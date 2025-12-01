@@ -1170,6 +1170,7 @@ add_filter( 'script_loader_tag', function( $tag, $handle ) {
     return $tag;
 }, 10, 2 );
 
+
 // Fix woocommerce-analytics Concatenation Issue
 add_filter( 'js_do_concat', function( $do_concat, $handle ) {
 	if ( 'woocommerce-analytics-client' === $handle ) {
