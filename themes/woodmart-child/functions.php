@@ -1092,11 +1092,6 @@ new WFACP_Compatibility_With_WC_Multiple_Customer_Addresses_field_position();
 
 
 
-
-
-
-
-
 /**
  * Woodmart – change sale badge percentage according
  * to selected variation on single product page.
@@ -1166,6 +1161,15 @@ JS;
     // Attach our JS to the WC variation script.
     wp_add_inline_script( 'wc-add-to-cart-variation', $script );
 }
+
+// Fix woocommerce-analytics Concatenation Issue
+add_filter( 'js_do_concat', function( $do_concat, $handle ) {
+	if ( 'woocommerce-analytics-client' === $handle ) {
+		return false;
+	}
+	return $do_concat;
+}, 10, 2 );
+
 
 // FunnelKit Builder Pro adjusment
 add_filter( 'wp_headers', function( $headers ) {
