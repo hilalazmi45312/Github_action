@@ -4,14 +4,14 @@ on:
   push:
     branches:
       - staging
-      - production   # trigger on both branches
+      - production
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the source repo (Senheng-1)
+      # 1. Checkout source repo (Senheng-1)
       - name: Checkout source repo
         uses: actions/checkout@v4
         with:
@@ -23,11 +23,20 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      # 3. Push the branch to Senheng-2
-      - name: Push branch to Senheng-2
+      # 3. Merge changes into Senheng-2
+      - name: Merge branch into Senheng-2
         env:
-          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}  # PAT with write access to Senheng-2
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
           echo "Syncing branch ${GITHUB_REF_NAME} to Senheng-2..."
           git remote add target https://x-access-token:${GH_TOKEN}@github.com/wpcomvip/senheng-2.git
-          git push target ${GITHUB_REF_NAME} --force
+          
+          # Fetch the remote branch from Senheng-2
+          git fetch target ${GITHUB_REF_NAME}
+
+          # Merge source branch into target branch
+          git checkout -B ${GITHUB_REF_NAME} target/${GITHUB_REF_NAME} || git checkout -b ${GITHUB_REF_NAME}
+          git merge --no-ff --commit --allow-unrelated-histories ${GITHUB_REF_NAME}
+
+          # Push merged changes
+          git push target ${GITHUB_REF_NAME}
