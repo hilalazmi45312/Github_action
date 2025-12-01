@@ -170,6 +170,7 @@ class ProductImportController
                 'cleanup_unused_attributes' => isset($_POST['cleanup_unused_attributes']) && $_POST['cleanup_unused_attributes'] === '1',
                 'use_enhanced_parent_finding' => isset($_POST['use_enhanced_parent_finding']) && $_POST['use_enhanced_parent_finding'] === '1',
                 'import_new_only' => isset($_POST['import_new_only']) && $_POST['import_new_only'] === '1',
+                'partial_update_existing' => isset($_POST['partial_update_existing']) && $_POST['partial_update_existing'] === '1',
             ];
             update_option('sh_import_flags', $flags, false);
 
@@ -561,6 +562,7 @@ class ProductImportController
             $cleanupUnusedAttributes = !empty($flags['cleanup_unused_attributes']);
             $useEnhancedParentFinding = !empty($flags['use_enhanced_parent_finding']);
             $importNewOnly = !empty($flags['import_new_only']);
+            $partialUpdateExisting = !empty($flags['partial_update_existing']);
             
             // Create a service instance for processing
             $service = new ProductImportService([
@@ -572,6 +574,7 @@ class ProductImportController
                 'cleanup_unused_attributes' => $cleanupUnusedAttributes,
                 'use_enhanced_parent_finding' => $useEnhancedParentFinding,
                 'import_new_only' => $importNewOnly,
+                'partial_update_existing' => $partialUpdateExisting,
             ]);
             
             // Process each row in the chunk directly with heartbeat

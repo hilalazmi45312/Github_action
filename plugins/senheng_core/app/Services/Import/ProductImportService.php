@@ -16,6 +16,7 @@ class ProductImportService
     private bool $cleanupUnusedAttributes;
     private bool $useEnhancedParentFinding;
     private bool $importNewOnly;
+    private bool $partialUpdateExisting;
 
     // Track products that need cleanup at the end of batch
     private array $productsNeedingCleanup = [];
@@ -30,6 +31,7 @@ class ProductImportService
         $this->cleanupUnusedAttributes = $cfg['cleanup_unused_attributes'] ?? false;
         $this->useEnhancedParentFinding = $cfg['use_enhanced_parent_finding'] ?? false;
         $this->importNewOnly = $cfg['import_new_only'] ?? false;
+        $this->partialUpdateExisting = $cfg['partial_update_existing'] ?? false;
     }
 
     /**
@@ -389,15 +391,21 @@ class ProductImportService
                 throw new \Exception("Failed to save product: " . (is_wp_error($productId) ? $productId->get_error_message() : 'Unknown error'));
             }
         
-        $this->applyACFAndMeta($productId, $r, false);
+        $this->applyACFAndMeta($productId, $r, false, $isUpdate);
         // Persist the external SKU for future matching
         $currentExternalSku = get_post_meta($productId, '_external_sku', true);
         if ($currentExternalSku !== $externalSku) {
             update_post_meta($productId, '_external_sku', $externalSku);
         }
-        $this->assignCategories($productId, $r);
-        $this->assignBrand($productId, $r);
-        $this->applyImages($productId, $r, true);
+
+        // Skip heavy updates if partial update is enabled for existing products
+        if (!$isUpdate || !$this->partialUpdateExisting) {
+            $this->assignCategories($productId, $r);
+            $this->assignBrand($productId, $r);
+            $this->applyImages($productId, $r, true);
+        } else {
+            Logger::info($this->logFile, "Partial update enabled: Skipped Categories, Brand, and Images for existing product.");
+        }
             
         } catch (\Exception $e) {
             // Check if it's a duplicate SKU error
@@ -1125,15 +1133,21 @@ class ProductImportService
                 throw new \Exception("Failed to save variation: " . (is_wp_error($varId) ? $varId->get_error_message() : 'Unknown error'));
             }
 
-        $this->applyACFAndMeta($varId, $r, true);
+        $this->applyACFAndMeta($varId, $r, true, $isUpdate);
         // Persist the external SKU for future matching
         $currentExternalSku = get_post_meta($varId, '_external_sku', true);
         if ($currentExternalSku !== $externalSku) {
             update_post_meta($varId, '_external_sku', $externalSku);
         }
-        // Assign brand to parent product (variations inherit parent's brand)
-        $this->assignBrand($parentId, $r);
-        $this->applyImages($varId, $r, false); // gallery typically on parent
+        
+        // Skip heavy updates if partial update is enabled for existing products
+        if (!$isUpdate || !$this->partialUpdateExisting) {
+            // Assign brand to parent product (variations inherit parent's brand)
+            $this->assignBrand($parentId, $r);
+            $this->applyImages($varId, $r, false); // gallery typically on parent
+        } else {
+            Logger::info($this->logFile, "Partial update enabled: Skipped Brand and Images for existing variation.");
+        }
             
         } catch (\Exception $e) {
             // Check if it's a duplicate SKU error
@@ -1185,14 +1199,17 @@ class ProductImportService
         }
 
         // Description from pc_detail (only for simple products, not variations)
-        if ($product->get_type() !== 'variation') {
+        // Skip description update if partial update is enabled for existing products
+        $isExistingProduct = $product->get_id() > 0;
+        $skipDescription = $isExistingProduct && $this->partialUpdateExisting;
+
+        if ($product->get_type() !== 'variation' && !$skipDescription) {
             // pc_detail is already processed and contains extracted content
             $content = $r['pc_detail'] ?? '';
             if ($content) {
                 $currentDescription = $product->get_description();
                 
                 // Check if this is an existing product and if description updates are disabled
-                $isExistingProduct = $product->get_id() > 0;
                 $shouldUpdateDescription = !$isExistingProduct || $this->updateDescriptions;
                 
                 if ($shouldUpdateDescription && $currentDescription !== $content) {
@@ -1202,6 +1219,8 @@ class ProductImportService
                     Logger::info($this->logFile, "Product Description update skipped (existing product, toggle disabled)");
                 }
             }
+        } elseif ($skipDescription) {
+            Logger::info($this->logFile, "Product Description update skipped (Partial Update enabled)");
         }
 
         $origPrice = null;
@@ -1242,14 +1261,17 @@ class ProductImportService
      * @param array $r           Feed row
      * @param bool  $isVariation Whether this is a variation
      */
-    private function applyACFAndMeta(int $postId, array $r, bool $isVariation): void
+    private function applyACFAndMeta(int $postId, array $r, bool $isVariation, bool $isUpdate = false): void
     {
         // Get product to check if it's a simple product or variable parent
         $product = wc_get_product($postId);
         $isSimpleProduct = $product && $product->get_type() === 'simple';
         
+        // Determine if we should skip heavy meta updates (partial update mode)
+        $skipHeavyMeta = $isUpdate && $this->partialUpdateExisting;
+
         // ACF fields
-        if (function_exists('update_field')) {
+        if (function_exists('update_field') && !$skipHeavyMeta) {
             // Set Insider Product ID and s_coin_value for:
             // - Simple products (on the product itself)
             // - Variations (on each variation, parent remains empty)
@@ -1285,6 +1307,31 @@ class ProductImportService
             if ((int)$currentSalesQuantity !== $newSalesQuantity) {
                 update_post_meta($postId, '_sales_quantity', $newSalesQuantity);
             }
+        }
+
+        // Yoast SEO Fields
+        // Meta Title (supports 'meta_title' or 'ptitle' columns)
+        if (!$skipHeavyMeta) {
+            $seoTitle = $r['meta_title'] ?? ($r['ptitle'] ?? '');
+            if (!empty($seoTitle)) {
+                $currentSeoTitle = get_post_meta($postId, '_yoast_wpseo_title', true);
+                if ($currentSeoTitle !== $seoTitle) {
+                    update_post_meta($postId, '_yoast_wpseo_title', $seoTitle);
+                    Logger::info($this->logFile, "Yoast SEO Title updated");
+                }
+            }
+
+            // Meta Description (supports 'meta_description' column)
+            $seoDesc = $r['meta_description'] ?? '';
+            if (!empty($seoDesc)) {
+                $currentSeoDesc = get_post_meta($postId, '_yoast_wpseo_metadesc', true);
+                if ($currentSeoDesc !== $seoDesc) {
+                    update_post_meta($postId, '_yoast_wpseo_metadesc', $seoDesc);
+                    Logger::info($this->logFile, "Yoast SEO Description updated");
+                }
+            }
+        } elseif ($isUpdate && $this->partialUpdateExisting) {
+            Logger::info($this->logFile, "Partial update enabled: Skipped Yoast SEO meta updates.");
         }
     }
 

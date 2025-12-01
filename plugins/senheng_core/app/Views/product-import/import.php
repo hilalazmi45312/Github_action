@@ -61,6 +61,12 @@ $stats = ProductImportController::getStats();
                             <span><strong>Import New Products Only</strong> - Skip products that already exist by matching SKU or Product Title.</span>
                         </label>
                         <p style="font-size: 12px; color: #666; margin: 2px 0 15px 26px;">When checked, products with matching SKU or Product Title will be skipped and not created or updated.</p>
+
+                        <label style="display: flex; align-items: center; margin-bottom: 2px;">
+                            <input type="checkbox" id="partial_update_existing" name="partial_update_existing" value="1" style="margin-right: 8px;">
+                            <span><strong>Partial Update for Existing Products</strong> - Only update basic fields for existing products.</span>
+                        </label>
+                        <p style="font-size: 12px; color: #666; margin: 2px 0 15px 26px;">When checked, existing products will only have their Title, Price, Stock, and Sales Quantity updated. Descriptions, Images, Categories, and other meta data will be preserved.</p>
                     </div>
                     
                     <input type="hidden" name="nonce" value="<?php echo esc_attr($nonce); ?>">
