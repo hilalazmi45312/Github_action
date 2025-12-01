@@ -276,6 +276,31 @@ class ProductImportService
             throw new \Exception("SKU is required (Product: $title)");
         }
 
+        // Check if SKU exists globally before processing
+        // This ensures we prioritize existing SKU mapping over CSV structure assumptions
+        $existingId = wc_get_product_id_by_sku($sku);
+        if ($existingId) {
+            $existingProduct = wc_get_product($existingId);
+            if ($existingProduct) {
+                $type = $existingProduct->get_type();
+                
+                if ($type === 'variation') {
+                    // It's a variation.
+                    $parentId = $existingProduct->get_parent_id();
+                    Logger::info($this->logFile, "SKU $sku found as existing VARIATION (ID: $existingId). Routing to upsertVariation.");
+                    $this->upsertVariation($parentId, $r, $sku);
+                    ProgressStore::addLog('INFO', "✓ Successfully processed variation (existing): $title (SKU: $sku)");
+                    return;
+                } elseif ($type === 'simple') {
+                    // It's a simple product.
+                    Logger::info($this->logFile, "SKU $sku found as existing SIMPLE product (ID: $existingId). Routing to upsertSimple.");
+                    $this->upsertSimple($r, $title, $sku);
+                    ProgressStore::addLog('INFO', "✓ Successfully processed simple product (existing): $title (SKU: $sku)");
+                    return;
+                }
+            }
+        }
+
         $isVariation = $this->isVariationRow($r);
 
         if (!$isVariation) {
@@ -1115,7 +1140,13 @@ class ProductImportService
         // Resolve internal SKU uniqueness for variations too
         $internalSku = $isUpdate && $varId ? (wc_get_product($varId)->get_sku() ?: $externalSku) : $this->generateUniqueSku($externalSku);
         $var->set_sku($internalSku);
-        $var->set_attributes($formattedVariationAttrs);
+        
+        // Only update attributes if we have new ones, OR if it's a new product
+        // If it's an update and we have no attributes in CSV, preserve existing
+        if (!empty($formattedVariationAttrs) || !$isUpdate) {
+            $var->set_attributes($formattedVariationAttrs);
+        }
+
         $this->applyCommonFields($var, $r);
         $mappedStatus = $this->resolvePostStatus($r);
         if (!$this->importNewOnly && $mappedStatus) {
@@ -1186,12 +1217,22 @@ class ProductImportService
     {
         // Stock management - only update if different
         $product->set_manage_stock(true);
-        $qty = (int)($r['real_quantity'] ?? 0);
+        
+        // Determine stock quantity
+        $qty = 0;
+        if (isset($r['real_quantity']) && $r['real_quantity'] !== '') {
+            $qty = (int)$r['real_quantity'];
+        } elseif (isset($r['quantity']) && $r['quantity'] !== '') {
+            $qty = (int)$r['quantity'];
+        }
+        
+        // Only update stock quantity if it has changed
         $currentQty = $product->get_stock_quantity();
         if ($currentQty != $qty) {
             $product->set_stock_quantity($qty);
         }
         
+        // Determine stock status based on quantity
         $newStockStatus = $qty > 0 ? 'instock' : 'outofstock';
         $currentStockStatus = $product->get_stock_status();
         if ($currentStockStatus !== $newStockStatus) {
