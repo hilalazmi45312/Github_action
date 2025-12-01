@@ -1167,4 +1167,12 @@ JS;
     wp_add_inline_script( 'wc-add-to-cart-variation', $script );
 }
 
+// FunnelKit Builder Pro adjusment
+add_filter( 'wp_headers', function( $headers ) {
+    // Only add the header if it is not already set
+    if ( ! isset( $headers['Access-Control-Allow-Origin'] ) ) {
+        $headers['Access-Control-Allow-Origin'] = 'https://app.wpmailkit.com';
+    }
 
+    return $headers;
+}, 999 );
