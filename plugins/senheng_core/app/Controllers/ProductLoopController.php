@@ -31,6 +31,8 @@ class ProductLoopController
         // Ensure assets are available for AJAX requests
         add_action('wp_ajax_woodmart_get_products_shortcode', [self::class, 'enqueue_styles'], 1);
         add_action('wp_ajax_nopriv_woodmart_get_products_shortcode', [self::class, 'enqueue_styles'], 1);
+        add_action('wp_ajax_woodmart_get_products_tab_shortcode', [self::class, 'enqueue_styles'], 1);
+        add_action('wp_ajax_nopriv_woodmart_get_products_tab_shortcode', [self::class, 'enqueue_styles'], 1);
 
         // AJAX handlers
         add_action('wp_ajax_get_variation_image', [self::class, 'ajax_get_variation_image']);
@@ -50,7 +52,7 @@ class ProductLoopController
                 
         // Posts slider override for WoodMart compatibility
         add_action('init', [self::class, 'setup_posts_slider_override'], 20);
-        add_action('wp_head', [self::class, 'print_defer_scripts']);
+        add_action('wp_footer', [self::class, 'print_defer_scripts']);
     }
     
     /**
@@ -515,51 +517,109 @@ class ProductLoopController
         ?>
             <script>
             (function(){
-            function render(){
-                var priceEls = document.querySelectorAll('.senheng-price-wrapper[data-defer="true"]');
-                for (var i = 0; i < priceEls.length; i++) {
-                var el = priceEls[i];
-                var t = el.getAttribute('data-type');
-                if (t === 'simple') {
-                    var sale = el.getAttribute('data-sale');
-                    var regular = el.getAttribute('data-regular');
-                    var current = el.getAttribute('data-current');
-                    var h = '';
-                    if (sale && regular && sale !== regular) {
-                    h = '<span class="price"><ins class="sale-price">' + sale + '</ins></span><span class="original-price-row"><del class="original-price">' + regular + '</del></span>';
-                    } else {
-                    h = '<span class="price">' + current + '</span>';
+                // Main render function
+                window.senhengRenderDeferred = function(){
+                    var priceEls = document.querySelectorAll('.senheng-price-wrapper[data-defer="true"]');
+                    for (var i = 0; i < priceEls.length; i++) {
+                        var el = priceEls[i];
+                        el.removeAttribute('data-defer'); // Prevent re-processing
+                        var t = el.getAttribute('data-type');
+                        if (t === 'simple') {
+                            var sale = el.getAttribute('data-sale');
+                            var regular = el.getAttribute('data-regular');
+                            var current = el.getAttribute('data-current');
+                            var h = '';
+                            if (sale && regular && sale !== regular) {
+                                h = '<span class="price"><ins class="sale-price">' + sale + '</ins></span><span class="original-price-row"><del class="original-price">' + regular + '</del></span>';
+                            } else {
+                                h = '<span class="price">' + current + '</span>';
+                            }
+                            el.innerHTML = h;
+                        } else if (t === 'variable') {
+                            var lowest = el.getAttribute('data-lowest');
+                            var lowestRegular = el.getAttribute('data-lowest-regular');
+                            var lowestSale = el.getAttribute('data-lowest-sale');
+                            var h2 = '';
+                            if (lowestSale && lowestRegular && lowestSale !== lowestRegular) {
+                                h2 = '<span class="price"><span class="price-from">From </span><ins class="sale-price">' + lowestSale + '</ins></span><span class="original-price-row"><del class="original-price">' + lowestRegular + '</del></span>';
+                            } else {
+                                h2 = '<span class="price"><span class="price-from">From </span>' + lowest + '</span>';
+                            }
+                            el.innerHTML = h2;
+                        }
                     }
-                    el.innerHTML = h;
-                } else if (t === 'variable') {
-                    var lowest = el.getAttribute('data-lowest');
-                    var lowestRegular = el.getAttribute('data-lowest-regular');
-                    var lowestSale = el.getAttribute('data-lowest-sale');
-                    var h2 = '';
-                    if (lowestSale && lowestRegular && lowestSale !== lowestRegular) {
-                    h2 = '<span class="price"><span class="price-from">From </span><ins class="sale-price">' + lowestSale + '</ins></span><span class="original-price-row"><del class="original-price">' + lowestRegular + '</del></span>';
-                    } else {
-                    h2 = '<span class="price"><span class="price-from">From </span>' + lowest + '</span>';
+
+                    var ratingEls = document.querySelectorAll('.senheng-rating-wrapper[data-defer="true"]');
+                    for (var j = 0; j < ratingEls.length; j++) {
+                        var el2 = ratingEls[j];
+                        el2.removeAttribute('data-defer'); // Prevent re-processing
+                        var rating = parseFloat(el2.getAttribute('data-rating') || '0');
+                        var count = parseInt(el2.getAttribute('data-count') || '0', 10);
+                        var w = Math.max(0, Math.min(100, (rating / 5) * 100));
+                        el2.innerHTML = '<div class="star-rating" title="Rated ' + rating + ' out of 5"><span style="width:' + w + '%"><strong class="rating">' + rating + '</strong> out of 5</span></div><span class="rating-count">(' + count + ')</span>';
                     }
-                    el.innerHTML = h2;
-                }
+                };
+
+                // Initial run
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    window.senhengRenderDeferred();
+                } else {
+                    document.addEventListener('DOMContentLoaded', window.senhengRenderDeferred);
                 }
 
-                var ratingEls = document.querySelectorAll('.senheng-rating-wrapper[data-defer="true"]');
-                for (var j = 0; j < ratingEls.length; j++) {
-                var el2 = ratingEls[j];
-                var rating = parseFloat(el2.getAttribute('data-rating') || '0');
-                var count = parseInt(el2.getAttribute('data-count') || '0', 10);
-                var w = Math.max(0, Math.min(100, (rating / 5) * 100));
-                el2.innerHTML = '<div class="star-rating" title="Rated ' + rating + ' out of 5"><span style="width:' + w + '%"><strong class="rating">' + rating + '</strong> out of 5</span></div><span class="rating-count">(' + count + ')</span>';
+                // Mutation Observer for robust AJAX handling
+                if (typeof MutationObserver !== 'undefined') {
+                    var observer = new MutationObserver(function(mutations) {
+                        var shouldRender = false;
+                        for (var i = 0; i < mutations.length; i++) {
+                            if (mutations[i].addedNodes.length) {
+                                // Check if any added node is relevant or contains relevant elements
+                                // Simple check: if new nodes are added, just try to render. 
+                                // Optimization: we could check classLists but for now safety first.
+                                shouldRender = true;
+                                break;
+                            }
+                        }
+                        if (shouldRender) {
+                            // Debounce slightly
+                            if (window.senhengRenderTimeout) clearTimeout(window.senhengRenderTimeout);
+                            window.senhengRenderTimeout = setTimeout(window.senhengRenderDeferred, 50);
+                        }
+                    });
+                    
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
                 }
-            }
 
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                render();
-            } else {
-                document.addEventListener('DOMContentLoaded', render);
-            }
+                // Handle AJAX requests (jQuery fallback)
+                if (typeof jQuery !== 'undefined') {
+                    jQuery(document).on('ajaxComplete', function() {
+                        setTimeout(window.senhengRenderDeferred, 50);
+                    });
+                    
+                    // WoodMart specific events
+                    jQuery(document).on('woodmart-layout-updated wdProductsTabsLoaded', function() {
+                        setTimeout(window.senhengRenderDeferred, 50);
+                    });
+                    jQuery(document).on('pjax:complete', function() {
+                        setTimeout(window.senhengRenderDeferred, 50);
+                    });
+                    // Elementor Popup
+                    jQuery(document).on('elementor/popup/show', function() {
+                        setTimeout(window.senhengRenderDeferred, 50);
+                    });
+                }
+
+                // Elementor Editor
+                window.addEventListener('elementor/frontend/init', function() {
+                    if (typeof elementorFrontend !== 'undefined') {
+                        elementorFrontend.hooks.addAction('frontend/element_ready/global', function($scope) {
+                            window.senhengRenderDeferred();
+                        });
+                    }
+                });
             })();
             </script>
         <?php
