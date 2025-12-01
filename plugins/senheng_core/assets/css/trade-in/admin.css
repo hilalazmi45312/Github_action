@@ -1,0 +1,11 @@
+input.sh-trade-in-input {
+    margin: 0; 
+    padding: 5px 8px; 
+    height: var(--xts-input-height); 
+    outline: none; 
+    border-color: var(--xts-option-border-color); 
+    border-radius: var(--xts-option-border-radius); 
+    box-shadow: none; 
+    line-height: 1; 
+    transition: .2s border-color ease-in-out, .2s box-shadow ease-in-out;
+}
