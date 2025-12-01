@@ -1310,24 +1310,36 @@ class ProductImportService
         }
 
         // Yoast SEO Fields
-        // Meta Title (supports 'meta_title' or 'ptitle' columns)
+        // Meta Title (supports 'meta_title', 'ptitle', or 'seo_meta_title' columns)
         if (!$skipHeavyMeta) {
-            $seoTitle = $r['meta_title'] ?? ($r['ptitle'] ?? '');
-            if (!empty($seoTitle)) {
-                $currentSeoTitle = get_post_meta($postId, '_yoast_wpseo_title', true);
-                if ($currentSeoTitle !== $seoTitle) {
-                    update_post_meta($postId, '_yoast_wpseo_title', $seoTitle);
-                    Logger::info($this->logFile, "Yoast SEO Title updated");
-                }
+            // Determine target ID for SEO fields
+            // If it's a variation, apply SEO to parent instead
+            $seoTargetId = $postId;
+            $targetDescription = "Product";
+            
+            if ($isVariation) {
+                $seoTargetId = $product->get_parent_id();
+                $targetDescription = "Parent Product (from Variation)";
             }
+            
+            if ($seoTargetId) {
+                $seoTitle = $r['seo_meta_title'] ?? ($r['meta_title'] ?? ($r['ptitle'] ?? ''));
+                if (!empty($seoTitle)) {
+                    $currentSeoTitle = get_post_meta($seoTargetId, '_yoast_wpseo_title', true);
+                    if ($currentSeoTitle !== $seoTitle) {
+                        update_post_meta($seoTargetId, '_yoast_wpseo_title', $seoTitle);
+                        Logger::info($this->logFile, "Yoast SEO Title updated for $targetDescription (ID: $seoTargetId)");
+                    }
+                }
 
-            // Meta Description (supports 'meta_description' column)
-            $seoDesc = $r['meta_description'] ?? '';
-            if (!empty($seoDesc)) {
-                $currentSeoDesc = get_post_meta($postId, '_yoast_wpseo_metadesc', true);
-                if ($currentSeoDesc !== $seoDesc) {
-                    update_post_meta($postId, '_yoast_wpseo_metadesc', $seoDesc);
-                    Logger::info($this->logFile, "Yoast SEO Description updated");
+                // Meta Description (supports 'meta_description' or 'seo_meta_description' columns)
+                $seoDesc = $r['seo_meta_description'] ?? ($r['meta_description'] ?? '');
+                if (!empty($seoDesc)) {
+                    $currentSeoDesc = get_post_meta($seoTargetId, '_yoast_wpseo_metadesc', true);
+                    if ($currentSeoDesc !== $seoDesc) {
+                        update_post_meta($seoTargetId, '_yoast_wpseo_metadesc', $seoDesc);
+                        Logger::info($this->logFile, "Yoast SEO Description updated for $targetDescription (ID: $seoTargetId)");
+                    }
                 }
             }
         } elseif ($isUpdate && $this->partialUpdateExisting) {
