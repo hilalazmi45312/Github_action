@@ -1,0 +1,602 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Permissions Pro Hints\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-07 15:54-0400\n"
+"PO-Revision-Date: 2024-11-11 14:35+0000\n"
+"Last-Translator: Kevin Behrens <kevin@publishpress.com>\n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../includes-pro\n"
+"X-Poedit-KeywordsList: __;_e;_c;__ngettext;_n;_x;_ex;esc_html__;esc_html_e\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.6; wp-5.6.1\n"
+"X-Poedit-SearchPath-0: admin-load.php\n"
+
+#: includes-pro/admin-load.php:68 includes-pro/admin-load.php:364
+#, php-format
+msgid "%1$s skipping missing file in %2$s \"%3$s\":%4$s %5$s"
+msgstr ""
+
+#: includes-pro/admin-load.php:67 includes-pro/admin-load.php:361
+#, php-format
+msgid "%1$s skipping unfilterable file in %2$s \"%3$s\":%4$s %5$s"
+msgstr ""
+
+#: includes-pro/admin-load.php:69 includes-pro/admin-load.php:70
+#: includes-pro/admin-load.php:367 includes-pro/admin-load.php:370
+#, php-format
+msgid "%1$snew attachment in %2$s \"%3$s\":%4$s %5$s"
+msgstr ""
+
+#: includes-pro/admin-load.php:53 includes-pro/admin-load.php:318
+#, php-format
+msgid ""
+"%1$sNote:%2$s FTP-uploaded files will not be filtered correctly until you "
+"run the %3$sAttachments Utility%4$s."
+msgstr ""
+
+#: includes-pro/admin-load.php:72 includes-pro/admin-load.php:376
+#, php-format
+msgid "%s attachment records were added to the database."
+msgstr ""
+
+#: includes-pro/admin-load.php:38 includes-pro/admin-load.php:270
+msgid ".htaccess file has all required rules."
+msgstr ""
+
+#: includes-pro/admin-load.php:37 includes-pro/admin-load.php:267
+msgid ".htaccess needs to be updated to include these rules."
+msgstr ""
+
+#: includes-pro/admin-load.php:29 includes-pro/admin-load.php:238
+#, php-format
+msgid "Additional settings provided by the %s module."
+msgstr ""
+
+#: includes-pro/admin-load.php:73 includes-pro/admin-load.php:379
+msgid "All linked uploads are already registered as attachments."
+msgstr ""
+
+#: includes-pro/admin-load.php:51 includes-pro/admin-load.php:312
+msgid ""
+"Best practice is to access the above url periodically (using your own cron "
+"service) to prevent long-term bookmarking of protected files."
+msgstr ""
+
+#: includes-pro/admin-load.php:34 includes-pro/admin-load.php:258
+msgid ""
+"Block direct URL access to images and other uploaded files in the WordPress "
+"uploads folder which are attached to posts that the user cannot read.  For "
+"each protected file, a separate RewriteRule will be added to the .htaccess "
+"file in this site's uploads folder.  Non-protected files are returned with "
+"no script execution whatsoever."
+msgstr ""
+
+#: includes-pro/admin-load.php:36 includes-pro/admin-load.php:264
+msgid "But your .htaccess is missing or not writeable!"
+msgstr ""
+
+#: includes-pro/admin-load.php:508
+msgid ""
+"By default, WordPress hides posts visitors don't have access to. This "
+"feature allows those posts to be displayed, with post content replaced by "
+"teaser text."
+msgstr ""
+
+#: includes-pro/admin-load.php:32 includes-pro/admin-load.php:250
+msgid "Can create network-wide permission groups"
+msgstr ""
+
+#: includes-pro/admin-load.php:66 includes-pro/admin-load.php:358
+#, php-format
+msgid "checking %s posts / pages..."
+msgstr ""
+
+#: includes-pro/admin-load.php:455
+msgid "Choose post field from suggested meta key names"
+msgstr ""
+
+#: includes-pro/admin-load.php:576
+msgid ""
+"CMS Page Tree View plugin: hide 'add' links (for all hierarchical post types)"
+" based on user's association permissions"
+msgstr ""
+
+#: includes-pro/admin-load.php:579
+msgid ""
+"CMS Page Tree View plugin: hide 'add' links (for pages) based on user's page "
+"association permissions"
+msgstr ""
+
+#: includes-pro/admin-load.php:582
+msgid ""
+"CMS Page Tree View plugin: hide 'add' links (for specified hierarchical post "
+"type) based on user's association permissions"
+msgstr ""
+
+#: includes-pro/admin-load.php:565
+msgid ""
+"Count users as a member of a BuddyPress Permissions Group only if they are a "
+"moderator of the BP group"
+msgstr ""
+
+#: includes-pro/admin-load.php:568
+msgid ""
+"Count users as a member of a BuddyPress Permissions Group only if they are "
+"an administrator of the BP group"
+msgstr ""
+
+#: includes-pro/admin-load.php:461
+msgid "Create or designate a post for existing users."
+msgstr ""
+
+#: includes-pro/admin-load.php:86 includes-pro/admin-load.php:422
+msgid "Create or edit custom Privacy or Workflow statuses"
+msgstr ""
+
+#: includes-pro/admin-load.php:88 includes-pro/admin-load.php:428
+msgid "Create or edit custom Privacy statuses"
+msgstr ""
+
+#: includes-pro/admin-load.php:87 includes-pro/admin-load.php:425
+msgid "Create or edit Publication Workflow statuses"
+msgstr ""
+
+#: includes-pro/admin-load.php:98 includes-pro/admin-load.php:488
+msgid ""
+"Developer note: User matches and Post data may be customized using filters "
+"and actions."
+msgstr ""
+
+#: includes-pro/admin-load.php:123
+msgid "Display PublishPress Branding in Admin"
+msgstr ""
+
+#: includes-pro/admin-load.php:109 includes-pro/admin-load.php:542
+msgid "Editorial Circle membership does not limit editing access"
+msgstr ""
+
+#: includes-pro/admin-load.php:90 includes-pro/admin-load.php:434
+msgid ""
+"Editors can edit posts having a moderation status (i.e. Approved) without a "
+"supplemental status-specific role"
+msgstr ""
+
+#: includes-pro/admin-load.php:77 includes-pro/admin-load.php:393
+#, php-format
+msgid ""
+"Enable Custom Capabilities by toggling the link below status name. If "
+"enabled, non-Editors will need a corresponding %ssupplemental role%s to edit "
+"posts of that status."
+msgstr ""
+
+#: includes-pro/admin-load.php:93 includes-pro/admin-load.php:473
+msgid "Enable users to edit their own synchronized post."
+msgstr ""
+
+#: includes-pro/admin-load.php:91 includes-pro/admin-load.php:467
+msgid "Establish a dedicated post for each qualified user."
+msgstr ""
+
+#: includes-pro/admin-load.php:35 includes-pro/admin-load.php:261
+#, php-format
+msgid ""
+"File Filtering on multisite installations will require the following rules "
+"to be inserted above the stock ms-files.php rules in the %1$smain .htaccess "
+"file%2$s:"
+msgstr ""
+
+#: includes-pro/admin-load.php:60 includes-pro/admin-load.php:340
+#, php-format
+msgid ""
+"Files linked in post content must be in %1$s (or a subfolder of it). If you "
+"move files, consider using a %2$s search and replace plugin%3$s to update "
+"those URLs."
+msgstr ""
+
+#: includes-pro/admin-load.php:44 includes-pro/admin-load.php:288
+msgid "for all sites"
+msgstr ""
+
+#: includes-pro/admin-load.php:79 includes-pro/admin-load.php:399
+#, php-format
+msgid ""
+"For post edit by a user who cannot publish, %sworkflow is configured%s to "
+"make the Publish button escalate the post to the highest-ordered workflow "
+"status permitted."
+msgstr ""
+
+#: includes-pro/admin-load.php:78 includes-pro/admin-load.php:396
+#, php-format
+msgid ""
+"For post edit by a user who cannot publish, %sworkflow is configured%s to "
+"make the Publish button increment the post to the next workflow status "
+"permitted."
+msgstr ""
+
+#: includes-pro/admin-load.php:80 includes-pro/admin-load.php:402
+msgid ""
+"For post edit by a user who cannot publish, the Publish button will escalate "
+"the post to the highest-order status permitted to the user."
+msgstr ""
+
+#: includes-pro/admin-load.php:61 includes-pro/admin-load.php:343
+msgid ""
+"For post restrictions to be extended to files and images, those attachments "
+"must be stored as post metadata (not just linked in the post content). The "
+"WordPress editor normally handles that, but this utility scans post content "
+"to apply any missing attachments."
+msgstr ""
+
+#: includes-pro/admin-load.php:526
+msgid ""
+"Hide unreadable private posts, but show a teaser for posts which are "
+"unreadable due to regular Privacy or Role Restrictions."
+msgstr ""
+
+#: includes-pro/admin-load.php:92 includes-pro/admin-load.php:470
+#, php-format
+msgid ""
+"Hint: If %s have custom fields (like email address), create one to assist "
+"field name discovery."
+msgstr ""
+
+#: includes-pro/admin-load.php:96 includes-pro/admin-load.php:482
+msgid ""
+"If a user cannot be matched to an existing post, a new post is created for "
+"them."
+msgstr ""
+
+#: includes-pro/admin-load.php:529
+msgid ""
+"If anyone tries to view a post they don't have access to, redirect to "
+"another page instead of displaying a teaser."
+msgstr ""
+
+#: includes-pro/admin-load.php:31 includes-pro/admin-load.php:247
+msgid ""
+"If enabled, custom group membership is applied network-wide (though role "
+"assignments are still site-specific)."
+msgstr ""
+
+#: includes-pro/admin-load.php:33 includes-pro/admin-load.php:253
+msgid "If group editing is allowed, can also modify network group membership"
+msgstr ""
+
+#: includes-pro/admin-load.php:557
+msgid ""
+"If user is a super admin or has 'pp_manage_network_members' capability, user "
+"searches via Permissions ajax return users from all sites"
+msgstr ""
+
+#: includes-pro/admin-load.php:48 includes-pro/admin-load.php:303
+msgid ""
+"Improve Media Library performance by disabling file filtering for thumbnails "
+"(size specified in Settings > Media)."
+msgstr ""
+
+#: includes-pro/admin-load.php:54 includes-pro/admin-load.php:322
+msgid "Invalid file filtering key argument."
+msgstr ""
+
+#: includes-pro/admin-load.php:94 includes-pro/admin-load.php:476
+msgid ""
+"It is designed to bring setup convenience and delegated editing permissions "
+"to Team / Staff plugins, but has broad usage potential."
+msgstr ""
+
+#: includes-pro/admin-load.php:106 includes-pro/admin-load.php:523
+msgid ""
+"Keep unreadable content hidden in the blogroll and link lists, but show the "
+"teaser on direct access attempts."
+msgstr ""
+
+#: includes-pro/admin-load.php:300
+msgid ""
+"Make attached files unreadable to users who do not have the "
+"edit_private_files or pp_list_all_files capability."
+msgstr ""
+
+#: includes-pro/admin-load.php:47 includes-pro/admin-load.php:297
+msgid ""
+"Make unattached files unreadable to users who do not have the "
+"edit_private_files or pp_list_all_files capability."
+msgstr ""
+
+#: includes-pro/admin-load.php:45 includes-pro/admin-load.php:291
+msgid "NONE: remove Permissions rules"
+msgstr ""
+
+#: includes-pro/admin-load.php:56 includes-pro/admin-load.php:328
+msgid ""
+"Note that access control of direct file URLs also requires the following "
+"site configuration:"
+msgstr ""
+
+#: includes-pro/admin-load.php:40 includes-pro/admin-load.php:276
+#, php-format
+msgid ""
+"Note that an additional rule will need to be added with each new site. "
+"%1$sTo eliminate this requirement, research \"WordPress remove ms-files\"."
+"%2$s"
+msgstr ""
+
+#: includes-pro/admin-load.php:82 includes-pro/admin-load.php:408
+#, php-format
+msgid ""
+"Note that the Post Type itself will also need to have %sPermissions%s "
+"enabled."
+msgstr ""
+
+#: includes-pro/admin-load.php:85 includes-pro/admin-load.php:419
+msgid ""
+"Note, this only applies if the role definition includes the pp_moderate_any "
+"capability"
+msgstr ""
+
+#: includes-pro/admin-load.php:64 includes-pro/admin-load.php:352
+msgid ""
+"Note: Direct access to uploaded file attachments cannot be filtered because "
+"your WP_CONTENT_DIR is not in the WordPress branch."
+msgstr ""
+
+#: includes-pro/admin-load.php:30 includes-pro/admin-load.php:242
+msgid ""
+"Note: If you deactive, re-entry of the license key will be required for re-"
+"activation."
+msgstr ""
+
+#: includes-pro/admin-load.php:104
+msgid ""
+"Note: the prefix and suffix settings below will always be applied unless the "
+"teaser mode is \"no teaser\"."
+msgstr ""
+
+#: includes-pro/admin-load.php:205
+#, php-format
+msgid ""
+"Note: This generates a post (of selected type) for each current or future "
+"%suser%s in the selected role."
+msgstr ""
+
+#: includes-pro/admin-load.php:199
+#, php-format
+msgid ""
+"Note: Workflow sequence and branching for pre-publication is configured %son "
+"a separate screen%s"
+msgstr ""
+
+#: includes-pro/admin-load.php:43 includes-pro/admin-load.php:285
+msgid "only for sites with protected files"
+msgstr ""
+
+#: includes-pro/admin-load.php:71 includes-pro/admin-load.php:373
+#, php-format
+msgid ""
+"Operation complete: %s linked uploads were found in your post / page content."
+msgstr ""
+
+#: includes-pro/admin-load.php:452
+msgid "Parent id for created posts"
+msgstr ""
+
+#: includes-pro/admin-load.php:210
+#, php-format
+msgid ""
+"Permissions filtering is turned on for the post type: %1$sPermissions > Core "
+"> Filtered Post Types%2$s"
+msgstr ""
+
+#: includes-pro/admin-load.php:89 includes-pro/admin-load.php:431
+msgid ""
+"Pertains to assignment of a custom privacy or moderation status. This "
+"capability in a WP role enables PP to assign a type-specific supplemental "
+"role with custom capabilities such as \"set_pages_approved\""
+msgstr ""
+
+#: includes-pro/admin-load.php:55 includes-pro/admin-load.php:325
+msgid "Please configure File Filtering options!"
+msgstr ""
+
+#: includes-pro/admin-load.php:81 includes-pro/admin-load.php:405
+#, php-format
+msgid "Please enable the PublishPress %sStatuses feature%s."
+msgstr ""
+
+#: includes-pro/admin-load.php:95 includes-pro/admin-load.php:479
+msgid ""
+"Post / User match fields allow existing Users to be designated as the Author "
+"(owner) of an exiting post."
+msgstr ""
+
+#: includes-pro/admin-load.php:440
+msgid "Post property or meta field to match with user field"
+msgstr ""
+
+#: includes-pro/admin-load.php:499
+#, php-format
+msgid ""
+"Settings for replacing unreadable content with teaser text, provided by the "
+"%s module."
+msgstr ""
+
+#: includes-pro/admin-load.php:101 includes-pro/admin-load.php:502
+msgid ""
+"Settings on this tab do not apply because teaser filtering is disabled for "
+"all post types."
+msgstr ""
+
+#: includes-pro/admin-load.php:171
+#, php-format
+msgid ""
+"Should pages with privacy status \"premium\" require set_pages_premium and "
+"edit_premium_pages capabilities? If so, you can %1$sassign a status-specific "
+"Page Editor role%2$s or %3$sadd the capabilities directly to a role%4$s."
+msgstr ""
+
+#: includes-pro/admin-load.php:102 includes-pro/admin-load.php:505
+msgid ""
+"Since some browsers will cache feeds without regard to user login, block RSS "
+"content even for qualified users."
+msgstr ""
+
+#: includes-pro/admin-load.php:46 includes-pro/admin-load.php:294
+msgid ""
+"Since the plugin is not network-activated, you will need to modify the ."
+"htaccess file manually, inserting a RewriteRule as shown above for each site "
+"which needs file filtering."
+msgstr ""
+
+#: includes-pro/admin-load.php:76 includes-pro/admin-load.php:390
+msgid ""
+"Statuses alter your content's accessibility by imposing additional "
+"capability requirements."
+msgstr ""
+
+#: includes-pro/admin-load.php:74 includes-pro/admin-load.php:384
+msgid ""
+"Statuses enabled here are available as Visibility options for post "
+"publishing. Affected posts become inaccessable without a corresponding "
+"status-specific role assignment."
+msgstr ""
+
+#: includes-pro/admin-load.php:75 includes-pro/admin-load.php:387
+msgid ""
+"Statuses enabled here are available in the editor as additional steps "
+"between Draft and Published."
+msgstr ""
+
+#: includes-pro/admin-load.php:52 includes-pro/admin-load.php:315
+msgid ""
+"Supply a custom key which will enable a support url to regenerate file "
+"access keys.  Then execute the url regularly (using your own cron service) "
+"to prevent long-term bookmarking of protected files."
+msgstr ""
+
+#: includes-pro/admin-load.php:65 includes-pro/admin-load.php:355
+msgid "The operation was terminated due to an invalid configuration."
+msgstr ""
+
+#: includes-pro/admin-load.php:219
+#, php-format
+msgid ""
+"The synchronized role is supplemented with Author capabilities for the post "
+"type: %1$sPermissions > Groups%2$s > [Role Name]"
+msgstr ""
+
+#: includes-pro/admin-load.php:57 includes-pro/admin-load.php:331
+msgid ""
+"The wp-content folder cannot be relocated outside the main WordPress folder."
+msgstr ""
+
+#: includes-pro/admin-load.php:39 includes-pro/admin-load.php:273
+msgid ""
+"These rules will not be inserted automatically.  You are responsible for "
+"editing .htaccess and later removing the rules if the functionality is no "
+"longer desired."
+msgstr ""
+
+#: includes-pro/admin-load.php:97 includes-pro/admin-load.php:485
+msgid ""
+"These users will be enabled to edit their synchronized post if \"Grant "
+"Author Permissions\" is enabled.  This works by automating the following "
+"configuration:"
+msgstr ""
+
+#: includes-pro/admin-load.php:99 includes-pro/admin-load.php:491
+msgid ""
+"This feature works with most Team / Staff plugins. However, the following "
+"are NOT fully compatible. With these plugins, PublishPress Permissions can "
+"sync and set editing permissions for teams, but not individual team members:"
+msgstr ""
+
+#: includes-pro/admin-load.php:100 includes-pro/admin-load.php:494
+msgid "This plugin is NOT fully compatible."
+msgstr ""
+
+#: includes-pro/admin-load.php:464
+msgid "This post type is not hierarchical"
+msgstr ""
+
+#: includes-pro/admin-load.php:84 includes-pro/admin-load.php:416
+msgid ""
+"To disable custom visibility statuses, first re-assign posts to a different "
+"status."
+msgstr ""
+
+#: includes-pro/admin-load.php:62 includes-pro/admin-load.php:346
+msgid ""
+"To run this utility by cron task or other direct request, use the following "
+"URL:"
+msgstr ""
+
+#: includes-pro/admin-load.php:63 includes-pro/admin-load.php:349
+#, php-format
+msgid ""
+"To run this utility by direct URL, set a file filtering regen key on "
+"%1$sPermissions Settings%2$s"
+msgstr ""
+
+#: includes-pro/admin-load.php:49 includes-pro/admin-load.php:306
+#, php-format
+msgid ""
+"To trigger regeneration of %1$suploads/.htaccess%2$s with new file URL keys "
+"(at next site access), execute the following URL:"
+msgstr ""
+
+#: includes-pro/admin-load.php:50 includes-pro/admin-load.php:309
+#, php-format
+msgid ""
+"To trigger regeneration of %1$suploads/.htaccess%2$s with new file URL keys, "
+"execute the following URL:"
+msgstr ""
+
+#: includes-pro/admin-load.php:535
+msgid ""
+"Unreadable items of these comma-separated types will have nav menu item "
+"hidden."
+msgstr ""
+
+#: includes-pro/admin-load.php:42 includes-pro/admin-load.php:282
+msgid "Update .htaccess now"
+msgstr ""
+
+#: includes-pro/admin-load.php:446
+msgid "User meta field to match with post field"
+msgstr ""
+
+#: includes-pro/admin-load.php:443
+msgid "User property or meta field to match with post field"
+msgstr ""
+
+#: includes-pro/admin-load.php:449
+msgid "User role to include in synchronization"
+msgstr ""
+
+#: includes-pro/admin-load.php:108 includes-pro/admin-load.php:539
+msgid "Visibility Circle membership does not limit viewing access"
+msgstr ""
+
+#: includes-pro/admin-load.php:458
+msgid ""
+"When a new user of specified role is added, create or designate a post for "
+"them."
+msgstr ""
+
+#: includes-pro/admin-load.php:554
+msgid ""
+"When searching for users via Permissions ajax, return return only users "
+"registered to current site"
+msgstr ""
+
+#: includes-pro/admin-load.php:41 includes-pro/admin-load.php:279
+msgid ""
+"You will need to manually restore the .htacces file to default contents if "
+"anything goes wrong. Proceed?"
+msgstr ""

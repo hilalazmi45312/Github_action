@@ -1,0 +1,234 @@
+.sh-share-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 9998;
+    display: none;
+}
+
+/* Toast styles for copy success */
+.sh-toast-popup {
+    background: #3b4667 !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18) !important;
+    padding: 0 !important;
+}
+.swal2-toast button:where(.swal2-close){
+   background: transparent !important;
+   color: #c2c2c2 !important;
+}
+.swal2-toast button:where(.swal2-close)::hover{
+  background: transparent !important;
+  color: #c2c2c2 !important;
+}
+body.swal2-toast-shown .swal2-container.swal2-top {
+  inset: 100px auto auto 50% !important;
+}
+.sh-toast-popup.animate__animated.animate__fadeInDown{
+  animation-duration: 0.15s !important;
+}
+.sh-toast-popup.animate__animated.animate__fadeOutUp{
+  animation-duration: 0.15s !important;
+}
+.sh-toast-html { margin: 0 !important; }
+.sh-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    font-weight: 700;
+}
+.sh-toast-check {
+    width: 22px; height: 22px; display: inline-block; flex: 0 0 22px;
+    border-radius: 50%; background: #5ed091; position: relative;
+}
+.sh-toast-check::after {
+    content: '';
+    position: absolute; left: 6px; top: 4px;
+    width: 8px; height: 12px; border: solid #fff; border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+.sh-toast-text { color: #fff; font-size: 16px; }
+
+.sh-share-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 12px;
+    max-width: 600px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    z-index: 9999;
+    display: none;
+}
+
+.sh-share-header { 
+    position: relative;
+    padding: 30px 34px 0 34px; 
+}
+.sh-share-header h3 { 
+    margin:0; 
+    font-size:20px; 
+    font-weight:700; 
+    color:#3b4453; 
+    letter-spacing:0.2px;
+    text-align: center;
+}
+.sh-share-modal .sh-share-close {
+    position:absolute; right:18px; top: 28px; transform:translateY(-50%);
+    background: transparent; border:0; cursor:pointer; 
+    width:28px; height:28px;
+    color:#9aa0a6; font-size:30px; line-height:1;
+}
+.sh-share-close,
+.sh-share-close:hover,
+.sh-share-close:focus,
+.sh-share-close:active {
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.sh-share-close:hover { color:#6f7684; }
+
+.sh-share-body { padding: 25px 34px 30px 34px; }
+.sh-share-list { list-style:none; display:flex; justify-content:center; padding:0; margin:0; }
+.sh-share-item { display:flex; flex-direction:column; align-items:center; gap:10px; min-width:70px; }
+.sh-share-icon { 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    width:55px; 
+    height:55px;
+    background:#f6f7fb; 
+    border-radius:14px; 
+    text-decoration:none;
+    color:#9aa0a6; 
+}
+.sh-share-item .sh-label { font-size:11px; color:#333; text-align:center; }
+.sh-share-item .sh-label.success { color:#2e7d32; }
+.sh-share-item .sh-label.error { color:#c62828; }
+
+/* Unified SVG sizing and behavior */
+.sh-share-icon svg { width:44px; height:44px; display:inline-block; }
+
+/* Two-tone gray theme mapping
+   - Dark brand blue (#185BAA etc.) -> darker gray
+   - Light brand blue (#019BF0 etc.) -> light gray
+*/
+.sh-share-icon { color: #5e6a7d; }
+
+/* Dark blue variations → #525252 */
+.sh-share-icon svg [fill="#185BAA"],
+.sh-share-icon svg [stroke="#185BAA"],
+.sh-share-icon svg [fill="#1877F2"],
+.sh-share-icon svg [stroke="#1877F2"],
+.sh-share-icon svg [fill="#0f1419"],
+.sh-share-icon svg [stroke="#0f1419"],
+.sh-share-icon svg [fill="#4489F1"],
+.sh-share-icon svg [stroke="#4489F1"] {
+  fill: #525252 !important;
+  /* stroke: #525252 !important; */
+}
+
+/* Specific brand blues → requested grays */
+/* #019BF0 → #808080 */
+.sh-share-icon svg [fill="#019BF0"],
+.sh-share-icon svg [stroke="#019BF0"] {
+  fill: #808080 !important;
+  stroke: #808080 !important;
+}
+
+/* #D2EDFF → #C5C5C5; keep other light blues as-is mapping below if needed */
+.sh-share-icon svg [fill="#D2EDFF"],
+.sh-share-icon svg [stroke="#D2EDFF"] {
+  fill: #C5C5C5 !important;
+  /* stroke: #C5C5C5 !important; */
+}
+
+/* Other light blue variations → light gray (unchanged) */
+.sh-share-icon svg [fill="#B3E5FF"],
+.sh-share-icon svg [stroke="#B3E5FF"] {
+  fill: #c9cfd7 !important;
+  stroke: #c9cfd7 !important;
+}
+
+@media (max-width: 480px){
+  .sh-share-modal{
+    max-width: 80%;
+  }
+  .sh-share-item{
+    min-width: 25%;
+  }
+  .sh-share-item .sh-label{
+    font-size: 9px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Header Share Button (mobile-only, single product)
+   --------------------------------------------------------- */
+.sh-header-share-wrapper{ display: none; }
+
+@media (max-width: 480px){
+  .sh-header-share-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    z-index: 390;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
+  }
+
+  .sh-share-icon{
+    width: 50px;
+    height: 50px;
+  }
+
+  .sh-share-body{
+    padding: 20px 40px 20px 40px; 
+  }
+
+  .whb-scroll-slide.whb-hide-on-scroll.whb-scroll-up .sh-header-share-wrapper{
+    transform: none;
+  }
+  .whb-scroll-slide:is(.whb-scroll-down,.whb-scroll-up) .sh-header-share-wrapper{
+    transition: transform .3s ease;
+  }
+  .whb-sticked .sh-header-share-wrapper{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+  .whb-scroll-slide.whb-sticked.whb-scroll-up .sh-header-share-wrapper{
+    transform: translateY(110px);
+  }
+
+  #impact-share-button.sh-header-share-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: transparent;
+    color: #000000;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    transition: background-color 0.2s ease;
+  }
+
+  #impact-share-button.sh-header-share-btn svg{
+    width: 28px;
+    height: 28px;
+  }
+  #impact-share-button.sh-header-share-btn .sh-share-text{
+    font-size: 15px;
+    font-weight: 500;
+    color: #333333;
+  }
+}
+
+

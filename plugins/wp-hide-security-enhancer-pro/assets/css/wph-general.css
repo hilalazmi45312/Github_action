@@ -1,0 +1,26 @@
+
+.wph-notice { position: relative}
+.wph-message-close {        position: absolute;        top: 0px;        right: 0px;        padding: 10px 15px 10px 21px;        font-size: 13px;        line-height: 1.23076923;        text-decoration: none !important;         }
+#adminmenu span.wph-info {display: inline-block;font-size: 9px;}
+#adminmenu span.wph-info.submenu {padding-left: 20px}
+#adminmenu .wph-current a {box-shadow: inset 2px 0 0 0 currentColor; color: #2ea2cc}
+#wph-header {background-color: #3d4350; margin-left: -20px; padding: 20px 0px;}
+#wph-header h1 {color:#FFF; padding: 0px 0px 0px 20px; font-weight: normal; font-size: 1.8em; }
+#wph-header h1 img {vertical-align: middle; padding: 0px 20px 0px 15px; margin: -10px 0px}
+#wph-header h1 .plugin-mark {padding: 5px 7px 7px 7px; vertical-align: unset;}
+#wph .nav-tab-wrapper { background-color: #FFF; margin-left: -20px; padding: 10px 0px 13px 20px;}
+#wph .nav-tab-wrapper {}
+#wph .nav-tab-wrapper a {text-decoration: none; font-weight: normal; color: #3c434a; margin-right: 30px; padding: 10px 0 7px 0; display: inline-block; font-size: 0.8em;}
+#wph .nav-tab-wrapper.split a {  padding: 10px 5px 7px 5px; margin-right: 10px; position:relative; border-bottom: 2px solid #FFF; font-size: 14px }
+#wph .nav-tab-wrapper.split a:after {content: "";  display: inline-block;  height: 15px;  width: 1px;  background-color:#e3e3e3;  margin-right: 10px;  vertical-align: middle; position: absolute; right: -16px; top: 14px;}
+#wph .nav-tab-wrapper.split a:last-child::after {background-color:transparent}
+#wph .nav-tab-wrapper a:hover { border-bottom: 2px solid #0073aa; }
+#wph .nav-tab-wrapper a::focus {outline: none;    border: 0;}
+#wph .nav-tab-wrapper .wph-nav-tab-active {border-bottom: 2px solid #0073aa !important; font-weight: bold}
+#wph .nav-tab-wrapper .check-headers{ background-color: #3d4350; color: #FFF; border-color: #3e3e3e; padding: 14px; font-size: 14px;}
+#wph .nav-tab-wrapper .check-headers:hover {background-color: #FFF; color:#000}
+
+#wph #wph-notices {margin-left: -20px; padding-top: 20px}
+#wph #wph-notices .notice {margin-right: 0px; border-right: none;}
+#wph #wph-notices.no-wrap {padding-top: 10px}
+#wph #wph-notices.no-wrap .notice {margin-left: 0px;}

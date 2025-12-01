@@ -1,0 +1,1614 @@
+/* Product Extras Widget Styles */
+
+.sh-product-extras-default-field{
+    display: none;
+}
+
+/* Conditional visibility - hide elements with conditions by default */
+[data-conditions] {
+    display: none;
+}
+
+/* Show elements when conditions are met */
+[data-conditions].sh-conditions-met {
+    display: block;
+}
+
+[data-conditions].sh-conditions-met.sh-product-extras-cards-wrapper {
+    display: flex;
+}
+
+[data-conditions].sh-conditions-met.sh-information-wrapper {
+    display: grid;
+}
+
+.sh-variation-form .sh-variation-content .form.variations_form{
+    justify-content: var(--content-align);
+}
+
+.reset_variations{
+    display: none !important;
+}
+
+.sh-product-extras-container {
+    margin: 20px 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.sh-product-extras-container.sh-hidden {
+    margin: 0;
+}
+
+/* Group Title Styles */
+.sh-product-extras-group-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 16px 0;
+    padding: 0;
+}
+
+/* Product Cards Layout Styles */
+.sh-product-extras-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    border: 1px solid #222;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 30px;
+}
+
+/* Information Cards - Separate Box Layout */
+.sh-product-extras-cards-wrapper.sh-information-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+}
+
+/* Responsive styles for information wrapper */
+@media (max-width: 768px) {
+    .sh-product-extras-cards-wrapper.sh-information-wrapper {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sh-product-extras-cards-wrapper.sh-information-wrapper {
+        gap: 10px;
+    }
+}
+
+.sh-product-extras-cards-wrapper .sh-product-extra-card {
+    border: none;
+    border-radius: 0;
+    padding:8px;
+    background: #fff;
+    position: relative;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}   
+
+.sh-product-extra-card:last-child {
+    border-bottom: none;
+}
+
+.sh-product-extra-card.sh-product-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.sh-product-checkbox {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 2;
+    margin-left: 20px;
+}
+
+.sh-checkbox-input {
+    display: none;
+}
+
+.sh-checkbox-label {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    background: #fff;
+    cursor: pointer;
+    position: relative;
+}
+
+.sh-checkbox-input:checked + .sh-checkbox-label {
+    background: #333;
+    border-color: #333;
+}
+
+.sh-checkbox-input:checked + .sh-checkbox-label::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.sh-product-image {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sh-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.sh-product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    padding: 16px;
+}
+
+/* Product Info Row - Title and Right Section */
+.sh-product-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+/* Right Section - Price and Quantity */
+.sh-product-right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Main Layout: Left (Title/Variation) and Right (Price/Quantity) */
+.sh-product-main-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.sh-product-left-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.sh-product-right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+/* Legacy support for old structure */
+.sh-product-price-qty-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.sh-product-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    line-height: 1.3;
+    overflow: hidden;
+    /* text-overflow: ellipsis;
+    white-space: nowrap; */
+    flex: 1;
+}
+
+.sh-product-left-section .sh-product-title {
+    font-size: 14px;
+    line-height: 1.3;
+    font-family: var(--wd-title-font);
+}
+
+.sh-product-left-section .sh-product-variations {
+    margin-top: 8px;
+}
+
+.sh-product-extras-cards-wrapper .sh-product-link {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sh-product-extras-cards-wrapper .sh-product-link:hover {
+    color: #333 !important;
+}
+
+.sh-product-description {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    display: none;
+}
+
+.sh-product-price-quantity {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    gap: 12px;
+}
+
+.sh-product-price {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Price styles in horizontal layout */
+
+.sh-product-extras-container .sh-product-price-qty-row .sh-product-price {
+    text-align: left;
+    flex: 1;
+}
+
+
+.sh-product-extras-container .sh-product-right-section .sh-product-price {
+    text-align: right;
+    margin-bottom: 4px;
+}
+
+
+.sh-product-extras-container .sh-price-regular {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+    display: block;
+    text-decoration: none;
+    color: #0A0503 !important;
+}
+
+
+.sh-product-extras-container .sh-price-original {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+    margin: 2px 0 0 0;
+    display: block;
+    order: 2;
+    font-family: var(--wd-title-font);
+}
+
+.sh-price-sale {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e74c3c;
+    margin: 0;
+    display: block;
+    order: 1;
+    font-family: var(--wd-title-font);
+}
+
+/* Ensure sale price appears first and original price appears second */
+
+.sh-product-extras-container .sh-product-price .sh-price-sale {
+    order: 1;
+}
+
+.sh-product-extras-container .sh-product-price .sh-price-original {
+    order: 2;
+}
+
+.sh-price-free {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    transition: none;
+}
+
+.sh-product-price-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sh-product-price-free {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    transition: none;
+}
+
+.sh-product-quantity {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+/* Quantity styles in horizontal layout */
+.sh-product-price-qty-row .sh-product-quantity {
+    margin-left: 0;
+    flex-shrink: 0;
+}
+
+.sh-product-right-section .sh-product-quantity {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Quantity label */
+.sh-qty-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    margin-right: 8px;
+}
+
+.sh-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: #fff;
+    border-radius: 8px;
+    padding: 0;
+    border: 1px solid #000;
+    overflow: hidden;
+}
+
+.sh-quantity-controls input[type='number'], .sh-qty-input {
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    background: #fff;
+    color: #333;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    font-size: 14px;
+    font-weight: 600;
+    transition: none;
+    appearance: textfield; /* Standard property */
+    -moz-appearance: textfield; /* Firefox */
+    min-width: 40px;
+    width: auto;
+    height: 42px;
+}
+
+/* Remove spinner arrows for Chrome, Safari, Edge */
+.sh-qty-input::-webkit-outer-spin-button,
+.sh-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.sh-quantity-controls input[type='number']::-webkit-outer-spin-button,
+.sh-quantity-controls input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.sh-quantity-controls .sh-qty-btn {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    min-width: 30px;
+    width: auto;
+    height: auto;
+}
+
+.sh-quantity-controls .sh-qty-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.sh-quantity-controls .sh-qty-btn.sh-disabled,
+.sh-quantity-controls .sh-qty-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: #999;
+    background-color: #f9f9f9;
+}
+
+.sh-quantity-controls .sh-qty-btn.sh-disabled:hover,
+.sh-quantity-controls .sh-qty-btn:disabled:hover {
+    background-color: #f9f9f9;
+}
+
+/* Product Variations Support */
+.sh-product-variations {
+    margin-top: 8px;
+    margin-bottom: 12px;
+    padding-top: 0;
+}
+
+.sh-variation-attribute {
+    margin-bottom: 8px;
+}
+
+.sh-variation-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.sh-variation-select {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #fff;
+}
+
+.sh-product-extras-title {
+    margin: 0 0 20px 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* Variation Swatches Styles - Woodmart Compatible */
+.sh-product-variations {
+    margin: 8px 0 12px 0;
+    /* Woodmart swatch variables */
+    --wd-swatch-size: 25px;
+    --wd-swatch-w: 1em;
+    --wd-swatch-h: 1em;
+    --wd-swatch-text-size: 16px;
+    --wd-swatch-h-sp: 15px;
+    --wd-swatch-v-sp: 10px;
+    --wd-swatch-inn-sp: .001px;
+    --wd-swatch-brd-color: var(--brdcolor-gray-200, rgba(0, 0, 0, 0.075));
+}
+
+.sh-variation-attribute {
+    margin-bottom: 10px;
+}
+
+.sh-variation-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Woodmart-style swatches container */
+.sh-variation-swatches {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: var(--text-align, flex-start);
+    vertical-align: middle;
+    gap: var(--wd-swatch-v-sp) var(--wd-swatch-h-sp);
+}
+
+/* Base Woodmart swatch styling */
+.sh-variation-swatch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--wd-swatch-w);
+    height: var(--wd-swatch-h);
+    color: var(--color-gray-900, #242424);
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--wd-swatch-size);
+    line-height: 1;
+    cursor: pointer;
+    transition: all .25s ease;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+}
+
+
+
+.sh-variation-swatch.wd-active {
+    transform: scale(1.1);
+}
+
+.sh-variation-swatch.wd-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Woodmart swatch background container */
+.sh-variation-swatch .wd-swatch-bg {
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+/* Color/Background swatches */
+.sh-variation-swatch.wd-bg,
+.sh-color-swatch {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.sh-variation-swatch.wd-bg .wd-swatch-text {
+    display: none;
+}
+
+.sh-variation-swatch.wd-bg .wd-swatch-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Color swatches - using specific classes */
+.sh-color-swatch {
+    border: 1px solid var(--brdcolor-gray-300, rgba(0, 0, 0, 0.105));
+}
+
+
+
+.sh-color-swatch.wd-active {
+    border-color: var(--color-gray-800, #333);
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.3);
+    transform: scale(1.1);
+}
+
+
+
+/* White color border for dark themes */
+.sh-variation-swatch.wd-bg .wd-swatch-bg:is(
+:not([style^="background-color"]),
+[style*="#ffffff"],
+[style*="#FFFFFF"],
+[style*="255,255,255"]):before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--wd-swatch-brd-color);
+    border-radius: inherit;
+}
+
+/* Text swatches - using specific classes to avoid override */
+.sh-text-swatch {
+    min-width: 1em;
+    min-height: 1em;
+    width: auto;
+    height: auto;
+    border-radius: 4px !important;
+    background: var(--bgcolor-gray-100, #f7f7f7);
+    border: 1px solid var(--brdcolor-gray-300, rgba(0, 0, 0, 0.105));
+    padding: 8px;
+    min-width: 40px;
+}
+
+.sh-text-swatch .wd-swatch-text {
+    padding: 0;
+    font-size: var(--wd-swatch-text-size);
+    color: var(--color-gray-800, #333);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.sh-text-swatch.wd-active {
+    background: var(--color-gray-800, #333);
+    border-color: var(--color-gray-800, #333);
+    color: var(--color-white, #fff);
+}
+
+.sh-text-swatch.wd-active .wd-swatch-text {
+    color: var(--color-white, #fff);
+}
+
+
+
+/* Image swatches - using specific classes */
+.sh-image-swatch {
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--brdcolor-gray-300, rgba(0, 0, 0, 0.105));
+}
+
+.sh-image-swatch img,
+.sh-image-swatch picture {
+    display: block;
+    max-height: 100%;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    object-fit: cover;
+}
+
+
+
+.sh-image-swatch.wd-active {
+    border-color: var(--color-gray-800, #333);
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.3);
+    transform: scale(1.1);
+}
+
+
+
+/* Size variations */
+.sh-product-variations.wd-size-xs {
+    --wd-swatch-size: 20px;
+    --wd-swatch-text-size: 14px;
+}
+
+.sh-product-variations.wd-size-m {
+    --wd-swatch-size: 35px;
+}
+
+.sh-product-variations.wd-size-large {
+    --wd-swatch-size: 45px;
+    --wd-swatch-text-size: 18px;
+}
+
+/* Shape variations */
+.sh-product-variations.wd-shape-round .sh-variation-swatch:not(.wd-text) {
+    border-radius: 1em;
+}
+
+.sh-product-variations.wd-shape-rounded .sh-variation-swatch:not(.wd-text) {
+    border-radius: 5px;
+}
+
+/* Text swatches always remain rectangular */
+.sh-product-variations .sh-text-swatch,
+.sh-color-text-swatch {
+    border-radius: 4px !important;
+}
+
+/* Specific styling for text swatches within color attributes */
+.sh-color-text-swatch {
+    border-radius: 4px !important;
+    padding: 6px 12px;
+    min-width: 40px;
+    background: var(--bgcolor-white, #fff);
+    border: 1px solid var(--brdcolor-gray-300, rgba(0, 0, 0, 0.105));
+    color: var(--color-gray-800, #333);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+
+.sh-color-text-swatch.wd-active {
+    background: var(--color-gray-800, #333);
+    border-color: var(--color-gray-800, #333);
+    color: var(--color-white, #fff);
+}
+
+/* Automatic Disabled Styles for All Swatches */
+/* Color swatches disabled state */
+.sh-color-swatch.wd-disabled,
+.sh-image-swatch.wd-disabled,
+.sh-variation-swatch.wd-disabled {
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    position: relative;
+}
+
+/* Text swatches disabled state */
+.sh-text-swatch.wd-disabled,
+.sh-color-text-swatch.wd-disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    background-color: #f0f0f0 !important;
+    color: #999999 !important;
+    border-color: #dddddd !important;
+}
+
+.sh-text-swatch.wd-disabled .wd-swatch-text,
+.sh-color-text-swatch.wd-disabled .wd-swatch-text {
+    color: #999999 !important;
+}
+
+
+
+/* Disable hover effects for disabled swatches */
+.sh-color-swatch.wd-disabled:hover,
+.sh-image-swatch.wd-disabled:hover,
+.sh-variation-swatch.wd-disabled:hover,
+.sh-text-swatch.wd-disabled:hover,
+.sh-color-text-swatch.wd-disabled:hover {
+    transform: none !important;
+    border-color: inherit !important;
+    background-color: inherit !important;
+    box-shadow: none !important;
+}
+
+/* Disabled styles - Style 1 (default) */
+.sh-product-variations.wd-dis-style-1 .sh-variation-swatch.wd-disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+/* Disabled styles - Style 2 (cross pattern) */
+.sh-product-variations.wd-dis-style-2 .sh-variation-swatch:before {
+    content: "";
+    position: absolute;
+    inset: var(--wd-swatch-inn-sp);
+    border-radius: inherit;
+    background-image: linear-gradient(to top right, transparent calc(50% - 1px), #CF000F 50%, transparent calc(50% + 1px)), 
+                      linear-gradient(to top left, transparent calc(50% - 1px), #CF000F 50%, transparent calc(50% + 1px));
+    opacity: 0;
+    transition: opacity .2s ease;
+    z-index: 2;
+}
+
+.sh-product-variations.wd-dis-style-2 .sh-variation-swatch.wd-disabled {
+    opacity: .7;
+    cursor: default;
+}
+
+.sh-product-variations.wd-dis-style-2 .sh-variation-swatch.wd-disabled:before {
+    opacity: 1;
+}
+
+/* Disabled styles - Style 3 (diagonal line) */
+.sh-product-variations.wd-dis-style-3 .sh-variation-swatch:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: linear-gradient(to top left, transparent calc(50% - 1px), var(--wd-swatch-brd-color) 50%, transparent calc(50% + 1px));
+    opacity: 0;
+    transition: opacity .2s ease;
+    z-index: 2;
+}
+
+.sh-product-variations.wd-dis-style-3 .sh-variation-swatch.wd-disabled {
+    opacity: .4;
+    cursor: default;
+    --wd-swatch-brd-color: var(--brdcolor-gray-500, rgba(0, 0, 0, 0.2));
+}
+
+.sh-product-variations.wd-dis-style-3 .sh-variation-swatch.wd-disabled:before {
+    opacity: 1;
+}
+
+/* Swatch wrapper support */
+.sh-variation-swatch-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.sh-variation-swatch-wrap.wd-active .sh-variation-swatch {
+    transform: scale(1.1);
+}
+
+/* Additional Woodmart compatibility - swatches inherit all Woodmart swatch styles */
+
+.sh-product-variations .wd-swatches-product {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: var(--text-align, flex-start);
+    vertical-align: middle;
+    gap: var(--wd-swatch-v-sp) var(--wd-swatch-h-sp);
+}
+
+.sh-product-variations .wd-swatches-product + select {
+    display: none;
+}
+
+.sh-product-extras-fields {
+    margin: 0;
+}
+
+/* Override default product extras styles for better integration */
+.sh-product-extras-container .pewc-group-wrap {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+}
+
+.sh-product-extras-container .pewc-group-wrap:last-child {
+    margin-bottom: 0;
+}
+
+.sh-product-extras-container .pewc-group-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #444;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.sh-product-extras-container .pewc-field-wrap {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.sh-product-extras-container .pewc-field-wrap:last-child {
+    margin-bottom: 0;
+}
+
+.sh-product-extras-container .pewc-field-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+    display: block;
+}
+
+.sh-product-extras-container .pewc-field-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.sh-product-extras-container .pewc-field-input:focus {
+    outline: none;
+    border-color: #007cba;
+    box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1);
+}
+
+.sh-product-extras-container .pewc-field-price {
+    font-weight: 600;
+    color: #007cba;
+    margin-left: 10px;
+}
+
+.sh-product-extras-container .pewc-field-description {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Checkbox and Radio styles */
+.sh-product-extras-container input[type="checkbox"],
+.sh-product-extras-container input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+.sh-product-extras-container .pewc-checkbox-label,
+.sh-product-extras-container .pewc-radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.sh-product-extras-container .pewc-checkbox-label:hover,
+.sh-product-extras-container .pewc-radio-label:hover {
+    background-color: #f5f5f5;
+}
+
+/* Radio button styles for select field cards */
+.sh-product-extras-container .sh-product-radio {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+}
+
+.sh-product-extras-container .sh-radio-input {
+    margin: 0;
+    transform: scale(1.2);
+}
+
+.sh-product-extras-container .sh-radio-label {
+    display: block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.sh-product-extras-container .sh-select-option-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.sh-product-extras-container .sh-select-option-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sh-product-extras-container .sh-radio-input:checked + .sh-radio-label {
+    background-color: #0073aa;
+}
+
+.sh-product-extras-container .sh-select-option-card:has(.sh-radio-input:checked) {
+    border-color: #0073aa;
+    box-shadow: 0 2px 8px rgba(0, 115, 170, 0.2);
+}
+
+.sh-product-extras-container .sh-select-option-card:not(:has(.sh-radio-input:checked)) .sh-product-image,
+.sh-product-extras-container .sh-select-option-card:not(:has(.sh-radio-input:checked)) .sh-product-details {
+    opacity: 0.8;
+}
+
+/* Radio option card styles */
+.sh-product-extras-container .sh-radio-option-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.sh-product-extras-container .sh-radio-option-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sh-product-extras-container .sh-radio-option-card:has(.sh-radio-input:checked) {
+    border-color: #0073aa;
+    box-shadow: 0 2px 8px rgba(0, 115, 170, 0.2);
+}
+
+.sh-product-extras-container .sh-radio-option-card:not(:has(.sh-radio-input:checked)) .sh-product-image,
+.sh-product-extras-container .sh-radio-option-card:not(:has(.sh-radio-input:checked)) .sh-product-details {
+    opacity: 0.8;
+}
+
+/* Image swatch card styles */
+.sh-product-extras-container .sh-image-swatch-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.sh-product-extras-container .sh-image-swatch-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sh-product-extras-container .sh-image-swatch-card:has(.sh-radio-input:checked),
+.sh-product-extras-container .sh-image-swatch-card:has(.sh-checkbox-input:checked) {
+    border-color: #0073aa;
+    box-shadow: 0 2px 8px rgba(0, 115, 170, 0.2);
+}
+
+.sh-product-extras-container .sh-image-swatch-card:not(:has(.sh-radio-input:checked)):not(:has(.sh-checkbox-input:checked)) .sh-product-image,
+.sh-product-extras-container .sh-image-swatch-card:not(:has(.sh-radio-input:checked)):not(:has(.sh-checkbox-input:checked)) .sh-product-details {
+    opacity: 0.8;
+}
+
+/* Image swatch specific image styling */
+.sh-product-extras-container .sh-image-swatch-image {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.sh-product-extras-container .sh-image-swatch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Option description styles */
+.sh-product-extras-container .sh-product-description {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.sh-product-extras-container .sh-product-description p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Enhanced select-box specific styles */
+.sh-product-extras-container .sh-select-option-card[data-field-type="select-box"] {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sh-product-extras-container .sh-select-option-card[data-field-type="select-box"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.sh-product-extras-container .sh-select-option-card[data-field-type="select-box"] .sh-product-image {
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Improved radio button positioning for select fields */
+.sh-product-extras-container .sh-select-option-card .sh-product-radio {
+    z-index: 3;
+}
+
+.sh-product-extras-container .sh-select-option-card .sh-radio-input:checked + .sh-radio-label::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0073aa;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Select dropdown styles */
+.sh-product-extras-container select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* File upload styles */
+.sh-product-extras-container input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.sh-product-extras-container input[type="file"]:hover {
+    border-color: #007cba;
+    background-color: #f0f8ff;
+}
+
+/* Notice styles */
+.sh-product-extras-notice {
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    color: #856404;
+    margin: 10px 0;
+}
+
+.sh-product-extras-notice p {
+    margin: 0;
+}
+
+* Checkbox List Card Design Override */
+.pewc-checkboxes-list-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 20px 0 !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper {
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    background: #fff !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper:hover {
+    border-color: #007cba !important;
+    box-shadow: 0 4px 12px rgba(0, 124, 186, 0.15) !important;
+    transform: translateY(-2px) !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper:has(input:checked) {
+    border-color: #007cba !important;
+    background: #f8fcff !important;
+    box-shadow: 0 4px 12px rgba(0, 124, 186, 0.2) !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper label {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 15px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    width: 100% !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper input[type="checkbox"] {
+    margin: 5px 0 0 0 !important;
+    transform: scale(1.2) !important;
+    flex-shrink: 0 !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkboxes-list-desc-wrapper {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkboxes-list-desc {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-child-product-price-label {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #007cba !important;
+    margin-top: 8px !important;
+    display: block !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-child-quantity-field {
+    width: 80px !important;
+    padding: 8px 12px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    margin-top: 15px !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-child-quantity-field:focus {
+    outline: none !important;
+    border-color: #007cba !important;
+    box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1) !important;
+}
+
+/* Hide the theme element span */
+.pewc-checkboxes-list-wrapper .pewc-theme-element {
+    display: none !important;
+}
+
+/* Fallback for browsers that don't support :has() */
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper.selected {
+    border-color: #007cba !important;
+    background: #f8fcff !important;
+    box-shadow: 0 4px 12px rgba(0, 124, 186, 0.2) !important;
+}
+
+/* Product images in checkbox list cards */
+.pewc-checkboxes-list-wrapper .pewc-checkbox-image-wrapper {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    border: 1px solid #e0e0e0 !important;
+    flex-shrink: 0 !important;
+    margin-right: 15px !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-image-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+/* Adjust layout when images are present */
+.pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper:has(.pewc-checkbox-image-wrapper) label {
+    align-items: center !important;
+}
+
+/* Disabled state styling */
+.pewc-checkboxes-list-wrapper .pewc-checkbox-disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
+.pewc-checkboxes-list-wrapper .pewc-checkbox-disabled:hover {
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Information Card Specific Styles */
+.sh-information-wrapper .sh-product-extra-card.sh-information-card {
+    border: 1px solid #222;
+    border-radius: 8px;
+    cursor: default;
+}
+
+/* No hover effects or selected styling needed for information cards */
+
+.sh-information-content {
+    margin-top: 8px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.sh-information-content p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure information cards don't have checkbox styling */
+.sh-information-card .sh-product-checkbox {
+    display: none;
+}
+
+/* Adjust image size for information cards */
+.sh-information-card .sh-product-image {
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.sh-information-card .sh-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Center align items in main row for information cards */
+.sh-information-card .sh-product-main-row {
+    align-items: center;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .sh-product-extras-container {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .sh-product-extras-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .sh-product-extras-container .pewc-group-title {
+        font-size: 16px;
+    }
+    
+    .sh-product-extra-card {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 6px;
+    }
+    
+    .sh-product-image {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .sh-product-image img {
+        max-width: 80px !important;
+        max-height: 80px !important;
+    }
+    
+    .sh-product-details {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .sh-product-title {
+        font-size: 14px !important;
+    }
+    
+    .sh-product-price {
+        font-size: 14px !important;
+    }
+    
+    /* Responsive styles for main layout */
+    .sh-product-main-row {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .sh-product-left-section {
+        order: 1;
+    }
+    
+    .sh-product-right-section {
+        order: 2;
+        align-self: center;
+        gap: 8px;
+    }
+    
+    .sh-product-right-section .sh-product-price {
+        text-align: right;
+    }
+    
+    .sh-product-right-section .sh-product-quantity {
+        justify-content: flex-end;
+    }
+    
+    /* Legacy responsive styles */
+    .sh-product-price-qty-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .sh-product-variations .wd-swatches-product{
+        gap: 8px !important;
+    }
+    
+    .sh-product-price-qty-row .sh-product-price {
+        text-align: left;
+        width: 100%;
+    }
+    
+    .sh-product-price-qty-row .sh-product-quantity {
+        align-self: flex-end;
+    }
+    
+    .sh-price-regular,
+    .sh-price-sale {
+        font-size: 16px;
+    }
+    
+    .sh-quantity-controls {
+        margin-top: 10px !important;
+        padding: 0;
+    }
+    
+    .sh-quantity-input {
+        padding: 3px 6px !important;
+        font-size: 12px !important;
+        min-width: 35px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .sh-quantity-btn {
+        padding: 3px 6px !important;
+        font-size: 12px !important;
+        min-width: 24px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .sh-quantity-controls .sh-qty-btn {
+        padding: 3px 6px;
+        font-size: 12px;
+        min-width: 24px;
+        width: auto;
+        min-height: 20px;
+    }
+    
+    .sh-quantity-controls input[type='number'], .sh-qty-input {
+        padding: 3px 6px;
+        font-size: 12px;
+        min-width: 35px;
+        width: auto;
+        height: auto;
+    }
+    
+    .pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper label {
+        gap: 12px !important;
+    }
+    
+    .sh-product-extras-cards-wrapper {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .sh-product-image img {
+        height: 100px;
+    }
+
+    .sh-product-extras-cards-wrapper,
+    .pewc-checkboxes-list-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .sh-product-extra-card,
+    .pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper {
+        padding: 15px !important;
+    }
+    
+    .sh-product-image {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .sh-product-image img {
+        max-width: 50px !important;
+        max-height: 50px !important;
+    }
+    
+    .sh-product-title {
+        font-size: 11px !important;
+    }
+    
+    .sh-product-price {
+        font-size: 14px !important;
+    }
+    
+    .sh-quantity-controls {
+        margin-top: 10px !important;
+    }
+    
+    .sh-quantity-input {
+        width: 45px !important;
+        padding: 4px 6px !important;
+        font-size: 12px !important;
+    }
+    
+    .sh-quantity-btn {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 12px !important;
+    }
+    
+    .pewc-checkboxes-list-wrapper .pewc-checkbox-wrapper label {
+        gap: 12px !important;
+    }
+    
+    .sh-product-extras-cards-wrapper {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .sh-product-image img {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sh-product-extras-container {
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .sh-product-checkbox{
+        margin-left: 5px;
+    }
+
+    .sh-checkbox-label{
+        width: 15px;
+        height: 15px;
+    }
+    
+    .sh-product-extras-title {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .sh-product-extras-container .pewc-group-title {
+        font-size: 16px;
+    }
+    
+    .sh-product-extras-cards-wrapper {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .sh-text-swatch{
+        padding: 4px;
+    }
+
+    .sh-product-right-section{
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .sh-product-extras-container .sh-product-right-section .sh-product-price{
+        margin-bottom: 0;
+    }
+    
+    .sh-product-right-section .sh-product-quantity{
+        gap: 2px;
+    }   
+
+    .sh-product-extras-container .sh-price-regular{
+        font-size: 11px;
+    }
+    /* Even more compact quantity controls for very small screens */
+    .sh-quantity-controls {
+        margin-top: 0 !important;
+    }
+    
+    .sh-quantity-input {
+        padding: 2px 4px !important;
+        font-size: 11px !important;
+        min-width: 30px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .sh-quantity-btn {
+        padding: 2px 4px !important;
+        font-size: 11px !important;
+        min-width: 20px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .sh-quantity-controls .sh-qty-btn {
+        padding: 2px 4px;
+        font-size: 11px;
+        min-width: 20px;
+        width: auto;
+        height: auto;
+    }
+
+    .sh-qty-label{
+        font-size: 11px;
+        margin-bottom: 3px;
+    }
+    
+    .sh-quantity-controls input[type='number'], .sh-qty-input {
+        padding: 2px 4px;
+        font-size: 11px;
+        min-width: 30px;
+        width: auto;
+    }
+}

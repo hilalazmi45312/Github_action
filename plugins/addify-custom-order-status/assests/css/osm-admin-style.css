@@ -1,0 +1,164 @@
+/* Styling for the buttons on my account page */
+
+/* Style for the name and icon column of CPT listing page */
+span.admin-status-name {
+	padding: 7px 10px;
+	border-radius: 3px;
+}
+span.admin-status-icon {
+	font-size:2em ;
+}
+/* styling for order status data metabox */
+.status-row{
+	padding-top: 15px;
+	width:80%;
+}
+.status_fields{
+	width: 100%;
+	padding: 20px;
+}
+.status-data{
+	width:40%;
+}
+span.trash a{
+	color:blue;
+}
+select.status-select{
+  width:79%;
+}
+.osm-textarea{
+  width:80%;
+}
+span.hide-note{
+  color:#a00;
+}
+input.status-data{
+  width:80%;
+
+}
+/* Delete Modal Styles */
+/* The Modal (background) */
+.modal {
+	display: block; 
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	padding-left:30px;
+	border: 1px solid #888;
+	width: 35%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .delete-close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+  }
+  
+  .delete-close:hover,
+  .delete-close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  /* file modal */
+  .file-modal{
+	display: none;
+  }
+  .import-modal {
+	margin-bottom: 20px;
+}
+  /* Delete Modal Button styles */
+  button.reassign-btn {
+	padding: 5px;
+	margin-bottom: 25px;
+}
+select#delete-select{
+  margin-top:-9px;
+}
+
+/* styling for the import/export custom status button */
+a#export-csv {
+  color: black;
+  border-color: #767777;
+}
+button#import-csv {
+  color: black;
+  border-color: #767777;
+}
+
+/* styling for the upload button */
+button#upload-csv {
+  margin: 10px 2px;
+  padding: 4px 22px;
+  background-color: #2271b1;
+  color:#f6f7f7;
+}
+span#import-msg{
+  color:#fe485c;
+}
+/* -----Styling for email status post type------- */
+span.email-title{
+  font-weight: 600;
+  color: #2271b1;
+  font-size:14px;
+}
+span.email-placeholders {
+  font-size: 12px;
+  color: #2271b1
+}
+/* styling for autonmation rules */
+.time-head{
+  width:15%;
+}
+input.time-data{
+  width:28%;
+}
+span.auto-conditions {
+  font-size: 17px;
+	font-weight: 400;
+}
+input.osm-rules{
+  width:40%;
+}
+button.osm-select-all{
+  margin-top: 7px;
+}
+button.osm-deselect-all{
+  margin-top: 7px;
+}
+input.date-data{
+  width:35%;
+}
+.head-email{
+  width: 27%;
+  padding-top: 10px;
+}
+/* styling for cron settings */
+.cron-settings {
+  padding-left: 15px;
+}
+/* select2 styling */
+.select2-container .select2-selection--multiple {
+  max-height: 10rem; 
+  overflow: auto;
+
+} 
+
+.status-row .select2-container{
+  width: 80% !important;
+}

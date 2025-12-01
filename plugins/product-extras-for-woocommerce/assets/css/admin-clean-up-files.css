@@ -1,0 +1,14 @@
+.pewc-clean-up-files-list {
+	border: 1px solid #ccc;
+	padding: 20px;
+	height: auto;
+	max-height: 60vh;
+	overflow: auto;
+}
+.pewc-clean-up-files-list p {
+	margin: 0;
+}
+.pewc-clean-up-files-confirm,
+.pewc-clean-up-files-cancel {
+	margin: 10px 0 !important;
+}

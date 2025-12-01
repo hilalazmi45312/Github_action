@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+/* //rplc: wcmca */
+.white-box 
+{
+	background-color: white;
+	padding: 15px 15px 15px 15px;
+	overflow: auto;
+}
+.wcmca_inline_block
+{
+	display: inline-block;
+	margin-right: 30px;
+	margin-bottom: 5px;
+	background: #f9f9f9;
+	padding: 20px;
+	border-radius: 3px;	
+}
+label
+{
+	display:block;
+	clear:both;
+	font-weight:bold;
+}
+.wcmca_option_group
+{
+	display: inline-block;
+	background: #f8f8f8;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 3px;
+}
+.wcmca_company_option_description
+{
+	font-size: 14px;
+	margin-bottom: 30px;
+}
+.wcmca_general_option_description
+{
+	font-size: 14px;
+	margin-bottom: 10px;
+	font-weight: normal;
+	margin-right: 20px;
+}
+.wcmca_no_margin_top
+{
+	margin-top: 0px !important;
+}
+.wcmca_section_title 
+{
+	margin-top: 50px;
+	margin-bottom: 20px;
+	font-size: 25px;
+	padding: 7px;
+	color: white;
+	background: #efefef;
+	color: #0073AA;
+	padding: 10px;
+	border-radius: 3px;
+}
+.wcmca_checkbox_container
+{
+	display: inline-block;
+	width: 260px;
+	font-weight: bold;
+}
+.wcmca_label
+{
+	font-weight: bold;
+	display: inline-block;
+	margin-left: 5px;
+}
+.wcmca_email_message
+{
+	display: block;
+	width: 400px;
+	height: 150px;	
+}
+.wcmca_message_container
+{
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	vertical-align: top;
+	/* float: left; */
+}
+#wcmca_messages_container
+{
+	display: block;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+.wcmca_checkbox_container_auto_width
+{
+	display: inline-block;
+	margin-right: 10px;
+	font-weight: bold;
+}
+label 
+{
+	font-size: 15px;
+}
+h3 
+{
+	font-size: 1.8em;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	color: #0073AA;
+	display: block;
+	clear: both;
+	/* border-top: 1px #e4e4e4 solid;
+	padding-top: 20px; */
+}
+.white-box p, .white-box li, #wcmca_shortcode_container
+{
+	margin-top: 10px;
+	margin-bottom:10px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 15px;
+	/* line-height: 1.6;  */
+}
+
+/* Default UI Override */
+.wp-core-ui .button-primary:hover {
+	background: #7FB9D4 none repeat scroll 0 0;
+	border-color: #7FB9D4;
+	box-shadow: none;
+	font-weight: bold;
+}
+.wp-core-ui .button-primary, .wp-core-ui .button-primary.focus, .wp-core-ui .button-primary:focus {
+	background: #0073AA none repeat scroll 0 0;
+	border-color: #0073AA;
+	box-shadow: none;
+	font-weight: bold;
+	text-shadow: none;
+}

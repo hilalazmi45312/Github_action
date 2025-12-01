@@ -1,0 +1,16 @@
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1" display-as-translated="1">order_status</custom-type>
+    <custom-type translate="1" display-as-translated="1">status_emails</custom-type>
+    <custom-type translate="1" display-as-translated="1">status_automation</custom-type>
+  </custom-types>
+  <custom-fields>
+    <custom-field action="translate">osm_name</custom-field>
+    <custom-field action="translate">osm_desc</custom-field>
+    <custom-field action="translate">osm_email_subject</custom-field>
+    <custom-field action="translate">osm_email_heading</custom-field>
+    <custom-field action="translate">osm_email_name</custom-field>
+    <custom-field action="translate">osm_email_desc</custom-field>
+    <custom-field action="translate">osm_email_custom_msg</custom-field>
+  </custom-fields>
+</wpml-config>

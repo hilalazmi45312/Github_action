@@ -1,0 +1,94 @@
+body {
+    .bwf-btn-popup {
+        max-width: 100%;
+    }
+    .bwf_pp_overlay{
+        .bwf_pp_wrap{
+            a.bwf_pp_close{
+                text-decoration:none;
+            }
+        }
+    }
+
+    .bwf_pp_close:hover {
+        background-color: #D40F0F;
+        color: #444444;
+    }
+    .bwfop-poup-button-wrap{
+        cursor:pointer;
+    }
+    .bwf_pp_opt_sub_head{
+        font-family: "Open Sans", Sans-serif;
+    }
+    .bwf_pp_footer{
+        font-family: "Open Sans", Sans-serif;
+        font-size: 16px;
+        line-height: 1em;
+        color: #000000;
+    }
+    .bwf-icon-inner-svg {
+        display: inline-flex !important;
+        align-items: center;
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+    
+    .bwf-btn-inner-text, .bwf-btn-sub-text{
+        display: block;
+        text-align: center;
+    }
+    .bwfop-popup-form-container{
+        margin: 0 auto;
+        width: 100%;
+        .bwf_pp_opt_head {
+            font-family: "Open Sans", Sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.5em;
+            color: #000000;
+        }
+        .bwfop-poup-button-wrap{
+            text-align: center;
+            .bwf-btn-inner-text{
+                font-size: 24px;
+                line-height: 1.5;
+            }
+            .bwf-btn-popup{
+                background-color: #000000;
+                color: #fff;
+                cursor: pointer;
+                font-weight: 500;
+                padding: 14px 25px;
+                line-height: 1.4;
+                width: 100%;
+                align-items: center;
+                text-decoration: none;
+                cursor: pointer;
+                justify-content: center;
+                display: inline-flex;
+                flex-wrap: wrap;
+                &:hover{
+                    background-color: #000000;
+                }
+            }
+            .bwfop-secondary{
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+            .bwf-btn-sub-text{
+                font-size: 15px;
+                display: block;
+                width: 100%;
+            }
+        }
+        .pp-bar-text.above {
+            text-align: center;
+        }
+    }
+    .bwf-section-wrap .bwf-col {
+        z-index: unset;
+    }
+}

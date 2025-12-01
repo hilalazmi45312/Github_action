@@ -1,0 +1,20 @@
+.bwf-bg-image-control {
+    button.components-button.woocommerce-image-upload__remove-image {
+        float: right;
+        transform: scale(0.8) translateY(-34px);
+    }
+}
+.bwf-block-toolbar button.components-button.woocommerce-image-upload__remove-image.is-secondary {
+    float: none;
+    transform: none;
+    position: relative;
+    margin: 55px 70px;
+}
+.bwf-block-toolbar button.components-button.woocommerce-image-upload__remove-image.is-secondary::before {
+    content: '';
+    border: 2px dashed #d3d3d3;
+    position: absolute;
+    left: -68px;
+    width: calc(100% + 140px);
+    height: calc(100% + 72px);
+}

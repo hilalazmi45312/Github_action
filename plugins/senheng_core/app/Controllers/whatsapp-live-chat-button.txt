@@ -1,0 +1,110 @@
+<?php
+
+
+define('WALC_PHONE_NUMBER', '60123456789');
+
+/*
+|--------------------------------------------------------------------------
+| 1.  Enqueue a tiny inline stylesheet
+|--------------------------------------------------------------------------
+*/
+add_action('wp_enqueue_scripts', function () {
+
+    // Only on single-product pages
+    // if (!is_product()) {
+    //     return;
+    // }
+
+    /* Register an empty style handle and enqueue it
+       – ensures the handle exists before we attach CSS. */
+    wp_register_style('walc-inline', false);
+    wp_enqueue_style('walc-inline');
+
+    /* Add the rules */
+    wp_add_inline_style('walc-inline', '
+        .walc-live-chat{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:10px 18px;
+            border-radius:30px;           /* pill shape */
+            // background:#25d366;
+            color:#000;
+            font-size:16px;
+            font-weight:600;
+            text-decoration:none;
+            line-height:1;
+            box-shadow:0 2px 8px rgba(37,211,102,.15);
+            transition:background .2s, box-shadow .2s;
+        }
+        .walc-live-chat:hover{
+            background:#1ebe5d;           /* slightly darker */
+            box-shadow:0 4px 10px rgba(30,190,93,.25);
+            color:#fff;
+        }
+        .walc-wa-icon{
+            width:22px;
+            height:22px;
+            display:block;
+        }
+    ');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| 2.  Output the button
+|--------------------------------------------------------------------------
+*/
+add_action('woocommerce_single_product_summary', function () {
+    if (get_option('walc_enable_button') !== 'yes') {
+        return;
+    }
+
+    global $product;
+
+    if (!$product instanceof WC_Product) {
+        return;
+    }
+
+    $brand = get_product_brand($product);
+    $product_name = $product->get_name();
+    $msg_template = "Hi, I'm interested in {$brand} ({$product_name}). Please provide more info";
+
+    $wa_url = 'https://wa.me/' . WALC_PHONE_NUMBER . '?text=' . rawurlencode($msg_template);
+    $wa_icon = '<img class="walc-wa-icon" src="' .
+        esc_url(plugins_url('assets/uploads/whatsapp-icon.webp', dirname(__FILE__, 2))) .
+        '" alt="WhatsApp" />';
+
+    echo '<p><a class="walc-live-chat" href="' . esc_url($wa_url) . '" target="_blank" rel="noopener">' .
+        $wa_icon . ' WhatsApp&nbsp;Us</a></p>';
+}, 35);
+
+
+/**
+ * Get product brand name from:
+ *  1. Product attribute (e.g. pa_brand)
+ *  2. Custom field (_brand)
+ */
+function get_product_brand(WC_Product $product)
+{
+    // Try attribute
+    $attributes = $product->get_attributes();
+    foreach (array_keys($attributes) as $attr_key) {
+        if (strpos($attr_key, 'brand') !== false) {
+            $terms = wp_get_post_terms($product->get_id(), $attr_key, ['fields' => 'names']);
+            if (!empty($terms)) {
+                return $terms[0];
+            }
+        }
+    }
+
+    // Fallback: check custom field
+    $meta = $product->get_meta('_brand', true);
+    if (!empty($meta)) {
+        return $meta;
+    }
+
+    // Final fallback
+    return '';
+}

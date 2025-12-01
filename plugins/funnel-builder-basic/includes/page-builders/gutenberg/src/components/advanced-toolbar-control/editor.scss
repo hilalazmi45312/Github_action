@@ -1,0 +1,40 @@
+.bwf-advanced-toolbar-control .components-button-group {
+	width: 100%;
+	&.bwf-toolbar--full-width {
+		display: flex;
+		flex-wrap: nowrap;
+		> button,
+		> button > svg {
+			width: 100% !important;
+		}
+	}
+	svg {
+		height: 20px !important;
+		width: auto;
+	}
+	&.bwf-toolbar--multiline {
+		flex-wrap: wrap;
+		> button {
+			margin-top: -1px !important;
+			margin-left: -1px !important;
+		}
+		> button,
+		> button > svg {
+			width: auto !important;
+		}
+	}
+}
+
+.bwf-advanced-toolbar-control__text-button {
+	align-self: center;
+	width: 100%;
+}
+
+/**
+ * backward compatibility v5.4
+ */
+body.branch-5-4 {
+	.bwf-advanced-toolbar-control .components-button-group {
+		border: 1px solid #e2e4e7;
+	}
+}

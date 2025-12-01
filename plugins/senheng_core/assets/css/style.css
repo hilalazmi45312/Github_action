@@ -1,0 +1,79 @@
+   .swal2-popup .swal2-actions button {
+       all: unset;
+       /* resets inherited styles */
+       all: initial;
+       /* alternative, depending on browser */
+       font-family: inherit;
+       padding: 8px 16px;
+       border-radius: 5px;
+       background-color: #3085d6;
+       color: white;
+       cursor: pointer;
+       border: none;
+       margin: 0 5px;
+   }
+
+   .swal2-popup .swal2-actions button.swal2-cancel {
+       background-color: #aaa;
+   }
+
+   .required {
+       color: red;
+   }
+
+   /* MODAL STYLING */
+   .custom-modal {
+       display: none;
+       position: fixed;
+       z-index: 1;
+       inset: 0;
+       background-color: rgba(0, 0, 0, 0.4);
+   }
+
+   .modal-content {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       background: #fff;
+       width: 600px;
+       max-height: 90vh;
+       display: flex;
+       flex-direction: column;
+       border-radius: 6px;
+       overflow: hidden;
+   }
+
+   .modal-body {
+       padding: 30px;
+       overflow-y: auto;
+       max-height: calc(100vh - 140px);
+       /* adjust based on header/footer */
+       flex: 1;
+   }
+
+   .modal-footer {
+       padding: 15px 30px;
+       background-color: #f9f9f9;
+       border-top: 1px solid #eee;
+       text-align: right;
+       flex-shrink: 0;
+   }
+
+   .modal-body input[type="number"],
+   .modal-body input[type="text"] {
+       width: 100%;
+       padding: 2px;
+       margin: 4px 0 15px;
+       box-sizing: border-box;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+   }
+
+   .close-button {
+       position: absolute;
+       right: 15px;
+       top: 10px;
+       font-size: 24px;
+       cursor: pointer;
+   }

@@ -1,0 +1,344 @@
+.woocommerce-cart-form__cart-item.cart_item .product-thumbnail{
+    vertical-align: initial;
+}
+
+
+.sh-extras-section {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 16px;
+}
+
+.sh-extras-header {
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.sh-extras-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.sh-extras-image {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f7f7f7;
+}
+
+.sh-extras-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.sh-extras-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.sh-extras-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-left: 16px;
+}
+
+.sh-extras-title {
+    font-size: 14px;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.sh-extras-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.sh-extras-price .amount {
+    font-weight: 600;
+    color: #333;
+}
+
+.cart-product-extras .sh-price-original,
+.sh-price-original .amount{
+    color: #888 ;
+    text-decoration: line-through;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+.sh-extras-qty {
+    font-size: 12px;
+    color: #666;
+}
+
+.checkout-product-extras .sh-extras-section {
+    margin-bottom: 8px;
+}
+/* Cart Product Extras Minimal Styling */
+
+.woocommerce-cart-form__cart-item.cart_item .product-price .woocommerce-Price-amount,
+.cart-totals-inner table .cart-subtotal .amount{
+    color: var(--wd-primary-color);
+    font-weight: 600;
+}
+
+.cart-product-extras{
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.cart-extras-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 4px 0;
+}
+
+.cart-extras-item:last-child {
+    margin-bottom: 0;
+}
+
+.cart-extras-image {
+    max-width: 60px;
+    max-height: 60px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px; /* Align with first line of text */
+}
+
+.cart-extras-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 5px;
+}
+
+.cart-extras-price-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.cart-extras-title {
+    color: #333;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.cart-extras-quantity {
+    color: #666;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.cart-extras-price {
+    color: #e74c3c !important; /* Red color for price */
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* Remove WooCommerce default price styling to ensure red color */
+.cart-extras-price .woocommerce-Price-amount {
+    color: inherit !important;
+}
+
+.cart-extras-price .woocommerce-Price-currencySymbol {
+    color: inherit !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .cart-product-extras-minimal {
+        margin-top: 6px;
+        font-size: 12px;
+    }
+    
+    .cart-extras-item {
+        gap: 6px;
+    }
+    
+    .cart-extras-image {
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+    }
+    
+    .cart-extras-content {
+        gap: 1px;
+    }
+    
+    .cart-extras-title {
+        font-size: 12px;
+    }
+    
+    .cart-extras-price {
+        font-size: 11px;
+    }
+}
+
+/* WooCommerce cart table integration */
+.woocommerce-cart-form .cart_item .cart-product-extras {
+    margin-top: 8px;
+}
+
+.woocommerce table.cart .cart-product-extras {
+    margin-top: 8px;
+}
+
+/* Woodmart theme compatibility */
+.woodmart-theme .cart-product-extras {
+    background-color: #f7f7f7;
+    border-left-color: #83b735;
+}
+
+.woodmart-theme .cart-extras-price {
+    color: #83b735;
+}
+
+/* Animation for better UX */
+.cart-product-extras {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hide default WooCommerce variation display */
+.woocommerce-cart .cart_item .variations,
+.woocommerce-checkout .cart_item .variations,
+.woocommerce-cart .cart_item dl.variation,
+.woocommerce-checkout .cart_item dl.variation,
+.woocommerce-cart-form td.product-name ul.variation,
+/* Hide default variation display in mini cart to prevent duplication */
+.widget_shopping_cart .cart_item dl.variation,
+.woocommerce-mini-cart .cart_item dl.variation,
+.widget_shopping_cart .cart_item .variations,
+.woocommerce-mini-cart .cart_item .variations {
+    display: none !important;
+}
+
+/* Variation Display Styles */
+.cart-variation-data {
+    font-size: 14px;
+    color: #707070;
+    margin-top: 5px;
+}
+
+.cart-product-extras .cart-variation-data{
+    font-size: 12px;
+}
+
+.cart-variation-data .variation-item {
+    display: inline-block;
+    margin-right: 0;
+    margin-bottom: 4px;
+}
+
+.cart-variation-data .variation-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.cart-variation-data .variation-value {
+    color: #777;
+    font-weight: normal;
+}
+
+.cart-variation-data .variation-separator {
+    color: #999;
+    margin: 0 2px;
+}
+
+/* Mini cart specific styles */
+.widget_shopping_cart .cart-variation-data,
+.woocommerce-mini-cart .cart-variation-data {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+.widget_shopping_cart .cart-variation-data .variation-item,
+.woocommerce-mini-cart .cart-variation-data .variation-item {
+    margin-right: 8px;
+    margin-bottom: 2px;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+/* Mini cart extra items variation styles */
+.wd-extra-cart-item .cart-variation-data.mini-cart-variation {
+    margin: 2px 0 4px 0;
+    font-size: 10px;
+    color: #666;
+}
+
+.wd-extra-cart-item .cart-variation-data.mini-cart-variation .variation-item {
+    display: inline-block;
+    margin-right: 0;
+    margin-bottom: 2px;
+}
+
+.wd-extra-cart-item .cart-variation-data.mini-cart-variation .variation-label {
+    font-weight: 500;
+}
+
+.wd-extra-cart-item .cart-variation-data.mini-cart-variation .variation-value {
+    font-weight: normal;
+}
+
+.wd-extra-cart-item .cart-variation-data.mini-cart-variation .variation-separator {
+    color: #888;
+    margin: 0 1px;
+}
+
+.woocommerce-cart .pickup-location-package-field small{
+    display: none;
+}
+
+.woocommerce-cart .pickup-location-package-field{
+    margin-top: 8px;
+}
+
+/* Mobile responsive for variations */
+@media (max-width: 768px) {
+    .cart-variation-data {
+        font-size: 11px;
+        margin-top: 4px;
+    }
+    
+    .cart-variation-data .variation-item {
+        margin-right: 0;
+        margin-bottom: 3px;
+    }
+    
+    .woocommerce-cart .cart-variation-data {
+        font-size: 12px;
+    }
+}
+
+/* Woodmart theme compatibility for variations */
+.woodmart-theme .cart-variation-data .variation-label {
+    color: #83b735;
+}

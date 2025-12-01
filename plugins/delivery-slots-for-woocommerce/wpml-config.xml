@@ -1,0 +1,170 @@
+<wpml-config>
+    <admin-texts>
+        <!-- Order Delivery start -->
+        <!-- localizations start -->
+        <key name="dey_order_delivery_date_field_label"/>
+        <key name="dey_order_delivery_time_slots_field_label"/>
+        <key name="dey_order_delivery_default_time_slot_label"/>
+        <key name="dey_order_delivery_unavailable_time_slot_label"/>
+        <key name="dey_order_delivery_as_soon_as_possible_label"/>
+        <key name="dey_order_delivery_fee_label"/>
+        <key name="dey_order_delivery_date_label"/>
+        <key name="dey_order_delivery_time_slot_label"/>
+        <key name="dey_order_delivery_expected_info_label"/>
+        <key name="dey_order_delivery_products_label"/>
+        <key name="dey_order_delivery_partially_booked_label"/>
+        <key name="dey_order_delivery_remaining_count_label"/>
+        <key name="dey_order_delivery_booked_label"/>
+        <key name="dey_order_delivery_myaccount_order_delivery_date_label"/>
+        <!-- localizations end -->
+
+        <!-- messages start -->
+        <key name="dey_order_delivery_expected_msg"/>
+        <key name="dey_order_delivery_date_mandatory_msg"/>
+        <key name="dey_order_delivery_time_slot_mandatory_msg"/>
+        <key name="dey_order_delivery_date_incorrect_msg"/>
+        <key name="dey_order_delivery_time_slot_incorrect_msg"/>
+        <key name="dey_order_delivery_date_booked_msg"/>
+        <key name="dey_order_delivery_date_holiday_msg"/>
+        <!-- messages end -->
+
+        <!-- notifications start -->
+        <key name="dey_customer_today_order_delivery_without_slot_subject"/>
+        <key name="dey_customer_today_order_delivery_without_slot_message"/>
+        <key name="dey_customer_today_order_delivery_with_slot_subject"/>
+        <key name="dey_customer_today_order_delivery_with_slot_message"/>
+        <!-- notifications end -->
+        <!-- Order Delivery end -->
+
+        <!-- Order Local Pickup start -->
+        <!-- localizations start -->
+        <key name="dey_local_pickup_location_field_label"/>
+        <key name="dey_local_pickup_date_field_label"/>
+        <key name="dey_local_pickup_default_pickup_location_label"/>
+        <key name="dey_local_pickup_time_slots_field_label"/>
+        <key name="dey_local_pickup_default_time_slot_label"/>
+        <key name="dey_local_pickup_unavailable_time_slot_label"/>
+        <key name="dey_local_pickup_as_soon_as_possible_label"/>
+        <key name="dey_local_pickup_time_slot_label"/>
+        <key name="dey_local_pickup_fee_label"/>
+        <key name="dey_local_pickup_location_label"/>
+        <key name="dey_local_pickup_date_label"/>
+        <key name="dey_local_pickup_products_label"/>
+        <key name="dey_local_pickup_partially_booked_label"/>
+        <key name="dey_local_pickup_remaining_count_label"/>
+        <key name="dey_local_pickup_booked_label"/>
+        <!-- localizations end -->
+
+        <!-- messages start -->
+        <key name="dey_local_pickup_location_mandatory_msg"/>
+        <key name="dey_local_pickup_date_mandatory_msg"/>
+        <key name="dey_local_pickup_time_slot_mandatory_msg"/>
+        <key name="dey_local_pickup_date_incorrect_msg"/>
+        <key name="dey_local_pickup_time_slot_incorrect_msg"/>
+        <key name="dey_local_pickup_date_booked_msg"/>
+        <key name="dey_local_pickup_date_holiday_msg"/>
+        <!-- messages end -->
+
+        <!-- notifications start -->
+        <key name="dey_customer_today_order_pickup_without_slot_subject"/>
+        <key name="dey_customer_today_order_pickup_without_slot_message"/>
+        <key name="dey_customer_today_order_pickup_with_slot_subject"/>
+        <key name="dey_customer_today_order_pickup_with_slot_message"/>
+        <!-- notifications end -->
+        <!-- Order Local Pickup end -->
+
+        <!-- Product Delivery start -->
+        <!-- localizations start -->
+        <key name="dey_product_delivery_date_field_label"/>
+        <key name="dey_product_delivery_time_slots_field_label"/>
+        <key name="dey_product_delivery_default_time_slot_label"/>
+        <key name="dey_product_delivery_unavailable_time_slot_label"/>
+        <key name="dey_product_delivery_as_soon_as_possible_label"/>        
+        <key name="dey_product_delivery_fee_label"/>
+        <key name="dey_product_delivery_date_label"/>
+        <key name="dey_product_delivery_time_slot_label"/>
+        <key name="dey_product_delivery_expected_info_label"/>
+        <key name="dey_product_delivery_partially_booked_label"/>
+        <key name="dey_product_delivery_remaining_count_label"/>
+        <key name="dey_product_delivery_booked_label"/>
+        <!-- localizations end -->
+
+        <!-- messages start -->
+        <key name="dey_product_delivery_expected_msg"/>
+        <key name="dey_product_delivery_date_mandatory_msg"/>
+        <key name="dey_product_delivery_time_slot_mandatory_msg"/>
+        <key name="dey_product_delivery_date_incorrect_msg"/>
+        <key name="dey_product_delivery_time_slot_incorrect_msg"/>
+        <key name="dey_product_delivery_date_booked_msg"/>
+        <key name="dey_product_delivery_date_holiday_msg"/>
+        <key name="dey_product_delivery_disabled_cart_msg"/>
+        <key name="dey_product_delivery_date_cart_incorrect_msg"/>
+        <key name="dey_product_delivery_time_slot_cart_incorrect_msg"/>
+        <key name="dey_product_delivery_date_cart_booked_msg"/>
+        <key name="dey_product_delivery_date_cart_holiday_msg"/>
+        <key name="dey_product_delivery_virtual_product_removed_cart_msg"/>
+        <!-- messages end -->
+
+        <!-- notifications start -->
+        <key name="dey_customer_today_product_delivery_without_slot_subject"/>
+        <key name="dey_customer_today_product_delivery_without_slot_message"/>
+        <key name="dey_customer_today_product_delivery_with_slot_subject"/>
+        <key name="dey_customer_today_product_delivery_with_slot_message"/>
+        <!-- notifications end -->
+        <!-- Product Delivery end -->
+
+        <!-- Product Local Pickup start -->
+        <!-- Localization start -->
+        <key name="dey_product_local_pickup_date_field_label"/>
+        <key name="dey_product_local_pickup_location_field_label"/>
+        <key name="dey_product_local_pickup_time_slots_field_label"/>
+        <key name="dey_product_local_pickup_default_time_slot_label"/>
+        <key name="dey_product_local_pickup_unavailable_time_slot_label"/>
+        <key name="dey_product_local_pickup_as_soon_as_possible_label"/>
+        <key name="dey_product_local_pickup_fee_label"/>
+        <key name="dey_product_local_pickup_same_day_fee_label"/>
+        <key name="dey_product_local_pickup_next_day_fee_label"/>
+        <key name="dey_product_local_pickup_date_label"/>
+        <key name="dey_product_local_pickup_time_slot_label"/>
+        <key name="dey_product_local_pickup_partially_booked_label"/>
+        <key name="dey_product_local_pickup_remaining_count_label"/>
+        <key name="dey_product_local_pickup_booked_label"/>
+        <!-- Localization end -->
+        <!-- Messages start -->
+        <key name="dey_product_local_pickup_expected_msg"/>
+        <key name="dey_product_local_pickup_date_mandatory_msg"/>
+        <key name="dey_product_local_pickup_time_slot_mandatory_msg"/>
+        <key name="dey_product_local_pickup_date_incorrect_msg"/>
+        <key name="dey_product_local_pickup_time_slot_incorrect_msg"/>
+        <key name="dey_product_local_pickup_date_booked_msg"/>
+        <key name="dey_product_local_pickup_date_holiday_msg"/>
+        <key name="dey_product_local_pickup_disabled_cart_msg"/>
+        <key name="dey_product_local_pickup_date_cart_incorrect_msg"/>
+        <key name="dey_product_local_pickup_time_slot_cart_incorrect_msg"/>
+        <key name="dey_product_local_pickup_date_cart_holiday_msg"/>
+        <key name="dey_product_local_pickup_virtual_product_removed_cart_msg"/>
+        <!-- Messages end -->
+        <!-- Product Local Pickup end -->
+
+        <!-- Order Tip start -->
+        <!-- localizations start -->
+        <key name="dey_order_tip_title_label"/>
+        <key name="dey_order_tip_custom_button_label"/>
+        <key name="dey_order_tip_custom_field_placeholder_label"/>
+        <key name="dey_order_tip_custom_add_tip_button_label"/>
+        <key name="dey_order_tip_fee_label"/>
+        <key name="dey_order_tip_fee_remove_label"/>
+        <!-- localizations end -->
+
+        <!-- messages start -->
+        <key name="dey_order_tip_description_msg"/>
+        <key name="dey_order_tip_added_msg"/>
+        <key name="dey_order_tip_removed_msg"/>
+        <key name="dey_order_tip_custom_empty_msg"/>
+        <key name="dey_order_tip_custom_valid_msg"/>
+        <key name="dey_order_tip_custom_minimum_msg"/>
+        <key name="dey_order_tip_custom_maximum_msg"/>
+        <!-- messages end -->
+        <!-- Order Tip end -->
+    </admin-texts>
+</wpml-config>

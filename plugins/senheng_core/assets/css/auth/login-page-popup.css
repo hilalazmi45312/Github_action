@@ -1,0 +1,462 @@
+body {
+    background: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+}
+
+.bgk-first {
+    background-color: #F5F5F8;
+    padding-bottom: 1px;
+    border-radius: 10px 10px 0 0;
+}
+
+.bgk-second {
+    background-color: #F5F5F8;
+    padding-top: 0;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    border-radius: 0 0 10px 10px;
+}
+
+.bgk-third {
+    background-color: #F5F5F8;
+    padding-top: 20px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    border-radius: 10px;
+}
+
+.login-card h2,
+.register-card h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+    color: #000;
+}
+
+.login-card .subtitle,
+.register-card .subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+
+.tab-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: #f4f4f4;
+    border-radius: 12px;
+}
+
+.tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    color: #444;
+    border-radius: 10px;
+}
+
+.tab.active {
+    background: #eb001e;
+    color: #fff;
+    border: 2px solid #eb001e;
+}
+
+.phone-input {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.phone-input select,
+.phone-input input {
+    /* padding: 12px; */
+    border-radius: 8px;
+    /* border: 1px solid #ccc; */
+    font-size: 15px;
+    width: 100%;
+}
+
+.phone-input select {
+    width: 30%;
+}
+
+.btn-red {
+    background: #eb001e;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 20px;
+    /* font-weight: bold; */
+    cursor: pointer;
+    /* font-size: 15px; */
+}
+
+.btn-outline {
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
+    width: 100%;
+    padding: 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.divider-login-popup {
+    margin: 25px 0;
+    position: relative;
+    text-align: center;
+    box-shadow: none !important;
+}
+
+.divider-login-popup span {
+    background: #fff;
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.divider-login-popup::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    z-index: 0;
+}
+
+.social-login {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    /* font-size: 12px; */
+    padding: 8px;
+    cursor: pointer;
+}
+
+.social-btn.fb {
+    background: #1877f2;
+    color: #fff;
+}
+
+.social-btn.google {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.social-btn.apple {
+    background: #000;
+    color: #fff;
+}
+
+.social-btn.tiktok {
+    background: #000;
+    color: #fff;
+}
+
+.terms {
+    font-size: 12px;
+    color: #666;
+    /* margin-top: 25px; */
+    text-align: left;
+    margin-bottom: -16px;
+}
+
+.terms a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.fa-brands,
+.fab {
+    font-size: 28px;
+}
+
+.phone-input select,
+.phone-input input {
+    border: 1px solid #000;
+}
+
+.reset-password {
+    margin-top: 20px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.5); */
+    display: none;
+    z-index: 999;
+}
+
+.login-container {
+    position: fixed;
+    top: 94px;
+    right: -540px;
+    width: 540px;
+    max-height: calc(100vh - 94px);
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    transition: right 0.4s ease, opacity 0.4s ease;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 20px 0 0 20px;
+}
+
+.login-container.active {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+    border-radius: 20px 0 0 20px;
+}
+
+.tac-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.otp-inputs,
+.otp-inputs-register {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.step-2-otp,
+.step-2-otp-register {
+    width: 48px;
+    height: 48px !important;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 12px !important;
+    border: 1px solid #ccc;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 14px;
+    color: #888;
+}
+
+.swal2-confirm {
+    background-color: #eb001e !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 4px !important;
+}
+
+.resend-code {
+    margin-top: 10px;
+    color: green;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+}
+
+.back-button {
+    margin-top: 20px;
+    text-align: left;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.terms-checkbox {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.terms-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    transform: scale(1.2);
+    margin: 0;
+    cursor: pointer;
+}
+
+.terms-checkbox a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+}
+
+/* HIDE FOR TEMP */
+.social-btn.tiktok {
+    display: none;
+}
+
+
+@media (max-width: 600px) {
+    .login-container {
+        margin-top: 17px;
+        width: 100%;
+        height: 70vh;
+        padding: 20px;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+
+    .login-container.active {
+        border-radius: 20px;
+    }
+
+    .toggle-password {
+        position: absolute;
+        top: 33%;
+        right: 60px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 14px;
+        color: #888;
+    }
+
+    .custom-alert {
+        width: 100vw !important;
+    }
+
+    .login-popup-close-btn {
+        display: flex !important;
+    }
+}
+
+.custom-alert {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffe2e2;
+    color: #b00020;
+    border: 1px solid #f5c2c2;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.3s ease;
+    width: auto;
+    max-width: min(92vw, 480px)
+}
+
+.custom-alert span {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.custom-alert.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.outline-icon {
+    color: transparent;
+    -webkit-text-stroke: 1px #b00020;
+}
+
+.custom-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.custom-loading.hidden {
+    display: none;
+}
+
+.custom-loading-box {
+    text-align: center;
+}
+
+.custom-loading-box img {
+    width: 120px;
+    height: 120px;
+}
+
+.custom-loading-box p {
+    margin-top: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* VALIDATION PART */
+input.invalid-input-popup {
+    border: 2.5px solid #d33 !important;
+    outline: none !important;
+    color: #d33 !important;
+}
+
+.login-popup-close-btn {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.login-popup-close-btn i {
+    font-size: 18px;
+    color: #333;
+}

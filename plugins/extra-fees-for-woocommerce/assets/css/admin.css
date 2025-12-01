@@ -1,0 +1,437 @@
+.efw-gateway-fee-settings {
+	float: left;
+	width: 98%;
+	margin-bottom: 15px;
+	padding: 15px;
+	border: 1px solid #000;
+	background: #fff;
+}
+.efw-gateway-fee-settings p {
+	float: left;
+	width: 100%;
+	margin-top:0;
+}
+
+.efw-gateway-fee-settings p label{
+	display: table-cell;
+	float: left;
+	width: 200px;
+	padding: 0 24px 20px 0;
+	font-weight: 600;
+	font-size: 14px;
+	text-align: left;
+	line-height: 1.3;
+	vertical-align: top;
+}
+
+.efw-gateway-fee-settings p input,
+.efw-gateway-fee-settings p select {
+	margin-left: 10px;
+
+}
+
+.efw-gateway-fee-settings p select,
+.efw-gateway-fee-settings p input {
+	width: 250px;
+}
+
+.efw-gateway-fee-settings p input[type='checkbox'] {
+	width: auto;
+}
+
+.efw_progress_bar_wrapper{
+	width:500px;
+	margin:20% auto;
+}
+.efw_progress_bar_outer{
+	height: 20px;
+	width: 500px;
+	background:#d5d4d3;
+	box-shadow:0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	border-radius:50px;
+}
+.efw_progress_bar_inner{
+	height: 20px;
+	background:#5cb85c;
+	border-radius:50px;
+}
+table.wp-list-table .column-product_fee {
+	width: 11% !important;
+}
+
+.efw_reports_tab_inner_content p{
+	float: left;
+	margin-top: 0;
+	width: auto !important;
+}
+
+.efw_reports_tab_inner_content .efw_fee_report_table_wrap p.search-box{
+	float: right !important;
+}
+
+.efw_reports_tab_inner_content select {
+	width:200px;
+}
+
+.efw_reports_tab_inner_content p label {
+	display: table-cell;
+	float: left;
+	padding: 0 15px 15px 0;
+	color: #666;
+	font-weight: 600;
+	font-size: 14px;
+	text-align: left;
+	line-height: 1.3;
+	vertical-align: top;
+	width: 250px;
+}
+
+.efw_reports_tab_inner_content p span {
+	color: #000;
+}
+.efw-rules-wrapper {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.efw-rules-wrapper h2 {
+	padding-left: 0 !important;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.efw-rules-content {
+	width: 100%;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.efw-rules-content input[type='text'],
+.efw-rules-content input[type='time'],
+.efw-rules-content input[type='number'],
+.efw-rules-content .form-field span {
+	margin: 0 5px;
+}
+
+.efw-rules-content select {
+	width: 50%;
+	margin: 0 5px !important;
+}
+
+.efw-rules-content .form-field span{
+	float: left;
+	width: 50px;
+}
+
+.efw-variation-rules {
+	float: left;
+	width: 100%;
+	border: 1px solid #e5e5e5;
+}
+
+.efw-rule-name {
+	padding: 15px 0 15px 10px;
+	margin-top: 0;
+	margin-bottom: 0;
+	border: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 1em;
+	cursor: pointer;
+}
+
+.efw-rule-name span {
+	float:right;
+}
+
+.efw-rule-name .dashicons-arrow-down {
+	width: auto;
+	height: auto;
+	margin-right: 10px;
+	font-size: 30px;
+	line-height: 20px;
+}
+
+.efw-rule-name .dashicons-trash {
+	color: #f00;
+}
+
+.efw-variation-rules .efw-rule-fields {
+	float:left;
+	width: 96%;
+	margin-left: 2%;
+}
+
+.efw-variation-rules select {
+	width: 95%;
+}
+
+.efw-from-to input[type='text'],
+.efw-from-to input[type='time'] {
+	float: left;
+	width: 220px !important;
+	margin: 0 5px;
+}
+
+.efw-from-to span {
+	float: left;
+	width: 50px;
+	margin: 0 5px;
+}
+
+.efw-add-rule-button-wrapper {
+	width: 100%;
+	margin: 15px 0 15px 8px;
+}
+
+.efw-variation-rules {
+	float: left;
+	width: 100%;
+	border: 1px solid #e5e5e5;
+}
+
+.efw-variation-rules .efw-rule-fields {
+	float:left;
+	width: 96%;
+	margin-left: 2%;
+}
+
+.efw-variation-rules select {
+	width: 95%;
+}
+
+.efw-shipping-fee-contents{
+	margin-bottom: 25px !important;
+	border:1px solid #000 !important;
+}
+
+.efw-shipping-fee-contents tbody th{
+	padding-left:10px;
+}
+
+.efw-shipping-fee-contents tbody tr td .efw_datepicker{
+	width:auto !important;
+}
+
+.efw-date-ranges-to-label{
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.efw-extra-fee-description textarea{
+	width:50%;
+}
+
+.efw-rule-fields-variable .efw-extra-fee-description textarea{
+	width:100%;
+}
+
+.efw-rule-fields .efw-extra-fee-description textarea{
+	margin-left:5px;
+}
+
+.efw-rule-fields-variable .efw-add-rule-for-variable{
+	margin-top:10px !important;
+}
+
+.efw-rules-content .form-field .required{
+	float:none;
+	margin:0;
+}
+
+#efw_multiple_fee_table,
+.efw-additional-fee-rule-content-wrapper {
+	background: #fff;
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+	width:100%;
+}
+
+#efw_multiple_fee_table th,
+.efw-additional-fee-rule-content-wrapper th {
+	background: #f1f1f1;
+}
+
+.efw_ordertotalfee_tab_inner_content #efw_multiple_fee_table th,
+.efw_ordertotalfee_tab_inner_content #efw_multiple_fee_table td,
+.efw-additional-fee-rule-content-wrapper th,
+.efw-additional-fee-rule-content-wrapper td {
+	padding: 5px;
+	text-align: center;
+	width: auto !important;
+	position: initial !important;
+}
+
+#efw_multiple_fee_table td input,
+#efw_multiple_fee_table td select,
+.efw-additional-fee-rule-content-wrapper td input {
+	max-width: 100%;
+}
+
+#efw_multiple_fee_table tr:nth-child(odd),
+.efw-additional-fee-rule-content-wrapper tr:nth-child(odd) {
+	background-color: #fafafa;
+}
+
+#efw_multiple_fee_table tr:last-child td,
+.efw-additional-fee-rule-content-wrapper tr:last-child td {
+	text-align: left;
+}
+
+#efw_multiple_fee_table th:last-child,
+#efw_multiple_fee_table td:last-child,
+.efw-additional-fee-rule-content-wrapper th:last-child,
+.efw-additional-fee-rule-content-wrapper td:last-child {
+	text-align: left;
+}
+
+.efw-multiple-fee-remove{
+	margin: 10px;
+}
+.efw-multiple-fee-remove:hover {
+   background: #f00;
+   color: #fff;
+   border: 1px solid #f00;
+   border-radius: 5px;
+}
+
+.efw-reports-field-wrapper .efw-reports-settings button {
+	margin-bottom: 10px;
+}
+
+.efw_reports_tab_content_wrapper {
+	background: #fff;
+	padding: 15px;	
+}
+
+.efw_reports_tab_inner_content h2 {
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #000; 
+}
+.efw-reports-field-wrapper {
+	width: 50%;
+}
+.efw-reports-settings {
+	display: flex;
+}
+
+.efw_reports_tab_inner_content select {
+	margin-right: 10px;
+}
+
+.efw_reports_tab_inner_content table {
+	border: none !important;
+	width: 100%;
+}
+
+.efw_reports_tab_inner_content table tr:nth-last-child(odd){
+	background: #f7f7f7;
+}
+
+.efw_reports_tab_inner_content table.efw-reports-data-content tr:nth-last-child(odd) {
+	background: #e1e0e0;
+}
+
+.efw_reports_tab_inner_content .efw_fee_report_table_wrap table th{
+	background: #e1e0e0 !important;
+}
+
+.efw_reports_tab_inner_content table th,
+.efw_reports_tab_inner_content table td {
+	padding: 15px !important;
+}
+
+.efw_reports_tab_inner_content table th {
+	width:50%;
+}
+.efw_fee_coupon_data a:before {
+	font-family: Dashicons;
+	content: "\f18E" !important;
+}
+.efw-shipping-fee-contents-title {
+	background: #fff;
+	float: left;
+	width: 100%;
+	margin: 15px 0;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+
+.efw-shipping-fee-contents-title h2 {
+	padding-bottom: 15px;
+	margin: 0;
+}
+
+.efw-shipping-fee-contents-title .efw-shipping-fee-contents-container{
+	box-sizing: border-box;
+	margin-bottom: 25px !important;
+	border: none;
+}
+
+.efw-shipping-fee-contents-container h3 {
+	padding: 10px 0;
+	background: #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 0;
+	padding: 10px;
+}
+
+.efw-shipping-fee-contents-container table{
+	padding: 10px;
+}
+
+.efw-shipping-fee-contents-container tbody th{
+	padding-left:10px;
+}
+
+.efw-shipping-fee-contents-container tbody tr td .efw_datepicker{
+	width:auto !important;
+}
+
+.efw_productfee_tab_inner_content .efw-extra-fee-wrapper {
+	float: left;
+	width: 100%
+}
+
+.efw_productfee_tab_inner_content .efw-rules-content {
+	border: none !important;
+}
+
+.efw_productfee_tab_inner_content .efw-rules-content-wrapper {
+	float: left;
+	width: 100%;
+	margin: 5px;		
+}
+.efw_productfee_tab_inner_content .efw-rules-content {
+	float: left;
+	width: 100%;	
+}
+
+.efw_productfee_tab_inner_content .efw-rules-content h3 {
+	background: #ccc;
+}
+
+.efw_productfee_tab_inner_content .efw-rules-content .efw-fee-wrapper {
+	background: #fff;
+	float: left;
+}
+
+.efw_productfee_tab_inner_content .efw-rules-content p {
+	width: 100%;
+	float: left;
+	margin: 10px 0;
+}
+
+.efw_productfee_tab_inner_content .efw-rules-content p label {
+	float: left;
+	width: 200px;
+	padding: 10px;
+}
+.efw_productfee_tab_inner_content .efw-rules-content p input,
+.efw_productfee_tab_inner_content .efw-rules-content p select,
+.efw_productfee_tab_inner_content .efw-rules-content p textarea,
+.efw_productfee_tab_inner_content .efw-rules-content p input[type="number"] {
+	width: 50%;
+	float: left;
+}
+

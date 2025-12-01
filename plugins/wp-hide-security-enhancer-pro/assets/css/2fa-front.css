@@ -1,0 +1,12 @@
+
+
+table.widefat {  border: 1px solid #c3c4c7;  box-shadow: 0 1px 1px rgba(0,0,0,.04);}
+table.fixed {  table-layout: fixed;}
+.widefat td, .widefat th {  padding: 8px 10px; vertical-align: top; color: #50575e;}
+.widefat thead tr th { color: #2c3338; }
+.fixed .column-author {width: 20%; }
+.striped > tbody > :nth-child(2n+1) {background-color: #f6f7f7;}
+#_2fa_app_code {box-shadow: 0 0 0 transparent;                                        border-radius: 4px;  border: 1px solid #8c8f94;  background-color: #fff;  color: #2c3338;line-height: 2;  min-height: 30px;}
+._2fa-options-table .button {color: #2271b1;  border-color: #2271b1;  background: #f6f7f7;  vertical-align: top;display: inline-block;  text-decoration: none;  font-size: 13px;  line-height: 2.15384615;  min-height: 30px;  margin: 0;  padding: 0 10px;  cursor: pointer;  border-width: 1px;  border-style: solid;  -webkit-appearance: none;  border-radius: 3px;  white-space: nowrap;  box-sizing: border-box;vertical-align: middle;}
+._2fa-options-table .button-primary {  background: #2271b1;  border-color: #2271b1;  color: #fff;  text-decoration: none;  text-shadow: none;  display: inline-block;  text-decoration: none;  font-size: 13px;  line-height: 2.15384615;  min-height: 30px;  margin: 0;  padding: 0 10px;  cursor: pointer;  border-width: 1px;  border-style: solid;  -webkit-appearance: none;  border-radius: 3px;  white-space: nowrap;  box-sizing: border-box;}
+._2fa-options-table .button-primary:hover {  background: #135e96;  border-color: #135e96;  color: #fff;}

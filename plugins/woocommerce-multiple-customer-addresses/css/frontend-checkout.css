@@ -1,0 +1,228 @@
+/* .select2-drop-active 
+{
+  z-index: 2147483647;
+}
+ */
+/* #select2-wcmca_billing_country-container, #select2-wcmca_shipping_country-container, 
+#select2-wcmca_billing_state-container, #select2-wcmca_shipping_state-container, */
+.select2-dropdown.wcmca-increase-z-index
+{
+ z-index:991044;
+}
+.mfp-wrap ~ .select2-container {
+	z-index: 10000002 !important;
+}
+#wcmca_billing_country_field .select2-container, #wcmca_shipping_country_field .select2-container,
+#wcmca_billing_state_field .select2-container, #wcmca_shipping_state_field .select2-container
+{
+	width: 100% !important;
+}
+.mfp-bg {
+	z-index: 991042;
+}
+.mfp-wrap {
+	z-index: 991043;
+}
+.wcmca_product_address_select_menu
+{
+	 width: 500px;
+}
+.wcmca_address_select_menu
+{
+	display:block;
+	margin-bottom: 15px;
+    width: 100%;
+	margin bottom: 10px;
+}
+.wcmca_loader_image
+{
+	/* margin-top:3px;
+	margin-bottom:30px; */
+	display:none;
+	clear:both;
+	width:16px;
+	height:16px;
+}
+.wcmca_default_droppdown_option
+{
+	font-weight: bold;
+	font-style: italic;
+}
+/* .select.wcmca-country-select2, .select.wcmca-state-select2
+{
+	display:block;
+	width: 100%;
+	height: 38px;
+} */
+.wcmca_product_field_label
+{
+	display: block;
+	margin-top: 10px;
+}
+textarea.wcmca_product_field
+{
+	max-width: 500px;
+}
+.wcmca_add_new_address_buttons_container
+{
+	display: block;
+	clear: both;
+}
+#wcmca_form_background_overlay{
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.9;
+	opacity:.90;
+	filter: alpha(opacity=90);
+}
+#wcmca_form_popup_container_shipping,  #wcmca_form_popup_container_billing{
+	
+	
+	 background: #fff none repeat scroll 0 0;
+	margin: 40px auto;
+	max-width: 700px;
+	padding: 20px 30px;
+	position: relative;
+	text-align: left;
+}
+/*#wcmca_form_popup_container .woocommerce, #wcmca_form_popup_container .woocommerce #wcmca_address_form, #wcmca_form_popup_container .woocommerce #wcmca_address_form #wcmca_address_form_fieldset
+{
+	  position: absolute;
+	 margin-top: 2%;
+	 width: 98%;
+	 height: 850px; 
+}*/
+
+#wcmca_close_address_form_button_shipping, #wcmca_close_address_form_button_billing
+{
+	float:right;
+	font-weight:bold;
+	font-size:16px;
+	color: #d6d6d6;
+	cursor:pointer;
+}
+
+#wcmca_address_form_fieldset_shipping, #wcmca_address_form_fieldset_billing
+{
+	display:block;
+	clear:both;
+	margin-bottom:20px;
+}
+#wcmca_save_address_button_shipping, #wcmca_save_address_button_billing
+{
+	margin-top:15px;
+}
+.wcmca_save_address_button_container
+{
+	display:block;
+	clear: both;
+}
+.wcmca_divider
+{
+	display:block;
+	clear:both;
+	height:5px;
+	width: 100%;
+}
+.select.select2-choice {
+  width: 100%;
+  height: 40px;
+}
+.wcmca_preloader_image
+{
+	margin-left: 10px;
+    margin-top: 28px;
+	display:none;
+	width:32px;
+	height:32px;
+}
+.wcmca_default_checkobx_label
+{
+	font-weight: bold;
+	margin-bottom: 20px;
+	display:block;
+}
+.wcmca_form_label
+{
+	display:block;
+}
+a.button.wcmca_add_new_address_button, button.button.wcmca_add_new_address_button
+{
+	margin-top:8px;
+}
+.woocommerce a.button.wcmca_remove_address_button, a.button.wcmca_remove_address_button
+{
+	display: none;
+}
+.wcmca_input_field
+{
+	width:98%;
+}
+label.wcmca_form_inline_input_label, .woocommerce form .form-row label, .woocommerce-page form .form-row label.wcmca_form_inline_input_label
+{
+	clear:right;
+	display:inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+label.wcmca_form_inline_input_label:first-child, .woocommerce form .form-row label, .woocommerce-page form .form-row label.wcmca_form_inline_input_label:first-child
+{
+	clear:right;
+	display:block;
+	margin-left: 0px;
+}
+.wcmca_form_inline_input_label:after, .wcmca_form_label:after, abbr.required
+{
+	color:red;
+}
+/* Sizes */
+#wcmca_address_form_fieldset_billing .form-row-wide, #wcmca_address_form_fieldset_shipping .form-row-wide {
+	display: block;
+	clear: both;
+}
+#wcmca_form_popup_container_shipping .wcmca_input_field, #wcmca_form_popup_container_billing .wcmca_input_field {
+  box-sizing: border-box;
+  width: 100%;
+}
+#wcmca_form_popup_container_shipping .form-row-first, #wcmca_form_popup_container_billing .form-row-first {
+    float: left;
+    position: relative;
+    width: 46%;
+	/* margin: 0px 5px; */ 
+}
+#wcmca_form_popup_container_shipping .form-row.form-row.form-row-last, #wcmca_form_popup_container_billing .form-row.form-row.form-row-last {
+    clear: right;
+    float: right;
+    /* margin-left: 2%; */
+    width: 48%;
+}
+#wcmca_country_field_field_shipping, #wcmca_country_field_field_billing {
+  clear: both;
+  display: block;
+}
+#wcmca_address_select_menu_billing, #wcmca_address_select_menu_shipping 
+{
+	width: 100%;
+}
+.wcmca_address_selector_container
+{
+	overflow: hidden;
+}
+.wcmca_collect_from_store
+{
+	margin: 10px 0px 10px 0px;
+}
+.wcmca_collect_from_store_container
+{
+	display: block;
+}
+.wcmca-address-select-menu-dropdown
+{
+	top: -30px;
+}

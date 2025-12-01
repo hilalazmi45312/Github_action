@@ -1,0 +1,122 @@
+.wcmcam_address_block_title
+{
+	overflow:hidden;	
+	display: block;
+}
+.mfp-close
+{
+	color:#000;
+}
+.mfp-bg
+{
+ z-index: 10942;
+}
+.mfp-wrap
+{
+	z-index: 10943;
+}
+/* table.display_meta
+{
+	display: none;
+} */
+#wcmca_load_billing_additionl_addresses_button, #wcmca_load_shipping_additionl_addresses_button
+{
+	display:none;
+}
+#order_data .order_data_column #wcmca_load_billing_additionl_addresses_button::after, #order_data .order_data_column #wcmca_load_shipping_additionl_addresses_button::after
+{
+	 font-family: WooCommerce;
+    font-size: 14px;
+    font-weight: 400;
+    left: 0;
+    line-height: 14px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    vertical-align: top;
+	
+	
+}
+#order_data .order_data_column #wcmca_load_billing_additionl_addresses_button, #order_data .order_data_column #wcmca_load_shipping_additionl_addresses_button
+{
+	border: 0 none;
+    color: #999;
+    float: right;
+    height: 0;
+    margin: 0 0 0 6px;
+    overflow: hidden;
+    padding: 14px 0 0;
+    position: relative;
+    width: 14px;
+}
+#order_data .order_data_column #wcmca_load_billing_additionl_addresses_button::after, #order_data .order_data_column #wcmca_load_shipping_additionl_addresses_button::after
+{
+	font-family:Dashicons;
+	content: "\f163";
+}
+#order_data .order_data_column #wcmca_load_billing_additionl_addresses_button::hover, #order_data .order_data_column #wcmca_load_billing_additionl_addresses_button::active, #order_data .order_data_column #wcmca_load_billing_additionl_addresses_button::focus,
+#order_data .order_data_column #wcmca_load_shipping_additionl_addresses_button::hover, #order_data .order_data_column #wcmca_load_shipping_additionl_addresses_button::active, #order_data .order_data_column #wcmca_load_shipping_additionl_addresses_button::focus
+{
+	color:#000
+}
+#wcmca_additional_addresses_container
+{
+	background: #fff none repeat scroll 0 0;
+	min-height: 100px;
+	max-width: 90%;
+	padding: 20px 30px;
+	position: relative;
+	text-align: left;
+	overflow: auto;
+}
+
+@media screen and (min-width: 981px)
+{
+	#wcmca_additional_addresses_container
+	{
+		margin: 40px 30px auto 60px/* 170px */;
+	}
+}
+@media screen and (min-width: 766px) and (max-width: 980px) 
+{
+	#wcmca_additional_addresses_container
+	{
+		margin: 40px 20px auto  10px/* 40px */;
+	}
+}
+@media screen and (max-width: 765px)
+{
+	#wcmca_additional_addresses_container
+	{
+		margin: 40px 10px auto 10px;
+	}
+}
+
+.wcmca_preloader_image
+{
+	/* position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 64px;
+   height: 64px; */
+   /* margin-top: -32px; */ /* Half the height */
+   /* margin-left: -32px;  *//* Half the width */
+   
+   display: block;
+   /* margin-left: auto;
+   margin-right: auto; */
+   margin-left: 50%;
+   margin-right: 50%;
+}
+#wcmca_edit_order_item_container
+{
+	margin-top: 20px;
+	float:left;
+	display: block;
+	clear:both;
+}
+button.wcmca_make_order_item_editable
+{
+	margin-bottom: 10px !important;
+	display: block !important;
+}

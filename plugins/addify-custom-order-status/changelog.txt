@@ -1,0 +1,25 @@
+*** Custom Order Status Change log ***
+
+2025-08-22 - version 1.2.0
+* Add - Added wp_editor for email messages.
+
+2025-05-26 - version 1.1.2
+* Add -Add Slug Validation on backend.
+
+2024-03-29 - version 1.1.1
+* Fix -Instructions related to slug.
+* Fix -Styling for order status.
+* Fix -Hook added for bulk actions for HPOS.
+* Fix -Admin email hook issue.
+
+2024-01-24 - version 1.1.0
+* Update - Compatibility updated for latest versions of WooCommerce and WordPress.
+* Update - Compatible with WooCommerce High-Performance Order Storage (HPOS).
+
+2023-03-31 - version 1.0.1
+* Fix - Fixed failed security check on status import.
+* Fix - Fixed JS conflicts in admin panel.
+
+
+2022-12-01 - version 1.0.0
+* Other - Initial release of the plugin.

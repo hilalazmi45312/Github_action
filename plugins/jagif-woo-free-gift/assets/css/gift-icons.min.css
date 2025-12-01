@@ -1,0 +1,85 @@
+@font-face {
+    font-family: jagif_gift_icons;
+    src: url(../fonts/gift-icons/gift-icons.eot);
+    src: url(../fonts/gift-icons/gift-icons.eot?#iefix) format("embedded-opentype"), url(../fonts/gift-icons/gift-icons.woff2) format("woff2"), url(../fonts/gift-icons/gift-icons.woff) format("woff"),
+    url(../fonts/gift-icons/gift-icons.ttf) format("truetype"), url(../fonts/gift-icons/gift-icons.svg#Flaticon) format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    @font-face {
+        font-family: jagif_gift_icons;
+        src: url(../fonts/gift-icons/gift-icons.svg#Flaticon) format("svg");
+    }
+}
+[class*=" jagif_gift_icon-"]:after,
+[class*=" jagif_gift_icon-"]:before,
+[class^="jagif_gift_icon-"]:after,
+[class^="jagif_gift_icon-"]:before {
+    font-family: jagif_gift_icons;
+    font-size: 20px;
+    font-style: normal;
+}
+.jagif_gift_icon-1:before {
+    content: "\f102";
+}
+.jagif_gift_icon-2:before {
+    content: "\f103";
+}
+.jagif_gift_icon-3:before {
+    content: "\f104";
+}
+.jagif_gift_icon-4:before {
+    content: "\f10d";
+}
+.jagif_gift_icon-5:before {
+    content: "\f10f";
+}
+.jagif_gift_icon-6:before {
+    content: "\f111";
+}
+.jagif_gift_icon-7:before {
+    content: "\f115";
+}
+.jagif_gift_icon-8:before {
+    content: "\f105";
+}
+.jagif_gift_icon-9:before {
+    content: "\f107";
+}
+.jagif_gift_icon-10:before {
+    content: "\f106";
+}
+.jagif_gift_icon-11:before {
+    content: "\f108";
+}
+.jagif_gift_icon-12:before {
+    content: "\f109";
+}
+.jagif_gift_icon-13:before {
+    content: "\f10a";
+}
+.jagif_gift_icon-14:before {
+    content: "\f10b";
+}
+.jagif_gift_icon-15:before {
+    content: "\f10c";
+}
+.jagif_gift_icon-16:before {
+    content: "\f10e";
+}
+.jagif_gift_icon-17:before {
+    content: "\f110";
+}
+.jagif_gift_icon-18:before {
+    content: "\f112";
+}
+.jagif_gift_icon-19:before {
+    content: "\f113";
+}
+.jagif_gift_icon-20:before {
+    content: "\f114";
+}
+.jagif_gift_icon-21:before {
+    content: "\f101";
+}

@@ -1,0 +1,1744 @@
+[
+    {
+        "key": "group_5757d093217f9",
+        "title": "WooCommerce Multiple Customer Addresses - General Options & Style",
+        "fields": [
+            {
+                "key": "field_5757d1431248e",
+                "label": "VAT idetification field",
+                "name": "wcmca_vat_idetification_field",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "You can optionally show an extra VAT identification field on billing addrese where your EU clients can enter their VAT Number.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58048bcfa8c03",
+                "label": "VAT idetification field - enable required",
+                "name": "wcmca_vat_identification_enable_required",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5757d1431248e",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_669dfab5fc43d",
+                "label": "Default country",
+                "name": "wcmca_default_country",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "Select which country will be preselected when choosing the billing\/shipping country.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "34",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "no": "No default",
+                    "AF": "Afghanistan",
+                    "AX": "Åland",
+                    "AL": "Albania",
+                    "DZ": "Algeria",
+                    "AS": "American",
+                    "AD": "Andorra",
+                    "AO": "Angola",
+                    "AI": "Anguilla",
+                    "AQ": "Antarctica",
+                    "AG": "Antigua",
+                    "AR": "Argentina",
+                    "AM": "Armenia",
+                    "AW": "Aruba",
+                    "AU": "Australia",
+                    "AT": "Austria",
+                    "AZ": "Azerbaijan",
+                    "BS": "Bahamas",
+                    "BH": "Bahrain",
+                    "BD": "Bangladesh",
+                    "BB": "Barbados",
+                    "BY": "Belarus",
+                    "BE": "Belgium",
+                    "PW": "Belau",
+                    "BZ": "Belize",
+                    "BJ": "Benin",
+                    "BM": "Bermuda",
+                    "BT": "Bhutan",
+                    "BO": "Bolivia",
+                    "BQ": "Bonaire,",
+                    "BA": "Bosnia",
+                    "BW": "Botswana",
+                    "BV": "Bouvet",
+                    "BR": "Brazil",
+                    "IO": "British",
+                    "BN": "Brunei",
+                    "BG": "Bulgaria",
+                    "BF": "Burkina",
+                    "BI": "Burundi",
+                    "KH": "Cambodia",
+                    "CM": "Cameroon",
+                    "CA": "Canada",
+                    "CV": "Cape",
+                    "KY": "Cayman",
+                    "CF": "Central",
+                    "TD": "Chad",
+                    "CL": "Chile",
+                    "CN": "China",
+                    "CX": "Christmas",
+                    "CC": "Cocos",
+                    "CO": "Colombia",
+                    "KM": "Comoros",
+                    "CG": "Congo",
+                    "CD": "Congo",
+                    "CK": "Cook",
+                    "CR": "Costa",
+                    "HR": "Croatia",
+                    "CU": "Cuba",
+                    "CW": "Curaçao",
+                    "CY": "Cyprus",
+                    "CZ": "Czech",
+                    "DK": "Denmark",
+                    "DJ": "Djibouti",
+                    "DM": "Dominica",
+                    "DO": "Dominican",
+                    "EC": "Ecuador",
+                    "EG": "Egypt",
+                    "SV": "El",
+                    "GQ": "Equatorial",
+                    "ER": "Eritrea",
+                    "EE": "Estonia",
+                    "ET": "Ethiopia",
+                    "FK": "Falkland",
+                    "FO": "Faroe",
+                    "FJ": "Fiji",
+                    "FI": "Finland",
+                    "FR": "France",
+                    "GF": "French",
+                    "PF": "French",
+                    "TF": "French",
+                    "GA": "Gabon",
+                    "GM": "Gambia",
+                    "GE": "Georgia",
+                    "DE": "Germany",
+                    "GH": "Ghana",
+                    "GI": "Gibraltar",
+                    "GR": "Greece",
+                    "GL": "Greenland",
+                    "GD": "Grenada",
+                    "GP": "Guadeloupe",
+                    "GU": "Guam",
+                    "GT": "Guatemala",
+                    "GG": "Guernsey",
+                    "GN": "Guinea",
+                    "GW": "Guinea-Bissau",
+                    "GY": "Guyana",
+                    "HT": "Haiti",
+                    "HM": "Heard",
+                    "HN": "Honduras",
+                    "HK": "Hong",
+                    "HU": "Hungary",
+                    "IS": "Iceland",
+                    "IN": "India",
+                    "ID": "Indonesia",
+                    "IR": "Iran",
+                    "IQ": "Iraq",
+                    "IE": "Ireland",
+                    "IM": "Isle",
+                    "IL": "Israel",
+                    "IT": "Italy",
+                    "CI": "Ivory",
+                    "JM": "Jamaica",
+                    "JP": "Japan",
+                    "JE": "Jersey",
+                    "JO": "Jordan",
+                    "KZ": "Kazakhstan",
+                    "KE": "Kenya",
+                    "KI": "Kiribati",
+                    "KW": "Kuwait",
+                    "KG": "Kyrgyzstan",
+                    "LA": "Laos",
+                    "LV": "Latvia",
+                    "LB": "Lebanon",
+                    "LS": "Lesotho",
+                    "LR": "Liberia",
+                    "LY": "Libya",
+                    "LI": "Liechtenstein",
+                    "LT": "Lithuania",
+                    "LU": "Luxembourg",
+                    "MO": "Macao",
+                    "MK": "North",
+                    "MG": "Madagascar",
+                    "MW": "Malawi",
+                    "MY": "Malaysia",
+                    "MV": "Maldives",
+                    "ML": "Mali",
+                    "MT": "Malta",
+                    "MH": "Marshall",
+                    "MQ": "Martinique",
+                    "MR": "Mauritania",
+                    "MU": "Mauritius",
+                    "YT": "Mayotte",
+                    "MX": "Mexico",
+                    "FM": "Micronesia",
+                    "MD": "Moldova",
+                    "MC": "Monaco",
+                    "MN": "Mongolia",
+                    "ME": "Montenegro",
+                    "MS": "Montserrat",
+                    "MA": "Morocco",
+                    "MZ": "Mozambique",
+                    "MM": "Myanmar",
+                    "NA": "Namibia",
+                    "NR": "Nauru",
+                    "NP": "Nepal",
+                    "NL": "Netherlands",
+                    "NC": "New",
+                    "NZ": "New",
+                    "NI": "Nicaragua",
+                    "NE": "Niger",
+                    "NG": "Nigeria",
+                    "NU": "Niue",
+                    "NF": "Norfolk",
+                    "MP": "Northern",
+                    "KP": "North",
+                    "NO": "Norway",
+                    "OM": "Oman",
+                    "PS": "Palestinian",
+                    "PK": "Pakistan",
+                    "PA": "Panama",
+                    "PG": "Papua",
+                    "PY": "Paraguay",
+                    "PE": "Peru",
+                    "PN": "Pitcairn",
+                    "PH": "Philippines",
+                    "PL": "Poland",
+                    "PT": "Portugal",
+                    "PR": "Puerto",
+                    "QA": "Qatar",
+                    "RO": "Romania",
+                    "RE": "Reunion",
+                    "RU": "Russia",
+                    "RW": "Rwanda",
+                    "BL": "Saint",
+                    "SH": "Saint",
+                    "LC": "Saint",
+                    "KN": "Saint",
+                    "MF": "Saint",
+                    "SX": "Saint",
+                    "PM": "Saint",
+                    "VC": "Saint",
+                    "ST": "São",
+                    "SM": "San",
+                    "SA": "Saudi",
+                    "SN": "Senegal",
+                    "RS": "Serbia",
+                    "SC": "Seychelles",
+                    "SG": "Singapore",
+                    "SL": "Sierra",
+                    "SK": "Slovakia",
+                    "SI": "Slovenia",
+                    "SB": "Solomon",
+                    "SO": "Somalia",
+                    "GS": "South",
+                    "ZA": "South",
+                    "KR": "South",
+                    "SS": "South",
+                    "ES": "Spain",
+                    "LK": "Sri",
+                    "SR": "Suriname",
+                    "SD": "Sudan",
+                    "SJ": "Svalbard",
+                    "SZ": "Swaziland",
+                    "SE": "Sweden",
+                    "CH": "Switzerland",
+                    "SY": "Syria",
+                    "TW": "Taiwan",
+                    "TJ": "Tajikistan",
+                    "TZ": "Tanzania",
+                    "TH": "Thailand",
+                    "TL": "Timor-Leste",
+                    "TK": "Tokelau",
+                    "TG": "Togo",
+                    "TO": "Tonga",
+                    "TT": "Trinidad",
+                    "TN": "Tunisia",
+                    "TR": "Turkey",
+                    "TC": "Turks",
+                    "TM": "Turkmenistan",
+                    "TV": "Tuvalu",
+                    "UG": "Uganda",
+                    "UA": "Ukraine",
+                    "AE": "United",
+                    "GB": "United",
+                    "US": "United",
+                    "UM": "United",
+                    "UY": "Uruguay",
+                    "UZ": "Uzbekistan",
+                    "VU": "Vanuatu",
+                    "VA": "Vatican",
+                    "VE": "Venezuela",
+                    "VN": "Vietnam",
+                    "VG": "Virgin",
+                    "VI": "Virgin",
+                    "WF": "Wallis",
+                    "EH": "Western",
+                    "WS": "Samoa",
+                    "YE": "Yemen",
+                    "ZM": "Zambia",
+                    "ZW": "Zimbabwe"
+                },
+                "default_value": false,
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "ui": 1,
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_632175069e8f3",
+                "label": "Disable checkout billing form editing",
+                "name": "wcmca_disable_checkout_billing_form",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Enabling this option, the user will not be able to alter the checkout billing form",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_632175569e8f4",
+                "label": "Disable checkout shipping form editing",
+                "name": "wcmca_disable_checkout_shipping_form",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Enabling this option, the user will not be able to alter the checkout shipping form",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_57a843beb8547",
+                "label": "Disable the billing multiple addresses selection",
+                "name": "wcmca_disable_billing_multiple_addresses",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Multiple addresses selection will be disabled for billing address",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_64a506ef30b5b",
+                "label": "Disable the billing multiple addresses only for the following roles",
+                "name": "wcmca_billing_addresses_disable_for_roles",
+                "aria-label": "",
+                "type": "role_selector",
+                "instructions": "The multiple addresses feature won't be available for the selected roles.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_57a843beb8547",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "34",
+                    "class": "",
+                    "id": ""
+                },
+                "return_value": "name",
+                "allowed_roles": "",
+                "field_type": "checkbox"
+            },
+            {
+                "key": "field_59e4cb410bd5c",
+                "label": "Max number of billing addresses",
+                "name": "wcmca_max_number_of_billing_addresses",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "This is the max number of billing addresses the user can create. Leave 0 for no limits.",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_57a843beb8547",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "min": 0,
+                "max": "",
+                "placeholder": "Default value: 0",
+                "step": 1,
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_59e4cc1c0bd5d",
+                "label": "Disable the add\/edit\/delete billing addresses capabilities",
+                "name": "wcmca_disable_user_billing_addresses_editing_capabilities",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Enabling this option, the user will not be able to insert, delete or edit the additional shipping addresses. Only the Admin will be able to do that.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_57a843beb8547",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_57a843edb8548",
+                "label": "Disable the shipping multiple addresses selection",
+                "name": "wcmca_disable_shipping_multiple_addresses",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Multiple addresses selection will be disabled for shipping address",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_64a509dde0f4e",
+                "label": "Disable the shipping multiple addresses only for the following roles",
+                "name": "wcmca_shipping_addresses_disable_for_roles",
+                "aria-label": "",
+                "type": "role_selector",
+                "instructions": "The multiple addresses feature won't be available for the selected roles",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_57a843edb8548",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "34",
+                    "class": "",
+                    "id": ""
+                },
+                "return_value": "name",
+                "allowed_roles": "",
+                "field_type": "checkbox"
+            },
+            {
+                "key": "field_59e4ca980bd5b",
+                "label": "Max number of shipping addresses",
+                "name": "wcmca_max_number_of_shipping_addresses",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "This is the max number of shipping addresses the user can create. Leave 0 for no limits.",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_57a843edb8548",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "min": 0,
+                "max": "",
+                "placeholder": "Default value: 0",
+                "step": 1,
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_59e4cc9f0bd5e",
+                "label": "Disable the add\/edit\/delete shipping addresses capabilities",
+                "name": "wcmca_disable_user_shipping_addresses_editing_capabilities",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Enabling this option, the user will not be able to insert, delete or edit the additional shipping addresses. Only the Admin will be able to do that.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_57a843edb8548",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_57e2d9502bac1",
+                "label": "My account page - Display fields labels",
+                "name": "wcmca_my_account_page_display_fields_labels",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "By default on My Account page are listed additional addresses displaying fields with labels and content. You can optionally disable the label display for fields.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_57fc8a9629c14",
+                "label": "Disable Identifier \/ Name field",
+                "name": "wcmca_disable_identifier_field",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "By default the user has to specify, during the field creation, an \"Address identifier\" that lately is used to recall the address during the checkout process. Disabling this field the address will be identified using user address data. Ex.: \"John Smith - 25012 Main Street - New York, NY, US\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_57e443341073e",
+                "label": "Billing first and last name - disable required",
+                "name": "wcmca_billing_first_and_last_name_disable_required",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "By default billing first and last name are required field. You can disable fields to be required (useful for business users)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_57e443ae1073f",
+                "label": "Shipping first and last name - disable required",
+                "name": "wcmca_shipping_first_and_last_name_disable_required",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "By default shipping first and last name are required field. You can disable fields to be required (useful for business users)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_57e44500ebbbe",
+                "label": "Billing company name - enabled required",
+                "name": "wcmca_billing_company_name_enable_required",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "By default billing company name is not a required field. You can disable the field to be required (useful for business users)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_57e44575ebbbf",
+                "label": "Shipping company name - enabled required",
+                "name": "wcmca_shipping_company_name_enable_required",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "By default billing company name is not a required field. You can disable the field to be required (useful for business users)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "multiple": 0,
+                "allow_null": 0,
+                "choices": {
+                    "no": "No",
+                    "yes": "Yes"
+                },
+                "default_value": [],
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "return_format": "value"
+            },
+            {
+                "key": "field_58e3cef50bdd8",
+                "label": "Add shipping email field to Shipping addresses",
+                "name": "wcmca_add_shipping_email_field_to_shipping_addresses",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "This option adds an email field to the shipping addresses and to the Checkout shipping form.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58e3cf430bdda",
+                "label": "Is shipping email field required",
+                "name": "wcmca_is_shipping_email_required",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "The shipping email field will be mandatory.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5b18fd947680e",
+                "label": "Send WooCommerce notification emails to the shipping email address",
+                "name": "wcmca_send_woocommerce_notification_to_shipping_email",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "WooCommerce notifications emails will be sent to the shipping email address. <strong>Note<\/strong> if the user hasn't specified any shipping email (this could happen if the field is not required), the email will be sent to the billing email.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58e3cef50bdd8",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5b19205d048c1",
+                "label": "Send WooCommerce notification copy to billing email address",
+                "name": "wcmca_send_woocommerce_notification_copty_to_billing_email",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "The plugin will send a copy of the notification email to the billing email address.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58e3cef50bdd8",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_5b18fd947680e",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58e3cf640bddb",
+                "label": "Add shipping phone number field to Shipping addresses",
+                "name": "wcmca_add_shipping_phone_field_to_shipping_addresses",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "This option adds a phone field to shipping addresses and to the Checkout shipping form.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58e3cf780bddc",
+                "label": "Is shipping phone number field required",
+                "name": "wcmca_is_shipping_phone_required",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Make the shipping phone number field will be mandatory.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_6176506188ab3",
+                "label": "Checkout page",
+                "name": "my_account_-_addresses__copy",
+                "aria-label": "",
+                "type": "divider",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "custom_css": "",
+                "font_size": 14
+            },
+            {
+                "key": "field_5d85dadb99a5f",
+                "label": "Disable \"last used address\" option",
+                "name": "wcmca_checkout_page_disable_last_used_address_option",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Disable the \"last used address\" option used in the checkout page address selector to load the address used to for the last order.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_6176508088ab4",
+                "label": "Disable smooth scroll on address selection",
+                "name": "wcmca_checkout_page_disable_smooth_scroll",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Once an address is selected, the page scrool on top of the page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_6125f6554088f",
+                "label": "My Account - Addresses page",
+                "name": "my_account_-_addresses_",
+                "aria-label": "",
+                "type": "divider",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "custom_css": "",
+                "font_size": 14
+            },
+            {
+                "key": "field_582374da35d42",
+                "label": "Addresses title tag",
+                "name": "wcmca_my_account_page_addresses_title_tag",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "Select wich html tag has to be used to render the addresses title. Keep in mind that you can customize title title style using the CSS class <strong>wcmca_address_title<\/strong>",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "h3": "h3",
+                    "h1": "h1",
+                    "h2": "h2",
+                    "h4": "h4",
+                    "h5": "h5",
+                    "h6": "h6"
+                },
+                "default_value": false,
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_57f3630e15d0c",
+                "label": "Default address badge backgroud color",
+                "name": "wcmca_default_badge_backgroud_color",
+                "aria-label": "",
+                "type": "color_picker",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "#000000",
+                "enable_opacity": false,
+                "return_format": "string"
+            },
+            {
+                "key": "field_57f3637b15d0d",
+                "label": "Default address badge text color",
+                "name": "wcmca_default_badge_text_color",
+                "aria-label": "",
+                "type": "color_picker",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "#FFFFFF",
+                "enable_opacity": false,
+                "return_format": "string"
+            },
+            {
+                "key": "field_6125f6af40891",
+                "label": "My Account - Orders List page",
+                "name": "my_account_-_orders_list_page",
+                "aria-label": "",
+                "type": "divider",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "custom_css": "",
+                "font_size": 14
+            },
+            {
+                "key": "field_6125f6cc40892",
+                "label": "Display billing address column",
+                "name": "wcmca_orders_list_display_billing_address_column",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_6125f6ee40893",
+                "label": "Display shipping address column",
+                "name": "wcmca_orders_list_display_shipping_address_column",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_6125f69540890",
+                "label": "Custom CSS Rules",
+                "name": "custom_css_rules",
+                "aria-label": "",
+                "type": "divider",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "custom_css": "",
+                "font_size": 14
+            },
+            {
+                "key": "field_57e26475087f6",
+                "label": "My account page",
+                "name": "wcmca_custom_css_rules_my_account_page",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "Define here your custom CSS",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_57e26509087f7",
+                "label": "Checkout page",
+                "name": "wcmca_custom_css_rules_checkout_page",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "Define here your custom CSS",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "wcmca-option-menu"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    },
+    {
+        "key": "group_58e3ce32ad990",
+        "title": "WooCommerce Multiple Customer Addresses - Shipping per product options",
+        "fields": [
+            {
+                "key": "field_58d0072f70a9f",
+                "label": "Shipping per product",
+                "name": "wcmca_shipping_per_product",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "If enabled, on Checkout page the customer will be able to associate a shipping address for each item.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_64a7b9efa97fa",
+                "label": "Disable address selection for the following roles",
+                "name": "wcmca_product_address_disable_for_roles",
+                "aria-label": "",
+                "type": "role_selector_with_guest",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_value": "name",
+                "allowed_roles": "",
+                "field_type": "checkbox"
+            },
+            {
+                "key": "field_58dcb80ef844e",
+                "label": "Add same products distinctly to cart",
+                "name": "wcmca_add_product_distinctly_to_cart",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Same products will be added to cart as distinct items. Quantity will be adjustable only using the Cart page.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_61fb8f9ba977c",
+                "label": "Apply ships costs and methods according to the product addresses data",
+                "name": "wcmca_multiple_addresses_shipping",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "Shipping costs and methods will be applied according to the shipping data associated to each product.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_61fd20ad5c715",
+                "label": "Products to exclude",
+                "name": "wcmca_shipping_per_product_excluded_prod",
+                "aria-label": "",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "product",
+                    "product_variation"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 1,
+                "return_format": "id",
+                "ui": 1,
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_61fd20fd5c716",
+                "label": "Categories to exclude",
+                "name": "wcmca_shipping_per_product_excluded_cat",
+                "aria-label": "",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "product_cat",
+                "field_type": "multi_select",
+                "allow_null": 0,
+                "add_term": 1,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0,
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_591956f87947d",
+                "label": "Disable shop page reloading if a product is added to cart",
+                "name": "wcmca_disable_shop_page_reloading_if_a_product_is_added_to_cart",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "By default shop page is reloaded if a product is added to cart. This is to allow user to be able to re-add a product to cart. To disable this behaviour use the following switch.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58dcb80ef844e",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_61e928f3a3faa",
+                "label": "Automcatically split products by quantity when adding them to cart",
+                "name": "wcmca_automatically_split_product_by_cart_quantity",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "The plugin will add an instance of the product added to cart accordint its quantity. <br>\r\n<strong>Example:<\/strong> If the customer adds 3X Product 1, the plugin will automcatically add 3 instance of 1X Product 1<br><br>In this way, each instance can have its own address. <strong>NOTE:<\/strong> you can adjust the quantity of each instance via the cart page.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58dcb80ef844e",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58e3cfc40bddd",
+                "label": "Display Notes field",
+                "name": "wcmca_display_notes_field",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "A note field will be showed for each cart item on checkout page.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5bb242ec60038",
+                "label": "Add option to pick up item from store",
+                "name": "wcmca_display_pick_up_option",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "In the address selector will be showed an option to collect the product from store.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58e3d21d0bddf",
+                "label": "Display \"Add billing address\" button",
+                "name": "wcmca_display_add_billing_address_button",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "This option adds the \"Add billing address\" button for each cart item on checkout page.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_58e3d2b80bde0",
+                "label": "Display \"Add shipping address\" button",
+                "name": "wcmca_display_add_shipping_address_button",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "This option adds the \"Add shipping address\" button for each cart item on checkout page.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5d8b35e6b84da",
+                "label": "Guest users - Address type",
+                "name": "wcmca_product_address_type_for_guests",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "By default, the guest user address type is set as billing type (so the user must specify an email address and phone number). You can however set the type as shipping (no email or phone number will be required).",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "Shipping",
+                "ui_off_text": "Billing"
+            },
+            {
+                "key": "field_5f7c08a5b2017",
+                "label": "Show the address selector even if there is only one item on the cart",
+                "name": "wcmca_product_address_show_selector_even_for_one_item",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "By default, the address selector for the products is displayed only if there is more than one item on the cart. Enable this option to show it also if the cart has only one item.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_593f9c436412b",
+                "label": "Handling fee for products shipped to addresses different from checkout shipping address?",
+                "name": "wcmca_handling_product_shipping_fee",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "You can add a <strong>fixed<\/strong> handling fee for each product shipped to an address different to the checkout shipping address. <strong>NOTE:<\/strong> Handling fee <strong>DO NOT APPLY<\/strong> additional shipping cost based on the selected address.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_593fa30a64131",
+                "label": "Is fee taxable?",
+                "name": "wcmca_fee_taxable",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_593f9c436412b",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_593f9d336412c",
+                "label": "Handling fees",
+                "name": "wcmca_fee_ranges",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "<p>You can add fee values to cart according to the number of products that have to be shipped to different addresses. <\/p>\r\n<p><strong>Example:<\/strong> if you have from 2 to 4 product to ship to a different address, you can assign a fee of 4$ for each of them. If you have from 5 to 8 products, you can assig a fee of 3$, and so on.<\/p>",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_593f9c436412b",
+                            "operator": "==",
+                            "value": "1"
+                        },
+                        {
+                            "field": "field_58d0072f70a9f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "Add range",
+                "sub_fields": [
+                    {
+                        "key": "field_593f9f8b6412d",
+                        "label": "Min",
+                        "name": "wcmca_min",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "Leave emtpy for or 0 for no limits",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": 0,
+                        "max": "",
+                        "step": 1,
+                        "parent_repeater": "field_593f9d336412c"
+                    },
+                    {
+                        "key": "field_593f9fcf6412f",
+                        "label": "Max",
+                        "name": "wcmca_max",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "Leave emtpy for or 0 for no limits",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": 0,
+                        "max": "",
+                        "step": 1,
+                        "parent_repeater": "field_593f9d336412c"
+                    },
+                    {
+                        "key": "field_593f9fe464130",
+                        "label": "Fee value",
+                        "name": "wcmca_fee",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": 1,
+                        "max": "",
+                        "step": "0.001",
+                        "parent_repeater": "field_593f9d336412c"
+                    }
+                ],
+                "rows_per_page": 20
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "wcmca-option-menu"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]

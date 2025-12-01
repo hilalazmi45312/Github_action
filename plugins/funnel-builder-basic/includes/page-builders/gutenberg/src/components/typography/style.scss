@@ -1,0 +1,11 @@
+.bwf-align-typo {
+    .components-button-group {
+        .components-button {
+            &.is-primary, &:hover {
+                box-shadow: unset;
+                background: #000;
+			  	z-index: 0;
+            }
+        }
+    }
+}

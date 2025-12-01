@@ -1,0 +1,84 @@
+/* S-Coin Label Widget (frontend) */
+.rebate-container-small.s-coin-label-dynamic {
+	display: inline-block;
+	position: relative;
+	max-width: 100%;
+}
+.rebate-container-small.s-coin-label-dynamic img {
+	display: block;
+	height: 80px;
+	width: auto;
+	max-width: 100%;
+}
+.rebate-container-small.s-coin-label-dynamic .rebate-info {
+	font-weight: 700;
+	line-height: 1;
+	position: absolute;
+    top: 45%;
+    right: 18%;
+	color: rgb(236, 28, 39);
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 68%;
+	transform: translateY(-50%);
+	display: inline-flex;
+	align-items: flex-start;
+	font-family: 'Poppins', sans-serif;
+}
+
+.rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-number {
+	font-weight: 700;
+	line-height: 1;
+}
+
+.rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-symbol {
+	font-weight: 700;
+	position: relative;
+	top: calc(var(--icon-height, 80px) * -0.004);
+	line-height: 1;
+}
+
+/* CSS custom property for icon height - set dynamically by JavaScript */
+.rebate-container-small.s-coin-label-dynamic {
+	--icon-height: 80px;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	position: relative;
+	transition: opacity 0.3s ease;
+}
+
+/* Removed problematic CSS rule that was preventing S-coin labels from showing */
+
+.sh-scoin-label {
+	transition: opacity 0.3s ease;
+}
+
+/* S-Coin Widget - Center single-digit percentages */
+.single-product .wd-page-wrapper .sh-scoin-label .rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-number[data-single-digit="true"] {
+	position: relative;
+}
+
+.single-product .wd-page-wrapper .sh-scoin-label .rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-number[data-triple-digit="true"] {
+	position: relative;
+}
+
+/* S-Coin Widget - Fallback for browsers that don't support :has() - Use JavaScript to add class */
+.rebate-container-small.s-coin-label-dynamic .rebate-info.scoin-widget-single-digit {
+	right: 15% !important;
+	justify-content: center !important;
+}
+
+.rebate-container-small.s-coin-label-dynamic .rebate-info.scoin-widget-multi-digit {
+	right: 16% !important;
+	
+}
+
+.scoin-hidden {
+  display: none !important;
+}
+
+/* Responsive scaling handled by Elementor controls with clamp() functions */
+/* Media queries removed to allow Elementor font size controls to work properly */

@@ -1,0 +1,98 @@
+.woocommerce-MyAccount-navigation-link--affiliate-program {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.woocommerce-MyAccount-navigation-link--affiliate-overview,
+.woocommerce-MyAccount-navigation-link--affiliate-signup,
+.woocommerce-MyAccount-navigation-link--affiliate-commission-structure,
+.woocommerce-MyAccount-navigation-link--affiliate-learning-support,
+.woocommerce-MyAccount-navigation-link--affiliate-manage-earning,
+.woocommerce-MyAccount-navigation-link--affiliate-faq,
+.woocommerce-MyAccount-navigation-link--affiliate-terms-conditions,
+.woocommerce-MyAccount-navigation-link--affiliate-return-refund {
+    padding-left: 25px;
+    font-weight: normal;
+}
+
+.impact-sign-up-button {
+    background-color: #ed1c24 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    border-radius: 20px !important;
+    /* display: block !important;
+    width: 100% !important; */
+    box-sizing: border-box !important;
+}
+
+/* ---------- header block ---------- */
+.affiliate-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* title */
+.program-title {
+    font-size: 24px;
+    margin: 0 0 20px;
+    font-weight: 700;
+}
+
+/* pill-selector */
+.role-selector {
+    display: inline-block;
+    background: #f5dede;
+    /* light pink like screenshot */
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin-bottom: 30px;
+}
+
+.role-selector .role-item {
+    font-weight: 700;
+    position: relative;
+    padding: 4px 30px;
+    cursor: default;
+}
+
+.role-selector .role-item.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: #c7000a;
+}
+
+/* logo */
+.program-logo {
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto 30px;
+    display: block;
+}
+
+/* intro & note */
+.program-intro {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.program-note {
+    font-size: 16px;
+    margin-top: 25px;
+}
+
+/* .page-title {
+    display: none !important;
+} */
+
+body.woocommerce-account .wd-page-title {
+    display: none !important;
+}
+
+/* Header Share Button styles moved to share-popup.css */

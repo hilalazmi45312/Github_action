@@ -1,0 +1,27 @@
+li.ppc-admin-menu-separator.line-separator {
+    clear: both;
+}
+
+li.ppc-admin-menu-separator.line-separator {
+    width: 100%;
+}
+
+li.ppc-admin-menu-separator.line-separator .separator:after,
+ul.wp-submenu li.ppc-admin-menu-separator.line-separator:after {
+    border-bottom: 1px solid hsla(0, 0%, 100%, .2);
+    display: block;
+    margin: 13px 0 8px 0;
+    content: "";
+    width: 100%;
+}
+
+ul.wp-submenu li.ppc-admin-menu-separator.empty-separator:after {
+    display: block;
+    margin: 2px 0 2px 0;
+    content: "";
+    width: 100%;
+}
+
+li.ppc-admin-menu-separator a {
+    display: none !important;
+}

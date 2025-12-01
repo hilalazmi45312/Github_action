@@ -1,0 +1,103 @@
+.ikea-category-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    /* <-- add this */
+}
+
+.ikea-cat-item {
+    flex: 0 0 auto;
+    text-align: center;
+    width: 100px;
+    cursor: pointer;
+}
+
+.ikea-cat-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.ikea-cat-item span {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.placeholder-thumb {
+    width: 80px;
+    height: 80px;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.ikea-mega-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 300px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 9999;
+    display: none;
+}
+
+
+
+.ikea-mega-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.ikea-mega-left {
+    flex: 1;
+}
+
+.ikea-mega-left h3 {
+    margin-bottom: 1rem;
+}
+
+.ikea-mega-left ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ikea-mega-left ul li {
+    margin-bottom: 0.5rem;
+}
+
+.ikea-mega-left ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.ikea-mega-left ul li a:hover {
+    text-decoration: underline;
+}
+
+.ikea-mega-right {
+    flex: 1;
+}
+
+.ikea-mega-right img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.ikea-cat-item.grayscale img {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+
+.ikea-cat-item.grayscale span {
+    opacity: 0.5;
+}

@@ -1,0 +1,596 @@
+/* iPay88 Payment Gateway Styles */
+.ipay88-payment-container {
+	background: #ffffff;
+	border: 1px solid #e1e5e9;
+	border-radius: 12px;
+	padding: 0;
+	margin: 15px 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.ipay88-section-title {
+	background: #ffffff;
+	color: #2c3e50;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 16px 20px;
+	border: none;
+	border-bottom: 1px solid #e1e5e9;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	user-select: none;
+	margin-bottom: 0;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.ipay88-section-title:hover {
+	background: #f8f9fa;
+}
+
+.ipay88-section-title:last-child {
+	border-bottom: none;
+}
+
+.ipay88-section-title .ipay88-section-content {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.ipay88-section-icon {
+	width: 24px;
+	height: 24px;
+	margin-right: 12px;
+	object-fit: contain;
+}
+
+.ipay88-section-title::after {
+	content: "▼";
+	font-size: 12px;
+	transition: transform 0.3s ease;
+	transform: rotate(-90deg); /* Default hidden state - arrow points right */
+	color: #6c757d;
+}
+
+.ipay88-section-title.collapsed::after {
+	transform: rotate(0deg); /* Expanded state - arrow points down */
+}
+
+.ipay88-payment-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 0 20px;
+	overflow: hidden;
+	transition: max-height 0.3s ease, opacity 0.3s ease;
+	max-height: 0; /* Default hidden state */
+	opacity: 0;
+	visibility: hidden;
+	background: #fafbfc;
+	border-top: 1px solid #e1e5e9;
+	gap: 15px;
+}
+
+.ipay88-payment-grid.collapsed {
+	max-height: 100%; /* Expanded state when collapsed class is applied */
+	opacity: 1;
+	visibility: visible;
+	padding: 20px;
+}
+
+.ipay88-payment-option-wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	grid-column: 1 / -1; /* Span across all columns */
+}
+
+
+/* Keep original 2-column layout for BNPL payment options */
+.ipay88-payment-grid.bnpl-grid {
+	grid-template-columns: 1fr; /* Single column for BNPL */
+	gap: 0;
+}
+
+/* Special styling for BNPL section */
+.ipay88-payment-section:first-child .ipay88-section-title {
+	border-top: none;
+}
+
+.ipay88-payment-section:first-child .ipay88-section-title::before {
+	content: "0% INTEREST INSTALLMENT";
+	position: absolute;
+	top: -8px;
+	right: 20px;
+	background: #28a745;
+	color: white;
+	font-size: 10px;
+	font-weight: 600;
+	padding: 2px 8px;
+	border-radius: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.ipay88-payment-option {
+	display: flex;
+	align-items: center;
+	padding: 16px 20px;
+	border: 1px solid #e1e5e9;
+	border-radius: 8px;
+	background: #ffffff;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.ipay88-payment-option:hover {
+	border-color: #007bff;
+	box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+	transform: translateY(-1px);
+}
+
+.ipay88-payment-option.selected {
+	border-color: #dc3545;
+	background: #fff5f5;
+	box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+}
+
+/* Special styling for selected radio button */
+.ipay88-payment-option input[type="radio"]:checked + .ipay88-bank-logo,
+.ipay88-payment-option input[type="radio"]:checked ~ .ipay88-payment-label {
+	opacity: 1;
+}
+
+.ipay88-payment-option input[type="radio"]:checked {
+	accent-color: #dc3545;
+}
+
+/* Special styling for selected BNPL options */
+.ipay88-payment-option.bnpl-option.selected {
+	border-color: #dc3545;
+	background: #fff5f5;
+	position: relative;
+}
+
+
+.ipay88-payment-option input[type="radio"] {
+	margin: 0 16px 0 0;
+	width: 18px;
+	height: 18px;
+	accent-color: #007bff;
+	cursor: pointer;
+}
+
+
+.ipay88-bank-logo {
+	width: 48px;
+	height: 32px;
+	object-fit: contain;
+	margin-right: 16px;
+	border-radius: 4px;
+}
+
+.ipay88-payment-label {
+	color: #2c3e50;
+	font-size: 15px;
+	font-weight: 500;
+	flex: 1;
+	margin-left: 10px;
+}
+
+
+
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+	.ipay88-payment-grid,
+	.ipay88-payment-grid.bnpl-grid {
+		grid-template-columns: 1fr !important; /* Force single column on mobile */
+		gap: 8px !important;
+	}
+	
+	.ipay88-payment-option {
+		padding: 12px 15px;
+		margin-bottom: 5px;
+	}
+	
+	.ipay88-bank-logo {
+		width: 32px;
+		height: 22px;
+		margin-right: 10px;
+	}
+	
+	.ipay88-payment-label {
+		font-size: 14px;
+		line-height: 1.3;
+	}
+	
+	.ipay88-payment-container {
+		padding: 15px;
+		margin: 10px 0;
+	}
+	
+	.ipay88-section-title {
+		font-size: 14px;
+		padding: 10px 12px;
+		margin-bottom: 10px;
+	}
+	
+	.ipay88-section-icon {
+		width: 24px;
+		height: 24px;
+		margin-right: 6px;
+	}
+	
+	.ipay88-month-dropdown {
+		padding: 12px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+	
+	.ipay88-month-dropdown label {
+		font-size: 13px;
+		margin-bottom: 6px;
+	}
+	
+	.ipay88-tenure-select {
+		padding: 10px 12px;
+		font-size: 14px;
+	}
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+	.ipay88-payment-container {
+		padding: 12px;
+		margin: 8px 0;
+		border-radius: 6px;
+	}
+	
+	.ipay88-payment-option {
+		padding: 10px 12px;
+		flex-wrap: nowrap;
+		align-items: flex-start;
+	}
+	
+	.ipay88-payment-option input[type="radio"] {
+		margin: 2px 8px 0 0;
+		flex-shrink: 0;
+	}
+	
+	.ipay88-bank-logo {
+		width: 28px;
+		height: 20px;
+		margin-right: 8px;
+		flex-shrink: 0;
+	}
+	
+	.ipay88-payment-label {
+		font-size: 13px;
+		line-height: 1.4;
+		word-wrap: break-word;
+		flex: 1;
+		min-width: 0;
+	}
+	
+	.ipay88-section-title {
+		font-size: 13px;
+		padding: 8px 10px;
+	}
+	
+	.ipay88-section-icon {
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+	}
+	
+	.ipay88-month-dropdown {
+		padding: 10px;
+		margin-bottom: 6px;
+	}
+	
+	.ipay88-tenure-select {
+		padding: 8px 10px;
+		font-size: 13px;
+	}
+}
+
+/* JavaScript Enhancement Styles */
+.ipay88-payment-option input[type="radio"]:checked + .ipay88-bank-logo,
+.ipay88-payment-option input[type="radio"]:checked ~ .ipay88-payment-label {
+	opacity: 1;
+}
+
+.ipay88-payment-option input[type="radio"]:not(:checked) + .ipay88-bank-logo,
+.ipay88-payment-option input[type="radio"]:not(:checked) ~ .ipay88-payment-label {
+	opacity: 0.8;
+}
+
+/* Animation for smooth transitions */
+.ipay88-payment-option {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Legacy styles for backward compatibility */
+.ipay88_opt_container {
+	display: inline-block;
+	vertical-align: top;
+	width: 150px;
+	min-height: 150px;
+	margin: 0 10px;
+	border: 1px solid #CCCCCC;
+	padding: 10px 25px;
+	border-radius: 5px;
+}
+
+.ipay88_title_opt {
+	border-bottom: 1px solid #CCCCCC;
+	text-align: center;
+}
+
+.payment-mapping {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* Installment Options Styles for BNPL */
+.ipay88-installment-options {
+	background: #f8f9fa;
+	border: 1px solid #e1e5e9;
+	border-radius: 8px;
+	margin: 8px 0 0 0;
+	width: 100%;
+	overflow: hidden;
+}
+
+/* Installment Header */
+.ipay88-installment-header {
+	padding: 16px 20px 8px 20px;
+	background: #ffffff;
+	border-bottom: 1px solid #e1e5e9;
+}
+
+.ipay88-installment-header h5 {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #2c3e50;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+/* Installment List */
+.ipay88-installment-list {
+	padding: 16px 20px;
+}
+
+.ipay88-installment-option {
+	display: flex;
+	align-items: center;
+	padding: 12px 0;
+	border-bottom: 1px solid #e1e5e9;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.ipay88-installment-option:last-child {
+	border-bottom: none;
+}
+
+/* Removed hover effect for installment options to prevent unwanted collapsing */
+
+.ipay88-installment-option input[type="radio"] {
+	margin: 0 16px 0 0;
+	width: 18px;
+	height: 18px;
+	accent-color: #007bff;
+	cursor: pointer;
+}
+
+.ipay88-installment-option label {
+	font-size: 12px;
+	color: #2c3e50;
+	cursor: pointer;
+	flex: 1;
+	margin: 0;
+}
+
+.ipay88-tenure-select {
+	width: 100%;
+	padding: 12px 16px;
+	border: 1px solid #e1e5e9;
+	border-radius: 6px;
+	background: white;
+	font-size: 15px;
+	color: #2c3e50;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.ipay88-tenure-select:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.ipay88-tenure-select:hover {
+	border-color: #007bff;
+	box-shadow: 0 2px 6px rgba(0, 123, 255, 0.1);
+}
+
+/* Animation for dropdown appearance */
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+		max-height: 0;
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+		max-height: 100px;
+	}
+}
+
+/* Disclaimer styling */
+.ipay88-disclaimer {
+	padding: 16px 20px;
+	background: #fff5f5;
+	border-top: 1px solid #fed7d7;
+	color: #e53e3e;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.4;
+	margin: 0;
+}
+
+.ipay88-disclaimer::before {
+	content: "⚠️ ";
+	margin-right: 4px;
+}
+
+/* ========================================
+   FunnelKit Compatibility Overrides
+   ======================================== */
+
+/* High specificity overrides for FunnelKit compatibility */
+#wfacp-e-form .ipay88-payment-container,
+body #wfacp-e-form .ipay88-payment-container {
+	background: #ffffff !important;
+	border: 1px solid #e1e5e9 !important;
+	border-radius: 12px !important;
+	padding: 0 !important;
+	margin: 15px 0 !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+	overflow: hidden !important;
+}
+
+#wfacp-e-form .ipay88-section-title,
+body #wfacp-e-form .ipay88-section-title {
+	background: #ffffff !important;
+	color: #2c3e50 !important;
+	font-size: 16px !important;
+	font-weight: 600 !important;
+	padding: 16px 20px !important;
+	border: none !important;
+	border-bottom: 1px solid #e1e5e9 !important;
+	cursor: pointer !important;
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+	user-select: none !important;
+	margin-bottom: 0 !important;
+	transition: all 0.3s ease !important;
+	position: relative !important;
+}
+
+#wfacp-e-form .ipay88-section-title::after,
+body #wfacp-e-form .ipay88-section-title::after {
+	content: "▼" !important;
+	font-size: 12px !important;
+	transition: transform 0.3s ease !important;
+	transform: rotate(-90deg) !important;
+	color: #6c757d !important;
+}
+
+#wfacp-e-form .ipay88-section-title.collapsed::after,
+body #wfacp-e-form .ipay88-section-title.collapsed::after {
+	transform: rotate(0deg) !important;
+}
+
+#wfacp-e-form .ipay88-payment-grid,
+body #wfacp-e-form .ipay88-payment-grid {
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	padding: 0 20px !important;
+	overflow: hidden !important;
+	transition: max-height 0.3s ease, opacity 0.3s ease !important;
+	max-height: 0 !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+	background: #fafbfc !important;
+	border-top: 1px solid #e1e5e9 !important;
+	gap: 15px !important;
+}
+
+#wfacp-e-form .ipay88-payment-grid.collapsed,
+body #wfacp-e-form .ipay88-payment-grid.collapsed {
+	max-height: 100% !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	padding: 15px !important;
+}
+
+/* BNPL grid should be single column in FunnelKit */
+#wfacp-e-form .ipay88-payment-grid.bnpl-grid,
+body #wfacp-e-form .ipay88-payment-grid.bnpl-grid {
+	grid-template-columns: 1fr !important;
+}
+
+#wfacp-e-form .ipay88-payment-option,
+body #wfacp-e-form .ipay88-payment-option {
+	display: flex !important;
+	align-items: center !important;
+	padding: 16px 20px !important;
+	border: 1px solid #e1e5e9 !important;
+	border-radius: 8px !important;
+	background: #ffffff !important;
+	cursor: pointer !important;
+	transition: all 0.3s ease !important;
+	position: relative !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+#wfacp-e-form .ipay88-payment-option.selected,
+body #wfacp-e-form .ipay88-payment-option.selected {
+	border-color: #dc3545 !important;
+	background: #fff5f5 !important;
+	box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2) !important;
+}
+
+#wfacp-e-form .ipay88-installment-options,
+body #wfacp-e-form .ipay88-installment-options {
+	background: #f8f9fa !important;
+	border: 1px solid #e1e5e9 !important;
+	border-radius: 8px !important;
+	margin: 8px 0 0 0 !important;
+	width: 100% !important;
+	overflow: hidden !important;
+}
+
+#wfacp-e-form .ipay88-installment-list,
+body #wfacp-e-form .ipay88-installment-list {
+	padding: 0 20px !important;
+}
+
+#wfacp-e-form .ipay88-installment-option,
+body #wfacp-e-form .ipay88-installment-option {
+	display: flex !important;
+	align-items: center !important;
+	padding: 12px 0 !important;
+	border-bottom: 1px solid #e1e5e9 !important;
+	cursor: pointer !important;
+	transition: background-color 0.2s ease !important;
+}
+
+#wfacp-e-form .ipay88-installment-option:last-child,
+body #wfacp-e-form .ipay88-installment-option:last-child {
+	border-bottom: none !important;
+}
+
+/* Ensure all elements use border-box in FunnelKit */
+#wfacp-e-form .ipay88-payment-container *,
+body #wfacp-e-form .ipay88-payment-container * {
+	box-sizing: border-box !important;
+}
+
+#wfacp-e-form h1, #wfacp-e-form h2, #wfacp-e-form h3, #wfacp-e-form h4, #wfacp-e-form h5, #wfacp-e-form h6{
+	margin-top: 0 !important;
+}

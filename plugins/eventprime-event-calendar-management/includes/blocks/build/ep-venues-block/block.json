@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/ep-venues-block",
+  "version": "0.1.0",
+  "title": "EventPrime Venues",
+  "category": "event-prime",
+  "icon": "smiley",
+  "description": "EventPrime Venues block",
+  "providesContext": {
+    "create-block/block_square_card_columns": "block_square_card_columns"
+  },
+  "attributes": {
+    "ep_organizer_block_custom_class": {
+      "type": "string",
+      "default": "ep_organizer_block_custom_class"
+    },
+    "ep_block_venues_card_columns": {
+      "type": "number",
+      "default": 3
+    },
+    "ep_venues_disable_load_more": {
+      "type": "boolean",
+      "default": true
+    },
+    "ep_venues_load_more_text": {
+      "type": "string",
+      "default": " Load More "
+    },
+    "ep_venues_block_fetch_items": {
+      "type": "number",
+      "default": 10
+    },
+    "ep_venues_views": {
+      "type": "string",
+      "default": "ep-venues-square"
+    },
+    "ep_venues_background_color": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "ep-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

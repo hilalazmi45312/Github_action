@@ -1,0 +1,646 @@
+/* Hide variation choice/selection elements but keep add to cart button - ONLY for WoodMart add-to-cart widget */
+.wd-single-add-cart .variations_form table.variations,
+.wd-single-add-cart .variations_form .variations,
+.wd-single-add-cart .woocommerce-variation-price,
+.wd-single-add-cart .woocommerce-variation-availability,
+.wd-single-add-cart .price-wrapper .woocommerce-variation-price {
+    display: none !important;
+}
+
+/* Hide variation selection dropdowns and swatches - ONLY for WoodMart add-to-cart widget */
+.wd-single-add-cart .variations_form .variations select,
+.wd-single-add-cart .variations_form .variations .value,
+.wd-single-add-cart .variations_form .variations .label,
+.wd-single-add-cart .variations_form .variations tr,
+.wd-single-add-cart .wd-swatches-wrap,
+.wd-single-add-cart .wd-swatch {
+    display: none !important;
+}
+
+/* Hide stock status for variations - ONLY for WoodMart add-to-cart widget */
+.wd-single-add-cart.wd-design-justify .variations_form > p.stock,
+.wd-single-add-cart .variations_form > p.stock,
+.wd-single-add-cart .wd-single-stock-status {
+    display: none !important;
+}
+
+/* Hide variation description but keep add to cart - ONLY for WoodMart add-to-cart widget */
+.wd-single-add-cart .woocommerce-variation-description,
+.wd-single-add-cart .single_variation .woocommerce-variation-description {
+    display: none !important;
+}
+
+/* Override WoodMart's variation display but preserve add to cart - ONLY for WoodMart add-to-cart widget */
+.wd-single-add-cart .woocommerce-variation.wd-show .woocommerce-variation-price,
+.wd-single-add-cart .woocommerce-variation.wd-show .woocommerce-variation-availability,
+.wd-single-add-cart .woocommerce-variation.wd-show .woocommerce-variation-description {
+    display: none !important;
+}
+
+/* Hide add to cart button in Elementor editor for custom variation widget */
+.elementor-editor-active .elementor-widget-sh_product_variation .single_variation_wrap,
+.elementor-editor-active .elementor-widget-sh_product_variation .woocommerce-variation-add-to-cart,
+.elementor-editor-active .elementor-widget-sh_product_variation .single_add_to_cart_button {
+    display: none !important;
+}
+
+/* Product Extras in Cart Styling */
+.sh-cart-extras-group {
+    margin: 6px 0 2px 0;
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Product Extras Display Styles */
+.pewc-cart-extras-separator {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e0e6ed 20%, #e0e6ed 80%, transparent);
+    margin: 6px 0 4px 0;
+    position: relative;
+}
+
+.pewc-cart-extras-separator:after {
+    content: "extras";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 0 8px;
+    font-size: 0.7em;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sh-cart-extra-item {
+    margin: 2px 0;
+    padding-left: 8px;
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.3;
+    border-left: 2px solid #e8f4fd;
+    background: rgba(232, 244, 253, 0.3);
+    padding: 2px 0 2px 8px;
+}
+
+.pewc-cart-extras-item {
+    font-size: 0.9em;
+    color: #666;
+    margin: 2px 0;
+    padding-left: 15px;
+    position: relative;
+    background: rgba(0,0,0,0.02);
+    border-radius: 3px;
+    padding: 5px 5px 5px 15px;
+}
+
+.pewc-cart-extras-item:before {
+    content: "•";
+    position: absolute;
+    left: 5px;
+    color: #999;
+    top: 5px;
+}
+
+.sh-cart-extra-item:last-child {
+    margin-bottom: 4px;
+}
+
+/* Mini cart specific styling */
+.woocommerce-mini-cart .sh-cart-extras-group {
+    font-size: 0.75em;
+    margin: 4px 0 1px 0;
+}
+
+.woocommerce-mini-cart .pewc-cart-extras-separator {
+    margin: 4px 0 2px 0;
+}
+
+.woocommerce-mini-cart .pewc-cart-extras-separator:after {
+    font-size: 0.6em;
+    top: -7px;
+    padding: 0 6px;
+}
+
+.woocommerce-mini-cart .sh-cart-extra-item {
+    font-size: 0.8em;
+    margin: 1px 0;
+    padding: 1px 0 1px 6px;
+}
+
+/* Cart page specific styling */
+.woocommerce-cart .sh-cart-extras-group {
+    margin: 8px 0 2px 0;
+    font-size: 0.9em;
+}
+
+.woocommerce-cart .sh-cart-extra-item {
+    margin: 2px 0;
+    padding: 2px 0 2px 12px;
+    font-size: 0.95em;
+}
+
+/* Checkout page specific styling */
+.woocommerce-checkout .sh-cart-extras-group {
+    margin: 6px 0 2px 0;
+    font-size: 0.85em;
+}
+
+.woocommerce-checkout .sh-cart-extra-item {
+    margin: 2px 0;
+    padding: 2px 0 2px 8px;
+    font-size: 0.85em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sh-cart-extras-group {
+        font-size: 0.8em;
+    }
+
+    .sh-cart-extra-item {
+        font-size: 0.85em;
+        padding-left: 6px;
+    }
+}
+
+/* Custom Cart Wrapper */
+
+.custom-cart-wrapper {
+    margin: 20px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-family: var(--wd-title-font);
+}
+
+.custom-cart-actions {
+    display: flex;
+    align-items: stretch;
+    background: #ed1c24;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    min-height: 60px;
+    width: 50%;
+}
+
+.wd-sticky-btn.wd-sticky-btn-shown .custom-cart-actions,
+.wd-sticky-btn .custom-cart-actions{
+    width: 100%;
+}
+
+.custom-cart-actions::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ed1c24;
+    z-index: 1;
+}
+
+/* Vertical divider line */
+.custom-cart-actions::after {
+    content: '';
+    position: absolute;
+    left: 80px;
+    width: 1px;
+    background: #FFF;
+    z-index: 2;
+    height: 100%;
+}
+
+.quantity-selector {
+    position: relative;
+    flex: 0 0 80px;
+    min-width: 80px;
+    background: #ed1c24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 30px 0 0 30px;
+    z-index: 2;
+}
+
+.custom-qty-dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    position: relative;
+    font-weight: 700;
+    border-radius: 30px 0 0 30px;
+}
+
+/* Hide WooCommerce quantity input */
+.custom-qty-dropdown-hidden {
+    display: none !important;
+}
+
+/* Hide default WooCommerce quantity input */
+.woocommerce-variation-add-to-cart .quantity {
+    display: none;
+}
+
+/* Style WooCommerce quantity input to look like our custom dropdown */
+.quantity input[type="number"].custom-qty-dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    position: relative;
+    font-weight: 700;
+    border-radius: 30px 0 0 30px;
+}
+
+/* Hide default number input arrows */
+.quantity input[type="number"].custom-qty-dropdown::-webkit-outer-spin-button,
+.quantity input[type="number"].custom-qty-dropdown::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity input[type="number"].custom-qty-dropdown[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Custom dropdown arrow */
+.quantity-selector::after {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M5 8l7 7 7-7z"/></svg>');
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    z-index: 3;
+}
+
+/* Show dropdown arrow even when no variation/0/disabled to guide selection */
+.quantity-selector:has(.custom-qty-dropdown:disabled)::after,
+.quantity-selector:has(.custom-qty-dropdown[value="0"])::after,
+.quantity-selector.no-variation::after {
+    display: block;
+}
+
+/* Dropdown options styling */
+.custom-qty-dropdown option {
+    background: white;
+    color: #333;
+    font-weight: 600;
+    padding: 10px;
+}
+
+/* Add to Basket Button Section */
+.custom-add-to-basket-btn {
+    background: transparent !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0 30px 30px 0 !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    flex: 1 !important;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    position: relative;
+    overflow: hidden;
+    gap: 2px;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+/* Center button text content */
+.custom-add-to-basket-btn span,
+.custom-add-to-basket-btn .button-text {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.custom-add-to-basket-btn:active {
+    transform: translateY(0);
+}
+
+.custom-cart-actions small{
+    font-size: 12px !important;
+    opacity: 0.9 !important;
+    font-weight: 400 !important;
+    display: block;
+    color: white !important;
+}
+/* Disabled state styling */
+.custom-add-to-basket-btn:disabled {
+    background: #8b0000 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+
+.custom-add-to-basket-btn:disabled span {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.custom-add-to-basket-btn:disabled small {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Hide default WooCommerce quantity input */
+.woocommerce-variation-add-to-cart .quantity {
+    display: none;
+}
+
+/* Hide default add to cart button */
+.single_add_to_cart_button:not(.custom-add-to-basket-btn) {
+    display: none !important;
+}
+
+/* Product summary specific styling */
+.product-summary .custom-cart-wrapper {
+    margin: 15px 0;
+}
+
+/* Low stock indicator */
+.custom-qty-dropdown.low-stock::before {
+    content: '⚠';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffcc00;
+    font-size: 14px;
+    z-index: 4;
+}
+
+/* Stock quantity info */
+.stock-quantity-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .custom-cart-actions {
+        /* Keep horizontal layout instead of stacking */
+        flex-direction: row;
+        border-radius: 30px;
+        min-height: 50px;
+    }
+
+    .custom-cart-actions::before {
+        border-radius: 30px;
+    }
+
+    .custom-cart-actions::after {
+        /* Keep the vertical divider on mobile */
+        display: block;
+        height: 100%;
+    }
+
+    .quantity-selector {
+        min-width: 60px;
+        border-radius: 30px 0 0 30px;
+    }
+
+    .custom-add-to-basket-btn {
+        border-radius: 0 30px 30px 0 !important;
+        min-height: 50px;
+    }
+
+    .custom-cart-wrapper {
+        margin: 15px 0;
+    }
+}
+
+/* Woodmart theme specific */
+.woodmart-single-product .custom-cart-wrapper {
+    margin: 20px 0;
+}
+
+.variations_form .woocommerce-variation-add-to-cart {
+    margin: 0;
+}
+
+/* Disabled state */
+.custom-add-to-basket-btn[disabled] {
+    background: #ccc !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+/* Loading state */
+.custom-add-to-basket-btn.loading {
+    pointer-events: none;
+    position: relative;
+}
+
+.custom-add-to-basket-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.5s linear infinite;
+    z-index: 3;
+}
+
+.custom-add-to-basket-btn.loading span,
+.custom-add-to-basket-btn.loading small {
+    visibility: hidden !important;
+}
+
+/* Ensure button is clickable when not loading */
+.custom-add-to-basket-btn:not(.loading):not([disabled]) {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Error state - make sure button is still clickable after errors */
+.custom-add-to-basket-btn.error-state {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Force enable button after any error */
+.custom-add-to-basket-btn:not([disabled]) {
+    pointer-events: auto !important;
+}
+
+/* Prevent flickering during state transitions */
+.custom-add-to-basket-btn {
+    transition: all 0.2s ease !important;
+}
+
+/* Ensure smooth transitions for disabled state */
+.custom-add-to-basket-btn:disabled {
+    transition: all 0.2s ease !important;
+}
+
+/* Prevent rapid state changes from causing visual glitches */
+.custom-add-to-basket-btn.loading {
+    transition: none !important;
+}
+
+/* Prevent duplicate error messages */
+.woocommerce-error:not(:first-of-type),
+.wc-block-components-notice-banner.is-error:not(:first-of-type) {
+    display: none !important;
+}
+
+/* Ensure error messages are properly styled and don't stack */
+.woocommerce-error,
+.wc-block-components-notice-banner.is-error {
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.custom-cart-wrapper.loading .custom-qty-dropdown {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.custom-cart-wrapper.loading .custom-add-to-basket-btn {
+    pointer-events: none;
+}
+
+/* Ensure cart wrapper doesn't block clicks when not loading */
+.custom-cart-wrapper:not(.loading) .custom-add-to-basket-btn {
+    pointer-events: auto !important;
+}
+
+/* Style for disabled out-of-stock button in sticky footer */
+.wd-sticky-add-to-cart.wd-out-of-stock,
+.wd-sticky-add-to-cart.out-of-stock {
+    background-color: #fff !important;
+    color: #8b0000 !important;
+}
+
+.wd-sticky-add-to-cart.stock.out-of-stock.wd-style-default {
+    background-color: #f5f5f5 !important;
+    color: #999 !important;
+    border: 1px solid #ddd !important;
+    font-weight: 500 !important;
+}
+
+/* Out of stock message styling for custom cart wrapper */
+.custom-cart-wrapper .stock.out-of-stock {
+    color: #B50808;
+    font-weight: 600;
+    text-align: center;
+}
+
+.woocommerce-notices-wrapper .woocommerce-error li{
+    line-height: 1.25 !important;
+}
+
+
+@media (max-width: 480px) {
+    .single-product .sh-variation-form form.variations_form{
+        justify-content: var(--content-align) !important;
+    }
+
+    form.cart{
+        justify-content: center !important;
+    }
+
+    form.variation_form{
+        justify-content: start !important;
+    }
+
+    form.cart>*{
+        flex: 0 1 75% !important;
+    }
+
+    form.cart .variations{
+        flex: 1 1 100% !important;
+    }
+
+    .woocommerce-variation-add-to-cart>*{
+        max-width: 100%;
+    }
+
+    .custom-cart-actions {
+        width: 100%;
+        min-height: 45px;
+    }
+
+    /* .custom-cart-actions::after {
+        left: 50px
+    } */
+
+    .quantity-selector {
+        min-width: 50px;
+    }
+
+    .custom-qty-dropdown {
+        font-size: 14px;
+        min-height: 45px;
+        padding: 0 10px;
+    }
+
+    .custom-add-to-basket-btn {
+        min-height: 45px;
+        font-size: 14px !important;
+        padding: 0 15px;
+    }
+
+    .custom-add-to-basket-btn span {
+        font-size: 11px !important;
+    }
+
+    .custom-add-to-basket-btn small {
+        font-size: 9px !important;
+    }
+}

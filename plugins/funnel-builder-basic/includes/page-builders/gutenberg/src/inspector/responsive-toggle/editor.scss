@@ -1,0 +1,31 @@
+.bwf-responsive-field {
+	display: flex;
+	justify-content: space-between;
+	transform: translateY(10px);
+	.bwf-responsive-toggle {
+		margin-left: 10px;
+		transform: translateY(-3px);
+		button {
+			height: 14px;
+			width: 14px;
+			padding: 5px !important; // Force override for Gutenberg 7.7.
+			min-width: 11px !important; // Force override for Gutenberg 7.7.
+			box-sizing: content-box;
+			border-radius: 0 !important;
+			margin: 0;
+			border: 1px solid transparent;
+			margin: 0 1px;
+			&:hover,
+			&.is-active {
+				border: 1px solid #1e1e1e !important;
+				box-shadow: none !important;
+				border-radius: 2px !important;
+				color: #1e1e1e;
+			}
+			&.is-active {
+				background: #000 !important;
+				color: #fff;
+			}
+		}
+	}
+}

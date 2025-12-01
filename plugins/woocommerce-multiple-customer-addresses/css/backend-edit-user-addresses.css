@@ -1,0 +1,98 @@
+.wp-core-ui .button-primary.wcmca_primary
+{
+	background: #a46497 none repeat scroll 0 0;
+    border-color: #a46497;
+    box-shadow: none;
+	text-shadow:none;
+	font-weight: bold;
+}
+.wp-core-ui .button-primary.wcmca_primary:hover
+{
+	background: #8e9dc4 none repeat scroll 0 0;
+    border-color: #8e9dc4;
+    box-shadow: none;
+	font-weight: bold;
+}
+.wp-core-ui .button-primary.wcmca_primary:active
+{
+	background: #8e9dc4 none repeat scroll 0 0;
+    border-color: #8e9dc4;
+    box-shadow: none;
+	font-weight: bold;
+}
+.white-box
+{
+	background-color: white;
+   /*  box-shadow: 2px 5px 10px; */
+    box-shadow: 1px 1px 2px;
+	padding: 25px 15px 25px 15px;
+	overflow: auto;
+}
+.form-row.form-row.form-row-last
+{
+	 float: right;
+	 overflow: visible;
+    width: 47%;
+}
+.col-1.address, .col-2.address {
+   float: left;
+   margin-right: 30px;
+    margin-top: 5px;
+	overflow: auto;
+}
+.wcmca_additional_addresses_list_title
+{
+	display:block;
+	clear:both;
+	
+}
+.wcmcam_address_block_title
+{
+	margin-bottom:15px;
+	overflow: auto;
+	display: block;
+}
+#wcmca_user_details {
+	padding: 10px;
+	max-width: 300px;
+	border: 1px #dedede solid;
+	margin-bottom: 10px;
+}
+label.wcmca-label 
+{
+	color: #0073AA;
+	font-weight: bold;
+}
+#wcmca_divider
+{
+	clear: both;
+	width:100%;
+	height:2px;
+	display:block;
+}
+select.select.wcmca-country-select2,select.wcmca-state-select2
+{
+   display:block;
+   width: 100%;
+}
+.addresses
+{
+	/* overflow: auto;
+	float: left; */
+	
+	display: inline-block;
+    overflow: auto;
+    vertical-align: top;
+}
+.wcmca_shipping_addresses_title
+{
+	margin-top: 40px;
+}
+#wcmca_add_new_address_button_billing
+{
+	margin-bottom: 20px;
+}
+#wcmca_add_new_address_button_shipping
+{
+	margin-bottom: 40px;
+}

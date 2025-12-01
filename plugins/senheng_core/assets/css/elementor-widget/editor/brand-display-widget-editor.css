@@ -1,0 +1,68 @@
+/* Senheng Brand Display Widget Editor Styles */
+
+/* Preview styles in editor */
+.elementor-editor-active .sh-brand-display {
+    border: 1px dashed #ccc;
+    position: relative;
+}
+
+.elementor-editor-active .sh-brand-display:empty::before {
+    content: "Brand Display Widget - Configure settings to see preview";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Control panel styles */
+.elementor-control-display_mode .elementor-control-field-description {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #666;
+}
+
+.elementor-control-selected_brands .elementor-control-field-description {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #666;
+}
+
+/* Widget preview adjustments */
+.elementor-editor-active .sh-brand-item {
+    pointer-events: none;
+    display: inline-block;
+}
+
+.elementor-editor-active .sh-brand-link {
+    cursor: default;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.elementor-editor-active .sh-brand-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.elementor-editor-active .sh-brand-item:hover .sh-brand-name {
+    color: #0073aa;
+    text-decoration: underline;
+}
+
+/* Responsive preview adjustments */
+@media (max-width: 768px) {
+    .elementor-editor-active .sh-brand-display:empty::before {
+        font-size: 12px;
+        padding: 0 10px;
+    }
+}

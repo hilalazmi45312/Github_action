@@ -1,0 +1,1275 @@
+// Initialize Insider
+window.InsiderObject = {
+    isInitialized: false,
+    userDataReady: false,
+    initializationPromise: null,
+    queue: [],
+
+    landingPageMap: {
+        'our-story': 'about-us-our_story',
+        'corporate-vision-mission-values-and-philosophy': 'about-us-corporate_vision_mission_values_and_philosophy',
+        'Press Room': 'about-us-press_room',
+        'join-our-team': 'about-us-join_our_team',
+        'contact-us': 'contact_us',
+        'faq': 'faq',
+        'news': 'news',
+        'blog': 'blog',
+        'Newsletter': 'newsletter',
+        'store-locations': 'store_locations',
+        'wishlist': 'wishlist',
+        'my-account': 'my_account',
+        'promotions': 'promotions',
+        'more-rewards-membership': 'more_rewards_membership',
+        'morerewards': 'morerewards',
+        '012-5488449': '012-5488449',
+        'Pick Up In Store': 'pick_up_in_store',
+        'grooming': 'grooming',
+        'delivery-exchange-return-policy': 'delivery_exchange_return_policy',
+        'privacy-policy': 'privacy_policy',
+        'terms-and-conditions': 'terms_and_conditions',
+    },
+
+    async init() {
+        window.InsiderQueue = window.InsiderQueue || [];
+
+        // Load Insider script
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `//${insiderData.partnerName}.api.useinsider.com/ins.js?id=${insiderData.partnerId}`;
+
+        // Create promise for script loading
+        const scriptPromise = new Promise((resolve, reject) => {
+            script.onload = resolve;
+            script.onerror = reject;
+        });
+
+        document.head.appendChild(script);
+        await scriptPromise;
+
+        // Mark as initialized without waiting for user data
+        this.isInitialized = true;
+
+        // If user is logged in, initialize user data first
+        if (insiderData.hasLoginCookie || insiderData.hasRegisterCookie) {
+            if (insiderData.userData) {
+                this.initializationPromise = this.initializeUser(insiderData.userData);
+                await this.initializationPromise;
+
+                // Process login/register events after user data is ready
+                await this.handleLoginEvent();
+                await this.handleRegisterEvent();
+            }
+        } else {
+            // If no user-specific events, mark user data as ready to allow other events
+            this.userDataReady = true;
+        }
+
+        // Initialize basic events that don't need user data
+        this.bindEvents();
+        await this.processQueuedEvents();
+    },
+
+    initializeUser(userData) {
+        return new Promise((resolve) => {
+            console.log('Starting user initialization...');
+
+            window.InsiderQueue = window.InsiderQueue || [];
+            window.InsiderQueue.push({
+                type: 'user',
+                value: {
+                    uuid: userData.uuid,
+                    gdpr_optin: userData.gdpr_optin,
+                    email_optin: userData.email_optin,
+                    name: userData.name,
+                    username: userData.username,
+                    email: userData.email,
+                    phone_number: userData.phone_number,
+                    custom: {
+                        phone_number: userData.phone_number,
+                        email: userData.email,
+                        customer_code: userData.member_code,
+                        channel: insiderData.channel,
+                    }
+                }
+            });
+
+            window.InsiderQueue.push({
+                type: 'init',
+            });
+
+            // Wait a bit to ensure user data is processed
+            setTimeout(() => {
+                this.userDataReady = true;
+                document.dispatchEvent(new Event('insiderUserReady'));
+                console.log('User initialization completed');
+                resolve();
+            }, 5000); // Adjust timeout as needed : 5000ms (5s)
+        });
+    },
+
+    bindEvents() {
+        // Page type
+        this.handlePageType();
+
+        // Search form submission
+        document.addEventListener('submit', (event) => {
+            if (event.target.matches('form.searchform')) {
+                this.handleSearch(event);
+            }
+        });
+
+        // Banner clicks
+        this.initializeBannerTracking();
+
+        // Subscription form
+        this.handleSubscription();
+
+        // Add landing page tracking
+        this.initializeLandingPageTracking();
+
+        // Add brand tracking
+        this.initializeBrandTracking();
+
+        // Add to cart event
+        this.bindAjaxCartEvent();
+
+        // Product share event
+        this.bindProductShareEvent();
+
+        // Quick View product share event
+        this.bindQuickViewProductShareEvent();
+
+        // Wishlist events
+        this.bindWishlistEvents();
+
+        // Product Care event
+        this.bindProductCareEvent();
+
+        // Product view event
+        this.bindProductViewEventVariation();
+    },
+
+    async processQueuedEvents() {
+        if (this.isInitialized && this.userDataReady) {
+            while (this.queue.length > 0) {
+                const event = this.queue.shift();
+                await this.pushEvent(event.name, event.parameters);
+                console.log('Processing queued event:', event);
+            }
+        }
+    },
+
+    async pushEvent(eventName, parameters) {
+        // If user is logged in, wait for user initialization
+        if (insiderData.userData) {
+            if (!this.userDataReady) {
+                console.log(`Queuing ${eventName} until user initialization completes`);
+                this.queue.push({ name: eventName, parameters });
+                return;
+            }
+        }
+
+        window.InsiderQueue.push({
+            type: 'custom_event',
+            value: [{
+                event_name: eventName,
+                event_parameters: parameters
+            }]
+        });
+
+        console.log(`📡 ${eventName} event pushed to InsiderQueue`, parameters);
+    },
+
+    /**
+     * Handle login event if user data is ready
+     */
+    async handleLoginEvent() {
+        if (!this.userDataReady) {
+            console.log('Waiting for user data initialization...');
+            await this.initializationPromise;
+        }
+
+        if (insiderData.hasLoginCookie && insiderData.userData) {
+            this.pushEvent('login', {
+                uuid: insiderData.userData.uuid,
+                gdpr_optin: insiderData.userData.gdpr_optin,
+                name: insiderData.userData.name,
+                username: insiderData.userData.username,
+                email: insiderData.userData.email,
+                phone_number: insiderData.userData.phone_number,
+                custom: {
+                    customer_code: insiderData.userData.member_code,
+                    channel: insiderData.channel,
+                    email: insiderData.userData.email,
+                    phone_number: insiderData.userData.phone_number,
+                }
+            });
+
+            // Delete the cookie
+            document.cookie = 'insider_login_event=; path=/; max-age=0';
+            console.log('Login event processed for:', insiderData.userData.username);
+        }
+    },
+
+    /**
+     * Handle registration event if user data is ready
+     */
+    async handleRegisterEvent() {
+        if (!this.userDataReady) {
+            console.log('Waiting for user data initialization...');
+            await this.initializationPromise;
+        }
+
+        if (insiderData.hasRegisterCookie && insiderData.userData) {
+            this.pushEvent('registration_completed', {
+                uuid: insiderData.userData.uuid,
+                gdpr_optin: insiderData.userData.gdpr_optin,
+                name: insiderData.userData.name,
+                username: insiderData.userData.username,
+                email: insiderData.userData.email,
+                phone_number: insiderData.userData.phone_number,
+                custom: {
+                    customer_code: insiderData.userData.member_code,
+                    channel: insiderData.channel,
+                    email: insiderData.userData.email,
+                    phone_number: insiderData.userData.phone_number,
+                }
+            });
+
+            // Delete the cookie
+            document.cookie = 'insider_register_event=; path=/; max-age=0';
+            console.log('Registration event processed for:', insiderData.userData.username);
+
+            // Directly push login event here instead of using handleLoginEvent
+            await this.pushEvent('login', {
+                uuid: insiderData.userData.uuid,
+                gdpr_optin: insiderData.userData.gdpr_optin,
+                name: insiderData.userData.name,
+                username: insiderData.userData.username,
+                email: insiderData.userData.email,
+                phone_number: insiderData.userData.phone_number,
+                custom: {
+                    customer_code: insiderData.userData.member_code,
+                    channel: insiderData.channel,
+                    email: insiderData.userData.email,
+                    phone_number: insiderData.userData.phone_number,
+                }
+            });
+            console.log('Auto-login event processed after registration for:', insiderData.userData.username);
+        }
+    },
+
+    /**
+     * Track page type and category view
+     */
+    handlePageType() {
+        // Push page type
+        if (insiderData.pageType) {
+            window.InsiderQueue.push({
+                type: insiderData.pageType,
+                ...(insiderData.categoryName && { value: [insiderData.categoryName] })
+            });
+
+            // Track category view if applicable
+            if (insiderData.pageType === 'category' && insiderData.categoryName) {
+                this.pushEvent('category_viewed', { custom: { category_name: insiderData.categoryName, channel: insiderData.channel } });
+                // console.log('Insider category view:', insiderData.categoryName);
+            }
+
+            window.InsiderQueue.push({
+                type: 'init',
+            });
+
+            // console.log('Insider page view:', insiderData.pageType);
+        }
+    },
+
+    /**
+     * Handle search event
+     */
+    handleSearch(event) {
+        const searchInput = event.target.querySelector("input[name='s']");
+        const keyword = searchInput ? searchInput.value.trim() : "";
+        const searched_url = event.target.action + '?' + new URLSearchParams(new FormData(event.target)).toString();
+
+        this.pushEvent('searched', { custom: { keyword, searched_url, channel: insiderData.channel } });
+    },
+
+    /**
+     * Handle subscription events
+     */
+    handleSubscription() {
+        const form = document.querySelector('.wpcf7-form');
+        if (form) {
+            form.addEventListener('submit', (event) => {
+                const email = form.querySelector('input[name="Email"]').value;
+                this.pushEvent('subscription', { custom: { email, channel: insiderData.channel } });
+            });
+        }
+    },
+
+    /**
+     * Handle banner click events
+     */
+    initializeBannerTracking() {
+        const bannerSelectors = [
+            '.wd-promo-banner-link',
+            '.wd-carousel .wd-slide-link',
+            '.wd-cat-content a.wd-fill',
+            '.wd-button-wrapper a',
+            '.elementor-widget-image a',
+            '.wd-image a',
+            '.article-inner'
+        ];
+
+        bannerSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(banner => {
+                banner.addEventListener('click', (event) => this.handleBannerClick(event));
+            });
+        });
+    },
+
+    handleBannerClick(event) {
+        // Prevent default redirect
+        // event.preventDefault();
+
+        const bannerElement = event.currentTarget;
+        let bannerData = this.extractBannerData(bannerElement);
+
+        this.pushEvent('banner_clicked', bannerData);
+        // console.log('📡 Banner clicked event:', bannerData);
+
+        // Optional: If you want to redirect after debugging, uncomment this:
+        // setTimeout(() => {
+        //     window.location.href = bannerElement.href;
+        // }, 1000);
+    },
+
+    extractBannerData(element) {
+        // Default banner data
+        let banner_name = 'Unknown Banner';
+        const banner_url = element.href || element.querySelector('a')?.href || '';
+        const channel = insiderData.channel;
+
+        // CASE 1 : Special case for `.wd-promo-banner-link` banner
+        // - Shop online pickup in store banner
+        // - More rewards banner
+        const topBannerImage = element.closest('.promo-banner-wrapper')?.querySelector('img');
+        if (topBannerImage) {
+            // console.log('.promo-banner-wrapper');
+            // Get image ID if available (id="image-2286")
+            const imageId = topBannerImage.id;
+            if (imageId && imageId.startsWith('image-')) {
+                banner_name = imageId;
+            } else if (topBannerImage.alt) {
+                // Fallback to alt text if no ID
+                banner_name = topBannerImage.alt.trim();
+            }
+        }
+
+        // CASE 2 : Special case for the `Our Categories` banner
+        const ourCategoryBanner = element.closest('.wd-cat');
+        if (ourCategoryBanner) {
+            // console.log('.wd-cat');
+            // Get the image ID
+            ourCategoryBannerImage = ourCategoryBanner.querySelector('img');
+            if (ourCategoryBannerImage && ourCategoryBannerImage.id && ourCategoryBannerImage.id.startsWith('image-')) {
+                banner_name = ourCategoryBannerImage.id; // Use image ID as name
+            }
+
+            // Get the category name
+            // const catTitle = catContainer.querySelector('.wd-entities-title a');
+            // if (catTitle) {
+            //     banner_category = catTitle.textContent.trim();
+            //     banner_name = `Category: ${banner_category}`;
+            // }
+        }
+
+        const moreRewardsBannerImage = element.closest('.elementor-widget-container')?.querySelector('img');
+        if (moreRewardsBannerImage) {
+            // console.log('.elementor-widget-container');
+            const imageId = moreRewardsBannerImage.id;
+            if (imageId && imageId.startsWith('image-')) {
+                banner_name = imageId;
+            } else if (moreRewardsBannerImage.alt) {
+                banner_name = moreRewardsBannerImage.alt.trim();
+            }
+        }
+
+        // CASE 3 : Special case for the `Weekly Discounts` banner
+        const weeklyDiscountsContainer = element.closest('.elementor-widget-wrap');
+        if (weeklyDiscountsContainer) {
+            // console.log('.elementor-widget-wrap');
+            const weeklyDiscountsTitle = weeklyDiscountsContainer.querySelector('.woodmart-title-container.title');
+            if (weeklyDiscountsTitle && weeklyDiscountsTitle.textContent.trim() === 'Weekly Discounts') {
+                banner_name = 'Weekly Discounts';
+            }
+        }
+
+        // Special case for banners with `.banner-title`
+        const promoBannerWrapper = element.closest('.promo-banner-wrapper');
+        if (promoBannerWrapper) {
+            // console.log('.promo-banner-wrapper');
+            const bannerTitle = promoBannerWrapper.querySelector('.banner-title');
+            const bannerImageID = promoBannerWrapper.querySelector('.banner-image img')?.id;
+            if (bannerTitle) {
+                banner_name = bannerTitle.textContent.trim();
+            }
+            if (bannerImageID && bannerImageID.startsWith('image-')) {
+                banner_name = bannerImageID;
+            }
+        }
+
+        // For Banner With Pets Library
+        const petsLibrary = element.querySelector('.entry-thumbnail');
+        if (petsLibrary) {
+            const petsLibraryTitle = petsLibrary.querySelector('.wd-entities-title');
+            if (petsLibraryTitle) {
+                banner_name = petsLibraryTitle.textContent.trim();
+            }
+            const petsLibraryImageID = petsLibrary.querySelector('img')?.id;
+            if (petsLibraryImageID && petsLibraryImageID.startsWith('image-')) {
+                banner_name = petsLibraryImageID;
+            }
+        }
+
+        // Fallback to other possible sources for banner name
+        if (banner_name === 'Unknown Banner') {
+            // console.log('Fallback to other sources');
+            banner_name = element.getAttribute('aria-label') ||
+                element.querySelector('h3.wd-entities-title a')?.textContent.trim() ||
+                element.querySelector('.wd-btn-text')?.textContent.trim() ||
+                element.querySelector('img')?.alt ||
+                'Banner';
+        }
+
+        //FOR SOURCE PARAMETER PRODUCT VIEW EVENT
+        if (banner_name === 'image-3382') //cat banner
+        {
+            //set cookie
+            Cookies.set('from_home_page', 'cat-banner', { expires: 1, path: '/' });
+        }
+
+        if (banner_name === 'image-3383') //dog banner
+        {
+            //set cookie
+            Cookies.set('from_home_page', 'dog-banner', { expires: 1, path: '/' });
+        }
+
+        if (banner_name === 'Weekly Discounts') //Weekly Discounts banner
+        {
+            //set cookie
+            Cookies.set('source_product_clicked', 'Homepage - Weekly Discounts', { expires: 1, path: '/' });
+        }
+
+
+        return {
+            custom: {
+                banner_name,
+                banner_url,
+                channel
+            }
+        };
+    },
+
+    /**
+     * Handle landing page events
+     */
+    initializeLandingPageTracking() {
+        // Track initial page load
+        this.landingPageViewEvent();
+
+        // Track menu item clicks
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', (event) => {
+                const menuText = event.currentTarget.textContent.trim();
+                const eventName = this.landingPageMap[menuText];
+                this.triggerLandingPageEvent(eventName);
+            });
+        });
+    },
+
+    landingPageViewEvent() {
+        const path = window.location.pathname.replace(/\/+$/, '');
+        const page = path.split('/').filter(Boolean).pop() || '';
+        const eventName = this.landingPageMap[page];
+        this.triggerLandingPageEvent(eventName);
+    },
+
+    triggerLandingPageEvent(eventName) {
+        if (!eventName) return;
+
+        this.pushEvent('landing_page_viewed', { custom: { landing_page_name: eventName, landing_page_clicked: true } });
+    },
+
+    /**
+     * Handle brand click events
+     */
+    initializeBrandTracking() {
+        // Select all brand links within the brands listing
+        document.querySelectorAll('.mgwoocommercebrands.brands-listing li strong a').forEach(brandLink => {
+            brandLink.addEventListener('click', (event) => this.handleBrandClick(event));
+        });
+    },
+
+    handleBrandClick(event) {
+        // Prevent default redirect for debugging
+        event.preventDefault();
+
+        const brandElement = event.currentTarget;
+        const brandContainer = brandElement.closest('li');
+
+        // Get store name from the description div or img alt text
+        let store_name = brandContainer.querySelector('.description')?.textContent.trim() ||
+            brandElement.querySelector('img')?.alt ||
+            brandElement.textContent.trim();
+
+        this.pushEvent('shop_by_brand_viewed', { custom: { store_name } });
+
+        // console.log('📡 Brand view event:', store_name);
+
+        // Optional: Redirect after a delay to allow for debugging
+        // setTimeout(() => {
+        // window.location.href = brandElement.href;
+        // }, 1000); // 1000ms (1s) delay
+    },
+
+    //Initialize All Cart Event AJAX
+    bindAjaxCartEvent() {
+        jQuery(document).ajaxComplete((event, xhr, settings) => {
+            // Add to Cart event
+            if ((settings.url.indexOf("wc-ajax=add_to_cart") !== -1) || (settings.data && settings.data.includes("action=woodmart_ajax_add_to_cart"))) {
+                try {
+                    const formDataArray = settings.data.split('&');
+                    let product_id = null;
+                    let quantity = null;
+                    let variation_id = null;
+
+                    if (settings.url.indexOf("wc-ajax=add_to_cart") !== -1) {
+                        product_id = formDataArray.find(x => x.includes('product_id')).split('=')[1];
+                        quantity = parseInt(formDataArray.find(x => x.includes('quantity')).split('=')[1], 10);
+                    }
+
+                    if (!product_id && settings.data.includes("action=woodmart_ajax_add_to_cart")) {
+                        product_id = formDataArray.find(x => x.includes('add-to-cart')).split('=')[1];
+                        quantity = parseInt(formDataArray.find(x => x.includes('quantity')).split('=')[1], 10);
+                        variation_id = formDataArray.find(x => x.includes('variation_id'))?.split('=')[1] || null;
+                    }
+
+                    if (product_id) {
+                        jQuery.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                action: 'get_wc_products',
+                                product_id: product_id,
+                                variation_id: variation_id,
+                            },
+                            success: (response) => {
+                                if (response.success && response.data) {
+                                    this.handleAddToCartEvent(response.data, quantity);
+                                }
+                            },
+                            error: (error) => {
+                                console.error('Error fetching product data:', error);
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error processing Add to Cart event:", error);
+                }
+            }
+
+            // Remove from Cart event
+            if ((settings.url.indexOf("wc-ajax=remove_from_cart") !== -1) || (settings.url.indexOf("remove_item=") !== -1 && settings.url.indexOf("cart") !== -1)) {
+                try {
+                    let removeItemKey = null;
+
+                    // Handle wc-ajax=remove_from_cart
+                    if (settings.url.indexOf("wc-ajax=remove_from_cart") !== -1) {
+                        let formDataArray = settings.data.split('&');
+                        removeItemKey = formDataArray.find(x => x.includes('cart_item_key'))?.split('=')[1];
+                    }
+
+                    // Handle ?remove_item=xxx in URL
+                    if (!removeItemKey && settings.url.indexOf("remove_item=") !== -1) {
+                        let urlParams = new URLSearchParams(settings.url.split('?')[1]);
+                        removeItemKey = urlParams.get('remove_item');
+                    }
+
+                    if (removeItemKey) {
+                        jQuery.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                action: 'get_wc_products',
+                                remove_item: removeItemKey,
+                            },
+                            // xhrFields: { withCredentials: true },
+                            success: (response) => {
+                                if (response.success && response.data) {
+                                    this.handleRemoveFromCartEvent(response.data);
+                                }
+                            },
+                            error: (error) => {
+                                console.error('Error fetching product data:', error);
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error processing Remove from Cart event:", error);
+                }
+            }
+
+            // Update Order Review event
+            if (settings.url.indexOf("wc-ajax=update_order_review") !== -1) {
+                try {
+                    jQuery.ajax({
+                        url: ajaxurl,
+                        type: 'POST',
+                        data: {
+                            action: 'get_wc_cart_data',
+                        },
+                        success: (response) => {
+                            if (response.success && response.data) {
+                                this.handleUpdateOrderReviewEvent(response.data.products);
+                            }
+                        },
+                        error: (error) => {
+                            console.error('Error fetching cart data:', error);
+                        }
+                    });
+                } catch (error) {
+                    console.error("Error processing Update Order Review event:", error);
+                }
+            }
+
+            // Update Shipping Method event
+            if (settings.url.indexOf("wc-ajax=update_shipping_method") !== -1) {
+                try {
+                    jQuery.ajax({
+                        url: ajaxurl,
+                        type: 'POST',
+                        data: {
+                            action: 'get_wc_cart_data',
+                        },
+                        success: (response) => {
+                            if (response.success && response.data) {
+                                this.handleUpdateShippingMethodEvent(response.data);
+                            }
+                        },
+                        error: (error) => {
+                            console.error('Error fetching cart data:', error);
+                        }
+                    });
+                } catch (error) {
+                    console.error("Error processing Update Shipping Method event:", error);
+                }
+            }
+
+            // Search woodmart ajax search
+            if (settings.url.indexOf("action=woodmart_ajax_search") !== -1) {
+                try {
+                    let formDataArray = settings.data ? settings.data.split('&') : [];
+                    let keyword = '';
+                    const urlParams = new URLSearchParams(settings.url.split('?')[1]);
+                    keyword = urlParams.get('query') || '';
+                    let searched_url = settings.url + (keyword ? '&s=' + keyword : '');
+                    this.pushEvent('searched', { custom: { keyword, searched_url, channel: insiderData.channel } });
+                    console.log('📡 Search pushed:', { custom: { keyword, searched_url, channel: insiderData.channel } });
+                } catch (error) {
+                    console.error("Error processing Search event:", error);
+                }
+            }
+
+        });
+    },
+
+    /**
+     * Handle Add to Cart event
+     */
+    handleAddToCartEvent(productData, quantity) {
+        const productAddedCart = {
+            type: 'add_to_cart',
+            value: {
+                id: productData.product_id,
+                name: productData.product_name,
+                taxonomy: productData.category_name,
+                unit_price: productData.product_price,
+                unit_sale_price: productData.product_sale_price,
+                url: productData.product_url,
+                product_image_url: productData.product_image_url,
+                quantity: quantity,
+                custom: {
+                    add_to_cart_id: productData.add_to_cart_id,
+                    sku_id: productData.sku_id,
+                    channel: productData.channel,
+                    store_name: productData.store_name,
+                    variant: productData.variant,
+                    coin_cashback: productData.coin_cashback,
+                }
+            }
+        };
+
+        window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({
+            type: 'currency',
+            value: productData.currency
+        });
+        window.InsiderQueue.push(productAddedCart);
+        window.InsiderQueue.push({
+            type: 'init'
+        });
+
+        console.log('📡 Add to Cart pushed:', productAddedCart);
+
+        // Inventory event
+        // jQuery(function($) {
+        //     var tryPopup = function() {
+        //         var instance = $('body').data('plugin_multiInventory');
+        //         console.log('instance:', instance);
+        //         if (instance && typeof instance.popupOpen === 'function') {
+        //             instance.popupOpen();
+        //             console.log('multiInventory plugin initialized');
+        //         } else {
+        //             console.warn('multiInventory plugin not yet initialized');
+        //         }
+        //     };
+
+        //     // Wait a bit or hook to a custom event
+        //     setTimeout(tryPopup, 1000);
+        // });
+
+    },
+
+    /**
+     * Handle Remove from Cart event
+     */
+    handleRemoveFromCartEvent(productData) {
+        const productRemovedCart = {
+            type: 'remove_from_cart',
+            value: {
+                id: productData.product_id,
+                name: productData.product_name,
+                taxonomy: productData.category_name,
+                unit_price: productData.product_price,
+                unit_sale_price: productData.product_sale_price,
+                url: productData.product_url,
+                product_image_url: productData.product_image_url,
+                quantity: productData.quantity,
+                custom: {
+                    add_to_cart_id: productData.add_to_cart_id,
+                    sku_id: productData.sku_id,
+                    channel: productData.channel,
+                    store_name: productData.store_name,
+                    variant: productData.variant,
+                    coin_cashback: productData.coin_cashback,
+                }
+            }
+        };
+
+        window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({
+            type: 'currency',
+            value: productData.currency
+        });
+        window.InsiderQueue.push(productRemovedCart);
+        window.InsiderQueue.push({
+            type: 'init'
+        });
+
+        console.log('📡 Remove from Cart pushed:', productRemovedCart);
+    },
+
+    /**
+     * Handle Update Order Review
+     */
+    handleUpdateOrderReviewEvent(productData) {
+        const checkoutData = productData;
+        checkoutData.forEach((product, index) => {
+            setTimeout(() => {
+                let eventData = {
+                    type: 'custom_event',
+                    value: [{
+                        event_name: 'checkout_initiated',
+                        event_parameters: checkoutData[index]
+                    }]
+                };
+                window.InsiderQueue.push(eventData);
+                console.log('📡 Update Order Review pushed:', checkoutData);
+            }, index === 0 ? 5000 : index * 3000); // First delay 5s, others follow index * 3000
+        });
+        // window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({
+            type: 'currency',
+            value: "MYR"
+        });
+        window.InsiderQueue.push(checkoutData);
+        window.InsiderQueue.push({
+            type: 'init'
+        });
+    },
+
+    /**
+     * Handle Update Shipping Method
+     */
+    handleUpdateShippingMethodEvent(productData) {
+        let cartDataFull = productData;
+        let cartData = {
+            type: 'cart',
+            value: {
+                total: cartDataFull.total,
+                items: cartDataFull.products,
+            }
+        };
+        // window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({
+            type: 'currency',
+            value: "MYR"
+        });
+        window.InsiderQueue.push(cartData);
+        window.InsiderQueue.push({
+            type: 'init'
+        });
+
+        console.log('📡 Update Shipping Method pushed:', cartData);
+    },
+
+    /**
+     * Bind Product Share Event
+     */
+    bindProductShareEvent() {
+        jQuery(document).on('click', '.social-whatsapp, .social-facebook, .social-email, .social-tg', (e) => {
+            const $target = jQuery(e.currentTarget);
+            let channel_shared = '';
+
+            if ($target.hasClass('social-whatsapp')) {
+                channel_shared = "whatsapp";
+            } else if ($target.hasClass('social-facebook')) {
+                channel_shared = "facebook";
+            } else if ($target.hasClass('social-email')) {
+                channel_shared = "email";
+            } else if ($target.hasClass('social-tg')) {
+                channel_shared = "telegram";
+            }
+
+            const productContainer = $target.closest('.container');
+            const productForm = productContainer.find('form');
+            let product_id = productForm.find("button[name='add-to-cart']").attr('value');
+
+            if (typeof product_id === 'undefined') {
+                product_id = productForm.find("input[name='add-to-cart']").val();
+            }
+
+            if (typeof product_id === 'undefined') {
+                return;
+            }
+
+            jQuery.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'get_wc_products',
+                    product_id: product_id,
+                },
+                success: (response) => {
+                    if (response.success && response.data) {
+                        this.handleProductSharedEvent(response.data, channel_shared);
+                    }
+                },
+                error: (error) => {
+                    console.error('Error fetching product data for share:', error);
+                }
+            });
+        });
+    },
+
+    /**
+     * Bind Product Share Event in Quick View
+     */
+    bindQuickViewProductShareEvent() {
+        jQuery(document).on('click', '.quick-view-button', (e) => {
+            const product_id = jQuery(e.currentTarget).data('id');
+
+            // Attach share events *once* inside Quick View (unbind first to avoid multiple triggers)
+            jQuery(document).on('click', '.social-whatsapp, .social-facebook, .social-email, .social-tg', (ev) => {
+                const $shareBtn = jQuery(ev.currentTarget);
+                let channel_shared = '';
+
+                if ($shareBtn.hasClass('social-whatsapp')) {
+                    channel_shared = "whatsapp";
+                } else if ($shareBtn.hasClass('social-facebook')) {
+                    channel_shared = "facebook";
+                } else if ($shareBtn.hasClass('social-email')) {
+                    channel_shared = "email";
+                } else if ($shareBtn.hasClass('social-tg')) {
+                    channel_shared = "telegram";
+                }
+
+                if (typeof product_id === 'undefined') {
+                    return;
+                }
+
+                jQuery.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'get_wc_products',
+                        product_id: product_id,
+                    },
+                    success: (response) => {
+                        if (response.success && response.data) {
+                            this.handleProductSharedEvent(response.data, channel_shared);
+                        }
+                    },
+                    error: (error) => {
+                        console.error('Error fetching product data in Quick View Share:', error);
+                    }
+                });
+            });
+        });
+    },
+
+    /**
+     * Handle Product Shared Event
+     */
+    handleProductSharedEvent(productData, channel_shared) {
+        const productSharedData = {
+            type: 'custom_event',
+            value: [{
+                event_name: 'product_shared',
+                event_parameters: {
+                    id: productData.product_id,
+                    name: productData.product_name,
+                    taxonomy: productData.category_name,
+                    unit_price: productData.product_price,
+                    unit_sale_price: productData.product_sale_price,
+                    url: productData.product_url,
+                    product_image_url: productData.product_image_url,
+                    quantity: productData.quantity,
+                    custom: {
+                        sku_id: productData.sku_id,
+                        channel: 'app',
+                        store_name: productData.store_name,
+                        variant: productData.variant,
+                        coin_cashback: productData.coin_cashback,
+                        channel_shared: channel_shared,
+                    }
+                }
+            }]
+        };
+
+        // window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({
+            type: 'currency',
+            value: productData.currency
+        });
+        window.InsiderQueue.push(productSharedData);
+        window.InsiderQueue.push({
+            type: 'init'
+        });
+
+        console.log('📡 Product Shared pushed:', productSharedData);
+    },
+
+    bindWishlistEvents() {
+        // Add to Wishlist
+        jQuery(document).on('click', '.wd-wishlist-btn a', (e) => {
+            const product_id = jQuery(e.currentTarget).attr('data-product-id');
+            if (!product_id) {
+                console.log("No product ID found for wishlist");
+                return;
+            }
+
+            jQuery.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'get_wc_products',
+                    product_id: product_id
+                },
+                success: (response) => {
+                    if (response.success && response.data) {
+                        this.handleWishlistAddEvent(response.data);
+                    } else {
+                        console.log("Error:", response.data?.message);
+                    }
+                },
+                error: () => {
+                    console.log("AJAX request failed while adding to wishlist");
+                }
+            });
+        });
+
+        // Remove from Wishlist
+        jQuery(document).on('click', '.wd-wishlist-remove', (e) => {
+            const product_id = jQuery(e.currentTarget).data('product-id');
+            if (!product_id) {
+                console.log("No product ID found for wishlist removal");
+                return;
+            }
+
+            jQuery.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'get_wc_products',
+                    product_id: product_id
+                },
+                success: (response) => {
+                    if (response.success && response.data) {
+                        this.handleWishlistRemoveEvent(response.data);
+                    } else {
+                        console.log("Error:", response.data?.message);
+                    }
+                },
+                error: () => {
+                    console.log("AJAX request failed while removing from wishlist");
+                }
+            });
+        });
+    },
+
+    /**
+     * Handle Wishlist Add Event
+     */
+    handleWishlistAddEvent(productData) {
+        const productAddedWishList = {
+            type: 'custom_event',
+            value: [{
+                event_name: 'product_added_to_wishlist',
+                event_parameters: {
+                    id: productData.product_id,
+                    name: productData.product_name,
+                    taxonomy: productData.category_name,
+                    unit_price: productData.product_price,
+                    unit_sale_price: productData.product_sale_price,
+                    url: productData.product_url,
+                    product_image_url: productData.product_image_url,
+                    quantity: productData.quantity,
+                    custom: {
+                        sku_id: productData.sku_id,
+                        channel: productData.channel,
+                        store_name: productData.store_name,
+                        variant: productData.variant,
+                        coin_cashback: productData.coin_cashback,
+                    }
+                }
+            }]
+        };
+
+        // window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({ type: 'currency', value: productData.currency });
+        window.InsiderQueue.push(productAddedWishList);
+        window.InsiderQueue.push({ type: 'init' });
+
+        console.log('📡 Product Added to Wishlist:', productAddedWishList);
+    },
+
+    /**
+     * Handle Wishlist Remove Event
+     */
+    handleWishlistRemoveEvent(productData) {
+        const productRemovedWishList = {
+            type: 'custom_event',
+            value: [{
+                event_name: 'product_removed_from_wishlist',
+                event_parameters: {
+                    id: productData.product_id,
+                    name: productData.product_name,
+                    taxonomy: productData.category_name,
+                    unit_price: productData.product_price,
+                    unit_sale_price: productData.product_sale_price,
+                    url: productData.product_url,
+                    product_image_url: productData.product_image_url,
+                    quantity: productData.quantity,
+                    custom: {
+                        sku_id: productData.sku_id,
+                        channel: productData.channel,
+                        store_name: productData.store_name,
+                        variant: productData.variant,
+                        coin_cashback: productData.coin_cashback,
+                    }
+                }
+            }]
+        };
+
+        // window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({ type: 'currency', value: productData.currency });
+        window.InsiderQueue.push(productRemovedWishList);
+        window.InsiderQueue.push({ type: 'init' });
+
+        console.log('📡 Product Removed from Wishlist:', productRemovedWishList);
+    },
+
+    /**
+     * Bind Product Care Event
+     */
+    bindProductCareEvent() {
+
+        let hasTriggered = false;
+        let clickedTabs = {
+            'description': false,
+            'additional_information': false,
+            'reviews': false
+        };
+        let currentTab = jQuery('.wd-nav-tabs .active .wd-tabs-title').text().trim().toLowerCase().replace(/\(\d+\)/, '').trim().replace(/\s+/g, '_');
+
+        if (typeof currentTab !== 'undefined' && currentTab !== '') {
+            clickedTabs[currentTab] = true;
+        }
+
+        jQuery('.wd-nav-link').on('click', (event) => {
+            let tabText = jQuery(event.currentTarget).find('.wd-tabs-title').text().trim().toLowerCase().replace(/\(\d+\)/, '').trim().replace(/\s+/g, '_');
+            if (clickedTabs[tabText]) {
+                return;
+            }
+            clickedTabs[tabText] = true;
+            this.sendProductCareEvent(clickedTabs); // this refers to your object
+        });
+
+        jQuery(window).on('scroll', () => {
+            if (!hasTriggered && isMiddleInViewport(jQuery('.product-tabs-wrapper'))) {
+                if (Object.values(clickedTabs).some(Boolean)) {
+                    this.sendProductCareEvent(clickedTabs);
+                    hasTriggered = true;
+                }
+            }
+        });
+
+
+
+        function isMiddleInViewport(element) {
+            if (!jQuery(element).length) return false;
+            let elementTop = jQuery(element).offset().top;
+            let elementHeight = jQuery(element).outerHeight();
+            let elementMiddle = elementTop + (elementHeight / 2);
+
+            let viewportTop = jQuery(window).scrollTop();
+            let viewportBottom = viewportTop + jQuery(window).height();
+
+            return elementMiddle > viewportTop && elementMiddle < viewportBottom;
+        }
+    },
+
+    /**
+     * Send Product Care Event to Insider
+     */
+    sendProductCareEvent(tabState) {
+        const productCareEvent = {
+            type: 'custom_event',
+            value: [{
+                event_name: 'product_care',
+                event_parameters: {
+                    custom: {
+                        url: window.location.href,
+                        description: tabState.description,
+                        additional_information: tabState.additional_information,
+                        reviews: tabState.reviews,
+                        channel: 'web'
+                    }
+                }
+            }]
+        };
+
+        // window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push(productCareEvent);
+        // window.InsiderQueue.push({ type: 'init' });
+
+        console.log('📡 Product Care Event Fired:', productCareEvent);
+    },
+
+    bindProductViewEventVariation() {
+        jQuery(($) => {
+            $('form.variations_form').on('found_variation', (event, variation) => {
+                let variation_id = variation.variation_id;
+
+                jQuery.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'get_wc_products',
+                        product_id: variation_id,
+                    },
+                    success: (response) => {
+                        if (response.success && response.data) {
+                            this.handleProductViewEvent(response.data); // works now
+                        } else {
+                            console.log("Error:", response.data?.message);
+                        }
+                    },
+                    error: () => {
+                        console.log("AJAX request failed while removing from wishlist");
+                    }
+                });
+            });
+        });
+    },
+
+    /**
+     * Handle Product View Event
+     */
+    handleProductViewEvent(productData) {
+        // Helper to read cookies
+        function getCookieValue(name) {
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : '';
+        }
+
+        // Parse utm_info from cookie
+        const utmRaw = getCookieValue('utm_info');
+        const utmParts = utmRaw ? utmRaw.split(' - ') : [];
+
+        const source_1 = utmParts[0] || '';
+        const source_2 = utmParts[1] || '';
+        const source_3 = utmParts[2] || '';
+
+        const productViewed = {
+            type: 'product',
+            value: {
+                id: productData.product_id,
+                name: productData.product_name,
+                taxonomy: productData.category_name,
+                unit_price: parseFloat(productData.product_price),
+                unit_sale_price: parseFloat(productData.product_sale_price),
+                url: productData.product_url,
+                product_image_url: productData.product_image_url,
+                stock: parseInt(productData.product_stock),
+                custom: {
+                    sku_id: productData.sku_id,
+                    channel: productData.channel,
+                    store_name: productData.store_name,
+                    variant: productData.variant,
+                    coin_cashback: productData.coin_cashback,
+                    source_1: source_1.trim(),
+                    source_2: source_2.trim(),
+                    source_3: source_3.trim()
+                }
+            }
+        };
+
+        window.InsiderQueue = window.InsiderQueue || [];
+        window.InsiderQueue.push({ type: 'product' });
+        window.InsiderQueue.push(productViewed);
+        window.InsiderQueue.push({ type: 'currency', value: productData.currency || 'USD' });
+        window.InsiderQueue.push({ type: 'init' });
+
+        console.log('📡 Product Viewed pushed:', productViewed);
+
+        // Unset source_product_clicked cookie after use
+        if (document.cookie.indexOf('source_product_clicked') !== -1) {
+            document.cookie = 'source_product_clicked=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        }
+    }
+};
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.InsiderObject.init().catch(error => {
+        console.error('Failed to initialize Insider:', error);
+    });
+    jQuery(".backButton").click(function () {
+        console.log('test');
+        window.history.back();
+    });
+});

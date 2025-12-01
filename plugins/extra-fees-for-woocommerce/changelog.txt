@@ -1,0 +1,361 @@
+*** Extra Fees for WooCommerce ***
+
+2025-05-29 - version 7.0.0
+* Dev: Bump WordPress "tested up to" version 6.8.1.
+* Dev: Bump WooCommerce "tested up to" version 9.8.5.
+* Dev: Compatibility is given with Loco Translate.
+* Fix: Fatal error in View Subscription Page[Compatibility issue with WooCommerce Subscriptions].
+* Fix: Tax applied for Product Fee to Subscription Product even if it is not configured[Compatibility issue with WooCommerce Subscriptions].
+* Fix: Product Price is displayed twice for Variable Products when the category filter is used in Quick Setup.
+* Fix: Error is thrown in checkout when purchasing a booking product.
+ 
+2025-04-21 - version 6.9.0
+ * New: Site Admin can see the Order Reports[Fee charged in each order]
+ * Dev: Bump WordPress "tested up to" version 6.8.0.
+ * Dev: Bump WooCommerce "tested up to" version 9.8.1.
+ * Fix: Product Fee is shown twice for Booking Product on the Thank You Page.
+ * Fix: Settings in the Variation Level are not working properly for the Product Fee.
+ * Fix: Unable to save the value for Category Level Settings when Product Level Fee Text & Value is left empty.
+ * Fix: Fee not applied from Category Level when Percentage of Product Price is selected.
+ * Fix: Payment Gateway Fee is not recorded in Reports when using Checkout Blocks.
+ * Fix: Duplicate entries are recorded for the fee in Reports.
+ 
+2025-03-27 - version 6.8.0
+ * New: Multiple Product Fee Settings were added to Quick Setup.
+ * New: Product Fee Settings were added to the Category Page.
+ * New: Product Fee can be charged based on Min-Max Quantity.
+ * New: Option to charge the Shipping Fee based on Fixed + Percentage Fee.
+ * New: Option to calculate the percentage by adding or including the Order Total in the Shipping Fee.
+ * New: Option to add a Fixed Fee before or after percentage calculation in the Shipping Fee.
+ * New: Shipping Fee can be restricted based on Weekday(s).
+ * Dev: Bump WooCommerce "tested up to" version 9.7.1.
+ * Fix: Payment Gateway Fee is not charged on the Pay for Order page.
+ 
+2025-02-27 - version 6.7.0
+ * New: Restrict Payment Gateway Fee based on State.
+ * New: Restrict Payment Gateway Fee based on Day(s) of the Week.
+ * Update: Rearranged settings for Product Fee.
+ * Dev: Product Fee compatibility is given with WooCommerce Name Your Price.
+ * Dev: Bump WordPress "tested up to" version 6.7.2.
+ * Dev: Bump WooCommerce "tested up to" version 9.7.0.
+ 
+2025-01-18 - version 6.6.0
+ * New: Option to restrict the Order Fee based on Shipping Zone
+ * New: Option to display the product fee info table below the "Add to Cart" button on the product page
+ * New: Option to charge the product fee for renewal orders synced with older subscriptions[Compatibility with WooCommerce Subscriptions]
+ * Tweak: Extended an option to hide the product fee info displayed below the line item in the checkout
+ * Tweak: An alert message is displayed in all the fee tabs when the global checkbox is not enabled
+ * Tweak: Settings Rearrangement in Product Fee
+ * Tweak: Tested with WooCommerce 9.5.2
+ * Fix: Unable to add product for manual order when product fee is enabled
+ 
+2024-12-13 - version 6.5.0
+ * Tweak: Tested with WooCommerce 9.4.3
+ * Fix: Payment Gateway Fee is not applied for default selected gateway in blocks checkout
+ * Fix: Product Fee calculation issue when it is applied as a separate component
+ 
+2024-11-29 - version 6.4.0
+ * Tweak: Added Product Fee & Order Fee before order creation for Manual Orders
+ * Tweak: Tested with WordPress 6.7.1
+ * Tweak: Tested with WooCommerce 9.4.2
+ * Fix: User filter is not working for Manual Orders
+ * Fix: Fatal error in error log[Compatibility issue with WooCommerce Cart Abandonment Recovery plugin]
+ 
+2024-10-04 - version 6.3.0
+ * New: Provided compatibility with WooCommerce Bookings[Product Fee supported]
+ * Tweak: Improvement in displaying the Additional Fee Text on the Thank You Page
+ * Tweak: Tested with WordPress 6.6.2
+ * Tweak: Tested with WooCommerce 9.3.3
+ * Fix: Additional Fee set in the product level is not added based on quantity
+ * Fix: More Info link is not displayed in the Shipping Fee
+ 
+2024-08-23 - version 6.2.0
+ * New: Option to calculate the Payment Gateway Fee based on the Order Total which includes fee
+ * New: Option to add the fixed fee before calculating the percentage value[Applicable only to Fixed + Percentage Fee Type]
+ * New: Option to combine & display the multiple fees in a single component in the cart & checkout
+ * New: Additional Fee can be charged based on Cart Quantity
+ * Tweak: Tested with WooCommerce 9.2.2
+ * Fix: Tax Cost is not calculated properly in all the fee types
+ 
+2024-07-26 - version 6.1.0
+ * New: Option to set the maximum fee to charge in Payment Gateway Fee & Shipping Fee
+ * Tweak: Tested with WordPress 6.6.1
+ * Tweak: Tested with WooCommerce 9.1.2
+ * Fix: Product Fee based on quantity is not updated properly in Car/Checkout Blocks
+
+2024-06-29 - version 6.0.0
+ * New: Product Fee can be charged in First/Final Installment[Compatibility given with "Payment Plan Suite"]
+ * New: Product Fee can be displayed in the Mini Cart
+ * New: Option to Export/Import the Plugin Settings
+ * Tweak: Tested with WordPress v6.5.5
+ * Tweak: Tested with WooCommerce v9.0.2
+ 
+2024-04-29 - version 5.9.0
+ * New: Shipping Fee can be charged based on regions
+ * New: Option to restrict the fees charged when the coupon is applied to the order
+ * New: Option to hide the product fee on the product page & cart page
+ * Tweak: Restricting fee to charge for manual creating order when applying coupon
+ * Tweak: Tested with WordPress v6.5.2
+ * Tweak: Tested with WooCommerce v8.8.2
+ * Fix: Payment Gateway fee is not charging properly
+ 
+2024-03-26 - version 5.8.0
+ * Tweak: Improvement in Product Fee Bulk Update Settings
+ * Tweak: Code Improvements for jQuery Conflict
+ * Tweak: Tested with WooCommerce v8.7.0
+ * Fix: Auto populating the value in Billing & Shipping Address when Payment Gateway is enabled
+
+2024-02-14 - version 5.7.0
+ * Tweak: Code Improvements    
+ * Fix: Product Fee is not multiplied based on the quantity
+ * Fix: Product Fee is not calculated properly in the Recurring Totals[Compatibility with Buy Once or Subscribe for WooCommerce Subscriptions]    
+ * Fix: Undefined function error when gateway fee is enabled & order has updated in the admin end
+ 
+2024-02-05 - version 5.6.0
+ * Tweak: Tested with WordPress 6.4.3
+ * Fix: Issue when installing the plugin
+
+2024-01-30 - version 5.5.0
+ * New: Compatible given with Cart and Checkout Blocks
+ * New: Option to modify the product fee based on the discounted value through coupons
+ * Tweak: Tested with WooCommerce v8.5.2
+ * Fix: Product Price is getting modified after changing the quantity in the Order Page
+ * Fix: Product Fee duplication issue when updating the order in the Order Page
+ * Fix: Product Fee is not updated when adding a new product to the Order Page
+ * Fix: Product Fee is not deducted when removing the product from the Order Page
+ 
+2023-12-22 - version 5.4.0
+ * Tweak: Tested with WooCommerce v8.4.0
+ * Fix: Selected Tax Class Value is not saved properly in Payment Gateway Fee & Shipping Fee
+ * Fix: Fatal Error at checkout[Conflict with Category Filter]
+ 
+2023-12-08 - version 5.3.0
+ * New: Compatibility given with the Avalara Avatax plugin
+ * New: Option to Include/Exclude additional product(s) when choosing Category filter
+ * Tweak: Tested with WordPress v6.4.2
+ * Tweak: Tested with WooCommerce v8.3.1
+ 
+2023-11-22 - version 5.2.0
+ * New: Option to restrict charging Product Fee & Order Fee on Renewal Orders[Compatibility with WooCommerce Subscriptions]
+ * Tweak: Tested with WooCommerce v8.3.0
+ * Fix: PHP higher version[v8.2.x] errors fixed
+
+2023-11-09 - version 5.1.0
+ * Tweak: Tested with WordPress v6.4.1
+ * Tweak: Tested with WooCommerce v8.2.2
+ * Fix: Fatal Error when upgrading to PHP v8.2
+ * Fix: Product Fee is not charged on Renewals[Compatibility issue with WooCommerce Subscriptions]
+ * Fix: Signup Fee is charged additionally to the Parent Order[Compatibility issue with WooCommerce Subscriptions
+
+2023-10-18 - version 5.0.0
+ * Tweak: Product Fee description displayed on the Thankyou Page
+ * Tweak: Design improvement in the Reports Tab
+ * Tweak: Display improvement in Multi-Select option
+ * Tweak: Code Improvements
+ * Tweak: Tested with WordPress v6.3.2
+ * Tweak: Tested with WooCommerce v8.2.1
+ * Fix: User and Product Filters are not working properly
+ 
+2023-09-20 - version 4.9.1
+ * Tweak: Tested with WooCommerce v8.1.1
+ * Fix: Payment Gateway Fee duplication issue when changing the order status
+ 
+2023-09-14 - version 4.9.0
+ * New: Payment Gateway Fee, Order Fee & Shipping Fee can be charged while creating the order manually
+ * Tweak: Improvement in Order Fee when buying multiple quantities of the product
+ * Tweak: Tested with WordPress v6.3.1
+ * Tweak: Tested with WooCommerce v8.1.0
+ * Fix: Product Fee is not charged for Manual Order Creation
+ 
+2023-08-26 - version 4.8.0
+ * New: Option to charge the Payment Gateway Fee based on Country/Region
+ * Tweak: Tested with PHP v8.2.0
+ * Tweak: Tested with WordPress v6.3
+ * Tweak: Tested with WooCommerce v8.0.2
+
+2023-08-08 - version 4.7.0
+ * Fix: Order Fee is not calculated properly
+ * Fix: Non-numeric value encountered in Order Fee
+ * Fix: Calculation issue in Payment Gateway Fee when choosing percentage type
+ 
+2023-08-01 - version 4.6.0
+ * Tweak: Tested with WooCommerce v7.9.0
+ * Fix: Payment Gateway Fee is not calculated properly on the Renewals[Compatibility issue with WooCommerce Subscriptions]
+ * Fix: PHP Warning in Cart[Conflict with Product Fee]
+ 
+2023-06-17 - version 4.5.0
+ * New: Product Fee can be charged based on Tags
+ * New: Product Fee can be set based on specific time period
+ * Tweak: Compatible with High-Performance Order Storage[HPOS]
+ * Tweak: Validation made in Minimum & Maximum Cart Subtotal/Order Total field
+ * Tweak: Tested with WooCommerce v7.8.0
+ 
+2023-06-14 - version 4.4.0
+ * New   - Product Fee supported for Manual Orders
+ * New   - Admin can see the Reports using Custom Date Range
+ * New   - Admin can remove the multiple rules in a single action
+ * Tweak - Toggle Improvements in Product Fee
+ * Tweak - Decimal Value supported in Minimum and Maximum Cart Subtotal/Order Total to Add Fee
+ * Tweak - Tested with WordPress v6.2.2 & WooCommerce v7.7.2
+
+2023-06-02 - version 4.3.1
+ * New - Product Fee support for WC Manual Orders & Yith WC Quote Plugin
+
+2023-03-20 - version 4.3.0
+ * Tweak - Tested with WooCommerce v7.5.0
+
+2023-01-11 - version 4.2.0
+ * New	 - Option to display the Product Fee[Add Fee with Original Price] on the Shop Page & Category Page.
+
+2023-01-03 - version 4.1.0
+ * Tweak - Security Improvements
+ * Tweak - Tested with WooCommerce v7.2.2
+
+2022-11-16 - version 4.0.0
+ * New   - Added Product/Category Filter in Order Fee
+ * Tweak - Tested with WordPress v6.1.1 & WooCommerce v7.1
+
+2022-11-04 - version 3.9.0
+ * New   - Compatibility with WooCommerce Subscriptions[Automatic Renewal Payments supported for Payment Gateway Fee]
+ * Tweak - Tested with WordPress v6.1 & WooCommerce v7.0.1
+
+2022-10-10 - version 3.8.0
+ * Fix   - Payment Gateway Fee is not charging properly
+
+2022-10-06 - version 3.7.0
+ * New   - Option to restrict Tax Cost on Product Fee
+ * Tweak - Improvement in Payment Gateway Fee
+ * Tweak - Tested with WooCommerce v6.9.4
+
+2022-09-26 - version 3.6.0
+ * New   - Order Fee can be set based on Cart Subtotal Range/Order Total Range
+ * Tweak - Tested with WordPress v6.0.2 & WooCommerce v6.9.3
+
+2022-09-14 - version 3.5.0
+ * New   - Option to charge Product Fee for one quantity of the Product
+ * Tweak - Settings Improvement
+ * Tweak - Improvement made in Product Fee Bulk Update Settings
+ * Tweak - Improvement in displaying the Fee Description in Product Level
+ * Tweak - Tested with WordPress v6.0.2 & WooCommerce v6.9.0
+ * Fix   - Product Fee rules are displayed when Quick Setup is configured
+
+2022-08-18 - version 3.4.0
+ * New   - Option to display the Fee Description in popup for all the Fee Types
+ * Tweak - Tested with WordPress v6.0.1 & WooCommerce v6.8.0
+ * Fix   - Error at Frontend
+
+2022-07-08 - version 3.3.0
+ * New   - Option to display the Product Fee on Shop Page
+ * Tweak - Tested with WooCommerce v6.6.1
+ * Tweak - Improvement made in displaying the Payment Gateway Fee
+
+2022-06-16 - version 3.2.0
+ * Tweak - Code Improvements
+ * Tweak - Improvement in saving the default values when WooCommerce is not active
+ * Tweak - Tested with WordPress v6.0 & WooCommerce v6.6.0
+ * Fix   - Header already sent error message on plugin activation when WooCommerce is inactive
+
+2022-05-17 - version 3.1.0
+ * Tweak - Improvement in Product Fee Bulk Update
+ * Tweak - Tested with WooCommerce v6.5.1
+ * Fix   - Error at Checkout[Conflict with User Role Filter when using Payment Gateway Fee]
+ 
+2022-05-12 - version 3.0.0
+ * New   - Fee can be charged based on Shipping Method
+
+2022-04-27 - version 2.9.0
+ * Tweak - Code Improvements
+ * Tweak - Improvement in charging Payment Gateway Fee based on Minimum Fee option
+ * Fix   - Product Price display issue in Variable Product based on Tax Setup
+
+2022-04-19 - version 2.8.0
+ * Tweak - Tested with WordPress v5.9.3 & WooCommerce v6.4.1
+ * Fix   - Product Price & Product Fee display issue in Variable Product[Compatible issue with "WooCommerce Product Bundles" plugin]
+ * Fix   - Product Fee is not displaying for Variable Subscriptions on Edit Order Page
+ * Fix   - Formating Issue in Shop & Category Page
+
+2022-04-01 - version 2.7.0
+ * Tweak - Improvement made in Payment Gateway Fee
+ * Tweak - Tested with WordPress v5.9.2 & WooCommerce v6.3.1
+ * Fix   - Product Fee compatibility issue with WooCommerce Subscriptions Plugin
+
+2022-03-09 - version 2.6.0
+ * Tweak - Tested with WooCommerce v6.3.0
+ * Tweak - Improvement in calculating the Payment Gateway Fee & Order Fee based on Maximum Threshold Value
+ * Fix   - Fixed Fee Type is not working in Order Fee Mode
+
+2022-03-01 - version 2.5.0
+ * New   - Order Fee can be set based on Order Total
+ * Tweak - Tested with WordPress v5.9.1 & WooCommerce v6.2.1
+
+2022-02-23 - version 2.4.0
+ * Fix   - Fatal Error at Backend
+
+2022-02-21 - version 2.3.0
+ * New   - Multiple Product Fee can be set in a Product
+ * Tweak - Tested with WordPress v5.9 & WooCommerce v6.2
+
+2021-10-26 - version 2.2.0
+ * New   - Supported Payment Gateway Fee & Order Fee for Renewal Orders[Compatibility with WooCommerce Subscriptions]
+
+2021-10-16 - version 2.1.0
+ * New   - Payment Gateway Fee can be set based on Order Total
+ * Tweak - Tested with WordPress v5.8.1 & WooCommerce v5.8.0
+
+2021-09-03 - version 2.0.0
+ * New   - Reports for site admin to see the collected fees
+ * New   - User(s)/User Role(s) restricted can be set for Product Fee & Order Fee
+ * Tweak - Improvement in displaying the Regular Price for Variable Product
+ * Tweak - Validation[Min & Max Subtotal to Add Fee] in Payment Gateway Fee Settings
+ * Tweak - Tested with WooCommerce v5.6
+ * Tweak - Compatible with PHP v8.x
+ * Fix   - PHP Warning in Error Log
+
+2021-08-07 - version 1.9.0
+ * New   - Separate Column to display the Product Fee configured for Products at the admin end
+ * Tweak - Improvement in displaying the Product Fee at frontend for Variable Product
+ * Tweak - PHP Fatal Error  in Error Log
+ * Tweak - Tested with WordPress v5.8 & WooCommerce v5.5.2
+
+2021-05-22 - version 1.8.0
+ * New   - Added Filters to modify the Fee
+ * Tweak - Code improvement in Variable Product Selection
+ * Tweak - Tested WooCommerce up to v5.3.0
+
+2020-12-24 - version 1.7.0
+ * New   - Option to set a Fixed Fee + Percentage of Cart Subtotal in Payment Gateway Fee
+ * Tweak - POT File Updated
+
+2020-12-15 - version 1.6.0
+ * New   - Option to set the Minimum Fee for Payment Gateway Fee
+ * Tweak - Product Fee display issue in cart & checkout[Compatbile with WooCommerce Name Your Price Plugin]
+ * Tweak - Tested up to WordPress v5.6 & WooCommerce v4.8
+ * Tweak - POT File Updated
+
+2020-12-08 - version 1.5.0
+ * New   - Option to restrict the Payment Gateway Fee based on Users/User Roles
+ * New   - Option to restrict the Payment Gateway Fee based on Products/Categories
+ * New   - Option to restrict the Payment Gateway Fee based on Date Ranges
+
+2020-12-03 - version 1.4.0
+ * New   - "Bulk Update" Settings added in "Product Fee" Module
+ * Tweak - Tested WooCommerce up to v4.7
+ * Tweak - POT File Updated
+
+2020-11-17 - version 1.3.0
+ * New   - Option to restrict the Order Fee based on Shipping Methods
+ * Tweak - Tested WooCommerce up to v4.7
+ * Tweak - POT File Updated
+
+2020-11-02 - version 1.2.0
+ * Tweak - Tested WooCommerce up to v4.6
+ * Fix   - Incorrect Product Fee is getting added to Subscription Price[Conflict with WooCommerce Subscritpion Plugin]
+ * Fix   - Product Level Settings is not saving for Simple Subscription[Conflict with WooCommerce Subscritpion Plugin]
+
+
+2020-08-03 - version 1.1.0
+ * Tweak - Improvement in configuring the fee in decimal value
+ * Tweak - Tested WooCommerce up to v4.3.0
+
+2020-03-12 - version 1.0.0
+ * Initial Release

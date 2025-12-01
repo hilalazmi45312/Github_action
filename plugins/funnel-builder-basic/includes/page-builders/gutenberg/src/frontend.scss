@@ -1,0 +1,25 @@
+@import './blocks/popup-form/frontend.scss';
+body{
+    .bwfac_forms_outer .bwfac_form_sec, .bwfac_forms_outer .bwfac_form_sec label{
+        color: #404040;
+        font-family: "Rubik", Sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .bwfop-popup-form-container{
+        .bwf_pp_effect_fade.show_popup_form .bwf_pp_wrap {
+            box-sizing: content-box;
+        }
+        .bwf_pp_opt_sub_head{
+            float: unset;
+        }
+        .bwfop-poup-button-wrap {
+            .bwfop-secondary{
+                .bwf-btn-inner-text, .bwf-icon-inner-svg{
+                    display: inline-block; 
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}

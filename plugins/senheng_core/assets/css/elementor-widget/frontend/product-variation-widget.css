@@ -1,0 +1,144 @@
+[class*="wd-swatches"].wd-text-style-1 .wd-swatch.wd-text:is(.wd-active,:hover:not(.wd-disabled)):after, [class*="wd-swatches"].wd-text-style-1 :is(.wd-swatch-wrap a:hover,.wd-swatch-wrap.wd-active) .wd-swatch.wd-text:after{
+    opacity: 0 !important;
+}
+
+[class*="wd-swatches"].wd-text-style-3 .wd-swatch.wd-text .wd-swatch-text , [class*="wd-swatches"].wd-text-style-2 .wd-swatch.wd-text .wd-swatch-text{
+    font-size: unset !important;
+    padding: 0 !important;
+}
+
+/* Product Variation Widget Styles */
+.product-variation-widget {
+    margin: 20px 0;
+}
+
+.product-variation-widget .variations_form {
+    margin: 0;
+}
+
+.product-variation-widget .variations {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-variation-widget .variations tr {
+    border-bottom: 1px solid #eee;
+}
+
+.product-variation-widget .variations th.label {
+    padding: 10px 15px 10px 0;
+    font-weight: 600;
+    vertical-align: top;
+    text-align: left;
+    width: 30%;
+}
+
+.product-variation-widget .variations td.value {
+    padding: 10px 0;
+    vertical-align: top;
+}
+
+/* New layout styling for variation name and value rows */
+.product-variation-widget .variation-name-row {
+    border-bottom: none;
+}
+
+.product-variation-widget .variation-name.cell {
+    padding: 15px 0 5px 0;
+}
+
+/* Variation label styling - controlled by Elementor typography controls */
+.elementor-widget-sh_product_variation .variation-label,
+.elementor-widget-sh_product_variation .variation-name-cell .variation-label {
+    /* Remove default styling to allow Elementor controls to take precedence */
+    font-weight: inherit;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    margin: inherit;
+    padding: inherit;
+    /* Ensure smooth transitions when text updates */
+    transition: all 0.2s ease;
+}
+
+.product-variation-widget .variation-value.cell {
+    padding: 5px 0 15px 0;
+}
+
+/* Basic form styling - WoodMart handles swatch styling automatically */
+
+
+/* Color and Image Swatch styling */
+.sh-variation-form .wd-swatch.wd-bg {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Text Swatch styling - auto-sizing based on content */
+.sh-variation-form .wd-swatch.wd-text {
+    display: inline-block;
+    /* border: 2px solid #000; */
+    border: 1px solid var(--wd-swatch-brd-color);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+}
+
+.sh-variation-form .wd-swatch.wd-text:hover {
+    --wd-swatch-brd-color: var(--color-gray-500);
+}
+
+.sh-variation-form .wd-swatch.wd-text.wd-active {
+    border-color: #000;
+    border-width: 2px;
+    color: #000;
+    font-weight: 600;
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.2); */
+}
+
+/* Disabled swatches: block interaction and lower opacity */
+.sh-variation-form .wd-swatch.wd-disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* WoodMart will handle color and image backgrounds through their default theme styles */
+
+/* Selected value row removed */
+
+/* Ensure Elementor typography controls take precedence */
+/* Selected value text removed */
+
+.elementor-widget-sh_product_variation label:after{
+    content:'';
+}
+
+
+/* Basic responsive design for form layout */
+@media (max-width: 768px) {
+    .product-variation-widget .variations th.label {
+        width: 100%;
+        padding-bottom: 5px;
+    }
+    
+    .product-variation-widget .variations td.value {
+        padding-top: 5px;
+    }
+}

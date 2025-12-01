@@ -1,0 +1,42 @@
+.bwf-dimensions-control-component {
+    .components-bwf-dimensions-control__inputs {
+        display: flex;
+        .components-bwf-dimensions-control__number {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            height: 30px;
+            margin: 0 -1px 0 0;
+            padding: 5px;
+            width: calc(25% - 5px);
+            &:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+        .components-bwf-dimensions-control_reset {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            box-shadow: none;
+            height: auto;
+            justify-content: center;
+            padding: 0;
+            text-align: center;
+            text-shadow: none;
+            width: 30px;
+            border: 1px solid #8c8f94;
+            &:hover, &:focus {
+                box-shadow: none !important;
+            }
+        }
+    }
+    .components-bwf-dimensions-control__input-labels {
+        display: flex;
+        .components-bwf-dimensions-control__number-label {
+            width: calc(25% - 5px);
+            font-size: 11px;
+            &:last-child {
+                width: 30px;
+            }
+        }
+    }
+}

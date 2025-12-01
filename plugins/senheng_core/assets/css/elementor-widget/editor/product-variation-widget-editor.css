@@ -1,0 +1,125 @@
+/* Variation Widget Editor Preview - Using WoodMart Default Styles */
+
+/* .elementor-widget-sh_product_variation .sh-variation-form {
+    text-align: center;
+} */
+table.variations{
+    margin-bottom: 5px;
+}
+form.variations_form{
+    --wd-var-table-mb: unset !important;
+    margin-top: 10px;
+}
+.wd-swatch.wd-text .wd-swatch-text{
+    font-size: unset;
+}
+
+.elementor-widget-sh_product_variation .sh-variation-title {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.elementor-widget-sh_product_variation .sh-variation-content {
+    color: #666;
+}
+
+/* Widget Category Icon */
+.elementor-element[data-element_type="sh_product_variation"] .elementor-widget-icon {
+    background-color: #28a745;
+    color: white;
+}
+
+/* New layout styling for variation name and value rows in editor */
+.elementor-widget-sh_product_variation .variation-name-row {
+    border-bottom: none;
+}
+
+.elementor-widget-sh_product_variation .variation-name.cell {
+    padding: 4px 0 0 0;
+}
+
+/* Variation label styling - controlled by Elementor typography controls */
+.elementor-widget-sh_product_variation .variation-label,
+.elementor-widget-sh_product_variation .variation-name-cell .variation-label {
+    /* Remove default styling to allow Elementor controls to take precedence */
+    font-weight: inherit;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    margin: inherit;
+    padding: inherit;
+    /* Ensure smooth transitions when text updates */
+    transition: all 0.2s ease;
+}
+
+.elementor-widget-sh_product_variation .variation-value.cell {
+    padding: 10px 0 5px 15px;
+}
+
+.elementor-widget-sh_product_variation table.variations .cell {
+    border: none;
+}
+
+/* Default swatch styling for editor preview - can be overridden by Elementor controls */
+/* Color and Image Swatch styling */
+.elementor-widget-sh_product_variation .wd-swatch.wd-bg {
+    width: 40px;
+    height: 40px;
+    margin: 0 8px 8px 0;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Text Swatch styling - auto-sizing based on content */
+.elementor-widget-sh_product_variation .wd-swatch.wd-text {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: auto;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+}
+
+
+
+.elementor-widget-sh_product_variation .wd-swatch.wd-text.wd-active {
+    border-color: #000;
+    border-width: 2px;
+    color: #000;
+    font-weight: bold;
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.2); */
+}
+
+/* WoodMart handles swatch styling automatically through their inline style system */
+
+/* Selected value row removed in editor */
+
+.elementor-widget-sh_product_variation table.variations label:after{
+    content:'';
+}
+
+/* Basic responsive design for form layout */
+@media (max-width: 768px) {
+    .elementor-widget-sh_product_variation .sh-variation-form {
+        padding: 15px;
+    }
+}

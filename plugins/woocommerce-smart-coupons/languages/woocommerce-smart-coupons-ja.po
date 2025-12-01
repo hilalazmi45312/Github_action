@@ -1,0 +1,5772 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Smart Coupons 9.37.0\n"
+"Report-Msgid-Bugs-To: https://www.storeapps.org/support/contact-us\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-05-14T05:10:47+00:00\n"
+"PO-Revision-Date: 2025-06-06 11:47+0000\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: woocommerce-smart-coupons\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.8.1"
+
+#. translators: Add more detail to coupon description
+#: includes/class-wc-sc-display-coupons.php:807
+msgid " &"
+msgstr "&amp;"
+
+#: includes/class-wc-sc-display-coupons.php:443
+#: includes/class-wc-sc-display-coupons.php:1027
+#: includes/class-wc-sc-display-coupons.php:2813
+#: includes/class-wc-sc-shortcode.php:540
+#: includes/class-wc-smart-coupons.php:5038
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:372
+#: templates/combined-email.php:129 templates/email.php:126
+#: templates/print-coupons-default.php:146
+msgid " & "
+msgstr "&amp; "
+
+#: templates/plain/combined-email.php:88 templates/plain/email.php:83
+#: templates/plain/expiry-reminder-email.php:64
+msgid " &amp; "
+msgstr "&amp; "
+
+#. translators: 1. Discount type 2. Discount Type Label
+#: includes/class-wc-sc-product-fields.php:114
+#: includes/class-wc-sc-product-fields.php:175
+msgid " ( %1$s: %2$s )"
+msgstr "( %1$s: %2$s )"
+
+#. translators: 1: email heading 2: suffix
+#: includes/emails/class-wc-sc-email-coupon.php:465
+msgid " coupon"
+msgstr "クーポン"
+
+#: includes/class-wc-sc-display-coupons.php:792
+msgid " discount"
+msgstr "割引"
+
+#: includes/class-wc-sc-display-coupons.php:768
+#: includes/class-wc-sc-display-coupons.php:777
+msgid " discount on "
+msgstr "割引 "
+
+#: includes/class-wc-sc-display-coupons.php:759
+msgid " discount on your entire purchase"
+msgstr "全品割引"
+
+#: includes/class-wc-sc-display-coupons.php:792
+msgid " on "
+msgstr "オン "
+
+#. translators: %s: Maximum coupon discount amount
+#: includes/class-wc-sc-display-coupons.php:790
+#: includes/class-wc-smart-coupons.php:1365
+#: includes/emails/class-wc-sc-email-coupon.php:444
+msgid " upto %s"
+msgstr "まで"
+
+#: includes/class-wc-sc-admin-notifications.php:247
+msgid ""
+"! If things aren't going quite as expected, we're happy to help -- please "
+"reach out to"
+msgstr "!もし、物事が期待通りに進まない場合は、喜んでお手伝いします。"
+
+#: includes/class-wc-sc-settings.php:808
+msgid "\"Coupons with Product\" description"
+msgstr "「商品付きクーポン」の説明"
+
+#: includes/class-wc-sc-admin-welcome.php:612
+msgid "\"Store Credit Receiver detail\" form not appearing on checkout page?"
+msgstr "「ストアクレジットレシーバー詳細」フォームがチェックアウトページに表示されない？"
+
+#: includes/class-wc-smart-coupons.php:6170
+msgid "$coupon is not an object of WC_Coupon"
+msgstr "couponはWC_Couponのオブジェクトではありません。"
+
+#: includes/class-wc-smart-coupons.php:6172
+msgid "$coupon is: "
+msgstr "クーポンは "
+
+#: includes/class-wc-smart-coupons.php:6790
+#: includes/class-wc-smart-coupons.php:6838
+msgid "$item is not an object of WC_Order_Item"
+msgstr "itemはWC_Order_Itemのオブジェクトではありません。"
+
+#: includes/class-wc-smart-coupons.php:6792
+#: includes/class-wc-smart-coupons.php:6840
+msgid "$item is: "
+msgstr "アイテムは "
+
+#: includes/class-wc-smart-coupons.php:6916
+msgid "$item_id is required"
+msgstr "item_idは必須"
+
+#: includes/class-wc-smart-coupons.php:6657
+#: includes/class-wc-smart-coupons.php:6711
+#: includes/class-wc-smart-coupons.php:6740
+#: includes/class-wc-smart-coupons.php:6764
+#: includes/class-wc-smart-coupons.php:6918
+msgid "$item_id is: "
+msgstr "item_idは： "
+
+#: includes/class-wc-smart-coupons.php:6658
+#: includes/class-wc-smart-coupons.php:6712
+#: includes/class-wc-smart-coupons.php:6741
+#: includes/class-wc-smart-coupons.php:6765
+msgid "$item_key is: "
+msgstr "item_keyは： "
+
+#: includes/class-wc-smart-coupons.php:6543
+#: includes/class-wc-smart-coupons.php:6598
+msgid "$key is required"
+msgstr "キーは必須"
+
+#: includes/class-wc-smart-coupons.php:6545
+#: includes/class-wc-smart-coupons.php:6600
+msgid "$key is: "
+msgstr "キーは "
+
+#: includes/class-wc-smart-coupons.php:6273
+#: includes/class-wc-smart-coupons.php:6388
+#: includes/class-wc-smart-coupons.php:6502
+msgid "$meta_key is: "
+msgstr "meta_keyは： "
+
+#: includes/class-wc-smart-coupons.php:6272
+#: includes/class-wc-smart-coupons.php:6387
+#: includes/class-wc-smart-coupons.php:6501
+msgid "$post_id is: "
+msgstr "post_idは： "
+
+#: includes/class-wc-sc-coupon-fields.php:1108
+msgid "%"
+msgstr "%"
+
+#. translators: 1. Product/s 2. Product names 3. is/are 4. Coupons code
+#: includes/class-wc-sc-coupon-actions.php:588
+msgid "%1$s %2$s %3$s removed because coupon %4$s is removed."
+msgstr "クーポン %4$s が削除されたため、%1$s %2$s %3$s が削除されました。"
+
+#. translators: 1. The coupon code, 2. The discount type
+#: includes/class-wc-sc-ajax.php:258 includes/class-wc-sc-settings.php:404
+msgid "%1$s (Type: %2$s)"
+msgstr "1$s (タイプ: %2$s)"
+
+#. translators: 1. Discount type 2. Discount amount
+#. translators: 1: coupon type 2: coupon amount
+#: includes/class-wc-sc-display-coupons.php:799
+#: includes/emails/class-wc-sc-email-coupon.php:457
+msgid "%1$s coupon of %2$s"
+msgstr "2$s の %1$s クーポン"
+
+#. translators: 1: email heading 2: suffix
+#: includes/emails/class-wc-sc-email-coupon.php:465
+msgid "%1$s Free Shipping%2$s"
+msgstr "1$s 送料無料%2$s"
+
+#. translators: 1. amount of store credit 2. store credit label 3. coupon code
+#: includes/class-wc-sc-coupon-process.php:827
+msgid "%1$s worth of %2$s restored to coupon %3$s."
+msgstr "1$s分の%2$sがクーポン%3$sに復元されました。"
+
+#. translators: 1. amount of store credit 2. coupon code
+#: includes/class-wc-sc-coupon-process.php:830
+msgid "%1$s worth of Store Credit restored to coupon %2$s."
+msgstr "1$s分のストアクレジットがクーポン%2$sに復元されます。"
+
+#. translators: 1: HTML small tag start 2: HTML small tag end
+#: includes/class-wc-sc-admin-pages.php:1284
+msgid ""
+"%1$s(This will add the same coupon description in all the bulk generated "
+"coupons)%2$s"
+msgstr "1$s(一括生成された全てのクーポンに同じクーポンの説明が追加されます)%2$s"
+
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-settings.php:1092
+#: includes/class-wc-sc-settings.php:1095
+msgid "%1$s: %2$s to avoid issues related to missing data for %3$s. %4$s"
+msgstr "1$s: %2$s は、%3$s の欠落データに関する問題を回避するためです。%4$s"
+
+#. translators: 1. Error title 2. The bulk process
+#: includes/class-wc-sc-background-coupon-importer.php:389
+msgid ""
+"%1$s: The coupon bulk %2$s process stopped. Please review the coupons list "
+"to check the status."
+msgstr "%1$s:クーポン一括 %2$s プロセスが停止しました。クーポン一覧でステータスを確認してください。"
+
+#. translators: 1. Important 2. Upload path
+#: includes/class-wc-sc-background-coupon-importer.php:337
+msgid ""
+"%1$s: To allow bulk generation of coupons, please make sure %2$s directory "
+"is writable."
+msgstr "%1$s:クーポンの一括生成を許可するには、%2$s ディレクトリが書き込み可能であることを確認してください。"
+
+#. translators: 1. Message type 2. Functionality name "Bulk Generate" 3. Functionality name "Import-Export"
+#: includes/class-wc-sc-admin-notifications.php:292
+msgid ""
+"%1$s: To ensure %2$s and %3$s work correctly, contact your system "
+"administrator or host provider to resolve below:"
+msgstr "%1$s:2$s と %3$s が正しく動作するように、システム管理者またはホスト・プロバイダに連絡して、以下を解決してください："
+
+#. translators: 1: WooCommerce Smart Coupons 2: Link for the Smart Coupons settings
+#: includes/class-wc-sc-admin-notifications.php:260
+msgid ""
+"%1$s: You are using a custom coupon style which is planned to be removed "
+"from the plugin in upcoming versions. New, improved styles & colors are "
+"added in the version 4.9.0. We would request you to choose a color scheme & "
+"a style for coupon from the newly added colors & styles. You can do this "
+"from %2$s."
+msgstr ""
+"%1$s:次のバージョンでプラグインから削除される予定のカスタムクーポンスタイルを使用しています。バージョン4.9."
+"0で新しく改良されたスタイルと色が追加されました。新しく追加された色とスタイルからクーポンの配色とスタイルを選択してください。2$sから行うことができます。"
+
+#. translators: 1$-2$: opening and closing <strong> tags, 3$-4$: link tags, takes to woocommerce plugin on wp.org, 5$-6$: opening and closing link tags, leads to plugins.php in admin.
+#: woocommerce-smart-coupons.php:61
+msgid ""
+"%1$sWooCommerce Smart Coupons is inactive.%2$s The %3$sWooCommerce "
+"plugin%4$s must be active for the Smart Coupons to work. Please %5$sinstall "
+"& activate WooCommerce &raquo;%6$s"
+msgstr ""
+"1$sWooCommerce Smart Coupons is inactive.%2$s Smart Coupons "
+"を機能させるには、%3$sWooCommerce プラグイン%4$s "
+"をアクティブにする必要があります。5$sWooCommerce\"%6$sをインストールして有効にしてください。"
+
+#. translators: %s: Plugin name
+#: includes/class-wc-sc-admin-notifications.php:481
+msgid "%s &minus; Database update required"
+msgstr "s - データベースの更新が必要です。"
+
+#. translators: Plugin's name
+#: includes/class-wc-sc-privacy.php:828
+msgid "%s - Coupon Personal Data Eraser"
+msgstr "%s - クーポン個人データ消しゴム"
+
+#. translators: Plugin's name
+#: includes/class-wc-sc-privacy.php:826
+msgid "%s - Coupon Personal Data Exporter"
+msgstr "s - クーポン個人データエクスポーター"
+
+#. translators: Plugin's name
+#: includes/class-wc-sc-privacy.php:833
+msgid "%s - Order Personal Data Eraser"
+msgstr "s - 個人データ消去を注文する"
+
+#. translators: Plugin's name
+#: includes/class-wc-sc-privacy.php:831
+msgid "%s - Order Personal Data Exporter"
+msgstr "s - 個人データのエクスポートを注文する"
+
+#. translators: Plugin's name
+#: includes/class-wc-sc-privacy.php:838
+msgid "%s - User Personal Data Eraser"
+msgstr "s - ユーザ個人データ消去"
+
+#. translators: Plugin's name
+#: includes/class-wc-sc-privacy.php:836
+msgid "%s - User Personal Data Exporter"
+msgstr "s - ユーザ個人データのエクスポート"
+
+#. translators: 1. Coupon type
+#: includes/class-wc-sc-background-coupon-importer.php:404
+msgid "%s are being"
+msgstr "sは"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-order-fields.php:413
+msgid "%s Balance "
+msgstr "sバランス "
+
+#. translators: Order notes
+#: includes/class-wc-sc-coupon-process.php:838
+msgid "%s Because PayPal doesn't accept discount on shipping & tax."
+msgstr "sはPayPalが送料と税金の割引を受け入れないからです。"
+
+#. translators: %s: Plugin name
+#: includes/class-wc-sc-admin-notifications.php:532
+msgid ""
+"%s database update completed. Thank you for updating to the latest version!"
+msgstr "s データベースの更新が完了しました。最新バージョンに更新していただきありがとうございます！"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:927
+msgid "%s discount is inclusive of tax"
+msgstr "s割引は税込みです。"
+
+#. translators: 1. The discount text
+#: includes/class-wc-smart-coupons.php:1813
+msgid "%s discount on anything you want."
+msgstr "お好きなものを何割引でも。"
+
+#. translators: 1. The discount text
+#: includes/class-wc-smart-coupons.php:1815
+msgid "%s discount on entire store."
+msgstr "店舗全体が%s割引になります。"
+
+#. translators: Add more detail to coupon description
+#: includes/class-wc-sc-display-coupons.php:807
+msgid "%s Free Shipping"
+msgstr "送料無料"
+
+#. translators: 1. Product title
+#: includes/class-wc-sc-coupon-actions.php:370
+#: includes/class-wc-sc-coupon-actions.php:502
+msgid "%s has been added to your cart!"
+msgstr "sがカートに追加されました"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:925
+msgid "%s include tax?"
+msgstr "税込みですか？"
+
+#. translators: %s: Plugin name
+#: includes/class-wc-sc-admin-notifications.php:519
+msgid ""
+"%s is updating the database in the background. The database update process "
+"may take a little while, so please be patient."
+msgstr "sはバックグラウンドでデータベースを更新しています。データベースの更新処理には少し時間がかかりますので、しばらくお待ちください。"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-display-coupons.php:749
+msgid "%s of "
+msgstr "の "
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:785
+msgid "%s product CTA"
+msgstr "商品CTA"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-admin-pages.php:686
+msgid "%s sent successfully."
+msgstr "sが正常に送信されました。"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-order-fields.php:119
+msgid "%s Used"
+msgstr "使用される %s"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-order-fields.php:181
+msgid "%s Used:"
+msgstr "sが使用された："
+
+#. translators: 1: email heading 2: suffix
+#: includes/emails/class-wc-sc-email-coupon.php:465
+msgid "&"
+msgstr "&amp;"
+
+#: includes/class-wc-sc-admin-pages.php:1210
+msgid "(Add to store and email generated coupons to recipients)"
+msgstr "(店舗に追加し、生成されたクーポンを受信者に電子メールで送信する）"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:199
+msgid "(Copy)"
+msgstr "(コピー）"
+
+#: includes/class-wc-sc-admin-pages.php:1200
+msgid "(Does not add to store, but creates a .csv file, that you can"
+msgstr "(ストアには追加されませんが、.csvファイルが作成されます。"
+
+#. translators: %s: Note for admin
+#: includes/class-wc-sc-settings.php:481
+msgid "(Note: It's recommended to keep it Disabled)"
+msgstr "(注：無効にしておくことをお勧めします）"
+
+#: includes/class-wc-sc-admin-pages.php:829
+#: includes/class-wc-sc-admin-pages.php:1245
+msgid "(optional)"
+msgstr "(オプション)"
+
+#: includes/class-wc-sc-coupon-fields.php:535
+msgid "(prefix or suffix with up to three letters work best)"
+msgstr "(3文字以内の接頭辞または接尾辞が最適)"
+
+#: includes/class-wc-sc-background-coupon-importer.php:410
+msgid "--:--:--"
+msgstr "--:--:--"
+
+#: includes/class-wc-sc-admin-welcome.php:563
+msgid ""
+". If still the issue persist, temporarily de-activate all plugins except "
+"WooCommerce & Smart Coupons. Re-check the issue, if the issue still persists,"
+" contact us (from the link at the end of this page). If the issue goes away, "
+"re-activate other plugins one-by-one & re-checking the fields, to find out "
+"which plugin is conflicting."
+msgstr ""
+".それでも問題が解決しない場合は、WooCommerce &amp; Smart "
+"Coupons以外のすべてのプラグインを一時的に停止してください。それでも問題が解決しない場合は、このページの最後にあるリンクからお問い合わせください。問題が解決された場合、他のプラグインを一つずつ再アクティブ化し、フィールドを再チェックして、どのプラグインが競合しているかを調べてください。"
+
+#. translators: Documentation link for 'How to Apply Single or Multiple Coupons on Click of a Link'
+#: includes/class-wc-sc-admin-welcome.php:580
+msgid ""
+". Replace www.mysite.com with your own site URL and replace discount5 with "
+"the your coupon code."
+msgstr ".www.mysite.com をあなたのサイトのURLに、discount5 をクーポンコードに置き換えてください。"
+
+#: includes/class-wc-sc-admin-pages.php:798
+#: includes/class-wc-sc-coupon-fields.php:1106
+msgid "0.00"
+msgstr "0.00"
+
+#: includes/class-wc-sc-coupon-fields.php:1091
+msgid "1"
+msgstr "1"
+
+#: includes/class-wc-sc-admin-pages.php:1176
+msgid "10"
+msgstr "10"
+
+#. Description of the plugin
+msgid ""
+"<strong>WooCommerce Smart Coupons</strong> lets customers buy gift "
+"certificates, store credits or coupons easily. They can use purchased "
+"credits themselves or gift to someone else."
+msgstr ""
+"<strong>WooCommerce Smart Couponsを</strong>"
+"使用すると、顧客は簡単にギフト券、ストアクレジットまたはクーポンを購入することができます。購入したクレジットは自分で使うことも、誰かにプレゼントすることもできます。"
+
+#. translators: 1: Singular name for post type 2: Email
+#: includes/class-wc-sc-admin-pages.php:1567
+msgid "[%1$s restricted with email: %2$s]"
+msgstr "[1$sは電子メールで制限されています: %2$s]。"
+
+#: includes/class-wc-smart-coupons.php:3346
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "Delete Smart Coupons Custom Table"
+msgstr "スマートクーポンカスタムテーブルの削除"
+
+#: includes/class-wc-smart-coupons.php:3349
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "Note:"
+msgstr "注："
+
+#. translators: Label for discount type Store Credit
+#: includes/class-wc-smart-coupons.php:3335
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "Set \"%s\" Meta"
+msgstr "s \"メタを設定"
+
+#. translators: Table name
+#: includes/class-wc-smart-coupons.php:3351
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid ""
+"Smart Coupons creates a custom table & fills it with existing coupon data in "
+"such a way that it can query coupons faster. This greatly improves some of "
+"the features of Smart Coupons. This tool will delete the Smart Coupons "
+"custom table - %s. But it will not affect any existing coupon's data. After "
+"deleting the custom table, you'll be shown a notice to update Smart Coupons "
+"database. This will help you regenerate Smart Coupons custom table. Please "
+"ensure the Smart Coupons database update process is completed before "
+"creating/updating/deleting any coupons"
+msgstr ""
+"Smart "
+"Couponsは、カスタムテーブルを作成し、既存のクーポンデータで埋めることで、クーポンのクエリを高速化します。これにより、スマート・クーポンの機能の一部が大幅に向上します。このツールは、スマート・クーポンのカスタム・テーブル"
+" %s "
+"を削除します。しかし、既存のクーポンのデータには影響しません。カスタムテーブルを削除した後、スマートクーポンのデータベースを更新するよう通知が表示されます。これにより、スマートクーポンのカスタムテーブルが再生成されます。クーポンを作成/更新/削除する前に、スマートクーポンデータベースの更新プロセスが完了していることを確認してください。"
+
+#. translators: Label for discount type Store Credit
+#: includes/class-wc-smart-coupons.php:3333
+#: includes/class-wc-smart-coupons.php:3335
+#: includes/class-wc-smart-coupons.php:3337
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "Store Credit"
+msgstr "店舗クレジット"
+
+#. translators: Label for discount type Store Credit
+#: includes/class-wc-smart-coupons.php:3337
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "This tool will set required meta for discount type \"%s\" (if needed)."
+msgstr "このツールは、割引タイプ\"%s \"に必要なメタを設定します（必要な場合）。"
+
+#. translators: Label for discount type Store Credit
+#: includes/class-wc-smart-coupons.php:3333
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "WooCommerce Smart Coupons &minus; \"%s\" meta"
+msgstr "WooCommerce スマートクーポン - \"%s\" メタデータ"
+
+#: includes/class-wc-smart-coupons.php:3345
+msgctxt "[Admin] WooCommerce > Status > Tools"
+msgid "WooCommerce Smart Coupons &minus; Custom table"
+msgstr "WooCommerce スマートクーポン - カスタムテーブル"
+
+#. translators: %s: Preview link
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:680 includes/class-wc-sc-settings.php:689
+#: includes/class-wc-sc-settings.php:698 includes/class-wc-sc-settings.php:707
+#: includes/class-wc-sc-settings.php:716 includes/class-wc-sc-settings.php:787
+#: includes/class-wc-sc-settings.php:799 includes/class-wc-sc-settings.php:809
+#: includes/class-wc-sc-settings.php:819 includes/class-wc-sc-settings.php:829
+#: includes/class-wc-sc-settings.php:855 includes/class-wc-sc-settings.php:864
+#: includes/class-wc-sc-settings.php:874 includes/class-wc-sc-settings.php:883
+msgid "[Preview]"
+msgstr "[プレビュー］"
+
+#. translators: %s: Label for store credit, 1: : Label for store credit, 2: Label for store credit, 3: Label for store credit
+#: includes/class-wc-sc-settings.php:499 includes/class-wc-sc-settings.php:510
+msgid "[Read More]"
+msgstr "[続きを読む］"
+
+#: includes/class-wc-sc-admin-welcome.php:87
+msgid "About Smart Coupons"
+msgstr "スマートクーポンについて"
+
+#: includes/class-wc-smart-coupons.php:6018
+msgid "Account endpoints > Coupons"
+msgstr "アカウントエンドポイント &gt; クーポン"
+
+#: includes/class-wc-smart-coupons.php:6006
+msgid "Acknowledgement email"
+msgstr "確認メール"
+
+#: includes/class-wc-smart-coupons.php:1807
+msgid "Act before the offer expires."
+msgstr "オファーの有効期限が切れる前に行動しよう。"
+
+#: includes/class-wc-sc-admin-pages.php:1169
+msgid "Action"
+msgstr "アクション"
+
+#: includes/class-wc-sc-coupon-fields.php:1024
+msgid "Actions"
+msgstr "行動"
+
+#: includes/compat/class-wcs-sc-compatibility.php:1053
+msgid "Active for x payments"
+msgstr "xの支払いに有効"
+
+#: includes/class-wc-sc-admin-pages.php:551
+msgid "Add Coupon"
+msgstr "クーポンの追加"
+
+#: includes/class-wc-sc-coupon-categories.php:97
+msgid "Add new coupon category"
+msgstr "新しいクーポン・カテゴリーを追加する"
+
+#: includes/class-wc-sc-coupon-actions.php:664
+msgid "Add product details"
+msgstr "製品の詳細を追加"
+
+#: includes/class-wc-sc-coupon-fields.php:1055
+msgid "Add products to cart"
+msgstr "商品をカートに入れる"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:144
+#: includes/class-wc-sc-coupons-by-taxonomy.php:217
+msgid "Add taxonomy restriction"
+msgstr "タクソノミーの制限を追加"
+
+#: includes/class-wc-sc-coupon-actions.php:1156
+msgctxt "Add to Cart button text"
+msgid "Add to Cart"
+msgstr "カートに入れる"
+
+#: includes/class-wc-sc-admin-pages.php:1182
+msgid "Add to store"
+msgstr "店舗に追加"
+
+#: includes/class-wc-sc-background-coupon-importer.php:590
+#: includes/class-wc-sc-background-coupon-importer.php:599
+msgid "added"
+msgstr "追加"
+
+#: includes/class-wc-sc-background-coupon-importer.php:582
+#: includes/class-wc-sc-background-coupon-importer.php:586
+msgid "added & emailed"
+msgstr "追加＆Eメール"
+
+#: includes/class-wc-smart-coupons.php:7528
+msgid "Added by coupon"
+msgstr "クーポン追加"
+
+#: includes/class-wc-sc-settings.php:874
+msgid "Additional text below the title. "
+msgstr "タイトルの下に追加テキスト。 "
+
+#: includes/class-wc-sc-coupon-categories.php:90
+msgctxt "Admin menu name"
+msgid "Categories"
+msgstr "カテゴリー"
+
+#: includes/class-wc-sc-coupon-expiry-reminder.php:246
+msgctxt ""
+"Admin notice message displayed after scheduling a coupon expiry reminder"
+msgid "Expiry reminder scheduled for this coupon."
+msgstr "このクーポンの有効期限をお知らせします。"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:89
+msgctxt "admin setting description"
+msgid ""
+"Specify the number of days before the coupon expiry date when the reminder "
+"email should be sent to the customer. Leave blank for a reminder on the same "
+"expiry day."
+msgstr "クーポン有効期限の何日前にリマインダーメールを送信するかを指定します。同じ有効期限日にリマインダーを送信する場合は、空白のままにします。"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:96
+msgctxt "admin setting title"
+msgid "Send reminder X days before expiry"
+msgstr "有効期限のX日前にリマインダーを送信"
+
+#: includes/class-wc-sc-admin-welcome.php:400
+msgid ""
+"Advanced restrictions - payment, shipping, location, user roles, product "
+"attributes"
+msgstr "高度な制限 - 支払い、配送、場所、ユーザーの役割、製品属性"
+
+#. translators: Link for the plugin 'Aelia Currency Switcher for WooCommerce'
+#: includes/class-wc-sc-admin-welcome.php:647
+msgid "Aelia Currency Switcher for WooCommerce"
+msgstr "WooCommerce用アエリア通貨スイッチャー"
+
+#: includes/class-wc-sc-coupon-fields.php:1053
+msgid "After applying the coupon, do these also..."
+msgstr "クーポン適用後、これらも行う..."
+
+#: includes/class-wc-sc-coupon-fields.php:551
+msgid ""
+"after issuance - instead of a fixed expiry date, and at \"Expiry time\" if "
+"set. (Only used for auto-generated coupons)"
+msgstr "発行後 - 固定した有効期限ではなく、設定されている場合は「有効期限」。(自動生成クーポンのみ使用)"
+
+#: includes/class-wc-sc-coupon-categories.php:92
+msgid "All coupon categories"
+msgstr "すべてのクーポンカテゴリー"
+
+#: includes/class-wc-sc-display-coupons.php:766
+#: includes/class-wc-sc-display-coupons.php:775
+msgid "all products"
+msgstr "全製品"
+
+#: includes/class-wc-sc-cheapest-costliest-items.php:122
+msgid "All qualifying products"
+msgstr "すべての対象製品"
+
+#: includes/class-wc-sc-coupon-import.php:995
+msgid "All set, Begin import?"
+msgstr "準備万端、輸入開始？"
+
+#: includes/class-wc-sc-settings.php:882
+#: includes/class-wc-smart-coupons.php:6002
+msgid "Allow schedule sending of coupons?"
+msgstr "クーポンのスケジュール送信を許可しますか？"
+
+#. translators: %s: Label for store credit, 1: : Label for store credit, 2: Label for store credit, 3: Label for store credit
+#: includes/class-wc-sc-settings.php:510
+msgid "Allow selling %s at discounted price"
+msgstr "割引価格での %s の販売を許可する"
+
+#: includes/class-wc-sc-settings.php:854
+#: includes/class-wc-smart-coupons.php:6001
+msgid "Allow sending of coupons to others"
+msgstr "クーポンの送信を許可する"
+
+#: includes/class-wc-sc-settings.php:855
+msgid "Allow the buyer to send coupons to someone else."
+msgstr "購入者が他の人にクーポンを送れるようにする。"
+
+#: includes/class-wc-sc-coupon-fields.php:1098
+msgid "Allow users to choose when multiples are added on the above."
+msgstr "上記について、倍数が追加されるタイミングをユーザーが選択できるようにする。"
+
+#: includes/class-wc-sc-coupons-by-excluded-email.php:474
+msgid "Allowed emails"
+msgstr "許可された電子メール"
+
+#: includes/class-wc-sc-coupons-by-location.php:200
+msgid "Allowed locations"
+msgstr "許可された場所"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:116
+msgid "Allowed user roles"
+msgstr "許可されたユーザーの役割"
+
+#: includes/class-wc-sc-coupon-import.php:1136
+msgid "Already uploaded CSV to the server?"
+msgstr "すでにCSVをサーバーにアップロード済みですか？"
+
+#: includes/class-wc-sc-settings.php:544
+msgid "Amaranth red"
+msgstr "アマランス・レッド"
+
+#: includes/class-wc-sc-display-coupons.php:2909
+msgid "Amount"
+msgstr "金額"
+
+#: includes/class-wc-smart-coupons.php:1179
+msgid "An error has occurred. Please try again later."
+msgstr "エラーが発生しました。後でもう一度お試しください。"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:430
+msgid "An error occurred:"
+msgstr "エラーが発生しました："
+
+#: includes/class-wc-sc-admin-welcome.php:403
+msgid "and a lot more…"
+msgstr "そのほかにも..."
+
+#: includes/class-wc-sc-coupon-import.php:1096
+msgid "and create your CSV based on that."
+msgstr "を作成し、それに基づいてCSVを作成する。"
+
+#. translators: 1: Affiliate For WooCommerce 2: Smart Manager 3: Smart Offers
+#: includes/class-wc-sc-admin-welcome.php:423
+msgid "any amount"
+msgstr "いくらでも"
+
+#: includes/class-wc-sc-admin-pages.php:1360
+msgid "Apply"
+msgstr "応募する"
+
+#: includes/class-wc-sc-settings.php:910
+msgid "Apply before tax"
+msgstr "税別"
+
+#: includes/class-wc-sc-cheapest-costliest-items.php:120
+#: includes/class-wc-sc-cheapest-costliest-items.php:376
+msgid "Apply discount on"
+msgstr "割引の適用"
+
+#: includes/class-wc-sc-admin-welcome.php:399
+msgid "Apply multiple coupons via URL"
+msgstr "URLから複数のクーポンを適用する"
+
+#: includes/class-wc-sc-admin-pages.php:215
+msgid ""
+"Are you sure you want to remove the selected items? If you have previously "
+"reduced this item's stock, or this order was submitted by a customer, you "
+"will need to manually restore the item's stock."
+msgstr ""
+"選択した商品を本当に削除しますか？以前にこの商品の在庫を減らした場合、またはこの注文が顧客によって送信された場合、手動で商品の在庫を復元する必要があります。"
+
+#: includes/class-wc-sc-admin-pages.php:272
+msgid "Are you sure you want to revoke access to this download?"
+msgstr "このダウンロードへのアクセスを本当に取り消しますか？"
+
+#. translators: 1. The bulk process
+#: includes/class-wc-sc-background-coupon-importer.php:555
+msgid ""
+"Are you sure you want to stop the coupon bulk %s process? Click OK to stop."
+msgstr "本当にクーポン一括 %s プロセスを停止しますか?OKをクリックして停止します。"
+
+#: includes/class-wc-sc-admin-pages.php:218
+#: includes/class-wc-sc-coupon-refund-process.php:576
+msgid ""
+"Are you sure you wish to delete this refund? This action cannot be undone."
+msgstr "この払い戻しを本当に削除しますか？この操作は取り消せません。"
+
+#: includes/class-wc-sc-admin-pages.php:219
+msgid ""
+"Are you sure you wish to delete this tax column? This action cannot be "
+"undone."
+msgstr "本当にこの税金欄を削除しますか？この操作は元に戻せません。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:216
+msgid ""
+"Are you sure you wish to process store credit refund? This action cannot be "
+"undone."
+msgstr "本当にストアクレジット払い戻しの処理をご希望ですか？この操作は取り消すことができません。"
+
+#: includes/class-wc-sc-admin-pages.php:217
+msgid ""
+"Are you sure you wish to process this refund? This action cannot be undone."
+msgstr "本当にこの払い戻しを処理しますか？この操作は取り消すことができません。"
+
+#: includes/class-wc-sc-admin-welcome.php:436
+msgid ""
+"Attach a gift of any value (free or paid product) to a particular coupon. "
+"Here, instead of a discount, a product is redeemed for the coupon code."
+msgstr "特定のクーポンに任意の価値のギフト（無料または有料製品）を添付します。ここでは、割引の代わりに、製品がクーポンコードと交換されます。"
+
+#: includes/class-wc-smart-coupons.php:1804
+msgid "Attention!"
+msgstr "注目してほしい！"
+
+#: includes/class-wc-sc-settings.php:469
+msgid "Auto apply coupons"
+msgstr "クーポンの自動適用"
+
+#: includes/class-wc-sc-auto-apply-coupon.php:106
+#: includes/class-wc-sc-coupon-fields.php:461
+msgid "Auto apply?"
+msgstr "オートですか？"
+
+#: includes/class-wc-smart-coupons.php:4789
+msgid "Auto Generate Coupon"
+msgstr "クーポンの自動生成"
+
+#: includes/class-wc-sc-coupon-fields.php:510
+msgid "Auto generate?"
+msgstr "自動生成？"
+
+#: includes/class-wc-sc-coupon-fields.php:533
+msgid "auto generated"
+msgstr "自動生成"
+
+#: includes/class-wc-smart-coupons.php:6004
+msgid "Auto generated coupon email"
+msgstr "自動生成クーポンメール"
+
+#: includes/class-wc-sc-settings.php:479
+#: includes/class-wc-smart-coupons.php:5996
+msgid "Automatic deletion"
+msgstr "自動削除"
+
+#: includes/class-wc-sc-admin-welcome.php:407
+msgid "Automatic payment for subscription renewals"
+msgstr "購読更新の自動支払い"
+
+#. translators: %s: plural name for store credit
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-display-coupons.php:907
+#: includes/class-wc-sc-display-coupons.php:1098
+#: includes/class-wc-sc-settings.php:834
+msgid "Available Coupons & %s"
+msgstr "利用可能なクーポン &amp; %s"
+
+#. translators: %s: plural name for store credit
+#: includes/class-wc-sc-display-coupons.php:907
+#: includes/class-wc-sc-display-coupons.php:1098
+msgid "Available Coupons & Store Credits"
+msgstr "利用可能なクーポン＆ストアクレジット"
+
+#: includes/class-wc-sc-display-coupons.php:500
+#: includes/class-wc-sc-display-coupons.php:893
+#: includes/class-wc-sc-settings.php:823 includes/class-wc-sc-shortcode.php:650
+msgid "Available Coupons (click on a coupon to use it)"
+msgstr "利用可能なクーポン（クーポンをクリックすると利用できます）"
+
+#: includes/class-wc-sc-admin-welcome.php:596
+msgid "Available coupons are not visible on Cart, Checkout & My Account page?"
+msgstr "利用可能なクーポンがカート、チェックアウト、マイアカウントのページに表示されない？"
+
+#. translators: %s: list of placeholders
+#: includes/emails/class-wc-sc-email.php:97
+msgid "Available placeholders: %s"
+msgstr "使用可能なプレースホルダ: %s"
+
+#: includes/class-wc-sc-admin-notifications.php:247
+msgid ""
+"Awesome, you successfully auto-generated a coupon! Are you having a great "
+"experience with"
+msgstr "クーポンの自動生成に成功しました！で素晴らしい体験をしていますか？"
+
+#: includes/class-wc-sc-settings.php:668
+msgid "Balloon"
+msgstr "バルーン"
+
+#: includes/class-wc-sc-settings.php:602
+msgid "Basic"
+msgstr "ベーシック"
+
+#. translators: 1: Action name 2: Error message
+#: includes/abstracts/class-wc-sc-background-process.php:156
+msgctxt "Batch failed error message"
+msgid "Failed batch action: %1$s. Error: %2$s"
+msgstr "バッチ・アクションに失敗しました: %1$s。エラー: %2$s"
+
+#: includes/batches/class-wc-sc-coupons-expiry-reminder-scheduler.php:95
+msgctxt "Batch stopped error message"
+msgid "Batch stopped due to health status in task."
+msgstr "タスクのヘルスステータスが原因でバッチが停止した。"
+
+#: includes/class-wc-sc-coupon-import.php:1120
+msgid ""
+"Before you can upload your import file, you will need to fix the following "
+"error:"
+msgstr "インポートファイルをアップロードする前に、以下のエラーを修正する必要があります："
+
+#: includes/class-wc-sc-coupons-by-location.php:297
+msgid "Billing"
+msgstr "請求"
+
+#: includes/class-wc-sc-coupons-by-location.php:482
+msgid "billing address"
+msgstr "請求先住所"
+
+#: includes/class-wc-sc-coupons-by-location.php:498
+msgid "Billing Locations"
+msgstr "請求先"
+
+#: blocks/class-sc-actiontab-extend-store-endpoint.php:102
+msgid "Billing period for the subscription."
+msgstr "サブスクリプションの請求期間。"
+
+#: includes/class-wc-sc-display-coupons.php:3129
+msgid "Black Friday"
+msgstr "ブラックフライデー"
+
+#: blocks/build/js/available-coupons/block.json
+#: blocks/src/js/available-coupons/block.json
+msgctxt "block description"
+msgid "Displays available coupons."
+msgstr "利用可能なクーポンを表示します。"
+
+#: blocks/build/js/send-coupon-form/block.json
+#: blocks/src/js/send-coupon-form/block.json
+msgctxt "block description"
+msgid "Displays Send coupon form."
+msgstr "クーポン送信フォームを表示します。"
+
+#: blocks/build/woocommerce-smart-coupons-available-coupons-block.js:7
+#: blocks/src/js/available-coupons/edit.js:19
+msgctxt "Block editor"
+msgid "Available Coupons (click on a coupon to use it)"
+msgstr "利用可能なクーポン（クーポンをクリックすると利用できます）"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:59
+#: blocks/src/js/send-coupon-form/edit.js:63
+msgctxt "Block editor"
+msgid "Deliver coupon"
+msgstr "クーポン"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:84
+msgctxt "Block editor"
+msgid "Enter recipient e-mail address"
+msgstr "受信者のメールアドレスを入力"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:39
+msgctxt "Block editor"
+msgid "Gift to someone else"
+msgstr "誰かへの贈り物"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:71
+msgctxt "Block editor"
+msgid "later"
+msgstr "後日"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:88
+msgctxt "Block editor"
+msgid "Message for receiver"
+msgstr "受信者へのメッセージ"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:67
+msgctxt "Block editor"
+msgid "now"
+msgstr "今"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:80
+msgctxt "Block editor"
+msgid "Receiver email address"
+msgstr "受信者メールアドレス"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:30
+msgctxt "Block editor"
+msgid "Send coupons to..."
+msgstr "クーポンを送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:53
+msgctxt "Block editor"
+msgid "Send to different people"
+msgstr "さまざまな人に送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:35
+msgctxt "Block editor"
+msgid "Send to me"
+msgstr "私に送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:49
+msgctxt "Block editor"
+msgid "Send to one person"
+msgstr "一人に送る"
+
+#: blocks/blocks.php:64
+msgctxt "Block editor"
+msgid "WooCommerce Smart Coupons"
+msgstr "WooCommerce スマートクーポン"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:92
+msgctxt "Block editor"
+msgid "Write a message"
+msgstr "メッセージを書く"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block.js:1
+#: blocks/src/js/send-coupon-form/edit.js:31
+msgctxt "Block editor"
+msgid "Your order contains coupons. What would you like to do?"
+msgstr "ご注文にクーポンが含まれています。どうしますか？"
+
+#: blocks/class-wc-sc-blocks-integration.php:466
+msgctxt "Block editor & frontend"
+msgid "Available Coupons (click on a coupon to use it)"
+msgstr "利用可能なクーポン（クーポンをクリックすると利用できます）"
+
+#: blocks/class-wc-sc-blocks-integration.php:646
+msgctxt "Block editor & frontend"
+msgid "coupon"
+msgstr "クーポン"
+
+#: blocks/class-wc-sc-blocks-integration.php:699
+msgctxt "Block editor & frontend"
+msgid "Deliver coupon"
+msgstr "クーポン"
+
+#: blocks/class-wc-sc-blocks-integration.php:700
+msgctxt "Block editor & frontend"
+msgid "Enter recipient e-mail address"
+msgstr "受信者のメールアドレスを入力"
+
+#: blocks/class-wc-sc-blocks-integration.php:643
+msgctxt "Block editor & frontend"
+msgid "Free Shipping coupon"
+msgstr "送料無料クーポン"
+
+#: blocks/class-wc-sc-blocks-integration.php:675
+msgctxt "Block editor & frontend"
+msgid "Gift to someone else"
+msgstr "誰かへの贈り物"
+
+#: blocks/class-wc-sc-blocks-integration.php:695
+msgctxt "Block editor & frontend"
+msgid "later"
+msgstr "後日"
+
+#: blocks/class-wc-sc-blocks-integration.php:691
+msgctxt "Block editor & frontend"
+msgid "now"
+msgstr "今"
+
+#: blocks/class-wc-sc-blocks-integration.php:650
+msgctxt "Block editor & frontend"
+msgid "of"
+msgstr "の"
+
+#: blocks/class-wc-sc-blocks-integration.php:650
+msgctxt "Block editor & frontend"
+msgid "Send"
+msgstr "送信"
+
+#: blocks/class-wc-sc-blocks-integration.php:561
+#: blocks/class-wc-sc-blocks-integration.php:562
+msgctxt "Block editor & frontend"
+msgid "Send Coupons to..."
+msgstr "クーポンを送る"
+
+#: blocks/class-wc-sc-blocks-integration.php:685
+msgctxt "Block editor & frontend"
+msgid "Send to different people"
+msgstr "さまざまな人に送る"
+
+#: blocks/class-wc-sc-blocks-integration.php:671
+msgctxt "Block editor & frontend"
+msgid "Send to me"
+msgstr "私に送る"
+
+#: blocks/class-wc-sc-blocks-integration.php:681
+msgctxt "Block editor & frontend"
+msgid "Send to one person"
+msgstr "一人に送る"
+
+#: blocks/class-wc-sc-blocks-integration.php:667
+msgctxt "Block editor & frontend"
+msgid "Your order contains coupons. What would you like to do?"
+msgstr "ご注文にクーポンが含まれています。どうしますか？"
+
+#: blocks/build/js/available-coupons/block.json
+#: blocks/src/js/available-coupons/block.json
+msgctxt "block title"
+msgid "Available coupons"
+msgstr "利用可能なクーポン"
+
+#: blocks/build/js/send-coupon-form/block.json
+#: blocks/src/js/send-coupon-form/block.json
+msgctxt "block title"
+msgid "Send coupon form"
+msgstr "クーポンフォームの送信"
+
+#: includes/class-wc-sc-admin-welcome.php:428
+msgid "Bulk create unique coupons & email them"
+msgstr "ユニークなクーポンを一括作成し、メールで送信"
+
+#. translators: 1. Message type 2. Functionality name "Bulk Generate" 3. Functionality name "Import-Export"
+#: includes/class-wc-sc-admin-notifications.php:292
+#: includes/class-wc-sc-admin-pages.php:124
+#: includes/class-wc-sc-admin-pages.php:556
+#: includes/class-wc-sc-admin-pages.php:1610
+msgid "Bulk Generate"
+msgstr "一括生成"
+
+#: includes/class-wc-sc-admin-welcome.php:398
+msgid "Bulk generate coupons"
+msgstr "クーポンの一括生成"
+
+#: includes/class-wc-sc-background-coupon-importer.php:342
+msgid ""
+"Bulk generation is disabled since uploads directory is not writable. Please "
+"ensure uploads directory is writable before starting bulk generate process."
+msgstr ""
+"uploadsディレクトリが書き込み可能でないため、一括生成が無効になっています。一括生成プロセスを開始する前に、uploadsディレクトリが書き込み可能であることを確認してください。"
+
+#: includes/batches/class-wc-sc-coupons-expiry-reminder-scheduler.php:181
+msgctxt "button text"
+msgid "View status"
+msgstr "ステータスを見る"
+
+#: includes/class-wc-sc-admin-notifications.php:646
+msgctxt "Button text for dismissing WooCommerce feature notice"
+msgid "Skip"
+msgstr "スキップ"
+
+#: includes/class-wc-sc-admin-notifications.php:590
+msgctxt "Button text for retrying the update process"
+msgid "Restart Update"
+msgstr "再起動アップデート"
+
+#: includes/class-wc-sc-admin-notifications.php:720
+msgctxt "Button text for setting up the expiry reminder feature"
+msgid "Set Up Now"
+msgstr "セットアップ"
+
+#: includes/class-wc-sc-admin-notifications.php:738
+msgctxt "Button text for the combine coupon feature"
+msgid "Create a Combo Coupon"
+msgstr "コンボクーポンを作成する"
+
+#. translators: 1. The discount text
+#: includes/class-wc-smart-coupons.php:1819
+msgid "Buy as much as you want. Flat %s off everything."
+msgstr "お好きなだけお買い求めください。すべて一律％オフ。"
+
+#: includes/class-wc-sc-settings.php:850
+msgid ""
+"Buyers can send purchased coupons to anyone – right while they're checking "
+"out."
+msgstr "バイヤーは、購入したクーポンをチェックアウト中に誰にでも送ることができる。"
+
+#: includes/class-wc-smart-coupons.php:6017
+msgid "Calculate coupon discounts sequentially"
+msgstr "クーポンの割引を順次計算する"
+
+#: includes/class-wc-sc-admin-pages.php:231
+msgid ""
+"Calculate line taxes? This will calculate taxes based on the customers "
+"country. If no billing/shipping is set it will use the store base country."
+msgstr "行税金を計算しますか？これは顧客の国に基づいて税金を計算します。請求/配送が設定されていない場合は、ストアの基本国を使用します。"
+
+#: includes/class-wc-sc-admin-pages.php:230
+msgid "Calculate totals based on order items, discounts, and shipping?"
+msgstr "注文項目、割引、送料に基づいて合計を計算しますか？"
+
+#: includes/class-wc-sc-settings.php:761
+msgid ""
+"Call it something else! Use these to quickly change text labels through your "
+"store. <a href=\"https://woocommerce.com/document/smart-coupons/how-to-"
+"translate-smart-coupons/\" target=\"_blank\">Use translations</a> for "
+"complete control."
+msgstr ""
+"他の名前にするこれらを使って、お店のテキストラベルを素早く変更しましょう。完全なコントロールのために<a href=\"https:"
+"//woocommerce.com/document/smart-coupons/how-to-translate-smart-coupons/\" "
+"target=\"_blank\">翻訳を使用して</a>ください。"
+
+#: includes/class-wc-sc-admin-welcome.php:574
+msgid ""
+"Can coupon code have any spaces in the name? / My Store Credit/Gift "
+"Certificate is not working (not generating new coupon code)."
+msgstr "クーポンコード名にスペースを入れることはできますか？/ マイストアクレジット/ギフト券が使えません（新しいクーポンコードが生成されません）。"
+
+#: includes/class-wc-sc-shortcode.php:932
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: includes/class-wc-sc-settings.php:545
+msgid "Carolina Blue"
+msgstr "カロライナ・ブルー"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:120
+msgid "Cart"
+msgstr "カート"
+
+#: includes/class-wc-sc-ajax.php:343 includes/class-wc-sc-ajax.php:358
+#: includes/class-wc-smart-coupons.php:1345
+#: includes/class-wc-smart-coupons.php:1360
+msgid "Cart Discount"
+msgstr "カート割引"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:191
+#: includes/class-wc-sc-coupons-by-product-quantity.php:208
+#: includes/class-wc-sc-coupons-by-product-quantity.php:253
+#: includes/class-wc-sc-coupons-by-product-quantity.php:263
+msgid "Categories"
+msgstr "カテゴリー"
+
+#: includes/class-wc-sc-coupon-categories.php:89
+msgid "Category"
+msgstr "カテゴリー"
+
+#: includes/class-wc-sc-cheapest-costliest-items.php:123
+msgid "Cheapest qualifying product in cart"
+msgstr "カート内の対象商品が最も安い"
+
+#: includes/class-wc-smart-coupons.php:88
+msgid "Cheatin&#8217; huh?"
+msgstr "浮気？"
+
+#: includes/class-wc-sc-coupon-message.php:134
+msgid "Check this box to include this message in order confirmation email."
+msgstr "注文確認メールにこのメッセージを含める場合は、このボックスにチェックを入れてください。"
+
+#: includes/class-wc-sc-product-fields.php:129
+#: includes/class-wc-sc-product-fields.php:185
+msgid "Check this box to send above coupons on each renewal order."
+msgstr "このボックスにチェックを入れると、更新のたびに上記のクーポンが送信されます。"
+
+#. translators: 1. The coupon code 2. The text 'payment method/s' 3. List of payment method names 4. Link to the checkout page
+#: includes/class-wc-sc-coupons-by-payment-method.php:210
+#: includes/class-wc-sc-coupons-by-payment-method.php:214
+msgid "Checkout"
+msgstr "チェックアウト"
+
+#: includes/class-wc-sc-settings.php:553
+msgid "Chocolate"
+msgstr "チョコレート"
+
+#: includes/class-wc-sc-settings.php:539
+msgid "Choose a color scheme for coupons."
+msgstr "クーポンの配色を選ぶ。"
+
+#: includes/class-wc-sc-coupon-import.php:1129
+msgid "Choose a CSV file"
+msgstr "CSVファイルを選択する"
+
+#: includes/class-wc-sc-settings.php:588
+msgid "Choose a style for coupon on the website."
+msgstr "ウェブサイトでクーポンのスタイルを選択。"
+
+#: includes/class-wc-sc-settings.php:663
+msgid "Choose a style for store notice on the website."
+msgstr "ウェブサイト上で店舗告知用のスタイルを選択する。"
+
+#: includes/class-wc-sc-settings.php:455
+msgid ""
+"Choose order status which will trigger the auto-generation of coupon, if the "
+"order contains product which will generate the coupon."
+msgstr "注文にクーポンを生成する商品が含まれている場合、クーポンの自動生成をトリガーする注文ステータスを選択します。"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:127
+msgid "Choose whether to validate the quantity, cart-wise or product-wise"
+msgstr "カート単位で数量を検証するか、商品単位で数量を検証するかを選択する。"
+
+#: includes/emails/class-wc-sc-email.php:109
+msgid "Choose which format of email to send."
+msgstr "送信するメールの形式を選択します。"
+
+#: includes/class-wc-sc-coupon-import.php:1079
+msgid "Chosen"
+msgstr "選ばれし者"
+
+#: includes/class-wc-sc-settings.php:670
+msgid "Christmas"
+msgstr "クリスマス"
+
+#: includes/class-wc-smart-coupons.php:3323
+msgid "Clear Smart Coupons Cache"
+msgstr "スマートクーポン・キャッシュクリア"
+
+#: includes/class-wc-sc-coupon-import.php:1096
+msgid "Click here to download a sample"
+msgstr "サンプルのダウンロードはこちら"
+
+#: includes/class-wc-sc-coupon-fields.php:146
+#: includes/class-wc-sc-coupon-fields.php:1536
+msgid "Click to copy"
+msgstr "クリックしてコピー"
+
+#: includes/class-wc-sc-shortcode.php:813
+msgid "Click to select coupon code."
+msgstr "クリックしてクーポンコードを選択。"
+
+#: includes/class-wc-sc-admin-pages.php:224
+msgid "Click to toggle"
+msgstr "クリックして切り替える"
+
+#: includes/class-wc-sc-shortcode.php:607
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:469
+#: templates/combined-email.php:199 templates/email.php:179
+msgid "Click to visit store. This coupon will be applied automatically."
+msgstr "クリックしてください。このクーポンは自動的に適用されます。"
+
+#: includes/class-wc-sc-settings.php:601
+msgid "Clipper"
+msgstr "クリッパー"
+
+#: includes/class-wc-sc-display-coupons.php:2908
+msgid "Code"
+msgstr "コード"
+
+#: includes/class-wc-sc-settings.php:535
+msgid "Colors"
+msgstr "カラー"
+
+#: includes/class-wc-sc-settings.php:892
+#: includes/class-wc-smart-coupons.php:6003
+msgid "Combine emails"
+msgstr "電子メールを組み合わせる"
+
+#: includes/class-wc-smart-coupons.php:6005
+msgid "Combined auto generated coupons email"
+msgstr "自動生成されたクーポンメールの組み合わせ"
+
+#: includes/class-wc-sc-admin-welcome.php:507
+msgid "Configure any denomination Gift Cards"
+msgstr "任意の額面のギフトカードを設定する"
+
+#: includes/class-wc-sc-admin-welcome.php:516
+msgid "Configure discounted price Gift Cards"
+msgstr "割引価格ギフトカードの設定"
+
+#: includes/class-wc-sc-admin-welcome.php:498
+msgid "Configure fixed denomination Gift Cards"
+msgstr "定額ギフトカードの設定"
+
+#: includes/class-wc-sc-coupon-fields.php:1534
+#: includes/class-wc-sc-coupon-fields.php:1549
+msgid "Copied!"
+msgstr "コピーした！"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:116
+msgid "Copy"
+msgstr "コピー"
+
+#: includes/class-wc-sc-admin-pages.php:232
+msgid ""
+"Copy billing information to shipping information? This will remove any "
+"currently entered shipping information."
+msgstr "請求先情報を配送先情報にコピーしますか？これは、現在入力されている出荷情報を削除します。"
+
+#: includes/class-wc-sc-coupon-fields.php:1541
+#: includes/class-wc-sc-coupon-fields.php:1551
+msgid "Copy coupon code"
+msgstr "クーポンコードをコピーする"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:118
+msgid "Copy coupon shareable link and apply via URL"
+msgstr "クーポン共有リンクをコピーし、URLから申し込む"
+
+#: includes/class-wc-sc-coupon-fields.php:139
+msgid "Copy the following link and share it to apply this coupon via URL."
+msgstr "以下のリンクをコピーしてシェアすると、URLからクーポンが適用されます。"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:116
+msgid "Copy this coupon code"
+msgstr "このクーポンコードをコピーする"
+
+#: includes/class-wc-sc-admin-pages.php:271
+msgid ""
+"Could not grant access - the user may already have permission for this file "
+"or billing email is not set. Ensure the billing email is set, and the order "
+"has been saved."
+msgstr ""
+"アクセスを許可できませんでした - "
+"ユーザーがすでにこのファイルの権限を持っているか、請求先Eメールが設定されていません。請求先Eメールが設定され、注文が保存されていることを確認してください。"
+
+#: includes/class-wc-sc-coupon-fields.php:1414
+msgid "Could not locate WooCommerce"
+msgstr "WooCommerceが見つかりません"
+
+#: includes/class-wc-sc-background-coupon-importer.php:609
+#: includes/class-wc-sc-purchase-credit.php:973
+#: includes/emails/class-wc-sc-email-coupon.php:493
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:203
+msgid "coupon"
+msgstr "クーポン"
+
+#: includes/class-wc-sc-privacy.php:371
+#: includes/emails/class-wc-sc-acknowledgement-email.php:342
+#: templates/acknowledgement-email.php:66 templates/coupon-design/basic.php:49
+#: templates/coupon-design/clipper.php:48 templates/coupon-design/cutout.php:65
+#: templates/coupon-design/deal.php:39 templates/coupon-design/deliver.php:44
+#: templates/coupon-design/shipment.php:43
+#: templates/coupon-design/special.php:68 templates/coupon-design/ticket.php:40
+#: templates/plain/acknowledgement-email.php:56
+msgid "Coupon"
+msgid_plural "Coupons"
+msgstr[0] "クーポン"
+
+#. translators: The coupon code
+#: includes/class-wc-smart-coupons.php:3431
+msgid "Coupon %s is valid for a new user only, hence removed."
+msgstr "クーポン %s は新規ユーザにのみ有効です。"
+
+#: includes/class-wc-sc-privacy.php:589
+#: includes/class-wc-smart-coupons.php:5154
+msgid "Coupon Amount"
+msgstr "クーポン金額"
+
+#: includes/class-wc-sc-privacy.php:109
+msgid "Coupon amount, email & message entered for gift card receiver"
+msgstr "ギフトカード受取人のために入力されたクーポン金額、Eメール、メッセージ"
+
+#: includes/class-wc-sc-background-coupon-importer.php:585
+#: includes/class-wc-sc-background-coupon-importer.php:598
+msgid "Coupon bulk generation"
+msgstr "クーポン一括生成"
+
+#: includes/class-wc-sc-admin-pages.php:1314
+#: includes/class-wc-sc-coupon-categories.php:88
+#: includes/class-wc-sc-coupon-categories.php:226
+msgid "Coupon categories"
+msgstr "クーポンカテゴリー"
+
+#: includes/class-wc-smart-coupons.php:5176
+msgid "Coupon Category"
+msgstr "クーポン・カテゴリー"
+
+#: includes/class-wc-sc-privacy.php:586
+#: includes/class-wc-smart-coupons.php:5142
+msgid "Coupon Code"
+msgstr "クーポンコード"
+
+#: includes/class-wc-sc-shortcode.php:867
+msgid "Coupon code"
+msgstr "クーポンコード"
+
+#. translators: 1. The coupon code 2. The text 'payment method/s' 3. List of payment method names 4. Link to the checkout page
+#: includes/class-wc-sc-coupons-by-payment-method.php:210
+msgid ""
+"Coupon code %1$s has been removed. It is valid only for %2$s: %3$s. You can "
+"change the payment method from the %4$s page."
+msgstr "クーポンコード %1$s は削除されました。2$s: %3$sにのみ有効です。支払い方法は%4$sページから変更できます。"
+
+#. translators: 1. The coupon code 2. The text 'payment method/s' 3. List of payment method names 4. Link to the checkout page
+#: includes/class-wc-sc-coupons-by-payment-method.php:214
+msgid ""
+"Coupon code %1$s is valid only for %2$s: %3$s. You can change payment method "
+"from the %4$s page."
+msgstr "クーポンコード %1$s は %2$s: %3$s にのみ有効です。支払い方法は %4$s ページから変更できます。"
+
+#: includes/class-wc-sc-privacy.php:107
+msgid "Coupon code generated for you"
+msgstr "クーポンコード"
+
+#: includes/class-wc-sc-privacy.php:108
+msgid "Coupon code passed via URL"
+msgstr "URL経由で渡されるクーポンコード"
+
+#: templates/plain/combined-email.php:97 templates/plain/email.php:92
+#: templates/plain/expiry-reminder-email.php:73
+msgid "Coupon Code:"
+msgstr "クーポンコード"
+
+#. translators: %d: Post ID
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:288
+msgid "Coupon creation failed, could not find original coupon: %d"
+msgstr "クーポンの作成に失敗しました。"
+
+#. translators: %s: coupon id
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:311
+msgid "Coupon creation failed, could not find original coupon: %s"
+msgstr "クーポンの作成に失敗しました。"
+
+#: includes/class-wc-sc-admin-pages.php:1304
+msgid "Coupon Data"
+msgstr "クーポンデータ"
+
+#. translators: %s: field name
+#: includes/class-wc-sc-purchase-credit.php:1418
+msgid "Coupon delivery date and time is a required field."
+msgstr "クーポン配信日時は必須項目です。"
+
+#: includes/class-wc-sc-email-preview.php:140
+msgctxt "Coupon description"
+msgid "This is a dummy Smart Coupons coupon for email previews."
+msgstr "これはメールプレビュー用のダミーのスマートクーポンクーポンです。"
+
+#: includes/class-wc-sc-admin-pages.php:1282
+msgid "Coupon Description "
+msgstr "クーポン内容 "
+
+#: includes/class-wc-sc-settings.php:489
+#: includes/class-wc-smart-coupons.php:5997
+msgid "Coupon emails"
+msgstr "クーポンメール"
+
+#: includes/class-wc-sc-coupon-fields.php:412
+#: includes/class-wc-smart-coupons.php:4800
+msgid "Coupon expiry time"
+msgstr "クーポン有効期限"
+
+#: includes/class-wc-sc-combo-coupons.php:105
+msgctxt "Coupon field description"
+msgid "Select coupons that can be used in conjunction with this coupon."
+msgstr "このクーポンと併用できるクーポンを選択してください。"
+
+#: includes/class-wc-sc-combo-coupons.php:123
+msgctxt "Coupon field description"
+msgid "Select coupons that cannot be used in conjunction with this coupon."
+msgstr "このクーポンと併用できるクーポンを選択してください。"
+
+#: includes/class-wc-sc-combo-coupons.php:104
+msgctxt "Coupon field label"
+msgid "Coupon(s) can be used with"
+msgstr "クーポンは以下でご利用いただけます"
+
+#: includes/class-wc-sc-combo-coupons.php:122
+msgctxt "Coupon field label"
+msgid "Coupon(s) can’t be used with"
+msgstr "クーポンはご利用いただけません"
+
+#: includes/class-wc-sc-combo-coupons.php:110
+#: includes/class-wc-sc-combo-coupons.php:128
+#: includes/class-wc-sc-combo-coupons.php:138
+msgctxt "Coupon field placeholder"
+msgid "Search for a coupons…"
+msgstr "クーポンを検索…"
+
+#: includes/class-wc-sc-privacy.php:592
+msgid "Coupon For"
+msgstr "クーポン"
+
+#: includes/class-wc-sc-background-coupon-importer.php:581
+#: includes/class-wc-sc-background-coupon-importer.php:589
+msgid "Coupon import"
+msgstr "クーポン輸入"
+
+#: includes/class-wc-sc-coupon-import.php:916
+msgid "Coupon Import Error"
+msgstr "クーポンのインポートエラー"
+
+#: includes/class-wc-sc-coupons-by-location.php:482
+msgid "Coupon is not valid for the"
+msgstr "クーポンは"
+
+#: includes/class-wc-smart-coupons.php:4794
+msgid "Coupon Is Visible Storewide"
+msgstr "クーポンは全店舗で利用可能"
+
+#: includes/class-wc-sc-coupon-message.php:421
+#: includes/class-wc-sc-coupon-message.php:438
+msgid "Coupon Message"
+msgstr "クーポンメッセージ"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:411
+msgctxt "coupon never expires"
+msgid "Never expires"
+msgstr "有効期限なし"
+
+#: includes/class-wc-sc-privacy.php:388
+msgid "Coupon passed in URL"
+msgstr "URLに渡されたクーポン"
+
+#: includes/class-wc-sc-display-coupons.php:2570
+msgid "Coupon Received"
+msgstr "クーポン"
+
+#. translators: The coupon code
+#: includes/class-wc-smart-coupons.php:3490
+msgid "Coupon removed. There is no credit remaining in %s."
+msgstr "クーポンが削除されました。s にクレジットが残っていません。"
+
+#: includes/class-wc-sc-coupon-fields.php:101
+msgid "Coupon shareable link"
+msgstr "クーポン共有リンク"
+
+#: includes/class-wc-smart-coupons.php:4790
+msgid "Coupon Title Prefix"
+msgstr "クーポンタイトルのプレフィックス"
+
+#: includes/class-wc-smart-coupons.php:4791
+msgid "Coupon Title Suffix"
+msgstr "クーポンタイトルの接尾辞"
+
+#: includes/class-wc-sc-auto-apply-coupon.php:915
+msgid "Coupon usage limit has been reached."
+msgstr "クーポンの使用上限に達しました。"
+
+#: includes/class-wc-smart-coupons.php:4787
+msgid "Coupon Validity"
+msgstr "クーポン有効期限"
+
+#: includes/class-wc-sc-coupon-fields.php:503
+msgid "Coupon value same as product's price?"
+msgstr "クーポンの価値が商品価格と同じか？"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:119
+msgid ""
+"Coupon will apply only if any of the selected payment methods are used "
+"during checkout."
+msgstr "クーポンは、チェックアウト時に選択された支払い方法のいずれかが使用された場合にのみ適用されます。"
+
+#: includes/class-wc-sc-coupons-by-shipping-method.php:118
+msgid ""
+"Coupon will apply only if any of the selected shipping methods are used "
+"during checkout."
+msgstr "クーポンは、チェックアウト時に選択された配送方法のいずれかが使用された場合にのみ適用されます。"
+
+#: includes/class-wc-sc-admin-pages.php:123
+#: includes/class-wc-sc-admin-pages.php:550
+#: includes/class-wc-sc-admin-pages.php:555
+#: includes/class-wc-sc-admin-pages.php:1636
+#: includes/class-wc-sc-background-coupon-importer.php:400
+#: includes/class-wc-sc-display-coupons.php:949
+#: includes/class-wc-sc-display-coupons.php:986
+#: includes/class-wc-sc-display-coupons.php:2317
+#: includes/class-wc-sc-product-fields.php:99
+#: includes/class-wc-sc-product-fields.php:159
+msgid "Coupons"
+msgstr "クーポン"
+
+#: includes/class-wc-sc-background-coupon-importer.php:610
+msgid "coupons"
+msgstr "クーポン"
+
+#: includes/class-wc-sc-admin-welcome.php:397
+msgid "Create and gift Store Credit / Gift Cards"
+msgstr "ストアクレジット／ギフトカードの作成とギフト"
+
+#: includes/class-wc-sc-settings.php:555
+msgid "Crimson Breeze"
+msgstr "クリムゾン・ブリーズ"
+
+#: includes/class-wc-sc-settings.php:560
+msgid "Crimson Noir"
+msgstr "クリムゾン・ノワール"
+
+#: includes/class-wc-sc-background-coupon-importer.php:631
+msgid "CSV file has been generated. You can download it from "
+msgstr "CSVファイルが生成されました。ダウンロードは "
+
+#. translators: Link for the plugin 'Aelia Currency Switcher for WooCommerce'
+#: includes/class-wc-sc-admin-welcome.php:647
+msgid ""
+"Currently, Smart Coupons is compatible with %s. But it is not compatible "
+"with any other multi-currency plugin or with WPML."
+msgstr "現在、Smart Couponsは%sと互換性があります。しかし、他のマルチカレンシープラグインやWPMLとは互換性がありません。"
+
+#: includes/class-wc-sc-settings.php:577
+msgid "Custom colors"
+msgstr "カスタムカラー"
+
+#: includes/class-wc-smart-coupons.php:5435
+msgid "Custom Style"
+msgstr "カスタムスタイル"
+
+#: includes/class-wc-smart-coupons.php:5165
+msgid "Customer Email"
+msgstr "お客様のEメール"
+
+#: includes/class-wc-sc-admin-welcome.php:634
+msgid ""
+"Customers can apply store credit on a subscription during purchase of "
+"subscription. If the same store credit has sufficient balance, it'll keep "
+"applying it to renewals till the remainder in store credit is higher than "
+"renewal price. Customers will be able to apply store credit only during "
+"signup. They will not get an option to apply store credit in renewals. But "
+"if the store credit will not have sufficient balance to pay for the renewals,"
+" then the order will go into pending mode. Now when the customer will go to "
+"pay for this renewal order, they'll get an option to apply store credit "
+"again. To activate the subscription again, the customer will have to pay for "
+"the renewals. When the customer is paying for the renewals from their "
+"account, then in that process they can use the same store credit which "
+"didn't have the sufficient balance, again & pay for the remaining amount."
+msgstr ""
+"ストアクレジットはサブスクリプションの購入時に適用することができます。同じストアクレジットに十分な残高がある場合、ストアクレジットの残額が更新価格を上回るまで、更新に適用され続けます。ストアクレジットはサインアップ時にのみ適用できます。更新時にストア・クレジットを適用するオプションはありません。しかし、もしストアクレジットの残高が更新料金の支払いに十分でない場合、注文は保留モードになります。顧客がこの更新注文の支払いに行くと、再度ストアクレジットを適用するオプションが表示されます。サブスクリプションを再度有効にするには、顧客は更新料金を支払う必要があります。顧客が自分のアカウントから更新料金を支払う場合、その過程で、十分な残高がなかった同じストアクレジットを再度使用し、残りの金額を支払うことができます。"
+
+#: includes/class-wc-sc-settings.php:572
+msgid "Customize color scheme for coupons."
+msgstr "クーポンの配色をカスタマイズ"
+
+#: includes/class-wc-sc-settings.php:568
+msgid "Customize colors"
+msgstr "色のカスタマイズ"
+
+#: includes/class-wc-sc-settings.php:529
+msgid "Customize Coupons"
+msgstr "クーポンのカスタマイズ"
+
+#: includes/class-wc-sc-settings.php:526
+msgid "Customize coupons"
+msgstr "クーポンのカスタマイズ"
+
+#: includes/class-wc-sc-settings.php:599
+msgid "Cutout"
+msgstr "カットアウト"
+
+#: includes/class-wc-sc-coupon-fields.php:546
+msgid "Days"
+msgstr "日数"
+
+#: includes/class-wc-sc-settings.php:603
+msgid "Deal"
+msgstr "ディール"
+
+#: includes/class-wc-sc-settings.php:911
+#: includes/class-wc-smart-coupons.php:6008
+msgid "Deduct credit/gift before doing tax calculations"
+msgstr "税額計算をする前に、クレジット／贈与を差し引く"
+
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-settings.php:1092
+msgid "Delete Gift / Credit, when credit is used up"
+msgstr "クレジットを使い切ったら、ギフト/クレジットを削除する。"
+
+#. translators: %s: Note for admin
+#: includes/class-wc-sc-settings.php:481
+msgid "Delete the %1$s when entire credit amount is used up %2$s"
+msgstr "2$sを使い切ったら、%1$sを削除する。"
+
+#: includes/class-wc-sc-settings.php:600
+msgid "Deliver"
+msgstr "届ける"
+
+#: includes/class-wc-sc-purchase-credit.php:837
+msgid "Deliver coupon"
+msgstr "クーポン"
+
+#: includes/class-wc-sc-settings.php:873
+msgid "Description"
+msgstr "説明"
+
+#: templates/plain/combined-email.php:103 templates/plain/email.php:98
+#: templates/plain/expiry-reminder-email.php:79
+msgid "Description:"
+msgstr "説明"
+
+#: includes/class-wc-smart-coupons.php:4793
+msgid "Disable Email Restriction"
+msgstr "電子メールの制限を無効にする"
+
+#: includes/class-wc-sc-coupon-fields.php:587
+msgid "Disable email restriction?"
+msgstr "メール制限を解除しますか？"
+
+#. translators: %s: Explanation of the setting
+#: includes/class-wc-sc-settings.php:471
+msgid ""
+"Disabling this, no coupons will be auto-applied - even if any coupon has "
+"\"Auto apply?\" enabled."
+msgstr "この機能を無効にすると、クーポンが自動適用されません。"
+
+#: includes/class-wc-sc-ajax.php:358 includes/class-wc-sc-settings.php:1243
+#: includes/class-wc-smart-coupons.php:1360
+msgid "Discount"
+msgstr "割引"
+
+#: includes/class-wc-sc-display-coupons.php:1367
+msgid "Discount Coupons"
+msgstr "割引クーポン"
+
+#: includes/class-wc-smart-coupons.php:5153
+msgid "Discount Type"
+msgstr "割引タイプ"
+
+#: templates/plain/combined-email.php:83 templates/plain/email.php:78
+#: templates/plain/expiry-reminder-email.php:59
+msgid "Discount:"
+msgstr "割引："
+
+#: includes/class-wc-sc-admin-welcome.php:500
+msgid "Discover how to set up and offer gift cards in your store"
+msgstr "お店でギフトカードを設定し、提供する方法をご覧ください。"
+
+#: includes/class-wc-sc-coupon-message.php:125
+msgid "Display a message to user"
+msgstr "ユーザーへのメッセージ表示"
+
+#. translators: %s: Preview link
+#: includes/class-wc-sc-settings.php:716
+msgid ""
+"Display coupon description along with coupon code (on site as well as in "
+"emails) %s"
+msgstr "クーポンコードと一緒にクーポンの説明を表示する（サイトとEメールに） %s"
+
+#: includes/class-wc-sc-settings.php:635
+msgid "Display Coupons"
+msgstr "クーポンの表示"
+
+#: includes/class-wc-sc-settings.php:632
+msgid "Display coupons"
+msgstr "クーポンの表示"
+
+#: includes/class-wc-smart-coupons.php:6013
+msgid "Display prices during cart and checkout"
+msgstr "カートとチェックアウト時の価格表示"
+
+#: includes/class-wc-smart-coupons.php:6012
+msgid "Display prices in the shop"
+msgstr "店内の価格表示"
+
+#: includes/class-wc-smart-coupons.php:6015
+msgid "Display tax totals"
+msgstr "税金の合計を表示する"
+
+#: includes/class-wc-sc-settings.php:678
+msgid "Displaying coupons"
+msgstr "クーポンの表示"
+
+#: includes/class-wc-sc-admin-welcome.php:349
+msgid "DIY Tour"
+msgstr "DIYツアー"
+
+#: includes/class-wc-sc-coupon-fields.php:588
+msgid ""
+"Do not restrict auto-generated coupons to buyer / receiver email, anyone "
+"with the coupon code can use it."
+msgstr "自動生成されたクーポンは、購入者/受信者のEメールに限定しないでください。"
+
+#: includes/class-wc-sc-admin-welcome.php:583
+msgid ""
+"Do not want to tie store credit to be used by only one customer? / Can a "
+"customer send a gift certificate to themselves to pass on to someone else?"
+msgstr "ストアクレジットを一人の顧客だけに使用させたくないですか？/ 顧客が自分宛にギフト券を送り、他の人に渡すことはできますか？"
+
+#: includes/class-wc-sc-admin-notifications.php:105
+#: includes/class-wc-sc-admin-welcome.php:323
+msgid "Docs"
+msgstr "資料"
+
+#: includes/class-wc-sc-admin-welcome.php:616
+msgid "Does Smart Coupons allow printing of coupon as Gift Card?"
+msgstr "Smart Couponsでは、クーポンをギフトカードとして印刷できますか？"
+
+#: includes/class-wc-smart-coupons.php:1808
+msgid "Don&#39;t Miss Out."
+msgstr "お見逃しなく。"
+
+#: includes/class-wc-sc-coupon-import.php:916
+msgid "Download a sample.csv to confirm"
+msgstr "sample.csvをダウンロードして確認する"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:123
+msgid "Duplicate"
+msgstr "重複"
+
+#: includes/class-wc-sc-coupon-fields.php:1090
+msgid "each with quantity"
+msgstr "それぞれ数量"
+
+#: includes/class-wc-sc-coupon-categories.php:95
+msgid "Edit coupon category"
+msgstr "クーポンカテゴリーの編集"
+
+#: includes/class-wc-sc-admin-welcome.php:584
+msgid ""
+"Edit the main coupon which is entered in \"Coupons\" field of the product "
+"edit page, then go to \"Usage Restrictions\" > \"Disable Email Restriction\" "
+"and disable this setting and save the coupon."
+msgstr ""
+"商品編集画面の「クーポン」欄に入力されているメインクーポンを編集し、「利用制限」→「メール制限を無効にする」でこの設定を無効にし、クーポンを保存します。"
+
+#: includes/class-wc-sc-coupon-process.php:340
+msgid "Email address"
+msgstr "メールアドレス"
+
+#: includes/emails/class-wc-sc-email-coupon.php:35
+msgid "Email auto generated coupon to recipients. One email per coupon."
+msgstr "自動生成されたクーポンを受信者にメール送信。クーポン1つにつきメール1通。"
+
+#: includes/class-wc-sc-settings.php:490
+msgid "Email auto generated coupons to recipients"
+msgstr "自動生成されたクーポンを受信者にメールで送信"
+
+#: includes/class-wc-sc-settings.php:619
+msgid "Email coupon"
+msgstr "メールクーポン"
+
+#: includes/class-wc-sc-coupon-import.php:1010
+msgid "Email coupon to recipients"
+msgstr "クーポンを受信者にメールで送信"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:43
+msgctxt "email description"
+msgid "Send a reminder email for coupons approaching expiry."
+msgstr "有効期限が近づいたクーポンのリマインダーメールを送信します。"
+
+#: includes/emails/class-wc-sc-email.php:124
+msgid "Email heading"
+msgstr "電子メールの見出し"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:81
+msgctxt "email heading"
+msgid "Reminder: Your Coupon Are Expiring Soon"
+msgstr "お知らせクーポンの有効期限が迫っています"
+
+#: includes/class-wc-sc-url-coupon.php:655
+msgid "Email set in session successfully."
+msgstr "電子メールが正常にセッションに設定されました。"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:72
+msgctxt "email subject"
+msgid "{site_title}: Your Coupon Are About to Expire!"
+msgstr "{site_title}：クーポンの有効期限が迫っています！"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:42
+msgctxt "email title"
+msgid "Smart Coupons - Coupon Expiry Reminder"
+msgstr "スマートクーポン - クーポン有効期限リマインダー"
+
+#: includes/class-wc-sc-admin-pages.php:1228
+msgid "Email to "
+msgstr "Eメール "
+
+#: includes/class-wc-sc-admin-pages.php:1208
+msgid "Email to recipients"
+msgstr "受信者への電子メール"
+
+#: includes/emails/class-wc-sc-email.php:107
+msgid "Email type"
+msgstr "Eメールタイプ"
+
+#: includes/class-wc-sc-settings.php:559
+msgid "Emerald Blaze"
+msgstr "エメラルド・ブレイズ"
+
+#: includes/class-wc-sc-settings.php:561
+msgid "Emerald Contrast"
+msgstr "エメラルド・コントラスト"
+
+#: includes/class-wc-sc-admin-notifications.php:180
+msgid "Enable"
+msgstr "有効にする"
+
+#: includes/class-wc-sc-settings.php:499
+msgid "Enable feature to allow printing of coupons"
+msgstr "クーポンの印刷機能を有効にする"
+
+#: includes/class-wc-sc-settings.php:641
+msgid "Enable store notice for the coupon"
+msgstr "クーポンの店舗通知を有効にする"
+
+#: includes/class-wc-smart-coupons.php:6010
+msgid "Enable taxes"
+msgstr "税金を有効にする"
+
+#: includes/class-wc-smart-coupons.php:6016
+msgid "Enable the use of coupon codes"
+msgstr "クーポンコードの使用を可能にする"
+
+#: includes/emails/class-wc-sc-email.php:103
+msgid "Enable this email notification"
+msgstr "このメール通知を有効にする"
+
+#: includes/class-wc-sc-settings.php:883
+msgid ""
+"Enable this to allow buyers to select date & time for delivering the coupon."
+msgstr "バイヤーがクーポンを配信する日時を選択できるようにします。"
+
+#: includes/class-wc-sc-coupon-import.php:1010
+msgid ""
+"Enable this to send coupon to recipient's email addresses, provided in "
+"imported file."
+msgstr "インポートしたファイルに記載されている受信者のメールアドレスにクーポンを送信します。"
+
+#: includes/emails/class-wc-sc-email.php:101
+msgid "Enable/Disable"
+msgstr "有効/無効"
+
+#: includes/class-wc-smart-coupons.php:1801
+msgid "Ending Soon!"
+msgstr "まもなく終了！"
+
+#: includes/class-wc-sc-display-coupons.php:2318
+msgid "Endpoint for the My Account &rarr; Coupons page"
+msgstr "マイアカウント &rarr; クーポンページのエンドポイント"
+
+#: includes/class-wc-sc-coupon-fields.php:1147
+#: includes/class-wc-smart-coupons.php:5289
+msgctxt "enhanced select"
+msgid "%qty% results are available, use up and down arrow keys to navigate."
+msgstr "数%の結果が表示されます。上下の矢印キーで移動してください。"
+
+#: includes/class-wc-smart-coupons.php:5291
+msgctxt "enhanced select"
+msgid "Loading failed"
+msgstr "読み込みに失敗しました"
+
+#: includes/class-wc-sc-coupon-fields.php:1156
+#: includes/class-wc-smart-coupons.php:5298
+msgctxt "enhanced select"
+msgid "Loading more results&hellip;"
+msgstr "より多くの結果をロードする..."
+
+#: includes/class-wc-sc-coupon-fields.php:1148
+#: includes/class-wc-smart-coupons.php:5290
+msgctxt "enhanced select"
+msgid "No matches found"
+msgstr "該当なし"
+
+#: includes/class-wc-sc-coupon-fields.php:1146
+#: includes/class-wc-smart-coupons.php:5288
+msgctxt "enhanced select"
+msgid "One result is available, press enter to select it."
+msgstr "結果は1つなので、エンターキーを押して選択する。"
+
+#: includes/class-wc-sc-coupon-fields.php:1153
+#: includes/class-wc-smart-coupons.php:5295
+msgctxt "enhanced select"
+msgid "Please delete %qty% characters"
+msgstr "を削除してください。"
+
+#: includes/class-wc-sc-coupon-fields.php:1152
+#: includes/class-wc-smart-coupons.php:5294
+msgctxt "enhanced select"
+msgid "Please delete 1 character"
+msgstr "1文字削除してください"
+
+#: includes/class-wc-sc-coupon-fields.php:1151
+#: includes/class-wc-smart-coupons.php:5293
+msgctxt "enhanced select"
+msgid "Please enter %qty% or more characters"
+msgstr "qty%以上の文字を入力してください。"
+
+#: includes/class-wc-sc-coupon-fields.php:1150
+#: includes/class-wc-smart-coupons.php:5292
+msgctxt "enhanced select"
+msgid "Please enter 1 or more characters"
+msgstr "1文字以上入力してください"
+
+#: includes/class-wc-sc-coupon-fields.php:1149
+#: includes/class-wc-sc-coupon-fields.php:1157
+#: includes/class-wc-smart-coupons.php:5299
+msgctxt "enhanced select"
+msgid "Searching&hellip;"
+msgstr "検索..."
+
+#: includes/class-wc-sc-coupon-fields.php:1155
+#: includes/class-wc-smart-coupons.php:5297
+msgctxt "enhanced select"
+msgid "You can only select %qty% items"
+msgstr "選択できる項目は %qty% だけです。"
+
+#: includes/class-wc-sc-coupon-fields.php:1154
+#: includes/class-wc-smart-coupons.php:5296
+msgctxt "enhanced select"
+msgid "You can only select 1 item"
+msgstr "選択できる項目は1つです。"
+
+#: includes/class-wc-sc-admin-pages.php:229
+msgid "Enter a name for the new attribute term:"
+msgstr "新しい属性用語の名前を入力します："
+
+#: includes/class-wc-sc-purchase-credit.php:158
+msgid "Enter a numeric value."
+msgstr "数値を入力する。"
+
+#: includes/class-wc-sc-coupon-import.php:1136
+msgid "Enter location on the server"
+msgstr "サーバー上の場所を入力"
+
+#: includes/class-wc-sc-shortcode.php:797
+msgid "Enter more than one character to search."
+msgstr "複数の文字を入力して検索する。"
+
+#: includes/class-wc-sc-purchase-credit.php:870
+#: includes/class-wc-sc-purchase-credit.php:980
+msgid "Enter recipient e-mail address"
+msgstr "受信者のメールアドレスを入力"
+
+#: includes/class-wc-sc-admin-pages.php:226
+msgid "Enter some text, or some attributes by pipe (|) separating values."
+msgstr "テキストを入力するか、パイプ (|) で値を区切って属性を入力します。"
+
+#. translators: 1: Path to setting 2: Setting to set email address 3: Setting for number of coupons to generate
+#: includes/class-wc-sc-admin-pages.php:1216
+msgid ""
+"Enter the email addresses of the recipients separated by comma under %1$1s. "
+"Make sure to match the count of email addresses in %2$2s to %3$3s"
+msgstr ""
+"受信者のメールアドレスを%1$1sの下にカンマ区切りで入力してください。2$2sから%3$3sのメールアドレスのカウントと一致するようにしてください。"
+
+#. translators: 1. Error title 2. The bulk process
+#: includes/class-wc-sc-background-coupon-importer.php:389
+msgid "Error"
+msgstr "エラー"
+
+#: includes/class-wc-sc-display-coupons.php:2216
+msgid "Error loading content."
+msgstr "コンテンツの読み込み中にエラーが発生しました。"
+
+#: includes/class-wc-smart-coupons.php:8265
+msgctxt "Error message"
+msgid "Gift sending date & time input is empty or invalid."
+msgstr "ギフト送信日時の入力が空または無効です。"
+
+#: includes/class-wc-smart-coupons.php:8279
+msgctxt "Error message"
+msgid "Gift sending date & time is invalid."
+msgstr "ギフトの送信日時は無効です。"
+
+#: includes/class-wc-sc-coupon-process.php:126
+msgctxt "Error message"
+msgid "Invalid order ID."
+msgstr "注文IDが無効です。"
+
+#: includes/class-wc-sc-coupon-actions.php:1065
+msgctxt "Error message"
+msgid "No applicable coupons found."
+msgstr "該当するクーポンは見つかりませんでした。"
+
+#: includes/class-wc-sc-coupon-process.php:132
+msgctxt "Error message"
+msgid "Order not found."
+msgstr "注文が見つかりません。"
+
+#. translators: 1: Order ID
+#: includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php:244
+msgctxt "Error message for failed net total update"
+msgid "Failed to update net total for Order ID: %s"
+msgstr "注文 ID: %s の正味合計の更新に失敗しました。"
+
+#. translators: 1: Current task name
+#: includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php:79
+msgctxt "Error message for fixing order stats negative net value"
+msgid "No order id's passed"
+msgstr "オーダーIDが渡されない"
+
+#: includes/class-wc-sc-coupon-refund-process.php:808
+msgctxt "Error message for invalid coupon discount type"
+msgid "Invalid coupon discount type"
+msgstr "無効なクーポン割引タイプ"
+
+#: includes/class-wc-sc-combo-coupons.php:423
+msgctxt "Error message for invalid nonce"
+msgid "Invalid nonce"
+msgstr "無効なノンス"
+
+#: includes/class-wc-sc-coupon-refund-process.php:794
+msgctxt "Error message for invalid refund, discount, or coupon ID"
+msgid "Invalid refund or discount amounts, or coupon ID is missing"
+msgstr "払い戻しまたは割引の金額が無効、またはクーポンIDが見つからない"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:539
+msgctxt "Error message for invalid saved card"
+msgid "Invalid saved card selected."
+msgstr "無効なセーブカードが選択されました。"
+
+#. translators: 1: Order ID
+#: includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php:206
+msgctxt "Error message for missing coupons"
+msgid "No coupons found in the order. Order ID: %s"
+msgstr "注文にクーポンが見つかりませんでした。注文ID: %s"
+
+#. translators: 1: Order ID
+#: includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php:181
+msgctxt "Error message for missing order"
+msgid "Order not found. Order ID: %s"
+msgstr "注文が見つかりません。注文 ID: %s"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:519
+msgctxt "Error message for nonce verification failure"
+msgid "Nonce verification failed."
+msgstr "Nonceの検証に失敗した。"
+
+#. translators: 1: Order ID
+#: includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php:193
+msgctxt "Error message for orders without Smart Coupon"
+msgid "Smart Coupon not used. Order ID: %s"
+msgstr "スマートクーポンが使用されていません。注文ID: %s"
+
+#: includes/class-wc-sc-combo-coupons.php:427
+msgctxt "Error message for unauthorized access"
+msgid "Unauthorized"
+msgstr "無許可"
+
+#: includes/class-wc-sc-coupon-actions.php:1217
+msgctxt "Error message when a product does not match coupon restrictions"
+msgid "Selected product is not valid for this coupon."
+msgstr "厳選された商品は本クーポンの対象外となります。"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:556
+msgctxt "Error message when cart or session is missing"
+msgid "Cart or session not available."
+msgstr "カートまたはセッションが利用できません。"
+
+#: includes/class-wc-sc-coupon-actions.php:1212
+msgctxt "Error message when coupon actions are missing"
+msgid "Coupon action not found."
+msgstr "クーポンアクションが見つかりません。"
+
+#: includes/class-wc-sc-combo-coupons.php:334
+msgctxt "Error message when coupon cannot be combined"
+msgid ""
+"This coupon cannot be used together with one of the other coupons already "
+"applied."
+msgstr "このクーポンは、すでに適用されている他のクーポンと併用することはできません。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:800
+msgctxt "Error message when coupon cannot be found"
+msgid "Coupon not found"
+msgstr "クーポンが見つかりません"
+
+#: includes/class-wc-sc-coupon-refund-process.php:771
+msgctxt "Error message when line item data is invalid"
+msgid "Line item data is missing or invalid"
+msgstr "行項目のデータがない、または無効である"
+
+#: includes/class-wc-sc-coupon-refund-process.php:787
+msgctxt "Error message when order cannot be found"
+msgid "Order not found"
+msgstr "注文が見つかりません"
+
+#: includes/class-wc-sc-coupon-refund-process.php:781
+msgctxt "Error message when order ID is missing or invalid"
+msgid "Order ID is missing or invalid"
+msgstr "注文IDがない、または無効"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:560
+msgctxt "Error message when payment method is missing in request"
+msgid "Payment method not provided."
+msgstr "支払い方法は提供されない。"
+
+#: includes/class-wc-sc-coupon-actions.php:1260
+msgctxt "Error message when product addition fails"
+msgid "Failed to add product to cart."
+msgstr "製品をカートに追加できませんでした。"
+
+#. translators: %s: Product title
+#: includes/class-wc-sc-coupon-actions.php:1245
+msgctxt "Error message when product is already in cart"
+msgid "\"%s\" is already in your cart."
+msgstr "\"%s \"はすでにカートに入っています。"
+
+#: includes/class-wc-sc-coupon-actions.php:1187
+msgctxt "Error message when product or coupon is missing"
+msgid "Invalid product or coupon."
+msgstr "無効な商品またはクーポンです。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:765
+msgctxt "Error message when security token is invalid"
+msgid "Invalid security token"
+msgstr "無効なセキュリティー・トークン"
+
+#: includes/class-wc-sc-coupon-actions.php:1224
+msgctxt "Error message when the product does not exist"
+msgid "Product not found."
+msgstr "製品が見つかりません。"
+
+#: includes/class-wc-sc-coupon-actions.php:1194
+msgctxt "Error message when the provided coupon is invalid"
+msgid "Coupon not found."
+msgstr "クーポンが見つかりません。"
+
+#: includes/class-wc-sc-coupon-actions.php:1504
+msgctxt "Error Please select a product."
+msgid "Please select a product."
+msgstr "製品を選択してください。"
+
+#: includes/class-wc-sc-coupon-actions.php:1528
+msgctxt "Error processing request"
+msgid "Error processing request."
+msgstr "リクエストの処理にエラーが発生しました。"
+
+#: includes/class-wc-sc-url-coupon.php:707
+msgid "Error updating checkout:"
+msgstr "チェックアウトの更新エラー："
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-coupon-process.php:370
+msgid "Error: %s Receiver&#146;s E-mail address is invalid."
+msgstr "エラー: %s 受信者の電子メール・アドレスが無効です。"
+
+#: includes/class-wc-sc-coupon-process.php:372
+msgid "Error: Gift Card Receiver&#146;s E-mail address is invalid."
+msgstr "エラーギフトカード受取人のEメールアドレスが無効です。"
+
+#: includes/class-wc-sc-background-coupon-importer.php:1276
+msgid "Every 5 Seconds"
+msgstr "5秒ごと"
+
+#. Translators: %s is an example number of days.
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:92
+msgctxt "example number of days"
+msgid "e.g., %s"
+msgstr "例：%s"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:102
+#: includes/class-wc-sc-coupons-by-taxonomy.php:289
+msgid "Exclude"
+msgstr "除外"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:611
+msgid "Exclude Attributes"
+msgstr "属性の除外"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:180
+msgid "Exclude attributes"
+msgstr "属性を除く"
+
+#: includes/class-wc-smart-coupons.php:5164
+msgid "Exclude Product categories"
+msgstr "製品カテゴリーを除く"
+
+#: includes/class-wc-smart-coupons.php:5162
+msgid "Exclude product IDs"
+msgstr "プロダクトIDを除く"
+
+#: includes/class-wc-smart-coupons.php:5160
+msgid "Exclude Sale Items"
+msgstr "セール品を除く"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:254
+msgid "Exclude User Role"
+msgstr "ユーザーの役割を除外する"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:133
+msgid "Exclude user roles"
+msgstr "ユーザー・ロールの除外"
+
+#: includes/class-wc-sc-coupons-by-excluded-email.php:107
+#: includes/class-wc-sc-coupons-by-excluded-email.php:347
+#: includes/class-wc-sc-coupons-by-excluded-email.php:475
+msgid "Excluded emails"
+msgstr "対象外メール"
+
+#. translators: Discount amount applied on tax
+#: includes/class-wc-smart-coupons.php:2824
+msgid "excludes -%s on tax"
+msgstr "税別"
+
+#: includes/class-wc-sc-coupon-fields.php:543
+msgid "Expire"
+msgstr "期限切れ"
+
+#: templates/plain/combined-email.php:108 templates/plain/email.php:103
+#: templates/plain/expiry-reminder-email.php:84
+msgid "Expires on:"
+msgstr "有効期限"
+
+#: includes/class-wc-sc-admin-pages.php:814
+msgid "Expiry Date"
+msgstr "有効期限"
+
+#: includes/class-wc-smart-coupons.php:5156
+msgid "Expiry date"
+msgstr "有効期限"
+
+#: templates/expiry-reminder-email.php:69
+msgctxt "expiry email print coupon"
+msgid "Print coupon"
+msgstr "クーポン印刷"
+
+#. translators: %s: Plugin name
+#: includes/batches/class-wc-sc-coupons-expiry-reminder-scheduler.php:191
+msgctxt "Expiry reminder background processing complete info message"
+msgid ""
+"%s Expiry Reminder background processing complete. This message will "
+"automatically disappear but after few seconds upon refresh."
+msgstr "s期限切れリマインダーのバックグラウンド処理が完了しました。このメッセージは自動的に消えますが、数秒後に更新されます。"
+
+#. translators: 1: The expiry date
+#: includes/class-wc-smart-coupons.php:1475
+msgid "Expiry: %s"
+msgstr "有効期限: %s"
+
+#: includes/class-wc-sc-admin-pages.php:206
+#: includes/class-wc-smart-coupons.php:4382
+msgid "Export"
+msgstr "輸出"
+
+#: includes/class-wc-sc-admin-pages.php:1188
+msgid "Export to CSV"
+msgstr "CSVエクスポート"
+
+#: includes/class-wc-sc-background-coupon-importer.php:747
+#: includes/class-wc-sc-background-coupon-importer.php:764
+msgid "Failed to create export file."
+msgstr "エクスポートファイルの作成に失敗しました。"
+
+#. translators: 1. Receiver email 2. Coupon code 3. Order id
+#: includes/class-wc-sc-coupon-process.php:1146
+#: includes/class-wc-smart-coupons.php:923
+msgid ""
+"Failed to schedule email to \"%1$s\" for coupon \"%2$s\" received from order "
+"#%3$s."
+msgstr "注文 #%3$s から受け取ったクーポン \"%2$s\" に対して、\"%1$s\" に電子メールを送信するスケジュールに失敗しました。"
+
+#. translators: 1. Receiver email 2. Coupon code
+#: includes/class-wc-sc-coupon-import.php:728
+msgid "Failed to schedule email to \"%1$s\" for coupon \"%2$s\"."
+msgstr "クーポン \"%2$s\" の \"%1$s\" への電子メールのスケジュールに失敗しました。"
+
+#: includes/class-wc-sc-purchase-credit.php:1305
+#: includes/compat/class-wc-sc-kco-compatibility.php:123
+msgid "Failed to update coupon receiver details in session."
+msgstr "セッションでクーポン受信者の詳細を更新できませんでした。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:508
+msgid "Failed to update store credit refund details."
+msgstr "ストアクレジット払い戻し明細の更新に失敗しました。"
+
+#: includes/class-wc-sc-admin-welcome.php:547
+msgid "FAQ / Common Problems"
+msgstr "よくある質問"
+
+#: includes/class-wc-sc-admin-notifications.php:104
+#: includes/class-wc-sc-admin-pages.php:159
+#: includes/class-wc-sc-admin-pages.php:622
+#: includes/class-wc-sc-admin-welcome.php:359
+msgid "FAQ's"
+msgstr "よくある質問"
+
+#: includes/class-wc-sc-admin-pages.php:235
+msgid "Featured"
+msgstr "特集"
+
+#: includes/class-wc-sc-admin-notifications.php:181
+msgid "features."
+msgstr "が特徴だ。"
+
+#: includes/class-wc-sc-settings.php:596
+msgid "Festive"
+msgstr "祝祭"
+
+#: includes/class-wc-sc-url-coupon.php:713
+msgid "Fetch error:"
+msgstr "フェッチエラー："
+
+#: includes/class-wc-sc-coupon-import.php:1000
+msgid "File format seems OK"
+msgstr "ファイル形式は問題ないようだ。"
+
+#. translators: File path
+#: includes/class-wc-smart-coupons.php:5466
+#: includes/class-wc-smart-coupons.php:5474
+msgid "File not found %s"
+msgstr "ファイルが見つかりません。"
+
+#: includes/class-wc-sc-coupon-import.php:287
+msgid ""
+"File not found. Make sure the file has required permission to read and/or "
+"the file is accessible: "
+msgstr "ファイルが見つかりません。ファイルに必要な読み取り権限があるか、ファイルにアクセスできるか確認してください： "
+
+#: includes/class-wc-sc-coupon-import.php:999
+msgid "File uploaded OK"
+msgstr "ファイルアップロードOK"
+
+#: includes/class-wc-smart-coupons.php:4349
+msgid "Filter by category"
+msgstr "カテゴリーで絞り込む"
+
+#. translators: Email address of users
+#: includes/class-wc-smart-coupons.php:7221
+msgid "Find coupons restricted to %s"
+msgstr "sに制限されたクーポンを検索する"
+
+#: includes/class-wc-sc-settings.php:593
+msgid "Flat"
+msgstr "フラット"
+
+#. translators: 1. The discount text
+#: includes/class-wc-smart-coupons.php:1821
+msgid "Flat %s discount on everything today."
+msgstr "本日、全品一律%s割引。"
+
+#: includes/emails/class-wc-sc-email-coupon.php:415
+#: includes/emails/class-wc-sc-email-coupon.php:426
+msgid "for all products"
+msgstr "全製品"
+
+#: includes/emails/class-wc-sc-email-coupon.php:437
+msgid "for entire purchase"
+msgstr "全購入対象"
+
+#. translators: Documentation link for 'How to Apply Single or Multiple Coupons on Click of a Link'
+#: includes/class-wc-sc-admin-welcome.php:580
+msgid "For more details you can refer to this article: %s"
+msgstr "詳細については、この記事を参照してください：%s"
+
+#: includes/class-wc-sc-coupon-fields.php:470
+msgid "For new customers?"
+msgstr "新規顧客のため？"
+
+#: includes/class-wc-smart-coupons.php:4795
+#: includes/class-wc-smart-coupons.php:5171
+msgid "For new user only?"
+msgstr "新規ユーザーのみですか？"
+
+#: includes/emails/class-wc-sc-email-coupon.php:413
+#: includes/emails/class-wc-sc-email-coupon.php:424
+#: includes/emails/class-wc-sc-email-coupon.php:435
+msgid "for some products"
+msgstr "一部の製品について"
+
+#: includes/class-wc-sc-display-coupons.php:445
+#: includes/class-wc-sc-display-coupons.php:1029
+#: includes/class-wc-sc-display-coupons.php:2815
+#: includes/class-wc-sc-shortcode.php:542
+#: includes/class-wc-smart-coupons.php:5040
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:374
+#: templates/combined-email.php:131 templates/email.php:128
+#: templates/plain/combined-email.php:93 templates/plain/email.php:88
+#: templates/plain/expiry-reminder-email.php:69
+#: templates/print-coupons-default.php:148
+msgid "Free Shipping"
+msgstr "送料無料"
+
+#: includes/class-wc-smart-coupons.php:5155
+msgid "Free shipping"
+msgstr "送料無料"
+
+#: includes/class-wc-sc-purchase-credit.php:970
+msgid "Free Shipping coupon"
+msgstr "送料無料クーポン"
+
+#: includes/emails/class-wc-sc-combined-email-coupon.php:144
+#: includes/emails/class-wc-sc-combined-email-coupon.php:221
+#: includes/emails/class-wc-sc-email-coupon.php:207
+#: includes/emails/class-wc-sc-email-coupon.php:286
+msgid "from"
+msgstr "より"
+
+#: includes/class-wc-sc-admin-welcome.php:622
+msgid ""
+"From version 4.11.0, you can add/link coupons to product variations as well. "
+"This feature is not available in a version lower than 4.11.0."
+msgstr ""
+"バージョン4.11.0から、商品バリエーションにもクーポンを追加/リンクできるようになりました。この機能は4.11."
+"0より低いバージョンでは利用できません。"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:235
+#: blocks/src/js/send-coupon-form/block.js:239
+msgctxt "Frontend"
+msgid "Deliver coupon"
+msgstr "クーポン"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:262
+#: blocks/src/js/send-coupon-form/block.js:287
+msgctxt "Frontend"
+msgid "Enter recipient e-mail address"
+msgstr "受信者のメールアドレスを入力"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:207
+msgctxt "Frontend"
+msgid "Gift to someone else"
+msgstr "誰かへの贈り物"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:267
+#: blocks/src/js/send-coupon-form/block.js:294
+msgctxt "Frontend"
+msgid "Message for receiver"
+msgstr "受信者へのメッセージ"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:259
+#: blocks/src/js/send-coupon-form/block.js:284
+msgctxt "Frontend"
+msgid "Receiver email address"
+msgstr "受信者メールアドレス"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:195
+msgctxt "Frontend"
+msgid "Send coupons to..."
+msgstr "クーポンを送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:225
+msgctxt "Frontend"
+msgid "Send to different people"
+msgstr "さまざまな人に送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:202
+msgctxt "Frontend"
+msgid "Send to me"
+msgstr "私に送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:220
+msgctxt "Frontend"
+msgid "Send to one person"
+msgstr "一人に送る"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:271
+#: blocks/src/js/send-coupon-form/block.js:298
+msgctxt "Frontend"
+msgid "Write a message"
+msgstr "メッセージを書く"
+
+#: blocks/build/woocommerce-smart-coupons-send-coupon-form-block-frontend.js:1
+#: blocks/src/js/send-coupon-form/block.js:197
+msgctxt "Frontend"
+msgid "Your order contains coupons. What would you like to do?"
+msgstr "ご注文にクーポンが含まれています。どうしますか？"
+
+#: includes/class-wc-sc-settings.php:421 includes/class-wc-sc-settings.php:424
+msgid "General"
+msgstr "一般"
+
+#: includes/class-wc-sc-background-coupon-importer.php:370
+#: includes/class-wc-sc-background-coupon-importer.php:375
+msgid "generate"
+msgstr "ジェネレート"
+
+#: includes/class-wc-sc-admin-pages.php:284
+msgid "Generate coupon code"
+msgstr "クーポンコードの生成"
+
+#: includes/class-wc-sc-admin-pages.php:1180
+msgid "Generate coupons and"
+msgstr "クーポンの発行"
+
+#: includes/class-wc-sc-background-coupon-importer.php:374
+#: includes/class-wc-sc-background-coupon-importer.php:599
+msgid "generated"
+msgstr "生成された"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:740
+msgid "Generated %s amount"
+msgstr "生成量 %s"
+
+#: includes/class-wc-sc-background-coupon-importer.php:369
+msgid "generated & sent"
+msgstr "生成・送信"
+
+#: includes/class-wc-sc-privacy.php:377
+msgid "Generated Coupon Data"
+msgstr "生成クーポンデータ"
+
+#: includes/class-wc-sc-display-coupons.php:3009
+msgid "Generated coupons"
+msgstr "生成クーポン"
+
+#. translators: 1. Link to jump to 'Order actions' metabox 2. Text 'Order actions' 3. Text 'arrow'
+#: includes/class-wc-sc-display-coupons.php:2510
+msgctxt "Generated coupons metabox - Order edit admin page"
+msgid "arrow"
+msgstr "矢"
+
+#. translators: 1. Link to jump to 'Order actions' metabox 2. Text 'Order actions' 3. Text 'arrow'
+#: includes/class-wc-sc-display-coupons.php:2510
+msgctxt "Generated coupons metabox - Order edit admin page"
+msgid ""
+"Coupons are not generated for this order. You can regenerate it from %1$s. "
+"Select an appropriate action from the %2$s dropdown menu and hit the %3$s "
+"button next to it."
+msgstr ""
+"この注文にはクーポンが生成されません。1$sから再生成できます。2$sドロップダウンメニューから適切なアクションを選択し、その横にある%3$sボタンを押してください。"
+
+#. translators: 1. Link to jump to 'Order actions' metabox 2. Text 'Order actions' 3. Text 'arrow'
+#: includes/class-wc-sc-display-coupons.php:2510
+msgctxt "Generated coupons metabox - Order edit admin page"
+msgid "Order actions"
+msgstr "オーダーアクション"
+
+#. translators: 1. Label for Order action for regenerating coupons
+#: includes/class-wc-sc-display-coupons.php:2523
+msgctxt "Generated coupons metabox - Order edit admin page"
+msgid "Select %s to only regenerate coupons. No email will be sent for this."
+msgstr "クーポンの再生成のみを行う場合は %s を選択してください。この場合、メールは送信されません。"
+
+#. translators: 1. Label for Order action for regenerating & resending coupons
+#: includes/class-wc-sc-display-coupons.php:2533
+msgctxt "Generated coupons metabox - Order edit admin page"
+msgid ""
+"Select %s to regenerate as well as resend coupons to the recipients via "
+"email."
+msgstr "sを選択すると、クーポンが再生成され、電子メールで受信者に再送信されます。"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:118
+msgid "Get shareable link"
+msgstr "共有リンクの取得"
+
+#: includes/class-wc-sc-display-coupons.php:3130
+msgid "get this & several other products at a huge discount"
+msgstr "この商品と他の商品を大幅割引で手に入れよう"
+
+#: includes/class-wc-sc-admin-welcome.php:587
+msgid ""
+"Getting 'Page Not Found Error' when accessing Coupons tab from My Account "
+"Page?"
+msgstr "マイアカウントページからクーポンタブにアクセスすると、「ページが見つかりません」エラーが発生しますか？"
+
+#: includes/class-wc-sc-admin-welcome.php:434
+msgid "Gift a product via coupon"
+msgstr "クーポンで商品を贈る"
+
+#: includes/class-wc-sc-settings.php:669
+msgid "Gift box"
+msgstr "ギフトボックス"
+
+#: includes/emails/class-wc-sc-email-coupon.php:360
+#: includes/emails/class-wc-sc-email-coupon.php:484
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:194
+msgid "Gift Card"
+msgstr "ギフトカード"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:336
+#: templates/acknowledgement-email.php:61
+#: templates/plain/acknowledgement-email.php:51
+msgid "Gift card"
+msgstr "ギフトカード"
+
+#: includes/class-wc-smart-coupons.php:6009
+msgid "Gift Card discount is inclusive of tax"
+msgstr "ギフトカード割引は税込みです。"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:337
+#: templates/acknowledgement-email.php:62
+#: templates/plain/acknowledgement-email.php:52
+msgid "Gift cards"
+msgstr "ギフトカード"
+
+#. translators: %1$s is the formatted coupon code, %2$s is the coupon code used as modal ID.
+#: includes/class-wc-sc-coupon-actions.php:1027
+msgctxt "Gift selection notice"
+msgid "Choose your gift now with coupon %1$s! %2$s"
+msgstr "クーポン %1$s で今すぐギフトをお選びください！%2$s"
+
+#: includes/class-wc-sc-coupon-actions.php:1029
+msgctxt "Gift selection notice link"
+msgid "Click here to select your eligible product."
+msgstr "こちらをクリックして対象商品をお選びください。"
+
+#: includes/class-wc-sc-purchase-credit.php:830
+msgid "Gift to someone else"
+msgstr "誰かへの贈り物"
+
+#: includes/class-wc-sc-settings.php:766
+msgid ""
+"Give alternate singular name to Store Credit / Gift Certificate. This label "
+"will only rename Store Credit / Gift Certificate used in the Smart Coupons "
+"plugin. <a href=\"https://woocommerce.com/document/smart-coupons/how-to-"
+"rename-store-credit/\" target=\"_blank\"><small> [Read More] </small></a>"
+msgstr ""
+"ストアクレジット/ギフト券に単数形の別の名前を付けます。このラベルは、Smart "
+"Couponsプラグインで使用されているストアクレジット/ギフト券の名前のみを変更します。 <a href=\"https://woocommerce."
+"com/document/smart-coupons/how-to-rename-store-credit/\" target=\"_blank\">"
+"<small>[続きを読む］ </small></a>"
+
+#: includes/class-wc-sc-admin-welcome.php:630
+msgid ""
+"Give away a discount or credit on signing up a subscription, give away "
+"recurring discount or credits, apply credit during sign up, automatic "
+"payment for renewals from credit (Note: When using PayPal Standard Gateway, "
+"store credit can be applied only during sign up. Automatic payment for "
+"renewals by credit will not work for PayPal Standard Gateway)."
+msgstr ""
+"購読申し込み時に割引やクレジットをプレゼントする、定期的に割引やクレジットをプレゼントする、購読申し込み時にクレジットを適用する、クレジットによる更新の自動支払い（注：PayPal"
+" Standard Gatewayを使用する場合、ストアクレジットは購読申し込み時にのみ適用できます。PayPal Standard "
+"Gatewayの場合、クレジットによる更新の自動支払いは機能しません）。"
+
+#: includes/class-wc-sc-admin-welcome.php:450
+msgid ""
+"Give bigger discounts without hurting your profits. Offer a percentage off "
+"coupon upto a particular value. Example -  Flat 50% off upto $100."
+msgstr "利益を損なうことなく、より大きな割引を提供する。特定の金額までのパーセントオフクーポンを提供する。例 - 100ドルまで一律50％オフ。"
+
+#: includes/class-wc-sc-admin-welcome.php:442
+msgid "Give discounts to customers for next purchase"
+msgstr "次回購入時に顧客に割引を与える"
+
+#: includes/class-wc-sc-settings.php:777
+msgid "Give plural name for the above singular name."
+msgstr "上記の単数形の名前に複数形の名前をつける。"
+
+#: includes/class-wc-sc-admin-welcome.php:300
+msgid ""
+"Glad to have you onboard. We hope WooCommerce Smart Coupons adds to your "
+"desired success 🏆"
+msgstr "ご利用いただきありがとうございます。WooCommerce Smart Couponsがお客様の成功に貢献できることを願っております。"
+
+#. translators: HTML entity for Right-arrow
+#: includes/class-wc-sc-admin-welcome.php:308
+msgid "Go to Coupons dashboard %s"
+msgstr "クーポン・ダッシュボードへ %s"
+
+#: includes/class-wc-sc-admin-welcome.php:588
+msgid ""
+"Go to WordPress -> Settings -> Permalinks and click on Save Settings once."
+msgstr "WordPress」→「設定」→「パーマリンク」を開き、「設定を保存」をクリックします。"
+
+#: includes/class-wc-sc-settings.php:548
+msgid "Gold"
+msgstr "ゴールド"
+
+#: includes/class-wc-smart-coupons.php:1799
+msgid "Great News!"
+msgstr "素晴らしいニュースだ！"
+
+#. translators: %s: link to submit idea for Smart Coupons on WooCommerce idea board
+#: includes/class-wc-sc-admin-notifications.php:360
+msgid "Have a feature request? Submit it %s."
+msgstr "機能要求をお持ちですか？sを送信してください。"
+
+#. translators: %s: link to submit idea for Smart Coupons on WooCommerce idea board
+#. translators: 1. File name 2. File download link
+#: includes/class-wc-sc-admin-notifications.php:360
+#: includes/class-wc-sc-admin-welcome.php:559
+#: includes/class-wc-sc-admin-welcome.php:567
+#: includes/class-wc-sc-admin-welcome.php:593
+#: includes/class-wc-sc-background-coupon-importer.php:631
+#: includes/class-wc-sc-print-coupon.php:278
+msgid "here"
+msgstr "これ"
+
+#: includes/class-wc-sc-coupon-fields.php:413
+msgid "HH:MM"
+msgstr "HH:MM"
+
+#: includes/class-wc-sc-coupon-import.php:1095
+msgid ""
+"Hi there! Upload a CSV file with coupons details to import them into your "
+"shop."
+msgstr "こんにちは！クーポンの詳細をCSVファイルにアップロードして、ショップにインポートしましょう。"
+
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-settings.php:1092
+#: includes/class-wc-sc-settings.php:1095
+msgid "Hide this notice"
+msgstr "この通知を隠す"
+
+#: includes/class-wc-sc-cheapest-costliest-items.php:124
+msgid "Highest priced qualifying product in cart"
+msgstr "カート内の最高価格の対象商品"
+
+#: includes/class-wc-sc-admin-welcome.php:600
+msgid "How can I resend gift card coupon bought by customers?"
+msgstr "顧客が購入したギフトカードクーポンを再送信するにはどうすればよいですか？"
+
+#: includes/class-wc-sc-admin-welcome.php:633
+msgid "How does automatic payment by store credit work with Subscriptions?"
+msgstr "ストアクレジットによる自動支払いは、定期購入ではどのように機能しますか？"
+
+#: includes/class-wc-sc-settings.php:431
+msgid ""
+"How many coupons (at max) should be shown on cart, checkout & my account "
+"page? If set to 0 (zero) then coupons will not be displayed at all on the "
+"website."
+msgstr ""
+"カート、チェックアウト、マイアカウントのページに表示されるクーポンの数はいくつですか？0(ゼロ)"
+"に設定すると、ウェブサイト上にクーポンは一切表示されません。"
+
+#. translators: Documentation link for 'How to Apply Single or Multiple Coupons on Click of a Link'
+#: includes/class-wc-sc-admin-welcome.php:580
+msgid "How to Apply Single or Multiple Coupons on Click of a Link"
+msgstr "リンククリックで単一または複数のクーポンを適用する方法"
+
+#: includes/class-wc-sc-admin-welcome.php:570
+msgid "How to change texts of the emails sent from Smart Coupons?"
+msgstr "スマートクーポンから送信されるメールのテキストを変更するには？"
+
+#: includes/class-wc-sc-admin-welcome.php:489
+msgid "How to Configure BOGO"
+msgstr "BOGOの設定方法"
+
+#: includes/class-wc-sc-admin-welcome.php:571
+msgid "How to override email template"
+msgstr "メールテンプレートの上書き方法"
+
+#. translators: Documentation link for 'How to Print Coupons'
+#: includes/class-wc-sc-admin-welcome.php:618
+msgid "How to Print Coupons"
+msgstr "クーポンの印刷方法"
+
+#: includes/class-wc-sc-admin-welcome.php:566
+msgid "How to translate texts from Smart Coupons?"
+msgstr "スマートクーポンのテキストを翻訳するには？"
+
+#: includes/class-wc-sc-admin-welcome.php:416
+msgid "How to use Smart Coupons the best way"
+msgstr "スマートクーポンの上手な使い方"
+
+#. Plugin URI of the plugin
+msgid "https://woocommerce.com/products/smart-coupons/"
+msgstr "https://woocommerce.com/products/smart-coupons/"
+
+#. Author URI of the plugin
+msgid "https://www.storeapps.org/"
+msgstr "https://www.storeapps.org/"
+
+#: includes/class-wc-sc-settings.php:1244
+msgid "Hurry. Going fast! On the entire range of products."
+msgstr "お急ぎください。お急ぎください！全商品対象。"
+
+#: includes/class-wc-sc-admin-welcome.php:645
+msgid ""
+"I'm using WPML & WPML provides support for multi-currency, but Smart Coupons "
+"only changes currency symbol & the price value remains same. Can Smart "
+"Coupons change the currency symbol and the price value associated with it?"
+msgstr ""
+"私はWPMLを使用しており、WPMLは多通貨をサポートしていますが、Smart Couponsは通貨記号を変更するだけで、価格は変わりません。Smart "
+"Couponsは、通貨記号とそれに関連する価格を変更できますか？"
+
+#. translators: 1: ID who refunded
+#: includes/class-wc-sc-coupon-refund-process.php:682
+msgid "ID: %d"
+msgstr "ID: %d"
+
+#: includes/class-wc-sc-coupon-import.php:1004
+msgid ""
+"If enabled, existing coupons that match by coupon code will be updated. "
+"Coupons that do not exist will be skipped."
+msgstr "有効にすると、クーポンコードで一致する既存のクーポンが更新されます。存在しないクーポンはスキップされます。"
+
+#: includes/class-wc-sc-privacy.php:103
+msgid ""
+"If you are a visitor: We access your billing email address entered during "
+"purchase"
+msgstr "ビジターの場合購入時に入力された請求先メールアドレスにアクセスします。"
+
+#. translators: WooCommerce My Account support link
+#: includes/class-wc-sc-admin-welcome.php:674
+msgid "If you are facing any issues, please %s from your WooCommerce account."
+msgstr "問題がある場合は、WooCommerceアカウントから%sしてください。"
+
+#: includes/class-wc-sc-privacy.php:102
+msgid ""
+"If you are logged in: We access your billing email address saved in your "
+"account & billing email address entered during purchase"
+msgstr "ログインしている場合お客様のアカウントに保存されている請求先メールアドレスと、購入時に入力された請求先メールアドレスにアクセスします。"
+
+#. translators: 1. File name 2. File download link
+#: includes/class-wc-sc-admin-welcome.php:593
+msgid "If you want to import coupon through file, the file should be like"
+msgstr "ファイルを通してクーポンをインポートする場合は、以下のようなファイルにしてください。"
+
+#: includes/class-wc-sc-coupons-by-location.php:291
+msgid ""
+"If you want to restrict the coupon to certain locations, enter allowed "
+"locations here. Country and state names will be auto-completed. Enter city "
+"names by typing them fully. Partial names are fine too."
+msgstr ""
+"クーポンを特定の場所に限定したい場合は、ここに許可された場所を入力してください。国名と州名は自動入力されます。都市名は完全に入力してください。部分的な入力も可能です。"
+
+#. translators: WooCommerce Subscriptions product link
+#: includes/class-wc-sc-admin-welcome.php:411
+msgid ""
+"If your store is using %s and your customer has purchased a subscription "
+"using a Store Credit. If that store credit has balance left in it, store "
+"will automatically use it for renewing that subscription."
+msgstr ""
+"あなたのストアが%sを使用していて、顧客がストア・クレジットを使用してサブスクリプションを購入した場合。ストア・クレジットの残高が残っている場合、ストアは自動的にそのクレジットをサブスクリプションの更新に使用します。"
+
+#: includes/class-wc-sc-admin-pages.php:205
+#: includes/class-wc-sc-coupon-import.php:1014
+msgid "Import"
+msgstr "輸入"
+
+#: includes/class-wc-sc-admin-pages.php:1200
+#: includes/class-wc-sc-background-coupon-importer.php:364
+msgid "import"
+msgstr "インポート"
+
+#: includes/class-wc-sc-admin-pages.php:385
+msgid "Import <strong>coupons</strong> to your store via a csv file."
+msgstr "csvファイル経由で<strong>クーポンを</strong>ストアにインポート。"
+
+#: includes/class-wc-sc-admin-welcome.php:430
+msgid ""
+"Import and export unique coupons in bulk via CSV. Share coupon codes to deal "
+"sites or email them to your customers."
+msgstr "ユニークなクーポンをCSVで一括インポート・エクスポート。クーポンコードをディールサイトに共有したり、顧客にメールで送信したりできます。"
+
+#: includes/class-wc-sc-admin-pages.php:320
+msgid "Import complete - imported"
+msgstr "インポート完了"
+
+#: includes/class-wc-sc-admin-pages.php:133
+#: includes/class-wc-sc-admin-pages.php:566
+#: includes/class-wc-sc-admin-pages.php:1603
+msgid "Import Coupons"
+msgstr "輸入クーポン"
+
+#. translators: 1. Message type 2. Functionality name "Bulk Generate" 3. Functionality name "Import-Export"
+#: includes/class-wc-sc-admin-notifications.php:292
+msgid "Import-Export"
+msgstr "輸出入"
+
+#. translators: 1. Message type 2. Functionality name "Bulk Generate" 3. Functionality name "Import-Export"
+#. translators: 1. Important 2. Upload path
+#. translators: 1. Coupon type
+#: includes/class-wc-sc-admin-notifications.php:169
+#: includes/class-wc-sc-admin-notifications.php:292
+#: includes/class-wc-sc-background-coupon-importer.php:337
+#: includes/class-wc-sc-background-coupon-importer.php:404
+#: includes/class-wc-smart-coupons.php:5558
+msgid "Important"
+msgstr "重要"
+
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-settings.php:1095
+msgid "Important setting"
+msgstr "重要な設定"
+
+#: includes/class-wc-sc-background-coupon-importer.php:363
+msgid "imported"
+msgstr "外来"
+
+#: includes/class-wc-sc-background-coupon-importer.php:406
+msgid "in the background. You will be notified when it is completed."
+msgstr "をバックグラウンドで実行します。完了すると通知が届きます。"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:101
+#: includes/class-wc-sc-coupons-by-taxonomy.php:288
+msgid "Include"
+msgstr "含む"
+
+#. translators: %s: Preview link
+#: includes/class-wc-sc-settings.php:680
+msgid ""
+"Include coupon details on product's page, for products that issue coupons %s"
+msgstr "クーポンを発行している商品には、商品ページにクーポンの詳細を掲載 %s"
+
+#. translators: %s: Preview link
+#: includes/class-wc-sc-settings.php:698
+msgid ""
+"Include coupons received from other people on My Account > Coupons page %s"
+msgstr "マイアカウント]&gt;[クーポン]ページの%sに他の人から受け取ったクーポンを含める"
+
+#: includes/class-wc-sc-coupon-message.php:133
+msgid "Include in email?"
+msgstr "電子メールに含めるか？"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:742
+msgid "Include tax in the amount of the generated %s"
+msgstr "生成された %s の金額に税金を含める。"
+
+#: includes/class-wc-smart-coupons.php:6007
+msgid "Include tax in the amount of the generated gift card"
+msgstr "生成されたギフトカードの金額に税金を含む"
+
+#. translators: Discount amount applied on tax
+#: includes/class-wc-smart-coupons.php:2827
+msgid "includes -%s on tax"
+msgstr "税金に-%sを含む"
+
+#. translators: 1. Coupon code 2. Expiry date
+#: includes/class-wc-sc-coupon-parser.php:420
+msgid ""
+"Incorrect format for expiry date of coupon \"%1$s\". Entered date is %2$s. "
+"Expected date format: YYYY-MM-DD"
+msgstr "クーポン \"%1$s\" の有効期限の形式が正しくありません。入力された日付は %2$s です。期待される日付形式：YYYY-MM-DD"
+
+#: includes/class-wc-smart-coupons.php:5159
+msgid "Individual USe"
+msgstr "個人ユーザー"
+
+#: includes/class-wc-sc-display-coupons.php:3128
+msgid "Insane deal"
+msgstr "非常識な取引"
+
+#: includes/class-wc-sc-shortcode.php:929
+msgid "Insert Shortcode"
+msgstr "ショートコードの挿入"
+
+#. translators: 1: Label for store credit
+#: includes/class-wc-sc-coupon-refund-process.php:393
+msgid "Invalid %s refund amount"
+msgstr "無効な %s 返金額です。"
+
+#: includes/class-wc-sc-display-coupons.php:1399
+msgid "Invalid / Used Coupons"
+msgstr "無効/使用済みクーポン"
+
+#: includes/class-wc-sc-admin-pages.php:804
+#: includes/class-wc-sc-purchase-credit.php:156
+msgid "Invalid amount."
+msgstr "無効な金額。"
+
+#: includes/class-wc-sc-coupon-import.php:916
+msgid ""
+"Invalid CSV file. Make sure your CSV file contains all columns, header row, "
+"and data in correct format."
+msgstr "無効なCSVファイルです。CSVファイルにすべての列、ヘッダー行、正しい形式のデータが含まれていることを確認してください。"
+
+#: includes/class-wc-sc-admin-pages.php:784
+msgid "Invalid email address."
+msgstr "メールアドレスが無効です。"
+
+#: includes/class-wc-sc-url-coupon.php:648
+msgid "Invalid email format."
+msgstr "無効なメール形式です。"
+
+#. translators: 1. Product/s 2. Product names 3. is/are 4. Coupons code
+#: includes/class-wc-sc-coupon-actions.php:588
+msgid "is"
+msgid_plural "are"
+msgstr[0] "は"
+
+#: includes/class-wc-smart-coupons.php:5558
+msgid "is active but it will only work with WooCommerce 3.0.0+."
+msgstr "は有効ですが、WooCommerce 3.0.0+でのみ動作します。"
+
+#: includes/class-wc-sc-coupon-message.php:439
+msgid "Is Email Coupon Message"
+msgstr "メールクーポンメッセージ"
+
+#: includes/class-wc-sc-admin-welcome.php:621
+msgid ""
+"Is it possible to have a coupon for each variation of the variable product?"
+msgstr "可変商品のバリエーションごとにクーポンを発行することは可能ですか？"
+
+#: includes/class-wc-sc-admin-welcome.php:637
+msgid ""
+"Is it possible to partially pay for a subscription with store credit and the "
+"remainder by another method?"
+msgstr "購読料の一部をストアクレジットで支払い、残りを別の方法で支払うことは可能ですか？"
+
+#: includes/class-wc-smart-coupons.php:4792
+msgid "Is Pick Price of Product"
+msgstr "製品のピック価格は？"
+
+#: includes/class-wc-sc-admin-welcome.php:625
+msgid "Is Smart Coupons compatible with WooCommerce Subscriptions?"
+msgstr "Smart CouponsはWooCommerce Subscriptionsと互換性がありますか？"
+
+#: includes/class-wc-sc-admin-welcome.php:641
+msgid "Is Smart Coupons WPML compatible?"
+msgstr "Smart CouponsはWPMLに対応していますか？"
+
+#: includes/class-wc-sc-coupons-by-location.php:310
+msgid ""
+"Is that a city name or partial name or ZIP code, you want to match? If so, "
+"press \"Enter\" to save it as: "
+msgstr "一致させたいのは都市名ですか、部分名ですか、郵便番号ですか？もしそうなら、\"Enter \"キーを押して保存してください： "
+
+#: includes/class-wc-sc-admin-welcome.php:591
+msgid "Is there any reference file for creating an import file for coupons?"
+msgstr "クーポンのインポートファイルを作成するための参考ファイルはありますか？"
+
+#: includes/class-wc-sc-coupon-import.php:283
+msgid ""
+"It seems PHP extension \"fileinfo\" is either not installed, not configured "
+"or it's not accessible."
+msgstr "PHPの拡張機能 \"fileinfo \"がインストールされていないか、設定されていないか、アクセスできないようです。"
+
+#: includes/class-wc-sc-admin-notifications.php:181
+msgid "it to use"
+msgstr "使用する"
+
+#: includes/class-wc-sc-settings.php:546
+msgid "Keppel"
+msgstr "ケッペル"
+
+#: includes/class-wc-sc-admin-welcome.php:339
+msgid "Know Smart Coupons"
+msgstr "スマートなクーポンを知る"
+
+#: includes/class-wc-sc-settings.php:756 includes/class-wc-sc-settings.php:759
+msgid "Labels"
+msgstr "ラベル"
+
+#: includes/class-wc-sc-purchase-credit.php:545
+msgid "Later"
+msgstr "後日"
+
+#: includes/class-wc-sc-admin-pages.php:1200
+msgid "later"
+msgstr "後日"
+
+#: includes/class-wc-sc-admin-welcome.php:563
+msgid "latest version of Smart Coupons"
+msgstr "スマートクーポンの最新バージョン"
+
+#: includes/class-wc-sc-admin-welcome.php:509
+msgid "Learn how to configure the sale of store credit in any amount"
+msgstr "ストア・クレジットを任意の金額で販売する設定方法を学ぶ"
+
+#: includes/class-wc-sc-admin-welcome.php:491
+msgid ""
+"Learn how to create a Buy One, Get One (BOGO) offer to boost sales and "
+"attract customers"
+msgstr "売上を伸ばし、顧客を惹きつけるBOGO（Buy One, Get One）オファーの作り方を学ぶ。"
+
+#: includes/class-wc-sc-admin-welcome.php:518
+msgid "Learn how to offer Gift Card worth $100 for just $90"
+msgstr "100ドル分のギフトカードを90ドルで提供する方法を学ぶ"
+
+#: includes/class-wc-sc-admin-notifications.php:247
+msgid "leaving a review"
+msgstr "レビュー"
+
+#: includes/class-wc-sc-display-coupons.php:2621
+#: includes/class-wc-sc-display-coupons.php:2632
+msgid "Less details"
+msgstr "詳細はこちら"
+
+#. translators: 1: Affiliate For WooCommerce 2: Smart Manager 3: Smart Offers
+#: includes/class-wc-sc-admin-welcome.php:423
+msgid ""
+"Let customers purchase gift cards from you or you issue store credit that "
+"your users can redeem on the current or next purchase. See how: %1$s or %2$s"
+msgstr "ギフトカードを購入したり、ストアクレジットを発行したりすることができます。その方法をご覧ください：1$s または %2$s"
+
+#. translators: %s: link to review WooCommerce Smart Coupons
+#: includes/class-wc-sc-admin-notifications.php:334
+msgid ""
+"Liked WooCommerce Smart Coupons? Leave us a %s. A huge thank you from "
+"WooCommerce & StoreApps in advance!"
+msgstr ""
+"WooCommerce Smart Couponsが気に入りましたか？sを残してください。WooCommerce &amp; "
+"StoreAppsよりお礼を申し上げます！"
+
+#: includes/class-wc-smart-coupons.php:5168
+msgid "Limit Usage to X Items"
+msgstr "利用をXアイテムに制限する"
+
+#: includes/class-wc-smart-coupons.php:1802
+msgid "Limited Time Offer!"
+msgstr "期間限定キャンペーン！"
+
+#: includes/class-wc-sc-admin-notifications.php:560
+msgctxt "Link text for contacting support"
+msgid "contact our support team"
+msgstr "サポートチームへのお問い合わせ"
+
+#: includes/class-wc-sc-coupon-expiry-reminder.php:247
+msgctxt "Link text to view scheduled actions in admin"
+msgid "View scheduled action"
+msgstr "予定されているアクションを見る"
+
+#: includes/class-wc-sc-display-coupons.php:2571
+msgid ""
+"List of coupons & their details which you have received from the store. "
+"Click on the coupon to see the details."
+msgstr "お店から受け取ったクーポンとその詳細のリストです。クーポンをクリックすると詳細が表示されます。"
+
+#: includes/class-wc-sc-display-coupons.php:1136
+msgid ""
+"List of coupons which are valid & available for use. Click on the coupon to "
+"use it. The coupon discount will be visible only when at least one product "
+"is present in the cart."
+msgstr "有効で使用可能なクーポンの一覧です。クーポンをクリックしてご利用ください。クーポン割引は、カートに商品が1点以上ある場合にのみ表示されます。"
+
+#: includes/class-wc-sc-display-coupons.php:1414
+msgid ""
+"List of coupons which can not be used. The reason can be based on its usage "
+"restrictions, usage limits, expiry date."
+msgstr "ご利用いただけないクーポンの一覧です。その理由は、使用制限、使用限度、有効期限などです。"
+
+#: includes/class-wc-sc-coupons-by-excluded-email.php:109
+msgid ""
+"List of excluded billing emails to check against when an order is placed. "
+"Separate email addresses with commas. You can also use an asterisk (*) to "
+"match parts of an email. For example \"*@gmail.com\" would match all gmail "
+"addresses."
+msgstr ""
+"注文時に照合する請求メールの除外リスト。メールアドレスはカンマで区切ってください。アスタリスク（*）を使用して、電子メールの一部に一致させることもできます。例えば、\"*@gmail"
+".com \"はすべてのgmailアドレスにマッチします。"
+
+#: includes/class-wc-sc-admin-pages.php:233
+msgid ""
+"Load the customer's billing information? This will remove any currently "
+"entered billing information."
+msgstr "顧客の請求情報をロードしますか？これは、現在入力されている請求情報を削除します。"
+
+#: includes/class-wc-sc-admin-pages.php:234
+msgid ""
+"Load the customer's shipping information? This will remove any currently "
+"entered shipping information."
+msgstr "顧客の配送情報をロードしますか？これにより、現在入力されている配送先情報が削除されます。"
+
+#: includes/class-wc-sc-coupons-by-location.php:497
+msgid "Locations lookup in"
+msgstr "ロケーション検索"
+
+#: includes/class-wc-sc-admin-welcome.php:567
+msgid "Loco Translate"
+msgstr "ロコ翻訳"
+
+#. translators: 1: The task class name
+#: includes/batches/class-wc-sc-coupon-table.php:291
+#: includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php:94
+msgctxt "Logger for stopped batch process due to health status"
+msgid "Batch stopped due to health status in task: %s"
+msgstr "タスクのヘルス・ステータスが原因でバッチが停止しました: %s"
+
+#: includes/class-wc-sc-settings.php:549
+msgid "Majorelle Blue"
+msgstr "マジョレル・ブルー"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:123
+msgid "Make a duplicate from this coupon"
+msgstr "このクーポンを複製する"
+
+#: includes/class-wc-sc-admin-welcome.php:454
+msgid "Make customer's coupon usage, easy & simple"
+msgstr "顧客のクーポン利用を簡単かつシンプルにする"
+
+#: includes/class-wc-sc-admin-welcome.php:553
+msgid ""
+"Make sure use of coupon is enabled in your store. You can find this setting"
+msgstr "クーポンの使用が有効になっていることを確認してください。この設定は"
+
+#: includes/class-wc-sc-admin-welcome.php:563
+msgid "Make sure you are using the "
+msgstr "を使用していることを確認してください。 "
+
+#: includes/class-wc-sc-admin-pages.php:1318
+#: includes/class-wc-sc-coupon-categories.php:106
+#: includes/class-wc-sc-coupon-categories.php:166
+#: includes/class-wc-smart-coupons.php:4386
+msgid "Manage coupon categories"
+msgstr "クーポンカテゴリーの管理"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:507
+msgid "Manage Coupon Reminder Emails"
+msgstr "クーポンリマインダーメールの管理"
+
+#: includes/class-wc-sc-admin-pages.php:1631
+msgid "Marketing"
+msgstr "マーケティング"
+
+#: includes/class-wc-sc-coupons-by-location.php:294
+msgid "Match for location in"
+msgstr "の場所と一致する。"
+
+#: includes/class-wc-smart-coupons.php:4796
+msgid "Max discount"
+msgstr "最大割引"
+
+#. translators: 1. WooCommerce current currency symbol
+#: includes/class-wc-sc-coupon-fields.php:429
+msgid "Max discount (%s)"
+msgstr "最大割引率 (%s)"
+
+#: includes/class-wc-sc-coupon-import.php:1134
+msgid "Maximum file size"
+msgstr "最大ファイルサイズ"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:135
+msgid "Maximum quantity"
+msgstr "最大数量"
+
+#: includes/class-wc-smart-coupons.php:5158
+msgid "Maximum Spend"
+msgstr "最高額"
+
+#: includes/class-wc-sc-settings.php:547
+msgid "McDonald"
+msgstr "マクドナルド"
+
+#: includes/class-wc-smart-coupons.php:5146
+msgid "Menu Order"
+msgstr "メニューオーダー"
+
+#: includes/class-wc-sc-admin-pages.php:829
+#: includes/class-wc-sc-admin-pages.php:1245
+#: includes/class-wc-sc-display-coupons.php:2878
+#: includes/class-wc-sc-display-coupons.php:2911
+#: includes/class-wc-sc-privacy.php:595
+msgid "Message"
+msgstr "メッセージ"
+
+#. translators: %s: Plugin name
+#: includes/class-wc-sc-admin-notifications.php:554
+msgctxt "Message displayed when the database update process fails"
+msgid ""
+"%1$s database update failed. This may be due to server issues or "
+"configuration problems. Please click the \"Restart Update\" button to try "
+"again. If the issue persists, %2$s for assistance."
+msgstr ""
+"1$s データベースの更新に失敗しました。これはサーバの問題または設定の問題による可能性があります。更新を再起動します\" "
+"ボタンをクリックして、再試行してください。問題が解決しない場合は、%2$s にお問い合わせください。"
+
+#. translators: %s: Plugin name, e.g., WooCommerce Smart Coupons
+#: includes/class-wc-sc-admin-notifications.php:730
+msgctxt "Message for the combo coupons feature admin notice"
+msgid ""
+"Now control which coupons can or can’t be used together. With Combo Coupons, "
+"create smarter discount rules to stack or restrict coupon usage based on "
+"your strategy — right from the coupon settings."
+msgstr ""
+"クーポンの併用可否をコントロールできるようになりました。コンボクーポンを使えば、戦略に合わせてクーポンの併用や利用制限を設定するなど、よりスマートな割引ルールをクーポン設定から作成できます。"
+
+#. translators: %s: Plugin name, e.g., WooCommerce Smart Coupons
+#: includes/class-wc-sc-admin-notifications.php:712
+msgctxt ""
+"Message for the new feature admin notice, introducing the coupon expiry "
+"reminder"
+msgid ""
+"%s is excited to introduce the new Coupon Expiry Reminders! Now, you can "
+"automatically send reminder emails to your customers before their coupons "
+"expire. Ensure they never miss out on a discount by setting up reminders in "
+"the Smart Coupons - Expiry Reminder section."
+msgstr ""
+"sは、新しいクーポン有効期限リマインダーをご紹介できることを嬉しく思います！クーポンの有効期限が切れる前に、リマインダーメールを自動的に送信することができます。Smart"
+" Coupons - Expiry Reminderセクションでリマインダーを設定することで、割引を逃すことがなくなります。"
+
+#: includes/class-wc-sc-display-coupons.php:2208
+msgctxt "Message shown when there are no available coupons for the customer"
+msgid "Sorry, No coupons available for you."
+msgstr "申し訳ございませんが、ご利用いただけるクーポンはございません。"
+
+#: templates/plain/combined-email.php:75 templates/plain/email.php:26
+msgid "Message:"
+msgstr "メッセージ"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:131
+msgid "Minimum quantity"
+msgstr "最小数量"
+
+#: includes/class-wc-smart-coupons.php:5157
+msgid "Minimum Spend"
+msgstr "最低金額"
+
+#: includes/class-wc-sc-settings.php:557
+msgid "Mint Ember"
+msgstr "ミント・エンバー"
+
+#. translators: Discount type
+#: includes/class-wc-sc-act-deact.php:286
+msgid "Missing meta for discount type \"%s\" set successfully!"
+msgstr "割引タイプ \"%s\" のメタが見つかりません！"
+
+#: includes/class-wc-sc-coupon-fields.php:548
+msgid "Months"
+msgstr "ヶ月"
+
+#: includes/class-wc-sc-display-coupons.php:2623
+#: includes/class-wc-sc-display-coupons.php:2635
+#: includes/class-wc-sc-display-coupons.php:2738
+msgid "More details"
+msgstr "詳細"
+
+#: includes/class-wc-sc-settings.php:828
+msgid "My Account page"
+msgstr "マイアカウントのページ"
+
+#: includes/class-wc-sc-privacy.php:807
+msgid "N/A"
+msgstr "該当なし"
+
+#: includes/class-wc-sc-admin-pages.php:222
+msgid "Name"
+msgstr "名称"
+
+#: includes/class-wc-sc-admin-pages.php:1125
+msgid "Need a lot of coupons? You can easily do that with Smart Coupons."
+msgstr "たくさんのクーポンが必要ですか？Smart Couponsを使えば簡単です。"
+
+#: includes/class-wc-sc-url-coupon.php:710
+msgid "Network error:"
+msgstr "ネットワークエラー："
+
+#: includes/class-wc-sc-display-coupons.php:462
+#: includes/class-wc-sc-display-coupons.php:1043
+#: includes/class-wc-sc-display-coupons.php:2845
+#: includes/class-wc-sc-shortcode.php:572
+#: includes/class-wc-smart-coupons.php:5067
+#: includes/emails/class-wc-sc-email-coupon.php:178
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:233
+#: templates/combined-email.php:162 templates/email.php:153
+#: templates/plain/combined-email.php:125 templates/plain/email.php:120
+#: templates/plain/expiry-reminder-email.php:101
+#: templates/print-coupons-default.php:180
+msgid "Never expires"
+msgstr "有効期限なし"
+
+#: includes/class-wc-sc-admin-notifications.php:244
+#: includes/class-wc-sc-print-coupon.php:275
+msgid "Never show again"
+msgstr "二度とショーに出ない"
+
+#: includes/class-wc-sc-coupon-categories.php:98
+msgid "New coupon category name"
+msgstr "新しいクーポン・カテゴリー名"
+
+#: includes/class-wc-sc-coupon-import.php:1004
+msgid "New feature"
+msgstr "新機能"
+
+#: includes/class-wc-sc-coupon-categories.php:99
+msgid "No coupon categories found"
+msgstr "クーポンカテゴリーが見つかりません"
+
+#: includes/class-wc-sc-shortcode.php:815
+msgid "No coupon code found."
+msgstr "クーポンコードが見つかりません。"
+
+#: includes/batches/class-wc-sc-coupons-expiry-reminder-scheduler.php:86
+msgctxt "No coupon ids error message"
+msgid "No coupon ids passed."
+msgstr "クーポンIDは渡されない。"
+
+#: includes/class-wc-sc-admin-coupons-dashboard-actions.php:266
+msgid "No coupon to duplicate has been supplied!"
+msgstr "複製クーポンは提供されていない！"
+
+#: includes/class-wc-sc-admin-pages.php:238
+msgid "No customer selected"
+msgstr "顧客が選択されていない"
+
+#: includes/class-wc-sc-url-coupon.php:642
+msgid "No email provided."
+msgstr "電子メールは提供されていない。"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:136
+#: includes/class-wc-sc-coupons-by-product-quantity.php:158
+#: includes/class-wc-sc-coupons-by-product-quantity.php:196
+#: includes/class-wc-sc-coupons-by-product-quantity.php:226
+#: includes/class-wc-sc-coupons-by-product-quantity.php:238
+msgid "No maximum"
+msgstr "上限なし"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:132
+#: includes/class-wc-sc-coupons-by-product-quantity.php:157
+#: includes/class-wc-sc-coupons-by-product-quantity.php:195
+#: includes/class-wc-sc-coupons-by-product-quantity.php:225
+#: includes/class-wc-sc-coupons-by-product-quantity.php:237
+msgid "No minimum"
+msgstr "最低額なし"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:109
+msgid "No payment methods"
+msgstr "支払い方法なし"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:186
+msgid "No product attributes"
+msgstr "製品属性なし"
+
+#: includes/class-wc-sc-coupons-by-excluded-email.php:108
+msgid "No restrictions"
+msgstr "制限なし"
+
+#: includes/class-wc-sc-shortcode.php:793
+#: includes/class-wc-sc-shortcode.php:834
+#: includes/class-wc-sc-shortcode.php:871
+msgid "No search term specified."
+msgstr "検索語が指定されていない。"
+
+#: includes/class-wc-sc-coupons-by-shipping-method.php:108
+msgid "No shipping methods"
+msgstr "発送方法なし"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:117
+#: includes/class-wc-sc-coupons-by-user-role.php:134
+msgid "No user roles"
+msgstr "ユーザーの役割なし"
+
+#: includes/class-wc-sc-admin-welcome.php:638
+msgid ""
+"No, this is possible only in those cases where subscription amount is more "
+"than store credit's balance. If store credit's balance is more than "
+"subscription's total then your bank account or credit card will not be "
+"charged."
+msgstr ""
+"いいえ。これは、ストアクレジットの残高よりも定期購入の金額の方が多い場合のみ可能です。ストアクレジットの残高が定期購入の総額を上回っている場合、お客様の銀行口座またはクレジットカードには請求されません。"
+
+#: includes/class-wc-sc-admin-welcome.php:575
+msgid ""
+"No. Coupon code should not have any spaces in the name, Eg, Coupon code "
+"should be “gift-certificate” & not “gift certificate”."
+msgstr ""
+"例：クーポンコードは \"gift-certificate \"でなければならず、\"gift certificate \"であってはならない。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:523
+msgid "Nonce verification failed for action \"wc_sc_refund_store_credit\"."
+msgstr "アクション \"wc_sc_refund_store_credit\" の Nonce 検証に失敗しました。"
+
+#: includes/class-wc-sc-url-coupon.php:637
+msgid "Nonce verification failed."
+msgstr "Nonceの検証に失敗した。"
+
+#. translators: Excluded product names
+#: includes/class-wc-smart-coupons.php:1448
+msgid "Not valid for %s"
+msgstr "sでは無効です。"
+
+#. translators: 1: The category names excluded
+#: includes/class-wc-smart-coupons.php:1462
+msgid "Not valid for category %s"
+msgid_plural "Not valid for categories %s"
+msgstr[0] "カテゴリ %s には無効です。"
+
+#. translators: Formatted maximum amount
+#: includes/class-wc-smart-coupons.php:1436
+msgid "Not valid for sale items"
+msgstr "セール品は対象外"
+
+#: includes/class-wc-sc-admin-welcome.php:642
+msgid ""
+"Not yet, but this is being worked on. You will find this in later versions."
+msgstr "まだですが、現在取り組んでいます。後のバージョンで見られるでしょう。"
+
+#: includes/class-wc-sc-coupon-import.php:1097
+msgid ""
+"Note: If any coupon from the CSV file already exists in the store, it will "
+"not update the existing coupon, instead a new coupon will be imported & the "
+"previous coupon with the same code will become inactive."
+msgstr ""
+"注意: "
+"CSVファイルのクーポンが既にストアに存在する場合、既存のクーポンは更新されず、新しいクーポンがインポートされ、同じコードを持つ以前のクーポンは無効になります。"
+
+#: includes/class-wc-sc-admin-notifications.php:521
+msgid ""
+"Note: WP CRON has been disabled on your install which may prevent this "
+"update from completing."
+msgstr "注意: WP CRONが無効になっているため、このアップデートが完了しない可能性があります。"
+
+#: includes/class-wc-sc-display-coupons.php:1994
+msgctxt "Notice when coupon code is empty"
+msgid "Please enter a valid coupon code."
+msgstr "有効なクーポンコードを入力してください。"
+
+#: includes/class-wc-sc-settings.php:671
+msgid "Notification"
+msgstr "お知らせ"
+
+#: includes/class-wc-sc-purchase-credit.php:535
+msgid "Now"
+msgstr "現在"
+
+#: includes/class-wc-sc-settings.php:439
+#: includes/class-wc-smart-coupons.php:5994
+msgid "Number of characters in auto-generated coupon code"
+msgstr "自動生成されるクーポンコードの文字数"
+
+#: includes/class-wc-sc-settings.php:440
+msgid ""
+"Number of characters in auto-generated coupon code will be restricted to "
+"this number excluding prefix and/or suffix. The default length will be 13. "
+"It is recommended to keep this number between 10 to 15 to avoid coupon code "
+"duplication."
+msgstr ""
+"自動生成されるクーポンコードの文字数は、接頭辞や接尾辞を除き、この文字数に制限されます。デフォルトの長さは13です。クーポンコードの重複を避けるため、この文字数は10から15の間に保つことをお勧めします。"
+
+#. translators: 1: Path to setting 2: Setting to set email address 3: Setting for number of coupons to generate
+#: includes/class-wc-sc-admin-pages.php:1175
+#: includes/class-wc-sc-admin-pages.php:1216
+msgid "Number of coupons to generate"
+msgstr "生成するクーポンの数"
+
+#: includes/class-wc-sc-settings.php:430
+#: includes/class-wc-smart-coupons.php:5993
+msgid "Number of coupons to show"
+msgstr "クーポンの表示枚数"
+
+#: includes/class-wc-sc-settings.php:554
+msgid "Ocean"
+msgstr "オーシャン"
+
+#. translators: 1. Coupon type 2. Coupon amount
+#: includes/class-wc-sc-purchase-credit.php:979
+msgid "of"
+msgstr "の"
+
+#: templates/acknowledgement-email.php:53
+msgid "on"
+msgstr "オン"
+
+#: includes/class-wc-sc-settings.php:818
+msgid "On Cart/Checkout pages"
+msgstr "カート／チェックアウトページ"
+
+#: includes/class-wc-sc-coupon-import.php:279
+msgid "Only CSV files are supported. The uploaded file type is: "
+msgstr "CSVファイルのみ対応しています。アップロード可能なファイル形式は "
+
+#: includes/class-wc-sc-product-columns.php:242
+msgid "Open in a new tab"
+msgstr "新しいタブで開く"
+
+#: includes/class-wc-sc-coupon-fields.php:531
+msgid "Optional coupon code format"
+msgstr "オプションのクーポンコード形式"
+
+#: includes/class-wc-sc-coupon-import.php:1135
+msgid "OR"
+msgstr "または"
+
+#: includes/class-wc-sc-coupon-process.php:1942
+msgctxt "Order edit admin page"
+msgid "Coupon details manually sent."
+msgstr "クーポンの詳細を手動で送信。"
+
+#: includes/class-wc-sc-coupon-process.php:1937
+msgctxt "Order edit admin page"
+msgid "Coupons manually regenerated & sent."
+msgstr "クーポンを手動で再生成して送信。"
+
+#: includes/class-wc-sc-coupon-process.php:1935
+msgctxt "Order edit admin page"
+msgid "Coupons manually regenerated."
+msgstr "クーポンは手動で再生成される。"
+
+#: includes/class-wc-sc-coupon-process.php:1908
+msgctxt "Order edit admin page"
+msgid "Regenerate & resend coupon emails"
+msgstr "クーポンメールの再生成と再送信"
+
+#: includes/class-wc-sc-coupon-process.php:1907
+msgctxt "Order edit admin page"
+msgid "Regenerate coupons"
+msgstr "リジェネレイト・クーポン"
+
+#: includes/class-wc-sc-coupon-process.php:1905
+msgctxt "Order edit admin page"
+msgid "Resend coupon emails"
+msgstr "クーポンメールの再送"
+
+#. translators: %s: singular name for store credit
+#: includes/compat/class-wcs-sc-compatibility.php:898
+msgid "Order paid by %s"
+msgstr "注文の支払い"
+
+#. translators: %s: singular name for store credit
+#: includes/compat/class-wcs-sc-compatibility.php:898
+msgid "Order paid by store credit."
+msgstr "ストアクレジットでお支払いください。"
+
+#: includes/class-wc-sc-admin-pages.php:1649
+msgid "Original amount"
+msgstr "元の金額"
+
+#: includes/class-wc-sc-admin-notifications.php:247
+msgid "our support team"
+msgstr "サポートチーム"
+
+#: includes/class-wc-sc-print-coupon.php:123
+msgctxt "Page slug"
+msgid "wc-sc-coupons-terms"
+msgstr "wc-scクーポン規約"
+
+#: includes/class-wc-sc-print-coupon.php:124
+msgctxt "Page title"
+msgid "Smart Coupons Terms"
+msgstr "スマートクーポン規約"
+
+#: includes/class-wc-sc-coupon-categories.php:93
+msgid "Parent coupon category"
+msgstr "親クーポンのカテゴリー"
+
+#: includes/class-wc-sc-coupon-categories.php:94
+msgid "Parent coupon category:"
+msgstr "親クーポンのカテゴリー"
+
+#. translators: 1. The coupon code 2. The text 'payment method/s' 3. List of payment method names 4. Link to the checkout page
+#: includes/class-wc-sc-coupons-by-payment-method.php:210
+#: includes/class-wc-sc-coupons-by-payment-method.php:214
+msgid "payment method"
+msgid_plural "payment methods"
+msgstr[0] "支払方法"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:108
+#: includes/class-wc-sc-coupons-by-payment-method.php:230
+msgid "Payment methods"
+msgstr "支払い方法"
+
+#. translators: The PHP extension name
+#: includes/class-wc-sc-admin-notifications.php:285
+msgid ""
+"PHP extension %s is missing or not accessible. It is required for secure "
+"coupon imports."
+msgstr "PHP 拡張 %s がないか、アクセスできません。これは安全なクーポンのインポートに必要です。"
+
+#: includes/class-wc-sc-purchase-credit.php:873
+#: includes/class-wc-sc-purchase-credit.php:985
+msgid "Pick a delivery date & time"
+msgstr "配達日時の指定"
+
+#. translators: 1. The discount text
+#: includes/class-wc-smart-coupons.php:1817
+msgid "Pick any item today for %s off."
+msgstr "本日、お好きな商品をお選びください。"
+
+#: includes/class-wc-sc-admin-notifications.php:247
+msgid "Please consider"
+msgstr "ご検討ください"
+
+#: includes/class-wc-sc-admin-pages.php:1042
+msgid "Please enter a valid value for Number of Coupons to Generate"
+msgstr "生成するクーポンの数」に有効な値を入力してください。"
+
+#: includes/class-wc-sc-admin-pages.php:201
+msgid "Please enter in a value less than the regular price."
+msgstr "通常価格より低い金額を入力してください。"
+
+#: includes/class-wc-sc-admin-pages.php:200
+msgid "Please enter in country code with two capital letters."
+msgstr "国番号を大文字2文字で入力してください。"
+
+#. translators: Decimal point
+#: includes/class-wc-sc-admin-pages.php:197
+msgid "Please enter in decimal (%s) format without thousand separators."
+msgstr "千区切りのない10進数(%s)形式で入力してください。"
+
+#. translators: Decimal point
+#: includes/class-wc-sc-admin-pages.php:199
+msgid ""
+"Please enter in monetary decimal (%s) format without thousand separators and "
+"currency symbols."
+msgstr "千の区切り文字や通貨記号を使用せず、10進数（%s）形式で入力してください。"
+
+#: includes/class-wc-smart-coupons.php:4369
+msgid "Please select at least one coupon to print."
+msgstr "印刷するクーポンを1つ以上選択してください。"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:255
+msgid "Please select some categories"
+msgstr "いくつかのカテゴリーを選択してください"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:210
+msgid ""
+"Please select some categories in \"Product categories\" restrictions above..."
+msgstr "上記の \"製品カテゴリ \"の制限の中でいくつかのカテゴリを選択してください..."
+
+#: includes/class-wc-sc-admin-pages.php:216
+msgid "Please select some items."
+msgstr "いくつかの項目を選択してください。"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:247
+msgid "Please select some products"
+msgstr "商品をお選びください"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:171
+msgid "Please select some products in \"Products\" restrictions above..."
+msgstr "上記の \"製品 \"制限からいくつかの製品を選択してください..."
+
+#: includes/class-wc-sc-admin-pages.php:691
+msgid "Please try again later."
+msgstr "後でもう一度お試しください。"
+
+#: includes/class-wc-smart-coupons.php:5558
+msgid "Please update WooCommerce to the latest version"
+msgstr "WooCommerceを最新バージョンにアップデートしてください。"
+
+#: includes/class-wc-sc-admin-welcome.php:567
+msgid "plugin and then following steps listed "
+msgstr "プラグインをインストールし "
+
+#: includes/class-wc-sc-settings.php:779
+msgid "Plural name"
+msgstr "複数の名前"
+
+#: includes/compat/class-wc-sc-polylang-compatibility.php:70
+msgid "Polylang plugin is required for this functionality."
+msgstr "この機能にはPolylangプラグインが必要です。"
+
+#. translators: %1$s: coupon code, %2$d: number of options, %3$s: discount amount, %4$s: currency symbol, %5$s: discount type.
+#: includes/class-wc-sc-coupon-actions.php:1154
+msgctxt "Popup description"
+msgid ""
+"Redeem Your \"%1$s\" and choose 1 product from %2$d options with %3$s %4$s "
+"%5$s off "
+msgstr "1$s \"をご利用になり、%2$dのオプションから1つの商品を選択し、%3$s %4$s %5$s 割引をご利用ください。 "
+
+#: includes/class-wc-sc-coupon-actions.php:1152
+msgctxt "Popup title"
+msgid "Choose an option."
+msgstr "オプションを選択してください。"
+
+#: includes/class-wc-smart-coupons.php:5147
+msgid "Post Date"
+msgstr "投稿日"
+
+#: includes/class-wc-smart-coupons.php:5143
+msgid "Post Excerpt"
+msgstr "抜粋を投稿する"
+
+#: includes/class-wc-smart-coupons.php:5145
+msgid "Post Parent"
+msgstr "ポストペアレント"
+
+#: includes/class-wc-smart-coupons.php:5144
+msgid "Post Status"
+msgstr "ポストステータス"
+
+#: includes/class-wc-sc-coupon-fields.php:532
+msgid "Prefix"
+msgstr "プリフィックス"
+
+#: includes/class-wc-sc-display-coupons.php:2015
+msgctxt "Prefix for successful coupon notice"
+msgid "Coupon code"
+msgstr "クーポンコード"
+
+#: includes/class-wc-sc-settings.php:209 includes/class-wc-sc-shortcode.php:880
+msgid "Preview"
+msgstr "プレビュー"
+
+#: includes/class-wc-sc-admin-pages.php:844
+#: includes/class-wc-sc-admin-pages.php:1260
+msgid "Preview Email"
+msgstr "プレビューメール"
+
+#: includes/class-wc-smart-coupons.php:6011
+msgid "Prices entered with tax"
+msgstr "税込価格"
+
+#: includes/class-wc-smart-coupons.php:4384
+msgid "Print"
+msgstr "プリント"
+
+#: includes/class-wc-sc-display-coupons.php:1274
+#: templates/combined-email.php:232 templates/email.php:206
+msgid "Print coupon"
+msgid_plural "Print coupons"
+msgstr[0] "クーポン印刷"
+
+#: includes/class-wc-smart-coupons.php:4384
+msgid "Print selected coupons"
+msgstr "選択したクーポンを印刷する"
+
+#: includes/class-wc-sc-settings.php:498
+#: includes/class-wc-smart-coupons.php:5998
+msgid "Printing coupons"
+msgstr "クーポンの印刷"
+
+#. translators: 1. Product/s 2. Product names 3. is/are 4. Coupons code
+#: includes/class-wc-sc-coupon-actions.php:588
+#: includes/class-wc-sc-coupons-by-product-quantity.php:124
+msgid "Product"
+msgid_plural "Products"
+msgstr[0] "製品"
+
+#. translators: 1. Singular/plural label for product(s) 2. Excluded product names
+#: includes/class-wc-sc-coupons-by-product-attribute.php:590
+#: includes/class-wc-sc-coupons-by-taxonomy.php:733
+msgid "product"
+msgid_plural "products"
+msgstr[0] "製品"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:610
+msgid "Product Attributes"
+msgstr "製品属性"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:156
+msgid "Product attributes"
+msgstr "製品属性"
+
+#. translators: %s: List of non-product coupon types.
+#: includes/class-wc-sc-coupons-by-product-attribute.php:170
+msgid ""
+"Product attributes that the coupon will be applied to, or that need to be in "
+"the cart in order for the %s to be applied."
+msgstr "クーポンが適用される商品属性、または%sが適用されるためにカート内にある必要がある商品属性。"
+
+#. translators: %s: List of non-product coupon types.
+#: includes/class-wc-sc-coupons-by-product-attribute.php:194
+msgid ""
+"Product attributes that the coupon will not be applied to, or that cannot be "
+"in the cart in order for the %s to be applied."
+msgstr "クーポンが適用されない商品属性、または%sを適用するためにカートに入れることができない商品属性。"
+
+#: includes/class-wc-smart-coupons.php:5163
+msgid "Product categories"
+msgstr "製品カテゴリー"
+
+#: includes/class-wc-sc-ajax.php:348 includes/class-wc-sc-ajax.php:353
+#: includes/class-wc-smart-coupons.php:1350
+#: includes/class-wc-smart-coupons.php:1355
+msgid "Product Discount"
+msgstr "製品割引"
+
+#: includes/class-wc-smart-coupons.php:5161
+msgid "Product IDs"
+msgstr "プロダクトID"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:115
+#: includes/class-wc-sc-coupons-by-product-quantity.php:688
+msgid "Product quantity based restrictions"
+msgstr "製品数量に基づく制限"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:181
+msgid ""
+"Product taxonomies that the coupon will be applicable for, or its "
+"availability in the cart in order for the \"Fixed cart discount\" to be "
+"applied, based on whether the taxonomies are included or excluded."
+msgstr "固定カート割引」が適用されるために、クーポンが適用される商品タクソノミ、またはカート内のタクソノミの有無。"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:140
+msgid ""
+"Product taxonomies that the coupon will be applicable for, or its "
+"availability in the cart in order for the \"Fixed cart discount\" to be "
+"applied, based on whether the taxonomies are included or excluded. All the "
+"taxonomies selected here, should be valid, for this coupon to be valid."
+msgstr ""
+"固定カート割引」が適用されるために、クーポンが適用される商品タクソノミ、またはカート内で利用可能なタクソノミ。このクーポンを有効にするには、ここで選択したすべてのタクソノミが有効である必要があります。"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:153
+#: includes/class-wc-sc-coupons-by-product-quantity.php:169
+#: includes/class-wc-sc-coupons-by-product-quantity.php:245
+#: includes/class-wc-sc-coupons-by-product-quantity.php:260
+msgid "Products"
+msgstr "製品紹介"
+
+#: includes/class-wc-sc-background-coupon-importer.php:409
+msgid "Progress"
+msgstr "進捗状況"
+
+#: includes/class-wc-sc-settings.php:594
+msgid "Promotion"
+msgstr "プロモーション"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-purchase-credit.php:218
+msgid "Purchase %s worth"
+msgstr "購入額 %s 相当"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-purchase-credit.php:218
+#: includes/class-wc-sc-settings.php:803
+msgid "Purchase credit worth"
+msgstr "購入クレジット価値"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-admin-pages.php:741
+msgid "Quickly create and email %s to one or more people."
+msgstr "をすばやく作成し、1人または複数の人に電子メールで送信します。"
+
+#: includes/class-wc-sc-admin-pages.php:743
+msgid ""
+"Quickly create and email Store Credit or Gift Card to one or more people."
+msgstr "ストアクレジットやギフトカードをすばやく作成し、1人または複数の人にメールで送信できます。"
+
+#: includes/class-wc-sc-coupon-import.php:1098
+msgid "Ready to import? Choose a .csv file, then click \"Upload file\"."
+msgstr "インポートの準備はできましたか？.csvファイルを選択し、「ファイルをアップロード」をクリックしてください。"
+
+#: includes/class-wc-sc-display-coupons.php:2875
+#: includes/class-wc-sc-display-coupons.php:2910
+msgid "Receiver"
+msgstr "レシーバー"
+
+#: includes/compat/class-wcs-sc-compatibility.php:932
+msgid "Recurring subscriptions"
+msgstr "定期購読"
+
+#. translators: %1$s: coupon code, %2$d: number of options, %3$s: discount amount, %4$s: currency symbol, %5$s: discount type.
+#: blocks/class-sc-actiontab-extend-store-endpoint.php:181
+msgid ""
+"Redeem Your \"%1$s\" and choose 1 product from %2$d options with %3$s %4$s "
+"%5$s off "
+msgstr "1$s \"をご利用になり、%2$dのオプションから1つの商品を選択し、%3$s %4$s %5$s 割引をご利用ください。 "
+
+#. translators: 1: refund id 2: refund date
+#: includes/class-wc-sc-coupon-refund-process.php:689
+msgid "Refund %1$s - %2$s"
+msgstr "払い戻し %1$s - %2$s"
+
+#. translators: 1: refund id 2: refund date 3: username
+#: includes/class-wc-sc-coupon-refund-process.php:676
+msgid "Refund %1$s - %2$s by %3$s"
+msgstr "払い戻し %1$s - %2$s by %3$s"
+
+#: includes/class-wc-sc-admin-notifications.php:243
+msgid "Remind me after a month"
+msgstr "1ヶ月後に思い出させて"
+
+#: includes/class-wc-sc-admin-pages.php:223
+msgid "Remove"
+msgstr "削除"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:217
+msgid "Remove taxonomy restriction"
+msgstr "タクソノミーの制限を解除する"
+
+#: includes/class-wc-sc-admin-pages.php:221
+msgid "Remove this attribute?"
+msgstr "この属性を削除しますか？"
+
+#: includes/class-wc-sc-admin-pages.php:220
+msgid "Remove this item meta?"
+msgstr "このアイテムを削除しますか？"
+
+#: includes/class-wc-sc-privacy.php:311
+msgid "Removed Coupon Personal Data"
+msgstr "クーポンの個人情報を削除"
+
+#: includes/class-wc-sc-privacy.php:721
+msgid "Removed Order Personal Data"
+msgstr "削除された注文個人データ"
+
+#: includes/class-wc-sc-privacy.php:430
+msgid "Removed User Personal Data"
+msgstr "削除されたユーザー個人データ"
+
+#: includes/compat/class-wcs-sc-compatibility.php:942
+#: includes/compat/class-wcs-sc-compatibility.php:1366
+msgid ""
+"Renewal orders should not generate coupons even when they include a product "
+"that issues coupons"
+msgstr "クーポンを発行する商品が含まれていても、更新注文ではクーポンを発行しないこと。"
+
+#: includes/class-wc-sc-admin-pages.php:1175
+msgid "Required"
+msgstr "必須"
+
+#: blocks/class-wc-sc-extend-store-endpoint.php:134
+msgctxt "REST API"
+msgid "Coupons scheduled date & time"
+msgstr "クーポン発行予定日時"
+
+#: blocks/class-wc-sc-extend-store-endpoint.php:119
+msgctxt "REST API"
+msgid "Email address of recipients"
+msgstr "受信者の電子メールアドレス"
+
+#: blocks/class-wc-sc-extend-store-endpoint.php:149
+msgctxt "REST API"
+msgid "Message for coupon recipient"
+msgstr "クーポン受取人へのメッセージ"
+
+#: blocks/class-wc-sc-extend-store-endpoint.php:107
+msgctxt "REST API"
+msgid "Whether to send coupons now or schedule for later."
+msgstr "クーポンを今すぐ送信するか、後で送信するか。"
+
+#: blocks/class-wc-sc-extend-store-endpoint.php:95
+msgctxt "REST API"
+msgid "Whether to send coupons to only one person or multiple people."
+msgstr "一人だけにクーポンを送るか、複数人に送るか。"
+
+#: blocks/class-wc-sc-extend-store-endpoint.php:82
+msgctxt "REST API"
+msgid "Whether to send coupons to someone else."
+msgstr "誰かにクーポンを送るかどうか。"
+
+#: includes/class-wc-sc-privacy.php:803
+msgid "Retain Store Credit/Gift Certificate"
+msgstr "ストアクレジット/ギフト券の保持"
+
+#: includes/class-wc-sc-admin-notifications.php:107
+msgid "Review"
+msgstr "レビュー"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:145
+msgid ""
+"Role of the users for whom this coupon is not valid. Keep empty if you want "
+"this coupon to be valid for users with any role."
+msgstr "このクーポンが無効なユーザーのロール。このクーポンをどのロールのユーザーにも有効にしたい場合は、空白のままにしておいてください。"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:128
+msgid ""
+"Role of the users for whom this coupon is valid. Keep empty if you want this "
+"coupon to be valid for users with any role."
+msgstr "このクーポンが有効なユーザーのロール。このクーポンをどのロールのユーザーにも有効にしたい場合は、空のままにしておいてください。"
+
+#: includes/class-wc-sc-settings.php:550
+msgid "Rose Pink"
+msgstr "ローズピンク"
+
+#: includes/class-wc-smart-coupons.php:6014
+msgid "Rounding"
+msgstr "丸め"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:116
+msgid "Scheduled email heading"
+msgstr "メールの見出し"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:108
+msgid "Scheduled email subject"
+msgstr "メールの件名"
+
+#. translators: %s: Plugin name
+#: includes/batches/class-wc-sc-coupons-expiry-reminder-scheduler.php:177
+msgctxt "scheduling coupon expiry info message"
+msgid ""
+"%s is scheduling coupon expiry reminders in the background. This may take a "
+"few moments, so please be patient."
+msgstr "sはバックグラウンドでクーポン有効期限リマインダーのスケジューリングを行っています。しばらくお待ちください。"
+
+#: includes/class-wc-sc-settings.php:645
+msgid ""
+"Search & select a coupon which you want to display as store notice. The "
+"selected coupon's description will be displayed along with the coupon code "
+"(if it is set) otherwise, a description will be generated automatically. To "
+"disable the feature, keep this field empty."
+msgstr ""
+"店舗告知として表示したいクーポンを検索・選択します。選択されたクーポンの説明は、クーポンコード（設定されている場合）と共に表示されます。この機能を無効にするには、このフィールドを空のままにしてください。"
+
+#: includes/class-wc-sc-coupon-categories.php:91
+msgid "Search coupon categories"
+msgstr "クーポンカテゴリー検索"
+
+#: includes/class-wc-sc-shortcode.php:867
+msgid "Search coupon..."
+msgstr "クーポンを検索..."
+
+#: includes/class-wc-sc-product-fields.php:100
+#: includes/class-wc-sc-product-fields.php:161
+msgid "Search for a coupon&hellip;"
+msgstr "クーポンを検索..."
+
+#: includes/class-wc-sc-settings.php:651
+msgid "Search for a coupon..."
+msgstr "クーポンを検索..."
+
+#: includes/class-wc-sc-coupon-fields.php:1058
+#: includes/class-wc-sc-coupon-fields.php:1085
+msgid "Search for a product&hellip;"
+msgstr "製品を検索..."
+
+#: includes/class-wc-sc-settings.php:211
+msgid "See coupon search limitations"
+msgstr "クーポン検索の制限を見る"
+
+#: includes/class-wc-sc-admin-welcome.php:430
+#: includes/class-wc-sc-admin-welcome.php:436
+#: includes/class-wc-sc-admin-welcome.php:444
+#: includes/class-wc-sc-admin-welcome.php:601
+msgid "See how"
+msgstr "どうだ"
+
+#: includes/class-wc-sc-coupons-by-location.php:275
+msgid "Select Additional Locations"
+msgstr "追加ロケーションを選択"
+
+#: includes/class-wc-sc-coupons-by-location.php:212
+msgid "Select location"
+msgstr "場所を選択"
+
+#: includes/class-wc-sc-display-coupons.php:880
+#: includes/class-wc-sc-settings.php:791
+#: includes/class-wc-smart-coupons.php:316
+msgid "Select options"
+msgstr "オプションを選択"
+
+#: includes/class-wc-sc-settings.php:464
+msgid "Select order status&hellip;"
+msgstr "注文状況を選択..."
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:162
+#: includes/class-wc-sc-coupons-by-product-attribute.php:216
+msgid "Select product attributes..."
+msgstr "製品属性を選択..."
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:508
+msgid "Sell %s at less price?"
+msgstr "を安く売る？"
+
+#: includes/class-wc-smart-coupons.php:5999
+msgid "Sell gift cards at less price?"
+msgstr "ギフトカードを安く売る？"
+
+#: includes/class-wc-sc-admin-welcome.php:419
+msgid "Sell or issue store credit / gift cards"
+msgstr "ストアクレジット／ギフトカードの販売または発行"
+
+#. translators: 1. Coupon type 2. Coupon amount
+#: includes/class-wc-sc-admin-pages.php:838
+#: includes/class-wc-sc-purchase-credit.php:979
+msgid "Send"
+msgstr "送信"
+
+#. translators: %s: singular name for store credit
+#. translators: Store Credit label
+#: includes/class-wc-sc-admin-pages.php:143
+#: includes/class-wc-sc-admin-pages.php:579
+#: includes/class-wc-sc-admin-pages.php:1607
+msgid "Send %s"
+msgstr "sを送信"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:42
+msgid "Send an acknowledgement email to the purchaser. One email per customer."
+msgstr "購入者に確認メールを送信します。お客様1人につき1通。"
+
+#: includes/class-wc-sc-settings.php:848
+msgid "Send Coupon Form"
+msgstr "クーポン送信フォーム"
+
+#: includes/class-wc-sc-settings.php:845
+msgid "Send coupon form"
+msgstr "クーポンフォームの送信"
+
+#: includes/class-wc-sc-product-fields.php:127
+#: includes/class-wc-sc-product-fields.php:186
+msgid "Send coupons on renewals?"
+msgstr "更新時にクーポンを送る？"
+
+#: includes/class-wc-sc-purchase-credit.php:803
+#: includes/class-wc-sc-settings.php:868
+msgid "Send Coupons to..."
+msgstr "クーポンを送る"
+
+#: includes/class-wc-sc-settings.php:893
+msgid ""
+"Send only one email instead of multiple emails when multiple coupons are "
+"generated for same recipient"
+msgstr "同じ受信者に複数のクーポンが生成された場合、複数の電子メールの代わりに1つの電子メールのみを送信します。"
+
+#: includes/emails/class-wc-sc-combined-email-coupon.php:35
+msgid ""
+"Send only one email instead of multiple emails when multiple coupons are "
+"generated per recipient."
+msgstr "受信者ごとに複数のクーポンが生成された場合、複数のメールを送信する代わりに、1つのメールのみを送信します。"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-admin-pages.php:143
+#: includes/class-wc-sc-admin-pages.php:579
+msgid "Send Store Credit"
+msgstr "ストア・クレジットを送る"
+
+#. translators: 1: Path to setting 2: Setting to set email address 3: Setting for number of coupons to generate
+#: includes/class-wc-sc-admin-pages.php:776
+#: includes/class-wc-sc-admin-pages.php:1216
+#: includes/class-wc-sc-admin-pages.php:1234
+msgid "Send to"
+msgstr "送信先"
+
+#: includes/class-wc-sc-purchase-credit.php:833
+msgid "Send to different people"
+msgstr "さまざまな人に送る"
+
+#: includes/class-wc-sc-purchase-credit.php:828
+msgid "Send to me"
+msgstr "私に送る"
+
+#: includes/class-wc-sc-purchase-credit.php:832
+msgid "Send to one person"
+msgstr "一人に送る"
+
+#: includes/class-wc-sc-display-coupons.php:2874
+#: includes/class-wc-sc-display-coupons.php:2912
+msgid "Sender"
+msgstr "送信者"
+
+#: includes/class-wc-sc-background-coupon-importer.php:594
+msgid "sent"
+msgstr "送信"
+
+#: includes/class-wc-sc-admin-welcome.php:448
+msgid "Set a maximum discount limit"
+msgstr "割引の上限を設定する"
+
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-settings.php:1092
+#: includes/class-wc-sc-settings.php:1095
+msgid "Setting"
+msgstr "セッティング"
+
+#: includes/class-wc-sc-admin-notifications.php:169
+msgid "Setting \"Enable the use of coupon codes\" is disabled."
+msgstr "クーポンコードの使用を有効にする」の設定が無効になっています。"
+
+#: includes/class-wc-sc-admin-notifications.php:103
+#: includes/class-wc-sc-admin-welcome.php:322
+msgid "Settings"
+msgstr "設定"
+
+#: includes/class-wc-sc-settings.php:598
+msgid "Shipment"
+msgstr "出荷"
+
+#: includes/class-wc-sc-coupons-by-location.php:301
+msgid "Shipping address"
+msgstr "配送先住所"
+
+#: includes/class-wc-sc-coupons-by-location.php:482
+msgid "shipping address"
+msgstr "発送先住所"
+
+#: includes/class-wc-sc-coupons-by-location.php:499
+msgid "Shipping Locations"
+msgstr "発送場所"
+
+#: includes/class-wc-sc-coupons-by-shipping-method.php:107
+#: includes/class-wc-sc-coupons-by-shipping-method.php:240
+msgid "Shipping methods"
+msgstr "配送方法"
+
+#: includes/class-wc-sc-display-coupons.php:3131
+msgid "Shop now!"
+msgstr "今すぐお買い求めください！"
+
+#. translators: %s: Preview link
+#: includes/class-wc-sc-settings.php:689
+msgid ""
+"Show coupons available to customers on their My Account > Coupons page %s"
+msgstr "マイアカウント &gt; クーポン]ページで利用可能なクーポンを表示する %s"
+
+#. translators: %s: Preview link
+#: includes/class-wc-sc-settings.php:707
+msgid "Show invalid or used coupons in My Account > Coupons %s"
+msgstr "マイアカウント &gt; クーポン %sに無効または使用済みのクーポンを表示する"
+
+#: includes/class-wc-sc-admin-welcome.php:456
+msgid ""
+"Show only valid coupons to your customer (if logged in) on cart, checkout & "
+"My Account page. Coupons can be applied with single click. So, no need to "
+"remember the coupon code or copy-pasting."
+msgstr ""
+"有効なクーポンのみをカート、チェックアウト、マイアカウントページに表示します。クーポンはシングルクリックで適用できます。クーポンコードを覚えたり、コピーペーストする必要はありません。"
+
+#: includes/class-wc-sc-coupon-fields.php:482
+msgid "Show to everyone?"
+msgstr "みんなに見せる？"
+
+#: includes/class-wc-sc-admin-welcome.php:567
+msgid "Simplest method is by installing"
+msgstr "最も簡単な方法は、インストールすることである。"
+
+#: includes/class-wc-sc-settings.php:769
+msgid "Singular name"
+msgstr "単独名"
+
+#: includes/class-wc-sc-background-coupon-importer.php:621
+msgid "Skipped"
+msgstr "スキップ"
+
+#: includes/class-wc-sc-admin-pages.php:320
+msgid "skipped"
+msgstr "スキップ"
+
+#: includes/class-wc-sc-admin-pages.php:521
+#: includes/class-wc-sc-admin-pages.php:523
+msgid "Smart Coupon"
+msgstr "スマートクーポン"
+
+#: includes/class-wc-sc-admin-welcome.php:562
+msgid "Smart Coupon's fields are broken?"
+msgstr "スマートクーポンのフィールドが壊れている？"
+
+#: includes/class-wc-sc-settings.php:94
+#: includes/blocks/sc-gutenberg-block.js:43
+msgid "Smart Coupons"
+msgstr "スマートクーポン"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:41
+msgid "Smart Coupons - Acknowledgement email"
+msgstr "スマートクーポン - 受領確認メール"
+
+#: includes/emails/class-wc-sc-email-coupon.php:34
+msgid "Smart Coupons - Auto generated coupon email"
+msgstr "スマートクーポン - 自動生成クーポンメール"
+
+#: includes/emails/class-wc-sc-combined-email-coupon.php:34
+msgid "Smart Coupons - Combined auto generated coupons email"
+msgstr "スマートクーポン - 自動生成されたクーポンを組み合わせたEメール"
+
+#: includes/class-wc-sc-admin-welcome.php:391
+msgid "Smart Coupons enable coupons to become an automatic/interactive system."
+msgstr "スマート・クーポンは、クーポンを自動／インタラクティブ・システムにすることができる。"
+
+#: includes/class-wc-sc-print-coupon.php:278
+msgid ""
+"Smart Coupons has created a coupon's terms page (used during coupon printing)"
+" for you. Please edit it as required from"
+msgstr "Smart Couponsでは、クーポンの利用規約ページ（クーポン印刷時に使用）を作成しました。必要に応じて"
+
+#: includes/class-wc-sc-admin-welcome.php:390
+msgid ""
+"Smart Coupons is a powerful extension, built on top of WooCommerce coupons. "
+"It adds a new discount type - Store Credit - and advanced functionality to "
+"the default coupons."
+msgstr ""
+"スマートクーポンは、WooCommerceクーポンの上に構築された強力な拡張機能です。デフォルトのクーポンに新しい割引タイプ - ストアクレジット - "
+"と高度な機能を追加します。"
+
+#: includes/class-wc-sc-admin-welcome.php:608
+msgid "Smart Coupons is not sending emails."
+msgstr "スマートクーポンはEメールを送信していない。"
+
+#: includes/class-wc-smart-coupons.php:6028
+msgid "Smart Coupons related settings"
+msgstr "スマートクーポン関連設定"
+
+#: includes/class-wc-sc-admin-welcome.php:609
+msgid ""
+"Smart Coupons sends email only after order completion. So make sure that "
+"order complete email is enabled and sending. If enabled, then make sure all "
+"settings of coupons, products are in place. Also check by switching your "
+"theme."
+msgstr ""
+"スマートクーポンは注文完了後にのみメールを送信します。そのため、注文完了メールが有効になっており、送信されていることを確認してください。有効になっている場合は、クーポン、商品の設定がすべて整っていることを確認してください。また、テーマを切り替えて確認してください。"
+
+#: includes/class-wc-sc-admin-pages.php:152
+#: includes/class-wc-sc-admin-pages.php:609
+msgid "Smart Coupons Settings"
+msgstr "スマートクーポンの設定"
+
+#: includes/class-wc-sc-admin-notifications.php:270
+msgid "Smart Coupons settings"
+msgstr "スマートクーポンの設定"
+
+#: includes/class-wc-sc-admin-welcome.php:597
+msgid ""
+"Smart Coupons uses hooks of Cart, Checkout & My Account page to display "
+"available coupons. If your theme is not using those hooks in cart, checkout "
+"& my-account template, coupons will not be displayed."
+msgstr ""
+"スマートクーポンは、カート、チェックアウト、マイアカウントのフックを使用して、利用可能なクーポンを表示します。お使いのテーマがカート、チェックアウト、マイアカウントのテンプレートでこれらのフックを使用していない場合、クーポンは表示されません。"
+
+#: includes/class-wc-sc-admin-notifications.php:247
+msgid "so far?"
+msgstr "ここまでは？"
+
+#: includes/class-wc-sc-display-coupons.php:764
+#: includes/class-wc-sc-display-coupons.php:773
+#: includes/class-wc-sc-display-coupons.php:782
+msgid "some products"
+msgstr "一部製品"
+
+#: includes/class-wc-smart-coupons.php:6655
+#: includes/class-wc-smart-coupons.php:6709
+#: includes/class-wc-smart-coupons.php:6738
+#: includes/class-wc-smart-coupons.php:6762
+msgid "Some values required for $item_id & $item_key"
+msgstr "item_idと$item_keyにはいくつかの値が必要です。"
+
+#: includes/class-wc-smart-coupons.php:6270
+#: includes/class-wc-smart-coupons.php:6385
+#: includes/class-wc-smart-coupons.php:6499
+msgid "Some values required for $post_id & $meta_key"
+msgstr "post_id と $meta_key にはいくつかの値が必要です。"
+
+#: includes/class-wc-sc-display-coupons.php:1083
+#: includes/class-wc-sc-display-coupons.php:1139
+msgid "Sorry, No coupons available for you."
+msgstr "申し訳ございませんが、ご利用いただけるクーポンはございません。"
+
+#: includes/class-wc-sc-coupon-import.php:761
+#: includes/class-wc-sc-coupon-import.php:817
+#: includes/class-wc-sc-coupon-import.php:829
+msgid "Sorry, there has been an error."
+msgstr "申し訳ありません、エラーが発生しました。"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:556
+#: includes/class-wc-sc-coupons-by-taxonomy.php:704
+msgid "Sorry, this coupon is not applicable to selected products."
+msgstr "申し訳ございませんが、このクーポンは一部の商品には適用されません。"
+
+#. translators: 1. Singular/plural label for product(s) 2. Excluded product names
+#: includes/class-wc-sc-coupons-by-product-attribute.php:590
+#: includes/class-wc-sc-coupons-by-taxonomy.php:733
+msgid "Sorry, this coupon is not applicable to the %1$s: %2$s."
+msgstr "申し訳ありませんが、このクーポンは %1$s: %2$s には適用されません。"
+
+#: includes/class-wc-sc-settings.php:552
+msgid "Spanish Orange"
+msgstr "スパニッシュオレンジ"
+
+#: includes/class-wc-sc-settings.php:597
+msgid "Special"
+msgstr "スペシャル"
+
+#. translators: Formatted minimum amount
+#: includes/class-wc-smart-coupons.php:1428
+msgid "Spend at least %s"
+msgstr "少なくとも%sを使う"
+
+#. translators: Formatted maximum amount
+#: includes/class-wc-smart-coupons.php:1432
+msgid "Spend up to %s"
+msgstr "sまで使う"
+
+#: includes/class-wc-sc-admin-welcome.php:493
+#: includes/class-wc-sc-admin-welcome.php:502
+#: includes/class-wc-sc-admin-welcome.php:511
+#: includes/class-wc-sc-admin-welcome.php:520
+msgid "Start this tour"
+msgstr "このツアーを開始する"
+
+#: includes/class-wc-sc-background-coupon-importer.php:411
+msgid "Stop"
+msgstr "ストップ"
+
+#. translators: Discount type
+#. translators: Store Credit label
+#: includes/class-wc-sc-act-deact.php:286
+#: includes/class-wc-sc-admin-pages.php:1442
+#: includes/class-wc-sc-admin-pages.php:1452
+#: includes/class-wc-sc-admin-pages.php:1607 includes/class-wc-sc-ajax.php:338
+#: includes/class-wc-sc-coupon-refund-process.php:91
+#: includes/class-wc-sc-coupon-refund-process.php:677
+#: includes/class-wc-sc-coupon-refund-process.php:690
+#: includes/class-wc-smart-coupons.php:1340
+#: includes/emails/class-wc-sc-email-coupon.php:362
+#: includes/emails/class-wc-sc-email-coupon.php:486
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:196
+msgid "Store Credit"
+msgstr "店舗クレジット"
+
+#: includes/class-wc-sc-background-coupon-importer.php:593
+msgid "Store credit"
+msgstr "ストアクレジット"
+
+#: includes/class-wc-sc-settings.php:373
+#: includes/compat/class-wcs-sc-compatibility.php:928
+msgid "store credit"
+msgstr "ストアクレジット"
+
+#: includes/class-wc-sc-background-coupon-importer.php:606
+msgid "store credit / gift card"
+msgstr "ストア・クレジット／ギフト・カード"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-order-fields.php:413
+msgid "Store Credit / Gift Card Balance"
+msgstr "ストアクレジット/ギフトカード残高"
+
+#: includes/class-wc-sc-coupon-fields.php:1461
+#: includes/class-wc-sc-settings.php:765
+msgid "Store Credit / Gift Certificate"
+msgstr "ストアクレジット/ギフト券"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-admin-pages.php:686
+msgid "Store Credit / Gift Certificate sent successfully."
+msgstr "ストアクレジット/ギフト券が正常に送信されました。"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-display-coupons.php:749
+msgid "Store Credit of "
+msgstr "店舗クレジット "
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-order-fields.php:119
+msgid "Store Credit Used"
+msgstr "店舗クレジット使用"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-order-fields.php:181
+msgid "Store Credit Used:"
+msgstr "ストア・クレジットを使用："
+
+#: includes/class-wc-sc-admin-welcome.php:605
+msgid ""
+"Store Credit's default behavior is auto-generate because, when using a store "
+"credit, it's balance keeps reducing. Therefore it should be uniquely created "
+"for every user automatically."
+msgstr ""
+"ストアクレジットのデフォルトの動作は自動生成です。なぜなら、ストアクレジットを使用すると残高が減り続けるからです。そのため、すべてのユーザーに対して自動的に作成されます。"
+
+#: includes/class-wc-sc-privacy.php:99 includes/class-wc-sc-privacy.php:311
+#: includes/class-wc-sc-privacy.php:430 includes/class-wc-sc-privacy.php:721
+msgid "Store Credit/Gift Certificate"
+msgstr "ストアクレジット/ギフト券"
+
+#: includes/class-wc-sc-privacy.php:234
+msgid "Store Credit/Gift Certificate - Coupon Data"
+msgstr "ストアクレジット/ギフト券 - クーポンデータ"
+
+#: includes/class-wc-sc-privacy.php:605
+msgid "Store Credit/Gift Certificate - Order Data"
+msgstr "ストアクレジット/ギフト券 - 注文データ"
+
+#: includes/class-wc-sc-privacy.php:804
+msgid ""
+"Store Credit/Gift Certificate that are stored for customers via coupons. If "
+"erased, the customer will not be able to use the coupons."
+msgstr "ストアクレジット/ギフト券は、クーポンを通じてお客様に保存されます。消去された場合、お客様はクーポンを使用することができなくなります。"
+
+#: includes/class-wc-sc-order-fields.php:253
+msgid "Store Credit:"
+msgstr "店舗クレジット："
+
+#: includes/class-wc-sc-display-coupons.php:1339
+msgid "Store Credits"
+msgstr "店舗クレジット"
+
+#: includes/class-wc-sc-settings.php:374 includes/class-wc-sc-settings.php:1085
+msgid "store credits"
+msgstr "ストアクレジット"
+
+#: includes/class-wc-sc-background-coupon-importer.php:398
+msgid "Store Credits / Gift Cards"
+msgstr "ストアクレジット/ギフトカード"
+
+#: includes/class-wc-sc-background-coupon-importer.php:607
+msgid "store credits / gift cards"
+msgstr "ストア・クレジット／ギフト・カード"
+
+#. Author of the plugin
+msgid "StoreApps"
+msgstr "ストアアップス"
+
+#: includes/class-wc-smart-coupons.php:5429
+msgid "Style 1"
+msgstr "スタイル1"
+
+#: includes/class-wc-smart-coupons.php:5430
+msgid "Style 2"
+msgstr "スタイル2"
+
+#: includes/class-wc-smart-coupons.php:5431
+msgid "Style 3"
+msgstr "スタイル3"
+
+#: includes/class-wc-smart-coupons.php:5432
+msgid "Style 4"
+msgstr "スタイル4"
+
+#: includes/class-wc-smart-coupons.php:5433
+msgid "Style 5"
+msgstr "スタイル5"
+
+#: includes/class-wc-smart-coupons.php:5434
+msgid "Style 6"
+msgstr "スタイル6"
+
+#: includes/class-wc-sc-settings.php:614
+msgid "Style for coupon in email."
+msgstr "メールでクーポンを受け取るスタイル。"
+
+#: includes/class-wc-sc-settings.php:610
+msgid "Style for email"
+msgstr "Eメールのスタイル"
+
+#: includes/class-wc-sc-settings.php:659
+msgid "Style for store notice"
+msgstr "店舗告知用スタイル"
+
+#: includes/class-wc-sc-settings.php:584
+msgid "Styles"
+msgstr "スタイル"
+
+#: includes/emails/class-wc-sc-email.php:116
+msgid "Subject"
+msgstr "テーマ"
+
+#. translators: WooCommerce My Account support link
+#: includes/class-wc-sc-admin-welcome.php:674
+msgid "submit a ticket"
+msgstr "チケットを提出する"
+
+#: includes/class-wc-sc-coupons-by-payment-method.php:553
+msgctxt "Success message after updating payment method and validating coupons"
+msgid "Payment method updated successfully, and coupons validated."
+msgstr "支払い方法が正常に更新され、クーポンが有効になりました。"
+
+#. translators: %s: Product title
+#: includes/class-wc-sc-coupon-actions.php:1267
+msgctxt "Success message when a product is added to the cart"
+msgid "\"%s\" has been added to your cart."
+msgstr "\"%s \"がカートに追加されました。"
+
+#: includes/class-wc-sc-background-coupon-importer.php:618
+msgid "Successfully"
+msgstr "成功裏に"
+
+#: includes/class-wc-sc-act-deact.php:244
+msgid "Successfully cleared WooCommerce Smart Coupons cache!"
+msgstr "WooCommerce Smart Couponsのキャッシュクリアに成功しました！"
+
+#: includes/class-wc-sc-coupon-refund-process.php:506
+msgid "Successfully updated store credit refund details."
+msgstr "ストアクレジット払い戻し詳細の更新に成功しました。"
+
+#: includes/class-wc-sc-coupon-fields.php:534
+msgid "Suffix"
+msgstr "接尾辞"
+
+#: includes/class-wc-sc-display-coupons.php:2015
+msgctxt "Suffix for successful coupon notice"
+msgid "has been applied to your cart."
+msgstr "がカートに適用されました。"
+
+#: includes/class-wc-smart-coupons.php:1800
+msgid "Super Savings!"
+msgstr "超節約！"
+
+#: includes/class-wc-sc-admin-notifications.php:106
+msgid "Support"
+msgstr "サポート"
+
+#. translators: 1. Error Message
+#: includes/class-wc-sc-coupon-data-store.php:262
+msgid "Sync of coupon data for coupon ID: %1$d failed. Reason: %2$s"
+msgstr "クーポン ID: %1$d のクーポン・データの同期に失敗しました。理由: %2$s"
+
+#. translators: Table name
+#: includes/class-wc-sc-act-deact.php:304
+msgid "Table %s deleted successfully."
+msgstr "テーブル %s が正常に削除されました。"
+
+#: includes/class-wc-sc-admin-pages.php:595
+#: includes/class-wc-sc-admin-welcome.php:305
+#: includes/class-wc-sc-tours.php:207 includes/class-wc-sc-tours.php:209
+msgid "Take a tour"
+msgstr "ツアーに参加する"
+
+#: includes/class-wc-sc-settings.php:730 includes/class-wc-sc-settings.php:733
+msgid "Tax"
+msgstr "税金"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:139
+#: includes/class-wc-sc-coupons-by-taxonomy.php:180
+msgid "Taxonomy"
+msgstr "分類学"
+
+#: includes/class-wc-sc-coupons-by-taxonomy.php:860
+msgid "Taxonomy based restrictions"
+msgstr "分類学に基づく制限"
+
+#: includes/class-wc-sc-admin-welcome.php:298
+msgid "Thank you for installing WooCommerce Smart Coupons"
+msgstr "WooCommerce Smart Couponsをインストールしていただきありがとうございます。"
+
+#: includes/class-wc-sc-rest-coupons-controller.php:147
+msgid "The coupon code already exists"
+msgstr "クーポンコードは既に存在する"
+
+#: includes/class-wc-sc-settings.php:889
+msgid ""
+"The coupons will be sent to the recipients via email on the selected date & "
+"time"
+msgstr "クーポンは、指定された日時にEメールで受信者に送信されます。"
+
+#: includes/class-wc-sc-coupon-import.php:1096
+msgid "The CSV must adhere to a specific format and include a header row."
+msgstr "CSVは特定のフォーマットに従い、ヘッダー行を含まなければならない。"
+
+#: includes/class-wc-sc-admin-notifications.php:482
+msgid ""
+"The database update runs in the background and may take some time. It's only "
+"for WooCommerce Smart Coupons plugin data and won't affect your existing "
+"data."
+msgstr ""
+"データベースの更新はバックグラウンドで実行され、時間がかかる場合があります。WooCommerceスマートクーポンプラグインのデータのみで、既存のデータには影響しません。"
+
+#: includes/class-wc-sc-coupon-import.php:762
+msgid "The file does not exist, please try again."
+msgstr "ファイルが存在しません。もう一度やり直してください。"
+
+#: includes/class-wc-sc-coupon-fields.php:431
+msgid "The maximum discount this coupon can give on a cart."
+msgstr "このクーポンがカートに適用される最大割引額。"
+
+#: includes/class-wc-sc-admin-pages.php:821
+msgid "The store credit will expire at 00:00:00 of this date."
+msgstr "ストアクレジットの有効期限はこの日付の00:00:00です。"
+
+#: includes/class-wc-sc-settings.php:864
+msgid "The title for coupon receiver details block. "
+msgstr "クーポン受信機詳細ブロックのタイトル。 "
+
+#: includes/class-wc-sc-purchase-credit.php:163
+msgid "The value should not be greater than"
+msgstr "を超えてはならない。"
+
+#: includes/class-wc-sc-purchase-credit.php:161
+msgid "The value should not be less than"
+msgstr "を下回ってはならない。"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-admin-pages.php:690
+msgid "There has been an error in sending %s."
+msgstr "s の送信でエラーが発生しました。"
+
+#. translators: %s: singular name for store credit
+#: includes/class-wc-sc-admin-pages.php:690
+msgid "There has been an error in sending Store Credit / Gift Certificate."
+msgstr "ストアクレジット/ギフト券の送信にエラーが発生しました。"
+
+#. translators: 1. File name 2. File download link
+#: includes/class-wc-sc-admin-welcome.php:593
+msgid ""
+"There is one file which is located inside the plugin. You can download the "
+"%1$s file from %2$s."
+msgstr "プラグイン内に1つのファイルがあります。1$sファイルは%2$sからダウンロードできます。"
+
+#: includes/class-wc-sc-product-fields.php:123
+#: includes/class-wc-sc-product-fields.php:160
+msgid ""
+"These coupon/s will be given to customers who buy this product. The coupon "
+"code will be automatically sent to their email address on purchase."
+msgstr "本クーポンは、本商品をお買い上げのお客様に差し上げます。クーポンコードはご購入時に自動的にお客様のメールアドレスに送信されます。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:126
+msgid "This action will also refund all store credit applied to the order."
+msgstr "この操作により、注文に適用されたストアクレジットもすべて払い戻されます。"
+
+#: includes/class-wc-smart-coupons.php:1170
+msgid ""
+"This coupon has pending emails to be sent. Deleting it will delete those "
+"emails also. Are you sure to delete this coupon?"
+msgstr "このクーポンには送信待ちのメールがあります。削除すると、これらのメールも削除されます。このクーポンを削除してもよろしいですか？"
+
+#: includes/class-wc-sc-coupons-by-shipping-method.php:216
+#: includes/class-wc-sc-coupons-by-shipping-method.php:221
+msgid "This coupon is not valid for selected shipping method."
+msgstr "このクーポンは選択された配送方法には適用されません。"
+
+#: includes/class-wc-sc-coupons-by-excluded-email.php:245
+#: includes/class-wc-sc-coupons-by-excluded-email.php:259
+#: includes/class-wc-sc-coupons-by-user-role.php:230
+#: includes/class-wc-sc-coupons-by-user-role.php:237
+msgid "This coupon is not valid for you."
+msgstr "このクーポンはお客様にはご利用いただけません。"
+
+#: includes/class-wc-smart-coupons.php:3528
+msgid "This coupon is valid for the first order only."
+msgstr "本クーポンは初回注文のみ有効です。"
+
+#: includes/class-wc-sc-admin-welcome.php:613
+msgid ""
+"This form is displayed using a hook which is available in My Account "
+"template. Make sure your theme's my-account template contains all hooks "
+"required for that template. Update your theme if it is not updated."
+msgstr ""
+"このフォームはマイアカウントテンプレートで利用可能なフックを使用して表示されます。テーマのマイアカウントテンプレートに、そのテンプレートに必要なフックがすべて含まれていることを確認してください。テーマが更新されていない場合は、更新してください。"
+
+#: includes/class-wc-sc-admin-welcome.php:501
+msgid ""
+"This guide will help you create gift cards, making it easy for your "
+"customers to purchase and redeem them, driving more sales and enhancing "
+"customer loyalty."
+msgstr ""
+"このガイドでは、ギフトカードを作成し、顧客が簡単に購入・利用できるようにすることで、より多くの売上を促進し、顧客ロイヤルティを高めるお手伝いをします。"
+
+#: includes/class-wc-sc-admin-welcome.php:519
+msgid ""
+"This guide will show you how to create a compelling offer that encourages "
+"customers to buy Gift Cards at a significant discount, boosting your sales "
+"and customer engagement."
+msgstr "このガイドでは、顧客にギフトカードの大幅な割引購入を促し、売上と顧客エンゲージメントを高める魅力的なオファーを作成する方法をご紹介します。"
+
+#: includes/class-wc-sc-admin-welcome.php:510
+msgid ""
+"This guide will show you how to set up flexible store credit options, "
+"allowing your customers to purchase credit in any custom denominations to "
+"use in your store."
+msgstr "このガイドでは、フレキシブルなストアクレジットオプションを設定する方法をご紹介します。"
+
+#: includes/class-wc-sc-admin-pages.php:886
+msgid "This is a sample coupon"
+msgstr "これはクーポンのサンプルです。"
+
+#: includes/class-wc-sc-settings.php:809
+msgid ""
+"This is the heading above coupon details displayed on products that issue "
+"coupons. "
+msgstr "クーポンを発行している商品のクーポン詳細の上に表示される見出しです。 "
+
+#: includes/class-wc-sc-settings.php:819
+msgid ""
+"This is the title for the list of available coupons, shown on Cart and "
+"Checkout pages. "
+msgstr "これは、カートとチェックアウトのページに表示される、利用可能なクーポンのリストのタイトルです。 "
+
+#: includes/class-wc-sc-order-fields.php:121
+msgid "This is the total credit used."
+msgstr "これは使用されたクレジットの合計である。"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:787
+msgid ""
+"This is what will be shown instead of \"Add to Cart\" for products that sell "
+"%s. "
+msgstr "これは、%sを販売する商品の「カートに入れる」の代わりに表示されるものです。 "
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:113
+msgctxt ""
+"This message is shown when the WooCommerce Smart Coupons database is not "
+"updated"
+msgid ""
+"This feature is unavailable until the WooCommerce Smart Coupons database "
+"update is complete. Please update the WooCommerce Smart Coupons database to "
+"enable coupon expiry reminders."
+msgstr ""
+"この機能はWooCommerceスマートクーポンデータベースのアップデートが完了するまで利用できません。クーポンの有効期限リマインダーを有効にするには、WooCommerceスマートクーポンデータベースを更新してください。"
+
+#: includes/class-wc-sc-coupon-fields.php:1092
+msgid ""
+"This much quantity of each product, selected above, will be added to cart."
+msgstr "上記で選択された各商品の数量がカートに追加されます。"
+
+#. translators: %s: $coupon_code coupon code
+#: includes/class-wc-sc-url-coupon.php:355
+msgctxt ""
+"This notice will be shown on the cart or the checkout page if the coupon is "
+"already applied."
+msgid ""
+"Coupon code \"%s\" already applied! Please add some products to the cart to "
+"see the discount."
+msgstr "クーポンコード「%s」はすでに適用されています！割引を表示するには、商品をカートに追加してください。"
+
+#. translators: %s: $coupon_code coupon code
+#: includes/class-wc-sc-url-coupon.php:351
+msgctxt ""
+"This notice will be shown on the cart or the checkout page if the coupon "
+"will be applied successfully."
+msgid ""
+"Coupon code \"%s\" applied successfully. Please add some products to the "
+"cart to see the discount."
+msgstr "クーポンコード「%s」が正常に適用されました。割引を表示するには、商品をカートに追加してください。"
+
+#: includes/class-wc-smart-coupons.php:6028
+msgid ""
+"This section shows settings that affects Smart Coupons' functionalities."
+msgstr "このセクションでは、スマートクーポンの機能に影響する設定を示します。"
+
+#: includes/class-wc-sc-admin-welcome.php:492
+msgid ""
+"This step-by-step guide will walk you through the process of setting up a "
+"BOGO deal, ensuring that your customers enjoy great value and keep coming "
+"back for more."
+msgstr ""
+"このステップ・バイ・ステップのガイドでは、BOGOディールを設定する手順を説明し、お客様にお得な買い物を楽しんでもらい、何度も足を運んでもらえるようにします。"
+
+#: includes/class-wc-smart-coupons.php:3324
+msgid "This tool will clear the cache created by WooCommerce Smart Coupons."
+msgstr "このツールはWooCommerceスマートクーポンによって作成されたキャッシュをクリアします。"
+
+#: includes/class-wc-smart-coupons.php:1803
+msgid "This Week Only!"
+msgstr "今週限り！"
+
+#: includes/class-wc-smart-coupons.php:1806
+msgid "This will be over soon! Hurry."
+msgstr "もうすぐ終わる！急げ"
+
+#. translators: %s: list of placeholders
+#: includes/emails/class-wc-sc-acknowledgement-email.php:104
+msgid ""
+"This will be used when the setting \"WooCommerce > Settings > Smart Coupons >"
+" Allow schedule sending of coupons?\" is enabled. Available placeholders: %s."
+msgstr ""
+"WooCommerce &gt; Settings &gt; Smart Coupons &gt; Allow schedule sending of "
+"coupons? \"が有効な場合に使用されます。利用可能なプレースホルダ: %s."
+
+#: includes/class-wc-sc-settings.php:595
+msgid "Ticket"
+msgstr "チケット"
+
+#: includes/class-wc-sc-coupon-fields.php:414
+msgid ""
+"Time after which coupon will be expired. This will work in conjunction with "
+"Coupon expiry date."
+msgstr "クーポンの有効期限。これはクーポンの有効期限と連動します。"
+
+#: includes/emails/class-wc-sc-expiry-reminder-email.php:105
+msgctxt "time unit"
+msgid "days"
+msgstr "日"
+
+#: includes/class-wc-sc-coupon-fields.php:373
+msgctxt "Timepicker on the admin side"
+msgid "Choose Time"
+msgstr "時間を選ぶ"
+
+#: includes/class-wc-sc-coupon-fields.php:307
+msgctxt "Timepicker on the admin side"
+msgid "Done"
+msgstr "完了"
+
+#: includes/class-wc-sc-coupon-fields.php:371
+msgctxt "Timepicker on the admin side"
+msgid "HH:mm"
+msgstr "HH:mm"
+
+#: includes/class-wc-sc-coupon-fields.php:375
+msgctxt "Timepicker on the admin side"
+msgid "Hour"
+msgstr "時間"
+
+#: includes/class-wc-sc-coupon-fields.php:379
+msgctxt "Timepicker on the admin side"
+msgid "Microsecond"
+msgstr "マイクロ秒"
+
+#: includes/class-wc-sc-coupon-fields.php:378
+msgctxt "Timepicker on the admin side"
+msgid "Millisecond"
+msgstr "ミリ秒"
+
+#: includes/class-wc-sc-coupon-fields.php:376
+msgctxt "Timepicker on the admin side"
+msgid "Minute"
+msgstr "分"
+
+#: includes/class-wc-sc-coupon-fields.php:306
+msgctxt "Timepicker on the admin side"
+msgid "Now"
+msgstr "現在"
+
+#: includes/class-wc-sc-coupon-fields.php:377
+msgctxt "Timepicker on the admin side"
+msgid "Second"
+msgstr "セカンド"
+
+#: includes/class-wc-sc-coupon-fields.php:374
+msgctxt "Timepicker on the admin side"
+msgid "Time"
+msgstr "時間"
+
+#: includes/class-wc-sc-coupon-fields.php:380
+msgctxt "Timepicker on the admin side"
+msgid "Time Zone"
+msgstr "タイムゾーン"
+
+#: includes/class-wc-sc-purchase-credit.php:682
+msgctxt "Timepicker on the frontend side"
+msgid "Choose Time"
+msgstr "時間を選ぶ"
+
+#: includes/class-wc-sc-purchase-credit.php:616
+msgctxt "Timepicker on the frontend side"
+msgid "Done"
+msgstr "完了"
+
+#: includes/class-wc-sc-purchase-credit.php:684
+msgctxt "Timepicker on the frontend side"
+msgid "Hour"
+msgstr "時間"
+
+#: includes/class-wc-sc-purchase-credit.php:688
+msgctxt "Timepicker on the frontend side"
+msgid "Microsecond"
+msgstr "マイクロ秒"
+
+#: includes/class-wc-sc-purchase-credit.php:687
+msgctxt "Timepicker on the frontend side"
+msgid "Millisecond"
+msgstr "ミリ秒"
+
+#: includes/class-wc-sc-purchase-credit.php:685
+msgctxt "Timepicker on the frontend side"
+msgid "Minute"
+msgstr "分"
+
+#: includes/class-wc-sc-purchase-credit.php:615
+msgctxt "Timepicker on the frontend side"
+msgid "Now"
+msgstr "現在"
+
+#: includes/class-wc-sc-purchase-credit.php:686
+msgctxt "Timepicker on the frontend side"
+msgid "Second"
+msgstr "セカンド"
+
+#: includes/class-wc-sc-purchase-credit.php:683
+msgctxt "Timepicker on the frontend side"
+msgid "Time"
+msgstr "時間"
+
+#: includes/class-wc-sc-purchase-credit.php:689
+msgctxt "Timepicker on the frontend side"
+msgid "Time Zone"
+msgstr "タイムゾーン"
+
+#: includes/class-wc-sc-settings.php:863
+msgid "Title"
+msgstr "タイトル"
+
+#: includes/class-wc-sc-product-columns.php:102
+msgctxt "Title for coupon column on the products page"
+msgid "Linked coupons"
+msgstr "連動クーポン"
+
+#: includes/class-wc-sc-admin-notifications.php:727
+msgctxt "Title for the combo coupons feature admin notice"
+msgid "✨ New Feature: 🤝 Combo Coupons!"
+msgstr "✨ 新機能: 🤝 コンボクーポン!"
+
+#: includes/class-wc-sc-admin-notifications.php:709
+msgctxt "Title for the new feature admin notice"
+msgid "✨ New Feature Alert!"
+msgstr "新機能のお知らせ！"
+
+#: includes/class-wc-sc-settings.php:829
+msgid "Title of available coupons list on My Account page. "
+msgstr "マイアカウントページに表示される利用可能なクーポンのタイトル。 "
+
+#: templates/acknowledgement-email.php:71
+msgid "to"
+msgstr "への"
+
+#: templates/combined-email.php:82
+msgid "To redeem your discount click on the following coupon(s):"
+msgstr "割引を利用するには、以下のクーポンをクリックしてください："
+
+#: templates/plain/expiry-reminder-email.php:20
+msgid ""
+"To redeem your discount use below coupon codes during checkout or copy and "
+"paste the below URL and hit enter in your browser"
+msgstr "割引を利用するには、チェックアウト時に以下のクーポンコードを使用するか、以下のURLをコピー＆ペーストしてブラウザでエンターキーを押します。"
+
+#: templates/plain/combined-email.php:22
+msgid ""
+"To redeem your discount use below coupon codes during checkout or copy and "
+"paste the below URLs and hit enter in your browser"
+msgstr "割引を利用するには、チェックアウト時に以下のクーポンコードを使用するか、以下のURLをコピー＆ペーストしてブラウザでエンターキーを押します。"
+
+#. translators: %s: Coupon code
+#: templates/email.php:85 templates/expiry-reminder-email.php:24
+msgid ""
+"To redeem your discount use coupon code %s during checkout or click on the "
+"following coupon:"
+msgstr "割引を利用するには、チェックアウト時にクーポンコード「%s」を使用するか、次のクーポンをクリックしてください："
+
+#. translators: %s: Coupon code
+#: templates/plain/email.php:23
+msgid ""
+"To redeem your discount use coupon code %s during checkout or copy and paste "
+"the below URL and hit enter in your browser:"
+msgstr ""
+"割引を利用するには、チェックアウト時にクーポンコード「%s」を使用するか、以下のURLをコピー＆ペーストしてブラウザでエンターキーを押してください："
+
+#: includes/class-wc-sc-admin-welcome.php:395
+msgid "Top Smart Coupons features"
+msgstr "スマートクーポンのトップ機能"
+
+#: includes/class-wc-sc-display-coupons.php:1348
+msgid "Total Credit Amount"
+msgstr "クレジット総額"
+
+#: includes/class-wc-sc-settings.php:558
+msgid "Tropical Dawn"
+msgstr "トロピカル・ドーン"
+
+#. translators: 1. Discount type 2. Discount Type Label
+#: includes/class-wc-sc-ajax.php:132
+#: includes/class-wc-sc-product-fields.php:114
+#: includes/class-wc-sc-product-fields.php:175
+msgid "Type"
+msgstr "タイプ"
+
+#: includes/class-wc-sc-coupons-by-product-attribute.php:818
+msgid "Unauthorized"
+msgstr "無許可"
+
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-settings.php:1092
+msgid "Uncheck"
+msgstr "チェックを外す"
+
+#: includes/class-wc-sc-admin-welcome.php:604
+msgid ""
+"Uncheck \"Auto-generate\" option in Store Credit is not saving? Is it always "
+"checked?"
+msgstr "ストアクレジットが保存されないのですが？常にチェックされていますか？"
+
+#: includes/class-wc-sc-coupon-fields.php:430
+msgid "Unlimited discount"
+msgstr "無制限割引"
+
+#: includes/class-wc-sc-coupon-categories.php:96
+msgid "Update coupon category"
+msgstr "クーポンカテゴリーの更新"
+
+#: includes/class-wc-sc-coupon-import.php:1004
+msgid "Update existing coupons"
+msgstr "既存のクーポンを更新する"
+
+#: includes/class-wc-sc-admin-notifications.php:495
+msgid "Update WooCommerce Smart Coupons database"
+msgstr "WooCommerceスマートクーポンデータベースを更新する"
+
+#: includes/class-wc-sc-background-coupon-importer.php:590
+msgid "updated"
+msgstr "更新済み"
+
+#: includes/class-wc-sc-background-coupon-importer.php:582
+msgid "updated & emailed"
+msgstr "更新＆メール送信"
+
+#: includes/class-wc-sc-coupon-import.php:1138
+msgid "Upload file"
+msgstr "ファイルのアップロード"
+
+#. translators: %s: Maximum coupon discount amount
+#: includes/class-wc-sc-ajax.php:363
+msgid "upto %s"
+msgstr "まで"
+
+#. translators: Documentation link for 'How to Apply Single or Multiple Coupons on Click of a Link'
+#: includes/class-wc-sc-admin-welcome.php:580
+msgid "URL of coupon should be like this:"
+msgstr "クーポンのURLはこんな感じ："
+
+#: includes/class-wc-smart-coupons.php:5169
+msgid "Usage Count"
+msgstr "使用回数"
+
+#: includes/class-wc-smart-coupons.php:5166
+msgid "Usage Limit"
+msgstr "利用限度額"
+
+#: includes/class-wc-smart-coupons.php:5167
+msgid "Usage Limit Per User"
+msgstr "ユーザーごとの使用量制限"
+
+#. translators: %s: Label for store credit
+#: includes/compat/class-wcs-sc-compatibility.php:934
+msgid ""
+"Use %s applied in first subscription order for subsequent renewals until "
+"credit reaches zero"
+msgstr "クレジットがゼロになるまで、最初のサブスクリプション注文で適用された %s をその後の更新に使用する。"
+
+#: includes/class-wc-smart-coupons.php:1833
+msgid "Use code"
+msgstr "コード使用"
+
+#. translators: 1. The coupon code
+#: includes/class-wc-smart-coupons.php:1850
+msgid "Use code: %s"
+msgstr "コードを使用してください：%s"
+
+#: includes/class-wc-sc-admin-pages.php:787
+#: includes/class-wc-sc-admin-pages.php:1240
+msgid "Use comma \",\" to separate multiple email addresses"
+msgstr "カンマ「,」で複数のメールアドレスを区切ってください。"
+
+#: includes/class-wc-smart-coupons.php:6000
+msgid ""
+"Use gift card applied in first subscription order for subsequent renewals "
+"until credit reaches zero"
+msgstr "クレジットの残高がゼロになるまで、初回注文時に適用されたギフトカードを次回更新時に使用する。"
+
+#: includes/class-wc-smart-coupons.php:5170
+msgid "Used By"
+msgstr "中古"
+
+#: includes/class-wc-sc-print-coupon.php:420
+msgid "Used during coupon printing"
+msgstr "クーポン印刷時に使用"
+
+#: includes/class-wc-sc-admin-pages.php:228
+msgid "Used for variations"
+msgstr "バリエーションに使用"
+
+#: includes/class-wc-sc-coupon-columns.php:128
+msgid "Used in orders"
+msgstr "注文に使用される"
+
+#: includes/class-wc-sc-coupons-by-user-role.php:253
+msgid "User Role"
+msgstr "ユーザーの役割"
+
+#: includes/class-wc-sc-coupon-fields.php:1097
+msgid "users can choose only one"
+msgstr "ユーザーが選択できるのは1つだけです。"
+
+#. translators: Product names
+#: includes/class-wc-smart-coupons.php:1442
+msgid "Valid for %s"
+msgstr "sで有効"
+
+#. translators: 1: The category names
+#: includes/class-wc-smart-coupons.php:1455
+msgid "Valid for category %s"
+msgid_plural "Valid for categories %s"
+msgstr[0] "カテゴリ %s で有効です。"
+
+#: includes/class-wc-smart-coupons.php:1484
+msgid "Valid on entire range of products. Buy anything in the store."
+msgstr "全商品対象。店内全品対象。"
+
+#: includes/class-wc-sc-settings.php:454
+#: includes/class-wc-smart-coupons.php:5995
+msgid "Valid order status for auto-generating coupon"
+msgstr "自動生成クーポンの有効な注文状況"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:117
+msgid "Validate quantity of"
+msgstr "の数量を検証する。"
+
+#: includes/class-wc-smart-coupons.php:4788
+msgid "Validity Suffix"
+msgstr "有効サフィックス"
+
+#: includes/class-wc-sc-admin-pages.php:225
+msgid "Value(s)"
+msgstr "価値"
+
+#. translators: 1: Affiliate For WooCommerce 2: Smart Manager 3: Smart Offers
+#: includes/class-wc-sc-admin-welcome.php:423
+msgid "variable but fixed amount"
+msgstr "変動額だが固定額"
+
+#: includes/class-wc-sc-settings.php:556
+msgid "Velvet Flame"
+msgstr "ベルベットの炎"
+
+#: includes/class-wc-sc-admin-notifications.php:523
+msgid "View status"
+msgstr "ステータスを見る"
+
+#: includes/class-wc-sc-settings.php:551
+msgid "Vintage"
+msgstr "ヴィンテージ"
+
+#: includes/class-wc-sc-admin-pages.php:227
+msgid "Visible on the product page"
+msgstr "商品ページに表示"
+
+#: templates/combined-email.php:213 templates/email.php:191
+#: templates/expiry-reminder-email.php:54
+#: templates/plain/combined-email.php:131 templates/plain/email.php:124
+msgid "Visit store"
+msgstr "来店"
+
+#: templates/plain/expiry-reminder-email.php:106
+msgid "Visit store:"
+msgstr "ご来店を："
+
+#: includes/class-wc-sc-background-coupon-importer.php:491
+msgid ""
+"We are processing coupons in background. Please wait before starting new "
+"process."
+msgstr "バックグラウンドでクーポンを処理しています。新しい処理を開始する前にお待ちください。"
+
+#: includes/class-wc-sc-privacy.php:111
+msgid ""
+"We store these data so that we can process it for you whenever required."
+msgstr "これらのデータは、必要なときにいつでもお客様のために処理できるように保存されます。"
+
+#: includes/class-wc-sc-coupon-fields.php:547
+msgid "Weeks"
+msgstr "週間"
+
+#: includes/class-wc-sc-admin-welcome.php:88
+msgid "Welcome to Smart Coupons"
+msgstr "スマート・クーポンへようこそ"
+
+#: includes/class-wc-sc-admin-welcome.php:388
+msgid "What is Smart Coupons?"
+msgstr "スマートクーポンとは？"
+
+#: includes/class-wc-sc-privacy.php:100
+msgid "What we access?"
+msgstr "何にアクセスするのか？"
+
+#: includes/class-wc-sc-privacy.php:105
+msgid "What we store & why?"
+msgstr "何を保管し、なぜ保管するのか？"
+
+#: includes/class-wc-sc-admin-welcome.php:578
+msgid ""
+"What's the URL to a coupon, so it's automatically inserted when visiting?"
+msgstr "クーポンのURLを教えてください。訪問時に自動的に挿入されます。"
+
+#: includes/class-wc-sc-coupon-fields.php:462
+msgid ""
+"When checked, and applicable, this discount will apply automatically to the "
+"cart / order - without customer needing to know / use the coupon. Auto Apply "
+"is an excellent way to setup discount rules using Smart Coupons. Keep in "
+"mind that, at most 5 coupons / discounts will be auto applied on a cart / "
+"order."
+msgstr ""
+"チェックが入り、適用可能な場合、この割引はカートや注文に自動的に適用されます。自動適用は、スマートクーポンを使用して割引ルールを設定する優れた方法です。最大5つのクーポン/割引がカート/注文に自動適用されることを覚えておいてください。"
+
+#: includes/class-wc-sc-coupon-fields.php:511
+msgid ""
+"When checked, and when this coupon is linked to a product, and when someone "
+"places an order containing such product: generates a copy of this coupon "
+"with all the settings, assigns a new coupon code and issues that newly "
+"generated coupon to the customer, to use in future order/s."
+msgstr ""
+"このクーポンが商品にリンクされ、誰かがその商品を含む注文をした場合、このクーポンのコピーをすべての設定で生成し、新しいクーポンコードを割り当て、その新しく生成されたクーポンを顧客に発行します。"
+
+#: includes/class-wc-sc-coupon-fields.php:504
+msgid "When checked, generated coupon's value will be same as product's price"
+msgstr "チェックすると、生成されたクーポンの価値は商品価格と同じになります。"
+
+#: includes/class-wc-sc-coupon-fields.php:471
+msgid ""
+"When checked, this coupon can be used only in a customer's very first order."
+msgstr "チェックが入っている場合、このクーポンは初回注文時にのみ使用できる。"
+
+#: includes/class-wc-sc-coupon-fields.php:483
+msgid ""
+"When checked, this coupon will be included for display on  cart / checkout / "
+"My Account pages - for all eligible customers."
+msgstr "チェックした場合、このクーポンはカート/チェックアウト/マイページに表示されます。"
+
+#. translators: %s: Explanation of the setting
+#: includes/class-wc-sc-settings.php:471
+msgid ""
+"When enabled, each coupon will have the option to enable auto-apply for that "
+"coupon %s"
+msgstr "有効にすると、各クーポンには、そのクーポン%sの自動適用を有効にするオプションがあります。"
+
+#. translators: %s: Label for store credit, 1: : Label for store credit, 2: Label for store credit, 3: Label for store credit
+#: includes/class-wc-sc-settings.php:517
+msgid ""
+"When selling %1$s, if Regular and Sale price is found for the product, then "
+"coupon will be created with product's Regular Price but customer will pay "
+"product's Sale price. This setting will also make sure if any discount "
+"coupon is applied on the %2$s while purchasing, then customer will get %3$s "
+"in their picked price"
+msgstr ""
+"1$を販売する際、その商品に通常価格とセール価格が見つかった場合、クーポンは商品の通常価格で作成されますが、顧客は商品のセール価格を支払うことになります。この設定により、購入時に%2$sに割引クーポンが適用された場合、顧客は選択した価格で%3$sを得ることができます。"
+
+#: includes/class-wc-sc-coupon-fields.php:1111
+msgid ""
+"When this coupon will be applied, selected products will be added to cart "
+"with set discount. If discount is not set, this coupon's discount will be "
+"applied to these products."
+msgstr ""
+"このクーポンが適用されると、選択された商品は設定された割引でカートに追加されます。割引が設定されていない場合、本クーポンの割引が適用されます。"
+
+#: includes/class-wc-sc-admin-welcome.php:552
+msgid ""
+"When trying to add coupon/Smart Coupon, I get \"Invalid post type\" message."
+msgstr "クーポン/スマートクーポンを追加しようとすると、「無効な投稿タイプです」というメッセージが表示されます。"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:799
+msgid ""
+"When you opt to allow people to buy %s of any amount, this label will be "
+"used. "
+msgstr "このラベルは、任意の金額の%を購入できるようにする場合に使用されます。 "
+
+#: includes/class-wc-sc-admin-welcome.php:629
+msgid "Which features of Smart Coupons work with Subscriptions?"
+msgstr "スマートクーポンのどの機能が定期購入に対応していますか？"
+
+#. translators: %s: Label for store credit
+#: includes/class-wc-sc-settings.php:797
+msgid "While purchasing %s"
+msgstr "sを購入中"
+
+#: includes/class-wc-sc-coupon-fields.php:1105
+msgid "with discount of"
+msgstr "割引"
+
+#: includes/class-wc-sc-admin-pages.php:1626
+msgid "WooCommerce"
+msgstr "ウーコマース"
+
+#: includes/class-wc-smart-coupons.php:6019
+msgid "WooCommerce Account Connected"
+msgstr "WooCommerceアカウント接続"
+
+#: includes/class-wc-sc-admin-pages.php:385
+msgid "WooCommerce Coupons (CSV)"
+msgstr "WooCommerce クーポン (CSV)"
+
+#. Plugin Name of the plugin
+#. translators: 1: plugin name 2: page based text 3: Label for store credit 4: Hide notice text
+#: includes/class-wc-sc-admin-notifications.php:181
+#: includes/class-wc-sc-admin-notifications.php:247
+#: includes/class-wc-sc-admin-notifications.php:261
+#: includes/class-wc-sc-settings.php:1092
+#: includes/class-wc-sc-settings.php:1095
+msgid "WooCommerce Smart Coupons"
+msgstr "WooCommerce スマートクーポン"
+
+#: includes/class-wc-smart-coupons.php:3322
+msgid "WooCommerce Smart Coupons Cache"
+msgstr "WooCommerce スマート・クーポン・キャッシュ"
+
+#. translators: WooCommerce Subscriptions product link
+#: includes/class-wc-sc-admin-welcome.php:411
+msgid "WooCommerce Subscriptions"
+msgstr "WooCommerce サブスクリプション"
+
+#: includes/class-wc-sc-admin-pages.php:793
+msgid "Worth"
+msgstr "価値"
+
+#. translators: 1: coupon amount 2: discount for text
+#: includes/emails/class-wc-sc-email-coupon.php:419
+msgid "worth %1$s (%2$s) "
+msgstr "価値 %1$s (%2$s) "
+
+#. translators: 1: coupon amount 2: max discount text 3: discount for text
+#: includes/emails/class-wc-sc-email-coupon.php:448
+msgid "worth %1$s%% %2$s (%3$s) "
+msgstr "1$s%%%2$s (%3$s) の価値 "
+
+#. translators: 1: coupon amount 2: discount for text
+#: includes/emails/class-wc-sc-email-coupon.php:430
+msgid "worth %1$s%% (%2$s) "
+msgstr "価値 %1$s%% (%2$s) "
+
+#. translators: %s coupon amount
+#: includes/emails/class-wc-sc-email-coupon.php:403
+msgid "worth %s "
+msgstr "価値 %s "
+
+#. translators: %s: coupon amount
+#: includes/emails/class-wc-sc-email-coupon.php:408
+msgid "worth %s (for entire purchase) "
+msgstr "購入金額 "
+
+#: includes/batches/class-wc-sc-coupons-expiry-reminder-scheduler.php:179
+msgctxt "WP CRON has been disabled warning message"
+msgid ""
+"Note: WP CRON has been disabled on your install which may prevent this "
+"update from completing."
+msgstr "注意: WP CRONが無効になっているため、このアップデートが完了しない可能性があります。"
+
+#: includes/class-wc-sc-purchase-credit.php:876
+#: includes/class-wc-sc-purchase-credit.php:990
+msgid "Write a message"
+msgstr "メッセージを書く"
+
+#: includes/class-wc-sc-coupon-fields.php:549
+msgid "Years"
+msgstr "年"
+
+#. translators: Documentation link for 'How to Print Coupons'
+#: includes/class-wc-sc-admin-welcome.php:618
+msgid ""
+"Yes, Smart Coupons does provide a feature for printing coupons. For more "
+"details, check this article: %s"
+msgstr "はい、Smart Couponsにはクーポンを印刷する機能があります。詳しくはこちらの記事をご覧ください：%s"
+
+#: includes/class-wc-sc-admin-welcome.php:626
+msgid "Yes, Smart Coupons does work with WooCommerce Subscriptions."
+msgstr "はい、スマートクーポンはWooCommerce定期購入と連動します。"
+
+#: includes/class-wc-sc-coupon-fields.php:150
+msgid "You can also apply multiple coupon codes via a single URL. For example:"
+msgstr "また、1つのURLから複数のクーポンコードを適用することもできます。例えば"
+
+#: includes/class-wc-sc-background-coupon-importer.php:415
+msgid ""
+"You can continue with other work. But for bulk generating or importing new "
+"coupons, wait for the current process to complete."
+msgstr "他の作業を続けることができます。しかし、新しいクーポンを一括生成またはインポートする場合は、現在のプロセスが完了するまでお待ちください。"
+
+#: includes/class-wc-sc-admin-welcome.php:571
+msgid "You can do this by overriding the email template."
+msgstr "Eメールテンプレートをオーバーライドすることでこれを行うことができます。"
+
+#: includes/class-wc-sc-admin-welcome.php:444
+msgid ""
+"You can give a coupon to your customer after every purchase, which can "
+"encourage them to purchase again from you."
+msgstr "購入のたびにクーポンを贈ることで、顧客の再購入を促すことができる。"
+
+#: includes/class-wc-sc-admin-welcome.php:601
+msgid "You can resend them from order admin edit page."
+msgstr "注文管理編集ページから再送信することができます。"
+
+#: includes/class-wc-sc-admin-pages.php:273
+msgid "You cannot add the same tax rate twice!"
+msgstr "同じ税率を2回追加することはできない！"
+
+#: includes/class-wc-smart-coupons.php:1805
+msgid "You don't want to miss this..."
+msgstr "これは見逃せない。"
+
+#: templates/combined-email.php:241
+msgid "You got these coupons "
+msgstr "こんなクーポンがある "
+
+#. translators: %s: singular name for store credit
+#: templates/email.php:216 templates/plain/combined-email.php:137
+#: templates/plain/email.php:130 templates/plain/expiry-reminder-email.php:113
+msgid "You got this %s"
+msgstr "あなたはこの%sを得た"
+
+#. translators: %s: singular name for store credit
+#: templates/email.php:216 templates/plain/combined-email.php:137
+#: templates/plain/email.php:130 templates/plain/expiry-reminder-email.php:113
+msgid "You got this gift card"
+msgstr "ギフトカード"
+
+#. translators: 1: email heading 2: suffix
+#: includes/emails/class-wc-sc-email-coupon.php:465
+msgid "You have received a"
+msgstr "あなたが受け取ったのは"
+
+#: includes/emails/class-wc-sc-email-coupon.php:76
+msgid "You have received a {coupon_type} {coupon_value}"
+msgstr "クーポン_タイプ}を受け取りました。{クーポン値｝"
+
+#: includes/emails/class-wc-sc-combined-email-coupon.php:70
+msgid "You have received coupons."
+msgstr "クーポンを受け取りました。"
+
+#. translators: 1. Receiver's count 2. Gift Card/s 3. Receiver name 4. Receiver details
+#: templates/acknowledgement-email.php:37
+msgid "You have scheduled to send %1$d %2$s %3$s %4$s"
+msgstr "1$d %2$s %3$s %4$s の送信を予約しました。"
+
+#. translators: 1. Receiver's count 2. Gift Card/s 3. Receiver name 4. Receiver details
+#: templates/plain/acknowledgement-email.php:27
+msgid "You have scheduled to send %1$d %2$s to %3$s (%4$s)"
+msgstr "1$d %2$s を %3$s (%4$s) に送信する予定です。"
+
+#: includes/class-wc-sc-coupon-refund-process.php:123
+msgid ""
+"You have selected all items for refund. This action will also refund all "
+"applied store credit."
+msgstr "払い戻し対象商品をすべて選択しました。この操作により、適用されたストアクレジットもすべて払い戻されます。"
+
+#. translators: 1. Receiver's count 2. Singular/Plural label for store credit(s) 3. Receiver name 4. Receiver details
+#: templates/acknowledgement-email.php:34
+msgid "You have successfully sent %1$d %2$s %3$s %4$s"
+msgstr "1$d %2$s %3$s %4$s の送信に成功しました。"
+
+#. translators: 1. Receiver's count 2. Singular/Plural label for store credit(s) 3. Receiver name 4. Receiver details
+#: templates/plain/acknowledgement-email.php:24
+msgid "You have successfully sent %1$d %2$s to %3$s (%4$s)"
+msgstr "1$d %2$s を %3$s (%4$s) に送信しました。"
+
+#: includes/class-wc-sc-settings.php:813
+msgid "You will get following coupon(s) when you buy this item"
+msgstr "この商品を購入すると、以下のクーポンがもらえます。"
+
+#: includes/class-wc-sc-display-coupons.php:698
+msgid "You will get following coupon(s) when you buy this item:"
+msgstr "この商品を購入すると、以下のクーポンがもらえます："
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:586
+#: includes/class-wc-sc-coupons-by-product-quantity.php:588
+#: includes/class-wc-sc-coupons-by-product-quantity.php:590
+msgid "Your cart does not meet the product quantity requirement."
+msgstr "カートの中身が必要数量に達していません。"
+
+#: includes/class-wc-sc-coupons-by-product-quantity.php:550
+msgid "Your cart does not meet the quantity requirement."
+msgstr "あなたのカートは数量要件を満たしていません。"
+
+#. translators: 1. Number of quantity 2. Singular or plural text based on number of quantities
+#: includes/class-wc-sc-coupons-by-product-quantity.php:564
+msgid "Your cart should have a maximum of %1$d %2$s in total."
+msgstr "カートには合計で %1$d %2$s までの商品が入ります。"
+
+#. translators: 1. Number of quantity 2. Singular or plural text based on number of quantities
+#: includes/class-wc-sc-coupons-by-product-quantity.php:568
+msgid "Your cart should have a minimum of %1$d %2$s in total."
+msgstr "カートには最低 %1$d %2$s の合計が必要です。"
+
+#: includes/class-wc-sc-display-coupons.php:784
+msgid "your entire purchase"
+msgstr "お買い上げ全額"
+
+#: includes/class-wc-sc-purchase-credit.php:826
+msgid "Your order contains coupons. What would you like to do?"
+msgstr "ご注文にクーポンが含まれています。どうしますか？"
+
+#: includes/class-wc-sc-purchase-credit.php:815
+msgid ""
+"Your order contains coupons. You will receive them after completion of this "
+"order."
+msgstr "ご注文にはクーポンが含まれています。ご注文完了後にお渡しします。"
+
+#: includes/class-wc-sc-admin-pages.php:274
+msgid ""
+"Your product has variations! Before changing the product type, it is a good "
+"idea to delete the variations to avoid errors in the stock reports."
+msgstr "商品にバリエーションがあります！商品タイプを変更する前に、在庫レポートのエラーを避けるためにバリエーションを削除することをお勧めします。"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:95
+msgid "{coupon_type} has been successfully scheduled"
+msgstr "{coupon_type}は正常にスケジュールされました。"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:77
+msgid "{coupon_type} sent successfully"
+msgstr "{coupon_type}が正常に送信されました。"
+
+#: includes/emails/class-wc-sc-email-coupon.php:67
+msgid ""
+"{site_title}: Congratulations! You've received a {coupon_type} from "
+"{sender_name}"
+msgstr "{site_title}です：おめでとうございます！あなたは{sender_name}から{coupon_type}を受け取りました。"
+
+#: includes/emails/class-wc-sc-combined-email-coupon.php:61
+msgid ""
+"{site_title}: Congratulations! You've received coupons from {sender_name}"
+msgstr "{site_title}です：おめでとうございます！あなたは{sender_name}からクーポンを受け取りました。"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:86
+msgid "{site_title}: {coupon_type} has been successfully scheduled"
+msgstr "{site_title}です：{coupon_type}は正常にスケジュールされました。"
+
+#: includes/emails/class-wc-sc-acknowledgement-email.php:68
+msgid "{site_title}: {coupon_type} sent successfully"
+msgstr "{site_title}です：{coupon_type}が正常に送信されました"

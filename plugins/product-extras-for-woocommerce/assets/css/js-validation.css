@@ -1,0 +1,17 @@
+.pewc-failed-validation,
+.pewc-product-extra-groups > li.pewc-failed-validation {
+  border: 1px solid #f00;
+  padding: 2em;
+  border-radius: 1em;
+}
+.pewc-item.pewc-failed-validation .pewc-js-validation-notice,
+.pewc-group-js-validation-notice {
+  color: #f00;
+}
+.pewc-group-js-validation-notice {
+  display:none;
+  margin-top:20px;
+}
+.tab-failed {
+  color: #f00
+}

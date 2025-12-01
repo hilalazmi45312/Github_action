@@ -1,0 +1,78 @@
+/* Product Price Widget Styles */
+.sh-price-widget {
+    display: block;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sh-price-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.sh-price-current {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sh-price-regular {
+    text-decoration: line-through;
+    color: #999;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sh-price-save {
+    color: #28a745;
+    font-weight: bold;
+    margin-bottom: 0 ;
+    padding-bottom: 0 ;
+}
+
+/* Override WooCommerce price color for this widget only */
+.sh-price-widget .woocommerce-Price-amount.amount {
+    color: #000000 ;
+}
+
+.sh-price-widget .woocommerce-Price-amount.amount bdi {
+    color: #000000 ;
+}
+
+/* Remove bottom spacing from widget container */
+.elementor-widget-sh_product_price .elementor-widget-container {
+    margin-bottom: 0 ;
+    padding-bottom: 0 ;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sh-price-widget .sh-price-current {
+        font-size: 28px;
+    }
+    
+    .sh-price-widget .sh-price-regular {
+        font-size: 18px;
+    }
+    
+    .sh-price-widget .sh-price-save {
+        font-size: 16px;
+        flex-basis: 100% !important;
+        order: 1 !important;
+        width: 100% !important;
+    }
+    
+    .sh-price-widget .sh-price-current,
+    .sh-price-widget .sh-price-regular {
+        order: 0 !important;
+    }
+}

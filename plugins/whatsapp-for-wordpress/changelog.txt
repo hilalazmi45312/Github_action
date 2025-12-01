@@ -1,0 +1,267 @@
+= Jun 18, 2025 – Version 3.7.3 =
+- Fixed: Error “Always available online” option when switching from Free version to Pro version
+
+= Apr 4, 2025 - Version 3.7.1 =
+- Updated: Remove a lable
+
+= Jan 15, 2025 - Version 3.7.0 =
+- Added: User role permissions
+
+= Nov 13, 2024 - Version 3.6.9 =
+- Added: Setting to hide offline agents (only in PRO)
+- Fixed: Missing capability check
+
+= Jul 29, 2024 - Version 3.6.8 =
+- Fixed: Font style issue
+
+= Jun 18, 2024 – Version 3.6.7 =
+- Improved: Button style conflicting with theme
+- Fixed: Background button
+
+= Jun 3, 2024 – Version 3.6.6 =
+- Improved: Web accessibility (using Tab and Shift + Tab to navigate the chat modal)
+- Fixed: Missing text
+
+= May 10, 2024 – Version 3.6.5 =
+- Fixed: CleanTalk security report
+
+= Mar 28, 2024 – Version 3.6.4 =
+- Fixed: Wordfence bug report
+
+= Mar 19, 2024 – Version 3.6.3 =
+- Updated: Change text-domain
+- Fixed: Wordfence bug report
+
+= Mar 3, 2024 – Version 3.6.2 =
+- Fixed: Wordfence report
+
+= Feb 1, 2024 – Version 3.6.1 =
+- Fixed: Hide widget on some pages in Elementor
+
+= Jan 15, 2024 - Version 3.6 =
+- Added: Font size of text in widget
+- Fixed: Hide/Display widget with post types
+
+= Dec 13, 2023 – Version 3.5 =
+- Added: Hook to hide widget for custom post types
+- Improved: UI tooltip
+
+= Sep 11, 2023 – Version 3.4.6 =
+- Fixed: jQuery warning
+- Fixed: Prevent display WhatsApp widget in Oxygen Builder admin dashboard
+
+= Sep 5, 2023 – Version 3.4.5 =
+- Fixed: XSS vulnerability
+
+= Aug 9, 2023 – Version 3.4.4 =
+- Fixed: Conflict jquery-ui-tabs
+
+= Jun 14, 2023 – Version 3.4.3 =
+- Improved: Display on Posts (Show on all posts, Show on these posts, Hide on these posts) (PRO)
+
+= Jun 7, 2023 - Version 3.4.2 =
+- Improved: UI Text 
+
+= Jun 2, 2023 - Version 3.4.1 =
+- Fixed: Compatible with WooCommerce Products Sold Counter plugin (KoalaApps)
+- Fixed: PHP Warning
+
+= Apr 19, 2023 - Version 3.4 =
+- Improved: Options Display of Floating Widget 
+
+= Feb 15, 2023 – Version 3.3.3 =
+- Fixed: Cache GDPR
+
+= Dec 21, 2022 – Version 3.3.2 =
+- Added: Support Porto Theme
+- Fixed: Deprecated woocommerce_stock_html filter
+
+= Oct 13, 2022 – Version 3.3.1 =
+- Added: Custom code to show button when product out of stock (add_filter('njt_wa_out_of_stock_display', '__return_true'); // Add this code to theme functions.php)
+
+= Sep 16, 2022 – Version 3.3 =
+- Added: Display widget on Posts
+- Improved: Some text
+
+= Nov 15, 2022 - Version 3.2.1 =
+- Added: Some recommended plugins
+
+= Jul 13, 2022 - Version 3.2 =
+- Added: Validate fields
+- Fixed: Style for range
+
+= Jun 27, 2022 – Version 3.1.9 =
+- Added: Recommended plugins
+
+= Mar 27, 2022 – Version 3.1.8 =
+- Added: Support Google Tag Manager (PRO)
+- Fixed: Support GA4 (PRO)
+
+= Mar 16, 2022 – Version 3.1.7 =
+-  Fixed: Google Speed Test (Avoid serving legacy JavaScript to modern browsers)
+
+= Mar 10, 2022 – Version 3.1.6 =
+- Added: Break line for chat description, GDPR content notice, responsive time text
+
+= Mar 8, 2022 – Version 3.1.5 =
+- Added: Break line for Predefined text
+
+= Dec 22, 2021 – Version 3.1.4 =
+- Fixed: Link in frontend
+
+= Dec 6, 2021 – Version 3.1.3 =
+- Fixed: Special characters in link (break Predefined Text)
+
+= Aug 6, 2021 - Version 3.1.2 =
+- Fixed: Save settings
+- Fixed: Load pages in low memory
+- Fixed: Save widget distance, save background color in button
+
+= Jun 17, 2021 – Version 3.1.1 =
+- Added: New ScrollBar UI
+- Improved: No more using jQuery in frontend, use native browser script with fast appearance (no delay like old versions)
+- Supported: Riode Theme
+- Optimized: Bundle Assets Files
+- Fixed: WooCommerce Button
+- Fixed: Conflict with Woodmart theme
+- Fixed: Widget left position
+- Fixed: Conflict CSS Style with jQueryUI
+- Fixed: Small bugs
+
+= Apr 20, 2021 – Version 3.0.5 =
+- Removed: Option for opening WhatsApp Web URL on mobile
+
+= Apr 14, 2021 – Version 3.0.4 =
+- Added: Option for redirect different WhatsApp URL (API, Web, Protocol)
+
+= Mar 23, 2021 – Version 3.0.3 =
+- Fixed: Time runs for older WordPress versions below 5.3
+- Fixed: Small bugs
+
+= Mar 16, 2021 – Version 3.0.2 =
+- Improved: Live preview
+- Improved: WhatsApp button live editor in Gutenberg block
+- Improved: CSS
+
+= Mar 12, 2021 – Version 3.0.1 =
+- Improved: UI
+- Updated: POT file
+- Fixed: Open WhatsApp button
+
+= Mar 10, 2021 – Version 3.0 - BIG UPDATE =
+- Added: Facebook Pixel Analytics (PRO)
+- Added: Compatible with all cache plugins
+- Added: Widget icon label options
+- Added: Widget Distance
+- Added: Widget Scroll Bar (PRO)
+- Added: Time Symbols
+- Added: Button live preview
+- Added: Widget live preview
+- Added: Custom multiple time (PRO)
+- Added: RTL support
+- Improved: Change WhatsApp web link to API link
+- Improved: WhatsApp button Gutenberg block
+- Improved: UI/UX
+- Fixed: WhatsApp button
+- Fixed: Some small bugs
+
+= Nov 5, 2020 – Version 2.6 =
+- Improved: Permissions
+- Removed: Missing tags
+- Fixed: Conflict with Oxygen builder
+- Fixed: Script warnings
+- Fixed: Small bugs
+
+= Sep 14, 2020 – Version 2.5 =
+- Improved: Floating widget
+- Fixed: Duplicate WhatsApp button in WooCommerce product pages
+- Fixed: Detect time by WordPress timezone setting 
+
+= Sep 1, 2020 – Version 2.4 =
+- Added: Google Analytics
+- Added: Support multisite
+- Updated: Pot file
+- Changed: Some text
+- Removed: Unused files
+- Fixed: Some small bugs
+
+= Jun 9, 2020 – Version 2.3.3 =
+- Fixed: WPML and Floating Widget
+
+= May 15, 2020 – Version 2.3.2 =
+- Fixed: WPML and Polylang translation compatibility
+
+= Feb 24, 2020 – Version 2.3.1 =
+- Fixed: Get pages error (thanks to bhdrdnz)
+
+= Feb 12, 2020 – Version 2.3 =
+- Fixed: Replace link detected in device
+- Fixed: Time availibility not correctly 
+- Fixed: Display in page chosen
+
+= Nov 21, 2019 – Version 2.2.1 =
+- Fixed: WPML conflict
+
+= Apr 9, 2019 – Version 2.2
+- Added: Translation files (Spanish, Portuguese, German, French, Russian)
+
+= Feb 28, 2019 – Version 2.1.1 =
+- Fixed: Widget disappears once there are too many accounts
+
+= Jan 28, 2019 – Version 2.1 =
+- Added: Option to enable/ disable GDPR
+- Improved: Work on WordPress with/ without Gutenberg
+- Fixed: Small bugs
+
+= 2.0 =
+* Added: Select pages to display WhatsApp box
+* Added: Select devices desktop/ mobile
+* Added: Notice alert for wrong phone number/ group link input
+* Added: Translation files (Spanish, Portuguese, German, French, Russian)
+* Added: GDPR notice with privacy policy link
+* Added: Support Gutenberg
+* Added: Option always online
+* Added: Option to enable/ disable GDPR
+* Added: Edit response time text
+* Added: On/Off for widget
+* Added: Multi-Languages
+* Added: Widget label option
+* Added: Default settings
+* Added: Ajax accounts loading
+
+* Improved: Translation with PoEdit
+* Improved: Clean code
+* Improved: Work on WordPress with/ without Gutenberg
+* Improved: Optimize plugin
+* Improved: Loading speed when select account
+* Improved: UI/UX
+* Improved: Important updates
+* Improved: Link to WhatsApp app on phone
+* Improved: List accounts pages
+
+
+* Fixed: Get pages error (thanks to bhdrdnz)
+* Fixed: Replace link detected in device
+* Fixed: Time availibility not correctly 
+* Fixed: Display in page chosen
+* Fixed: WPML conflict
+* Fixed: Widget disappears once there are too many accounts
+* Fixed: Work with sever cache
+* Fixed: GDPR CSS
+* Fixed: Error on WooCommerce variable products
+* Fixed: Some small bugs
+* Fixed: Group link, links in label description
+* Fixed: Loading languages
+* Fixed: Update options for new version
+* Fixed: CSS for button
+* Fixed: Display settings for WhatsApp Widget
+* Fixed: Some small bugs
+
+= 1.1 =
+* Added: Time Availability
+* Added: Shortcode [njwa_time_work] for each account
+* Added: Button shortcode
+* Improved: UI/UX
+
+= 1.0 =
+* Version 1.0 Initial Release

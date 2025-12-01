@@ -1,0 +1,188 @@
+.jagif-popup-gift-icon-wrap {
+  z-index: 999991;
+  opacity: 1;
+  position: fixed;
+  line-height: 1.6;
+  font-size: 13px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+  animation-fill-mode: both;
+}
+.jagif-popup-gift-icon-wrap * {
+  box-sizing: border-box;
+}
+.jagif-popup-gift-icon-wrap *::after {
+  box-sizing: border-box;
+}
+.jagif-popup-gift-icon-wrap *::before {
+  box-sizing: border-box;
+}
+
+.jagif-popup-gift-icon-wrap-bottom_left.jagif-popup-gift-icon-wrap-open {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_in_left;
+}
+
+.jagif-popup-gift-icon-wrap-top_left.jagif-popup-gift-icon-wrap-open {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_in_left;
+}
+
+.jagif-popup-gift-icon-wrap-bottom_left.jagif-popup-gift-icon-wrap-close {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_out_left;
+}
+
+.jagif-popup-gift-icon-wrap-top_left.jagif-popup-gift-icon-wrap-close {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_out_left;
+}
+
+.jagif-popup-gift-icon-wrap-bottom_right.jagif-popup-gift-icon-wrap-open {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_in_right;
+}
+
+.jagif-popup-gift-icon-wrap-top_right.jagif-popup-gift-icon-wrap-open {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_in_right;
+}
+
+.jagif-popup-gift-icon-wrap-bottom_right.jagif-popup-gift-icon-wrap-close {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_out_right;
+}
+
+.jagif-popup-gift-icon-wrap-top_right.jagif-popup-gift-icon-wrap-close {
+  animation-duration: 0.8s;
+  animation-name: jagif-gift-icon-slide_out_right;
+}
+
+.jagif-popup-gift-icon-wrap.jagif-popup-gift-icon-wrap-mouseenter {
+  animation-duration: 0.3s !important;
+  animation-name: jagif-gift-icon-mouseenter !important;
+}
+
+.jagif-popup-gift-icon-wrap.jagif-popup-gift-icon-wrap-mouseleave {
+  animation-duration: 0.3s !important;
+  animation-name: jagif-gift-icon-mouseleave !important;
+}
+
+.jagif-popup-gift-icon-wrap.jagif-popup-gift-icon-wrap-effect-shake_vertical:not(.jagif-popup-gift-icon-wrap-mouseenter) {
+  animation-duration: 1s !important;
+  animation-name: jagif-gift-icon-shake_vertical !important;
+}
+
+.jagif-popup-gift-icon-wrap.jagif-popup-gift-icon-wrap-effect-shake_horizontal:not(.jagif-popup-gift-icon-wrap-mouseenter) {
+  animation-duration: 1s !important;
+  animation-name: jagif-gift-icon-shake_horizontal !important;
+}
+
+.jagif-popup-gift-icon {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jagif-popup-gift-icon i {
+  font-size: 20px !important;
+  color: #d2691e;
+  transform: translateZ(0);
+}
+.jagif-popup-gift-icon i:before {
+  margin: 0;
+}
+
+.jagif-popup-gift-count-wrap {
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jagif-popup-gift-icon-1 .jagif-popup-gift-count-wrap {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  height: 20px;
+  width: 20px;
+  transform: scale(1) translateY(-50%) translateX(-45%);
+}
+
+.jagif-popup-gift-icon.jagif-popup-gift-icon-2 {
+  align-items: flex-end;
+}
+.jagif-popup-gift-icon.jagif-popup-gift-icon-2 i {
+  margin-bottom: 5px;
+}
+
+.jagif-popup-gift-icon-2 .jagif-popup-gift-count-wrap {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  height: 16px;
+  width: 16px;
+}
+
+.jagif-popup-gift-icon.jagif-popup-gift-icon-3 i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+}
+
+.jagif-popup-gift-icon-3 .jagif-popup-gift-count-wrap {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 1;
+  height: 16px;
+  width: 16px;
+  transform: scale(1) rotate(-50deg);
+}
+
+.jagif-popup-gift-icon-4 .jagif-popup-gift-count-wrap {
+  display: none;
+}
+
+.jagif-popup-gift-count {
+  font-weight: 300;
+}
+
+@keyframes jagif-gift-icon-slide_out_left {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(-100%, 0, 0) scale(1);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@keyframes jagif-gift-icon-slide_out_right {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(100%, 0, 0) scale(1);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/*# sourceMappingURL=jagif-popup-gift-icon.css.map */

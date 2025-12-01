@@ -1,0 +1,2 @@
+﻿"Status Name","Status Slug","Status Description","Background Color","Text Color","Graphic Style","User can cancel","Is paid status","Bulk Action","Display in Reports","Hide from Customer"
+Changed,changed,"Description of changed status.",#ff40ff,#feffff,text,no,osm_not_paid,yes,yes,no

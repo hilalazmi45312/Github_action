@@ -1,0 +1,148 @@
+/* Product Extras Widget - Elementor Editor Styles */
+
+.wd-swatch.wd-text .wd-swatch-text{
+    font-size: unset;
+}
+
+/* Widget Icon and Title in Editor */
+.elementor-element .elementor-widget-sh-product-extras .elementor-widget-title {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Widget Icon */
+.elementor-element .elementor-widget-sh-product-extras .elementor-widget-icon {
+    color: #007cba;
+}
+
+/* Control Sections */
+.elementor-control-section_content,
+.elementor-control-section_style {
+    border-left: 3px solid #007cba;
+}
+
+/* Control Labels */
+.elementor-control-show_title .elementor-control-title,
+.elementor-control-custom_title .elementor-control-title,
+.elementor-control-title_tag .elementor-control-title,
+.elementor-control-title_typography .elementor-control-title,
+.elementor-control-title_color .elementor-control-title,
+.elementor-control-field_spacing .elementor-control-title,
+.elementor-control-field_typography .elementor-control-title {
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Typography Controls */
+.elementor-control-title_typography .elementor-control-content,
+.elementor-control-field_typography .elementor-control-content {
+    background: #f8f9fa;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Color Controls */
+.elementor-control-title_color .elementor-control-content {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+/* Spacing Controls */
+.elementor-control-field_spacing .elementor-control-content {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+/* Switch Controls */
+.elementor-control-show_title .elementor-control-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Select Controls */
+.elementor-control-title_tag select {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    background: #fff;
+    color: #495057;
+}
+
+.elementor-control-title_tag select:focus {
+    border-color: #007cba;
+    box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1);
+    outline: none;
+}
+
+/* Help Text */
+.elementor-control-description {
+    color: #6c757d;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+/* Widget Preview in Editor */
+.elementor-widget-sh-product-extras .elementor-widget-container {
+    border: 1px dashed #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    background: #f8f9fa;
+    text-align: center;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.elementor-widget-sh-product-extras .elementor-widget-container:before {
+    content: "\f0c7";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 24px;
+    display: block;
+    margin-bottom: 8px;
+    color: #007cba;
+}
+
+.elementor-widget-sh_product_extras .sh-product-extras-field-label{
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Responsive Controls */
+@media (max-width: 1024px) {
+    .elementor-control-content {
+        padding: 8px;
+    }
+    
+    .elementor-control-title {
+        font-size: 13px;
+    }
+}
+
+/* Dark Mode Support */
+.elementor-editor-dark .elementor-widget-sh-product-extras .elementor-widget-container {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ccc;
+}
+
+.elementor-editor-dark .elementor-control-title {
+    color: #ccc;
+}
+
+.elementor-editor-dark .elementor-control-description {
+    color: #999;
+}
+
+/* Animation for Better UX */
+.elementor-control-content {
+    transition: all 0.2s ease;
+}
+
+.elementor-control:hover .elementor-control-content {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

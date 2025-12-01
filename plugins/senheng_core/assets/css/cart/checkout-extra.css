@@ -1,0 +1,771 @@
+body #wfacp-e-form *{
+    font-size: unset !important;
+    font-family: var(--wd-title-font) !important;
+}
+
+.woocommerce-remove-coupon{
+    margin-inline-end: 0px !important;
+}
+
+#coupons_list{
+    display: none;
+}
+
+.woocommerce-checkout-review-order-table .wd-checkout-prod{
+    align-items: initial !important;
+}
+
+.checkout-product-extras .sh-extras-section {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 16px;
+}
+
+.checkout-product-extras .sh-extras-header {
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.checkout-product-extras .sh-extras-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.checkout-product-extras .sh-extras-image {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f7f7f7;
+}
+
+.checkout-product-extras .sh-extras-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.checkout-product-extras .sh-extras-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.checkout-product-extras .sh-extras-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-left: 16px;
+}
+
+.checkout-product-extras .sh-extras-title {
+    font-size: 14px;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.checkout-product-extras .sh-extras-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.checkout-product-extras .sh-extras-price .amount {
+    font-weight: 600;
+    color: #111;
+}
+
+.checkout-product-extras .sh-extras-price .sh-price-original,
+.checkout-product-extras .sh-price-original .amount{
+    color: #888 ;
+    text-decoration: line-through;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+/* Hide default WooCommerce variation display */
+.woocommerce-cart .cart_item .variations,
+.woocommerce-checkout .cart_item .variations,
+.woocommerce-cart .cart_item dl.variation,
+.woocommerce-checkout .cart_item dl.variation {
+    display: none !important;
+}
+
+.checkout-product-extras .sh-extras-qty {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Variation Display Styles for Checkout */
+.checkout-variation-data{
+    margin-top: 5px;
+}
+
+.checkout-product-extras ,.checkout-variation-data, .checkout-variation-data .variation-separator{
+    font-size: 14px;
+    color: #707070;
+}
+
+.checkout-product-extras .checkout-variation-data .variation-item {
+    display: inline-block;
+    margin-right: 0;
+    margin-bottom: 4px;
+}
+
+.checkout-product-extras .checkout-variation-data .variation-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.checkout-product-extras .checkout-variation-data .variation-value {
+    color: #707070;
+    font-weight: normal;
+}
+
+.checkout-product-extras .checkout-variation-data .variation-separator {
+    color: #707070;
+    margin: 0 2px;
+}
+/* Checkout Product Extras Styling */
+
+.woocommerce-checkout tr.cart_item .product-total>.amount{
+    color: var(--wd-primary-color) !important;
+    font-weight: 600;
+}
+
+.woocommerce-checkout .cart-product-label .product-name-wrapper{
+    color: #000;
+}
+
+.woocommerce-checkout .cart-product-label .sale-price-indicator{
+    color: #666;
+}
+
+/* Hide the colon that appears before product extras */
+.woocommerce-checkout-review-order-table .product-name .checkout-product-extras::before,
+.woocommerce-checkout .woocommerce-checkout-review-order .checkout-product-extras::before,
+.checkout-product-extras::before {
+    content: none !important;
+}
+
+/* Hide empty keys and colons in checkout display */
+.woocommerce-checkout .product-name dt:empty + dd .checkout-product-extras,
+.woocommerce-checkout .product-name .variation:has(.checkout-product-extras) dt:empty,
+.checkout-extras-hidden-key,
+.woocommerce-checkout .product-name dt:has(.checkout-extras-hidden-key) {
+    display: none !important;
+}
+
+/* Hide colon after hidden key */
+.woocommerce-checkout .product-name dt:has(.checkout-extras-hidden-key)::after,
+.woocommerce-checkout .variation dt:has(.checkout-extras-hidden-key)::after {
+    content: none !important;
+    display: none !important;
+}
+
+.woocommerce-checkout-review-order-table ul.variation {
+    display: none !important;
+}
+
+.woocommerce-checkout .checkout-product-extras {
+    margin-top: 8px;
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+/* Layout for Product Extras - Match Cart Page */
+.checkout-extras-item-horizontal {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.checkout-extras-item-horizontal:last-child {
+    margin-bottom: 0;
+}
+
+/* Left: Image Container - Match Cart Page */
+.checkout-extras-image-container {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f7f7f7;
+}
+
+.checkout-extras-image {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f7f7f7;
+}
+
+.checkout-extras-placeholder {
+    opacity: 0.7;
+}
+
+/* Product Details with new layout structure */
+.checkout-extras-details {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Left side: Title and variation */
+.checkout-extras-details .sh-extras-left {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Right side: Prices and quantity */
+.checkout-extras-details .sh-extras-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-left: 16px;
+}
+
+.checkout-extras-title {
+    font-size: 14px;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.checkout-extras-price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.checkout-extras-name {
+    font-size: 13px;
+    line-height: 1.3;
+    margin: 0;
+    color: #000 !important;
+}
+
+.checkout-extras-variation {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+    display: inline;
+}
+
+.checkout-extras-variation .variation-value {
+    display: inline;
+}
+
+.checkout-extras-variation .variation-separator {
+    display: inline;
+}
+
+.checkout-extras-quantity-price {
+    font-size: 12px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.checkout-extras-quantity-price .quantity {
+    color: #666;
+    order: 0 !important;
+}
+
+.checkout-extras-quantity-price .price {
+    font-weight: 500;
+}
+
+.checkout-actual-price .woocommerce-Price-amount.amount bdi,.checkout-actual-price .woocommerce-Price-amount.amount .woocommerce-Price-currencySymbol{
+    font-size: 11.2px;
+}
+
+.woocommerce-checkout .wfacp_elementor_mini_cart_widget .product-quantity{
+    display: none;
+}
+
+.woocommerce-checkout .checkout-qty{
+    display: block;
+    margin-top: 4px;
+}
+
+.woocommerce-checkout ul.variation{
+    display: none !important;
+}
+
+.woocommerce-checkout .pickup-location-package-field .woocommerce-shipping-contents{
+    display: none;
+}
+
+#wfacp-e-form .wfacp_main_form .select2-container .select2-selection--single .select2-selection__rendered{
+    padding: 12px 12px 2px !important;
+}
+
+body #wfacp-e-form .wfacp_main_form .wfacp_shipping_table ul li .wfacp_single_shipping{
+    margin-bottom: 4px;
+}
+
+.woocommerce-checkout .shop_table .cart_item{
+    display: none;
+}
+
+.sh-custom-shop-table {
+    margin: 0;
+    padding: 0;
+}
+
+.sh-custom-shop-table .sh-checkout-cart-item {
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.sh-custom-shop-table .sh-checkout-cart-item:last-child { 
+    margin-bottom: 20px; 
+}
+
+.sh-custom-shop-table .sh-cart-item-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 0;
+}
+
+.sh-custom-shop-table .sh-item-badge {
+    background: #6c757d;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.sh-custom-shop-table .sh-item-image-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.sh-custom-shop-table .sh-item-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sh-custom-shop-table .sh-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sh-custom-shop-table .sh-item-qty-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #6c757d;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    overflow: visible;
+}
+
+.sh-custom-shop-table .sh-item-details {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.sh-custom-shop-table .sh-item-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: #000;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.sh-custom-shop-table .sh-item-meta {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
+
+body #wfacp-e-form .sh-custom-shop-table .sh-item-price .woocommerce-Price-amount bdi {
+    font-size: 14px !important;
+    text-align: right;
+    flex-shrink: 0;
+    padding-left: 20px;
+}
+
+body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi .woocommerce-Price-currencySymbol{
+    font-size: 12px !important;
+}
+
+.sh-custom-shop-table .sh-remove-item {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+}
+
+.sh-custom-shop-table .sh-added-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #dc3545;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 15px 0 15px 0;
+}
+
+.sh-custom-shop-table .sh-extras-section {
+    margin-top: 15px;
+    padding-top: 0;
+    border-top: none;
+}
+
+.sh-custom-shop-table .sh-extras-header {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.sh-custom-shop-table .sh-extras-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0 12px 12px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* .sh-custom-shop-table .sh-extras-item:last-child {
+    margin-bottom: 0;
+} */
+
+.sh-custom-shop-table .sh-extras-image {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #d0d0d0;
+}
+
+.sh-custom-shop-table .sh-extras-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sh-custom-shop-table .sh-extras-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sh-custom-shop-table .sh-extras-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 0;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.sh-custom-shop-table .sh-extras-pricing {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.sh-custom-shop-table .sh-extras-price {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+}
+
+.sh-custom-shop-table .sh-price-original {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.sh-custom-shop-table .sh-extras-qty {
+    display: block;
+    font-size: 12px;
+    color: #666;
+}
+
+
+@media (max-width: 768px) {
+    .sh-custom-shop-table .sh-checkout-cart-item {
+        padding: 12px;
+    }
+    
+    .sh-custom-shop-table .sh-cart-item-header {
+        gap: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-item-badge {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+    
+    .sh-custom-shop-table .sh-item-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .sh-custom-shop-table .sh-item-qty-badge {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+        top: -6px;
+        right: -6px;
+    }
+    
+    .sh-custom-shop-table .sh-item-name {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .sh-custom-shop-table .sh-item-meta {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    .sh-custom-shop-table .sh-item-meta > div {
+        margin: 2px 0;
+    }
+    
+    .sh-custom-shop-table .sh-item-price {
+        font-size: 16px;
+        padding-left: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-remove-item {
+        width: 22px;
+        height: 22px;
+        font-size: 16px;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .sh-custom-shop-table .sh-added-badge {
+        font-size: 12px;
+        margin: 10px 0 10px 0;
+    }
+    
+    .sh-custom-shop-table .sh-added-badge::before {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-section {
+        margin-top: 15px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-header {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-item {
+        gap: 10px;
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-title {
+        font-size: 13px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-price {
+        font-size: 14px;
+    }
+    
+    .sh-custom-shop-table .sh-price-original {
+        font-size: 12px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-qty {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sh-custom-shop-table .sh-checkout-cart-item {
+        padding: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-cart-item-header {
+        gap: 16px;
+    }
+
+    body #wfacp-e-form .sh-custom-shop-table .sh-checkout-cart-item .sh-item-meta > div, body #wfacp-e-form .sh-custom-shop-table .sh-checkout-cart-item .sh-item-meta > div > strong{ 
+        font-size: 12px;
+        font-family: var(--wd-title-font);
+    }
+
+    body #wfacp-e-form .wfacp_mb_mini_cart_wrap{
+        font-size: 12px !important;
+    }
+
+    body.woocommerce-checkout #wfacp-e-form .wfacp_summary_link {
+        font-size: 14px !important;
+    }
+
+    body #wfacp-e-form div.wfacp_mb_mini_cart_wrap .wfacp_mb_cart_accordian span.woocommerce-Price-amount {
+        font-size: 14px !important;
+    }
+    
+    .sh-custom-shop-table .sh-item-badge {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-item-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sh-custom-shop-table .sh-item-qty-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+        top: -5px;
+        right: -5px;
+        border-width: 1.5px;
+    }
+    
+    .sh-custom-shop-table .sh-item-name {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    .sh-custom-shop-table .sh-item-meta {
+        font-size: 11px;
+    }
+    
+    .sh-custom-shop-table .sh-item-price {
+        font-size: 14px;
+    }
+
+     .sh-custom-shop-table .sh-extras-qty {
+        font-size: 12px;
+        margin-top: 0;
+    }
+    
+    .sh-custom-shop-table .sh-remove-item {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .sh-custom-shop-table .sh-added-badge {
+        font-size: 11px;
+    }
+    
+    .sh-custom-shop-table .sh-added-badge::before {
+        width: 14px;
+        height: 14px;
+        font-size: 9px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-header {
+        font-size: 13px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-item {
+        gap: 16px;
+        padding: 4px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-image {
+        width: 40px;
+        height: 40px;
+    }
+    
+   ≈ .sh-extras-title {
+        font-size: 12px !important;
+    }
+    
+    .sh-custom-shop-table .sh-extras-price {
+        font-size: 13px;
+    }
+    
+    .sh-custom-shop-table .sh-price-original {
+        font-size: 11px;
+    }
+    
+    .sh-custom-shop-table .sh-extras-qty {
+        font-size: 10px;
+    }
+}

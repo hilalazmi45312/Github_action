@@ -1,0 +1,19 @@
+body {
+  box-sizing: border-box;
+}
+body * {
+  box-sizing: border-box;
+}
+body .jagif-general-settings .tabular.menu .item {
+  cursor: pointer;
+}
+
+.description {
+  font-style: italic;
+  font-size: small !important;
+}
+.description.jagif-hidden {
+  display: none;
+}
+
+/*# sourceMappingURL=jagif-admin-settings.css.map */

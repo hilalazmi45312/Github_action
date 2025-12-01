@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="./tests/bootstrap.php" backupGlobals="false" colors="true" defaultTestSuite="unit" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" convertDeprecationsToExceptions="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage includeUncoveredFiles="false">
+    <include>
+      <directory suffix=".php">./includes</directory>
+    </include>
+    <exclude>
+      <directory suffix=".php">./includes/modules</directory>
+      <directory suffix=".php">./includes/compatibility</directory>
+      <directory suffix=".php">./includes/cli</directory>
+      <directory suffix=".php">./includes/admin</directory>
+      <file>./includes/data/class-wc-pb-data.php</file>
+      <file>./includes/class-wc-pb-ajax.php</file>
+      <file>./includes/class-wc-pb-background-updater.php</file>
+      <file>./includes/class-wc-pb-order-again.php</file>
+      <file>./includes/class-wc-pb-cli.php</file>
+      <file>./includes/class-wc-pb-display.php</file>
+      <file>./includes/class-wc-pb-install.php</file>
+      <file>./includes/wc-pb-template-functions.php</file>
+      <file>./includes/wc-pb-template-hooks.php</file>
+      <file>./includes/wc-pb-update-functions.php</file>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="unit">
+      <directory prefix="test-" suffix=".php">./tests/unit</directory>
+    </testsuite>
+    <testsuite name="perf">
+      <directory prefix="perf-" suffix=".php">./tests/perfs</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

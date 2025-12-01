@@ -1,0 +1,57 @@
+.wcmca_product_shipping_title
+{
+	display:block; 
+	clear:both; 
+	margin-bottom:3px;
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size: 14px;
+}
+.billing_first_name, .shipping_first_name{
+	clear: left;
+	display: inherit;
+	float: left;
+}
+.billing_last_name, .shipping_last_name
+{
+	display: inherit;
+	float: left;
+	margin-left: 5px;
+}
+.wcmca_clear_both
+{
+	 clear: both;
+	display: block;
+}
+.wcmca_clear_right
+{
+	 clear: right;
+	display: block;
+}
+.wcmca_product_address 
+{
+	display: block;
+	padding: 10px 10px 10px 15px;
+	margin-top: 10px;
+	/* margin-right: 20px; */
+	border: none;
+	background: #f3f3f3;
+	color: #333;
+	max-width: 500px;
+	font-size: 12px;
+}
+.wcmca_product_address_loader, .wfacp_mini_cart_start_h tr td img.wcmca_product_address_loader
+{
+	margin-top: 5px;
+	display: none;
+	clear: both;
+}
+.wcmca_product_shipping_box 
+{
+	margin-top: 10px;
+	margin-bottom: 15px;
+	display: block;
+}
+td.product-name {
+	max-width: 250px;
+}

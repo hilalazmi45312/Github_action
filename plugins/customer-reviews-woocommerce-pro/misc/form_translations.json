@@ -1,0 +1,6742 @@
+[
+  {
+    "element": "required",
+    "language": "AR",
+    "text": "مطلوب"
+  },
+  {
+    "element": "rating",
+    "language": "AR",
+    "text": "تقييم"
+  },
+  {
+    "element": "comment",
+    "language": "AR",
+    "text": "تعليق"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "AR",
+    "text": "تعليقك"
+  },
+  {
+    "element": "submit_button",
+    "language": "AR",
+    "text": "ارسل"
+  },
+  {
+    "element": "footer_form",
+    "language": "AR",
+    "text": "تم إنشاء هذا النموذج من قِبل CusRev  نيابةً عن <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "AR",
+    "text": "لقد تم تقديم مراجعة لهذا الطلب بالفعل"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "AR",
+    "text": "يمكنك تعديل هذه المراجعة إذا أردت"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "AR",
+    "text": "شكراً لك على إرسال رأيك!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "AR",
+    "text": "لقد تم تسجيل ردك."
+  },
+  {
+    "element": "edit_review",
+    "language": "AR",
+    "text": "عدل رأيك"
+  },
+  {
+    "element": "dname_section",
+    "language": "AR",
+    "text": "عرض الاسم"
+  },
+  {
+    "element": "terms_form",
+    "language": "AR",
+    "text": "بإرسال رأيك ، فإنك توافق على <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">الشروط والأحكام</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "AR",
+    "text": "التعليقات"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "AR",
+    "text": "لا شيئ"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "AR",
+    "text": "مجهول"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "AR",
+    "text": "خطأ: تم تجاوز الحد الأقصى لعدد الملفات"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "AR",
+    "text": "خطأ: صيغ الملفات المدعومة هي PNG ، JPG ، JPEG ، MP4 ، WEBM ، OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "AR",
+    "text": "خطأ: لم يتم العثور على المنتج"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "AR",
+    "text": "خطأ: لم يتم العثور على الطلب"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "AR",
+    "text": "خطأ: الحد الأقصى لحجم الملف الذي يتم تحميله هو 25 ميغابايت"
+  },
+  {
+    "element": "form__media_title",
+    "language": "AR",
+    "text": "تحميل الصور / الفيديو"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "AR",
+    "text": "أضف صورًا أو مقاطع فيديو إلى تعليقك"
+  },
+  {
+    "element": "form__error_title",
+    "language": "AR",
+    "text": "خطأ"
+  },
+  {
+    "element": "form__error_body",
+    "language": "AR",
+    "text": "حدث خطأ أثناء إرسال تعليقك. يمكنك المحاولة مرة أخرى باستخدام الزر الموجود بالأسفل. إذا استمرت المشكلة ، فيرجى الاتصال <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "AR",
+    "text": "معلومات تقنية"
+  },
+  {
+    "element": "form__error_button",
+    "language": "AR",
+    "text": "حاول مرة أخرى"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "AR",
+    "text": "حدث خطأ أثناء تحميل الملف."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "AR",
+    "text": "قيم الموقع وخدمة العملاء والتسليم"
+  },
+  {
+    "element": "form__none",
+    "language": "AR",
+    "text": "لا شيئ"
+  },
+  {
+    "element": "required",
+    "language": "BG",
+    "text": "Задължително поле"
+  },
+  {
+    "element": "rating",
+    "language": "BG",
+    "text": "Рейтинг"
+  },
+  {
+    "element": "comment",
+    "language": "BG",
+    "text": "Коментар"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "BG",
+    "text": "Вашият коментар"
+  },
+  {
+    "element": "submit_button",
+    "language": "BG",
+    "text": "Изпрати"
+  },
+  {
+    "element": "footer_form",
+    "language": "BG",
+    "text": "Тази форма беше генерирана от CusRev от името на <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "BG",
+    "text": "Вече е изпратено ревю за тази поръчка"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "BG",
+    "text": "Ако желаете може да редактирате това ревю"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "BG",
+    "text": "Благодаря за ревюто!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "BG",
+    "text": "Вашият отговор беше записан."
+  },
+  {
+    "element": "edit_review",
+    "language": "BG",
+    "text": "Редактирайте ревюто си"
+  },
+  {
+    "element": "dname_section",
+    "language": "BG",
+    "text": "Име"
+  },
+  {
+    "element": "terms_form",
+    "language": "BG",
+    "text": "С изпращането на вашето ревю се съгласявате с <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">условията за ползване</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "BG",
+    "text": "Отзиви"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "BG",
+    "text": "Няма"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "BG",
+    "text": "Анонимен"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "BG",
+    "text": "Грешка: Лимитът за максималния брой файлове е надхвърлен"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "BG",
+    "text": "Грешка: Поддържаните файлови формати са PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "BG",
+    "text": "Грешка: Продуктът не е намерен"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "BG",
+    "text": "Грешка: Поръчката не е намерена"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "BG",
+    "text": "Грешка: Максималният размер на качвания файл е 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "BG",
+    "text": "Качи Снимки/Видео"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "BG",
+    "text": "Качи снимки или видеа за твоя отзив"
+  },
+  {
+    "element": "form__error_title",
+    "language": "BG",
+    "text": "Грешка"
+  },
+  {
+    "element": "form__error_body",
+    "language": "BG",
+    "text": "Възникна грешка при изпращане на отзива ви. Можете да опитате отново с помощта на бутона по-долу. Ако проблемът продължава, моля, свържете се с <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "BG",
+    "text": "Техническа информация"
+  },
+  {
+    "element": "form__error_button",
+    "language": "BG",
+    "text": "Опитай отново"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "BG",
+    "text": "Грешка при качването на файла"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "BG",
+    "text": "Оцени уебсайта, обслужването и доставката"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "BG",
+    "text": "Минимум %d знака"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "BG",
+    "text": "%1d знака (минимум %2d знака)"
+  },
+  {
+    "element": "form__none",
+    "language": "BG",
+    "text": "Няма"
+  },
+  {
+    "element": "required",
+    "language": "BR",
+    "text": "Obrigatório"
+  },
+  {
+    "element": "rating",
+    "language": "BR",
+    "text": "Avaliação"
+  },
+  {
+    "element": "comment",
+    "language": "BR",
+    "text": "Comente"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "BR",
+    "text": "Seu comentário"
+  },
+  {
+    "element": "submit_button",
+    "language": "BR",
+    "text": "Enviar"
+  },
+  {
+    "element": "footer_form",
+    "language": "BR",
+    "text": "Este formulário foi gerado pelo Plugin CusRev em nome de <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "BR",
+    "text": "Uma avaliação já foi enviada para este pedido"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "BR",
+    "text": "Se você quiser, você pode editar este comentário"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "BR",
+    "text": "Obrigado por enviar sua avaliação!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "BR",
+    "text": "Sua resposta foi gravada."
+  },
+  {
+    "element": "edit_review",
+    "language": "BR",
+    "text": "Edite a sua avaliação"
+  },
+  {
+    "element": "dname_section",
+    "language": "BR",
+    "text": "Nome a apresentar"
+  },
+  {
+    "element": "terms_form",
+    "language": "BR",
+    "text": "Ao submeter a sua avaliação, está a concordar com os <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">termos e condições</a>."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "BR",
+    "text": "Qual a avaliação global do website, serviço de entrega e apoio ao cliente?"
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "BR",
+    "text": "Comentários"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "BR",
+    "text": "Nenhum"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "BR",
+    "text": "Anônimo"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "BR",
+    "text": "Erro: o limite para o número máximo de arquivos foi excedido"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "BR",
+    "text": "Erro: os formatos de arquivo aceitos são PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "BR",
+    "text": "Erro: produto não encontrado"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "BR",
+    "text": "Erro: pedido não encontrado"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "BR",
+    "text": "Erro: o tamanho máximo do arquivo enviado é de 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "BR",
+    "text": "Carregar Fotos / Vídeos"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "BR",
+    "text": "Adicionar fotos ou vídeo ao seu comentário"
+  },
+  {
+    "element": "form__error_title",
+    "language": "BR",
+    "text": "Erro"
+  },
+  {
+    "element": "form__error_body",
+    "language": "BR",
+    "text": "Ocorreu um erro durante o envio do seu comentário. Você pode tentar novamente usando o botão abaixo. Se o problema persistir, entre em contato com <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "BR",
+    "text": "Informação técnica"
+  },
+  {
+    "element": "form__error_button",
+    "language": "BR",
+    "text": "Tente novamente"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "BR",
+    "text": "Erro durante o upload do arquivo"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "BR",
+    "text": "Mínimo de %d caracteres"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "BR",
+    "text": "%1d caracteres (mínimo de %2d caracteres)"
+  },
+  {
+    "element": "form__meta_description",
+    "language": "BR",
+    "text": "Avalie produtos e/ou serviços que você comprou de {{{shop.name}}}"
+  },
+  {
+    "element": "form__none",
+    "language": "BR",
+    "text": "Nenhum"
+  },
+  {
+    "element": "required",
+    "language": "CS",
+    "text": "Povinné"
+  },
+  {
+    "element": "rating",
+    "language": "CS",
+    "text": "Hodnocení"
+  },
+  {
+    "element": "comment",
+    "language": "CS",
+    "text": "Komentář"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "CS",
+    "text": "Váš komentář"
+  },
+  {
+    "element": "submit_button",
+    "language": "CS",
+    "text": "Odeslat"
+  },
+  {
+    "element": "footer_form",
+    "language": "CS",
+    "text": "Tento dotazník byl vytvořen pluginem CusRev pro <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "CS",
+    "text": "Recenze pro tuto objednávku již byla odeslána"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "CS",
+    "text": "Pokud chcete, můžete upravit toto hodnocení"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "CS",
+    "text": "Děkujeme za vyplnění dotazníku!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "CS",
+    "text": "Vaše odpoveď byla uložena."
+  },
+  {
+    "element": "edit_review",
+    "language": "CS",
+    "text": "Změnit hodnocení"
+  },
+  {
+    "element": "dname_section",
+    "language": "CS",
+    "text": "Veřejné jméno"
+  },
+  {
+    "element": "terms_form",
+    "language": "CS",
+    "text": "Odesláním recenze souhlasíte se <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">smluvními podmínkami</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "CS",
+    "text": "Recenzí"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "CS",
+    "text": "Žádný"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "CS",
+    "text": "Anonymní"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "CS",
+    "text": "Chyba: Limit pro maximální počet souborů byl překročen"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "CS",
+    "text": "Chyba: Podporované formáty souborů jsou PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "CS",
+    "text": "Chyba: Produkt nebyl nalezen"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "CS",
+    "text": "Chyba: Objednávka nebyla nalezena"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "CS",
+    "text": "Chyba: Maximální velikost nahraného souboru je 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "CS",
+    "text": "Nahrát fotografie/video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "CS",
+    "text": "Přidejte fotografie nebo video k recenzi"
+  },
+  {
+    "element": "form__error_title",
+    "language": "CS",
+    "text": "Chyba"
+  },
+  {
+    "element": "form__error_body",
+    "language": "CS",
+    "text": "Během odesílání recenze došlo k chybě. Můžete to zkusit znovu pomocí tlačítka níže. Pokud problém přetrvává, kontaktujte prosím <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "CS",
+    "text": "Technické informace"
+  },
+  {
+    "element": "form__error_button",
+    "language": "CS",
+    "text": "Zkusit znovu"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "CS",
+    "text": "Chyba při nahrávání souboru."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "CS",
+    "text": "Hodnoťte webové stránky, služby zákazníkům a doručení"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "CS",
+    "text": "Minimálně %d znaků"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "CS",
+    "text": "%1d znaků (minimálně %2d znaků)"
+  },
+  {
+    "element": "form__none",
+    "language": "CS",
+    "text": "Žádný"
+  },
+  {
+    "element": "required",
+    "language": "DA",
+    "text": "Påkrævet"
+  },
+  {
+    "element": "rating",
+    "language": "DA",
+    "text": "Bedømmelse"
+  },
+  {
+    "element": "comment",
+    "language": "DA",
+    "text": "Bemærkning"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "DA",
+    "text": "Din kommentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "DA",
+    "text": "Send"
+  },
+  {
+    "element": "footer_form",
+    "language": "DA",
+    "text": "Denne formular var genereret af CusRev på vegne af <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "DA",
+    "text": "En anmeldelse er allerede sendt vedrørende denne ordre"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "DA",
+    "text": "Hvis du ønsker, kan du redigere denne anmeldelse"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "DA",
+    "text": "Tak for din anmeldelse!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "DA",
+    "text": "Dit svar er registreret."
+  },
+  {
+    "element": "edit_review",
+    "language": "DA",
+    "text": "Rediger din anmeldelse"
+  },
+  {
+    "element": "dname_section",
+    "language": "DA",
+    "text": "Vis navn"
+  },
+  {
+    "element": "terms_form",
+    "language": "DA",
+    "text": "Ved at indsende din anmeldelse indvilger du i <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">vilkår og betingelser</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "DA",
+    "text": "Anmeldelser"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "DA",
+    "text": "Ingen"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "DA",
+    "text": "Anonym"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "DA",
+    "text": "Fejl: Grænsen for det maksimale antal filer er overskredet"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "DA",
+    "text": "Fejl: De understøttede filformater er PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "DA",
+    "text": "Fejl: Produkt ikke fundet"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "DA",
+    "text": "Fejl: Ordre ikke fundet"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "DA",
+    "text": "Fejl: Maksimumstørrelse for uploadede filer er 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "DA",
+    "text": "Upload fotos/video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "DA",
+    "text": "Tilføj fotos/video til din anmeldelse"
+  },
+  {
+    "element": "form__error_title",
+    "language": "DA",
+    "text": "Fejl"
+  },
+  {
+    "element": "form__error_body",
+    "language": "DA",
+    "text": "Der opstod en fejl under indsendelsen af din anmeldelse. Du kan prøve igen ved at bruge knappen herunder. Hvis problemet fortsætter, bedes du kontakte <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "DA",
+    "text": "Tekniske oplysninger"
+  },
+  {
+    "element": "form__error_button",
+    "language": "DA",
+    "text": "Prøv igen"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "DA",
+    "text": "Fejl under uploading af filen"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "DA",
+    "text": "Bedøm websted, kundeservice og levering"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "DA",
+    "text": "Minimum %d tegn"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "DA",
+    "text": "%1d tegn (minimum %2d tegn)"
+  },
+  {
+    "element": "form__none",
+    "language": "DA",
+    "text": "Ingen"
+  },
+  {
+    "element": "required",
+    "language": "DE",
+    "text": "Pflichtfeld"
+  },
+  {
+    "element": "rating",
+    "language": "DE",
+    "text": "Bewertung"
+  },
+  {
+    "element": "comment",
+    "language": "DE",
+    "text": "Kommentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "DE",
+    "text": "Dein Kommentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "DE",
+    "text": "Abschicken"
+  },
+  {
+    "element": "footer_form",
+    "language": "DE",
+    "text": "Dieses Formular wurde vom CusRev im Auftrag von <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a> erstellt."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "DE",
+    "text": "Für diese Bestellung wurde bereits eine Bewertung abgegeben"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "DE",
+    "text": "Diese Bewertung kann editiert werden"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "DE",
+    "text": "Danke für das Absenden der Bewertung!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "DE",
+    "text": "Ihre Bewertung wurde erfasst."
+  },
+  {
+    "element": "edit_review",
+    "language": "DE",
+    "text": "Bewertung editieren"
+  },
+  {
+    "element": "dname_section",
+    "language": "DE",
+    "text": "Angezeigter Name"
+  },
+  {
+    "element": "terms_form",
+    "language": "DE",
+    "text": "Mit dem Absenden Ihrer Bewertung erklären Sie sich mit <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">den Geschäfts- und Nutzungsbedingungen</a> einverstanden."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "DE",
+    "text": "Bewertungen"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "DE",
+    "text": "Keines"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "DE",
+    "text": "Anonym"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "DE",
+    "text": "Fehler: Die Grenze für die maximale Anzahl von Dateien überschreitet die folgenden Werte"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "DE",
+    "text": "Fehler: Die unterstützten Dateiformate sind PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "DE",
+    "text": "Fehler: Produkt nicht gefunden"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "DE",
+    "text": "Fehler: Bestellung nicht gefunden"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "DE",
+    "text": "Fehler: Die maximale Größe der hochgeladenen Datei beträgt 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "DE",
+    "text": "Fotos/Videos hochladen"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "DE",
+    "text": "Fotos oder Videos zu Ihrer Bewertung hinzufügen"
+  },
+  {
+    "element": "form__error_title",
+    "language": "DE",
+    "text": "Fehler"
+  },
+  {
+    "element": "form__error_body",
+    "language": "DE",
+    "text": "Bei der Übermittlung Ihrer Bewertung ist ein Fehler aufgetreten. Sie können es mit der untenstehenden Schaltfläche erneut versuchen. Wenn das Problem weiterhin besteht, kontaktieren Sie bitte <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "DE",
+    "text": "Technische Informationen"
+  },
+  {
+    "element": "form__error_button",
+    "language": "DE",
+    "text": "Versuchen Sie es erneut"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "DE",
+    "text": "Fehler beim Hochladen der Datei."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "DE",
+    "text": "Bewerten Sie Website, Kundenservice und Lieferung"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "DE",
+    "text": "Mindestens %d Zeichen"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "DE",
+    "text": "%1d Zeichen (mindestens %2d Zeichen)"
+  },
+  {
+    "element": "form__none",
+    "language": "DE",
+    "text": "Keines"
+  },
+  {
+    "element": "required",
+    "language": "DEF",
+    "text": "Erforderlich"
+  },
+  {
+    "element": "rating",
+    "language": "DEF",
+    "text": "Bewertung"
+  },
+  {
+    "element": "comment",
+    "language": "DEF",
+    "text": "Kommentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "DEF",
+    "text": "Ihr Kommentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "DEF",
+    "text": "Senden"
+  },
+  {
+    "element": "footer_form",
+    "language": "DEF",
+    "text": "Dieses Formular wurde vom CusRev im Auftrag von <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a> erstellt."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "DEF",
+    "text": "Für diese Bestellung wurde bereits eine Rezension eingereicht"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "DEF",
+    "text": "Wenn Sie möchten, können Sie diese Rezension bearbeiten"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "DEF",
+    "text": "Vielen Dank für die Einreichung Ihrer Rezension!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "DEF",
+    "text": "Ihre Antwort wurde entgegengenommen."
+  },
+  {
+    "element": "edit_review",
+    "language": "DEF",
+    "text": "Ihre Rezension bearbeiten"
+  },
+  {
+    "element": "dname_section",
+    "language": "DEF",
+    "text": "Öffentlicher Name"
+  },
+  {
+    "element": "terms_form",
+    "language": "DEF",
+    "text": "Indem Sie Ihre Rezension einreichen, erklären Sie sich mit <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">den Bedingungen</a> einverstanden."
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "DEF",
+    "text": "Fehler: Das Limit für die maximale Anzahl von Dateien wurde überschritten"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "DEF",
+    "text": "Fehler: Die unterstützten Dateiformate sind PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "DEF",
+    "text": "Fehler: Artikel nicht gefunden"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "DEF",
+    "text": "Fehler: Bestellung nicht gefunden"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "DEF",
+    "text": "Fehler: Die maximale Größe der hochgeladenen Datei beträgt 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "DEF",
+    "text": "Fotos/Video hochladen"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "DEF",
+    "text": "Fotos oder Videos zu Ihrer Rezension hinzufügen"
+  },
+  {
+    "element": "form__error_title",
+    "language": "DEF",
+    "text": "Fehler"
+  },
+  {
+    "element": "form__error_body",
+    "language": "DEF",
+    "text": "Bei der Einreichung Ihrer Rezension ist ein Fehler aufgetreten. Sie können es mit der Schaltfläche unten erneut versuchen. Wenn das Problem weiterhin besteht, wenden Sie sich bitte an <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "DEF",
+    "text": "Technische Informationen"
+  },
+  {
+    "element": "form__error_button",
+    "language": "DEF",
+    "text": "Erneut versuchen"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "DEF",
+    "text": "Fehler beim Hochladen der Datei."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "DEF",
+    "text": "Website, Kundendienst und Lieferung bewerten"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "DEF",
+    "text": "Mindestens %d Zeichen"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "DEF",
+    "text": "%1d Zeichen (mindestens %2d Zeichen)"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "DEF",
+    "text": "Anonym"
+  },
+  {
+    "element": "required",
+    "language": "EL",
+    "text": "Απαραίτητο πεδίο"
+  },
+  {
+    "element": "rating",
+    "language": "EL",
+    "text": "Αξιολόγηση"
+  },
+  {
+    "element": "comment",
+    "language": "EL",
+    "text": "Σχόλια"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "EL",
+    "text": "Το σχόλιο σας"
+  },
+  {
+    "element": "submit_button",
+    "language": "EL",
+    "text": "Υποβολή"
+  },
+  {
+    "element": "footer_form",
+    "language": "EL",
+    "text": "Αυτή η φόρμα υποβλήθηκε από CusRev εκ μέρους της <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "EL",
+    "text": "Μια αξιολόγηση έχει ήδη υποβληθεί για αυτή τη παραγγελία"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "EL",
+    "text": "Αν θέλετε μπορείτε να διορθώσετε την αξιολόγηση σας"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "EL",
+    "text": "Ευχαριστούμε για την αξιολόγηση!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "EL",
+    "text": "Η αξιολόγηση σας έχει καταγραφεί."
+  },
+  {
+    "element": "edit_review",
+    "language": "EL",
+    "text": "Επιδιορθώστε την αξιολόγηση σας"
+  },
+  {
+    "element": "dname_section",
+    "language": "EL",
+    "text": "Όνομα"
+  },
+  {
+    "element": "terms_form",
+    "language": "EL",
+    "text": "Με την υποβολή της αξιολόγησης συμφωνείτε με <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">τους όρους χρήσης</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "EL",
+    "text": "Reviews"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "EL",
+    "text": "None"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "EL",
+    "text": "Anonymous"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "EL",
+    "text": "Σφάλμα: Το όριο για τον μέγιστο αριθμό αρχείων ξεπέρασε"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "EL",
+    "text": "Σφάλμα: Οι υποστηριζόμενες μορφές αρχείων είναι PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "EL",
+    "text": "Σφάλμα: Το προϊόν δεν βρέθηκε"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "EL",
+    "text": "Σφάλμα: Η παραγγελία δεν βρέθηκε"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "EL",
+    "text": "Σφάλμα: Το μέγιστο μέγεθος αρχείου είναι 25 MB."
+  },
+  {
+    "element": "form__media_title",
+    "language": "EL",
+    "text": "Ανεβάστε φωτογραφία η βίντεο"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "EL",
+    "text": "Προσθέστε φωτογραφίες η βίντεο με την αξιολόγηση σας"
+  },
+  {
+    "element": "form__error_title",
+    "language": "EL",
+    "text": "Σφάλμα"
+  },
+  {
+    "element": "form__error_body",
+    "language": "EL",
+    "text": "Ένα σφάλμα προέκυψε κατά την υποβολή της αξιολόγησης. Μπορείτε να προσπαθήσετε ξανά πατώντας το παρακάτω κουμπί. Αν το πρόβλημα επιμένει παρακαλώ επικοινωνήστε με την <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "EL",
+    "text": "Πληροφορίες"
+  },
+  {
+    "element": "form__error_button",
+    "language": "EL",
+    "text": "Δοκιμάστε ξανά"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "EL",
+    "text": "Σφάλμα κατά το ανέβασμα του αρχείου."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "EL",
+    "text": "Αξιολογήστε τον ιστότοπο, την εξυπηρέτηση και την παράδοση"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "EL",
+    "text": "Τουλάχιστον %d χαρακτήρες"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "EL",
+    "text": "%1d χαρακτήρες (τουλάχιστον %2d χαρακτήρες)"
+  },
+  {
+    "element": "form__none",
+    "language": "EL",
+    "text": "None"
+  },
+  {
+    "element": "required",
+    "language": "EN",
+    "text": "Required"
+  },
+  {
+    "element": "rating",
+    "language": "EN",
+    "text": "Rating"
+  },
+  {
+    "element": "comment",
+    "language": "EN",
+    "text": "Comment"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "EN",
+    "text": "Your comment"
+  },
+  {
+    "element": "submit_button",
+    "language": "EN",
+    "text": "Submit"
+  },
+  {
+    "element": "footer_form",
+    "language": "EN",
+    "text": "This form was created by CusRev on behalf of <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "EN",
+    "text": "A review has already been submitted for this order"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "EN",
+    "text": "If you want, you can edit this review"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "EN",
+    "text": "Thank you for submitting a review!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "EN",
+    "text": "Your response has been recorded."
+  },
+  {
+    "element": "edit_review",
+    "language": "EN",
+    "text": "Edit your review"
+  },
+  {
+    "element": "dname_section",
+    "language": "EN",
+    "text": "Display name"
+  },
+  {
+    "element": "terms_form",
+    "language": "EN",
+    "text": "By submitting your review, you agree to the <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">terms and conditions</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "EN",
+    "text": "Reviews"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "EN",
+    "text": "None"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "EN",
+    "text": "Anonymous"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "EN",
+    "text": "Error: The limit for the maximum number of files exceeded"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "EN",
+    "text": "Error: The supported file formats are PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "EN",
+    "text": "Error: Product not found"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "EN",
+    "text": "Error: Order not found"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "EN",
+    "text": "Error: The maximum size of uploaded file is 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "EN",
+    "text": "Upload Photos/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "EN",
+    "text": "Add photos or video to your review"
+  },
+  {
+    "element": "form__error_title",
+    "language": "EN",
+    "text": "Error"
+  },
+  {
+    "element": "form__error_body",
+    "language": "EN",
+    "text": "An error occurred during submission of your review. You can try again using the button below. If the problem persists, please contact <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "EN",
+    "text": "Technical Information"
+  },
+  {
+    "element": "form__error_button",
+    "language": "EN",
+    "text": "Try again"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "EN",
+    "text": "Error during upload of the file."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "EN",
+    "text": "Rate website, customer service and delivery"
+  },
+  {
+    "element": "form__single_choice_title",
+    "language": "EN",
+    "text": "A new single choice question"
+  },
+  {
+    "element": "form__multiple_choice_title",
+    "language": "EN",
+    "text": "A new multiple choice question"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "EN",
+    "text": "Minimum %d characters"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "EN",
+    "text": "%1d characters (minimum %2d characters)"
+  },
+  {
+    "element": "form__meta_description",
+    "language": "EN",
+    "text": "Review products and/or services that you purchased from {{{shop.name}}}"
+  },
+  {
+    "element": "form__none",
+    "language": "EN",
+    "text": "None"
+  },
+  {
+    "element": "required",
+    "language": "ES",
+    "text": "Campo obligatorio"
+  },
+  {
+    "element": "rating",
+    "language": "ES",
+    "text": "Puntuación"
+  },
+  {
+    "element": "comment",
+    "language": "ES",
+    "text": "Comentario"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "ES",
+    "text": "Su comentario"
+  },
+  {
+    "element": "submit_button",
+    "language": "ES",
+    "text": "Enviar"
+  },
+  {
+    "element": "footer_form",
+    "language": "ES",
+    "text": "Este formulario ha sido generado por el CusRev en nombre de <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "ES",
+    "text": "Ya se ha enviado una opinión para este pedido"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "ES",
+    "text": "Si lo desea, puede editar esta opinión"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "ES",
+    "text": "Muchas gracias por enviarnos su opinión!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "ES",
+    "text": "Su respuesta ha quedado registrada."
+  },
+  {
+    "element": "edit_review",
+    "language": "ES",
+    "text": "Edita tu opinión"
+  },
+  {
+    "element": "dname_section",
+    "language": "ES",
+    "text": "Nombre para mostrar"
+  },
+  {
+    "element": "terms_form",
+    "language": "ES",
+    "text": "Al enviar su valoración, acepta los <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">términos y condiciones</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "ES",
+    "text": "Comentarios"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "ES",
+    "text": "Ninguno"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "ES",
+    "text": "Anónimo"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "ES",
+    "text": "Error: El límite para el número máximo de archivos ha sido excedido"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "ES",
+    "text": "Error: Los formatos de archivo admitidos son PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "ES",
+    "text": "Error: Producto no encontrado"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "ES",
+    "text": "Error: Orden no encontrada"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "ES",
+    "text": "Error: El tamaño máximo del archivo cargado debe ser de 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "ES",
+    "text": "Subir Fotos/Videos"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "ES",
+    "text": "Agregue fotos o videos a su comentario"
+  },
+  {
+    "element": "form__error_title",
+    "language": "ES",
+    "text": "Error"
+  },
+  {
+    "element": "form__error_body",
+    "language": "ES",
+    "text": "Ha ocurrido un error enviando su comentario. Puede intentarlo nuevamente usando el botón a continuación. Si el problema persiste, contacte a <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "ES",
+    "text": "Información Técnica"
+  },
+  {
+    "element": "form__error_button",
+    "language": "ES",
+    "text": "Volver a intentarlo"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "ES",
+    "text": "Error subiendo el archivo."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "ES",
+    "text": "Deje un comentario del sitio web, el servicio de atención al cliente y la entrega"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "ES",
+    "text": "Mínimo %d caracteres"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "ES",
+    "text": "%1d caracteres (mínimo %2d caracteres)"
+  },
+  {
+    "element": "form__none",
+    "language": "ES",
+    "text": "Ninguno"
+  },
+  {
+    "element": "required",
+    "language": "ET",
+    "text": "Kohustuslik"
+  },
+  {
+    "element": "rating",
+    "language": "ET",
+    "text": "Teie hinnang"
+  },
+  {
+    "element": "comment",
+    "language": "ET",
+    "text": "Kommenteeri"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "ET",
+    "text": "Teie kommentaar"
+  },
+  {
+    "element": "submit_button",
+    "language": "ET",
+    "text": "Saada"
+  },
+  {
+    "element": "footer_form",
+    "language": "ET",
+    "text": "See blankett on valmistatud <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>-le CusRev poolt."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "ET",
+    "text": "Sellele tellimusele olete tagasisidet juba andnud"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "ET",
+    "text": "Kui soovid, saad tagasisidet muuta"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "ET",
+    "text": "Täname tagasiside eest!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "ET",
+    "text": "Teie vastus on salvestatud."
+  },
+  {
+    "element": "edit_review",
+    "language": "ET",
+    "text": "Muuda oma tagasisidet"
+  },
+  {
+    "element": "dname_section",
+    "language": "ET",
+    "text": "Nimi, mis kuvatakse arvustuse juures avalikult"
+  },
+  {
+    "element": "terms_form",
+    "language": "ET",
+    "text": "Andes tagasisidet nõustute <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">tingimustega</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "ET",
+    "text": "Arvustused"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "ET",
+    "text": "Puudub"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "ET",
+    "text": "Anonüümne"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "ET",
+    "text": "Viga: Maksimaalne failide arv ületati"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "ET",
+    "text": "Viga: Toetatavad faililaiendid on PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "ET",
+    "text": "Viga: Toodet ei leitud"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "ET",
+    "text": "Viga: Tellimust ei leitud"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "ET",
+    "text": "Viga: Üleslaaditud faili suurus võib olla kuni 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "ET",
+    "text": "Piltide/videote üleslaadimine"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "ET",
+    "text": "Lisage oma arvustusele pilt või video"
+  },
+  {
+    "element": "form__error_title",
+    "language": "ET",
+    "text": "Viga"
+  },
+  {
+    "element": "form__error_body",
+    "language": "ET",
+    "text": "Teie arvustuse esitamisel tekkis viga. Võite proovida uuesti, kasutades allolevat nuppu. Kui probleem püsib, siis võtke ühendust <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "ET",
+    "text": "Tehniline informatsioon"
+  },
+  {
+    "element": "form__error_button",
+    "language": "ET",
+    "text": "Proovige uuesti"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "ET",
+    "text": "Viga faili üleslaadimisel."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "ET",
+    "text": "Hinnake veebilehte, klienditeenindust ja kohaletoimetamist"
+  },
+  {
+    "element": "form__none",
+    "language": "ET",
+    "text": "Puudub"
+  },
+  {
+    "element": "required",
+    "language": "FA",
+    "text": "الزامیست"
+  },
+  {
+    "element": "rating",
+    "language": "FA",
+    "text": "امتیاز"
+  },
+  {
+    "element": "comment",
+    "language": "FA",
+    "text": "نظر"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "FA",
+    "text": "نظر شما"
+  },
+  {
+    "element": "submit_button",
+    "language": "FA",
+    "text": "ارسال"
+  },
+  {
+    "element": "footer_form",
+    "language": "FA",
+    "text": "این فرم توسط افزونه CusRev به نمایندگی از تولید شده است <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "FA",
+    "text": "قبلاً یک نظر برای این سفارش ارسال شده است"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "FA",
+    "text": "چنانچه تمایل داشته باشید می توانید این نظر را ویرایش کنید"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "FA",
+    "text": "از این که نظر خود را ارسال فرمودید، متشکریم!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "FA",
+    "text": "پاسخ شما دریافت گردید"
+  },
+  {
+    "element": "edit_review",
+    "language": "FA",
+    "text": "نظرتان را ویرایش کنید"
+  },
+  {
+    "element": "dname_section",
+    "language": "FA",
+    "text": "نام شما برای نمایش به دیگران"
+  },
+  {
+    "element": "terms_form",
+    "language": "FA",
+    "text": "با ارسال نظرات شما،شما موافق <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">شرایط و ضوابط هستید</a>."
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "FA",
+    "text": "خطا: محدودیت حداکثر تعداد فایلها از حد مجاز فراتر رفته است"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "FA",
+    "text": "خطا: فرمت های فایل پشتیبانی شده عبارتند از PNG، JPG، JPEG، MP4، WEBM، OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "FA",
+    "text": "خطا: محصول یافت نشد"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "FA",
+    "text": "خطا: سفارش یافت نشد"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "FA",
+    "text": "خطا: حداکثر اندازه فایل آپلودی 25 مگابایت است."
+  },
+  {
+    "element": "form__media_title",
+    "language": "FA",
+    "text": "آپلود عکس / ویدئو"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "FA",
+    "text": "عکس یا ویدیو را به نظر خود اضافه کنید"
+  },
+  {
+    "element": "form__error_title",
+    "language": "FA",
+    "text": "خطا"
+  },
+  {
+    "element": "form__error_body",
+    "language": "FA",
+    "text": "هنگام ارسال نظر شما خطایی روی داد. با استفاده از دکمه زیر میتوانید دوباره امتحان کنید. اگر مشکل برطرف نشد، لطفا با <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a> تماس بگیرید."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "FA",
+    "text": "اطلاعات فنی"
+  },
+  {
+    "element": "form__error_button",
+    "language": "FA",
+    "text": "تلاش مجدد"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "FA",
+    "text": "خطا هنگام آپلود فایل."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "FA",
+    "text": "امتیاز وب سایت، خدمات مشتری و تحویل"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "FA",
+    "text": "ناشناس"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "FA",
+    "text": "هیچ یک"
+  },
+  {
+    "element": "form__none",
+    "language": "FA",
+    "text": "هیچ یک"
+  },
+  {
+    "element": "required",
+    "language": "FI",
+    "text": "Vaadittu"
+  },
+  {
+    "element": "rating",
+    "language": "FI",
+    "text": "Arviosi"
+  },
+  {
+    "element": "comment",
+    "language": "FI",
+    "text": "Kommentti"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "FI",
+    "text": "Kommenttisi"
+  },
+  {
+    "element": "submit_button",
+    "language": "FI",
+    "text": "Lähetä"
+  },
+  {
+    "element": "footer_form",
+    "language": "FI",
+    "text": "Tämän kaavakeen loi CusRev, <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a> puolesta."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "FI",
+    "text": "Tälle tilaukselle on jätetty jo arvostelu"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "FI",
+    "text": "Jos haluat, voit muokata tätä arvostelua"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "FI",
+    "text": "Kiitos arvostelustasi!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "FI",
+    "text": "Vastauksesi on tallennettu."
+  },
+  {
+    "element": "edit_review",
+    "language": "FI",
+    "text": "Muokkaa arvosteluasi"
+  },
+  {
+    "element": "dname_section",
+    "language": "FI",
+    "text": "Näytettävä nimi"
+  },
+  {
+    "element": "terms_form",
+    "language": "FI",
+    "text": "Antamalla arvostelusi hyväksyt <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">käyttöehdot</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "FI",
+    "text": "Arvostelut"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "FI",
+    "text": "Ei kukaan"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "FI",
+    "text": "Nimetön"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "FI",
+    "text": "Virhe: Tiedostojen enimmäismäärä ylittyy"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "FI",
+    "text": "Virhe: Tuetut tiedostomuodot ovat PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "FI",
+    "text": "Virhe: Tuotetta ei löydy"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "FI",
+    "text": "Virhe: Tilausta ei löydy"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "FI",
+    "text": "Virhe: Liitetiedoston enimmäiskoko on 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "FI",
+    "text": "Lisää Kuvia/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "FI",
+    "text": "Lisää kuvia tai video arvosteluun"
+  },
+  {
+    "element": "form__error_title",
+    "language": "FI",
+    "text": "Virhe"
+  },
+  {
+    "element": "form__error_body",
+    "language": "FI",
+    "text": "Arvostelun lähettämisen aikana tapahtui virhe. Voit yrittää uudelleen käyttämällä alla olevaa painiketta. Jos ongelma jatkuu, ota yhteyttä <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "FI",
+    "text": "Tekniset tiedot"
+  },
+  {
+    "element": "form__error_button",
+    "language": "FI",
+    "text": "Yritä uudestaan"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "FI",
+    "text": "Virhe lähetettäessä tiedostoa"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "FI",
+    "text": "Arvostele nettisivu, asiakaspalvelu sekä toimitus"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "FI",
+    "text": "Vähintään %d merkkiä"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "FI",
+    "text": "%1d merkkiä (vähintään %2d merkkiä)"
+  },
+  {
+    "element": "form__none",
+    "language": "FI",
+    "text": "Ei sijaintia"
+  },
+  {
+    "element": "required",
+    "language": "FR",
+    "text": "Cette réponse est nécessaire"
+  },
+  {
+    "element": "rating",
+    "language": "FR",
+    "text": "Évaluation"
+  },
+  {
+    "element": "comment",
+    "language": "FR",
+    "text": "Commentaire"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "FR",
+    "text": "Votre commentaire"
+  },
+  {
+    "element": "submit_button",
+    "language": "FR",
+    "text": "Envoyer"
+  },
+  {
+    "element": "footer_form",
+    "language": "FR",
+    "text": "Ce formulaire a été créé par CusRev, site d'avis clients, pour le compte de <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "FR",
+    "text": "Un avis a déjà été laissé pour cette commande"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "FR",
+    "text": "Si vous le souhaitez, vous pouvez modifier cet avis"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "FR",
+    "text": "Merci d'avoir donné votre avis!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "FR",
+    "text": "Votre réponse a bien été enregistrée."
+  },
+  {
+    "element": "edit_review",
+    "language": "FR",
+    "text": "Modifier votre avis"
+  },
+  {
+    "element": "dname_section",
+    "language": "FR",
+    "text": "Nom à afficher"
+  },
+  {
+    "element": "terms_form",
+    "language": "FR",
+    "text": "En envoyant votre avis, vous acceptez <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">les conditions d'utilisation</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "FR",
+    "text": "Avis"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "FR",
+    "text": "Aucun"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "FR",
+    "text": "Anonyme"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "FR",
+    "text": "Erreur: La limite du nombre maximum de fichiers est dépassée"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "FR",
+    "text": "Erreur: Les formats de fichiers supportés sont PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "FR",
+    "text": "Erreur: Produit non trouvé"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "FR",
+    "text": "Erreur: Bon de commande non trouvé"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "FR",
+    "text": "Erreur: La taille maximum de fichier téléchargé est de 25MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "FR",
+    "text": "Télécharger photos/vidéos"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "FR",
+    "text": "Ajouter des photos ou des vidéos à votre avis"
+  },
+  {
+    "element": "form__error_title",
+    "language": "FR",
+    "text": "Erreur"
+  },
+  {
+    "element": "form__error_body",
+    "language": "FR",
+    "text": "Une erreur s'est produite lors de l'envoi de votre avis. Vous pouvez essayer à nouveau en appuyant sur le bouton ci-dessous. Si le problème persiste, veuillez contacter <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "FR",
+    "text": "Informations techniques"
+  },
+  {
+    "element": "form__error_button",
+    "language": "FR",
+    "text": "Essayez à nouveau"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "FR",
+    "text": "Erreur au cours du téléchargement du fichier."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "FR",
+    "text": "Notez le site internet, le service clientèle et la livraison"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "FR",
+    "text": "Minimum %d caractères"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "FR",
+    "text": "%1d caractères (minimum %2d caractères)"
+  },
+  {
+    "element": "form__none",
+    "language": "FR",
+    "text": "Aucun"
+  },
+  {
+    "element": "required",
+    "language": "HE",
+    "text": "שדה חובה"
+  },
+  {
+    "element": "rating",
+    "language": "HE",
+    "text": "דירוג"
+  },
+  {
+    "element": "comment",
+    "language": "HE",
+    "text": "תגובה"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "HE",
+    "text": "התגובה שלך"
+  },
+  {
+    "element": "submit_button",
+    "language": "HE",
+    "text": "שלח"
+  },
+  {
+    "element": "footer_form",
+    "language": "HE",
+    "text": "הטופס הזה נוצר על ידי CusRev מטעם <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "HE",
+    "text": "חוות דעת למוצר זה כבר התקבלה"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "HE",
+    "text": "ניתן לערוך את חוות הדעת"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "HE",
+    "text": "תודה על חוות הדעת!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "HE",
+    "text": "תגובתך התקבלה בהצלחה."
+  },
+  {
+    "element": "edit_review",
+    "language": "HE",
+    "text": "ערוך חוות דעת"
+  },
+  {
+    "element": "dname_section",
+    "language": "HE",
+    "text": "שם לתצוגה"
+  },
+  {
+    "element": "terms_form",
+    "language": "HE",
+    "text": "על ידי שליחת הביקורת, אתה מסכים ל<a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">תנאים והתניות</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "HE",
+    "text": "ביקורות"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "HE",
+    "text": "כלום"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "HE",
+    "text": "אנונימי"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "HE",
+    "text": "שגיאה: הגעת למספר המקסימלי של קבצים להוספה"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "HE",
+    "text": "שגיאה: הפורמטים הנתמכים הם PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "HE",
+    "text": "שגיאה: הפריט לא נמצא"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "HE",
+    "text": "שגיאה: ההזמנה לא נמצאה"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "HE",
+    "text": "שגיאה: גודל ההעלאה המקסימלי הוא 25MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "HE",
+    "text": "העלה תמונות/סרטון"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "HE",
+    "text": "הוסף תמונות או סרטון לביקורת שלך"
+  },
+  {
+    "element": "form__error_title",
+    "language": "HE",
+    "text": "שגיאה"
+  },
+  {
+    "element": "form__error_body",
+    "language": "HE",
+    "text": "אירעה שגיאה בעת שליחת הביקורת שלך. תוכל לנסות שוב בעזרת הכפתור למטה. אם הבעיה חוזרת, אנא צור קשר עם  <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "HE",
+    "text": "מידע טכני"
+  },
+  {
+    "element": "form__error_button",
+    "language": "HE",
+    "text": "נסה שוב"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "HE",
+    "text": "אירעה שגיאה בעת העלאת הקובץ"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "HE",
+    "text": "דרג את האתר, שירות הלקוחות והמשלוח"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "HE",
+    "text": "לפחות %d תווים"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "HE",
+    "text": "%1d תווים (לפחות %2d תווים)"
+  },
+  {
+    "element": "form__none",
+    "language": "HE",
+    "text": "כלום"
+  },
+  {
+    "element": "required",
+    "language": "HR",
+    "text": "Obavezno"
+  },
+  {
+    "element": "rating",
+    "language": "HR",
+    "text": "Ocjena"
+  },
+  {
+    "element": "comment",
+    "language": "HR",
+    "text": "Komentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "HR",
+    "text": "Vaš komentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "HR",
+    "text": "Objavi"
+  },
+  {
+    "element": "footer_form",
+    "language": "HR",
+    "text": "Ovaj je obrazac generiral CusRev u ime <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "HR",
+    "text": "Recenzija za ovu narudžbu već je poslana"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "HR",
+    "text": "Ako želite, možete urediti ovu recenziju"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "HR",
+    "text": "Hvala što ste poslali recenziju!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "HR",
+    "text": "Vaš odgovor je zabilježen."
+  },
+  {
+    "element": "edit_review",
+    "language": "HR",
+    "text": "Uredite svoju recenziju"
+  },
+  {
+    "element": "dname_section",
+    "language": "HR",
+    "text": "Ime za prikaz"
+  },
+  {
+    "element": "terms_form",
+    "language": "HR",
+    "text": "Slanjem recenzije prihvaćate <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">odredbe i uvjete</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "HR",
+    "text": "Reviews"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "HR",
+    "text": "None"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "HR",
+    "text": "Anoniman"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "HR",
+    "text": "Pogreška: Prekoračen je limit za maksimalni broj datoteka"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "HR",
+    "text": "Pogreška: podržani formati datoteka su PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "HR",
+    "text": "Pogreška: Proizvod nije pronađen"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "HR",
+    "text": "Pogreška: Narudžba nije pronađena"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "HR",
+    "text": "Pogreška: Maksimalna veličina prenesene datoteke je 25 MB."
+  },
+  {
+    "element": "form__media_title",
+    "language": "HR",
+    "text": "Prenesite fotografije/videozapise"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "HR",
+    "text": "U recenziju dodajte fotografije ili videozapise"
+  },
+  {
+    "element": "form__error_title",
+    "language": "HR",
+    "text": "Pogreška"
+  },
+  {
+    "element": "form__error_body",
+    "language": "HR",
+    "text": "Došlo je do pogreške tijekom slanja recenzije. Možete pokušati ponovo pomoću gumba u nastavku. Ako problem i dalje postoji, kontaktirajte <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "HR",
+    "text": "Tehničke informacije"
+  },
+  {
+    "element": "form__error_button",
+    "language": "HR",
+    "text": "Pokušajte ponovo"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "HR",
+    "text": "Pogreška tijekom prijenosa datoteke."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "HR",
+    "text": "Ocijenite web stranicu, služba za korisnike i dostavu"
+  },
+  {
+    "element": "form__single_choice_title",
+    "language": "HR",
+    "text": "A new single choice question"
+  },
+  {
+    "element": "form__multiple_choice_title",
+    "language": "HR",
+    "text": "A new multiple choice question"
+  },
+  {
+    "element": "form__none",
+    "language": "HR",
+    "text": "None"
+  },
+  {
+    "element": "required",
+    "language": "HU",
+    "text": "Kötelező"
+  },
+  {
+    "element": "rating",
+    "language": "HU",
+    "text": "Értékelés"
+  },
+  {
+    "element": "comment",
+    "language": "HU",
+    "text": "Véleményed"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "HU",
+    "text": "Ide írd a véleményed"
+  },
+  {
+    "element": "submit_button",
+    "language": "HU",
+    "text": "Küldés"
+  },
+  {
+    "element": "footer_form",
+    "language": "HU",
+    "text": "Ezt az űrlapot a CusRev hozta létre <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "HU",
+    "text": "Már értékelted ezt a megrendelést"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "HU",
+    "text": "Ha szeretnéd, módosíthatod az értékelést"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "HU",
+    "text": "Köszönjük az értékelést!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "HU",
+    "text": "Az értékelést rögzítettük."
+  },
+  {
+    "element": "edit_review",
+    "language": "HU",
+    "text": "Értékelés szerkesztése"
+  },
+  {
+    "element": "dname_section",
+    "language": "HU",
+    "text": "Megjelenítendő név"
+  },
+  {
+    "element": "terms_form",
+    "language": "HU",
+    "text": "Az értékelés megerősítésével elfogadja az <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">Általános felhasználási feltételeket</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "HU",
+    "text": "Vélemények"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "HU",
+    "text": "Egyik sem"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "HU",
+    "text": "Névtelen"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "HU",
+    "text": "Hiba: A fájlok maximális számának határértéke meg lett haladva"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "HU",
+    "text": "Hiba: A támogatott fájlformátumok PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "HU",
+    "text": "Hiba: A termék nem található"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "HU",
+    "text": "Hiba: A rendelés nem található"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "HU",
+    "text": "Hiba: A feltöltött fájl maximális mérete 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "HU",
+    "text": "Fotók/videó feltöltése"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "HU",
+    "text": "Adjon hozzá fotókat vagy videókat a véleményéhez"
+  },
+  {
+    "element": "form__error_title",
+    "language": "HU",
+    "text": "Hiba"
+  },
+  {
+    "element": "form__error_body",
+    "language": "HU",
+    "text": "Hiba történt a véleményének benyújtása során. Az alábbi gombra kattintva próbálkozhat újra. Ha a probléma továbbra is fennáll, kérjük, forduljon a <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>-ra."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "HU",
+    "text": "Technikai információk"
+  },
+  {
+    "element": "form__error_button",
+    "language": "HU",
+    "text": "Próbálkozzon újra"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "HU",
+    "text": "Hiba történt a fájl feltöltése közben."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "HU",
+    "text": "Értékeld a weboldalt, az ügyfélszolgálatot és a szállítást"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "HU",
+    "text": "Legalább %d karakter"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "HU",
+    "text": "%1d karakter (legalább %2d karakter)"
+  },
+  {
+    "element": "form__none",
+    "language": "HU",
+    "text": "Egyik sem"
+  },
+  {
+    "element": "required",
+    "language": "ID",
+    "text": "Wajib diisi"
+  },
+  {
+    "element": "rating",
+    "language": "ID",
+    "text": "Nilainya"
+  },
+  {
+    "element": "comment",
+    "language": "ID",
+    "text": "Komentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "ID",
+    "text": "Komentar Anda"
+  },
+  {
+    "element": "submit_button",
+    "language": "ID",
+    "text": "Kirim"
+  },
+  {
+    "element": "footer_form",
+    "language": "ID",
+    "text": "Formulir diterbitkan oleh plugin CusRev sebagai bagian dari <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "ID",
+    "text": "Sudah ada ulasan sebelumnya untuk order ini"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "ID",
+    "text": "Jika Anda mau, Anda bisa mengubah ulasan ini"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "ID",
+    "text": "Terima kasih telah memberikan ulasan!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "ID",
+    "text": "Ulasan Anda telah kami simpan."
+  },
+  {
+    "element": "edit_review",
+    "language": "ID",
+    "text": "Ubah ulasan Anda"
+  },
+  {
+    "element": "dname_section",
+    "language": "ID",
+    "text": "Nama ditampilkan"
+  },
+  {
+    "element": "terms_form",
+    "language": "ID",
+    "text": "Dengan mengirimkan ulasan, Anda menyetujui <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">syarat dan ketentuan</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "ID",
+    "text": "Ulasan"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "ID",
+    "text": "Tidak ada"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "ID",
+    "text": "Anonim"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "ID",
+    "text": "Kesalahan: Batas untuk jumlah file maksimum terlampaui"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "ID",
+    "text": "Kesalahan: Format file yang didukung adalah PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "ID",
+    "text": "Kesalahan: Produk tidak ditemukan"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "ID",
+    "text": "Kesalahan: Pesanan tidak ditemukan"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "ID",
+    "text": "Kesalahan: Ukuran maksimum file yang diunggah adalah 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "ID",
+    "text": "Unggah Foto/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "ID",
+    "text": "Tambahkan foto atau video ke ulasan Anda"
+  },
+  {
+    "element": "form__error_title",
+    "language": "ID",
+    "text": "Kesalahan"
+  },
+  {
+    "element": "form__error_body",
+    "language": "ID",
+    "text": "Terjadi kesalahan saat pengiriman ulasan anda. Anda dapat mencoba lagi menggunakan tombol di bawah ini. Jika masalah berlanjut, silakan hubungi <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "ID",
+    "text": "Informasi Teknis"
+  },
+  {
+    "element": "form__error_button",
+    "language": "ID",
+    "text": "Coba lagi"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "ID",
+    "text": "Kesalahan saat mengunggah file."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "ID",
+    "text": "Nilai situs web, layanan pelanggan dan pengiriman"
+  },
+  {
+    "element": "form__none",
+    "language": "ID",
+    "text": "Tidak ada"
+  },
+  {
+    "element": "required",
+    "language": "IS",
+    "text": "Nauðsynlegt"
+  },
+  {
+    "element": "rating",
+    "language": "IS",
+    "text": "Einkunn"
+  },
+  {
+    "element": "comment",
+    "language": "IS",
+    "text": "Umsögn"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "IS",
+    "text": "Umsögnin þín"
+  },
+  {
+    "element": "submit_button",
+    "language": "IS",
+    "text": "Senda"
+  },
+  {
+    "element": "footer_form",
+    "language": "IS",
+    "text": "Þetta form var búið til af CusRev fyrir hönd <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "IS",
+    "text": "Umsögn hefur nú þegar verið send fyrir þessa pöntun"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "IS",
+    "text": "Ef þú vilt getur þú breytt umsögn þinni"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "IS",
+    "text": "Takk fyrir að senda umsögn!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "IS",
+    "text": "Umsögnin þín hefur verið móttekin"
+  },
+  {
+    "element": "edit_review",
+    "language": "IS",
+    "text": "Breyta umsögn þinni"
+  },
+  {
+    "element": "dname_section",
+    "language": "IS",
+    "text": "Nafn með umsögn"
+  },
+  {
+    "element": "terms_form",
+    "language": "IS",
+    "text": "Með því að senda umsögnina samþykkir þú <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">skilmála og skilyrði</a>."
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "IS",
+    "text": "Villa: Of mörg viðhengi"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "IS",
+    "text": "Villa: Eingöngu tekið við viðhengjum af gerðinni PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "IS",
+    "text": "Villa: Vara finnst ekki"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "IS",
+    "text": "Villa: Pöntun fannst ekki"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "IS",
+    "text": "Villa: Hámarksstærð viðhengja er 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "IS",
+    "text": "Sendu myndir/myndband"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "IS",
+    "text": "Bættu myndum eða myndbandi við umsögn þína"
+  },
+  {
+    "element": "form__error_title",
+    "language": "IS",
+    "text": "Villa"
+  },
+  {
+    "element": "form__error_body",
+    "language": "IS",
+    "text": "Villa kom upp við sendingu á umsögn þinni. Þú getur reynt aftur með því að nota hnappinn hérna fyrir neðan. Ef það gengur ekki, vinsamlegast hafðu samband við <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "IS",
+    "text": "Tæknilegar upplýsingar"
+  },
+  {
+    "element": "form__error_button",
+    "language": "IS",
+    "text": "Reyna aftur"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "IS",
+    "text": "Villa við að hlaða upp viðhengi."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "IS",
+    "text": "Gefðu vefsíðunni, þjónustunni og afhendingu einkunn"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "IS",
+    "text": "Nafnlaus"
+  },
+  {
+    "element": "required",
+    "language": "IT",
+    "text": "Richiesto"
+  },
+  {
+    "element": "rating",
+    "language": "IT",
+    "text": "Valutazione"
+  },
+  {
+    "element": "comment",
+    "language": "IT",
+    "text": "Commento"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "IT",
+    "text": "Il tuo commento"
+  },
+  {
+    "element": "submit_button",
+    "language": "IT",
+    "text": "Invia"
+  },
+  {
+    "element": "footer_form",
+    "language": "IT",
+    "text": "Questo form è stato generato dal CusRev installato su <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "IT",
+    "text": "Hai già inviato una recensione per questo ordine"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "IT",
+    "text": "Se vuoi, puoi cambiare questa recensione"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "IT",
+    "text": "Grazie per aver inviato la tua recensione!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "IT",
+    "text": "La tua risposta è stata registrata."
+  },
+  {
+    "element": "edit_review",
+    "language": "IT",
+    "text": "Scrivi la tua recensione"
+  },
+  {
+    "element": "dname_section",
+    "language": "IT",
+    "text": "Nome visualizzato"
+  },
+  {
+    "element": "terms_form",
+    "language": "IT",
+    "text": "Inviando la tua recensione, accetti i <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">termini e condizioni</a>."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "IT",
+    "text": "Vota il sito, il servizio clienti e la consegna"
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "IT",
+    "text": "Recensioni"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "IT",
+    "text": "Nessuno"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "IT",
+    "text": "Anonimo"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "IT",
+    "text": "Errore: È stato superato il limite per il numero massimo di file"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "IT",
+    "text": "Errore: I formati file supportati sono PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "IT",
+    "text": "Errore: Prodotto non trovato"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "IT",
+    "text": "Errore: Ordine non trovato"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "IT",
+    "text": "Errore: La dimensione massima dei file caricati è di 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "IT",
+    "text": "Carica Foto/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "IT",
+    "text": "Aggiungi foto o video alla tua recensione"
+  },
+  {
+    "element": "form__error_title",
+    "language": "IT",
+    "text": "Errore"
+  },
+  {
+    "element": "form__error_body",
+    "language": "IT",
+    "text": "È successo un errore durante l’invio della tua richiesta. Puoi riprovare utilizzando il tasto qui sotto. Se il problema persiste, ti preghiamo di contattare <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "IT",
+    "text": "Informazioni Tecniche"
+  },
+  {
+    "element": "form__error_button",
+    "language": "IT",
+    "text": "Riprova"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "IT",
+    "text": "Errore durante il caricamento del file."
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "IT",
+    "text": "Minimo %d caratteri"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "IT",
+    "text": "%1d caratteri (minimo %2d caratteri)"
+  },
+  {
+    "element": "form__none",
+    "language": "IT",
+    "text": "Nessuno"
+  },
+  {
+    "element": "required",
+    "language": "JA",
+    "text": "必須"
+  },
+  {
+    "element": "rating",
+    "language": "JA",
+    "text": "評価"
+  },
+  {
+    "element": "comment",
+    "language": "JA",
+    "text": "コメント"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "JA",
+    "text": "あなたのコメント"
+  },
+  {
+    "element": "submit_button",
+    "language": "JA",
+    "text": "提出する"
+  },
+  {
+    "element": "footer_form",
+    "language": "JA",
+    "text": "このフォームは<a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>の代わりにCusRevによって生成されました。"
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "JA",
+    "text": "このオーダーのレビューが既に提出されています"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "JA",
+    "text": "あなたが望むなら、このレビューを編集することができます"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "JA",
+    "text": "あなたのレビューを提出していただきありがとうございます！"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "JA",
+    "text": "あなたの応答は記録されました。"
+  },
+  {
+    "element": "edit_review",
+    "language": "JA",
+    "text": "あなたのレビューを編集する"
+  },
+  {
+    "element": "dname_section",
+    "language": "JA",
+    "text": "表示名"
+  },
+  {
+    "element": "terms_form",
+    "language": "JA",
+    "text": "レビューを送信することにより、<a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">利用規約</a>に同意したことになります。"
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "JA",
+    "text": "レビュー"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "JA",
+    "text": "なし"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "JA",
+    "text": "匿名"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "JA",
+    "text": "エラー：ファイルの最大数の制限を超えています"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "JA",
+    "text": "エラー：サポートされているファイル形式は、PNG、JPG、JPEG、MP4、WEBM、OGGです。"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "JA",
+    "text": "エラー：商品が見つかりません"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "JA",
+    "text": "エラー：注文が見つかりません"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "JA",
+    "text": "エラー：アップロードされたファイルの最大サイズは25 MBです"
+  },
+  {
+    "element": "form__media_title",
+    "language": "JA",
+    "text": "写真/ビデオをアップロードする"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "JA",
+    "text": "あなたのレビューに写真やビデオを追加する"
+  },
+  {
+    "element": "form__error_title",
+    "language": "JA",
+    "text": "エラー"
+  },
+  {
+    "element": "form__error_body",
+    "language": "JA",
+    "text": "あなたのレビューの提出中にエラーが発生しました。 以下のボタンを使ってもう一度お試しください。 問題が解決しない場合は、<a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>までご連絡ください。"
+  },
+  {
+    "element": "form__error_tech",
+    "language": "JA",
+    "text": "技術的な情報"
+  },
+  {
+    "element": "form__error_button",
+    "language": "JA",
+    "text": "再試行する"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "JA",
+    "text": "ファイルのアップロード中にエラーが発生しました。"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "JA",
+    "text": "ウェブサイト、顧客サービス、および配達を評価する"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "JA",
+    "text": "%d字以上"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "JA",
+    "text": "%1d字 (%2d字以上)"
+  },
+  {
+    "element": "form__none",
+    "language": "JA",
+    "text": "なし"
+  },
+  {
+    "element": "required",
+    "language": "KA",
+    "text": "აუცილებელი"
+  },
+  {
+    "element": "rating",
+    "language": "KA",
+    "text": "რეიტინგი"
+  },
+  {
+    "element": "comment",
+    "language": "KA",
+    "text": "კომენტარი"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "KA",
+    "text": "თქვენი კომენტარი"
+  },
+  {
+    "element": "submit_button",
+    "language": "KA",
+    "text": "გამოქვეყნება"
+  },
+  {
+    "element": "footer_form",
+    "language": "KA",
+    "text": "ეს ფორმა დაგენერირდა CusRev მოდულის მეშვეობით საიტისთვის: <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "KA",
+    "text": "აღნიშნული შეკვეთისთვის შეფასება უკვე დამატებულია"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "KA",
+    "text": "თუ გსურთს, შეგიძლიათ შეფასების რედაქტირება"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "KA",
+    "text": "დიდი მადლობა შეფასების დატოვებისთვის!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "KA",
+    "text": "თქვენი შეფასება მიღებულია."
+  },
+  {
+    "element": "edit_review",
+    "language": "KA",
+    "text": "შეფასების რედაქტირება"
+  },
+  {
+    "element": "dname_section",
+    "language": "KA",
+    "text": "თქვენი სახელი"
+  },
+  {
+    "element": "terms_form",
+    "language": "KA",
+    "text": "ამ შეფასების გამოქვეყნებით, თქვენ ეთანხმებით საიტის <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">წესებს და პირობებს</a>."
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "KA",
+    "text": "შეცდომა: გადაჭარბებულია ლიმიტი მაქსიმალური ფაილების ატვირთვის"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "KA",
+    "text": "შეცდომა: დასაშვები ფაილის ფორმატებია: PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "KA",
+    "text": "შეცდომა: პროდუქტი ვერ მოიძებნა"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "KA",
+    "text": "შეცდომა: შეკვეთა ვერ მოიძებნა"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "KA",
+    "text": "შეცდომა: მაქსიმალური ფაილის ზომა არის 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "KA",
+    "text": "ატვირთეთ ფოტო/ვიდეო"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "KA",
+    "text": "დაამატეთ ფოტოები ან ვიდეო თქვენს შეფასებას"
+  },
+  {
+    "element": "form__error_title",
+    "language": "KA",
+    "text": "შეცდომა"
+  },
+  {
+    "element": "form__error_body",
+    "language": "KA",
+    "text": "დაფიქსირდა შეცდომა თქვენი შეფასების დამატებისას. ცადეთ ხელახლა ქვემოთ მოცემულ ღილაკზე დაჭერით. თუ პრობლემა განმეორდა, დაგვიკავშირდით <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "KA",
+    "text": "ტექნიკური ინფორმაცია"
+  },
+  {
+    "element": "form__error_button",
+    "language": "KA",
+    "text": "სცადეთ ხელახლა"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "KA",
+    "text": "დაფიქსირდა შეცდომა ფაილის ატვირთვისას."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "KA",
+    "text": "შეაფასეთ საიტი, მხარდაჭერის სერვისი და მიწოდების სერვისი"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "KA",
+    "text": "სტუმარი"
+  },
+  {
+    "element": "required",
+    "language": "KO",
+    "text": "필수의"
+  },
+  {
+    "element": "rating",
+    "language": "KO",
+    "text": "만족도"
+  },
+  {
+    "element": "comment",
+    "language": "KO",
+    "text": "리뷰"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "KO",
+    "text": "리뷰를 남겨주세요"
+  },
+  {
+    "element": "submit_button",
+    "language": "KO",
+    "text": "제출"
+  },
+  {
+    "element": "footer_form",
+    "language": "KO",
+    "text": "이 리뷰 작성 페이지는 <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>의CusRev 플러그인을 통해서 작성되었습니다."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "KO",
+    "text": "이 주문에 대한 리뷰가 이미 제출되었습니다"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "KO",
+    "text": "원하는 경우 이 리뷰 편집할 수 있다"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "KO",
+    "text": "리뷰를 제출해 주셔서 감사합니다!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "KO",
+    "text": "당신의 응답이 기록되었습니다."
+  },
+  {
+    "element": "edit_review",
+    "language": "KO",
+    "text": "당신의 리뷰 편집"
+  },
+  {
+    "element": "dname_section",
+    "language": "KO",
+    "text": "작성자 이름"
+  },
+  {
+    "element": "terms_form",
+    "language": "KO",
+    "text": "고객님이 리뷰를 제출하시면, 고객님께서는 귀사의 <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">약관과 조건</a> 에 동의하게 됩니다."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "KO",
+    "text": "리뷰"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "KO",
+    "text": "없음"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "KO",
+    "text": "익명인"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "KO",
+    "text": "오류 : 최대 파일 수에 대한 제한이 초과되었습니다."
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "KO",
+    "text": "오류 : 지원되는 파일 형식은 PNG, JPG, JPEG, MP4, WEBM, OGG입니다."
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "KO",
+    "text": "오류 : 상품을 찾을 수 없습니다."
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "KO",
+    "text": "오류 : 주문을 찾을 수 없습니다."
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "KO",
+    "text": "오류 : 업로드된 파일의 최대 크기는 25MB입니다."
+  },
+  {
+    "element": "form__media_title",
+    "language": "KO",
+    "text": "사진/비디오 업로드"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "KO",
+    "text": "리뷰에 사진 또는 비디오 첨가하세요"
+  },
+  {
+    "element": "form__error_title",
+    "language": "KO",
+    "text": "오류"
+  },
+  {
+    "element": "form__error_body",
+    "language": "KO",
+    "text": "리뷰 제출 중 오류가 발생했습니다. 아래 버튼을 사용하여 다시 시도할 수 있습니다. 문제가 지속되면 <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>에 문의하십시오."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "KO",
+    "text": "기술 정보"
+  },
+  {
+    "element": "form__error_button",
+    "language": "KO",
+    "text": "다시 해보세요"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "KO",
+    "text": "파일을 업로드하는 동안 오류가 발생했습니다."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "KO",
+    "text": "웹 사이트, 고객 서비스 및 배송 평가"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "KO",
+    "text": "최소 %d글자"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "KO",
+    "text": "%1d글자(최소 %2d글자)"
+  },
+  {
+    "element": "form__none",
+    "language": "KO",
+    "text": "없음"
+  },
+  {
+    "element": "required",
+    "language": "LT",
+    "text": "Privaloma"
+  },
+  {
+    "element": "rating",
+    "language": "LT",
+    "text": "Įvertinimas"
+  },
+  {
+    "element": "comment",
+    "language": "LT",
+    "text": "Komentaras"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "LT",
+    "text": "Atsakymas"
+  },
+  {
+    "element": "submit_button",
+    "language": "LT",
+    "text": "Pateikti"
+  },
+  {
+    "element": "footer_form",
+    "language": "LT",
+    "text": "Ši forma sukurta naudojant CusRev įskiepį per <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "LT",
+    "text": "Atsiliepimas šiam užsakymui jau pateiktas"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "LT",
+    "text": "Jeigu norite, galite redaguoti atsiliepimą"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "LT",
+    "text": "Ačiū už jūsų atsiliepimą!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "LT",
+    "text": "Jūsų atsiliepimas išsaugotas."
+  },
+  {
+    "element": "edit_review",
+    "language": "LT",
+    "text": "Redaguoti atsiliepimą"
+  },
+  {
+    "element": "dname_section",
+    "language": "LT",
+    "text": "Rodomas vardas"
+  },
+  {
+    "element": "terms_form",
+    "language": "LT",
+    "text": "Pateikdami peržiūrą, jūs sutinkate su <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">taisyklėmis ir nuostatomis</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "LT",
+    "text": "Atsiliepimai"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "LT",
+    "text": "Nėra"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "LT",
+    "text": "Anonimas"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "LT",
+    "text": "Klaida: Pasiektas maksimalus failų limitas"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "LT",
+    "text": "Klaida: Palaikomi failų formatai yra PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "LT",
+    "text": "Klaida: Produktas nerastas"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "LT",
+    "text": "Klaida: Užsakymas nerastas"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "LT",
+    "text": "Klaida: Maksimalus įkelto failo dydis yra 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "LT",
+    "text": "Įkelti Nuotraukas/Vaizdo Įrašus"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "LT",
+    "text": "Pridėti nuotraukas ar vaizdo įrašus prie savo atsiliepimo"
+  },
+  {
+    "element": "form__error_title",
+    "language": "LT",
+    "text": "Klaida"
+  },
+  {
+    "element": "form__error_body",
+    "language": "LT",
+    "text": "Apžvalgos pateikimo metu Įvyko klaida. Galite pabandyti dar kartą spausdami mygtuką apačioje. Jeigu problema išlieka, prašome susisiekti su <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "LT",
+    "text": "Techninė Informacija"
+  },
+  {
+    "element": "form__error_button",
+    "language": "LT",
+    "text": "Pabandyti dar kartą"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "LT",
+    "text": "Klaida failo įkėlimo metu."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "LT",
+    "text": "Įvertinti tinklalapį, klientų aptarnavimo paslaugas bei pristatymo patirtis"
+  },
+  {
+    "element": "form__none",
+    "language": "LT",
+    "text": "Nėra"
+  },
+  {
+    "element": "required",
+    "language": "LV",
+    "text": "Nepieciešams"
+  },
+  {
+    "element": "rating",
+    "language": "LV",
+    "text": "Reitings"
+  },
+  {
+    "element": "comment",
+    "language": "LV",
+    "text": "Komentārs"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "LV",
+    "text": "Jūsu komentārs"
+  },
+  {
+    "element": "submit_button",
+    "language": "LV",
+    "text": "Iesniegt"
+  },
+  {
+    "element": "footer_form",
+    "language": "LV",
+    "text": "Šo veidlapu veidoja CusRev spraudnis <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a> vārdā."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "LV",
+    "text": "Par šo pasūtījumu jau ir iesniegts pārskats"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "LV",
+    "text": "Ja vēlaties, varat rediģēt šo pārskatu"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "LV",
+    "text": "Paldies par Jūsu iesniegto atsauksmi!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "LV",
+    "text": "Jūsu atbilde ir reģistrēta."
+  },
+  {
+    "element": "edit_review",
+    "language": "LV",
+    "text": "Rediģēt atsauksmes"
+  },
+  {
+    "element": "dname_section",
+    "language": "LV",
+    "text": "Ekrāna vārds"
+  },
+  {
+    "element": "terms_form",
+    "language": "LV",
+    "text": "Iesniedzot savu pārskatu, jūs piekrītat <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">noteikumiem un nosacījumiem</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "LV",
+    "text": "Reviews"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "LV",
+    "text": "None"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "LV",
+    "text": "Anonymous"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "LV",
+    "text": "Kļūda: pārsniegts maksimālais failu skaits"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "LV",
+    "text": "Kļūda: atbalstītie failu formāti ir PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "LV",
+    "text": "Kļūda: produkts nav atrasts"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "LV",
+    "text": "Kļūda: pasūtījums nav atrasts"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "LV",
+    "text": "Kļūda: maksimālais augšupielādes izmērs ir 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "LV",
+    "text": "Augšuplādēt Foto/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "LV",
+    "text": "Pievienot foto vai video pie atsauksmes"
+  },
+  {
+    "element": "form__error_title",
+    "language": "LV",
+    "text": "Kļūda"
+  },
+  {
+    "element": "form__error_body",
+    "language": "LV",
+    "text": "Pārskatīšanas iesniegšanas laikā radās kļūda. Jūs varat mēģināt vēlreiz, izmantojot zemāk redzamo pogu. Ja problēma saglabājas, lūdzu, sazinieties ar <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "LV",
+    "text": "Tehniskā informācija"
+  },
+  {
+    "element": "form__error_button",
+    "language": "LV",
+    "text": "Mēģīnāt vēlreiz"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "LV",
+    "text": "Augšupielādējot failu, radās kļūda."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "LV",
+    "text": "Novērtējiet vietni, klientu apkalpošanu un piegādi"
+  },
+  {
+    "element": "form__none",
+    "language": "LV",
+    "text": "None"
+  },
+  {
+    "element": "required",
+    "language": "MK",
+    "text": "Потребно"
+  },
+  {
+    "element": "rating",
+    "language": "MK",
+    "text": "Оцена"
+  },
+  {
+    "element": "comment",
+    "language": "MK",
+    "text": "Мислење"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "MK",
+    "text": "Вашето мислење"
+  },
+  {
+    "element": "submit_button",
+    "language": "MK",
+    "text": "Испрати"
+  },
+  {
+    "element": "footer_form",
+    "language": "MK",
+    "text": "Оваа форма е генерирана од CusRev партнер на <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "MK",
+    "text": "Веќе го оценивте производот"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "MK",
+    "text": "Ако сакате може да го промените мислењето"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "MK",
+    "text": "Ви благодариме на одвоеното време!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "MK",
+    "text": "Вашето мислење е зачувано."
+  },
+  {
+    "element": "edit_review",
+    "language": "MK",
+    "text": "Промени го мислењето"
+  },
+  {
+    "element": "dname_section",
+    "language": "MK",
+    "text": "Име"
+  },
+  {
+    "element": "terms_form",
+    "language": "MK",
+    "text": "Со испраќање на вашето мислење, вие се согласувате со <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">условите за користење</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "MK",
+    "text": "Reviews"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "MK",
+    "text": "None"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "MK",
+    "text": "Anonymous"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "MK",
+    "text": "Грешка: Го надминавте лимитот за максимален број на фајлови"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "MK",
+    "text": "Грешка: Само овие фајлови се подржани PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "MK",
+    "text": "Грешка: Производот не е пронајден"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "MK",
+    "text": "Грешка: Нарачката не постои"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "MK",
+    "text": "Грешка: Максимална дозволена големина е 25 MB."
+  },
+  {
+    "element": "form__media_title",
+    "language": "MK",
+    "text": "Додај Слика/Видео"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "MK",
+    "text": "Додај слика или видео на вашето мислење"
+  },
+  {
+    "element": "form__error_title",
+    "language": "MK",
+    "text": "Грешка"
+  },
+  {
+    "element": "form__error_body",
+    "language": "MK",
+    "text": "Се појави грешка обидете се повторно или исконтактирајте <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "MK",
+    "text": "Технички информации"
+  },
+  {
+    "element": "form__error_button",
+    "language": "MK",
+    "text": "Обидете се повторно"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "MK",
+    "text": "Се појави грешка."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "MK",
+    "text": "Оценете веб-сајт, корисничката подршка и доставата"
+  },
+  {
+    "element": "form__none",
+    "language": "MK",
+    "text": "None"
+  },
+  {
+    "element": "required",
+    "language": "NL",
+    "text": "Verplicht veld"
+  },
+  {
+    "element": "rating",
+    "language": "NL",
+    "text": "Waardering"
+  },
+  {
+    "element": "comment",
+    "language": "NL",
+    "text": "Commentaar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "NL",
+    "text": "Jouw commentaar"
+  },
+  {
+    "element": "submit_button",
+    "language": "NL",
+    "text": "Verzenden"
+  },
+  {
+    "element": "footer_form",
+    "language": "NL",
+    "text": "Dit formulier werd gegenereerd door de CusRev namens <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "NL",
+    "text": "Voor deze bestelling werd al een beoordeling verzonden"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "NL",
+    "text": "Als je wilt, kun je je beoordeling nog wijzigen"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "NL",
+    "text": "Bedankt voor je beoordeling!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "NL",
+    "text": "Je beoordeling werd goed opgeslagen."
+  },
+  {
+    "element": "edit_review",
+    "language": "NL",
+    "text": "Pas je beoordeling aan"
+  },
+  {
+    "element": "dname_section",
+    "language": "NL",
+    "text": "Naam tonen"
+  },
+  {
+    "element": "terms_form",
+    "language": "NL",
+    "text": "Door je beoordeling in te dienen, ga je akkoord met de <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">algemene voorwaarden</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "NL",
+    "text": "Beoordelingen"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "NL",
+    "text": "Geen"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "NL",
+    "text": "Anoniem"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "NL",
+    "text": "Foutmelding: Het limiet voor het maximum aantal bestanden is overschreden"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "NL",
+    "text": "Foutmelding: De ondersteunde bestandsformaten zijn PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "NL",
+    "text": "Foutmelding: Product niet gevonden"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "NL",
+    "text": "Foutmelding: Bestelling niet gevonden"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "NL",
+    "text": "Foutmelding: De maximum grootte van het geüploade bestand is 25MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "NL",
+    "text": "Upload foto's/video's"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "NL",
+    "text": "Voeg foto's of video's toe aan je recensie"
+  },
+  {
+    "element": "form__error_title",
+    "language": "NL",
+    "text": "Foutmelding"
+  },
+  {
+    "element": "form__error_body",
+    "language": "NL",
+    "text": "Er is een fout opgetreden tijdens het indienen van je recensie. Je kunt het opnieuw proberen door te knop hieronder te gebruiken. Als het probleem zich blijft voordoen, neem dan contact op met <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "NL",
+    "text": "Technische informatie"
+  },
+  {
+    "element": "form__error_button",
+    "language": "NL",
+    "text": "Probeer opnieuw"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "NL",
+    "text": "Fout tijdens het uploaden van je bestand"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "NL",
+    "text": "Beoordeel website, klantenservice en bezorging"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "NL",
+    "text": "Minimaal %d tekens"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "NL",
+    "text": "%1d tekens (minimaal %2d tekens)"
+  },
+  {
+    "element": "form__none",
+    "language": "NL",
+    "text": "Geen"
+  },
+  {
+    "element": "required",
+    "language": "NO",
+    "text": "Påkrevet"
+  },
+  {
+    "element": "rating",
+    "language": "NO",
+    "text": "Vurdering"
+  },
+  {
+    "element": "comment",
+    "language": "NO",
+    "text": "Kommentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "NO",
+    "text": "Din kommentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "NO",
+    "text": "Send"
+  },
+  {
+    "element": "footer_form",
+    "language": "NO",
+    "text": "Dette skjemaet er generert av CusRev på vegne av <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "NO",
+    "text": "Et anmeldelse er allerede sendt inn for denne ordren"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "NO",
+    "text": "Du kan redigere denne anmeldelsen dersom ønskelig"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "NO",
+    "text": "Takk for din anmeldelse!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "NO",
+    "text": "Din anmeldelse er mottatt."
+  },
+  {
+    "element": "edit_review",
+    "language": "NO",
+    "text": "Rediger din anmeldelse"
+  },
+  {
+    "element": "dname_section",
+    "language": "NO",
+    "text": "Vis navn som"
+  },
+  {
+    "element": "terms_form",
+    "language": "NO",
+    "text": "Ved å sende din anmeldelse godtar du <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">vilkårene</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "NO",
+    "text": "Omtaler"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "NO",
+    "text": "Ingen"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "NO",
+    "text": "Anonym"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "NO",
+    "text": "Feilmelding: Grensen for maksimalt antall filer overgått"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "NO",
+    "text": "Feilmelding: De støttede filformatene er PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "NO",
+    "text": "Feilmelding: Produkt ikke funnet"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "NO",
+    "text": "Feilmelding: Ordre ikke funnet"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "NO",
+    "text": "Feilmelding: Maksimalstørrelse på opplastet fil er 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "NO",
+    "text": "Last opp bilder/video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "NO",
+    "text": "Legg til bilder eller video i omtalen din"
+  },
+  {
+    "element": "form__error_title",
+    "language": "NO",
+    "text": "Feilmelding"
+  },
+  {
+    "element": "form__error_body",
+    "language": "NO",
+    "text": "Det oppstod en feil under innsendingen av omtalen din. Du kan prøve igjen ved å klikke på knappen nedenfor. Dersom problemet vedvarer, vennligst kontakt <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "NO",
+    "text": "Teknisk informasjon"
+  },
+  {
+    "element": "form__error_button",
+    "language": "NO",
+    "text": "Prøv igjen"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "NO",
+    "text": "Feil under opplasting av filen."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "NO",
+    "text": "Gi en vurdering av nettside, kundeservice og leveranse"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "NO",
+    "text": "Minimum %d tegn"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "NO",
+    "text": "%1d tegn (minimum %2d tegn)"
+  },
+  {
+    "element": "form__none",
+    "language": "NO",
+    "text": "Ingen"
+  },
+  {
+    "element": "required",
+    "language": "PL",
+    "text": "Wymagane"
+  },
+  {
+    "element": "rating",
+    "language": "PL",
+    "text": "Ocena"
+  },
+  {
+    "element": "comment",
+    "language": "PL",
+    "text": "Komentarz"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "PL",
+    "text": "Twój komentarz"
+  },
+  {
+    "element": "submit_button",
+    "language": "PL",
+    "text": "Wyślij"
+  },
+  {
+    "element": "footer_form",
+    "language": "PL",
+    "text": "This form was generated by CusRev on behalf of <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "PL",
+    "text": "Już oceniłeś ten produkt"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "PL",
+    "text": "Możesz edytować swoją ocenę"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "PL",
+    "text": "Dziękujemy za ocenę!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "PL",
+    "text": "Twoja odpowiedz została zapisana."
+  },
+  {
+    "element": "edit_review",
+    "language": "PL",
+    "text": "Edytuj twoją ocenę"
+  },
+  {
+    "element": "dname_section",
+    "language": "PL",
+    "text": "Nazwa wyświetlana"
+  },
+  {
+    "element": "terms_form",
+    "language": "PL",
+    "text": "Wysyłając ten formularz akceptujesz <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">regulamin</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "PL",
+    "text": "Opinii"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "PL",
+    "text": "Brak"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "PL",
+    "text": "Anonimowo"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "PL",
+    "text": "Błąd: Przekroczono limit maksymalnej liczby plików"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "PL",
+    "text": "Błąd: Obsługiwane formaty plików to PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "PL",
+    "text": "Błąd: Nie znaleziono produktu"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "PL",
+    "text": "Błąd: Nie znaleziono zamówienia"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "PL",
+    "text": "Błąd: Maksymalny rozmiar przesyłanego pliku to 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "PL",
+    "text": "Prześlij Zdjęcia/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "PL",
+    "text": "Dodaj zdjęcia lub video do swojej recenzji"
+  },
+  {
+    "element": "form__error_title",
+    "language": "PL",
+    "text": "Błąd"
+  },
+  {
+    "element": "form__error_body",
+    "language": "PL",
+    "text": "Wystąpił błąd podczas przesyłania Twojej recenzji. Możesz spróbować ponownie przy pomocy poniższego przycisku. Jeśli problem się powtarza, prosimy skontaktować się z <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "PL",
+    "text": "Informacje Techniczne"
+  },
+  {
+    "element": "form__error_button",
+    "language": "PL",
+    "text": "Spróbuj ponownie"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "PL",
+    "text": "Wystąpił błąd podczas przesyłania pliku."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "PL",
+    "text": "Oceń stronę, obsługę klienta oraz dostawę"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "PL",
+    "text": "Co najmniej %d znaków"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "PL",
+    "text": "%1d znaków (co najmniej %2d znaków)"
+  },
+  {
+    "element": "form__none",
+    "language": "PL",
+    "text": "Brak"
+  },
+  {
+    "element": "required",
+    "language": "PT",
+    "text": "Obrigatório"
+  },
+  {
+    "element": "rating",
+    "language": "PT",
+    "text": "Classificação"
+  },
+  {
+    "element": "comment",
+    "language": "PT",
+    "text": "Comentário"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "PT",
+    "text": "O seu comentário"
+  },
+  {
+    "element": "submit_button",
+    "language": "PT",
+    "text": "Enviar"
+  },
+  {
+    "element": "footer_form",
+    "language": "PT",
+    "text": "Este formulário foi gerado pelo Plugin CusRev em nome de <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "PT",
+    "text": "Já foi submetida uma review para esta encomenda"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "PT",
+    "text": "Se desejar pode editar esta review"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "PT",
+    "text": "Obrigada por submeter a sua avaliação!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "PT",
+    "text": "A sua resposta foi gravada."
+  },
+  {
+    "element": "edit_review",
+    "language": "PT",
+    "text": "Edite a sua avaliação"
+  },
+  {
+    "element": "dname_section",
+    "language": "PT",
+    "text": "Nome a apresentar"
+  },
+  {
+    "element": "terms_form",
+    "language": "PT",
+    "text": "Ao submeter a sua avaliação, está a concordar com os <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">termos e condições</a>."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "PT",
+    "text": "Qual a avaliação global do website, serviço de entrega e apoio ao cliente?"
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "PT",
+    "text": "Avaliações"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "PT",
+    "text": "Nenhum"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "PT",
+    "text": "Anónimo"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "PT",
+    "text": "Erro: o limite para o número máximo de arquivos foi excedido"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "PT",
+    "text": "Erro: os formatos de arquivo aceitos são PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "PT",
+    "text": "Erro: produto não encontrado"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "PT",
+    "text": "Erro: pedido não encontrado"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "PT",
+    "text": "Erro: o tamanho máximo do arquivo enviado é de 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "PT",
+    "text": "Carregar Fotos / Vídeos"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "PT",
+    "text": "Adicionar fotos ou vídeo ao seu comentário"
+  },
+  {
+    "element": "form__error_title",
+    "language": "PT",
+    "text": "Erro"
+  },
+  {
+    "element": "form__error_body",
+    "language": "PT",
+    "text": "Ocorreu um erro durante o envio do seu comentário. Você pode tentar novamente usando o botão abaixo. Se o problema persistir, entre em contato com <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "PT",
+    "text": "Informação técnica"
+  },
+  {
+    "element": "form__error_button",
+    "language": "PT",
+    "text": "Tente novamente"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "PT",
+    "text": "Erro durante o upload do arquivo"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "PT",
+    "text": "%d carateres no mínimo"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "PT",
+    "text": "%1d carateres (%2d carateres no mínimo)"
+  },
+  {
+    "element": "form__none",
+    "language": "PT",
+    "text": "Nenhum"
+  },
+  {
+    "element": "required",
+    "language": "RO",
+    "text": "Necesar"
+  },
+  {
+    "element": "rating",
+    "language": "RO",
+    "text": "Evaluare"
+  },
+  {
+    "element": "comment",
+    "language": "RO",
+    "text": "Comentariu"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "RO",
+    "text": "Comentariul tau"
+  },
+  {
+    "element": "submit_button",
+    "language": "RO",
+    "text": "Trimite"
+  },
+  {
+    "element": "footer_form",
+    "language": "RO",
+    "text": "Acest formular a fost creat de CusRev pentru <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "RO",
+    "text": "Un review a fost trimis deja pentru aceasta comanda"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "RO",
+    "text": "Daca doresti, poti edita acest review"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "RO",
+    "text": "Multumim pentru review-ul tau!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "RO",
+    "text": "Raspunsul tau a fost inregistrat."
+  },
+  {
+    "element": "edit_review",
+    "language": "RO",
+    "text": "Editeaza review-ul"
+  },
+  {
+    "element": "dname_section",
+    "language": "RO",
+    "text": "Nume afișat"
+  },
+  {
+    "element": "terms_form",
+    "language": "RO",
+    "text": "Transmițând această recenzie, ești de acord cu <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">termenii și condițiile</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "RO",
+    "text": "Recenzii"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "RO",
+    "text": "Niciunul"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "RO",
+    "text": "Anonim"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "RO",
+    "text": "Eroare: Limită de fișiere depășită"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "RO",
+    "text": "Eroare: Formaturi suportate: PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "RO",
+    "text": "Eroare: Produs negăsit"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "RO",
+    "text": "Eroare: Comandă negăsită"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "RO",
+    "text": "Eroare: Mărimea maximă a fișierului trebuie să fie 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "RO",
+    "text": "Adaugă Fotografii/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "RO",
+    "text": "Adaugă fotografii sau videoclipuri la recenzia ta"
+  },
+  {
+    "element": "form__error_title",
+    "language": "RO",
+    "text": "Eroare"
+  },
+  {
+    "element": "form__error_body",
+    "language": "RO",
+    "text": "O eroare a apărut în trimiterea recenziei tale. Poți reîncerca apăsând pe butonul de mai jos. Dacă problema persistă, te rugăm să contactezi <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "RO",
+    "text": "Informații tehnice"
+  },
+  {
+    "element": "form__error_button",
+    "language": "RO",
+    "text": "Încearcă din nou"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "RO",
+    "text": "Eroare la încărcarea imaginii"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "RO",
+    "text": "Oferă o notă site-ului, serviciului clienți și livrării"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "RO",
+    "text": "Minimum %d caractere"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "RO",
+    "text": "%1d caractere (minimum %2d caractere)"
+  },
+  {
+    "element": "form__none",
+    "language": "RO",
+    "text": "Niciunul"
+  },
+  {
+    "element": "comment",
+    "language": "RU",
+    "text": "Комментарий"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "RU",
+    "text": "Ваш комментарий"
+  },
+  {
+    "element": "required",
+    "language": "RU",
+    "text": "Обязательное поле"
+  },
+  {
+    "element": "rating",
+    "language": "RU",
+    "text": "Оценка"
+  },
+  {
+    "element": "submit_button",
+    "language": "RU",
+    "text": "Отправить"
+  },
+  {
+    "element": "footer_form",
+    "language": "RU",
+    "text": "Эта форма была сгенерирована плагином CusRev от имени <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "RU",
+    "text": "Для этого заказа уже был оставлен отзыв"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "RU",
+    "text": "Если хотите, вы можете его изменить"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "RU",
+    "text": "Спасибо за оставленный отзыв!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "RU",
+    "text": "Ваш отзыв был сохранен."
+  },
+  {
+    "element": "edit_review",
+    "language": "RU",
+    "text": "Редактировать ваш отзыв"
+  },
+  {
+    "element": "dname_section",
+    "language": "RU",
+    "text": "Отображаемое имя"
+  },
+  {
+    "element": "terms_form",
+    "language": "RU",
+    "text": "Отправляя отзыв вы принимаете условия <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">пользовательского соглашения</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "RU",
+    "text": "Отзывы"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "RU",
+    "text": "Нет"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "RU",
+    "text": "Аноним"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "RU",
+    "text": "Ошибка: Превышен лимит на максимальное количество файлов"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "RU",
+    "text": "Ошибка: Поддерживаемые форматы файлов это PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "RU",
+    "text": "Ошибка: Товар не найден"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "RU",
+    "text": "Ошибка: Заказ не найден"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "RU",
+    "text": "Ошибка: Максимальный размер загружаемого файла не должен превышать 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "RU",
+    "text": "Загрузить Фото / Видео"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "RU",
+    "text": "Добавьте фото или видео к вашему отзыву"
+  },
+  {
+    "element": "form__error_title",
+    "language": "RU",
+    "text": "Ошибка"
+  },
+  {
+    "element": "form__error_body",
+    "language": "RU",
+    "text": "При отправке отзыва произошла ошибка. Вы можете попробовать еще раз используя кнопку ниже. Если ошибка повторяется, пожалуйста свяжитесь с <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "RU",
+    "text": "Техническая информация"
+  },
+  {
+    "element": "form__error_button",
+    "language": "RU",
+    "text": "Попробовать еще раз"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "RU",
+    "text": "Ошибка при загрузке файла"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "RU",
+    "text": "Оцените вебсайт, обслуживание клиентов и доставку"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "RU",
+    "text": "Минимум %d символов"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "RU",
+    "text": "%1d символа(-ов)  (минимум %2d символов)"
+  },
+  {
+    "element": "form__none",
+    "language": "RU",
+    "text": "Нет"
+  },
+  {
+    "element": "required",
+    "language": "SK",
+    "text": "Požadované"
+  },
+  {
+    "element": "rating",
+    "language": "SK",
+    "text": "Hodnotenie"
+  },
+  {
+    "element": "comment",
+    "language": "SK",
+    "text": "Komentár"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "SK",
+    "text": "Váš komentár"
+  },
+  {
+    "element": "submit_button",
+    "language": "SK",
+    "text": "Odoslať"
+  },
+  {
+    "element": "footer_form",
+    "language": "SK",
+    "text": "Tento dotazník bol vytvorený pluginom CusRev pre <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "SK",
+    "text": "Pre túto objednávku už bola odoslaná kontrola"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "SK",
+    "text": "Ak chcete, môžete túto recenziu upraviť"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "SK",
+    "text": "Ďakujeme za odoslanie vašej recenzie!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "SK",
+    "text": "Vaša odpoveď bola zaznamenaná."
+  },
+  {
+    "element": "edit_review",
+    "language": "SK",
+    "text": "Upravte svoju recenziu"
+  },
+  {
+    "element": "dname_section",
+    "language": "SK",
+    "text": "Verejné meno"
+  },
+  {
+    "element": "terms_form",
+    "language": "SK",
+    "text": "Odoslaním recenzie súhlasíte so <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">zmluvnými podmienkami</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "SK",
+    "text": "Reviews"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "SK",
+    "text": "None"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "SK",
+    "text": "Anonymný"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "SK",
+    "text": "Chyba: Bol prekročený limit pre maximálny počet súborov"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "SK",
+    "text": "Chyba: Podporované formáty súborov sú PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "SK",
+    "text": "Chyba: Produkt sa nenašiel"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "SK",
+    "text": "Chyba: Objednávka sa nenašla"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "SK",
+    "text": "Chyba: Maximálna veľkosť odovzdaného súboru je 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "SK",
+    "text": "Nahrať fotky/video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "SK",
+    "text": "Pridajte k svojej recenzii fotografie alebo videá"
+  },
+  {
+    "element": "form__error_title",
+    "language": "SK",
+    "text": "Chyba"
+  },
+  {
+    "element": "form__error_body",
+    "language": "SK",
+    "text": "Počas odoslania vašej kontroly sa vyskytla chyba. Môžete to skúsiť znova pomocou tlačidla nižšie. Ak problém pretrváva, kontaktujte spoločnosť <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "SK",
+    "text": "Technické informácie"
+  },
+  {
+    "element": "form__error_button",
+    "language": "SK",
+    "text": "Skúste to znova"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "SK",
+    "text": "Chyba pri nahrávaní súboru."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "SK",
+    "text": "Ohodnoťte web, zákaznícky servis a doručovanie"
+  },
+  {
+    "element": "form__single_choice_title",
+    "language": "SK",
+    "text": "A new single choice question"
+  },
+  {
+    "element": "form__multiple_choice_title",
+    "language": "SK",
+    "text": "A new multiple choice question"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "SK",
+    "text": "Minimálne %d znakov"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "SK",
+    "text": "%1d znakov (minimálne %2d znakov)"
+  },
+  {
+    "element": "form__none",
+    "language": "SK",
+    "text": "None"
+  },
+  {
+    "element": "required",
+    "language": "SL",
+    "text": "Obvezno polje"
+  },
+  {
+    "element": "rating",
+    "language": "SL",
+    "text": "Ocena"
+  },
+  {
+    "element": "comment",
+    "language": "SL",
+    "text": "Komentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "SL",
+    "text": "Vaš komentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "SL",
+    "text": "Objavi"
+  },
+  {
+    "element": "footer_form",
+    "language": "SL",
+    "text": "Ta obrazec so generirali CusRev v imenu <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "SL",
+    "text": "Artikli tega naročila so že bili ocenjeni"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "SL",
+    "text": "Če želite, lahko svojo oceno spremenite"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "SL",
+    "text": "Hvala za vašo oceno!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "SL",
+    "text": "Vaša ocena je bila shranjena."
+  },
+  {
+    "element": "edit_review",
+    "language": "SL",
+    "text": "Spremenite svojo oceno"
+  },
+  {
+    "element": "dname_section",
+    "language": "SL",
+    "text": "Prikazno ime"
+  },
+  {
+    "element": "terms_form",
+    "language": "SL",
+    "text": "Z vložitvijo svoje ocene se strinjate s <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">pogoji</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "SL",
+    "text": "Mnenja"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "SL",
+    "text": "Nič"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "SL",
+    "text": "Anonimno"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "SL",
+    "text": "Napaka: meja največjega števila datotek je presežena"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "SL",
+    "text": "Napaka: Podprte oblike datotek so PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "SL",
+    "text": "Napaka: artikel ni najden"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "SL",
+    "text": "Napaka: naročila ni bilo mogoče najti"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "SL",
+    "text": "Napaka: največja velikost naložene datoteke je lahko 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "SL",
+    "text": "Naloži fotografije/videoposnetke"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "SL",
+    "text": "Dodajte fotografije ali videoposneteke k vašemu mnenju"
+  },
+  {
+    "element": "form__error_title",
+    "language": "SL",
+    "text": "Napaka"
+  },
+  {
+    "element": "form__error_body",
+    "language": "SL",
+    "text": "Pri oddaji vašega mnenja je prišlo do napake. S pritiskom na spodnji gumb lahko poskusite znova. Če napaka ni odpravljena, se obrnite na <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "SL",
+    "text": "Tehnične informacije"
+  },
+  {
+    "element": "form__error_button",
+    "language": "SL",
+    "text": "Poskusi znova"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "SL",
+    "text": "Med nalaganjem datotek je prišlo do napake."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "SL",
+    "text": "Oceni spletno stran, pomoč strankam in dostavo"
+  },
+  {
+    "element": "form__none",
+    "language": "SL",
+    "text": "Nič"
+  },
+  {
+    "element": "required",
+    "language": "SR",
+    "text": "Neophodno"
+  },
+  {
+    "element": "rating",
+    "language": "SR",
+    "text": "Ocena"
+  },
+  {
+    "element": "comment",
+    "language": "SR",
+    "text": "Komentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "SR",
+    "text": "Vaš komentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "SR",
+    "text": "Potvrdi"
+  },
+  {
+    "element": "footer_form",
+    "language": "SR",
+    "text": "Ovu formu je generisao dodatak CusRev koji stoji iza <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "SR",
+    "text": "Recenzija je već postavljena za ovu narudžbinu"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "SR",
+    "text": "Ukoliko želite, možete izmeniti ovu recenziju"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "SR",
+    "text": "Hvala Vam za Vašu recenziju!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "SR",
+    "text": "Vaš odgovor je zabeležen."
+  },
+  {
+    "element": "edit_review",
+    "language": "SR",
+    "text": "Izmeni svoju recenziju"
+  },
+  {
+    "element": "dname_section",
+    "language": "SR",
+    "text": "Ime za prikaz"
+  },
+  {
+    "element": "terms_form",
+    "language": "SR",
+    "text": "Slanjem svoje ocene potvrđujete da ste saglasni sa <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">uslovima i odredbama pružanja usluge</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "SR",
+    "text": "Recenzije"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "SR",
+    "text": "Ništa"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "SR",
+    "text": "Anonimno"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "SR",
+    "text": "Greška: Prekoračeno ograničenja maksimalnog broja fajlova"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "SR",
+    "text": "Greška: Podržani formati su PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "SR",
+    "text": "Greška: Proizvod nije pronađen"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "SR",
+    "text": "Greška: Narudžba nije pronađena"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "SR",
+    "text": "Greška: Maksimalna veličina prenesenih fajlova je 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "SR",
+    "text": "Prenesite slike/video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "SR",
+    "text": "Dodajte slike ili video u svoju recenziju"
+  },
+  {
+    "element": "form__error_title",
+    "language": "SR",
+    "text": "Greška"
+  },
+  {
+    "element": "form__error_body",
+    "language": "SR",
+    "text": "Greška je nastala tokom slanja vaše recenzije. Možete pokušati opet korišćenjem dugmeta ispod. Ako se greška ponovi, molimo kontaktirajte <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "SR",
+    "text": "Tehničke informacije"
+  },
+  {
+    "element": "form__error_button",
+    "language": "SR",
+    "text": "Pokušajte ponovo"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "SR",
+    "text": "Greška tokom prenošenja fajla."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "SR",
+    "text": "Ocenite veb sajt, podršku korisnicima i dostavu"
+  },
+  {
+    "element": "form__none",
+    "language": "SR",
+    "text": "Ništa"
+  },
+  {
+    "element": "required",
+    "language": "SV",
+    "text": "Obligatorisk"
+  },
+  {
+    "element": "rating",
+    "language": "SV",
+    "text": "Betyg"
+  },
+  {
+    "element": "comment",
+    "language": "SV",
+    "text": "Kommentar"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "SV",
+    "text": "Din kommentar"
+  },
+  {
+    "element": "submit_button",
+    "language": "SV",
+    "text": "Skicka"
+  },
+  {
+    "element": "footer_form",
+    "language": "SV",
+    "text": "Detta formulär genererades av CusRev på uppdrag av <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "SV",
+    "text": "En recension har redan blivit skickad för denna order"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "SV",
+    "text": "Om du vill kan du redigera denna recension"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "SV",
+    "text": "Tack att du skickade in en recension!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "SV",
+    "text": "Din recension har blivit registrerad."
+  },
+  {
+    "element": "edit_review",
+    "language": "SV",
+    "text": "Redigera din recension"
+  },
+  {
+    "element": "dname_section",
+    "language": "SV",
+    "text": "Visningsnamn"
+  },
+  {
+    "element": "terms_form",
+    "language": "SV",
+    "text": "När du skickar in din recension, godkänner du samtidigt vårt <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">Användaravtal</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "SV",
+    "text": "Recensioner"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "SV",
+    "text": "Inga"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "SV",
+    "text": "Anonym"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "SV",
+    "text": "Fel: Gränsen för max antal filer uppnådd"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "SV",
+    "text": "Fel: De stödda filformat är PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "SV",
+    "text": "Fel: Produkt hittades ej"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "SV",
+    "text": "Fel: Order hittades ej"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "SV",
+    "text": "Fel: maxstorlek för uppladdad fil är 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "SV",
+    "text": "Ladda upp bild/video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "SV",
+    "text": "Lägg till bild eller video till din recension"
+  },
+  {
+    "element": "form__error_title",
+    "language": "SV",
+    "text": "Fel"
+  },
+  {
+    "element": "form__error_body",
+    "language": "SV",
+    "text": "Ett fel uppstod när recensionen skickades in. Du kan försöka igen med knappen nedan. Om problem kvarstår, vänligen kontakta <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "SV",
+    "text": "Teknisk information"
+  },
+  {
+    "element": "form__error_button",
+    "language": "SV",
+    "text": "Försök igen"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "SV",
+    "text": "Error vid uppladdning av fil."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "SV",
+    "text": "Betygsätt webbplats, kundtjänst och leverans"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "SV",
+    "text": "Minst %d tecken"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "SV",
+    "text": "%1d tecken (minst %2d tecken)"
+  },
+  {
+    "element": "form__none",
+    "language": "SV",
+    "text": "Inga"
+  },
+  {
+    "element": "required",
+    "language": "TH",
+    "text": "จำเป็นต้องตอบคำถามนี้"
+  },
+  {
+    "element": "rating",
+    "language": "TH",
+    "text": "เรตติ้ง"
+  },
+  {
+    "element": "comment",
+    "language": "TH",
+    "text": "ความคิดเห็น"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "TH",
+    "text": "ความคิดเห็นของคุณ"
+  },
+  {
+    "element": "submit_button",
+    "language": "TH",
+    "text": "ยอมรับ"
+  },
+  {
+    "element": "footer_form",
+    "language": "TH",
+    "text": "แบบฟอร์มนี้สร้างขึ้นโดยปลั๊กอิน CusRev โดยตัวแทนของร้าน <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>"
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "TH",
+    "text": "ความคิดเห็นถูกส่งแล้วโดยคำสั่งซื้อนี้"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "TH",
+    "text": "ถ้าคุณต้องการ คุณสามารถแก้ไขความคิดเห็นได้"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "TH",
+    "text": "ขอบคุณสำหรับคำแนะนำติชมของคุณ"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "TH",
+    "text": "การตอบกลับของคุณได้ถูกบันทึกแล้ว"
+  },
+  {
+    "element": "edit_review",
+    "language": "TH",
+    "text": "แก้ไขรีวิว"
+  },
+  {
+    "element": "dname_section",
+    "language": "TH",
+    "text": "ชื่อที่แสดง"
+  },
+  {
+    "element": "terms_form",
+    "language": "TH",
+    "text": "เพื่อส่งความคิดเห็น คุณยอมรับ<a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">ข้อกำหนดและเงื่อนไข</a>"
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "TH",
+    "text": "รีวิว"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "TH",
+    "text": "ไม่มี"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "TH",
+    "text": "ไม่แสดงตน"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "TH",
+    "text": "ข้อผิดพลาด: เกินจำนวนของไฟล์ที่กำหนดไว้"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "TH",
+    "text": "ข้อผิดพลาด: ประเภทไฟล์ที่รองรับคือ PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "TH",
+    "text": "ข้อผิดพลาด: ไม่พบผลิตภัณฑ์"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "TH",
+    "text": "ข้อผิดพลาด: ไม่พบคำสั่งซื้อ"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "TH",
+    "text": "ข้อผิดพลาด: ขนาดไฟล์ในการอัพโหลดสูงสุดคือ 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "TH",
+    "text": "อัพโหลดรูปภาพ/วิดีโอ"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "TH",
+    "text": "เพิ่มรูปภาพหรือวิดิโอให้การรีวิวของคุณ"
+  },
+  {
+    "element": "form__error_title",
+    "language": "TH",
+    "text": "ข้อผิดพลาด"
+  },
+  {
+    "element": "form__error_body",
+    "language": "TH",
+    "text": "ข้อผิดพลาดเกิดขึ้นระหว่างการส่งรีวิวของคุณ คุณสามารถลองได้อีกครั้งโดยใช้ปุ่มข้างล่างนี้ หากเกิดปัญหาขึ้นอีกครั้ง กรุณาติดต่อ <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>"
+  },
+  {
+    "element": "form__error_tech",
+    "language": "TH",
+    "text": "ข้อมูลทางเทคนิค"
+  },
+  {
+    "element": "form__error_button",
+    "language": "TH",
+    "text": "ลองอีกครั้ง"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "TH",
+    "text": "ข้อผิดพลาดระหว่างการอัพโหลดไฟล์"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "TH",
+    "text": "ให้คะแนนเว็บไซต์ การบริการลูกค้า และการจัดส่งสินค้า"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "TH",
+    "text": "ขั้นต่ำ %d อักขระ"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "TH",
+    "text": "%1d อักขระ (ขั้นต่ำ %2d อักขระ)"
+  },
+  {
+    "element": "form__none",
+    "language": "TH",
+    "text": "ไม่มี"
+  },
+  {
+    "element": "required",
+    "language": "TR",
+    "text": "Gerekli"
+  },
+  {
+    "element": "rating",
+    "language": "TR",
+    "text": "Puanlama"
+  },
+  {
+    "element": "comment",
+    "language": "TR",
+    "text": "Yorum"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "TR",
+    "text": "Yorumunuz"
+  },
+  {
+    "element": "submit_button",
+    "language": "TR",
+    "text": "Gönder"
+  },
+  {
+    "element": "footer_form",
+    "language": "TR",
+    "text": "Bu form CusRev eklentisi tarafından <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a> adına oluşturulmuştur."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "TR",
+    "text": "Bu sipariş için zaten bir değerlendirme yapıldı"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "TR",
+    "text": "Arzu ederseniz, bu değerlendirmeyi düzenleyebilirsiniz"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "TR",
+    "text": "Değerlendirmeniz için teşekkür ederiz!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "TR",
+    "text": "Cevabınız kaydedildi."
+  },
+  {
+    "element": "edit_review",
+    "language": "TR",
+    "text": "Değerlendirmenizi düzenleyin"
+  },
+  {
+    "element": "dname_section",
+    "language": "TR",
+    "text": "Gösterilecek İsim"
+  },
+  {
+    "element": "terms_form",
+    "language": "TR",
+    "text": "Bu değerlendirmeyi göndererek <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">kullanım koşullarını</a> kabul etmiş bulunmaktasınız."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "TR",
+    "text": "Değerlendirmeler"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "TR",
+    "text": "Hiçbiri"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "TR",
+    "text": "İsimsiz"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "TR",
+    "text": "Hata: İzin verilen maksimum dosya sayısı aşıldı"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "TR",
+    "text": "Hata: Desteklenen dosya formatları PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "TR",
+    "text": "Hata: Ürün Bulunamadı"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "TR",
+    "text": "Hata: Sipariş Bulunamadı"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "TR",
+    "text": "Hata: Yüklenilen dosyanın boyutu en fazla 25 MB olabilir"
+  },
+  {
+    "element": "form__media_title",
+    "language": "TR",
+    "text": "Foto / Videolar yükleyin"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "TR",
+    "text": "Değerlendirmeniz için Foto ya da Videolar yükleyin"
+  },
+  {
+    "element": "form__error_title",
+    "language": "TR",
+    "text": "Hata"
+  },
+  {
+    "element": "form__error_body",
+    "language": "TR",
+    "text": "Değerlendirmenizi yüklerken bir hata oluştu. Aşağıdaki butonu kullanarak tekrar deneyebilirsiniz. Eğer sorun devam ederse, lütfen <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a> ile irtibat kurun."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "TR",
+    "text": "Teknik Bilgi"
+  },
+  {
+    "element": "form__error_button",
+    "language": "TR",
+    "text": "Tekrar Deneyin"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "TR",
+    "text": "Dosya yüklerken hata oluştu."
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "TR",
+    "text": "Websitesi, müşteri hizmetleri ve teslimatı derecelendirin"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "TR",
+    "text": "Minimum %d karakter"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "TR",
+    "text": "%1d karakter (minimum %2d karakter)"
+  },
+  {
+    "element": "form__none",
+    "language": "TR",
+    "text": "Hiçbiri"
+  },
+  {
+    "element": "comment",
+    "language": "UK",
+    "text": "Коментар"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "UK",
+    "text": "Ваш коментар"
+  },
+  {
+    "element": "required",
+    "language": "UK",
+    "text": "Обов'зково"
+  },
+  {
+    "element": "rating",
+    "language": "UK",
+    "text": "Рейтинг"
+  },
+  {
+    "element": "submit_button",
+    "language": "UK",
+    "text": "Надіслати"
+  },
+  {
+    "element": "footer_form",
+    "language": "UK",
+    "text": "Цю форму було створено плагіном CusRev від імені <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "UK",
+    "text": "Для цього замовлення вже надіслано огляд"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "UK",
+    "text": "Якщо ви хочете, ви можете відредагувати цей відгук"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "UK",
+    "text": "Дякуємо, що надіслали Ваш відгук!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "UK",
+    "text": "Ваша відповідь записана."
+  },
+  {
+    "element": "edit_review",
+    "language": "UK",
+    "text": "Редагування відгуку"
+  },
+  {
+    "element": "dname_section",
+    "language": "UK",
+    "text": "Відображуване ім'я"
+  },
+  {
+    "element": "terms_form",
+    "language": "UK",
+    "text": "Відправляючи свій відгук, ви погоджуєтесь з <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">правилами та умовами</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "UK",
+    "text": "Отзывы"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "UK",
+    "text": "Нет"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "UK",
+    "text": "Аноним"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "UK",
+    "text": "Помилка: Ліміт максимальної кількості файлів перевищено"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "UK",
+    "text": "Помилка: Підтримувані формати файлів: PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "UK",
+    "text": "Помилка: Товар не знайдено"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "UK",
+    "text": "Помилка: Замовлення не знайдено"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "UK",
+    "text": "Помилка: Максимальний розмір завантаженого файлу - 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "UK",
+    "text": "Завантажити фотографії/відео"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "UK",
+    "text": "Додайте до відгуку фотографії чи відео"
+  },
+  {
+    "element": "form__error_title",
+    "language": "UK",
+    "text": "Помилка"
+  },
+  {
+    "element": "form__error_body",
+    "language": "UK",
+    "text": "Під час подання вашої рецензії сталася помилка. Ви можете спробувати знову, скориставшись кнопкою нижче. Якщо проблема не зникне, зверніться до <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "UK",
+    "text": "Технічна інформація"
+  },
+  {
+    "element": "form__error_button",
+    "language": "UK",
+    "text": "Спробуйте ще раз"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "UK",
+    "text": "Помилка під час завантаження файлу"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "UK",
+    "text": "Оцініть веб-сайт, обслуговування клієнтів та доставку"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "UK",
+    "text": "Мінімум %d символи(-ів)"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "UK",
+    "text": "%1d символи(-ів) (мінімум %2d символи(-ів))"
+  },
+  {
+    "element": "form__none",
+    "language": "UK",
+    "text": "Нет"
+  },
+  {
+    "element": "required",
+    "language": "VI",
+    "text": "Bắt buộc"
+  },
+  {
+    "element": "rating",
+    "language": "VI",
+    "text": "Chấm điểm"
+  },
+  {
+    "element": "comment",
+    "language": "VI",
+    "text": "Bình luận"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "VI",
+    "text": "Bình luận của bạn"
+  },
+  {
+    "element": "submit_button",
+    "language": "VI",
+    "text": "Gửi"
+  },
+  {
+    "element": "footer_form",
+    "language": "VI",
+    "text": "Mẫu này được tạo bởi CusRev thay mặt cho <a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "VI",
+    "text": "Đơn hàng này đã được Đánh Giá"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "VI",
+    "text": "Bạn có thể chỉnh sửa Đánh Giá nếu bạn muốn"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "VI",
+    "text": "Cảm ơn bạn đã gửi đánh giá!"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "VI",
+    "text": "Phản hồi của bạn đã được lưu lại."
+  },
+  {
+    "element": "edit_review",
+    "language": "VI",
+    "text": "Chỉnh sửa Đánh Giá"
+  },
+  {
+    "element": "dname_section",
+    "language": "VI",
+    "text": "Tên Hiển Thị"
+  },
+  {
+    "element": "terms_form",
+    "language": "VI",
+    "text": "Bằng việc gửi đánh giá này, bạn đồng ý với <a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">các điều khoản và điều kiện của chúng tôi</a>."
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "VI",
+    "text": "Nhận xét"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "VI",
+    "text": "Không"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "VI",
+    "text": "Giấu tên"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "VI",
+    "text": "Lỗi: Vượt quá giới hạn số tệp tối đa"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "VI",
+    "text": "Lỗi: Định dạng tệp được hỗ trợ là PNG, JPG, JPEG, MP4, WEBM, OGG"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "VI",
+    "text": "Lỗi: Không tìm thấy sản phẩm"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "VI",
+    "text": "Lỗi: Không tìm thấy đơn hàng"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "VI",
+    "text": "Lỗi: Kích thước tệp tải lên tối đa là 25 MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "VI",
+    "text": "Tải lên Ảnh/Video"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "VI",
+    "text": "Thêm ảnh hoặc video vào nhận xét của bạn"
+  },
+  {
+    "element": "form__error_title",
+    "language": "VI",
+    "text": "Lỗi"
+  },
+  {
+    "element": "form__error_body",
+    "language": "VI",
+    "text": "Có lỗi xảy ra trong quá trình gửi nhận xét của bạn. Bạn có thể thử lại bằng cách dùng nút bên dưới. Nếu vấn đề vẫn còn tồn tại, vui lòng liên hệ <a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>."
+  },
+  {
+    "element": "form__error_tech",
+    "language": "VI",
+    "text": "Thông tin kỹ thuật"
+  },
+  {
+    "element": "form__error_button",
+    "language": "VI",
+    "text": "Thử lại"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "VI",
+    "text": "Lỗi trong quá trình tải lên tệp"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "VI",
+    "text": "Đánh giá trang web, dịch vụ khách hàng và giao hàng"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "VI",
+    "text": "Tối thiểu %d ký tự"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "VI",
+    "text": "%1d ký tự (tối thiểu %2d ký tự)"
+  },
+  {
+    "element": "form__none",
+    "language": "VI",
+    "text": "Không"
+  },
+  {
+    "element": "required",
+    "language": "ZH",
+    "text": "必填"
+  },
+  {
+    "element": "rating",
+    "language": "ZH",
+    "text": "評分"
+  },
+  {
+    "element": "comment",
+    "language": "ZH",
+    "text": "評論"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "ZH",
+    "text": "你的評論"
+  },
+  {
+    "element": "submit_button",
+    "language": "ZH",
+    "text": "提交評論"
+  },
+  {
+    "element": "footer_form",
+    "language": "ZH",
+    "text": "此表單由 CusRev 代表<a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>產生。"
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "ZH",
+    "text": "此表單已提交審核"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "ZH",
+    "text": "如果你想要，你可以再編輯這篇評論"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "ZH",
+    "text": "感謝您提交評論！"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "ZH",
+    "text": "您的評論已提交成功"
+  },
+  {
+    "element": "edit_review",
+    "language": "ZH",
+    "text": "編輯您的評論"
+  },
+  {
+    "element": "dname_section",
+    "language": "ZH",
+    "text": "評論顯示的名稱"
+  },
+  {
+    "element": "terms_form",
+    "language": "ZH",
+    "text": "提交您的評論，代表您同意<a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">條款和條件</a>。"
+  },
+  {
+    "element": "shoppage_reviews",
+    "language": "ZH",
+    "text": "评论"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "ZH",
+    "text": "没有"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "ZH",
+    "text": "匿名"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "ZH",
+    "text": "错误：上传的文件数量超过最大限额"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "ZH",
+    "text": "错误：仅支持PNG, JPG, JPEG, MP4, WEBM, OGG格式文件"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "ZH",
+    "text": "错误：产品未找到"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "ZH",
+    "text": "错误：该订单未找到"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "ZH",
+    "text": "错误：允许上传的文件最大尺寸为25MB"
+  },
+  {
+    "element": "form__media_title",
+    "language": "ZH",
+    "text": "上传图片/视频"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "ZH",
+    "text": "添加图片或者视频到您的评论中"
+  },
+  {
+    "element": "form__error_title",
+    "language": "ZH",
+    "text": "错误"
+  },
+  {
+    "element": "form__error_body",
+    "language": "ZH",
+    "text": "在您提交评论过程中出现错误。您可以点击以下按钮再试一次。如果问题还是存在，请联系<a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>。"
+  },
+  {
+    "element": "form__error_tech",
+    "language": "ZH",
+    "text": "技术支持"
+  },
+  {
+    "element": "form__error_button",
+    "language": "ZH",
+    "text": "请再试一次"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "ZH",
+    "text": "上传文件时出错"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "ZH",
+    "text": "网站打分，客户评论和派送"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "ZH",
+    "text": "最少 %d 字元"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "ZH",
+    "text": "%1d 字元（最少 %2d 字元）"
+  },
+  {
+    "element": "form__none",
+    "language": "ZH",
+    "text": "没有"
+  },
+  {
+    "element": "comment",
+    "language": "ZHS",
+    "text": "评论"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "ZHS",
+    "text": "你的评论"
+  },
+  {
+    "element": "dname_section",
+    "language": "ZHS",
+    "text": "评论显示的名称"
+  },
+  {
+    "element": "edit_review",
+    "language": "ZHS",
+    "text": "编辑您的评论"
+  },
+  {
+    "element": "footer_form",
+    "language": "ZHS",
+    "text": "此表单由 CusRev 代表<a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>产生。"
+  },
+  {
+    "element": "form__error_body",
+    "language": "ZHS",
+    "text": "在您提交评论过程中出现错误。您可以点击以下按钮再试一次。如果问题还是存在，请联系<a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>。"
+  },
+  {
+    "element": "form__error_button",
+    "language": "ZHS",
+    "text": "请再试一次"
+  },
+  {
+    "element": "form__error_tech",
+    "language": "ZHS",
+    "text": "技术支持"
+  },
+  {
+    "element": "form__error_title",
+    "language": "ZHS",
+    "text": "错误"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "ZHS",
+    "text": "错误：上传的文件数量超过最大限额"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "ZHS",
+    "text": "错误：允许上传的文件最大尺寸为25MB"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "ZHS",
+    "text": "错误：仅支持PNG, JPG, JPEG, MP4, WEBM, OGG格式文件"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "ZHS",
+    "text": "错误：该订单未找到"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "ZHS",
+    "text": "错误：产品未找到"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "ZHS",
+    "text": "上传文件时出错"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "ZHS",
+    "text": "添加图片或者视频到您的评论中"
+  },
+  {
+    "element": "form__media_title",
+    "language": "ZHS",
+    "text": "上传图片/视频"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "ZHS",
+    "text": "最少 %d 字符"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "ZHS",
+    "text": "%1d 字符（最少 %2d 字符）"
+  },
+  {
+    "element": "form__none",
+    "language": "ZHS",
+    "text": "没有"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "ZHS",
+    "text": "对网站，客户服务和派递服务评分"
+  },
+  {
+    "element": "rating",
+    "language": "ZHS",
+    "text": "评分"
+  },
+  {
+    "element": "required",
+    "language": "ZHS",
+    "text": "必填"
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "ZHS",
+    "text": "此表单已提交审核"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "ZHS",
+    "text": "如果你想要，你可以再编辑这篇评论"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "ZHS",
+    "text": "感谢您提交评论！"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "ZHS",
+    "text": "您的评论已提交成功"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "ZHS",
+    "text": "匿名"
+  },
+  {
+    "element": "terms_form",
+    "language": "ZHS",
+    "text": "提交您的评论，代表您同意<a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">条款和条件</a>。"
+  },
+  {
+    "element": "submit_button",
+    "language": "ZHS",
+    "text": "提交评论"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "ZHS",
+    "text": "没有"
+  },
+  {
+    "element": "comment",
+    "language": "ZHT",
+    "text": "評論"
+  },
+  {
+    "element": "comment_placeholder",
+    "language": "ZHT",
+    "text": "你的評論"
+  },
+  {
+    "element": "dname_section",
+    "language": "ZHT",
+    "text": "評論顯示的名稱"
+  },
+  {
+    "element": "edit_review",
+    "language": "ZHT",
+    "text": "編輯您的評論"
+  },
+  {
+    "element": "footer_form",
+    "language": "ZHT",
+    "text": "此表單由 CusRev 代表<a target=\"_blank\" href=\"{{{shop.url}}}\" class=\"info__link\">{{{shop.name}}}</a>產生。"
+  },
+  {
+    "element": "form__error_body",
+    "language": "ZHT",
+    "text": "在您提交評論過程中出現錯誤。您可以點擊以下按鈕再試一次。如果問題還是存在，請聯繫<a href=\"{{{shop.shopUrl}}}\">{{{shop.name}}}</a>。"
+  },
+  {
+    "element": "form__error_button",
+    "language": "ZHT",
+    "text": "請再試一次"
+  },
+  {
+    "element": "form__error_tech",
+    "language": "ZHT",
+    "text": "技術支援"
+  },
+  {
+    "element": "form__error_title",
+    "language": "ZHT",
+    "text": "錯誤"
+  },
+  {
+    "element": "form__error_upload_filelimit",
+    "language": "ZHT",
+    "text": "錯誤：上傳的檔數量超過最大限額"
+  },
+  {
+    "element": "form__error_upload_filesize",
+    "language": "ZHT",
+    "text": "錯誤：允許上傳的檔最大尺寸為25MB"
+  },
+  {
+    "element": "form__error_upload_filetype",
+    "language": "ZHT",
+    "text": "錯誤：僅支援PNG, JPG, JPEG, MP4, WEBM, OGG格式檔"
+  },
+  {
+    "element": "form__error_upload_order_not_found",
+    "language": "ZHT",
+    "text": "錯誤：該訂單未找到"
+  },
+  {
+    "element": "form__error_upload_product_not_found",
+    "language": "ZHT",
+    "text": "錯誤：產品未找到"
+  },
+  {
+    "element": "form__error_upload_unknown",
+    "language": "ZHT",
+    "text": "上傳文件時出錯"
+  },
+  {
+    "element": "form__media_subtitle",
+    "language": "ZHT",
+    "text": "添加圖片或者視頻到您的評論中"
+  },
+  {
+    "element": "form__media_title",
+    "language": "ZHT",
+    "text": "上傳圖片/視頻"
+  },
+  {
+    "element": "form__min_length_1",
+    "language": "ZHT",
+    "text": "最少 %d 字元"
+  },
+  {
+    "element": "form__min_length_2",
+    "language": "ZHT",
+    "text": "%1d 字元（最少 %2d 字元）"
+  },
+  {
+    "element": "form__none",
+    "language": "ZHT",
+    "text": "沒有"
+  },
+  {
+    "element": "form__shop_rating_text",
+    "language": "ZHT",
+    "text": "對網站，客戶服務和派遞服務評分"
+  },
+  {
+    "element": "rating",
+    "language": "ZHT",
+    "text": "評分"
+  },
+  {
+    "element": "required",
+    "language": "ZHT",
+    "text": "必填"
+  },
+  {
+    "element": "review_submitted_h",
+    "language": "ZHT",
+    "text": "此表單已提交審核"
+  },
+  {
+    "element": "review_submitted_t",
+    "language": "ZHT",
+    "text": "如果你想要，你可以再編輯這篇評論"
+  },
+  {
+    "element": "review_thanks_h",
+    "language": "ZHT",
+    "text": "感謝您提交評論！"
+  },
+  {
+    "element": "review_thanks_t",
+    "language": "ZHT",
+    "text": "您的評論已提交成功"
+  },
+  {
+    "element": "shoppage_anonymous",
+    "language": "ZHT",
+    "text": "匿名"
+  },
+  {
+    "element": "terms_form",
+    "language": "ZHT",
+    "text": "提交您的評論，代表您同意<a href=\"{{{shop.termsUrl}}}\" target=\"_blank\">條款和條件</a>。"
+  },
+  {
+    "element": "submit_button",
+    "language": "ZHT",
+    "text": "提交評論"
+  },
+  {
+    "element": "shoppage_none",
+    "language": "ZHT",
+    "text": "沒有"
+  }
+]

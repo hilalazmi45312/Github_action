@@ -1,0 +1,93 @@
+.product-reward {
+	display: flex;
+	gap: 0.25rem;
+	margin-top: auto !important;
+}
+
+/* S-coin thumbnail styling for product loop archive - moved to bottom with specific selectors */
+/* This section is now handled by more specific selectors below to avoid widget conflicts */
+
+.s-coin-cashback-label {
+	background-color: #ffda00;
+	padding: 5px 10px;
+	display: inline-block;
+	border-radius: 5px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.scoin-cont {
+	font-size: 9px !important;
+	color: #000 !important;
+	background-color: #e2ede3 !important;
+	border: none !important;
+	border-radius: 6px !important;
+	margin-top: 10px !important;
+	font-style: italic !important;
+	pointer-events: none !important;
+	cursor: default !important;
+}
+
+.scoin-cont img {
+	width: 16px !important;
+	height: 16px !important;
+	vertical-align: middle !important;
+	margin-right: 5px !important;
+}
+
+.scoin-cont-total {
+	font-size: 14px !important;
+	color: #939691 !important;
+	background-color: #f9f2d5 !important;
+	border: none !important;
+	border-radius: 6px !important;
+	margin-top: 10px !important;
+}
+
+.scoin-cont-total img {
+	width: 18px !important;
+	height: 18px !important;
+	vertical-align: middle !important;
+	margin-right: 5px !important;
+}
+
+/* Fallback for general product loops (non-Elementor widgets) */
+.rebate-container-small:not(.s-coin-label-dynamic) {
+    position: relative;
+    display: inline-block;
+}
+
+.rebate-container-small:not(.s-coin-label-dynamic) img {
+    height: 50px;
+    width: auto;
+}
+
+.rebate-container-small:not(.s-coin-label-dynamic) .rebate-info {
+    position: absolute;
+    top: 45%;
+    right: 18%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: #ff0000;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ensure S-Coin Label Widget styles take precedence */
+.rebate-container-small.s-coin-label-dynamic {
+    /* Widget styles are handled in s-coin-label-widget.css */
+    /* This ensures no conflicts with product loop styles */
+}
+
+/* mobile setting */
+@media (max-width: 768px) {
+}
+
+/* .table th,
+ .table td {
+     padding: 8px;
+     text-align: center;
+ } */

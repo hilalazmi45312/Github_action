@@ -1,0 +1,51 @@
+.bwf-advanced-range-control {
+	width: 100%;
+}
+
+// We cannot trust the initialPosition of the RangeControl, so we manually set
+// it via CSS.
+.bwf-range-control {
+	&.bwf-range-control--blank {
+		.components-range-control__track {
+			width: var(--bwf-advanced-range-control--width) !important;
+		}
+		[class*="ThumbWrapper"] {
+			left: var(--bwf-advanced-range-control--width) !important;
+		}
+	}
+}
+
+.bwf-range-control {
+	display: flex;
+	align-items: center;
+	.components-range-control {
+		flex: 1;
+		margin: 0 !important;
+	}
+	// Style the input control to make it smaller.
+	.components-input-control__container {
+		position: relative;
+		border-radius: 2px;
+		padding-top: 0px;
+		box-sizing: border-box;
+		display: inline-block;
+		font-size: 13px;
+		margin-top: 0px;
+		width: 64px;
+		margin-left: 16px !important;
+	}
+	// Style the reset button.
+	.components-range-control__reset {
+		height: 30px;
+		min-height: 30px;
+		margin-left: 8px;
+	}
+	.components-base-control__field,
+	.components-base-control {
+		margin-bottom: 0;
+	}
+
+	.components-number-control {
+		width: unset;
+	}
+}

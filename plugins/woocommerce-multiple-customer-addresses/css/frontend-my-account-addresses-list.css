@@ -1,0 +1,320 @@
+.mfp-bg {
+	/* z-index: 991042; */
+	 z-index: 10000000;
+}
+.mfp-wrap {
+	/* z-index: 991043; */
+	z-index: 10000001; 
+}
+.select2-dropdown.wcmca-increase-z-index
+{
+ z-index:10000002 !important;
+}
+.mfp-wrap ~ .select2-container {
+	z-index: 10000002 !important;
+}
+/* end */
+.wcmca_additional_addresses_list_title
+{
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+.wcmca-country-select2, .wcmca-state-select2, .select.wcmca-country-select2, .select.wcmca-state-select2
+{
+	display:block;
+	width: 100%;
+}
+.wcmca_address_title_checkbox
+{
+	margin-right: 5px;
+}
+.wcmca_address_title_text_content
+{
+	/* vertical-align: middle; */
+}
+.wcmca_bulk_delete_button, .wcmca_delete_all_button
+{
+	float: right;
+	text-transform: capitalize;
+	margin-left: 3px !important;
+}
+.wcmca_action_button_container
+{
+	display: block;
+	clear: both;
+	height: 50px;
+}
+/* .select.wcmca-country-select2, .select.wcmca-state-select2
+{
+	
+	height: 38px;
+} */
+.wcmca_saving_loader_image
+{
+	display:block;
+	clear:both;
+}
+.required {
+  color: red;
+}
+.wcmca_default_checkobx_label
+{
+	font-weight: bold;
+	margin-bottom: 20px;
+	display:block;
+}
+.wcmca_default_address_badge
+{
+	/* font-weight: bold;
+    padding: 2px 5px 2px 5px; */
+	
+	display: inline-block;
+    float: left;
+    padding: 0 5px;
+}
+.wcmcam_address_block_title h3
+{
+	margin-top: 10px;
+}
+.billing_first_name, .shipping_first_name{
+	clear: left;
+	display: inherit;
+	float: left;
+}
+
+.billing_last_name, .shipping_last_name
+{
+	display: inherit;
+	float: left;
+	margin-left: 5px;
+}
+#wcmca_custom_addresses {
+	display: block;
+	clear: both;
+	float: auto;
+}
+#wcmca_add_new_address_button_billing {
+   /*  float: left;
+    margin-right: 10px; */
+	display: inline-block;
+}
+#wcmca_add_new_address_button_shipping
+{
+	/* float: left; */
+	display: inline-block;
+}
+#wcmca_form_background_overlay{
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.9;
+	opacity:.90;
+	filter: alpha(opacity=90);
+}
+#wcmca_billing_country_field .select2-container, #wcmca_shipping_country_field .select2-container,
+#wcmca_billing_state_field .select2-container, #wcmca_shipping_state_field .select2-container
+{
+	width: 100% !important;
+}
+#wcmca_form_popup_container_shipping, #wcmca_form_popup_container_billing
+{
+	
+	 background: #fff none repeat scroll 0 0;
+		margin: 40px auto;
+		max-width: 700px;
+		padding: 20px 30px;
+		position: relative;
+		text-align: left;
+}
+ /*#wcmca_form_popup_container .woocommerce, #wcmca_form_popup_container .woocommerce #wcmca_address_form, #wcmca_form_popup_container .woocommerce #wcmca_address_form #wcmca_address_form_fieldset
+	{
+		 position: absolute;
+		 margin-top: 2%;
+		 width: 98%;
+		 height: 850px;
+	} */
+#wcmca_close_address_form_button_shipping, #wcmca_close_address_form_button_billing
+{
+	float:right;
+	font-weight:bold;
+	font-size:16px;
+	color: #d6d6d6;
+	cursor:pointer;
+}
+#wcmca_address_form_fieldset_shipping, #wcmca_address_form_fieldset_billing
+{
+	display:block;
+	clear:both;
+	margin-bottom:20px;
+}
+#wcmca_save_address_button_shipping, #wcmca_save_address_button_billing
+{
+	margin-top:15px;
+}
+.wcmca_save_address_button_container
+{
+	display:block;
+	clear: both;
+}
+.wcmca_preloader_image
+{
+	display: none;
+    float: left;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    margin-top: 25px;
+    width: 32px;
+}
+.select.select2-choice {
+  width: 100%;
+  height: 40px;
+}
+.wcmca_saving_loader_image
+{
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left:10px;
+	display:none;
+	clear:both;
+	width:32px;
+	height:32px;
+	/* margin-left:auto;
+	margin-right:auto; */
+}
+.woocommerce-account .addresses .title h3.wcmca_address_title, h3.wcmca_address_title
+{
+  clear: both;
+  display: block;
+  float: none;
+  margin-bottom: 2px;
+}
+.wcmcam_address_block_title
+{
+   margin-bottom: 10px;
+	display: block;
+	overflow: hidden;
+}
+.wcmca_edit_address_button, .wcmca_delete_address_button, .wcmca_duplicate_address_button
+{
+   /* float:right; */
+   display: inline-block;
+   float: left !important;
+}
+.wcmca_divider
+{
+	display:block;
+	clear:both;
+	height:5px;
+	width: 100%;
+}
+.class_action_sparator
+{
+	/* float:right;
+	margin-right: 5px;
+	margin-left: 5px; */
+	 display: inline-block;
+    float: left !important;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.wcmca_clear_both
+{
+	 clear: both;
+	display: block;
+}
+.wcmca_clear_right
+{
+	clear: right;
+	display: block;
+	margin-bottom: 15px;
+}
+.wcmca_hidden
+{
+	display:none;
+}
+label.wcmca_form_inline_input_label, .woocommerce form .form-row label, .woocommerce-page form .form-row label.wcmca_form_inline_input_label
+{
+	clear:right;
+	display:inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+label.wcmca_form_inline_input_label:first-child, .woocommerce form .form-row label, .woocommerce-page form .form-row label.wcmca_form_inline_input_label:first-child
+{
+	clear:right;
+	display:block;
+	margin-left: 0px;
+}
+.wcam_input_field
+{
+	width:98%;
+}
+
+h5.wcmca_personal_data_title
+{
+	display: block;
+	clear:both;
+	margin-bottom:2px;
+	/* margin-top:12px; */
+	font-style: italic;
+}
+
+/* .woocommerce .col2-set .col-1, .woocommerce-page .col2-set .col-1 {
+  float: left;
+  width: 46%;
+}
+.woocommerce .col2-set .col-2, .woocommerce-page .col2-set .col-2 {
+  float: right;
+  width: 48%;
+} */
+#wcmca_add_new_address_button_shipping_shipping, #wcmca_add_new_address_button_shipping_billing
+{
+	display:inline-block;
+	clear:both;
+	margin-bottom: 25px;
+}
+
+.woocommerce form .form-row .input-text, .woocommerce-page form .form-row .input-text, #wcmca_country_field_shipping, #wcmca_country_field_billing
+{
+ height:37px;
+}
+
+/* Sizes */
+#wcmca_form_popup_container_shipping .wcmca_input_field, #wcmca_form_popup_container_billing .wcmca_input_field {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#wcmca_form_popup_container_shipping .form-row.form-row.form-row-last, #wcmca_form_popup_container_billing .form-row.form-row.form-row-last {
+    clear: right;
+    float: right;
+    /* margin-left: 2%; */
+    width: 48%;
+}
+#wcmca_form_popup_container_shipping .form-row-first, #wcmca_form_popup_container_billing .form-row-first {
+    float: left;
+    position: relative;
+    width: 46%;
+	/* margin: 0px 5px; */ 
+}
+#wcmca_country_field_field_shipping, #wcmca_country_field_field_billing {
+  clear: both;
+  display: block;
+}
+h5.wcmca_address_title {
+	margin-bottom: 8px;
+	margin-top: 15px;
+}
+.wcmca_address_container 
+{
+	background: #f8f8f8;
+	padding: 10px 10px 10px 10px;
+	border-radius: 5px;
+	margin-right: 10px;
+	margin-bottom: 50px;
+}

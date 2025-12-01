@@ -1,0 +1,482 @@
+/**
+ * Benefit Box Admin Interface Styles
+ * Styles for the admin modal, forms, and interface elements
+ */
+
+.badge {
+    display: inline-block;
+    padding: 8px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 3px;
+}
+
+.badge-success {
+    background-color: #46b450;
+    color: #fff;
+}
+
+.badge-info {
+    background-color: #0073aa;
+    color: #fff;
+}
+
+.badge-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Table Layout and Sizing */
+.wp-list-table {
+    width: 100%;
+    max-width: none;
+    table-layout: auto;
+}
+
+.wp-list-table th,
+.wp-list-table td {
+    padding: 20px 15px !important;
+    vertical-align: middle !important;
+    line-height: 1.4;
+    min-height: 60px;
+}
+
+.column-type {
+    width: 120px;
+    min-width: 120px;
+}
+
+.column-title {
+    width: 20%;
+    min-width: 200px;
+}
+
+.column-subtitle {
+    width: 25%;
+    min-width: 250px;
+}
+
+.column-icon {
+    width: 100px;
+    min-width: 100px;
+}
+
+.column-status {
+    width: 100px;
+    min-width: 100px;
+}
+
+.column-sort {
+    width: 80px;
+    min-width: 80px;
+}
+
+.column-actions {
+    width: 150px;
+    min-width: 150px;
+}
+
+/* Enhanced table styling */
+.wp-list-table {
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.wp-list-table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    color: #495057;
+}
+
+.wp-list-table tbody tr {
+    height: 60px;
+}
+
+.wp-list-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.wp-list-table tbody td {
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Subtitle column text handling */
+.column-subtitle {
+    word-wrap: break-word;
+    max-width: 300px;
+}
+
+.column-subtitle .truncated-text {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.column-subtitle .full-text {
+    display: none;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.column-subtitle:hover .truncated-text {
+    display: none;
+}
+
+.column-subtitle:hover .full-text {
+    display: block;
+}
+
+.benefit-box-form {
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.whatsapp-specific h3 {
+    margin: 0;
+    color: #0073aa;
+    padding: 10px 0;
+}
+
+.icon-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.icon-preview {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+}
+
+.icon-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.no-icon {
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+}
+
+.availability-schedule-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    background: #f9f9f9;
+}
+
+.schedule-day {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.day-checkbox {
+    min-width: 100px;
+    font-weight: 500;
+}
+
+.time-input {
+    width: 80px;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.copy-to-all {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 3px 8px;
+}
+
+.offline-messages {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    background: #f9f9f9;
+}
+
+.message-group {
+    margin-bottom: 15px;
+}
+
+.message-group:last-child {
+    margin-bottom: 0;
+}
+
+.message-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Custom Availability Schedule Styling */
+.custom-availability {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+    padding: 15px;
+}
+
+.availability-header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.availability-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.day-schedule {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.day-schedule:last-child {
+    border-bottom: none;
+}
+
+.day-schedule .day-checkbox {
+    min-width: 100px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.day-schedule .day-checkbox input[type="checkbox"] {
+    margin: 0;
+}
+
+.time-select {
+    min-width: 80px;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.add-time-slot {
+    padding: 4px 12px !important;
+    font-size: 12px !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+    background: #0073aa !important;
+    color: white !important;
+    border-color: #0073aa !important;
+}
+
+.add-time-slot:hover {
+    background: #005a87 !important;
+    border-color: #005a87 !important;
+}
+
+#apply-to-all-days {
+    font-size: 13px;
+    padding: 6px 12px;
+    background: #00a32a;
+    color: white;
+    border-color: #00a32a;
+}
+
+#apply-to-all-days:hover {
+    background: #008a20;
+    border-color: #008a20;
+}
+
+/* Modal Styles */
+.benefit-box-modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.benefit-box-modal-content {
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 0;
+    border: 1px solid #888;
+    border-radius: 4px;
+    width: 95%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.benefit-box-modal-header {
+    padding: 15px 20px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.benefit-box-modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.benefit-box-modal-close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.benefit-box-modal-close:hover,
+.benefit-box-modal-close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.benefit-box-modal-body {
+    padding: 20px;
+}
+
+.benefit-box-modal-footer {
+    padding: 15px 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    text-align: right;
+}
+
+.benefit-box-modal-footer .button {
+    margin-left: 10px;
+}
+
+/* Loading state */
+.benefit-box-modal .loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Success/Error notifications */
+.benefit-box-notification {
+    position: fixed;
+    top: 35px;
+    right: 20px;
+    z-index: 100001;
+    padding: 20px 25px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.benefit-box-notification.show {
+    transform: translateX(0);
+}
+
+.benefit-box-notification.success {
+    background-color: #46b450;
+}
+
+.benefit-box-notification.error {
+    background-color: #dc3232;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .wp-list-table {
+        font-size: 14px;
+    }
+    
+    .wp-list-table th,
+    .wp-list-table td {
+        padding: 16px 12px;
+    }
+    
+    .wp-list-table tbody tr,
+    .wp-list-table tbody td {
+        height: 50px;
+    }
+    
+    .column-subtitle {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .benefit-box-modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .icon-selector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .schedule-day {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .day-checkbox {
+        min-width: auto;
+    }
+    
+    /* Mobile table adjustments */
+    .wp-list-table {
+        font-size: 13px;
+    }
+    
+    .wp-list-table th,
+    .wp-list-table td {
+        padding: 12px 10px;
+    }
+    
+    .wp-list-table tbody tr,
+    .wp-list-table tbody td {
+        height: 45px;
+    }
+    
+    .column-subtitle {
+        max-width: 150px;
+    }
+}

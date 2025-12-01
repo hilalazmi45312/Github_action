@@ -1,0 +1,331 @@
+*** FunnelKit Funnel Builder Basic ***
+= 3.13.2 (October 23, 2025) =
+* Improved: Checkout: Compatibility updated with MailerLite plugin. (#8237)
+* Fixed: Checkout: Issue with oxygen templates getting overridden by checkout page if set for boxed or Canvas template. (#8235)
+
+= 3.13.1 (October 23, 2025) =
+* Fixed: PHP deprecated warnings with WooCommerce v10.3.0 resolved for funnel pages. (#8231)
+
+= 3.13.0 (October 22, 2025) =
+* Improved: Checkout: Improved custom field multi-select option display on thankyou pages and emails. (#8110)
+* Improved: Checkout: Enhanced Google address autocomplete loading efficiency, special handling for NL and US. (#8169, #8131)
+* Fixed: Checkout: Enhanced form field validation and messages for the radio buttons. (#8039)
+
+= 3.12.1 (August 08, 2025) =
+* Improved: Checkout: Enhanced compatibility with the "DIGITS: WordPress Mobile Number Signup and Login" plugin by UnitedOver. (#7983)
+* Fixed: Checkout: Resolved an issue with checkout tabs not functioning properly in the Legacy admin UI. (#7992)
+* Fixed: Checkout: Corrected the display of the "You Save" value and percentage when multiple products have discounts applied. (#7993)
+* Fixed: Checkout: Addressed an issue where the Date of Birth (DOB) field was appearing on the single order screen, despite not being added in the checkout fields. (#7991)
+
+= 3.12.0 (August 02, 2025) =
+* Added: Checkout: Added a new setting to open the collapsible order summary by default for every page builder widget. (#7904)
+* Improved: Checkout: Improved preparation of state field select when a user is logged in. (#7897)
+* Improved: Checkout: Enhanced compatibility with Bricks builder. (#7853)
+* Improved: Checkout: Updated compatibility with Delivery Date Pro for WooCommerce. (#7858)
+* Improved: Checkout: Enhanced compatibility with Checkout Field Editor Pro by Themehigh. (#7842, #7914)
+* Improved: Checkout: Optimized "You Save" percentage calculation to avoid rounding errors. (#7826)
+* Improved: Checkout: Updated compatibility with Rank Math SEO plugin. (#7836)
+* Improved: Checkout: Enhanced cart icon SVG to better handle color conflicts with themes. (#7906)
+* Improved: Checkout: Enhanced compatibility with WPLoyalty plugin for more seamless integration. (#7824)
+* Improved: Checkout: Improved compatibility with Avada Fusion Builder when using Block editor. (#7902, #7908)
+* Improved: Checkout: Enhanced compatibility with WooCommerce Sequential Order Numbers 3rd party add-ons. (#7602)
+* Improved: Checkout: Enhanced compatibility with Innosend plugin for smoother operation. (#7931)
+* Fixed: Checkout: Resolved design distortion of international dropdown when fewer than five countries are listed on mobile. (#7839)
+* Fixed: Checkout: Removed "required" option from HTML fields to avoid validation errors. (#7851)
+* Fixed: Checkout: Resolved issue where the Date of Birth field was still showing a delete icon after being removed from sections in the field editor UI. (#7912)
+* Fixed: Checkout: Resolved issue where inline stats in funnel steps weren't showing correctly when there were multiple conversion sources. (#7821)
+* Fixed: Checkout: Corrected revenue calculation in checkout analytics when multiple sources are present. (#7821)
+* Fixed: Checkout: Resolved shipping fields validation issue on multi-step checkout when "use different address" was unchecked. (#7863)
+
+= 3.11.1 (July 04, 2025) =
+* Fixed: Checkout: Checkout form fields were flickering on focus since the last update. (#7806)
+* Fixed: Checkout: DOB field showing with blank '-' when not required in thankyou page. (#7805)
+
+= 3.11.0.1 (July 02, 2025) =
+* Improved: Checkout: Google address autocompleted improved for United Kingdom addresses. (#5909)
+* Improved: Checkout: Compatibility with "ShopLentor – WooCommerce Builder for Elementor & Gutenberg by HasThemes" plugin. (#5910)
+* Fixed: Checkout: Compatibility with Klaviyo plugin updated for checkout fields default value. (#7790)
+
+= 3.11.0 (July 01, 2025) =
+* Added: Checkout: Bulgarian and Chinese translations for FunnelKit Checkout to enhance multilingual support. (#6342)
+* Improved: Checkout: Shimmer animation effect during page load for a more dynamic and engaging user experience. (#7309)
+* Improved: Checkout: Styling for the required field asterisk for improved visibility and better user interaction. (#7308)
+* Improved: Checkout: Amazon Paybutton visibility and styling improved to enhance user interaction and accessibility. (#7401)
+* Improved: Checkout: Overridden order-review.php to prevent issues with shipping-related plugins, improving compatibility. (#7409)
+* Improved: Checkout: Form fields now display correctly when options are UTF-8 encoded for better functionality. (#7461)
+* Improved: Checkout: Form field labels styling enhanced for the inside option to ensure clearer user input. (#7464)
+* Improved: Checkout: Rendering of WooCommerce order attribution fields on hook 'wfacp_before_checkout_form_fields' for better compatibility. (#7560)
+* Improved: Checkout: Compatibility with WooCommerce checkout addons updated for more customization options. (#7434)
+* Improved: Checkout: Compatibility with WooCommerce PayPal Payments updated to ensure smoother transaction processing. (#7445)
+* Improved: Checkout: Compatibility with Savoy theme updated to ensure a more seamless and cohesive design. (#7425, #7455)
+* Improved: Checkout: Compatibility with yParcel plugin v5.x.x, optimizing shipping management during checkout. (#7284)
+* Improved: Checkout: Compatibility with Sg WooCommerce Checkout Location Picker by Sevengits (v1.1.12) for improved location selection. (#7475)
+* Improved: Checkout: Compatibility with WooCommerce EU VAT Assistant by Aelia for easier VAT management and processing. (#7516)
+* Improved: Checkout: Compatibility with Sendcloud Shipping v2 by By Sendcloud B.V. for enhanced shipping options. (#7539)
+* Improved: Checkout: Compatibility with WooCommerce Payments for streamlined payment processing and better functionality. (#7513)
+* Improved: Checkout: Compatibility with FluentCRM fields for better CRM integration and data management. (#7557)
+* Improved: Checkout- Compatibility with Mondial Relay - InPost - WordPress updated for seamless integration with shipping services. (#7257)
+* Improved: Checkout: Compatibility with CURCY – Multi Currency for WooCommerce for broader currency support. (#7229)
+* Improved: Checkout: Compatibility with Speed Optimizer by SiteGround plugin for faster page loads and performance. (#7574)
+* Improved: Checkout: Compatibility with Mailpoet plugin for better email integration and marketing support. (#7592)
+* Improved: Checkout: Compatibility with Chained product for WooCommerce plugin for more advanced product handling. (#7545)
+* Improved: Checkout: Compatibility with Ecomus Addons by Drfuri for better add-on management and functionality. (#7617)
+* Improved: Checkout: Compatibility with Pay by paynow.pl for broader payment support, enhancing payment options. (#7636)
+* Improved: Checkout: Compatibility with Easy product bundles for WooCommerce for better bundle management. (#7639)
+* Improved: Checkout: Compatibility with WooCommerce Local Delivery Date Picker & Time Slots by AntsRoute for better delivery scheduling. (#7642)
+* Improved: Checkout: Compatibility with Elessi Theme by NasaTheme for a more cohesive and seamless design. (#7655)
+* Improved: Checkout- Compatibility with EPS Uberweisung by PSA GmbH payment external link, providing additional payment methods for your customers. (#7237)
+* Improved: Checkout: Compatibility with Mailerlite plugin for seamless integration and smoother workflows. (#7274)
+* Improved: Checkout: Compatibility with Bulgarisation for WooCommerce by Autopolis.bg for more localized support. (#7272)
+* Improved: Checkout: Compatibility with Order delivery date pro by Tyche for more precise delivery options. (#7381)
+* Improved: Checkout- Enhanced compatibility with Ubigeo Shipping, offering more shipping options for a better customer experience. (#7685)
+* Fixed: Checkout: Smart Login form now displays properly when login inline is set and already open on the page for smoother user experience. (#7228)
+* Fixed: Checkout: Cases where applying coupon on the checkout page now correctly shows the success message only once for clearer feedback. (#7344)
+* Fixed: Checkout: Sale price now displays correctly when 0% discount is applied to sale price with multiple products for better price visibility. (#7285)
+* Fixed: Checkout: Resolved edge cases when Checkout session was sustaining even after the thank-you page is opened, improving session management. (#7325)
+* Fixed: Checkout: PHP error during quantity update when product doesn't exist, ensuring smoother checkout process. (#7387)
+* Fixed: Checkout: Resolved edge case of infinite loop during store checkout when WC term page is created using page builder, improving checkout flow. (#7374)
+* Fixed: Checkout: Label color settings for opt-in now work correctly when using label inside option for better customization. (#7327)
+* Fixed: Checkout: Shipping address now gets copied to billing address when form contains shipping first, streamlining the process. (#7416)
+* Fixed: Checkout: PHP error handled when no step ID exists in funnel session data, improving error handling and session management. (#7486)
+* Fixed: Checkout: Product switcher settings now work correctly with store checkout for smoother product management. (#7547)
+* Fixed: Checkout: Styling improvements made to FunnelKit Stripe GPay express button for better visual appearance. (#7609)
+* Improved: Checkout: Google map JS loading optimized by adding "async" for better performance. (#7456)
+* Improved: Checkout: Quantity switcher improved for Firefox browser compatibility. (#7420)
+* Improved: Checkout: Added WooCommerce login form end hook in custom form login popup for better compatibility. (#7467)
+* Improved: Checkout: Styling improved to prevent conflict in login form eye icon background color. (#7697)
+* Improved: Checkout: Compatibility with Checkout Field Editor for WooCommerce by ThemeHigh for smoother integration. (#7407)
+* Improved: Checkout: Optimized usage of Geocode service when using Google address autocomplete for faster loading. (#7680)
+* Fixed: Checkout: CSS issue with checkout custom fields if placed after payment gateways. (#7299)
+* Fixed: Checkout: Address autocomplete not working correctly in case of shipping address dragged but shipping is disabled. (#7441)
+* Fixed: Checkout: Validation class on street address field not applying correctly with house number validation. (#7531)
+* Fixed: Checkout: Admin UI Checkout URL getting distorted when no products during slug modification. (#7558)
+* Fixed: Checkout: Font family issue with collapsible order summary. (#7566)
+* Fixed: Checkout: PHP Error when shipping rate or tax is returned as a blank string instead of a float. (#726)
+* Fixed: Checkout: Shipping calculations now work correctly in multistep checkout when shipping country is hidden for accurate shipping calculations. (#7653)
+
+= 3.10.0 (Mar 07, 2025) =
+* Added: Full template library access. (#6998)
+* Added: Full support for Optin popup, clone step and duplicate step feature. (#6998)
+* Added: Checkout - New feature billing/shipping address fields to allow house numbers for better user experience. (#6928)
+* Improved: Checkout - Enhanced compatibility with the Divi Menu and Divi Bar plugins for seamless integration. (#7124)
+* Improved: Checkout - Updated compatibility with WooCommerce Checkout Manager (QuadLayers v7.6.5) for improved checkout flow. (#7111)
+* Fixed: Checkout - Handled PHP errors in the checkout template when using Divi Builder, even if the theme/plugin was later disabled. (#7150)
+* Fixed: Checkout - Improved compatibility with the PostNL plugin for a smoother checkout experience. (#7163)
+* Fixed: Checkout - Addressed the subscription price string issue in the product switcher when the product was not in the cart. (#7152)
+* Fixed: Checkout - Resolved the "Invalid recurring shipping method" error when using WooCommerce subscriptions with a single recurring shipping method. (#7172
+* Improved: Checkout - Address autocomplete suggestions now support the current user language for a more localized experience. (#7123)
+* Improved: Checkout - Address autocomplete API arguments modify to show more results in the suggestions. (#7185)
+* Improved: Checkout - prevent copying enteries in billing & shipping phone in multi step form. (#7196)
+
+= 3.8.1 (Feb 06, 2025) =
+* Improved: Enhanced plugin security for CSRF and LFI in scenarios where an administrator is logged in, ensuring stronger protection. (#7075)
+
+= 3.8.0 (Feb 04, 2025) =
+* Added: Email notification to WordPress site admin when license expired. (#7028)
+* Improved: License authentication is now more robust for sites with multiple site URLs, ensuring seamless verification. (#6983)
+* Improved: Checkout- Display of custom checkbox field improved for thankyou pages and emails. (#7059)
+
+= 3.7.0 (Oct 10, 2024) =
+* Improved: compatibility with WordPress 6.7 . (#6851)
+* Improved: Better handling for SQL error when creating a table if it already exists. (#6857)
+* Improved: Order indexing buttons under tools were not clickable in a certain state. (#6832, #6831)
+* Improved: Checkout – Compatibility updated with Tickera forms. (#6817)
+* Improved: Checkout- Styling improved for conversion filters in backend or Safari Browser. (#6863)
+* Fixed: Checkout- PHP notice in case of WooCommerce advanced field used in checkout but no billing fields exists. (#6818)
+* Fixed: Checkout- The sticky place order button on mobile devices is not working correctly for bricks integration. (#6812)
+* Fixed: PHP Error in analytics when WooCommerce is not active. (#6855)
+
+= 3.6.0 (Oct 10, 2024) =
+* Added: Checkout - Compatibility with WooCommerce Product Add-ons. (#5584)
+* Added: Checkout - Compatibility with WooCommerce Checkout Field Editor by WooCommerce for third-party advanced fields. (#6580)
+* Added: Checkout - A new filter `wfacp_smart_button_position_rest` added to modify available positions for express checkout buttons. (#6756)
+* Improved: Checkout - Updated compatibility with Tickera Bridge for WooCommerce. (#6633)
+* Improved: Checkout- Handling for Query Param to auto-populate checkout field in support with Meta policies about pixel data. (#6741)
+* Improved: Checkout - Updated compatibility with WooCommerce PayPal Payments to resolve duplicate credit card fields. (#6685)
+* Improved: Checkout - Updated compatibility with TranslatePress. (#6713)
+* Improved: Checkout - Updated compatibility with the Brazilian Market on WooCommerce. (#6717)
+* Improved: Checkout - Updated compatibility with the Thrive Builder. (#6751)
+* Improved: Checkout - Handled cases where the `id` attribute was missing for extra advanced fields. (#6727)
+* Fixed: Checkout - Subscription price showed double when multiple quantities were in checkout products for products without a signup fee, under WCML setup. (#6696)
+* Fixed: Checkout - CSS issue for WooCommerce notices on checkout pages. (#6480)
+
+= 3.5.0 (Aug 22, 2024) =
+* Improved: Security measures have been strengthened to better protect the plugin. (#5919, #6540)
+* Improved: Checkout- product_id attribute added to delete cart anchor tag to support analytics plugin. (#6519)
+* Improved: Checkout- Address autocomplete improved for Mexico country. (#6531)
+
+= 3.4.5 (July 22, 2024)  =
+* Fixed: Compatibility with Bricks theme updated for the embed forms. (#6489)
+
+= 3.4.3 (July 19, 2024)  =
+* Improved: Checkout: Advanced phone field validations improved for a few countries. (#6394)
+* Fixed: Checkout: Placeholder option for the custom select fields in the checkout form. (#6473)
+
+= 3.4.2 (July 16, 2024)  =
+* Added: Compatibility with WordPress version 6.6.(#6422)
+* Fixed: Checkout: Last step preview was not working correctly in some cases. (#5481)
+
+= 3.4.1 (June 28, 2024)  =
+* Improved: Checkout- Smart login feature rate limit added to restrict five attempts per WooCommerce session. (#6365)
+* Fixed: Checkout- Generate Checkout URL tool copying old url during export and duplicate. (#6351)
+
+= 3.4.0 (June 28, 2024) =
+* Added: Checkout- New & improved user login experience with FunnelKit Checkout. (#5344)
+* Improved: Checkout - Language translations for the checkout form improved for different design templates. (#6133, #6205)
+* Improved: Checkout- Compatibility with Checkout Field Editor for WooCommerce (Pro) updated. (#6103)
+* Improved: Checkout: Address autocomplete is not working fine for country Turkey. (#6187)
+* Improved: Checkout- German Translation for the checkout form improved. (#6205)
+* Fixed: Dynamic Checkout URL under optimization was not working in case of empty values. (#6231)
+* Fixed: Analytics to handle scenarios for COD orders getting canceled. (#6179)
+* Fixed: Checkout- Close checkout after a date optimization was not working with some builders. (#6087)
+* Fixed: Checkout- Quantity switcher in products section getting hidden in case of 100% coupon discounts. (#6332)
+
+= 3.3.1 (Apr 08, 2024) =
+* Improved: Checkout - Language translations for the checkout form improved for different design templates. (#5261)
+* Fixed: Checkout- Fatal error on checkout page when slingblocks plugin is deactivated and block editor template is set. (#6068)
+
+= 3.2.0 (Jan 25, 2024) =
+* Improved: Checkout - RTL styling for customizer templates. (#5657)
+* Fixed: Checkout - Enable Icon and button subtext not working correctly on customizer templates. (#5722)
+
+= 3.0.1 (Jan 25, 2024) =
+* Fixed: Google address autocomplete was not working when user saved new settings in v3.0.0. (#5608)
+
+= 3.0.0 (Jan 24, 2024) =
+* Added: Completely revamped admin interface and made all interfaces REACT gaining speed benefits and making workflow faster
+    - Dashboard
+    - Funnel listing
+    - Store checkout
+    - Funnel Step listing
+    - Global settings
+    - Single step tabs like Products, Design and Rules.
+* Added: New Dashboard widgets UTM Performance tracking & Referrer tracking Widget on Dashboard
+* Added: Global Analytics giving a site wide view
+* Added: New Global Reports for Funnels
+* Added: New Global Reports for Referrers
+* Added: Global Conversions (Orders/Options) with advanced Filters ( such as Funnels,UTM, Referrer etc.....)
+* Added: Export Orders, Optins and Referrers
+* Added: Single Contact Profile view with Conversion Activity, Order Details and Rich Insights
+* Added: Canvas Mode with ability to add/ delete nodes along with viewing of analytics
+* Added: New Order Bump Skins
+* Added: Ability to pre-check order bumps and hide them after selection
+* Added: Order Bump New Design Controls
+* Added: Ability to arrange multiple order bumps or upsells right from Step listings screen
+* Added: Enhanced Funnel Export with ability to check few Funnels and Export them
+* Added: Quick setup in Dashboard
+* Improved: Refactored parts of code for overall performance gains
+* Improved: Workflow for adding upsell offers, you can create new offers and adding to existing upsell sequences or create new upsell
+* Improved: Cloning steps workflow improved.
+* Fixed: Checkout: Compatibility with Shipmondo updated.
+* Fixed: Checkout: PayPal Express checkout button showing twice with payPal for woocommerce addon.
+* Fixed: Checkout: Express button by Woo payment were not showing up since v7.0.0
+
+
+= 2.17.2 (Jan 20, 2024) =
+* Fixed: Express Checkout buttons styling on mobile devices distorted since last update. (#5578)
+
+
+= 2.17.1 (Jan 18, 2024) =
+* Improved: Checkout: Compatibility with EU VAT plugin updated. (#5492)
+* Improved: Compatibility with Divi builder updated. (#5525)
+* Fixed: Checkout: Compatibility with PayPal for WooCommerce angelleye plugin smart buttons were loading outside the express button box. (#5540)
+* Fixed: Checkout: Coupon code input styling issue in case of native checkout created using blocks. (#5538)
+* Fixed: Checkout: Compatibility with oxygen builder updated. (#5558)
+
+= 2.17.0 (Jan 11, 2024) =
+* Added: Checkout: A new filter 'wfacp_show_advanced_field_order' was added to allow custom fields on new manual orders. (#5140)
+* Improved: Checkout: Better Handling for no default variation (any) case in the product switcher. (#5111)
+* Improved: Checkout: RTL styling for coupon field improved. (#5130)
+* Fixed: Checkout: Phone field showing distorted with multistep form in case of field label position outside. (#5328)
+* Fixed: Checkout: Down arrow for custom select fields on checkout was not working. (#5382)
+* Fixed: Checkout: Javascript error coming on checkout during removing the item with GTM server side plugin.(#5142)
+
+= 2.15.0 (Nov 24, 2023) =
+* Added: Compatibility with PHP 8.2.(#4830)
+* Improved: Allowed multiple IDs tracking for the Pinterest and TikTok. (#5087)
+* Improved: Checkout: Hardened plugin security for ajax request with in case of user with 'customer' role logged in. (#5337)
+* Improved: Checkout: Compatibility with YITH Dynamic pricing updated. (#5092)
+* Improved: Checkout: WooCommerce session sustained during reload in cases of failure. (#5080)
+* Improved: Checkout: Compatibility with Theme Pro builder updated. (#5087)
+* Improved: Checkout: Compatibility with Woodmart theme updated. (#5077)
+* Improved: Checkout: Compatibility with WooCommerce Inpost updated. (#5079)
+* Fixed: Checkout: PHP fatal error while editing checkout page using oxygen builder. (#5306)
+* Fixed: Checkout: CSS fix when native checkout is built using the block editor. (#5091)
+* Fixed: Label position on checkout fields were not correct in case when email not used in form. (#5322)
+
+= 2.14.3 (Nov 09, 2023) =
+* Fixed: Checkout: Place Order button amount not updating on bump selection for customizer templates. (#5050)
+
+= 2.14.2 (Oct 20, 2023) =
+* Fixed: Checkout: Handled Fatal error on single order admin page when WooCommerce unable to unserialize item data.(#5038)
+
+= 2.14.1 (Oct 19, 2023) =
+* Fixed: Checkout: Address2 field was showing default collapsible for a few templates after import. (#5157)
+
+= 2.14.0 (Oct 18, 2023) =
+* Improved: Checkout: Google Address autocomplete UI improved.(#4777)
+* Improved: Checkout: Google address autocomplete now supports subpremise for the US. (#5045)
+
+= 2.13.2 (Sept 20, 2023) =
+* Improved: Custom text area field behavior when text is added with a line break. (#4783)
+
+= 2.13.1 (Sept 19, 2023) =
+* Fixed: HPOS Compatibility logging a notice inside WooCommerce logs. (#1623)
+
+= 2.13.0 (Sept 18, 2023) =
+* Added: WooCommerce HPOS feature compatibility. (#1622)
+* Improved: Checkout- Custom text area field behavior when text is added with a line break. (#4783)
+* Improved: Checkout- Google Address autocomplete now populates address_2 field. (#4972)
+* Fixed: Checkout- Prevent phone field from getting reset on step switching. (#4839)
+* Fixed: Checkout- tracks.js file not found in case of TikTok integration is enabled on checkout. (#4818)
+
+= 2.12.0 (June 20, 2023) =
+* Added: Checkout- Compatibility with FOX – Currency Switcher Professional for WooCommerce plugin. (#4686)
+* Improved: Checkout- Compatibility with FunnelKit Stripe Payment gateway updated. (#4682)
+* Improved: Checkout- Compatibility with Mailchimp for WooCommerce By Mailchimp updated. (#4662)
+* Improved: Checkout- Compatibility with Breakdance builder updated for customizer templates . (#4663)
+* Improved: Checkout- Compatibility with Omnisend for Woocommerce . (#4670)
+* Improved: Checkout- Compatibility with angelleye smart buttons improved for multistep forms . (#4670)
+* Improved: Checkout- Compatibility with Brazilian gateway updated. (#4694)
+* Improved: Checkout- Compatibility with Angelleye gateway updated. (#4715)
+* Improved: Checkout: Shimmer effect during product quantity changes. (#4309)
+* Improved: Checkout: up-to-date Subscription cart shipping html templates. ($4737)
+* Improved: Checkout: Express buttons compatibility with PayPal Commerce Platform by Angelleye. (#4698)
+* Improved: Checkout: Compatibility with WC Payments updated. (#4730)
+* Fixed: Checkout: PHP Error on renewal orders when the shipping address is unset. (#4734)
+* Fixed: Checkout: Console warning related to Google address autocomplete. (#4741)
+* Fixed: Checkout- Spain City was not getting filled using address autocomplete. (#4671)
+* Fixed: Checkout: Box shadow settings with Divi checkout widget was not working. (#4706)
+* Fixed: Checkout- Spain City was not getting filled using address autocomplete. (#4671)
+* Fixed: Checkout- Price not coming with strikethrough when discount is 100%. (#4692)
+
+= 2.11.0 (Mar 01, 2023) =
+* Added: Checkout- Settings to control price visibility on the place order button on customizer. (#4634)
+* Improved: Checkout- Styling for customizer multistep preview improved.(#4599)
+* Improved: Checkout- Styling for multi-select custom field. (#4598)
+* Improved: Checkout- Styling for shimmer animation on product switcher field. (#4614)
+* Fixed: Checkout- Settings to background color for Best value tag not working in some cases. (#4645)
+
+= 2.10.0 (Jan 27, 2023) =
+* Improved: Checkout: Compatibility with blocksy theme updated. (#4606)
+* Improved: Checkout: Order Pay page css improved. (#4603)
+* Improved: Checkout: Compatibility with Divi theme editor improved. (#4585)
+* Improved: Checkout: Radio button behaviour improved during shimmer animation. (#4313)
+* Improved: Checkout: Compatibility with Avada theme updated (#4605)
+* Improved: Checkout: Compatibility with OceanWP theme updated. (#4601)
+
+= 2.9.2 (Jan 11, 2023) =
+* Fixed: Checkout: 301 redirect was not working on dedicated checkout pages since v2.9.0. (#3930)
+
+= 2.9.1 (Jan 10, 2023) =
+* Fixed: Checkout: Issue with advanced phone field showing country 'Afghanistan' when billing country and shipping country is hidden. (#4580)
+
+= 2.7.1 (Nov 11, 2022) =
+* Fixed: Admin design tab was not showing correctly on safari browser. (#4457)
+* Fixed: Intl field not showing correctly on multi-step form's 2nd or 3rd step. (#4449)
+
+= 2.7.0 (Nov 07, 2022) =
+* Initial Release
+
+

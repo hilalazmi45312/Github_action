@@ -1,0 +1,10 @@
+.wcmca_error {
+    display: none;
+   /*  padding: 5px 10px 0px 0; */
+    margin: 0px 0px 10px 0px;
+	color: #f84747;
+	font-weight: bold;
+}
+.wcmca_error::before { 
+    content: "* ";
+}

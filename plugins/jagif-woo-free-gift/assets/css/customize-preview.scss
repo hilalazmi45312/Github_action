@@ -1,0 +1,134 @@
+.jagif-hide {
+  display: none !important;
+}
+
+.jagif-customize-range {
+  display: flex;
+  justify-content: space-between;
+}
+
+.jagif-customize-range-value {
+  width: 40px !important;
+  text-align: center !important;
+  border-radius: 10px !important;
+  padding: 0 !important;
+}
+
+input.jagif-customize-range-value {
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin-right: 0 !important;
+  }
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin-right: 0 !important;
+  }
+}
+
+.jagif-customize-range-min-max {
+  max-width: 85%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.jagif-customize-radio {
+  margin: 3px 8px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  float: left;
+  margin: 3px 8px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  float: left;
+
+  i {
+    max-width: 100%;
+    height: auto;
+    opacity: .7;
+    background: none !important;
+
+    &:before {
+      font-size: 20px !important;
+    }
+  }
+
+  .ui-state-active {
+    i {
+      color: #000;
+      opacity: 1 !important;
+      color: #000;
+      opacity: 1 !important;
+    }
+
+    img {
+      box-shadow: 0 0 2px 1px #3ac0ff;
+      opacity: 1 !important;
+    }
+  }
+
+  label {
+    border: unset !important;
+    line-height: normal !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: unset !important;
+  }
+
+  .ui-icon {
+    display: none !important;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    opacity: .7;
+    background: none !important;
+  }
+
+  img.jagif-choose-icon {
+    max-width: 40px !important;
+  }
+}
+
+.jagif_radio_control {
+  input[type='radio'] {
+    width: 25%;
+    height: 65px;
+    margin: 10px;
+    text-align: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #CCCCCC;
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+.jagif_wrap_list_badge_type {
+  .jagif_template_radio {
+    .radio_active {
+      border: 2px solid #33aeff;
+      box-shadow: 0 0 2px 1px #3ac0ff;
+    }
+  }
+}
+
+.jagif_wrap_product_badge {
+  .jagif_badge-gift-icon {
+    img.jagif-icon-gift {
+      position: absolute;
+      z-index: 9;
+    }
+  }
+}
+
+.jagif-free-gift-promo-item {
+  .jagif-open-popup-choose-var {
+    pointer-events: none;
+    cursor: no-drop !important;
+  }
+}

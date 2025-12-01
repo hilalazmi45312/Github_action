@@ -1,0 +1,10 @@
+<wpml-config>
+    <admin-texts>
+        <!-- Frontend label - Start -->
+        <key name="efw_productfee_fee_text"/>
+	<key name="efw_ordertotalfee_fee_text"/>
+	<key name="efw_productfee_overall_fee_text"/>
+        <!-- Frontend label - End-->
+        
+    </admin-texts>
+</wpml-config>

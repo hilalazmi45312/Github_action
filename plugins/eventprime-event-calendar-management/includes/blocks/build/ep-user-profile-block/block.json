@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/ep-user-profile-block",
+  "version": "0.1.0",
+  "title": "EventPrime User Profile",
+  "category": "event-prime",
+  "description": "EventPrime block to display user profile ",
+  "attributes": {
+    "block_user_profile_class": {
+      "type": "string",
+      "default": "block_user_profile_class"
+    },
+    "ep_user_profile_tabs": {
+      "type": "string",
+      "default": "ep-coming-up"
+    }
+  },
+  "textdomain": "ep-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:../../build/ep-user-profile-block/index.css",
+  "style": "file:./style-index.css"
+}

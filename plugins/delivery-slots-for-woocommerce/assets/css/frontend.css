@@ -1,0 +1,217 @@
+.dey-delivery-order-details b {
+	color: #000;
+	font-weight: 600;
+}
+
+.dey-holiday,
+.dey-booked {
+	opacity: 1 !important;
+	pointer-events: auto !important;
+}
+
+.dey-product-delivery-slots-fields-wrapper {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.dey-order-expected-delivery-info-wrapper,
+.dey-product-expected-delivery-info-wrapper {
+	font-size: 16px;
+	clear: both;
+}
+
+.dey-product-date-picker-label {
+	margin: 10px 0;
+}
+
+.dey-order-delivery-date-picker-field {
+	margin: 10px 0;
+}
+
+.dey-order-local-pickup-date-picker-field {
+	margin: 10px 0;
+}
+
+.dey-order-tip-cart-wrapper {
+	display: block;
+	float: left;
+	margin: 10px 0;
+}
+
+.dey-order-tip-cart-wrapper h4 {
+	font-size: 18px;
+	color: #000;
+	font-weight: 500;
+}
+
+.dey-order-tip-cart-wrapper .dey-order-tip-predefined-buttons {
+	float: left;
+	margin-bottom: 10px;
+}
+
+.dey-order-tip-cart-wrapper .dey-order-tip-predefined-buttons button.dey-order-tip-button {
+	display: inline-block;
+	padding: 0.6180469716em 1.41575em;
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: none;
+	border-radius: 0;
+	margin: 5px 5px 5px 0;
+}
+
+.dey-order-tip-cart-wrapper .dey-order-tip-custom-amount-actions {
+	float: left;
+}
+
+.dey-order-tip-cart-wrapper .dey-order-tip-custom-amount-actions .dey-order-tip-field-row {
+	display: block;
+	float: left;
+	margin: 0;
+}
+
+.dey-order-tip-cart-wrapper .dey-order-tip-custom-amount-actions .dey-order-tip-custom-amount {
+	width: 200px;
+	height: 45px;
+	padding: 0.6180469716em;
+	background: #fff;
+	color: #43454b;
+	box-shadow: none;
+	border: 1px solid #ccc;
+	background: #f1f1f1;
+	border-radius: 5px;
+}
+
+.dey-order-tip-cart-wrapper .dey-order-tip-field-row button.dey-order-tip-button {
+	display: inline-block;
+	padding: 0.6180469716em 1.41575em;
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: none;
+	border-radius: 0;
+	margin: 5px 5px 5px 0;
+}
+
+.dey-order-tip-checkout-wrapper {
+	display: block;
+	float: left;
+	margin: 10px 0;
+	width: 100%;
+}
+
+.dey-order-tip-checkout-wrapper h4 {
+	font-size: 18px;
+	color: #000;
+	font-weight: 500;
+}
+
+.dey-order-tip-checkout-wrapper .dey-order-tip-predefined-buttons {
+	float: left;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.dey-order-tip-checkout-wrapper .dey-order-tip-predefined-buttons button.dey-order-tip-button {
+	display: inline-block;
+	padding: 0.6180469716em 1.41575em;
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: none;
+	border-radius: 0;
+	margin: 5px 5px 5px 0;
+}
+
+.dey-order-tip-checkout-wrapper .dey-order-tip-custom-amount-actions {
+	float: left;
+	width: 100%;
+}
+
+.dey-order-tip-checkout-wrapper .dey-order-tip-custom-amount-actions .dey-order-tip-field-row {
+	display: block;
+	float: left;
+	margin: 0;
+}
+
+.dey-order-tip-checkout-wrapper .dey-order-tip-custom-amount-actions .dey-order-tip-custom-amount {
+	width: 200px;
+	height: 45px;
+	padding: 0.6180469716em;
+	background: #fff;
+	color: #43454b;
+	box-shadow: none;
+	border: 1px solid #ccc;
+	background: #f1f1f1;
+	border-radius: 5px;
+}
+
+.dey-order-tip-checkout-wrapper .dey-order-tip-field-row button.dey-order-tip-button {
+	display: inline-block;
+	padding: 0.6180469716em 1.41575em;
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: none;
+	border-radius: 0;
+	margin: 5px 5px 5px 0;
+}
+
+/* Order scheduler fields */
+.dey-order-delivery-scheduler-button,
+.dey-order-pickup-scheduler-button {
+	display: flex;
+	float: left;
+	padding: 10px;
+}
+
+.dey-order-delivery-scheduler-button label,
+.dey-order-pickup-scheduler-button label {
+	margin-right: 10px;
+}
+
+.dey-calender-color-info {
+	margin-bottom: 10px;
+}
+
+.dey-calender-dot-color {
+	margin-right: 5px;
+}
+
+.dey-calender-dot-color:before {
+	content: '';
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 5px;
+	line-height: 1.2;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.dey-number-field::-webkit-outer-spin-button,
+.dey-number-field::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
+	margin: 0 !important;
+}
+
+/* Firefox */
+.dey-number-field {
+	-moz-appearance: textfield !important;
+	appearance: textfield !important;
+	-webkit-appearance: textfield !important;
+}
+
+.dey-hide {
+	display: none;
+}
+
+/* Product order scheduler fields start */
+.dey-product-delivery-scheduler-button,
+.dey-product-pickup-scheduler-button {
+	display: flex;
+	float: left;
+	padding: 10px;
+}
+
+.dey-product-delivery-scheduler-button label,
+.dey-product-pickup-scheduler-button label {
+	margin-right: 10px;
+}
+
+/* Product order scheduler fields end */

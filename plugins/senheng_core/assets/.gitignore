@@ -1,0 +1,49 @@
+# Ignore OS/mac/windows junk
+.DS_Store
+Thumbs.db
+
+# Ignore PHPStorm / VSCode / NetBeans / Sublime / general IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore log files
+*.log
+
+# Ignore node modules if using build tools
+node_modules/
+
+# Ignore composer vendor if using
+vendor/
+
+# Ignore build artifacts
+dist/
+build/
+
+# Ignore SASS/SCSS cache
+.sass-cache/
+
+# Ignore compiled map files
+*.map
+
+# Ignore test coverage
+coverage/
+
+# Ignore wp specific stuff that shouldn’t be in a plugin
+wp-content/uploads/
+wp-content/cache/
+
+# If you bundle languages
+*.pot~
+*.mo~
+*.po~
+
+# ignore env files if you use them
+.env
+.env.*
+
+# ignore backup files
+*.bak
+*.swp
+*.tmp

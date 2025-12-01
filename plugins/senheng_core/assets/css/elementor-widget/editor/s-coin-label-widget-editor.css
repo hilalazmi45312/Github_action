@@ -1,0 +1,89 @@
+/* S-Coin Label Widget Editor Styles */
+
+/* Editor-specific container styles */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic {
+	position: relative;
+	display: inline-block;
+}
+
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic img {
+	max-width: 100%;
+	height: auto;
+	min-height: 40px;
+}
+
+/* Editor-specific text positioning and sizing */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info {
+	position: absolute !important;
+	top: 45% !important;
+    right: 18% !important;
+	max-width: 68% !important;
+	transform: translateY(-50%) !important;
+	text-align: center !important;
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	pointer-events: none; /* Prevent text from interfering with editor interactions */
+	font-weight: 700 !important;
+	display: inline-flex !important;
+	align-items: flex-start !important;
+	font-family: 'Poppins', sans-serif !important;
+}
+
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-number {
+	font-weight: 700 !important;
+	line-height: 1 !important;
+}
+
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-symbol {
+	font-weight: 700 !important;
+	position: relative !important;
+	top: calc(var(--icon-height, 80px) * -0.004) !important;
+	line-height: 1 !important;
+}
+
+/* Dynamic font sizing based on icon height */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic img {
+	--icon-height: 80px; /* Default fallback */
+}
+
+/* Handle custom icon sizes in editor */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic {
+	--icon-height: 80px; /* Default value */
+}
+
+/* Responsive text scaling for different icon sizes - removed conflicting font-size rule */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info {
+	line-height: 1;
+}
+
+/* S-Coin Widget Editor - Center single-digit percentages in editor */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info .percentage-number[data-single-digit="true"] {
+	position: relative !important;
+}
+
+
+/* S-Coin Widget Editor - Fallback for browsers that don't support :has() - Use JavaScript to add class */
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info.scoin-widget-single-digit {
+	right: 25% !important;
+	justify-content: center !important;
+}
+
+.elementor-editor-active .rebate-container-small.s-coin-label-dynamic .rebate-info.scoin-widget-multi-digit {
+	right: 18% !important;
+}
+
+/* Category icon for editor */
+.elementor-element[data-widget_type="sh_s_coin_label"] .elementor-widget-container::before {
+	content: "🪙";
+	font-size: 20px;
+	display: block;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+/* Remove bottom spacing from widget container */
+.elementor-widget-sh_s_coin_label .elementor-widget-container {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}

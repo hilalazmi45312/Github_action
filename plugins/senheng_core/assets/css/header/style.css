@@ -1,0 +1,146 @@
+@media (max-width: 768px) {
+
+    .mobi-title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobi-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+        align-items: center;
+        padding: 6px;
+        background: #e21b22;
+        color: #fff;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+        height: 56px;
+    }
+
+    .mobi-left,
+    .mobi-right {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .mobi-icon-btn {
+        all: unset;
+        /* reset UA styles */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #fff;
+        padding: 4px;
+        border-radius: 4px;
+        background: transparent !important;
+
+        /* neutralize platform quirks */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .mobi-icon-btn::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+
+    .mobi-icon-btn:focus,
+    .mobi-icon-btn:active,
+    .mobi-icon-btn:hover {
+        background: transparent !important;
+        color: #fff;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+
+
+    /* Search capsule */
+    .mobi-search {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #fff;
+        padding: 2px 6px;
+        border-radius: 8px;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06);
+        height: 40px;
+        overflow: hidden;
+        /* ✅ keeps button inside capsule */
+    }
+
+    .mobi-search-icon {
+        display: inline-flex;
+        margin-left: 2px;
+    }
+
+    .mobi-search input[type="search"] {
+        appearance: none;
+        border: 0;
+        outline: 0;
+        flex: 1;
+        min-width: 0;
+        font-size: 14px;
+        padding: 6px 4px;
+        color: #333;
+    }
+
+    .mobi-search input::placeholder {
+        color: #b9b9b9;
+        font-size: 14px;
+    }
+
+    .mobi-search-btn {
+        all: unset;
+        /* reset WP/Theme button styles */
+        background-color: #f33;
+        border: none;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+
+    /* Cart badge */
+    .mobi-cart {
+        position: relative;
+    }
+
+    .mobi-cart-badge {
+        position: absolute;
+        top: -4px;
+        right: -6px;
+        min-width: 16px;
+        height: 16px;
+        padding: 0 4px;
+        border-radius: 999px;
+        font-size: 10px;
+        line-height: 16px;
+        text-align: center;
+        background: #fff;
+        color: #e21b22;
+        font-weight: 700;
+        box-shadow: 0 0 0 1px #e21b22;
+    }
+
+    .mobi-cart-badge:empty,
+    .mobi-cart-badge[data-count="0"] {
+        display: none;
+    }
+
+}

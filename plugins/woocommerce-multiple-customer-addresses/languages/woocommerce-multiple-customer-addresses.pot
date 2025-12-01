@@ -1,0 +1,749 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Multiple Customer Addresses\n"
+"POT-Creation-Date: 2025-11-06 13:03+0100\n"
+"PO-Revision-Date: 2017-04-18 10:44+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: woocommerce-multiple-customer-addresses.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: classes/acf\n"
+
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:25
+msgid "Email"
+msgstr ""
+
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:31
+#: classes/com/WCMCA_Address.php:121 classes/com/WCMCA_Address.php:122
+msgid "Phone"
+msgstr ""
+
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:86
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:87
+#: classes/com/WCMCA_Address.php:68 classes/com/WCMCA_Address.php:69
+#: classes/frontend/WCMCA_Emails.php:61
+msgid "VAT Identification Number"
+msgstr ""
+
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:105
+msgid "Product addresses edit actions"
+msgstr ""
+
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:106
+msgid ""
+"In case you have enable the <strong>Shipping per product</strong> option and "
+"you want to edit the assigned address, please click the following button.<br/"
+"><br/>Before proceeding mark the order as <strong>On hold</strong> otherwise "
+"WooCommerce won't display the edit icon."
+msgstr ""
+
+#: classes/admin/WCMCA_AdminOrderDetailsPage.php:107
+msgid "Make product addresses editable"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:13
+msgid "You must use country codes. Example: IT, FR, DE"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:17
+msgid "Invalid file format. Please select a valid CSV file."
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:18
+msgid "Select a file first!"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:19
+msgid "100% done!"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:20
+msgid ""
+"Please use a fully HTML5 compliant browser. The one you are using does not "
+"allow file reading."
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:39
+msgid "CSV data import"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:41
+msgid "Instruction"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:42
+msgid "Here the list of columns that can be imported:"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:44
+msgid ""
+"Example: john@gmail.com. It is a <strong>required</strong> column and it "
+"contains the account email the customer used to register his account"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:45
+msgid ""
+"Values: <strong>billing</strong> or <strong>shipping</strong>. It is a "
+"<strong>required</strong> column and it contains the type of the address"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:49
+msgid ""
+"Values: <strong>yes</strong> or <strong>no</strong>. It set the address as "
+"the default address"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:50
+msgid ""
+"Example: <strong>Home</strong>, <strong>Office</strong>, ect. Identifier for "
+"the address"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:51
+msgid ""
+"Values: <strong>yes</strong> or <strong>no</strong>. It is an "
+"<strong>optional</strong> column. If set to yes, it will delete <strong>all "
+"addresses associated with the customer</strong>"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:56
+msgid "Select a file"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:60
+#: woocommerce-multiple-customer-addresses.php:209
+msgid "Import"
+msgstr ""
+
+#: classes/admin/WCMCA_ImportPage.php:70
+msgid "Import another"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:99 classes/com/WCMCA_Address.php:100
+msgid "Email address"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:390
+msgid ""
+"The file hasn't a valid header row, import process stopped. Please check the "
+"csv file structure."
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:411
+#, php-format
+msgid "Invalid email for row %d"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:416
+#, php-format
+msgid "You must specify the address type for row %d"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:421
+#, php-format
+msgid "Wrong type for row %d. Type must be billing or shipping"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:452
+#, php-format
+msgid "Error for row %d, error message: %s"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:452
+msgid "Cannot add address"
+msgstr ""
+
+#: classes/com/WCMCA_Address.php:531 classes/com/WCMCA_Address.php:575
+msgid "Select one"
+msgstr ""
+
+#: classes/com/WCMCA_Cart.php:96
+msgid "Handling fee"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:50
+msgid "Additional addresses"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:54
+msgid "Addresses list"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:56
+msgid "View & Edit"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:82
+msgid ""
+"This action will reload the page. Unsaved changes will be lost, proceed?"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:83
+msgid "Click to load addresses list"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:106
+msgid "Please select a regisered user."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:129
+msgid "First Name"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:130
+msgid "Last Name"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:131
+msgid "Email Address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:133
+msgid "Billing First Name"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:134
+msgid "Billing Last Name"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:135
+msgid "Biling Email Address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:137
+msgid "Registration Date"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:138
+msgid "Roles"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:142
+msgid "Role code:"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:144
+msgid "More details"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:145
+msgid "User page"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:146
+msgid "Orders list"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:168 classes/com/WCMCA_Html.php:516
+msgid "Selected addresses will be deleted, Are you sure?"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:169 classes/com/WCMCA_Html.php:518
+msgid "Address will be duplicated, are you sure?"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:170 classes/com/WCMCA_Html.php:517
+#, php-format
+msgid "All the %s addresses will be deleted, Are you sure?"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:174 classes/com/WCMCA_Html.php:529
+msgid "State"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:175 classes/com/WCMCA_Html.php:530
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:176 classes/com/WCMCA_Html.php:531
+msgid "City"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:212
+msgid "This user has no saved addresses!"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:223 classes/com/WCMCA_Html.php:695
+msgid "Add new billing address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:229
+msgid ""
+"Billing addresses limit reached! To add a new one, delete one of the "
+"existings!"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:237 classes/com/WCMCA_Html.php:698
+msgid "Add new shipping address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:243
+msgid ""
+"Shipping addresses limit reached! To add a new one, delete one of the "
+"existings!"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:295
+msgid "Please make sure to have filled all the required fields."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:296
+msgid "The entered email has not a valid format."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:297
+msgid "The entered postcode has not a valid format."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:298
+msgid "The entered phone  has not a valid format."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:315
+msgid ""
+"Identifier / Name (Examples: \"Office address,\" \"Mary Jones,\" \"MJ "
+"2145,\" etc.)"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:322
+msgid "Make this address the default shipping address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:322
+msgid "Make this address the default billing address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:354
+msgid "Select a country"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:462
+msgid "Save"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:557 classes/com/WCMCA_Html.php:725
+msgid "Select an address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:563
+msgid "Add new address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:581 classes/com/WCMCA_Html.php:664
+msgid ""
+"Item will be shipped to the billing address (or to the shipping address if "
+"you selected to ship to a different address from the billing)."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:582 classes/com/WCMCA_Html.php:665
+msgid "Pick-up in store."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:589 classes/com/WCMCA_Html.php:669
+msgid "Loading..."
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:608
+msgid "Set address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:609
+msgid "Remove address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:613
+msgid "Pick-up in store"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:624 classes/com/WCMCA_Html.php:709
+msgid "Note"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:687
+msgid "Shipping address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:722
+msgid "There are no additional addresses"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:728 classes/com/WCMCA_Html.php:758
+msgid "Shipping address used for the previous order"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:730 classes/com/WCMCA_Html.php:760
+msgid "Billing address used for the previous order"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:738
+msgid "Default"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:752
+msgid "Use the current shipping address"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:754 classes/com/WCMCA_Order.php:63
+msgid "Collect from store"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:765
+msgid "Billing addresses"
+msgstr ""
+
+#: classes/com/WCMCA_Html.php:782
+msgid "Shipping addresses"
+msgstr ""
+
+#: classes/com/WCMCA_Order.php:92 templates/order-table-item.php:71
+msgid "Notes"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v4.php:23
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v5.php:33
+msgid "Divider"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v4.php:24
+msgid "Basic"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v4.php:74
+msgid "Preview Size"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v4.php:75
+msgid "Thumbnail is advised"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v4.php:86
+msgid "Thumbnail"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v4.php:87
+msgid "Something Else"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v5.php:58
+msgid "Error! Please enter a higher value"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v5.php:93
+msgid "Custom CSS"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v5.php:99
+msgid "Instructions"
+msgstr ""
+
+#: classes/com/vendor/acf-divider-field-master/acf-divider-v5.php:100
+msgid "Divide field groups"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:37
+msgid "User Role Selector"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:38
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:39
+msgid "Choice"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:75
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:76
+msgid "Return Format"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:76
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:77
+msgid "Specify the returned value type"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:81
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:82
+msgid "Role Name"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:82
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:83
+msgid "Role Object"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:88
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:90
+msgid "Allowed Roles"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:92
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:94
+msgid "To allow all roles, select none or all of the options to the right"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:97
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:99
+msgid "Field Type"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:101
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:103
+msgid "Multiple Values"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:102
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:104
+msgid "Checkbox"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:103
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:105
+msgid "Multi Select"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:105
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:107
+msgid "Single Value"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:106
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:108
+msgid "Radio Buttons"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-field/acf-role_selector-v5.php:107
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:109
+msgid "Select"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:38
+msgid "User Role Selector (with guest)"
+msgstr ""
+
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:88
+#: classes/com/vendor/acf-role-selector-with-guest-field/acf-role_selector_with_guest-v5.php:142
+msgid "Guest"
+msgstr ""
+
+#: classes/frontend/WCMCA_MyAccountPage.php:51
+msgid "Latest Used Addresses"
+msgstr ""
+
+#: classes/frontend/WCMCA_OrderDetailsPage.php:37
+msgid "Local pickup"
+msgstr ""
+
+#: classes/frontend/WCMCA_OrderDetailsPage.php:37
+#, php-format
+msgid "Ship to: %s"
+msgstr ""
+
+#: classes/frontend/WCMCA_OrderDetailsPage.php:51
+msgid "Shipping total:"
+msgstr ""
+
+#: classes/frontend/WCMCA_OrderDetailsPage.php:89
+msgid "VAT Identification Number:"
+msgstr ""
+
+#: classes/frontend/WCMCA_OrdersListPage.php:24
+msgid "Bills to"
+msgstr ""
+
+#: classes/frontend/WCMCA_OrdersListPage.php:26
+#: templates/order-table-item.php:1
+msgid "Ships to"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:68
+#: classes/vendor/vanquish/admin/ActivationPage.php:69
+#: classes/vendor/vanquish/admin/ActivationPage.php:129
+msgid " Activator"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:109
+msgid "Purchase code is invalid!"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:110
+msgid "Buyer name is invalid!"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:111
+msgid "Item id is invalid!"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:112
+msgid ""
+"Max number of domains reached! You have to purchase a new license. The "
+"current license has been activated in the following domains: "
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:113
+#: classes/vendor/vanquish/admin/ActivationPage.php:192
+msgid "Verifing, please wait..."
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:114
+msgid ""
+"There was an error while verifing the code. Please retry in few minutes!"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:115
+msgid "Activation successfully completed!"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:116
+msgid "Buyer and Purchase code fields must be filled!"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:158
+msgid "Activation"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:175
+msgid ""
+"The plugin can be activate in only <strong>two</strong> domains and they "
+"cannot be unregistered. For each activated domain, you can reactivate "
+"<strong>unlimited</strong> times (including <strong>subdomains</strong> and "
+"<strong>subfolders</strong>). The \"localhost\" domain will not consume "
+"activations. Please enter the following data and hit the activation button"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:181
+msgid "Buyer"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:182
+msgid "Insert the Envato username used to purchase the plugin."
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:183
+msgid "Example: vanquish"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:186
+msgid "Purchase code"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:187
+msgid ""
+"Insert the purchase code. It can be downloaded from your CodeCanyon "
+"\"Downloads\" profile page."
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:188
+msgid "Example: 7d7c3rt8-f512-227c-8c98-fc53c3b212fe"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:190
+msgid "Activate"
+msgstr ""
+
+#: classes/vendor/vanquish/admin/ActivationPage.php:195
+msgid "The plugin has been successfully activated!"
+msgstr ""
+
+#: classes/vendor/vanquish/com/Updater.php:123
+msgid ""
+"An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
+"\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+msgstr ""
+
+#: classes/vendor/vanquish/com/Updater.php:130
+msgid "An unknown error occurred"
+msgstr ""
+
+#: templates/checkout-product-address.php:50 templates/my-account.php:133
+#: templates/my-account.php:140 templates/order-table-item.php:51
+msgid "Yes"
+msgstr ""
+
+#: templates/checkout-product-address.php:50 templates/my-account.php:133
+#: templates/my-account.php:140 templates/order-table-item.php:51
+msgid "No"
+msgstr ""
+
+#: templates/my-account.php:7
+msgid "Billing Addresses"
+msgstr ""
+
+#: templates/my-account.php:10
+msgid "Shipping Addresses"
+msgstr ""
+
+#: templates/my-account.php:15
+msgid "Delete selected"
+msgstr ""
+
+#: templates/my-account.php:16
+msgid "Delete all"
+msgstr ""
+
+#: templates/my-account.php:46
+msgid "Duplicate"
+msgstr ""
+
+#: templates/my-account.php:48
+msgid "Edit"
+msgstr ""
+
+#: templates/my-account.php:50
+msgid "Delete"
+msgstr ""
+
+#: templates/my-account.php:59
+msgid "Default billing address"
+msgstr ""
+
+#: templates/my-account.php:61
+msgid "Default shipping address"
+msgstr ""
+
+#: templates/my-account.php:67
+msgid "Load"
+msgstr ""
+
+#: woocommerce-multiple-customer-addresses.php:61
+#, php-format
+msgid ""
+"To complete the <span style=\"color:#96588a; font-weight:bold;\">%s</span> "
+"plugin activation, you must verify your purchase license. Click <a "
+"href=\"%s\">here</a> to verify it."
+msgstr ""
+
+#: woocommerce-multiple-customer-addresses.php:208
+msgid "Multiple Customer Addresses"
+msgstr ""
+
+#: woocommerce-multiple-customer-addresses.php:221
+msgid "Are you sure?"
+msgstr ""
+
+#: woocommerce-multiple-customer-addresses.php:221
+msgid "Reset activation"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Multiple Customer Addresses & Shipping"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Manage multiple customers shipping and billing addresses and multiple "
+"shippings"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Lagudi Domenico"
+msgstr ""

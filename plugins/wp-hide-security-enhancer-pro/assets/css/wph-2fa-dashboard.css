@@ -1,0 +1,9 @@
+._2fa-options-table label {font-weight: 700}
+._2fa_apps_icons {padding: 20px 0}
+._2fa_apps_icons img { display: inine; max-height: 45px; margin: 0 10px; border-radius: 50%;}
+._2fa-options-table .notice {padding: 10px;display: inline-block;}
+._2fa-options-table .notice.error { color: red}
+._2fa-info.important {color:#d63638}
+#recovery-code-list {padding: 10px 20px;  margin-bottom: 10px;  border: 1px dashed black;  display: inline-block;}
+#_2fa_app_code {letter-spacing: .60em; padding-left: 20px; padding-right: 20px; width: 185px;}
+#_2fa_app_code::placeholder {color:#c6c6c6; font-weight: lighter;}

@@ -1,0 +1,373 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-12-22T04:16:56+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: product-promotion-badge\n"
+
+#: plugin/load.php:775
+#: plugin/load.php:776
+#: plugin/build/block-extension/index.js:1
+#: plugin/build/settings-page/index.js:4
+msgid "Promotion badges"
+msgstr ""
+
+#: plugin/slots.php:12
+msgid "Available Slots"
+msgstr ""
+
+#: plugin/slots.php:18
+msgid "The human-readable label for the slot."
+msgstr ""
+
+#: plugin/slots.php:22
+msgid "The identifier for the slot."
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Allow rendering badges"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Choose the way to render badges on this block."
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Auto"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Allow"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Disallow"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Slot"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Enter a name to define the area where badges will be inserted."
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "Hide the block if there are no badges"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+msgid "The block will be hidden if no badges are displayed in it."
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+#: plugin/build/settings-page/index.js:1
+msgid "Stock status"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:1
+#: plugin/build/settings-page/index.js:1
+msgid "Change publish date"
+msgstr ""
+
+#. translators: If using a space between 'g:i' and 'a', use a non-breaking space.
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Date"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Popup Title"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Unset"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Close"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Visibility conditions"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Enable conditional visibility"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "The block will be shown when the conditions are met."
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Sale status"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Any"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "On-sale"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Not on-sale"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Featured product"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Featured  only"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+#: plugin/build/settings-page/index.js:4
+msgid "Not featured"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Date from"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Select a date to begin displaying the badge."
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Set date"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Date to"
+msgstr ""
+
+#: plugin/build/block-extension/index.js:4
+msgid "Select a date to stop displaying the badge."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:1
+msgid "Alignment"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Products"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Slots"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enabled"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Image"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Conditions"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Locations"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Edit image"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Select image"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Choose from preset"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Badge presets"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Name"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Image alignment"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter an image dimension. Leave blank for automated sizing."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Width"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Height"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter an offset number to adjust the position of the badge on the axis."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "X-Axis offset"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Y-Axis offset"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Order"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter an index number to reorder the image along the z-axis."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Specific products"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Featured only"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Low stock status"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Low stock"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Not low stock"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Limit purchase"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Limit purchases to 1 item per order"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "No limit"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Coupon"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter a coupon code. The badge will be able to show if the coupon is valid for the product."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Date (Start - End)"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Select a date range to display the badge."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Start date"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "End date"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Stock (min - max)"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter a stock quantity. Leave blank for no conditions."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "% Discount (min - max)"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter a percentage of discounting. Leave blank for no conditions."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Rating (min - max)"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Enter a product rating score (0 - 5). Leave blank for no conditions."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Show on product image"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Consider showing the badge on all product images."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Show on a single product page"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Consider showing the badge on a single product page by default, including gallery blocks in product pages."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Show on product image block"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Consider showing the badge on all product image blocks by default."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Show on these slots"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Specify a slot to show the badge"
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "No promotion badges created."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Settings saved."
+msgstr ""
+
+#: plugin/build/settings-page/index.js:4
+msgid "Save"
+msgstr ""

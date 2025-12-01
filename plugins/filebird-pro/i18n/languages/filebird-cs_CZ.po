@@ -1,0 +1,615 @@
+# Translation of Plugins - FileBird &#8211; WordPress Media Library Folders &amp; File Manager - Development (trunk) in Czech
+# This file is distributed under the same license as the Plugins - FileBird &#8211; WordPress Media Library Folders &amp; File Manager - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-09-04 10:50:49+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n >= 2 && n <= 4) ? 1 : 2);\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: cs_CZ\n"
+"Project-Id-Version: Plugins - FileBird &#8211; WordPress Media Library Folders &amp; File Manager - Development (trunk)\n"
+
+#: includes/Support/WPML.php:75
+msgid "Done!"
+msgstr "Hotovo!"
+
+#: includes/I18n.php:265
+msgid "Sync"
+msgstr "Synchronizace"
+
+#: includes/I18n.php:264
+msgid "Sync WPML"
+msgstr "Synchronizace WPML"
+
+#: includes/I18n.php:259
+msgid "Learn more"
+msgstr "Zjistit více"
+
+#: includes/I18n.php:168
+msgid "All folders"
+msgstr "Všechny složky"
+
+#: includes/I18n.php:160
+msgid "Processing..."
+msgstr "Zpracovává se..."
+
+#: includes/I18n.php:195
+msgid "Attachment Size"
+msgstr "Velikost přílohy"
+
+#: includes/I18n.php:253
+msgid "VIP live chat support"
+msgstr "Živá podpora na chatu"
+
+#: includes/I18n.php:248
+msgid "Advanced third-party compatibility"
+msgstr "Rozšířená kompatibilita s třetími stranami"
+
+#: includes/I18n.php:284
+msgid "Lifetime license"
+msgstr "Doživotní licence"
+
+#: includes/I18n.php:120
+msgid "Upgrade to FileBird Pro"
+msgstr "Navýšit na FileBird Pro"
+
+#: includes/I18n.php:45
+msgid "Change Color"
+msgstr "Změna barvy"
+
+#: includes/I18n.php:285
+msgid "PRO"
+msgstr "PRO"
+
+#: includes/I18n.php:86
+msgid "Size Descending"
+msgstr "Velikost sestupně"
+
+#: includes/I18n.php:85
+msgid "Size Ascending"
+msgstr "Velikost vzsetupně"
+
+#: includes/I18n.php:221
+msgid "Export Now"
+msgstr "Exportovat nyní"
+
+#: includes/I18n.php:220
+msgid "Export CSV"
+msgstr "Exportovat do CSV"
+
+#: includes/I18n.php:281 views/settings/header.php:20
+msgid "Import/Export"
+msgstr "Import/Export"
+
+#: includes/I18n.php:280 views/settings/header.php:15
+msgid "Tools"
+msgstr "Nástroje"
+
+#: includes/Classes/Core.php:254
+msgid "FileBird folder:"
+msgstr "FileBird složka:"
+
+#: includes/I18n.php:148
+msgid "Uploaded"
+msgstr "Nahráno"
+
+#: includes/I18n.php:183 blocks/filebird-gallery/dist/blocks.build.js:1
+msgid "Descending"
+msgstr "Sestupně"
+
+#: includes/I18n.php:182 blocks/filebird-gallery/dist/blocks.build.js:1
+msgid "Ascending"
+msgstr "Vzestupně"
+
+#: includes/I18n.php:147
+msgid "Expand"
+msgstr "Rozbalit"
+
+#: includes/I18n.php:146
+msgid "Collapse"
+msgstr "Sbalit"
+
+#: includes/I18n.php:138
+msgid "Failed to save settings. Please try again!"
+msgstr "Nastavení se nepodařilo uložit. Zkuste to prosím ještě jednou."
+
+#: includes/I18n.php:137
+msgid "Settings saved"
+msgstr "Nastavení uloženo"
+
+#: includes/I18n.php:134
+msgid "Select a default startup folder:"
+msgstr "Vyberte výchozí počáteční adresář:"
+
+#: includes/I18n.php:131
+msgid "Can not active your License, please try again."
+msgstr "Vaší licenci se nepodařilo aktivovat, zkuste to prosím ještě jednou."
+
+#: includes/I18n.php:130
+msgid "Please enter your Personal Access Token or get one."
+msgstr "Prosím zadejte Vás osobní přístupový klíč a nebo jej vygenerujte."
+
+#: includes/Controller/Api.php:68 includes/Controller/Api.php:99
+msgid "folder_id is missing."
+msgstr "Složka folder_id někam zmizela"
+
+#: includes/Support/ACF/acf-field-filebird-v4.php:20
+#: includes/Support/ACF/acf-field-filebird-v5.php:19
+msgid "FileBird Folder"
+msgstr "FileBird složka"
+
+#: includes/I18n.php:129
+msgid "Please enter your Purchase Code."
+msgstr "Prosím zadejte Váš kód objednávky."
+
+#: includes/Controller/Api.php:113
+msgid "Required fields are missing."
+msgstr "Požadované pole nejsou vyplněny."
+
+#: includes/I18n.php:128
+msgid "Import failed. Please try again or <a href=\"https://ninjateam.org/support\" target=\"_blank\">contact our support</a>."
+msgstr "Import se nepovedl. Zkuste to prosím znovu nebo <a href=\"https://ninjateam.org/support\" target=\"_blank\">kontaktujte naši podporu</a>."
+
+#: includes/I18n.php:123
+msgid "Go To Media"
+msgstr "Přejděte do menu Média"
+
+#: includes/I18n.php:64
+msgid "Are you sure you want to delete this folder? Those files will be moved to <strong>Uncategorized</strong> folder."
+msgstr "Jste si jistí, že chcete smazat tento adresář? Soubory budou přesunuté do složky <strong>Nezařazené</strong>"
+
+#: includes/I18n.php:55
+msgid "You are editing another folder! Please complete the task first!"
+msgstr "Upravujete jinou složku! Nejdřív prosím dokončete úlohu!"
+
+#: includes/Classes/Convert.php:117
+msgid "Successfully wiped."
+msgstr "Úspěšně vyčištěno."
+
+#: views/notices/html-notice-update-database.php:23
+msgid "You are using the new FileBird 4. Please update database to view your folders correctly."
+msgstr "Používáte novou verzi FileBird 4. Aktualizujte prosím databázi, aby se vaše složky zobrazovaly správně."
+
+#: includes/Controller/FolderController.php:289
+msgid "Please choose folder"
+msgstr "Vyberte prosím složku"
+
+#: includes/I18n.php:126
+msgid "Import now"
+msgstr "Importovat teď"
+
+#: includes/I18n.php:125
+msgid "You're using the new FileBird 4. Please import database to view your folders correctly."
+msgstr "Používáte novou verzi FileBird 4. Chcete-li správně zobrazit své složky, importujte databázi."
+
+#: includes/I18n.php:124 views/notices/html-notice-update-database.php:19
+msgid "FileBird 4 Update Required"
+msgstr "Aktualizace na FileBird 4 je vyžadována"
+
+#: views/notices/html-notice-update-database.php:29
+msgid "Update now"
+msgstr "Aktualizovat nyní"
+
+#: includes/I18n.php:122
+msgid "Congratulations. Successfully imported!"
+msgstr "Gratulujeme. Import proběhl v pořádku!"
+
+#: includes/I18n.php:121
+msgid "Success."
+msgstr "Úspěch."
+
+#: includes/I18n.php:87
+msgid "Skip & Deactivate"
+msgstr "Přeskočit & Deaktivovat"
+
+#: includes/Controller/SyncController.php:152
+msgid "folders"
+msgstr "složky"
+
+#: includes/I18n.php:194
+msgid "Generate"
+msgstr "Generovat"
+
+#: includes/Classes/Core.php:282
+msgid "Choose folder: "
+msgstr "Zvolit složku:"
+
+#: includes/I18n.php:207
+msgid "Clear"
+msgstr "Zrušit"
+
+#: includes/I18n.php:192
+msgid "Import from old version"
+msgstr "Import ze staré verze"
+
+#: includes/I18n.php:119
+msgid "Including Divi, Fusion, Thrive Architect, WPBakery..."
+msgstr "Včetně Divi, Fusion, Thrive Architect, WPBakery..."
+
+#: includes/I18n.php:104
+msgid "Sorry to see you walk away, please share why you want to deactivate FileBird?"
+msgstr "Je nám líto, že odcházíte. Můžete nám sdělit, proč jste se rozhodli deaktivovat FileBird?"
+
+#: includes/I18n.php:103
+msgid "Want a better FileBird?"
+msgstr "Chcete lepší FileBird?"
+
+#: includes/I18n.php:102
+msgid "Please share your thoughts..."
+msgstr "Podělte se prosím o své myšlenky..."
+
+#: includes/I18n.php:101
+msgid "Please <a target=\"_blank\" href=\"https://ninjateam.org/support/\">ask for support here</a>, we will fix it for you."
+msgstr "Prosím <a target=\"_blank\" href=\"https://ninjateam.org/support/\">požádejte o podporu zde</a>, rádi to pro vás vyřešíme."
+
+#: includes/I18n.php:98
+msgid "Which features please?"
+msgstr "Jaké funkce prosím?"
+
+#: includes/I18n.php:95
+msgid "This is just temporary, I will use it again."
+msgstr "Je to jen dočasné, budu jej používat i nadále."
+
+#: includes/I18n.php:93
+msgid "Found another plugin that works better."
+msgstr "Našel jsem jiný plugin, který pracuje lépe."
+
+#: includes/I18n.php:92
+msgid "Not work with my theme or other plugins."
+msgstr "Není kompatibilní s mojí šablonou nebo dalšími pluginy."
+
+#: includes/I18n.php:91
+msgid "It doesn't have the features I'm looking for."
+msgstr "Nemá funkce, které jsem hledal."
+
+#: includes/I18n.php:89
+msgid "Thank you so much!"
+msgstr "Děkujeme mnohokrát!"
+
+#: includes/I18n.php:88
+msgid "Deactivate"
+msgstr "Deaktivovat"
+
+#: includes/I18n.php:106
+msgid ""
+"<p>FileBird Lite version supports up to 10 folders.<br>Please upgrade to have unlimited folders and other premium features!</p>\n"
+"        <ul class=\"fbv-in_feature\">\n"
+"          <li>Unlimited Folders</li>\n"
+"          <li>Sort Files / Folders</li>\n"
+"          <li>Compatible with Premium Page Builders <span id=\"fbv-pagebuilder\" class=\"njn-i\"><svg viewBox=\"0 0 192 512\"><path fill=\"currentColor\" d=\"M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z\"></path></svg></span></li>\n"
+"          <li>Get Fast Updates</li>\n"
+"          <li>Premium Technical Support</li>\n"
+"          <li>One-time Payment</li>\n"
+"          <li>30-day Refund Guarantee</li>\n"
+"        </ul>"
+msgstr ""
+"<p>FileBird Lite má podporu maximálně 10 složek.<br>Pokud nechcete být maximálním počtem složek omezování tak prosím přejděte na FileBird Pro a získáte další prémiové funkce!</p>\n"
+"<ul class=\"fbv-in_feature\">\n"
+"  <li>Neomezený počet složek</li>\n"
+"  <li>Třídění souborů / složek</li>\n"
+"  <li>Kompatibilta s prémiovými 'Page Builders' <span id=\"fbv-pagebuilder\" class=\"njn-i\"><svg viewBox=\"0 0 192 512\"><path fill=\"currentColor\" d=\"M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z\"></path></svg></span></li>\n"
+"  <li>Aktualizace získáte jako první</li>\n"
+"  <li>Prioritní technická podpora</li>\n"
+"  <li>Jednorázová platba</li>\n"
+"  <li>Garance 30 dní na vrácení peněz</li>\n"
+"</ul>"
+
+#: includes/Admin/Settings.php:133
+msgid "Documentation"
+msgstr "Dokumentace"
+
+#: includes/Classes/Convert.php:139 includes/I18n.php:164
+msgid "Please try again."
+msgstr "Zkuste to znovu."
+
+#: includes/Classes/Convert.php:97
+msgid "success"
+msgstr "Hotovo"
+
+#: includes/Controller/Api.php:21
+msgid "Invalid action"
+msgstr "Neplatná akce"
+
+#: includes/Classes/Core.php:156 includes/Model/Folder.php:41
+msgid "All Folders"
+msgstr "Všechny složky"
+
+#: includes/I18n.php:74
+msgid "By Modified"
+msgstr "Podle data změny"
+
+#: includes/I18n.php:73
+msgid "Date Descending"
+msgstr "Datum sestupně"
+
+#: includes/I18n.php:72
+msgid "Date Ascending"
+msgstr "Datum vzestupně"
+
+#: includes/I18n.php:71
+msgid "By Date"
+msgstr "Podle data"
+
+#: includes/I18n.php:70
+msgid "Name Descending"
+msgstr "Název sestupně"
+
+#: includes/I18n.php:69
+msgid "Name Ascending"
+msgstr "Název vzestupně"
+
+#: includes/I18n.php:68
+msgid "By Name"
+msgstr "Podle názvu"
+
+#: includes/I18n.php:67
+msgid "Reset"
+msgstr "Reset"
+
+#: includes/I18n.php:66
+msgid "Sort Descending"
+msgstr "Seřadit sestupně"
+
+#: includes/I18n.php:65
+msgid "Sort Ascending"
+msgstr "Seřadit vzestupně"
+
+#: includes/I18n.php:59
+msgid "Bulk Select"
+msgstr "Hromadné úpravy"
+
+#: includes/I18n.php:58
+msgid "Sort Files"
+msgstr "Třídění souborů"
+
+#: includes/I18n.php:57
+msgid "Delete Folder"
+msgstr "Smazat složku"
+
+#: includes/I18n.php:56
+msgid "Sort Folders"
+msgstr "Třídění složek"
+
+#: includes/I18n.php:54
+msgid "Those files will be moved to <strong>Uncategorized</strong> folder."
+msgstr "Soubory budou přesunuty do složky <strong>Nezařazené</strong>."
+
+#. Plugin URI of the plugin
+#: filebird.php
+msgid "https://ninjateam.org/wordpress-media-library-folders/"
+msgstr "https://ninjateam.org/wordpress-media-library-folders/"
+
+#: includes/I18n.php:80
+msgid "Author Descending"
+msgstr "Autor sestupně"
+
+#: includes/I18n.php:79
+msgid "Author Ascending"
+msgstr "Autor vzestupně"
+
+#: includes/I18n.php:77
+msgid "By Author"
+msgstr "Podle autora"
+
+#: includes/I18n.php:76
+msgid "Modified Descending"
+msgstr "Datum změny sestupně"
+
+#: includes/I18n.php:75
+msgid "Modified Ascending"
+msgstr "Datum změny vzestupně"
+
+#: includes/I18n.php:52
+msgid "Are you sure you want to delete"
+msgstr "Jste si jistí, že to chcete smazat"
+
+#: includes/I18n.php:51
+msgid "Enter folder name..."
+msgstr "Zadejte název složky..."
+
+#: includes/I18n.php:49
+msgid "Folder name..."
+msgstr "Název složky..."
+
+#: includes/I18n.php:46
+msgid "Save"
+msgstr "Uložit"
+
+#: includes/I18n.php:44
+msgid "Can't delete!"
+msgstr "Nelze smazat!"
+
+#: includes/I18n.php:43
+msgid "Successfully deleted!"
+msgstr "Úspěšně smazáno!"
+
+#: includes/I18n.php:39
+msgid "Successfully moved"
+msgstr "Úspěšně přesunuto"
+
+#: includes/I18n.php:34
+msgid "Paste"
+msgstr "Vložit"
+
+#: includes/I18n.php:33
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: includes/I18n.php:30
+msgid "Ok"
+msgstr "Ok"
+
+#: includes/Controller/FolderController.php:250
+msgid "Can't delete folder, please try again later"
+msgstr "Složku nelze smazat, zkuste to prosím později"
+
+#: includes/Classes/Convert.php:99
+msgid "validation failed"
+msgstr "ověření se nezdařilo"
+
+#: includes/Controller/Api.php:134 includes/Controller/FolderController.php:69
+#: includes/Controller/FolderController.php:93
+#: includes/Controller/FolderController.php:274
+msgid "Validation failed"
+msgstr "Ověření se nezdařilo"
+
+#: includes/Classes/Review.php:71
+msgid "Later"
+msgstr "Později"
+
+#: includes/Classes/Review.php:70
+msgid "Rate now"
+msgstr "Ohodnotit teď"
+
+#: includes/Classes/Convert.php:161
+msgid "Success"
+msgstr "Úspěch"
+
+#: includes/I18n.php:219
+msgid "Import"
+msgstr "Importovat"
+
+#: includes/Admin/Settings.php:144 includes/I18n.php:132
+#: views/settings/header.php:10
+msgid "Settings"
+msgstr "Nastavení"
+
+#: includes/Classes/Review.php:72 includes/I18n.php:156
+msgid "No, thanks"
+msgstr "Děkuji nechci"
+
+#: includes/I18n.php:100
+msgid "Please read FileBird documentation <a target=\"_blank\" href=\"https://ninjateam.gitbook.io/filebird/\">here</a> or <a target=\"_blank\" href=\"https://ninjateam.org/support/\">chat with us</a> if you need help"
+msgstr "Pokud potřebujete pomoc, přečtěte si prosím dokumentaci k pluginu FileBird <a target=\"_blank\" href=\"https://ninjateam.gitbook.io/filebird/\">zde</a> nebo <a target=\"_blank\" href=\"https://ninjateam.org/support/\">nám napište</a>."
+
+#: includes/Classes/Review.php:66
+msgid "We will be forever grateful. Thank you in advance ;)"
+msgstr "Budeme vám navždy vděční. Děkujeme předem ;)"
+
+#: includes/Classes/Review.php:63
+msgid "Thank you for choosing FileBird. We hope you love it. Could you take a couple of seconds posting a nice review to share your happy experience?"
+msgstr "Děkujeme, že jste si vybrali FileBird. Doufáme, že se vám líbí. Mohli byste věnovat pár vteřin na zveřejnění pěkné recenze a podělit se o svoje zážitky?"
+
+#: includes/Classes/Review.php:61
+msgid "Give FileBird a review"
+msgstr "Ohodnoťte FileBird"
+
+#: includes/Controller/Import/Methods/ImportMethod.php:53
+#: includes/Controller/SyncController.php:74
+msgid "Congratulations! We imported successfully %d folders into <strong>FileBird.</strong>"
+msgstr "Výborně! Úspěšně jsme importovali %d složek do <strong>FileBird.</strong>"
+
+#: includes/Admin/Settings.php:44 includes/Admin/Settings.php:45
+msgid "FileBird"
+msgstr "FileBird"
+
+#: includes/Admin/Settings.php:119 includes/I18n.php:133
+msgid "FileBird Settings"
+msgstr "Nastavení FileBird"
+
+#: includes/I18n.php:143
+msgid "Go Pro"
+msgstr "Přejděte na PRO verzi"
+
+#: includes/I18n.php:96
+msgid "Other"
+msgstr "Ostatní"
+
+#: includes/I18n.php:94
+msgid "Don't know how to use it."
+msgstr "Nevím, jak to použít"
+
+#: includes/I18n.php:99
+msgid "Please tell us which one"
+msgstr "Prosím, řekněte nám který"
+
+#: views/notices/html-notice-first-folder.php:13
+msgid "Get Started"
+msgstr "Začněte"
+
+#: views/notices/html-notice-first-folder.php:11
+msgid "Create your first folder for media library now."
+msgstr "Vytvořte si váš první adresář v knihovně médií"
+
+#: includes/I18n.php:48 blocks/filebird-gallery/dist/blocks.build.js:1
+msgid "Folder"
+msgstr "Adresář"
+
+#. Description of the plugin
+#: filebird.php
+msgid "Organize thousands of WordPress media files into folders/ categories at ease."
+msgstr "Snadno organizujte tisíce WordPress mediálních souborů do adresářů/kategorií"
+
+#: includes/I18n.php:31
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: includes/I18n.php:179
+msgid "files"
+msgstr "soubory"
+
+#. Author URI of the plugin
+#: filebird.php
+msgid "https://ninjateam.org"
+msgstr "https://ninjateam.org"
+
+#. Author of the plugin
+#: filebird.php
+msgid "Ninja Team"
+msgstr "Ninja Team"
+
+#. Plugin Name of the plugin
+#: filebird.php
+msgid "FileBird Lite"
+msgstr "FileBird Lite"
+
+#: includes/I18n.php:151
+msgid "Move"
+msgstr "Přesunout"
+
+#: includes/I18n.php:53
+msgid "Are you sure?"
+msgstr "Jste si jistí?"
+
+#: includes/I18n.php:105
+msgid "Folder Limit Reached"
+msgstr "Dosažený limit složky"
+
+#: includes/Classes/Core.php:160 includes/Classes/Core.php:246
+#: includes/I18n.php:61 includes/Model/Folder.php:45
+msgid "Uncategorized"
+msgstr "Nezařazené"
+
+#: includes/I18n.php:60
+msgid "All Files"
+msgstr "Všechny soubory"
+
+#: includes/I18n.php:28
+msgid "Delete"
+msgstr "Smazat"
+
+#: includes/I18n.php:63
+msgid "Rename"
+msgstr "Přejmenovat"
+
+#: includes/I18n.php:27
+msgid "New Folder"
+msgstr "Nová složka"
+
+#: includes/I18n.php:29 includes/I18n.php:50
+msgid "Folders"
+msgstr "Složky"
+
+#: includes/I18n.php:153
+msgid "items"
+msgstr "Položky"
+
+#: includes/I18n.php:152
+msgid "item"
+msgstr "Položka"
+
+#: includes/I18n.php:26
+msgid "No media files found."
+msgstr "Nic nenalezeno."

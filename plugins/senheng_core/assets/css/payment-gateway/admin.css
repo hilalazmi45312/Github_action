@@ -1,0 +1,838 @@
+/**
+ * Payment Gateway Admin Styles
+ * 
+ * @package Senheng_Core
+ * @version 1.0.0
+ * @author Senheng Core Team
+ */
+
+/* Payment Gateway Container */
+.payment-gateway-container {
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+/* Header Section */
+.payment-gateway-header {
+    background: #fff;
+    padding: 25px;
+    border: 1px solid #ccd0d4;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.payment-gateway-header h2 {
+    margin: 0 0 10px 0;
+    color: #23282d;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.payment-gateway-header p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Form Sections */
+.payment-gateway-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.payment-gateway-section h3 {
+    margin: 0;
+    padding: 20px 25px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #e5e5e5;
+    color: #23282d;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 6px 6px 0 0;
+}
+
+.payment-gateway-section .form-table {
+    margin: 0;
+    padding: 25px;
+}
+
+.payment-gateway-section .form-table th {
+    width: 200px;
+    padding: 15px 20px 15px 0;
+    vertical-align: top;
+}
+
+.payment-gateway-section .form-table td {
+    padding: 15px 0;
+}
+
+/* Custom Notification System */
+.senheng-notification {
+    margin: 20px 0;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    animation: notificationSlideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: top;
+}
+
+.senheng-notification-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    position: relative;
+}
+
+.senheng-notification-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    animation: iconBounce 0.8s ease-out 0.2s both;
+}
+
+.senheng-notification-success .senheng-notification-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.senheng-notification-error .senheng-notification-icon {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.senheng-notification-message {
+    flex: 1;
+    min-width: 0;
+}
+
+.senheng-notification-message h4 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.senheng-notification-message p {
+    margin: 0;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.senheng-notification-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.senheng-notification:hover .senheng-notification-close {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.senheng-notification-close:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #374151;
+    transform: scale(1.1);
+}
+
+/* Success Notification Specific */
+.senheng-notification-success {
+    background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    border-left: 4px solid #10b981;
+}
+
+/* Error Notification Specific */
+.senheng-notification-error {
+    background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 100%);
+    border-left: 4px solid #ef4444;
+}
+
+/* Animations */
+@keyframes notificationSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes iconBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-180deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes successShine {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes errorShine {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Auto-hide animation */
+.senheng-notification.hiding {
+    animation: notificationSlideOut 0.4s ease-in forwards;
+}
+
+@keyframes notificationSlideOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .senheng-notification {
+        margin: 15px 0;
+    }
+    
+    .senheng-notification-content {
+        padding: 16px;
+    }
+    
+    .senheng-notification-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 12px;
+    }
+    
+    .senheng-notification-message h4 {
+        font-size: 16px;
+    }
+    
+    .senheng-notification-message p {
+        font-size: 13px;
+    }
+}
+
+/* Form Elements */
+.payment-gateway-form input[type="text"],
+.payment-gateway-form input[type="password"],
+.payment-gateway-form input[type="url"],
+.payment-gateway-form select,
+.payment-gateway-form textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.payment-gateway-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.payment-gateway-form .description {
+    margin-top: 5px;
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Field Groups */
+.field-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.field-group input[type="text"] {
+    max-width: 150px;
+}
+
+/* URL Display Fields */
+.url-display {
+    background: #f9f9f9;
+    padding: 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    word-break: break-all;
+    margin-bottom: 5px;
+}
+
+/* Copy Button */
+.copy-button {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.copy-button:hover {
+    background: #005a87;
+}
+
+.copy-button.copied {
+    background: #46b450;
+}
+
+/* Environment Toggle */
+.environment-toggle {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.environment-toggle label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Test Info Box */
+.test-info-box {
+    background: #e8f4fd;
+    border: 1px solid #1e8cbe;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.test-info-box h4 {
+    margin: 0 0 15px 0;
+    color: #1e8cbe;
+    font-size: 16px;
+}
+
+.test-info-box .test-data {
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.test-info-box .note {
+    font-style: italic;
+    color: #666;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+/* Action Buttons */
+.payment-gateway-actions {
+    text-align: right;
+    padding: 20px 0;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 30px;
+}
+
+.payment-gateway-actions .button-primary {
+    margin-left: 10px;
+}
+
+/* Success Messages */
+.payment-gateway-success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Error Messages */
+.payment-gateway-error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .payment-gateway-container {
+        margin: 10px;
+    }
+    
+    .payment-gateway-header,
+    .payment-gateway-section {
+        margin-bottom: 15px;
+    }
+    
+    .payment-gateway-header,
+    .payment-gateway-section .form-table {
+        padding: 15px;
+    }
+    
+    .payment-gateway-section .form-table th {
+        width: 100%;
+        display: block;
+        padding-bottom: 5px;
+    }
+    
+    .payment-gateway-section .form-table td {
+        display: block;
+        padding-top: 5px;
+    }
+    
+    .field-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .payment-gateway-form input[type="text"],
+    .payment-gateway-form input[type="password"],
+    .payment-gateway-form input[type="url"],
+    .payment-gateway-form select,
+    .payment-gateway-form textarea {
+        max-width: 100%;
+    }
+}
+
+/* New Payment Options Styles */
+.payment-providers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.payment-providers-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.business-location {
+    color: #666;
+    font-size: 14px;
+}
+
+.payment-providers-container {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.payment-provider-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.payment-provider-item:hover {
+    background-color: #f9f9f9;
+}
+
+.payment-provider-handle {
+    color: #ccc;
+    margin-right: 12px;
+    cursor: grab;
+}
+
+.payment-provider-icon {
+    margin-right: 16px;
+}
+
+.provider-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+}
+
+.provider-logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: contain;
+    display: block;
+}
+
+.ipay88-logo {
+    background: linear-gradient(135deg, #FF6B35, #F7931E);
+}
+
+.payment-provider-details {
+    flex: 1;
+}
+
+.payment-provider-details h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.payment-provider-details p {
+    margin: 0;
+    color: #666;    
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 2.5px
+}
+
+.official-badge {
+    background: #1e8cbe;
+    color: white;
+    font-size: 10px;
+    font-weight: normal;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+}
+
+.payment-provider-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 16px;
+}
+
+.status-enabled {
+    color: #46b450;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-disabled {
+    color: #dc3232;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.payment-provider-menu {
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+}
+
+/* Gateway Configuration Styles */
+.gateway-header {
+    margin-bottom: 20px;
+}
+
+.back-link {
+    color: #1e8cbe;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.gateway-config-container {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+.gateway-config-header {
+    margin-bottom: 24px;
+}
+
+.gateway-config-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.gateway-config-header p {
+    margin: 0;
+    color: #666;
+}
+
+.config-section {
+    margin-bottom: 24px;
+}
+
+.config-enable {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: #1e8cbe;
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+.toggle-label {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.config-field {
+    margin-bottom: 20px;
+}
+
+.config-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.config-field input,
+.config-field select,
+.config-field textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.config-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.config-field .description {
+    font-size: 13px;
+    color: #666;
+    margin: 4px 0 0 0;
+    font-style: italic;
+}
+
+.url-field {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.url-field input {
+    flex: 1;
+}
+
+.copy-btn, .copy-url-btn {
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    margin-left: 8px !important;
+}
+
+.copy-url-btn.copied {
+    background-color: #46b450 !important;
+    color: white !important;
+    border-color: #46b450 !important;
+    transition: all 0.3s ease !important;
+}
+
+.copy-url-btn.error {
+    background-color: #dc3232 !important;
+    color: white !important;
+    border-color: #dc3232 !important;
+    transition: all 0.3s ease !important;
+}
+
+.copy-url-btn {
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+.copy-url-btn:hover {
+    background-color: #0073aa !important;
+    color: white !important;
+    border-color: #0073aa !important;
+}
+
+.test-info-box {
+    background: #e8f4fd;
+    border: 1px solid #1e8cbe;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.test-info-box h4 {
+    margin: 0 0 12px 0;
+    color: #1e8cbe;
+    font-size: 16px;
+}
+
+.test-info-box p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.test-info-box .note {
+    font-style: italic;
+    color: #666;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.config-actions {
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 12px;
+}
+
+.config-section h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 24px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .payment-providers-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .payment-provider-item {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .payment-provider-actions {
+        margin-right: 0;
+    }
+    
+    .gateway-config-container {
+        padding: 16px;
+        margin: 10px 0;
+    }
+    
+    .config-field input,
+    .config-field select,
+    .config-field textarea {
+        max-width: 100%;
+    }
+    
+    .url-field {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .copy-btn, .copy-url-btn {
+        align-self: flex-start;
+        margin-left: 0;
+        margin-top: 4px;
+    }
+}
