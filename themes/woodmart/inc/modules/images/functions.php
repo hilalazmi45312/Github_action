@@ -74,9 +74,10 @@ if ( ! function_exists( 'woodmart_otf_get_image_html' ) ) {
 			add_filter( 'image_downsize', 'gambit_otf_regen_thumbs_media_downsize', 10, 3 );
 		}
 
-		$cache_key = 'woodmart_image_html_' . md5( serialize( array( $image_id, $size, $attr ) ) );
+        // $image_html = wp_get_attachment_image( $image_id, $size, false, $attr );
 
         // Custom code suggestion from WPVIP
+		$cache_key = 'woodmart_image_html_' . md5( serialize( array( $image_id, $size, $attr ) ) );
         $image_html = wp_cache_get( $cache_key, 'woodmart_images' );
 		if ( false === $image_html ) {
 			$image_html = wp_get_attachment_image( $image_id, $size, false, $attr );
