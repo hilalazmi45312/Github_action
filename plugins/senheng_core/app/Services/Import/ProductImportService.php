@@ -407,6 +407,7 @@ class ProductImportService
         $mappedStatus = $this->resolvePostStatus($r);
         if ($mappedStatus) {
             $product->set_status($mappedStatus);
+            Logger::info($this->logFile, "Product status updated to '$mappedStatus'");
         }
 
         try {
@@ -1149,11 +1150,15 @@ class ProductImportService
 
         $this->applyCommonFields($var, $r);
         $mappedStatus = $this->resolvePostStatus($r);
-        if (!$this->importNewOnly && $mappedStatus) {
+        
+        // If we have a status from CSV, update the PARENT product's status
+        if ($mappedStatus && $parentId) {
             $parentProduct = wc_get_product($parentId);
+            // Only update if different to avoid unnecessary saves
             if ($parentProduct && $parentProduct->get_status() !== $mappedStatus) {
                 $parentProduct->set_status($mappedStatus);
                 $parentProduct->save();
+                Logger::info($this->logFile, "Parent Product (ID: $parentId) status updated to '$mappedStatus' from variation row");
             }
         }
 
