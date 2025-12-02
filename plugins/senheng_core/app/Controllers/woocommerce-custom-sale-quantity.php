@@ -36,7 +36,7 @@ add_action( 'woocommerce_process_product_meta', function ( $post_id ) {
 	if ( isset( $_POST['_sales_quantity'] ) ) {
 		update_post_meta( $post_id, '_sales_quantity', intval( $_POST['_sales_quantity'] ) );
 	}
-	reset_sale_price_if_empty( $post_id );
+	// reset_sale_price_if_empty( $post_id ); // Disabled to prevent clearing sale price
 });
 
 // --- Variations: Add & Save Sale Quantity ---
@@ -58,13 +58,15 @@ add_action( 'woocommerce_variation_options_inventory', function ( $loop, $variat
 add_action( 'woocommerce_save_product_variation', function ( $variation_id ) {
 	$sale_qty = isset( $_POST['_sales_quantity'][ $variation_id ] ) ? intval( $_POST['_sales_quantity'][ $variation_id ] ) : 0;
 	update_post_meta( $variation_id, '_sales_quantity', $sale_qty );
-	reset_sale_price_if_empty( $variation_id );
+	// reset_sale_price_if_empty( $variation_id ); // Disabled to prevent clearing sale price
 }, 10, 1 );
 
 
 
 // --- Reset Sale Price if Sale Stock is 0 ---
 function reset_sale_price_if_empty( $product_id ) {
+    return; // Disabled to prevent clearing sale price from database
+	/*
 	$sale_qty = (int) get_post_meta( $product_id, '_sales_quantity', true );
 	if ( $sale_qty <= 0 ) {
 		$product = wc_get_product( $product_id );
@@ -76,6 +78,7 @@ function reset_sale_price_if_empty( $product_id ) {
 			// update_cart_items_pricing_when_sale_ends( $product_id );
 		}
 	}
+	*/
 }
 
 // --- Fix Cart: Split Cart Items into Sale and Regular ---
