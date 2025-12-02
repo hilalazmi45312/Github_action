@@ -96,7 +96,9 @@ class AttributeHelper
             }
 
             // Get the global attribute ID
-            $attributeId = wc_attribute_taxonomy_id_by_name($taxonomy);
+            // Remove pa_ prefix for lookup as wc_attribute_taxonomy_id_by_name expects the slug without prefix
+            $attributeName = strpos($taxonomy, 'pa_') === 0 ? substr($taxonomy, 3) : $taxonomy;
+            $attributeId = wc_attribute_taxonomy_id_by_name($attributeName);
             
             $attribute = new \WC_Product_Attribute();
             $attribute->set_id($attributeId);
