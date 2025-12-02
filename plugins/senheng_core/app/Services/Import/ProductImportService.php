@@ -1018,41 +1018,7 @@ class ProductImportService
         Logger::info($this->logFile, "🔄 Parent product description updated from variation '$sku' pc_detail (Parent ID: $parentId)");
     }
 
-    /**
-     * Validate and fix product prices to prevent WooCommerce validation errors
-     * Clears sale price if regular price is lower than sale price
-     * 
-     * @param WC_Product_Simple|WC_Product_Variation $product  Product object
-     */
-    private function validateAndFixPrices($product): void
-    {
-        $regularPrice = $product->get_regular_price();
-        $salePrice = $product->get_sale_price();
-        
-        // Skip validation if either price is empty
-        if (empty($regularPrice) || empty($salePrice)) {
-            return;
-        }
-        
-        // Convert to float for comparison
-        $regularPriceFloat = floatval($regularPrice);
-        $salePriceFloat = floatval($salePrice);
-        
-        // If regular price is lower than or equal to sale price, clear the sale price
-        if ($regularPriceFloat <= $salePriceFloat) {
-            $product->set_sale_price('');
-            
-            // Get product identifier for logging
-            $productId = $product->get_id();
-            $sku = $product->get_sku();
-            $productType = $product->get_type();
-            
-            Logger::warning($this->logFile, 
-                "⚠️ PRICE VALIDATION: Sale price cleared for {$productType} (ID: {$productId}, SKU: {$sku}) " .
-                "- Regular price ({$regularPrice}) was lower than or equal to sale price ({$salePrice})"
-            );
-        }
-    }
+
 
     /**
      * Upsert variation product
@@ -1297,7 +1263,6 @@ class ProductImportService
             }
         }
 
-        $this->validateAndFixPrices($product);
     }
 
     /**

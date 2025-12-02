@@ -6,6 +6,12 @@ use SenhengCore\App\Services\Import\Logger;
 class AttributeHelper
 {
     /**
+     * Cache for existing global attributes [label => slug]
+     * @var array|null
+     */
+    private static $existingAttributes = null;
+
+    /**
      * Resolve variant keys and values into WooCommerce attribute format
      * 
      * @param array $keys   Array of attribute labels (e.g., ["Color", "Size"])
@@ -96,7 +102,8 @@ class AttributeHelper
             }
 
             // Get the global attribute ID
-            $attributeId = wc_attribute_taxonomy_id_by_name($taxonomy);
+            $attributeName = strpos($taxonomy, 'pa_') === 0 ? substr($taxonomy, 3) : $taxonomy;
+            $attributeId = wc_attribute_taxonomy_id_by_name($attributeName);
             
             $attribute = new \WC_Product_Attribute();
             $attribute->set_id($attributeId);
@@ -122,6 +129,31 @@ class AttributeHelper
     }
 
     /**
+     * Get existing attribute slug by label
+     * 
+     * @param string $label Attribute label
+     * @return string|null Attribute slug if exists, null otherwise
+     */
+    private static function getExistingAttributeSlug(string $label): ?string
+    {
+        if (self::$existingAttributes === null) {
+            self::$existingAttributes = [];
+            
+            // Get all attribute taxonomies
+            if (function_exists('wc_get_attribute_taxonomies')) {
+                $taxonomies = wc_get_attribute_taxonomies();
+                foreach ($taxonomies as $tax) {
+                    // Store by lowercase label for case-insensitive lookup
+                    self::$existingAttributes[strtolower($tax->attribute_label)] = $tax->attribute_name;
+                }
+            }
+        }
+        
+        $labelLower = strtolower(trim($label));
+        return self::$existingAttributes[$labelLower] ?? null;
+    }
+
+    /**
      * Ensure global attribute and term exist
      * 
      * @param string $label  Attribute label (e.g., "Color")
@@ -130,8 +162,16 @@ class AttributeHelper
      */
     private static function ensureGlobalAttribute(string $label, string $value): array
     {
-        // Use smartShortenAttributeName to handle long attribute names
-        $slug = self::smartShortenAttributeName($label);
+        // Check if attribute already exists by label
+        $existingSlug = self::getExistingAttributeSlug($label);
+        
+        if ($existingSlug) {
+            $slug = $existingSlug;
+        } else {
+            // Use smartShortenAttributeName to handle long attribute names
+            $slug = self::smartShortenAttributeName($label);
+        }
+
         $taxonomy = 'pa_' . $slug;
 
         // Ensure attribute taxonomy exists
