@@ -1115,17 +1115,21 @@ class ProductImportService
         }
 
         $this->applyCommonFields($var, $r);
-        $mappedStatus = $this->resolvePostStatus($r);
         
-        // If we have a status from CSV, update the PARENT product's status
-        if ($mappedStatus && $parentId) {
-            $parentProduct = wc_get_product($parentId);
-            // Only update if different to avoid unnecessary saves
-            if ($parentProduct && $parentProduct->get_status() !== $mappedStatus) {
-                $parentProduct->set_status($mappedStatus);
-                $parentProduct->save();
-                Logger::info($this->logFile, "Parent Product (ID: $parentId) status updated to '$mappedStatus' from variation row");
-            }
+        // 1. Handle Variation Status ("Enabled" checkbox)
+        // 'draft' from resolvePostStatus means 'inactive' in CSV
+        // For variations, 'private' status = Disabled (unticked Enabled)
+        // 'publish' status = Enabled (ticked Enabled)
+        $mappedStatus = $this->resolvePostStatus($r);
+        if ($mappedStatus) {
+            $varStatus = ($mappedStatus === 'draft') ? 'private' : 'publish';
+            $var->set_status($varStatus);
+        }
+
+        // 2. Update Parent Title if different (User requirement: "if variation sku found change the name of the parentproduct if different")
+        $title = trim((string)($r['Product_Name'] ?? ''));
+        if ($title && $parentId) {
+            $this->updateParentTitle($parentId, $title);
         }
 
         try {
@@ -1164,9 +1168,16 @@ class ProductImportService
         }
 
         // Clean up unused attributes from parent after variation update (if toggle enabled)
-        if ($this->cleanupUnusedAttributes) {
+        // Use skipAttributes check if available
+        if ((!isset($skipAttributes) || !$skipAttributes) && $this->cleanupUnusedAttributes) {
             // Instead of cleaning up immediately, track this parent for cleanup at end of batch
             $this->productsNeedingCleanup[$parentId] = true;
+        }
+
+        // 3. Handle Parent Status based on ALL variations
+        // If all variations are inactive/draft/private, parent becomes draft
+        if ($parentId) {
+            $this->updateParentStatusBasedOnChildren($parentId);
         }
 
         if ($isUpdate) {
@@ -1435,8 +1446,8 @@ class ProductImportService
     {
         $raw = isset($r['status']) ? $r['status'] : ($r['Status'] ?? '');
         $val = strtolower(trim((string)$raw));
-        if ($val === 'active') return 'publish';
-        if ($val === 'inactive') return 'draft';
+        if ($val === 'active' || $val === 'publish') return 'publish';
+        if ($val === 'inactive' || $val === 'draft' || $val === 'private') return 'draft';
         return null;
     }
 
@@ -1451,6 +1462,46 @@ class ProductImportService
         if (!$sku) return null;
         $id = wc_get_product_id_by_sku($sku);
         return $id ?: null;
+    }
+
+    /**
+     * Update parent status based on children variations
+     * If all variations are private/draft, parent becomes draft
+     * If any variation is publish, parent becomes publish
+     */
+    private function updateParentStatusBasedOnChildren(int $parentId): void
+    {
+        global $wpdb;
+        
+        // Count published variations
+        $publishedCount = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$wpdb->posts} 
+            WHERE post_parent = %d 
+            AND post_type = 'product_variation' 
+            AND post_status = 'publish'",
+            $parentId
+        ));
+        
+        $parent = wc_get_product($parentId);
+        if (!$parent) return;
+        
+        $currentStatus = $parent->get_status();
+        
+        if ($publishedCount > 0) {
+            // At least one variation is active -> Parent should be active
+            if ($currentStatus !== 'publish') {
+                $parent->set_status('publish');
+                $parent->save();
+                Logger::info($this->logFile, "Parent Product (ID: $parentId) status updated to 'publish' (has active variations)");
+            }
+        } else {
+            // No active variations -> Parent should be draft
+            if ($currentStatus !== 'draft' && $currentStatus !== 'trash') {
+                $parent->set_status('draft');
+                $parent->save();
+                Logger::info($this->logFile, "Parent Product (ID: $parentId) status updated to 'draft' (all variations inactive)");
+            }
+        }
     }
 }
 
