@@ -1281,6 +1281,16 @@ class ProductImportService
         // Determine if we should skip heavy meta updates (partial update mode)
         $skipHeavyMeta = $isUpdate && $this->partialUpdateExisting;
 
+        // Sales quantity meta (ALWAYS update regardless of partial update)
+        if (isset($r['sale_quantity'])) {
+            $currentSalesQuantity = get_post_meta($postId, '_sales_quantity', true);
+            $newSalesQuantity = (int)$r['sale_quantity'];
+            if ((int)$currentSalesQuantity !== $newSalesQuantity) {
+                update_post_meta($postId, '_sales_quantity', $newSalesQuantity);
+                Logger::info($this->logFile, "Updated sale_quantity for product ID $postId: $newSalesQuantity");
+            }
+        }
+
         // ACF fields
         if (function_exists('update_field') && !$skipHeavyMeta) {
             // Set Insider Product ID and s_coin_value for:
@@ -1308,15 +1318,6 @@ class ProductImportService
             $currentMetaInsiderProductId = get_post_meta($postId, 'insider_product_id', true);
             if ($currentMetaInsiderProductId !== $r['SKU_ID']) {
                 update_post_meta($postId, 'insider_product_id', $r['SKU_ID']);
-            }
-        }
-
-        // Sales quantity meta
-        if (isset($r['sale_quantity'])) {
-            $currentSalesQuantity = get_post_meta($postId, '_sales_quantity', true);
-            $newSalesQuantity = (int)$r['sale_quantity'];
-            if ((int)$currentSalesQuantity !== $newSalesQuantity) {
-                update_post_meta($postId, '_sales_quantity', $newSalesQuantity);
             }
         }
 
