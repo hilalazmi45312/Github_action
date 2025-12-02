@@ -688,7 +688,7 @@ class ProductImportService
             "SELECT ID FROM {$wpdb->posts} 
             WHERE post_title = %s 
             AND post_type = 'product' 
-            AND post_status = 'publish' 
+            AND post_status IN ('publish', 'draft', 'pending') 
             LIMIT 1",
             $title
         ));
