@@ -1231,6 +1231,8 @@ class CheckoutController
 
     public static function capture_raw_checkout_post($order_id, $data)
     {
+        $order = wc_get_order($order_id);
+        $amount = number_format($order->get_total(), 2, '.', '');
         $payment_type = $_POST['ipay88_payment_type'] ?? '';
         $types_mapping = ipay88_types_mapping();
         $payment_plan = $_POST['ipay88_payment_plan' . $payment_type] ?? '';
@@ -1244,6 +1246,15 @@ class CheckoutController
             update_post_meta($order_id, '_ipay88_payment_type', sanitize_text_field($payment_type));
             update_post_meta($order_id, '_ipay88_payment_plan', sanitize_text_field($payment_plan));
             update_post_meta($order_id, '_ipay88_admin_fee', sanitize_text_field($admin_fee));
+            update_post_meta(
+                $order_id,
+                '_ipay88_merchant_mode',
+                in_array($payment_type, ['523','891'], true) && $payment_plan > 0
+                    ? 'second'
+                    : 'primary'
+            );
+            update_post_meta($order_id, '_ipay88_amount', $amount);
+
         }
     }
 

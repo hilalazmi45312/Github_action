@@ -173,7 +173,7 @@ class AutoSonController
             // 'shippingFeescoin'   => 0,
             // 'scoinRedemption'    => 0,
             'isAdminFeeWaive'    => $isAdminFeeWaive,
-            'isStorePickUp' => $isPickup ? 'true' : 'false',
+            'isStorePickUp '     => $isPickup,
         ];
     }
 
