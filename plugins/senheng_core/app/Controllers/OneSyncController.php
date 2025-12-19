@@ -5,6 +5,14 @@ class OneSyncController
 
     public static function one_sync_dynamic_script()
     {
+        // Elementor editor or preview – do not load Flix
+        if (
+            (did_action('elementor/loaded') && \Elementor\Plugin::$instance->editor->is_edit_mode()) ||
+            isset($_GET['elementor-preview'])
+        ) {
+            return;
+        }
+
         if (!is_product()) return;
 
         global $product;

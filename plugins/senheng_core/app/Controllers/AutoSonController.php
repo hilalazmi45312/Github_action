@@ -139,6 +139,7 @@ class AutoSonController
         $admin_fee = get_post_meta($order->get_id(), '_ipay88_admin_fee', true);
         $shipping_method = $order->get_shipping_method();
         $isPickup = stripos($shipping_method, 'Store Pickup') !== false;
+        $storePickUpName = $isPickup ? self::get_store_pickup_name($order) : '';
         $isAdminFeeWaive = self::isBrandWaived($admin_fee, $cart_brands);
 
         return [
@@ -174,7 +175,28 @@ class AutoSonController
             // 'scoinRedemption'    => 0,
             'isAdminFeeWaive'    => $isAdminFeeWaive,
             'isStorePickUp' => $isPickup ? 'true' : 'false',
+            'storePickUpName' => $storePickUpName,
         ];
+    }
+
+    private static function get_store_pickup_name($order)
+    {
+        foreach ($order->get_shipping_methods() as $item) {
+
+            // // Only Local Pickup Plus
+            // if ($item->get_method_id() !== 'local_pickup_plus') {
+            //     continue;
+            // }
+
+            // This meta is already saved by the plugin
+            $location_name = $item->get_meta('_pickup_location_name');
+
+            if (!empty($location_name)) {
+                return $location_name; // e.g. "senQ IOI Mall Puchong"
+            }
+        }
+
+        return '';
     }
 
     private static function isBrandWaived($admin_fee, $cart_brands)

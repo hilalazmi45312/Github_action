@@ -229,6 +229,14 @@ class CheckoutController
         
         // Render a custom shop table row after cart contents on checkout
         add_action('woocommerce_review_order_after_cart_contents', [self::class, 'render_custom_checkout_cart_table'], 10);
+
+        // Handle iPay88 cancellation error notice
+        if ( isset( $_GET['ipay88_error'] ) && $_GET['ipay88_error'] === 'cancelled' ) {
+            wc_add_notice(
+                __( 'Payment was cancelled or failed. Please try again.', 'wc_ipay88' ),
+                'error'
+            );
+        }
     }
 
     /**

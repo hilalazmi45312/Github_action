@@ -1227,6 +1227,46 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 				}
 			}
 		}
+
+		$estatus = WC_iPay88::get_field( 'Status', $posted );
+		$errdesc = WC_iPay88::get_field( 'ErrDesc', $posted );
+		$transid = WC_iPay88::get_field( 'TransId', $posted );
+		if ( $estatus !== '1' ) {
+
+			WC_iPay88::add_debug_log(
+				'Payment not successful. Status=' . $estatus . ' Error=' . $errdesc
+			);
+
+			update_post_meta( $order_id, '_ipay88_response_json', json_encode( $posted ) );
+
+			if ( ! in_array( $order->get_status(), [ 'processing', 'completed', 'failed' ], true ) ) {
+
+				// Update order
+				$order->update_status( 'failed' );
+				$order->add_order_note(
+					sprintf(
+						__(
+							'iPay88 Payment Failed.
+								Error Description: %s
+								Transaction Reference Number: %s.', 'wc_ipay88'
+						),
+						$errdesc, $transid
+					)
+				);
+			}
+
+			if ( $is_backend_notification ) {
+				echo $received_ok;
+			} else {
+				wc_add_notice(
+					__( 'Payment was cancelled or failed. Please try again.', 'wc_ipay88' ),
+					'error'
+				);
+				// wp_safe_redirect( wc_get_checkout_url() );
+				wp_safe_redirect(add_query_arg('ipay88_error', 'cancelled', wc_get_checkout_url()));
+			}
+			exit;
+		}
 		
 		if ( $this->validate_response() ) {
 			
@@ -1339,6 +1379,37 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		wc_add_notice( __( 'An error occurred while validating your payment notification.', 'wc_ipay88' ) );
 		wp_safe_redirect( wc_get_cart_url() );
 		exit;
+	}
+
+	private function detect_and_set_merchant_from_response( $posted ) {
+
+		// Keep original credentials
+		$primary_code = $this->MerchantCode;
+		$primary_key  = $this->MerchantKey;
+
+		// Try PRIMARY merchant first
+		$this->MerchantCode = PRIMARY_IPAY88_MERCHANT_CODE_LIVE;
+		$this->MerchantKey  = PRIMARY_IPAY88_MERCHANT_KEY_LIVE;
+
+		if ( $this->validate_response() ) {
+			WC_iPay88::add_debug_log('Callback validated with PRIMARY merchant.');
+			return true;
+		}
+
+		// Try SECOND merchant
+		$this->MerchantCode = SECOND_IPAY88_MERCHANT_CODE_LIVE;
+		$this->MerchantKey  = SECOND_IPAY88_MERCHANT_KEY_LIVE;
+
+		if ( $this->validate_response() ) {
+			WC_iPay88::add_debug_log('Callback validated with SECOND merchant.');
+			return true;
+		}
+
+		// Restore original (safety)
+		$this->MerchantCode = $primary_code;
+		$this->MerchantKey  = $primary_key;
+
+		return false;
 	}
 	
 	/**

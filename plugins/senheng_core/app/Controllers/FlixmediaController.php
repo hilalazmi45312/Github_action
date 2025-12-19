@@ -5,6 +5,15 @@ class FlixmediaController
 
     public static function flixmedia_dynamic_script()
     {
+
+        // Elementor editor or preview – do not load Flix
+        if (
+            (did_action('elementor/loaded') && \Elementor\Plugin::$instance->editor->is_edit_mode()) ||
+            isset($_GET['elementor-preview'])
+        ) {
+            return;
+        }
+
         if (! is_product()) return;
 
         global $product;
@@ -53,7 +62,8 @@ class FlixmediaController
             }
 
             #flix-minisite {
-                margin-left: -6px
+                margin-left: -6px;
+                display: none !important;
             }
 
             .woocommerce-product-gallery--with-images #flix_hotspots {
@@ -148,9 +158,9 @@ class FlixmediaController
                     const s = document.createElement('script');
                     s.async = true;
                     s.src = 'https://media.flixfacts.com/js/loader.js';
-                    s.setAttribute('data-flix-distributor', '<?php echo $distributor_id; ?>');
+                    s.setAttribute('data-flix-distributor', <?php echo wp_json_encode($distributor_id); ?>);
                     s.setAttribute('data-flix-language', 'b3');
-                    // s.setAttribute('data-flix-button', 'flix-minisite'); #remove this cause Eda Nicol not wanted the
+                    s.setAttribute('data-flix-button', 'flix-minisite');
                     s.setAttribute('data-flix-inpage', 'flix-inpage');
                     s.setAttribute('data-flix-fallback-language', 'b3');
                     if (o.brand) s.setAttribute('data-flix-brand', o.brand);
@@ -174,12 +184,28 @@ class FlixmediaController
                 if (!descTab.contains(inpage)) descTab.appendChild(inpage);
 
                 window.__updateFlixVisibility = function() {
-                    const hasContent = inpage.children.length > 0 || inpage.innerHTML.trim() !== '';
-                    descTab.classList.toggle('flix-active', hasContent);
-                    //hide reviews and additional info class when flix is active
+                    const inpage = document.getElementById('flix-inpage');
+                    if (!inpage) return;
+
+                    // Check if it contains a fallback script (indicates no match / no real content)
+                    const hasFallbackScript = inpage.querySelector('script[src*="media.flix"][src*="service.js"]') !== null ||
+                                            inpage.querySelector('script[type="text/javascript"][src*="modular/js/minify"]') !== null;
+
+                    // Alternative broader check: any <script type="text/javascript"> inside inpage
+                    // const hasFallbackScript = inpage.querySelector('script[type="text/javascript"]') !== null;
+
+                    const hasContent = !hasFallbackScript && 
+                                    (inpage.children.length > 0 || inpage.innerHTML.trim() !== '');
+
+                    const descTab = document.getElementById('tab-description');
+                    if (descTab) {
+                        descTab.classList.toggle('flix-active', hasContent);
+                    }
+
+                    // Hide/show additional info and reviews tabs
                     const addInfoTab = document.querySelector('.additional_information_tab');
                     const reviewsTab = document.querySelector('.reviews_tab');
-                    //hide both tabs when flix is active
+
                     if (hasContent) {
                         if (addInfoTab) addInfoTab.style.display = 'none';
                         if (reviewsTab) reviewsTab.style.display = 'none';
@@ -187,7 +213,6 @@ class FlixmediaController
                         if (addInfoTab) addInfoTab.style.display = '';
                         if (reviewsTab) reviewsTab.style.display = '';
                     }
-
                 };
 
                 new MutationObserver(window.__updateFlixVisibility)
