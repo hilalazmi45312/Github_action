@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Admin class.
@@ -362,15 +362,15 @@ class WC_Local_Pickup_Plus_Admin {
 	public function process_import_export_form() {
 
 		// get action and bail out if can't be found
-		if ( isset( $_POST['action'], $_POST['_wp_http_referer'] ) && is_string( $_POST['action'] ) && Framework\SV_WC_Helper::str_starts_with( $_POST['action'], 'wc_local_pickup_plus_' ) ) {
-			$action = str_replace( 'wc_local_pickup_plus_csv_', '', $_POST['action'] );
+		if ( isset( $_POST['action'], $_POST['_wp_http_referer'] ) && is_string( $_POST['action'] ) && Framework\SV_WC_Helper::str_starts_with( sanitize_text_field( $_POST['action'] ), 'wc_local_pickup_plus_' ) ) {
+			$action = str_replace( 'wc_local_pickup_plus_csv_', '', sanitize_text_field( $_POST['action'] ) );
 		} else {
 			return;
 		}
 
 		// security checks
 		if ( ! check_admin_referer( "wc_local_pickup_plus_csv_{$action}" ) || ! current_user_can( $this->get_import_export_capability() ) ) {
-			wp_die( __( 'You are not allowed to perform this action.', 'woocommerce-shipping-local-pickup-plus' ) );
+			wp_die( esc_html__( 'You are not allowed to perform this action.', 'woocommerce-shipping-local-pickup-plus' ) );
 		}
 
 		// run action
@@ -594,7 +594,7 @@ class WC_Local_Pickup_Plus_Admin {
 			id="<?php echo esc_attr( $field['id'] ); ?>"
 			class="<?php echo esc_attr( $field['class'] ); ?>"
 			style="<?php echo esc_attr( $field['css'] ); ?>"
-			<?php echo implode( ' ', $custom_attributes ); ?>
+			<?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			data-minimum-input-length="2">
 			<?php if ( $pickup_location ) : ?>
 				<option value="<?php echo esc_attr( $pickup_location->get_id() ); ?>" selected><?php echo esc_html( $pickup_location->get_name() ); ?></option>
@@ -615,7 +615,7 @@ class WC_Local_Pickup_Plus_Admin {
 	 */
 	public function output_search_pickup_locations_field( $field ) {
 
-		echo $this->get_search_pickup_locations_field( $field );
+		echo $this->get_search_pickup_locations_field( $field ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 
@@ -637,7 +637,7 @@ class WC_Local_Pickup_Plus_Admin {
 				<label for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo esc_html( $field['title'] ); ?></label>
 				<?php echo ! empty( $field['desc_tip'] ) ? wc_help_tip( $field['desc_tip'] ) : ''; ?>
 			</th>
-			<td class="forminp forminp-<?php echo sanitize_title( $field['type'] ); ?>">
+			<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $field['type'] ) ); ?>">
 				<?php $this->output_search_pickup_locations_field( $field ); ?>
 			</td>
 		</tr>
@@ -712,7 +712,7 @@ class WC_Local_Pickup_Plus_Admin {
 
 				<nav class="nav-tab-wrapper woo-nav-tab-wrapper">
 					<?php foreach ( $tabs as $name => $label ) : ?>
-						<a href="<?php echo admin_url( "admin.php?page=wc-settings&tab={$name}" ); ?>" class="nav-tab <?php if ( 'shipping' === $name ) { echo 'nav-tab-active'; } ?>"><?php echo esc_html( $label ); ?></a>
+						<a href="<?php echo esc_url( admin_url( "admin.php?page=wc-settings&tab={$name}" ) ); ?>" class="nav-tab <?php if ( 'shipping' === $name ) { echo 'nav-tab-active'; } ?>"><?php echo esc_html( $label ); ?></a>
 					<?php endforeach; ?>
 				</nav>
 
@@ -724,7 +724,7 @@ class WC_Local_Pickup_Plus_Admin {
 					$array_keys = array_keys( $sections );
 
 					foreach ( $sections as $id => $label ) {
-						echo '<li><a href="' . admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . sanitize_title( $id ) ) . '" class="' . ( 'pickup_locations' === $id ? 'current' : '' ) . '">' . $label . '</a> ' . ( end( $array_keys ) === $id ? '' : '|' ) . ' </li>';
+						echo '<li><a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . sanitize_title( $id ) ) ) . '" class="' . ( 'pickup_locations' === $id ? 'current' : '' ) . '">' . esc_html( $label ) . '</a> ' . ( end( $array_keys ) === $id ? '' : '|' ) . ' </li>';
 					}
 
 					?>
@@ -789,7 +789,7 @@ class WC_Local_Pickup_Plus_Admin {
 				<tr>
 					<td data-export-label="Pickup Locations"><?php esc_html_e( 'Pickup Locations', 'woocommerce-shipping-local-pickup-plus' ); ?>:</td>
 					<td class="help"><?php echo wc_help_tip( __( 'The number of pickup locations published and available to customers.', 'woocommerce-shipping-local-pickup-plus' ) ); ?></td>
-					<td><?php echo wc_local_pickup_plus()->get_pickup_locations_instance()->get_pickup_locations_count(); ?></td>
+					<td><?php echo esc_html( wc_local_pickup_plus()->get_pickup_locations_instance()->get_pickup_locations_count() ); ?></td>
 				</tr>
 				<tr>
 					<td data-export-label="Pickup Appointments"><?php esc_html_e( 'Pickup Appointments', 'woocommerce-shipping-local-pickup-plus' ); ?>:</td>
@@ -841,7 +841,7 @@ class WC_Local_Pickup_Plus_Admin {
 
 							case 'per-order' :
 
-								printf( $pickup_selection_mode, strtolower( esc_html_x( 'Per order', 'Pickup selection mode', 'woocommerce-shipping-local-pickup-plus' ) ) );
+								printf( $pickup_selection_mode, strtolower( esc_html_x( 'Per order', 'Pickup selection mode', 'woocommerce-shipping-local-pickup-plus' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 								/* translators: Placeholder: %s - cart item handling mode from settings */
 								$item_handling_mode = esc_html__( 'Cart item handling mode: %s', 'woocommerce-shipping-local-pickup-plus' );
@@ -849,11 +849,11 @@ class WC_Local_Pickup_Plus_Admin {
 								switch ( $shipping_method->item_handling_mode() ) :
 
 									case 'automatic' :
-										printf( '<br />' . $item_handling_mode, strtolower( esc_html_x( 'Automatic grouping', 'Cart item handling mode', 'woocommerce-shipping-local-pickup-plus' ) ) );
+										printf( '<br />' . $item_handling_mode, strtolower( esc_html_x( 'Automatic grouping', 'Cart item handling mode', 'woocommerce-shipping-local-pickup-plus' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									break;
 
 									case 'customer' :
-										printf( '<br />' . $item_handling_mode, strtolower( esc_html_x( 'Customer selection', 'Cart item handling mode', 'woocommerce-shipping-local-pickup-plus' ) ) );
+										printf( '<br />' . $item_handling_mode, strtolower( esc_html_x( 'Customer selection', 'Cart item handling mode', 'woocommerce-shipping-local-pickup-plus' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									break;
 
 								endswitch;
@@ -864,11 +864,11 @@ class WC_Local_Pickup_Plus_Admin {
 								switch ( $shipping_method->get_default_handling() ) :
 
 									case 'pickup' :
-										printf( '<br />' . $default_handling, strtolower( esc_html_x( 'Pickup items', 'Default cart item handling', 'woocommerce-shipping-local-pickup-plus' ) ) );
+										printf( '<br />' . $default_handling, strtolower( esc_html_x( 'Pickup items', 'Default cart item handling', 'woocommerce-shipping-local-pickup-plus' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									break;
 
 									case 'ship' :
-										printf( '<br />' . $default_handling, strtolower( esc_html_x( 'Ship items', 'Default cart item handling', 'woocommerce-shipping-local-pickup-plus' ) ) );
+										printf( '<br />' . $default_handling, strtolower( esc_html_x( 'Ship items', 'Default cart item handling', 'woocommerce-shipping-local-pickup-plus' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									break;
 
 								endswitch;
@@ -876,7 +876,7 @@ class WC_Local_Pickup_Plus_Admin {
 							break;
 
 							case 'per-item' :
-								printf( $pickup_selection_mode, strtolower( esc_html_x( 'Per item', 'Pickup selection mode', 'woocommerce-shipping-local-pickup-plus' ) ) );
+								printf( $pickup_selection_mode, strtolower( esc_html_x( 'Per item', 'Pickup selection mode', 'woocommerce-shipping-local-pickup-plus' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							break;
 
 							// this wouldn't normally happen

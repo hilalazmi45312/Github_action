@@ -22,6 +22,7 @@ return apply_filters(
 				'color-hover'      => '--btn-color-hover',
 				'background'       => '--btn-bgcolor',
 				'background-hover' => '--btn-bgcolor-hover',
+				'padding'          => '--btn-padding',
 			),
 		),
 		'product_loop'                => array(
@@ -170,8 +171,8 @@ return apply_filters(
 		),
 		'my_account_download_file'      => array(
 			'title'          => 'Download file',
-			'selector'       => 'html .woocommerce-MyAccount-downloads-file',
-			'selector-hover' => 'html .woocommerce-MyAccount-downloads-file:hover',
+			'selector'       => 'html .woocommerce-order-downloads .woocommerce-MyAccount-downloads-file',
+			'selector-hover' => 'html .woocommerce-order-downloads .woocommerce-MyAccount-downloads-file:hover',
 		),
 		'my_account_order_again'        => array(
 			'title'          => 'Order again',
@@ -252,8 +253,8 @@ return apply_filters(
 		),
 		'blog_continue_reading'             => array(
 			'title'          => 'Blog "List" Continue Reading',
-			'selector'       => 'html .blog-design-list .btn-read-more',
-			'selector-hover' => 'html .blog-design-list .btn-read-more:hover',
+			'selector'       => 'html .blog-design-list .wd-post-read-more.wd-style-btn a',
+			'selector-hover' => 'html .blog-design-list .wd-post-read-more.wd-style-btn a:hover',
 		),
 		'plugins'                       => array(
 			'title' => 'Plugins',
@@ -314,8 +315,8 @@ return apply_filters(
 		),
 		'add_to_cart_popup_view_cart'   => array(
 			'title'          => 'Add to cart popup view cart',
-			'selector'       => 'html .popup-added_to_cart .view-cart',
-			'selector-hover' => 'html .popup-added_to_cart .view-cart:hover',
+			'selector'       => 'html .wd-popup-added-cart .view-cart',
+			'selector-hover' => 'html .wd-popup-added-cart .view-cart:hover',
 		),
 		'empty_page_btn'                => array(
 			'title'          => 'Empty page button',

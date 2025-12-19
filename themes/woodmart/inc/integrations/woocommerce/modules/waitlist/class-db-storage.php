@@ -25,6 +25,10 @@ class DB_Storage extends Singleton {
 	 * Constructor.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'waitlist_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		self::define_tables();
 
 		if ( ! get_option( 'wd_waitlist_installed' ) ) {
@@ -119,7 +123,8 @@ class DB_Storage extends Singleton {
 			$items_per_page = abs( apply_filters( 'woodmart_waitlist_per_page', 12 ) );
 			$offset         = ( $page - 1 ) * $items_per_page;
 			$query         .= $wpdb->prepare(
-				' LIMIT %d OFFSET %d',
+				' ORDER BY created_date_gmt DESC
+				LIMIT %d OFFSET %d',
 				$items_per_page,
 				$offset
 			);
@@ -378,7 +383,8 @@ class DB_Storage extends Singleton {
 	public static function install() {
 		global $wpdb;
 
-		if ( ! isset( $_GET['settings-updated'] ) ) {
+		// Only run on settings save or on dashboard page load.
+		if ( ! isset( $_GET['settings-updated'] ) && isset( $_GET['page'] ) && 'xts_dashboard' !== $_GET['page'] ) {
 			return;
 		}
 

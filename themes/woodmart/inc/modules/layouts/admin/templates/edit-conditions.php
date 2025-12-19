@@ -16,14 +16,14 @@ $conditions = $conditions && is_array( $conditions ) ? wp_json_encode( $conditio
 
 ob_start();
 ?>
-<div class="xts-layout-conditions" data-type="<?php echo esc_attr( $type ); ?>" data-conditions='<?php echo
+<div class="xts-popup-conditions" data-type="<?php echo esc_attr( $type ); ?>" data-conditions='<?php echo
 $conditions; ?>' data-id="<?php echo esc_attr( $post_id ); ?>">
-	<a href="javascript:void(0);" class="xts-layout-conditions-edit-add xts-hidden xts-inline-btn xts-color-primary xts-i-add">
+	<a href="javascript:void(0);" class="xts-popup-conditions-edit-add xts-hidden xts-inline-btn xts-color-primary xts-i-add">
 		<?php esc_html_e( 'Add condition', 'woodmart' ); ?>
 	</a>
 
-	<div class="xts-popup-actions xts-layout-submit-wrap">
-		<a href="javascript:void(0);" class="xts-layout-conditions-edit-save xts-btn xts-color-primary xts-i-save xts-hidden">
+	<div class="xts-popup-actions xts-popup-actions-overlap">
+		<a href="javascript:void(0);" class="xts-popup-conditions-edit-save xts-btn xts-color-primary xts-i-save xts-hidden">
 			<?php esc_html_e( 'Save conditions', 'woodmart' ); ?>
 		</a>
 	</div>
@@ -36,7 +36,7 @@ $admin->get_template(
 	'popup',
 	array(
 		'btn_text'    => esc_html__( 'Edit conditions', 'woodmart' ),
-		'btn_classes' => ' xts-layout-conditions-edit xts-i-edit-write',
+		'btn_classes' => ' xts-popup-conditions-edit xts-i-edit-write',
 		'title_text'  => esc_html__( 'Edit conditions', 'woodmart' ),
 		'content'     => $content,
 	)

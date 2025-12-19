@@ -489,6 +489,7 @@
     "blog_spacing_mobile": "20",
     "blog_excerpt_length": "105",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "hide_larger_price": "1",
     "single_product_variations_price": "1",
     "label_shape": "rounded-sm",
@@ -547,9 +548,8 @@
     "stock_label_text_color": {
         "idle": "rgb(255,255,255)"
     },
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "576",
-    "additional_tab_title": "Delivery Details",
     "sticky_footer": "0",
-    "breadcrumbs": "1"
+    "breadcrumbs": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -184,7 +184,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_mailchimp' ) ) {
 					'param_name' => 'button_color_tabs',
 					'tabs'       => true,
 					'value'      => array(
-						esc_html__( 'IDLE', 'woodmart' ) => 'idle',
+						esc_html__( 'Idle', 'woodmart' )  => 'idle',
 						esc_html__( 'Hover', 'woodmart' ) => 'hover',
 					),
 					'default'    => 'idle',
@@ -275,6 +275,15 @@ if ( ! function_exists( 'woodmart_get_vc_map_mailchimp' ) ) {
 					'group'      => esc_html__( 'Design Options', 'js_composer' ),
 				),
 				woodmart_get_vc_responsive_spacing_map(),
+
+				// Width option (with dependency Columns option, responsive).
+				woodmart_get_responsive_dependency_width_map( 'responsive_tabs' ),
+				woodmart_get_responsive_dependency_width_map( 'width_desktop' ),
+				woodmart_get_responsive_dependency_width_map( 'custom_width_desktop' ),
+				woodmart_get_responsive_dependency_width_map( 'width_tablet' ),
+				woodmart_get_responsive_dependency_width_map( 'custom_width_tablet' ),
+				woodmart_get_responsive_dependency_width_map( 'width_mobile' ),
+				woodmart_get_responsive_dependency_width_map( 'custom_width_mobile' ),
 			),
 		);
 	}

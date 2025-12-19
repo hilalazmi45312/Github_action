@@ -3,9 +3,6 @@
  * The default template for displaying content
  */
 
-$size = woodmart_loop_prop( 'portfolio_image_size' );
-$img  = woodmart_otf_get_image_html( get_post_thumbnail_id(), woodmart_loop_prop( 'portfolio_image_size' ), woodmart_loop_prop( 'portfolio_image_size_custom' ) );
-
 $classes[] = 'wd-project';
 $classes[] = 'portfolio-entry';
 
@@ -35,7 +32,7 @@ if ( 'text-shown' !== $style ) {
 		<?php if ( has_post_thumbnail() ) : ?>
 			<figure class="entry-thumbnail color-scheme-light">
 				<a href="<?php echo esc_url( get_permalink() ); ?>" class="portfolio-thumbnail">
-					<?php echo $img; ?>
+					<?php echo woodmart_otf_get_image_html( get_post_thumbnail_id(), woodmart_loop_prop( 'portfolio_image_size' ), woodmart_loop_prop( 'portfolio_image_size_custom' ) ); //phpcs:ignore ?>
 				</a>
 				<div class="wd-portfolio-btns">
 					<div class="portfolio-enlarge wd-action-btn wd-style-icon wd-enlarge-icon wd-tltp">
@@ -51,9 +48,9 @@ if ( 'text-shown' !== $style ) {
 									if ( function_exists( 'woodmart_shortcode_social' ) ) {
 										echo woodmart_shortcode_social(
 											array(
-												'size'   => 'small',
-												'style'  => 'default',
-												'color'  => 'light',
+												'size'  => 'small',
+												'style' => 'default',
+												'color' => 'light',
 											)
 										);}
 									?>

@@ -31,17 +31,14 @@ class Backend extends Singleton {
 			add_action( 'admin_enqueue_scripts', array( $this, 'scripts' ), 50 );
 			add_filter( 'woodmart_admin_localized_string_array', array( $this, 'add_localized_settings' ) );
 		} elseif ( woodmart_is_header_frontend_editor() ) { //phpcs:ignore
-			add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ), 100 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ), 10002 );
 			add_action( 'wp_footer', array( $this, 'output_placeholder' ) );
 			add_filter( 'woodmart_localized_string_array', array( $this, 'add_localized_settings' ) );
 			add_filter( 'body_class', array( $this, 'add_body_class' ) );
 
 			add_filter( 'woodmart_enqueue_combined_js', '__return_true' );
 
-			remove_action( 'woodmart_before_wp_footer', 'woodmart_search_full_screen', 100 );
-			add_action( 'whb_after_header', 'woodmart_search_full_screen' );
-
-			add_action( 'woodmart_before_wp_footer', 'woodmart_mobile_menu', 130 );
+			remove_action( 'woodmart_before_wp_footer', 'woodmart_mobile_menu', 130 );
 			add_action( 'whb_after_header', 'woodmart_mobile_menu', 20 );
 
 			remove_action( 'woodmart_before_wp_footer', 'woodmart_cart_side_widget', 140 );

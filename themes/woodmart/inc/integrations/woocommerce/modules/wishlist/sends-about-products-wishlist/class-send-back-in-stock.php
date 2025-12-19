@@ -20,13 +20,6 @@ use XTS\Singleton;
  */
 class Sends_Back_In_Stock extends Singleton {
 	/**
-	 * Name unsubscribed users option.
-	 *
-	 * @var string
-	 */
-	private $unsubscribed_users = 'woodmart_wishlist_unsubscribed_users';
-
-	/**
 	 * Init.
 	 */
 	public function init() {
@@ -39,6 +32,15 @@ class Sends_Back_In_Stock extends Singleton {
 
 		add_action( 'woodmart_wishlist_send_back_in_stock_email', array( $this, 'send_back_in_stock_email' ) );
 
+		add_action( 'init', array( $this, 'schedule_cron_event' ) );
+	}
+
+	/**
+	 * Schedule cron event on init hook.
+	 *
+	 * @return void
+	 */
+	public function schedule_cron_event() {
 		if ( ! wp_next_scheduled( 'woodmart_wishlist_send_back_in_stock_email' ) ) {
 			wp_schedule_event( time(), apply_filters( 'woodmart_schedule_send_back_in_stock_email', 'hourly' ), 'woodmart_wishlist_send_back_in_stock_email' );
 		}
@@ -61,12 +63,13 @@ class Sends_Back_In_Stock extends Singleton {
 			return;
 		}
 
-		$unsubscribed_users = get_option( $this->unsubscribed_users, array() );
-		$emails_limited     = apply_filters( 'woodmart_wishlist_send_emails_limited', 20 );
-		$counter            = 1;
+		$emails_limited = apply_filters( 'woodmart_wishlist_send_emails_limited', 20 );
+		$counter        = 1;
 
 		foreach ( $products_back_in_stock as $user_id => $product_list ) {
-			if ( ! $user_id || ! $product_list || in_array( get_userdata( $user_id )->user_email, $unsubscribed_users, true ) ) {
+			$user_email = get_userdata( $user_id )->user_email;
+
+			if ( ! $user_id || ! $product_list || woodmart_is_user_unsubscribed_from_mailing( $user_email, 'XTS_Email_Wishlist_Back_In_Stock' ) || woodmart_should_skip_subscription_email( $user_email, $user_id ) ) {
 				continue;
 			}
 
@@ -98,14 +101,13 @@ class Sends_Back_In_Stock extends Singleton {
 
 		$users_id               = $this->get_users_id_by_product_id( $product_id );
 		$products_back_in_stock = get_option( 'woodmart_wishlist_products_back_in_stock', array() );
-		$unsubscribed_users     = get_option( $this->unsubscribed_users, array() );
 
 		if ( ! $users_id ) {
 			return;
 		}
 
 		foreach ( $users_id as $user_id ) {
-			if ( ( isset( $products_back_in_stock[ $user_id ] ) && in_array( $product_id, $products_back_in_stock[ $user_id ], true ) ) || ( in_array( get_userdata( $user_id )->user_email, $unsubscribed_users, true ) ) ) {
+			if ( ( isset( $products_back_in_stock[ $user_id ] ) && in_array( $product_id, $products_back_in_stock[ $user_id ], true ) ) || woodmart_is_user_unsubscribed_from_mailing( get_userdata( $user_id )->user_email, 'XTS_Email_Wishlist_Back_In_Stock' ) ) {
 				continue;
 			}
 

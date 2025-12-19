@@ -101,6 +101,7 @@ class Options extends Singleton {
 		'conditions'        => 'XTS\Admin\Modules\Options\Controls\Conditions',
 		'discount_rules'    => 'XTS\Admin\Modules\Options\Controls\Discount_Rules',
 		'timetable'         => 'XTS\Admin\Modules\Options\Controls\Timetable',
+		'clear'             => 'XTS\Admin\Modules\Options\Controls\Clear',
 	);
 
 	/**
@@ -284,6 +285,18 @@ class Options extends Singleton {
 	 */
 	public function load_defaults() {
 		foreach ( self::$_fields as $field ) {
+			if ( 'group' === $field->args['type'] && ! empty( $field->inner_fields ) ) {
+				foreach ( $field->inner_fields as $inner_field ) {
+					if ( ! isset( $inner_field->args['default'] ) ) {
+						continue;
+					}
+
+					if ( ! isset( self::$_options[ $inner_field->get_id() ] ) ) {
+						self::$_options[ $inner_field->get_id() ] = $inner_field->args['default'];
+					}
+				}
+			}
+
 			if ( ! isset( $field->args['default'] ) ) {
 				continue;
 			}
@@ -485,7 +498,7 @@ class Options extends Singleton {
 		foreach ( self::$_fields as $key => $field ) {
 			$field->set_presets( $this->_presets );
 
-			if ( ! $is_preset_active || woodmart_is_opt_changed( $field->args['id'] ) || 'group' === $field->args['type'] ) {
+			if ( ! $is_preset_active || 'group' === $field->args['type'] || woodmart_is_opt_changed( $field->args['id'] ) ) {
 				$field_css = $field->css_output();
 
 				if ( $field_css && is_array( $field_css ) ) {
@@ -583,7 +596,7 @@ class Options extends Singleton {
 
 		$sanitized_options['last_message'] = 'save';
 
-		$default_options = get_option( 'xts-' . self::$opt_name . '-options' );
+		$default_options = get_option( 'xts-' . self::$opt_name . '-options', array() );
 
 		$presets = Presets::get_all();
 
@@ -603,11 +616,14 @@ class Options extends Singleton {
 			// Create a subarray with preset options. Everything else leave unchanged.
 			if ( strlen( $options['fields_to_save'] ) > 0 && is_array( $fields_to_save ) && count( $fields_to_save ) > 0 ) {
 				foreach ( $fields_to_save as $option ) {
-					$options_to_save[ $preset_id ][ $option ] = $options[ $option ];
+					$value = isset( $default_options[ $preset_id ][ $option ] ) ? $default_options[ $preset_id ][ $option ] : '';
+					$value = isset( $options[ $option ] ) ? $options[ $option ] : $value;
+
+					$options_to_save[ $preset_id ][ $option ] = $value;
 				}
 				$options_to_save[ $preset_id ]['fields_to_save'] = $options['fields_to_save'];
 			}
-			$options_to_save['last_tab'] = $options['last_tab'];
+			$options_to_save['last_tab'] = isset( $options['last_tab'] ) ? $options['last_tab'] : '';
 			$options                     = $options_to_save;
 		}
 
@@ -677,17 +693,21 @@ class Options extends Singleton {
 	 * @return array
 	 */
 	private function sanitized_options( $field, $sanitized_options, $imported_options, $options, $reset ) {
-		if ( isset( $imported_options[ $field->get_id() ] ) ) {
-			$sanitized_options[ $field->get_id() ] = $field->sanitize( $imported_options[ $field->get_id() ] );
+		$field_id = $field->get_id();
+
+		if ( isset( $imported_options[ $field_id ] ) ) {
+			$sanitized_options[ $field_id ] = $field->sanitize( $imported_options[ $field_id ] );
 		} elseif ( $reset ) {
-			$sanitized_options[ $field->get_id() ] = self::get_default( $field->args );
+			$sanitized_options[ $field_id ] = self::get_default( $field->args );
 		} else {
-			if ( isset( $options[ $field->get_id() ] ) ) {
-				$sanitized_options[ $field->get_id() ] = $field->sanitize( $options[ $field->get_id() ] );
+			if ( isset( $options[ $field_id ] ) ) {
+				$sanitized_options[ $field_id ] = $field->sanitize( $options[ $field_id ] );
+			} elseif ( isset( self::$_options[ $field_id ] ) ) {
+				$sanitized_options[ $field_id ] = self::$_options[ $field_id ];
 			} elseif ( 'select' !== $field->args['type'] ) {
-				$sanitized_options[ $field->get_id() ] = self::get_default( $field->args );
+				$sanitized_options[ $field_id ] = self::get_default( $field->args );
 			} else {
-				$sanitized_options[ $field->get_id() ] = '';
+				$sanitized_options[ $field_id ] = '';
 			}
 		}
 

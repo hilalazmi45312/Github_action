@@ -1,6 +1,6 @@
 <?php
 
-if ( ! function_exists( 'wd_get_box_shadow_control_attrs' ) ) {
+if ( ! function_exists( 'wd_get_border_control_attrs' ) ) {
 	function wd_get_border_control_attrs( $attr, $attrs_prefix = '' ) {
 		$attr->add_attr(
 			array(

@@ -1,7 +1,7 @@
 /* global woodmart_settings */
 (function($) {
 	woodmartThemeModule.ajaxPortfolio = function() {
-		if ('no' === woodmart_settings.ajax_portfolio || 'undefined' === typeof ($.fn.pjax)) {
+		if ('no' === woodmart_settings.ajax_portfolio || 'undefined' === typeof ($.fn.pjax) || woodmartThemeModule.$body.hasClass('elementor-editor-active')) {
 			return;
 		}
 

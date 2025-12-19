@@ -183,5 +183,9 @@
             }
         }
     },
-    "portfolio_page": "51"
+    "portfolio_page": "51",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

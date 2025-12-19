@@ -18,13 +18,13 @@
  *
  * @package     WC-Shipping-Local-Pickup-Plus
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * The Local Pickup Plus shipping method class.
@@ -412,7 +412,7 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 		<tr valign="top">
 			<th scope="row" class="titledesc">
 				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
-				<?php echo $this->get_tooltip_html( $data ); if ( ! empty( $data['desc_tip'] ) ) { $data['desc_tip'] = false; } ?>
+				<?php echo $this->get_tooltip_html( $data ); if ( ! empty( $data['desc_tip'] ) ) { $data['desc_tip'] = false; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</th>
 			<td class="forminp">
 				<fieldset
@@ -473,7 +473,7 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 												   value="limited" /><?php printf(
 															/* translators: Placeholder: %s numerical input field HTML to limit the number of appointments per slot */
 															esc_html__( 'Limited to %s appointments per appointment time', 'woocommerce-shipping-local-pickup-plus' ),
-															$max_num_appointments_input ); ?>
+															$max_num_appointments_input ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											<p class="description" style="<?php echo 'unlimited' === $data['value'] ? 'display:none;' : 'display:block;'; ?>"><?php esc_html_e( 'Limit the number of appointments available for each appointment time. Once the limit has been reached, the appointment will be removed from the calendar.', 'woocommerce-shipping-local-pickup-plus' ); ?></p>
 										</li>
 									</ul>
@@ -485,8 +485,8 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 					}
 
 					if ( null !== $field_object ) {
-						echo $field_object->get_field_html( $data );
-						echo $this->get_description_html( $data );
+						echo $field_object->get_field_html( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo $this->get_description_html( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					}
 
 					?>
@@ -764,9 +764,9 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 		// save the default price adjustment setting
 		if ( isset( $_POST['woocommerce_local_pickup_plus_default_price_adjustment'], $_POST['woocommerce_local_pickup_plus_default_price_adjustment_amount'], $_POST['woocommerce_local_pickup_plus_default_price_adjustment_type'] ) ) {
 
-			$adjustment = $_POST['woocommerce_local_pickup_plus_default_price_adjustment'];
-			$amount     = $_POST['woocommerce_local_pickup_plus_default_price_adjustment_amount'];
-			$type       = $_POST['woocommerce_local_pickup_plus_default_price_adjustment_type'];
+			$adjustment = sanitize_text_field( $_POST['woocommerce_local_pickup_plus_default_price_adjustment'] );
+			$amount     = sanitize_text_field( $_POST['woocommerce_local_pickup_plus_default_price_adjustment_amount'] );
+			$type       = sanitize_text_field( $_POST['woocommerce_local_pickup_plus_default_price_adjustment_type'] );
 
 			// validate and sanitize a valid price adjustment string
 			$default_price_adjustment = new \WC_Local_Pickup_Plus_Price_Adjustment();
@@ -806,7 +806,7 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 			// save the default public holidays for pickup appointment scheduling
 			if ( ! empty( $_POST['woocommerce_local_pickup_plus_default_public_holidays'] ) ) {
 
-				$public_holidays = (array) $_POST['woocommerce_local_pickup_plus_default_public_holidays'];
+				$public_holidays = array_map('sanitize_text_field', (array) $_POST['woocommerce_local_pickup_plus_default_public_holidays']);
 				$calendar        = new \WC_Local_Pickup_Plus_Public_Holidays( $public_holidays );
 
 				update_option( 'woocommerce_local_pickup_plus_default_public_holidays', $calendar->get_calendar() );
@@ -820,7 +820,7 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 			if ( isset( $_POST['woocommerce_local_pickup_plus_default_lead_time_amount'], $_POST['woocommerce_local_pickup_plus_default_lead_time_interval'] ) ) {
 
 				$amount   = max( 0, (int) $_POST['woocommerce_local_pickup_plus_default_lead_time_amount'] );
-				$interval = $_POST['woocommerce_local_pickup_plus_default_lead_time_interval'];
+				$interval = sanitize_text_field( $_POST['woocommerce_local_pickup_plus_default_lead_time_interval'] );
 
 				$default_lead_time = new \WC_Local_Pickup_Plus_Schedule_Adjustment( 'lead-time' );
 				$default_lead_time->set_value( $amount, $interval );
@@ -830,14 +830,14 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 
 			// save the lead calculation preference affecting pickup scheduling
 			if ( isset( $_POST['woocommerce_local_pickup_plus_lead_time_calculation'] ) ) {
-				update_option( 'woocommerce_local_pickup_plus_lead_time_calculation', $_POST['woocommerce_local_pickup_plus_lead_time_calculation'] );
+				update_option( 'woocommerce_local_pickup_plus_lead_time_calculation', sanitize_text_field( $_POST['woocommerce_local_pickup_plus_lead_time_calculation'] ) );
 			}
 
 			// save the default deadline affecting pickup scheduling
 			if ( isset( $_POST['woocommerce_local_pickup_plus_default_deadline_amount'], $_POST['woocommerce_local_pickup_plus_default_deadline_interval'] ) ) {
 
 				$amount   = max( 0, (int) $_POST['woocommerce_local_pickup_plus_default_deadline_amount'] );
-				$interval = $_POST['woocommerce_local_pickup_plus_default_deadline_interval'];
+				$interval = sanitize_text_field( $_POST['woocommerce_local_pickup_plus_default_deadline_interval'] );
 
 				$default_lead_time = new \WC_Local_Pickup_Plus_Schedule_Adjustment( 'deadline' );
 				$default_lead_time->set_value( $amount, $interval );
@@ -1383,7 +1383,7 @@ class WC_Shipping_Local_Pickup_Plus extends \WC_Shipping_Method {
 		$label = $this->get_method_title();
 
 		// the action of removing an item from the customer's cart is made by a GET request with remove_item as the query string
-		$is_remove_action = 'GET' === $_SERVER['REQUEST_METHOD'] && isset( $_SERVER['QUERY_STRING'] ) && strpos( $_SERVER['QUERY_STRING'], 'remove_item' ) !== false;
+		$is_remove_action = 'GET' === $_SERVER['REQUEST_METHOD'] && isset( $_SERVER['QUERY_STRING'] ) && strpos( sanitize_text_field( $_SERVER['QUERY_STRING'] ), 'remove_item' ) !== false;
 
 		if ( $is_remove_action || 'POST' === $_SERVER['REQUEST_METHOD'] || is_cart() || is_checkout() || ( $wp_query && defined( 'WC_DOING_AJAX' ) && 'update_order_review' === $wp_query->get( 'wc-ajax' ) ) ) {
 

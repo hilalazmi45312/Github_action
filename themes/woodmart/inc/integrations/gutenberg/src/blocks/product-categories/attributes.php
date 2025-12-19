@@ -124,6 +124,17 @@ if ( ! function_exists( 'wd_get_block_product_categories_attrs' ) ) {
 				'grid_product_count'             => array(
 					'type' => 'string',
 				),
+				'icon_alignment'                 => array(
+					'type' => 'string',
+				),
+				'iconWidth'                      => array(
+					'type'       => 'string',
+					'responsive' => true,
+				),
+				'iconHeight'                     => array(
+					'type'       => 'string',
+					'responsive' => true,
+				),
 			)
 		);
 

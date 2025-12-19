@@ -10,7 +10,7 @@ add_action('init', function () {
 // add_filter('script_loader_tag', [PwaSessionController::class, 'deferJS'], 10, 3);
 
 
-add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
+// add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
 // add_action('template_redirect', [PwaSessionController::class, 'shweb_auto_login_from_token']); #close for temp WH want to see if this make slow
 // add_filter('password_protected_is_active', [PwaSessionController::class, 'isPasswordProtectedActive']);
 
@@ -71,7 +71,22 @@ add_action('woocommerce_order_refunded', function ($order_id, $refund_id) {
 add_action('woocommerce_admin_order_data_after_order_details', function ($order) {
     $irclickid = get_post_meta($order->get_id(), '_irclickid', true);
     if ($irclickid) {
-        echo '<p><strong>Impact Click ID:</strong> ' . esc_html($irclickid) . '</p>';
+        echo '<p class="form-field form-field-wide" style="margin-top: 30px"><strong>Impact Click ID:</strong> ' . esc_html($irclickid) . '</p>';
+    }
+
+    $payment_type = get_post_meta($order->get_id(), '_ipay88_payment_type_name', true);
+    $payment_plan = (int) get_post_meta($order->get_id(), '_ipay88_payment_plan', true);
+
+    if ($payment_type) {
+
+        $label = $payment_type;
+
+        // Append "x {months}" only if payment plan > 0
+        if ($payment_plan > 0) {
+            $label .= ' x ' . $payment_plan . ' month(s)';
+        }
+
+        echo '<p class="form-field form-field-wide" style="margin-top: 30px"><strong>Payment Method:</strong> ' . esc_html($label) . '</p>';
     }
 });
 
@@ -95,7 +110,10 @@ add_action('wp_footer', [WarrantyController::class, 'injectCartCheckboxScript'])
 add_action('woocommerce_checkout_create_order_line_item', [WarrantyController::class, 'store_warranty_in_order_item'], 10, 4);
 
 // Installment Controller
+// Ensure payment methods table has all required columns
+add_action('admin_init', [PaymentMethod::class, 'ensureTableColumns']);
 add_action('wp_enqueue_scripts', [InstallmentController::class, 'sh_enqueue_bnpl_assets']);
+add_action('wp_ajax_create_payment_method', [InstallmentController::class, 'createPaymentMethod']);
 add_action('wp_ajax_create_payment_plan', [InstallmentController::class, 'createPaymentPlan']);
 add_action('woocommerce_single_product_summary', [InstallmentController::class, 'payment_plan_front_end']);
 add_action('wp_ajax_senheng_exclude_brands', [InstallmentController::class, 'senheng_exclude_brands']);
@@ -106,10 +124,13 @@ add_action('init', [BenefitBoxController::class, 'registerShortcode']);
 add_action('wp_ajax_delete_benefit_box_data', [BenefitBoxController::class, 'handleDeleteBenefitBoxData']);
 add_action('wp_ajax_update_benefit_box_status', [BenefitBoxController::class, 'handleUpdateBenefitBoxStatus']);
 add_action('wp_ajax_bulk_delete_benefit_boxes', [BenefitBoxController::class, 'handleBulkDeleteBenefitBoxes']);
+add_action('init', [BenefitBoxController::class, 'registerProductWarrantyShortcode']);
 
 // Benefit Box Admin AJAX routes
 add_action('wp_ajax_save_benefit_box_data', [BenefitBoxController::class, 'handleSaveBenefitBoxData']);
 
+// Product Import/Export Controller
+add_action('init', [ImportExportWoocommerceController::class, 'init']);
 
 // Product Import Controller routes and actions
 add_action('admin_enqueue_scripts', [ProductImportController::class, 'enqueueAssets']);
@@ -118,8 +139,6 @@ add_action('wp_ajax_start_cli_import', [ProductImportController::class, 'startCl
 add_action('wp_ajax_process_next_chunk', [ProductImportController::class, 'processNextChunk']);
 // add_action('wp_ajax_clear_import_lock', [ProductImportController::class, 'clearImportLock']); // Removed - no longer using lock files
 add_action('wp_ajax_clear_import_logs', [ProductImportController::class, 'clearImportLogs']);
-
-
 
 // ACF Controller
 add_filter('acf/location/rule_values/post_type', [AcfController::class, 'acf_location_rule_values_Post']);
@@ -133,14 +152,26 @@ add_filter('woocommerce_loop_product_link', '__return_empty_string', 10);
 add_action('woocommerce_after_shop_loop_item_title', [\SenhengCore\Controllers\ProductLoopController::class, 'scoin_display_on_product_loop'], 15);
 
 // S-Coin Controller
-add_action('woocommerce_product_after_variable_attributes', [ScoinController::class, 'add_s_coin_field'], 10, 3);
-add_action('woocommerce_save_product_variation', [ScoinController::class, 'save_s_coin_field'], 10, 2);
+// Removed manual S-Coin Value field registration hooks (handled by ACF)
 add_action('wp_enqueue_scripts', [ScoinController::class, 'sh_enqueue_s_coin_assets']);
 // Removed: add_action('woocommerce_after_shop_loop_item_title', [ScoinController::class, 'scoin_display_on_product_loop'], 15); - Now handled in ProductLoopController
 // add_action('woocommerce_before_single_product_summary', [ScoinController::class, 'scoin_display_on_single_product'], 10);
 add_filter('woocommerce_cart_item_name', [ScoinController::class, 'scoin_display_on_cart_item'], 20, 3);
 add_filter('woocommerce_cart_totals_before_order_total', [ScoinController::class, 'sh_cart_totals_scoin_row'], 20, 3);
 add_filter('woocommerce_review_order_before_order_total', [ScoinController::class, 'sh_cart_totals_scoin_row'], 20, 3);
+// S-Coin field in WooCommerce variation tab
+add_action('woocommerce_variation_options_pricing', [ScoinController::class, 'add_variation_scoin_field'], 10, 3);
+add_action('woocommerce_save_product_variation', [ScoinController::class, 'save_variation_scoin_field'], 10, 2);
+
+// S-Coin Export/Import Support MOVED TO ImportExportWoocommerceController
+// add_filter('woocommerce_product_export_column_names', [ScoinController::class, 'add_export_column']);
+// add_filter('woocommerce_product_export_product_default_columns', [ScoinController::class, 'add_export_column']);
+// add_filter('woocommerce_product_export_product_column_s_coin_value', [ScoinController::class, 'export_column_data'], 10, 2);
+// add_filter('woocommerce_csv_product_import_mapping_options', [ScoinController::class, 'add_import_options']);
+// add_filter('woocommerce_csv_product_import_mapping_default_columns', [ScoinController::class, 'add_import_mapping']);
+// add_filter('woocommerce_product_importer_parsed_data', [ScoinController::class, 'handle_parsed_import_data'], 10, 2);
+// add_filter('woocommerce_product_import_pre_insert_product_object', [ScoinController::class, 'import_product_data'], 10, 2);
+// add_action('woocommerce_product_import_inserted_product_object', [ScoinController::class, 'import_variation_data'], 10, 2);
 
 // Custom Add to Cart Controller routes and actions
 add_action('init', [WooCommerceAddtoCartController::class, 'init']);
@@ -150,6 +181,10 @@ add_action('init', [TradeInController::class, 'init']);
 
 // Cart Controller - Handle cart page product extras display
 add_action('init', [CartController::class, 'init']);
+
+// Thank You Controller - Override Funnel Builder order details
+add_action('init', [ThankYouController::class, 'init']);
+
 
 // Woodmart Rating Controller - Override rating display to show zero stars
 add_action('init', [WoodmartRatingController::class, 'init']);
@@ -190,16 +225,21 @@ add_filter('woocommerce_form_field', [CheckoutController::class, 'remove_optiona
 
 add_action('woocommerce_checkout_create_order_line_item', [CheckoutController::class, 'add_scoin_to_order_item'], 10, 4);
 add_action('woocommerce_checkout_update_order_meta', [CheckoutController::class, 'update_order_meta_with_scoin'], 10, 2);
+add_action('woocommerce_checkout_update_order_meta', [CheckoutController::class, 'capture_raw_checkout_post'], 5, 2);
 
 add_action('wp_enqueue_scripts', [CheckoutController::class, 'enqueue_checkout_assets']);
 add_action('woocommerce_checkout_cart_item_quantity', [CheckoutController::class, 'display_product_extras_in_checkout_after_quantity'], 10, 3);
 add_filter('woocommerce_cart_item_subtotal', [CheckoutController::class, 'modify_checkout_item_subtotal'], 2001, 3);
+
+// Order Meta Controller - Admin & Display
+add_action('init', [OrderMetaController::class, 'init']);
 add_action('woocommerce_checkout_create_order_line_item', [CheckoutController::class, 'save_product_extras_to_order_item'], 20, 4);
 
 //BNPL - iPay88 Admin Fee Update Handler
 add_action('wp_ajax_update_ipay88_admin_fee', [CheckoutController::class, 'update_ipay88_admin_fee_callback']);
 add_action('wp_ajax_nopriv_update_ipay88_admin_fee', [CheckoutController::class, 'update_ipay88_admin_fee_callback']);
 add_action('woocommerce_cart_calculate_fees', [CheckoutController::class, 'add_ipay88_admin_fee_to_cart']);
+
 // add_action('woocommerce_review_order_after_order_total', [CheckoutController::class, 'display_ipay88_admin_fee_note']);
 add_action('woocommerce_checkout_order_processed', [CheckoutController::class, 'clear_ipay88_admin_fee']);
 add_action('woocommerce_before_checkout_form', [CheckoutController::class, 'clear_ipay88_admin_fee'], 5);
@@ -213,7 +253,7 @@ add_filter('woocommerce_locate_template', [MyAccountController::class, 'overide_
 // add_action('wp_footer', [SplashController::class, 'footer']);
 
 // Header Controller
-add_action('wp_head', [HeaderController::class, 'renderPWAHeader']);
+// add_action('wp_head', [HeaderController::class, 'renderPWAHeader']);
 
 // HTTP Logger for debugging API calls
 add_action('http_api_debug', [HttpLogger::class, 'listen'], 10, 5);

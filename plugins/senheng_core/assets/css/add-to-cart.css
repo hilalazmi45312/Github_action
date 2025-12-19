@@ -18,8 +18,8 @@
 }
 
 /* Hide stock status for variations - ONLY for WoodMart add-to-cart widget */
-.wd-single-add-cart.wd-design-justify .variations_form > p.stock,
-.wd-single-add-cart .variations_form > p.stock,
+.wd-single-add-cart.wd-design-justify .variations_form>p.stock,
+.wd-single-add-cart .variations_form>p.stock,
 .wd-single-add-cart .wd-single-stock-status {
     display: none !important;
 }
@@ -93,7 +93,7 @@
     margin: 2px 0;
     padding-left: 15px;
     position: relative;
-    background: rgba(0,0,0,0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 3px;
     padding: 5px 5px 5px 15px;
 }
@@ -181,7 +181,7 @@
 .custom-cart-actions {
     display: flex;
     align-items: stretch;
-    background: #ed1c24;
+    background: var(--btn-accented-bgcolor);
     border-radius: 30px;
     overflow: hidden;
     position: relative;
@@ -190,7 +190,7 @@
 }
 
 .wd-sticky-btn.wd-sticky-btn-shown .custom-cart-actions,
-.wd-sticky-btn .custom-cart-actions{
+.wd-sticky-btn .custom-cart-actions {
     width: 100%;
 }
 
@@ -201,7 +201,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #ed1c24;
+    background: var(--btn-accented-bgcolor);
     z-index: 1;
 }
 
@@ -220,7 +220,7 @@
     position: relative;
     flex: 0 0 80px;
     min-width: 80px;
-    background: #ed1c24;
+    background: var(--btn-accented-bgcolor);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -364,13 +364,14 @@
     transform: translateY(0);
 }
 
-.custom-cart-actions small{
+.custom-cart-actions small {
     font-size: 12px !important;
     opacity: 0.9 !important;
     font-weight: 400 !important;
     display: block;
     color: white !important;
 }
+
 /* Disabled state styling */
 .custom-add-to-basket-btn:disabled {
     background: #8b0000 !important;
@@ -542,8 +543,13 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .custom-cart-wrapper.loading .custom-qty-dropdown {
@@ -581,33 +587,33 @@
     text-align: center;
 }
 
-.woocommerce-notices-wrapper .woocommerce-error li{
+.woocommerce-notices-wrapper .woocommerce-error li {
     line-height: 1.25 !important;
 }
 
 
 @media (max-width: 480px) {
-    .single-product .sh-variation-form form.variations_form{
+    .single-product .sh-variation-form form.variations_form {
         justify-content: var(--content-align) !important;
     }
 
-    form.cart{
+    form.cart {
         justify-content: center !important;
     }
 
-    form.variation_form{
+    form.variation_form {
         justify-content: start !important;
     }
 
-    form.cart>*{
+    form.cart>* {
         flex: 0 1 75% !important;
     }
 
-    form.cart .variations{
+    form.cart .variations {
         flex: 1 1 100% !important;
     }
 
-    .woocommerce-variation-add-to-cart>*{
+    .woocommerce-variation-add-to-cart>* {
         max-width: 100%;
     }
 

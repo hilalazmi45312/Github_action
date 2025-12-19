@@ -3,6 +3,196 @@
 class CheckoutController
 {
     /**
+     * Get product by ID
+     * 
+     * @param int $product_id Product or variation ID
+     * @return WC_Product|false
+     */
+    private static function get_product($product_id)
+    {
+        if (!$product_id) {
+            return false;
+        }
+        
+        return wc_get_product((int) $product_id);
+    }
+
+    /**
+     * Check if cart contains only virtual products
+     * 
+     * @return bool
+     */
+    private static function is_cart_only_virtual()
+    {
+        if (!WC()->cart || WC()->cart->is_empty()) {
+            return false;
+        }
+
+        foreach (WC()->cart->get_cart() as $cart_item) {
+            if (!$cart_item['data']->is_virtual()) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    /**
+     * Get deposit metadata for a product
+     * 
+     * @param int $product_id Product ID
+     * @return array{amount: mixed, type: mixed}
+     */
+    private static function get_deposit_meta($product_id)
+    {
+        $product_id = (int) $product_id;
+        return [
+            'amount' => get_post_meta($product_id, '_awcdp_deposits_deposit_amount', true),
+            'type' => get_post_meta($product_id, '_awcdp_deposit_type', true),
+        ];
+    }
+
+    /**
+     * Get waived brands from database
+     * 
+     * @return array List of brand slugs that have admin fee waived
+     */
+    private static function get_waived_brands()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'c_admin_fee_waivers';
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table name from $wpdb->prefix (safe)
+        $rows = $wpdb->get_col("SELECT brand_slug FROM {$table_name}");
+        return array_map('strtolower', array_map('trim', (array)$rows));
+    }
+
+    /**
+     * Calculate all cart-related data in a single loop
+     * This consolidates what was previously 5-6 separate cart iterations.
+     * 
+     * @return array{base_cart_total: float, extras_total: float, has_deposits: bool, deposit_total: float, full_total: float, remaining_amount: float, cart_brands: array}
+     */
+    private static function calculate_cart_data()
+    {
+        $cart = WC()->cart;
+        $data = [
+            'base_cart_total' => 0.0,
+            'extras_total' => 0.0,
+            'has_deposits' => false,
+            'deposit_total' => 0.0,
+            'full_total' => 0.0,
+            'remaining_amount' => 0.0,
+            'cart_brands' => [],
+        ];
+
+        if (!$cart || $cart->is_empty()) {
+            return $data;
+        }
+
+        foreach ($cart->get_cart() as $cart_item) {
+            $qty = isset($cart_item['quantity']) ? (int)$cart_item['quantity'] : 1;
+            $product_id = isset($cart_item['product_id']) ? (int)$cart_item['product_id'] : 0;
+            $variation_id = isset($cart_item['variation_id']) ? (int)$cart_item['variation_id'] : 0;
+            $pid = $variation_id ? $variation_id : $product_id;
+            $product = self::get_product($pid);
+
+            if (!$product) continue;
+
+            // 1. Calculate base cart total (regular price)
+            $regular_price = $product->get_regular_price();
+            if ($regular_price === '' || $regular_price === null) {
+                $regular_price = $product->get_price();
+            }
+            $data['base_cart_total'] += floatval($regular_price) * $qty;
+
+            // 2. Calculate extras total
+            if (isset($cart_item['product_extras']) && !empty($cart_item['product_extras']['selected_products'])) {
+                foreach ($cart_item['product_extras']['selected_products'] as $extra) {
+                    $extra_price = isset($extra['price']) ? floatval($extra['price']) : 0;
+                    $extra_qty = isset($extra['quantity']) ? intval($extra['quantity']) : 1;
+                    
+                    // Apply discount if available
+                    $child_discount = isset($extra['childDiscount']) ? floatval($extra['childDiscount']) : 0;
+                    $discount_type = isset($extra['discountType']) ? $extra['discountType'] : '';
+                    
+                    if ($extra_price > 0 && $child_discount > 0) {
+                        if ($discount_type === 'percent') {
+                            $extra_price = $extra_price - ($extra_price * ($child_discount / 100));
+                        } elseif ($discount_type === 'fixed') {
+                            $extra_price = max(0, $extra_price - $child_discount);
+                        }
+                    }
+                    
+                    $data['extras_total'] += $extra_price * $extra_qty * $qty;
+                }
+            }
+
+            // 3. Check for deposits and calculate deposit amounts
+            $is_deposit = (
+                (isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') ||
+                (isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit') ||
+                (isset($cart_item['_final_tradein_price']))
+            );
+
+            if ($is_deposit) {
+                $data['has_deposits'] = true;
+
+                // Calculate deposit amount
+                if (isset($cart_item['deposit_amount']) && is_numeric($cart_item['deposit_amount'])) {
+                    $data['deposit_total'] += floatval($cart_item['deposit_amount']) * $qty;
+                } elseif (isset($cart_item['_final_tradein_price']) && is_numeric($cart_item['_final_tradein_price'])) {
+                    $data['deposit_total'] += floatval($cart_item['_final_tradein_price']) * $qty;
+                } elseif (isset($cart_item['awcdp_deposit'], $cart_item['awcdp_deposit']['enable']) && $cart_item['awcdp_deposit']['enable'] == 1 && isset($cart_item['awcdp_deposit']['deposit'])) {
+                    $data['deposit_total'] += floatval($cart_item['awcdp_deposit']['deposit']) * $qty;
+                } else {
+                    // Fallback: compute from product meta
+                    $meta = self::get_deposit_meta($product_id);
+                    $base_price = floatval($product->get_price());
+                    if ($base_price === 0.0) {
+                        $base_price = floatval($product->get_regular_price());
+                    }
+                    if ($meta['amount'] !== '' && $meta['amount'] !== null) {
+                        if ($meta['type'] === 'percent') {
+                            $data['deposit_total'] += ($base_price * (floatval($meta['amount']) / 100)) * $qty;
+                        } else {
+                            $data['deposit_total'] += floatval($meta['amount']) * $qty;
+                        }
+                    } else {
+                        $data['deposit_total'] += $base_price * $qty;
+                    }
+                }
+
+                // Calculate full total for deposit items
+                $base_price = $product->get_price();
+                if ($base_price === '' || $base_price === null) {
+                    $base_price = $product->get_regular_price();
+                }
+                
+                // Apply Trade-In Discount
+                if (isset($cart_item['trade_in']) && $cart_item['trade_in'] === 'yes' && class_exists('TradeInController')) {
+                    $discount = TradeInController::get_trade_in_discount($product_id);
+                    $base_price = max(0, floatval($base_price) - $discount);
+                }
+                
+                $data['full_total'] += floatval($base_price) * $qty;
+            }
+
+            // 4. Collect cart brands for admin fee waiver check
+            if ($product_id > 0) {
+                $brands = wp_get_post_terms($product_id, 'product_brand', ['fields' => 'slugs']);
+                if (!is_wp_error($brands) && !empty($brands)) {
+                    $data['cart_brands'][] = strtolower($brands[0]);
+                }
+            }
+        }
+
+        // Calculate remaining amount for deposits
+        $data['remaining_amount'] = max($data['full_total'] - $data['deposit_total'], 0.0);
+
+        return $data;
+    }
+
+    /**
      * Initialize checkout page hooks and filters
      */
     public static function init_checkout_page_hooks()
@@ -20,6 +210,10 @@ class CheckoutController
         add_filter('woocommerce_package_rates', [self::class, 'restrict_shipping_methods_for_tradein_or_deposit'], 100, 2);
         add_filter('woocommerce_shipping_chosen_method', [self::class, 'force_local_pickup_plus_when_restricted'], 10, 3);
 
+        // Debug hook to inject console logs into AJAX response
+        add_action('woocommerce_review_order_before_order_total', [self::class, 'render_debug_logs']);
+        add_filter('woocommerce_update_order_review_fragments', [self::class, 'ensure_fragments_total_consistency'], PHP_INT_MAX);
+
         // Ensure coupon UI strings render correctly on initial page load
         add_filter('woocommerce_checkout_coupon_message', [self::class, 'filter_checkout_coupon_message']);
         add_filter('gettext', [self::class, 'translate_coupon_code_to_discount_code'], 10, 3);
@@ -27,7 +221,11 @@ class CheckoutController
         // Initialize deposit functionality
         self::init_deposit_hooks();
 
-        self::ensure_checkout_totals_include_extras();
+        // Filter cart total on checkout to ensure fees are included
+        add_filter('woocommerce_cart_get_total', [self::class, 'filter_checkout_cart_total'], PHP_INT_MAX, 1);
+
+        // self::ensure_checkout_totals_include_extras();
+        add_action('woocommerce_after_calculate_totals', [self::class, 'ensure_checkout_totals_include_extras'], PHP_INT_MAX);
         
         // Render a custom shop table row after cart contents on checkout
         add_action('woocommerce_review_order_after_cart_contents', [self::class, 'render_custom_checkout_cart_table'], 10);
@@ -45,7 +243,7 @@ class CheckoutController
         // Render Remaining Balance inside order totals so WFACP shows it in summary
         add_action('woocommerce_review_order_before_order_total', [self::class, 'render_remaining_balance_row']);
         add_filter('woocommerce_order_item_name', [self::class, 'checkout_order_item_name'], 10, 3);
-        add_filter('woocommerce_available_payment_gateways', [self::class, 'filter_payment_gateways_for_deposits']);
+
     }
 
     /**
@@ -100,13 +298,9 @@ class CheckoutController
                 // Actual product price below payment option
                 $product_id = isset($cart_item['product_id']) ? $cart_item['product_id'] : 0;
                 $variation_id = isset($cart_item['variation_id']) ? $cart_item['variation_id'] : 0;
-                $product_obj = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+                $product_obj = self::get_product($variation_id ? $variation_id : $product_id);
                 if ($product_obj) {
-                    if (!empty($cart_item['force_regular_price'])) {
-                        $base_price = $product_obj->get_regular_price();
-                    } else {
-                        $base_price = $product_obj->get_price();
-                    }
+                    $base_price = $product_obj->get_price();
                     $product_name .= '<div class="checkout-actual-price"><small>' . esc_html__('Actual Price', 'senheng-core') . ': ' . wc_price($base_price) . '</small></div>';
                 }
             }
@@ -348,8 +542,8 @@ class CheckoutController
                         // Update label and placeholder inside coupon form
                         $root.find('form.checkout_coupon.woocommerce-form-coupon').each(function() {
                             var $form = $(this);
-                            $form.find('label[for="coupon_code"]').text('Discount code');
-                            $form.find('input[name="coupon_code"]').attr('placeholder', 'Discount code');
+                            $form.find('label[for="coupon_code"]').text('Discount Code');
+                            $form.find('input[name="coupon_code"]').attr('placeholder', 'Discount Code');
                         });
 
                         // Tweak toggle message, if present (e.g., "Have a coupon?")
@@ -497,16 +691,24 @@ class CheckoutController
                                 return;
                             }
 
-                            popup.css('display', 'block');
-                            setTimeout(() => {
-                                popup.addClass('active');
-                                jQuery('.login-overlay').fadeIn(300);
-                            }, 0);
-                            popupVisible = true;
+                            if (!popupVisible) {
+                                popup.css('display', 'block');
+                                setTimeout(() => {
+                                    popup.addClass('active');
+                                    jQuery('.login-overlay').fadeIn(300);
+
+                                    // Load the Turnstile only now
+                                    renderLoginTurnstile();
+                                }, 0);
+
+                                popupVisible = true;
+                                return;
+                            }
 
 
                             registerCard.style.display = 'none';
                             loginCard.style.display = 'block';
+                            renderLoginTurnstile();
                         });
 
                         checkoutRegisterTriggers.on('click', function(e) {
@@ -545,6 +747,7 @@ class CheckoutController
                             phoneNumberReg.value = '';
                             passwordReg.value = '';
                             cPasswordReg.value = '';
+                            renderRegisterTurnstile();
                         });
 
                         jQuery(document).on('click', '.login-overlay', function() {
@@ -554,6 +757,8 @@ class CheckoutController
                                 jQuery('.login-container').css('display', 'none');
                             }, 400);
                             popupVisible = false;
+
+                            destroyTurnstile(); // 🔥 Stop Turnstile
                         });
                     });
 
@@ -708,16 +913,37 @@ class CheckoutController
      */
     public static function translate_coupon_code_to_discount_code($translated, $text, $domain)
     {
-        if (!function_exists('is_checkout') || !is_checkout()) {
+        // Early exit: strings too short or too long to contain "coupon"
+        $len = strlen($text);
+        if ($len < 6 || $len > 100) {
             return $translated;
         }
+
+        // Cache is_checkout() check per-request to avoid repeated function calls
+        static $is_checkout = null;
+        if ($is_checkout === null) {
+            $is_checkout = function_exists('is_checkout') && is_checkout();
+        }
+        if (!$is_checkout) {
+            return $translated;
+        }
+
+        // Quick check: if "coupon" not in text, skip regex entirely
+        if (stripos($text, 'coupon') === false) {
+            return $translated;
+        }
+
         // Exact label match
         if (strcasecmp($text, 'Coupon code') === 0) {
             return 'Discount code';
         }
-        // General replacement for other phrases (e.g., Have a coupon?)
+        // Replace "Coupon code" as a phrase first (case insensitive) to prevent "Discount Code code"
+        if (preg_match('/\bcoupon\s+code\b/i', $translated)) {
+            return preg_replace('/\bcoupon\s+code\b/i', 'Discount code', $translated);
+        }
+        // General replacement for standalone "coupon" (e.g., Have a coupon?)
         if (preg_match('/\bcoupon\b/i', $text)) {
-            return preg_replace('/\bcoupon\b/i', 'Discount Code', $translated);
+            return preg_replace('/\bcoupon\b/i', 'discount code', $translated);
         }
         return $translated;
     }
@@ -815,18 +1041,8 @@ class CheckoutController
     // START - Custom Virtual Checkout Fields
     public static function custom_virtual_checkout_fields($fields)
     {
-        $only_virtual = true;
-
-        // Check if cart contains only virtual products
-        foreach (WC()->cart->get_cart() as $cart_item) {
-            if (!$cart_item['data']->is_virtual()) {
-                $only_virtual = false;
-                break;
-            }
-        }
-
         // If only virtual products, unset all default checkout fields
-        if ($only_virtual) {
+        if (self::is_cart_only_virtual()) {
             $fields = array();
 
             // Add custom fields
@@ -876,15 +1092,7 @@ class CheckoutController
 
     public static function validate_custom_virtual_fields()
     {
-        $only_virtual = true;
-        foreach (WC()->cart->get_cart() as $cart_item) {
-            if (!$cart_item['data']->is_virtual()) {
-                $only_virtual = false;
-                break;
-            }
-        }
-
-        if ($only_virtual) {
+        if (self::is_cart_only_virtual()) {
             if ($_POST['id_number'] !== $_POST['confirm_id_number']) {
                 wc_add_notice(__('ID Number and Confirm ID Number do not match.'), 'error');
             }
@@ -906,18 +1114,15 @@ class CheckoutController
 
     public static function restrict_virtual_and_physical_cart($passed, $product_id, $quantity)
     {
-        error_log('Cart Validation: Checking virtual/physical restriction for product ID: ' . $product_id);
 
         // Check if cart is available
         if (!WC()->cart) {
-            error_log('Cart Validation: Cart object not available');
             return $passed;
         }
 
         // Get the product being added
-        $product = wc_get_product($product_id);
+        $product = self::get_product($product_id);
         if (!$product) {
-            error_log('Cart Validation: Product not found for ID: ' . $product_id);
             return $passed;
         }
 
@@ -925,7 +1130,6 @@ class CheckoutController
 
         // Check if cart is empty - if so, allow any product type
         if (WC()->cart->is_empty()) {
-            error_log('Cart Validation: Cart is empty, allowing product');
             return $passed;
         }
 
@@ -941,8 +1145,6 @@ class CheckoutController
         }
 
         if ($has_conflict) {
-            error_log('Cart Validation: Virtual/physical conflict detected - allowing add to cart but marking conflict');
-
             // Store the conflict in session for side cart to detect
             WC()->session->set('mixed_product_conflict', true);
 
@@ -951,7 +1153,6 @@ class CheckoutController
             return $passed;
         }
 
-        error_log('Cart Validation: Virtual/physical restriction passed');
         return $passed;
     }
 
@@ -984,30 +1185,31 @@ class CheckoutController
         $product_id   = $values['product_id'];
         $variation_id = ! empty($values['variation_id']) ? $values['variation_id'] : 0;
 
-        // Get S-Coin value (variation > parent)
-        $s_coin_value = (float) (
+        // Get S-Coin percentage value (variation > parent)
+        $s_coin_percent = (float) (
             get_field('s_coin_value', $variation_id) ?: get_field('s_coin_value', $product_id)
         );
 
+        // Get the product price
         $price = (float) $values['data']->get_price();
 
-        // Gold membership check
-        $user_id = get_current_user_id();
-        $memberships = wc_memberships_get_user_memberships($user_id);
-        $has_gold_membership = false;
-        foreach ($memberships as $membership) {
-            if ($membership->get_plan()->get_slug() === 'p1_membership_gold') {
-                $has_gold_membership = true;
-                break;
-            }
+        // Skip if no S-Coin percentage or no price
+        if ($s_coin_percent <= 0 || $price <= 0) {
+            return;
         }
-        if ($has_gold_membership) {
-            $s_coin_value += (2 / 100) * $price;
-        }
+
+        // Calculate S-Coin value: (percentage/100 * price) * 100
+        // - First divide percentage by 100 to get decimal (e.g., 1% → 0.01)
+        // - Multiply by price to get RM cashback value
+        // - Divide by 100 because 100 S-Coin = RM1
+        $s_coin_value = ($s_coin_percent / 100 * $price) * 100;
 
         // Multiply by quantity
         $qty = isset($values['quantity']) ? (int) $values['quantity'] : 1;
         $s_coin_total_item = $s_coin_value * $qty;
+
+        // Apply 0.5 rounding rule (consistent with ScoinController)
+        $s_coin_total_item = round($s_coin_total_item, 0, PHP_ROUND_HALF_UP);
 
         // Save as order item meta
         $item->add_meta_data('_s_coin_value', $s_coin_total_item);
@@ -1025,6 +1227,24 @@ class CheckoutController
 
         // Save as order meta
         update_post_meta($order_id, '_s_coin_total', $total_scoins);
+    }
+
+    public static function capture_raw_checkout_post($order_id, $data)
+    {
+        $payment_type = $_POST['ipay88_payment_type'] ?? '';
+        $types_mapping = ipay88_types_mapping();
+        $payment_plan = $_POST['ipay88_payment_plan' . $payment_type] ?? '';
+        $admin_fee    = $_POST['ipay88_admin_fee' . $payment_type] ?? '';
+        $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($payment_type, $payment_plan);
+
+        // Persist immediately
+        if ($payment_type) {
+            $payment_name = $types_mapping['name'][$payment_type] ?? '';
+            update_post_meta($order_id, '_ipay88_payment_type_name', sanitize_text_field($payment_name));
+            update_post_meta($order_id, '_ipay88_payment_type', sanitize_text_field($payment_type));
+            update_post_meta($order_id, '_ipay88_payment_plan', sanitize_text_field($payment_plan));
+            update_post_meta($order_id, '_ipay88_admin_fee', sanitize_text_field($admin_fee));
+        }
     }
 
     /**
@@ -1070,7 +1290,7 @@ class CheckoutController
                     $unit_regular = null;
                     if ($product_id) {
                         $variation_id = isset($extra_product_data['variationId']) ? $extra_product_data['variationId'] : '';
-                        $product_obj = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+                        $product_obj = self::get_product($variation_id ? $variation_id : $product_id);
                         if ($product_obj) {
                             $unit_price = (float) $product_obj->get_price();
                             $unit_regular = (float) $product_obj->get_regular_price();
@@ -1099,7 +1319,7 @@ class CheckoutController
                         $image_url = '';
                         if ($product_id) {
                             $variation_id = isset($extra_product_data['variationId']) ? $extra_product_data['variationId'] : '';
-                            $product_for_image = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+                            $product_for_image = self::get_product($variation_id ? $variation_id : $product_id);
                             if ($product_for_image) {
                                 $image_id = $product_for_image->get_image_id();
                                 if ($image_id) {
@@ -1194,22 +1414,15 @@ class CheckoutController
                         $display_value .= '<span class="sh-extras-price">' . wc_price(0) . '</span>'; // Always show RM 0.00 as sales price
                         // Optional original price (strikethrough) if provided by widget data
                         $original_price = null;
-                        error_log('CheckoutController: selected_info data: ' . print_r($info_data, true));
                         if (isset($info_data['infoOriginalPrice']) && is_numeric($info_data['infoOriginalPrice'])) {
                             $original_price = (float) $info_data['infoOriginalPrice'];
-                            error_log('CheckoutController: Found infoOriginalPrice: ' . $original_price);
                         } elseif (isset($info_data['originalPrice']) && is_numeric($info_data['originalPrice'])) {
                             $original_price = (float) $info_data['originalPrice'];
-                            error_log('CheckoutController: Found originalPrice: ' . $original_price);
                         } elseif (isset($info_data['original']) && is_numeric($info_data['original'])) {
                             $original_price = (float) $info_data['original'];
-                            error_log('CheckoutController: Found original: ' . $original_price);
                         }
                         if (!is_null($original_price) && $original_price > 0) {
-                            error_log('CheckoutController: Adding original price: ' . $original_price);
                             $display_value .= '<span class="sh-price-original">' . wc_price($original_price) . '</span>';
-                        } else {
-                            error_log('CheckoutController: No original price found or price is 0');
                         }
                         $display_value .= '<span class="sh-extras-qty">' . esc_html__('Qty:', 'senheng-core') . ' 1</span>';
                         $display_value .= '</div>';
@@ -1278,7 +1491,7 @@ class CheckoutController
                     $unit_price = 0;
                     if ($product_id) {
                         $variation_id = isset($extra_product_data['variationId']) ? $extra_product_data['variationId'] : '';
-                        $product_obj = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+                        $product_obj = self::get_product($variation_id ? $variation_id : $product_id);
                         if ($product_obj) {
                             $unit_price = (float) $product_obj->get_price();
                         }
@@ -1289,6 +1502,18 @@ class CheckoutController
                         $unit_price = isset($extra_product_data['price']) ? (float) $extra_product_data['price'] : 0;
                     }
 
+                    // Apply discount if available
+                    $child_discount = isset($extra_product_data['childDiscount']) ? floatval($extra_product_data['childDiscount']) : 0;
+                    $discount_type = isset($extra_product_data['discountType']) ? $extra_product_data['discountType'] : '';
+                    
+                    if ($unit_price > 0 && $child_discount > 0) {
+                         if ($discount_type === 'percent') {
+                             $unit_price = $unit_price - ($unit_price * ($child_discount / 100));
+                         } elseif ($discount_type === 'fixed') {
+                             $unit_price = max(0, $unit_price - $child_discount);
+                         }
+                    }
+
                     // Calculate total price based on current quantity
                     $product_price = $unit_price * $product_quantity;
 
@@ -1297,7 +1522,7 @@ class CheckoutController
                         $image_url = '';
                         if ($product_id) {
                             $variation_id = isset($extra_product_data['variationId']) ? $extra_product_data['variationId'] : '';
-                            $product_for_image = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+                            $product_for_image = self::get_product($variation_id ? $variation_id : $product_id);
                             if ($product_for_image) {
                                 $image_id = $product_for_image->get_image_id();
                                 if ($image_id) {
@@ -1399,22 +1624,15 @@ class CheckoutController
                         $display_value .= '<span class="sh-extras-price">' . wc_price(0) . '</span>'; // Always show RM 0.00 as sales price
                         // Optional original price (strikethrough) if provided by widget data
                         $original_price = null;
-                        error_log('CheckoutController: selected_info data: ' . print_r($info_data, true));
                         if (isset($info_data['infoOriginalPrice']) && is_numeric($info_data['infoOriginalPrice'])) {
                             $original_price = (float) $info_data['infoOriginalPrice'];
-                            error_log('CheckoutController: Found infoOriginalPrice: ' . $original_price);
                         } elseif (isset($info_data['originalPrice']) && is_numeric($info_data['originalPrice'])) {
                             $original_price = (float) $info_data['originalPrice'];
-                            error_log('CheckoutController: Found originalPrice: ' . $original_price);
                         } elseif (isset($info_data['original']) && is_numeric($info_data['original'])) {
                             $original_price = (float) $info_data['original'];
-                            error_log('CheckoutController: Found original: ' . $original_price);
                         }
                         if (!is_null($original_price) && $original_price > 0) {
-                            error_log('CheckoutController: Adding original price: ' . $original_price);
                             $display_value .= '<span class="sh-price-original">' . wc_price($original_price) . '</span>';
-                        } else {
-                            error_log('CheckoutController: No original price found or price is 0');
                         }
                         $display_value .= '<span class="sh-extras-qty">' . esc_html__('Qty:', 'senheng-core') . ' 1</span>';
                         $display_value .= '</div>';
@@ -1519,12 +1737,25 @@ class CheckoutController
             return;
         }
 
+        // Fix for ReferenceError: $container is not defined in deposits-partial-payments-for-woocommerce
+        // This ensures $container is defined in global scope before the plugin's JS runs
+        wp_add_inline_script('jquery', 'var $container;');
+
         // Enqueue checkout-specific CSS
         wp_enqueue_style(
             'senheng-checkout-extras',
             plugin_dir_url(__FILE__) . '../../assets/css/cart/checkout-extra.css',
             array(),
             '1.0.0'
+        );
+
+        // Enqueue checkout animation JS for Funnel Builder compatibility
+        wp_enqueue_script(
+            'senheng-checkout-animation',
+            plugin_dir_url(__FILE__) . '../../assets/js/checkout-animation.js',
+            array('jquery'),
+            '1.0.1',
+            true
         );
     }
 
@@ -1547,7 +1778,7 @@ class CheckoutController
         // Get the variation product for attribute labels
         $variation_product = null;
         if ($variation_id) {
-            $variation_product = wc_get_product($variation_id);
+            $variation_product = self::get_product($variation_id);
         }
 
         $item_data = array();
@@ -1629,6 +1860,18 @@ class CheckoutController
                     $product_price = isset($extra_product_data['price']) ? floatval($extra_product_data['price']) : 0;
                     $product_quantity = isset($extra_product_data['quantity']) ? intval($extra_product_data['quantity']) : 1;
 
+                    // Apply discount if available
+                    $child_discount = isset($extra_product_data['childDiscount']) ? floatval($extra_product_data['childDiscount']) : 0;
+                    $discount_type = isset($extra_product_data['discountType']) ? $extra_product_data['discountType'] : '';
+
+                    if ($product_price > 0 && $child_discount > 0) {
+                        if ($discount_type === 'percent') {
+                            $product_price = $product_price - ($product_price * ($child_discount / 100));
+                        } elseif ($discount_type === 'fixed') {
+                            $product_price = max(0, $product_price - $child_discount);
+                        }
+                    }
+
                     $extras_total += $product_price * $product_quantity;
                 }
             }
@@ -1646,7 +1889,7 @@ class CheckoutController
         $variation_id = isset($cart_item['variation_id']) ? $cart_item['variation_id'] : 0;
         $quantity = isset($cart_item['quantity']) ? $cart_item['quantity'] : 1;
 
-        $product = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+        $product = self::get_product($variation_id ? $variation_id : $product_id);
         if (!$product) {
             return $subtotal_html;
         }
@@ -1661,7 +1904,7 @@ class CheckoutController
             $deposit_value = floatval($cart_item['awcdp_deposit']['deposit']);
         } elseif ((isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') || (isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit')) {
             $use_deposit = true;
-            $base_price = !empty($cart_item['force_regular_price']) ? $product->get_regular_price() : $product->get_price();
+            $base_price = $product->get_price();
             $meta_amount = get_post_meta($product_id, '_awcdp_deposits_deposit_amount', true);
             $meta_type = get_post_meta($product_id, '_awcdp_deposit_type', true);
             if (!empty($meta_amount)) {
@@ -1676,7 +1919,7 @@ class CheckoutController
         }
 
         if (!$use_deposit) {
-            $base_price = !empty($cart_item['force_regular_price']) ? $product->get_regular_price() : $product->get_price();
+            $base_price = $product->get_price();
         }
 
         $product_part = $use_deposit ? ($deposit_value * $quantity) : ($base_price * $quantity);
@@ -1684,6 +1927,72 @@ class CheckoutController
         $extras_total = self::calculate_product_extras_total($cart_item);
         $total_subtotal = $product_part + ($extras_total * $quantity);
         return wc_price($total_subtotal);
+    }
+
+    /**
+     * Filter cart total on checkout to ensure fees (admin fee) are included
+     * and deposit amounts are correctly reflected in the order total.
+     * 
+     * @param float $total The current cart total
+     * @return float The corrected total including fees
+     */
+    public static function filter_checkout_cart_total($total)
+    {
+        // Only apply on checkout page 
+        if (!function_exists('is_checkout') || !is_checkout()) {
+            return $total;
+        }
+
+        // Avoid running during admin (non-AJAX)
+        if (is_admin() && !defined('DOING_AJAX')) {
+            return $total;
+        }
+
+        // Skip during coupon apply/remove operations to prevent bottleneck with Smart Coupons auto-apply
+        if (doing_action('woocommerce_applied_coupon') || 
+            doing_action('woocommerce_removed_coupon') ||
+            doing_action('woocommerce_coupon_applied') ||
+            doing_action('wc_ajax_apply_coupon') ||
+            doing_action('wp_ajax_woocommerce_apply_coupon') ||
+            doing_action('wp_ajax_nopriv_woocommerce_apply_coupon')) {
+            return $total;
+        }
+
+        $cart = WC()->cart;
+        if (!$cart || $cart->is_empty()) {
+            return $total;
+        }
+
+        // Calculate cart data to check for deposits
+        $cart_data = self::calculate_cart_data();
+        
+        // Get fee and shipping totals
+        $fee_total = floatval($cart->get_fee_total());
+        $shipping_total = floatval($cart->get_shipping_total());
+        $tax_total = floatval($cart->get_total_tax());
+        $discount_total = floatval($cart->get_discount_total());
+
+        // If cart has deposits, use the deposit total + extras as the base
+        if ($cart_data['has_deposits']) {
+            $contents_total = $cart_data['deposit_total'] + $cart_data['extras_total'];
+        } else {
+            $contents_total = floatval($cart->get_cart_contents_total());
+        }
+
+        // Calculate expected total
+        $expected_total = $contents_total + $fee_total + $shipping_total + $tax_total - $discount_total;
+
+        // Always return the expected total when we have deposits to ensure correct pricing
+        if ($cart_data['has_deposits']) {
+            return max(0, $expected_total);
+        }
+
+        // Only override if there's a significant difference (fee not included)
+        if (abs(floatval($total) - $expected_total) > 0.01 && $fee_total > 0) {
+            return $expected_total;
+        }
+
+        return $total;
     }
 
     /**
@@ -1695,6 +2004,16 @@ class CheckoutController
         // Prevent infinite loops
         static $processing = false;
         if ($processing || (is_admin() && !defined('DOING_AJAX'))) {
+            return;
+        }
+
+        // Skip during coupon apply/remove operations to prevent bottleneck with Smart Coupons auto-apply
+        if (doing_action('woocommerce_applied_coupon') || 
+            doing_action('woocommerce_removed_coupon') ||
+            doing_action('woocommerce_coupon_applied') ||
+            doing_action('wc_ajax_apply_coupon') ||
+            doing_action('wp_ajax_woocommerce_apply_coupon') ||
+            doing_action('wp_ajax_nopriv_woocommerce_apply_coupon')) {
             return;
         }
 
@@ -1711,142 +2030,91 @@ class CheckoutController
 
         $processing = true;
 
-        $total_extras_price = 0;
-        $base_cart_total = 0;
-
-        // Calculate both base cart total and extras total
-        foreach ($cart_object->get_cart() as $cart_item_key => $cart_item) {
-            // Add base product full price total (ignore deposit-modified line_total)
-            $qty = isset($cart_item['quantity']) ? (int)$cart_item['quantity'] : 1;
-            $pid = isset($cart_item['variation_id']) && $cart_item['variation_id'] ? (int)$cart_item['variation_id'] : (isset($cart_item['product_id']) ? (int)$cart_item['product_id'] : 0);
-            $p = $pid ? wc_get_product($pid) : null;
-            if ($p) {
-                $bp = $p->get_regular_price();
-                if ($bp === '' || $bp === null) $bp = $p->get_price();
-                $base_cart_total += floatval($bp) * $qty;
-            }
-
-            // Calculate extras for this cart item
-            if (isset($cart_item['product_extras']) && !empty($cart_item['product_extras']['selected_products'])) {
-                $product_extras = $cart_item['product_extras'];
-                $cart_item_quantity = $cart_item['quantity'];
-
-                foreach ($product_extras['selected_products'] as $extra_product) {
-                    $extra_price = isset($extra_product['price']) ? floatval($extra_product['price']) : 0;
-                    $extra_quantity = isset($extra_product['quantity']) ? intval($extra_product['quantity']) : 1;
-
-                    $extra_total = $extra_price * $extra_quantity * $cart_item_quantity;
-                    $total_extras_price += $extra_total;
-                }
-            }
-        }
+        // Use consolidated cart data calculation (single loop, cached per-request)
+        $cart_data = self::calculate_cart_data();
+        $base_cart_total = $cart_data['base_cart_total'];
+        $total_extras_price = $cart_data['extras_total'];
 
         // Calculate what the totals should be
         $expected_cart_contents_total = $base_cart_total + $total_extras_price;
 
-        // Only update if the current totals don't match expected totals (tolerance for floating point)
+        // 1. Update Cart Contents Total (Only if extras exist and mismatch)
         if ($total_extras_price > 0 && abs($cart_object->cart_contents_total - $expected_cart_contents_total) > 0.01) {
             $cart_object->subtotal = $expected_cart_contents_total;
             $cart_object->cart_contents_total = $expected_cart_contents_total;
+        }
 
-            // Update total (cart_contents_total + fees + shipping + taxes - discounts)
-            $shipping_total = $cart_object->get_shipping_total();
-            $tax_total = $cart_object->get_total_tax();
-            $discount_total = $cart_object->get_discount_total();
+        // 2. Update Final Total (Always check if components don't sum up to current total)
+        // This ensures fees (like admin fee) that might be missed by other overrides are included
+        $shipping_total = $cart_object->get_shipping_total();
+        $tax_total = $cart_object->get_total_tax();
+        $discount_total = $cart_object->get_discount_total();
+        $fee_total = method_exists($cart_object, 'get_fee_total') ? $cart_object->get_fee_total() : 0;
 
-            $fee_total = method_exists($cart_object, 'get_fee_total') ? $cart_object->get_fee_total() : 0;
-            $cart_object->total = $expected_cart_contents_total + $fee_total + $shipping_total + $tax_total - $discount_total;
+        // Use the current cart_contents_total (which might have been updated above or by other plugins)
+        $current_contents_total = $cart_object->cart_contents_total;
 
-            error_log("CheckoutController: Updated cart totals - Base: {$base_cart_total}, Extras: {$total_extras_price}, Final: {$cart_object->total}");
+        $expected_final_total = $current_contents_total + $fee_total + $shipping_total + $tax_total - $discount_total;
+
+        if (abs($cart_object->get_total('edit') - $expected_final_total) > 0.01) {
+             // Use set_total() to properly update the internal totals array that get_total() reads from
+             $cart_object->set_total($expected_final_total);
         }
 
         $processing = false;
     }
 
     /**
-     * Calculate checkout totals including extras - direct approach
-     * This method directly calculates and applies the correct totals for checkout
+     * Ensure total is consistent before fragments generation
+     * This counters any resets by other plugins (like Funnel Builder)
+     * AND overwrites the fragments with the corrected values.
      */
-    public static function calculate_checkout_totals_with_extras()
-    {
-        // Only run on checkout page
-        if (!is_checkout()) {
-            return;
-        }
-
-        // Get cart object
+    public static function ensure_fragments_total_consistency($fragments) {
         $cart_object = WC()->cart;
-        if (!$cart_object || $cart_object->is_empty()) {
-            return;
+        
+        // Use consolidated cart data calculation (single loop, cached per-request)
+        $cart_data = self::calculate_cart_data();
+        $base_cart_total = $cart_data['base_cart_total'];
+        $total_extras_price = $cart_data['extras_total'];
+        
+        $current_contents_total = $base_cart_total + $total_extras_price;
+        
+        $shipping_total = $cart_object->get_shipping_total();
+        $tax_total = $cart_object->get_total_tax();
+        $discount_total = $cart_object->get_discount_total();
+        $fee_total = method_exists($cart_object, 'get_fee_total') ? $cart_object->get_fee_total() : 0;
+
+        $calc_contents_total = $current_contents_total;
+        $expected_final_total = $calc_contents_total + $fee_total + $shipping_total + $tax_total - $discount_total;
+        
+        $current_total = $cart_object->get_total('edit');
+        
+        if (abs($current_total - $expected_final_total) > 0.01) {
+             // Use set_total() to properly update the internal totals array
+             $cart_object->set_total($expected_final_total);
+             if (abs($cart_object->get_cart_contents_total() - $calc_contents_total) > 0.01 && $total_extras_price > 0) {
+                 $cart_object->set_cart_contents_total($calc_contents_total);
+             }
+             
+             // FORCE UPDATE FRAGMENTS
+             // Funnel Builder keys
+             if (isset($fragments['.cart_total'])) {
+                 $fragments['.cart_total'] = $cart_object->get_total('edit');
+             }
+             if (isset($fragments['.wfacp_order_total'])) {
+                 // Regenerate the HTML for order total
+                 // Assuming standard Woo function is reliable once cart->total is fixed
+                 $fragments['.wfacp_order_total'] = wc_cart_totals_order_total_html();
+             }
+
+        } else {
+             // Even if correct, ensure fragment reflects it (paranoid mode)
+             if (isset($fragments['.cart_total']) && $fragments['.cart_total'] != $expected_final_total) {
+                  $fragments['.cart_total'] = $expected_final_total;
+             }
         }
-
-        $total_extras_price = 0;
-        $base_cart_total = 0;
-
-        // Calculate both base cart total and extras total
-        foreach ($cart_object->get_cart() as $cart_item_key => $cart_item) {
-            // Add base product full price total (ignore deposit-modified line_total)
-            $qty = isset($cart_item['quantity']) ? (int)$cart_item['quantity'] : 1;
-            $pid = isset($cart_item['variation_id']) && $cart_item['variation_id'] ? (int)$cart_item['variation_id'] : (isset($cart_item['product_id']) ? (int)$cart_item['product_id'] : 0);
-            $p = $pid ? wc_get_product($pid) : null;
-            if ($p) {
-                $bp = $p->get_regular_price();
-                if ($bp === '' || $bp === null) $bp = $p->get_price();
-                $base_cart_total += floatval($bp) * $qty;
-            }
-
-            // Calculate extras for this cart item
-            if (isset($cart_item['product_extras']) && !empty($cart_item['product_extras']['selected_products'])) {
-                $product_extras = $cart_item['product_extras'];
-                $cart_item_quantity = $cart_item['quantity'];
-
-                foreach ($product_extras['selected_products'] as $extra_product) {
-                    $extra_price = isset($extra_product['price']) ? floatval($extra_product['price']) : 0;
-                    $extra_quantity = isset($extra_product['quantity']) ? intval($extra_product['quantity']) : 1;
-
-                    $extra_total = $extra_price * $extra_quantity * $cart_item_quantity;
-                    $total_extras_price += $extra_total;
-                }
-            }
-        }
-
-        // Calculate what the totals should be
-        $expected_cart_contents_total = $base_cart_total + $total_extras_price;
-
-        // Force update the totals
-        if ($total_extras_price > 0) {
-            $cart_object->subtotal = $expected_cart_contents_total;
-            $cart_object->cart_contents_total = $expected_cart_contents_total;
-
-            // Update total (cart_contents_total + fees + shipping + taxes - discounts)
-            $shipping_total = $cart_object->get_shipping_total();
-            $tax_total = $cart_object->get_total_tax();
-            $discount_total = $cart_object->get_discount_total();
-
-            $fee_total = method_exists($cart_object, 'get_fee_total') ? $cart_object->get_fee_total() : 0;
-            $cart_object->total = $expected_cart_contents_total + $fee_total + $shipping_total + $tax_total - $discount_total;
-
-            error_log("CheckoutController: Direct calculation - Base: {$base_cart_total}, Extras: {$total_extras_price}, Final: {$cart_object->total}");
-        }
-    }
-
-    /**
-     * Force cart totals recalculation on checkout page load
-     */
-    public static function force_checkout_totals_recalculation()
-    {
-        // Only run on checkout page
-        if (!is_checkout()) {
-            return;
-        }
-
-        // Force WooCommerce to recalculate cart totals
-        if (WC()->cart && !WC()->cart->is_empty()) {
-            // Clear any cached totals by setting needs_calculation flag            
-            WC()->cart->calculate_totals();
-
-            error_log("CheckoutController: Forced cart totals recalculation on checkout page");
-        }
+        
+        return $fragments;
     }
 
     /**
@@ -1935,8 +2203,6 @@ class CheckoutController
 
     public static function add_ipay88_admin_fee_to_cart($cart)
     {
-        global $wpdb;
-
         if (is_admin() && !defined('DOING_AJAX')) {
             return;
         }
@@ -1946,19 +2212,12 @@ class CheckoutController
         // Only proceed if admin fee exists
         if ($admin_fee > 0) {
 
-            // Get waived brands from DB
-            $table_name = $wpdb->prefix . 'c_admin_fee_waivers';
-            $rows = $wpdb->get_col("SELECT brand_slug FROM {$table_name}");
-            $waived_brands = array_map('strtolower', array_map('trim', (array)$rows));
+            // Get waived brands from DB (cached per-request)
+            $waived_brands = self::get_waived_brands();
 
-            $cart_brands = [];
-
-            foreach ($cart->get_cart() as $item) {
-                $brands = wp_get_post_terms($item['product_id'], 'product_brand', ['fields' => 'slugs']);
-                if (!is_wp_error($brands) && !empty($brands)) {
-                    $cart_brands[] = strtolower($brands[0]); // only take first brand
-                }
-            }
+            // Get cart brands from consolidated cart data (cached per-request)
+            $cart_data = self::calculate_cart_data();
+            $cart_brands = $cart_data['cart_brands'];
 
             if (empty($cart_brands)) {
                 $cart->add_fee(__('Admin Fee', 'woocommerce'), $admin_fee);
@@ -1971,7 +2230,8 @@ class CheckoutController
                 // All items same brand and it's waived → skip fee
                 $cart->add_fee(__('Admin Fee', 'woocommerce'), $admin_fee);
                 $brand = ucfirst($unique_brands[0]);
-                $cart->add_fee(__("{$brand} Fee", 'woocommerce'), -$admin_fee);
+                // $cart->add_fee(__("{$brand} Fee", 'woocommerce'), -$admin_fee);
+                $cart->add_fee(__("Admin Waiver", 'woocommerce'), -$admin_fee);
             } else {
                 // Mixed brands → charge normal fee
                 $cart->add_fee(__('Admin Fee', 'woocommerce'), $admin_fee);
@@ -2030,12 +2290,28 @@ class CheckoutController
                     $item->add_meta_data('_deposit_option', 'deposit');
 
                     // Prefer AWCDP calculated final price; fall back to legacy fields
+                    $deposit_amount = 0;
                     if (isset($cart_item['_final_tradein_price'])) {
-                        $item->add_meta_data('_deposit_amount', $cart_item['_final_tradein_price']);
+                        $deposit_amount = floatval($cart_item['_final_tradein_price']);
+                        $item->add_meta_data('_deposit_amount', $deposit_amount);
                     } elseif (isset($cart_item['deposit_amount'])) {
-                        $item->add_meta_data('_deposit_amount', $cart_item['deposit_amount']);
+                        $deposit_amount = floatval($cart_item['deposit_amount']);
+                        $item->add_meta_data('_deposit_amount', $deposit_amount);
                     } elseif (isset($cart_item['product_extras']['deposit_amount'])) {
-                        $item->add_meta_data('_deposit_amount', $cart_item['product_extras']['deposit_amount']);
+                        $deposit_amount = floatval($cart_item['product_extras']['deposit_amount']);
+                        $item->add_meta_data('_deposit_amount', $deposit_amount);
+                    }
+
+                    // Calculate and store remaining balance per item
+                    // deposit_amount is per-unit, so remaining = (price - deposit) * qty
+                    $product = $item->get_product();
+                    if ($product && $deposit_amount > 0) {
+                        $quantity = $item->get_quantity();
+                        $unit_price = floatval($product->get_price());
+                        // Remaining balance = (full unit price - deposit per unit) * quantity
+                        $remaining_per_unit = max(0, $unit_price - $deposit_amount);
+                        $total_remaining = $remaining_per_unit * $quantity;
+                        $item->add_meta_data('_remaining_balance', $total_remaining);
                     }
 
                     if (isset($cart_item['deposit_percentage'])) {
@@ -2066,9 +2342,10 @@ class CheckoutController
         }
 
         // Render as a totals table row (does not affect totals)
+        // Wrap in <span> tags for WFACP shimmer animation compatibility
         echo '<tr class="fee remaining-balance-row">'
-            . '<th>' . esc_html__('Remaining Balance', 'senheng-core') . '</th>'
-            . '<td class="amount">' . wc_price($totals['remaining_amount']) . '</td>'
+            . '<th><span>' . esc_html__('Remaining Balance', 'senheng-core') . '</span></th>'
+            . '<td><span class="woocommerce-Price-amount amount">' . wc_price($totals['remaining_amount']) . '</span></td>'
             . '</tr>';
     }
 
@@ -2083,9 +2360,10 @@ class CheckoutController
             return;
         }
 
+        // Wrap in <span> tags for WFACP shimmer animation compatibility
         echo '<tr class="fee deposit-payment-row order-paid">'
-            . '<th>' . esc_html__('Deposit Payment', 'senheng-core') . '</th>'
-            . '<td class="amount">' . wc_price($totals['deposit_total']) . '</td>'
+            . '<th><span>' . esc_html__('Deposit Payment', 'senheng-core') . '</span></th>'
+            . '<td><span class="woocommerce-Price-amount amount">' . wc_price($totals['deposit_total']) . '</span></td>'
             . '</tr>';
     }
 
@@ -2097,94 +2375,14 @@ class CheckoutController
      */
     private static function calculate_deposit_totals()
     {
-        $cart = WC()->cart;
-        $has_deposits = false;
-        $deposit_total = 0.0;
-        $full_total = 0.0;
-
-        if (!$cart) {
-            return [
-                'has_deposits' => false,
-                'deposit_total' => 0.0,
-                'full_total' => 0.0,
-                'remaining_amount' => 0.0,
-            ];
-        }
-
-        foreach ($cart->get_cart() as $cart_item) {
-            $quantity = isset($cart_item['quantity']) ? (int) $cart_item['quantity'] : 1;
-
-            $is_deposit = (
-                (isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') ||
-                (isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit') ||
-                (isset($cart_item['_final_tradein_price']))
-            );
-
-            if (!$is_deposit) {
-                continue;
-            }
-
-            $has_deposits = true;
-
-            // Deposit amount from cart item (AWCDP/trade-in unified)
-            if (isset($cart_item['deposit_amount']) && is_numeric($cart_item['deposit_amount'])) {
-                $deposit_total += floatval($cart_item['deposit_amount']) * $quantity;
-            } elseif (isset($cart_item['_final_tradein_price']) && is_numeric($cart_item['_final_tradein_price'])) {
-                $deposit_total += floatval($cart_item['_final_tradein_price']) * $quantity;
-            } elseif (isset($cart_item['awcdp_deposit'], $cart_item['awcdp_deposit']['enable']) && $cart_item['awcdp_deposit']['enable'] == 1 && isset($cart_item['awcdp_deposit']['deposit'])) {
-                $deposit_total += floatval($cart_item['awcdp_deposit']['deposit']) * $quantity;
-            } elseif ((isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') || (isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit')) {
-                // Compute deposit from product meta as a fallback
-                $meta_amount = get_post_meta($cart_item['product_id'], '_awcdp_deposits_deposit_amount', true);
-                $meta_type = get_post_meta($cart_item['product_id'], '_awcdp_deposit_type', true);
-                // Determine base price respecting sale/regular logic
-                $product_id_for_price = isset($cart_item['variation_id']) && $cart_item['variation_id'] ? $cart_item['variation_id'] : (isset($cart_item['product_id']) ? $cart_item['product_id'] : 0);
-                $product_for_price = $product_id_for_price ? wc_get_product($product_id_for_price) : null;
-                $base_price_for_deposit = 0.0;
-                if ($product_for_price) {
-                    $base_price_for_deposit = !empty($cart_item['force_regular_price']) ? floatval($product_for_price->get_regular_price()) : floatval($product_for_price->get_price());
-                    if ($base_price_for_deposit === 0.0) {
-                        $base_price_for_deposit = floatval($product_for_price->get_regular_price());
-                    }
-                }
-                if ($meta_amount !== '' && $meta_amount !== null) {
-                    if ($meta_type === 'percent') {
-                        $deposit_total += ($base_price_for_deposit * (floatval($meta_amount) / 100)) * $quantity;
-                    } else {
-                        $deposit_total += floatval($meta_amount) * $quantity;
-                    }
-                } else {
-                    $deposit_total += $base_price_for_deposit * $quantity;
-                }
-            }
-
-            // Original product full price: use actual price respecting force_regular_price for consistency
-            $product_id = isset($cart_item['variation_id']) && $cart_item['variation_id'] ? $cart_item['variation_id'] : (isset($cart_item['product_id']) ? $cart_item['product_id'] : 0);
-            $product_obj = $product_id ? wc_get_product($product_id) : null;
-            if ($product_obj) {
-                $base_price = !empty($cart_item['force_regular_price']) ? $product_obj->get_regular_price() : $product_obj->get_price();
-                if ($base_price === '' || $base_price === null) {
-                    // Fallback opposite
-                    $base_price = !empty($cart_item['force_regular_price']) ? $product_obj->get_price() : $product_obj->get_regular_price();
-                }
-
-                // Apply Trade-In Discount
-                if (isset($cart_item['trade_in']) && $cart_item['trade_in'] === 'yes') {
-                    $discount = TradeInController::get_trade_in_discount($cart_item['product_id']);
-                    $base_price = max(0, floatval($base_price) - $discount);
-                }
-
-                $full_total += floatval($base_price) * $quantity;
-            }
-        }
-
-        $remaining_amount = max($full_total - $deposit_total, 0.0);
+        // Use consolidated cart data calculation (already has deposit data)
+        $cart_data = self::calculate_cart_data();
 
         return [
-            'has_deposits' => $has_deposits,
-            'deposit_total' => $deposit_total,
-            'full_total' => $full_total,
-            'remaining_amount' => $remaining_amount,
+            'has_deposits' => $cart_data['has_deposits'],
+            'deposit_total' => $cart_data['deposit_total'],
+            'full_total' => $cart_data['full_total'],
+            'remaining_amount' => $cart_data['remaining_amount'],
         ];
     }
 
@@ -2245,6 +2443,8 @@ class CheckoutController
 
         // Output inside a single table row to keep markup valid under Woo table structure
         echo '<tr class="sh-custom-shop-table-row"><td colspan="100%">';
+        // Add hidden container to satisfy deposits-partial-payments-for-woocommerce JS
+        echo '<div class="awcdp-deposits-wrapper" style="display:none;"></div>';
         echo '<div class="sh-custom-shop-table">';
 
         $item_number = 0;
@@ -2252,7 +2452,7 @@ class CheckoutController
             $item_number++;
             $product_id   = isset($cart_item['product_id']) ? (int) $cart_item['product_id'] : 0;
             $variation_id = isset($cart_item['variation_id']) ? (int) $cart_item['variation_id'] : 0;
-            $product_obj  = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
+            $product_obj  = self::get_product($variation_id ? $variation_id : $product_id);
             $qty          = isset($cart_item['quantity']) ? (int) $cart_item['quantity'] : 1;
 
             if (!$product_obj) continue;
@@ -2261,7 +2461,7 @@ class CheckoutController
             $product_image = $product_obj->get_image('thumbnail');
             
             // Calculate price (actual/base)
-            $base_price = !empty($cart_item['force_regular_price']) ? $product_obj->get_regular_price() : $product_obj->get_price();
+            $base_price = $product_obj->get_price();
             $line_total = floatval($base_price) * $qty;
 
             // Calculate deposit subtotal when applicable
@@ -2436,6 +2636,18 @@ class CheckoutController
                 } elseif (isset($extra_product_data['productPrice']) && is_numeric($extra_product_data['productPrice'])) {
                     $price_unit = floatval($extra_product_data['productPrice']);
                 }
+
+                // Apply discount if available
+                $child_discount = isset($extra_product_data['childDiscount']) ? floatval($extra_product_data['childDiscount']) : 0;
+                $discount_type = isset($extra_product_data['discountType']) ? $extra_product_data['discountType'] : '';
+                
+                if ($price_unit > 0 && $child_discount > 0) {
+                     if ($discount_type === 'percent') {
+                         $price_unit = $price_unit - ($price_unit * ($child_discount / 100));
+                     } elseif ($discount_type === 'fixed') {
+                         $price_unit = max(0, $price_unit - $child_discount);
+                     }
+                }
                 
                 $original_unit = null;
                 if (isset($extra_product_data['originalPrice']) && is_numeric($extra_product_data['originalPrice'])) {
@@ -2451,7 +2663,7 @@ class CheckoutController
                     $out .= '<div class="sh-extras-item">';
                     $out .= '<div class="sh-extras-image">';
                     if (!empty($extra_product_data['productId'])) {
-                        $extra_product = wc_get_product($extra_product_data['productId']);
+                        $extra_product = self::get_product($extra_product_data['productId']);
                         if ($extra_product) {
                             $out .= $extra_product->get_image('thumbnail');
                         }
@@ -2480,5 +2692,37 @@ class CheckoutController
         return $out;
     }
 
+    /**
+     * Helper to log to browser console
+     */
+    public static function console_log($data = null, $label = '') {
+        // Collect logs in a static array
+        static $logs = [];
+        // If data is provided, add to log
+        if ($data !== null) {
+            $logs[] = ['label' => $label, 'data' => $data];
+        }
+        // Always return logs (for retrieval)
+        return $logs;
+    }
 
+    /**
+     * Render collected logs as script tag
+     */
+    public static function render_debug_logs() {
+        // Retrieve logs without adding new one
+        $logs = self::console_log(null); 
+        
+        if (empty($logs)) return;
+
+        echo '<script>';
+        foreach ($logs as $log) {
+            $json = json_encode($log['data']);
+            $label = $log['label'] ? "{$log['label']}: " : '';
+            // Sanitize script output to avoid breaking JS
+            echo "console.log('PHP DEBUG: " . esc_js($label) . "', " . $json . ");";
+        }
+        echo '</script>';
+    }
 }
+

@@ -64,8 +64,16 @@ class LoginController
         $phone = sanitize_text_field($_POST['phone']);
         $tx_id = sanitize_text_field($_POST['tx_id']);
         $type  = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : 'CONTACT';
+        $cf_token = sanitize_text_field($_POST['cf_token']);
 
         $api = new MagentoAPI();
+
+        $cf_validation = $api->verify_turnstile_token($cf_token);
+        if ($cf_validation['flag'] !== 1) {
+            wp_send_json_error($cf_validation);
+            return;
+        }
+
         $loginData = $api->login($tx_id, $phone, $otp, $type);
 
         if ($loginData['flag'] !== 1) {
@@ -95,10 +103,21 @@ class LoginController
             ]);
         }
 
+        // Retrieve ambassador ID once at login
+        $config = woo_authorization_salt();
+        $idsso  = $loginData['idsso'];
+
+        $ambassador_id = ImpactController::get_ambassador_id($user->ID, $config, $idsso);
+
+        // If ambassador found, mark user as signed up automatically
+        if ($ambassador_id) {
+            update_user_meta($user->ID, 'impact_ambassador_sign_up', true);
+        }
+
         $plan_slug = mapping_membership_SH($loginData['cust_cardtype']);
         $plan_id   = my_get_membership_plan_id_by_slug($plan_slug);
         if ($plan_id) {
-            $assignMembership = my_assign_or_switch_membership( $user->ID, $plan_id, 'active', true );
+            $assignMembership = my_assign_or_switch_membership($user->ID, $plan_id, 'active', true);
         }
 
         // User meta fields to update
@@ -127,17 +146,36 @@ class LoginController
             update_user_meta($user->ID, $key, $value);
         }
 
+        // Clean (to ensure no cache plugins interfere)
+        wp_cache_delete($user->ID, 'users');
+        wp_cache_delete($user->user_login, 'userlogins');
+
         // Force login
         wp_set_current_user($user->ID);
         wp_set_auth_cookie($user->ID, true); // true = remember me
 
+        do_action('wp_login', $user->user_login, $user);
+
         // Set Insider login event cookie
         setcookie('insider_login_event', $user->ID, time() + 300, "/");
+
+        // Determine redirect URL - avoid just HTTP_REFERER for homepage
+        $redirect_url = home_url('/'); // Default to homepage
+        if (!empty($_SERVER['HTTP_REFERER'])) {
+            $referer = esc_url_raw($_SERVER['HTTP_REFERER']);
+            // Only use referer if it's from the same site
+            if (strpos($referer, home_url()) === 0) {
+                $redirect_url = $referer;
+            }
+        }
+
+        // Add cache busting parameter to force fresh page load
+        $redirect_url = add_query_arg('logged_in', time(), $redirect_url);
 
         // Send success response
         wp_send_json_success([
             'message' => 'Login successful.',
-            'redirect_url' => esc_url_raw($_SERVER['HTTP_REFERER']),
+            'redirect_url' => $redirect_url,
         ]);
     }
 
@@ -150,7 +188,16 @@ class LoginController
         $arr_post['provider'] = sanitize_text_field($_POST['provider']);
         $arr_post['photo_url'] = sanitize_text_field($_POST['photo_url']);
 
+        $cf_token = sanitize_text_field($_POST['cf_token']);
+
         $api = new MagentoAPI();
+
+        $cf_validation = $api->verify_turnstile_token($cf_token);
+        if ($cf_validation['flag'] !== 1) {
+            wp_send_json_error($cf_validation);
+            return;
+        }
+
         $loginData = $api->socialLogin($arr_post);
 
         if ($loginData['flag'] !== 1) {
@@ -180,10 +227,21 @@ class LoginController
             ]);
         }
 
+        // Retrieve ambassador ID once at login
+        $config = woo_authorization_salt();
+        $idsso  = $loginData['idsso'];
+
+        $ambassador_id = ImpactController::get_ambassador_id($user->ID, $config, $idsso);
+
+        // If ambassador found, mark user as signed up automatically
+        if ($ambassador_id) {
+            update_user_meta($user->ID, 'impact_ambassador_sign_up', true);
+        }
+
         $plan_slug = mapping_membership_SH($loginData['cust_cardtype']);
         $plan_id   = my_get_membership_plan_id_by_slug($plan_slug);
         if ($plan_id) {
-            $assignMembership = my_assign_or_switch_membership( $user->ID, $plan_id, 'active', true );
+            $assignMembership = my_assign_or_switch_membership($user->ID, $plan_id, 'active', true);
         }
 
         // User meta fields to update
@@ -212,17 +270,36 @@ class LoginController
             update_user_meta($user->ID, $key, $value);
         }
 
+        // Clean (to ensure no cache plugins interfere)
+        wp_cache_delete($user->ID, 'users');
+        wp_cache_delete($user->user_login, 'userlogins');
+
         // Force login
         wp_set_current_user($user->ID);
         wp_set_auth_cookie($user->ID, true); // true = remember me
 
+        do_action('wp_login', $user->user_login, $user);
+
         // Set Insider login event cookie
         setcookie('insider_login_event', $user->ID, time() + 300, "/");
+
+        // Determine redirect URL - avoid just HTTP_REFERER for homepage
+        $redirect_url = home_url('/'); // Default to homepage
+        if (!empty($_SERVER['HTTP_REFERER'])) {
+            $referer = esc_url_raw($_SERVER['HTTP_REFERER']);
+            // Only use referer if it's from the same site
+            if (strpos($referer, home_url()) === 0) {
+                $redirect_url = $referer;
+            }
+        }
+
+        // Add cache busting parameter to force fresh page load
+        $redirect_url = add_query_arg('logged_in', time(), $redirect_url);
 
         // Send success response
         wp_send_json_success([
             'message' => 'Login successful.',
-            'redirect_url' => esc_url_raw($_SERVER['HTTP_REFERER']),
+            'redirect_url' => $redirect_url,
         ]);
     }
 

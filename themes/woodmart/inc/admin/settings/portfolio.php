@@ -113,12 +113,12 @@ Options::add_field(
 		),
 		'default'     => 3,
 		'priority'    => 12,
-		't_tab'       => [
+		't_tab'       => array(
 			'id'    => 'project_columns_tabs',
 			'tab'   => esc_html__( 'Desktop', 'woodmart' ),
 			'icon'  => 'xts-i-desktop',
 			'style' => 'devices',
-		],
+		),
 	)
 );
 
@@ -162,11 +162,11 @@ Options::add_field(
 		),
 		'default'     => 'auto',
 		'priority'    => 13,
-		't_tab'       => [
+		't_tab'       => array(
 			'id'   => 'project_columns_tabs',
 			'tab'  => esc_html__( 'Tablet', 'woodmart' ),
 			'icon' => 'xts-i-tablet',
-		],
+		),
 	)
 );
 
@@ -210,11 +210,11 @@ Options::add_field(
 		),
 		'default'     => 'auto',
 		'priority'    => 14,
-		't_tab'       => [
+		't_tab'       => array(
 			'id'   => 'project_columns_tabs',
 			'tab'  => esc_html__( 'Mobile', 'woodmart' ),
 			'icon' => 'xts-i-phone',
-		],
+		),
 	)
 );
 
@@ -429,7 +429,7 @@ Options::add_field(
 		),
 		'default'     => 'date',
 		'priority'    => 50,
-		'class'    => 'xts-col-6',
+		'class'       => 'xts-col-6',
 	)
 );
 
@@ -453,7 +453,121 @@ Options::add_field(
 		),
 		'default'     => 'DESC',
 		'priority'    => 60,
-		'class'    => 'xts-col-6',
+		'class'       => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'portfolio_archive_layout',
+		'name'        => esc_html__( 'Sidebar position', 'woodmart' ),
+		'description' => esc_html__( 'Select main content and sidebar alignment for portfolio pages.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'portfolio_archive_section',
+		'options'     => array(
+			'full-width'    => array(
+				'name'  => esc_html__( '1 Column', 'woodmart' ),
+				'value' => 'full-width',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/none.png',
+			),
+			'sidebar-left'  => array(
+				'name'  => esc_html__( '2 Columns Left', 'woodmart' ),
+				'value' => 'sidebar-left',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/left.png',
+			),
+			'sidebar-right' => array(
+				'name'  => esc_html__( '2 Columns Right', 'woodmart' ),
+				'value' => 'sidebar-right',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/right.png',
+			),
+		),
+		'default'     => 'sidebar-right',
+		'priority'    => 70,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'portfolio_archive_sidebar_width',
+		'name'        => esc_html__( 'Sidebar size', 'woodmart' ),
+		'description' => esc_html__( 'You can set different sizes for your portfolio pages sidebar', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'portfolio_archive_section',
+		'options'     => array(
+			2 => array(
+				'name'  => esc_html__( 'Small', 'woodmart' ),
+				'value' => 2,
+			),
+			3 => array(
+				'name'  => esc_html__( 'Medium', 'woodmart' ),
+				'value' => 2,
+			),
+			4 => array(
+				'name'  => esc_html__( 'Large', 'woodmart' ),
+				'value' => 2,
+			),
+		),
+		'default'     => 3,
+		'priority'    => 80,
+		'class'       => 'xts-tooltip-bordered',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'portfolio_archive_hide_sidebar',
+		'section'     => 'portfolio_archive_section',
+		'name'        => esc_html__( 'Off canvas sidebar for desktop', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on desktop and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'off-canvas-sidebar-for-mobile.mp4" autoplay loop muted></video>',
+		'type'        => 'switcher',
+		'default'     => '0',
+		't_tab'       => array(
+			'id'    => 'portfolio_archive_hide_sidebar_tabs',
+			'tab'   => esc_html__( 'Desktop', 'woodmart' ),
+			'icon'  => 'xts-i-desktop',
+			'style' => 'devices',
+		),
+		'priority'    => 90,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'portfolio_archive_hide_sidebar_tablet',
+		'name'        => esc_html__( 'Off canvas sidebar for tablet', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on tablet and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'portfolio_archive_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'portfolio_archive_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Tablet', 'woodmart' ),
+			'icon' => 'xts-i-tablet',
+		),
+		'priority'    => 100,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'portfolio_archive_hide_sidebar_mobile',
+		'name'        => esc_html__( 'Off canvas sidebar for mobile', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on mobile devices and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'portfolio_archive_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'portfolio_archive_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+			'icon' => 'xts-i-phone',
+		),
+		'priority'    => 110,
 	)
 );
 
@@ -489,21 +603,61 @@ Options::add_field(
 			),
 		),
 		'default'     => 'hover',
-		'priority'    => 70,
+		'priority'    => 120,
 		'class'       => 'xts-btn-set-img-col-3',
 	)
 );
 
 Options::add_field(
 	array(
-		'id'          => 'portoflio_image_size',
-		'name'        => esc_html__( 'Images size', 'woodmart' ),
-		'description' => esc_html__( 'Enter image size. Example: \'thumbnail\', \'medium\', \'large\', \'full\' or other sizes defined by current theme.', 'woodmart' ),
-		'group'       => esc_html__( 'Project options', 'woodmart' ),
-		'type'        => 'text_input',
-		'section'     => 'portfolio_archive_section',
-		'default'     => 'large',
-		'priority'    => 80,
+		'id'       => 'portoflio_image_size',
+		'name'     => esc_html__( 'Images size', 'woodmart' ),
+		'group'    => esc_html__( 'Project options', 'woodmart' ),
+		'type'     => 'select',
+		'section'  => 'portfolio_archive_section',
+		'default'  => 'large',
+		'options'  => woodmart_get_default_image_sizes(),
+		'priority' => 130,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'portoflio_image_custom_width',
+		'name'     => esc_html__( 'Width', 'woodmart' ),
+		'group'    => esc_html__( 'Project options', 'woodmart' ),
+		'type'     => 'text_input',
+		'section'  => 'portfolio_archive_section',
+		'default'  => '',
+		'requires' => array(
+			array(
+				'key'     => 'portoflio_image_size',
+				'compare' => 'equals',
+				'value'   => 'custom',
+			),
+		),
+		'priority' => 135,
+		'class'    => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'portoflio_image_custom_height',
+		'name'     => esc_html__( 'Height', 'woodmart' ),
+		'group'    => esc_html__( 'Project options', 'woodmart' ),
+		'type'     => 'text_input',
+		'section'  => 'portfolio_archive_section',
+		'default'  => '',
+		'requires' => array(
+			array(
+				'key'     => 'portoflio_image_size',
+				'compare' => 'equals',
+				'value'   => 'custom',
+			),
+		),
+		'priority' => 136,
+		'class'    => 'xts-col-6',
 	)
 );
 
@@ -519,7 +673,7 @@ Options::add_field(
 		'default'     => '1',
 		'on-text'     => esc_html__( 'Yes', 'woodmart' ),
 		'off-text'    => esc_html__( 'No', 'woodmart' ),
-		'priority'    => 90,
+		'priority'    => 140,
 	)
 );
 
@@ -534,12 +688,12 @@ Options::add_field(
 		'options'     => array(
 			'links'   => array(
 				'name'  => esc_html__( 'Links', 'woodmart' ),
-				'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'portfolio-categories-filters-links.mp4" autoplay loop muted></video>',
+				'hint'  => '<video data-src="' . WOODMART_TOOLTIP_URL . 'portfolio-categories-filters-links.mp4" autoplay loop muted></video>',
 				'value' => 'links',
 			),
 			'masonry' => array(
 				'name'  => esc_html__( 'Masonry', 'woodmart' ),
-				'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'portfolio-categories-filters-masonry.mp4" autoplay loop muted></video>',
+				'hint'  => '<video data-src="' . WOODMART_TOOLTIP_URL . 'portfolio-categories-filters-masonry.mp4" autoplay loop muted></video>',
 				'value' => 'masonry',
 			),
 		),
@@ -551,7 +705,7 @@ Options::add_field(
 			),
 		),
 		'default'     => 'links',
-		'priority'    => 100,
+		'priority'    => 150,
 	)
 );
 
@@ -576,7 +730,7 @@ Options::add_field(
 			),
 		),
 		'default'     => '1',
-		'priority'    => 110,
+		'priority'    => 160,
 	)
 );
 
@@ -611,6 +765,121 @@ Options::add_field(
 	)
 );
 
+
+Options::add_field(
+	array(
+		'id'          => 'single_portfolio_layout',
+		'name'        => esc_html__( 'Sidebar position', 'woodmart' ),
+		'description' => esc_html__( 'Select main content and sidebar alignment for project pages.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'portfolio_singe_project_section',
+		'options'     => array(
+			'full-width'    => array(
+				'name'  => esc_html__( '1 Column', 'woodmart' ),
+				'value' => 'full-width',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/none.png',
+			),
+			'sidebar-left'  => array(
+				'name'  => esc_html__( '2 Columns Left', 'woodmart' ),
+				'value' => 'sidebar-left',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/left.png',
+			),
+			'sidebar-right' => array(
+				'name'  => esc_html__( '2 Columns Right', 'woodmart' ),
+				'value' => 'sidebar-right',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/right.png',
+			),
+		),
+		'default'     => 'sidebar-right',
+		'priority'    => 30,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'single_portfolio_sidebar_width',
+		'name'        => esc_html__( 'Sidebar size', 'woodmart' ),
+		'description' => esc_html__( 'You can set different sizes for your project pages sidebar', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'portfolio_singe_project_section',
+		'options'     => array(
+			2 => array(
+				'name'  => esc_html__( 'Small', 'woodmart' ),
+				'value' => 2,
+			),
+			3 => array(
+				'name'  => esc_html__( 'Medium', 'woodmart' ),
+				'value' => 2,
+			),
+			4 => array(
+				'name'  => esc_html__( 'Large', 'woodmart' ),
+				'value' => 2,
+			),
+		),
+		'default'     => 3,
+		'priority'    => 40,
+		'class'       => 'xts-tooltip-bordered',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'single_portfolio_hide_sidebar',
+		'section'     => 'portfolio_singe_project_section',
+		'name'        => esc_html__( 'Off canvas sidebar for desktop', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on desktop and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'off-canvas-sidebar-for-mobile.mp4" autoplay loop muted></video>',
+		'type'        => 'switcher',
+		'default'     => '0',
+		't_tab'       => array(
+			'id'    => 'portfolio_hide_sidebar_tabs',
+			'tab'   => esc_html__( 'Desktop', 'woodmart' ),
+			'icon'  => 'xts-i-desktop',
+			'style' => 'devices',
+		),
+		'priority'    => 50,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'single_portfolio_hide_sidebar_tablet',
+		'name'        => esc_html__( 'Off canvas sidebar for tablet', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on tablet and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'portfolio_singe_project_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'portfolio_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Tablet', 'woodmart' ),
+			'icon' => 'xts-i-tablet',
+		),
+		'priority'    => 51,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'single_portfolio_hide_sidebar_mobile',
+		'name'        => esc_html__( 'Off canvas sidebar for mobile', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on mobile devices and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'portfolio_singe_project_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'portfolio_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+			'icon' => 'xts-i-phone',
+		),
+		'priority'    => 52,
+	)
+);
+
 Options::add_field(
 	array(
 		'id'          => 'portfolio_navigation',
@@ -621,7 +890,7 @@ Options::add_field(
 		'type'        => 'switcher',
 		'section'     => 'portfolio_singe_project_section',
 		'default'     => '1',
-		'priority'    => 30,
+		'priority'    => 60,
 		'class'       => 'xts-col-6',
 	)
 );
@@ -636,7 +905,28 @@ Options::add_field(
 		'type'        => 'switcher',
 		'section'     => 'portfolio_singe_project_section',
 		'default'     => '1',
-		'priority'    => 40,
+		'priority'    => 70,
 		'class'       => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'           => 'single_project_builder_post_data',
+		'name'         => esc_html__( 'Select preview project for builder', 'woodmart' ),
+		'description'  => esc_html__( 'The information from this portfolio will be used as an example while you are working with the portfolio template and Elementor.', 'woodmart' ),
+		'group'        => esc_html__( 'Builder', 'woodmart' ),
+		'type'         => 'select',
+		'section'      => 'portfolio_singe_project_section',
+		'select2'      => true,
+		'empty_option' => true,
+		'autocomplete' => array(
+			'type'   => 'portfolio',
+			'value'  => 'portfolio',
+			'search' => 'woodmart_get_post_by_query_autocomplete',
+			'render' => 'woodmart_get_post_by_ids_autocomplete',
+		),
+		'priority'     => 80,
+		'class'        => 'xts-preset-field-disabled',
 	)
 );

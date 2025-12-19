@@ -3,6 +3,23 @@
 // app/Models/PaymentMethod.php
 class PaymentMethod
 {
+    /**
+     * Ensure all required columns exist in the table
+     * This handles schema updates without separate migration files
+     */
+    public static function ensureTableColumns()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'c_payment_methods';
+
+        // Check if ipay88_id column exists
+        $column_exists = $wpdb->get_results("SHOW COLUMNS FROM {$table_name} LIKE 'ipay88_id'");
+
+        if (empty($column_exists)) {
+            $wpdb->query("ALTER TABLE {$table_name} ADD COLUMN ipay88_id INT DEFAULT NULL AFTER status");
+        }
+    }
+
     public static function all()
     {
         global $wpdb;
@@ -41,6 +58,24 @@ class PaymentMethod
         ));
     }
 
+    public static function findByIpay88Id($ipay88_id, $exclude_id = null)
+    {
+        global $wpdb;
+
+        if ($exclude_id) {
+            return $wpdb->get_row($wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}c_payment_methods WHERE ipay88_id = %d AND id != %d",
+                $ipay88_id,
+                $exclude_id
+            ));
+        }
+
+        return $wpdb->get_row($wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}c_payment_methods WHERE ipay88_id = %d",
+            $ipay88_id
+        ));
+    }
+
     public static function updateStatus($id, $status)
     {
         global $wpdb;
@@ -57,6 +92,42 @@ class PaymentMethod
     {
         global $wpdb;
         return $wpdb->delete("{$wpdb->prefix}c_payment_methods", ['id' => $id], ['%d']);
+    }
+
+    public static function create($data)
+    {
+        global $wpdb;
+        $result = $wpdb->insert(
+            "{$wpdb->prefix}c_payment_methods",
+            [
+                'name' => $data['name'],
+                'status' => $data['status'] ?? 'active',
+                'ipay88_id' => isset($data['ipay88_id']) ? intval($data['ipay88_id']) : null,
+            ],
+            ['%s', '%s', '%d']
+        );
+
+        if ($result === false) {
+            return false;
+        }
+
+        return $wpdb->insert_id;
+    }
+
+    public static function update($data)
+    {
+        global $wpdb;
+        return $wpdb->update(
+            "{$wpdb->prefix}c_payment_methods",
+            [
+                'name' => $data['name'],
+                'status' => $data['status'] ?? 'active',
+                'ipay88_id' => isset($data['ipay88_id']) ? intval($data['ipay88_id']) : null,
+            ],
+            ['id' => $data['id']],
+            ['%s', '%s', '%d'],
+            ['%d']
+        );
     }
 
     public static function getPaymentPlans($method_id)
@@ -103,5 +174,28 @@ class PaymentMethod
             SELECT *
             FROM {$wpdb->prefix}c_admin_fee_waivers
         ", ARRAY_A);
+    }
+
+    public static function getAdminFeePaymentMethods($ipay88_id, $payment_plan)
+    {
+        global $wpdb;
+
+        $sql = $wpdb->prepare(
+            "
+        SELECT COALESCE(pp.apply_admin_fee, 0)
+        FROM {$wpdb->prefix}c_payment_methods pm
+        LEFT JOIN {$wpdb->prefix}c_payment_plans pp
+            ON pp.method_id = pm.id
+           AND pp.months = %d
+           AND pp.status = 'active'
+        WHERE pm.ipay88_id = %d
+          AND pm.status = 'active'
+        LIMIT 1
+        ",
+            $payment_plan,
+            $ipay88_id
+        );
+
+        return (int) $wpdb->get_var($sql);
     }
 }

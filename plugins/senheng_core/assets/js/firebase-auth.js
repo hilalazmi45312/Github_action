@@ -6,8 +6,16 @@ const auth = getAuth();
 const googleSignInButtons = document.querySelectorAll('.social-btn.google');
 googleSignInButtons.forEach(googleSignInButton => {
     googleSignInButton.addEventListener('click', () => {
+        if (!loginCfToken) {
+            return showSwalError(
+                'Verification required',
+                'Please complete the human verification.'
+            );
+        }
         manageButtonState(googleSignInButton, false);
         const provider = new GoogleAuthProvider();
+        provider.addScope('email');
+        provider.addScope('profile');
         provider.setCustomParameters({
             prompt: 'select_account'
         });
@@ -92,6 +100,12 @@ const appleSignInButtons = document.querySelectorAll('.social-btn.apple');
 
 appleSignInButtons.forEach(appleSignInButton => {
     appleSignInButton.addEventListener('click', () => {
+        if (!loginCfToken) {
+            return showSwalError(
+                'Verification required',
+                'Please complete the human verification.'
+            );
+        }
         manageButtonState(appleSignInButton, false);
 
         const provider = new OAuthProvider('apple.com');
@@ -161,7 +175,8 @@ function sendTokenToPhpApi(email, uid, accessToken, displayName, provider, photo
         access_token: accessToken,
         name: displayName,
         provider,
-        photo_url: photoURL
+        photo_url: photoURL,
+        cf_token: loginCfToken,
     }, (response) => {
         // Swal.close(); // Close the loading popup when response is received
         hideLoading();

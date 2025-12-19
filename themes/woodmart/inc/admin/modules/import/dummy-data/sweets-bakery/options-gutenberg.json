@@ -124,59 +124,6 @@
             }
         }
     ],
-    "advanced_typography": {
-        "0": {
-            "custom": "",
-            "selector": [
-                "product_title"
-            ],
-            "custom-selector": "",
-            "google": "1",
-            "font-family": "Jost",
-            "font-weight": "600",
-            "font-style": "",
-            "font-subset": "",
-            "text-transform": "",
-            "font-size": "24",
-            "tablet": {
-                "font-size": "",
-                "line-height": ""
-            },
-            "mobile": {
-                "font-size": "18",
-                "line-height": ""
-            },
-            "line-height": "",
-            "color": "",
-            "hover": {
-                "color": ""
-            }
-        },
-        "{{index}}": {
-            "custom": "",
-            "custom-selector": "",
-            "google": "0",
-            "font-family": "",
-            "font-weight": "",
-            "font-style": "",
-            "font-subset": "",
-            "text-transform": "",
-            "font-size": "",
-            "tablet": {
-                "font-size": "",
-                "line-height": ""
-            },
-            "mobile": {
-                "font-size": "",
-                "line-height": ""
-            },
-            "line-height": "",
-            "color": "",
-            "hover": {
-                "color": ""
-            }
-        }
-    },
     "primary-color": {
         "idle": "rgb(253,70,128)"
     },
@@ -191,6 +138,7 @@
     },
     "form_border_width": "1",
     "blog_excerpt_length": "110",
+    "blog_archive_layout": "full-width",
     "update_cart_quantity_change": "1",
     "products_hover": "info",
     "product_sticky": "1",
@@ -198,5 +146,8 @@
     "blog_excerpt": "excerpt",
     "secondary-color": {
         "idle": "rgb(22,82,127)"
-    }
+    },
+    "blog_design": "mask",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -396,7 +396,7 @@ Options::add_field(
 		'max'       => 1000,
 		'priority'  => 60,
 		'selectors' => array(
-			'.wd-popup.wd-age-verify' => array(
+			'.wd-age-verify-wrap' => array(
 				'--wd-popup-width: {{VALUE}}px;',
 			),
 		),
@@ -492,29 +492,6 @@ Options::add_field(
 
 Options::add_field(
 	array(
-		'id'          => 'popup_scroll',
-		'name'        => esc_html__( 'Show after user scroll down the page', 'woodmart' ),
-		'description' => esc_html__( 'Set the number of pixels users have to scroll down before popup opens', 'woodmart' ),
-		'type'        => 'range',
-		'section'     => 'promo_popup_section',
-		'default'     => 1000,
-		'min'         => 100,
-		'step'        => 50,
-		'max'         => 5000,
-		'priority'    => 50,
-		'requires'    => array(
-			array(
-				'key'     => 'popup_event',
-				'compare' => 'equals',
-				'value'   => 'scroll',
-			),
-		),
-		'unit'        => 'px',
-	)
-);
-
-Options::add_field(
-	array(
 		'id'          => 'popup-background',
 		'name'        => esc_html__( 'Popup background', 'woodmart' ),
 		'description' => esc_html__( 'Set background image or color for promo popup', 'woodmart' ),
@@ -569,7 +546,7 @@ Options::add_field(
 		'max'         => 1000,
 		'priority'    => 70,
 		'selectors'   => array(
-			'.wd-popup.wd-promo-popup' => array(
+			'.wd-promo-popup-wrap' => array(
 				'--wd-popup-width: {{VALUE}}px;',
 			),
 		),
@@ -586,7 +563,7 @@ Options::add_field(
 		'group'         => esc_html__( 'Style', 'woodmart' ),
 		'section'       => 'promo_popup_section',
 		'selectors'     => array(
-			'.wd-popup.wd-promo-popup' => array(
+			'.wd-promo-popup-wrap' => array(
 				'--wd-popup-padding: {{VALUE}}{{UNIT}};',
 			),
 		),
@@ -652,9 +629,33 @@ Options::add_field(
 
 Options::add_field(
 	array(
+		'id'          => 'popup_scroll',
+		'name'        => esc_html__( 'Show after user scroll down the page', 'woodmart' ),
+		'description' => esc_html__( 'Set the number of pixels users have to scroll down before popup opens', 'woodmart' ),
+		'group'       => esc_html__( 'Settings', 'woodmart' ),
+		'type'        => 'range',
+		'section'     => 'promo_popup_section',
+		'default'     => 1000,
+		'min'         => 100,
+		'step'        => 50,
+		'max'         => 5000,
+		'priority'    => 100,
+		'requires'    => array(
+			array(
+				'key'     => 'popup_event',
+				'compare' => 'equals',
+				'value'   => 'scroll',
+			),
+		),
+		'unit'        => 'px',
+	)
+);
+
+Options::add_field(
+	array(
 		'id'           => 'promo_timeout',
 		'name'         => esc_html__( 'Popup delay', 'woodmart' ),
-		'description'  => esc_html__( 'Show popup after some time (in milliseconds)', 'woodmart' ),
+		'description'  => esc_html__( 'Show popup after some time (in milliseconds).', 'woodmart' ),
 		'type'         => 'text_input',
 		'attributes'   => array(
 			'type' => 'number',
@@ -663,7 +664,7 @@ Options::add_field(
 		'section'      => 'promo_popup_section',
 		'empty_option' => true,
 		'default'      => '2000',
-		'priority'     => 100,
+		'priority'     => 110,
 		'requires'     => array(
 			array(
 				'key'     => 'popup_event',
@@ -686,7 +687,7 @@ Options::add_field(
 		'min'         => 0,
 		'step'        => 1,
 		'max'         => 10,
-		'priority'    => 110,
+		'priority'    => 120,
 		'unit'        => 'page',
 	)
 );
@@ -703,7 +704,7 @@ Options::add_field(
 		'group'       => esc_html__( 'Settings', 'woodmart' ),
 		'section'     => 'promo_popup_section',
 		'default'     => 1,
-		'priority'    => 120,
+		'priority'    => 130,
 	)
 );
 
@@ -1037,18 +1038,82 @@ Options::add_field(
 /**
  * Search.
  */
+
+Options::add_field(
+	array(
+		'id'       => 'search_by_sku',
+		'name'     => esc_html__( 'Search by product SKU', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'general_search',
+		'default'  => '1',
+		'priority' => 10,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'search_by_product_categories',
+		'name'     => esc_html__( 'Search by product categories', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'general_search',
+		'default'  => '0',
+		'priority' => 20,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'search_by_product_tag',
+		'name'     => esc_html__( 'Search by product product tag', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'general_search',
+		'default'  => '0',
+		'priority' => 30,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'search_by_product_attributes',
+		'name'     => esc_html__( 'Search by product attributes', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'general_search',
+		'default'  => '0',
+		'priority' => 40,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'search_by_product_brands',
+		'name'     => esc_html__( 'Search by product brands', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'general_search',
+		'default'  => '0',
+		'priority' => 45,
+	)
+);
+
+
 Options::add_field(
 	array(
 		'id'          => 'enqueue_posts_results',
 		'name'        => esc_html__( 'Display results from blog', 'woodmart' ),
 		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'display-results-from-blog.mp4" autoplay loop muted></video>',
-		'description' => esc_html__( 'Enable this option to show search results from the blog below the product results.', 'woodmart' ),
+		'description' => esc_html__( 'Show search results from the blog below the product results.', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
 		'type'        => 'switcher',
 		'section'     => 'general_search',
 		'on-text'     => esc_html__( 'Yes', 'woodmart' ),
 		'off-text'    => esc_html__( 'No', 'woodmart' ),
 		'default'     => false,
-		'priority'    => 10,
+		'priority'    => 50,
+		'class'    => 'xts-col-6',
 	)
 );
 
@@ -1056,6 +1121,7 @@ Options::add_field(
 	array(
 		'id'       => 'search_posts_results_column',
 		'name'     => esc_html__( 'Number of columns for blog results', 'woodmart' ),
+		'group'    => esc_html__( 'Results', 'woodmart' ),
 		'type'     => 'range',
 		'section'  => 'general_search',
 		'default'  => 2,
@@ -1069,38 +1135,9 @@ Options::add_field(
 				'value'   => true,
 			),
 		),
-		'priority' => 20,
+		'priority' => 60,
 		'unit'     => 'col',
-	)
-);
-
-Options::add_field(
-	array(
-		'id'       => 'search_by_sku',
-		'name'     => esc_html__( 'Search by product SKU', 'woodmart' ),
-		'type'     => 'switcher',
-		'section'  => 'general_search',
-		'default'  => '1',
-		'on-text'  => esc_html__( 'Yes', 'woodmart' ),
-		'off-text' => esc_html__( 'No', 'woodmart' ),
-		'priority' => 30,
-	)
-);
-
-Options::add_field(
-	array(
-		'id'          => 'relevanssi_search',
-		'name'        => esc_html__( 'Use Relevanssi for AJAX search', 'woodmart' ),
-		'description' => wp_kses(
-			__( 'You will need to install and activate this <a href="https://wordpress.org/plugins/relevanssi/" target="_blank">plugin</a>', 'woodmart' ),
-			true
-		),
-		'type'        => 'switcher',
-		'section'     => 'general_search',
-		'default'     => '0',
-		'on-text'     => esc_html__( 'Yes', 'woodmart' ),
-		'off-text'    => esc_html__( 'No', 'woodmart' ),
-		'priority'    => 40,
+		'class'    => 'xts-col-6',
 	)
 );
 
@@ -1109,24 +1146,43 @@ Options::add_field(
 		'id'          => 'popular_requests',
 		'name'        => esc_html__( 'Popular requests', 'woodmart' ),
 		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'popular-requests.mp4" autoplay loop muted></video>',
-		'description' => esc_html__( 'Show quick buttons under the search form with popular search requests. Separate words with new lines.', 'woodmart' ),
-		'group'       => esc_html__( 'Full screen search', 'woodmart' ),
+		'description' => esc_html__( 'Show quick buttons under the search form with popular search requests. To display requests in the search, a special option needs to be enabled in the corresponding search element. Separate words with new lines.', 'woodmart' ),
+		'group'       => esc_html__( 'Options', 'woodmart' ),
 		'type'        => 'textarea',
 		'wysiwyg'     => false,
 		'section'     => 'general_search',
 		'default'     => '',
-		'priority'    => 50,
+		'priority'    => 70,
+		'placeholder' => esc_html__( 'shirt&#10;sneakers&#10;shoe', 'woodmart' ),
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'search_synonyms',
+		'name'        => esc_html__( 'Synonyms', 'woodmart' ),
+		'description' => esc_html__(
+			'Add synonyms to search queries to broaden the products search results. Format: ”key = value 1, value 2”. Each group of synonyms starts on a new line. For example, if you add “shirt = polo, jersey” to the synonym list, a search for “shirt” will automatically be converted into a search that matches products containing either “shirt”, ”polo” or ”jersey”. Synonyms are one-way. If you need both directions, add the synonym in reverse: “jersey = shirt”.',
+			'woodmart'
+		),
+		'group'       => esc_html__( 'Options', 'woodmart' ),
+		'type'        => 'textarea',
+		'wysiwyg'     => false,
+		'section'     => 'general_search',
+		'default'     => '',
+		'priority'    => 75,
+		'placeholder' => esc_html__( 'shirt = blouse, jersey, polo&#10;sneakers = footgear, trainers, shoe&#10;shoe = sneakers, boot, moccasin', 'woodmart' ),
 	)
 );
 
 Options::add_field(
 	array(
 		'id'       => 'full_search_content_type',
-		'name'     => esc_html__( 'Full screen search extra content', 'woodmart' ),
+		'name'     => esc_html__( 'Search extra content', 'woodmart' ),
 		'hint'     => '<video data-src="' . WOODMART_TOOLTIP_URL . 'full-screen-search-extra-content.mp4" autoplay loop muted></video>',
 		'type'     => 'buttons',
 		'section'  => 'general_search',
-		'group'    => esc_html__( 'Full screen search', 'woodmart' ),
+		'group'    => esc_html__( 'Options', 'woodmart' ),
 		'default'  => 'content',
 		'options'  => array(
 			'text'    => array(
@@ -1138,7 +1194,7 @@ Options::add_field(
 				'value' => 'content',
 			),
 		),
-		'priority' => 60,
+		'priority' => 80,
 		'class'    => 'xts-html-block-switch',
 	)
 );
@@ -1147,9 +1203,9 @@ Options::add_field(
 	array(
 		'id'          => 'full_search_content_text',
 		'type'        => 'textarea',
-		'name'        => esc_html__( 'Full-screen search text', 'woodmart' ),
-		'description' => esc_html__( 'You can display some products, posts, banners or other information in the full screen search.', 'woodmart' ),
-		'group'       => esc_html__( 'Full screen search', 'woodmart' ),
+		'name'        => esc_html__( 'Search custom text', 'woodmart' ),
+		'description' => esc_html__( 'You can display some products, posts, banners or other information in the header search area. To display extra content in the search, a special option needs to be enabled in the corresponding search element.', 'woodmart' ),
+		'group'       => esc_html__( 'Options', 'woodmart' ),
 		'wysiwyg'     => true,
 		'section'     => 'general_search',
 		'requires'    => array(
@@ -1159,16 +1215,16 @@ Options::add_field(
 				'value'   => 'text',
 			),
 		),
-		'priority'    => 70,
+		'priority'    => 90,
 	)
 );
 
 Options::add_field(
 	array(
 		'id'           => 'full_search_content_html_block',
-		'name'         => esc_html__( 'Full screen search custom content', 'woodmart' ),
-		'description'  => esc_html__( 'You can display some products, posts, banners or other information in the full screen search.', 'woodmart' ),
-		'group'        => esc_html__( 'Full screen search', 'woodmart' ),
+		'name'         => esc_html__( 'Search custom content', 'woodmart' ),
+		'description'  => esc_html__( 'You can display some products, posts, banners or other information in the header search area. To display extra content in the search, a special option needs to be enabled in the corresponding search element.', 'woodmart' ),
+		'group'        => esc_html__( 'Options', 'woodmart' ),
 		'type'         => 'select',
 		'section'      => 'general_search',
 		'select2'      => true,
@@ -1179,7 +1235,7 @@ Options::add_field(
 			'search' => 'woodmart_get_post_by_query_autocomplete',
 			'render' => 'woodmart_get_post_by_ids_autocomplete',
 		),
-		'priority'     => 80,
+		'priority'     => 100,
 		'requires'     => array(
 			array(
 				'key'     => 'full_search_content_type',
@@ -1192,13 +1248,18 @@ Options::add_field(
 
 Options::add_field(
 	array(
-		'id'          => 'ajax_fullscreen_content',
-		'name'        => esc_html__( 'AJAX full screen search extra content', 'woodmart' ),
-		'description' => esc_html__( 'Load full screen search extra content HTML with AJAX', 'woodmart' ),
-		'group'       => esc_html__( 'Full screen search', 'woodmart' ),
+		'id'          => 'relevanssi_search',
+		'name'        => esc_html__( 'Use Relevanssi for AJAX search', 'woodmart' ),
+		'description' => wp_kses(
+			__( 'You will need to install and activate this <a href="https://wordpress.org/plugins/relevanssi/" target="_blank">plugin</a>', 'woodmart' ),
+			true
+		),
+		'group'       => esc_html__( 'Plugins', 'woodmart' ),
 		'type'        => 'switcher',
 		'section'     => 'general_search',
-		'default'     => true,
-		'priority'    => 90,
+		'default'     => '0',
+		'on-text'     => esc_html__( 'Yes', 'woodmart' ),
+		'off-text'    => esc_html__( 'No', 'woodmart' ),
+		'priority'    => 120,
 	)
 );

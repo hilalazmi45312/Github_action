@@ -550,6 +550,37 @@ if ( ! function_exists( 'woodmart_get_banner_params' ) ) {
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
+				array(
+					'type'             => 'dropdown',
+					'heading'          => esc_html__( 'Highlight text style', 'woodmart' ),
+					'hint'             => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
+					'group'            => esc_html__( 'Title and Subtitle', 'woodmart' ),
+					'param_name'       => 'title_decoration_style',
+					'value'            => array(
+						esc_html__( 'Default', 'woodmart' )  => 'default',
+						esc_html__( 'Primary color', 'woodmart' )  => 'colored',
+						esc_html__( 'Primary color + secondary font', 'woodmart' ) => 'colored-alt',
+						esc_html__( 'Bordered', 'woodmart' ) => 'bordered',
+						esc_html__( 'Gradient', 'woodmart' ) => 'gradient',
+					),
+					'std'              => 'colored',
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'       => 'woodmart_gradient',
+					'heading'    => esc_html__( 'Highlight text gradient', 'woodmart' ),
+					'group'      => esc_html__( 'Title and Subtitle', 'woodmart' ),
+					'param_name' => 'title_decoration_gradient',
+					'selectors'  => array(
+						'{{WRAPPER}} .wd-underline-gradient .banner-title u' => array(
+							'background-image: {{VALUE}};',
+						),
+					),
+					'dependency' => array(
+						'element' => 'title_decoration_style',
+						'value'   => array( 'gradient' ),
+					),
+				),
 				/**
 				* Subtitle
 				*/
@@ -799,17 +830,33 @@ if ( ! function_exists( 'woodmart_get_banner_params' ) ) {
 				),
 				array(
 					'type'       => 'woodmart_dropdown',
-					'heading'    => esc_html__( 'Style', 'woodmart' ),
+					'heading'    => esc_html__( 'Background', 'woodmart' ),
 					'group'      => esc_html__( 'Countdown', 'woodmart' ),
 					'param_name' => 'countdown_style',
 					'value'      => array(
 						esc_html__( 'Default', 'woodmart' ) => 'simple',
-						esc_html__( 'Shadow', 'woodmart' ) => 'standard',
-						esc_html__( 'Transparent', 'woodmart' ) => 'transparent',
 						esc_html__( 'Primary color', 'woodmart' ) => 'active',
+						esc_html__( 'Custom', 'woodmart' ) => 'custom',
 					),
+					'std'        => 'simple',
 					'style'      => array(
 						'active' => woodmart_get_color_value( 'primary-color', '#7eb934' ),
+					),
+				),
+				array(
+					'type'             => 'wd_colorpicker',
+					'heading'          => esc_html__( 'Background color', 'woodmart' ),
+					'group'            => esc_html__( 'Countdown', 'woodmart' ),
+					'param_name'       => 'countdown_bg_color',
+					'selectors'        => array(
+						'{{WRAPPER}} .wd-timer' => array(
+							'--wd-timer-bg:{{VALUE}};',
+						),
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+					'dependency'       => array(
+						'element' => 'countdown_style',
+						'value'   => array( 'custom' ),
 					),
 				),
 				array(
@@ -821,6 +868,38 @@ if ( ! function_exists( 'woodmart_get_banner_params' ) ) {
 						esc_html__( 'Inherit', 'woodmart' ) => '',
 						esc_html__( 'Light', 'woodmart' ) => 'light',
 						esc_html__( 'Dark', 'woodmart' ) => 'dark',
+					),
+				),
+				array(
+					'type'             => 'woodmart_switch',
+					'heading'          => esc_html__( 'Box shadow', 'woodmart' ),
+					'group'            => esc_html__( 'Countdown', 'woodmart' ),
+					'param_name'       => 'enable_shadow',
+					'true_state'       => 'yes',
+					'false_state'      => 'no',
+					'default'          => 'no',
+					'edit_field_class' => 'vc_col-sm-12 vc_column',
+				),
+				array(
+					'type'             => 'wd_box_shadow',
+					'group'            => esc_html__( 'Countdown', 'woodmart' ),
+					'param_name'       => 'items_shadow',
+					'selectors'        => array(
+						'{{WRAPPER}} .wd-item' => array(
+							'box-shadow: {{HORIZONTAL}}px {{VERTICAL}}px {{BLUR}}px {{SPREAD}}px {{COLOR}};',
+						),
+					),
+					'edit_field_class' => 'vc_col-sm-12 vc_column',
+					'dependency'       => array(
+						'element' => 'enable_shadow',
+						'value'   => array( 'yes' ),
+					),
+					'default'          => array(
+						'horizontal' => '0',
+						'vertical'   => '0',
+						'blur'       => '9',
+						'spread'     => '0',
+						'color'      => '',
 					),
 				),
 				array(
@@ -1553,21 +1632,6 @@ if ( ! function_exists( 'woodmart_get_banner_params' ) ) {
 				/**
 				 * Advanced.
 				 */
-				array(
-					'type'             => 'dropdown',
-					'heading'          => esc_html__( 'Highlight text style', 'woodmart' ),
-					'hint'             => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
-					'group'            => esc_html__( 'Advanced', 'woodmart' ),
-					'param_name'       => 'title_decoration_style',
-					'value'            => array(
-						esc_html__( 'Default', 'woodmart' )  => 'default',
-						esc_html__( 'Primary color', 'woodmart' )  => 'colored',
-						esc_html__( 'Primary color + secondary font', 'woodmart' ) => 'colored-alt',
-						esc_html__( 'Bordered', 'woodmart' ) => 'bordered',
-					),
-					'std'              => 'colored',
-					'edit_field_class' => 'vc_col-sm-6 vc_column',
-				),
 				function_exists( 'woodmart_get_vc_responsive_visible_map' ) ? woodmart_get_vc_responsive_visible_map( 'responsive_tabs_hide' ) : '',
 				function_exists( 'woodmart_get_vc_responsive_visible_map' ) ? woodmart_get_vc_responsive_visible_map( 'wd_hide_on_desktop' ) : '',
 				function_exists( 'woodmart_get_vc_responsive_visible_map' ) ? woodmart_get_vc_responsive_visible_map( 'wd_hide_on_tablet' ) : '',

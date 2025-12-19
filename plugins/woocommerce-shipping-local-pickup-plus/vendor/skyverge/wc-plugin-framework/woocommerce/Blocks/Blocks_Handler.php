@@ -1,11 +1,16 @@
 <?php
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_12\Blocks;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_12\Blocks;
 
+use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
+use Automattic\WooCommerce\Blocks\Package as WooCommerceBlocks;
 use Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\Payment_Gateway\Blocks\Gateway_Checkout_Block_Integration;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Payment_Gateway;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Plugin;
+use WP_Post;
 
-if ( ! class_exists( '\SkyVerge\WooCommerce\PluginFramework\v5_11_12\Blocks\Blocks_Handler' ) ) :
+if ( ! class_exists( '\SkyVerge\WooCommerce\PluginFramework\v5_15_12\Blocks\Blocks_Handler' ) ) :
 
 /**
  * WooCommerce Blocks handler.
@@ -14,13 +19,22 @@ if ( ! class_exists( '\SkyVerge\WooCommerce\PluginFramework\v5_11_12\Blocks\Bloc
  *
  * Individual plugins should override this class to load their own block integrations classes.
  *
+ * Gateways can straight out use {@see Gateway_Blocks_Handler} instead.
+ *
  * @since 5.11.11
  */
+#[\AllowDynamicProperties]
 class Blocks_Handler {
 
 
-	/** @var Framework\SV_WC_Plugin|Framework\SV_WC_Payment_Gateway current plugin instance */
-	protected Framework\SV_WC_Plugin $plugin;
+	/** @var SV_WC_Plugin|SV_WC_Payment_Gateway current plugin instance */
+	protected SV_WC_Plugin $plugin;
+
+	/** @var IntegrationInterface|null */
+	protected ?IntegrationInterface $cart_block_integration = null;
+
+	/** @var IntegrationInterface|null */
+	protected ?IntegrationInterface $checkout_block_integration = null;
 
 
 	/**
@@ -30,14 +44,17 @@ class Blocks_Handler {
 	 *
 	 * @since 5.11.11
 	 *
-	 * @param Framework\SV_WC_Plugin $plugin
+	 * @param SV_WC_Plugin $plugin
 	 */
-	public function __construct( Framework\SV_WC_Plugin $plugin ) {
+	public function __construct( SV_WC_Plugin $plugin ) {
 
 		$this->plugin = $plugin;
 
 		// blocks-related notices and call-to-actions
 		add_action( 'admin_notices', [ $this, 'add_admin_notices' ] );
+
+		// handle WooCommerce Blocks integrations in compatible plugins
+		add_action( 'woocommerce_blocks_loaded', [ $this, 'handle_blocks_integration' ] );
 	}
 
 
@@ -72,6 +89,80 @@ class Blocks_Handler {
 
 
 	/**
+	 * Gets the cart block integration instance.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @return Block_Integration|null
+	 */
+	public function get_cart_block_integration_instance() : ?IntegrationInterface {
+
+		// individual plugins should override this method to return their own cart block integration instance
+		return $this->cart_block_integration;
+	}
+
+
+	/**
+	 * Gets the checkout block integration instance.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @return Block_Integration|null
+	 */
+	public function get_checkout_block_integration_instance() : ?IntegrationInterface {
+
+		// individual plugins should override this method to return their own checkout block integration instance
+		return $this->checkout_block_integration;
+	}
+
+
+	/**
+	 * Handles WooCommerce Blocks integrations in compatible plugins.
+	 *
+	 * @see Gateway_Blocks_Handler::handle_blocks_integration() for gateways
+	 *
+	 * @internal
+	 *
+	 * @since 5.12.0
+	 *
+	 * @return void
+	 */
+	public function handle_blocks_integration() : void {
+
+		if ( ! class_exists( WooCommerceBlocks::class ) || ! version_compare( WooCommerceBlocks::get_version(), '4.4.0', '>' ) ) {
+			return;
+		}
+
+		$compatible_blocks = [];
+
+		if ( $this->is_cart_block_compatible() ) {
+			$compatible_blocks = ['cart', 'mini-cart'];
+		}
+
+		if ( $this->is_checkout_block_compatible() ) {
+			$compatible_blocks[] = 'checkout';
+		}
+
+		foreach ( $compatible_blocks as $block_name ) {
+
+			add_action( "woocommerce_blocks_{$block_name}_block_registration", function( $integration_registry ) use ( $block_name ) {
+
+					if ( $block_name === 'checkout' ) {
+						$integration_instance = $this->get_checkout_block_integration_instance();
+					} else {
+						$integration_instance = $this->get_cart_block_integration_instance();
+					}
+
+					if ( $integration_instance ) {
+						$integration_registry->register( $integration_instance );
+					}
+				}
+			);
+		}
+	}
+
+
+	/**
 	 * Determines if the checkout page is using the checkout block.
 	 *
 	 * @since 5.11.11
@@ -89,14 +180,28 @@ class Blocks_Handler {
 
 
 	/**
+	 * Determines if a page contains a checkout shortcode.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @param int|string|WP_Post $page
+	 * @return bool
+	 */
+	public static function page_contains_checkout_shortcode( $page ) : bool {
+
+		return static::page_contains_shortcode( '[woocommerce_checkout]', $page );
+	}
+
+
+	/**
 	 * Determines if the cart page is using the cart block.
 	 *
 	 * @since 5.11.11
 	 *
 	 * @return bool false if using the legacy cart shortcode
 	 */
-	public static function is_cart_block_in_use() : bool
-	{
+	public static function is_cart_block_in_use() : bool {
+
 		if ( ! class_exists( CartCheckoutUtils::class ) ) {
 			return false;
 		}
@@ -106,11 +211,46 @@ class Blocks_Handler {
 
 
 	/**
+	 * Determines if a page contains a cart shortcode.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @param int|string|WP_Post $page
+	 * @return bool
+	 */
+	public static function page_contains_cart_shortcode( $page ) : bool {
+
+		return static::page_contains_shortcode( '[woocommerce_cart]', $page );
+	}
+
+
+	/**
+	 * Determines if a page contains a cart or checkout shortcode.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @param string $shortcode
+	 * @param int|string|WP_Post $page
+	 * @return bool
+	 */
+	protected static function page_contains_shortcode( string $shortcode, $page ) : bool {
+
+		if ( is_numeric( $page ) ) {
+			$page = get_post( $page );
+		}
+
+		if ( ! $page instanceof WP_Post ) {
+			return false;
+		}
+
+		return false !== strpos( $page->post_content, $shortcode );
+	}
+
+
+	/**
 	 * Adds admin notices pertaining the blocks integration.
 	 *
 	 * @since 5.11.11
-	 *
-	 * @internal
 	 *
 	 * @return void
 	 */

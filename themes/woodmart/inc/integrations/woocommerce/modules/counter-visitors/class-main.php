@@ -21,11 +21,11 @@ class Main extends Singleton {
 	public function init() {
 		add_action( 'init', array( $this, 'add_options' ) );
 
-		if ( ! woodmart_get_opt( 'counter_visitor_enabled' ) ) {
+		if ( ! woodmart_get_opt( 'counter_visitor_enabled' ) || ! woodmart_woocommerce_installed() ) {
 			return;
 		}
 
-		add_action( 'woocommerce_single_product_summary', array( $this, 'output_count_visitors' ), 38 );
+		add_action( 'woocommerce_single_product_summary', array( $this, 'output_count_visitors' ), 39 );
 
 		add_action( 'wp_ajax_woodmart_update_count_product_visits', array( $this, 'update_count_product_visits' ) );
 		add_action( 'wp_ajax_nopriv_woodmart_update_count_product_visits', array( $this, 'update_count_product_visits' ) );

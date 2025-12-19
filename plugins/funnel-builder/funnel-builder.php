@@ -3,7 +3,7 @@
  * Plugin Name: FunnelKit Funnel Builder
  * Plugin URI: https://funnelkit.com/wordpress-funnel-builder/
  * Description: Create high-converting sales funnels on WordPress that look professional by following a well-guided step-by-step process.
- * Version: 3.13.1.4
+ * Version: 3.13.1.6
  * Author: FunnelKit
  * Author URI: https://funnelkit.com
  * License: GPLv3 or later
@@ -154,13 +154,13 @@ if ( ! class_exists( 'WFFN_Core' ) ) {
 		public function define_plugin_properties() {
 
 
-			define( 'WFFN_VERSION', '3.13.1.4' );
+			define( 'WFFN_VERSION', '3.13.1.6' );
 			define( 'WFFN_BWF_VERSION', '1.10.12.70' );
 
 			define( 'WFFN_MIN_WC_VERSION', '3.5.0' );
 			define( 'WFFN_MIN_WP_VERSION', '5.4.0' );
 			define( 'WFFN_DB_VERSION', '4.0.0' );
-			define( 'WFFN_REVIEW_RATING_COUNT', 897 );
+			define( 'WFFN_REVIEW_RATING_COUNT', 948 );
 			define( 'WFFN_SLUG', 'wffn' );
 			define( 'WFFN_PLUGIN_FILE', __FILE__ );
 			define( 'WFFN_PLUGIN_DIR', __DIR__ );

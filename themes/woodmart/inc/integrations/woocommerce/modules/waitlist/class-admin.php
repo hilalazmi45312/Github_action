@@ -25,42 +25,27 @@ class Admin extends Singleton {
 	protected $db_storage;
 
 	/**
+	 * Page slug for the waitlist admin page.
+	 *
+	 * @var string
+	 */
+	public $waitlist_page;
+
+	/**
 	 * Constructor.
 	 */
 	public function init() {
-		$this->db_storage = DB_Storage::get_instance();
+		if ( ! woodmart_get_opt( 'waitlist_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
 
-		$this->include_files();
+		$this->db_storage = DB_Storage::get_instance();
 
 		add_action( 'init', array( $this, 'delete_waitlist' ) );
 
 		add_action( 'admin_menu', array( $this, 'register_waitlist_page' ) );
 
 		add_filter( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
-
-		add_action( 'wp_ajax_woodmart_waitlist_json_search_users', array( $this, 'woodmart_json_search_users' ) );
-	}
-
-	/**
-	 * Include main files.
-	 */
-	private function include_files() {
-		if ( ! class_exists( 'WP_List_Table' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-		}
-
-		$files = array(
-			'class-waitlist-table',
-			'class-users-table',
-		);
-
-		foreach ( $files as $file ) {
-			$file_path = WOODMART_THEMEROOT . '/inc/integrations/woocommerce/modules/waitlist/list-tables/' . $file . '.php';
-
-			if ( file_exists( $file_path ) ) {
-				require_once $file_path;
-			}
-		}
 	}
 
 	/**
@@ -69,9 +54,7 @@ class Admin extends Singleton {
 	 * @return void
 	 */
 	public function register_waitlist_page() {
-		global $wd_waitlist_page;
-
-		$wd_waitlist_page = add_submenu_page(
+		$this->waitlist_page = add_submenu_page(
 			'edit.php?post_type=product',
 			esc_html__( 'Waitlists', 'woodmart' ),
 			esc_html__( 'Waitlists', 'woodmart' ),
@@ -80,7 +63,7 @@ class Admin extends Singleton {
 			array( $this, 'render_waitlist_page' )
 		);
 
-		add_action( 'load-' . $wd_waitlist_page, array( $this, 'waitlist_screen_options' ) );
+		add_action( 'load-' . $this->waitlist_page, array( $this, 'waitlist_screen_options' ) );
 	}
 
 	/**
@@ -93,17 +76,32 @@ class Admin extends Singleton {
 
 		if ( ! empty( $_GET['tab'] ) && 'users' === $_GET['tab'] ) {
 			$list_table = new Users_Table();
+
+			$product_id   = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : false;
+			$variation_id = isset( $_GET['variation_id'] ) ? intval( $_GET['variation_id'] ) : false;
+
+			$product_id = $variation_id ? $variation_id : $product_id;
+
+			if ( $product_id ) {
+				$product      = wc_get_product( $product_id );
+				$product_name = $product->get_name();
+			}
 		}
 
 		if ( $list_table instanceof Waitlist_Table ) {
 			wp_enqueue_style( 'woocommerce_admin_styles' );
-			wp_enqueue_style( 'wd-page-wtl', WOODMART_ASSETS . '/css/parts/page-wtl.min.css', array(), WOODMART_VERSION );
 		}
 
 		$list_table->prepare_items();
 		?>
-			<div class="wrap xts-wtl-page-wrap">
+			<div class="wrap xts-post-type-table xts-wtl-page-wrap">
 				<h2 class="wp-heading-inline"><?php echo esc_html__( 'Waitlists', 'woodmart' ); ?></h2>
+
+				<?php if ( ! empty( $product_name ) ) : ?>
+					<h3>
+						<?php echo esc_html( $product_name ); ?>
+					</h3>
+				<?php endif; ?>
 
 				<form id="xts-waitlist-settings-page-form" method="get" action="">
 					<input type="hidden" name="page" value="xts-waitlist-page" />
@@ -124,11 +122,9 @@ class Admin extends Singleton {
 	 * Add screen options to waitlist admin page.
 	 */
 	public function waitlist_screen_options() {
-		global $wd_waitlist_page;
-
 		$screen = get_current_screen();
 
-		if ( ! is_object( $screen ) || $screen->id !== $wd_waitlist_page ) {
+		if ( ! is_object( $screen ) || $screen->id !== $this->waitlist_page ) {
 			return;
 		}
 
@@ -178,40 +174,6 @@ class Admin extends Singleton {
 			)
 		);
 		die();
-	}
-
-	public function woodmart_json_search_users( $term = '' ) {
-		check_ajax_referer( 'search-users', 'security' );
-
-		if ( empty( $term ) && isset( $_GET['term'] ) ) {
-			$term = (string) wc_clean( wp_unslash( $_GET['term'] ) ); // phpcs:ignore.
-		}
-
-		if ( empty( $term ) ) {
-			wp_die();
-		}
-
-		$users_found = array();
-
-		$users = new WP_User_Query(
-			array(
-				'search'         => '*' . esc_attr( $term ) . '*',
-				'search_columns' => array(
-					'user_login',
-					'user_nicename',
-					'user_email',
-					'user_url',
-				),
-			)
-		);
-
-		$users_objects = $users->get_results();
-
-		foreach ( $users_objects as $user ) {
-			$users_found[ $user->get( 'ID' ) ] = $user->get( 'user_login' );
-		}
-
-		wp_send_json( apply_filters( 'woodmart_json_search_found_users', $users_found ) );
 	}
 }
 

@@ -156,7 +156,10 @@ $lastPage = $pagination['last_page'];
         }
     </style>
 
-    <button style="margin-bottom: 40px; margin-top: 40px;" class="button button-primary" id="brandExcludeBtn">Admin Fee Waive (Brand)</button>
+    <div style="margin-bottom: 40px; margin-top: 40px; display: flex; gap: 10px;">
+        <button class="button button-primary" id="addPaymentMethodBtn">+ Add Payment Method</button>
+        <button class="button button-primary" id="brandExcludeBtn">Admin Fee Waive (Brand)</button>
+    </div>
 
     <table class="widefat installment-table">
         <thead>
@@ -365,6 +368,133 @@ $lastPage = $pagination['last_page'];
                             buttonsStyling: false
                         });
                     });
+            }
+        });
+    });
+
+    // Add Payment Method Button Handler
+    document.getElementById('addPaymentMethodBtn').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Add Payment Method',
+            html: `
+                <div style="text-align: left;">
+                    <div style="margin-bottom: 15px;">
+                        <label for="paymentMethodIpay88Id" style="display: block; margin-bottom: 5px; font-weight: 600;">iPay88 Payment ID:</label>
+                        <input type="number" id="paymentMethodIpay88Id" class="swal2-input" placeholder="e.g. 156" style="width: 100%; margin: 0; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="paymentMethodName" style="display: block; margin-bottom: 5px; font-weight: 600;">Payment Method Name:</label>
+                        <input type="text" id="paymentMethodName" class="swal2-input" placeholder="e.g. Public Bank EPP (Instalment Payment)" style="width: 100%; margin: 0; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="paymentMethodStatus" style="display: block; margin-bottom: 5px; font-weight: 600;">Status:</label>
+                        <select id="paymentMethodStatus" class="swal2-select" style="width: 80%; padding: 8px; border: 1px solid #d9d9d9; border-radius: 4px;">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Create',
+            cancelButtonText: 'Cancel',
+            customClass: {
+                popup: 'senheng-brand-popup',
+                title: 'senheng-brand-title',
+                htmlContainer: 'senheng-brand-container',
+                confirmButton: 'button button-primary senheng-brand-save',
+                cancelButton: 'button senheng-brand-cancel'
+            },
+            buttonsStyling: false,
+            focusConfirm: false,
+            preConfirm: () => {
+                const ipay88Id = document.getElementById('paymentMethodIpay88Id').value.trim();
+                const name = document.getElementById('paymentMethodName').value.trim();
+                const status = document.getElementById('paymentMethodStatus').value;
+                
+                if (!name) {
+                    Swal.showValidationMessage('Please enter a payment method name.');
+                    return false;
+                }
+                
+                return { ipay88_id: ipay88Id, name: name, status: status };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { ipay88_id, name, status } = result.value;
+                const ajaxUrl = "<?php echo admin_url('admin-ajax.php'); ?>";
+
+                Swal.fire({
+                    title: 'Creating...',
+                    html: 'Please wait while we create the payment method.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                fetch(ajaxUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        action: 'create_payment_method',
+                        ipay88_id: ipay88_id,
+                        name: name,
+                        status: status
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    Swal.close();
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.data.message || 'Payment method created successfully.',
+                            confirmButtonText: 'OK',
+                            customClass: {
+                                popup: 'senheng-brand-popup',
+                                confirmButton: 'button button-primary'
+                            },
+                            buttonsStyling: false
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        let errorMsg = 'Something went wrong.';
+                        if (data.data && data.data.errors) {
+                            errorMsg = Object.values(data.data.errors).flat().join('<br>');
+                        } else if (data.data && data.data.message) {
+                            errorMsg = data.data.message;
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            html: errorMsg,
+                            confirmButtonText: 'OK',
+                            customClass: {
+                                popup: 'senheng-brand-popup',
+                                confirmButton: 'button button-primary'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to create payment method.',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'senheng-brand-popup',
+                            confirmButton: 'button button-primary'
+                        },
+                        buttonsStyling: false
+                    });
+                });
             }
         });
     });

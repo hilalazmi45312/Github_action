@@ -78,7 +78,11 @@ if( ! function_exists( 'woodmart_proccess_360_view_metabox' ) ) {
 	function woodmart_proccess_360_view_metabox( $post_id, $post ) {
 		$attachment_ids = isset( $_POST['product_360_image_gallery'] ) ? array_filter( explode( ',', wc_clean( $_POST['product_360_image_gallery'] ) ) ) : array();
 
-		update_post_meta( $post_id, '_product_360_image_gallery', implode( ',', $attachment_ids ) );
+		if ( $attachment_ids ) {
+			update_post_meta( $post_id, '_product_360_image_gallery', implode( ',', $attachment_ids ) );
+		} else {
+			delete_post_meta( $post_id, '_product_360_image_gallery' );
+		}
 	}
 }
 
@@ -111,9 +115,12 @@ if( ! function_exists( 'woodmart_product_360_view' ) ) {
 
 		woodmart_enqueue_js_library( 'threesixty' );
 		woodmart_enqueue_js_library( 'magnific' );
-		woodmart_enqueue_inline_style( 'mfp-popup' );
 		woodmart_enqueue_js_script( 'product-360-button' );
+		
+		woodmart_enqueue_inline_style( 'mfp-popup' );
 		woodmart_enqueue_inline_style( '360degree' );
+		woodmart_enqueue_inline_style( 'mod-animations-transform' );
+		woodmart_enqueue_inline_style( 'mod-transform' );
 
 		if ( count( $images ) < 1 ) {
 			return;
@@ -136,7 +143,7 @@ if( ! function_exists( 'woodmart_product_360_view' ) ) {
 			<div class="product-360-button wd-action-btn wd-gallery-btn wd-style-icon-bg-text">
 				<a href="#product-360-view" rel="nofollow"><span><?php esc_html_e('360 product view', 'woodmart'); ?></span></a>
 			</div>
-			<div id="product-360-view" class="product-360-view-wrapper mfp-hide wd-popup">
+			<div id="product-360-view" class="mfp-hide wd-popup wd-product-360-view wd-scroll-content">
 				<div class="wd-threed-view wd-product-threed threed-id-<?php echo esc_attr( $id ); ?>" data-args='<?php echo wp_json_encode( $args ); ?>'>
 					<?php if ( ! empty( $title ) ): ?>
 						<h3 class="threed-title"><span><?php echo wp_kses( $title, woodmart_get_allowed_html() ); ?></span></h3>

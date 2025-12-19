@@ -6,7 +6,7 @@
 		var cartWidgetSide = $('.cart-widget-side');
 		var closeSide = $('.wd-close-side');
 
-		body.on('click', '.cart-widget-opener', function(e) {
+		body.on('click wdOpenWidgetCart', '.cart-widget-opener', function(e) {
 			if (!isCart() && !isCheckout()) {
 				e.preventDefault();
 			}
@@ -40,6 +40,7 @@
 		});
 
 		var closeWidget = function() {
+			cartWidgetSide.trigger('wdCloseSide');
 			cartWidgetSide.removeClass('wd-opened');
 			closeSide.removeClass('wd-close-side-opened');
 		};
@@ -48,6 +49,7 @@
 			if (isCart() || isCheckout()) {
 				return false;
 			}
+			cartWidgetSide.trigger('wdOpenSide');
 			cartWidgetSide.addClass('wd-opened');
 			closeSide.addClass('wd-close-side-opened');
 		};

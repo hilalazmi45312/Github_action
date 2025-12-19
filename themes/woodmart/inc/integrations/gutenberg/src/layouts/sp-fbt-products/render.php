@@ -14,7 +14,7 @@ if ( ! function_exists( 'wd_gutenberg_single_product_fbt_products' ) ) {
 		$block_attributes['is_builder'] = true;
 
 		$block_attributes['slides_per_view_tablet'] = isset( $block_attributes['slides_per_viewTablet'] ) ? $block_attributes['slides_per_viewTablet'] : '';
-		$block_attributes['slides_per_view_tablet'] = isset( $block_attributes['slides_per_viewMobile'] ) ? $block_attributes['slides_per_viewMobile'] : '';
+		$block_attributes['slides_per_view_mobile'] = isset( $block_attributes['slides_per_viewMobile'] ) ? $block_attributes['slides_per_viewMobile'] : '';
 
 		$block_attributes['hide_prev_next_buttons_tablet'] = ! empty( $block_attributes['hide_prev_next_buttonsTablet'] ) ? 'yes' : 'no';
 		$block_attributes['hide_prev_next_buttons_mobile'] = ! empty( $block_attributes['hide_prev_next_buttonsMobile'] ) ? 'yes' : 'no';

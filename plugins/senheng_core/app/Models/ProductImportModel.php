@@ -80,7 +80,6 @@ class ProductImportModel
         } else {
             update_post_meta($product_id, 's_coin_value', $data['Scoin'] ?? '');
         }
-        update_post_meta($product_id, '_sales_quantity', $data['sale_quantity'] ?? '');
 
         $brand_name = $data['brand_name'] ?? '';
         if (!empty($brand_name)) {
@@ -227,7 +226,6 @@ class ProductImportModel
         } else {
             update_post_meta($variation_id, 's_coin_value', $data['Scoin'] ?? '');
         }
-        update_post_meta($variation_id, '_sales_quantity', $data['sale_quantity'] ?? '');
         
         $variation->save();
         
@@ -582,7 +580,6 @@ class ProductImportModel
         } else {
             update_post_meta($product_id, 's_coin_value', $data['Scoin'] ?? '');
         }
-        update_post_meta($product_id, '_sales_quantity', $data['sale_quantity'] ?? '');
 
         $brand_name = $data['brand_name'] ?? '';
         if (!empty($brand_name)) {
@@ -1025,7 +1022,6 @@ class ProductImportModel
         } else {
             update_post_meta($variation->get_id(), 's_coin_value', $data['Scoin'] ?? '');
         }
-        update_post_meta($variation->get_id(), '_sales_quantity', $data['sale_quantity'] ?? '');
         $log .= "Created variation for " . (isset($data['name']) ? $data['name'] : '') . " with ID: {$variation->get_id()}\n\n";
         return $variation->get_id();
     }

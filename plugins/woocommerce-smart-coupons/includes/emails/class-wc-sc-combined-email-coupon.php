@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.4.1
- * @version     1.3.0
+ * @version     1.5.0
  *
  * @package     woocommerce-smart-coupons/includes/emails/
  */
@@ -58,7 +58,8 @@ if ( ! class_exists( 'WC_SC_Combined_Email_Coupon' ) ) {
 		 * @return string Default email subject
 		 */
 		public function get_default_subject() {
-			return __( '{site_title}: Congratulations! You\'ve received coupons from {sender_name}', 'woocommerce-smart-coupons' );
+			/* translators: 1: site title, 2: sender name */
+			return sprintf( __( '%1$s: Congratulations! You\'ve received coupons from %2$s', 'woocommerce-smart-coupons' ), '{site_title}', '{sender_name}' );
 		}
 
 		/**
@@ -76,36 +77,42 @@ if ( ! class_exists( 'WC_SC_Combined_Email_Coupon' ) ) {
 		 * @param array $args Email arguments.
 		 */
 		public function trigger( $args = array() ) {
+			try {
+				$this->email_args = wp_parse_args( $args, $this->email_args );
 
-			$this->email_args = wp_parse_args( $args, $this->email_args );
-
-			if ( ! isset( $this->email_args['email'] ) || empty( $this->email_args['email'] ) ) {
-				return;
-			}
-
-			$this->setup_locale();
-
-			$this->recipient = $this->email_args['email'];
-
-			$order_id = isset( $this->email_args['order_id'] ) ? $this->email_args['order_id'] : 0;
-
-			// Get order object.
-			if ( ! empty( $order_id ) && 0 !== $order_id ) {
-				$order = wc_get_order( $order_id );
-				if ( is_a( $order, 'WC_Order' ) ) {
-					$this->object = $order;
+				if ( ! isset( $this->email_args['email'] ) || empty( $this->email_args['email'] ) ) {
+					return;
 				}
-			}
 
-			$this->set_placeholders();
+				$this->setup_locale();
 
-			$email_content = $this->get_content();
-			// Replace placeholders with values in the email content.
-			$email_content = ( is_callable( array( $this, 'format_string' ) ) ) ? $this->format_string( $email_content ) : $email_content;
+				$this->recipient = $this->email_args['email'];
 
-			// Send email.
-			if ( $this->is_enabled() && $this->get_recipient() ) {
-				$this->send( $this->get_recipient(), $this->get_subject(), $email_content, $this->get_headers(), $this->get_attachments() );
+				$order_id = isset( $this->email_args['order_id'] ) ? $this->email_args['order_id'] : 0;
+
+				// Get order object.
+				if ( ! empty( $order_id ) && 0 !== $order_id ) {
+					$order = wc_get_order( $order_id );
+					if ( is_a( $order, 'WC_Order' ) ) {
+						$this->object = $order;
+					}
+				}
+
+				$this->set_placeholders();
+
+				$email_content = $this->get_content();
+				// Replace placeholders with values in the email content.
+				$email_content = ( is_callable( array( $this, 'format_string' ) ) ) ? $this->format_string( $email_content ) : $email_content;
+
+				// Send email.
+				if ( $this->is_enabled() && $this->get_recipient() ) {
+					$this->send( $this->get_recipient(), $this->get_subject(), $email_content, $this->get_headers(), $this->get_attachments() );
+				}
+			} catch ( \Throwable $e ) {
+				global $woocommerce_smart_coupon;
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
 			}
 
 			$this->restore_locale();
@@ -124,75 +131,84 @@ if ( ! class_exists( 'WC_SC_Combined_Email_Coupon' ) ) {
 		 * @return string Email content html
 		 */
 		public function get_content_html() {
+			try {
+				global $woocommerce_smart_coupon;
 
-			global $woocommerce_smart_coupon;
+				$order         = $this->object;
+				$url           = $this->get_url();
+				$email_heading = $this->get_heading();
 
-			$order         = $this->object;
-			$url           = $this->get_url();
-			$email_heading = $this->get_heading();
+				$sender = '';
+				$from   = '';
 
-			$sender = '';
-			$from   = '';
+				$is_gift = isset( $this->email_args['is_gift'] ) ? $this->email_args['is_gift'] : '';
 
-			$is_gift = isset( $this->email_args['is_gift'] ) ? $this->email_args['is_gift'] : '';
-
-			if ( 'yes' === $is_gift ) {
-				$sender_name  = $this->get_sender_name();
-				$sender_email = $this->get_sender_email();
-				if ( ! empty( $sender_name ) && ! empty( $sender_email ) ) {
-					$sender = $sender_name . ' (' . $sender_email . ') ';
-					$from   = ' ' . __( 'from', 'woocommerce-smart-coupons' ) . ' ';
+				if ( 'yes' === $is_gift ) {
+					$sender_name  = $this->get_sender_name();
+					$sender_email = $this->get_sender_email();
+					if ( ! empty( $sender_name ) && ! empty( $sender_email ) ) {
+						$sender = $sender_name . ' (' . $sender_email . ') ';
+						$from   = ' ' . __( 'from', 'woocommerce-smart-coupons' ) . ' ';
+					}
 				}
+
+				$email            = isset( $this->email_args['email'] ) ? $this->email_args['email'] : '';
+				$receiver_details = isset( $this->email_args['receiver_details'] ) ? $this->email_args['receiver_details'] : '';
+
+				$design           = get_option( 'wc_sc_setting_coupon_design', 'basic' );
+				$background_color = get_option( 'wc_sc_setting_coupon_background_color', '#39cccc' );
+				$foreground_color = get_option( 'wc_sc_setting_coupon_foreground_color', '#30050b' );
+				$third_color      = get_option( 'wc_sc_setting_coupon_third_color', '#39cccc' );
+
+				$show_coupon_description = get_option( 'smart_coupons_show_coupon_description', 'no' );
+
+				$valid_designs = $woocommerce_smart_coupon->get_valid_coupon_designs();
+
+				if ( ! in_array( $design, $valid_designs, true ) ) {
+					$design = 'basic';
+				}
+
+				$design = ( 'custom-design' !== $design ) ? 'email-coupon' : $design;
+
+				$coupon_styles = $woocommerce_smart_coupon->get_coupon_styles( $design, array( 'is_email' => 'yes' ) );
+
+				$default_path  = $this->template_base;
+				$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
+
+				ob_start();
+
+				wc_get_template(
+					$this->template_html,
+					array(
+						'email'                   => $email,
+						'email_obj'               => $this,
+						'email_heading'           => $email_heading,
+						'order'                   => $order,
+						'url'                     => $url,
+						'from'                    => $from,
+						'background_color'        => $background_color,
+						'foreground_color'        => $foreground_color,
+						'third_color'             => $third_color,
+						'coupon_styles'           => $coupon_styles,
+						'sender'                  => $sender,
+						'receiver_details'        => $receiver_details,
+						'show_coupon_description' => $show_coupon_description,
+						'design'                  => $design,
+					),
+					$template_path,
+					$default_path
+				);
+
+				return ob_get_clean();
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+
+				ob_end_clean();
+				return '';
 			}
 
-			$email            = isset( $this->email_args['email'] ) ? $this->email_args['email'] : '';
-			$receiver_details = isset( $this->email_args['receiver_details'] ) ? $this->email_args['receiver_details'] : '';
-
-			$design           = get_option( 'wc_sc_setting_coupon_design', 'basic' );
-			$background_color = get_option( 'wc_sc_setting_coupon_background_color', '#39cccc' );
-			$foreground_color = get_option( 'wc_sc_setting_coupon_foreground_color', '#30050b' );
-			$third_color      = get_option( 'wc_sc_setting_coupon_third_color', '#39cccc' );
-
-			$show_coupon_description = get_option( 'smart_coupons_show_coupon_description', 'no' );
-
-			$valid_designs = $woocommerce_smart_coupon->get_valid_coupon_designs();
-
-			if ( ! in_array( $design, $valid_designs, true ) ) {
-				$design = 'basic';
-			}
-
-			$design = ( 'custom-design' !== $design ) ? 'email-coupon' : $design;
-
-			$coupon_styles = $woocommerce_smart_coupon->get_coupon_styles( $design, array( 'is_email' => 'yes' ) );
-
-			$default_path  = $this->template_base;
-			$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
-
-			ob_start();
-
-			wc_get_template(
-				$this->template_html,
-				array(
-					'email'                   => $email,
-					'email_obj'               => $this,
-					'email_heading'           => $email_heading,
-					'order'                   => $order,
-					'url'                     => $url,
-					'from'                    => $from,
-					'background_color'        => $background_color,
-					'foreground_color'        => $foreground_color,
-					'third_color'             => $third_color,
-					'coupon_styles'           => $coupon_styles,
-					'sender'                  => $sender,
-					'receiver_details'        => $receiver_details,
-					'show_coupon_description' => $show_coupon_description,
-					'design'                  => $design,
-				),
-				$template_path,
-				$default_path
-			);
-
-			return ob_get_clean();
 		}
 
 		/**
@@ -201,52 +217,61 @@ if ( ! class_exists( 'WC_SC_Combined_Email_Coupon' ) ) {
 		 * @return string Email plain content
 		 */
 		public function get_content_plain() {
+			try {
+				global $woocommerce_smart_coupon;
 
-			global $woocommerce_smart_coupon;
+				$order         = $this->object;
+				$url           = $this->get_url();
+				$email_heading = $this->get_heading();
 
-			$order         = $this->object;
-			$url           = $this->get_url();
-			$email_heading = $this->get_heading();
+				$sender = '';
+				$from   = '';
 
-			$sender = '';
-			$from   = '';
+				$is_gift = isset( $this->email_args['is_gift'] ) ? $this->email_args['is_gift'] : '';
 
-			$is_gift = isset( $this->email_args['is_gift'] ) ? $this->email_args['is_gift'] : '';
-
-			if ( 'yes' === $is_gift ) {
-				$sender_name  = $this->get_sender_name();
-				$sender_email = $this->get_sender_email();
-				if ( ! empty( $sender_name ) && ! empty( $sender_email ) ) {
-					$sender = $sender_name . ' (' . $sender_email . ') ';
-					$from   = ' ' . __( 'from', 'woocommerce-smart-coupons' ) . ' ';
+				if ( 'yes' === $is_gift ) {
+					$sender_name  = $this->get_sender_name();
+					$sender_email = $this->get_sender_email();
+					if ( ! empty( $sender_name ) && ! empty( $sender_email ) ) {
+						$sender = $sender_name . ' (' . $sender_email . ') ';
+						$from   = ' ' . __( 'from', 'woocommerce-smart-coupons' ) . ' ';
+					}
 				}
+
+				$email            = isset( $this->email_args['email'] ) ? $this->email_args['email'] : '';
+				$receiver_details = isset( $this->email_args['receiver_details'] ) ? $this->email_args['receiver_details'] : '';
+
+				$default_path  = $this->template_base;
+				$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_plain );
+
+				ob_start();
+
+				wc_get_template(
+					$this->template_plain,
+					array(
+						'email'            => $email,
+						'email_obj'        => $this,
+						'email_heading'    => $email_heading,
+						'order'            => $order,
+						'url'              => $url,
+						'from'             => $from,
+						'sender'           => $sender,
+						'receiver_details' => $receiver_details,
+					),
+					$template_path,
+					$default_path
+				);
+
+				return ob_get_clean();
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+
+				ob_end_clean();
+				return '';
 			}
 
-			$email            = isset( $this->email_args['email'] ) ? $this->email_args['email'] : '';
-			$receiver_details = isset( $this->email_args['receiver_details'] ) ? $this->email_args['receiver_details'] : '';
-
-			$default_path  = $this->template_base;
-			$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_plain );
-
-			ob_start();
-
-			wc_get_template(
-				$this->template_plain,
-				array(
-					'email'            => $email,
-					'email_obj'        => $this,
-					'email_heading'    => $email_heading,
-					'order'            => $order,
-					'url'              => $url,
-					'from'             => $from,
-					'sender'           => $sender,
-					'receiver_details' => $receiver_details,
-				),
-				$template_path,
-				$default_path
-			);
-
-			return ob_get_clean();
 		}
 
 		/**

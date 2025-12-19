@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2024-10-30 14:55" -->
+	<!-- generator="WordPress/6.7.2" created="2025-05-29 15:42" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,14 +29,13 @@
 	<title>Elementor 2.0 WoodMart dummy</title>
 	<link>https://dummy.xtemos.com/woodmart2/elementor</link>
 	<description>Just another WoodMart Dummy 2.0 Sites site</description>
-	<pubDate>Wed, 30 Oct 2024 14:55:04 +0000</pubDate>
+	<pubDate>Thu, 29 May 2025 15:42:03 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/elementor</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>105</wp:term_id>
 			<wp:term_taxonomy><![CDATA[woodmart_slider]]></wp:term_taxonomy>
@@ -61,7 +60,7 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[height_mobile]]></wp:meta_key>
-			<wp:meta_value><![CDATA[500]]></wp:meta_value>
+			<wp:meta_value><![CDATA[915]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[arrows_style]]></wp:meta_key>
@@ -84,35 +83,12 @@
 			<wp:meta_value><![CDATA[20000]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-105-status]]></wp:meta_key>
-			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-105-css-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[#slider-105 .wd-slide {
-	min-height: 760px;
-}
-
-@media (max-width: 1024px) {
-	#slider-105 .wd-slide {
-		min-height: 500px;
-	}
-}
-
-@media (max-width: 767px) {
-	#slider-105 .wd-slide {
-		min-height: 500px;
-	}
-}
-]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-105-version]]></wp:meta_key>
-			<wp:meta_value><![CDATA[7.6.0]]></wp:meta_value>
+			<wp:meta_value><![CDATA[8.1.2]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-105-site-url]]></wp:meta_key>
-			<wp:meta_value><![CDATA[4f146f679d9b7d2ba7fe3593044e8d2b]]></wp:meta_value>
+			<wp:meta_value><![CDATA[573d753390f46baa14c4ee4b10cec742]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[arrows_hover_style]]></wp:meta_key>
@@ -242,19 +218,11 @@
 			<wp:meta_key><![CDATA[pagination_border_active_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:1:{s:4:"idle";s:0:"";}]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-105-credentials]]></wp:meta_key>
-			<wp:meta_value><![CDATA[requested]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-105-file-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2024/10/xts-term-105-1730299988.css";s:13:"theme_version";s:5:"7.6.0";s:8:"site_url";s:32:"4f146f679d9b7d2ba7fe3593044e8d2b";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term><wp:term_id>106</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[footer-menu-flowers]]></wp:term_slug><wp:term_name><![CDATA[Footer menu Flowers]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.2</generator>
 
 					<item>
 					<title><![CDATA[flowers-slider-2-bg-opt]]></title>
@@ -438,10 +406,6 @@
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021/10/flowers-infobox-line-bg.svg]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_inline_svg]]></wp:meta_key>
-							<wp:meta_value><![CDATA[<svg xmlns="http://www.w3.org/2000/svg" width="1462.53" height="73.91" viewBox="0 0 1462.53 73.91"><defs><style> .cls-1 { fill: none; stroke: #ed2353; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2px; stroke-dasharray: 16 12; fill-rule: evenodd; } </style></defs><path id="line" class="cls-1" d="M230,4181.17s155.616,51.88,344.133,49.77,170.287-31.6,460.177-31.6,348.91,30.45,663.25-41.87" transform="translate(-229 -4158.09)"></path></svg>]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -672,6 +636,10 @@
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021/10/flowers-product-10.jpg]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -1618,12 +1586,12 @@ Summer Collection</p>
 							<wp:meta_value><![CDATA[[{"id":"a6ba1c9","elType":"container","settings":{"mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","margin":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""},"flex_gap":{"size":"","column":"","row":"","unit":"px","isLinked":"1"},"flex_direction":"row","scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"6666b6d","elType":"widget","settings":{"slider":"flowers-slider","scroll_y":"-80","sync_parent_id":"wd_65831a04c7334"},"elements":[],"widgetType":"wd_slider"}],"isInner":""},{"id":"fbb993d","elType":"container","settings":{"mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","structure":"30","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"flex_direction":"row","flex_gap":{"size":"","column":"","row":"","unit":"px","isLinked":"1"},"content_width":"full","width":{"unit":"%","size":"101.846"},"_flex_size":"none","scroll_y":"-80","_element_width":"initial","container_sticky_offset":"50","flex_direction_mobile":"column"},"elements":[{"id":"7844452","elType":"container","settings":{"_column_size":"33","width":{"unit":"%","size":"40.624"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","width_tablet":{"size":"41.2","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"hide_mobile":"hidden-mobile","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","_flex_size":"none","_element_width":"initial","container_sticky_offset":"50"},"elements":[{"id":"8220940","elType":"widget","settings":{"align":"left","image_size":"full","title":"Flowers\r\nFor Holidays.","subtitle":"","content":"We have created a new collection of bouquets.","btn_text":"TO SHOP","btn_position":"static","hover":"zoom","image_custom_dimension":{"width":"485","height":"480"},"style":"border","btn_color":"primary","btn_shape":"round","horizontal_alignment":"center","text_alignment":"center","width":{"size":"100","unit":"%"},"title_font":"alt","woodmart_css_id":"5c62b87595f27","hide_btn_tablet":"yes","hide_btn_mobile":"yes","title_typography_typography":"custom","title_typography_font_size":{"size":"48","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"custom_title_color":"#C24D94","custom_text_color":"#777777","custom_subtitle_color":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfY29sb3JwaWNrZXIiLCJjc3NfYXJncyI6eyJjb2xvciI6WyIgLmJhbm5lci1zdWJ0aXRsZSJdfSwic2VsZWN0b3JfaWQiOiI1YzYyYjg3NTk1ZjI3IiwiZGF0YSI6eyJkZXNrdG9wIjoicmdiYSgyNTUsMjU1LDI1NSwwLjAxKSJ9fQ==","woodmart_empty_space":"","image_type":"background","image_height":{"unit":"px","size":"480","sizes":[]},"image_height_tablet":{"unit":"px","size":"310","sizes":[]},"title_typography_font_family":"Great Vibes","title_typography_line_height":{"unit":"px","size":"58","sizes":[]},"title_typography_line_height_tablet":{"unit":"px","size":"46","sizes":[]},"title_typography_line_height_mobile":{"unit":"em","size":"42","sizes":[]},"scroll_y":"-80","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-banner-large.jpg","id":"6067","alt":"","source":"library"},"woodmart_color_scheme":"light","custom_height":"Yes"},"elements":[],"widgetType":"wd_banner"}],"isInner":"1"},{"id":"b74e849","elType":"container","settings":{"_column_size":"33","width":{"unit":"%","size":"32.279"},"width_tablet":{"size":"33.3","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","_flex_size":"none","_element_width":"initial","container_sticky_offset":"50"},"elements":[{"id":"c79631e","elType":"widget","settings":{"align":"left","image_size":"full","title":"Flowers\r\nFor Date.","subtitle":"","content":"Delicate flowers for her.","btn_text":"","btn_position":"static","hover":"zoom","image_custom_dimension":{"width":"384","height":"230"},"btn_color":"primary","btn_shape":"round","vertical_alignment":"middle","width":{"size":"100","unit":"%"},"title_font":"alt","woodmart_css_id":"5c629b8ed1170","title_typography_typography":"custom","title_typography_font_size":{"size":"32","unit":"px"},"title_typography_font_size_tablet":{"size":"24","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"custom_title_color":"#C24D94","custom_text_color":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfY29sb3JwaWNrZXIiLCJjc3NfYXJncyI6eyJjb2xvciI6WyIgLmJhbm5lci1pbm5lciJdfSwic2VsZWN0b3JfaWQiOiI1YzYyOWI4ZWQxMTcwIiwiZGF0YSI6eyJkZXNrdG9wIjoicmdiYSg0OCw0OCw0OCwwLjcpIn19","custom_subtitle_color":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfY29sb3JwaWNrZXIiLCJjc3NfYXJncyI6eyJjb2xvciI6WyIgLmJhbm5lci1zdWJ0aXRsZSJdfSwic2VsZWN0b3JfaWQiOiI1YzYyOWI4ZWQxMTcwIiwiZGF0YSI6eyJkZXNrdG9wIjoicmdiYSgyNTUsMjU1LDI1NSwwLjAxKSJ9fQ==","image_type":"background","image_height":{"unit":"px","size":"230","sizes":[]},"image_height_tablet":{"unit":"px","size":"145","sizes":[]},"image_height_mobile":{"unit":"px","size":"230","sizes":[]},"title_typography_font_family":"Great Vibes","title_typography_line_height":{"unit":"px","size":"42","sizes":[]},"title_typography_line_height_tablet":{"unit":"px","size":"34","sizes":[]},"title_typography_line_height_mobile":{"unit":"px","size":"","sizes":[]},"scroll_y":"-80","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-banner-medium-top.jpg","id":"6069","alt":"","source":"library"},"custom_height":"Yes"},"elements":[],"widgetType":"wd_banner"},{"id":"1c8050d","elType":"widget","settings":{"align":"left","image_size":"full","title":"Flowers\r\nFor Festival.","subtitle":"","content":"Decorate your holiday.","btn_text":"","btn_position":"static","hover":"zoom","image_custom_dimension":{"width":"384","height":"230"},"btn_color":"primary","btn_shape":"round","vertical_alignment":"middle","width":{"size":"100","unit":"%"},"title_font":"alt","woodmart_css_id":"5c629bbb1c026","title_typography_typography":"custom","title_typography_font_size":{"size":"32","unit":"px"},"title_typography_font_size_tablet":{"size":"24","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"custom_title_color":"#598060","custom_text_color":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfY29sb3JwaWNrZXIiLCJjc3NfYXJncyI6eyJjb2xvciI6WyIgLmJhbm5lci1pbm5lciJdfSwic2VsZWN0b3JfaWQiOiI1YzYyOWJiYjFjMDI2IiwiZGF0YSI6eyJkZXNrdG9wIjoicmdiYSg0OCw0OCw0OCwwLjcpIn19","custom_subtitle_color":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfY29sb3JwaWNrZXIiLCJjc3NfYXJncyI6eyJjb2xvciI6WyIgLmJhbm5lci1zdWJ0aXRsZSJdfSwic2VsZWN0b3JfaWQiOiI1YzYyOWJiYjFjMDI2IiwiZGF0YSI6eyJkZXNrdG9wIjoicmdiYSgyNTUsMjU1LDI1NSwwLjAxKSJ9fQ==","image_type":"background","image_height":{"unit":"px","size":"230","sizes":[]},"image_height_tablet":{"unit":"px","size":"145","sizes":[]},"image_height_mobile":{"unit":"px","size":"230","sizes":[]},"title_typography_font_family":"Great Vibes","title_typography_line_height":{"unit":"px","size":"42","sizes":[]},"title_typography_line_height_tablet":{"unit":"px","size":"","sizes":[]},"title_typography_line_height_mobile":{"unit":"px","size":"42","sizes":[]},"scroll_y":"-80","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-banner-medium-bottom.jpg","id":"6068","alt":"","source":"library"},"custom_height":"Yes"},"elements":[],"widgetType":"wd_banner"}],"isInner":"1"},{"id":"ace1cce","elType":"container","settings":{"_column_size":"33","width":{"size":"25.1","unit":"%"},"width_tablet":{"size":"25","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"hide_mobile":"hidden-mobile","mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","container_sticky_offset":"50"},"elements":[{"id":"2a49ab3","elType":"widget","settings":{"align":"left","image_size":"full","title":"Flowers\r\nFor Birthday.","subtitle":"","content":"Create your bougnet.","btn_text":"","btn_position":"static","hover":"zoom","image_custom_dimension":{"width":"283","height":"480"},"style":"border","btn_color":"primary","btn_shape":"round","horizontal_alignment":"center","text_alignment":"center","width":{"size":"100","unit":"%"},"title_font":"alt","woodmart_css_id":"5c629bcc27874","title_typography_typography":"custom","title_typography_font_size":{"size":"32","unit":"px"},"title_typography_font_size_tablet":{"size":"24","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"custom_title_color":"#647DB4","custom_text_color":"#777777","custom_subtitle_color":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfY29sb3JwaWNrZXIiLCJjc3NfYXJncyI6eyJjb2xvciI6WyIgLmJhbm5lci1zdWJ0aXRsZSJdfSwic2VsZWN0b3JfaWQiOiI1YzYyOWJjYzI3ODc0IiwiZGF0YSI6eyJkZXNrdG9wIjoicmdiYSgyNTUsMjU1LDI1NSwwLjAxKSJ9fQ==","image_type":"background","image_height":{"unit":"px","size":"480","sizes":[]},"image_height_tablet":{"unit":"px","size":"310","sizes":[]},"title_typography_font_family":"Great Vibes","title_typography_line_height":{"unit":"px","size":"42","sizes":[]},"title_typography_line_height_tablet":{"unit":"px","size":"34","sizes":[]},"scroll_y":"-80","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-bottom-right-full-heigh.jpg","id":"6070","alt":"","source":"library"},"woodmart_color_scheme":"light","custom_height":"Yes"},"elements":[],"widgetType":"wd_banner"}],"isInner":"1"}],"isInner":""},{"id":"2ba1d6d","elType":"container","settings":{"mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"50","left":"0","isLinked":""},"flex_direction":"column","flex_gap":{"size":"30","column":"30","row":"30","unit":"px","isLinked":"1"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"c3b8183","elType":"widget","settings":{"subtitle":"Wooden accessories.","after_title":"It is a long established fact that a reader will be distracted","image_size":"custom","subtitle_font":"alt","woodmart_css_id":"5c628b9f189bf","title":"Featured Products","title_typography_typography":"custom","title_typography_font_size":{"size":"38","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"width":{"size":"","unit":"%"},"after_font_size":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIiAudGl0bGUtYWZ0ZXJfdGl0bGUiXX0sInNlbGVjdG9yX2lkIjoiNWM2MjhiOWYxODliZiIsImRhdGEiOnsiZGVza3RvcCI6IjE0cHgifX0=","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"size":"24","unit":"px"},"subtitle_typography_font_family":"Great Vibes","scroll_y":"-80","color":"primary"},"elements":[],"widgetType":"wd_title"},{"id":"0ebbf27","elType":"widget","settings":{"title":"","items_per_page":"8","product_hover":"quick","orderby":"post__in","columns":{"size":"4","unit":"px","sizes":[]},"scroll_y":"-80","sync_parent_id":"wd_65831a04cdc75"},"elements":[],"widgetType":"wd_products"}],"isInner":""},{"id":"80f5b61","elType":"container","settings":{"boxed_width":{"unit":"px","size":"600","sizes":[]},"background_background":"classic","background_image":{"id":"6077","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-discount-bg.jpg","alt":"","source":"library"},"margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"padding":{"unit":"px","top":"70","right":"15","bottom":"70","left":"15","isLinked":""},"padding_mobile":{"unit":"px","top":"60","right":"30","bottom":"60","left":"30","isLinked":""},"background_position":"center center","background_size":"cover","flex_direction":"row","flex_align_items":"stretch","flex_gap":{"size":"10","column":"10","row":"10","unit":"px"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"129f706","elType":"container","settings":{"_column_size":"100","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","background_background":"classic","background_color":"#FFFFFF","padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":"1"},"container_sticky_offset":"50"},"elements":[{"id":"70f4903","elType":"widget","settings":{"icon_type":"icon","btn_text":"TO SHOP","image_size":"custom","subtitle":"","title":"-15% Discount","image":{"id":"6025","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-txt-element.jpg.png","alt":"","source":"library"},"btn_color":"primary","btn_shape":"round","title_font":"alt","woodmart_css_id":"5c629c2c85bf2","title_typography_typography":"custom","title_typography_font_size":{"size":"50","unit":"px"},"title_typography_font_size_tablet":{"size":"40","unit":"px"},"title_typography_font_size_mobile":{"size":"34","unit":"px"},"title_color":"#ED2353","info_box_inline":"no","_border_width":{"top":"1","left":"1","right":"1","bottom":"1","unit":"px","isLinked":""},"_border_border":"solid","_border_color":"#e5e5e5","content_typography_typography":"custom","content_typography_font_size":{"size":"26","unit":"px"},"content_typography_font_size_tablet":{"size":"18","unit":"px"},"content_typography_font_size_mobile":{"size":"14","unit":"px"},"image_custom_dimension":{"width":"160","height":"80"},"content":"On A Bouquet From The\r\nSummer Collection","icon_text":"53","title_typography_font_family":"Great Vibes","title_typography_line_height":{"unit":"px","size":"60","sizes":[]},"title_typography_line_height_tablet":{"unit":"px","size":"50","sizes":[]},"title_typography_line_height_mobile":{"unit":"px","size":"44","sizes":[]},"_padding":{"unit":"px","top":"60","right":"0","bottom":"60","left":"0","isLinked":""},"scroll_y":"-80","custom_text_color":"#303030","content_typography_line_height":{"unit":"px","size":"36","sizes":[]},"content_typography_line_height_tablet":{"unit":"px","size":"28","sizes":[]},"content_typography_line_height_mobile":{"unit":"px","size":"24","sizes":[]}},"elements":[],"widgetType":"wd_infobox"}],"isInner":"1"}],"isInner":""},{"id":"a64930f","elType":"container","settings":{"mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"50","left":"0","isLinked":""},"flex_direction":"column","flex_gap":{"size":"30","column":"30","row":"30","unit":"px","isLinked":"1"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"c6f4327","elType":"widget","settings":{"subtitle":"Massa et semper litara.","after_title":"A laoreet ad litora consequat a luctus a suspendisse ruturm","image_size":"custom","subtitle_font":"alt","woodmart_css_id":"5c627c0b7621a","title":"Our Gify Products","title_typography_typography":"custom","title_typography_font_size":{"size":"38","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"width":{"size":"","unit":"%"},"after_font_size":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIiAudGl0bGUtYWZ0ZXJfdGl0bGUiXX0sInNlbGVjdG9yX2lkIjoiNWM2MjdjMGI3NjIxYSIsImRhdGEiOnsiZGVza3RvcCI6IjE0cHgifX0=","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"size":"24","unit":"px"},"subtitle_typography_font_family":"Great Vibes","scroll_y":"-80","color":"primary"},"elements":[],"widgetType":"wd_title"},{"id":"7e855bc","elType":"widget","settings":{"title":"","layout":"carousel","items_per_page":"6","product_hover":"quick","orderby":"post__in","slides_per_view":{"size":"5","unit":"px","sizes":[]},"hide_pagination_control":"yes","scroll_carousel_init":"yes","scroll_y":"-80","sync_parent_id":"wd_65831a04cdc75"},"elements":[],"widgetType":"wd_products"}],"isInner":""},{"id":"4bb4b05","elType":"container","settings":{"mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","flex_direction":"column","flex_gap":{"size":"","column":"","row":"","unit":"px","isLinked":"1"},"margin":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":""},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"a4d47fa","elType":"widget","settings":{"subtitle":"Effective ways.","after_title":"Authorities in our business will tell in no uncertain terms","image_size":"custom","subtitle_font":"alt","woodmart_css_id":"5c627c1c4819d","title":"How We Work","title_typography_typography":"custom","title_typography_font_size":{"size":"38","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"width":{"size":"","unit":"%"},"after_font_size":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIiAudGl0bGUtYWZ0ZXJfdGl0bGUiXX0sInNlbGVjdG9yX2lkIjoiNWM2MjdjMWM0ODE5ZCIsImRhdGEiOnsiZGVza3RvcCI6IjE0cHgifX0=","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"size":"24","unit":"px"},"subtitle_color":"#ed2353","subtitle_typography_font_family":"Great Vibes","_margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":""},"scroll_y":"-80"},"elements":[],"widgetType":"wd_title"}],"isInner":""},{"id":"55efd69","elType":"container","settings":{"background_position":"top center","background_background":"classic","background_image":{"id":"6081","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-infobox-line-bg.svg","alt":"","source":"library"},"background_size":"contain","background_repeat":"no-repeat","mobile_bg_img_hidden":"yes","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","background_position_mobile":"initial","background_xpos_mobile":{"unit":"vw","size":"-100","sizes":[]},"background_ypos_mobile":{"unit":"vh","size":"0","sizes":[]},"margin":{"unit":"px","top":"0","right":"0","bottom":"90","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"70","left":"0","isLinked":""},"flex_direction":"column","flex_gap":{"size":"","column":"","row":"","unit":"px","isLinked":"1"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"7af1e66","elType":"widget","settings":{"slider_spacing":"20","slides_per_view":{"size":"3","unit":"px","sizes":[]},"hide_pagination_control":"yes","scroll_carousel_init":"yes","content_repeater":[{"_id":"9988618","icon_type":"icon","btn_text":"VIEW MORE","image_size":"custom","subtitle":"","title":"Choose The Best Flowers","image":{"id":"6082","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-infobox-1-img.png","alt":"","source":"library"},"image_custom_dimension":{"width":"196","height":"177"},"link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"content":"You begin with a text, you sculpt information, you chisel away what's not needed, you come to the point, make things clear, you're a content person.","icon_text":"01."},{"_id":"7910132","icon_type":"icon","btn_text":"VIEW MORE","image_size":"custom","subtitle":"","title":"We Make A Composition","image":{"id":"6083","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-infobox-2-img.png","alt":"","source":"library"},"image_custom_dimension":{"width":"196","height":"177"},"link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"content":"Rigid proponents of content strategy may shun the use of dummy copy but then designers might want to ask them to provide style sheets with the copy.","icon_text":"01."},{"_id":"5679582","icon_type":"icon","btn_text":"VIEW MORE","image_size":"custom","subtitle":"","title":"The Bouquet Is Ready","image":{"id":"6084","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-infobox-3-img-opt.png","alt":"","source":"library"},"image_custom_dimension":{"width":"196","height":"177"},"link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"content":"Anyway, you still use Lorem Ipsum and rightly so, as it will always have a place in the web workers toolbox, order things happen, not always the way.","icon_text":"01."}],"btn_color":"primary","btn_style":"link","scroll_y":"-80","title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"24","sizes":[]},"sync_parent_id":"wd_65831a04ca50b"},"elements":[],"widgetType":"wd_infobox_carousel"}],"isInner":""},{"id":"46080ad","elType":"container","settings":{"mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","margin":{"unit":"px","top":"0","right":"0","bottom":"50","left":"0","isLinked":""},"flex_direction":"column","flex_gap":{"size":"","column":"","row":"","unit":"px","isLinked":"1"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"789d444","elType":"widget","settings":{"subtitle":"Share best news.","after_title":"There are many variations of passages of lorem ipsum","image_size":"custom","subtitle_font":"alt","woodmart_css_id":"5c628c2158b5a","title":"Our New Article","title_typography_typography":"custom","title_typography_font_size":{"size":"38","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"width":{"size":"","unit":"%"},"after_font_size":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIiAudGl0bGUtYWZ0ZXJfdGl0bGUiXX0sInNlbGVjdG9yX2lkIjoiNWM2MjhjMjE1OGI1YSIsImRhdGEiOnsiZGVza3RvcCI6IjE0cHgifX0=","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"size":"24","unit":"px"},"subtitle_typography_font_family":"Great Vibes","scroll_y":"-80","color":"primary"},"elements":[],"widgetType":"wd_title"},{"id":"6d8e0c1","elType":"widget","settings":{"blog_spacing":"20","blog_design":"carousel","blog_carousel_design":"mask","img_size":"full","slides_per_view":{"size":"3","unit":"px","sizes":[]},"hide_pagination_control":"yes","scroll_y":"-80","slides_per_view_tablet":{"unit":"px","size":"2","sizes":[]},"slides_per_view_mobile":{"unit":"px","size":"1","sizes":[]},"sync_parent_id":"wd_65831a04c9156"},"elements":[],"widgetType":"wd_blog"}],"isInner":""},{"id":"2d98dd7","elType":"container","settings":{"content_position":"middle","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"1","row_reverse_tablet":"1","woodmart_disable_overflow":"0","mobile_bg_img_hidden":"no","structure":"20","margin":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"reverse_order_tablet":"reverse-tablet","reverse_order_mobile":"reverse-mobile","flex_direction":"row","flex_align_items":"center","flex_gap":{"size":"0","column":"0","row":"40","unit":"px"},"flex_direction_tablet":"column","scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"9c578dc","elType":"container","settings":{"_column_size":"50","woodmart_text_align":"center","border_width":{"top":"0","left":"0","right":"1","bottom":"0","unit":"px","isLinked":""},"border_border":"solid","border_color":"#e6e6e6","woodmart_parallax":"0","parallax_scroll":"no","mobile_bg_img_hidden":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","width_tablet":{"size":"100","unit":"%"},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"border_width_tablet":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"padding":{"unit":"px","top":"0","right":"15","bottom":"0","left":"15","isLinked":""},"container_sticky_offset":"50"},"elements":[{"id":"0d0a777","elType":"widget","settings":{"subtitle":"Massa et semper litara.","after_title":"","image_size":"custom","subtitle_font":"alt","woodmart_css_id":"5c1bad1a00385","title":"Do You Like The Theme? Share With Your Friends!","title_typography_typography":"custom","title_typography_font_size":{"size":"38","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"26","unit":"px"},"width":{"size":"407","unit":"px"},"subtitle_typography_typography":"custom","subtitle_typography_font_size":{"size":"24","unit":"px"},"subtitle_typography_font_family":"Great Vibes","scroll_y":"-80","color":"primary"},"elements":[],"widgetType":"wd_title"},{"id":"5c864f9","elType":"widget","settings":{"form_id":"594","content_width":{"unit":"px","size":"380","sizes":[]},"scroll_y":"-80","_element_width_mobile":"inherit"},"elements":[],"widgetType":"wd_mailchimp"},{"id":"9173578","elType":"widget","settings":{"text":"<p>Will be used in accordance with our <a href=\"#\"><strong>Privacy Policy<\/strong><\/a><\/p>","typography_typography":"custom","typography_font_size":{"size":"12","unit":"px"},"text_alignment":"center","scroll_y":"-80"},"elements":[],"widgetType":"wd_text_block"}],"isInner":"1"},{"id":"5bed9f2","elType":"container","settings":{"_column_size":"50","woodmart_text_align":"center","woodmart_parallax":"0","parallax_scroll":"no","mobile_bg_img_hidden":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","width_tablet":{"size":"100","unit":"%"},"border_radius_tablet":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":""},"padding":{"unit":"%","top":"0","right":"10","bottom":"0","left":"10","isLinked":""},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"container_sticky_offset":"50"},"elements":[{"id":"630e455","elType":"widget","settings":{"stars_rating":"no","slides_per_view":{"size":"1","unit":"px","sizes":[]},"hide_pagination_control":"yes","items_repeater":[{"_id":"5627680","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/09\/fashion-testimon-3.jpg","id":"1019","alt":"","source":"library"},"name":"Cecilia Vasquez","title":"Happy Customer","img_size":"100x100","content":"To short sentences, to many headings, images too large for the proposed design, or too small, or they fit in but it looks iffy for reasons the folks in the meeting can't quite tell right now, but they're unhappy."},{"_id":"4802201","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/09\/toys-testimonials-1.jpg","id":"3376","alt":"","source":"library"},"name":"Rene Butler","title":"Happy Customer","img_size":"100x100","content":"It's content strategy gone awry right from the start. It's like saying you're a bad designer, use less bold text, don't use italics in every other paragraph. True enough, but that's not all that it takes to get things back."},{"_id":"3863687","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/09\/fashion-testimon-2.jpg","id":"1018","alt":"","source":"library"},"name":"Elias Stanley","title":"Happy Customer","img_size":"100x100","content":"No typography, no colors, no layout, no styles, all those things that convey the important signals that go beyond the mere textual, hierarchies of information, weight, emphasis, oblique stresses, priorities."}],"scroll_y":"-80","slides_per_view_tablet":{"unit":"px","size":"1","sizes":[]},"slides_per_view_mobile":{"unit":"px","size":"1","sizes":[]},"sync_parent_id":"wd_65831a04c8e47"},"elements":[],"widgetType":"wd_testimonials"}],"isInner":"1"}],"isInner":""},{"id":"f340837","elType":"container","settings":{"wd_section_stretch":"stretch-content","mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","flex_gap":{"size":"30","column":"30","row":"30","unit":"px","isLinked":"1"},"margin":{"unit":"px","top":"0","right":"0","bottom":"-40","left":"0","isLinked":""},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":""},"flex_direction":"column","scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"3cbcd06","elType":"widget","settings":{"subtitle":"See our collection.","after_title":"In a professional context it often happens that private or corporate","image_size":"custom","subtitle_font":"alt","woodmart_css_id":"5c628d86c3473","title":"Our Instagram","title_typography_typography":"custom","title_typography_font_size":{"size":"38","unit":"px"},"title_typography_font_size_tablet":{"size":"36","unit":"px"},"title_typography_font_size_mobile":{"size":"32","unit":"px"},"width":{"size":"","unit":"%"},"after_font_size":"eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIiAudGl0bGUtYWZ0ZXJfdGl0bGUiXX0sInNlbGVjdG9yX2lkIjoiNWM2MjhkODZjMzQ3MyIsImRhdGEiOnsiZGVza3RvcCI6IjE0cHgifX0=","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"size":"24","unit":"px"},"subtitle_typography_font_family":"Great Vibes","scroll_y":"-80","color":"primary","_padding":{"unit":"px","top":"0","right":"15","bottom":"0","left":"15","isLinked":""}},"elements":[],"widgetType":"wd_title"},{"id":"60effd4","elType":"widget","settings":{"data_source":"images","number":{"size":"6","unit":"px","sizes":[]},"design":"slider","username":"theflowerseekers","per_row":{"size":"6","unit":"px","sizes":[]},"hide_pagination_control":"yes","hide_prev_next_buttons":"yes","scroll_y":"-80","images_size":"full","images_likes":"1000-10000","images_comments":"0-1000","images":[{"id":"6096","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-inst-6.jpg"},{"id":"6095","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-inst-5.jpg"},{"id":"6094","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-inst-4.jpg"},{"id":"6093","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-inst-3.jpg"},{"id":"6092","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-inst-2.jpg"},{"id":"6091","url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-inst-1.jpg"}],"size":"medium","sync_parent_id":"wd_65831a04ca932","per_row_tablet":{"unit":"px","size":"4","sizes":[]},"per_row_mobile":{"unit":"px","size":"3","sizes":[]}},"elements":[],"widgetType":"wd_instagram"}],"isInner":""}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_controls_usage]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:13:{s:9:"wd_slider";a:3:{s:5:"count";i:1;s:15:"control_percent";i:1;s:8:"controls";a:2:{s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:6:"slider";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:6:"column";a:3:{s:5:"count";i:14;s:15:"control_percent";i:1;s:8:"controls";a:3:{s:8:"advanced";a:3:{s:8:"wd_extra";a:2:{s:20:"column_sticky_offset";i:14;s:8:"scroll_y";i:14;}s:19:"_section_responsive";a:1:{s:11:"hide_mobile";i:2;}s:16:"section_advanced";a:1:{s:7:"padding";i:1;}}s:6:"layout";a:1:{s:6:"layout";a:1:{s:12:"_inline_size";i:3;}}s:5:"style";a:1:{s:14:"section_border";a:3:{s:12:"border_width";i:1;s:13:"border_border";i:1;s:12:"border_color";i:1;}}}}s:7:"section";a:3:{s:5:"count";i:11;s:15:"control_percent";i:2;s:8:"controls";a:3:{s:8:"advanced";a:2:{s:16:"section_advanced";a:2:{s:6:"margin";i:10;s:7:"padding";i:3;}s:19:"_section_responsive";a:2:{s:20:"reverse_order_tablet";i:1;s:20:"reverse_order_mobile";i:1;}}s:6:"layout";a:3:{s:14:"section_layout";a:3:{s:3:"gap";i:2;s:13:"content_width";i:1;s:16:"content_position";i:1;}s:17:"section_structure";a:1:{s:9:"structure";i:2;}s:15:"wd_extra_layout";a:1:{s:18:"wd_section_stretch";i:1;}}s:5:"style";a:1:{s:18:"section_background";a:6:{s:21:"background_background";i:3;s:16:"background_color";i:1;s:16:"background_image";i:2;s:19:"background_position";i:2;s:15:"background_size";i:2;s:17:"background_repeat";i:1;}}}}s:9:"wd_banner";a:3:{s:5:"count";i:4;s:15:"control_percent";i:11;s:8:"controls";a:3:{s:7:"content";a:2:{s:21:"image_content_section";a:4:{s:10:"image_size";i:4;s:22:"image_custom_dimension";i:4;s:12:"image_height";i:4;s:5:"image";i:4;}s:15:"content_section";a:4:{s:5:"title";i:4;s:8:"subtitle";i:4;s:7:"content";i:4;s:8:"btn_text";i:4;}}s:5:"style";a:6:{s:20:"button_style_section";a:5:{s:12:"btn_position";i:4;s:9:"btn_color";i:4;s:9:"btn_shape";i:4;s:15:"hide_btn_tablet";i:1;s:15:"hide_btn_mobile";i:1;}s:21:"general_style_section";a:2:{s:5:"hover";i:4;s:5:"style";i:2;}s:20:"layout_style_section";a:4:{s:20:"horizontal_alignment";i:2;s:14:"text_alignment";i:2;s:5:"width";i:4;s:18:"vertical_alignment";i:2;}s:19:"title_style_section";a:5:{s:27:"title_typography_typography";i:4;s:26:"title_typography_font_size";i:4;s:18:"custom_title_color";i:4;s:28:"title_typography_font_family";i:4;s:28:"title_typography_line_height";i:4;}s:21:"content_style_section";a:1:{s:17:"custom_text_color";i:4;}s:22:"subtitle_style_section";a:1:{s:21:"custom_subtitle_color";i:4;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:4;}}}}s:8:"wd_title";a:3:{s:5:"count";i:6;s:15:"control_percent";i:6;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:3:{s:8:"subtitle";i:6;s:11:"after_title";i:6;s:5:"title";i:6;}}s:5:"style";a:3:{s:19:"title_style_section";a:3:{s:10:"image_size";i:6;s:27:"title_typography_typography";i:6;s:26:"title_typography_font_size";i:6;}s:21:"general_style_section";a:2:{s:5:"width";i:6;s:5:"color";i:5;}s:22:"subtitle_style_section";a:4:{s:30:"subtitle_typography_typography";i:6;s:29:"subtitle_typography_font_size";i:6;s:31:"subtitle_typography_font_family";i:6;s:14:"subtitle_color";i:1;}}s:8:"advanced";a:2:{s:14:"_section_style";a:1:{s:7:"_margin";i:4;}s:8:"wd_extra";a:1:{s:8:"scroll_y";i:6;}}}}s:11:"wd_products";a:3:{s:5:"count";i:2;s:15:"control_percent";i:4;s:8:"controls";a:3:{s:5:"style";a:3:{s:20:"layout_style_section";a:3:{s:14:"items_per_page";i:2;s:7:"columns";i:1;s:6:"layout";i:1;}s:29:"products_design_style_section";a:1:{s:13:"product_hover";i:2;}s:22:"carousel_style_section";a:3:{s:15:"slides_per_view";i:1;s:23:"hide_pagination_control";i:1;s:20:"scroll_carousel_init";i:1;}}s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:7:"orderby";i:2;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:2;}}}}s:10:"wd_infobox";a:3:{s:5:"count";i:1;s:15:"control_percent";i:8;s:8:"controls";a:3:{s:7:"content";a:2:{s:20:"icon_content_section";a:4:{s:9:"icon_type";i:1;s:10:"image_size";i:1;s:5:"image";i:1;s:22:"image_custom_dimension";i:1;}s:15:"content_section";a:4:{s:8:"btn_text";i:1;s:8:"subtitle";i:1;s:5:"title";i:1;s:7:"content";i:1;}}s:5:"style";a:3:{s:22:"button_content_section";a:2:{s:9:"btn_color";i:1;s:9:"btn_shape";i:1;}s:19:"title_style_section";a:5:{s:27:"title_typography_typography";i:1;s:26:"title_typography_font_size";i:1;s:11:"title_color";i:1;s:28:"title_typography_font_family";i:1;s:28:"title_typography_line_height";i:1;}s:21:"content_style_section";a:4:{s:29:"content_typography_typography";i:1;s:28:"content_typography_font_size";i:1;s:17:"custom_text_color";i:1;s:30:"content_typography_line_height";i:1;}}s:8:"advanced";a:3:{s:15:"_section_border";a:3:{s:13:"_border_width";i:1;s:14:"_border_border";i:1;s:13:"_border_color";i:1;}s:14:"_section_style";a:1:{s:8:"_padding";i:1;}s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:19:"wd_infobox_carousel";a:3:{s:5:"count";i:1;s:15:"control_percent";i:3;s:8:"controls";a:3:{s:5:"style";a:3:{s:22:"carousel_style_section";a:4:{s:14:"slider_spacing";i:1;s:15:"slides_per_view";i:1;s:23:"hide_pagination_control";i:1;s:20:"scroll_carousel_init";i:1;}s:22:"button_content_section";a:2:{s:9:"btn_color";i:1;s:9:"btn_style";i:1;}s:19:"title_style_section";a:2:{s:27:"title_typography_typography";i:1;s:26:"title_typography_font_size";i:1;}}s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:16:"content_repeater";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:7:"wd_blog";a:3:{s:5:"count";i:1;s:15:"control_percent";i:4;s:8:"controls";a:2:{s:5:"style";a:2:{s:21:"general_style_section";a:4:{s:12:"blog_spacing";i:1;s:11:"blog_design";i:1;s:20:"blog_carousel_design";i:1;s:8:"img_size";i:1;}s:22:"carousel_style_section";a:2:{s:15:"slides_per_view";i:1;s:23:"hide_pagination_control";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:12:"wd_mailchimp";a:3:{s:5:"count";i:1;s:15:"control_percent";i:2;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:7:"form_id";i:1;}}s:5:"style";a:1:{s:21:"general_style_section";a:1:{s:13:"content_width";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:13:"wd_text_block";a:3:{s:5:"count";i:1;s:15:"control_percent";i:3;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:1;}}s:5:"style";a:2:{s:31:"style_paragraph_content_section";a:2:{s:21:"typography_typography";i:1;s:20:"typography_font_size";i:1;}s:29:"style_general_content_section";a:1:{s:14:"text_alignment";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:15:"wd_testimonials";a:3:{s:5:"count";i:1;s:15:"control_percent";i:3;s:8:"controls";a:3:{s:5:"style";a:2:{s:21:"general_style_section";a:1:{s:12:"stars_rating";i:1;}s:22:"carousel_style_section";a:2:{s:15:"slides_per_view";i:1;s:23:"hide_pagination_control";i:1;}}s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:14:"items_repeater";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:12:"wd_instagram";a:3:{s:5:"count";i:1;s:15:"control_percent";i:6;s:8:"controls";a:3:{s:7:"content";a:2:{s:23:"general_content_section";a:2:{s:11:"data_source";i:1;s:8:"username";i:1;}s:14:"images_section";a:2:{s:11:"images_size";i:1;s:6:"images";i:1;}}s:5:"style";a:1:{s:22:"layout_content_section";a:5:{s:6:"number";i:1;s:6:"design";i:1;s:7:"per_row";i:1;s:23:"hide_pagination_control";i:1;s:22:"hide_prev_next_buttons";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -1716,6 +1684,29 @@ Summer Collection</p>
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021/10/flowers-bottom-right-full-heigh.jpg]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
+					<title><![CDATA[flowers-discount-bg]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/elementor/home-flowers/flowers-discount-bg/</link>
+					<pubDate>Thu, 21 Oct 2021 17:08:18 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-discount-bg.jpg</guid>
+															<wp:post_id>6077</wp:post_id>
+					<wp:post_date><![CDATA[2021-10-21 17:08:18]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2021-10-21 17:08:18]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2021-10-21 17:08:18]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2021-10-21 17:08:18]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[open]]></wp:comment_status>
+					<wp:post_name><![CDATA[flowers-discount-bg]]></wp:post_name>
+					<wp:status><![CDATA[inherit]]></wp:status>
+					<wp:post_parent>6014</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[attachment]]></wp:post_type>
+											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-discount-bg.jpg]]></wp:attachment_url>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+							<wp:meta_value><![CDATA[2021/10/flowers-discount-bg.jpg]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -2041,52 +2032,6 @@ Summer Collection</p>
 						</wp:postmeta>
 										</item>
 								<item>
-					<title><![CDATA[bakery-blog-img-3]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/bakery-blog-img-3/</link>
-					<pubDate>Fri, 22 Oct 2021 16:49:04 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/bakery-blog-img-3.jpg</guid>
-															<wp:post_id>6666</wp:post_id>
-					<wp:post_date><![CDATA[2021-10-22 16:49:04]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-10-22 16:49:04]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-10-22 16:49:04]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-10-22 16:49:04]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[bakery-blog-img-3]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/bakery-blog-img-3.jpg]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2021/10/bakery-blog-img-3.jpg]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[woocommerce-placeholder]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/woocommerce-placeholder/</link>
-					<pubDate>Wed, 25 Aug 2021 13:20:31 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/08/woocommerce-placeholder.png</guid>
-															<wp:post_id>7</wp:post_id>
-					<wp:post_date><![CDATA[2021-08-25 13:20:31]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-08-25 13:20:31]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-08-25 13:20:31]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-08-25 13:20:31]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[woocommerce-placeholder]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/woocommerce-placeholder.png]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[woocommerce-placeholder.png]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
 					<title><![CDATA[wood-logo-dark]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/elementor/wood-logo-dark/</link>
 					<pubDate>Thu, 26 Aug 2021 12:45:05 +0000</pubDate>
@@ -2109,8 +2054,8 @@ Summer Collection</p>
 							<wp:meta_value><![CDATA[2021/08/wood-logo-dark.svg]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_inline_svg]]></wp:meta_key>
-							<wp:meta_value><![CDATA[<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 369 53" width="369px" height="53px"><path d="M95.1,11.2h8.1L93,44.4h-9l-5.7-22.3l-5.8,22.3h-9L53.3,11.2h8.5L68,36.4l6.1-25.3H83l6,25.2L95.1,11.2z"></path><path d="M108.2,40.1c-3.2-3.2-4.9-7.3-4.9-12.4c0-5.1,1.6-9.2,4.9-12.4c3.3-3.1,7.4-4.7,12.2-4.7s8.9,1.6,12.2,4.7 c3.3,3.1,4.9,7.2,4.9,12.4c0,5.1-1.6,9.3-5,12.4c-3.3,3.2-7.4,4.7-12.3,4.7C115.5,44.9,111.5,43.3,108.2,40.1z M120.4,37.7 c2.4,0,4.4-0.9,6.1-2.6c1.7-1.7,2.5-4.2,2.5-7.4s-0.8-5.6-2.5-7.3c-1.7-1.7-3.7-2.6-6.1-2.6c-2.4,0-4.4,0.9-6,2.6 c-1.6,1.7-2.5,4.2-2.5,7.4c0,3.2,0.8,5.7,2.5,7.4C116,36.9,118,37.7,120.4,37.7z"></path><path d="M143.5,40.1c-3.2-3.2-4.9-7.3-4.9-12.4c0-5.1,1.6-9.2,4.9-12.4c3.3-3.1,7.4-4.7,12.2-4.7s8.9,1.6,12.2,4.7 c3.3,3.1,4.9,7.2,4.9,12.4c0,5.1-1.6,9.3-5,12.4c-3.3,3.2-7.4,4.7-12.3,4.7C150.8,44.9,146.7,43.3,143.5,40.1z M155.7,37.7 c2.4,0,4.4-0.9,6.1-2.6c1.7-1.7,2.5-4.2,2.5-7.4s-0.8-5.6-2.5-7.3c-1.7-1.7-3.7-2.6-6.1-2.6c-2.4,0-4.4,0.9-6,2.6 c-1.6,1.7-2.5,4.2-2.5,7.4c0,3.2,0.8,5.7,2.5,7.4C151.3,36.9,153.3,37.7,155.7,37.7z"></path><path d="M179.4,40.1c-3-3.2-4.5-7.3-4.5-12.3c0-5,1.5-9.1,4.4-12.3c3-3.2,6.7-4.8,11.3-4.8c4.6,0,8,1.9,10.4,5.6V0h8.4v44.4H201 v-5.6c-2.5,4-6,6.1-10.5,6.1S182.3,43.3,179.4,40.1z M198.4,34.9c1.8-1.7,2.6-4.1,2.6-7.2c0-3-0.9-5.4-2.6-7.2 c-1.8-1.7-3.8-2.6-6.2-2.6c-2.4,0-4.4,0.9-6.2,2.6c-1.7,1.7-2.6,4.1-2.6,7.1c0,3,0.9,5.4,2.6,7.2c1.8,1.8,3.8,2.6,6.1,2.6 C194.6,37.6,196.6,36.7,198.4,34.9z"></path><path d="M222.5,11.2v5c2.1-3.6,5.6-5.5,10.3-5.5c2.5,0,4.8,0.6,6.8,1.7c2,1.2,3.5,2.8,4.6,5c1.2-2.1,2.8-3.7,4.8-4.9 c2-1.2,4.3-1.8,6.8-1.8c4,0,7.2,1.2,9.6,3.7c2.4,2.5,3.6,6,3.6,10.4v19.6h-8.4V26c0-2.6-0.7-4.6-2-6s-3.1-2.1-5.4-2.1 c-2.3,0-4.1,0.7-5.4,2.1s-2,3.4-2,6v18.4h-8.4V26c0-2.6-0.7-4.6-2-6c-1.3-1.4-3.1-2.1-5.4-2.1c-2.3,0-4.1,0.7-5.4,2.1s-2,3.4-2,6 v18.4H214V11.2H222.5z"></path><path d="M277.4,40.1c-3-3.2-4.5-7.3-4.5-12.3c0-5,1.5-9.1,4.4-12.3c3-3.2,6.7-4.8,11.3-4.8c4.6,0,8,1.9,10.4,5.6v-5.2h8.4v33.2h-8.4 v-5.6c-2.5,4-6,6.1-10.5,6.1C284.1,44.9,280.4,43.3,277.4,40.1z M296.4,34.9c1.8-1.7,2.6-4.1,2.6-7.2c0-3-0.9-5.4-2.6-7.2 c-1.8-1.7-3.8-2.6-6.2-2.6c-2.4,0-4.4,0.9-6.2,2.6c-1.7,1.7-2.6,4.1-2.6,7.1c0,3,0.9,5.4,2.6,7.2c1.8,1.8,3.8,2.6,6.2,2.6 S294.7,36.7,296.4,34.9z"></path><path d="M321.5,11.2V17c2.2-4.2,5.5-6.4,9.7-6.4v8.6h-2.1c-2.5,0-4.4,0.6-5.7,1.9c-1.3,1.3-1.9,3.4-1.9,6.5v16.7h-8.5V11.2H321.5z"></path><path d="M350.7,37.3h4v7.1h-5.3c-3.4,0-6-0.8-7.9-2.3c-1.8-1.6-2.8-4.1-2.8-7.7V18.1h-3.5v-6.9h3.5V2.9h8.5v8.2h7.4v6.9h-7.4v16.3 c0,1.1,0.3,1.9,0.8,2.3C348.6,37.1,349.5,37.3,350.7,37.3z"></path><circle fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" cx="24.2" cy="28.5" r="22.7"></circle><polyline points="10,39.8 23.9,11.1 39,39.8 "></polyline><rect x="22.5" y="39.6" width="2.9" height="6.3"></rect><g><path d="M368.2,39.6c0,1.4-0.5,2.5-1.4,3.4c-0.9,0.9-2.1,1.4-3.4,1.4s-2.5-0.5-3.4-1.4c-0.9-0.9-1.4-2.1-1.4-3.4 c0-1.4,0.5-2.5,1.4-3.4c0.9-0.9,2-1.4,3.4-1.4s2.5,0.5,3.4,1.4C367.7,37.1,368.2,38.3,368.2,39.6z"></path></g></svg>]]></wp:meta_value>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -2134,6 +2079,10 @@ Summer Collection</p>
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021/09/fashion-testimon-2.jpg]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -2323,16 +2272,62 @@ Summer Collection</p>
 							<wp:meta_value><![CDATA[[{"id":"b0cbd96","elType":"container","settings":{"content_position":"middle","background_repeat":"no-repeat","mobile_bg_img_hidden":"yes","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","structure":"20","flex_gap":{"size":"20","column":"20","row":"0","unit":"px"},"padding":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"margin":{"unit":"px","top":"40","right":"0","bottom":"0","left":"0","isLinked":""},"flex_direction":"row","scroll_y":"-80","flex_direction_mobile":"column","container_sticky_offset":"50","flex_direction_tablet":"row","margin_tablet":{"unit":"px","top":"60","right":"0","bottom":"0","left":"0","isLinked":""}},"elements":[{"id":"7aad30a","elType":"container","settings":{"_column_size":"50","woodmart_text_align":"center","width_tablet":{"size":"","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","align":"center","column_sticky_offset":"50","scroll_y":"-80","padding":{"unit":"px","top":"0","right":"15","bottom":"0","left":"15","isLinked":""},"content_width":"full","margin":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":""},"width":{"unit":"%","size":"50","sizes":[]},"container_sticky_offset":"50","flex_justify_content":"center"},"elements":[{"id":"f34d887","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-txt-element.jpg.png","id":"6025","alt":"","source":"library"},"alignment":"center","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"150"},"elements":[],"widgetType":"wd_image_or_svg"},{"id":"90f54e3","elType":"widget","settings":{"text":"<p>Fresh Tulips<br \/>The Perfect Choice.<\/p>","typography_typography":"custom","typography_font_family":"Great Vibes","typography_font_size":{"size":"70","unit":"px"},"typography_font_size_tablet":{"size":"50","unit":"px"},"typography_font_size_mobile":{"size":"46","unit":"px"},"typography_line_height":{"unit":"px","size":"80","sizes":[]},"typography_line_height_tablet":{"unit":"px","size":"60","sizes":[]},"typography_line_height_mobile":{"unit":"px","size":"","sizes":[]},"text_color":"custom","custom_text_color":"#93646A","text_alignment":"center","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"250"},"elements":[],"widgetType":"wd_text_block"},{"id":"079206c","elType":"widget","settings":{"text":"A symbol of simple love, charity, paradise on earth, heavenly and reminder of the passion life.","typography_typography":"custom","typography_font_size":{"size":"18","unit":"px"},"text_color":"custom","custom_text_color":"#886C6F","text_alignment":"center","width":{"unit":"px","size":"439","sizes":[]},"scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"350"},"elements":[],"widgetType":"wd_text_block"},{"id":"b185765","elType":"container","settings":{"flex_direction":"row","flex_justify_content":"center","flex_gap":{"column":"15","row":"10","isLinked":"","unit":"px","size":"15"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"f69112c","elType":"widget","settings":{"color":"primary","shape":"round","woodmart_css_id":"5bf6d7a31ecff","text":"TO SHOP","_element_width":"auto","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"450"},"elements":[],"widgetType":"wd_button"},{"id":"0e5f43f","elType":"widget","settings":{"style":"bordered","shape":"round","color_scheme":"dark","woodmart_css_id":"5bf6f3ccecfc9","text":"VIEW MORE","_element_width":"auto","color":"custom","scroll_y":"-80","bg_color":"#93646A","bg_color_hover":"#93646A","color_scheme_hover":"light","wd_animation":"slide-from-bottom","wd_animation_delay":"450"},"elements":[],"widgetType":"wd_button"}],"isInner":"1"}],"isInner":"1"},{"id":"301d2d9","elType":"container","settings":{"_column_size":"50","width_tablet":{"size":"","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"container_sticky_offset":"50"},"elements":[{"id":"c2ce2bf","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-3-img.png","id":"6042","alt":"","source":"library"},"alignment":"center","scroll_y":"-80"},"elements":[],"widgetType":"wd_image_or_svg"}],"isInner":"1"}],"isInner":""}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
 							<wp:meta_value><![CDATA[flowers-slide-1-2]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_controls_usage]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:5:{s:15:"wd_image_or_svg";a:3:{s:5:"count";i:2;s:15:"control_percent";i:2;s:8:"controls";a:2:{s:7:"content";a:1:{s:23:"general_content_section";a:2:{s:5:"image";i:2;s:9:"alignment";i:2;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:1;s:18:"wd_animation_delay";i:1;}}}}s:13:"wd_text_block";a:3:{s:5:"count";i:2;s:15:"control_percent";i:7;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:2;}}s:5:"style";a:2:{s:31:"style_paragraph_content_section";a:6:{s:21:"typography_typography";i:2;s:22:"typography_font_family";i:1;s:20:"typography_font_size";i:2;s:22:"typography_line_height";i:2;s:10:"text_color";i:2;s:17:"custom_text_color";i:2;}s:29:"style_general_content_section";a:2:{s:14:"text_alignment";i:2;s:5:"width";i:1;}}s:8:"advanced";a:2:{s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:2;s:18:"wd_animation_delay";i:2;}s:14:"_section_style";a:1:{s:7:"_margin";i:1;}}}}s:9:"wd_button";a:3:{s:5:"count";i:2;s:15:"control_percent";i:7;s:8:"controls";a:3:{s:5:"style";a:1:{s:21:"general_style_section";a:7:{s:5:"color";i:2;s:5:"shape";i:2;s:5:"style";i:1;s:12:"color_scheme";i:1;s:8:"bg_color";i:1;s:14:"bg_color_hover";i:1;s:18:"color_scheme_hover";i:1;}}s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:2;}}s:8:"advanced";a:3:{s:17:"_section_position";a:1:{s:14:"_element_width";i:2;}s:14:"_section_style";a:1:{s:7:"_margin";i:1;}s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:2;s:18:"wd_animation_delay";i:2;}}}}s:6:"column";a:3:{s:5:"count";i:2;s:15:"control_percent";i:1;s:8:"controls";a:2:{s:6:"layout";a:1:{s:6:"layout";a:1:{s:5:"align";i:1;}}s:8:"advanced";a:2:{s:8:"wd_extra";a:2:{s:20:"column_sticky_offset";i:2;s:8:"scroll_y";i:2;}s:16:"section_advanced";a:1:{s:7:"padding";i:1;}}}}s:7:"section";a:3:{s:5:"count";i:1;s:15:"control_percent";i:2;s:8:"controls";a:3:{s:6:"layout";a:2:{s:14:"section_layout";a:2:{s:16:"content_position";i:1;s:3:"gap";i:1;}s:17:"section_structure";a:1:{s:9:"structure";i:1;}}s:5:"style";a:1:{s:18:"section_background";a:1:{s:17:"background_repeat";i:1;}}s:8:"advanced";a:1:{s:16:"section_advanced";a:2:{s:7:"padding";i:1;s:6:"margin";i:1;}}}}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
+					<title><![CDATA[flowers-slider-3-bg]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/elementor/woodmart_slide/flowers-slide-1-2-2/flowers-slider-3-bg/</link>
+					<pubDate>Thu, 21 Oct 2021 16:50:09 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-bg.jpg</guid>
+															<wp:post_id>6040</wp:post_id>
+					<wp:post_date><![CDATA[2021-10-21 16:50:09]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2021-10-21 16:50:09]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2021-10-21 16:50:09]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2021-10-21 16:50:09]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[open]]></wp:comment_status>
+					<wp:post_name><![CDATA[flowers-slider-3-bg]]></wp:post_name>
+					<wp:status><![CDATA[inherit]]></wp:status>
+					<wp:post_parent>6039</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[attachment]]></wp:post_type>
+											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-bg.jpg]]></wp:attachment_url>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+							<wp:meta_value><![CDATA[2021/10/flowers-slider-3-bg.jpg]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
+					<title><![CDATA[flowers-slider-3-img]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/elementor/woodmart_slide/flowers-slide-1-2-2/flowers-slider-3-img/</link>
+					<pubDate>Thu, 21 Oct 2021 16:50:40 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-img.png</guid>
+															<wp:post_id>6042</wp:post_id>
+					<wp:post_date><![CDATA[2021-10-21 16:50:40]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2021-10-21 16:50:40]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2021-10-21 16:50:40]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2021-10-21 16:50:40]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[open]]></wp:comment_status>
+					<wp:post_name><![CDATA[flowers-slider-3-img]]></wp:post_name>
+					<wp:status><![CDATA[inherit]]></wp:status>
+					<wp:post_parent>6039</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[attachment]]></wp:post_type>
+											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-img.png]]></wp:attachment_url>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+							<wp:meta_value><![CDATA[2021/10/flowers-slider-3-img.png]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -2394,35 +2389,8 @@ Summer Collection</p>
 							<wp:meta_value><![CDATA[[{"id":"f718087","elType":"container","settings":{"background_position":"center bottom","background_size":"cover","background_repeat":"no-repeat","mobile_bg_img_hidden":"no","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","padding":{"unit":"px","top":"80","right":"15","bottom":"80","left":"15","isLinked":""},"padding_mobile":{"unit":"px","top":"60","right":"15","bottom":"60","left":"15","isLinked":""},"flex_direction":"column","flex_gap":{"size":null,"column":"","row":"","unit":"px","isLinked":true},"scroll_y":-80},"elements":[{"id":"6b9f6ed","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/08\/wood-logo-dark.svg","id":113,"alt":"","source":"library"},"image_size":"custom","image_custom_dimension":{"width":"220","height":"32"},"alignment":"center","_margin":{"unit":"px","top":"0","right":"0","bottom":"15","left":"0","isLinked":false},"scroll_y":-80},"elements":[],"widgetType":"wd_image_or_svg"},{"id":"7a0e8dc","elType":"widget","settings":{"title":"","scroll_y":-80,"nav_menu":"106","design":"horizontal","items_gap":"m","alignment":"center","_margin":{"unit":"px","top":"0","right":"0","bottom":"15","left":"0","isLinked":false}},"elements":[],"widgetType":"wd_mega_menu"},{"id":"4d8302b","elType":"widget","settings":{"size":"small","style":"bordered","scroll_y":"-80","label_text":"Share: ","fb_link":"#","twitter_link":"#","isntagram_link":"#","pinterest_link":"#","youtube_link":"#"},"elements":[],"widgetType":"wd_social_buttons"}],"isInner":false}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_controls_usage]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:5:{s:15:"wd_image_or_svg";a:3:{s:5:"count";i:1;s:15:"control_percent";i:3;s:8:"controls";a:2:{s:7:"content";a:1:{s:23:"general_content_section";a:4:{s:5:"image";i:1;s:10:"image_size";i:1;s:22:"image_custom_dimension";i:1;s:9:"alignment";i:1;}}s:8:"advanced";a:1:{s:14:"_section_style";a:1:{s:7:"_margin";i:1;}}}}s:12:"wd_mega_menu";a:3:{s:5:"count";i:1;s:15:"control_percent";i:4;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:2:{s:5:"title";i:1;s:8:"nav_menu";i:1;}}s:5:"style";a:1:{s:21:"general_style_section";a:3:{s:6:"design";i:1;s:9:"items_gap";i:1;s:9:"alignment";i:1;}}s:8:"advanced";a:1:{s:14:"_section_style";a:1:{s:7:"_margin";i:1;}}}}s:17:"wd_social_buttons";a:3:{s:5:"count";i:1;s:15:"control_percent";i:2;s:8:"controls";a:2:{s:5:"style";a:1:{s:21:"general_style_section";a:2:{s:4:"size";i:1;s:5:"style";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:1:{s:8:"scroll_y";i:1;}}}}s:6:"column";a:3:{s:5:"count";i:1;s:15:"control_percent";i:1;s:8:"controls";a:2:{s:6:"layout";a:1:{s:6:"layout";a:1:{s:5:"align";i:1;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:2:{s:20:"column_sticky_offset";i:1;s:8:"scroll_y";i:1;}}}}s:7:"section";a:3:{s:5:"count";i:1;s:15:"control_percent";i:2;s:8:"controls";a:2:{s:5:"style";a:1:{s:18:"section_background";a:3:{s:19:"background_position";i:1;s:15:"background_size";i:1;s:17:"background_repeat";i:1;}}s:8:"advanced";a:1:{s:16:"section_advanced";a:1:{s:7:"padding";i:1;}}}}}]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[flowers-discount-bg]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/home-flowers/flowers-discount-bg/</link>
-					<pubDate>Thu, 21 Oct 2021 17:08:18 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-discount-bg.jpg</guid>
-															<wp:post_id>6077</wp:post_id>
-					<wp:post_date><![CDATA[2021-10-21 17:08:18]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-10-21 17:08:18]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-10-21 17:08:18]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-10-21 17:08:18]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[flowers-discount-bg]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>6014</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-discount-bg.jpg]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2021/10/flowers-discount-bg.jpg]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -2446,10 +2414,6 @@ Summer Collection</p>
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021/10/flowers-infobox-line-bg.svg]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_inline_svg]]></wp:meta_key>
-							<wp:meta_value><![CDATA[<svg xmlns="http://www.w3.org/2000/svg" width="1462.53" height="73.91" viewBox="0 0 1462.53 73.91"><defs><style> .cls-1 { fill: none; stroke: #ed2353; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2px; stroke-dasharray: 16 12; fill-rule: evenodd; } </style></defs><path id="line" class="cls-1" d="M230,4181.17s155.616,51.88,344.133,49.77,170.287-31.6,460.177-31.6,348.91,30.45,663.25-41.87" transform="translate(-229 -4158.09)"></path></svg>]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -2660,52 +2624,6 @@ Summer Collection</p>
 						</wp:postmeta>
 										</item>
 								<item>
-					<title><![CDATA[woocommerce-placeholder]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/woocommerce-placeholder/</link>
-					<pubDate>Wed, 25 Aug 2021 13:20:31 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/08/woocommerce-placeholder.png</guid>
-															<wp:post_id>7</wp:post_id>
-					<wp:post_date><![CDATA[2021-08-25 13:20:31]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-08-25 13:20:31]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-08-25 13:20:31]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-08-25 13:20:31]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[woocommerce-placeholder]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/woocommerce-placeholder.png]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[woocommerce-placeholder.png]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[wooden-single-drawer-1]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/?attachment_id=301</link>
-					<pubDate>Thu, 26 Aug 2021 16:16:32 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/08/wooden-single-drawer-1.jpg</guid>
-															<wp:post_id>301</wp:post_id>
-					<wp:post_date><![CDATA[2021-08-26 16:16:32]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-08-26 16:16:32]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2022-06-20 13:59:05]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2022-06-20 13:59:05]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[wooden-single-drawer-1]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>300</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/08/wooden-single-drawer-1.jpg]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2021/08/wooden-single-drawer-1.jpg]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
 					<title><![CDATA[Flowers slide 1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/elementor/woodmart_slide/flowers-slide-1/</link>
 					<pubDate>Thu, 21 Oct 2021 16:40:36 +0000</pubDate>
@@ -2823,12 +2741,12 @@ Summer Collection</p>
 							<wp:meta_value><![CDATA[[{"id":"6c05c50","elType":"container","settings":{"content_position":"middle","background_repeat":"no-repeat","mobile_bg_img_hidden":"yes","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","structure":"20","flex_gap":{"size":20,"column":"20","row":"0","unit":"px","isLinked":false},"padding":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"margin":{"unit":"px","top":"40","right":"0","bottom":"0","left":"0","isLinked":false},"flex_direction":"row","flex_direction_tablet":"row","scroll_y":-80,"flex_direction_mobile":"column","container_sticky_offset":50,"margin_tablet":{"unit":"px","top":"60","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"af596f7","elType":"container","settings":{"_column_size":"50","woodmart_text_align":"center","width_tablet":{"size":"","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","align":"center","column_sticky_offset":"50","scroll_y":"-80","padding":{"unit":"px","top":"0","right":"15","bottom":"0","left":"15","isLinked":false},"content_width":"full","margin":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false},"width":{"unit":"%","size":50,"sizes":[]},"container_sticky_offset":50,"flex_justify_content":"center"},"elements":[{"id":"25a971c","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-txt-element.jpg.png","id":6025,"alt":"","source":"library"},"alignment":"center","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"150"},"elements":[],"widgetType":"wd_image_or_svg"},{"id":"7d7bbfe","elType":"widget","settings":{"text":"<p>Lovely Flowers<br \/>for Your Holiday.<\/p>","typography_typography":"custom","typography_font_family":"Great Vibes","typography_font_size":{"size":"70","unit":"px"},"typography_font_size_tablet":{"size":50,"unit":"px"},"typography_font_size_mobile":{"size":"46","unit":"px"},"typography_line_height":{"unit":"px","size":"80","sizes":[]},"typography_line_height_tablet":{"unit":"px","size":"60","sizes":[]},"typography_line_height_mobile":{"unit":"px","size":"","sizes":[]},"text_color":"custom","custom_text_color":"#125C77","text_alignment":"center","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"250"},"elements":[],"widgetType":"wd_text_block"},{"id":"1ed0de8","elType":"widget","settings":{"text":"A volutpat nisl ante a parturient vestibulum parturient pretium velit egestas sit donec vestibulum.","typography_typography":"custom","typography_font_size":{"size":"18","unit":"px"},"text_color":"custom","custom_text_color":"#5C7882","text_alignment":"center","width":{"unit":"px","size":470,"sizes":[]},"scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"350"},"elements":[],"widgetType":"wd_text_block"},{"id":"6b7b3fb","elType":"container","settings":{"flex_direction":"row","flex_justify_content":"center","flex_gap":{"column":"15","row":"10","isLinked":false,"unit":"px","size":15},"scroll_y":-80,"container_sticky_offset":50},"elements":[{"id":"89757fd","elType":"widget","settings":{"color":"primary","shape":"round","woodmart_css_id":"5bf6d7a31ecff","text":"TO SHOP","_element_width":"auto","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"450"},"elements":[],"widgetType":"wd_button"},{"id":"c241fca","elType":"widget","settings":{"style":"bordered","shape":"round","color_scheme":"dark","woodmart_css_id":"5bf6f3ccecfc9","text":"VIEW MORE","_element_width":"auto","color":"custom","scroll_y":"-80","bg_color":"#125C77","bg_color_hover":"#125C77","color_scheme_hover":"light","wd_animation":"slide-from-bottom","wd_animation_delay":"450"},"elements":[],"widgetType":"wd_button"}],"isInner":true}],"isInner":true},{"id":"ce0a950","elType":"container","settings":{"_column_size":"50","width_tablet":{"size":"","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","width":{"unit":"%","size":50,"sizes":[]},"container_sticky_offset":50},"elements":[{"id":"9903352","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-2-img.png","id":6024,"alt":"","source":"library"},"alignment":"center","scroll_y":"-80"},"elements":[],"widgetType":"wd_image_or_svg"}],"isInner":true}],"isInner":false}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_controls_usage]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:5:{s:15:"wd_image_or_svg";a:3:{s:5:"count";i:2;s:15:"control_percent";i:2;s:8:"controls";a:2:{s:7:"content";a:1:{s:23:"general_content_section";a:2:{s:5:"image";i:2;s:9:"alignment";i:2;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:1;s:18:"wd_animation_delay";i:1;}}}}s:13:"wd_text_block";a:3:{s:5:"count";i:2;s:15:"control_percent";i:7;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:2;}}s:5:"style";a:2:{s:31:"style_paragraph_content_section";a:6:{s:21:"typography_typography";i:2;s:22:"typography_font_family";i:1;s:20:"typography_font_size";i:2;s:22:"typography_line_height";i:2;s:10:"text_color";i:2;s:17:"custom_text_color";i:2;}s:29:"style_general_content_section";a:2:{s:14:"text_alignment";i:2;s:5:"width";i:1;}}s:8:"advanced";a:2:{s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:2;s:18:"wd_animation_delay";i:2;}s:14:"_section_style";a:1:{s:7:"_margin";i:1;}}}}s:9:"wd_button";a:3:{s:5:"count";i:2;s:15:"control_percent";i:7;s:8:"controls";a:3:{s:5:"style";a:1:{s:21:"general_style_section";a:7:{s:5:"color";i:2;s:5:"shape";i:2;s:5:"style";i:1;s:12:"color_scheme";i:1;s:8:"bg_color";i:1;s:14:"bg_color_hover";i:1;s:18:"color_scheme_hover";i:1;}}s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:2;}}s:8:"advanced";a:3:{s:17:"_section_position";a:1:{s:14:"_element_width";i:2;}s:14:"_section_style";a:1:{s:7:"_margin";i:1;}s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:2;s:18:"wd_animation_delay";i:2;}}}}s:6:"column";a:3:{s:5:"count";i:2;s:15:"control_percent";i:1;s:8:"controls";a:2:{s:6:"layout";a:1:{s:6:"layout";a:1:{s:5:"align";i:1;}}s:8:"advanced";a:2:{s:8:"wd_extra";a:2:{s:20:"column_sticky_offset";i:2;s:8:"scroll_y";i:2;}s:16:"section_advanced";a:1:{s:7:"padding";i:1;}}}}s:7:"section";a:3:{s:5:"count";i:1;s:15:"control_percent";i:2;s:8:"controls";a:3:{s:6:"layout";a:2:{s:14:"section_layout";a:2:{s:16:"content_position";i:1;s:3:"gap";i:1;}s:17:"section_structure";a:1:{s:9:"structure";i:1;}}s:5:"style";a:1:{s:18:"section_background";a:1:{s:17:"background_repeat";i:1;}}s:8:"advanced";a:1:{s:16:"section_advanced";a:2:{s:7:"padding";i:1;s:6:"margin";i:1;}}}}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -3018,16 +2936,16 @@ Summer Collection</p>
 							<wp:meta_value><![CDATA[[{"id":"ff94d9f","elType":"container","settings":{"content_position":"middle","background_repeat":"no-repeat","mobile_bg_img_hidden":"yes","woodmart_parallax":"0","woodmart_gradient_switch":"no","row_reverse_mobile":"0","row_reverse_tablet":"0","woodmart_disable_overflow":"0","structure":"20","flex_gap":{"size":"20","column":"20","row":"0","unit":"px","isLinked":""},"padding":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"margin":{"unit":"px","top":"40","right":"0","bottom":"0","left":"0","isLinked":""},"flex_direction":"row","flex_direction_tablet":"row","scroll_y":"-80","flex_direction_mobile":"column","container_sticky_offset":"50","margin_tablet":{"unit":"px","top":"60","right":"0","bottom":"0","left":"0","isLinked":""}},"elements":[{"id":"74ef1b5","elType":"container","settings":{"_column_size":"50","woodmart_text_align":"center","width_tablet":{"size":"","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","align":"center","column_sticky_offset":"50","scroll_y":"-80","padding":{"unit":"px","top":"0","right":"15","bottom":"0","left":"15","isLinked":""},"content_width":"full","margin":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":""},"width":{"unit":"%","size":"50","sizes":[]},"container_sticky_offset":"50","flex_justify_content":"center"},"elements":[{"id":"694671c","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-txt-element.jpg.png","id":"6025","alt":"","source":"library"},"alignment":"center","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"150"},"elements":[],"widgetType":"wd_image_or_svg"},{"id":"a2bb0b7","elType":"widget","settings":{"text":"<p>Best Roses<br \/>In Amazing Color.<\/p>","typography_typography":"custom","typography_font_family":"Great Vibes","typography_font_size":{"size":"70","unit":"px"},"typography_font_size_tablet":{"size":"50","unit":"px"},"typography_font_size_mobile":{"size":"46","unit":"px"},"typography_line_height":{"unit":"px","size":"80","sizes":[]},"typography_line_height_tablet":{"unit":"px","size":"60","sizes":[]},"typography_line_height_mobile":{"unit":"px","size":"","sizes":[]},"text_color":"custom","custom_text_color":"#B09782","text_alignment":"center","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"250"},"elements":[],"widgetType":"wd_text_block"},{"id":"b1ce7cf","elType":"widget","settings":{"text":"When you order a bouquet of flowers, your goal is to impress that someone special needed.","typography_typography":"custom","typography_font_size":{"size":"18","unit":"px"},"text_color":"custom","custom_text_color":"#675444","text_alignment":"center","width":{"unit":"px","size":"470","sizes":[]},"scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"350"},"elements":[],"widgetType":"wd_text_block"},{"id":"1dcea6f","elType":"container","settings":{"flex_direction":"row","flex_justify_content":"center","flex_gap":{"column":"15","row":"10","isLinked":"","unit":"px","size":"15"},"scroll_y":"-80","container_sticky_offset":"50"},"elements":[{"id":"1c363a1","elType":"widget","settings":{"color":"primary","shape":"round","woodmart_css_id":"5bf6d7a31ecff","text":"TO SHOP","_element_width":"auto","scroll_y":"-80","wd_animation":"slide-from-bottom","wd_animation_delay":"450"},"elements":[],"widgetType":"wd_button"},{"id":"f553f4b","elType":"widget","settings":{"style":"bordered","shape":"round","color_scheme":"dark","woodmart_css_id":"5bf6f3ccecfc9","text":"VIEW MORE","_element_width":"auto","color":"custom","scroll_y":"-80","bg_color":"#B09782","bg_color_hover":"#B09782","color_scheme_hover":"light","wd_animation":"slide-from-bottom","wd_animation_delay":"450"},"elements":[],"widgetType":"wd_button"}],"isInner":"1"}],"isInner":"1"},{"id":"e8142c0","elType":"container","settings":{"_column_size":"50","width_tablet":{"size":"","unit":"%"},"width_mobile":{"size":"100","unit":"%"},"mobile_bg_img_hidden":"no","woodmart_parallax":"0","parallax_scroll":"no","mobile_reset_margin":"no","tablet_reset_margin":"no","column_sticky_offset":"50","scroll_y":"-80","content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"container_sticky_offset":"50"},"elements":[{"id":"c21f2bb","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/elementor\/wp-content\/uploads\/sites\/2\/2021\/10\/flowers-slider-1-img.png","id":"6032","alt":"","source":"library"},"alignment":"center","scroll_y":"-80"},"elements":[],"widgetType":"wd_image_or_svg"}],"isInner":"1"}],"isInner":""}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
 							<wp:meta_value><![CDATA[flowers-slide-1]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_controls_usage]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:5:{s:15:"wd_image_or_svg";a:3:{s:5:"count";i:2;s:15:"control_percent";i:2;s:8:"controls";a:2:{s:7:"content";a:1:{s:23:"general_content_section";a:2:{s:5:"image";i:2;s:9:"alignment";i:2;}}s:8:"advanced";a:1:{s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:1;s:18:"wd_animation_delay";i:1;}}}}s:13:"wd_text_block";a:3:{s:5:"count";i:2;s:15:"control_percent";i:7;s:8:"controls";a:3:{s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:2;}}s:5:"style";a:2:{s:31:"style_paragraph_content_section";a:6:{s:21:"typography_typography";i:2;s:22:"typography_font_family";i:1;s:20:"typography_font_size";i:2;s:22:"typography_line_height";i:2;s:10:"text_color";i:2;s:17:"custom_text_color";i:2;}s:29:"style_general_content_section";a:2:{s:14:"text_alignment";i:2;s:5:"width";i:1;}}s:8:"advanced";a:2:{s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:2;s:18:"wd_animation_delay";i:2;}s:14:"_section_style";a:1:{s:7:"_margin";i:1;}}}}s:9:"wd_button";a:3:{s:5:"count";i:2;s:15:"control_percent";i:7;s:8:"controls";a:3:{s:5:"style";a:1:{s:21:"general_style_section";a:7:{s:5:"color";i:2;s:5:"shape";i:2;s:5:"style";i:1;s:12:"color_scheme";i:1;s:8:"bg_color";i:1;s:14:"bg_color_hover";i:1;s:18:"color_scheme_hover";i:1;}}s:7:"content";a:1:{s:23:"general_content_section";a:1:{s:4:"text";i:2;}}s:8:"advanced";a:3:{s:17:"_section_position";a:1:{s:14:"_element_width";i:2;}s:14:"_section_style";a:1:{s:7:"_margin";i:1;}s:8:"wd_extra";a:3:{s:8:"scroll_y";i:2;s:12:"wd_animation";i:2;s:18:"wd_animation_delay";i:2;}}}}s:6:"column";a:3:{s:5:"count";i:2;s:15:"control_percent";i:1;s:8:"controls";a:2:{s:6:"layout";a:1:{s:6:"layout";a:1:{s:5:"align";i:1;}}s:8:"advanced";a:2:{s:8:"wd_extra";a:2:{s:20:"column_sticky_offset";i:2;s:8:"scroll_y";i:2;}s:16:"section_advanced";a:1:{s:7:"padding";i:1;}}}}s:7:"section";a:3:{s:5:"count";i:1;s:15:"control_percent";i:2;s:8:"controls";a:3:{s:6:"layout";a:2:{s:14:"section_layout";a:2:{s:16:"content_position";i:1;s:3:"gap";i:1;}s:17:"section_structure";a:1:{s:9:"structure";i:1;}}s:5:"style";a:1:{s:18:"section_background";a:1:{s:17:"background_repeat";i:1;}}s:8:"advanced";a:1:{s:16:"section_advanced";a:2:{s:7:"padding";i:1;s:6:"margin";i:1;}}}}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -3074,52 +2992,6 @@ Summer Collection</p>
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021/10/flowers-slider-1-img.png]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[flowers-slider-3-bg]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/woodmart_slide/flowers-slide-1-2-2/flowers-slider-3-bg/</link>
-					<pubDate>Thu, 21 Oct 2021 16:50:09 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-bg.jpg</guid>
-															<wp:post_id>6040</wp:post_id>
-					<wp:post_date><![CDATA[2021-10-21 16:50:09]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-10-21 16:50:09]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-10-21 16:50:09]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-10-21 16:50:09]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[flowers-slider-3-bg]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>6039</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-bg.jpg]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2021/10/flowers-slider-3-bg.jpg]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[flowers-slider-3-img]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/elementor/woodmart_slide/flowers-slide-1-2-2/flowers-slider-3-img/</link>
-					<pubDate>Thu, 21 Oct 2021 16:50:40 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-img.png</guid>
-															<wp:post_id>6042</wp:post_id>
-					<wp:post_date><![CDATA[2021-10-21 16:50:40]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-10-21 16:50:40]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-10-21 16:50:40]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-10-21 16:50:40]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[flowers-slider-3-img]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>6039</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/elementor/wp-content/uploads/sites/2/2021/10/flowers-slider-3-img.png]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2021/10/flowers-slider-3-img.png]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>

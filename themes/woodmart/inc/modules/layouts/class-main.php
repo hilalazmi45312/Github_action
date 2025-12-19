@@ -14,6 +14,13 @@ class Main extends Singleton {
 	private $layouts_cache = array();
 
 	/**
+	 * Layout.
+	 *
+	 * @var bool
+	 */
+	private $is_custom_layout = false;
+
+	/**
 	 * Constructor.
 	 */
 	public function init() {
@@ -24,6 +31,27 @@ class Main extends Singleton {
 
 		add_action( 'init', array( $this, 'include_files' ), 10 );
 		add_action( 'elementor/elements/categories_registered', array( $this, 'register_elementor_categories' ), 20 );
+		add_filter( 'woodmart_main_content_classes', array( $this, 'add_layout_wrapper_class' ) );
+		add_filter( 'woodmart_disable_sidebar', array( $this, 'disable_sidebar' ) );
+	}
+
+	/**
+	 * Set is custom layout.
+	 *
+	 * @param bool $is_active Is active.
+	 * @return void
+	 */
+	public function set_is_custom_layout( $is_active ) {
+		$this->is_custom_layout = $is_active;
+	}
+
+	/**
+	 * Is custom layout.
+	 *
+	 * @return bool
+	 */
+	public function is_custom_layout() {
+		return $this->is_custom_layout;
 	}
 
 	/**
@@ -35,17 +63,24 @@ class Main extends Singleton {
 		require_once XTS_LAYOUTS_DIR . 'admin/class-manager.php';
 		require_once XTS_LAYOUTS_DIR . 'admin/class-import.php';
 		require_once XTS_LAYOUTS_DIR . 'class-layout-type.php';
-		require_once XTS_LAYOUTS_DIR . 'class-checkout.php';
-		require_once XTS_LAYOUTS_DIR . 'class-cart.php';
-		require_once XTS_LAYOUTS_DIR . 'class-shop-archive.php';
-		require_once XTS_LAYOUTS_DIR . 'class-single-product.php';
+
+		if ( woodmart_woocommerce_installed() ) {
+			require_once XTS_LAYOUTS_DIR . 'class-checkout.php';
+			require_once XTS_LAYOUTS_DIR . 'class-thank-you-page.php';
+			require_once XTS_LAYOUTS_DIR . 'class-my-account.php';
+			require_once XTS_LAYOUTS_DIR . 'class-cart.php';
+			require_once XTS_LAYOUTS_DIR . 'class-shop-archive.php';
+			require_once XTS_LAYOUTS_DIR . 'class-single-product.php';
+		}
+
+		require_once XTS_LAYOUTS_DIR . 'class-single-post.php';
+		require_once XTS_LAYOUTS_DIR . 'class-posts-archive.php';
 	}
 
 	/**
 	 * Include files.
 	 */
 	public function include_files() {
-		$directory       = '';
 		$current_builder = woodmart_get_current_page_builder();
 
 		if ( 'wpb' === $current_builder ) {
@@ -65,7 +100,41 @@ class Main extends Singleton {
 	 * @return void
 	 */
 	public function register_layout_widgets() {
-		foreach ( glob( XTS_LAYOUTS_DIR . 'elementor/**/*.php', GLOB_NOSORT ) as $file ) {
+		$allowed_dirs = array(
+			'post-archive',
+			'single-post',
+		);
+
+		if ( woodmart_woocommerce_installed() ) {
+			$allowed_dirs = array_merge(
+				$allowed_dirs,
+				array(
+					'cart',
+					'checkout',
+					'thank-you-page',
+					'shop-archive',
+					'single-product',
+					'my-account',
+					'woocommerce',
+				)
+			);
+		}
+
+		foreach ( $allowed_dirs as $dir ) {
+			$this->register_widgets_by_pattern( 'elementor/' . $dir . '/*.php' );
+		}
+	}
+
+	/**
+	 * Register widgets by pattern
+	 *
+	 * @param string $pattern Files to include.
+	 * @return void
+	 */
+	public function register_widgets_by_pattern( $pattern ) {
+		$files = glob( XTS_LAYOUTS_DIR . $pattern );
+		natsort( $files );
+		foreach ( $files as $file ) {
 			require_once $file;
 		}
 	}
@@ -77,9 +146,17 @@ class Main extends Singleton {
 	 */
 	public function register_elementor_categories( $elements_manager ) {
 		$elements_manager->add_category(
-			'wd-woocommerce-elements',
+			'wd-posts-elements',
 			array(
-				'title' => esc_html__( '[XTemos] WooCommerce', 'woodmart' ),
+				'title' => esc_html__( '[XTemos] Posts elements', 'woodmart' ),
+				'icon'  => 'fab fa-plug',
+			)
+		);
+
+		$elements_manager->add_category(
+			'wd-site-elements',
+			array(
+				'title' => esc_html__( '[XTemos] Site', 'woodmart' ),
 				'icon'  => 'fab fa-plug',
 			)
 		);
@@ -115,6 +192,33 @@ class Main extends Singleton {
 				'icon'  => 'fab fa-plug',
 			)
 		);
+
+		$elements_manager->add_category(
+			'wd-thank-you-page-elements',
+			array(
+				'title' => esc_html__( '[XTemos] Thank you page', 'woodmart' ),
+				'icon'  => 'fab fa-plug',
+			)
+		);
+
+		$elements_manager->add_category(
+			'wd-my-account-elements',
+			array(
+				'title' => esc_html__( '[XTemos] My account', 'woodmart' ),
+				'icon'  => 'fab fa-plug',
+			)
+		);
+	}
+
+	/**
+	 * Disable sidebar from layouts.
+	 *
+	 * @param bool $condition Where sidebar needs to remove.
+	 *
+	 * @return bool
+	 */
+	public function disable_sidebar( $condition ) {
+		return $condition || $this->is_custom_layout();
 	}
 
 	/**
@@ -127,14 +231,33 @@ class Main extends Singleton {
 	public function has_custom_layout( $type ) {
 		do_action( 'woodmart_get_layout_id', $this );
 
-		if ( ! woodmart_woocommerce_installed() ) {
-			return false;
-		}
-
 		$id   = $this->get_layout_id( $type );
 		$post = get_post( $id );
 
 		return ( ! empty( $id ) && $post && 'publish' === $post->post_status ) || self::is_layout_type( $type );
+	}
+
+	/**
+	 * Set builder class wd-builder-(on/off) for layout wrapper.
+	 *
+	 * @param string $classes Classes.
+	 *
+	 * @return bool
+	 */
+	public function add_layout_wrapper_class( $classes ) {
+		$wishlist_page    = function_exists( 'wpml_object_id_filter' ) ? wpml_object_id_filter( woodmart_get_opt( 'wishlist_page' ), 'page', true ) : woodmart_get_opt( 'wishlist_page' );
+		$is_wishlist_page = $wishlist_page && (int) woodmart_get_the_ID() === (int) $wishlist_page;
+
+		if ( 'woodmart_layout' === get_post_type() ) {
+			$classes .= ' wd-builder-on';
+		} elseif (
+			woodmart_is_blog_archive() || woodmart_is_portfolio_archive() || is_singular( array( 'post', 'portfolio' ) ) ||
+			( woodmart_woocommerce_installed() && ( woodmart_is_shop_archive() || is_singular( 'product' ) || is_cart() || is_checkout() || woodmart_is_thank_you_page() || is_account_page() || $is_wishlist_page ) )
+		) {
+			$classes .= $this->is_custom_layout() ? ' wd-builder-on' : ' wd-builder-off';
+		}
+
+		return $classes;
 	}
 
 	/**
@@ -155,19 +278,48 @@ class Main extends Singleton {
 		$conditions_priority      = array();
 		$is_active_prev_condition = false;
 		$has_filtered_condition   = false;
+		$is_active                = false;
 
 		foreach ( $current_conditions_data as $post_id => $conditions ) {
 			$post_id = apply_filters( 'wpml_object_id', $post_id, 'woodmart_layout' );
 			$post    = get_post( $post_id );
 
 			foreach ( $conditions as $condition ) {
-				$is_active = false;
+				if ( woodmart_woocommerce_installed() ) {
+					if ( 'single_product' === $type ) {
+						$is_active = Single_Product::get_instance()->check( $condition );
+					}
 
-				if ( 'single_product' === $type ) {
-					$is_active = Single_Product::get_instance()->check( $condition );
-				} elseif ( 'shop_archive' === $type ) {
-					$is_active = Shop_Archive::get_instance()->check( $condition );
+					if ( 'shop_archive' === $type ) {
+						$is_active = Shop_Archive::get_instance()->check( $condition );
+					}
 
+					if ( 'checkout_form' === $type || 'checkout_content' === $type ) {
+						$is_active = Checkout::get_instance()->check( $condition, $type );
+					}
+
+					if ( 'thank_you_page' === $type ) {
+						$is_active = Thank_You_Page::get_instance()->check( $condition );
+					}
+
+					if ( 'my_account_page' === $type || 'my_account_auth' === $type || 'my_account_lost_password' === $type ) {
+						$is_active = My_Account::get_instance()->check( $condition, $type );
+					}
+
+					if ( 'cart' === $type || 'empty_cart' === $type ) {
+						$is_active = Cart::get_instance()->check( $condition, $type );
+					}
+				}
+
+				if ( 'single_post' === $type || 'single_portfolio' === $type ) {
+					$is_active = Single_Post::get_instance()->check( $condition, $type );
+				}
+
+				if ( 'blog_archive' === $type || 'portfolio_archive' === $type ) {
+					$is_active = Posts_Archive::get_instance()->check( $condition, $type );
+				}
+
+				if ( 'shop_archive' === $type ) {
 					if ( apply_filters( 'woodmart_allow_conditions_with_filter', true ) ) {
 						if ( $has_filtered_condition && ! $is_active_prev_condition && $is_active ) {
 							unset( $sorted_data[ $post_id ] );
@@ -183,10 +335,6 @@ class Main extends Singleton {
 							$has_filtered_condition = true;
 						}
 					}
-				} elseif ( 'checkout_form' === $type || 'checkout_content' === $type ) {
-					$is_active = Checkout::get_instance()->check( $condition, $type );
-				} elseif ( 'cart' === $type || 'empty_cart' === $type ) {
-					$is_active = Cart::get_instance()->check( $condition, $type );
 				}
 
 				if ( $is_active && $post && 'publish' === $post->post_status ) {
@@ -281,9 +429,9 @@ class Main extends Singleton {
 	/**
 	 * Setup preview.
 	 *
-	 * @param array $shop_args  Shop query arguments.
+	 * @param array $query_args  Query arguments.
 	 */
-	public static function setup_preview( $shop_args = array(), $force_product_id = false ) {
+	public static function setup_preview( $query_args = array(), $force_post_id = false ) {
 		global $post;
 
 		$post_id = get_the_ID();
@@ -294,31 +442,64 @@ class Main extends Singleton {
 			return;
 		}
 
-		$layout_type = get_post_meta( $post_id, 'wd_layout_type', true );
+		$layout_type     = get_post_meta( $post_id, 'wd_layout_type', true );
+		$setup_condition = ( wp_doing_ajax() && isset( $_POST['action'] ) && 'wd_layout_create' === $_POST['action'] ); // phpcs:ignore
 
-		if ( 'single_product' === $layout_type || ( wp_doing_ajax() && isset( $_POST['action'] ) && 'wd_layout_create' === $_POST['action'] ) || $force_product_id ) { // phpcs:ignore
-			Single_Product::setup_postdata( $force_product_id );
+		if ( 'single_post' === $layout_type || 'single_portfolio' === $layout_type || $setup_condition ) {
+			Single_Post::setup_postdata();
+		}
+
+		if ( 'blog_archive' === $layout_type || 'portfolio_archive' === $layout_type ) { // phpcs:ignore
+			$query_args = array(
+				'post_type' => 'blog_archive' === $layout_type ? 'post' : 'portfolio',
+				'paged'     => get_query_var( 'paged', 1 ),
+			);
+
+			if ( 'portfolio_archive' === $layout_type ) {
+				$query_args['posts_per_page'] = (int) woodmart_get_opt( 'portoflio_per_page' );
+			}
+
+			Posts_Archive::switch_to_preview_query( $query_args );
+		}
+
+		if ( ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
+		if ( 'single_product' === $layout_type || $setup_condition || $force_post_id ) { // phpcs:ignore
+			Single_Product::setup_postdata( $force_post_id );
 		} elseif ( 'shop_archive' === $layout_type ) {
-			if ( ! $shop_args ) {
-				$shop_args = array(
+			if ( ! $query_args ) {
+				$query_args = array(
 					'post_type'      => 'product',
 					'posts_per_page' => woodmart_get_products_per_page(),
 				);
 			}
 
-			Shop_Archive::switch_to_preview_query( $shop_args );
+			Shop_Archive::switch_to_preview_query( $query_args );
 		} elseif ( 'cart' === $layout_type || 'checkout_form' === $layout_type ) {
 			Cart::setup_cart();
+		} elseif ( 'thank_you_page' === $layout_type ) {
+			Thank_You_Page::setup_postdata();
+		} elseif ( 'my_account_page' === $layout_type || 'my_account_auth' === $layout_type || 'my_account_lost_password' === $layout_type ) {
+			My_Account::setup_postdata();
 		}
 	}
 
 	/**
 	 * Restore preview.
 	 */
-	public static function restore_preview( $force_product_id = false ) {
-		Single_Product::reset_postdata( $force_product_id );
-		Shop_Archive::restore_current_query();
-		Cart::reset_cart();
+	public static function restore_preview( $force_post_id = false ) {
+		if ( woodmart_woocommerce_installed() ) {
+			Single_Product::reset_postdata( $force_post_id );
+			Shop_Archive::restore_current_query();
+			Cart::reset_cart();
+			Thank_You_Page::reset_postdata();
+			My_Account::reset_postdata();
+		}
+
+		Single_Post::reset_postdata();
+		Posts_Archive::restore_current_query();
 	}
 
 	/**

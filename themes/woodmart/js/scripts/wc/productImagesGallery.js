@@ -36,7 +36,13 @@ woodmartThemeModule.productImagesGallery = function( replaceGallery = false) {
 			autoHeight            : woodmart_settings.product_slider_auto_height === 'yes',
 			grabCursor            : true,
 			a11y                  : {
-				enabled: false
+				enabled: true,
+				prevSlideMessage: woodmart_settings.swiper_prev_slide_msg,
+				nextSlideMessage: woodmart_settings.swiper_next_slide_msg,
+				firstSlideMessage: woodmart_settings.swiper_first_slide_msg,
+				lastSlideMessage: woodmart_settings.swiper_last_slide_msg,
+				paginationBulletMessage: woodmart_settings.swiper_pagination_bullet_msg,
+				slideLabelMessage: woodmart_settings.swiper_slide_label_msg,
 			},
 			breakpoints           : {
 				1025: {
@@ -107,6 +113,7 @@ woodmartThemeModule.productImagesGallery = function( replaceGallery = false) {
 				paginationDisabledClass: 'wd-disabled',
 				renderBullet           : function(index, className) {
 					var innerContent = '';
+					var label = woodmart_settings.swiper_pagination_bullet_msg.replace('{{index}}', index + 1);
 
 					if (galleryWrapper.querySelector('.wd-nav-pagin-wrap').classList.contains('wd-style-number-2')) {
 						innerContent = index + 1;
@@ -116,7 +123,7 @@ woodmartThemeModule.productImagesGallery = function( replaceGallery = false) {
 						}
 					}
 
-					return '<li class="' + className + '"><span>' + innerContent + '</span></li>';
+					return '<li class="' + className + '" tabindex="0" role="option" aria-label="' + label + '"><span>' + innerContent + '</span></li>';
 				}
 			};
 		}
@@ -130,7 +137,7 @@ woodmartThemeModule.productImagesGallery = function( replaceGallery = false) {
 					createThumbnails();
 				}
 
-				if ( 'vertical' === thumbnailsDirection && ! window.getComputedStyle(galleryWrapper).getPropertyValue('--wd-thumbs-height') ) {
+				if ( 'vertical' === thumbnailsDirection && ! window.getComputedStyle(galleryWrapper).getPropertyValue('--wd-thumbs-height') && thumbnailsWrapper.offsetHeight ) {
 					galleryWrapper.style.setProperty('--wd-thumbs-height', thumbnailsWrapper.offsetHeight + 'px');
 				}
 
@@ -159,7 +166,13 @@ woodmartThemeModule.productImagesGallery = function( replaceGallery = false) {
 						wrapperClass          : 'wd-carousel-wrap',
 						grabCursor            : true,
 						a11y                  : {
-							enabled: false
+							enabled: true,
+							prevSlideMessage: woodmart_settings.swiper_prev_slide_msg,
+							nextSlideMessage: woodmart_settings.swiper_next_slide_msg,
+							firstSlideMessage: woodmart_settings.swiper_first_slide_msg,
+							lastSlideMessage: woodmart_settings.swiper_last_slide_msg,
+							paginationBulletMessage: woodmart_settings.swiper_pagination_bullet_msg,
+							slideLabelMessage: woodmart_settings.swiper_slide_label_msg,
 						},
 						breakpoints           : {
 							1025 : {

@@ -50,7 +50,6 @@ if ( ! function_exists( 'woodmart_elementor_infobox_carousel_template' ) ) {
 		}
 
 		if ( 'yes' === $settings['scroll_carousel_init'] ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$wrapper_classes .= ' scroll-init';
 		}
 

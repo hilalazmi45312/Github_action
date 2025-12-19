@@ -73,6 +73,72 @@ class InstallmentController
         }
     }
 
+    public static function createPaymentMethod()
+    {
+        $arr_post = $_POST;
+
+        // Validate required fields
+        $rules = [
+            'name' => ['required', 'string'],
+        ];
+
+        $errors = validate($arr_post, $rules);
+
+        if (!empty($errors)) {
+            wp_send_json_error(['errors' => $errors]);
+            return;
+        }
+
+        $data = [
+            'name' => sanitize_text_field($arr_post['name']),
+            'status' => isset($arr_post['status']) ? sanitize_text_field($arr_post['status']) : 'active',
+            'ipay88_id' => isset($arr_post['ipay88_id']) && !empty($arr_post['ipay88_id']) ? intval($arr_post['ipay88_id']) : null,
+        ];
+
+        // For editing existing payment method
+        if (isset($arr_post['method_id']) && !empty($arr_post['method_id'])) {
+            $data['id'] = intval($arr_post['method_id']);
+            
+            // Check for duplicate ipay88_id (excluding current record)
+            if (!empty($data['ipay88_id'])) {
+                $existing = PaymentMethod::findByIpay88Id($data['ipay88_id'], $data['id']);
+                if ($existing) {
+                    wp_send_json_error(['message' => 'iPay88 Payment ID "' . $data['ipay88_id'] . '" already exists for "' . $existing->name . '".']);
+                    return;
+                }
+            }
+            
+            $update = PaymentMethod::update($data);
+            if ($update === false) {
+                wp_send_json_error(['message' => 'Failed to update payment method.']);
+                return;
+            }
+            wp_send_json_success(['message' => 'Payment method updated successfully']);
+            return;
+        }
+
+        // Check for duplicate ipay88_id before creating
+        if (!empty($data['ipay88_id'])) {
+            $existing = PaymentMethod::findByIpay88Id($data['ipay88_id']);
+            if ($existing) {
+                wp_send_json_error(['message' => 'iPay88 Payment ID "' . $data['ipay88_id'] . '" already exists for "' . $existing->name . '".']);
+                return;
+            }
+        }
+
+        // Create new payment method
+        $insert_id = PaymentMethod::create($data);
+        if ($insert_id === false) {
+            wp_send_json_error(['message' => 'Failed to create payment method.']);
+            return;
+        }
+
+        wp_send_json_success([
+            'message' => 'Payment method created successfully',
+            'method_id' => $insert_id
+        ]);
+    }
+
     public static function createPaymentPlan()
     {
         $arr_post = $_POST;

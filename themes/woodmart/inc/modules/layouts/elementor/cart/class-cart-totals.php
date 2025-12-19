@@ -218,6 +218,8 @@ class Cart_Totals extends Widget_Base {
 			$shortcode_cart->calculate_shipping();
 		}
 
+		do_action( 'woocommerce_check_cart_items' );
+
 		wc()->cart->calculate_fees();
 		wc()->cart->calculate_shipping();
 		wc()->cart->calculate_totals();

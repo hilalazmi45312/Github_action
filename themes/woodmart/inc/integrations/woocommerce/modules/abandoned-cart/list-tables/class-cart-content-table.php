@@ -28,6 +28,10 @@ class Cart_Content_Table extends WP_List_Table {
 	public $cart;
 
 	public function __construct( $cart ) {
+		if ( ! woodmart_get_opt( 'cart_recovery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->cart = $cart;
 
 		parent::__construct(
@@ -92,11 +96,14 @@ class Cart_Content_Table extends WP_List_Table {
 	}
 
 	public function table_data() {
-		$data = array();
+		$data        = array();
+		$origin_cart = WC()->cart;
 
 		foreach ( $this->cart->get_cart_contents() as $cart_item_key => $cart_item ) {
 			$_product = $cart_item['data'];
 			$quantity = $cart_item['quantity'];
+
+			WC()->cart = $this->cart;
 
 			if ( ! $_product || ! $_product->exists() || $quantity <= 0 ) {
 				continue;
@@ -111,6 +118,8 @@ class Cart_Content_Table extends WP_List_Table {
 				'subtotal'          => $this->cart->get_product_subtotal( $_product, $quantity ),
 			);
 		}
+
+		WC()->cart = $origin_cart;
 
 		return $data;
 	}

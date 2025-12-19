@@ -65,6 +65,10 @@
 			'attributes'      => wd_get_single_product_block_compare_btn_attrs(),
 			'render_callback' => 'wd_gutenberg_single_product_compare_btn',
 		),
+		'wd/sp-price-tracker'       => array(
+			'attributes'      => wd_get_single_product_block_price_tracker_btn_attrs(),
+			'render_callback' => 'wd_gutenberg_single_product_price_tracker_btn',
+		),
 		'wd/sp-wishlist-btn'              => array(
 			'attributes'      => wd_get_single_product_block_wishlist_btn_attrs(),
 			'render_callback' => 'wd_gutenberg_single_product_wishlist_btn',
@@ -112,6 +116,80 @@
 		'wd/sp-estimate-delivery'         => array(
 			'attributes'      => wd_get_single_product_block_estimate_delivery_attrs(),
 			'render_callback' => 'wd_gutenberg_single_product_estimate_delivery',
+		),
+
+		// Blog archive blocks.
+		'wd/pa-blog'                      => array(
+			'attributes'      => wd_get_blog_archive_block_attrs(),
+			'render_callback' => 'wd_gutenberg_blog_archive',
+		),
+
+		// Portfolio archive blocks.
+		'wd/pa-portfolio'                 => array(
+			'attributes'      => wd_get_portfolio_archive_block_attrs(),
+			'render_callback' => 'wd_gutenberg_portfolio_archive',
+		),
+		'wd/pa-portfolio-cats'            => array(
+			'attributes'      => wd_get_portfolio_archive_cats_block_attrs(),
+			'render_callback' => 'wd_gutenberg_portfolio_archive_categories',
+		),
+
+		// Single post blocks.
+		'wd/author-bio'                   => array(
+			'attributes'      => wd_get_author_bio_attrs(),
+			'render_callback' => 'wd_gutenberg_author_bio',
+		),
+		'wd/post-author-meta'             => array(
+			'attributes'      => wd_get_single_post_author_meta_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_author_meta',
+		),
+		'wd/post-categories'              => array(
+			'attributes'      => wd_get_single_post_categories_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_categories',
+		),
+		'wd/post-comments'                => array(
+			'attributes'      => wd_get_single_post_comments_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_comments',
+		),
+		'wd/post-comments-button'         => array(
+			'attributes'      => wd_get_single_post_comments_button_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_comments_btn',
+		),
+		'wd/post-comments-form'           => array(
+			'attributes'      => wd_get_single_post_comments_form_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_comments_form',
+		),
+		'wd/post-content'                 => array(
+			'attributes'      => wd_get_single_post_content_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_content',
+		),
+		'wd/post-date-meta'               => array(
+			'attributes'      => wd_get_single_post_date_meta_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_date_meta',
+		),
+		'wd/post-excerpt'                 => array(
+			'attributes'      => wd_get_single_post_excerpt_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_excerpt',
+		),
+		'wd/post-image'                   => array(
+			'attributes'      => wd_get_single_post_image_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_image',
+		),
+		'wd/post-meta-value'              => array(
+			'attributes'      => wd_get_single_post_meta_value_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_meta_value',
+		),
+		'wd/post-navigation'              => array(
+			'attributes'      => wd_get_single_post_navigation_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_navigation',
+		),
+		'wd/post-tags'                    => array(
+			'attributes'      => wd_get_single_post_tags_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_tags',
+		),
+		'wd/post-title'                   => array(
+			'attributes'      => wd_get_single_post_title_attrs(),
+			'render_callback' => 'wd_gutenberg_single_post_title',
 		),
 
 		// Product archive blocks.
@@ -205,6 +283,54 @@
 		'wd/ch-shipping-details'          => array(
 			'attributes'      => wd_get_checkout_block_shipping_details_attrs(),
 			'render_callback' => 'wd_gutenberg_checkout_shipping_details',
+		),
+
+		// Thank you page blocks.
+		'wd/tp-customer-details'          => array(
+			'attributes'      => wd_get_tp_customer_details_attrs(),
+			'render_callback' => 'wd_gutenberg_tp_customer_details',
+		),
+		'wd/tp-order-details'             => array(
+			'attributes'      => wd_get_tp_order_details_attrs(),
+			'render_callback' => 'wd_gutenberg_tp_order_details',
+		),
+		'wd/tp-order-overview'            => array(
+			'attributes'      => wd_get_tp_order_overview_attrs(),
+			'render_callback' => 'wd_gutenberg_tp_order_overview',
+		),
+		'wd/tp-order-message'             => array(
+			'attributes'      => wd_get_tp_order_message_attrs(),
+			'render_callback' => 'wd_gutenberg_tp_order_message',
+		),
+		'wd/tp-payment-instructions'      => array(
+			'attributes'      => wd_get_tp_payment_instructions_attrs(),
+			'render_callback' => 'wd_gutenberg_tp_payment_instructions',
+		),
+		'wd/tp-order-meta'                => array(
+			'attributes'      => wd_get_tp_order_meta_attrs(),
+			'render_callback' => 'wd_gutenberg_tp_order_meta',
+		),
+
+		// My account blocks.
+		'wd/ma-content'                   => array(
+			'attributes'      => wd_get_my_account_content_attrs(),
+			'render_callback' => 'wd_gutenberg_my_account_content',
+		),
+		'wd/ma-navigation'                => array(
+			'attributes'      => wd_get_my_account_navigation_attrs(),
+			'render_callback' => 'wd_gutenberg_my_account_navigation',
+		),
+		'wd/ma-login'                     => array(
+			'attributes'      => wd_get_my_account_login_attrs(),
+			'render_callback' => 'wd_gutenberg_my_account_login',
+		),
+		'wd/ma-register'                  => array(
+			'attributes'      => wd_get_my_account_register_attrs(),
+			'render_callback' => 'wd_gutenberg_my_account_register',
+		),
+		'wd/ma-lost-password'             => array(
+			'attributes'      => wd_get_my_account_lost_pass_attrs(),
+			'render_callback' => 'wd_gutenberg_my_account_lost_pass',
 		),
 
 		// WooCommerce blocks.

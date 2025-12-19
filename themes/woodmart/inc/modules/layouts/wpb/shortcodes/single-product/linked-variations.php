@@ -13,6 +13,10 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_linked_variations' ) 
 	 * @param array $settings Shortcode attributes.
 	 */
 	function woodmart_shortcode_single_product_linked_variations( $settings ) {
+		if ( ! woodmart_get_opt( 'linked_variations' ) ) {
+			return '';
+		}
+
 		$default_settings = array(
 			'css'            => '',
 			'alignment'      => 'left',

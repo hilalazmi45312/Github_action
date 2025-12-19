@@ -46,6 +46,8 @@ class Theme {
 		}
 
 		add_action( 'init', array( $this, 'enqueue_theme_settings_options' ), 5 );
+		add_action( 'init', array( __CLASS__, 'check_version' ), 5 );
+		add_action( 'woodmart_scheduled_update', array( __CLASS__, 'run_update' ), 10, 1 );
 	}
 
 	/**
@@ -69,11 +71,16 @@ class Theme {
 			// Import.
 			'admin/modules/import/class-import',
 
+			// Woocommerce integration.
+			'integrations/woocommerce/functions',
+			'integrations/woocommerce/helpers',
+			'integrations/woocommerce/template-tags',
+
 			// General modules.
 			'modules/parts-css-files/class-parts-css-files',
+			'modules/inline-css-files/class-inline-css-files',
 			'modules/styles-storage/class-styles-storage',
 			'modules/lazy-loading',
-			'modules/search',
 			'modules/mobile-optimization',
 			'modules/nav-menu-images/nav-menu-images',
 			'modules/sticky-toolbar',
@@ -89,16 +96,15 @@ class Theme {
 			'modules/twitter',
 			'modules/seo-scheme/class-faq',
 			'modules/seo-scheme/class-breadcrumbs',
-
-			// Woocommerce integration.
-			'integrations/woocommerce/functions',
-			'integrations/woocommerce/helpers',
-			'integrations/woocommerce/template-tags',
+			'modules/search/class-main',
+			'modules/floating-blocks/class-main',
+			'modules/performance/class-lcp',
 
 			'admin/modules/options/class-themesettingscss',
 			'admin/modules/options/class-options',
 
 			// Woocommerce modules.
+			'integrations/woocommerce/managers/class-module-endpoints-manager',
 			'integrations/woocommerce/modules/attributes-meta-boxes',
 			'integrations/woocommerce/modules/product-360-view',
 			'integrations/woocommerce/modules/size-guide',
@@ -133,7 +139,11 @@ class Theme {
 			'integrations/woocommerce/modules/out-of-stock-manager/class-main',
 			'integrations/woocommerce/modules/waitlist/class-main',
 			'integrations/woocommerce/modules/estimate-delivery/class-main',
+			'integrations/woocommerce/modules/product-tabs/class-main',
 			'integrations/woocommerce/modules/abandoned-cart/class-main',
+			'integrations/woocommerce/modules/review-reminder/class-main',
+			'integrations/woocommerce/modules/price-tracker/class-main',
+			'integrations/woocommerce/modules/marketing-consent/class-main',
 
 			// Plugin integrations.
 			'integrations/wcmp',
@@ -155,8 +165,9 @@ class Theme {
 			'integrations/curcy',
 			'integrations/rank-math',
 			'integrations/cartflows',
-			'integrations/mc4wp',
 			'integrations/vgse',
+			'integrations/woo-subscriptions',
+			'integrations/revslider',
 		);
 
 		if ( did_action( 'elementor/loaded' ) ) {
@@ -261,6 +272,7 @@ class Theme {
 			'counter',
 			'blog',
 			'brands',
+			'breadcrumbs',
 			'countdown-timer',
 			'extra-menu',
 			'google-map',
@@ -269,6 +281,8 @@ class Theme {
 			'mega-menu',
 			'menu-price',
 			'nested-carousel',
+			'page-heading',
+			'page-title',
 			'popup',
 			'portfolio',
 			'pricing-tables',
@@ -301,9 +315,10 @@ class Theme {
 			'table',
 			'video',
 			'compare-images',
+			'toggle',
 		);
 
-		if ( 'wpb' === woodmart_get_current_page_builder() && defined( 'WPB_VC_VERSION' ) ) {
+		if ( defined( 'WPB_VC_VERSION' ) ) {
 			$files = array_merge( $files, $wpb_files );
 
 			if ( ! woodmart_woocommerce_installed() ) {
@@ -368,6 +383,8 @@ class Theme {
 			'list',
 			'image-hotspot',
 			'products-tabs',
+			'page-heading',
+			'page-title',
 			'brands',
 			'categories',
 			'product-filters',
@@ -379,6 +396,8 @@ class Theme {
 			'table',
 			'video',
 			'compare-images',
+			'breadcrumbs',
+			'toggle',
 		);
 
 		$woo_files = array(
@@ -413,6 +432,7 @@ class Theme {
 				'admin/modules/dashboard/class-menu',
 				'admin/modules/dashboard/class-slider',
 				'admin/modules/dashboard/class-status-button',
+				'admin/modules/guide-tour/class-main',
 			)
 		);
 	}
@@ -499,5 +519,32 @@ class Theme {
 		foreach ( $files as $file ) {
 			require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/' . $file . '.php' );
 		}
+	}
+
+	/**
+	 * Check theme version and run the updater is required.
+	 */
+	public static function check_version() {
+		$current_version = get_option( 'woodmart_version' );
+		$target_version  = woodmart_get_theme_info( 'Version' );
+
+		if ( version_compare( $current_version, $target_version, '<' ) ) {
+			if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
+				self::run_update( $target_version );
+			} elseif ( ! wp_next_scheduled( 'woodmart_scheduled_update' ) ) {
+				wp_schedule_single_event( time() + 10, 'woodmart_scheduled_update', array( $target_version ) );
+			}
+		}
+	}
+
+	/**
+	 * Do action and update theme version in db.
+	 *
+	 * @param string $version Actual theme version.
+	 */
+	public static function run_update( $version ) {
+		do_action( 'woodmart_updated', $version );
+
+		update_option( 'woodmart_version', $version );
 	}
 }

@@ -5,7 +5,7 @@
  *
  * @author      StoreApps
  * @since       4.0.0
- * @version     1.0
+ * @version     1.1.0
  *
  * @package     woocommerce-smart-coupons/includes/blocks
  */
@@ -90,7 +90,6 @@ if ( ! class_exists( 'WC_SC_Gutenberg_Coupon_Block' ) ) {
 		 * @see https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type/#enqueuing-block-scripts
 		 */
 		public function gutenberg_coupon_block_init() {
-
 			// Skip block registration if Gutenberg is not enabled/merged.
 			if ( ! function_exists( 'register_block_type' ) ) {
 				return;

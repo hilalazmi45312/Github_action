@@ -6,7 +6,7 @@
  * @category    Admin
  * @package     wocommerce-smart-coupons/includes
  * @since       6.7.0
- * @version     1.8.0
+ * @version     1.11.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -91,31 +91,35 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @param array $args Arguments.
 		 */
 		public function usage_restriction( $args = array() ) {
+			try {
+				$coupon_id = ( ! empty( $args['coupon_id'] ) ) ? absint( $args['coupon_id'] ) : 0;
+				$coupon    = ( ! empty( $args['coupon_obj'] ) ) ? $args['coupon_obj'] : null;
 
-			$coupon_id = ( ! empty( $args['coupon_id'] ) ) ? absint( $args['coupon_id'] ) : 0;
-			$coupon    = ( ! empty( $args['coupon_obj'] ) ) ? $args['coupon_obj'] : null;
+				$excluded_emails = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_meta' ) ) ) ? $coupon->get_meta( 'wc_sc_excluded_customer_email' ) : get_post_meta( $coupon_id, 'wc_sc_excluded_customer_email', true );
 
-			$excluded_emails = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_meta' ) ) ) ? $coupon->get_meta( 'wc_sc_excluded_customer_email' ) : get_post_meta( $coupon_id, 'wc_sc_excluded_customer_email', true );
+				if ( ! is_array( $excluded_emails ) || empty( $excluded_emails ) ) {
+					$excluded_emails = array();
+				}
 
-			if ( ! is_array( $excluded_emails ) || empty( $excluded_emails ) ) {
-				$excluded_emails = array();
+				woocommerce_wp_text_input(
+					array(
+						'id'                => 'wc_sc_excluded_customer_email',
+						'label'             => __( 'Excluded emails', 'woocommerce-smart-coupons' ),
+						'placeholder'       => __( 'No restrictions', 'woocommerce-smart-coupons' ),
+						'description'       => __( 'List of excluded billing emails to check against when an order is placed. Separate email addresses with commas. You can also use an asterisk (*) to match parts of an email. For example "*@gmail.com" would match all gmail addresses.', 'woocommerce-smart-coupons' ),
+						'value'             => implode( ', ', $excluded_emails ),
+						'desc_tip'          => true,
+						'type'              => 'email',
+						'class'             => '',
+						'custom_attributes' => array(
+							'multiple' => 'multiple',
+						),
+					)
+				);
+
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			woocommerce_wp_text_input(
-				array(
-					'id'                => 'wc_sc_excluded_customer_email',
-					'label'             => __( 'Excluded emails', 'woocommerce-smart-coupons' ),
-					'placeholder'       => __( 'No restrictions', 'woocommerce-smart-coupons' ),
-					'description'       => __( 'List of excluded billing emails to check against when an order is placed. Separate email addresses with commas. You can also use an asterisk (*) to match parts of an email. For example "*@gmail.com" would match all gmail addresses.', 'woocommerce-smart-coupons' ),
-					'value'             => implode( ', ', $excluded_emails ),
-					'desc_tip'          => true,
-					'type'              => 'email',
-					'class'             => '',
-					'custom_attributes' => array(
-						'multiple' => 'multiple',
-					),
-				)
-			);
 
 		}
 
@@ -126,23 +130,26 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @param  WC_Coupon $coupon    The coupon object.
 		 */
 		public function process_meta( $post_id = 0, $coupon = null ) {
-			if ( empty( $post_id ) ) {
-				return;
-			}
+			try {
+				if ( empty( $post_id ) ) {
+					return;
+				}
+				$coupon = new WC_Coupon( $coupon );
 
-			$coupon = new WC_Coupon( $coupon );
+				$excluded_emails = ( isset( $_POST['wc_sc_excluded_customer_email'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_excluded_customer_email'] ) ) : ''; // phpcs:ignore
+				$excluded_emails = explode( ',', $excluded_emails );
+				$excluded_emails = array_map( 'trim', $excluded_emails );
+				$excluded_emails = array_filter( $excluded_emails, 'is_email' );
+				$excluded_emails = array_filter( $excluded_emails );
 
-            $excluded_emails = ( isset( $_POST['wc_sc_excluded_customer_email'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_excluded_customer_email'] ) ) : ''; // phpcs:ignore
-			$excluded_emails = explode( ',', $excluded_emails );
-			$excluded_emails = array_map( 'trim', $excluded_emails );
-			$excluded_emails = array_filter( $excluded_emails, 'is_email' );
-			$excluded_emails = array_filter( $excluded_emails );
-
-			if ( $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
-				$coupon->update_meta_data( 'wc_sc_excluded_customer_email', $excluded_emails );
-				$coupon->save();
-			} else {
-				update_post_meta( $post_id, 'wc_sc_excluded_customer_email', $excluded_emails );
+				if ( $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
+					$coupon->update_meta_data( 'wc_sc_excluded_customer_email', $excluded_emails );
+					$coupon->save();
+				} else {
+					update_post_meta( $post_id, 'wc_sc_excluded_customer_email', $excluded_emails );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -158,7 +165,6 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @return boolean           Is valid or not
 		 */
 		public function validate( $valid = false, $coupon = object, $discounts = null ) {
-
 			// If coupon is invalid already, no need for further checks.
 			if ( false === $valid ) {
 				return $valid;
@@ -261,7 +267,6 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 			}
 
 			return $valid;
-
 		}
 
 		/**
@@ -272,67 +277,71 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @param array $posted Post data.
 		 */
 		public function check_customer_coupons( $posted = array() ) {
-			$cart = ( function_exists( 'WC' ) && isset( WC()->cart ) ) ? WC()->cart : null;
-			if ( is_a( $cart, 'WC_Cart' ) ) {
-				$is_cart_empty = is_callable( array( $cart, 'is_empty' ) ) && $cart->is_empty();
-				if ( false === $is_cart_empty ) {
-					$applied_coupons = ( is_callable( array( $cart, 'get_applied_coupons' ) ) ) ? $cart->get_applied_coupons() : array();
-					if ( ! empty( $applied_coupons ) ) {
-						foreach ( $applied_coupons as $code ) {
-							$coupon = new WC_Coupon( $code );
+			try {
+				$cart = ( function_exists( 'WC' ) && isset( WC()->cart ) ) ? WC()->cart : null;
+				if ( is_a( $cart, 'WC_Cart' ) ) {
+					$is_cart_empty = is_callable( array( $cart, 'is_empty' ) ) && $cart->is_empty();
+					if ( false === $is_cart_empty ) {
+						$applied_coupons = ( is_callable( array( $cart, 'get_applied_coupons' ) ) ) ? $cart->get_applied_coupons() : array();
+						if ( ! empty( $applied_coupons ) ) {
+							foreach ( $applied_coupons as $code ) {
+								$coupon = new WC_Coupon( $code );
 
-							if ( $this->is_valid( $coupon ) ) {
+								if ( $this->is_valid( $coupon ) ) {
 
-								// Get user and posted emails to compare.
-								$current_user  = ( is_user_logged_in() ) ? wp_get_current_user() : null;
-								$user_email    = ( ! is_null( $current_user ) && ! empty( $current_user->user_email ) ) ? $current_user->user_email : '';
-								$billing_email = isset( $posted['billing_email'] ) ? $posted['billing_email'] : '';
-								$check_emails  = array_unique(
-									array_filter(
-										array_map(
-											'strtolower',
+									// Get user and posted emails to compare.
+									$current_user  = ( is_user_logged_in() ) ? wp_get_current_user() : null;
+									$user_email    = ( ! is_null( $current_user ) && ! empty( $current_user->user_email ) ) ? $current_user->user_email : '';
+									$billing_email = isset( $posted['billing_email'] ) ? $posted['billing_email'] : '';
+									$check_emails  = array_unique(
+										array_filter(
 											array_map(
-												'sanitize_email',
-												array(
-													$billing_email,
-													$user_email,
+												'strtolower',
+												array_map(
+													'sanitize_email',
+													array(
+														$billing_email,
+														$user_email,
+													)
 												)
 											)
 										)
-									)
-								);
+									);
 
-								if ( is_object( $coupon ) && is_callable( array( $coupon, 'get_meta' ) ) ) {
-									$exclude_restrictions = $coupon->get_meta( 'wc_sc_excluded_customer_email' );
-								} else {
-									if ( is_object( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) {
-										$coupon_id = $coupon->get_id();
+									if ( is_object( $coupon ) && is_callable( array( $coupon, 'get_meta' ) ) ) {
+										$exclude_restrictions = $coupon->get_meta( 'wc_sc_excluded_customer_email' );
 									} else {
-										$coupon_id = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+										if ( is_object( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) {
+											$coupon_id = $coupon->get_id();
+										} else {
+											$coupon_id = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+										}
+										$exclude_restrictions = ( ! empty( $coupon_id ) ) ? get_post_meta( $coupon_id, 'wc_sc_excluded_customer_email', true ) : array();
 									}
-									$exclude_restrictions = ( ! empty( $coupon_id ) ) ? get_post_meta( $coupon_id, 'wc_sc_excluded_customer_email', true ) : array();
-								}
 
-								if ( is_array( $exclude_restrictions ) && 0 < count( $exclude_restrictions ) && is_callable( array( $coupon, 'add_coupon_message' ) ) && is_callable( array( $cart, 'remove_coupon' ) ) && is_callable( array( $this, 'is_coupon_emails_allowed' ) ) && $this->is_coupon_emails_allowed( $check_emails, $exclude_restrictions, $cart ) ) {
-									$coupon->add_coupon_message( WC_Coupon::E_WC_COUPON_NOT_YOURS_REMOVED );
-									$cart->remove_coupon( $code );
-								}
+									if ( is_array( $exclude_restrictions ) && 0 < count( $exclude_restrictions ) && is_callable( array( $coupon, 'add_coupon_message' ) ) && is_callable( array( $cart, 'remove_coupon' ) ) && is_callable( array( $this, 'is_coupon_emails_allowed' ) ) && $this->is_coupon_emails_allowed( $check_emails, $exclude_restrictions, $cart ) ) {
+										$coupon->add_coupon_message( WC_Coupon::E_WC_COUPON_NOT_YOURS_REMOVED );
+										$cart->remove_coupon( $code );
+									}
 
-								/*
-								|===========================================================================================================================================================================|
-								|																																											|
-								|	Before this method, WooCommerce checks for Allowed emails. 																												|
-								|	And in that method, it already checks for the usage limit whether it is allowed to apply the coupon or not.																|
-								|		1. If it's allowed, it means the usage limit is within reach & we can proceed with checking for excluded email.														|
-								|			Because the main purpose of excluded email is to prevent application of coupon. And since the usage limit is already checked, it's not needed to check it again	|
-								|		2. If it's not allowed, the process will not reach in this method, as it's already invalidated.																		|
-								|																																											|
-								|===========================================================================================================================================================================|
-								*/
+									/*
+									|===========================================================================================================================================================================|
+									|																																											|
+									|	Before this method, WooCommerce checks for Allowed emails. 																												|
+									|	And in that method, it already checks for the usage limit whether it is allowed to apply the coupon or not.																|
+									|		1. If it's allowed, it means the usage limit is within reach & we can proceed with checking for excluded email.														|
+									|			Because the main purpose of excluded email is to prevent application of coupon. And since the usage limit is already checked, it's not needed to check it again	|
+									|		2. If it's not allowed, the process will not reach in this method, as it's already invalidated.																		|
+									|																																											|
+									|===========================================================================================================================================================================|
+									*/
+								}
 							}
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -392,9 +401,11 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @return array Modified data
 		 */
 		public function generate_coupon_meta( $data = array(), $post = array() ) {
+			$excluded_emails = ( isset( $post['wc_sc_excluded_customer_email'] ) ) ? wc_clean( wp_unslash( $post['wc_sc_excluded_customer_email'] ) ) : '';  // phpcs:ignore
+			if ( is_string( $excluded_emails ) ) {
+				$excluded_emails = explode( ',', $excluded_emails );
+			}
 
-            $excluded_emails = ( isset( $post['wc_sc_excluded_customer_email'] ) ) ? wc_clean( wp_unslash( $post['wc_sc_excluded_customer_email'] ) ) : '';  // phpcs:ignore
-			$excluded_emails = explode( ',', $excluded_emails );
 			$excluded_emails = array_map( 'trim', $excluded_emails );
 			$excluded_emails = array_filter( $excluded_emails, 'is_email' );
 			$excluded_emails = array_filter( $excluded_emails );
@@ -420,6 +431,7 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 				$excluded_emails = array_filter( $excluded_emails, 'is_email' );
 				$meta_value      = array_filter( $excluded_emails );
 			}
+
 			return $meta_value;
 		}
 
@@ -429,32 +441,35 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @param  array $args The arguments.
 		 */
 		public function copy_coupon_meta( $args = array() ) {
+			try {
+				$new_coupon_id = ( ! empty( $args['new_coupon_id'] ) ) ? absint( $args['new_coupon_id'] ) : 0;
+				$coupon        = ( ! empty( $args['ref_coupon'] ) ) ? $args['ref_coupon'] : false;
 
-			$new_coupon_id = ( ! empty( $args['new_coupon_id'] ) ) ? absint( $args['new_coupon_id'] ) : 0;
-			$coupon        = ( ! empty( $args['ref_coupon'] ) ) ? $args['ref_coupon'] : false;
+				if ( empty( $new_coupon_id ) || empty( $coupon ) ) {
+					return;
+				}
 
-			if ( empty( $new_coupon_id ) || empty( $coupon ) ) {
-				return;
-			}
+				if ( $this->is_wc_gte_30() && is_object( $coupon ) && is_callable( array( $coupon, 'get_meta' ) ) ) {
+					$excluded_emails = $coupon->get_meta( 'wc_sc_excluded_customer_email' );
+				} else {
+					$old_coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+					$excluded_emails = get_post_meta( $old_coupon_id, 'wc_sc_excluded_customer_email', true );
+				}
 
-			if ( $this->is_wc_gte_30() && is_object( $coupon ) && is_callable( array( $coupon, 'get_meta' ) ) ) {
-				$excluded_emails = $coupon->get_meta( 'wc_sc_excluded_customer_email' );
-			} else {
-				$old_coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-				$excluded_emails = get_post_meta( $old_coupon_id, 'wc_sc_excluded_customer_email', true );
-			}
+				if ( ! is_array( $excluded_emails ) || empty( $excluded_emails ) ) {
+					$excluded_emails = array();
+				}
 
-			if ( ! is_array( $excluded_emails ) || empty( $excluded_emails ) ) {
-				$excluded_emails = array();
-			}
+				$new_coupon = new WC_Coupon( $new_coupon_id );
 
-			$new_coupon = new WC_Coupon( $new_coupon_id );
-
-			if ( is_object( $new_coupon ) && is_callable( array( $new_coupon, 'update_meta_data' ) ) && is_callable( array( $new_coupon, 'save' ) ) ) {
-				$new_coupon->update_meta_data( 'wc_sc_excluded_customer_email', $excluded_emails );
-				$new_coupon->save();
-			} else {
-				update_post_meta( $new_coupon_id, 'wc_sc_excluded_customer_email', $excluded_emails );
+				if ( is_object( $new_coupon ) && is_callable( array( $new_coupon, 'update_meta_data' ) ) && is_callable( array( $new_coupon, 'save' ) ) ) {
+					$new_coupon->update_meta_data( 'wc_sc_excluded_customer_email', $excluded_emails );
+					$new_coupon->save();
+				} else {
+					update_post_meta( $new_coupon_id, 'wc_sc_excluded_customer_email', $excluded_emails );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -484,20 +499,23 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @param int    $post_id Post ID being shown.
 		 */
 		public function render_columns( $column = '', $post_id = 0 ) {
+			try {
+				if ( empty( $post_id ) || empty( $column ) || ! in_array( $column, array( 'wc_sc_coupon_allowed_emails', 'wc_sc_coupon_excluded_emails' ), true ) ) {
+					return;
+				}
 
-			if ( empty( $post_id ) || empty( $column ) || ! in_array( $column, array( 'wc_sc_coupon_allowed_emails', 'wc_sc_coupon_excluded_emails' ), true ) ) {
-				return;
-			}
+				$coupon = new WC_Coupon( $post_id );
 
-			$coupon = new WC_Coupon( $post_id );
-
-			switch ( $column ) {
-				case 'wc_sc_coupon_allowed_emails':
-					$this->render_allowed_emails_column( $post_id, $coupon );
-					break;
-				case 'wc_sc_coupon_excluded_emails':
-					$this->render_excluded_emails_column( $post_id, $coupon );
-					break;
+				switch ( $column ) {
+					case 'wc_sc_coupon_allowed_emails':
+						$this->render_allowed_emails_column( $post_id, $coupon );
+						break;
+					case 'wc_sc_coupon_excluded_emails':
+						$this->render_excluded_emails_column( $post_id, $coupon );
+						break;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -549,27 +567,32 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Excluded_Email' ) ) {
 		 * @return string $value
 		 */
 		public function email_column_value( $emails = array(), $args = array() ) {
-			$coupon_id = ( ! empty( $args['coupon_id'] ) ) ? absint( $args['coupon_id'] ) : 0;
-			$coupon    = ( ! empty( $args['coupon_obj'] ) ) ? $args['coupon_obj'] : null;
-			$filter    = ( ! empty( $args['filter'] ) ) ? $args['filter'] : false;
-			$value     = '<span class="na">&ndash;</span>';
-			if ( ! empty( $emails ) ) {
-				$email_count    = apply_filters(
-					'wc_sc_email_column_max_count',
-					$this->sc_get_option( 'wc_sc_email_column_max_count', 5 ),
-					array(
-						'source'     => $this,
-						'coupon_id'  => $coupon_id,
-						'coupon_obj' => $coupon,
-						'filter'     => $filter,
-					)
-				);
-				$visible_emails = ( ! empty( $email_count ) && is_array( $emails ) ) ? array_slice( $emails, 0, $email_count ) : array();
-				if ( ! empty( $visible_emails ) ) {
-					$mapped_emails = ( true === $filter ) ? array_map( array( $this, 'filter_by_email_link' ), $visible_emails ) : $visible_emails;
-					$value         = implode( ', ', $mapped_emails );
+			try {
+				$coupon_id = ( ! empty( $args['coupon_id'] ) ) ? absint( $args['coupon_id'] ) : 0;
+				$coupon    = ( ! empty( $args['coupon_obj'] ) ) ? $args['coupon_obj'] : null;
+				$filter    = ( ! empty( $args['filter'] ) ) ? $args['filter'] : false;
+				$value     = '<span class="na">&ndash;</span>';
+				if ( ! empty( $emails ) ) {
+					$email_count    = apply_filters(
+						'wc_sc_email_column_max_count',
+						$this->sc_get_option( 'wc_sc_email_column_max_count', 5 ),
+						array(
+							'source'     => $this,
+							'coupon_id'  => $coupon_id,
+							'coupon_obj' => $coupon,
+							'filter'     => $filter,
+						)
+					);
+					$visible_emails = ( ! empty( $email_count ) && is_array( $emails ) ) ? array_slice( $emails, 0, $email_count ) : array();
+					if ( ! empty( $visible_emails ) ) {
+						$mapped_emails = ( true === $filter ) ? array_map( array( $this, 'filter_by_email_link' ), $visible_emails ) : $visible_emails;
+						$value         = implode( ', ', $mapped_emails );
+					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
+
 			return $value;
 		}
 

@@ -1,6 +1,6 @@
 /* global xts_settings */
 (function($) {
-	woodmartThemeModule.$document.on('wdElementorSectionReady wdElementorColumnReady wdElementorGlobalReady wdShopPageInit', function() {
+	woodmartThemeModule.$document.on('wdShopPageInit', function() {
 		woodmartThemeModule.animations();
 	});
 

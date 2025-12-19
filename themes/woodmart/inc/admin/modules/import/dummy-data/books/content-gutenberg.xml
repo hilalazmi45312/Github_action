@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2024-10-25 08:40" -->
+	<!-- generator="WordPress/6.7.4" created="2025-10-08 11:05" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,15 +29,13 @@
 	<title>Gutenberg base</title>
 	<link>https://dummy.xtemos.com/woodmart2/gutenberg</link>
 	<description></description>
-	<pubDate>Fri, 25 Oct 2024 08:40:59 +0000</pubDate>
+	<pubDate>Wed, 08 Oct 2025 11:05:41 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/gutenberg</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>491</wp:author_id><wp:author_login><![CDATA[Ethan Smith]]></wp:author_login><wp:author_email><![CDATA[ethan_smith@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Ethan Smith]]></wp:author_display_name><wp:author_first_name><![CDATA[Ethan]]></wp:author_first_name><wp:author_last_name><![CDATA[Smith]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>0</wp:term_id>
 			<wp:term_taxonomy><![CDATA[]]></wp:term_taxonomy>
@@ -47,7 +45,7 @@
 			<wp:term><wp:term_id>73</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[top-bar-right-books]]></wp:term_slug><wp:term_name><![CDATA[Top Bar Right Books]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.4</generator>
 
 					<item>
 					<title><![CDATA[books-popup]]></title>
@@ -516,11 +514,11 @@
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/?page_id=12504</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/slider {"blockId":"78d7ab0f-e75a-4224-8040-53bc921db998","effect":"fade","arrowsTablet":false,"arrowsMobile":false,"arrowsStyle":"3","pagination":false,"paginationAlign":"center","autoplay":true,"autoplaySpeed":"25000","stretch":true,"height":"725","arrowsCustomSettings":true,"arrowsHoverStyle":"1","marginTop":"-40","marginBottom":"60","heightTablet":"700","heightMobile":"680","marginBottomTablet":"40"} -->
-<div id="wd-78d7ab0f" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-fade wd-stretched"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="fade" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1" data-autoplay="yes" data-speed="25000"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"82e21dca-2acc-4e44-b0c2-d35661f51ff7","effect":"fade","bgImage":{"id":12514,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-bg-slider-1-opt.jpg"},"bgColorCode":"#c5add8","bgPositionTablet":"custom","bgPositionMobile":"custom","bgCustomPositionXTablet":"-220","bgCustomPositionXMobile":"-600","bgCustomPositionYMobile":"160"} -->
+<div id="wd-78d7ab0f" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-fade wd-stretched"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="fade" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1;" data-autoplay="yes" data-speed="25000"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"82e21dca-2acc-4e44-b0c2-d35661f51ff7","effect":"fade","aspectRatio":"","bgImage":{"id":12514,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-bg-slider-1-opt.jpg"},"bgColorCode":"#c5add8","bgPositionTablet":"custom","bgPositionMobile":"custom","bgCustomPositionXTablet":"-220","bgCustomPositionXMobile":"-600","bgCustomPositionYMobile":"160"} -->
 <div id="wd-82e21dca" class="wp-block-wd-slider-item wd-slide wd-carousel-item"><div class="wd-slide-container"><!-- wp:wd/row {"blockId":"41927e6a-7b53-4d52-a884-f3bd56bc7c4c","columnsGap":0,"columnsGapTablet":30,"columnsGapMobile":0} -->
 <div id="wd-41927e6a" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"a7f7ebf5-cd18-4121-a2ab-a6083c0ac2c4","adjacentCount":2} -->
 <div id="wd-a7f7ebf5" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"7e74c277-c5a2-43f0-9196-94c0a6baf443","image":{"id":12518,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s1-img.png"},"animation":"zoom-in","animationDelay":"200"} -->
-<div id="wd-7e74c277" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_200"><img class="wp-image-12518" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s1-img.png" /></div>
+<div id="wd-7e74c277" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_200"><img class="wp-image-12518" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s1-img.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -554,11 +552,11 @@
 <!-- /wp:wd/row --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"3ee7e47b-32f1-4483-af44-61453d5fb8e8","effect":"fade","bgImage":{"id":12528,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-bg-slider-2-opt.jpg"},"bgColorCode":"#7ccad5","bgPositionTablet":"custom","bgPositionMobile":"custom","bgCustomPositionXTablet":"-220","bgCustomPositionXMobile":"-600","bgCustomPositionYMobile":"160"} -->
+<!-- wp:wd/slider-item {"blockId":"3ee7e47b-32f1-4483-af44-61453d5fb8e8","effect":"fade","aspectRatio":"","bgImage":{"id":12528,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-bg-slider-2-opt.jpg"},"bgColorCode":"#7ccad5","bgPositionTablet":"custom","bgPositionMobile":"custom","bgCustomPositionXTablet":"-220","bgCustomPositionXMobile":"-600","bgCustomPositionYMobile":"160"} -->
 <div id="wd-3ee7e47b" class="wp-block-wd-slider-item wd-slide wd-carousel-item"><div class="wd-slide-container"><!-- wp:wd/row {"blockId":"73ab91f5-0a8f-40db-b14c-177e9f25831b","columnsGap":0,"columnsGapTablet":30,"columnsGapMobile":0} -->
 <div id="wd-73ab91f5" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"d9a7d282-3133-4f14-b7c0-2e6e23097739","adjacentCount":2} -->
 <div id="wd-d9a7d282" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"12554616-c2a6-456c-987a-1bc088cc6910","image":{"id":12529,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s3-img.png"},"animation":"zoom-in","animationDelay":"200"} -->
-<div id="wd-12554616" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_200"><img class="wp-image-12529" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s3-img.png" /></div>
+<div id="wd-12554616" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_200"><img class="wp-image-12529" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s3-img.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -592,11 +590,11 @@
 <!-- /wp:wd/row --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"ef256dcb-cec4-4b0b-93b7-3e6c2dbfca36","effect":"fade","bgImage":{"id":12531,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-bg-slider-3-opt.jpg"},"bgColorCode":"rgba(92,86,88,0.85)","bgPositionTablet":"custom","bgPositionMobile":"custom","bgCustomPositionXTablet":"-220","bgCustomPositionXMobile":"-600","bgCustomPositionYMobile":"160"} -->
+<!-- wp:wd/slider-item {"blockId":"ef256dcb-cec4-4b0b-93b7-3e6c2dbfca36","effect":"fade","aspectRatio":"","bgImage":{"id":12531,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-bg-slider-3-opt.jpg"},"bgColorCode":"rgba(92,86,88,0.85)","bgPositionTablet":"custom","bgPositionMobile":"custom","bgCustomPositionXTablet":"-220","bgCustomPositionXMobile":"-600","bgCustomPositionYMobile":"160"} -->
 <div id="wd-ef256dcb" class="wp-block-wd-slider-item wd-slide wd-carousel-item"><div class="wd-slide-container"><!-- wp:wd/row {"blockId":"91bf1d7d-92af-4ccc-9575-2cc939b5e4ca","columnsGap":0,"columnsGapTablet":30,"columnsGapMobile":0} -->
 <div id="wd-91bf1d7d" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1099ef24-c718-43ed-99b7-ae1c62e8d3cc","adjacentCount":2} -->
 <div id="wd-1099ef24" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"af8927ed-fda5-4b47-adaf-3713faa170a3","image":{"id":12533,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s2-img.png"},"animation":"zoom-in","animationDelay":"200"} -->
-<div id="wd-af8927ed" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_200"><img class="wp-image-12533" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s2-img.png" /></div>
+<div id="wd-af8927ed" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_200"><img class="wp-image-12533" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/book-slider-s2-img.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -635,7 +633,7 @@
 <div id="wd-7daf838e" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"6a45cbe0-0608-49a8-8547-3d65101cfcd1","adjacentCount":4,"paddingRight":"15","paddingLeft":"15","borderType":"solid","borderColorCode":"#efefef","borderWidthRight":"1","adjacentCountTablet":2,"colWidthTablet":50,"marginBottomTablet":"40","borderWidthRightMobile":"0"} -->
 <div id="wd-6a45cbe0" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"32abedaa-fe51-48af-be59-b798b56a6941","align":"center","borderWidthLock":false,"borderWidthLockMobile":false} -->
 <div id="wd-32abedaa" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"652f12c5-e770-4a26-8e68-0ca019ce86fb","image":{"id":12544,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-pencil.svg"},"width":"80","height":"80","bgColorCode":"#f1f1f1","bgHoverColorCode":"#f1f1f1","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"51","borderRadiusTop":"51","borderRadiusRight":"51","borderRadiusBottom":"51","borderRadiusLeft":"51","borderRadiusUnits":"%","borderHoverRadiusUnits":"%"} -->
-<div id="wd-652f12c5" class="wp-block-wd-icon"><img class="wp-image-12544" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-pencil.svg" /></div>
+<div id="wd-652f12c5" class="wp-block-wd-icon"><img class="wp-image-12544" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-pencil.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"29f95fd8-ccdb-42f2-aec0-e29ea8ec9fd8","directionTablet":"column","directionMobile":"column"} -->
@@ -657,7 +655,7 @@
 <!-- wp:wd/column {"blockId":"ab72c5ce-70ef-441e-ad77-397d5a5b38ef","adjacentCount":4,"paddingRight":"15","paddingLeft":"15","borderType":"solid","borderColorCode":"#efefef","borderWidthRight":"1","adjacentCountTablet":2,"colWidthTablet":50,"marginBottomTablet":"40","borderWidthRightTablet":"0"} -->
 <div id="wd-ab72c5ce" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"f2ba38fb-caac-45f5-b953-c2316a4693fc","align":"center","borderWidthLock":false,"borderWidthLockTablet":false} -->
 <div id="wd-f2ba38fb" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"3c9539dd-d69b-4b60-93d0-73b7006f2b49","image":{"id":12541,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-book.svg"},"width":"80","height":"80","bgColorCode":"#f1f1f1","bgHoverColorCode":"#f1f1f1","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"51","borderRadiusTop":"51","borderRadiusRight":"51","borderRadiusBottom":"51","borderRadiusLeft":"51","borderRadiusUnits":"%","borderHoverRadiusUnits":"%"} -->
-<div id="wd-3c9539dd" class="wp-block-wd-icon"><img class="wp-image-12541" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-book.svg" /></div>
+<div id="wd-3c9539dd" class="wp-block-wd-icon"><img class="wp-image-12541" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-book.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"d89ab61e-cd73-467c-8db1-f85630900585","directionTablet":"column","directionMobile":"column"} -->
@@ -679,7 +677,7 @@
 <!-- wp:wd/column {"blockId":"01742e31-7d32-42b8-b66d-965220169f19","adjacentCount":4,"paddingRight":"15","paddingLeft":"15","borderType":"solid","borderColorCode":"#efefef","borderWidthRight":"1","adjacentCountTablet":2,"colWidthTablet":50,"marginBottomMobile":"40","borderWidthRightMobile":"0"} -->
 <div id="wd-01742e31" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"b67fd072-eaec-4f43-b72e-db9a31bd1339","align":"center","borderWidthLock":false,"borderWidthLockMobile":false} -->
 <div id="wd-b67fd072" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"0125a66d-e968-486d-ba10-1f9e560a4627","image":{"id":12542,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-books.svg"},"width":"80","height":"80","bgColorCode":"#f1f1f1","bgHoverColorCode":"#f1f1f1","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"51","borderRadiusTop":"51","borderRadiusRight":"51","borderRadiusBottom":"51","borderRadiusLeft":"51","borderRadiusUnits":"%","borderHoverRadiusUnits":"%"} -->
-<div id="wd-0125a66d" class="wp-block-wd-icon"><img class="wp-image-12542" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-books.svg" /></div>
+<div id="wd-0125a66d" class="wp-block-wd-icon"><img class="wp-image-12542" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-books.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"efdcc54a-427a-45b5-9aba-b0de02135f13","directionTablet":"column","directionMobile":"column"} -->
@@ -701,7 +699,7 @@
 <!-- wp:wd/column {"blockId":"1332c05c-cbd4-4ecb-a174-d3ceb1f3998d","adjacentCount":4,"paddingRight":"15","paddingLeft":"15","adjacentCountTablet":2,"colWidthTablet":50} -->
 <div id="wd-1332c05c" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"5bf05e41-fce7-4768-8c03-14f5d2ad2d93","align":"center","borderWidthLock":false} -->
 <div id="wd-5bf05e41" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"f41e15d9-d6ea-4811-b270-01e2623175d6","image":{"id":12543,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-laptop.svg"},"width":"80","height":"80","bgColorCode":"#f1f1f1","bgHoverColorCode":"#f1f1f1","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"51","borderRadiusTop":"51","borderRadiusRight":"51","borderRadiusBottom":"51","borderRadiusLeft":"51","borderRadiusUnits":"%","borderHoverRadiusUnits":"%"} -->
-<div id="wd-f41e15d9" class="wp-block-wd-icon"><img class="wp-image-12543" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-laptop.svg" /></div>
+<div id="wd-f41e15d9" class="wp-block-wd-icon"><img class="wp-image-12543" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-laptop.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"59b7f386-1709-40c1-a97b-50dde86f62ba","directionTablet":"column","directionMobile":"column"} -->
@@ -792,7 +790,7 @@
 <!-- wp:wd/row {"blockId":"67932f57-184f-41e5-9ee3-e16b650f4f06","columnsGap":80,"marginBottom":"80","columnsGapTablet":40,"marginBottomMobile":"60"} -->
 <div id="wd-67932f57" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"acd56883-edc9-4208-91db-1e17852e0bf1","adjacentCount":2,"colWidth":45,"adjacentCountTablet":1,"colWidthTablet":100,"alignItemsTablet":"center"} -->
 <div id="wd-acd56883" class="wp-block-wd-column wd-align-is-md-center"><!-- wp:wd/image {"blockId":"d644d8ee-8337-4c61-9082-a8b5b51ab1c4","image":{"id":12613,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-james-brown-img.png"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-james-brown-img.png","width":627,"height":620}} -->
-<div id="wd-d644d8ee" class="wp-block-wd-image wd-block-image"><img class="wp-image-12613" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-james-brown-img.png" /></div>
+<div id="wd-d644d8ee" class="wp-block-wd-image wd-block-image"><img class="wp-image-12613" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-james-brown-img.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -834,28 +832,28 @@
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/products-tabs {"blockId":"421a915d-73f5-4408-b490-2abdb5d8b128","marginBottom":"80","marginBottomMobile":"60"} -->
-<div id="wd-421a915d" class="wp-block-wd-products-tabs wd-tabs wd-products-tabs tabs-design-default wd-hover-parent"><!-- wp:wd/products-tabs-header {"blockId":"2e65912c-f6c9-4692-990c-9f42016b7693","hasTitle":false,"titleStyle":"underline","alignment":"center"} -->
-<div id="wd-2e65912c" class="wp-block-wd-products-tabs-header wd-tabs-header wd-align"><div class="wd-nav-wrapper wd-nav-tabs-wrapper"><ul class="wd-nav wd-nav-tabs products-tabs-title wd-icon-pos-start wd-style-underline"><!-- wp:wd/products-tabs-tab {"blockId":"7b5556ce-d1de-47ed-86ca-2bee8bbdfc70","title":"Biography","spacing":"","items_per_page":"8","columnsTablet":4,"columnsMobile":2} -->
-<li id="wd-7b5556ce" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;items_per_page&quot;:&quot;8&quot;,&quot;columns_tablet&quot;:4,&quot;el_id&quot;:&quot;wd-7b5556ce&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">Biography</span></a></li>
+<div id="wd-421a915d" class="wp-block-wd-products-tabs wd-tabs wd-products-tabs tabs-design-default wd-hover-parent"><!-- wp:wd/products-tabs-header {"blockId":"2e65912c-f6c9-4692-990c-9f42016b7693","hasTitle":false,"titleStyle":"underline","alignment":"center","currentTab":"5cb393da-c2ca-4fc5-a8c1-75100c64d7e0"} -->
+<div id="wd-2e65912c" class="wp-block-wd-products-tabs-header wd-tabs-header wd-align"><div class="wd-nav-wrapper wd-nav-tabs-wrapper"><ul class="wd-nav wd-nav-tabs products-tabs-title wd-icon-pos-start wd-style-underline"><!-- wp:wd/products-tabs-tab {"blockId":"2d7cfc7a-1ae5-4917-94fd-d4421d71e415","title":"Biography","spacing":"","items_per_page":"8","columnsTablet":4,"columnsMobile":2} -->
+<li id="wd-2d7cfc7a" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;items_per_page&quot;:&quot;8&quot;,&quot;columns_tablet&quot;:4,&quot;columns_mobile&quot;:2,&quot;el_id&quot;:&quot;wd-2d7cfc7a&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">Biography</span></a></li>
 <!-- /wp:wd/products-tabs-tab -->
 
 <!-- wp:wd/products-tabs-tab {"blockId":"1838580b-f1be-43f7-8835-998168f94313","title":"Fantasy","order":"DESC","spacing":"","items_per_page":"8","columnsTablet":4,"columnsMobile":2} -->
-<li id="wd-1838580b" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;items_per_page&quot;:&quot;8&quot;,&quot;order&quot;:&quot;DESC&quot;,&quot;columns_tablet&quot;:4,&quot;el_id&quot;:&quot;wd-1838580b&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">Fantasy</span></a></li>
+<li id="wd-1838580b" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;items_per_page&quot;:&quot;8&quot;,&quot;order&quot;:&quot;DESC&quot;,&quot;columns_tablet&quot;:4,&quot;columns_mobile&quot;:2,&quot;el_id&quot;:&quot;wd-1838580b&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">Fantasy</span></a></li>
 <!-- /wp:wd/products-tabs-tab -->
 
 <!-- wp:wd/products-tabs-tab {"blockId":"1dcdc2e7-a6be-4a5a-8f31-608ce5a72520","title":"History","spacing":"","items_per_page":"8","columnsTablet":4,"columnsMobile":2} -->
-<li id="wd-1dcdc2e7" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;items_per_page&quot;:&quot;8&quot;,&quot;columns_tablet&quot;:4,&quot;el_id&quot;:&quot;wd-1dcdc2e7&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">History</span></a></li>
+<li id="wd-1dcdc2e7" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;items_per_page&quot;:&quot;8&quot;,&quot;columns_tablet&quot;:4,&quot;columns_mobile&quot;:2,&quot;el_id&quot;:&quot;wd-1dcdc2e7&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">History</span></a></li>
 <!-- /wp:wd/products-tabs-tab --></ul></div></div>
 <!-- /wp:wd/products-tabs-header -->
 
-<!-- wp:wd/products-tabs-products {"blockId":"7b5556ce-d1de-47ed-86ca-2bee8bbdfc70","title":"Biography","spacing":"","items_per_page":"8","columnsTablet":4,"columnsMobile":2} /--></div>
+<!-- wp:wd/products-tabs-products {"blockId":"0c714d5b-7cc2-4bae-8f6f-238a01f22937","title":"Biography","spacing":"","items_per_page":"8","columnsTablet":4,"columnsMobile":2} /--></div>
 <!-- /wp:wd/products-tabs -->
 
 <!-- wp:wd/section {"blockId":"6ad13a4d-311e-4a46-bc6b-187eb69dc47d","paddingRight":"0","paddingLeft":"0","marginBottom":"0"} -->
 <div id="wd-6ad13a4d" class="wp-block-wd-section"><!-- wp:wd/row {"blockId":"4b0958fe-5e5c-4d29-9326-72161b51bc5d","columnsGap":0,"displayWidth":"full-width"} -->
 <div id="wd-4b0958fe" class="wp-block-wd-row wd-custom-width"><!-- wp:wd/column {"blockId":"7cbd0f38-4458-4c41-b84f-166fb62b65bc","adjacentCount":2,"colWidth":50,"alignItems":"flex-end","bgImage":{"id":12652,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-bg-img-1.jpg"},"paddingTop":"120","paddingBottom":"80","paddingTopTablet":"140","paddingTopMobile":"60","paddingRightMobile":"30","paddingBottomTablet":"100","paddingBottomMobile":"60","paddingLeftMobile":"30"} -->
 <div id="wd-7cbd0f38" class="wp-block-wd-column wd-align-is-lg-flex-end"><!-- wp:wd/image {"blockId":"7ccf0f5a-08e3-40f1-8eba-429d70ab45e2","image":{"id":12653,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-1.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-1.jpg","width":384,"height":480},"marginRight":"-60","parallaxScroll":true,"parallaxScrollY":-40,"marginRightTablet":"-30","marginRightMobile":"0"} -->
-<div id="wd-7ccf0f5a" class="wp-block-wd-image wd-block-image wd-parallax-on-scroll wd_scroll_x_0 wd_scroll_y_-40 wd_scroll_z_0 wd_scroll_smoothness_30"><img class="wp-image-12653" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-1.jpg" /></div>
+<div id="wd-7ccf0f5a" class="wp-block-wd-image wd-block-image wd-parallax-on-scroll wd_scroll_x_0 wd_scroll_y_-40 wd_scroll_z_0 wd_scroll_smoothness_30"><img class="wp-image-12653" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-1.jpg" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -913,7 +911,7 @@
 
 <!-- wp:wd/column {"blockId":"ca99941c-ef8f-4404-8515-e5734d7f9de9","adjacentCount":2,"colWidth":50,"bgImage":{"id":12674,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-bg-img-2.jpg"},"paddingTop":"120","paddingBottom":"80","alignItemsMobile":"center","paddingTopTablet":"140","paddingTopMobile":"60","paddingRightMobile":"30","paddingBottomTablet":"100","paddingBottomMobile":"60","paddingLeftMobile":"30","flexOrderMobile":"1"} -->
 <div id="wd-ca99941c" class="wp-block-wd-column wd-align-is-sm-center"><!-- wp:wd/image {"blockId":"2c1a12ae-2247-4f3b-8348-7227e8679e0b","image":{"id":12675,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-2.jpg"},"marginLeft":"-60","parallaxScroll":true,"parallaxScrollY":-40,"marginLeftTablet":"-30","marginLeftMobile":"0"} -->
-<div id="wd-2c1a12ae" class="wp-block-wd-image wd-block-image wd-parallax-on-scroll wd_scroll_x_0 wd_scroll_y_-40 wd_scroll_z_0 wd_scroll_smoothness_30"><img class="wp-image-12675" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-2.jpg" /></div>
+<div id="wd-2c1a12ae" class="wp-block-wd-image wd-block-image wd-parallax-on-scroll wd_scroll_x_0 wd_scroll_y_-40 wd_scroll_z_0 wd_scroll_smoothness_30"><img class="wp-image-12675" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-scr-img-2.jpg" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row --></div>
@@ -948,12 +946,12 @@
 
 <!-- wp:wd/column {"blockId":"004d47cc-ecb0-43dd-895a-e8001b3533ce","adjacentCount":3,"colWidth":23.000000000000007,"blocksGap":15,"adjacentCountTablet":2,"colWidthTablet":40} -->
 <div id="wd-004d47cc" class="wp-block-wd-column"><!-- wp:wd/gallery {"blockId":"03720a30-0ef3-48d4-a537-6636d3722107","columns":1,"columnsMobile":2,"spacingMobile":"20"} -->
-<div id="wd-03720a30" class="wp-block-wd-gallery wd-grid-g wd-caption-mask" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:2;--wd-gap-lg:20px;--wd-gap-sm: 20px"><!-- wp:wd/gallery-item {"blockId":"bba08bc0-87ae-4ab6-b5aa-fc3093d5b9a8","image":{"id":12700,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-1.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-1.jpg","width":283,"height":280}} -->
-<div id="wd-bba08bc0" class="wp-block-wd-gallery-item wd-col"><div class="wd-block-image"><img class="wp-image-12700" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-1.jpg" /></div></div>
+<div id="wd-03720a30" class="wp-block-wd-gallery wd-grid-g wd-caption-mask" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:2;--wd-gap-lg:20px;--wd-gap-sm: 20px;"><!-- wp:wd/gallery-item {"blockId":"bba08bc0-87ae-4ab6-b5aa-fc3093d5b9a8","image":{"id":12700,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-1.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-1.jpg","width":283,"height":280}} -->
+<div id="wd-bba08bc0" class="wp-block-wd-gallery-item wd-col"><div class="wd-block-image"><img class="wp-image-12700" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-1.jpg" alt=""/></div></div>
 <!-- /wp:wd/gallery-item -->
 
 <!-- wp:wd/gallery-item {"blockId":"5a2bfdc5-9d52-450e-8929-3e655ec3ce02","image":{"id":12702,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-2.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-2.jpg","width":283,"height":280}} -->
-<div id="wd-5a2bfdc5" class="wp-block-wd-gallery-item wd-col"><div class="wd-block-image"><img class="wp-image-12702" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-2.jpg" /></div></div>
+<div id="wd-5a2bfdc5" class="wp-block-wd-gallery-item wd-col"><div class="wd-block-image"><img class="wp-image-12702" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/books-typewriter-right-2.jpg" alt=""/></div></div>
 <!-- /wp:wd/gallery-item --></div>
 <!-- /wp:wd/gallery --></div>
 <!-- /wp:wd/column --></div>
@@ -1007,8 +1005,8 @@
 															<wp:post_id>12504</wp:post_id>
 					<wp:post_date><![CDATA[2024-05-22 14:42:55]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-05-22 14:42:55]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-23 11:38:30]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-23 11:38:30]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-10-08 11:04:49]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-08 11:04:49]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[home-books]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1016,20 +1014,8 @@
 					<wp:menu_order>0</wp:menu_order>
 					<wp:post_type><![CDATA[page]]></wp:post_type>
 																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_whb_header]]></wp:meta_key>
-							<wp:meta_value><![CDATA[none]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_title_off]]></wp:meta_key>
 							<wp:meta_value><![CDATA[on]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_page-title-size]]></wp:meta_key>
-							<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
@@ -1959,7 +1945,7 @@
 					<title><![CDATA[Contact us Books]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?cms_block=contact-us-books</link>
 					<pubDate>Wed, 22 May 2024 14:45:36 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/?post_type=cms_block&#038;p=12506</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2c4d63d-33b1-4c81-b111-5b361226cb10"} -->
 <div id="wd-f2c4d63d" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"5fc069d0-4e80-4f0a-b10a-c12b70bd0d18","adjacentCount":2,"colWidth":33.33} -->
@@ -2036,7 +2022,7 @@
 
 <!-- wp:wd/column {"blockId":"a7c1a999-e8fb-4d6b-b306-171fc63e54c3","adjacentCount":2,"colWidth":66.33} -->
 <div id="wd-a7c1a999" class="wp-block-wd-column"><!-- wp:wd/google-map {"blockId":"735ad1b7-0a4b-4c7a-9ad0-e6935cc9d372","height":"450","locations":[{"title":"","lat":"45.9","lon":"10.9","description":"","image":{"url":"","id":""},"imageSize":"full"}]} -->
-<div id="wd-735ad1b7" class="wp-block-wd-google-map wd-map-container google-map-container" data-map-args="{&quot;multiple_markers&quot;:&quot;yes&quot;,&quot;zoom&quot;:15,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;selector&quot;:&quot;wd-map-id-735ad1b7-0a4b-4c7a-9ad0-e6935cc9d372&quot;,&quot;markers&quot;:[{&quot;marker_lat&quot;:&quot;45.9&quot;,&quot;marker_lon&quot;:&quot;10.9&quot;,&quot;marker_icon&quot;:&quot;https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/themes/woodmart/inc/admin/assets/images/google-icon.png&quot;,&quot;marker_icon_size&quot;:[40,40],&quot;marker_title&quot;:&quot;&quot;,&quot;marker_description&quot;:&quot;&quot;}]}"><div class="wd-google-map-wrapper wd-map-wrapper wd-fill"><div id="wd-map-id-735ad1b7-0a4b-4c7a-9ad0-e6935cc9d372" class="wd-google-map wd-fill"></div></div></div>
+<div id="wd-735ad1b7" class="wp-block-wd-google-map wd-map-container google-map-container" data-map-args="{&quot;multiple_markers&quot;:&quot;yes&quot;,&quot;zoom&quot;:15,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;selector&quot;:&quot;wd-map-id-735ad1b7-0a4b-4c7a-9ad0-e6935cc9d372&quot;,&quot;markers&quot;:[{&quot;marker_lat&quot;:&quot;45.9&quot;,&quot;marker_lon&quot;:&quot;10.9&quot;,&quot;marker_icon&quot;:&quot;https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/themes/woodmart8/inc/admin/assets/images/google-icon.png&quot;,&quot;marker_icon_size&quot;:[40,40],&quot;marker_title&quot;:&quot;&quot;,&quot;marker_description&quot;:&quot;&quot;}]}"><div class="wd-google-map-wrapper wd-map-wrapper wd-fill"><div id="wd-map-id-735ad1b7-0a4b-4c7a-9ad0-e6935cc9d372" class="wd-google-map wd-fill"></div></div></div>
 <!-- /wp:wd/google-map --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->]]></content:encoded>
@@ -2095,6 +2081,10 @@
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -2148,6 +2138,10 @@
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[full-width]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_block]]></wp:meta_key>

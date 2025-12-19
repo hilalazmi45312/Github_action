@@ -17,6 +17,7 @@ if ( ! function_exists( 'woodmart_shortcode_button' ) ) {
 					'title'                         => 'GO',
 					'link'                          => '',
 					'link_nofollow'                 => false,
+					'custom_attributes'             => '',
 					'color'                         => 'default',
 					'style'                         => 'default',
 					'shape'                         => 'rectangle',
@@ -74,7 +75,7 @@ if ( ! function_exists( 'woodmart_shortcode_button' ) ) {
 			$wrap_class .= ' ' . $wrapper_class;
 		}
 
-		$attributes = woodmart_get_link_attributes( $link, $popup );
+		$attributes = woodmart_get_link_attributes( $link, $popup, $custom_attributes );
 
 		$btn_class     = 'btn';
 		$wrapper_attrs = '';

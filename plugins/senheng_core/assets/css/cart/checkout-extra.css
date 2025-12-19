@@ -1,17 +1,21 @@
-body #wfacp-e-form *{
-    font-size: unset !important;
-    font-family: var(--wd-title-font) !important;
-}
-
-.woocommerce-remove-coupon{
-    margin-inline-end: 0px !important;
-}
-
-#coupons_list{
+.shop_table .order-paid,
+.shop_table .order-remaining {
     display: none;
 }
 
-.woocommerce-checkout-review-order-table .wd-checkout-prod{
+body #wfacp-e-form * {
+    font-family: var(--wd-title-font) !important;
+}
+
+.woocommerce-remove-coupon {
+    margin-inline-end: 0px !important;
+}
+
+#coupons_list {
+    display: none;
+}
+
+.woocommerce-checkout-review-order-table .wd-checkout-prod {
     align-items: initial !important;
 }
 
@@ -84,8 +88,8 @@ body #wfacp-e-form *{
 }
 
 .checkout-product-extras .sh-extras-price .sh-price-original,
-.checkout-product-extras .sh-price-original .amount{
-    color: #888 ;
+.checkout-product-extras .sh-price-original .amount {
+    color: #888;
     text-decoration: line-through;
     margin-left: 8px;
     font-weight: 400;
@@ -105,11 +109,13 @@ body #wfacp-e-form *{
 }
 
 /* Variation Display Styles for Checkout */
-.checkout-variation-data{
+.checkout-variation-data {
     margin-top: 5px;
 }
 
-.checkout-product-extras ,.checkout-variation-data, .checkout-variation-data .variation-separator{
+.checkout-product-extras,
+.checkout-variation-data,
+.checkout-variation-data .variation-separator {
     font-size: 14px;
     color: #707070;
 }
@@ -134,18 +140,19 @@ body #wfacp-e-form *{
     color: #707070;
     margin: 0 2px;
 }
+
 /* Checkout Product Extras Styling */
 
-.woocommerce-checkout tr.cart_item .product-total>.amount{
+.woocommerce-checkout tr.cart_item .product-total>.amount {
     color: var(--wd-primary-color) !important;
     font-weight: 600;
 }
 
-.woocommerce-checkout .cart-product-label .product-name-wrapper{
+.woocommerce-checkout .cart-product-label .product-name-wrapper {
     color: #000;
 }
 
-.woocommerce-checkout .cart-product-label .sale-price-indicator{
+.woocommerce-checkout .cart-product-label .sale-price-indicator {
     color: #666;
 }
 
@@ -157,7 +164,7 @@ body #wfacp-e-form *{
 }
 
 /* Hide empty keys and colons in checkout display */
-.woocommerce-checkout .product-name dt:empty + dd .checkout-product-extras,
+.woocommerce-checkout .product-name dt:empty+dd .checkout-product-extras,
 .woocommerce-checkout .product-name .variation:has(.checkout-product-extras) dt:empty,
 .checkout-extras-hidden-key,
 .woocommerce-checkout .product-name dt:has(.checkout-extras-hidden-key) {
@@ -295,36 +302,37 @@ body #wfacp-e-form *{
     font-weight: 500;
 }
 
-.checkout-actual-price .woocommerce-Price-amount.amount bdi,.checkout-actual-price .woocommerce-Price-amount.amount .woocommerce-Price-currencySymbol{
+.checkout-actual-price .woocommerce-Price-amount.amount bdi,
+.checkout-actual-price .woocommerce-Price-amount.amount .woocommerce-Price-currencySymbol {
     font-size: 11.2px;
 }
 
-.woocommerce-checkout .wfacp_elementor_mini_cart_widget .product-quantity{
+.woocommerce-checkout .wfacp_elementor_mini_cart_widget .product-quantity {
     display: none;
 }
 
-.woocommerce-checkout .checkout-qty{
+.woocommerce-checkout .checkout-qty {
     display: block;
     margin-top: 4px;
 }
 
-.woocommerce-checkout ul.variation{
+.woocommerce-checkout ul.variation {
     display: none !important;
 }
 
-.woocommerce-checkout .pickup-location-package-field .woocommerce-shipping-contents{
+.woocommerce-checkout .pickup-location-package-field .woocommerce-shipping-contents {
     display: none;
 }
 
-#wfacp-e-form .wfacp_main_form .select2-container .select2-selection--single .select2-selection__rendered{
+#wfacp-e-form .wfacp_main_form .select2-container .select2-selection--single .select2-selection__rendered {
     padding: 12px 12px 2px !important;
 }
 
-body #wfacp-e-form .wfacp_main_form .wfacp_shipping_table ul li .wfacp_single_shipping{
+body #wfacp-e-form .wfacp_main_form .wfacp_shipping_table ul li .wfacp_single_shipping {
     margin-bottom: 4px;
 }
 
-.woocommerce-checkout .shop_table .cart_item{
+.woocommerce-checkout .shop_table .cart_item {
     display: none;
 }
 
@@ -338,8 +346,8 @@ body #wfacp-e-form .wfacp_main_form .wfacp_shipping_table ul li .wfacp_single_sh
     position: relative;
 }
 
-.sh-custom-shop-table .sh-checkout-cart-item:last-child { 
-    margin-bottom: 20px; 
+.sh-custom-shop-table .sh-checkout-cart-item:last-child {
+    margin-bottom: 20px;
 }
 
 .sh-custom-shop-table .sh-cart-item-header {
@@ -376,7 +384,7 @@ body #wfacp-e-form .wfacp_main_form .wfacp_shipping_table ul li .wfacp_single_sh
     background: #fff;
     border: 1px solid #e0e0e0;
     padding: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .sh-custom-shop-table .sh-item-image img {
@@ -400,7 +408,7 @@ body #wfacp-e-form .wfacp_main_form .wfacp_shipping_table ul li .wfacp_single_sh
     font-size: 11px;
     font-weight: 600;
     border: 2px solid #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     overflow: visible;
 }
 
@@ -432,7 +440,8 @@ body #wfacp-e-form .sh-custom-shop-table .sh-item-price .woocommerce-Price-amoun
     padding-left: 20px;
 }
 
-body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi .woocommerce-Price-currencySymbol{
+body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi,
+body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi .woocommerce-Price-currencySymbol {
     font-size: 12px !important;
 }
 
@@ -540,7 +549,7 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
     color: #000;
 }
 
-.sh-custom-shop-table .sh-price-original {
+.sh-custom-shop-table .sh-price-original .amount {
     display: block;
     font-size: 12px;
     color: #999;
@@ -558,22 +567,22 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
     .sh-custom-shop-table .sh-checkout-cart-item {
         padding: 12px;
     }
-    
+
     .sh-custom-shop-table .sh-cart-item-header {
         gap: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-item-badge {
         width: 24px;
         height: 24px;
         font-size: 11px;
     }
-    
+
     .sh-custom-shop-table .sh-item-image {
         width: 50px;
         height: 50px;
     }
-    
+
     .sh-custom-shop-table .sh-item-qty-badge {
         width: 20px;
         height: 20px;
@@ -581,26 +590,26 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
         top: -6px;
         right: -6px;
     }
-    
+
     .sh-custom-shop-table .sh-item-name {
         font-size: 13px;
         margin-bottom: 6px;
     }
-    
+
     .sh-custom-shop-table .sh-item-meta {
         font-size: 12px;
         line-height: 1.5;
     }
-    
-    .sh-custom-shop-table .sh-item-meta > div {
+
+    .sh-custom-shop-table .sh-item-meta>div {
         margin: 2px 0;
     }
-    
+
     .sh-custom-shop-table .sh-item-price {
         font-size: 16px;
         padding-left: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-remove-item {
         width: 22px;
         height: 22px;
@@ -608,50 +617,50 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
         top: 12px;
         right: 12px;
     }
-    
+
     .sh-custom-shop-table .sh-added-badge {
         font-size: 12px;
         margin: 10px 0 10px 0;
     }
-    
+
     .sh-custom-shop-table .sh-added-badge::before {
         width: 16px;
         height: 16px;
         font-size: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-section {
         margin-top: 15px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-header {
         font-size: 14px;
         margin-bottom: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-item {
         gap: 10px;
         padding: 10px;
         margin-bottom: 8px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-image {
         width: 45px;
         height: 45px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-title {
         font-size: 13px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-price {
         font-size: 14px;
     }
-    
+
     .sh-custom-shop-table .sh-price-original {
         font-size: 12px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-qty {
         font-size: 11px;
     }
@@ -661,17 +670,18 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
     .sh-custom-shop-table .sh-checkout-cart-item {
         padding: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-cart-item-header {
         gap: 16px;
     }
 
-    body #wfacp-e-form .sh-custom-shop-table .sh-checkout-cart-item .sh-item-meta > div, body #wfacp-e-form .sh-custom-shop-table .sh-checkout-cart-item .sh-item-meta > div > strong{ 
+    body #wfacp-e-form .sh-custom-shop-table .sh-checkout-cart-item .sh-item-meta>div,
+    body #wfacp-e-form .sh-custom-shop-table .sh-checkout-cart-item .sh-item-meta>div>strong {
         font-size: 12px;
         font-family: var(--wd-title-font);
     }
 
-    body #wfacp-e-form .wfacp_mb_mini_cart_wrap{
+    body #wfacp-e-form .wfacp_mb_mini_cart_wrap {
         font-size: 12px !important;
     }
 
@@ -682,18 +692,18 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
     body #wfacp-e-form div.wfacp_mb_mini_cart_wrap .wfacp_mb_cart_accordian span.woocommerce-Price-amount {
         font-size: 14px !important;
     }
-    
+
     .sh-custom-shop-table .sh-item-badge {
         width: 22px;
         height: 22px;
         font-size: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-item-image {
         width: 45px;
         height: 45px;
     }
-    
+
     .sh-custom-shop-table .sh-item-qty-badge {
         width: 18px;
         height: 18px;
@@ -702,25 +712,25 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
         right: -5px;
         border-width: 1.5px;
     }
-    
+
     .sh-custom-shop-table .sh-item-name {
         font-size: 12px;
         margin-bottom: 5px;
     }
-    
+
     .sh-custom-shop-table .sh-item-meta {
         font-size: 11px;
     }
-    
+
     .sh-custom-shop-table .sh-item-price {
         font-size: 14px;
     }
 
-     .sh-custom-shop-table .sh-extras-qty {
+    .sh-custom-shop-table .sh-extras-qty {
         font-size: 12px;
         margin-top: 0;
     }
-    
+
     .sh-custom-shop-table .sh-remove-item {
         width: 20px;
         height: 20px;
@@ -728,44 +738,164 @@ body .sh-custom-shop-table .sh-item-meta .woocommerce-Price-amount bdi, body .sh
         top: 10px;
         right: 10px;
     }
-    
+
     .sh-custom-shop-table .sh-added-badge {
         font-size: 11px;
     }
-    
+
     .sh-custom-shop-table .sh-added-badge::before {
         width: 14px;
         height: 14px;
         font-size: 9px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-header {
         font-size: 13px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-item {
         gap: 16px;
         padding: 4px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-image {
         width: 40px;
         height: 40px;
     }
-    
-   ≈ .sh-extras-title {
+
+    ≈ .sh-extras-title {
         font-size: 12px !important;
     }
-    
+
     .sh-custom-shop-table .sh-extras-price {
         font-size: 13px;
     }
-    
+
     .sh-custom-shop-table .sh-price-original {
         font-size: 11px;
     }
-    
+
     .sh-custom-shop-table .sh-extras-qty {
         font-size: 10px;
     }
+}
+
+/* -------------------------------------------------------------------------- */
+/* WFACP Shimmer Animation Support for Custom Checkout Elements               */
+/* -------------------------------------------------------------------------- */
+
+/* Ensure relative positioning for pseudo-elements */
+.wfacp_anim_active .sh-custom-shop-table .sh-item-image,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-name,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-price,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-meta,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-section,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-item {
+    position: relative;
+    overflow: hidden;
+    color: transparent !important;
+}
+
+/* Hide images */
+.wfacp_anim_active .sh-custom-shop-table .sh-item-image img,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-image img {
+    opacity: 0;
+}
+
+/* Skeleton blocks */
+.wfacp_anim_active .sh-custom-shop-table .sh-item-name,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-meta,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-price,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-title,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-price,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-qty,
+.wfacp_anim_active .sh-custom-shop-table .sh-added-badge,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-header {
+    color: transparent !important;
+    background-color: #eee;
+    border-radius: 4px;
+    display: inline-block;
+    min-width: 50%;
+}
+
+/* Shimmer Overlay */
+.wfacp_anim_active .sh-custom-shop-table .sh-item-image::after,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-name::after,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-price::after,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-meta::after,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-section::after,
+.wfacp_anim_active .sh-custom-shop-table .sh-extras-item::after,
+.wfacp_anim_active .sh-custom-shop-table .sh-item-qty-badge::after,
+.wfacp_anim_active .wfacp-order-place-btn-wrap::after {
+    animation: shimmer 2s linear infinite;
+    background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+    background-size: 1000px 100%;
+    content: " ";
+    display: block;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* Layout stability */
+.wfacp_anim_active .sh-custom-shop-table .sh-item-details {
+    min-height: 50px;
+}
+
+.wfacp_anim_active .sh-custom-shop-table .sh-item-name {
+    min-height: 16px;
+    width: 80%;
+}
+
+.wfacp_anim_active .sh-custom-shop-table .sh-item-meta {
+    min-height: 12px;
+    width: 60%;
+    margin-top: 4px;
+}
+
+.wfacp_anim_active .sh-custom-shop-table .sh-item-price {
+    min-height: 20px;
+    min-width: 60px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Fix Local Pickup Plus width issue with Funnel Builder Pro AJAX updates    */
+/* -------------------------------------------------------------------------- */
+table.lpp-shipping-package-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+}
+
+table.lpp-shipping-package-wrapper td,
+table.lpp-shipping-package-wrapper th {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Ensure the wrapper container does not expand */
+.wc-local-pickup-plus-package-pickup-location-field {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* Fix Select2 dropdown width in Local Pickup Plus */
+.wc-local-pickup-plus-package-pickup-location-field .select2.select2-container.select2-container--default {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.wc-local-pickup-plus-package-pickup-location-field .select2-container .select2-selection--single {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+table.lpp-shipping-package-wrapper .select2.select2-container {
+    width: 100% !important;
+    max-width: 100% !important;
 }

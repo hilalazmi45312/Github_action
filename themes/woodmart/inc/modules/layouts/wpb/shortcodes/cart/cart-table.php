@@ -60,16 +60,16 @@ if ( ! function_exists( 'woodmart_shortcode_cart_table' ) ) {
 							<tr>
 								<th class="product-remove">&nbsp;</th>
 								<th class="product-thumbnail">&nbsp;</th>
-								<th class="product-name">
+								<th scope="col" class="product-name">
 									<?php esc_html_e( 'Product', 'woocommerce' ); ?>
 								</th>
-								<th class="product-price">
+								<th scope="col" class="product-price">
 									<?php esc_html_e( 'Price', 'woocommerce' ); ?>
 								</th>
-								<th class="product-quantity">
+								<th scope="col" class="product-quantity">
 									<?php esc_html_e( 'Quantity', 'woocommerce' ); ?>
 								</th>
-								<th class="product-subtotal">
+								<th scope="col" class="product-subtotal">
 									<?php esc_html_e( 'Subtotal', 'woocommerce' ); ?>
 								</th>
 							</tr>
@@ -94,7 +94,7 @@ if ( ! function_exists( 'woodmart_shortcode_cart_table' ) ) {
 										echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											'woocommerce_cart_item_remove_link',
 											sprintf(
-												'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+												'<a role="button" href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
 												esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 												/* translators: %s is the product name */
 												esc_attr( sprintf( __( 'Remove %s from cart', 'woocommerce' ), wp_strip_all_tags( $product_name ) ) ),

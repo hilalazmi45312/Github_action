@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -25,7 +25,7 @@ namespace SkyVerge\WooCommerce\Local_Pickup_Plus\Fields;
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Field component to select a pickup location.
@@ -250,7 +250,7 @@ abstract class Pickup_Location_Field extends Field {
 			data-placeholder="<?php echo esc_html_x( 'Choose an area&hellip;', 'Geographic area to search', 'woocommerce-shipping-local-pickup-plus' ); ?>"
 			autocomplete="country">
 			<?php if ( $this->use_enhanced_search() ) : ?>
-				<?php echo $this->get_country_dropdown_options(); ?>
+				<?php echo $this->get_country_dropdown_options(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php else : ?>
 				<option value="anywhere" selected="selected"><?php esc_html_e( 'Anywhere', 'woocommerce-shipping-local-pickup-plus' ); ?></option>
 			<?php endif; ?>
@@ -435,14 +435,14 @@ abstract class Pickup_Location_Field extends Field {
 		<?php if ( wc_local_pickup_plus_shipping_method()->is_per_order_selection_enabled() ) : ?>
 
 			<?php if ( is_checkout() ) : ?>
-				<?php echo $chosen_location->get_name(); ?>
+				<?php echo esc_html( $chosen_location->get_name() ); ?>
 				<input type="hidden"
 				       name="<?php echo sanitize_html_class( $field_name ); ?>[<?php echo esc_attr( $object_id ); ?>]"
-				       value="<?php echo $chosen_location->get_id(); ?>">
+				       value="<?php echo esc_attr( $chosen_location->get_id() ); ?>">
 			<?php else : ?>
 				<small><?php
 					/* translators: Placeholder: %s - pickup location name */
-					printf( esc_html__( 'Pickup Location: %s', 'woocommerce-shipping-local-pickup-plus' ), $chosen_location->get_name() ); ?></small>
+					printf( esc_html__( 'Pickup Location: %s', 'woocommerce-shipping-local-pickup-plus' ), esc_html( $chosen_location->get_name() ) ); ?></small>
 			<?php endif; ?>
 
 		<?php else : // == wc_local_pickup_plus_shipping_method()->is_per_item_selection_enabled() ?>
@@ -450,7 +450,7 @@ abstract class Pickup_Location_Field extends Field {
 			<small><abbr
 					title="<?php echo esc_attr( $chosen_location->get_address()->get_formatted_html( true ) ); ?>"><?php
 					/* translators: Placeholder: %s - pickup location name */
-					printf( esc_html__( 'Available for pickup at: %s', 'woocommerce-shipping-local-pickup-plus' ), $chosen_location->get_name() ); ?></abbr></small>
+					printf( esc_html__( 'Available for pickup at: %s', 'woocommerce-shipping-local-pickup-plus' ), esc_html( $chosen_location->get_name() ) ); ?></abbr></small>
 
 		<?php endif ?>
 
@@ -481,10 +481,10 @@ abstract class Pickup_Location_Field extends Field {
 				<?php if ( ! $enhanced_search ) { echo 'style="display: none;"'; } ?>><?php
 				$change = '<a class="pickup-location-change-lookup-area" href="#">' . strtolower( esc_html__( 'Change', 'woocommerce-shipping-local-pickup-plus' ) ) . '</a>';
 				/* translators: Placeholder: %s - country or state name (or "Anywhere") */
-				printf( __( 'Enter a postcode or city to search for pickup locations from: %s', 'woocommerce-shipping-local-pickup-plus' ) . ' (' . $change . ')', '<em class="pickup-location-current-lookup-area-label">' . $this->get_lookup_area_label() . '</em>' ); ?>
+				printf( esc_html__( 'Enter a postcode or city to search for pickup locations from: %s', 'woocommerce-shipping-local-pickup-plus' ) . ' (' . $change . ')', '<em class="pickup-location-current-lookup-area-label">' . $this->get_lookup_area_label() . '</em>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</small>
 			<div style="display: none;">
-				<?php echo $this->get_country_state_dropdown( $object_id ); ?>
+				<?php echo $this->get_country_state_dropdown( $object_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 		</div>
 
@@ -521,7 +521,7 @@ abstract class Pickup_Location_Field extends Field {
 			>
 			<option></option>
 			<?php if ( $chosen_location instanceof \WC_Local_Pickup_Plus_Pickup_Location ) : ?>
-				<option value="<?php echo $chosen_location->get_id(); ?>" selected="selected"><?php echo esc_html( $chosen_location->get_formatted_name() ); ?></option>
+				<option value="<?php echo esc_attr( $chosen_location->get_id() ); ?>" selected="selected"><?php echo esc_html( $chosen_location->get_formatted_name() ); ?></option>
 			<?php endif; ?>
 		</select>
 

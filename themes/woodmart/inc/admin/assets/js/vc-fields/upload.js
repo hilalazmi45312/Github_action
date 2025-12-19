@@ -57,7 +57,7 @@
 			e.preventDefault();
 
 			var $removeButton = $(this);
-			var $uploadButton = $removeButton.siblings('..xts-upload-btn');
+			var $uploadButton = $removeButton.siblings('.xts-upload-btn');
 			var buttonId = $uploadButton.data('id');
 			var $input = $removeButton.siblings('.xts-upload-input-id');
 

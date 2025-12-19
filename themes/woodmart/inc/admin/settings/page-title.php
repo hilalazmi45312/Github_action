@@ -79,8 +79,29 @@ Options::add_field(
 			'position' => 'center center',
 			'size'     => 'cover',
 		),
+		'options'     => ! apply_filters( 'woodmart_generate_legacy_page_title_bg', false ) ? array(
+			'repeat'     => false,
+			'attachment' => false,
+			'size'       => array(
+				''        => '',
+				'cover'   => esc_html__( 'Cover', 'woodmart' ),
+				'contain' => esc_html__( 'Contain', 'woodmart' ),
+				'fill'    => esc_html__( 'Fill', 'woodmart' ),
+				'none'    => esc_html__( 'None', 'woodmart' ),
+			),
+		) : array(),
+		'allowed'     => ! apply_filters( 'woodmart_generate_legacy_page_title_bg', false ) ? array(
+			'repeat'     => false,
+			'attachment' => false,
+		) : array(),
+		'css_rules'   => ! apply_filters( 'woodmart_generate_legacy_page_title_bg', false ) ? array(
+			'color'    => false,
+			'image'    => false,
+			'size'     => 'object-fit',
+			'position' => 'object-position',
+		) : array(),
 		'section'     => 'page_title_section',
-		'selector'    => '.wd-page-title',
+		'selector'    => apply_filters( 'woodmart_generate_legacy_page_title_bg', false ) ? '.wd-page-title' : '.wd-page-title .wd-page-title-bg img',
 		'tags'        => 'page title color page title background',
 		'priority'    => 30,
 	)
@@ -109,7 +130,7 @@ Options::add_field(
 			),
 		),
 		'default'     => 'light',
-		'priority'    => 40,
+		'priority'    => 50,
 	)
 );
 
@@ -165,7 +186,7 @@ Options::add_field(
 				'value' => 'span',
 			),
 		),
-		'priority'    => 50,
+		'priority'    => 55,
 	)
 );
 

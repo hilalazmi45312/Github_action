@@ -163,7 +163,7 @@ class Wishlist_Button extends Widget_Base {
 					),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .wd-wishlist-btn[class*="wd-style-"] > a:before, {{WRAPPER}} .wd-wishlist-btn[class*="wd-style-"] > a:after' => 'font-size: {{SIZE}}px;',
+					'{{WRAPPER}} .wd-wishlist-btn[class*="wd-style-"]' => '--wd-action-icon-size: {{SIZE}}px;',
 				),
 			)
 		);

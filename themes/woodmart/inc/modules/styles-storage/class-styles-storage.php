@@ -284,7 +284,7 @@ class Styles_Storage {
 	 * @since 1.0.0
 	 */
 	public function reset_data() {
-		$this->update_data( 'xts-' . $this->data_name . '-status', 'invalid' );
+		$this->delete_data( 'xts-' . $this->data_name . '-status' );
 		$this->delete_data( 'xts-' . $this->data_name . '-credentials' );
 	}
 
@@ -311,6 +311,7 @@ class Styles_Storage {
 
 		if ( ! trim( $css ) ) {
 			$this->css = $css;
+			$this->update_data( 'xts-' . $this->data_name . '-status', 'valid' );
 			$this->update_data(
 				'xts-' . $this->data_name . '-css-data',
 				$css

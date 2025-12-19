@@ -26,8 +26,51 @@ class Background extends Field {
 	 * @return void.
 	 */
 	public function render_control() {
-		$value = $this->get_field_value();
-		$style = '';
+		$value        = $this->get_field_value();
+		$style        = '';
+		$allowed_size = woodmart_get_default_image_sizes();
+
+		$options = array_merge(
+			array(
+				'image_size' => array_combine(
+					array_column( $allowed_size, 'value' ),
+					array_column( $allowed_size, 'name' )
+				),
+				'repeat'     => array(
+					''          => '',
+					'no-repeat' => esc_html__( 'No Repeat', 'woodmart' ),
+					'repeat'    => esc_html__( 'Repeat', 'woodmart' ),
+					'repeat-x'  => esc_html__( 'Repeat Horizontally', 'woodmart' ),
+					'repeat-y'  => esc_html__( 'Repeat Vertically', 'woodmart' ),
+					'inherit'   => esc_html__( 'Inherit', 'woodmart' ),
+				),
+				'size'       => array(
+					''        => '',
+					'cover'   => esc_html__( 'Cover', 'woodmart' ),
+					'contain' => esc_html__( 'Contain', 'woodmart' ),
+					'inherit' => esc_html__( 'Inherit', 'woodmart' ),
+				),
+				'attachment' => array(
+					''        => '',
+					'fixed'   => esc_html__( 'Fixed', 'woodmart' ),
+					'scroll'  => esc_html__( 'Scroll', 'woodmart' ),
+					'inherit' => esc_html__( 'Inherit', 'woodmart' ),
+				),
+				'position'   => array(
+					''              => '',
+					'left top'      => esc_html__( 'Left Top', 'woodmart' ),
+					'left center'   => esc_html__( 'Left Center', 'woodmart' ),
+					'left bottom'   => esc_html__( 'Left Bottom', 'woodmart' ),
+					'center top'    => esc_html__( 'Center Top', 'woodmart' ),
+					'center center' => esc_html__( 'Center Center', 'woodmart' ),
+					'center bottom' => esc_html__( 'Center Bottom', 'woodmart' ),
+					'right top'     => esc_html__( 'Right Top', 'woodmart' ),
+					'right center'  => esc_html__( 'Right Center', 'woodmart' ),
+					'right bottom'  => esc_html__( 'Right Bottom', 'woodmart' ),
+				),
+			),
+			! empty( $this->args['options'] ) ? $this->args['options'] : array()
+		);
 
 		if ( ! empty( $value['color'] ) || ! empty( $value['id'] ) ) {
 			if ( ! empty( $value['color'] ) ) {
@@ -77,46 +120,72 @@ class Background extends Field {
 			<div class="xts-bg-controls xts-row xts-sp-10">
 				<div class="xts-col-xl-6 xts-col-12">
 					<div class="xts-bg-image-options xts-row xts-sp-10<?php echo empty( $value['url'] ) ? ' xts-hidden' : ''; ?>">
-						<div class="xts-col-lg-6 xts-col-12">
-							<select class="xts-bg-repeat" data-placeholder="<?php esc_attr_e( 'Background repeat', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'repeat' ) ); ?>">
-								<option value=""></option>
-								<option value="no-repeat" <?php selected( $this->get_field_value( 'repeat' ), 'no-repeat' ); ?>>No Repeat</option>
-								<option value="repeat" <?php selected( $this->get_field_value( 'repeat' ), 'repeat' ); ?>>Repeat</option>
-								<option value="repeat-x" <?php selected( $this->get_field_value( 'repeat' ), 'repeat-x' ); ?>>Repeat Horizontally</option>
-								<option value="repeat-y" <?php selected( $this->get_field_value( 'repeat' ), 'repeat-y' ); ?>>Repeat Vertically</option>
-								<option value="inherit" <?php selected( $this->get_field_value( 'repeat' ), 'inherit' ); ?>>Inherit</option>
-							</select>
-						</div>
-						<div class="xts-col-lg-6 xts-col-12">
-							<select class="xts-bg-size" data-placeholder="<?php esc_attr_e( 'Background size', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'size' ) ); ?>">
-								<option value=""></option>
-								<option value="cover" <?php selected( $this->get_field_value( 'size' ), 'cover' ); ?>>Cover</option>
-								<option value="contain" <?php selected( $this->get_field_value( 'size' ), 'contain' ); ?>>Contain</option>
-								<option value="inherit" <?php selected( $this->get_field_value( 'size' ), 'inherit' ); ?>>Inherit</option>
-							</select>
-						</div>
-						<div class="xts-col-lg-6 xts-col-12">
-							<select class="xts-bg-attachment" data-placeholder="<?php esc_attr_e( 'Background attachment', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'attachment' ) ); ?>">
-								<option value=""></option>
-								<option value="fixed" <?php selected( $this->get_field_value( 'attachment' ), 'fixed' ); ?>>Fixed</option>
-								<option value="scroll" <?php selected( $this->get_field_value( 'attachment' ), 'scroll' ); ?>>Scroll</option>
-								<option value="inherit" <?php selected( $this->get_field_value( 'attachment' ), 'inherit' ); ?>>Inherit</option>
-							</select>
-						</div>
-						<div class="xts-col-lg-6 xts-col-12">
-							<select class="xts-bg-position" data-placeholder="<?php esc_attr_e( 'Background position', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'position' ) ); ?>">
-								<option value=""></option>
-								<option value="left top" <?php selected( $this->get_field_value( 'position' ), 'left top' ); ?>>Left Top</option>
-								<option value="left center" <?php selected( $this->get_field_value( 'position' ), 'left center' ); ?>>Left Center</option>
-								<option value="left bottom" <?php selected( $this->get_field_value( 'position' ), 'left bottom' ); ?>>Left Bottom</option>
-								<option value="center top" <?php selected( $this->get_field_value( 'position' ), 'center top' ); ?>>Center Top</option>
-								<option value="center center" <?php selected( $this->get_field_value( 'position' ), 'center center' ); ?>>Center Center</option>
-								<option value="center bottom" <?php selected( $this->get_field_value( 'position' ), 'center bottom' ); ?>>Center Bottom</option>
-								<option value="right top" <?php selected( $this->get_field_value( 'position' ), 'right top' ); ?>>Right Top</option>
-								<option value="right center" <?php selected( $this->get_field_value( 'position' ), 'right center' ); ?>>Right Center</option>
-								<option value="right bottom" <?php selected( $this->get_field_value( 'position' ), 'right bottom' ); ?>>Right Bottom</option>
-							</select>
-						</div>
+						<?php if ( ! empty( $options['image_size'] ) ) : ?>
+							<div class="xts-col-12">
+								<div class="xts-row xts-sp-10">
+									<div class="xts-col-12">
+										<?php $image_size = $this->get_field_value( 'image_size' ) ? $this->get_field_value( 'image_size' ) : 'full'; ?>
+										<select class="xts-image-size" data-placeholder="<?php esc_attr_e( 'Image size', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'image_size' ) ); ?>">
+											<?php foreach ( $options['image_size'] as $key => $label ) : ?>
+												<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $image_size, $key ); ?>>
+													<?php echo esc_html( $label ); ?>
+												</option>
+											<?php endforeach; ?>
+										</select>
+									</div>
+									<div class="xts-col-lg-6 xts-col-12<?php echo 'custom' !== $this->get_field_value( 'image_size' ) ? ' xts-hidden' : ''; ?>">
+										<input type="number" name="<?php echo esc_attr( $this->get_input_name( 'image_size_custom_width' ) ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'image_size_custom_width' ) ); ?>" placeholder="<?php esc_attr_e( 'Width', 'woodmart' ); ?>" class="xts-image-size-custom" />
+									</div>
+									<div class="xts-col-lg-6 xts-col-12<?php echo 'custom' !== $this->get_field_value( 'image_size' ) ? ' xts-hidden' : ''; ?>">
+										<input type="number" name="<?php echo esc_attr( $this->get_input_name( 'image_size_custom_height' ) ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'image_size_custom_height' ) ); ?>" placeholder="<?php esc_attr_e( 'Height', 'woodmart' ); ?>" class="xts-image-size-custom" />
+									</div>
+								</div>
+							</div>
+						<?php endif; ?>
+						<?php if ( ! empty( $options['repeat'] ) ) : ?>
+							<div class="xts-col-lg-6 xts-col-12">
+								<select class="xts-bg-repeat" data-placeholder="<?php esc_attr_e( 'Background repeat', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'repeat' ) ); ?>">
+									<?php foreach ( $options['repeat'] as $key => $label ) : ?>
+										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $this->get_field_value( 'repeat' ), $key ); ?>>
+											<?php echo esc_html( $label ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endif; ?>
+						<?php if ( ! empty( $options['size'] ) ) : ?>
+							<div class="xts-col-lg-6 xts-col-12">
+								<select class="xts-bg-size" data-placeholder="<?php esc_attr_e( 'Background size', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'size' ) ); ?>">
+									<?php foreach ( $options['size'] as $key => $label ) : ?>
+										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $this->get_field_value( 'size' ), $key ); ?>>
+											<?php echo esc_html( $label ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endif; ?>
+						<?php if ( ! empty( $options['attachment'] ) ) : ?>
+							<div class="xts-col-lg-6 xts-col-12">
+								<select class="xts-bg-attachment" data-placeholder="<?php esc_attr_e( 'Background attachment', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'attachment' ) ); ?>">
+									<?php foreach ( $options['attachment'] as $key => $label ) : ?>
+										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $this->get_field_value( 'attachment' ), $key ); ?>>
+											<?php echo esc_html( $label ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endif; ?>
+						<?php if ( ! empty( $options['position'] ) ) : ?>
+							<div class="xts-col-lg-6 xts-col-12">
+								<select class="xts-bg-position" data-placeholder="<?php esc_attr_e( 'Background position', 'woodmart' ); ?>" name="<?php echo esc_attr( $this->get_input_name( 'position' ) ); ?>">
+									<?php foreach ( $options['position'] as $key => $label ) : ?>
+										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $this->get_field_value( 'position' ), $key ); ?>>
+											<?php echo esc_html( $label ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 				<div class="xts-col-xl-6 xts-col-12">
@@ -151,30 +220,70 @@ class Background extends Field {
 			return array();
 		}
 
+		if ( ! empty( $this->args['requires'] ) ) {
+			foreach ( $this->args['requires'] as $require ) {
+				if ( isset( $this->options[ $require['key'] ] ) ) {
+					if ( 'equals' === $require['compare'] && ( ( is_array( $require['value'] ) && ! in_array( $this->options[ $require['key'] ], $require['value'], true ) ) || ( ! is_array( $require['value'] ) && $this->options[ $require['key'] ] !== $require['value'] ) ) ) {
+						return array();
+					} elseif ( 'not_equals' === $require['compare'] && ( ( is_array( $require['value'] ) && in_array( $this->options[ $require['key'] ], $require['value'], true ) ) || ( ! is_array( $require['value'] ) && $this->options[ $require['key'] ] === $require['value'] ) ) ) {
+						return array();
+					}
+				}
+			}
+		}
+
 		$device = ! empty( $this->args['css_device'] ) ? $this->args['css_device'] : 'desktop';
 		$value  = $this->get_field_value();
 
+		$css_rules = array_merge(
+			array(
+				'color'      => 'background-color',
+				'image'      => 'background-image',
+				'repeat'     => 'background-repeat',
+				'size'       => 'background-size',
+				'attachment' => 'background-attachment',
+				'position'   => 'background-position',
+			),
+			! empty( $this->args['css_rules'] ) ? $this->args['css_rules'] : array()
+		);
+
 		$output = array();
 
-		if ( ! empty( $value['color'] ) ) {
-			$output[] = 'background-color: ' . $value['color'] . ';' . "\n";
+		if ( $css_rules['color'] && ! empty( $value['color'] ) ) {
+			$output[] = $css_rules['color'] . ': ' . $value['color'] . ';' . "\n";
 		}
-		if ( ! empty( $value['url'] ) ) {
-			$output[] = 'background-image: url(' . $value['url'] . ');' . "\n";
-		} else {
-			$output[] = 'background-image: none;' . "\n";
+
+		if ( $css_rules['image'] ) {
+			if ( ! empty( $value['id'] ) ) {
+				$image_size = ! empty( $value['image_size'] ) ? $value['image_size'] : 'full';
+
+				if ( 'custom' === $image_size ) {
+					$image_size_width  = ! empty( $value['image_size_custom_width'] ) ? (int) $value['image_size_custom_width'] : 0;
+					$image_size_height = ! empty( $value['image_size_custom_height'] ) ? (int) $value['image_size_custom_height'] : 0;
+
+					if ( $image_size_width || $image_size_height ) {
+						$image_size = array( $image_size_width, $image_size_height );
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$output[] = $css_rules['image'] . ': url(' . woodmart_otf_get_image_url( $value['id'], $image_size ) . ');' . "\n";
+			} else {
+				$output[] = $css_rules['image'] . ': none;' . "\n";
+			}
 		}
-		if ( ! empty( $value['repeat'] ) ) {
-			$output[] = 'background-repeat: ' . $value['repeat'] . ';' . "\n";
+		if ( $css_rules['repeat'] && ! empty( $value['repeat'] ) ) {
+			$output[] = $css_rules['repeat'] . ': ' . $value['repeat'] . ';' . "\n";
 		}
-		if ( ! empty( $value['size'] ) ) {
-			$output[] = 'background-size: ' . $value['size'] . ';' . "\n";
+		if ( $css_rules['size'] && ! empty( $value['size'] ) ) {
+			$output[] = $css_rules['size'] . ': ' . $value['size'] . ';' . "\n";
 		}
-		if ( ! empty( $value['attachment'] ) ) {
-			$output[] = 'background-attachment: ' . $value['attachment'] . ';' . "\n";
+		if ( $css_rules['attachment'] && ! empty( $value['attachment'] ) ) {
+			$output[] = $css_rules['attachment'] . ': ' . $value['attachment'] . ';' . "\n";
 		}
-		if ( ! empty( $value['position'] ) ) {
-			$output[] = 'background-position: ' . $value['position'] . ';' . "\n";
+		if ( $css_rules['position'] && ! empty( $value['position'] ) ) {
+			$output[] = $css_rules['position'] . ': ' . $value['position'] . ';' . "\n";
 		}
 
 		return array(
@@ -182,25 +291,6 @@ class Background extends Field {
 				$this->args['selector'] => $output,
 			),
 		);
-	}
-
-	/**
-	 * Check value URl and ID fields.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  string or array $value Field value.
-	 */
-	public function validate( $value ) {
-		if ( isset( $value['id'] ) ) {
-			$attachment = wp_get_attachment_url( $value['id'] );
-
-			if ( $attachment ) {
-				$value['url'] = $attachment;
-			}
-		}
-
-		return $value;
 	}
 }
 

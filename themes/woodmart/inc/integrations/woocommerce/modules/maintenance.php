@@ -9,7 +9,7 @@ if ( ! function_exists( 'woodmart_maintenance_page' ) ) {
 	 * @return bool
 	 */
 	function woodmart_maintenance_page() {
-		if ( ! woodmart_get_opt( 'maintenance_mode' ) || is_user_logged_in() || ( woodmart_get_opt( 'maintenance_mode' ) && isset( $_GET[ woodmart_get_opt( 'maintenance_access_key' ) ] ) ) ) { //phpcs:ignore
+		if ( ! woodmart_get_opt( 'maintenance_mode' ) || ( is_user_logged_in() && current_user_can( 'edit_posts' ) ) || ( woodmart_get_opt( 'maintenance_mode' ) && isset( $_GET[ woodmart_get_opt( 'maintenance_access_key' ) ] ) ) ) { //phpcs:ignore
 			return false;
 		}
 
@@ -34,7 +34,7 @@ if ( ! function_exists( 'woodmart_is_maintenance_active' ) ) {
 		$maintenance_access_key = woodmart_get_opt( 'maintenance_access_key' );
 		$is_access_key          = ! empty( $maintenance_access_key ) && isset( $_GET[ $maintenance_access_key ] ); //phpcs:ignore;
 
-		if ( ! $maintenance_mode || is_user_logged_in() || $is_access_key || ! woodmart_pages_ids_from_template( 'maintenance' ) ) {
+		if ( ! $maintenance_mode || ( is_user_logged_in() && current_user_can( 'edit_posts' ) ) || $is_access_key || ! woodmart_pages_ids_from_template( 'maintenance' ) ) {
 			return false;
 		}
 
@@ -61,7 +61,7 @@ if ( ! function_exists( 'woodmart_maintenance_mode' ) ) {
 			return;
 		}
 
-		if ( ! is_page( $page_id ) && ! is_user_logged_in() ) {
+		if ( ! is_page( $page_id ) && ( ! is_user_logged_in() || ! current_user_can( 'edit_posts' ) ) ) {
 			wp_redirect( get_permalink( $page_id ) );
 			exit();
 		}

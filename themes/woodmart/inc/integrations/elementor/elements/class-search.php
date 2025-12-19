@@ -109,14 +109,17 @@ class Search extends Widget_Base {
 
 		$this->add_control(
 			'price',
-			[
+			array(
 				'label'        => esc_html__( 'Show price', 'woodmart' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => '1',
 				'label_on'     => esc_html__( 'Yes', 'woodmart' ),
 				'label_off'    => esc_html__( 'No', 'woodmart' ),
 				'return_value' => '1',
-			]
+				'condition'    => array(
+					'search_post_type' => array( 'product' ),
+				),
+			)
 		);
 
 		$this->add_control(
@@ -140,7 +143,25 @@ class Search extends Widget_Base {
 				'label_on'     => esc_html__( 'Yes', 'woodmart' ),
 				'label_off'    => esc_html__( 'No', 'woodmart' ),
 				'return_value' => '1',
+				'condition'    => array(
+					'search_post_type' => array( 'product' ),
+				),
 			]
+		);
+
+		$this->add_control(
+			'include_cat_search',
+			array(
+				'label'        => esc_html__( 'Include categories in search', 'woodmart' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '0',
+				'label_on'     => esc_html__( 'Yes', 'woodmart' ),
+				'label_off'    => esc_html__( 'No', 'woodmart' ),
+				'return_value' => '1',
+				'condition'    => array(
+					'search_post_type' => array( 'product' ),
+				),
+			)
 		);
 
 		$this->end_controls_section();
@@ -306,13 +327,14 @@ class Search extends Widget_Base {
 
 		$this->start_controls_section(
 			'category_style_section',
-			[
+			array(
 				'label'     => esc_html__( 'Category', 'woodmart' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'category' => '1',
-				],
-			]
+				'condition' => array(
+					'category'         => '1',
+					'search_post_type' => array( 'product' ),
+				),
+			)
 		);
 
 		$this->add_control(
@@ -347,6 +369,7 @@ class Search extends Widget_Base {
 			'price'                 => 1,
 			'thumbnail'             => 1,
 			'category'              => 1,
+			'include_cat_search'    => 0,
 			'search_post_type'      => 'product',
 			'woodmart_color_scheme' => 'dark',
 			'form_style'            => 'default',
@@ -374,6 +397,7 @@ class Search extends Widget_Base {
 			woodmart_search_form(
 				array(
 					'ajax'               => true,
+					'include_cat_search' => $settings['include_cat_search'],
 					'post_type'          => $settings['search_post_type'],
 					'count'              => $settings['number'],
 					'thumbnail'          => $settings['thumbnail'],

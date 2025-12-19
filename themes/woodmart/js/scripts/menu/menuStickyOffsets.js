@@ -20,6 +20,12 @@
 					}
 
 					setOffset($menuItem);
+
+					if ($menuItem.find('> .wd-dropdown').length) {
+						$menuItem.find('.menu-item.menu-item-has-children').each(function() {
+							setOffset($(this));
+						});
+					}
 				});
 
 				$menu.addClass('wd-offsets-calculated');
@@ -35,7 +41,7 @@
 			}
 
 			var setOffset = function(li) {
-				var $dropdown = li.find(' > .wd-dropdown-menu');
+				var $dropdown = li.find(' > .wd-dropdown');
 				var dropdownHeight = $dropdown.innerHeight();
 				var dropdownOffset = $dropdown.offset().top - woodmartThemeModule.$window.scrollTop();
 				var viewportHeight = woodmartThemeModule.$window.height();
@@ -69,14 +75,15 @@
 			sideOpened( $(this) );
 		});
 
-		woodmartThemeModule.$document.on('click', '.wd-close-side.wd-location-sticky-nav', function() {
+		woodmartThemeModule.$document.on('click touchstart', '.wd-close-side.wd-location-sticky-nav', function() {
 			closeSide();
 		});
 
 		function sideOpened( $stickyNavBtn, addMouseoutEvent = true ) {
 			$stickyNavBtn.addClass('wd-opened');
 			$stickyNav.addClass('wd-opened');
-			$side.addClass('wd-close-side-opened').addClass('wd-location-sticky-nav');
+
+			$side.trigger('wdCloseSideAction', ['show', 'click', 'wd-location-sticky-nav']);
 
 			if ( ! addMouseoutEvent ) {
 				return;
@@ -92,7 +99,8 @@
 		function closeSide() {
 			$('.wd-header-sticky-nav').removeClass('wd-opened');
 			$stickyNav.removeClass('wd-opened');
-			$side.removeClass('wd-close-side-opened').removeClass('wd-location-sticky-nav');
+
+			$side.trigger('wdCloseSideAction', ['hide', 'click', 'wd-location-sticky-nav']);
 		}
 	};
 

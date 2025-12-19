@@ -18,6 +18,7 @@ if( ! function_exists( 'woodmart_ajax_search' ) ) {
 				'price'                 => 1,
 				'thumbnail'             => 1,
 				'category'              => 1,
+				'include_cat_search'    => 0,
 				'search_post_type'      => 'product',
 				'woodmart_color_scheme' => 'dark',
 				'el_class'              => '',
@@ -40,6 +41,7 @@ if( ! function_exists( 'woodmart_ajax_search' ) ) {
 					woodmart_search_form(
 						array(
 							'ajax'               => true,
+							'include_cat_search' => $atts['include_cat_search'],
 							'post_type'          => $atts['search_post_type'],
 							'count'              => $atts['number'],
 							'thumbnail'          => $atts['thumbnail'],

@@ -45,11 +45,13 @@
 		});
 
 		var closeWidget = function() {
+			loginFormSide.trigger('wdCloseSide');
 			loginFormSide.removeClass('wd-opened');
 			closeSide.removeClass('wd-close-side-opened');
 		};
 
 		var openWidget = function() {
+			loginFormSide.trigger('wdOpenSide');
 			loginFormSide.find('form').removeClass('hidden-form');
 			loginFormSide.addClass('wd-opened');
 			closeSide.addClass('wd-close-side-opened');

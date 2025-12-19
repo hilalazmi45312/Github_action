@@ -71,6 +71,14 @@ if ( ! function_exists( 'woodmart_elementor_products_tabs_template' ) ) {
 		$title_classes   = '';
 		$wd_nav_classes  = '';
 
+		$tabs_title_bg_activated      = $settings['tabs_title_bg_color_enable'] || $settings['tabs_title_bg_hover_color_enable'] || $settings['tabs_title_bg_active_color_enable'];
+		$tabs_title_box_shadow_active = $settings['tabs_title_box_shadow_enable'] || $settings['tabs_title_box_shadow_hover_enable'] || $settings['tabs_title_box_shadow_active_enable'];
+		$tabs_title_border_active     = $settings['tabs_title_border_enable'] || $settings['tabs_title_border_hover_enable'] || $settings['tabs_title_border_active_enable'];
+
+		if ( $tabs_title_bg_activated || $tabs_title_box_shadow_active || $tabs_title_border_active ) {
+			$wd_nav_classes .= ' wd-add-pd';
+		}
+
 		// Title classes.
 		if ( woodmart_elementor_is_edit_mode() ) {
 			$title_classes .= ' elementor-inline-editing';
@@ -78,7 +86,10 @@ if ( ! function_exists( 'woodmart_elementor_products_tabs_template' ) ) {
 
 		// Header classes.
 		$settings['alignment'] = $settings['alignment'] ? $settings['alignment'] : 'center';
-		$header_classes .= ' text-' . $settings['alignment'];
+
+		if ( 'default' === $settings['design'] ) {
+			$header_classes .= ' text-' . $settings['alignment'];
+		}
 
 		// Wrapper classes.
 		$wrapper_classes .= ' tabs-design-' . $settings['design'];
@@ -88,8 +99,6 @@ if ( ! function_exists( 'woodmart_elementor_products_tabs_template' ) ) {
 		}
 
 		if ( 'simple' === $settings['design'] ) {
-			$settings['tabs_style'] = 'default';
-
 			if ( 'grid' === $settings['layout'] && empty( $settings['pagination_arrows_position'] ) ) {
 				$settings['pagination_arrows_position'] = 'together';
 			} elseif ( 'carousel' === $settings['layout'] && empty( $settings['carousel_arrows_position'] ) ) {
@@ -128,7 +137,7 @@ if ( ! function_exists( 'woodmart_elementor_products_tabs_template' ) ) {
 		}
 
 		$nav_tabs_wrapper_classes = '';
-		if ( 'inherit' !== $settings['title_text_color_scheme'] && 'custom' !== $settings['title_text_color_scheme'] ) {
+		if ( 'inherit' !== $settings['title_text_color_scheme'] ) {
 			$nav_tabs_wrapper_classes .= ' color-scheme-' . $settings['title_text_color_scheme'];
 		}
 
@@ -215,7 +224,7 @@ if ( ! function_exists( 'woodmart_elementor_products_tabs_template' ) ) {
 				</div>
 			</div>
 
-			<?php if ( isset( $settings['tabs_items'][0] ) ) : ?>
+			<?php if ( isset( $settings['tabs_items'][0] ) && is_array( $settings['tabs_items'][0] ) ) : ?>
 				<?php echo woodmart_elementor_products_tab_template( $settings + $settings['tabs_items'][0] ); ?>
 			<?php endif; ?>
 		</div>

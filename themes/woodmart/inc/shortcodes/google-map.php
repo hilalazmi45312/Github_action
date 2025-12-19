@@ -212,7 +212,7 @@ if ( ! function_exists( 'woodmart_shortcode_google_map' ) ) {
 		woodmart_enqueue_inline_style( 'el-google-map' );
 
 		?>
-			<div class="google-map-container wd-map-container <?php echo esc_attr( $el_class ); ?>" style="<?php echo esc_attr( $style_attr ); ?>" data-map-args='<?php echo wp_json_encode( $map_args ); ?>'>
+			<div class="google-map-container wd-map-container <?php echo esc_attr( $el_class ); ?>" style="<?php echo esc_attr( $style_attr ); ?>" data-map-args='<?php echo esc_attr( wp_json_encode( $map_args ) ); ?>'>
 				<?php if ( 'page_load' !== $init_type && $placeholder ) : ?>
 					<div class="wd-map-placeholder wd-fill">
 						<?php echo $placeholder; // phpcs:ignore. ?>

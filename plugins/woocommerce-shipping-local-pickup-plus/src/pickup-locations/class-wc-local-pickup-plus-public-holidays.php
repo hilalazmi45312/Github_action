@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup Location holidays calendar.
@@ -453,7 +453,7 @@ class WC_Local_Pickup_Plus_Public_Holidays {
 		<div class="wc-local-pickup-plus-field wc-local-pickup-plus-public-holidays-field">
 
 			<div class="calendar">
-				<?php echo $this->get_calendar_table_html( $calendar_dates ); ?>
+				<?php echo $this->get_calendar_table_html( $calendar_dates ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 
 			<div class="dates">
@@ -469,7 +469,7 @@ class WC_Local_Pickup_Plus_Public_Holidays {
 						<?php $value = date( 'n-j', $time ); ?>
 						<?php $label = date_i18n( $format, $time ); ?>
 						<option
-							value="<?php echo $value; ?>"
+							value="<?php echo esc_attr( $value ); ?>"
 							<?php selected( in_array( $value, $calendar_dates, true ), true, true  );
 							?>><?php echo esc_html( $label ); ?></option>
 					<?php endfor; ?>
@@ -493,7 +493,7 @@ class WC_Local_Pickup_Plus_Public_Holidays {
 	 */
 	public function output_field_html( array $args ) {
 
-		echo $this->get_field_html( $args );
+		echo $this->get_field_html( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 

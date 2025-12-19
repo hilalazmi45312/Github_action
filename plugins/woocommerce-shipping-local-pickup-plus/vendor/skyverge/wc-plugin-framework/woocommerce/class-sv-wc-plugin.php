@@ -18,17 +18,22 @@
  *
  * @package   SkyVerge/WooCommerce/Plugin/Classes
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2013-2024, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_12;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_12;
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\Handlers\Country_Helper;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\Payment_Gateway\PaymentFormContextChecker;
+use stdClass;
+use Throwable;
+use WC_Logger_Interface;
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_Plugin' ) ) :
+if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\SV_WC_Plugin' ) ) :
 
 
 /**
@@ -41,11 +46,12 @@ if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_
  *
  * @version 5.8.0
  */
+#[\AllowDynamicProperties]
 abstract class SV_WC_Plugin {
 
 
 	/** Plugin Framework Version */
-	const VERSION = '5.11.11';
+	public const VERSION = '5.15.12';
 
 	/** @var object single instance of plugin */
 	protected static $instance;
@@ -65,8 +71,8 @@ abstract class SV_WC_Plugin {
 	/** @var string template path, without trailing slash */
 	private $template_path;
 
-	/** @var \WC_Logger instance */
-	private $logger;
+	/** @var WC_Logger_Interface|null instance */
+	private ?WC_Logger_Interface $logger = null;
 
 	/** @var  SV_WP_Admin_Message_Handler instance */
 	private $message_handler;
@@ -134,7 +140,7 @@ abstract class SV_WC_Plugin {
 		$this->id      = $id;
 		$this->version = $version;
 
-		$args = wp_parse_args( $args, [
+		$args = wp_parse_args( $this->maybeHandleBackwardsCompatibleArgs($args), [
 			'text_domain'        => '',
 			'dependencies'       => [],
 			'supported_features' => [
@@ -173,11 +179,32 @@ abstract class SV_WC_Plugin {
 		// build the blocks handler instance
 		$this->init_blocks_handler();
 
-		// build the setup handler instance
-		$this->init_setup_wizard_handler();
-
 		// add the action & filter hooks
 		$this->add_hooks();
+	}
+
+	/**
+	 * Provides backward compatibility for arguments, where we can. This handles any format changes in the $args array.
+	 *
+	 * @param array $args
+	 * @return array
+	 */
+	protected function maybeHandleBackwardsCompatibleArgs(array $args): array
+	{
+		// handle format change for HPOS declaration
+		if (array_key_exists('supports_hpos', $args)) {
+			// make sure `supported_features` initialized
+			if (! array_key_exists('supported_features', $args)) {
+				$args['supported_features'] = [];
+			}
+
+			// Assign `supported_features.hpos` value if not already assigned
+			$args['supported_features']['hpos'] = $args['supported_features']['hpos'] ?? $args['supports_hpos'];
+
+			unset($args['supports_hpos']);
+		}
+
+		return $args;
 	}
 
 
@@ -235,10 +262,11 @@ abstract class SV_WC_Plugin {
 	 * Plugins can override this with their own handler.
 	 *
 	 * @since 5.2.0
+	 * @since 5.15.7 The full `SV_WC_Plugin` instance is now used to instantiate `SV_WC_Hook_Deprecator`.
 	 */
 	protected function init_hook_deprecator() {
 
-		$this->hook_deprecator = new SV_WC_Hook_Deprecator( $this->get_plugin_name(), array_merge( $this->get_framework_deprecated_hooks(), $this->get_deprecated_hooks() ) );
+		$this->hook_deprecator = new SV_WC_Hook_Deprecator( $this, array_merge( $this->get_framework_deprecated_hooks(), $this->get_deprecated_hooks() ) );
 	}
 
 
@@ -278,8 +306,6 @@ abstract class SV_WC_Plugin {
 	 */
 	protected function init_blocks_handler() : void {
 
-		require_once( $this->get_framework_path() . '/Blocks/Blocks_Handler.php' );
-
 		// individual plugins should initialize their block integrations handler by overriding this method
 		$this->blocks_handler = new Blocks\Blocks_Handler( $this );
 	}
@@ -291,10 +317,12 @@ abstract class SV_WC_Plugin {
 	 * Plugins can override and extend this method to add their own setup wizard.
 	 *
 	 * @since 5.3.0
+	 *
+	 * @deprecated
 	 */
 	protected function init_setup_wizard_handler() {
 
-		require_once( $this->get_framework_path() . '/admin/abstract-sv-wc-plugin-admin-setup-wizard.php' );
+		// np-op
 	}
 
 
@@ -442,63 +470,38 @@ abstract class SV_WC_Plugin {
 	 * Include any critical files which must be available as early as possible,
 	 *
 	 * @since 2.0.0
+	 *
+	 * @deprecated class files are loaded via composer
 	 */
 	private function includes() {
 
-		$framework_path = $this->get_framework_path();
+		$this->setupClassAliases();
+	}
 
-		// common exception class
-		require_once(  $framework_path . '/class-sv-wc-plugin-exception.php' );
+	/**
+	 * Setup aliases for classes that got renamed, moved, or namespace changed.
+	 *
+	 * @since 5.13.1
+	 *
+	 * @return void
+	 */
+	protected function setupClassAliases() : void
+	{
+		$countryHelperAlias = '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\Country_Helper';
+		if (! class_exists($countryHelperAlias)) {
+			class_alias(
+				Country_Helper::class,
+				$countryHelperAlias
+			);
+		}
 
-		// addresses
-		require_once(  $framework_path . '/Addresses/Address.php' );
-		require_once(  $framework_path . '/Addresses/Customer_Address.php' );
-
-		// Settings API
-		require_once( $framework_path . '/Settings_API/Abstract_Settings.php' );
-		require_once( $framework_path . '/Settings_API/Setting.php' );
-		require_once( $framework_path . '/Settings_API/Control.php' );
-
-		// common utility methods
-		require_once( $framework_path . '/class-sv-wc-helper.php' );
-		require_once( $framework_path . '/Country_Helper.php' );
-		require_once( $framework_path . '/admin/Notes_Helper.php' );
-
-		// backwards compatibility for older WC versions
-		require_once( $framework_path . '/class-sv-wc-plugin-compatibility.php' );
-		require_once( $framework_path . '/compatibility/abstract-sv-wc-data-compatibility.php' );
-		require_once( $framework_path . '/compatibility/class-sv-wc-order-compatibility.php' );
-		require_once( $framework_path . '/compatibility/class-sv-wc-subscription-compatibility.php' );
-
-		// generic API base
-		require_once( $framework_path . '/api/class-sv-wc-api-exception.php' );
-		require_once( $framework_path . '/api/class-sv-wc-api-base.php' );
-		require_once( $framework_path . '/api/interface-sv-wc-api-request.php' );
-		require_once( $framework_path . '/api/interface-sv-wc-api-response.php' );
-
-		// XML API base
-		require_once( $framework_path . '/api/abstract-sv-wc-api-xml-request.php' );
-		require_once( $framework_path . '/api/abstract-sv-wc-api-xml-response.php' );
-
-		// JSON API base
-		require_once( $framework_path . '/api/abstract-sv-wc-api-json-request.php' );
-		require_once( $framework_path . '/api/abstract-sv-wc-api-json-response.php' );
-
-		// Cacheable API
-		require_once( $framework_path . '/api/traits/Cacheable_Request_Trait.php' );
-		require_once( $framework_path . '/api/Abstract_Cacheable_API_Base.php' );
-
-		// REST API Controllers
-		require_once( $framework_path . '/rest-api/Controllers/Settings.php' );
-
-		// Handlers
-		require_once( $framework_path . '/Handlers/Script_Handler.php' );
-		require_once( $framework_path . '/class-sv-wc-plugin-dependencies.php' );
-		require_once( $framework_path . '/class-sv-wc-hook-deprecator.php' );
-		require_once( $framework_path . '/class-sv-wp-admin-message-handler.php' );
-		require_once( $framework_path . '/class-sv-wc-admin-notice-handler.php' );
-		require_once( $framework_path . '/Lifecycle.php' );
-		require_once( $framework_path . '/rest-api/class-sv-wc-plugin-rest-api.php' );
+		$paymentFormContextCheckerAlias = '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\PaymentFormContextChecker';
+		if (! class_exists($paymentFormContextCheckerAlias)) {
+			class_alias(
+				PaymentFormContextChecker::class,
+				$paymentFormContextCheckerAlias
+			);
+		}
 	}
 
 
@@ -534,7 +537,7 @@ abstract class SV_WC_Plugin {
 			$deprecated_hooks[ $deprecated_filter ] = [
 				'removed'     => true,
 				'replacement' => false,
-				'version'     => '5.8.1'
+				'version'     => '5.8.1',
 			];
 		}
 
@@ -583,11 +586,10 @@ abstract class SV_WC_Plugin {
 	/**
 	 * Adds admin notices upon initialization.
 	 *
-	 * @internal
-	 *
 	 * @since 3.0.0
 	 */
 	public function add_admin_notices() {
+
 		// stub method
 	}
 
@@ -645,12 +647,14 @@ abstract class SV_WC_Plugin {
 	 * Declares HPOS compatibility if the plugin is compatible with HPOS.
 	 *
 	 * @internal
+	 *
+	 * @since 5.11.0
 	 * @deprecated since 5.11.11
 	 * @see SV_WC_Plugin::handle_features_compatibility()
 	 *
-	 * @since 5.11.0
+	 * @return void
 	 */
-	public function handle_hpos_compatibility() {
+	public function handle_hpos_compatibility() : void {
 
 		wc_deprecated_function( 'SV_WC_Plugin::handle_hpos_compatibility', '5.11.11', 'SV_WC_Plugin::handle_features_compatibility' );
 
@@ -663,7 +667,9 @@ abstract class SV_WC_Plugin {
 	 *
 	 * @internal
 	 *
-	 * @since 5.11.11
+	 * @since 5.12.0
+	 *
+	 * @return void
 	 */
 	public function handle_features_compatibility() : void {
 
@@ -672,7 +678,7 @@ abstract class SV_WC_Plugin {
 		}
 
 		FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->get_plugin_file(), $this->is_hpos_compatible() );
-		FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->get_plugin_file(), $this->get_blocks_handler()->is_cart_block_compatible() && $this->get_blocks_handler()->is_checkout_block_compatible() );
+		FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->get_plugin_file(), $this->get_blocks_handler()->is_cart_block_compatible() || $this->get_blocks_handler()->is_checkout_block_compatible() );
 	}
 
 
@@ -694,35 +700,44 @@ abstract class SV_WC_Plugin {
 
 
 	/**
-	 * Log API requests/responses
+	 * Logs API requests/responses.
 	 *
 	 * @since 2.2.0
-	 * @param array $request request data, see SV_WC_API_Base::broadcast_request() for format
-	 * @param array $response response data
+	 *
+	 * @param array<mixed>|stdClass $request request data, see SV_WC_API_Base::broadcast_request() for format
+	 * @param array<mixed>|stdClass $response response data
 	 * @param string|null $log_id log to write data to
 	 */
-	public function log_api_request( $request, $response, $log_id = null ) {
+	public function log_api_request( $request, $response, ?string $log_id = null ) : void {
 
-		$this->log( "Request\n" . $this->get_api_log_message( $request ), $log_id );
+		if ( ! empty( $request ) ) {
+			$this->log( "Request\n" . $this->get_api_log_message( $request, 'request' ), $log_id );
+		}
 
 		if ( ! empty( $response ) ) {
-			$this->log( "Response\n" . $this->get_api_log_message( $response ), $log_id );
+			$this->log( "Response\n" . $this->get_api_log_message( $response, 'response' ), $log_id );
 		}
 	}
 
 
 	/**
-	 * Transform the API request/response data into a string suitable for logging
+	 * Transform the API request/response data into a string suitable for logging.
 	 *
 	 * @since 2.2.0
-	 * @param array $data
+	 *
+	 * @param array<string, mixed>|scalar $data
+	 * @param string|null $type optional type of data, either 'request' or 'response'
 	 * @return string
 	 */
-	public function get_api_log_message( $data ) {
+	public function get_api_log_message( $data, ?string $type = null ) : string {
 
-		$messages = array();
+		$messages = [];
 
-		$messages[] = isset( $data['uri'] ) && $data['uri'] ? 'Request' : 'Response';
+		if ( ! empty( $type ) )  {
+			$messages[] = ucfirst( $type );
+		} else {
+			$messages[] = isset( $data['uri'] ) && $data['uri'] ? 'Request' : 'Response';
+		}
 
 		foreach ( (array) $data as $key => $value ) {
 
@@ -799,13 +814,22 @@ abstract class SV_WC_Plugin {
 			$log_id = $this->get_id();
 		}
 
-		if ( ! is_object( $this->logger ) ) {
-			$this->logger = new \WC_Logger();
-		}
-
-		$this->logger->add( $log_id, $message );
+		$this->logger()->add( $log_id, $message );
 	}
 
+	protected function logger() : WC_Logger_Interface
+	{
+		return $this->logger ??= wc_get_logger();
+	}
+
+	public function assert($assertion) : void
+	{
+		try {
+			assert($assertion);
+		} catch (Throwable $exception) {
+			$this->logger()->debug('Assertion failed, backtrace summery: '.wp_debug_backtrace_summary());
+		}
+	}
 
 	/**
 	 * Require and instantiate a class
@@ -879,7 +903,7 @@ abstract class SV_WC_Plugin {
 
 
 	/**
-	 * Determines whether the plugin supports HPOS.
+	 * Determines if the plugin supports HPOS.
 	 *
 	 * @since 5.11.0
 	 *
@@ -887,7 +911,7 @@ abstract class SV_WC_Plugin {
 	 */
 	public function is_hpos_compatible() : bool {
 
-		return isset($this->supported_features['hpos'] )
+		return isset( $this->supported_features['hpos'] )
 			&& true === $this->supported_features['hpos']
 			&& SV_WC_Plugin_Compatibility::is_wc_version_gte( '7.6' );
 	}
@@ -1055,6 +1079,7 @@ abstract class SV_WC_Plugin {
 	 * Returns the plugin version name.  Defaults to wc_{plugin id}_version
 	 *
 	 * @since 2.0.0
+	 *
 	 * @return string the plugin version name
 	 */
 	public function get_plugin_version_name() {
@@ -1067,10 +1092,44 @@ abstract class SV_WC_Plugin {
 	 * Returns the current version of the plugin
 	 *
 	 * @since 2.0.0
+	 *
 	 * @return string plugin version
 	 */
 	public function get_version() {
+
 		return $this->version;
+	}
+
+
+	/**
+	 * Gets the plugin version to be used by any internal scripts.
+	 *
+	 * This normally returns the plugin version, but will return `time()` if debug is enabled, to burst assets caches.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @return string
+	 */
+	public function get_assets_version() : string {
+
+		if ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG || defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
+			return (string) time();
+		}
+
+		return $this->version;
+	}
+
+
+	/**
+	 * Gets the plugin's textdomain.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @return string
+	 */
+	public function get_textdomain() : string {
+
+		return $this->text_domain;
 	}
 
 
@@ -1385,8 +1444,6 @@ abstract class SV_WC_Plugin {
 
 		return $is_active;
 	}
-
-
 }
 
 

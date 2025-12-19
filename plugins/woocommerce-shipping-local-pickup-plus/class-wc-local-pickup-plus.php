@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Appointments\Appointments;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Frontend;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * WooCommerce Local Pickup Plus main class.
@@ -38,7 +38,7 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 
 
 	/** @var string plugin version */
-	public const VERSION = '2.11.7';
+	public const VERSION = '2.11.8';
 
 	/** shipping method ID */
 	public const SHIPPING_METHOD_ID = 'local_pickup_plus';
@@ -142,6 +142,9 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 
 		$plugin_path = $this->get_plugin_path();
 
+		// static class for custom post types handling
+		require_once( $plugin_path . '/src/class-wc-local-pickup-plus-post-types.php' );
+
 		// load helper functions
 		require_once( $plugin_path . '/src/functions/wc-local-pickup-plus-functions.php' );
 
@@ -151,8 +154,8 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 		// include the Shipping method class
 		require_once( $plugin_path . '/src/class-wc-shipping-local-pickup-plus.php' );
 
-		// geocoding API handler
-		$this->geocoding        = $this->load_class( '/src/api/class-wc-local-pickup-plus-geocoding-api.php', 'WC_Local_Pickup_Plus_Geocoding_API' );
+		// note: the Geocoding API handler is now loaded on demand in {@see static::get_geocoding_api_instance()}
+
 		// geolocation handler
 		$this->geolocation      = $this->load_class( '/src/class-wc-local-pickup-plus-geolocation.php', 'WC_Local_Pickup_Plus_Geolocation' );
 		// init session handler
@@ -199,12 +202,8 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 	 */
 	public function init_plugin() {
 
-		// static class for custom post types handling
-		require_once( $this->get_plugin_path() . '/src/class-wc-local-pickup-plus-post-types.php' );
-
-		\WC_Local_Pickup_Plus_Post_Types::init();
-
 		$this->includes();
+		$this->addHooks();
 
 		// loads the local pickup plus class from the 'woocommerce_update_shipping_method' AJAX action early, which otherwise would not be loaded in time to update
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && ( ( isset( $_REQUEST['wc-ajax'] ) && 'update_order_review' === $_REQUEST['wc-ajax'] ) || ( isset( $_REQUEST['action' ] ) && 'woocommerce_update_shipping_method' === $_REQUEST['action'] ) ) ) {
@@ -216,6 +215,11 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 				self::$ajax_loaded = true;
 			}
 		}
+	}
+
+	public function addHooks() : void
+	{
+		add_action('init', [\WC_Local_Pickup_Plus_Post_Types::class, 'init']);
 	}
 
 
@@ -343,6 +347,9 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 	 * @return \WC_Local_Pickup_Plus_Geocoding_API
 	 */
 	public function get_geocoding_api_instance() {
+		if (! isset($this->geocoding)) {
+			$this->geocoding = $this->load_class('/src/api/class-wc-local-pickup-plus-geocoding-api.php', 'WC_Local_Pickup_Plus_Geocoding_API');
+		}
 
 		return $this->geocoding;
 	}
@@ -665,7 +672,12 @@ class WC_Local_Pickup_Plus extends Framework\SV_WC_Plugin {
 
 			foreach ( $lifecycle_handler->get_table_names() as $table_name ) {
 
-				if ( $table_name !== $wpdb->get_var( "SHOW TABLES LIKE '{$table_name}'" ) ) {
+				if ( $table_name !== $wpdb->get_var(
+					$wpdb->prepare(
+						"SHOW TABLES LIKE %s",
+						$wpdb->esc_like( $table_name )
+					)
+				) ) {
 
 					if ( true === $create ) {
 

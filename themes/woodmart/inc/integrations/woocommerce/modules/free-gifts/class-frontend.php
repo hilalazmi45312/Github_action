@@ -33,6 +33,10 @@ class Frontend extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'free_gifts_enabled', 0 ) || woodmart_get_opt( 'free_gifts_limit', 5 ) < 1 || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->manager = Manager::get_instance();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -155,25 +159,35 @@ class Frontend extends Singleton {
 	public function render_free_gifts_table( $settings = array() ) {
 		$manual_gifts_ids  = array();
 		$allowed_rules     = array();
+		$excluded_rules    = array();
 		$manual_gifts_rule = $this->manager->get_rules( 'manual' );
 
-		foreach ( WC()->cart->get_cart() as $cart ) {
-			if ( isset( $cart['wd_is_free_gift'] ) ) {
+		foreach ( WC()->cart->get_cart() as $cart_item ) {
+			if ( isset( $cart_item['wd_is_free_gift'] ) ) {
 				continue;
 			}
-
-			$product = $cart['data'];
 
 			foreach ( $manual_gifts_rule as $gift_rule_id => $gift_rule ) {
 				if ( empty( $gift_rule['free_gifts'] ) ) {
 					continue;
 				}
 
-				if ( ! in_array( $gift_rule_id, $allowed_rules, true ) && $this->manager->check_free_gifts_condition( $gift_rule, $product ) && $this->manager->check_free_gifts_totals( $gift_rule ) ) {
-					$manual_gifts_ids = array_merge( $manual_gifts_ids, $gift_rule['free_gifts'] );
-					$allowed_rules[]  = $gift_rule_id;
+				if ( ! empty( $gift_rule['free_gifts_strict_exclude_mode'] ) && ! in_array( $gift_rule_id, $excluded_rules, true ) && ! $this->manager->check_free_gifts_condition( $gift_rule, $cart_item['data'] ) ) {
+					$excluded_rules[] = $gift_rule_id;
+					continue;
+				}
+
+				if ( ! in_array( $gift_rule_id, $allowed_rules, true ) && $this->manager->check_free_gifts_condition( $gift_rule, $cart_item['data'] ) && $this->manager->check_free_gifts_totals( $gift_rule ) ) {
+					$allowed_rules[] = $gift_rule_id;
 				}
 			}
+		}
+
+		$allowed_rules = array_diff( $allowed_rules, $excluded_rules );
+
+		foreach ( $allowed_rules as $allowed_rule_id ) {
+			$gift_rule        = $this->manager->get_single_post_rules( $allowed_rule_id );
+			$manual_gifts_ids = array_merge( $manual_gifts_ids, $gift_rule['free_gifts'] );
 		}
 
 		$manual_gifts_ids = array_unique( $manual_gifts_ids );

@@ -624,6 +624,16 @@
                                         "value": true,
                                         "type": "switcher"
                                     },
+                                    "search_extra_content_enabled": {
+                                        "id": "search_extra_content_enabled",
+                                        "value": true,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content": {
+                                        "id": "search_extra_content",
+                                        "value": "",
+                                        "type": "options"
+                                    },
                                     "ajax": {
                                         "id": "ajax",
                                         "value": true,

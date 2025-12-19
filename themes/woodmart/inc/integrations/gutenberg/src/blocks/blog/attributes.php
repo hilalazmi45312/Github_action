@@ -8,6 +8,10 @@ if ( ! function_exists( 'wd_get_block_blog_attrs' ) ) {
 
 		$attr->add_attr(
 			array(
+				'show_title'           => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
 				'post_type'            => array(
 					'type'    => 'string',
 					'default' => 'post',
@@ -53,6 +57,9 @@ if ( ! function_exists( 'wd_get_block_blog_attrs' ) ) {
 					'type'       => 'string',
 					'default'    => '20',
 					'responsive' => true,
+				),
+				'blog_masonry'         => array(
+					'type' => 'boolean',
 				),
 				'parts_title'          => array(
 					'type'    => 'boolean',

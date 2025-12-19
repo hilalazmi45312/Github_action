@@ -116,7 +116,7 @@
 							woodmartThemeModule.$body.trigger('added_to_cart', [
 								response.fragments,
 								response.cart_hash,
-								''
+								jQuery()
 							]);
 						}
 					},

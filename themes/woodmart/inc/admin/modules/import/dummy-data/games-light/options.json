@@ -364,6 +364,7 @@
     "blog_design": "mask",
     "blog_columns": "3",
     "blog_spacing": "20",
+    "blog_archive_layout": "full-width",
     "quick_shop_variable": "0",
     "grid_swatches_attribute": "",
     "variation_gallery": "0",
@@ -463,5 +464,7 @@
     "full_search_content_type": "content",
     "full_search_content_html_block": "742",
     "ajax_fullscreen_content": "1",
-    "discord_link": "#"
+    "discord_link": "#",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

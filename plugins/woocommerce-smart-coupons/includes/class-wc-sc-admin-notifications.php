@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.0.0
- * @version     1.13.0
+ * @version     1.20.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -13,7 +13,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+use Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils;
 if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 
 	/**
@@ -53,6 +53,9 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 
 			add_action( 'admin_init', array( $this, 'dismiss_feature_notice' ) );
 
+			add_action( 'wp_ajax_sc_dismiss_notice', array( $this, 'wc_sc_dismiss_notice' ) );
+
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_dismissible_notice_script' ) );
 		}
 
 		/**
@@ -89,7 +92,6 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 			} else {
 				return call_user_func( array( $woocommerce_smart_coupon, $function_name ) );
 			}
-
 		}
 
 		/**
@@ -114,7 +116,6 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * Handle Smart Coupons review notice action
 		 */
 		public function wc_sc_review_notice_action() {
-
 			check_ajax_referer( 'wc-sc-review-notice-action', 'security' );
 
 			$post_do = ( ! empty( $_POST['do'] ) ) ? wc_clean( wp_unslash( $_POST['do'] ) ) : ''; // phpcs:ignore
@@ -127,27 +128,23 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 			update_option( 'wc_sc_is_show_review_notice', $option, 'no' );
 
 			wp_send_json( array( 'success' => 'yes' ) );
-
 		}
 
 		/**
 		 * Handle Smart Coupons version 4.0.0 notice action
 		 */
 		public function wc_sc_40_notice_action() {
-
 			check_ajax_referer( 'wc-sc-40-notice-action', 'security' );
 
 			update_option( 'wc_sc_is_show_40_notice', 'no', 'no' );
 
 			wp_send_json( array( 'success' => 'yes' ) );
-
 		}
 
 		/**
 		 * Show plugin review notice
 		 */
 		public function show_plugin_notice() {
-
 			global $pagenow, $post;
 
 			$valid_post_types      = array( 'shop_coupon', 'shop_order', 'product' );
@@ -255,7 +252,7 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 				<div class="updated fade error" style="background-color: #f0fff0;">
 					<p>
 						<?php
-						echo sprintf(
+						printf(
 							/* translators: 1: WooCommerce Smart Coupons 2: Link for the Smart Coupons settings */
 							esc_html__( '%1$s: You are using a custom coupon style which is planned to be removed from the plugin in upcoming versions. New, improved styles & colors are added in the version 4.9.0. We would request you to choose a color scheme & a style for coupon from the newly added colors & styles. You can do this from %2$s.', 'woocommerce-smart-coupons' ),
 							'<strong>' . esc_html__( 'WooCommerce Smart Coupons', 'woocommerce-smart-coupons' ) . '</strong>',
@@ -289,7 +286,7 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 					?>
 					<div id="wc_sc_import_error" class="notice notice-warning">
 						<?php /* translators: 1. Message type 2. Functionality name "Bulk Generate" 3. Functionality name "Import-Export" */ ?>
-						<p><?php echo sprintf( esc_html__( '%1$s: To ensure %2$s and %3$s work correctly, contact your system administrator or host provider to resolve below:', 'woocommerce-smart-coupons' ), '<strong>' . esc_html__( 'Important', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Bulk Generate', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Import-Export', 'woocommerce-smart-coupons' ) . '</strong>' ); ?></p>
+						<p><?php printf( esc_html__( '%1$s: To ensure %2$s and %3$s work correctly, contact your system administrator or host provider to resolve below:', 'woocommerce-smart-coupons' ), '<strong>' . esc_html__( 'Important', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Bulk Generate', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Import-Export', 'woocommerce-smart-coupons' ) . '</strong>' ); ?></p>
 						<ul>
 							<?php
 							foreach ( $messages as $message ) {
@@ -303,7 +300,6 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 					<?php
 				}
 			}
-
 		}
 
 		/**
@@ -313,12 +309,11 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * @return string $sc_rating_text
 		 */
 		public function wc_sc_footer_text( $sc_rating_text ) {
-
 			global $post, $pagenow;
 
 			if ( ! empty( $pagenow ) ) {
 				$get_post_type = ( ! empty( $post->ID ) ) ? $this->get_post_type( $post->ID ) : '';
-	  			$get_page      = ( ! empty( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
+				$get_page      = ( ! empty( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
 				$get_tab       = ( ! empty( $_GET['tab'] ) ) ? wc_clean( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore
 				$sc_pages      = array( 'wc-smart-coupons', 'sc-about', 'sc-faqs' );
 
@@ -336,7 +331,6 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 			}
 
 			return $sc_rating_text;
-
 		}
 
 		/**
@@ -346,13 +340,12 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * @return string $sc_text
 		 */
 		public function wc_sc_update_footer_text( $sc_text ) {
-
 			global $post, $pagenow;
 
 			if ( ! empty( $pagenow ) ) {
 				$get_post_type = ( ! empty( $post->ID ) ) ? $this->get_post_type( $post->ID ) : '';
-	  			$get_page      = ( ! empty( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
-	  			$get_tab       = ( ! empty( $_GET['tab'] ) ) ? wc_clean( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore
+				$get_page      = ( ! empty( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
+				$get_tab       = ( ! empty( $_GET['tab'] ) ) ? wc_clean( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore
 				$sc_pages      = array( 'wc-smart-coupons', 'sc-about', 'sc-faqs' );
 
 				if ( in_array( $get_page, $sc_pages, true ) || 'shop_coupon' === $get_post_type || 'wc-smart-coupons' === $get_tab ) {
@@ -362,7 +355,6 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 			}
 
 			return $sc_text;
-
 		}
 
 		/**
@@ -386,14 +378,14 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * @param string $message      Notice message.
 		 * @param string $action       Notice actions.
 		 * @param bool   $dismissible  Notice dismissible.
+		 * @param string $notice_key   Notice Key.
 		 * @return void.
 		 */
-		public static function show_notice( $type = 'info', $title = '', $message = '', $action = '', $dismissible = false ) {
+		public static function show_notice( $type = 'info', $title = '', $message = '', $action = '', $dismissible = false, $notice_key = '' ) {
 			$css_classes = array(
 				'notice',
 				'notice-' . $type,
 				'wc-sc-' . $type,
-
 			);
 			if ( true === $dismissible ) {
 				$css_classes[] = 'is-dismissible';
@@ -414,19 +406,24 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 
 			// Allow specific HTML tags.
 			$allowed_html = array(
-				'br' => array(),
-				'a'  => array(
+				'br'     => array(),
+				'a'      => array(
 					'href'   => array(),
 					'class'  => array(),
 					'target' => array(),
 				),
+				'strong' => array(),
 			);
 
 			?>
-			<div class="<?php echo esc_attr( implode( ' ', $css_classes ) ); ?>">
+			<div
+				class="<?php echo esc_attr( implode( ' ', $css_classes ) ); ?>"
+				id="<?php echo ! empty( $notice_key ) ? esc_attr( $notice_key ) : ''; ?>"
+				<?php echo ! empty( $notice_key ) ? 'data-notice-key="' . esc_attr( $notice_key ) . '"' : ''; ?>
+			>
 				<?php
 				if ( ! empty( $title ) ) {
-					printf( '<p><strong>%s</strong></p>', esc_html( $title ) );
+					printf( '<p>%s</p>', wp_kses_post( $title ) );
 				}
 				if ( ! empty( $message ) ) {
 					printf( '<p>%s</p>', wp_kses( $message, $allowed_html ) );
@@ -444,7 +441,7 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 */
 		public function admin_db_update_notices() {
 			if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
-				include_once 'class-wc-sc-background-upgrade.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-background-upgrade.php';
 			}
 
 			$wcsc_db       = WC_SC_Background_Upgrade::get_instance();
@@ -471,7 +468,7 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		public function db_update_pending_notice() {
 
 			if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
-				include_once 'class-wc-sc-background-upgrade.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-background-upgrade.php';
 			}
 
 			$wcsc_db = WC_SC_Background_Upgrade::get_instance();
@@ -532,7 +529,7 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 			$message = sprintf( __( '%s database update completed. Thank you for updating to the latest version!', 'woocommerce-smart-coupons' ), 'WooCommerce Smart Coupons' );
 			$this->show_notice( 'success', '', $message, '', true );
 			if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
-				include_once 'class-wc-sc-background-upgrade.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-background-upgrade.php';
 			}
 			if ( class_exists( 'WC_SC_Background_Upgrade' ) ) {
 				$wcsc_db        = WC_SC_Background_Upgrade::get_instance();
@@ -565,7 +562,7 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 			);
 
 			if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
-				include_once 'class-wc-sc-background-upgrade.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-background-upgrade.php';
 			}
 
 			$wcsc_db = WC_SC_Background_Upgrade::get_instance();
@@ -615,8 +612,9 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * @param string $message    Message content of the notice.
 		 * @param string $action_url URL for the action button.
 		 * @param string $action_text Text for the action button.
+		 * @param bool   $skip_link   Skip button should visible or not.
 		 */
-		public function show_feature_notice( $notice_key, $title, $message, $action_url, $action_text ) {
+		public function show_feature_notice( $notice_key, $title, $message, $action_url, $action_text, $skip_link = false ) {
 
 			// Check if the current screen is a WooCommerce admin page.
 			$screen = get_current_screen();
@@ -632,22 +630,27 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 				return; // Exit if notice has been dismissed.
 			}
 
-			// Create the action button HTML, linking to the specified URL.
-			$action_button = sprintf(
-				'<a href="%1$s" class="button button-primary">%2$s</a>',
-				esc_url( $action_url ), // Link to the action or settings.
-				esc_html( $action_text )
-			);
+			$action_button = '';
+			if ( ! empty( $action_text ) ) {
+				// Create the action button HTML, linking to the specified URL.
+				$action_button = sprintf(
+					'<a href="%1$s" class="button button-primary">%2$s</a>',
+					esc_url( $action_url ), // Link to the action or settings.
+					esc_html( $action_text )
+				);
+			}
 
-			// Create the skip link HTML to dismiss the notice.
-			$skip_link = sprintf(
-				'<a href="%s" class="button button-secondary" style="margin-left: 10px;">%s</a>',
-				esc_url( add_query_arg( 'sc_dismiss_notice', $notice_key ) ),
-				esc_html( _x( 'Skip', 'Button text for dismissing WooCommerce feature notice', 'woocommerce-smart-coupons' ) )
-			);
+			if ( $skip_link ) {
+				// Create the skip link HTML to dismiss the notice.
+				$skip_link = sprintf(
+					'<a href="%s" class="button button-secondary" style="margin-left: 10px;">%s</a>',
+					esc_url( add_query_arg( 'sc_dismiss_notice', $notice_key ) ),
+					esc_html( _x( 'Skip', 'Button text for dismissing WooCommerce feature notice', 'woocommerce-smart-coupons' ) )
+				);
+			}
 
 			// Display the info notice with message, action button, and skip link.
-			$this->show_notice( 'info', $title, $message, $action_button . $skip_link, true );
+			$this->show_notice( 'info', $title, $message, $action_button . $skip_link, true, $notice_key );
 		}
 
 		/**
@@ -658,7 +661,6 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * displaying again.
 		 */
 		public function dismiss_feature_notice() {
-
 			// Check if a dismiss request is present in the URL.
 			if ( isset( $_GET['sc_dismiss_notice'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
@@ -694,51 +696,87 @@ if ( ! class_exists( 'WC_SC_Admin_Notifications' ) ) {
 		 * @return void
 		 */
 		public function show_all_feature_notices() {
+			global $store_credit_label;
 
-			// Retrieve the email settings option for the coupon expiry reminder.
-			$email_settings = get_option( 'woocommerce_wc_sc_expiry_reminder_email_settings', array() );
+			$singular_store_credit_label = ! empty( $store_credit_label['singular'] ) ? ucwords( $store_credit_label['singular'] ) : __( 'Store Credit', 'woocommerce-smart-coupons' );
 
-			// Determine if the expiry reminder email feature is enabled.
-			$email_enabled = isset( $email_settings['enabled'] ) && 'yes' === $email_settings['enabled'];
-
-			// Display the Coupon Expiry Reminder notice if no reminder action is scheduled and the feature is disabled.
-			if ( empty( as_get_scheduled_actions( array( 'hook' => 'wc_sc_schedule_coupon_expiry_reminder' ), 'ids' ) ) && ! $email_enabled ) {
-				// remove this notice related code on 11 nov 2025. Discussed with Ratnakar Dubey.
-				$this->show_feature_notice(
-					'wc_sc_expiry_reminder_email_notice',
-					_x( '✨ New Feature Alert!', 'Title for the new feature admin notice', 'woocommerce-smart-coupons' ),
-					sprintf(
-						/* translators: %s: Plugin name, e.g., WooCommerce Smart Coupons */
-						_x(
-							'%s is excited to introduce the new Coupon Expiry Reminders! Now, you can automatically send reminder emails to your customers before their coupons expire. Ensure they never miss out on a discount by setting up reminders in the Smart Coupons - Expiry Reminder section.',
-							'Message for the new feature admin notice, introducing the coupon expiry reminder',
-							'woocommerce-smart-coupons'
-						),
-						'WooCommerce Smart Coupons'
-					),
-					admin_url( 'admin.php?page=wc-settings&tab=email&section=wc_sc_expiry_reminder_email' ),
-					_x( 'Set Up Now', 'Button text for setting up the expiry reminder feature', 'woocommerce-smart-coupons' )
-				);
+			// Ensure WEEK_IN_SECONDS is defined to avoid fatal error.
+			if ( ! defined( 'WEEK_IN_SECONDS' ) ) {
+				define( 'WEEK_IN_SECONDS', 7 * 24 * 60 * 60 );
 			}
 
-			// Combine Coupons feature notice.
-			$this->show_feature_notice(
-				'wc_sc_combine_coupons_notice',
-				_x( '✨ New Feature: 🤝 Combo Coupons!', 'Title for the combo coupons feature admin notice', 'woocommerce-smart-coupons' ),
-				sprintf(
-					/* translators: %s: Plugin name, e.g., WooCommerce Smart Coupons */
-					_x(
-						'Now control which coupons can or can’t be used together. With Combo Coupons, create smarter discount rules to stack or restrict coupon usage based on your strategy — right from the coupon settings.',
-						'Message for the combo coupons feature admin notice',
-						'woocommerce-smart-coupons'
-					),
-					'WooCommerce Smart Coupons'
-				),
-				admin_url( 'post-new.php?post_type=shop_coupon' ),
-				_x( 'Create a Combo Coupon', 'Button text for the combine coupon feature', 'woocommerce-smart-coupons' )
-			);
 		}
 
+		/**
+		 * Enqueue Inline script for the Dismissible notice.
+		 *
+		 * @return void
+		 */
+		public function enqueue_dismissible_notice_script() {
+			// TODO: Check if this can be disabled when on product edit page.
+			// Use an empty script handle just to attach inline JS.
+			wp_register_script( 'smart-coupons-dismissible-notice', '', array(), $this->get_smart_coupons_version(), true );
+			wp_enqueue_script( 'smart-coupons-dismissible-notice' );
+
+			$inline_js = <<<JS
+				document.addEventListener('DOMContentLoaded', function () {
+					const observer = new MutationObserver(() => {
+						const notices = document.querySelectorAll('.notice.is-dismissible[data-notice-key]');
+						notices.forEach(function (notice) {
+							const noticeKey = notice.getAttribute('data-notice-key');
+
+							// Skip if already handled.
+							if (notice.dataset.dismissBound === 'true') return;
+
+							const dismissBtn = notice.querySelector('.notice-dismiss');
+
+							if (!dismissBtn || !noticeKey) return;
+
+							dismissBtn.addEventListener('click', function () {
+								fetch(ajaxurl + '?action=sc_dismiss_notice&notice_key=' + encodeURIComponent(noticeKey), {
+									method: 'GET',
+									credentials: 'same-origin'
+								});
+							});
+
+							// Mark as bound.
+							notice.dataset.dismissBound = 'true';
+						});
+					});
+
+					observer.observe(document.body, { childList: true, subtree: true });
+				});
+JS;
+
+			wp_add_inline_script( 'smart-coupons-dismissible-notice', $inline_js );
+		}
+
+		/**
+		 * Handle Dismissable notice
+		 *
+		 * @return void
+		 */
+		public function wc_sc_dismiss_notice() {
+			if ( ! current_user_can( 'manage_woocommerce' ) ) {
+				wp_send_json_error();
+			}
+
+			$notice_key = sanitize_text_field( wp_unslash( $_GET['notice_key'] ) ?? '' ); //phpcs:disable
+			if ( empty( $notice_key ) ) {
+				wp_send_json_error();
+			}
+			if ( 'wc_sc_send_unused_coupon_reminder' === $notice_key ) {
+				delete_transient( 'wc_sc_send_unused_coupon_reminder_process_status' );
+			}else{
+				$dismissed = get_option( 'sc_dismissed_notices', array() );
+				if ( ! in_array( $notice_key, $dismissed, true ) ) {
+					$dismissed[] = $notice_key;
+					update_option( 'sc_dismissed_notices', $dismissed );
+				}
+			}
+
+			wp_send_json_success();
+		}
 	}
 
 }

@@ -27,7 +27,7 @@ if ( ! function_exists( 'gambit_otf_regen_thumbs_media_downsize' ) ) {
 	 * @return  mixed False if the custom downsize failed, or an array of the image if successful
 	 */
 	function gambit_otf_regen_thumbs_media_downsize( $out, $id, $size ) {
-		if ( isset( $_GET['action'] ) && 'woodmart_import_action' === $_GET['action'] ) {
+		if ( woodmart_is_import_demo_content() ) {
 			return $out;
 		}
 
@@ -91,11 +91,7 @@ if ( ! function_exists( 'gambit_otf_regen_thumbs_media_downsize' ) ) {
 
 		// check if img path exists, and is an image indeed
 		if ( ! @file_exists( $img_path ) || ! getimagesize( $img_path ) ) {
-			if ( ! isset( $imagedata['width'] ) || ! isset( $imagedata['height'] ) ) {
-				return $out;
-			}
-
-			return array( dirname( $att_url ), $imagedata['width'], $imagedata['height'], false );
+			return $out;
 		}
 
 		if ( is_string( $size )

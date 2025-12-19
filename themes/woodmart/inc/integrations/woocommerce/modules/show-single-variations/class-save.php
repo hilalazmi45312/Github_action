@@ -22,6 +22,10 @@ class Save extends Singleton {
 	 * Register hooks.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'show_single_variation' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		add_action( 'save_post_product', array( $this, 'save_product' ), 100, 3 );
 		add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation' ), 10, 2 );
 		add_action( 'woocommerce_new_product_variation', array( $this, 'save_variation' ), 10 );

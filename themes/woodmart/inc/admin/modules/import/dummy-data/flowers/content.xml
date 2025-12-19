@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2024-08-14 15:16" -->
+	<!-- generator="WordPress/6.7.2" created="2025-05-29 15:41" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,14 +29,13 @@
 	<title>admin</title>
 	<link>https://dummy.xtemos.com/woodmart2</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Wed, 14 Aug 2024 15:16:13 +0000</pubDate>
+	<pubDate>Thu, 29 May 2025 15:41:29 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>95</wp:term_id>
 			<wp:term_taxonomy><![CDATA[woodmart_slider]]></wp:term_taxonomy>
@@ -61,7 +60,7 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[height_mobile]]></wp:meta_key>
-			<wp:meta_value><![CDATA[500]]></wp:meta_value>
+			<wp:meta_value><![CDATA[915]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[arrows_style]]></wp:meta_key>
@@ -84,31 +83,8 @@
 			<wp:meta_value><![CDATA[20000]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-95-status]]></wp:meta_key>
-			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-95-css-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[#slider-95 .wd-slide {
-	min-height: 760px;
-}
-
-@media (max-width: 1024px) {
-	#slider-95 .wd-slide {
-		min-height: 500px;
-	}
-}
-
-@media (max-width: 767px) {
-	#slider-95 .wd-slide {
-		min-height: 500px;
-	}
-}
-]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-95-version]]></wp:meta_key>
-			<wp:meta_value><![CDATA[7.6.0]]></wp:meta_value>
+			<wp:meta_value><![CDATA[8.1.2]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-95-site-url]]></wp:meta_key>
@@ -242,19 +218,11 @@
 			<wp:meta_key><![CDATA[pagination_border_active_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:1:{s:4:"idle";s:0:"";}]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-95-credentials]]></wp:meta_key>
-			<wp:meta_value><![CDATA[requested]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-95-file-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:35:"/2024/08/xts-term-95-1723648331.css";s:13:"theme_version";s:5:"7.6.0";s:8:"site_url";s:32:"65c5e7a3e87c59ae65d18b8d3b912a1e";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term><wp:term_id>117</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[footer-menu-flowers]]></wp:term_slug><wp:term_name><![CDATA[Footer menu Flowers]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.2</generator>
 
 					<item>
 					<title><![CDATA[flowers-slider-2-bg-opt]]></title>

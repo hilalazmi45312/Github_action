@@ -316,7 +316,27 @@ if ( ! function_exists( 'woodmart_get_blog_design_name' ) ) {
 			'mask',
 		);
 
-		return ! in_array( $design, $old, true ) ? $design : $default;
+		$allowed = array(
+			'default',
+			'default-alt',
+			'small-images',
+			'chess',
+			'masonry',
+			'mask',
+			'meta-image',
+			'list',
+			'small',
+		);
+
+		if ( in_array( $design, $old, true ) ) {
+			return $default;
+		}
+
+		if ( in_array( $design, $allowed, true ) ) {
+			return $design;
+		}
+
+		return $default;
 	}
 }
 
@@ -642,7 +662,7 @@ if ( ! function_exists( 'woodmart_needs_header' ) ) {
 	 * @return bool
 	 */
 	function woodmart_needs_header() {
-		return ( ! isset( $GLOBALS['wd_maintenance'] ) && ! is_singular( 'woodmart_slide' ) && ! is_singular( 'cms_block' ) );
+		return ( ! isset( $GLOBALS['wd_maintenance'] ) && ! is_singular( array( 'woodmart_slide', 'cms_block', 'wd_product_tabs', 'wd_floating_block', 'wd_popup' ) ) );
 	}
 }
 
@@ -653,7 +673,7 @@ if ( ! function_exists( 'woodmart_needs_footer' ) ) {
 	 * @return bool
 	 */
 	function woodmart_needs_footer() {
-		return ( ! isset( $GLOBALS['wd_maintenance'] ) && ! is_singular( 'woodmart_slide' ) && ! is_singular( 'cms_block' ) );
+		return ( ! isset( $GLOBALS['wd_maintenance'] ) && ! is_singular( array( 'woodmart_slide', 'cms_block', 'wd_product_tabs', 'wd_floating_block', 'wd_popup' ) ) );
 	}
 }
 
@@ -679,6 +699,17 @@ if ( ! function_exists( 'woodmart_is_portfolio_archive' ) ) {
 	}
 }
 
+if ( ! function_exists( 'woodmart_is_thank_you_page' ) ) {
+	/**
+	 * Check if current page is order received.
+	 *
+	 * @return bool
+	 */
+	function woodmart_is_thank_you_page() {
+		return is_order_received_page() || get_query_var( 'order-received' ) || is_wc_endpoint_url( 'order-received' );
+	}
+}
+
 if ( ! function_exists( 'woodmart_get_config' ) ) {
 	/**
 	 * Get config file.
@@ -699,15 +730,27 @@ if ( ! function_exists( 'woodmart_tpl2id' ) ) {
 	 * @return int|void
 	 */
 	function woodmart_tpl2id( $tpl = '' ) {
+		$version   = defined( 'WOODMART_VERSION' ) ? WOODMART_VERSION : '';
+		$cache_key = 'woodmart_tpl2id_' . md5( $tpl . '-' . $version );
+
+		$cached_id = get_transient( $cache_key );
+
+		if ( false !== $cached_id ) {
+			return $cached_id;
+		}
+
 		$pages = get_pages(
 			array(
 				'meta_key'   => '_wp_page_template',
 				'meta_value' => $tpl,
 			)
 		);
-		foreach ( $pages as $page ) {
-			return $page->ID;
-		}
+
+		$page_id = ! empty( $pages ) ? $pages[0]->ID : 0;
+
+		set_transient( $cache_key, $page_id, DAY_IN_SECONDS );
+
+		return $page_id;
 	}
 }
 
@@ -716,6 +759,10 @@ if ( ! function_exists( 'woodmart_get_portfolio_page_id' ) ) {
 	 * Get portfolio page id.
 	 */
 	function woodmart_get_portfolio_page_id() {
+		if ( ! woodmart_get_opt( 'portfolio', '1' ) ) {
+			return 0;
+		}
+
 		return woodmart_get_opt( 'portfolio_page' ) ? woodmart_get_opt( 'portfolio_page' ) : woodmart_tpl2id( 'portfolio.php' );
 	}
 }
@@ -969,5 +1016,39 @@ if ( ! function_exists( 'woodmart_get_center_coords' ) ) {
 		$lat   = atan2( $zsin, $sqrt );
 
 		return array( $lat * 180 / pi(), $lon * 180 / pi() );
+	}
+}
+
+if ( ! function_exists( 'woodmart_get_options_depend_builder' ) ) {
+	/**
+	 * This function checks on which layout this element is displayed, and depending on these displays the necessary additional options.
+	 *
+	 * @param array $default_array An array of options that should be independent of the builder.
+	 * @param array $additional_array Options that should appear only on the specific layout.
+	 * This array must have a key equal to the name of the builder layout on which you want to see additional options.
+	 * Example: array( 'single_product' => array( 'related' => esc_html__( 'Related (Single product)', 'woodmart' ) ) );.
+	 * @return array
+	 */
+	function woodmart_get_options_depend_builder( $default_array, $additional_array ) {
+		$result_array = $default_array;
+
+		foreach ( $additional_array as $needed_builder => $additional_options ) {
+			if ( Builder::is_layout_type( $needed_builder ) ) {
+				$result_array = array_merge( $result_array, $additional_options );
+			}
+		}
+
+		return $result_array;
+	}
+}
+
+if ( ! function_exists( 'woodmart_is_import_demo_content' ) ) {
+	/**
+	 * Check if current action is import demo content.
+	 *
+	 * @return bool
+	 */
+	function woodmart_is_import_demo_content() {
+		return isset( $_GET['action'] ) && 'woodmart_import_action' === $_GET['action']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 }

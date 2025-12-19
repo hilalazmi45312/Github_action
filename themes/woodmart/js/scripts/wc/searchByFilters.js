@@ -15,7 +15,7 @@
 				$this.parent().removeClass('wd-active');
 			}
 
-			$this.parents('.wd-filter-wrapper').find('.wd-filter-list li').each(function() {
+			$this.parents('.wd-filter-wrapper').find('ul > li').each(function() {
 				var $this = $(this);
 				var $data = $this.find('.wd-filter-lable').text().toLowerCase();
 
@@ -36,7 +36,7 @@
 
 			$this.parent().siblings('input').val('');
 
-			$this.parents('.wd-filter-wrapper').find('.wd-filter-list li').each(function() {
+			$this.parents('.wd-filter-wrapper').find('ul li').each(function() {
 				$(this).show();
 			});
 		});

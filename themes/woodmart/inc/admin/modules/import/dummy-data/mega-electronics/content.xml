@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2025-01-20 15:07" -->
+	<!-- generator="WordPress/6.7.3" created="2025-09-01 12:49" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,14 +29,13 @@
 	<title>Mega electronics</title>
 	<link>https://dummy.xtemos.com/woodmart2/mega-electronics</link>
 	<description>Multipurpose WooCommerce Electronics Theme</description>
-	<pubDate>Mon, 20 Jan 2025 15:07:19 +0000</pubDate>
+	<pubDate>Mon, 01 Sep 2025 12:49:08 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/mega-electronics</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>341</wp:term_id>
 			<wp:term_taxonomy><![CDATA[woodmart_slider]]></wp:term_taxonomy>
@@ -80,10 +79,6 @@
 			<wp:meta_value><![CDATA[20000]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-341-status]]></wp:meta_key>
-			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-341-css-data]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#slider-341 .wd-slide {
 	min-height: 280px;
@@ -104,11 +99,11 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-341-version]]></wp:meta_key>
-			<wp:meta_value><![CDATA[7.6.0]]></wp:meta_value>
+			<wp:meta_value><![CDATA[8.2.0]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-341-site-url]]></wp:meta_key>
-			<wp:meta_value><![CDATA[36a90865eca121f0f8bcbf9b665c0512]]></wp:meta_value>
+			<wp:meta_value><![CDATA[8c1c72f84b8d179400e3f37bec74c1fc]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-341-credentials]]></wp:meta_key>
@@ -116,7 +111,11 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-341-file-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2025/01/xts-term-341-1736553979.css";s:13:"theme_version";s:5:"7.6.0";s:8:"site_url";s:32:"36a90865eca121f0f8bcbf9b665c0512";}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2025/08/xts-term-341-1755562151.css";s:13:"theme_version";s:5:"8.2.0";s:8:"site_url";s:32:"8c1c72f84b8d179400e3f37bec74c1fc";}]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-341-status]]></wp:meta_key>
+			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -162,10 +161,6 @@
 			<wp:meta_value><![CDATA[20000]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-340-status]]></wp:meta_key>
-			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-340-css-data]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#slider-340 .wd-slide {
 	min-height: 280px;
@@ -186,7 +181,7 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-340-version]]></wp:meta_key>
-			<wp:meta_value><![CDATA[7.6.0]]></wp:meta_value>
+			<wp:meta_value><![CDATA[8.2.0]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-340-site-url]]></wp:meta_key>
@@ -198,7 +193,11 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-340-file-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2025/01/xts-term-340-1737309710.css";s:13:"theme_version";s:5:"7.6.0";s:8:"site_url";s:32:"36a90865eca121f0f8bcbf9b665c0512";}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2025/08/xts-term-340-1755631438.css";s:13:"theme_version";s:5:"8.2.0";s:8:"site_url";s:32:"36a90865eca121f0f8bcbf9b665c0512";}]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-340-status]]></wp:meta_key>
+			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -244,10 +243,6 @@
 			<wp:meta_value><![CDATA[20000]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
-			<wp:meta_key><![CDATA[xts-term-339-status]]></wp:meta_key>
-			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-339-css-data]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#slider-339 .wd-slide {
 	min-height: 460px;
@@ -268,7 +263,7 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-339-version]]></wp:meta_key>
-			<wp:meta_value><![CDATA[7.6.0]]></wp:meta_value>
+			<wp:meta_value><![CDATA[8.2.0]]></wp:meta_value>
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-339-site-url]]></wp:meta_key>
@@ -280,11 +275,15 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-339-file-data]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2025/01/xts-term-339-1737384924.css";s:13:"theme_version";s:5:"7.6.0";s:8:"site_url";s:32:"8c1c72f84b8d179400e3f37bec74c1fc";}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:36:"/2025/08/xts-term-339-1755768944.css";s:13:"theme_version";s:5:"8.2.0";s:8:"site_url";s:32:"8c1c72f84b8d179400e3f37bec74c1fc";}]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-339-status]]></wp:meta_key>
+			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 		
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.3</generator>
 
 					<item>
 					<title><![CDATA[monitors-4k]]></title>

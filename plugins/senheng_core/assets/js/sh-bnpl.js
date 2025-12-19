@@ -10,6 +10,13 @@ jQuery(document).ready(function ($) {
     });
 
     let paymentPlans = shBnplData.paymentPlans || [];
+
+    // BNPL providers for low-price products (RM10-500)
+    const bnplProviders = ['Atome', 'GrabPay BNPL'];
+    const lowPriceMin = 10;
+    const lowPriceMax = 500;
+    const minTenureForLowPrice = 4;
+
     function renderInstallmentPlans(price) {
         if (shBnplData.productType === 'variable' && price <= 0) {
             Swal.fire({
@@ -20,68 +27,27 @@ jQuery(document).ready(function ($) {
             return;
         }
 
+        // Check if this is a low-price product (RM10-500)
+        const isLowPriceProduct = (price >= lowPriceMin && price <= lowPriceMax);
+
         let modalHtml = `<h2>INSTALLMENT</h2>`;
 
-        paymentPlans.forEach(bank => {
-            // const validPlans = bank.plans.filter(plan => price >= parseFloat(plan.min_amount));
-            // if (validPlans.length > 0) {
-            //     modalHtml += `
-            //     <div class="bank-section mb-3 my-bootstrap-scope">
-            //         <div class="bank-header d-flex align-items-center justify-content-between toggle-header" style="cursor: pointer;">
-            //             <div class="d-flex align-items-center">
-            //                 <img src="${bank.icon}" alt="${bank.name} Logo" class="bank-icon me-2" style="width: 32px; height: 32px;">
-            //                 <strong class="bank-name">${bank.name}</strong>
-            //             </div>
-            //             <span class="toggle-icon">+</span>
-            //         </div>
-            //         <div class="bank-plans" style="display: none;">
-            //             <table class="table table-striped table-bordered table-sm mt-2">
-            //                 <thead>
-            //                     <tr>
-            //                         <th>Tenure</th>
-            //                         <th>Amount</th>
-            //                         <th>Note</th>
-            //                     </tr>
-            //                 </thead>
-            //                 <tbody>`;
+        // Filter payment plans for low-price products
+        let plansToShow = paymentPlans;
+        if (isLowPriceProduct) {
+            plansToShow = paymentPlans.filter(bank => {
+                // Check if bank name contains any BNPL provider name
+                return bnplProviders.some(bnpl =>
+                    bank.name.toLowerCase().includes(bnpl.toLowerCase())
+                );
+            });
+        }
 
-            //     // Group plans by months and take the plan with the highest monthly amount for each tenure
-            //     const plansByMonths = {};
-            //     validPlans.forEach(plan => {
-            //         const months = parseInt(plan.months);
-            //         const adminFee = parseFloat(plan.apply_admin_fee || 0);
-            //         const monthly = (price + adminFee) / months;
-            //         if (!plansByMonths[months] || monthly > plansByMonths[months].monthly) {
-            //             plansByMonths[months] = {
-            //                 plan,
-            //                 monthly,
-            //                 adminFee
-            //             };
-            //         }
-            //     });
+        plansToShow.forEach(bank => {
+            let allPlans = bank.plans;
 
-            //     Object.keys(plansByMonths).sort((a, b) => a - b).forEach(months => {
-            //         const { plan, monthly, adminFee } = plansByMonths[months];
-            //         const displayAmount = 'RM ' + monthly.toFixed(2);
-            //         const note = adminFee > 0 ? `Includes admin fee RM ${adminFee}` : '0% interest';
-
-            //         modalHtml += `
-            //             <tr>
-            //                 <td>${plan.months}x</td>
-            //                 <td>${displayAmount}</td>
-            //                 <td>${note}</td>
-            //             </tr>`;
-            //     });
-
-            //     modalHtml += `
-            //                 </tbody>
-            //             </table>
-            //         </div>
-            //     </div>`;
-            // }
-            const allPlans = bank.plans;
             if (allPlans.length === 0) {
-                return; // Skip banks with no plans
+                return; // Skip banks with no valid plans
             }
             modalHtml += `
             <div class="bank-section mb-3 my-bootstrap-scope">
@@ -130,6 +96,7 @@ jQuery(document).ready(function ($) {
                 </div>
             </div>`;
         });
+
         $('#installment-modal .modal-body').html(modalHtml);
         $('#installment-modal').fadeIn();
 

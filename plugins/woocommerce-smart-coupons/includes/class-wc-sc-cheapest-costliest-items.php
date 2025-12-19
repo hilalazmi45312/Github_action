@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       9.4.0
- * @version     1.5.0
+ * @version     1.6.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -101,31 +101,35 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * @param  WC_Coupon $coupon Coupon Object.
 		 */
 		public function coupon_options( $coupon_id = 0, $coupon = null ) {
-			global $post;
+			try {
+				global $post;
 
-			if ( is_null( $coupon ) || ! is_a( $coupon, 'WC_Coupon' ) ) {
-				if ( empty( $coupon_id ) ) {
-					$coupon_id = ( ! empty( $post->ID ) ) ? $post->ID : 0;
+				if ( is_null( $coupon ) || ! is_a( $coupon, 'WC_Coupon' ) ) {
+					if ( empty( $coupon_id ) ) {
+						$coupon_id = ( ! empty( $post->ID ) ) ? $post->ID : 0;
+					}
+					$coupon = ( ! empty( $coupon_id ) ) ? new WC_Coupon( $coupon_id ) : null;
 				}
-				$coupon = ( ! empty( $coupon_id ) ) ? new WC_Coupon( $coupon_id ) : null;
+
+				$cheapest_costliest_settings = $this->is_callable( $coupon, 'get_meta' ) ? $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' ) : '';
+
+				list( $cheapest_costliest_type, $cheapest_costliest_count ) = $this->process_cheapest_costliest_settings( $cheapest_costliest_settings );
+
+				woocommerce_wp_select(
+					array(
+						'id'      => 'wc_sc_cheapest_costliest_type',
+						'label'   => __( 'Apply discount on', 'woocommerce-smart-coupons' ),
+						'options' => array(
+							''               => __( 'All qualifying products', 'woocommerce-smart-coupons' ),
+							'cheapest_cart'  => __( 'Cheapest qualifying product in cart', 'woocommerce-smart-coupons' ),
+							'costliest_cart' => __( 'Highest priced qualifying product in cart', 'woocommerce-smart-coupons' ),
+						),
+						'value'   => $cheapest_costliest_type,
+					)
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			$cheapest_costliest_settings = $this->is_callable( $coupon, 'get_meta' ) ? $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' ) : '';
-
-			list( $cheapest_costliest_type, $cheapest_costliest_count ) = $this->process_cheapest_costliest_settings( $cheapest_costliest_settings );
-
-			woocommerce_wp_select(
-				array(
-					'id'      => 'wc_sc_cheapest_costliest_type',
-					'label'   => __( 'Apply discount on', 'woocommerce-smart-coupons' ),
-					'options' => array(
-						''               => __( 'All qualifying products', 'woocommerce-smart-coupons' ),
-						'cheapest_cart'  => __( 'Cheapest qualifying product in cart', 'woocommerce-smart-coupons' ),
-						'costliest_cart' => __( 'Highest priced qualifying product in cart', 'woocommerce-smart-coupons' ),
-					),
-					'value'   => $cheapest_costliest_type,
-				)
-			);
 
 		}
 
@@ -136,34 +140,37 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * @param WC_Coupon $coupon The coupon object.
 		 */
 		public function coupon_options_save( $post_id = 0, $coupon = null ) {
-
-			if ( empty( $post_id ) ) {
-				return;
-			}
-
-			$coupon = new WC_Coupon( $coupon );
-
-			$post_cheapest_costliest_type  = ( isset( $_POST['wc_sc_cheapest_costliest_type'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_cheapest_costliest_type'] ) ) : '';   // phpcs:ignore
-			$post_cheapest_costliest_count = ( isset( $_POST['wc_sc_cheapest_costliest_count'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_cheapest_costliest_count'] ) ) : 1;  // phpcs:ignore
-
-			$post_cheapest_costliest_settings = $post_cheapest_costliest_count . '_' . $post_cheapest_costliest_type;
-
-			if ( true === $this->is_callable( $coupon, 'update_meta_data' ) ) {
-				if ( isset( $post_cheapest_costliest_settings ) ) { // phpcs:ignore
-					$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', $post_cheapest_costliest_settings );
-				} else {
-					$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', '' );
+			try {
+				if ( empty( $post_id ) ) {
+					return;
 				}
-			} else {
-				if ( isset( $post_cheapest_costliest_settings ) ) { // phpcs:ignore
-					update_post_meta( $post_id, 'wc_sc_cheapest_costliest_settings', $post_cheapest_costliest_settings );
-				} else {
-					update_post_meta( $post_id, 'wc_sc_cheapest_costliest_settings', '' );
-				}
-			}
 
-			if ( $this->is_callable( $coupon, 'save' ) ) {
-				$coupon->save();
+				$coupon = new WC_Coupon( $coupon );
+
+				$post_cheapest_costliest_type  = ( isset( $_POST['wc_sc_cheapest_costliest_type'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_cheapest_costliest_type'] ) ) : '';   // phpcs:ignore
+				$post_cheapest_costliest_count = ( isset( $_POST['wc_sc_cheapest_costliest_count'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_cheapest_costliest_count'] ) ) : 1;  // phpcs:ignore
+
+				$post_cheapest_costliest_settings = $post_cheapest_costliest_count . '_' . $post_cheapest_costliest_type;
+
+				if ( true === $this->is_callable( $coupon, 'update_meta_data' ) ) {
+					if ( isset( $post_cheapest_costliest_settings ) ) { // phpcs:ignore
+						$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', $post_cheapest_costliest_settings );
+					} else {
+						$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', '' );
+					}
+				} else {
+					if ( isset( $post_cheapest_costliest_settings ) ) { // phpcs:ignore
+						update_post_meta( $post_id, 'wc_sc_cheapest_costliest_settings', $post_cheapest_costliest_settings );
+					} else {
+						update_post_meta( $post_id, 'wc_sc_cheapest_costliest_settings', '' );
+					}
+				}
+
+				if ( $this->is_callable( $coupon, 'save' ) ) {
+					$coupon->save();
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -175,32 +182,36 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * @param array $data request body.
 		 */
 		public function woocommerce_legacy_api_process_smart_coupon_meta( $coupon_id = 0, $data = null ) {
-			if ( empty( $coupon_id ) ) {
-				return;
-			}
-			$coupon = new WC_Coupon( $coupon_id );
-			if ( ! $coupon instanceof WC_Coupon ) {
-				return;
-			}
-			if ( ! empty( $data ) && ! is_array( $data ) ) {
-				return;
-			}
-
-			$post_cheapest_costliest_type  = ( isset( $data['wc_sc_cheapest_costliest_type'] ) ) ? wc_clean( wp_unslash( $data['wc_sc_cheapest_costliest_type'] ) ) : '';   // phpcs:ignore
-			$post_cheapest_costliest_count = ( isset( $data['wc_sc_cheapest_costliest_count'] ) ) ? wc_clean( wp_unslash( $data['wc_sc_cheapest_costliest_count'] ) ) : 1;  // phpcs:ignore
-
-			$post_cheapest_costliest_settings = $post_cheapest_costliest_count . '_' . $post_cheapest_costliest_type;
-
-			if ( true === $this->is_callable( $coupon, 'update_meta_data' ) ) {
-				if ( isset( $post_cheapest_costliest_settings ) ) { // phpcs:ignore
-					$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', $post_cheapest_costliest_settings );
-				} else {
-					$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', '' );
+			try {
+				if ( empty( $coupon_id ) ) {
+					return;
+				}
+				$coupon = new WC_Coupon( $coupon_id );
+				if ( ! $coupon instanceof WC_Coupon ) {
+					return;
+				}
+				if ( ! empty( $data ) && ! is_array( $data ) ) {
+					return;
 				}
 
-				if ( $this->is_callable( $coupon, 'save' ) ) {
-					$coupon->save();
+				$post_cheapest_costliest_type  = ( isset( $data['wc_sc_cheapest_costliest_type'] ) ) ? wc_clean( wp_unslash( $data['wc_sc_cheapest_costliest_type'] ) ) : '';   // phpcs:ignore
+				$post_cheapest_costliest_count = ( isset( $data['wc_sc_cheapest_costliest_count'] ) ) ? wc_clean( wp_unslash( $data['wc_sc_cheapest_costliest_count'] ) ) : 1;  // phpcs:ignore
+
+				$post_cheapest_costliest_settings = $post_cheapest_costliest_count . '_' . $post_cheapest_costliest_type;
+
+				if ( true === $this->is_callable( $coupon, 'update_meta_data' ) ) {
+					if ( isset( $post_cheapest_costliest_settings ) ) { // phpcs:ignore
+						$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', $post_cheapest_costliest_settings );
+					} else {
+						$coupon->update_meta_data( 'wc_sc_cheapest_costliest_settings', '' );
+					}
+
+					if ( $this->is_callable( $coupon, 'save' ) ) {
+						$coupon->save();
+					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -213,70 +224,75 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * @return array
 		 */
 		public function find_valid_items( $items_to_apply = array(), $coupon = null, $discounts = null ) {
-			if ( empty( $items_to_apply ) || empty( $coupon ) ) {
-				return $items_to_apply;
-			}
-
-			$items_to_keep           = array();
-			$item_keys               = array();
-			$coupon_code             = ( $this->is_callable( $coupon, 'get_code' ) ) ? $coupon->get_code() : '';
-			$is_check_products_price = apply_filters(
-				'wc_sc_is_check_products_price',
-				true,
-				array(
-					'source'                  => $this,
-					'items_to_apply_discount' => $items_to_apply,
-					'coupon_obj'              => $coupon,
-					'discounts_obj'           => $discounts,
-				)
-			);
-			$item_key_to_price       = array();
-			if ( true === $is_check_products_price ) {
-				if ( ! empty( $items_to_apply ) && ! is_scalar( $items_to_apply ) ) {
-					foreach ( $items_to_apply as $item ) {
-						$key                       = $item->key ?? '';
-						$price                     = $item->price ?? 0;
-						$quantity                  = $item->quantity ?? 1;
-						$item_key_to_price[ $key ] = $price / $quantity;
-					}
+			try {
+				if ( empty( $items_to_apply ) || empty( $coupon ) ) {
+					return $items_to_apply;
 				}
-			} else {
-				$item_key_to_price = wp_list_pluck( $items_to_apply, 'price', 'key' );
+
+				$items_to_keep           = array();
+				$item_keys               = array();
+				$coupon_code             = ( $this->is_callable( $coupon, 'get_code' ) ) ? $coupon->get_code() : '';
+				$is_check_products_price = apply_filters(
+					'wc_sc_is_check_products_price',
+					true,
+					array(
+						'source'                  => $this,
+						'items_to_apply_discount' => $items_to_apply,
+						'coupon_obj'              => $coupon,
+						'discounts_obj'           => $discounts,
+					)
+				);
+				$item_key_to_price       = array();
+				if ( true === $is_check_products_price ) {
+					if ( ! empty( $items_to_apply ) && ! is_scalar( $items_to_apply ) ) {
+						foreach ( $items_to_apply as $item ) {
+							$key                       = $item->key ?? '';
+							$price                     = $item->price ?? 0;
+							$quantity                  = $item->quantity ?? 1;
+							$item_key_to_price[ $key ] = $price / $quantity;
+						}
+					}
+				} else {
+					$item_key_to_price = wp_list_pluck( $items_to_apply, 'price', 'key' );
+				}
+
+				if ( is_callable( 'WC' ) && is_object( WC() ) && is_object( WC()->session ) && is_callable( array( WC()->session, 'get' ) ) ) {
+					$items_to_keep = WC()->session->get( 'wc_sc_cheapest_costliest_items_session' );
+				}
+
+				if ( empty( $items_to_keep[ $coupon_code ] ) || ! is_array( $items_to_keep[ $coupon_code ] ) ) {
+					$items_to_keep[ $coupon_code ] = array();
+				}
+
+				$cheapest_costliest_settings = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' ) : '';
+				if ( empty( $cheapest_costliest_settings ) ) {
+					$items_to_keep[ $coupon_code ] = array_merge( $items_to_keep[ $coupon_code ], array_keys( $item_key_to_price ) );
+				}
+
+				list( $cheapest_costliest_type, $cheapest_costliest_count ) = $this->process_cheapest_costliest_settings( $cheapest_costliest_settings );
+				if ( empty( $cheapest_costliest_type ) ) {
+					$items_to_keep[ $coupon_code ] = array_merge( $items_to_keep[ $coupon_code ], array_keys( $item_key_to_price ) );
+				}
+
+				switch ( $cheapest_costliest_type ) {
+					case 'cheapest_cart':
+						$item_keys = $this->get_items_from_cart( $item_key_to_price, 'cheapest', $cheapest_costliest_count );
+						break;
+					case 'costliest_cart':
+						$item_keys = $this->get_items_from_cart( $item_key_to_price, 'costliest', $cheapest_costliest_count );
+						break;
+				}
+
+				$items_to_keep[ $coupon_code ] = array_merge( $items_to_keep[ $coupon_code ], $item_keys );
+
+				if ( is_callable( 'WC' ) && is_object( WC() ) && is_object( WC()->session ) && is_callable( array( WC()->session, 'set' ) ) ) {
+					$items_to_keep[ $coupon_code ] = array_filter( array_unique( $items_to_keep[ $coupon_code ] ) );
+					WC()->session->set( 'wc_sc_cheapest_costliest_items_session', $items_to_keep );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
-			if ( is_callable( 'WC' ) && is_object( WC() ) && is_object( WC()->session ) && is_callable( array( WC()->session, 'get' ) ) ) {
-				$items_to_keep = WC()->session->get( 'wc_sc_cheapest_costliest_items_session' );
-			}
-
-			if ( empty( $items_to_keep[ $coupon_code ] ) || ! is_array( $items_to_keep[ $coupon_code ] ) ) {
-				$items_to_keep[ $coupon_code ] = array();
-			}
-
-			$cheapest_costliest_settings = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' ) : '';
-			if ( empty( $cheapest_costliest_settings ) ) {
-				$items_to_keep[ $coupon_code ] = array_merge( $items_to_keep[ $coupon_code ], array_keys( $item_key_to_price ) );
-			}
-
-			list( $cheapest_costliest_type, $cheapest_costliest_count ) = $this->process_cheapest_costliest_settings( $cheapest_costliest_settings );
-			if ( empty( $cheapest_costliest_type ) ) {
-				$items_to_keep[ $coupon_code ] = array_merge( $items_to_keep[ $coupon_code ], array_keys( $item_key_to_price ) );
-			}
-
-			switch ( $cheapest_costliest_type ) {
-				case 'cheapest_cart':
-					$item_keys = $this->get_items_from_cart( $item_key_to_price, 'cheapest', $cheapest_costliest_count );
-					break;
-				case 'costliest_cart':
-					$item_keys = $this->get_items_from_cart( $item_key_to_price, 'costliest', $cheapest_costliest_count );
-					break;
-			}
-
-			$items_to_keep[ $coupon_code ] = array_merge( $items_to_keep[ $coupon_code ], $item_keys );
-
-			if ( is_callable( 'WC' ) && is_object( WC() ) && is_object( WC()->session ) && is_callable( array( WC()->session, 'set' ) ) ) {
-				$items_to_keep[ $coupon_code ] = array_filter( array_unique( $items_to_keep[ $coupon_code ] ) );
-				WC()->session->set( 'wc_sc_cheapest_costliest_items_session', $items_to_keep );
-			}
 			return $items_to_apply;
 		}
 
@@ -290,24 +306,28 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * @return integer
 		 */
 		public function remove_products_from_validation( $product_quantity = 1, $item = null, $coupon = null, $discounts = null ) {
-			if ( empty( $product_quantity ) || empty( $item ) || empty( $coupon ) ) {
-				return $product_quantity;
-			}
-
-			$cheapest_costliest_settings = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' ) : '';
-			if ( empty( $cheapest_costliest_settings ) ) {
-				return $product_quantity;
-			}
-			list( $cheapest_costliest_type, $cheapest_costliest_count ) = $this->process_cheapest_costliest_settings( $cheapest_costliest_settings );
-			if ( empty( $cheapest_costliest_type ) ) {
-				return $product_quantity;
-			}
-
-			if ( is_callable( 'WC' ) && is_object( WC() ) && is_object( WC()->session ) && is_callable( array( WC()->session, 'get' ) ) ) {
-				$items_to_keep = WC()->session->get( 'wc_sc_cheapest_costliest_items_session' );
-				if ( ! empty( $items_to_keep[ $coupon->get_code() ] ) && ! empty( $item->key ) && ! in_array( $item->key, $items_to_keep[ $coupon->get_code() ], true ) ) {
-					$product_quantity = 0;
+			try {
+				if ( empty( $product_quantity ) || empty( $item ) || empty( $coupon ) ) {
+					return $product_quantity;
 				}
+
+				$cheapest_costliest_settings = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' ) : '';
+				if ( empty( $cheapest_costliest_settings ) ) {
+					return $product_quantity;
+				}
+				list( $cheapest_costliest_type, $cheapest_costliest_count ) = $this->process_cheapest_costliest_settings( $cheapest_costliest_settings );
+				if ( empty( $cheapest_costliest_type ) ) {
+					return $product_quantity;
+				}
+
+				if ( is_callable( 'WC' ) && is_object( WC() ) && is_object( WC()->session ) && is_callable( array( WC()->session, 'get' ) ) ) {
+					$items_to_keep = WC()->session->get( 'wc_sc_cheapest_costliest_items_session' );
+					if ( ! empty( $items_to_keep[ $coupon->get_code() ] ) && ! empty( $item->key ) && ! in_array( $item->key, $items_to_keep[ $coupon->get_code() ], true ) ) {
+						$product_quantity = 0;
+					}
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $product_quantity;
@@ -447,22 +467,25 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * @param  array $args The arguments.
 		 */
 		public function copy_coupon_action_meta( $args = array() ) {
+			try {
+				$new_coupon_id = ( ! empty( $args['new_coupon_id'] ) ) ? absint( $args['new_coupon_id'] ) : 0;
+				$coupon        = ( ! empty( $args['ref_coupon'] ) ) ? $args['ref_coupon'] : false;
 
-			$new_coupon_id = ( ! empty( $args['new_coupon_id'] ) ) ? absint( $args['new_coupon_id'] ) : 0;
-			$coupon        = ( ! empty( $args['ref_coupon'] ) ) ? $args['ref_coupon'] : false;
+				if ( empty( $new_coupon_id ) || empty( $coupon ) ) {
+					return;
+				}
 
-			if ( empty( $new_coupon_id ) || empty( $coupon ) ) {
-				return;
+				$cheapest_costliest_settings = '';
+				if ( $this->is_wc_gte_30() ) {
+					$cheapest_costliest_settings = $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' );
+				} else {
+					$old_coupon_id               = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+					$cheapest_costliest_settings = get_post_meta( $old_coupon_id, 'wc_sc_cheapest_costliest_settings', true );
+				}
+				$this->update_post_meta( $new_coupon_id, 'wc_sc_cheapest_costliest_settings', $cheapest_costliest_settings );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			$cheapest_costliest_settings = '';
-			if ( $this->is_wc_gte_30() ) {
-				$cheapest_costliest_settings = $coupon->get_meta( 'wc_sc_cheapest_costliest_settings' );
-			} else {
-				$old_coupon_id               = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-				$cheapest_costliest_settings = get_post_meta( $old_coupon_id, 'wc_sc_cheapest_costliest_settings', true );
-			}
-			$this->update_post_meta( $new_coupon_id, 'wc_sc_cheapest_costliest_settings', $cheapest_costliest_settings );
 
 		}
 
@@ -491,28 +514,32 @@ if ( ! class_exists( 'WC_SC_Cheapest_Costliest_Items' ) ) {
 		 * Detects coupon removal from an order in the admin panel and updates the session accordingly.
 		 */
 		public function handle_coupon_removal_in_order() {
-			// Sanitize and validate inputs.
-			$action   = ( ! empty( $_POST['action'] ) ) ? wc_clean( wp_unslash( $_POST['action'] ) ) : ''; // phpcs:ignore
-			$coupon_code = ( ! empty( $_POST['coupon'] ) ) ? wc_clean( wp_unslash( $_POST['coupon'] ) ) : ''; // phpcs:ignore
+			try {
+				// Sanitize and validate inputs.
+				$action   = ( ! empty( $_POST['action'] ) ) ? wc_clean( wp_unslash( $_POST['action'] ) ) : ''; // phpcs:ignore
+				$coupon_code = ( ! empty( $_POST['coupon'] ) ) ? wc_clean( wp_unslash( $_POST['coupon'] ) ) : ''; // phpcs:ignore
 
-			if ( 'woocommerce_remove_order_coupon' !== $action || empty( $coupon_code ) ) {
-				return;
-			}
+				if ( 'woocommerce_remove_order_coupon' !== $action || empty( $coupon_code ) ) {
+					return;
+				}
 
-			// Ensure session is initialized (usually unavailable in admin).
-			if ( ! WC()->session ) {
-				WC()->initialize_session();
-			}
+				// Ensure session is initialized (usually unavailable in admin).
+				if ( ! WC()->session ) {
+					WC()->initialize_session();
+				}
 
-			// Get session data.
-			$items_in_session = WC()->session->get( 'wc_sc_cheapest_costliest_items_session', array() );
+				// Get session data.
+				$items_in_session = WC()->session->get( 'wc_sc_cheapest_costliest_items_session', array() );
 
-			// If coupon is in session, remove it.
-			if ( isset( $items_in_session[ $coupon_code ] ) ) {
-				unset( $items_in_session[ $coupon_code ] );
+				// If coupon is in session, remove it.
+				if ( isset( $items_in_session[ $coupon_code ] ) ) {
+					unset( $items_in_session[ $coupon_code ] );
 
-				// Update the session.
-				WC()->session->set( 'wc_sc_cheapest_costliest_items_session', $items_in_session );
+					// Update the session.
+					WC()->session->set( 'wc_sc_cheapest_costliest_items_session', $items_in_session );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 

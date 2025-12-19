@@ -43,8 +43,14 @@ if ( ! class_exists( 'XTS_Email_Abandoned_Cart' ) ) :
 		 * Constructor.
 		 */
 		public function __construct() {
+			if ( ! woodmart_get_opt( 'cart_recovery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+				return;
+			}
+
+			$this->template_base = WOODMART_THEMEROOT . '/woocommerce/';
+
 			$this->id          = 'woodmart_abandoned_cart_email';
-			$this->title       = esc_html__( 'Abandoned cart: incomplete purchase notification', 'woodmart' );
+			$this->title       = esc_html__( 'Abandoned cart', 'woodmart' );
 			$this->description = esc_html__( 'This email reminds customers about their incomplete purchases, encouraging them to complete their orders.', 'woodmart' );
 
 			$this->heading = wp_kses_post( __( 'Don\'t Forget to Complete Your Purchase!', 'woodmart' ) );
@@ -186,8 +192,9 @@ if ( ! class_exists( 'XTS_Email_Abandoned_Cart' ) ) :
 
 			return add_query_arg(
 				array(
-					'token' => $unsubscribe_token,
-					'email' => $this->object->_user_email,
+					'token'  => $unsubscribe_token,
+					'email'  => $this->object->_user_email,
+					'action' => 'woodmart_abandoned_cart_unsubscribe',
 				),
 				wc_get_page_permalink( 'shop' )
 			);
@@ -221,8 +228,8 @@ if ( ! class_exists( 'XTS_Email_Abandoned_Cart' ) ) :
 			$expiry_date = '';
 
 			if ( woodmart_get_opt( 'abandoned_cart_delete_expired_coupons', true ) ) {
-				$expiry_date = time() + intval( woodmart_get_opt( 'abandoned_cart_coupon_timeframe', 1 ) ) * intval( woodmart_get_opt( 'abandoned_cart_coupon_timeframe_period', DAY_IN_SECONDS ) );
-				$expiry_date = gmdate( 'Y-m-d h:i:s', $expiry_date );
+				$expiry_date = strtotime( current_time( 'mysql' ) ) + intval( woodmart_get_opt( 'abandoned_cart_coupon_timeframe', 1 ) ) * intval( woodmart_get_opt( 'abandoned_cart_coupon_timeframe_period', DAY_IN_SECONDS ) );
+				$expiry_date = gmdate( 'Y-m-d H:i:s', $expiry_date );
 			}
 
 			if ( woodmart_is_email_preview_request() ) {

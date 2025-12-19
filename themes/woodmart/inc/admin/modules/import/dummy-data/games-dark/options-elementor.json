@@ -378,6 +378,7 @@
     "blog_with_shadow": "1",
     "blog_columns": "3",
     "blog_spacing": "20",
+    "blog_archive_layout": "full-width",
     "quick_shop_variable": "0",
     "grid_swatches_attribute": "",
     "variation_gallery": "0",
@@ -475,5 +476,7 @@
     "carousel_arrows_together_border_style": "",
     "carousel_pagin_border_style": "",
     "products_spacing_tablet": "30",
-    "products_spacing_mobile": "10"
+    "products_spacing_mobile": "10",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

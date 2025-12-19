@@ -226,41 +226,64 @@ return apply_filters(
 		),
 		'blog_title'                         => array(
 			'title'          => 'Blog post title',
-			'selector'       => 'html .post.wd-post .wd-entities-title',
-			'selector-hover' => 'html .post.wd-post .wd-entities-title a:hover',
+			'selector'       => 'html .post.wd-post:not(.blog-design-small) .wd-entities-title',
+			'selector-hover' => 'html .post.wd-post:not(.blog-design-small) .wd-entities-title a:hover',
 		),
 		'blog_meta'                         => array(
 			'title'          => 'Blog post meta',
-			'selector'       => 'html .wd-post .entry-meta-list li, html .hovered-social-icons:after, html .wd-post-meta > div, html .wd-post-meta > div > a, html .wd-post-entry-meta :is(.wd-meta-date,.wd-post-cat,.wd-post-cat a), html .blog-design-list :is(.wd-meta-author,.wd-post-share,.wd-meta-reply a), html .wd-meta-reply-text',
-			'selector-hover' => 'html .wd-post .entry-meta-list li a:hover, html .hovered-social-icons:hover:after, html .wd-post-meta > div > a:hover, html .wd-post-entry-meta .wd-post-cat a:hover, html .blog-design-list :is(.wd-meta-author a,.wd-post-share,.wd-meta-reply a):hover',
+			'selector'       => 'html .wd-post:not(.blog-design-small) .wd-post-meta > div, html .wd-post:not(.blog-design-small) .wd-post-meta > div > a',
+			'selector-hover' => 'html .wd-post:not(.blog-design-small) .wd-post-meta > div > a:hover, html .post.wd-post .wd-post-meta .wd-post-share:hover',
 		),
-		'blog_title_shortcode'               => array(
-			'title'          => 'Blog title on WPBakery element',
-			'selector'       => 'html .wd-blog-holder .post.wd-post .wd-entities-title',
-			'selector-hover' => 'html .wd-blog-holder .post.wd-post .wd-entities-title a:hover',
+		'blog_category'                     => array(
+			'title'          => 'Blog post category',
+			'selector'       => 'html .wd-page-wrapper .wd-post .wd-post-cat, html .wd-page-wrapper .wd-post .wd-post-cat a',
+			'selector-hover' => 'html .wd-page-wrapper .wd-post .wd-post-cat a:hover',
 		),
 		'blog_title_carousel'                => array(
-			'title'          => 'Blog title on carousel',
-			'selector'       => 'html .wd-carousel-item .post.wd-post .wd-entities-title',
-			'selector-hover' => 'html .wd-carousel-item .post.wd-post .wd-entities-title a:hover',
+			'title'          => 'Blog title in carousel',
+			'selector'       => 'html .wd-carousel .wd-carousel-item .post.wd-post .wd-entities-title',
+			'selector-hover' => 'html .wd-carousel .wd-carousel-item .post.wd-post .wd-entities-title a:hover',
+		),
+		'blog_single'                               => array(
+			'title' => 'Single blog post',
 		),
 		'blog_title_sinle_post'              => array(
-			'title'    => 'Blog title on single post',
-			'selector' => 'html .wd-single-post-header .title',
-			'selector-hover' => 'html .wd-single-post-header .title:hover',
+			'title'    => 'Single blog post title',
+			'selector' => 'html .wd-single-post-header .title, html .wd-single-post-title .wd-post-title',
+			'selector-hover' => 'html .wd-single-post-header .title:hover, html .wd-single-post-title .wd-post-title:hover',
+		),
+		'blog_meta_sinle_post'              => array(
+			'title'    => 'Single blog post meta',
+			'selector' => 'html .post-single-page .wd-post-meta > div, html .post-single-page .wd-post-meta > div > a, html :is(.wd-single-post-author, .wd-single-post-reply) > div, html :is(.wd-single-post-author, .wd-single-post-reply) > div > a',
+			'selector-hover' => 'html .post-single-page .wd-post-meta > div > a:hover, html :is(.wd-single-post-author, .wd-single-post-reply) > div > a:hover',
+		),
+		'blog_category_sinle_post'              => array(
+			'title'    => 'Single blog post category',
+			'selector' => 'html .wd-page-wrapper .post-single-page .wd-post-cat, html .wd-page-wrapper .post-single-page .wd-post-cat a, html .wd-page-wrapper .wd-single-post-cat .wd-post-cat, html .wd-page-wrapper .wd-single-post-cat .wd-post-cat a',
+			'selector-hover' => 'html .wd-page-wrapper .post-single-page .wd-post-cat a:hover, html .wd-page-wrapper .wd-single-post-cat .wd-post-cat a:hover',
+		),
+		'blog_date_sinle_post'              => array(
+			'title'    => 'Single blog post date',
+			'selector' => 'html .post-single-page .wd-post-date.wd-style-default, html .wd-single-post-date .wd-post-date.wd-style-default',
+			'selector-hover' => 'html .post-single-page .wd-post-date.wd-style-default:hover, html .wd-single-post-date .wd-post-date.wd-style-default:hover',
 		),
 		'widgets'                               => array(
 			'title' => 'Widgets',
 		),
 		'widgets_price'          => array(
-			'title'    => 'Widgets prices',
+			'title'    => 'Widget price',
 			'selector' => 'html .widget-area .widget .price > .amount, html .widget-area .widget .price > ins .amount, html .widget-area .widget .price > ins .amount',
 			'selector-hover' => 'html .widget-area .widget .price > .amount:hover, html .widget-area .widget .price > ins .amount:hover, html .widget-area .widget .price > ins .amount:hover',
+		),
+		'widgets_old_price'              => array(
+			'title'    => 'Widget old price',
+			'selector' => 'html .widget-area .widget .price del, html .widget-area .widget .price del .amount',
+			'selector-hover' => 'html .widget-area .widget .price del:hover, html .widget-area .widget .price del .amount:hover',
 		),
 		'product_categories_first_level'            => array(
 			'title'          => 'Product categories first level',
 			'selector'       => 'html .widget_product_categories .product-categories > li > a',
-			'selector-hover' => '.widget_product_categories .product-categories > li > a:hover, html .widget_product_categories .product-categories > li.current-cat > a',
+			'selector-hover' => '.widget_product_categories .product-categories > li > a:hover, html .widget_product_categories .product-categories > li.wd-active > a',
 		),
 		'product_categories_second_level'           => array(
 			'title'          => 'Product categories second level',

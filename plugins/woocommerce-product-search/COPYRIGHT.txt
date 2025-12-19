@@ -1,0 +1,9 @@
+ WooCommerce Product Search                                      COPYRIGHT.txt
+
+ Copyright 2014-2025 "kento" (Karim Rahimpur) - www.itthinx.com
+
+ The files COPYRIGHT.txt and LICENSE.txt as well as ALL NOTICES IN THE
+ HEADERS OF ALL FILES MUST BE KEPT INTACT.
+
+ The code and all files of this software are released under
+ the license, terms and conditions as outlined in LICENSE.txt.

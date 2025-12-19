@@ -137,6 +137,11 @@ if ( ! function_exists( 'woodmart_product_brands_links' ) ) {
 		$brands       = wc_get_product_terms( $product->get_id(), $brand_option, array( 'fields' => 'all' ) );
 		$taxonomy     = get_taxonomy( $brand_option );
 
+		if ( 'variation' === $product->get_type() && empty( $brands ) && $product->get_parent_id() ) {
+			// For variable products, get the parent product's brands.
+			$brands = wc_get_product_terms( $product->get_parent_id(), $brand_option, array( 'fields' => 'all' ) );
+		}
+
 		if ( empty( $brands ) ) {
 			return;
 		}
@@ -178,10 +183,13 @@ if ( ! function_exists( 'woodmart_product_brand_tab' ) ) {
 
 		$brand_info = wc_get_product_terms( $product->get_id(), $attr, array( 'fields' => 'all' ) );
 
+		$priority = woodmart_get_opt( 'brand_tab_priority' );
+		$priority = ! empty( $priority ) && is_numeric( $priority ) ? $priority : 50;
+
 		if ( isset( $brand_info[0] ) && $brand_info[0]->description ) {
 			$tabs['brand_tab'] = array(
 				'title'    => woodmart_get_opt( 'brand_tab_name' ) ? sprintf( esc_html__( 'About %s', 'woodmart' ), $brand_info[0]->name ) : esc_html__( 'About brand', 'woodmart' ),
-				'priority' => 50,
+				'priority' => $priority,
 				'callback' => 'woodmart_product_brand_tab_content',
 			);
 		}

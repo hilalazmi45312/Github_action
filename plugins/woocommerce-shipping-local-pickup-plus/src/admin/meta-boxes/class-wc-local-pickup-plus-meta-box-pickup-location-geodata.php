@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup Location Data Meta Box.
@@ -85,6 +85,13 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Geodata extends \WC_Local_Pi
 
 					<?php if ( $pickup_location->has_coordinates() ) : ?>
 
+						<?php
+						$map_url = add_query_arg([
+							'q' => urlencode($pickup_location->get_latitude() . ',' . $pickup_location->get_longitude()),
+						], 'https://maps.google.com/maps');
+						?>
+
+
 						<tr>
 							<th><span class="dashicons dashicons-admin-site"></span></th>
 							<td><?php esc_html_e( 'Address is geocoded', 'woocommerce-shipping-local-pickup-plus' ); ?> <span class="geocoded-status-dot has-coordinates"></span></td>
@@ -93,7 +100,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Geodata extends \WC_Local_Pi
 							<th><span class="dashicons dashicons-external"></span></th>
 							<td>
 								<?php $help_tip = __( 'The position determined by Google for this address is only meant for searching locations by distance and visual precision is not a requirement.', 'woocommerce-shipping-local-pickup-plus' ); ?>
-								<a target="_blank" href="http://maps.google.com/maps?q=<?php echo $pickup_location->get_latitude(); ?>,<?php echo $pickup_location->get_longitude(); ?>"><?php esc_html_e( 'View on Google Maps', 'woocommerce-shipping-local-pickup-plus' ); ?></a><?php echo wc_help_tip( $help_tip ); ?>
+								<a target="_blank" href="<?php echo esc_url( $map_url ); ?>"><?php esc_html_e( 'View on Google Maps', 'woocommerce-shipping-local-pickup-plus' ); ?></a><?php echo wc_help_tip( $help_tip ); ?>
 							</td>
 						</tr>
 
@@ -125,7 +132,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Geodata extends \WC_Local_Pi
 									type="text"
 									step="any"
 									name="_pickup_location_latitude"
-									value="<?php echo $pickup_location->get_latitude(); ?>" />
+									value="<?php echo esc_attr( $pickup_location->get_latitude() ); ?>" />
 							</label>
 						</td>
 					</tr>
@@ -135,7 +142,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Geodata extends \WC_Local_Pi
 								<input
 									type="text"
 									name="_pickup_location_longitude"
-									value="<?php echo $pickup_location->get_longitude(); ?>" />
+									value="<?php echo esc_attr( $pickup_location->get_longitude() ); ?>" />
 							</label>
 						</td>
 					</tr>
@@ -165,8 +172,8 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Geodata extends \WC_Local_Pi
 
 		if ( isset( $_POST['_override_pickup_location_geocoding'] ) && 'yes' === $_POST['_override_pickup_location_geocoding'] ) {
 
-			$lat = isset( $_POST['_pickup_location_latitude'] )  ? $_POST['_pickup_location_latitude']  : null;
-			$lon = isset( $_POST['_pickup_location_longitude'] ) ? $_POST['_pickup_location_longitude'] : null;
+			$lat = isset( $_POST['_pickup_location_latitude'] )  ? sanitize_text_field( $_POST['_pickup_location_latitude'] )  : null;
+			$lon = isset( $_POST['_pickup_location_longitude'] ) ? sanitize_text_field( $_POST['_pickup_location_longitude'] ) : null;
 
 			if ( is_numeric( $lat ) && is_numeric( $lon ) ) {
 

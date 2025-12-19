@@ -81,6 +81,10 @@ woodmartThemeModule.sliderAnimations = function() {
 				(element) => e.detail.activeIndex == element.dataset.swiperSlideIndex,
 			).shift();
 
+			if (!slide) {
+				slide = e.target.swiper.wrapperEl.children[e.detail.activeIndex];
+			}
+
 			runAnimations(slide);
 
 			woodmartThemeModule.$document.trigger('wood-images-loaded');
@@ -97,6 +101,7 @@ woodmartThemeModule.runAnimations = function($activeSlide, firstLoad) {
 	// Elementor.
 	$activeSlide.parentElement.querySelectorAll('[class*="wd-animation"]').forEach( function (animateElement) {
 		animateElement.classList.remove('wd-animated');
+		animateElement.classList.remove('wd-in');
 	});
 
 	$activeSlide.querySelectorAll('[class*="wd-animation"]').forEach( function (animateElement) {
@@ -108,12 +113,9 @@ woodmartThemeModule.runAnimations = function($activeSlide, firstLoad) {
 			}
 		})
 
-		// if (firstLoad) {
-		// 	delay += 500;
-		// }
-
 		setTimeout(function() {
 			animateElement.classList.add('wd-animated');
+			animateElement.classList.add('wd-in');
 		}, delay);
 	});
 
@@ -133,10 +135,6 @@ woodmartThemeModule.runAnimations = function($activeSlide, firstLoad) {
 			}
 		}
 
-		// if (firstLoad) {
-		// 	delay += 500;
-		// }
-
 		setTimeout(function() {
 			animateElement.classList.remove('wd-off-anim');
 			animateElement.classList.add('wpb_start_animation');
@@ -146,14 +144,27 @@ woodmartThemeModule.runAnimations = function($activeSlide, firstLoad) {
 };
 
 woodmartThemeModule.sliderLazyLoad = function() {
-	document.querySelectorAll('.wd-slider > .wd-carousel-inner > .wd-carousel').forEach( function (carousel) {
-		load(carousel.querySelector('.wd-carousel-wrap').firstElementChild);
+	const slider = document.querySelectorAll('.wd-slider > .wd-carousel-inner > .wd-carousel');
 
+	window.addEventListener('wdEventStarted', function() {
+		slider.forEach(function (carousel) {
+			load(carousel.querySelector('.wd-carousel-wrap').firstElementChild);
+		});
+	});
+
+	slider.forEach( function (carousel) {
 		carousel.addEventListener('wdSlideChange', function (e) {
 			var slide = Array.prototype.filter.call(
 				e.target.swiper.wrapperEl.children,
 				(element) => e.detail.activeIndex == element.dataset.swiperSlideIndex,
 			).shift();
+
+			if (!slide) {
+				slide = Array.prototype.filter.call(
+					e.target.swiper.wrapperEl.children,
+					(element) => element.classList.contains('woodmart-loaded') && element.nextElementSibling ? element.nextElementSibling : null
+				).shift();
+			}
 
 			load(slide);
 		});
@@ -173,6 +184,6 @@ woodmartThemeModule.sliderLazyLoad = function() {
 };
 
 window.addEventListener('load',function() {
-	woodmartThemeModule.sliderAnimations();
 	woodmartThemeModule.sliderLazyLoad();
+	woodmartThemeModule.sliderAnimations();
 });

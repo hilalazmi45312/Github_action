@@ -13,90 +13,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use XTS\Admin\Modules\Options;
 use XTS\Modules\Mega_Menu_Walker;
-use XTS\Singleton;
 
 /**
  * Sticky navigation.
  *
  * @since 1.0.0
  */
-class Main extends Singleton {
+class Main {
 	/**
-	 * Basic initialization class required for Module class.
-	 *
-	 * @since 1.0.0
+	 * Constructor.
 	 */
-	public function init() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
 
 		add_action( 'wp_head', array( $this, 'enqueue_styles' ), 200 );
 		add_action( 'woodmart_after_body_open', array( $this, 'template' ), 600 );
 		add_filter( 'body_class', array( $this, 'body_class' ) );
 		add_filter( 'woodmart_localized_string_array', array( $this, 'add_localized_settings' ) );
-	}
-
-	/**
-	 * Output sticky category navigation menu.
-	 *
-	 * @codeCoverageIgnore
-	 * @since 1.0.0
-	 */
-	public function template() {
-		if ( ! woodmart_get_opt( 'sticky_navigation_menu' ) || woodmart_is_maintenance_active() || wp_is_mobile() && woodmart_get_opt( 'mobile_optimization', 0 ) ) {
-			return;
-		}
-
-		$title = woodmart_get_opt( 'sticky_navigation_title' );
-
-		if ( ! $title ) {
-			$title = esc_html__( 'Menu', 'woodmart' );
-		}
-
-		woodmart_enqueue_js_script( 'menu-sticky-offsets' );
-		woodmart_enqueue_js_script( 'menu-overlay' );
-		?>
-			<div class="wd-sticky-nav wd-hide-md">
-				<div class="wd-sticky-nav-title">
-					<span>
-						<?php echo esc_html( $title ); ?>
-					</span>
-				</div>
-
-				<?php
-				wp_nav_menu(
-					array(
-						'menu'       => woodmart_get_opt( 'sticky_navigation_menu' ),
-						'menu_class' => 'menu wd-nav wd-nav-vertical wd-nav-sticky',
-						'container'  => '',
-						'walker'     => new Mega_Menu_Walker(),
-					)
-				);
-				?>
-				<?php if ( woodmart_get_opt( 'sticky_navigation_area' ) || woodmart_get_opt( 'sticky_navigation_html_block' ) ) : ?>
-					<div class="wd-sticky-nav-content wd-entry-content">
-						<?php if ( 'text' === woodmart_get_opt( 'sticky_navigation_content_type', 'text' ) ) : ?>
-							<?php echo do_shortcode( woodmart_get_opt( 'sticky_navigation_area' ) ); ?>
-						<?php else : ?>
-							<?php echo woodmart_get_html_block( woodmart_get_opt( 'sticky_navigation_html_block' ) ); //phpcs:ignore ?>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
-			</div>
-		<?php
-	}
-
-	/**
-	 * Enqueue style.
-	 *
-	 * @return void
-	 */
-	public function enqueue_styles() {
-		if ( ! woodmart_get_opt( 'sticky_navigation_menu' ) ) {
-			return;
-		}
-
-		woodmart_enqueue_inline_style( 'mod-nav-vertical' );
-		woodmart_enqueue_inline_style( 'sticky-nav' );
 	}
 
 	/**
@@ -225,6 +158,70 @@ class Main extends Singleton {
 	}
 
 	/**
+	 * Output sticky category navigation menu.
+	 *
+	 * @codeCoverageIgnore
+	 * @since 1.0.0
+	 */
+	public function template() {
+		if ( ! woodmart_get_opt( 'sticky_navigation_menu' ) || woodmart_is_maintenance_active() || wp_is_mobile() && woodmart_get_opt( 'mobile_optimization', 0 ) ) {
+			return;
+		}
+
+		$title = woodmart_get_opt( 'sticky_navigation_title' );
+
+		if ( ! $title ) {
+			$title = esc_html__( 'Menu', 'woodmart' );
+		}
+
+		woodmart_enqueue_js_script( 'menu-sticky-offsets' );
+		woodmart_enqueue_js_script( 'menu-overlay' );
+		?>
+			<div class="wd-sticky-nav wd-hide-md">
+				<div class="wd-sticky-nav-title">
+					<span>
+						<?php echo esc_html( $title ); ?>
+					</span>
+				</div>
+
+				<?php
+				wp_nav_menu(
+					array(
+						'menu'       => woodmart_get_opt( 'sticky_navigation_menu' ),
+						'menu_class' => 'menu wd-nav wd-nav-vertical wd-nav-sticky wd-dis-act',
+						'container'  => '',
+						'walker'     => new Mega_Menu_Walker(),
+					)
+				);
+				?>
+				<?php if ( woodmart_get_opt( 'sticky_navigation_area' ) || woodmart_get_opt( 'sticky_navigation_html_block' ) ) : ?>
+					<div class="wd-sticky-nav-content wd-entry-content">
+						<?php if ( 'text' === woodmart_get_opt( 'sticky_navigation_content_type', 'text' ) ) : ?>
+							<?php echo do_shortcode( woodmart_get_opt( 'sticky_navigation_area' ) ); ?>
+						<?php else : ?>
+							<?php echo woodmart_get_html_block( woodmart_get_opt( 'sticky_navigation_html_block' ) ); //phpcs:ignore ?>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		<?php
+	}
+
+	/**
+	 * Enqueue style.
+	 *
+	 * @return void
+	 */
+	public function enqueue_styles() {
+		if ( ! woodmart_get_opt( 'sticky_navigation_menu' ) ) {
+			return;
+		}
+
+		woodmart_enqueue_inline_style( 'mod-nav-vertical' );
+		woodmart_enqueue_inline_style( 'sticky-nav' );
+	}
+
+	/**
 	 * Get all menus.
 	 *
 	 * @codeCoverageIgnore
@@ -280,4 +277,4 @@ class Main extends Singleton {
 	}
 }
 
-Main::get_instance();
+new Main();

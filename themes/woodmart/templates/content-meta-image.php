@@ -5,6 +5,8 @@ $post_format    = get_post_format();
 $thumb_classes  = '';
 $gallery_slider = apply_filters( 'woodmart_gallery_slider', true );
 $gallery        = array();
+$blog_excerpt   = woodmart_get_content( false, false, true );
+$has_excerpt    = woodmart_loop_prop( 'parts_text' ) && ( get_the_excerpt() || $blog_excerpt );
 
 $classes = array(
 	'wd-post',
@@ -30,22 +32,26 @@ if ( ! get_the_title() ) {
 	$classes[] = 'post-no-title';
 }
 
-if ( has_post_thumbnail() ) {
-	$thumb_classes .= ' color-scheme-light';
-}
-
 if ( 'quote' === $post_format ) {
 	woodmart_enqueue_inline_style( 'blog-loop-format-quote' );
 } elseif ( 'gallery' === $post_format && $gallery_slider ) {
 	$gallery = get_post_gallery( false, false );
+	woodmart_enqueue_inline_style( 'blog-mod-gallery' );
 
 	if ( ! empty( $gallery['ids'] ) ) {
-		$thumb_classes .= ' wd-carousel-container wd-post-gallery color-scheme-light';
+		$thumb_classes = ' wd-carousel-container wd-post-gallery';
 
 		$gallery['images_id'] = explode( ',', $gallery['ids'] );
+
+		if ( ! has_post_thumbnail() ) {
+			$classes[] = 'has-post-thumbnail';
+		}
 	}
 }
 
+if ( has_post_thumbnail() || ! empty( $gallery['ids'] ) ) {
+	$thumb_classes .= ' color-scheme-light';
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
@@ -61,13 +67,20 @@ if ( 'quote' === $post_format ) {
 			woodmart_enqueue_inline_style( 'swiper' );
 			?>
 			<div class="wd-carousel-inner">
-				<div class="wd-carousel wd-grid"<?php echo woodmart_get_carousel_attributes( array( 'autoheight' => 'yes' ) ); //phpcs:ignore ?>>
+				<div class="wd-carousel wd-grid"<?php echo woodmart_get_carousel_attributes( array( 'slides_per_view' => 1, 'autoheight' => 'yes' ) ); //phpcs:ignore ?>>
 					<div class="wd-carousel-wrap">
 						<?php
 						foreach ( $gallery['images_id'] as $image_id ) {
 							?>
 							<div class="wd-carousel-item">
-								<?php echo woodmart_otf_get_image_html( $image_id, apply_filters( 'woodmart_gallery_post_format_size', 'large' ) ); ?>
+								<?php echo woodmart_otf_get_image_html(
+									$image_id,
+									apply_filters( 'woodmart_gallery_post_format_size', woodmart_get_opt( 'blog_image_size', 'large' ) ),
+									array(
+										'width'  => woodmart_get_opt( 'blog_image_custom_width' ),
+										'height' => woodmart_get_opt( 'blog_image_custom_height' ),
+									)
+								); ?>
 							</div>
 							<?php
 						}
@@ -78,22 +91,23 @@ if ( 'quote' === $post_format ) {
 			</div>
 		<?php else : ?>
 			<div class="wd-post-img">
-				<?php echo woodmart_get_post_thumbnail( 'large' ); // phpcs:ignore ?>
+				<?php echo woodmart_get_post_thumbnail(  woodmart_get_opt('blog_image_size', 'large' ) ); // phpcs:ignore ?>
 			</div>
 		<?php endif; ?>
 
 		<?php /* translators: %s: Post title */ ?>
-		<a class="wd-post-link wd-fill" href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark" aria-label="<?php echo esc_attr( sprintf( __( 'Link on post %s', 'woodmart' ), esc_attr( get_the_title() ) ) ); ?>"></a>
+		<a class="wd-post-link wd-fill" tabindex="-1" href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark" aria-label="<?php echo esc_attr( sprintf( __( 'Link on post %s', 'woodmart' ), esc_attr( get_the_title() ) ) ); ?>"></a>
 
 		<?php if ( woodmart_loop_prop( 'parts_meta' ) ) : ?>
 			<div class="wd-post-header">
-				<div class="wd-meta-author">
-					<?php woodmart_post_meta_author( true, false ); ?>
+				<?php woodmart_enqueue_inline_style( 'blog-mod-author' ); ?>
+				<div class="wd-post-author wd-meta-author">
+					<?php woodmart_post_meta_author( true, false, true, 22 ); ?>
 				</div>
 
 				<div class="wd-post-actions">
 					<?php if ( woodmart_is_social_link_enable( 'share' ) && function_exists( 'woodmart_shortcode_social' ) ) : ?>
-						<div class="wd-post-share wd-tltp">
+						<div tabindex="0" class="wd-post-share wd-tltp">
 							<div class="tooltip top">
 								<div class="tooltip-inner">
 									<?php
@@ -111,7 +125,8 @@ if ( 'quote' === $post_format ) {
 					<?php endif; ?>
 
 					<?php if ( comments_open() ) : ?>
-						<div class="wd-meta-reply">
+						<?php woodmart_enqueue_inline_style( 'blog-mod-comments-button' ); ?>
+						<div class="wd-post-reply wd-meta-reply wd-style-1">
 							<?php woodmart_post_meta_reply(); ?>
 						</div>
 					<?php endif; ?>
@@ -121,11 +136,9 @@ if ( 'quote' === $post_format ) {
 	</div>
 
 	<div class="wd-post-content">
-		<div class="wd-post-entry-meta">
+		<div class="wd-post-meta wd-post-entry-meta">
 			<?php if ( is_sticky() ) : ?>
-				<div class="wd-featured-post">
-					<?php esc_html_e( 'Featured', 'woodmart' ); ?>
-				</div>
+				<div class="wd-featured-post"></div>
 			<?php endif; ?>
 
 			<?php if ( woodmart_loop_prop( 'parts_meta' ) && get_the_category_list( ', ' ) ) : ?>
@@ -135,33 +148,35 @@ if ( 'quote' === $post_format ) {
 			<?php endif; ?>
 
 			<?php if ( woodmart_loop_prop( 'parts_published_date', true ) ) : ?>
-				<div class="wd-modified-date">
-					<?php woodmart_post_modified_date(); ?>
+				<div class="wd-post-date wd-style-default">
+					<time class="published" datetime="<?php echo get_the_date( 'c' ); // phpcs:ignore ?>">
+						<?php echo esc_html( get_the_date( 'd M Y' ) ); ?>
+					</time>
 				</div>
 
-				<div class="wd-meta-date">
-					<?php echo esc_html( get_the_date( 'd M Y' ) ); ?>
+				<div class="wd-modified-date">
+					<?php woodmart_post_modified_date(); ?>
 				</div>
 			<?php endif; ?>
 		</div>
 
 		<?php if ( woodmart_loop_prop( 'parts_title' ) ) : ?>
-			<h3 class="wd-entities-title title post-title">
+			<h3 class="wd-post-title wd-entities-title title post-title">
 				<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 					<?php the_title(); ?>
 				</a>
 			</h3>
 		<?php endif; ?>
 
-		<?php if ( woodmart_loop_prop( 'parts_text' ) ) : ?>
-			<div class="wd-post-desc">
+		<?php if ( $has_excerpt ) : ?>
+			<div class="wd-post-excerpt">
 				<?php if ( is_search() ) : ?>
 					<div class="entry-summary">
 						<?php the_excerpt(); ?>
 					</div>
 				<?php else : ?>
 					<?php
-					woodmart_get_content( false );
+					echo $blog_excerpt; //phpcs:ignore
 
 					wp_link_pages(
 						array(
@@ -177,7 +192,7 @@ if ( 'quote' === $post_format ) {
 		<?php endif; ?>
 
 		<?php if ( woodmart_loop_prop( 'parts_btn' ) ) : ?>
-			<?php woodmart_render_read_more_btn(); ?>
+			<?php woodmart_render_read_more_btn( 'link' ); ?>
 		<?php endif; ?>
 	</div>
 

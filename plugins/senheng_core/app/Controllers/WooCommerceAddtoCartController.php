@@ -51,16 +51,24 @@ class WooCommerceAddtoCartController
      */
     public static function is_woodmart_theme()
     {
+        static $is_woodmart = null;
+
+        if ($is_woodmart !== null) {
+            return $is_woodmart;
+        }
+
         $theme = wp_get_theme();
         $theme_name = $theme->get('Name');
         $theme_template = $theme->get('Template');
 
         // Check if it's Woodmart or a Woodmart child theme
-        return (
+        $is_woodmart = (
             stripos($theme_name, 'woodmart') !== false ||
             stripos($theme_template, 'woodmart') !== false ||
             function_exists('woodmart_get_theme_info')
         );
+
+        return $is_woodmart;
     }
 
     /**
@@ -87,7 +95,7 @@ class WooCommerceAddtoCartController
         add_action('init', [self::class, 'remove_default_mini_cart_variation_hooks'], 30);
 
         // Add WooCommerce stock validation hooks
-        add_filter('woocommerce_add_to_cart_validation', [self::class, 'validate_variation_stock'], 10, 5);
+        // add_filter('woocommerce_add_to_cart_validation', [self::class, 'validate_variation_stock'], 10, 5);
 
         add_filter( 'woocommerce_product_variation_title_include_attributes', '__return_false' );
     }
@@ -250,6 +258,13 @@ class WooCommerceAddtoCartController
                 '1.0.0',
                 true
             );
+
+            wp_enqueue_style(
+                'senheng-sticky-footer-css',
+                SENHENG_CORE_ASSETS_URL . 'css/single-product-sticky-footer.css',
+                array(),
+                '1.0.0'
+            );
         }
 
         // Localize script with optimized parameters for faster performance
@@ -265,24 +280,6 @@ class WooCommerceAddtoCartController
 
     }
 
-
-
-    /**
-     * Validate variation stock before adding to cart
-     */
-    public static function validate_variation_stock($passed, $product_id, $quantity, $variation_id = 0, $variations = array())
-    {
-        // Check if the product has custom sale quantity handling - if so, let that system handle ALL validation
-        $product = wc_get_product($variation_id ?: $product_id);
-        if ($product) {
-            $product_key = $variation_id ?: $product_id;
-            $sale_quantity_meta = get_post_meta($product_key, '_sales_quantity', true);
-
-            if ($sale_quantity_meta !== '' && $sale_quantity_meta !== false) {
-                return $passed; // Skip this validation entirely
-            }
-        }
-    }
 
     /**
      * Remove default WooCommerce variation display hooks in mini cart to prevent duplicates
@@ -308,6 +305,7 @@ class WooCommerceAddtoCartController
         // Core functionality - always needed
         add_action('woocommerce_add_to_cart', [self::class, 'handle_add_to_cart'], 10, 6);
         add_filter('woocommerce_add_cart_item_data', [self::class, 'add_product_extras_to_cart_item_data'], 10, 3);
+        add_filter('woocommerce_add_cart_item', [self::class, 'restore_product_extras_to_cart_item'], 10, 2);
         add_filter('woocommerce_add_to_cart_fragments', [self::class, 'refresh_cart_fragments_for_addons'], 10, 1);
 
         add_action( 'woocommerce_before_single_product_summary', 'woocommerce_output_all_notices', 10 );
@@ -344,7 +342,7 @@ class WooCommerceAddtoCartController
         add_action('wp', [self::class, 'init_cart_dependent_features']);
 
         // Initialize side cart mixed product validation
-        // add_action('wp_footer', [self::class, 'init_side_cart_mixed_product_validation']);
+        add_action('wp_footer', [self::class, 'init_side_cart_mixed_product_validation']);
 
         // Override mini-cart subtotal output to be deposit-aware
         add_action('init', [self::class, 'override_mini_cart_subtotal_output'], 30);
@@ -403,8 +401,42 @@ class WooCommerceAddtoCartController
         $options = self::get_trade_deposit_options_from_request();
 
         if (!empty($product_extras)) {
-            // Store product extras in cart item meta
-            WC()->cart->cart_contents[$cart_item_key]['product_extras'] = $product_extras;
+            // Check if cart item already has product_extras (merging case)
+            $existing_extras = isset(WC()->cart->cart_contents[$cart_item_key]['product_extras']) 
+                ? WC()->cart->cart_contents[$cart_item_key]['product_extras'] 
+                : null;
+            
+            if ($existing_extras) {
+                // Merging case: update quantities based on the new total quantity
+                // When WooCommerce merges, $quantity is the NEW total quantity
+                // We need to keep the original extras structure but update quantities
+                
+                // Update selected_products quantities if they exist
+                if (isset($existing_extras['selected_products']) && is_array($existing_extras['selected_products'])) {
+                    foreach ($existing_extras['selected_products'] as $index => $extra_product) {
+                        // The extra product quantity should match the main product quantity
+                        // (assuming 1:1 ratio per main product)
+                        $base_qty = isset($extra_product['quantity']) ? intval($extra_product['quantity']) : 1;
+                        // Get the current cart item quantity before this merge
+                        $current_cart_qty = isset(WC()->cart->cart_contents[$cart_item_key]['quantity']) 
+                            ? intval(WC()->cart->cart_contents[$cart_item_key]['quantity']) 
+                            : 1;
+                        // Calculate the base quantity per main product
+                        $qty_per_main = $current_cart_qty > 0 ? round($base_qty / $current_cart_qty) : $base_qty;
+                        // New quantity = qty_per_main * new total quantity
+                        $new_extra_qty = max(1, $qty_per_main * $quantity);
+                        
+                        WC()->cart->cart_contents[$cart_item_key]['product_extras']['selected_products'][$index]['quantity'] = $new_extra_qty;
+                    }
+                }
+                
+                // selected_info doesn't have quantity - it just follows the main product
+                // No update needed for selected_info
+                
+            } else {
+                // New item: store product extras directly
+                WC()->cart->cart_contents[$cart_item_key]['product_extras'] = $product_extras;
+            }
 
             // Store extras hash for comparison
             if (isset($cart_item_data['extras_hash'])) {
@@ -457,9 +489,17 @@ class WooCommerceAddtoCartController
             // No early return is needed; WooCommerce will handle merge by cart ID
         }
 
-        // Add product extras (without trade/deposit) if present
+        // IMPORTANT: Store product_extras in session temporarily, NOT in cart_item_data
+        // This prevents the full extras array (with volatile fields like price) from affecting cart ID
+        // The extras will be restored to cart item after cart ID is generated
         if (!empty($product_extras)) {
-            $cart_item_data['product_extras'] = $product_extras;
+            $pending_extras = WC()->session ? WC()->session->get('pending_product_extras', array()) : array();
+            $extras_hash = isset($cart_item_data['extras_hash']) ? $cart_item_data['extras_hash'] : '';
+            $pending_key = $product_id . '_' . $variation_id . '_' . $extras_hash;
+            $pending_extras[$pending_key] = $product_extras;
+            if (WC()->session) {
+                WC()->session->set('pending_product_extras', $pending_extras);
+            }
             // Explicit flag to differentiate keys when extras exist
             $cart_item_data['has_product_extras'] = '1';
         }
@@ -473,6 +513,41 @@ class WooCommerceAddtoCartController
         }
 
         return $cart_item_data;
+    }
+
+    /**
+     * Restore product_extras to cart item after cart ID is generated
+     * This prevents volatile fields from affecting cart ID/merging
+     */
+    public static function restore_product_extras_to_cart_item($cart_item, $cart_item_key)
+    {
+        // Check if this item has pending product extras
+        if (!isset($cart_item['has_product_extras']) || $cart_item['has_product_extras'] !== '1') {
+            return $cart_item;
+        }
+        
+        // Get pending product extras from session
+        $pending_extras = WC()->session ? WC()->session->get('pending_product_extras', array()) : array();
+        if (empty($pending_extras)) {
+            return $cart_item;
+        }
+        
+        $product_id = $cart_item['product_id'];
+        $variation_id = isset($cart_item['variation_id']) ? $cart_item['variation_id'] : 0;
+        $extras_hash = isset($cart_item['extras_hash']) ? $cart_item['extras_hash'] : '';
+        $pending_key = $product_id . '_' . $variation_id . '_' . $extras_hash;
+        
+        if (isset($pending_extras[$pending_key])) {
+            $cart_item['product_extras'] = $pending_extras[$pending_key];
+            
+            // Clear from pending
+            unset($pending_extras[$pending_key]);
+            if (WC()->session) {
+                WC()->session->set('pending_product_extras', $pending_extras);
+            }
+        }
+        
+        return $cart_item;
     }
 
 
@@ -509,7 +584,7 @@ class WooCommerceAddtoCartController
 
                 foreach ($product_extras['selected_info'] as $index => $info) {
                     $extra_key = $cart_item_key . '_extra_info_' . $index;
-                    self::render_extra_mini_cart_item($extra_key, $info, 'info', $cart_item_key);
+                    self::render_extra_mini_cart_item($extra_key, $info, 'info', $cart_item_key, $cart_item['quantity']);
                 }
             }
 
@@ -530,7 +605,7 @@ class WooCommerceAddtoCartController
 
                 foreach ($product_extras['selected_products'] as $index => $product) {
                     $extra_key = $cart_item_key . '_extra_product_' . $index;
-                    self::render_extra_mini_cart_item($extra_key, $product, 'product', $cart_item_key);
+                    self::render_extra_mini_cart_item($extra_key, $product, 'product', $cart_item_key, $cart_item['quantity']);
                 }
             }
         }
@@ -740,12 +815,16 @@ class WooCommerceAddtoCartController
 
     /**
      * Render a single extra item as a mini-cart item
+     * @param int $parent_quantity The quantity of the parent cart item
      */
-    private static function render_extra_mini_cart_item($extra_key, $extra_data, $type, $parent_cart_key)
+    private static function render_extra_mini_cart_item($extra_key, $extra_data, $type, $parent_cart_key, $parent_quantity = 1)
     {
         $is_product = ($type === 'product');
         $title = $is_product ? $extra_data['title'] : $extra_data['infoLabel'];
-        $quantity = $is_product ? (int)$extra_data['quantity'] : 1;
+        // Base quantity per main product
+        $base_quantity = $is_product ? (int)$extra_data['quantity'] : 1;
+        // Total quantity = base quantity × parent cart quantity
+        $quantity = $base_quantity * max(1, (int)$parent_quantity);
         $image_url = '';
         $price = '';
 
@@ -798,6 +877,20 @@ class WooCommerceAddtoCartController
                 // If we have stored price data, use it as fallback but prefer fresh product price
                 if (isset($extra_data['price']) && $unit_price <= 0) {
                     $unit_price = floatval($extra_data['price']);
+                }
+
+                // Apply discount if available
+                if (isset($extra_data['childDiscount']) && $extra_data['childDiscount'] > 0 &&
+                    isset($extra_data['discountType']) && !empty($extra_data['discountType'])) {
+                    
+                    $discount_amount = floatval($extra_data['childDiscount']);
+                    $discount_type = $extra_data['discountType'];
+                    
+                    if ($discount_type === 'percent') {
+                         $unit_price = $unit_price - ($unit_price * ($discount_amount / 100));
+                    } elseif ($discount_type === 'fixed') {
+                         $unit_price = max(0, $unit_price - $discount_amount);
+                    }
                 }
 
                 // Get original price from stored data if available
@@ -1031,6 +1124,8 @@ class WooCommerceAddtoCartController
                             'title' => isset($entry['title']) ? $entry['title'] : '',
                             'price' => $price,
                             'originalPrice' => $originalPrice,
+                            'childDiscount' => isset($entry['childDiscount']) ? $entry['childDiscount'] : 0,
+                            'discountType' => isset($entry['discountType']) ? $entry['discountType'] : '',
                             'imageUrl' => ''
                         );
                     }
@@ -1098,6 +1193,14 @@ class WooCommerceAddtoCartController
                     // Add field label if available
                     if (isset($_POST['extra_product_field_labels'][$product_id])) {
                         $product_data['fieldLabel'] = $_POST['extra_product_field_labels'][$product_id];
+                    }
+
+                    // Add discount data if available
+                    if (isset($_POST['extra_product_child_discount'][$product_id])) {
+                        $product_data['childDiscount'] = $_POST['extra_product_child_discount'][$product_id];
+                    }
+                    if (isset($_POST['extra_product_discount_type'][$product_id])) {
+                        $product_data['discountType'] = $_POST['extra_product_discount_type'][$product_id];
                     }
 
                     // Get product title and price for display and calculation
@@ -1211,11 +1314,7 @@ class WooCommerceAddtoCartController
             // Use a more persistent flag that includes product info
             $price_calculated_key = '_price_calculated_' . $unique_key;
 
-            // STEP 1: Handle sale quantity pricing (force regular price logic)
-            if (!empty($cart_item['force_regular_price'])) {
-                $regular_price = $cart_item['data']->get_regular_price();
-                $cart_item['data']->set_price($regular_price);
-            }
+            // Note: Sale quantity pricing removed - using standard WooCommerce pricing
 
             // STEP 2: Handle product extras pricing (simplified without caching)
 
@@ -1235,12 +1334,7 @@ class WooCommerceAddtoCartController
 
                 $base_price = 0;
                 if ($original_product) {
-                    // Check if force_regular_price is set (for sale quantity pricing)
-                    if (!empty($cart_item['force_regular_price'])) {
-                        $base_price = floatval($original_product->get_regular_price());
-                    } else {
-                        $base_price = floatval($original_product->get_price());
-                    }
+                    $base_price = floatval($original_product->get_price());
                 }
 
                 // Final validation - if base price is still 0, this might be a free product
@@ -1305,12 +1399,7 @@ class WooCommerceAddtoCartController
                     if ($original_product) {
                         $base_price = 0;
 
-                        // Check if force_regular_price is set (for sale quantity pricing)
-                        if (!empty($cart_item['force_regular_price'])) {
-                            $base_price = floatval($original_product->get_regular_price());
-                        } else {
-                            $base_price = floatval($original_product->get_price());
-                        }
+                        $base_price = floatval($original_product->get_price());
 
                         $final_price = $base_price;
 
@@ -1401,6 +1490,20 @@ class WooCommerceAddtoCartController
             foreach ($product_extras['selected_products'] as $extra_product) {
                 $extra_price = isset($extra_product['price']) ? floatval($extra_product['price']) : 0;
                 $extra_quantity = isset($extra_product['quantity']) ? intval($extra_product['quantity']) : 1;
+
+                // Apply discount if available
+                if (isset($extra_product['childDiscount']) && $extra_product['childDiscount'] > 0 &&
+                    isset($extra_product['discountType']) && !empty($extra_product['discountType'])) {
+                    
+                    $discount_amount = floatval($extra_product['childDiscount']);
+                    $discount_type = $extra_product['discountType'];
+                    
+                    if ($discount_type === 'percent') {
+                         $extra_price = $extra_price - ($extra_price * ($discount_amount / 100));
+                    } elseif ($discount_type === 'fixed') {
+                         $extra_price = max(0, $extra_price - $discount_amount);
+                    }
+                }
 
                 // Multiply by cart item quantity since extras are per parent product
                 $extra_total = $extra_price * $extra_quantity * $cart_item_quantity;
@@ -1829,11 +1932,23 @@ class WooCommerceAddtoCartController
                 $vid = isset($entry['variationId']) ? intval($entry['variationId']) : 0;
                 $qty = isset($entry['quantity']) ? intval($entry['quantity']) : 1;
                 $ptype = isset($entry['productType']) ? (string)$entry['productType'] : '';
+                $childDiscount = isset($entry['childDiscount']) ? intval($entry['childDiscount']) : 0;
+                $discountType = isset($entry['discountType']) ? (string)$entry['discountType'] : '';
+                
+                // Normalize variation data for hashing
+                $vdata = isset($entry['variationData']) && is_array($entry['variationData']) ? $entry['variationData'] : array();
+                if (!empty($vdata)) {
+                    ksort($vdata);
+                }
+
                 $normalized[] = array(
                     'productId' => $pid,
                     'variationId' => $vid,
+                    'variationData' => $vdata,
                     'quantity' => $qty,
                     'productType' => $ptype,
+                    'childDiscount' => $childDiscount,
+                    'discountType' => $discountType,
                 );
             }
             // Sort by productId, then variationId to avoid order-based differences
@@ -1847,6 +1962,32 @@ class WooCommerceAddtoCartController
             $product_extras['selected_products_count'] = count($normalized);
             // Remove verbose keys from hash input to avoid cosmetic differences causing new keys
             unset($product_extras['selected_products']);
+        }
+
+        // Normalize selected_info to a canonical minimal structure for stable hashing
+        if (isset($product_extras['selected_info']) && is_array($product_extras['selected_info'])) {
+            $normalized_info = array();
+            foreach ($product_extras['selected_info'] as $entry) {
+                $infoId = isset($entry['infoId']) ? (string)$entry['infoId'] : '';
+                $infoLabel = isset($entry['infoLabel']) ? (string)$entry['infoLabel'] : '';
+                $fieldLabel = isset($entry['fieldLabel']) ? (string)$entry['fieldLabel'] : '';
+                $productId = isset($entry['productId']) ? intval($entry['productId']) : 0;
+                
+                $normalized_info[] = array(
+                    'infoId' => $infoId,
+                    'infoLabel' => $infoLabel,
+                    'fieldLabel' => $fieldLabel,
+                    'productId' => $productId,
+                );
+            }
+            // Sort by infoId for stable hashing regardless of insertion order
+            usort($normalized_info, function($a, $b) {
+                return strcmp($a['infoId'], $b['infoId']);
+            });
+            $product_extras['selected_info_normalized'] = $normalized_info;
+            $product_extras['selected_info_count'] = count($normalized_info);
+            // Remove verbose keys from hash input to avoid cosmetic differences causing new keys
+            unset($product_extras['selected_info']);
         }
 
         // Sort top-level keys to ensure stable hashing regardless of insertion order
@@ -2434,12 +2575,7 @@ class WooCommerceAddtoCartController
             return $price_html;
         }
 
-        // Check if force_regular_price is set (for sale quantity pricing)
-        if (!empty($cart_item['force_regular_price'])) {
-            $base_price = $product->get_regular_price();
-        } else {
-            $base_price = $product->get_price();
-        }
+        $base_price = $product->get_price();
 
         // Format the base price for display
         $base_price_html = wc_price($base_price);
@@ -2475,7 +2611,7 @@ class WooCommerceAddtoCartController
                 $variation_id = isset($cart_item['variation_id']) ? $cart_item['variation_id'] : 0;
                 $product = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
                 if ($product) {
-                    $base_unit = !empty($cart_item['force_regular_price']) ? floatval($product->get_regular_price()) : floatval($product->get_price());
+                    $base_unit = floatval($product->get_price());
                 }
             }
 
@@ -3075,8 +3211,26 @@ class WooCommerceAddtoCartController
             $qty = isset($cart_item['quantity']) ? (int)$cart_item['quantity'] : 1;
             $base_price = method_exists($product, 'get_price') ? floatval($product->get_price()) : 0.0;
             $current_selection = 'full';
-            if ((isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit') || (isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') || (isset($cart_item['deposit_amount']) && floatval($cart_item['deposit_amount']) > 0)) {
+            $was_preselected = false;
+            
+            // Check if payment option was already selected when adding to cart
+            // If so, don't show the options UI - the user already made their choice
+            if ((isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit') || 
+                (isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') || 
+                (isset($cart_item['deposit_amount']) && floatval($cart_item['deposit_amount']) > 0)) {
                 $current_selection = 'deposit';
+                $was_preselected = true;
+            }
+            
+            // Also check if full payment was explicitly selected (not just default)
+            if ((isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'full') ||
+                (isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'no')) {
+                $was_preselected = true;
+            }
+            
+            // Skip showing Payment Options if user already made a selection in the widget
+            if ($was_preselected) {
+                continue;
             }
 
             // Compute deposit value

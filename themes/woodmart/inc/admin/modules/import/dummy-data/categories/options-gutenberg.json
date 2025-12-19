@@ -124,5 +124,9 @@
                 "font-size": ""
             }
         }
-    ]
+    ],
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

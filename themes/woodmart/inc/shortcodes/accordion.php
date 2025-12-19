@@ -196,7 +196,7 @@ if ( ! function_exists( 'woodmart_shortcode_accordion' ) ) {
 				?>
 
 				<div class="wd-accordion-item">
-					<div class="wd-accordion-title<?php echo esc_attr( $loop_title_classes_wrapper ); ?>" data-accordion-index="<?php echo esc_attr( $index ); ?>">
+					<div class="wd-accordion-title wd-role-btn<?php echo esc_attr( $loop_title_classes_wrapper ); ?>" data-accordion-index="<?php echo esc_attr( $index ); ?>" tabindex="0">
 						<div class="wd-accordion-title-text">
 							<?php if ( ! empty( $icon_output ) ) : ?>
 								<?php echo $icon_output; // phpcs:ignore ?>

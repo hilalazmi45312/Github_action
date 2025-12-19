@@ -9,6 +9,7 @@ namespace XTS\Modules\Estimate_Delivery;
 
 use XTS\Singleton;
 use WC_Shipping_Zones;
+use WC_Shipping_Zone;
 use WC_Product;
 
 /**
@@ -172,6 +173,8 @@ class Manager extends Singleton {
 				$rule['est_del_priority'] = 1;
 			}
 
+			$rule['key'] = $id;
+
 			if ( ! empty( $rule['est_del_shipping_method'] ) ) {
 				$rules_with_shipping_method[ $id ] = $rule;
 			} else {
@@ -225,8 +228,6 @@ class Manager extends Singleton {
 				continue;
 			}
 
-			$rule['key'] = $id;
-
 			return $rule;
 		}
 	}
@@ -243,6 +244,10 @@ class Manager extends Singleton {
 		$conditions = $rule['est_del_condition'];
 		$is_active  = false;
 		$is_exclude = false;
+
+		if ( ! is_array( $conditions ) || empty( $conditions ) ) {
+			return false;
+		}
 
 		if ( 'variation' === $product->get_type() ) {
 			$product = wc_get_product( $product->get_parent_id() );
@@ -296,6 +301,7 @@ class Manager extends Singleton {
 				case 'product_tag':
 				case 'product_brand':
 				case 'product_attr_term':
+				case 'product_shipping_class':
 					$terms = wp_get_post_terms( $product->get_id(), get_taxonomies(), array( 'fields' => 'ids' ) );
 
 					if ( $terms ) {
@@ -328,12 +334,26 @@ class Manager extends Singleton {
 						}
 					}
 					break;
+				case 'product_stock_status':
+					$is_needed_stock_status = $product->get_stock_status() === $condition['product-stock-status'];
+
+					if ( $is_needed_stock_status ) {
+						if ( 'exclude' === $condition['comparison'] ) {
+							$is_active  = false;
+							$is_exclude = true;
+						} else {
+							$is_active = true;
+						}
+					}
+					break;
 			}
 
 			if ( $is_exclude || $is_active ) {
 				break;
 			}
 		}
+
+		$is_active = apply_filters( 'woodmart_check_estimate_delivery_condition', $is_active, $rule, $product );
 
 		return $is_active;
 	}
@@ -372,6 +392,7 @@ class Manager extends Singleton {
 			case 'product_tag':
 			case 'product_brand':
 			case 'product_attr_term':
+			case 'product_shipping_class':
 				$priority = 30;
 				break;
 			case 'product':
@@ -393,6 +414,7 @@ class Manager extends Singleton {
 		}
 
 		$selected_shipping_method = WC()->session->get( 'chosen_shipping_methods' );
+		$selected_shipping_method = is_array( $selected_shipping_method ) ? array_filter( $selected_shipping_method ) : $selected_shipping_method;
 
 		// If the delivery method has not yet been selected then set the first of the list.
 		if ( empty( $selected_shipping_method ) && ! empty( WC()->cart ) ) {
@@ -420,10 +442,55 @@ class Manager extends Singleton {
 		}
 
 		foreach ( $selected_shipping_method as $method ) {
-			if ( false !== $method ) {
-				$method = explode( ':', $method );
+			if ( false === $method ) {
+				continue;
+			}
 
-				return isset( $method[1] ) ? $method[1] : null;
+			if ( false !== strpos( $method, ':' ) ) {
+				$method    = explode( ':', $method );
+				$method_id = isset( $method[1] ) ? $method[1] : null;
+			} else {
+				$method_id = $this->get_shipping_method_instance_id( $method );
+			}
+		}
+
+		return $method_id ? strval( $method_id ) : null;
+	}
+
+	/**
+	 * Get shipping method instance ID by method name/slug.
+	 *
+	 * @param string $method_name Method name (e.g., 'chrono13').
+	 *
+	 * @return int|null Instance ID or null if not found.
+	 */
+	public function get_shipping_method_instance_id( $method_name ) {
+		$shipping_zones = WC_Shipping_Zones::get_zones();
+
+		foreach ( $shipping_zones as $zone ) {
+			if ( ! empty( $zone['shipping_methods'] ) ) {
+				foreach ( $zone['shipping_methods'] as $method ) {
+					if (
+						$method->id === $method_name ||
+						sanitize_title( $method->get_title() ) === $method_name ||
+						$method->get_rate_id() === $method_name
+					) {
+						return $method->get_instance_id();
+					}
+				}
+			}
+		}
+
+		$zone_0  = new WC_Shipping_Zone( 0 );
+		$methods = $zone_0->get_shipping_methods();
+
+		foreach ( $methods as $method ) {
+			if (
+				$method->id === $method_name ||
+				sanitize_title( $method->get_title() ) === $method_name ||
+				$method->get_rate_id() === $method_name
+			) {
+				return $method->get_instance_id();
 			}
 		}
 

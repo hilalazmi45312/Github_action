@@ -161,5 +161,10 @@
     "popup_color_scheme": "light",
     "secondary-color": {
         "idle": "rgb(165,165,165)"
-    }
+    },
+    "blog_design": "masonry",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

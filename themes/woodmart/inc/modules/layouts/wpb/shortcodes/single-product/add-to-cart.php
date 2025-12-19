@@ -81,7 +81,7 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_add_to_cart' ) ) {
 			<?php woocommerce_template_single_add_to_cart(); ?>
 
 			<?php
-		if ( woodmart_get_opt( 'waitlist_enabled' ) && ( ! woodmart_get_opt( 'waitlist_for_loggined' ) || is_user_logged_in() ) ) {
+			if ( woodmart_get_opt( 'waitlist_enabled' ) && ( ! woodmart_get_opt( 'waitlist_for_loggined' ) || is_user_logged_in() ) ) {
 				$waitlist_frontend = Waitlist_Frontend::get_instance();
 
 				if ( ( 'variable' === $product->get_type() && ! empty( $waitlist_frontend->get_out_of_stock_variations_ids( $product ) ) ) || ( 'simple' === $product->get_type() && ! $product->is_in_stock() ) ) {

@@ -201,7 +201,10 @@ if ( ! function_exists( 'woodmart_shortcode_promo_banner' ) ) {
 
 			$countdown_timer_classes .= 'wd-timer';
 			$countdown_timer_classes .= ' wd-size-' . $countdown_size;
-			$countdown_timer_classes .= ' wd-style-' . $countdown_style;
+
+			if ( 'active' === $countdown_style ) {
+				$countdown_timer_classes .= ' wd-bg-active';
+			}
 
 			woodmart_enqueue_js_library( 'countdown-bundle' );
 			woodmart_enqueue_js_script( 'countdown-element' );
@@ -302,7 +305,7 @@ if ( ! function_exists( 'woodmart_shortcode_promo_banner' ) ) {
 						<?php if ( ! empty( $date ) ) : ?>
 							<div class="<?php echo esc_attr( trim( $countdown_wrapper_classes ) ); ?>">
 								<div class="<?php echo esc_attr( $countdown_timer_classes ); ?>" data-end-date="<?php echo esc_attr( apply_filters( 'wd_countdown_timer_end_date', $date ) ); ?>" data-timezone="<?php echo esc_attr( $timezone ); ?>" data-hide-on-finish="<?php echo esc_attr( $hide_countdown_on_finish ); ?>">
-									<span class="wd-timer-days">
+									<span class="wd-item wd-timer-days">
 										<span class="wd-timer-value">
 											0
 										</span>
@@ -310,7 +313,7 @@ if ( ! function_exists( 'woodmart_shortcode_promo_banner' ) ) {
 											<?php esc_html_e( 'days', 'woodmart' ); ?>
 										</span>
 									</span>
-									<span class="wd-timer-hours">
+									<span class="wd-item wd-timer-hours">
 										<span class="wd-timer-value">
 											00
 										</span>
@@ -318,7 +321,7 @@ if ( ! function_exists( 'woodmart_shortcode_promo_banner' ) ) {
 											<?php esc_html_e( 'hr', 'woodmart' ); ?>
 										</span>
 									</span>
-									<span class="wd-timer-min">
+									<span class="wd-item wd-timer-min">
 										<span class="wd-timer-value">
 											00
 										</span>
@@ -326,7 +329,7 @@ if ( ! function_exists( 'woodmart_shortcode_promo_banner' ) ) {
 											<?php esc_html_e( 'min', 'woodmart' ); ?>
 										</span>
 									</span>
-									<span class="wd-timer-sec">
+									<span class="wd-item wd-timer-sec">
 										<span class="wd-timer-value">
 											00
 										</span>
@@ -379,30 +382,33 @@ if ( ! function_exists( 'woodmart_shortcode_promo_banner' ) ) {
 				<?php endif; ?>
 
 				<?php
-				$css = '';
-				if ( $custom_title_color && ! woodmart_is_css_encode( $custom_title_color ) ) $css .= '#' . $id . ' .banner-title{color:' . $custom_title_color . '}';
-				if ( $custom_subtitle_color && ! woodmart_is_css_encode( $custom_subtitle_color ) ) $css .= '#' . $id . ' .banner-subtitle{color:' . $custom_subtitle_color . '}';
-				if ( $custom_text_color && ! woodmart_is_css_encode( $custom_text_color ) ) $css .= '#' . $id . ' .banner-inner{color:' . $custom_text_color . '}';
+				if ( function_exists( 'woodmart_responsive_text_size_css' ) ) {
+					$css = '';
 
-				// Text size
-				if ( $title_desktop_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-title', $title_desktop_text_size, 'return' );
-				if ( $subtitle_desktop_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-subtitle', $subtitle_desktop_text_size, 'return' );
+					if ( $custom_title_color && ! woodmart_is_css_encode( $custom_title_color ) ) $css .= '#' . $id . ' .banner-title{color:' . $custom_title_color . '}';
+					if ( $custom_subtitle_color && ! woodmart_is_css_encode( $custom_subtitle_color ) ) $css .= '#' . $id . ' .banner-subtitle{color:' . $custom_subtitle_color . '}';
+					if ( $custom_text_color && ! woodmart_is_css_encode( $custom_text_color ) ) $css .= '#' . $id . ' .banner-inner{color:' . $custom_text_color . '}';
 
-				if ( $title_tablet_text_size || $subtitle_tablet_text_size ) {
-					$css .= '@media (max-width:1199px){';
-					if ( $title_tablet_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-title', $title_tablet_text_size, 'return' );
-					if ( $subtitle_tablet_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-subtitle', $subtitle_tablet_text_size, 'return' );
-					$css .= '}';
+					// Text size.
+					if ( $title_desktop_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-title', $title_desktop_text_size, 'return' );
+					if ( $subtitle_desktop_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-subtitle', $subtitle_desktop_text_size, 'return' );
+
+					if ( $title_tablet_text_size || $subtitle_tablet_text_size ) {
+						$css .= '@media (max-width:1199px){';
+						if ( $title_tablet_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-title', $title_tablet_text_size, 'return' );
+						if ( $subtitle_tablet_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-subtitle', $subtitle_tablet_text_size, 'return' );
+						$css .= '}';
+					}
+
+					if ( $title_mobile_text_size || $subtitle_mobile_text_size ) {
+						$css .= '@media (max-width:767px){';
+						if ( $title_mobile_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-title', $title_mobile_text_size, 'return' );
+						if ( $subtitle_mobile_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-subtitle', $subtitle_mobile_text_size, 'return' );
+						$css .= '}';
+					}
+
+					wp_add_inline_style( 'woodmart-inline-css', $css );
 				}
-
-				if ( $title_mobile_text_size || $subtitle_mobile_text_size ) {
-					$css .= '@media (max-width:767px){';
-					if ( $title_mobile_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-title', $title_mobile_text_size, 'return' );
-					if ( $subtitle_mobile_text_size ) $css .= woodmart_responsive_text_size_css( $id, 'banner-subtitle', $subtitle_mobile_text_size, 'return' );
-					$css .= '}';
-				}
-
-				wp_add_inline_style( 'woodmart-inline-css', $css );
 				?>
 			</div>
 		</div>
@@ -476,7 +482,6 @@ if ( ! function_exists( 'woodmart_shortcode_banners_carousel' ) ) {
 		$parsed_atts['custom_sizes'] = $custom_sizes;
 
 		if ( $scroll_carousel_init == 'yes' ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$class .= ' scroll-init';
 		}
 

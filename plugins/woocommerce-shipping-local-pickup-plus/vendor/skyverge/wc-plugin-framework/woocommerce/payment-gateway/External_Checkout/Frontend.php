@@ -19,20 +19,21 @@
  *
  * @package   SkyVerge/WooCommerce/Payment-Gateway/External_Checkout
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2013-2024, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_12\Payment_Gateway\External_Checkout;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_12\Payment_Gateway\External_Checkout;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\Handlers\Script_Handler;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\SV_WC_Helper;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\SV_WC_Payment_Gateway;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\SV_WC_Payment_Gateway_Plugin;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\Blocks\Blocks_Handler;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\Handlers\Script_Handler;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Helper;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Payment_Gateway;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Payment_Gateway_Plugin;
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\Payment_Gateway\\External_Checkout\\Frontend' ) ) :
+if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\Payment_Gateway\\External_Checkout\\Frontend' ) ) :
 
 
 /**
@@ -40,6 +41,7 @@ if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\Paymen
  *
  * @since 5.10.0
  */
+#[\AllowDynamicProperties]
 abstract class Frontend extends Script_Handler {
 
 
@@ -101,14 +103,13 @@ abstract class Frontend extends Script_Handler {
 			return;
 		}
 
-		$locations    = $this->get_handler()->get_display_locations();
-		$is_cart_ajax = wp_doing_ajax() && 'update_shipping_method' === SV_WC_Helper::get_requested_value( 'wc-ajax' );
+		$locations = $this->get_handler()->get_display_locations();
 
-		if ( is_product() && in_array( 'product', $locations, true ) ) {
+		if ( $this->should_init_on_product_page( $locations ) ) {
 			$this->init_product();
-		} else if ( ( is_cart() || $is_cart_ajax ) && in_array( 'cart', $locations, true ) ) {
+		} elseif ( $this->should_init_on_cart_page( $locations ) ) {
 			$this->init_cart();
-		} else if ( is_checkout() && in_array( 'checkout', $locations, true ) ) {
+		} elseif ( $this->should_init_on_checkout_page( $locations ) ) {
 			$this->init_checkout();
 		} else {
 			return;
@@ -125,6 +126,57 @@ abstract class Frontend extends Script_Handler {
 		if ( ! has_action( 'sv_wc_external_checkout_terms_notice' ) ) {
 			add_action( 'sv_wc_external_checkout_terms_notice', [ $this, 'render_terms_notice' ] );
 		}
+	}
+
+
+	/**
+	 * Determines if the external checkout frontend should be initialized on a product page.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @param array $locations configured display locations
+	 * @return bool
+	 */
+	protected function should_init_on_product_page( array $locations ) : bool {
+
+		return in_array( 'product', $locations, true ) && is_product();
+	}
+
+
+	/**
+	 * Determines if the external checkout frontend should be initialized on the cart page.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @param string[] $locations configured display locations
+	 * @return bool
+	 */
+	protected function should_init_on_cart_page( array $locations ) : bool {
+
+		if ( ! in_array( 'cart', $locations, true ) ) {
+			return false;
+		}
+
+		$is_cart_ajax = wp_doing_ajax() && 'update_shipping_method' === SV_WC_Helper::get_requested_value( 'wc-ajax' );
+		$should_init  = $is_cart_ajax || is_cart();
+
+		return $should_init && ! Blocks_Handler::is_cart_block_in_use();
+	}
+
+
+	/**
+	 * Determines if the external checkout frontend should be initialized on the checkout page.
+	 *
+	 * @since 5.12.0
+	 *
+	 * @param string[] $locations configured display locations
+	 * @return bool
+	 */
+	protected function should_init_on_checkout_page( array $locations ) : bool {
+
+		$should_init = in_array( 'checkout', $locations, true ) && is_checkout();
+
+		return $should_init && ! Blocks_Handler::is_checkout_block_in_use();
 	}
 
 
@@ -319,10 +371,47 @@ abstract class Frontend extends Script_Handler {
 	 * Each handler should override this method to add its specific JS.
 	 *
 	 * @since 5.10.0
+	 *
+	 * @return void
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_style( 'sv-wc-external-checkout-v5_11_12', $this->get_handler()->get_plugin()->get_payment_gateway_framework_assets_url() . '/css/frontend/sv-wc-payment-gateway-external-checkout.css', array(), $this->get_handler()->get_plugin()->get_version() ); // TODO: min
+		if  ( ! $this->should_enqueue_scripts() ) {
+			return;
+		}
+
+		wp_enqueue_style( 'sv-wc-external-checkout-v5_15_12', $this->get_handler()->get_plugin()->get_payment_gateway_framework_assets_url() . '/css/frontend/sv-wc-payment-gateway-external-checkout.css', array(), $this->get_handler()->get_plugin()->get_version() ); // TODO: min
+	}
+
+
+	/**
+	 * Determines whether the external checkout handle should enqueue scripts.
+	 *
+	 * @since 5.12.1
+	 *
+	 * @return bool
+	 */
+	protected function should_enqueue_scripts() : bool {
+
+		// enqueue on product pages or other pages
+		$should_enqueue = true;
+
+		// for cart and checkout, bail if blocks are in use (plugin-specific frontend scripts will handle it)
+		if ( is_cart() ) {
+			$should_enqueue = ! Blocks_Handler::is_cart_block_in_use();
+		} elseif ( is_checkout() ) {
+			$should_enqueue = ! Blocks_Handler::is_checkout_block_in_use();
+		}
+
+		/**
+		 * Determines whether the external checkout handler should enqueue scripts.
+		 *
+		 * @since 5.12.1
+		 *
+		 * @param bool $should_enqueue whether the external checkout handler should enqueue scripts
+		 * @param External_Checkout $handler the external checkout handler instance
+		 */
+		return (bool) apply_filters( 'sv_wc_external_checkout_should_enqueue_scripts', $should_enqueue, $this->get_handler() );
 	}
 
 

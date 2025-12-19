@@ -6,7 +6,6 @@
  */
 
 use XTS\Modules\Layouts\Main;
-use XTS\Modules\Waitlist\Frontend as Waitlist_Frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Direct access not allowed.

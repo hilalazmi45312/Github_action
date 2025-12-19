@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.7.2" created="2025-02-25 15:01" -->
+	<!-- generator="WordPress/6.7.2" created="2025-06-04 11:30" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>Marketplace 2</title>
 	<link>https://dummy.xtemos.com/woodmart2/marketplace2</link>
 	<description></description>
-	<pubDate>Tue, 25 Feb 2025 15:01:05 +0000</pubDate>
+	<pubDate>Wed, 04 Jun 2025 11:30:42 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>

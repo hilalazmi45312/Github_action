@@ -234,6 +234,42 @@ class Categories extends Element {
 					),
 					'extra_class' => 'xts-col-6',
 				),
+				'icon_width'            => array(
+					'id'          => 'icon_width',
+					'title'       => esc_html__( 'Width', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb_icon_width.mp4" autoplay loop muted></video>',
+					'type'        => 'slider',
+					'tab'         => esc_html__( 'Style', 'woodmart' ),
+					'group'       => esc_html__( 'Items icon', 'woodmart' ),
+					'from'        => 0,
+					'to'          => 60,
+					'value'       => '',
+					'units'       => 'px',
+					'selectors'   => array(
+						'{{WRAPPER}} .wd-dropdown-cats > .wd-nav > li > a .wd-nav-img' => array(
+							'--nav-img-width: {{VALUE}}px;',
+						),
+					),
+					'extra_class' => 'xts-col-6',
+				),
+				'icon_height'           => array(
+					'id'          => 'icon_height',
+					'title'       => esc_html__( 'Height', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb_icon_height.mp4" autoplay loop muted></video>',
+					'type'        => 'slider',
+					'tab'         => esc_html__( 'Style', 'woodmart' ),
+					'group'       => esc_html__( 'Items icon', 'woodmart' ),
+					'from'        => 0,
+					'to'          => 60,
+					'value'       => '',
+					'units'       => 'px',
+					'selectors'   => array(
+						'{{WRAPPER}} .wd-dropdown-cats > .wd-nav > li > a .wd-nav-img' => array(
+							'--nav-img-height: {{VALUE}}px;',
+						),
+					),
+					'extra_class' => 'xts-col-6',
+				),
 			),
 		);
 	}

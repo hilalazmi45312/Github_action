@@ -178,7 +178,7 @@ class Rating_Criteria extends Singleton {
 							<a class="star-5" href="#">5</a>
 						</span>
 					</div>
-					<select name="<?php echo esc_attr( $criteria_id ); ?>" id="<?php echo esc_attr( $criteria_id ); ?>" required>
+					<select name="<?php echo esc_attr( $criteria_id ); ?>" id="<?php echo esc_attr( $criteria_id ); ?>"<?php echo woodmart_get_opt( 'reviews_criteria_rating_required' ) ? ' required' : ''; ?>>
 						<option value="">
 							<?php echo esc_html__( 'Rate&hellip;', 'woodmart' ); ?>
 						</option>

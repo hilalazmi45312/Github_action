@@ -44,6 +44,10 @@ class Overal_Delivery_Date {
 	 * @return void
 	 */
 	public function __construct( $products, $shipping_method_id = false, $start_date = false ) {
+		if ( ! woodmart_get_opt( 'estimate_delivery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->products           = $products;
 		$this->shipping_method_id = $shipping_method_id;
 		$this->start_date         = $start_date;

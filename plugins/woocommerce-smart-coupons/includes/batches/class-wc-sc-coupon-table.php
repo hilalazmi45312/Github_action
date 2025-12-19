@@ -4,7 +4,7 @@
  *
  * @package     woocommerce-smart-coupons/includes/
  * @since       9.8.0
- * @version     1.2.0
+ * @version     1.4.0
  */
 
 // Exit if accessed directly.
@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WC_SC_Background_Process', false ) ) {
-	if ( file_exists( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/abstracts/class-wc-sc-background-process.php' ) ) {
-		include_once trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/abstracts/class-wc-sc-background-process.php';
+	if ( file_exists( WC_SC_PLUGIN_DIRPATH . 'includes/abstracts/class-wc-sc-background-process.php' ) ) {
+		include_once WC_SC_PLUGIN_DIRPATH . 'includes/abstracts/class-wc-sc-background-process.php';
 	}
 }
 
@@ -71,6 +71,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 		 * @throws Exception If any problem during the process.
 		 */
 		public function task( $current_item = '' ) {
+
 			global $wpdb;
 
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -161,7 +162,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 					if ( function_exists( 'maybe_create_table' ) && is_callable( 'maybe_create_table' ) ) {
 						$table_exists = maybe_create_table( $wpdb->prefix . 'wc_smart_coupons', $create_table_query );
 					} elseif ( function_exists( 'dbDelta' ) && is_callable( 'dbDelta' ) ) {
-						dbDelta( $create_table_query );
+						dbDelta( $create_table_query ); // phpcs:ignore
 					}
 
 					$this->remove_status_from_remaining_items( 'create' );
@@ -169,6 +170,9 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 
 				case 'insert':
 				case 'update':
+					$last_processed_id = (int) get_option( 'wc_sc_last_processed_coupon_id', 0 );
+					$batch_size        = apply_filters( 'wc_sc_data_batch_size_for_custom_table', 10000, array( 'source' => $this ) );
+
 					// phpcs:disable
 					$wpdb->query(
 						$wpdb->prepare(
@@ -182,7 +186,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 								wc_sc_payment_method_ids, wc_sc_shipping_method_ids, wc_sc_user_role_ids, wc_sc_exclude_user_role_ids, wc_sc_product_attribute_ids,
 								wc_sc_exclude_product_attribute_ids, wc_sc_taxonomy_restrictions, wc_sc_excluded_customer_email, wc_sc_product_quantity_restrictions,
 								wc_coupon_message, sa_cbl_billing_locations, sa_cbl_shipping_locations, generated_from_order_id
-							) 
+							)
 							SELECT
 								pm.post_id, pm.discount_type, pm.coupon_amount, pm.minimum_amount, pm.maximum_amount, pm.wc_sc_original_amount,
 								CASE WHEN (pm.date_expires + COALESCE(pm.wc_sc_expiry_time, 0)) > 0 THEN FROM_UNIXTIME(pm.date_expires + COALESCE(pm.wc_sc_expiry_time, 0)) ELSE NULL END,
@@ -247,35 +251,39 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 									MAX(CASE WHEN meta_key = 'generated_from_order_id' THEN CASE WHEN meta_value <> '' AND meta_value IS NOT NULL THEN meta_value ELSE NULL END END) AS generated_from_order_id,
 									MAX(CASE WHEN meta_key = 'wc_sc_expiry_time' THEN CASE WHEN meta_value <> '' AND meta_value IS NOT NULL THEN CAST(meta_value AS UNSIGNED) ELSE NULL END END) AS wc_sc_expiry_time
 								FROM {$wpdb->postmeta}
-								WHERE post_id IN (SELECT DISTINCT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_status = %s)
-									AND post_id NOT IN (SELECT id FROM {$wpdb->prefix}wc_smart_coupons)
+								WHERE post_id IN (
+									SELECT ID
+									FROM {$wpdb->posts}
+									WHERE post_type = %s AND post_status = %s AND ID > %d
+									ORDER BY ID ASC
+								)
 								GROUP BY post_id
 								LIMIT %d
 							) pm",
 							'shop_coupon',
 							'publish',
-							apply_filters( 'wc_sc_data_batch_size_for_custom_table', 10000, array( 'source' => $this ) )
+							$last_processed_id,
+							$batch_size
 						)
 					);
 
-					$remaining_coupon_id = $wpdb->get_var(
-						$wpdb->prepare(
-							"SELECT DISTINCT ID
-								FROM {$wpdb->posts}
-								WHERE post_type = %s
-									AND post_status = %s
-									AND ID NOT IN (SELECT id FROM {$wpdb->prefix}wc_smart_coupons)
-								ORDER BY ID DESC
-								LIMIT 1",
-							'shop_coupon',
-							'publish'
-						)
+					$new_last_id = $wpdb->get_var(
+						"SELECT MAX(ID)
+						FROM `{$wpdb->prefix}wc_smart_coupons`
+						ORDER BY ID DESC
+						LIMIT 1"
+					); // phpcs:enable
+
+					if ( $new_last_id > 0 ) {
+						$this->set_last_processed_id( $new_last_id );
+					}
+
+					// Check if we reached the end.
+					$max_id = (int) $wpdb->get_var( // phpcs:ignore
+						"SELECT MAX(ID) FROM {$wpdb->posts} WHERE post_type = 'shop_coupon' AND post_status = 'publish'"
 					);
-					// phpcs:enable
 
-					$remaining_coupon_id = absint( $remaining_coupon_id );
-
-					if ( empty( $remaining_coupon_id ) ) {
+					if ( $new_last_id >= $max_id ) {
 						$this->remove_status_from_remaining_items( array( 'insert', 'update' ) );
 					}
 
@@ -296,18 +304,46 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 		}
 
 		/**
+		 * Get the last processed coupon ID.
+		 *
+		 * @return int The last processed coupon ID.
+		 */
+		private function get_last_processed_id() {
+			return (int) get_option( 'wc_sc_last_processed_coupon_id', 0 );
+		}
+
+		/**
+		 * Set the last processed coupon ID.
+		 *
+		 * @param int $last_id The last processed coupon ID.
+		 */
+		private function set_last_processed_id( $last_id ) {
+			update_option( 'wc_sc_last_processed_coupon_id', absint( $last_id ), true );
+		}
+
+		/**
 		 * Get the remaining items for doing the action.
 		 *
 		 * @return string The function that needs to be processed.
 		 */
 		public function get_remaining_items() {
-			global $wpdb;
+			try {
+				global $wpdb, $woocommerce_smart_coupon;
 
-			$all_statuses = array( 'create', 'insert', 'update' );
-			$rows         = get_option( 'wc_sc_table_wc_smart_coupons_creation_status' );
-			foreach ( $all_statuses as $status ) {
-				if ( in_array( $status, $rows, true ) ) {
-					return $status;
+				$rows = get_option( 'wc_sc_table_wc_smart_coupons_creation_status' );
+				if ( is_array( $rows ) && in_array( 'create', $rows, true ) ) {
+					return 'create';
+				}
+
+				$last_id = $this->get_last_processed_id();
+				$max_id = (int) $wpdb->get_var( "SELECT MAX(ID) FROM {$wpdb->posts} WHERE post_type = 'shop_coupon' AND post_status = 'publish'" ); // phpcs:ignore
+
+				if ( $last_id < $max_id ) {
+					return 'insert';
+				}
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
 				}
 			}
 
@@ -320,16 +356,20 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 		 * @param mixed $statuses Status to remove.
 		 */
 		public function remove_status_from_remaining_items( $statuses = null ) {
-			if ( empty( $statuses ) ) {
-				return;
+			try {
+				if ( empty( $statuses ) ) {
+					return;
+				}
+				$rows = get_option( 'wc_sc_table_wc_smart_coupons_creation_status' );
+				if ( is_array( $statuses ) ) {
+					$rows = array_diff( $rows, $statuses );
+				} else {
+					$rows = array_diff( $rows, array( $statuses ) );
+				}
+				update_option( 'wc_sc_table_wc_smart_coupons_creation_status', $rows, true );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-			$rows = get_option( 'wc_sc_table_wc_smart_coupons_creation_status' );
-			if ( is_array( $statuses ) ) {
-				$rows = array_diff( $rows, $statuses );
-			} else {
-				$rows = array_diff( $rows, array( $statuses ) );
-			}
-			update_option( 'wc_sc_table_wc_smart_coupons_creation_status', $rows, true );
 		}
 
 		/**
@@ -337,6 +377,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Table' ) && class_exists( 'WC_SC_Background_P
 		 */
 		public function finalize() {
 			delete_option( 'wc_sc_table_wc_smart_coupons_creation_status' );
+			delete_option( 'wc_sc_last_processed_coupon_id' );
 		}
 
 	}

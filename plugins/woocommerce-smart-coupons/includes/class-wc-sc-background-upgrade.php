@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.28.0
- * @version     1.6.0
+ * @version     1.8.0
  * @package     woocommerce-smart-coupons/includes/
  */
 
@@ -123,24 +123,28 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 		 * Init
 		 */
 		public function init() {
-			global $woocommerce_smart_coupon;
-			// Get list of db updates.
-			$updates = $this->get_updates();
-			if ( ! empty( $updates ) ) {
-				foreach ( $updates as $update ) {
-					// Break if version is empty.
-					if ( empty( $update['version'] ) ) {
-						break;
+			try {
+				global $woocommerce_smart_coupon;
+				// Get list of db updates.
+				$updates = $this->get_updates();
+				if ( ! empty( $updates ) ) {
+					foreach ( $updates as $update ) {
+						// Break if version is empty.
+						if ( empty( $update['version'] ) ) {
+							break;
+						}
+						$version       = $update['version'];
+						$update_status = $this->get_status( $version );
+						if ( version_compare( $woocommerce_smart_coupon->get_smart_coupons_version(), $version, '>=' ) && ( false === $update_status ) ) {
+							// Set db update status to pending.
+							$this->set_status( $version, 'pending' );
+						}
+						$handler = isset( $update['cron_handler'] ) ? $update['cron_handler'] : '';
+						$this->register_scheduler( $handler );
 					}
-					$version       = $update['version'];
-					$update_status = $this->get_status( $version );
-					if ( version_compare( $woocommerce_smart_coupon->get_smart_coupons_version(), $version, '>=' ) && ( false === $update_status ) ) {
-						// Set db update status to pending.
-						$this->set_status( $version, 'pending' );
-					}
-					$handler = isset( $update['cron_handler'] ) ? $update['cron_handler'] : '';
-					$this->register_scheduler( $handler );
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -148,15 +152,19 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 		 * Process handler
 		 */
 		public function process_handler() {
-			if ( ! isset( $_GET['wc_sc_update'] ) || ! isset( $_GET['wc_sc_db_update_nonce'] ) ) {
-				return;
-			}
+			try {
+				if ( ! isset( $_GET['wc_sc_update'] ) || ! isset( $_GET['wc_sc_db_update_nonce'] ) ) {
+					return;
+				}
 
-			if ( ! wp_verify_nonce( wc_clean( wp_unslash( $_GET['wc_sc_db_update_nonce'] ) ), 'wc_sc_db_process' ) ) { // phpcs:ignore
-				return;
-			}
+				if ( ! wp_verify_nonce( wc_clean( wp_unslash( $_GET['wc_sc_db_update_nonce'] ) ), 'wc_sc_db_process' ) ) { // phpcs:ignore
+					return;
+				}
 
-			$this->handle_all( wc_clean( wp_unslash( $_GET['wc_sc_update'] ) ) ); // phpcs:ignore
+				$this->handle_all( wc_clean( wp_unslash( $_GET['wc_sc_update'] ) ) ); // phpcs:ignore
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**
@@ -248,19 +256,23 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 		 * Clear all update process.
 		 */
 		public function clear_all_process() {
-			$updates = $this->get_updates();
-			foreach ( $updates as $update ) {
-				$version     = isset( $update['version'] ) ? $update['version'] : '';
-				$row_handler = isset( $update['get_row_handler'] ) ? $update['get_row_handler'] : '';
-				$status      = $this->get_status( $version );
-				if ( false === $status || 'completed' === $status || 'done' === $status ) {
-					continue;
+			try {
+				$updates = $this->get_updates();
+				foreach ( $updates as $update ) {
+					$version     = isset( $update['version'] ) ? $update['version'] : '';
+					$row_handler = isset( $update['get_row_handler'] ) ? $update['get_row_handler'] : '';
+					$status      = $this->get_status( $version );
+					if ( false === $status || 'completed' === $status || 'done' === $status ) {
+						continue;
+					}
+					$rows = ! empty( $row_handler ) && is_callable( $row_handler ) ? call_user_func( $row_handler ) : '';
+					if ( 'processing' === $status && empty( $rows ) ) {
+						do_action( 'wc_sc_background_update_completed', $version );
+						$this->set_status( $version, 'completed' );
+					}
 				}
-				$rows = ! empty( $row_handler ) && is_callable( $row_handler ) ? call_user_func( $row_handler ) : '';
-				if ( 'processing' === $status && empty( $rows ) ) {
-					do_action( 'wc_sc_background_update_completed', $version );
-					$this->set_status( $version, 'completed' );
-				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -298,24 +310,27 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 		 * @param  int|string $action_id id of failed action.
 		 */
 		public function restart_failed_action( $action_id = 0 ) {
+			try {
+				if ( empty( $action_id ) || ! class_exists( 'ActionScheduler' ) || ! is_callable( array( 'ActionScheduler', 'store' ) ) || ! function_exists( 'as_enqueue_async_action' ) ) {
+					return;
+				}
 
-			if ( empty( $action_id ) || ! class_exists( 'ActionScheduler' ) || ! is_callable( array( 'ActionScheduler', 'store' ) ) || ! function_exists( 'as_enqueue_async_action' ) ) {
-				return;
-			}
+				$action      = ActionScheduler::store()->fetch_action( $action_id );
+				$action_hook = $action->get_hook();
 
-			$action      = ActionScheduler::store()->fetch_action( $action_id );
-			$action_hook = $action->get_hook();
-
-			$updates = $this->get_updates();
-			if ( ! empty( $updates ) ) {
-				foreach ( $updates as $update ) {
-					if ( ! empty( $update['version'] ) && ! empty( $update['cron_handler'] ) ) {
-						if ( $action_hook === $update['cron_handler'] ) {
-							$this->set_status( $update['version'], 'processing' );
-							as_enqueue_async_action( $update['cron_handler'], array( 'version' => $update['version'] ), $this->group );
+				$updates = $this->get_updates();
+				if ( ! empty( $updates ) ) {
+					foreach ( $updates as $update ) {
+						if ( ! empty( $update['version'] ) && ! empty( $update['cron_handler'] ) ) {
+							if ( $action_hook === $update['cron_handler'] ) {
+								$this->set_status( $update['version'], 'processing' );
+								as_enqueue_async_action( $update['cron_handler'], array( 'version' => $update['version'] ), $this->group );
+							}
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -433,17 +448,23 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 		 * @return array
 		 */
 		public function get_applied_coupon_profile_options() {
-			global $wpdb;
-			$option_name = 'sc_applied_coupon_profile_%';
-			$options = $wpdb->get_results( // @codingStandardsIgnoreLine
-				$wpdb->prepare(
-					"SELECT option_name, option_value
-			            FROM $wpdb->options
-			            WHERE option_name LIKE %s",
-					$option_name
-				),
-				ARRAY_A
-			);
+			try {
+				global $wpdb;
+				$option_name = 'sc_applied_coupon_profile_%';
+				$options = $wpdb->get_results( // @codingStandardsIgnoreLine
+					$wpdb->prepare(
+						"SELECT option_name, option_value
+				            FROM $wpdb->options
+				            WHERE option_name LIKE %s",
+						$option_name
+					),
+					ARRAY_A
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$options = array();
+			}
+
 			return $options;
 		}
 
@@ -477,8 +498,8 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 			$rows = $this->get_wc_negative_order_stats_status();
 			if ( ! empty( $rows ) ) {
 				if ( ! class_exists( 'WC_SC_Order_Stats_Negative_Net_Total_Fix' ) ) {
-					if ( file_exists( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php' ) ) {
-						include_once trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php';
+					if ( file_exists( WC_SC_PLUGIN_DIRPATH . 'includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php' ) ) {
+						include_once WC_SC_PLUGIN_DIRPATH . 'includes/batches/class-wc-sc-order-stats-negative-net-total-fix.php';
 					}
 				}
 				if ( class_exists( 'WC_SC_Order_Stats_Negative_Net_Total_Fix' ) ) {
@@ -506,8 +527,8 @@ if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
 			$rows = $this->get_table_wc_smart_coupons_creation_status();
 			if ( ! empty( $rows ) ) {
 				if ( ! class_exists( 'WC_SC_Coupon_Table' ) ) {
-					if ( file_exists( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/batches/class-wc-sc-coupon-table.php' ) ) {
-						include_once trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/batches/class-wc-sc-coupon-table.php';
+					if ( file_exists( WC_SC_PLUGIN_DIRPATH . 'includes/batches/class-wc-sc-coupon-table.php' ) ) {
+						include_once WC_SC_PLUGIN_DIRPATH . 'includes/batches/class-wc-sc-coupon-table.php';
 					}
 				}
 				if ( class_exists( 'WC_SC_Coupon_Table' ) ) {

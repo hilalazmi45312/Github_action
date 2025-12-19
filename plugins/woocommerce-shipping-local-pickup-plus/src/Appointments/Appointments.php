@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Appointments\Appointment;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Helpers\DateTimeComparison;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Handler for appointment objects associated with orders and shipping items.
@@ -116,6 +116,7 @@ class Appointments {
 			$start_time_results_ids = Framework\SV_WC_Helper::get_escaped_id_list( array_column( $start_time_results, 'order_item_id' ) );
 
 			// query by location
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$location_results = $wpdb->get_col( $wpdb->prepare( "
 				SELECT order_item_id
 				FROM {$wpdb->prefix}woocommerce_order_itemmeta
@@ -123,6 +124,7 @@ class Appointments {
 				AND meta_value = %d
 				AND order_item_id IN ($start_time_results_ids)
 			", $pickup_location_id ) );
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 			if ( ! empty( $location_results ) ) {
 
@@ -142,6 +144,7 @@ class Appointments {
 				$location_results = Framework\SV_WC_Helper::get_escaped_id_list( $location_results );
 
 				// query by order status
+				// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$order_status_results = $wpdb->get_col( "
 					SELECT order_item_id
 					FROM {$wpdb->prefix}posts AS posts
@@ -150,6 +153,7 @@ class Appointments {
 					AND posts.post_status IN ($order_statuses)
 					AND order_items.order_item_id IN ($location_results)
 				" );
+				// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 				/* @var array start times, indexed by order item ID */
 				$appointment_start_times = [];

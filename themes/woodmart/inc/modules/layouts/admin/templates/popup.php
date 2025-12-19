@@ -13,8 +13,11 @@
 $btn_classes = isset( $btn_classes ) ? $btn_classes : '';
 
 wp_enqueue_style( 'wd-admin-page-layouts', WOODMART_ASSETS . '/css/parts/page-layouts.min.css', array(), WOODMART_VERSION );
+
+$classes = isset( $create_layout ) && isset( $_GET['create_template'] ) ? ' xts-opened' : '';
+
 ?>
-<div class="xts-popup-holder">
+<div class="xts-popup-holder<?php echo esc_attr( $classes ); ?>">
 	<div class="xts-popup-overlay"></div>
 	<?php if ( $btn_text ) : ?>
 		<a href="javascript:void(0);" class="xts-popup-opener xts-btn xts-color-primary<?php echo esc_attr( $btn_classes ); ?>">
@@ -22,7 +25,7 @@ wp_enqueue_style( 'wd-admin-page-layouts', WOODMART_ASSETS . '/css/parts/page-la
 		</a>
 	<?php endif; ?>
 
-	<div class="xts-popup xts-theme-style">
+	<div class="xts-popup xts-size-l xts-theme-style">
 		<div class="xts-popup-inner">
 			<div class="xts-popup-header">
 				<div class="xts-popup-title">

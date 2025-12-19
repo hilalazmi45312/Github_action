@@ -138,7 +138,7 @@ if ( ! function_exists( 'woodmart_get_twitts' ) ) {
 								$timeDisplay = human_time_diff( $t['time'], current_time( 'timestamp' ) );
 								$displayAgo  = _x( ' ago', 'leading space is required to keep gap from date', 'woodmart' );
 								// Use to make il8n compliant
-								printf( esc_html__( '%1$s%2$s', 'woodmart' ), $timeDisplay, $displayAgo );
+								printf( '%1$s%2$s', $timeDisplay, $displayAgo );
 							?>
 						</a>
 					</span>

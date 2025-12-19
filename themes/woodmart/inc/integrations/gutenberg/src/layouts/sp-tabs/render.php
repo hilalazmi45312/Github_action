@@ -17,29 +17,44 @@ if ( ! function_exists( 'wd_gutenberg_single_product_tabs' ) ) {
 		if ( ! empty( $block_attributes['enableAdditionalInfo'] ) ) {
 			$additional_info_classes .= empty( $block_attributes['attrName'] ) ? ' wd-hide-name' : '';
 			$additional_info_classes .= empty( $block_attributes['attrImage'] ) ? ' wd-hide-image' : '';
-		} else {
-			add_filter( 'woocommerce_product_tabs', 'woodmart_single_product_remove_additional_information_tab', 98 );
 		}
 
 		if ( ! empty( $block_attributes['enableReviews'] ) ) {
-			woodmart_enqueue_inline_style( 'mod-comments' );
+			woodmart_enqueue_inline_style( 'post-types-mod-comments' );
 
 			Global_Data::get_instance()->set_data( 'reviews_columns', $block_attributes['reviewsColumns'] );
 			Global_Data::get_instance()->set_data( 'reviews_columns_tablet', $block_attributes['reviewsColumnsTablet'] );
 			Global_Data::get_instance()->set_data( 'reviews_columns_mobile', $block_attributes['reviewsColumnsMobile'] );
-		} else {
-			add_filter( 'woocommerce_product_tabs', 'woodmart_single_product_remove_reviews_tab', 98 );
 		}
-		if ( empty( $block_attributes['enableDescription'] ) ) {
-			add_filter( 'woocommerce_product_tabs', 'woodmart_single_product_remove_description_tab', 98 );
-		}
+
+		add_filter(
+			'woocommerce_product_tabs',
+			function ( $tabs ) use ( $block_attributes ) {
+				if ( isset( $tabs['description'] ) ) {
+					$tabs['description']['wd_show'] = $block_attributes['enableDescription'];
+				}
+
+				if ( isset( $tabs['additional_information'] ) ) {
+					$tabs['additional_information']['wd_show'] = $block_attributes['enableAdditionalInfo'];
+				}
+
+				if ( isset( $tabs['reviews'] ) ) {
+					$tabs['reviews']['wd_show'] = $block_attributes['enableReviews'];
+				}
+
+				return $tabs;
+			},
+			97 // The priority must be lower than the one used in the woodmart_maybe_unset_wc_tabs fucntion.
+		);
 
 		if ( ! empty( $block_attributes['tabsContentTextColorScheme'] ) ) {
 			$title_content_classes .= ' color-scheme-' . $block_attributes['tabsContentTextColorScheme'];
 		}
 
+		$title_classes = '';
+
 		if ( 'tabs' === $block_attributes['layout'] ) {
-			$title_classes         = ' wd-style-' . $block_attributes['tabsStyle'];
+			$title_classes        .= ' wd-style-' . $block_attributes['tabsStyle'];
 			$title_wrapper_classes = '';
 
 			if ( ! empty( $block_attributes['tabsAlignment'] ) ) {
@@ -48,6 +63,67 @@ if ( ! function_exists( 'wd_gutenberg_single_product_tabs' ) ) {
 
 			if ( ! empty( $block_attributes['tabsTitleTextColorScheme'] ) ) {
 				$title_wrapper_classes .= ' color-scheme-' . $block_attributes['tabsTitleTextColorScheme'];
+			}
+
+			$items_bg_activated = ! empty( $block_attributes['tabsBgColorCode'] ) ||
+				! empty( $block_attributes['tabsBgColorVariable'] ) ||
+				! empty( $block_attributes['tabsBgHoverColorCode'] ) ||
+				! empty( $block_attributes['tabsBgHoverColorVariable'] ) ||
+				! empty( $block_attributes['tabsBgActiveColorCode'] ) ||
+				! empty( $block_attributes['tabsBgActiveColorVariable'] );
+
+			$items_box_shadow_active = (
+					( ! empty( $block_attributes['tabsBoxShadowColorCode'] ) || ! empty( $block_attributes['tabsBoxShadowColorVariable'] ) ) &&
+					( ! empty( $block_attributes['tabsBoxShadowHorizontal'] ) || 0 === $block_attributes['tabsBoxShadowHorizontal'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowVertical'] ) || 0 === $block_attributes['tabsBoxShadowVertical'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowSpread'] ) || 0 === $block_attributes['tabsBoxShadowSpread'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowBlur'] ) || 0 === $block_attributes['tabsBoxShadowBlur'] )
+				) ||
+				(
+					( ! empty( $block_attributes['tabsBoxShadowHoverColorCode'] ) || ! empty( $block_attributes['tabsBoxShadowHoverColorVariable'] ) ) &&
+					( ! empty( $block_attributes['tabsBoxShadowHoverHorizontal'] ) || 0 === $block_attributes['tabsBoxShadowHoverHorizontal'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowHoverVertical'] ) || 0 === $block_attributes['tabsBoxShadowHoverVertical'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowHoverSpread'] ) || 0 === $block_attributes['tabsBoxShadowHoverSpread'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowHoverBlur'] ) || 0 === $block_attributes['tabsBoxShadowHoverBlur'] )
+				) ||
+				(
+					( ! empty( $block_attributes['tabsBoxShadowActiveColorCode'] ) || ! empty( $block_attributes['tabsBoxShadowActiveColorVariable'] ) ) &&
+					( ! empty( $block_attributes['tabsBoxShadowActiveHorizontal'] ) || 0 === $block_attributes['tabsBoxShadowActiveHorizontal'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowActiveVertical'] ) || 0 === $block_attributes['tabsBoxShadowActiveVertical'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowActiveSpread'] ) || 0 === $block_attributes['tabsBoxShadowActiveSpread'] ) &&
+					( ! empty( $block_attributes['tabsBoxShadowActiveBlur'] ) || 0 === $block_attributes['tabsBoxShadowActiveBlur'] )
+				);
+
+			$items_border_active = (
+					! empty( $block_attributes['tabsBorderType'] ) &&
+					'none' !== $block_attributes['tabsBorderType'] &&
+					! empty( $block_attributes['tabsBorderWidthTop'] ) &&
+					! empty( $block_attributes['tabsBorderWidthRight'] ) &&
+					! empty( $block_attributes['tabsBorderWidthBottom'] ) &&
+					! empty( $block_attributes['tabsBorderWidthLeft'] )
+				) || (
+					! empty( $block_attributes['tabsBorderRadiusTop'] ) &&
+					! empty( $block_attributes['tabsBorderRadiusRight'] ) &&
+					! empty( $block_attributes['tabsBorderRadiusBottom'] ) &&
+					! empty( $block_attributes['tabsBorderRadiusLeft'] )
+				) || (
+					! empty( $block_attributes['tabsBorderHoverType'] ) &&
+					'none' !== $block_attributes['tabsBorderHoverType'] &&
+					! empty( $block_attributes['tabsBorderHoverWidthTop'] ) &&
+					! empty( $block_attributes['tabsBorderHoverWidthRight'] ) &&
+					! empty( $block_attributes['tabsBorderHoverWidthBottom'] ) &&
+					! empty( $block_attributes['tabsBorderHoverWidthLeft'] )
+				) || (
+					! empty( $block_attributes['tabsBorderActiveType'] ) &&
+					'none' !== $block_attributes['tabsBorderActiveType'] &&
+					! empty( $block_attributes['tabsBorderActiveWidthTop'] ) &&
+					! empty( $block_attributes['tabsBorderActiveWidthRight'] ) &&
+					! empty( $block_attributes['tabsBorderActiveWidthBottom'] ) &&
+					! empty( $block_attributes['tabsBorderActiveWidthLeft'] )
+				);
+
+			if ( $items_bg_activated || $items_box_shadow_active || $items_border_active ) {
+				$title_classes .= ' wd-add-pd';
 			}
 
 			$args = array(
@@ -59,7 +135,6 @@ if ( ! function_exists( 'wd_gutenberg_single_product_tabs' ) ) {
 		} elseif ( 'accordion' === $block_attributes['layout'] ) {
 			$accordion_classes  = ' wd-style-' . $block_attributes['accordionStyle'];
 			$accordion_classes .= ' wd-opener-style-' . $block_attributes['accordionOpenerStyle'];
-			$title_classes      = '';
 
 			if ( ! empty( $block_attributes['accordionAlignment'] ) ) {
 				$accordion_classes .= ' wd-titles-' . $block_attributes['accordionAlignment'];
@@ -82,8 +157,6 @@ if ( ! function_exists( 'wd_gutenberg_single_product_tabs' ) ) {
 				'builder_title_classes'     => $title_classes,
 			);
 		} elseif ( 'side-hidden' === $block_attributes['layout'] ) {
-			$title_classes = '';
-
 			if ( ! empty( $block_attributes['sideHiddenTitleTextColorScheme'] ) ) {
 				$title_classes .= ' color-scheme-' . $block_attributes['sideHiddenTitleTextColorScheme'];
 			}
@@ -132,12 +205,11 @@ if ( ! function_exists( 'wd_gutenberg_single_product_tabs' ) ) {
 				$withcomments = true;
 			}
 		}
-
 		?>
 		<div id="<?php echo esc_attr( wd_get_gutenberg_element_id( $block_attributes ) ); ?>" class="wd-single-tabs<?php echo esc_attr( $wrapper_classes ); ?>">
 			<?php
 				wc_get_template(
-					'single-product/tabs/tabs-' . $block_attributes['layout'] . '.php',
+					'single-product/tabs/tabs-' . sanitize_file_name( $block_attributes['layout'] ) . '.php',
 					$args
 				);
 			?>

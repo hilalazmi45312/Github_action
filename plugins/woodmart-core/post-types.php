@@ -49,7 +49,6 @@ class WOODMART_Post_Types {
 		add_action( 'init', array( $this, 'register_sidebars' ), 1 );
 		add_action( 'init', array( $this, 'slider' ), 1 );
 		add_action( 'init', array( $this, 'register_portfolio' ), 1 );
-
 	}
 
 	// **********************************************************************//
@@ -64,16 +63,9 @@ class WOODMART_Post_Types {
 			'name'               => esc_html__( 'Slides', 'woodmart' ),
 			'singular_name'      => esc_html__( 'Slide', 'woodmart' ),
 			'menu_name'          => esc_html__( 'Slides', 'woodmart' ),
-			'parent_item_colon'  => esc_html__( 'Parent Item:', 'woodmart' ),
-			'all_items'          => esc_html__( 'All Items', 'woodmart' ),
-			'view_item'          => esc_html__( 'View Item', 'woodmart' ),
-			'add_new_item'       => esc_html__( 'Add New Item', 'woodmart' ),
-			'add_new'            => esc_html__( 'Add New', 'woodmart' ),
-			'edit_item'          => esc_html__( 'Edit Item', 'woodmart' ),
-			'update_item'        => esc_html__( 'Update Item', 'woodmart' ),
-			'search_items'       => esc_html__( 'Search Item', 'woodmart' ),
-			'not_found'          => esc_html__( 'Not found', 'woodmart' ),
-			'not_found_in_trash' => esc_html__( 'Not found in Trash', 'woodmart' ),
+			'all_items'     => esc_html__( 'All Slides', 'woodmart' ),
+			'add_new'       => esc_html__( 'Add Slide', 'woodmart' ),
+			'add_new_item'  => esc_html__( 'Add Slide', 'woodmart' ),
 		);
 
 		$args = array(
@@ -85,7 +77,7 @@ class WOODMART_Post_Types {
 			'publicly_queryable'  => is_user_logged_in(),
 			'show_ui'             => true,
 			'show_in_menu'        => true,
-			'show_in_nav_menus'   => true,
+			'show_in_nav_menus'   => false,
 			'show_in_admin_bar'   => true,
 			'menu_position'       => 32,
 			'menu_icon'           => 'dashicons-images-alt2',
@@ -115,23 +107,24 @@ class WOODMART_Post_Types {
 		);
 
 		$args = array(
-			'labels'            => $labels,
-			'public'            => true,
-			'show_in_nav_menus' => true,
-			'show_admin_column' => false,
-			'hierarchical'      => true,
-			'show_tagcloud'     => false,
-			'show_ui'           => true,
-			'query_var'         => false,
-			'rewrite'           => array( 'slug' => 'woodmart_slider' ),
-			'capabilities'      => array(),
+			'labels'             => $labels,
+			'public'             => true,
+			'show_in_nav_menus'  => false,
+			'show_admin_column'  => false,
+			'hierarchical'       => true,
+			'show_tagcloud'      => false,
+			'show_ui'            => true,
+			'query_var'          => false,
+			'publicly_queryable' => false,
+			'rewrite'            => array( 'slug' => 'woodmart_slider' ),
+			'capabilities'       => array(),
 		);
 
 		register_taxonomy( 'woodmart_slider', array( 'woodmart_slide' ), $args );
 	}
 
 	public function duplicate_action( $actions, $post ) {
-		if ( ! in_array( $post->post_type, array( 'woodmart_slide', 'cms_block' ), true )  ) {
+		if ( ! in_array( $post->post_type, array( 'woodmart_slide', 'cms_block', 'wd_popup', 'wd_floating_block' ), true )  ) {
 			return $actions;
 		}
 
@@ -262,10 +255,10 @@ class WOODMART_Post_Types {
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'editor' ),
 			'hierarchical'        => false,
-			'public'              => true,
+			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => 'edit.php?post_type=product',
-			'show_in_nav_menus'   => true,
+			'show_in_nav_menus'   => false,
 			'show_in_admin_bar'   => true,
 			'menu_icon'           => 'dashicons-editor-kitchensink',
 			'can_export'          => true,
@@ -287,19 +280,12 @@ class WOODMART_Post_Types {
 	public function register_blocks() {
 
 		$labels = array(
-			'name'               => esc_html__( 'HTML Blocks', 'woodmart' ),
-			'singular_name'      => esc_html__( 'HTML Block', 'woodmart' ),
-			'menu_name'          => esc_html__( 'HTML Blocks', 'woodmart' ),
-			'parent_item_colon'  => esc_html__( 'Parent Item:', 'woodmart' ),
-			'all_items'          => esc_html__( 'All Items', 'woodmart' ),
-			'view_item'          => esc_html__( 'View Item', 'woodmart' ),
-			'add_new_item'       => esc_html__( 'Add New Item', 'woodmart' ),
-			'add_new'            => esc_html__( 'Add New', 'woodmart' ),
-			'edit_item'          => esc_html__( 'Edit Item', 'woodmart' ),
-			'update_item'        => esc_html__( 'Update Item', 'woodmart' ),
-			'search_items'       => esc_html__( 'Search Item', 'woodmart' ),
-			'not_found'          => esc_html__( 'Not found', 'woodmart' ),
-			'not_found_in_trash' => esc_html__( 'Not found in Trash', 'woodmart' ),
+			'name'          => esc_html__( 'HTML Blocks', 'woodmart' ),
+			'singular_name' => esc_html__( 'HTML Block', 'woodmart' ),
+			'menu_name'     => esc_html__( 'HTML Blocks', 'woodmart' ),
+			'all_items'     => esc_html__( 'All Blocks', 'woodmart' ),
+			'add_new'       => esc_html__( 'Add Block', 'woodmart' ),
+			'add_new_item'  => esc_html__( 'Add Block', 'woodmart' ),
 		);
 
 		$args = array(
@@ -312,7 +298,7 @@ class WOODMART_Post_Types {
 			'publicly_queryable'  => is_user_logged_in(),
 			'show_ui'             => true,
 			'show_in_menu'        => true,
-			'show_in_nav_menus'   => true,
+			'show_in_nav_menus'   => false,
 			'show_in_admin_bar'   => true,
 			'menu_position'       => 32,
 			'menu_icon'           => 'dashicons-schedule',
@@ -346,7 +332,7 @@ class WOODMART_Post_Types {
 		$args = array(
 			'labels'            => $labels,
 			'public'            => true,
-			'show_in_nav_menus' => true,
+			'show_in_nav_menus' => false,
 			'show_admin_column' => false,
 			'hierarchical'      => true,
 			'show_tagcloud'     => true,
@@ -354,6 +340,10 @@ class WOODMART_Post_Types {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'cms_block_cat' ),
 			'capabilities'      => array(),
+			'default_term'      => array(
+				'name' => esc_html__( 'Uncategorized', 'woodmart' ),
+				'slug' => 'uncategorized',
+			),
 			'show_in_rest'      => true,
 		);
 
@@ -416,19 +406,12 @@ class WOODMART_Post_Types {
 	public function register_sidebars() {
 
 		$labels = array(
-			'name'               => esc_html__( 'Sidebars', 'woodmart' ),
-			'singular_name'      => esc_html__( 'Sidebar', 'woodmart' ),
-			'menu_name'          => esc_html__( 'Sidebars', 'woodmart' ),
-			'parent_item_colon'  => esc_html__( 'Parent Item:', 'woodmart' ),
-			'all_items'          => esc_html__( 'All Items', 'woodmart' ),
-			'view_item'          => esc_html__( 'View Item', 'woodmart' ),
-			'add_new_item'       => esc_html__( 'Add New Item', 'woodmart' ),
-			'add_new'            => esc_html__( 'Add New', 'woodmart' ),
-			'edit_item'          => esc_html__( 'Edit Item', 'woodmart' ),
-			'update_item'        => esc_html__( 'Update Item', 'woodmart' ),
-			'search_items'       => esc_html__( 'Search Item', 'woodmart' ),
-			'not_found'          => esc_html__( 'Not found', 'woodmart' ),
-			'not_found_in_trash' => esc_html__( 'Not found in Trash', 'woodmart' ),
+			'name'          => esc_html__( 'Sidebars', 'woodmart' ),
+			'singular_name' => esc_html__( 'Sidebar', 'woodmart' ),
+			'menu_name'     => esc_html__( 'Sidebars', 'woodmart' ),
+			'all_items'     => esc_html__( 'All Sidebars', 'woodmart' ),
+			'add_new'       => esc_html__( 'Add Sidebar', 'woodmart' ),
+			'add_new_item'  => esc_html__( 'Add Sidebar', 'woodmart' ),
 		);
 
 		$args = array(
@@ -437,11 +420,11 @@ class WOODMART_Post_Types {
 			'labels'              => $labels,
 			'supports'            => array( 'title' ),
 			'hierarchical'        => false,
-			'public'              => true,
+			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
-			'show_in_nav_menus'   => true,
-			'show_in_admin_bar'   => true,
+			'show_in_nav_menus'   => false,
+			'show_in_admin_bar'   => false,
 			'menu_position'       => 32,
 			'menu_icon'           => 'dashicons-welcome-widgets-menus',
 			'can_export'          => true,
@@ -472,19 +455,12 @@ class WOODMART_Post_Types {
 		$has_archive        = $portfolio_page_id && get_post( $portfolio_page_id ) ? urldecode( get_page_uri( $portfolio_page_id ) ) : true;
 
 		$labels = array(
-			'name'               => esc_html__( 'Portfolio', 'woodmart' ),
-			'singular_name'      => esc_html__( 'Project', 'woodmart' ),
-			'menu_name'          => esc_html__( 'Projects', 'woodmart' ),
-			'parent_item_colon'  => esc_html__( 'Parent Item:', 'woodmart' ),
-			'all_items'          => esc_html__( 'All Items', 'woodmart' ),
-			'view_item'          => esc_html__( 'View Item', 'woodmart' ),
-			'add_new_item'       => esc_html__( 'Add New Item', 'woodmart' ),
-			'add_new'            => esc_html__( 'Add New', 'woodmart' ),
-			'edit_item'          => esc_html__( 'Edit Item', 'woodmart' ),
-			'update_item'        => esc_html__( 'Update Item', 'woodmart' ),
-			'search_items'       => esc_html__( 'Search Item', 'woodmart' ),
-			'not_found'          => esc_html__( 'Not found', 'woodmart' ),
-			'not_found_in_trash' => esc_html__( 'Not found in Trash', 'woodmart' ),
+			'name'          => esc_html__( 'Portfolio', 'woodmart' ),
+			'singular_name' => esc_html__( 'Project', 'woodmart' ),
+			'menu_name'     => esc_html__( 'Projects', 'woodmart' ),
+			'all_items'     => esc_html__( 'All Projects', 'woodmart' ),
+			'add_new'       => esc_html__( 'Add Project', 'woodmart' ),
+			'add_new_item'  => esc_html__( 'Add Project', 'woodmart' ),
 		);
 
 		$args = array(
@@ -540,7 +516,7 @@ class WOODMART_Post_Types {
 			'new_item_name'         => esc_html__( 'New Category', 'woodmart' ),
 			'add_or_remove_items'   => esc_html__( 'Add or remove Categories', 'woodmart' ),
 			'choose_from_most_used' => esc_html__( 'Choose from most used text-domain', 'woodmart' ),
-			'menu_name'             => esc_html__( 'Category', 'woodmart' ),
+			'menu_name'             => esc_html__( 'Categories', 'woodmart' ),
 		);
 
 		$args = array(
@@ -583,10 +559,15 @@ class WOODMART_Post_Types {
 	public function manage_woodmart_slide_columns( $column, $post_id ) {
 		switch ( $column ) {
 			case 'thumb':
+				$slide_image           = get_post_meta( $post_id, 'image', true );
 				$meta_bg_image_desktop = get_post_meta( $post_id, 'bg_image_desktop', true );
 				$meta_bg_slide_color   = get_post_meta( $post_id, 'bg_color', true );
 
-				if ( $meta_bg_image_desktop && ! is_array( $meta_bg_image_desktop ) || ! empty( $meta_bg_image_desktop['url'] ) ) {
+				if ( ! empty( $slide_image['url'] ) ) {
+					?>
+					<img src="<?php echo esc_url( $slide_image['url'] ); ?>" alt="<?php echo esc_attr__( 'Slide thumbnail', 'woodmart' ); ?>">
+					<?php
+				} elseif ( $meta_bg_image_desktop && ! is_array( $meta_bg_image_desktop ) || ! empty( $meta_bg_image_desktop['url'] ) ) {
 					if ( is_array( $meta_bg_image_desktop ) && isset( $meta_bg_image_desktop['url'] ) ) {
 						$meta_bg_image_desktop = $meta_bg_image_desktop['url'];
 					}
@@ -716,7 +697,7 @@ if ( ! function_exists( 'woodmart_get_file' ) ) {
 
 if ( ! function_exists( 'woodmart_decompress' ) ) {
 	function woodmart_decompress( $variable ) {
-		return base64_decode( $variable );
+		return $variable ? base64_decode( $variable ) : '';
 	}
 }
 

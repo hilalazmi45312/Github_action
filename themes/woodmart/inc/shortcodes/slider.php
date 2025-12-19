@@ -35,33 +35,98 @@ if ( ! function_exists( 'woodmart_get_slide_data' ) ) {
 		}
 
 		if ( 'distortion' === $animation ) {
-			$bg_image_desktop      = has_post_thumbnail( $id ) ? wp_get_attachment_url( get_post_thumbnail_id( $id ) ) : '';
-			$meta_bg_image_desktop = get_post_meta( $id, 'bg_image_desktop', true );
-			$bg_image_tablet       = get_post_meta( $id, 'bg_image_tablet', true );
-			$bg_image_mobile       = get_post_meta( $id, 'bg_image_mobile', true );
+			$bg_image_desktop = has_post_thumbnail( $id ) ? wp_get_attachment_url( get_post_thumbnail_id( $id ) ) : '';
 
-			if ( is_array( $meta_bg_image_desktop ) && ! empty( $meta_bg_image_desktop['url'] ) ) {
-				$meta_bg_image_desktop = $meta_bg_image_desktop['url'];
+			$meta_bg_image_desktop = get_post_meta( $id, 'bg_image_desktop', true );
+			$image_desktop         = get_post_meta( $id, 'image', true );
+
+			$bg_image_tablet      = get_post_meta( $id, 'bg_image_tablet', true );
+			$bg_image_size_tablet = get_post_meta( $id, 'bg_image_tablet_size', true );
+
+			$bg_image_mobile      = get_post_meta( $id, 'bg_image_mobile', true );
+			$bg_image_size_mobile = get_post_meta( $id, 'bg_image_mobile_size', true );
+
+			if ( is_array( $image_desktop ) && ! empty( $image_desktop['id'] ) ) {
+				$image_size = get_post_meta( $id, 'image_size', true );
+
+				if ( 'custom' === $image_size ) {
+					$image_width  = get_post_meta( $id, 'image_size_custom_width', true );
+					$image_height = get_post_meta( $id, 'image_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$image_size = array( (int) $image_width, (int) $image_height );
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$image_size = $image_size ? $image_size : 'full';
+
+				$bg_image_desktop = woodmart_otf_get_image_url( $image_desktop['id'], $image_size );
+			} elseif ( is_array( $meta_bg_image_desktop ) && ! empty( $meta_bg_image_desktop['id'] ) ) {
+				$image_size = get_post_meta( $id, 'bg_image_desktop_size', true );
+
+				if ( 'custom' === $image_size ) {
+					$image_width  = get_post_meta( $id, 'bg_image_desktop_size_custom_width', true );
+					$image_height = get_post_meta( $id, 'bg_image_desktop_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$image_size = array( (int) $image_width, (int) $image_height );
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$image_size = $image_size ? $image_size : 'full';
+
+				$meta_bg_image_desktop = woodmart_otf_get_image_url( $meta_bg_image_desktop['id'], $image_size );
 			}
+
 			if ( ! is_array( $meta_bg_image_desktop ) && $meta_bg_image_desktop ) {
 				$bg_image_desktop = $meta_bg_image_desktop;
 			}
-			if ( is_array( $bg_image_tablet ) && isset( $bg_image_tablet['url'] ) ) {
-				$bg_image_tablet = $bg_image_tablet['url'];
+			if ( is_array( $bg_image_tablet ) && ! empty( $bg_image_tablet['id'] ) ) {
+				if ( 'custom' === $bg_image_size_tablet ) {
+					$image_width  = get_post_meta( $id, 'bg_image_tablet_size_custom_width', true );
+					$image_height = get_post_meta( $id, 'bg_image_tablet_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$bg_image_size_tablet = array( (int) $image_width, (int) $image_height );
+					} else {
+						$bg_image_size_tablet = 'full';
+					}
+				}
+
+				$bg_image_size_tablet = $bg_image_size_tablet ? $bg_image_size_tablet : 'full';
+
+				$bg_image_tablet = woodmart_otf_get_image_url( $bg_image_tablet['id'], $bg_image_size_tablet );
 			}
-			if ( is_array( $bg_image_mobile ) && isset( $bg_image_mobile['url'] ) ) {
-				$bg_image_mobile = $bg_image_mobile['url'];
+			if ( is_array( $bg_image_mobile ) && ! empty( $bg_image_mobile['url'] ) ) {
+				if ( 'custom' === $bg_image_size_mobile ) {
+					$image_width  = get_post_meta( $id, 'bg_image_mobile_size_custom_width', true );
+					$image_height = get_post_meta( $id, 'bg_image_mobile_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$bg_image_size_mobile = array( (int) $image_width, (int) $image_height );
+					} else {
+						$bg_image_size_mobile = 'full';
+					}
+				}
+
+				$bg_image_size_mobile = $bg_image_size_mobile ? $bg_image_size_mobile : 'full';
+
+				$bg_image_mobile = woodmart_otf_get_image_url( $bg_image_mobile['id'], $bg_image_size_mobile );
 			}
 
-			if ( $bg_image_desktop ) {
+			if ( $bg_image_desktop && ! is_array( $bg_image_desktop ) ) {
 				$attributes .= ' data-image-url="' . $bg_image_desktop . '"';
 			}
 
-			if ( $bg_image_tablet ) {
+			if ( $bg_image_tablet && ! is_array( $bg_image_tablet ) ) {
 				$attributes .= ' data-image-url-md="' . $bg_image_tablet . '"';
 			}
 
-			if ( $bg_image_mobile ) {
+			if ( $bg_image_mobile && ! is_array( $bg_image_mobile ) ) {
 				$attributes .= ' data-image-url-sm="' . $bg_image_mobile . '"';
 			}
 		}
@@ -203,8 +268,6 @@ if ( ! function_exists( 'woodmart_shortcode_slider' ) ) {
 		}
 
 		if ( 'on' === $scroll_carousel_init ) {
-			woodmart_enqueue_js_library( 'waypoints' );
-
 			$carousel_classes .= ' scroll-init';
 		}
 
@@ -275,6 +338,7 @@ if ( ! function_exists( 'woodmart_shortcode_slider' ) ) {
 							$slide_id        = 'slide-' . $slide->ID;
 							$slide_animation = get_post_meta( $slide->ID, 'slide_animation', true );
 							$slide_classes   = '';
+							$slide_image     = get_post_meta( $slide->ID, 'image', true );
 
 							if ( $key === $first_slide_key ) {
 								$slide_classes .= ' woodmart-loaded';
@@ -296,13 +360,14 @@ if ( ! function_exists( 'woodmart_shortcode_slider' ) ) {
 							<div id="<?php echo esc_attr( $slide_id ); ?>" class="wd-slide wd-carousel-item<?php echo esc_attr( $slide_classes ); ?>" <?php echo $slide_attrs; // phpcs:ignore ?>>
 								<?php
 								if ( ! empty( $slide_animation ) && 'none' !== $slide_animation ) {
-									woodmart_enqueue_inline_style( 'animations' );
-									woodmart_enqueue_js_script( 'animations' );
-									woodmart_enqueue_js_library( 'waypoints' );
+									woodmart_enqueue_inline_style( 'mod-animations-transform-base' );
+									woodmart_enqueue_inline_style( 'mod-animations-transform' );
+									woodmart_enqueue_inline_style( 'mod-transform' );
+									woodmart_enqueue_js_script( 'css-animations' );
 								}
 								?>
 								<div class="container wd-slide-container<?php echo woodmart_get_old_classes( ' woodmart-slide-container' ); ?><?php echo woodmart_get_slide_class( $slide->ID ); // phpcs:ignore ?>">
-									<div class="wd-slide-inner<?php echo woodmart_get_old_classes( ' woodmart-slide-inner' ); ?> <?php echo ( ! empty( $slide_animation ) && 'none' !== $slide_animation ) ? 'wd-animation-normal  wd-animation-' . esc_attr( $slide_animation ) : ''; // phpcs:ignore ?>">
+									<div class="wd-slide-inner<?php echo woodmart_get_old_classes( ' woodmart-slide-inner' ); ?> <?php echo ( ! empty( $slide_animation ) && 'none' !== $slide_animation ) ? 'wd-animation wd-transform wd-animation-normal  wd-animation-' . esc_attr( $slide_animation ) : ''; // phpcs:ignore ?>">
 										<?php if ( woodmart_is_elementor_installed() && Elementor\Plugin::$instance->documents->get( $slide->ID )->is_built_with_elementor() ) : ?>
 											<?php echo woodmart_elementor_get_content( $slide->ID, apply_filters('woodamrt_enqueue_inline_slide_style', true ) ); // phpcs:ignore ?>
 										<?php else : ?>
@@ -311,7 +376,28 @@ if ( ! function_exists( 'woodmart_shortcode_slider' ) ) {
 									</div>
 								</div>
 
-								<div class="wd-slide-bg wd-fill"></div>
+								<div class="wd-slide-bg wd-fill">
+									<?php if ( ! empty( $slide_image['id'] ) ) : ?>
+										<?php
+										$image_size = get_post_meta( $slide->ID, 'image_size', true );
+
+										if ( 'custom' === $image_size ) {
+											$image_width  = get_post_meta( $slide->ID, 'image_size_custom_width', true );
+											$image_height = get_post_meta( $slide->ID, 'image_size_custom_height', true );
+
+											if ( $image_width || $image_height ) {
+												$image_size = array( (int) $image_width, (int) $image_height );
+											} else {
+												$image_size = 'full';
+											}
+										}
+
+										$image_size = $image_size ? $image_size : 'full';
+
+										echo woodmart_otf_get_image_html( $slide_image['id'], $image_size );
+										?>
+									<?php endif; ?>
+								</div>
 
 								<?php if ( $link ) : ?>
 									<a href="<?php echo esc_url( $link ); ?>"<?php echo $link_target_blank ? ' target="_blank"' : ''; ?> class="wd-slide-link wd-fill" aria-label="<?php esc_attr_e( 'Slide link', 'woodmart' ); ?>"></a>
@@ -371,18 +457,23 @@ if ( ! function_exists( 'woodmart_get_slider_css' ) ) {
 			'bottom' => 'flex-end',
 		);
 
+		$height_type  = get_term_meta( $id, 'height_type', true );
+		$aspect_ratio = get_term_meta( $id, 'aspect_ratio', true );
+
 		$storage = new Styles_Storage( 'term-' . $id, 'term', $id );
 
-		if ( ! $storage->is_css_exists() ) {
+		if ( ! get_metadata( 'term', $id, 'xts-term-' . $id . '-status', true ) && ! $storage->is_css_exists() ) {
 			$css = Metaboxes::get_instance()->get_metabox_css( $id, 'xts_slider_metaboxes' );
 
-			if ( $css ) {
-				if ( ! function_exists( 'WP_Filesystem' ) ) {
-					require_once ABSPATH . '/wp-admin/includes/file.php';
-				}
+			if ( ! function_exists( 'WP_Filesystem' ) ) {
+				require_once ABSPATH . '/wp-admin/includes/file.php';
+			}
 
+			if ( $css ) {
 				$storage->reset_data();
 				$storage->write( $css );
+			} else {
+				$storage->write( '' );
 			}
 		}
 
@@ -407,45 +498,177 @@ if ( ! function_exists( 'woodmart_get_slider_css' ) ) {
 		}
 
 		echo '<style>';
+
 		foreach ( $slides as $slide ) {
 			$bg_color           = get_post_meta( $slide->ID, 'bg_color', true );
 			$content_full_width = get_post_meta( $slide->ID, 'content_full_width', true );
+
 			// Desktop.
-			$bg_image_desktop      = has_post_thumbnail( $slide->ID ) ? wp_get_attachment_url( get_post_thumbnail_id( $slide->ID ) ) : '';
-			$meta_bg_image_desktop = get_post_meta( $slide->ID, 'bg_image_desktop', true );
-			if ( is_array( $meta_bg_image_desktop ) && isset( $meta_bg_image_desktop['url'] ) ) {
-				$meta_bg_image_desktop = $meta_bg_image_desktop['url'];
-			}
-			if ( $meta_bg_image_desktop ) {
-				$bg_image_desktop = $meta_bg_image_desktop;
-			}
+			$bg_image_desktop            = has_post_thumbnail( $slide->ID ) ? wp_get_attachment_url( get_post_thumbnail_id( $slide->ID ) ) : '';
+			$meta_bg_image_desktop       = get_post_meta( $slide->ID, 'bg_image_desktop', true );
 			$bg_image_size_desktop       = get_post_meta( $slide->ID, 'bg_image_size_desktop', true );
 			$bg_image_position_desktop   = get_post_meta( $slide->ID, 'bg_image_position_desktop', true );
 			$bg_image_position_x_desktop = get_post_meta( $slide->ID, 'bg_image_position_x_desktop', true );
 			$bg_image_position_y_desktop = get_post_meta( $slide->ID, 'bg_image_position_y_desktop', true );
 			$width_desktop               = get_post_meta( $slide->ID, 'content_width', true );
+			$slide_image                 = get_post_meta( $slide->ID, 'image', true );
+			$image_dimensions_desktop    = '';
+
+			$image_object_fit        = get_post_meta( $slide->ID, 'image_object_fit', true );
+			$image_object_position   = get_post_meta( $slide->ID, 'image_object_position', true );
+			$image_object_position_x = get_post_meta( $slide->ID, 'image_object_position_x', true );
+			$image_object_position_y = get_post_meta( $slide->ID, 'image_object_position_y', true );
+
+			if ( 'as_image' === $height_type && ! empty( $slide_image['id'] ) ) {
+				$image_data = wp_get_attachment_metadata( $slide_image['id'] );
+				$image_size = get_post_meta( $slide->ID, 'image_size', true );
+
+				if ( 'custom' === $image_size ) {
+					$image_width  = get_post_meta( $slide->ID, 'image_size_custom_width', true );
+					$image_height = get_post_meta( $slide->ID, 'image_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$image_size = $image_width . 'x' . $image_height;
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$image_size = $image_size ? $image_size : 'full';
+
+				if ( 'full' !== $image_size && ! empty( $image_data['sizes'][ $image_size ] ) ) {
+					$image_dimensions_desktop = $image_data['sizes'][ $image_size ]['width'] . '/' . $image_data['sizes'][ $image_size ]['height'];
+				} elseif ( ! empty( $image_data['width'] ) && ! empty( $image_data['height'] ) ) {
+					$image_dimensions_desktop = $image_data['width'] . '/' . $image_data['height'];
+				}
+
+				if ( ! empty( $image_data['width'] ) && ! empty( $image_data['height'] ) ) {
+					$image_dimensions_desktop = $image_data['width'] . '/' . $image_data['height'];
+				}
+			} elseif ( is_array( $meta_bg_image_desktop ) && ! empty( $meta_bg_image_desktop['id'] ) ) {
+				$image_size = get_post_meta( $slide->ID, 'bg_image_desktop_size', true );
+
+				if ( 'custom' === $image_size ) {
+					$image_width  = get_post_meta( $slide->ID, 'bg_image_desktop_size_custom_width', true );
+					$image_height = get_post_meta( $slide->ID, 'bg_image_desktop_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$image_size = array( (int) $image_width, (int) $image_height );
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$image_size = $image_size ? $image_size : 'full';
+
+				if ( 'as_image' === $height_type ) {
+					$image_data = wp_get_attachment_metadata( $meta_bg_image_desktop['id'] );
+
+					if ( is_string( $image_size ) && 'full' !== $image_size && ! empty( $image_data['sizes'][ $image_size ] ) ) {
+						$image_dimensions_desktop = $image_data['sizes'][ $image_size ]['width'] . '/' . $image_data['sizes'][ $image_size ]['height'];
+					} else {
+						$image_dimensions_desktop = $image_data['width'] . '/' . $image_data['height'];
+					}
+				}
+
+				$meta_bg_image_desktop = woodmart_otf_get_image_url( $meta_bg_image_desktop['id'], $image_size );
+			} elseif ( 'as_image' === $height_type && get_post_thumbnail_id( $slide->ID ) ) {
+				$image_data = wp_get_attachment_metadata( get_post_thumbnail_id( $slide->ID ) );
+
+				if ( ! empty( $image_data['width'] ) && ! empty( $image_data['height'] ) ) {
+					$image_dimensions_desktop = $image_data['width'] . '/' . $image_data['height'];
+				}
+			}
+
+			if ( $meta_bg_image_desktop && ! is_array( $meta_bg_image_desktop ) ) {
+				$bg_image_desktop = $meta_bg_image_desktop;
+			}
 
 			// Tablet.
-			$width_tablet    = get_post_meta( $slide->ID, 'content_width_tablet', true );
-			$bg_image_tablet = get_post_meta( $slide->ID, 'bg_image_tablet', true );
-			if ( is_array( $bg_image_tablet ) && isset( $bg_image_tablet['url'] ) ) {
-				$bg_image_tablet = $bg_image_tablet['url'];
-			}
+			$width_tablet               = get_post_meta( $slide->ID, 'content_width_tablet', true );
+			$bg_image_tablet            = get_post_meta( $slide->ID, 'bg_image_tablet', true );
 			$bg_image_size_tablet       = get_post_meta( $slide->ID, 'bg_image_size_tablet', true );
 			$bg_image_position_tablet   = get_post_meta( $slide->ID, 'bg_image_position_tablet', true );
 			$bg_image_position_x_tablet = get_post_meta( $slide->ID, 'bg_image_position_x_tablet', true );
 			$bg_image_position_y_tablet = get_post_meta( $slide->ID, 'bg_image_position_y_tablet', true );
+			$image_dimensions_tablet    = '';
+
+			$image_object_fit_tablet        = get_post_meta( $slide->ID, 'image_object_fit_tablet', true );
+			$image_object_position_tablet   = get_post_meta( $slide->ID, 'image_object_position_tablet', true );
+			$image_object_position_x_tablet = get_post_meta( $slide->ID, 'image_object_position_x_tablet', true );
+			$image_object_position_y_tablet = get_post_meta( $slide->ID, 'image_object_position_y_tablet', true );
+
+			if ( is_array( $bg_image_tablet ) && ! empty( $bg_image_tablet['id'] ) ) {
+				$image_size = get_post_meta( $slide->ID, 'bg_image_tablet_size', true );
+
+				if ( 'custom' === $image_size ) {
+					$image_width  = get_post_meta( $slide->ID, 'bg_image_tablet_size_custom_width', true );
+					$image_height = get_post_meta( $slide->ID, 'bg_image_tablet_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$image_size = array( (int) $image_width, (int) $image_height );
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$image_size = $image_size ? $image_size : 'full';
+
+				if ( 'as_image' === $height_type && empty( $slide_image['id'] ) ) {
+					$image_data = wp_get_attachment_metadata( $bg_image_tablet['id'] );
+
+					if ( is_string( $image_size ) && 'full' !== $image_size && ! empty( $image_data['sizes'][ $image_size ] ) ) {
+						$image_dimensions_tablet = $image_data['sizes'][ $image_size ]['width'] . '/' . $image_data['sizes'][ $image_size ]['height'];
+					} else {
+						$image_dimensions_tablet = $image_data['width'] . '/' . $image_data['height'];
+					}
+				}
+
+				$bg_image_tablet = woodmart_otf_get_image_url( $bg_image_tablet['id'], $image_size );
+			}
 
 			// Mobile.
-			$width_mobile    = get_post_meta( $slide->ID, 'content_width_mobile', true );
-			$bg_image_mobile = get_post_meta( $slide->ID, 'bg_image_mobile', true );
-			if ( is_array( $bg_image_mobile ) && isset( $bg_image_mobile['url'] ) ) {
-				$bg_image_mobile = $bg_image_mobile['url'];
-			}
+			$width_mobile               = get_post_meta( $slide->ID, 'content_width_mobile', true );
+			$bg_image_mobile            = get_post_meta( $slide->ID, 'bg_image_mobile', true );
 			$bg_image_size_mobile       = get_post_meta( $slide->ID, 'bg_image_size_mobile', true );
 			$bg_image_position_mobile   = get_post_meta( $slide->ID, 'bg_image_position_mobile', true );
 			$bg_image_position_x_mobile = get_post_meta( $slide->ID, 'bg_image_position_x_mobile', true );
 			$bg_image_position_y_mobile = get_post_meta( $slide->ID, 'bg_image_position_y_mobile', true );
+			$image_dimensions_mobile    = '';
+
+			$image_object_fit_mobile        = get_post_meta( $slide->ID, 'image_object_fit_mobile', true );
+			$image_object_position_mobile   = get_post_meta( $slide->ID, 'image_object_position_mobile', true );
+			$image_object_position_x_mobile = get_post_meta( $slide->ID, 'image_object_position_x_mobile', true );
+			$image_object_position_y_mobile = get_post_meta( $slide->ID, 'image_object_position_y_mobile', true );
+
+			if ( is_array( $bg_image_mobile ) && ! empty( $bg_image_mobile['id'] ) ) {
+				$image_size = get_post_meta( $slide->ID, 'bg_image_mobile_size', true );
+
+				if ( 'custom' === $image_size ) {
+					$image_width  = get_post_meta( $slide->ID, 'bg_image_mobile_size_custom_width', true );
+					$image_height = get_post_meta( $slide->ID, 'bg_image_mobile_size_custom_height', true );
+
+					if ( $image_width || $image_height ) {
+						$image_size = array( (int) $image_width, (int) $image_height );
+					} else {
+						$image_size = 'full';
+					}
+				}
+
+				$image_size = $image_size ? $image_size : 'full';
+
+				if ( 'as_image' === $height_type && empty( $slide_image['id'] ) ) {
+					$image_data = wp_get_attachment_metadata( $bg_image_mobile['id'] );
+
+					if ( is_string( $image_size ) && 'full' !== $image_size && ! empty( $image_data['sizes'][ $image_size ] ) ) {
+						$image_dimensions_mobile = $image_data['sizes'][ $image_size ]['width'] . '/' . $image_data['sizes'][ $image_size ]['height'];
+					} elseif ( ! empty( $image_data['width'] ) && ! empty( $image_data['height'] ) ) {
+						$image_dimensions_mobile = $image_data['width'] . '/' . $image_data['height'];
+					}
+				}
+
+				$bg_image_mobile = woodmart_otf_get_image_url( $bg_image_mobile['id'], $image_size );
+			}
 
 			$v_align        = get_post_meta( $slide->ID, 'vertical_align', true );
 			$h_align        = get_post_meta( $slide->ID, 'horizontal_align', true );
@@ -466,7 +689,7 @@ if ( ! function_exists( 'woodmart_get_slider_css' ) ) {
 				}
 				<?php endif; ?>
 				#slide-<?php echo esc_attr( $slide->ID ); ?>.woodmart-loaded .wd-slide-bg {
-				<?php woodmart_maybe_set_css_rule( 'background-image', $bg_image_desktop ); ?>
+					<?php woodmart_maybe_set_css_rule( 'background-image', $bg_image_desktop ); ?>
 				}
 
 				#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-bg {
@@ -474,11 +697,37 @@ if ( ! function_exists( 'woodmart_get_slider_css' ) ) {
 				<?php woodmart_maybe_set_css_rule( 'background-size', $bg_image_size_desktop ); ?>
 
 				<?php if ( 'custom' !== $bg_image_position_desktop ) : ?>
-						<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_desktop ); ?>
-					<?php else : ?>
-						<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_x_desktop . ' ' . $bg_image_position_y_desktop ); ?>
+					<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_desktop ); ?>
+				<?php else : ?>
+					<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_x_desktop . ' ' . $bg_image_position_y_desktop ); ?>
+				<?php endif; ?>
+
+				<?php if ( 'as_image' === $height_type && ! empty( $slide_image['id'] ) ) : ?>
+					<?php
+					$image_data = wp_get_attachment_metadata( $slide_image['id'] );
+
+					if ( ! empty( $image_data['width'] ) && ! empty( $image_data['height'] ) ) {
+						woodmart_maybe_set_css_rule( '--wd-aspect-ratio', $image_data['width'] . '/' . $image_data['height'] );
+					}
+					?>
+				<?php endif; ?>
+			}
+
+				#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-bg img {
+					<?php woodmart_maybe_set_css_rule( 'object-fit', $image_object_fit ); ?>
+
+					<?php if ( 'custom' !== $image_object_position ) : ?>
+						<?php woodmart_maybe_set_css_rule( 'object-position', $image_object_position ); ?>
+					<?php elseif ( $image_object_position_x || $image_object_position_y ) : ?>
+						<?php woodmart_maybe_set_css_rule( 'object-position', ( (int) $image_object_position_x ) . 'px ' . ( (int) $image_object_position_y ) . 'px' ); ?>
 					<?php endif; ?>
 				}
+
+			<?php if ( $image_dimensions_desktop ) : ?>
+				#slide-<?php echo esc_attr( $slide->ID ); ?> {
+					<?php woodmart_maybe_set_css_rule( '--wd-aspect-ratio', $image_dimensions_desktop ); ?>
+				}
+			<?php endif; ?>
 
 				<?php if ( ! $content_full_width ) : ?>
 					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-inner {
@@ -488,58 +737,94 @@ if ( ! function_exists( 'woodmart_get_slider_css' ) ) {
 
 				@media (max-width: 1024px) {
 				<?php if ( $v_align_tablet || $h_align_tablet ) : ?>
-						#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-container {
-							<?php if ( $v_align_tablet ) : ?>
-								--wd-align-items: <?php echo esc_attr( $v_align_value[ $v_align_tablet ] ); ?>;
-							<?php endif; ?>
-							<?php if ( $h_align_tablet ) : ?>
-								--wd-justify-content: <?php echo esc_attr( $h_align_tablet ); ?>;
-							<?php endif; ?>
-						}
-					<?php endif; ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-container {
+						<?php if ( $v_align_tablet ) : ?>
+							--wd-align-items: <?php echo esc_attr( $v_align_value[ $v_align_tablet ] ); ?>;
+						<?php endif; ?>
+						<?php if ( $h_align_tablet ) : ?>
+							--wd-justify-content: <?php echo esc_attr( $h_align_tablet ); ?>;
+						<?php endif; ?>
+					}
+				<?php endif; ?>
 
-				<?php if ( $bg_image_tablet ) : ?>
-						#slide-<?php echo esc_attr( $slide->ID ); ?>.woodmart-loaded .wd-slide-bg {
-							<?php woodmart_maybe_set_css_rule( 'background-image', $bg_image_tablet ); ?>
-						}
+				<?php if ( $image_dimensions_tablet ) : ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?> {
+						<?php woodmart_maybe_set_css_rule( '--wd-aspect-ratio', $image_dimensions_tablet ); ?>
+					}
+				<?php endif; ?>
+
+				<?php if ( $bg_image_tablet && ! is_array( $bg_image_tablet ) ) : ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?>.woodmart-loaded .wd-slide-bg {
+						<?php woodmart_maybe_set_css_rule( 'background-image', $bg_image_tablet ); ?>
+					}
+				<?php endif; ?>
+
+				<?php if ( ! empty( $slide_image['id'] ) && ( $image_object_fit_tablet || $image_object_position_tablet ) ) : ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-bg img {
+						<?php woodmart_maybe_set_css_rule( 'object-fit', $image_object_fit_tablet ); ?>
+
+					<?php if ( 'custom' !== $image_object_position_tablet ) : ?>
+						<?php woodmart_maybe_set_css_rule( 'object-position', $image_object_position_tablet ); ?>
+					<?php elseif ( $image_object_position_x_tablet || $image_object_position_y_tablet ) : ?>
+						<?php woodmart_maybe_set_css_rule( 'object-position', ( (int) $image_object_position_x_tablet ) . 'px ' . ( (int) $image_object_position_y_tablet ) . 'px' ); ?>
 					<?php endif; ?>
+					}
+				<?php endif; ?>
 
 				<?php if ( ! $content_full_width ) : ?>
-						#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-inner {
-							<?php woodmart_maybe_set_css_rule( 'max-width', $width_tablet ); ?>
-						}
-					<?php endif; ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-inner {
+						<?php woodmart_maybe_set_css_rule( 'max-width', $width_tablet ); ?>
+					}
+				<?php endif; ?>
 
 					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-bg {
 					<?php if ( 'inherit' !== $bg_image_size_tablet ) : ?>
-							<?php woodmart_maybe_set_css_rule( 'background-size', $bg_image_size_tablet ); ?>
-						<?php endif; ?>
+						<?php woodmart_maybe_set_css_rule( 'background-size', $bg_image_size_tablet ); ?>
+					<?php endif; ?>
 
 					<?php if ( 'custom' !== $bg_image_position_tablet ) : ?>
-							<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_tablet ); ?>
-						<?php else : ?>
-							<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_x_tablet . ' ' . $bg_image_position_y_tablet ); ?>
-						<?php endif; ?>
+						<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_tablet ); ?>
+					<?php else : ?>
+						<?php woodmart_maybe_set_css_rule( 'background-position', $bg_image_position_x_tablet . ' ' . $bg_image_position_y_tablet ); ?>
+					<?php endif; ?>
 					}
 				}
 
 				@media (max-width: <?php echo esc_attr( $mobile_breakpoint ); ?>px) {
 				<?php if ( $v_align_mobile || $h_align_mobile ) : ?>
-						#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-container {
-						<?php if ( $v_align_mobile ) : ?>
-							--wd-align-items: <?php echo esc_attr( $v_align_value[ $v_align_mobile ] ); ?>;
-						<?php endif; ?>
-						<?php if ( $h_align_mobile ) : ?>
-							--wd-justify-content: <?php echo esc_attr( $h_align_mobile ); ?>;
-						<?php endif; ?>
-						}
+					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-container {
+					<?php if ( $v_align_mobile ) : ?>
+						--wd-align-items: <?php echo esc_attr( $v_align_value[ $v_align_mobile ] ); ?>;
 					<?php endif; ?>
+					<?php if ( $h_align_mobile ) : ?>
+						--wd-justify-content: <?php echo esc_attr( $h_align_mobile ); ?>;
+					<?php endif; ?>
+					}
+				<?php endif; ?>
 
-				<?php if ( $bg_image_mobile ) : ?>
-						#slide-<?php echo esc_attr( $slide->ID ); ?>.woodmart-loaded .wd-slide-bg {
-							<?php woodmart_maybe_set_css_rule( 'background-image', $bg_image_mobile ); ?>
-						}
-					<?php endif; ?>
+				<?php if ( $image_dimensions_mobile ) : ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?> {
+						<?php woodmart_maybe_set_css_rule( '--wd-aspect-ratio', $image_dimensions_mobile ); ?>
+					}
+				<?php endif; ?>
+
+				<?php if ( $bg_image_mobile && ! is_array( $bg_image_mobile ) ) : ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?>.woodmart-loaded .wd-slide-bg {
+						<?php woodmart_maybe_set_css_rule( 'background-image', $bg_image_mobile ); ?>
+					}
+				<?php endif; ?>
+
+				<?php if ( ! empty( $slide_image['id'] ) && ( $image_object_fit_mobile || $image_object_position_mobile ) ) : ?>
+					#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-bg img {
+						<?php woodmart_maybe_set_css_rule( 'object-fit', $image_object_fit_mobile ); ?>
+
+						<?php if ( 'custom' !== $image_object_position_mobile ) : ?>
+							<?php woodmart_maybe_set_css_rule( 'object-position', $image_object_position_mobile ); ?>
+						<?php elseif ( $image_object_position_x_mobile || $image_object_position_y_mobile ) : ?>
+							<?php woodmart_maybe_set_css_rule( 'object-position', ( (int) $image_object_position_x_mobile ) . 'px ' . ( (int) $image_object_position_y_mobile ) . 'px' ); ?>
+						<?php endif; ?>
+					}
+				<?php endif; ?>
 
 				<?php if ( ! $content_full_width ) : ?>
 						#slide-<?php echo esc_attr( $slide->ID ); ?> .wd-slide-inner {
@@ -637,7 +922,6 @@ if ( ! function_exists( 'woodmart_get_slider_class' ) ) {
 		$class .= woodmart_get_old_classes( ' woodmart-slider-wrapper' );
 
 		if ( 'on' === $scroll_carousel_init ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$class .= ' scroll-init';
 		}
 

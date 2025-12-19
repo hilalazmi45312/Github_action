@@ -83,7 +83,7 @@ if( ! function_exists( 'woodmart_get_vc_shortcode_categories' ) ) {
 					),
 
 					array(
-						'heading'          => esc_html__( 'Enable images', 'woodmart' ),
+						'heading'          => esc_html__( 'Enable icons', 'woodmart' ),
 						'group'            => esc_html__( 'Content', 'woodmart' ),
 						'type'             => 'woodmart_switch',
 						'param_name'       => 'images',
@@ -290,6 +290,10 @@ if( ! function_exists( 'woodmart_get_vc_shortcode_categories' ) ) {
 						'type'       => 'textfield',
 						'param_name' => 'img_size',
 						'hint'       => esc_html__( 'Enter image size. Example: \'thumbnail\', \'medium\', \'large\', \'full\' or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use \'thumbnail\' size.', 'woodmart' ),
+						'dependency' => array(
+							'element' => 'type',
+							'value'   => array( 'grid' ),
+						),
 					),
 					array(
 						'type'        => 'woodmart_switch',
@@ -349,6 +353,10 @@ if( ! function_exists( 'woodmart_get_vc_shortcode_categories' ) ) {
 						'true_state'  => 1,
 						'false_state' => 0,
 						'default'     => 0,
+						'dependency'  => array(
+							'element' => 'type',
+							'value'   => array( 'grid' ),
+						),
 					),
 					array(
 						'heading'          => esc_html__( 'Custom background color', 'woodmart' ),
@@ -910,6 +918,107 @@ if( ! function_exists( 'woodmart_get_vc_shortcode_categories' ) ) {
 						'dependency'       => array(
 							'element' => 'mobile_accordion',
 							'value'   => array( 'side-hidden' ),
+						),
+						'edit_field_class' => 'vc_col-sm-6 vc_column',
+					),
+
+					array(
+						'type'       => 'woodmart_title_divider',
+						'holder'     => 'div',
+						'title'      => esc_html__( 'Icon options', 'woodmart' ),
+						'group'      => esc_html__( 'Style', 'woodmart' ),
+						'param_name' => 'icon_divider',
+						'dependency' => array(
+							'element' => 'type',
+							'value'   => array( 'navigation' ),
+						),
+					),
+					array(
+						'type'       => 'dropdown',
+						'heading'    => esc_html__( 'Alignment', 'woodmart' ),
+						'group'      => esc_html__( 'Style', 'woodmart' ),
+						'param_name' => 'icon_alignment',
+						'value'      => array(
+							esc_html__( 'Default', 'woodmart' ) => 'inherit',
+							esc_html__( 'Left', 'woodmart' )  => 'left',
+							esc_html__( 'Right', 'woodmart' ) => 'right',
+						),
+						'dependency' => array(
+							'element' => 'type',
+							'value'   => array( 'navigation' ),
+						),
+					),
+					array(
+						'type'             => 'wd_slider',
+						'heading'          => esc_html__( 'Width', 'woodmart' ),
+						'group'            => esc_html__( 'Style', 'woodmart' ),
+						'param_name'       => 'icon_width',
+						'selectors'        => array(
+							'{{WRAPPER}} .wd-nav-product-cat > li > a .wd-nav-img' => array(
+								'--nav-img-width: {{VALUE}}{{UNIT}};',
+							),
+						),
+						'devices'          => array(
+							'desktop' => array(
+								'value' => '',
+								'unit'  => 'px',
+							),
+							'tablet'  => array(
+								'value' => '',
+								'unit'  => 'px',
+							),
+							'mobile'  => array(
+								'value' => '',
+								'unit'  => 'px',
+							),
+						),
+						'range'            => array(
+							'px' => array(
+								'min'  => 0,
+								'max'  => 50,
+								'step' => 1,
+							),
+						),
+						'dependency'       => array(
+							'element' => 'type',
+							'value'   => array( 'navigation' ),
+						),
+						'edit_field_class' => 'vc_col-sm-6 vc_column',
+					),
+					array(
+						'type'             => 'wd_slider',
+						'heading'          => esc_html__( 'Height', 'woodmart' ),
+						'group'            => esc_html__( 'Style', 'woodmart' ),
+						'param_name'       => 'icon_height',
+						'selectors'        => array(
+							'{{WRAPPER}} .wd-nav-product-cat > li > a .wd-nav-img' => array(
+								'--nav-img-height: {{VALUE}}{{UNIT}};',
+							),
+						),
+						'devices'          => array(
+							'desktop' => array(
+								'value' => '',
+								'unit'  => 'px',
+							),
+							'tablet'  => array(
+								'value' => '',
+								'unit'  => 'px',
+							),
+							'mobile'  => array(
+								'value' => '',
+								'unit'  => 'px',
+							),
+						),
+						'range'            => array(
+							'px' => array(
+								'min'  => 0,
+								'max'  => 50,
+								'step' => 1,
+							),
+						),
+						'dependency'       => array(
+							'element' => 'type',
+							'value'   => array( 'navigation' ),
 						),
 						'edit_field_class' => 'vc_col-sm-6 vc_column',
 					),

@@ -94,6 +94,113 @@ Options::add_field(
 
 Options::add_field(
 	array(
+		'id'           => 'accessibility_outline_group',
+		'name'         => esc_html__( 'Keyboard focus outline', 'woodmart' ),
+		'description'  => esc_html__( 'Define the style, thickness, and color of the outline around interactive elements that will be accessible for keyboard navigation using the "Tab" and "Enter" keys. Leave the "Color" option empty so the outline color relies on the element\'s current color scheme.', 'woodmart' ),
+		'type'         => 'group',
+		'style'        => 'dropdown',
+		'btn_settings' => array(
+			'label'   => esc_html__( 'Edit settings', 'woodmart' ),
+			'classes' => 'xts-i-cog',
+		),
+		'section'      => 'styles_section',
+		'inner_fields' => array(
+			array(
+				'id'        => 'accessibility_outline_style',
+				'name'      => esc_html__( 'Outline style', 'woodmart' ),
+				'type'      => 'select',
+				'selectors' => array(
+					':root' => array(
+						'--wd-otl-style: {{VALUE}};',
+					),
+				),
+				'options'   => array(
+					'none'   => array(
+						'name'  => esc_html__( 'None', 'woodmart' ),
+						'value' => 'none',
+					),
+					'solid'  => array(
+						'name'  => esc_html__( 'Solid', 'woodmart' ),
+						'value' => 'solid',
+					),
+					'dotted' => array(
+						'name'  => esc_html__( 'Dotted', 'woodmart' ),
+						'value' => 'dotted',
+					),
+					'double' => array(
+						'name'  => esc_html__( 'Double', 'woodmart' ),
+						'value' => 'double',
+					),
+					'dashed' => array(
+						'name'  => esc_html__( 'Dashed', 'woodmart' ),
+						'value' => 'dashed',
+					),
+					'groove' => array(
+						'name'  => esc_html__( 'Groove', 'woodmart' ),
+						'value' => 'groove',
+					),
+				),
+				'default'   => 'dotted',
+				'priority'  => 10,
+			),
+			array(
+				'id'        => 'accessibility_outline_width',
+				'name'      => esc_html__( 'Outline width', 'woodmart' ),
+				'type'      => 'responsive_range',
+				'devices'   => array(
+					'desktop' => array(
+						'value' => 2,
+						'unit'  => 'px',
+					),
+				),
+				'range'     => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 20,
+						'step' => 1,
+					),
+				),
+				'selectors' => array(
+					':root' => array(
+						'--wd-otl-width: {{VALUE}}{{UNIT}};',
+					),
+				),
+				'requires'  => array(
+					array(
+						'key'     => 'accessibility_outline_style',
+						'compare' => 'not_equals',
+						'value'   => 'none',
+					),
+				),
+				'priority'  => 20,
+			),
+			array(
+				'id'        => 'accessibility_outline_color',
+				'name'      => esc_html__( 'Color', 'woodmart' ),
+				'type'      => 'color',
+				'selectors' => array(
+					':root' => array(
+						'--wd-otl-color: {{VALUE}};',
+					),
+				),
+				'default'   => array(),
+				'requires'  => array(
+					array(
+						'key'     => 'accessibility_outline_style',
+						'compare' => 'not_equals',
+						'value'   => 'none',
+					),
+				),
+				'class'     => 'xts-col-4',
+				'priority'  => 30,
+			),
+		),
+		'priority'     => 50,
+	)
+);
+
+Options::add_field(
+	array(
 		'id'           => 'primary-color',
 		'name'         => esc_html__( 'Primary color', 'woodmart' ),
 		'description'  => esc_html__( 'Pick a background color for the theme buttons and other colored elements.', 'woodmart' ),
@@ -115,24 +222,6 @@ Options::add_field(
 		'selector_var' => '--wd-alternative-color',
 		'default'      => array( 'idle' => '#fbbc34' ),
 		'priority'     => 20,
-	)
-);
-
-Options::add_field(
-	array(
-		'id'                 => 'link-color',
-		'name'               => esc_html__( 'Links color', 'woodmart' ),
-		'hint'               => '<video data-src="' . WOODMART_TOOLTIP_URL . 'links-color.mp4" autoplay loop muted></video>',
-		'description'        => esc_html__( 'Set the color for links on your pages, posts and products content.', 'woodmart' ),
-		'type'               => 'color',
-		'section'            => 'colors_section',
-		'selector_var'       => '--wd-link-color',
-		'selector_hover_var' => '--wd-link-color-hover',
-		'default'            => array(
-			'idle'  => '#333333',
-			'hover' => '#242424',
-		),
-		'priority'           => 30,
 	)
 );
 
@@ -687,6 +776,12 @@ Options::add_field(
 					'background' => '',
 				),
 				'text-transform' => '',
+				'padding'        => array(
+					'top'    => '',
+					'right'  => '',
+					'bottom' => '',
+					'left'   => '',
+				),
 			),
 		),
 		'color-hover'      => true,
@@ -694,6 +789,7 @@ Options::add_field(
 		'text-transform'   => true,
 		'background'       => true,
 		'background-hover' => true,
+		'padding'          => true,
 		'priority'         => 250,
 	)
 );
@@ -739,18 +835,18 @@ Options::add_field(
 
 Options::add_field(
 	array(
-		'id'          => 'form_border_width',
-		'name'        => esc_html__( 'Form border width', 'woodmart' ),
-		'description' => esc_html__( 'Choose your form border width', 'woodmart' ),
-		'group'       => esc_html__( 'Style', 'woodmart' ),
-		'type'        => 'buttons',
-		'section'     => 'forms_section',
-		'selectors'   => array(
+		'id'            => 'form_border_width',
+		'name'          => esc_html__( 'Form border width', 'woodmart' ),
+		'description'   => esc_html__( 'Choose your form border width', 'woodmart' ),
+		'group'         => esc_html__( 'Style', 'woodmart' ),
+		'type'          => 'buttons',
+		'section'       => 'forms_section',
+		'selectors'     => array(
 			':root' => array(
 				'--wd-form-brd-width: {{VALUE}}px;',
 			),
 		),
-		'options'     => array(
+		'options'       => array(
 			0 => array(
 				'name'  => 0,
 				'hint'  => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'form-border-width-0.jpg" alt="">', true ),
@@ -768,8 +864,8 @@ Options::add_field(
 			),
 		),
 		'generate_zero' => true,
-		'default'     => 2,
-		'priority'    => 20,
+		'default'       => 2,
+		'priority'      => 20,
 	)
 );
 
@@ -917,5 +1013,154 @@ Options::add_field(
 		'selector_var' => '--notices-warning-color',
 		'default'      => array( 'idle' => '#fff' ),
 		'priority'     => 40,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'                 => 'link-color',
+		'name'               => esc_html__( 'Color', 'woodmart' ),
+		'hint'               => '<video data-src="' . WOODMART_TOOLTIP_URL . 'links-color.mp4" autoplay loop muted></video>',
+		'description'        => esc_html__( 'Set the color for links on your pages, posts and products content.', 'woodmart' ),
+		'type'               => 'color',
+		'section'            => 'general_links',
+		'selector_var'       => '--wd-link-color',
+		'selector_hover_var' => '--wd-link-color-hover',
+		'default'            => array(
+			'idle'  => '#333333',
+			'hover' => '#242424',
+		),
+		'tags'               => 'Links color',
+		'priority'           => 5,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'           => 'link_underline_style_group',
+		'name'         => esc_html__( 'Underlining style', 'woodmart' ),
+		'type'         => 'group',
+		'section'      => 'general_links',
+		'inner_fields' => array(
+			array(
+				'id'        => 'link_underline_style',
+				'name'      => esc_html__( 'Regular', 'woodmart' ),
+				'type'      => 'select',
+				'section'   => 'general_links',
+				'selectors' => array(
+					':root' => array(
+						'--wd-link-decor-style: {{VALUE}};',
+					),
+				),
+				'options'   => array(
+					''       => array(
+						'name'  => esc_html__( 'None', 'woodmart' ),
+						'value' => '',
+					),
+					'solid'  => array(
+						'name'  => esc_html__( 'Solid', 'woodmart' ),
+						'value' => 'solid',
+					),
+					'dotted' => array(
+						'name'  => esc_html__( 'Dotted', 'woodmart' ),
+						'value' => 'dotted',
+					),
+					'double' => array(
+						'name'  => esc_html__( 'Double', 'woodmart' ),
+						'value' => 'double',
+					),
+					'dashed' => array(
+						'name'  => esc_html__( 'Dashed', 'woodmart' ),
+						'value' => 'dashed',
+					),
+					'wavy'   => array(
+						'name'  => esc_html__( 'Wavy', 'woodmart' ),
+						'value' => 'wavy',
+					),
+				),
+				'default'   => '',
+				'priority'  => 10,
+			),
+			array(
+				'id'        => 'link_hover_underline_style',
+				'name'      => esc_html__( 'Hover', 'woodmart' ),
+				'type'      => 'select',
+				'section'   => 'general_links',
+				'selectors' => array(
+					':root' => array(
+						'--wd-link-decor-style-hover: {{VALUE}};',
+					),
+				),
+				'options'   => array(
+					''       => array(
+						'name'  => esc_html__( 'None', 'woodmart' ),
+						'value' => '',
+					),
+					'solid'  => array(
+						'name'  => esc_html__( 'Solid', 'woodmart' ),
+						'value' => 'solid',
+					),
+					'dotted' => array(
+						'name'  => esc_html__( 'Dotted', 'woodmart' ),
+						'value' => 'dotted',
+					),
+					'double' => array(
+						'name'  => esc_html__( 'Double', 'woodmart' ),
+						'value' => 'double',
+					),
+					'dashed' => array(
+						'name'  => esc_html__( 'Dashed', 'woodmart' ),
+						'value' => 'dashed',
+					),
+					'wavy'   => array(
+						'name'  => esc_html__( 'Wavy', 'woodmart' ),
+						'value' => 'wavy',
+					),
+				),
+				'default'   => '',
+				'priority'  => 20,
+			),
+		),
+		'tags'         => 'links underline underlining style',
+		'priority'     => 10,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'           => 'link_underline_color_group',
+		'name'         => esc_html__( 'Underlining color', 'woodmart' ),
+		'type'         => 'group',
+		'section'      => 'general_links',
+		'inner_fields' => array(
+			array(
+				'id'        => 'link_underline_color',
+				'name'      => esc_html__( 'Regular', 'woodmart' ),
+				'type'      => 'color',
+				'section'   => 'general_links',
+				'selectors' => array(
+					':root' => array(
+						'--wd-link-decor-color: {{VALUE}};',
+					),
+				),
+				'default'   => array(),
+				'priority'  => 10,
+			),
+			array(
+				'id'        => 'link_underline_hover_color',
+				'name'      => esc_html__( 'Hover', 'woodmart' ),
+				'type'      => 'color',
+				'section'   => 'general_links',
+				'selectors' => array(
+					':root' => array(
+						'--wd-link-decor-color-hover: {{VALUE}};',
+					),
+				),
+				'default'   => array(),
+				'priority'  => 20,
+			),
+		),
+		'tags'         => 'links underline underlining',
+		'priority'     => 20,
 	)
 );

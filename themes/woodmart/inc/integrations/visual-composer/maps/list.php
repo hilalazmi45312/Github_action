@@ -66,12 +66,12 @@ if ( ! function_exists( 'woodmart_get_vc_map_list' ) ) {
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
-					'type'             => 'woodmart_colorpicker',
-					'heading'          => esc_html__( 'Text color', 'woodmart' ),
-					'param_name'       => 'text_color',
-					'css_args'         => array(
-						'color' => array(
-							' li',
+					'heading'          => esc_html__( 'Link color', 'woodmart' ),
+					'type'             => 'wd_colorpicker',
+					'param_name'       => 'link_color',
+					'selectors'        => array(
+						'{{WRAPPER}} li a' => array(
+							'color: {{VALUE}};',
 						),
 					),
 					'dependency'       => array(
@@ -82,11 +82,26 @@ if ( ! function_exists( 'woodmart_get_vc_map_list' ) ) {
 				),
 				array(
 					'type'             => 'woodmart_colorpicker',
-					'heading'          => esc_html__( 'Text color hover', 'woodmart' ),
+					'heading'          => esc_html__( 'Link color hover', 'woodmart' ),
 					'param_name'       => 'text_color_hover',
 					'css_args'         => array(
 						'color' => array(
-							' li:hover',
+							' li a:hover',
+						),
+					),
+					'dependency'       => array(
+						'element' => 'color_scheme',
+						'value'   => array( 'custom' ),
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'             => 'woodmart_colorpicker',
+					'heading'          => esc_html__( 'Text color', 'woodmart' ),
+					'param_name'       => 'text_color',
+					'css_args'         => array(
+						'color' => array(
+							' li',
 						),
 					),
 					'dependency'       => array(
@@ -232,6 +247,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_list' ) ) {
 						esc_html__( 'With bullets', 'woodmart' ) => 'unordered-2',
 						esc_html__( 'Without icon', 'woodmart' ) => 'without',
 					),
+					'std'              => 'icon',
 					'param_name'       => 'list_type',
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),

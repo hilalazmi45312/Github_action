@@ -309,6 +309,7 @@
     "blog_words_or_letters": "letter",
     "blog_excerpt_length": "135",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "show_sku_in_mini_cart": "1",
     "show_sku_in_cart": "1",
     "show_sku_in_email_order": "0",
@@ -389,7 +390,6 @@
     "shop_countdown": "0",
     "categories_under_title": "0",
     "brands_under_title": "0",
-    "additional_tab_content_type": "text",
     "additional_tab_text": "",
     "single_sticky_add_to_cart": "1",
     "mobile_single_sticky_add_to_cart": "1",
@@ -428,7 +428,6 @@
     "load_more_button_page_url": "1",
     "shop_title": "0",
     "shop_categories": "0",
-    "additional_tab_title": "",
     "counter_visitor_data_source_max_number": "20",
     "advanced_typography_button": {
         "0": {
@@ -507,5 +506,7 @@
     "checkout_show_product_image": "1",
     "checkout_product_quantity": "1",
     "checkout_remove_button": "1",
-    "checkout_link_to_product": "1"
+    "checkout_link_to_product": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       9.16.0
- * @version     1.3.0
+ * @version     1.6.0
  *
  * @package     woocommerce-smart-coupons/includes/emails/
  */
@@ -69,7 +69,8 @@ if ( ! class_exists( 'WC_SC_Expiry_Reminder_Email' ) ) {
 		 * @return string Default email subject
 		 */
 		public function get_default_subject() {
-			return _x( '{site_title}: Your Coupon Are About to Expire!', 'email subject', 'woocommerce-smart-coupons' );
+			/* translators: 1: site title */
+			return sprintf( _x( '%s: Your Coupon Are About to Expire!', 'email subject', 'woocommerce-smart-coupons' ), '{site_title}' );
 		}
 
 		/**
@@ -123,47 +124,54 @@ if ( ! class_exists( 'WC_SC_Expiry_Reminder_Email' ) ) {
 		 * @param int $coupon_id The ID of the coupon.
 		 */
 		public function trigger( $coupon_id ) {
-			if ( $coupon_id ) {
-				$coupon = new WC_Coupon( $coupon_id );
+			try {
+				if ( $coupon_id ) {
+					$coupon = new WC_Coupon( $coupon_id );
 
-				if ( ! $coupon instanceof WC_Coupon ) {
-					return;
-				}
-
-				$coupon_amount = $coupon->get_amount();
-
-				if ( ! $coupon_amount || ! is_numeric( $coupon_amount ) || $coupon_amount <= 0 ) {
-					return;
-				}
-
-				$this->object = $coupon;
-
-				$recipients = $coupon->get_email_restrictions();
-
-				// Filter the list of recipients before sending the email.
-				$recipients = apply_filters( 'wc_sc_coupon_expiry_reminder_filter_emails', $recipients, $coupon_id );
-
-				// Get email restrictions and send email if valid.
-				foreach ( $recipients as $email ) {
-					if ( ! is_email( $email ) ) {
-						continue; // Skip invalid email addresses.
+					if ( ! $coupon instanceof WC_Coupon ) {
+						return;
 					}
 
-					$this->setup_locale();
-					$this->recipient = $email;
+					$coupon_amount = $coupon->get_amount();
 
-					$this->set_placeholders();
-
-					$email_content = $this->get_content();
-					// Replace placeholders with values in the email content.
-					$email_content = ( is_callable( array( $this, 'format_string' ) ) ) ? $this->format_string( $email_content ) : $email_content;
-
-					// Send email if enabled and recipient is set.
-					if ( $this->is_enabled() && $this->get_recipient() ) {
-						$this->send( $this->get_recipient(), $this->get_subject(), $email_content, $this->get_headers(), $this->get_attachments() );
+					if ( ! $coupon_amount || ! is_numeric( $coupon_amount ) || $coupon_amount <= 0 ) {
+						return;
 					}
 
-					$this->restore_locale();
+					$this->object = $coupon;
+
+					$recipients = $coupon->get_email_restrictions();
+
+					// Filter the list of recipients before sending the email.
+					$recipients = apply_filters( 'wc_sc_coupon_expiry_reminder_filter_emails', $recipients, $coupon_id );
+
+					// Get email restrictions and send email if valid.
+					foreach ( $recipients as $email ) {
+						if ( ! is_email( $email ) ) {
+							continue; // Skip invalid email addresses.
+						}
+
+						$this->setup_locale();
+						$this->recipient = $email;
+
+						$this->set_placeholders();
+
+						$email_content = $this->get_content();
+						// Replace placeholders with values in the email content.
+						$email_content = ( is_callable( array( $this, 'format_string' ) ) ) ? $this->format_string( $email_content ) : $email_content;
+
+						// Send email if enabled and recipient is set.
+						if ( $this->is_enabled() && $this->get_recipient() ) {
+							$this->send( $this->get_recipient(), $this->get_subject(), $email_content, $this->get_headers(), $this->get_attachments() );
+						}
+
+						$this->restore_locale();
+					}
+				}
+			} catch ( \Throwable $e ) {
+				global $woocommerce_smart_coupon;
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
 				}
 			}
 		}
@@ -179,88 +187,43 @@ if ( ! class_exists( 'WC_SC_Expiry_Reminder_Email' ) ) {
 		}
 
 		/**
-		 * Function to get coupon type for current coupon being sent.
-		 *
-		 * @return string $coupon_type Coupon type.
-		 */
-		public function get_coupon_type() {
-
-			global $store_credit_label;
-
-			$discount_type = $this->object->get_discount_type();
-			$is_gift       = isset( $this->email_args['is_gift'] ) ? $this->email_args['is_gift'] : '';
-
-			if ( 'smart_coupon' === $discount_type && 'yes' === $is_gift ) {
-				$smart_coupon_type = __( 'Gift Card', 'woocommerce-smart-coupons' );
-			} else {
-				$smart_coupon_type = __( 'Store Credit', 'woocommerce-smart-coupons' );
-			}
-
-			if ( ! empty( $store_credit_label['singular'] ) ) {
-				$smart_coupon_type = ucwords( $store_credit_label['singular'] );
-			}
-
-			$coupon_type = ( 'smart_coupon' === $discount_type && ! empty( $smart_coupon_type ) ) ? $smart_coupon_type : __( 'coupon', 'woocommerce-smart-coupons' );
-
-			return $coupon_type;
-		}
-
-		/**
-		 * Function to get coupon expiry date/time for current coupon being sent.
-		 *
-		 * @return string $coupon_expiry Coupon expiry.
-		 */
-		public function get_coupon_expiry() {
-
-			global $woocommerce_smart_coupon, $wpdb;
-
-			$coupon = $this->object;
-			if ( $woocommerce_smart_coupon->is_wc_gte_30() ) {
-				$coupon_id = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) ? $coupon->get_id() : 0;
-			} else {
-				$coupon_id = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-			}
-			// phpcs:disable
-			// Get the expiration date and schedule reminder.
-			$expiration_date = $wpdb->get_var(
-				$wpdb->prepare(
-					"SELECT UNIX_TIMESTAMP(date_expires) FROM {$wpdb->prefix}wc_smart_coupons WHERE id = %d",
-					$coupon_id
-				)
-			);
-			// phpcs:enable
-
-			return $expiration_date ? $woocommerce_smart_coupon->get_expiration_format( $expiration_date ) : esc_html__( 'Never expires', 'woocommerce-smart-coupons' );
-		}
-
-		/**
 		 * Load email HTML content.
 		 *
 		 * @return string Email content HTML
 		 */
 		public function get_content_html() {
-			global $woocommerce_smart_coupon;
+			try {
+				global $woocommerce_smart_coupon;
 
-			$email_heading = $this->get_heading();
+				$email_heading = $this->get_heading();
 
-			$default_path  = $this->template_base;
-			$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
+				$default_path  = $this->template_base;
+				$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
 
-			ob_start();
-			wc_get_template(
-				$this->template_html,
-				array(
-					'email_obj'     => $this,
-					'email_heading' => $email_heading,
-					'coupon_code'   => $this->object->get_code(),
-					'url'           => $this->get_url(),
-					'coupon_html'   => $this->get_coupon_design_html(),
-				),
-				$template_path,
-				$default_path
-			);
+				ob_start();
+				wc_get_template(
+					$this->template_html,
+					array(
+						'email_obj'     => $this,
+						'email_heading' => $email_heading,
+						'coupon_code'   => $this->object->get_code(),
+						'url'           => $this->get_url(),
+						'coupon_html'   => $this->get_coupon_design_html( $this->object->get_id(), $this->object ),
+					),
+					$template_path,
+					$default_path
+				);
 
-			return ob_get_clean();
+				return ob_get_clean();
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+
+				ob_end_clean();
+				return '';
+			}
+
 		}
 
 		/**
@@ -269,28 +232,38 @@ if ( ! class_exists( 'WC_SC_Expiry_Reminder_Email' ) ) {
 		 * @return string Email plain content
 		 */
 		public function get_content_plain() {
-			global $woocommerce_smart_coupon;
+			try {
+				global $woocommerce_smart_coupon;
 
-			$email_heading = $this->get_heading();
+				$email_heading = $this->get_heading();
 
-			$default_path  = $this->template_base;
-			$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
+				$default_path  = $this->template_base;
+				$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
 
-			ob_start();
-			wc_get_template(
-				$this->template_plain,
-				array(
-					'email_obj'     => $this,
-					'coupon'        => $this->object,
-					'email_heading' => $email_heading,
-					'coupon_code'   => $this->object->get_code(),
-					'url'           => $this->get_url(),
-				),
-				$template_path,
-				$default_path
-			);
+				ob_start();
+				wc_get_template(
+					$this->template_plain,
+					array(
+						'email_obj'     => $this,
+						'coupon'        => $this->object,
+						'email_heading' => $email_heading,
+						'coupon_code'   => $this->object->get_code(),
+						'url'           => $this->get_url(),
+					),
+					$template_path,
+					$default_path
+				);
 
-			return ob_get_clean();
+				return ob_get_clean();
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+
+				ob_end_clean();
+				return '';
+			}
+
 		}
 
 		/**
@@ -321,158 +294,6 @@ if ( ! class_exists( 'WC_SC_Expiry_Reminder_Email' ) ) {
 			} else {
 				delete_transient( 'wc_sc_coupons_expiry_reminder_status' );
 			}
-		}
-
-		/**
-		 * Generate Coupon Design HTML
-		 *
-		 * @return string HTML output of the coupon design.
-		 */
-		public function get_coupon_design_html() {
-			global $woocommerce_smart_coupon;
-
-			$coupon      = $this->object;
-			$coupon_id   = $this->object->get_id();
-			$coupon_data = $woocommerce_smart_coupon->get_coupon_meta_data( $coupon );
-
-			if ( $woocommerce_smart_coupon->is_wc_gte_30() ) {
-				$is_free_shipping = ( $coupon->get_free_shipping() ) ? 'yes' : 'no';
-				$expiry_date      = $coupon->get_date_expires();
-				$coupon_code      = $coupon->get_code();
-			} else {
-				$is_free_shipping = ( ! empty( $coupon->free_shipping ) ) ? $coupon->free_shipping : '';
-				$expiry_date      = ( ! empty( $coupon->expiry_date ) ) ? $coupon->expiry_date : '';
-				$coupon_code      = ( ! empty( $coupon->code ) ) ? $coupon->code : '';
-			}
-
-			$design                  = get_option( 'wc_sc_setting_coupon_design', 'basic' );
-			$background_color        = get_option( 'wc_sc_setting_coupon_background_color', '#39cccc' );
-			$foreground_color        = get_option( 'wc_sc_setting_coupon_foreground_color', '#30050b' );
-			$third_color             = get_option( 'wc_sc_setting_coupon_third_color', '#39cccc' );
-			$show_coupon_description = get_option( 'smart_coupons_show_coupon_description', 'no' );
-
-			// Check if the design is valid.
-			$valid_designs = $woocommerce_smart_coupon->get_valid_coupon_designs();
-			if ( ! in_array( $design, $valid_designs, true ) ) {
-				$design = 'basic';
-			}
-
-			$design = ( 'custom-design' !== $design ) ? 'email-coupon' : $design;
-
-			// Coupon-specific parameters.
-			$coupon_amount      = $woocommerce_smart_coupon->get_amount( $coupon, true );
-			$is_percent         = ( $coupon->get_discount_type() === 'percent' );
-			$coupon_description = ( 'yes' === $show_coupon_description ) ? $coupon->get_description() : '';
-
-			$coupon_styles = $woocommerce_smart_coupon->get_coupon_styles( $design, array( 'is_email' => 'yes' ) );
-			$coupon_type   = ( ! empty( $coupon_data['coupon_type'] ) ) ? $coupon_data['coupon_type'] : '';
-
-			if ( 'yes' === $is_free_shipping ) {
-				if ( ! empty( $coupon_type ) ) {
-					$coupon_type .= __( ' & ', 'woocommerce-smart-coupons' );
-				}
-				$coupon_type .= __( 'Free Shipping', 'woocommerce-smart-coupons' );
-			}
-
-			if ( ! empty( $expiry_date ) ) {
-				if ( $woocommerce_smart_coupon->is_wc_gte_30() && $expiry_date instanceof WC_DateTime ) {
-					$expiry_date = ( is_callable( array( $expiry_date, 'getTimestamp' ) ) ) ? $expiry_date->getTimestamp() : null;
-				} elseif ( ! is_int( $expiry_date ) ) {
-					$expiry_date = strtotime( $expiry_date );
-				}
-				if ( ! empty( $expiry_date ) && is_int( $expiry_date ) ) {
-					$expiry_time = (int) $woocommerce_smart_coupon->get_post_meta( $coupon_id, 'wc_sc_expiry_time', true );
-					if ( ! empty( $expiry_time ) ) {
-						$expiry_date += $expiry_time; // Adding expiry time to expiry date.
-					}
-				}
-			}
-
-			$coupon_target              = '';
-			$wc_url_coupons_active_urls = get_option( 'wc_url_coupons_active_urls' ); // From plugin WooCommerce URL coupons.
-			if ( ! empty( $wc_url_coupons_active_urls ) ) {
-				$coupon_target = ( ! empty( $wc_url_coupons_active_urls[ $coupon_id ]['url'] ) ) ? $wc_url_coupons_active_urls[ $coupon_id ]['url'] : '';
-			}
-			if ( ! empty( $coupon_target ) ) {
-				$coupon_target = home_url( '/' . $coupon_target );
-			} else {
-				$coupon_target = home_url( '/?sc-page=shop&coupon-code=' . $coupon_code );
-			}
-
-			$coupon_target = apply_filters( 'sc_coupon_url_in_email', $coupon_target, $coupon );
-			// Template arguments.
-			$args = array(
-				'coupon_object'      => $coupon,
-				'coupon_amount'      => $coupon_amount,
-				'amount_symbol'      => ( $is_percent ) ? '%' : get_woocommerce_currency_symbol(),
-				'discount_type'      => wp_strip_all_tags( $coupon_type ),
-				'coupon_description' => ! empty( $coupon_description ) ? $coupon_description : wp_strip_all_tags( $woocommerce_smart_coupon->generate_coupon_description( array( 'coupon_object' => $coupon ) ) ),
-				'coupon_code'        => $coupon->get_code(),
-				'coupon_expiry'      => ( ! empty( $expiry_date ) ) ? $woocommerce_smart_coupon->get_expiration_format( $expiry_date ) : _x( 'Never expires', 'coupon never expires', 'woocommerce-smart-coupons' ),
-				'thumbnail_src'      => $woocommerce_smart_coupon->get_coupon_design_thumbnail_src(
-					array(
-						'design'        => $design,
-						'coupon_object' => $coupon,
-					)
-				),
-				'classes'            => '',
-				'template_id'        => $design,
-				'is_percent'         => $is_percent,
-			);
-
-			// Output the design template.
-			ob_start();
-			?>
-			<style type="text/css">
-				.coupon-container {
-					margin: .2em;
-					box-shadow: 0 0 5px #e0e0e0;
-					display: inline-table;
-					text-align: center;
-					cursor: pointer;
-					padding: .55em;
-					line-height: 1.4em;
-				}
-
-				.coupon-content {
-					padding: 0.2em 1.2em;
-				}
-
-				.coupon-content .code {
-					font-family: monospace;
-					font-size: 1.2em;
-					font-weight:700;
-				}
-
-				.coupon-content .coupon-expire,
-				.coupon-content .discount-info {
-					font-family: Helvetica, Arial, sans-serif;
-					font-size: 1em;
-				}
-				.coupon-content .discount-description {
-					font: .7em/1 Helvetica, Arial, sans-serif;
-					width: 250px;
-					margin: 10px inherit;
-					display: inline-block;
-				}
-			</style>
-			<style type="text/css"><?php echo ( isset( $coupon_styles ) && ! empty( $coupon_styles ) ) ? esc_html( wp_strip_all_tags( $coupon_styles, true ) ) : ''; // phpcs:ignore ?></style>
-			<?php if ( 'custom-design' !== $design ) { ?>
-				<style type="text/css">
-					:root {
-						--sc-color1: <?php echo esc_html( $background_color ); ?>;
-						--sc-color2: <?php echo esc_html( $foreground_color ); ?>;
-						--sc-color3: <?php echo esc_html( $third_color ); ?>;
-					}
-				</style>
-			<?php } ?>
-			<div style="margin: 10px 0;" title="<?php echo esc_attr__( 'Click to visit store. This coupon will be applied automatically.', 'woocommerce-smart-coupons' ); ?>">
-				<a href="<?php echo esc_url( $coupon_target ); ?>" style="color: #444;">
-					<?php wc_get_template( 'coupon-design/' . $design . '.php', $args, '', plugin_dir_path( WC_SC_PLUGIN_FILE ) . 'templates/' ); ?>
-				</a>
-			</div>
-			<?php
-			return ob_get_clean();
 		}
 
 		/**

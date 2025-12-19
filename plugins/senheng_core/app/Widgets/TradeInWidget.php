@@ -432,6 +432,10 @@ class TradeInWidget extends \Elementor\Widget_Base
 
     protected function render()
     {
+        // Enqueue widget assets only when widget is rendered
+        wp_enqueue_style('sh-trade-in-widget-css');
+        wp_enqueue_script('sh-trade-in-widget-js');
+
         $settings = $this->get_settings_for_display();
         $product_id = $this->get_current_product_id();
 

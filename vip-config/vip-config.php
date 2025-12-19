@@ -16,9 +16,6 @@
  * Happy coding!
  *
  * - The WordPress VIP Team
- **/
-
-/**
  * Limit the number of revisions retained per post.
  *
  * By default, all revisions are retained. Use this constant to reduce the number of revisions retained per post.
@@ -50,6 +47,25 @@ if ( ! defined( 'VIP_JETPACK_IS_PRIVATE' ) &&
 	define( 'VIP_JETPACK_IS_PRIVATE', true );
 }
 
+define( 'WP_MEMORY_LIMIT', '8192M' );
+
+if ( isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ) {
+  $http_host   = $_SERVER['HTTP_HOST']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+  $request_uri = $_SERVER['REQUEST_URI']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+  $disabled_jetpack = [
+     'senheng-2.go-vip.net',
+  ];
+            
+  if( in_array( $http_host, $disabled_jetpack ) ) {
+     define( 'VIP_JETPACK_SKIP_LOAD', true );
+  }
+
+}
+
+
+// define( 'WP_MAX_MEMORY_LIMIT', '4096M');
+
 /**
  * Disable New Relic Browser instrumentation.
  *
@@ -76,5 +92,6 @@ if ( function_exists( 'newrelic_disable_autorum' ) ) {
  */
 if ( ( ! defined( 'VIP_GO_APP_ENVIRONMENT' ) || ( defined( 'VIP_GO_APP_ENVIRONMENT' ) && 'production' !== VIP_GO_APP_ENVIRONMENT ) )
 	&& ! defined( 'WP_DEBUG' ) ) {
-	define( 'WP_DEBUG', true );
+	define( 'WP_DEBUG', false );
+	define( 'WC_LOG_HANDLER', 'WC_Log_Handler_DB' );
 }

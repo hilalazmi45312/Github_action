@@ -50,7 +50,6 @@ if ( ! function_exists( 'woodmart_elementor_banner_template' ) ) {
 		}
 
 		if ( 'yes' === $settings['scroll_carousel_init'] ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$carousel_classes .= ' scroll-init';
 		}
 
@@ -242,7 +241,10 @@ if ( ! function_exists( 'woodmart_elementor_banner_template' ) ) {
 
 			$countdown_timer_classes .= 'wd-timer';
 			$countdown_timer_classes .= ' wd-size-' . $settings['countdown_size'];
-			$countdown_timer_classes .= ' wd-style-' . $settings['countdown_style'];
+
+			if ( 'active' === $settings['countdown_style'] ) {
+				$countdown_timer_classes .= ' wd-bg-active';
+			}
 
 			woodmart_enqueue_js_library( 'countdown-bundle' );
 			woodmart_enqueue_js_script( 'countdown-element' );
@@ -339,7 +341,7 @@ if ( ! function_exists( 'woodmart_elementor_banner_template' ) ) {
 						<?php if ( 'yes' === $settings['show_countdown'] ) : ?>
 							<div class="<?php echo esc_attr( trim( $countdown_wrapper_classes ) ); ?>">
 								<div class="<?php echo esc_attr( $countdown_timer_classes ); ?>" data-end-date="<?php echo esc_attr( apply_filters( 'wd_countdown_timer_end_date', $settings['date'] ) ); ?>" data-timezone="<?php echo esc_attr( $timezone ); ?>" data-hide-on-finish="<?php echo esc_attr( $settings['hide_countdown_on_finish'] ); ?>">
-									<span class="wd-timer-days">
+									<span class="wd-item wd-timer-days">
 										<span class="wd-timer-value">
 											0
 										</span>
@@ -347,7 +349,7 @@ if ( ! function_exists( 'woodmart_elementor_banner_template' ) ) {
 											<?php esc_html_e( 'days', 'woodmart' ); ?>
 										</span>
 									</span>
-									<span class="wd-timer-hours">
+									<span class="wd-item wd-timer-hours">
 										<span class="wd-timer-value">
 											00
 										</span>
@@ -355,7 +357,7 @@ if ( ! function_exists( 'woodmart_elementor_banner_template' ) ) {
 											<?php esc_html_e( 'hr', 'woodmart' ); ?>
 										</span>
 									</span>
-									<span class="wd-timer-min">
+									<span class="wd-item wd-timer-min">
 										<span class="wd-timer-value">
 											00
 										</span>
@@ -363,7 +365,7 @@ if ( ! function_exists( 'woodmart_elementor_banner_template' ) ) {
 											<?php esc_html_e( 'min', 'woodmart' ); ?>
 										</span>
 									</span>
-									<span class="wd-timer-sec">
+									<span class="wd-item wd-timer-sec">
 										<span class="wd-timer-value">
 											00
 										</span>

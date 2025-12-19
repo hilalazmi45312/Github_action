@@ -1,5 +1,9 @@
-/* global xts_settings */
+/* global woodmartThemeModule */
 (function() {
+	woodmartThemeModule.$document.on('wdElementorSectionReady wdElementorColumnReady wdElementorGlobalReady wdShopPageInit', function() {
+		woodmartThemeModule.cssAnimations();
+	});
+
 	woodmartThemeModule.cssAnimations = function() {
 	
 		var options = {
@@ -25,7 +29,7 @@
 				return;
 			}
 
-			var delay = 0;
+			var delay = 32;
 
 			target.classList.forEach((classname) => {
 				if (classname.includes('wd_delay_')) {
@@ -37,6 +41,7 @@
 
 			setTimeout(function() {
 				target.classList.add('wd-animated');
+				target.classList.add('wd-in');
 			}, delay)
 		}
 

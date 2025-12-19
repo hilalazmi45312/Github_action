@@ -15,6 +15,9 @@ function enqueue_insider_scripts()
 
     // Get page type information
     $page_type = get_page_type();
+    if (!is_array($page_type)) {
+        $page_type = [];
+    }
 
     //check if have utm_source
     if (isset($_GET['utm_source'])) {
@@ -130,8 +133,11 @@ function get_page_type()
         return ['type' => 'search'];
     } elseif (is_404()) {
         return ['type' => '404'];
+    } elseif (is_page()) {
+        return ['type' => ''];
     }
     // return ['type' => 'other'];
+    return ['type' => ''];
 }
 
 /************************************************/
@@ -183,6 +189,35 @@ function get_wc_products()
             wp_send_json_success(['message' => 'Cart item data not available']);
             return;
         }
+    }
+
+
+    // Handle cart updates (increase or decrease quantity)
+    if (isset($_POST['cart_key'])) {
+
+        $cart_key = sanitize_text_field($_POST['cart_key']);
+        $cart = WC()->cart->get_cart();
+
+        if (!isset($cart[$cart_key])) {
+            wp_send_json_error(['message' => 'Cart item not found']);
+            return;
+        }
+
+        $item = $cart[$cart_key];
+        $product_id = $item['variation_id'] ?: $item['product_id'];
+        $quantity   = (int) $item['quantity'];
+
+        $product = wc_get_product($product_id);
+        if (!$product) {
+            wp_send_json_error(['message' => 'Invalid product']);
+            return;
+        }
+
+        $product_data = extract_product_data($product);
+        $product_data['quantity'] = $quantity;
+
+        wp_send_json_success($product_data);
+        return;
     }
 
     $product_id = $_POST['product_id'] ?? wc_get_product_id_by_sku($_POST['sku_id'] ?? '');
@@ -458,7 +493,7 @@ function product_viewed()
         $product_id = get_the_ID();
         $product = wc_get_product($product_id);
 
-        if ($product) {
+        if ($product && $product->is_type('simple')) {
             $product_data = extract_product_data($product);
             if (isset($_COOKIE['utm_info'])) {
                 $utm_info = $_COOKIE['utm_info'];
@@ -794,9 +829,6 @@ function track_cart_page()
         echo "
         <script>
             window.InsiderQueue = window.InsiderQueue || [];
-            window.InsiderQueue.push({
-                type: 'cart',
-            });
             let cartData = {
                 type: 'cart',
                 value: {
@@ -1078,6 +1110,7 @@ function custom_insider_bulk_feed_handler(WP_REST_Request $request)
     $mode  = $request->get_param('mode') ?: 'all';
     $limit = (int) ($request->get_param('limit') ?: 200);
     $limit = max(1, min($limit, 1000));
+    $locale = insiderLocale();
 
     global $wpdb;
 
@@ -1146,7 +1179,7 @@ function custom_insider_bulk_feed_handler(WP_REST_Request $request)
             unset($create_ids[$key]);
             continue;
         }
-        $payloads_create = array_merge($payloads_create, build_insider_payload($product));
+        $payloads_create = array_merge($payloads_create, build_insider_payload($product, $locale));
     }
     foreach ($update_ids as $pid) {
         $product = wc_get_product($pid);
@@ -1154,7 +1187,7 @@ function custom_insider_bulk_feed_handler(WP_REST_Request $request)
             unset($update_ids[$key]);
             continue;
         }
-        $payloads_update = array_merge($payloads_update, build_insider_payload($product));
+        $payloads_update = array_merge($payloads_update, build_insider_payload($product, $locale));
     }
 
     $action = ($mode === 'update') ? 'update' : 'ingest';

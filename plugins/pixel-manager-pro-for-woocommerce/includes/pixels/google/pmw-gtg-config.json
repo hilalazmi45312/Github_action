@@ -1,0 +1,10 @@
+{
+    "enabled": true,
+    "measurement_path": "\/mtc",
+    "proxy_url": "http:\/\/wordpress-freemius.test\/wp-content\/plugins\/pixel-manager-pro-for-woocommerce\/includes\/pixels\/google\/pmw-gtg-proxy.php",
+    "site_url": "https:\/\/wordpress-freemius.test",
+    "logging_enabled": false,
+    "log_level": "warning",
+    "log_directory": "\/Users\/aleksandarvucenovic\/dev\/apps\/wordpress-freemius\/wp-content\/uploads\/pmw-logs",
+    "updated": 1765262281
+}

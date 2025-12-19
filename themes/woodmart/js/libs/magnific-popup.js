@@ -188,7 +188,7 @@ MagnificPopup.prototype = {
 		}
 		
 		mfp.types = []; 
-		_wrapClasses = '';
+		_wrapClasses = ' wd-scroll';
 		if(data.mainEl && data.mainEl.length) {
 			mfp.ev = data.mainEl.eq(0);
 		} else {
@@ -230,7 +230,11 @@ MagnificPopup.prototype = {
 				if(mfp._checkIfClose(e.target)) {
 					mfp.close();
 				}
-			});
+			})
+			.on('click'+EVENT_NS, '.wd-popup-close', function(e) {
+				mfp.close();
+				e.preventDefault()
+			})
 
 			mfp.container = _getEl('container', mfp.wrap);
 		}
@@ -270,11 +274,12 @@ MagnificPopup.prototype = {
 	
 
 		if(mfp.fixedContentPos) {
-			mfp.wrap.css({
-				overflow: mfp.st.overflowY,
-				overflowX: 'hidden',
-				overflowY: mfp.st.overflowY
-			});
+			// Now the overflow property is defined in the theme’s stylesheet
+			// mfp.wrap.css({
+			// 	overflow: mfp.st.overflowY,
+			// 	overflowX: 'hidden',
+			// 	overflowY: mfp.st.overflowY
+			// });
 		} else {
 			mfp.wrap.css({ 
 				top: _window.scrollTop(),
@@ -376,6 +381,11 @@ MagnificPopup.prototype = {
 
 		}, 16);
 
+		// Woodmart: add wd-in class to popup wrap
+		setTimeout(function() {
+			if (mfp.wrap.find('.wd-popup').length) mfp.wrap.find('.wd-popup-wrap').addClass('wd-in wd-animated');
+		}, 16);
+
 		mfp.isOpen = true;
 		mfp.updateSize(windowHeight);
 		_mfpTrigger(OPEN_EVENT);
@@ -389,12 +399,21 @@ MagnificPopup.prototype = {
 	close: function() {
 		if(!mfp.isOpen) return;
 		_mfpTrigger(BEFORE_CLOSE_EVENT);
-
 		mfp.isOpen = false;
 		// for CSS3 animation
 		if(mfp.st.removalDelay && !mfp.isLowIE && mfp.supportsTransition )  {
 			mfp._addClassToMFP(REMOVING_CLASS);
+			// Out animation for woodmart popups
+			if (mfp.wrap.find('.wd-popup').length) {
+				mfp.wrap.find('.wd-popup-wrap').removeClass('wd-in')
+				mfp.wrap.find('.wd-popup-wrap').addClass('wd-out');
+			}
 			setTimeout(function() {
+				if (mfp.wrap.find('.wd-popup').length) {
+					setTimeout(function() {
+						mfp.wrap.find('.wd-popup-wrap').removeClass('wd-out')
+					})
+				}
 				mfp._close();
 			}, mfp.st.removalDelay);
 		} else {
@@ -444,7 +463,6 @@ MagnificPopup.prototype = {
 			if(mfp.currTemplate.closeBtn)
 				mfp.currTemplate.closeBtn.detach();
 		}
-
 
 		// if(mfp._lastFocusedEl) {
 		// 	$(mfp._lastFocusedEl).focus(); // put tab focus back
@@ -548,8 +566,8 @@ MagnificPopup.prototype = {
 			if(mfp.st.showCloseBtn && mfp.st.closeBtnInside &&
 				mfp.currTemplate[type] === true) {
 				// if there is no markup, we just append close button element inside
-				if(!mfp.content.find('.mfp-close').length) {
-					mfp.content.prepend(_getCloseBtn()); // replace button position
+				if(!mfp.contentContainer.find('.mfp-close, .wd-popup-close').length) {
+					mfp.contentContainer.prepend(_getCloseBtn()); // replace button position
 				}
 			} else {
 				mfp.content = newContent;
@@ -560,6 +578,28 @@ MagnificPopup.prototype = {
 
 		_mfpTrigger(BEFORE_APPEND_EVENT);
 		mfp.container.addClass('mfp-'+type+'-holder');
+
+		// WoodMart: wrap close button + content into .wd-popup-wrap when .wd-popup present
+		if (newContent) {
+			var $wdPopup = newContent.hasClass('wd-popup') ? newContent : newContent.find('.wd-popup')
+
+			if ($wdPopup.length) {
+				var $wrap = $('<div class="wd-popup-wrap wd-animation wd-transform wd-animation-ready"></div>')
+				if (!$wdPopup.hasClass('wd-popup-builder') && !$wdPopup.hasClass('wd-promo-popup')) {
+					$wrap.addClass('wd-animation-default')
+				}
+				var $close = mfp.contentContainer.find('.wd-popup-close')
+				if (!$close.length) $close = newContent.find('.wd-popup-close')
+
+				mfp.contentContainer.empty()
+				if ($close.length) $wrap.append($close)
+				$wrap.append(newContent)
+
+				mfp.content = $wdPopup
+				mfp.contentContainer.append($wrap)
+				return
+			}
+		}
 
 		mfp.contentContainer.append(mfp.content);
 	},
@@ -733,7 +773,7 @@ MagnificPopup.prototype = {
 		} else {
 
 			// We close the popup if click is on close button or on preloader. Or if there is no content.
-			if(!mfp.content || $(target).hasClass('mfp-close') || (mfp.preloader && target === mfp.preloader[0]) ) {
+			if(!mfp.content || $(target).hasClass('mfp-close') || $(target).hasClass('wd-popup-close') || (mfp.preloader && target === mfp.preloader[0]) ) {
 				return true;
 			}
 

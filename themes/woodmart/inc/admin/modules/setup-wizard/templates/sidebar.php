@@ -7,22 +7,6 @@
 
 ?>
 
-<div class="xts-wizard-done-nav">
-	<div class="xts-wizard-done-nav-img">
-		<img src="<?php echo esc_url( $this->get_image_url( 'check.png' ) ); ?>" alt="check">
-	</div>
-
-	<h3>
-		<?php esc_html_e( 'Congratulations!', 'woodmart' ); ?>
-	</h3>
-
-	<p>
-		<?php esc_html_e( 'You have successfully installed our theme.', 'woodmart' ); ?>
-	</p>
-
-	<img class="xts-wizard-nav-bg-img" src="<?php echo esc_url( $this->get_image_url( 'themes.png' ) ); ?>" alt="themes">
-</div>
-
 <ul>
 	<?php
 	$index        = 0;
@@ -48,18 +32,11 @@
 
 		?>
 		<li class="<?php echo esc_attr( $classes ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>">
-			<a href="<?php echo esc_url( $this->get_page_url( $slug ) ); ?>">
+			<a class="xts-wizard-nav-btn xts-fill" href="<?php echo esc_url( $this->get_page_url( $slug ) ); ?>"></a>
+			<span class="xts-wizard-nav-content" href="<?php echo esc_url( $this->get_page_url( $slug ) ); ?>">
 				<?php echo esc_html( $text ); ?>
-			</a>
+			</span>
 		</li>
 		<?php $index++; ?>
 	<?php endforeach; ?>
 </ul>
-
-<?php if ( isset( $_GET['step'] ) && 'welcome' === $_GET['step'] || ! isset( $_GET['step'] ) ) : // phpcs:ignore ?>
-	<img class="xts-wizard-nav-bg-img" src="<?php echo esc_url( $this->get_image_url( 'welcome.png' ) ); ?>" alt="welcome themes">
-<?php else : ?>
-	<a class="xts-wizard-help xts-i-alert-info" href="https://xtemos.com/forums/forum/woodmart-premium-template/" target="_blank">
-		<?php esc_html_e( 'Get help', 'woodmart' ); ?>
-	</a>
-<?php endif; ?>

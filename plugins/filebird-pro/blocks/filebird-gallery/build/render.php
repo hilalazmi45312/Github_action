@@ -95,7 +95,9 @@ foreach ( $posts as $post ) {
     $img  = '<img src="' . esc_attr( $imageSrc ) . '" alt="' . esc_html( $imageAlt ) . '"';
     $img .= ' class="' . "wp-image-{$post->ID}" . '"/>';
 
-    $li  = '<li class="blocks-gallery-item">';
+    $hoverAnimation = $attributes['imageHoverAnimation'];
+
+    $li  = '<li class="blocks-gallery-item fb-block-hover-animation-' . esc_attr( $hoverAnimation ) . '">';
     $li .= '<figure>';
 
     $li .= empty( $href ) ? $img : '<a href="' . esc_attr( $href ) . '">' . $img . '</a>';

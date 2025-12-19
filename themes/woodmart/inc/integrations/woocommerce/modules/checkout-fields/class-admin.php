@@ -25,6 +25,10 @@ class Admin extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'checkout_fields_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->helper = Helper::get_instance();
 
 		add_action( 'init', array( $this, 'reset_all_fields' ) );

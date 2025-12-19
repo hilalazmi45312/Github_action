@@ -49,7 +49,7 @@
 			$hoverBase.on('click', function(e) {
 				var $this = $(this);
 				var hoverClass = 'state-hover';
-				if (!$this.hasClass(hoverClass) && !$this.hasClass('wd-fade-off') && woodmart_settings.base_hover_mobile_click === 'no' && !$this.hasClass('wd-hover-fw-button') ) {
+				if (!$this.hasClass(hoverClass) && !$this.hasClass('wd-fade-off') && woodmart_settings.base_hover_mobile_click === 'no') {
 					e.preventDefault();
 					$('.' + hoverClass).removeClass(hoverClass);
 					$this.addClass(hoverClass);
@@ -65,7 +65,7 @@
 
 		$hoverBase.on('mouseenter mousemove touchstart', function() {
 			var $product = $(this);
-			var $content = $product.find('.xts-more-desc');
+			var $content = $product.find('.wd-more-desc');
 
 			if ($content.hasClass('wd-height-calculated')) {
 				return;

@@ -10,7 +10,7 @@ if ( ! function_exists( 'woodmart_get_responsive_size_param' ) ) {
                 $output .= '<label class="xts-i-desktop">Desktop</label>';
                 $output .= '<div class="xts-input-append">';
                     $output .= '<input type="number" min="1" class="woodmart-rs-input" data-id="desktop">';
-                    $output .= '<span class="add-on">px</span>';
+                    $output .= '<span class="xts-add-on">px</span>';
                 $output .= '</div>';
             $output .= '</div>';
 
@@ -20,7 +20,7 @@ if ( ! function_exists( 'woodmart_get_responsive_size_param' ) ) {
                 $output .= '<label class="xts-i-tablet">Tablet</label>';
                 $output .= '<div class="xts-input-append">';
                     $output .= '<input type="number" min="1" class="woodmart-rs-input" data-id="tablet">';
-                    $output .= '<span class="add-on">px</span>';
+                    $output .= '<span class="xts-add-on">px</span>';
                 $output .= '</div>';
             $output .= '</div>';
 
@@ -28,7 +28,7 @@ if ( ! function_exists( 'woodmart_get_responsive_size_param' ) ) {
                 $output .= '<label class="xts-i-phone">Mobile</label>';
                 $output .= '<div class="xts-input-append">';
                     $output .= '<input type="number" min="1" class="woodmart-rs-input" data-id="mobile">';
-                    $output .= '<span class="add-on">px</span>';
+                    $output .= '<span class="xts-add-on">px</span>';
                 $output .= '</div>';
             $output .= '</div>';
 

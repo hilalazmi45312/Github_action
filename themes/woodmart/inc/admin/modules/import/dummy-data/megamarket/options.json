@@ -345,6 +345,7 @@
     "blog_excerpt": "excerpt",
     "blog_words_or_letters": "letter",
     "blog_excerpt_length": "135",
+    "blog_archive_layout": "full-width",
     "mini_cart_quantity": "1",
     "search_by_sku": "1",
     "relevanssi_search": "0",
@@ -431,9 +432,6 @@
     "counter_visitor_data_source_max_number": "20",
     "counter_visitor_live_mode": "1",
     "counter_visitor_live_duration": "10",
-    "additional_tab_title": "",
-    "additional_tab_content_type": "text",
-    "additional_tab_text": "",
     "advanced_typography_button": {
         "0": {
             "custom": "",
@@ -496,5 +494,7 @@
     "checkout_show_product_image": "1",
     "checkout_product_quantity": "1",
     "checkout_remove_button": "1",
-    "checkout_link_to_product": "1"
+    "checkout_link_to_product": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -87,7 +87,7 @@ class Frontend extends Singleton {
 			$this->_storage->write( $styles->get_all_css( $this->header->get_structure(), $this->header->get_options() ), true );
 		}
 
-		if ( ! is_admin() ) {
+		if ( ! is_admin() && ! woodmart_is_header_frontend_editor() ) {
 			$this->_storage->print_styles();
 		}
 	}
@@ -154,9 +154,17 @@ class Frontend extends Singleton {
 	 * @return void
 	 */
 	public function generate_header() {
+		if ( woodmart_is_header_frontend_editor() ) {
+			$this->_storage->inline_css();
+		}
+
+		add_filter( 'wp_min_priority_img_pixels', array( $this, 'get_max_value' ) );
+
 		$this->render_element( $this->_structure );
 
 		do_action( 'whb_after_header' );
+
+		remove_filter( 'wp_min_priority_img_pixels', array( $this, 'get_max_value' ) );
 	}
 
 	/**
@@ -268,6 +276,16 @@ class Frontend extends Singleton {
 	 */
 	private function is_empty_column( $el ) {
 		return empty( $el['content'] );
+	}
+
+	/**
+	 * Get max value for image lazy loading.
+	 *
+	 * @param int $value Current value.
+	 * @return int
+	 */
+	public function get_max_value( $value ) {
+		return PHP_INT_MAX;
 	}
 }
 

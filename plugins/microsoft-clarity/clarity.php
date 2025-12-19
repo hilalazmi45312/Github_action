@@ -3,7 +3,7 @@
  * Plugin Name:       Microsoft Clarity
  * Plugin URI:        https://clarity.microsoft.com/
  * Description:       With data and session replay from Clarity, you'll see how people are using your site — where they get stuck and what they love.
- * Version:           0.10.9
+ * Version:           0.10.15
  * Author:            Microsoft
  * Author URI:        https://www.microsoft.com/en-us/
  * License:           MIT
@@ -118,6 +118,7 @@ function clrt_update_clarity_options_handler( $action, $network_wide ) {
 		case 'uninstall':
 			delete_option( 'clarity_wordpress_site_id' );
 			delete_option( 'clarity_project_id' );
+			delete_option( 'clarity_is_agent_enabled' );
 			break;
 	}
 }
@@ -148,6 +149,28 @@ function clarity_add_script_to_header() {
 }
 
 /**
+ * Adds the script to run clarity.
+ */
+add_action( 'wp_head', 'brand_agent_add_script_to_header' );
+function brand_agent_add_script_to_header() {
+	$is_agent_enabled = get_option( 'clarity_is_agent_enabled');
+	$should_inject_brand_agents_script = should_inject_brand_agents_script();
+	if ( $is_agent_enabled == 1 && $should_inject_brand_agents_script) {
+		$frontend_injection_url = 'https://adsagentclientafd-b7hqhjdrf3fpeqh2.b01.azurefd.net/frontendInjection.js'
+		?>
+		<script>
+			(function() {
+				var script = document.createElement('script');
+				script.src = '<?php echo esc_js( $frontend_injection_url ); ?>';
+				script.type = 'module';
+				document.head.appendChild(script);
+			})();
+        </script>
+		<?php
+	}
+}
+
+/**
  * Adds the page link to the Microsoft Clarity block on installed plugin page.
  */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'clarity_page_link' );
@@ -156,4 +179,97 @@ function clarity_page_link( $links ) {
 	$clarity_link = "<a href='$url'>" . __( 'Clarity Dashboard' ) . '</a>';
 	array_unshift( $links, $clarity_link );
 	return $links;
+}
+
+/**
+ * Retrieving the currently installed plugin version
+ */
+function get_installed_plugin_version() {
+    if ( ! function_exists( 'get_plugin_data' ) ) {
+        require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    }
+
+    $plugin_data = get_plugin_data( plugin_dir_path( __FILE__ ) . 'clarity.php');
+
+    return $plugin_data['Version'];
+}
+
+/**
+ * Retrieving the latest version from the WordPress.org repository.
+ */
+function get_latest_plugin_version_from_api() {
+    $api_url = 'http://api.wordpress.org/plugins/info/1.0/microsoft-clarity.json';
+    $response = wp_remote_get( $api_url );
+
+    if ( is_wp_error( $response ) ) {
+        return false;
+    }
+
+    $body = wp_remote_retrieve_body( $response );
+    $plugin_info = json_decode( $body );
+
+    if ( $plugin_info && isset( $plugin_info->version ) ) {
+        return $plugin_info->version;
+    }
+
+    return false;
+}
+
+/**
+ * Checking if the current plugin version is latest
+ */
+add_action( 'admin_init', 'check_if_installed_plugin_version_is_latest' );
+function check_if_installed_plugin_version_is_latest() {
+	$installed_version = get_installed_plugin_version();
+	$latest_version = get_latest_plugin_version_from_api();
+
+   if ( $installed_version && $latest_version ) {
+    	if ( version_compare( $installed_version, $latest_version, '<' ) ) {
+			update_option( 'clarity_is_latest_plugin_version', '0' );
+    	} else {
+			update_option( 'clarity_is_latest_plugin_version', '1' );
+    	}
+	}
+}
+
+/**
+* Check if script should be injected on current page
+*/
+function should_inject_brand_agents_script() {
+    // Inject on WooCommerce pages
+    if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+        return true;
+    }
+    
+    // Inject on shop page
+    if ( function_exists( 'is_shop' ) && is_shop() ) {
+        return true;
+    }
+    
+    // Inject on product pages
+    if ( function_exists( 'is_product' ) && is_product() ) {
+        return true;
+    }
+    
+    // Inject on cart page
+    if ( function_exists( 'is_cart' ) && is_cart() ) {
+        return true;
+    }
+    
+    // Inject on checkout page
+    if ( function_exists( 'is_checkout' ) && is_checkout() ) {
+        return true;
+    }
+    
+    // Inject on account pages
+    if ( function_exists( 'is_account_page' ) && is_account_page() ) {
+        return true;
+    }
+    
+    // Inject on homepage if it's the shop
+    if ( is_front_page() && get_option( 'show_on_front' ) === 'page' && function_exists( 'wc_get_page_id' ) && get_option( 'page_on_front' ) == wc_get_page_id( 'shop' ) ) {
+        return true;
+    }
+    
+    return false;
 }

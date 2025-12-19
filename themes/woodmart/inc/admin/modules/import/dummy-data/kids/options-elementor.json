@@ -304,6 +304,9 @@
         "idle": "rgb(255,255,255)"
     },
     "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
     "blog_style": "shadow",
     "blog_with_shadow": "1",
     "blog_columns": "4",
@@ -388,5 +391,7 @@
     "carousel_pagin_border_style": "",
     "products_spacing_tablet": "20",
     "products_spacing_mobile": "10",
-    "header_close_btn": "0"
+    "header_close_btn": "0",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -108,7 +108,7 @@ class Blocks_Assets extends Singleton {
 
 		if ( ! empty( $assets['styles'] ) ) {
 			foreach ( $assets['styles'] as $style ) {
-				woodmart_enqueue_inline_style( $style );
+				woodmart_enqueue_inline_style( $style, woodmart_is_combined_needed( 'combined_css' ) );
 			}
 		}
 		if ( ! empty( $assets['libraries'] ) ) {
@@ -259,8 +259,9 @@ class Blocks_Assets extends Singleton {
 		if ( ! empty( $attrs['animation'] ) ) {
 			$assets['scripts'][] = 'css-animations';
 
-			$assets['styles'][] = 'block-animation';
-			$assets['styles'][] = 'block-transform';
+			$assets['styles'][] = 'mod-animations-transform-base';
+			$assets['styles'][] = 'mod-animations-transform';
+			$assets['styles'][] = 'mod-transform';
 		}
 
 		if ( ! empty( $attrs['overlay'] ) || ! empty( $attrs['bgType'] ) && 'video' === $attrs['bgType'] && ( ! empty( $attrs['bgExternalVideo'] ) || ! empty( $attrs['bgVideo'] ) ) ) {
@@ -284,7 +285,7 @@ class Blocks_Assets extends Singleton {
 		if ( $transform_attrs_keys ) {
 			foreach ( $transform_attrs_keys as $key ) {
 				if ( ! empty( $attrs[ $key ] ) && ! stripos( $key, 'units' ) && ( is_string( $attrs[ $key ] ) || is_numeric( $attrs[ $key ] ) ) ) {
-					$assets['styles'][] = 'block-transform';
+					$assets['styles'][] = 'mod-transform';
 
 					break;
 				}

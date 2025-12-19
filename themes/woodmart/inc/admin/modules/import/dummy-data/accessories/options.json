@@ -343,6 +343,7 @@
     "blog_excerpt": "excerpt",
     "blog_words_or_letters": "letter",
     "blog_excerpt_length": "130",
+    "blog_archive_layout": "full-width",
     "bought_together_enabled": "1",
     "bought_together_column": "3",
     "disable_copyrights": "0",
@@ -372,5 +373,7 @@
     "show_more_products_btn": "1",
     "wishlist_bulk_action": "1",
     "grid_stock_progress_bar": "0",
-    "form_border_width": "1"
+    "form_border_width": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

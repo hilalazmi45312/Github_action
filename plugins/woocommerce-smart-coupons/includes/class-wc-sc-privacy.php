@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     1.6.0
+ * @version     1.9.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -95,7 +95,6 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * Gets the message of the privacy to display.
 		 */
 		public function get_privacy_message() {
-
 			$content = '<h2>' . esc_html__( 'Store Credit/Gift Certificate', 'woocommerce-smart-coupons' ) . '</h2>
 						<strong>' . esc_html__( 'What we access?', 'woocommerce-smart-coupons' ) . '</strong>
 						<ul>
@@ -123,84 +122,88 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array
 		 */
 		protected function get_wc_sc_data( $email_address, $page ) {
+			try {
+				global $wpdb;
 
-			global $wpdb;
+				$wpdb->query( $wpdb->prepare( 'SET SESSION group_concat_max_len=%d', 999999 ) ); // phpcs:ignore
 
-			$wpdb->query( $wpdb->prepare( 'SET SESSION group_concat_max_len=%d', 999999 ) ); // phpcs:ignore
+				$results = wp_cache_get( 'wc_sc_coupon_data_' . sanitize_key( $email_address ), 'woocommerce_smart_coupons' );
 
-			$results = wp_cache_get( 'wc_sc_coupon_data_' . sanitize_key( $email_address ), 'woocommerce_smart_coupons' );
+				if ( false === $results ) {
+					$results = $wpdb->get_results( // phpcs:ignore
+						$wpdb->prepare(
+							"SELECT p.ID, 
+								p.post_title,
+								p.post_date,
+								GROUP_CONCAT( pm.meta_key ORDER BY pm.meta_id SEPARATOR '###' ) AS meta_keys, 
+								GROUP_CONCAT( pm.meta_value ORDER BY pm.meta_id SEPARATOR '###' ) AS meta_values
+								FROM $wpdb->posts AS p
+								LEFT JOIN $wpdb->postmeta AS pm
+									ON ( p.ID = pm.post_id AND p.post_type = %s AND pm.meta_key IN ( %s, %s, %s ) )
+								WHERE pm.meta_value = %s
+									OR pm.meta_value LIKE %s
+									OR pm.meta_value <> ''
+								GROUP BY p.ID
+								ORDER BY p.ID",
+							'shop_coupon',
+							'discount_type',
+							'customer_email',
+							'generated_from_order_id',
+							'smart_coupon',
+							'%' . $wpdb->esc_like( '"' . $email_address . '"' ) . '%'
+						),
+						ARRAY_A
+					);
+					wp_cache_set( 'wc_sc_coupon_data_' . sanitize_key( $email_address ), $results, 'woocommerce_smart_coupons' );
+					$this->maybe_add_cache_key( 'wc_sc_coupon_data_' . sanitize_key( $email_address ) );
+				}
 
-			if ( false === $results ) {
-				$results = $wpdb->get_results( // phpcs:ignore
-					$wpdb->prepare(
-						"SELECT p.ID, 
-							p.post_title,
-							p.post_date,
-							GROUP_CONCAT( pm.meta_key ORDER BY pm.meta_id SEPARATOR '###' ) AS meta_keys, 
-							GROUP_CONCAT( pm.meta_value ORDER BY pm.meta_id SEPARATOR '###' ) AS meta_values
-							FROM $wpdb->posts AS p
-							LEFT JOIN $wpdb->postmeta AS pm
-								ON ( p.ID = pm.post_id AND p.post_type = %s AND pm.meta_key IN ( %s, %s, %s ) )
-							WHERE pm.meta_value = %s
-								OR pm.meta_value LIKE %s
-								OR pm.meta_value <> ''
-							GROUP BY p.ID
-							ORDER BY p.ID",
-						'shop_coupon',
-						'discount_type',
-						'customer_email',
-						'generated_from_order_id',
-						'smart_coupon',
-						'%' . $wpdb->esc_like( '"' . $email_address . '"' ) . '%'
-					),
-					ARRAY_A
-				);
-				wp_cache_set( 'wc_sc_coupon_data_' . sanitize_key( $email_address ), $results, 'woocommerce_smart_coupons' );
-				$this->maybe_add_cache_key( 'wc_sc_coupon_data_' . sanitize_key( $email_address ) );
-			}
+				$coupon_data = array();
 
-			$coupon_data = array();
+				if ( ! empty( $results ) ) {
+					foreach ( $results as $result ) {
 
-			if ( ! empty( $results ) ) {
-				foreach ( $results as $result ) {
+						$meta_keys   = ( ! empty( $result['meta_keys'] ) ) ? explode( '###', $result['meta_keys'] ) : array();
+						$meta_values = ( ! empty( $result['meta_values'] ) ) ? explode( '###', $result['meta_values'] ) : array();
 
-					$meta_keys   = ( ! empty( $result['meta_keys'] ) ) ? explode( '###', $result['meta_keys'] ) : array();
-					$meta_values = ( ! empty( $result['meta_values'] ) ) ? explode( '###', $result['meta_values'] ) : array();
-
-					if ( count( $meta_keys ) === count( $meta_values ) ) {
-						$meta_values = array_map( 'maybe_unserialize', $meta_values );
-						$meta        = array_combine( $meta_keys, $meta_values );
-						if ( empty( $meta['discount_type'] ) || 'smart_coupon' !== $meta['discount_type'] ) {
+						if ( count( $meta_keys ) === count( $meta_values ) ) {
+							$meta_values = array_map( 'maybe_unserialize', $meta_values );
+							$meta        = array_combine( $meta_keys, $meta_values );
+							if ( empty( $meta['discount_type'] ) || 'smart_coupon' !== $meta['discount_type'] ) {
+								continue;
+							}
+							unset( $meta['discount_type'] );
+							if ( empty( $meta['customer_email'] ) ) {
+								continue;
+							}
+							$customer_emails = array_unique( $meta['customer_email'] );
+							$common_email    = array_intersect( array( $email_address ), $customer_emails );
+							if ( empty( $common_email ) ) {
+								continue;
+							}
+							$meta['customer_email'] = current( $common_email );
+						} else {
 							continue;
 						}
-						unset( $meta['discount_type'] );
-						if ( empty( $meta['customer_email'] ) ) {
-							continue;
+
+						if ( empty( $coupon_data[ $result['ID'] ] ) || ! is_array( $coupon_data[ $result['ID'] ] ) ) {
+							$coupon_data[ $result['ID'] ] = array();
 						}
-						$customer_emails = array_unique( $meta['customer_email'] );
-						$common_email    = array_intersect( array( $email_address ), $customer_emails );
-						if ( empty( $common_email ) ) {
-							continue;
-						}
-						$meta['customer_email'] = current( $common_email );
-					} else {
-						continue;
-					}
 
-					if ( empty( $coupon_data[ $result['ID'] ] ) || ! is_array( $coupon_data[ $result['ID'] ] ) ) {
-						$coupon_data[ $result['ID'] ] = array();
-					}
+						$coupon_data[ $result['ID'] ]['coupon_id']    = $result['ID'];
+						$coupon_data[ $result['ID'] ]['coupon_code']  = $result['post_title'];
+						$coupon_data[ $result['ID'] ]['created_date'] = $result['post_date'];
 
-					$coupon_data[ $result['ID'] ]['coupon_id']    = $result['ID'];
-					$coupon_data[ $result['ID'] ]['coupon_code']  = $result['post_title'];
-					$coupon_data[ $result['ID'] ]['created_date'] = $result['post_date'];
-
-					if ( ! empty( $meta ) ) {
-						foreach ( $meta as $key => $value ) {
-							$coupon_data[ $result['ID'] ][ $key ] = $value;
+						if ( ! empty( $meta ) ) {
+							foreach ( $meta as $key => $value ) {
+								$coupon_data[ $result['ID'] ][ $key ] = $value;
+							}
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$coupon_data = array();
 			}
 
 			return $coupon_data;
@@ -255,28 +258,39 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array An array of personal data in name value pairs
 		 */
 		public function wc_sc_coupon_data_eraser( $email_address, $page ) {
-			$coupon_data = $this->get_wc_sc_data( $email_address, (int) $page );
+			try {
+				$coupon_data = $this->get_wc_sc_data( $email_address, (int) $page );
 
-			$done           = false;
-			$items_removed  = false;
-			$items_retained = false;
-			$messages       = array();
+				$done           = false;
+				$items_removed  = false;
+				$items_retained = false;
+				$messages       = array();
 
-			foreach ( $coupon_data as $coupon ) {
-				list( $removed, $retained, $msgs ) = $this->maybe_handle_coupon_data( $coupon );
-				$items_removed                    |= $removed;
-				$items_retained                   |= $retained;
-				$messages                          = array_merge( $messages, $msgs );
+				foreach ( $coupon_data as $coupon ) {
+					list( $removed, $retained, $msgs ) = $this->maybe_handle_coupon_data( $coupon );
+					$items_removed                    |= $removed;
+					$items_retained                   |= $retained;
+					$messages                          = array_merge( $messages, $msgs );
+				}
+
+				// Tell core if we have more coupons to work on still.
+				$done = count( $coupon_data ) < 10;
+
+				return array(
+					'items_removed'  => $items_removed,
+					'items_retained' => $items_retained,
+					'messages'       => $messages,
+					'done'           => $done,
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
-			// Tell core if we have more coupons to work on still.
-			$done = count( $coupon_data ) < 10;
-
 			return array(
-				'items_removed'  => $items_removed,
-				'items_retained' => $items_retained,
-				'messages'       => $messages,
-				'done'           => $done,
+				'items_removed'  => false,
+				'items_retained' => false,
+				'messages'       => array(),
+				'done'           => true,
 			);
 		}
 
@@ -309,6 +323,7 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 			}
 
 			return array( true, false, array( '<strong>' . __( 'Store Credit/Gift Certificate', 'woocommerce-smart-coupons' ) . '</strong> - ' . __( 'Removed Coupon Personal Data', 'woocommerce-smart-coupons' ) ) );
+
 		}
 
 		/**
@@ -320,7 +335,6 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array
 		 */
 		protected function get_wc_sc_user_data( $email_address, $page ) {
-
 			$user_data = array();
 
 			$user = get_user_by( 'email', $email_address );
@@ -355,51 +369,60 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array
 		 */
 		public function wc_sc_user_data_exporter( $email_address, $page = 0 ) {
-			$done           = false;
-			$data_to_export = array();
+			try {
+				$done           = false;
+				$data_to_export = array();
 
-			$user_data = $this->get_wc_sc_user_data( $email_address, (int) $page );
+				$user_data = $this->get_wc_sc_user_data( $email_address, (int) $page );
 
-			if ( 0 < count( $user_data ) ) {
-				$shortcode = array();
-				$url       = array();
-				$index     = 0;
-				foreach ( $user_data as $key => $value ) {
-					if ( 'shortcode' === $key ) {
-						foreach ( $value as $val ) {
-							$shortcode[] = array(
-								'name'  => __( 'Coupon', 'woocommerce-smart-coupons' ),
-								'value' => $val,
+				if ( 0 < count( $user_data ) ) {
+					$shortcode = array();
+					$url       = array();
+					$index     = 0;
+					foreach ( $user_data as $key => $value ) {
+						if ( 'shortcode' === $key ) {
+							foreach ( $value as $val ) {
+								$shortcode[] = array(
+									'name'  => __( 'Coupon', 'woocommerce-smart-coupons' ),
+									'value' => $val,
+								);
+							}
+							$data_to_export[] = array(
+								'group_id'    => 'wc_smart_coupons_coupon_shortcode_data',
+								'group_label' => __( 'Generated Coupon Data', 'woocommerce-smart-coupons' ),
+								'item_id'     => 'wc-smart-coupons-shorcode-data-' . sanitize_title( $email_address ),
+								'data'        => $shortcode,
+							);
+						} elseif ( 'url' === $key ) {
+							$url[]            = array(
+								'name'  => __( 'Coupon' ),
+								'value' => $value,
+							);
+							$data_to_export[] = array(
+								'group_id'    => 'wc_smart_coupons_url_data',
+								'group_label' => __( 'Coupon passed in URL', 'woocommerce-smart-coupons' ),
+								'item_id'     => 'wc-smart-coupons-url-data-' . sanitize_title( $email_address ),
+								'data'        => $url,
 							);
 						}
-						$data_to_export[] = array(
-							'group_id'    => 'wc_smart_coupons_coupon_shortcode_data',
-							'group_label' => __( 'Generated Coupon Data', 'woocommerce-smart-coupons' ),
-							'item_id'     => 'wc-smart-coupons-shorcode-data-' . sanitize_title( $email_address ),
-							'data'        => $shortcode,
-						);
-					} elseif ( 'url' === $key ) {
-						$url[]            = array(
-							'name'  => __( 'Coupon' ),
-							'value' => $value,
-						);
-						$data_to_export[] = array(
-							'group_id'    => 'wc_smart_coupons_url_data',
-							'group_label' => __( 'Coupon passed in URL', 'woocommerce-smart-coupons' ),
-							'item_id'     => 'wc-smart-coupons-url-data-' . sanitize_title( $email_address ),
-							'data'        => $url,
-						);
 					}
+
+					$done = 10 > count( $user_data );
+				} else {
+					$done = true;
 				}
 
-				$done = 10 > count( $user_data );
-			} else {
-				$done = true;
+				return array(
+					'data' => $data_to_export,
+					'done' => $done,
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return array(
-				'data' => $data_to_export,
-				'done' => $done,
+				'data' => array(),
+				'done' => true,
 			);
 		}
 
@@ -411,37 +434,47 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array An array of personal data in name value pairs
 		 */
 		public function wc_sc_user_data_eraser( $email_address, $page ) {
+			try {
+				$user = get_user_by( 'email', $email_address );
 
-			$user = get_user_by( 'email', $email_address );
+				$done           = false;
+				$items_removed  = false;
+				$items_retained = false;
+				$messages       = array();
 
-			$done           = false;
-			$items_removed  = false;
-			$items_retained = false;
-			$messages       = array();
+				if ( ! empty( $user->ID ) ) {
 
-			if ( ! empty( $user->ID ) ) {
+					$meta_keys = array( '_sc_shortcode_generated_coupons', 'sc_applied_coupon_from_url' );
 
-				$meta_keys = array( '_sc_shortcode_generated_coupons', 'sc_applied_coupon_from_url' );
-
-				foreach ( $meta_keys as $meta_key ) {
-					delete_user_meta( $user->ID, $meta_key );
-					$removed         = true;
-					$retained        = false;
-					$msgs            = array( '<strong>' . __( 'Store Credit/Gift Certificate', 'woocommerce-smart-coupons' ) . '</strong> - ' . __( 'Removed User Personal Data', 'woocommerce-smart-coupons' ) );
-					$items_removed  |= $removed;
-					$items_retained |= $retained;
-					$messages        = array_merge( $messages, $msgs );
+					foreach ( $meta_keys as $meta_key ) {
+						delete_user_meta( $user->ID, $meta_key );
+						$removed         = true;
+						$retained        = false;
+						$msgs            = array( '<strong>' . __( 'Store Credit/Gift Certificate', 'woocommerce-smart-coupons' ) . '</strong> - ' . __( 'Removed User Personal Data', 'woocommerce-smart-coupons' ) );
+						$items_removed  |= $removed;
+						$items_retained |= $retained;
+						$messages        = array_merge( $messages, $msgs );
+					}
 				}
+
+				// Tell core if we have more coupons to work on still.
+				$done = true;
+
+				return array(
+					'items_removed'  => $items_removed,
+					'items_retained' => $items_retained,
+					'messages'       => $messages,
+					'done'           => $done,
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
-			// Tell core if we have more coupons to work on still.
-			$done = true;
-
 			return array(
-				'items_removed'  => $items_removed,
-				'items_retained' => $items_retained,
-				'messages'       => $messages,
-				'done'           => $done,
+				'items_removed'  => false,
+				'items_retained' => false,
+				'messages'       => array(),
+				'done'           => true,
 			);
 		}
 
@@ -454,7 +487,6 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array
 		 */
 		protected function get_wc_sc_order_data( $email_address, $page ) {
-
 			global $wpdb;
 
 			$user = get_user_by( 'email', $email_address );
@@ -566,57 +598,66 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array
 		 */
 		public function wc_sc_order_data_exporter( $email_address, $page = 0 ) {
-			$done           = false;
-			$data_to_export = array();
+			try {
+				$done           = false;
+				$data_to_export = array();
 
-			$order_data = $this->get_wc_sc_order_data( $email_address, (int) $page );
+				$order_data = $this->get_wc_sc_order_data( $email_address, (int) $page );
 
-			if ( 0 < count( $order_data ) ) {
-				$index = 0;
-				foreach ( $order_data as $key => $value ) {
-					foreach ( $value as $val ) {
-						$index++;
-						$data = array();
-						foreach ( $val as $k => $v ) {
-							if ( $val['email'] !== $email_address && 'code' === $k ) {
-								continue;
+				if ( 0 < count( $order_data ) ) {
+					$index = 0;
+					foreach ( $order_data as $key => $value ) {
+						foreach ( $value as $val ) {
+							$index++;
+							$data = array();
+							foreach ( $val as $k => $v ) {
+								if ( $val['email'] !== $email_address && 'code' === $k ) {
+									continue;
+								}
+								switch ( $k ) {
+									case 'code':
+										$name = __( 'Coupon Code', 'woocommerce-smart-coupons' );
+										break;
+									case 'amount':
+										$name = __( 'Coupon Amount', 'woocommerce-smart-coupons' );
+										break;
+									case 'email':
+										$name = __( 'Coupon For', 'woocommerce-smart-coupons' );
+										break;
+									case 'message':
+										$name = __( 'Message', 'woocommerce-smart-coupons' );
+										break;
+								}
+								$data[] = array(
+									'name'  => $name,
+									'value' => $v,
+								);
 							}
-							switch ( $k ) {
-								case 'code':
-									$name = __( 'Coupon Code', 'woocommerce-smart-coupons' );
-									break;
-								case 'amount':
-									$name = __( 'Coupon Amount', 'woocommerce-smart-coupons' );
-									break;
-								case 'email':
-									$name = __( 'Coupon For', 'woocommerce-smart-coupons' );
-									break;
-								case 'message':
-									$name = __( 'Message', 'woocommerce-smart-coupons' );
-									break;
-							}
-							$data[] = array(
-								'name'  => $name,
-								'value' => $v,
+							$data_to_export[] = array(
+								'group_id'    => 'wc_smart_coupons_order_data_' . $index,
+								'group_label' => __( 'Store Credit/Gift Certificate - Order Data', 'woocommerce-smart-coupons' ),
+								'item_id'     => 'wc-smart-coupons-order-data-' . $index,
+								'data'        => $data,
 							);
 						}
-						$data_to_export[] = array(
-							'group_id'    => 'wc_smart_coupons_order_data_' . $index,
-							'group_label' => __( 'Store Credit/Gift Certificate - Order Data', 'woocommerce-smart-coupons' ),
-							'item_id'     => 'wc-smart-coupons-order-data-' . $index,
-							'data'        => $data,
-						);
 					}
+
+					$done = 10 > count( $order_data );
+				} else {
+					$done = true;
 				}
 
-				$done = 10 > count( $order_data );
-			} else {
-				$done = true;
+				return array(
+					'data' => $data_to_export,
+					'done' => $done,
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return array(
-				'data' => $data_to_export,
-				'done' => $done,
+				'data' => array(),
+				'done' => true,
 			);
 		}
 
@@ -628,68 +669,78 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array An array of personal data in name value pairs
 		 */
 		public function wc_sc_order_data_eraser( $email_address, $page ) {
+			try {
+				global $wpdb;
 
-			global $wpdb;
+				$user = get_user_by( 'email', $email_address );
 
-			$user = get_user_by( 'email', $email_address );
+				$orders = wp_cache_get( 'wc_sc_order_by_email_for_' . $user->ID, 'woocommerce_smart_coupons' );
 
-			$orders = wp_cache_get( 'wc_sc_order_by_email_for_' . $user->ID, 'woocommerce_smart_coupons' );
-
-			if ( false === $orders ) {
-				if ( $this->is_hpos() ) {
-					$orders = $wpdb->get_results( // phpcs:ignore
-						$wpdb->prepare(
-							"SELECT date_created_gmt AS created_date,
-									id
-								FROM {$wpdb->prefix}wc_orders
-								WHERE customer_id = %d",
-							$user->ID
-						),
-						ARRAY_A
-					);
-				} else {
-					$orders = $wpdb->get_results( // phpcs:ignore
-						$wpdb->prepare(
-							"SELECT p.post_date AS created_date,
-									pm.post_id
-								FROM {$wpdb->posts} AS p
-									LEFT JOIN {$wpdb->postmeta} AS pm
-										ON ( p.ID = pm.post_id AND p.post_type = %s )
-								WHERE pm.meta_key = %s
-									AND pm.meta_value = %d",
-							'shop_order',
-							'_customer_user',
-							$user->ID
-						),
-						ARRAY_A
-					);
+				if ( false === $orders ) {
+					if ( $this->is_hpos() ) {
+						$orders = $wpdb->get_results( // phpcs:ignore
+							$wpdb->prepare(
+								"SELECT date_created_gmt AS created_date,
+										id
+									FROM {$wpdb->prefix}wc_orders
+									WHERE customer_id = %d",
+								$user->ID
+							),
+							ARRAY_A
+						);
+					} else {
+						$orders = $wpdb->get_results( // phpcs:ignore
+							$wpdb->prepare(
+								"SELECT p.post_date AS created_date,
+										pm.post_id
+									FROM {$wpdb->posts} AS p
+										LEFT JOIN {$wpdb->postmeta} AS pm
+											ON ( p.ID = pm.post_id AND p.post_type = %s )
+									WHERE pm.meta_key = %s
+										AND pm.meta_value = %d",
+								'shop_order',
+								'_customer_user',
+								$user->ID
+							),
+							ARRAY_A
+						);
+					}
+					wp_cache_set( 'wc_sc_order_by_email_for_' . $user->ID, $orders, 'woocommerce_smart_coupons' );
+					$this->maybe_add_cache_key( 'wc_sc_order_by_email_for_' . $user->ID );
 				}
-				wp_cache_set( 'wc_sc_order_by_email_for_' . $user->ID, $orders, 'woocommerce_smart_coupons' );
-				$this->maybe_add_cache_key( 'wc_sc_order_by_email_for_' . $user->ID );
-			}
 
-			$done           = false;
-			$items_removed  = false;
-			$items_retained = false;
-			$messages       = array();
+				$done           = false;
+				$items_removed  = false;
+				$items_retained = false;
+				$messages       = array();
 
-			if ( ! empty( $orders ) ) {
-				foreach ( $orders as $order ) {
-					list( $removed, $retained, $msgs ) = $this->maybe_handle_order_data( $order );
-					$items_removed                    |= $removed;
-					$items_retained                   |= $retained;
-					$messages                          = array_merge( $messages, $msgs );
+				if ( ! empty( $orders ) ) {
+					foreach ( $orders as $order ) {
+						list( $removed, $retained, $msgs ) = $this->maybe_handle_order_data( $order );
+						$items_removed                    |= $removed;
+						$items_retained                   |= $retained;
+						$messages                          = array_merge( $messages, $msgs );
+					}
 				}
-			}
 
-			// Tell core if we have more coupons to work on still.
-			$done = count( $orders ) < 10;
+				// Tell core if we have more coupons to work on still.
+				$done = count( $orders ) < 10;
+
+				return array(
+					'items_removed'  => $items_removed,
+					'items_retained' => $items_retained,
+					'messages'       => $messages,
+					'done'           => $done,
+				);
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 
 			return array(
-				'items_removed'  => $items_removed,
-				'items_retained' => $items_retained,
-				'messages'       => $messages,
-				'done'           => $done,
+				'items_removed'  => false,
+				'items_retained' => false,
+				'messages'       => array( __( 'An error occurred while erasing order data.', 'woocommerce-smart-coupons' ) ),
+				'done'           => true,
 			);
 		}
 
@@ -727,12 +778,18 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @param  WC_Order $order The order object.
 		 */
 		public function remove_order_personal_data( $order ) {
-			$created_date = $order->get_date_created();
-			$args         = array(
-				'post_id'      => $order->get_id(),
-				'created_date' => $created_date,
-			);
-			$result       = $this->maybe_handle_order_data( $args );
+			try {
+				$created_date = $order->get_date_created();
+				$args         = array(
+					'post_id'      => $order->get_id(),
+					'created_date' => $created_date,
+				);
+				$result       = $this->maybe_handle_order_data( $args );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
+
+			return array( false, false, array( __( 'An error occurred while removing order personal data.', 'woocommerce-smart-coupons' ) ) );
 		}
 
 		/**
@@ -798,19 +855,24 @@ if ( ! class_exists( 'WC_SC_Privacy' ) ) {
 		 * @return array $settings Updated
 		 */
 		public function account_settings( $settings ) {
-			$insert_setting = array(
-				array(
-					'title'       => __( 'Retain Store Credit/Gift Certificate', 'woocommerce-smart-coupons' ),
-					'desc_tip'    => __( 'Store Credit/Gift Certificate that are stored for customers via coupons. If erased, the customer will not be able to use the coupons.', 'woocommerce-smart-coupons' ),
-					'id'          => 'woocommerce_smart_coupons_retention',
-					'type'        => 'relative_date_selector',
-					'placeholder' => __( 'N/A', 'woocommerce-smart-coupons' ),
-					'default'     => '',
-					'autoload'    => false,
-				),
-			);
+			try {
+				$insert_setting = array(
+					array(
+						'title'       => __( 'Retain Store Credit/Gift Certificate', 'woocommerce-smart-coupons' ),
+						'desc_tip'    => __( 'Store Credit/Gift Certificate that are stored for customers via coupons. If erased, the customer will not be able to use the coupons.', 'woocommerce-smart-coupons' ),
+						'id'          => 'woocommerce_smart_coupons_retention',
+						'type'        => 'relative_date_selector',
+						'placeholder' => __( 'N/A', 'woocommerce-smart-coupons' ),
+						'default'     => '',
+						'autoload'    => false,
+					),
+				);
 
-			array_splice( $settings, ( count( $settings ) - 1 ), 0, $insert_setting );
+				array_splice( $settings, ( count( $settings ) - 1 ), 0, $insert_setting );
+
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 
 			return $settings;
 		}

@@ -5,7 +5,7 @@
  * @package     woocommerce-smart-coupons/includes/
  * @author      StoreApps
  * @since       7.12.0
- * @version     1.2.0
+ * @version     1.5.0
  */
 
 // Exit if accessed directly.
@@ -94,7 +94,6 @@ if ( ! class_exists( 'WC_SC_Product_Columns' ) ) {
 		 * @return array Updated columns list.
 		 */
 		public function define_columns( $columns = array() ) {
-
 			if ( ! is_array( $columns ) || empty( $columns ) ) {
 				$columns = array();
 			}
@@ -110,7 +109,6 @@ if ( ! class_exists( 'WC_SC_Product_Columns' ) ) {
 		 * @param int $post_id Post ID being shown.
 		 */
 		protected function prepare_row_data( $post_id = 0 ) {
-
 			if ( empty( $post_id ) ) {
 				return;
 			}
@@ -128,7 +126,6 @@ if ( ! class_exists( 'WC_SC_Product_Columns' ) ) {
 			if ( empty( $this->object ) || $product_id !== $post_id ) {
 				$this->object = wc_get_product( $post_id );
 			}
-
 		}
 
 		/**
@@ -138,23 +135,25 @@ if ( ! class_exists( 'WC_SC_Product_Columns' ) ) {
 		 * @param integer $post_id Post ID being shown.
 		 */
 		public function render_columns( $column = '', $post_id = 0 ) {
+			try {
+				if ( empty( $post_id ) ) {
+					return;
+				}
 
-			if ( empty( $post_id ) ) {
-				return;
+				if ( empty( $column ) ) {
+					return;
+				}
+
+				$this->prepare_row_data( $post_id );
+
+				switch ( $column ) {
+					case 'wc_sc_linked_coupons':
+						$this->render_view_product_coupon_column( $post_id, $this->object );
+						break;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			if ( empty( $column ) ) {
-				return;
-			}
-
-			$this->prepare_row_data( $post_id );
-
-			switch ( $column ) {
-				case 'wc_sc_linked_coupons':
-					$this->render_view_product_coupon_column( $post_id, $this->object );
-					break;
-			}
-
 		}
 
 		/**
@@ -164,97 +163,101 @@ if ( ! class_exists( 'WC_SC_Product_Columns' ) ) {
 		 * @param WC_Product $product The Product object.
 		 */
 		public function render_view_product_coupon_column( $product_id = 0, $product = null ) {
+			try {
+				if ( empty( $product_id ) ) {
+					return;
+				}
 
-			if ( empty( $product_id ) ) {
-				return;
-			}
+				if ( ! is_a( $product, 'WC_Product' ) ) {
+					return;
+				}
 
-			if ( ! is_a( $product, 'WC_Product' ) ) {
-				return;
-			}
+				$max_coupons_limit = apply_filters(
+					'wc_sc_maximum_linked_coupons_limit',
+					$this->sc_get_option( 'wc_sc_maximum_linked_coupons_limit', 5 ),
+					array(
+						'source'      => $this,
+						'product_id'  => $product_id,
+						'product_obj' => $product,
+					)
+				);
 
-			$max_coupons_limit = apply_filters(
-				'wc_sc_maximum_linked_coupons_limit',
-				$this->sc_get_option( 'wc_sc_maximum_linked_coupons_limit', 5 ),
-				array(
-					'source'      => $this,
-					'product_id'  => $product_id,
-					'product_obj' => $product,
-				)
-			);
+				// Fetch linked coupons from simple & variable products (except variations).
+				$linked_coupons = ( $this->is_callable( $product, 'get_meta' ) ) ? $product->get_meta( '_coupon_title' ) : $this->get_post_meta( $product_id, '_coupon_title', true );
 
-			// Fetch linked coupons from simple & variable products (except variations).
-			$linked_coupons = ( $this->is_callable( $product, 'get_meta' ) ) ? $product->get_meta( '_coupon_title' ) : $this->get_post_meta( $product_id, '_coupon_title', true );
+				if ( empty( $linked_coupons ) || ! is_array( $linked_coupons ) ) {
+					$linked_coupons = array();
+				} else {
+					$linked_coupons = array_filter( array_unique( $linked_coupons ) );
+				}
 
-			if ( empty( $linked_coupons ) || ! is_array( $linked_coupons ) ) {
-				$linked_coupons = array();
-			} else {
-				$linked_coupons = array_filter( array_unique( $linked_coupons ) );
-			}
+				$linked_coupons_count = count( $linked_coupons );
 
-			$linked_coupons_count = count( $linked_coupons );
-
-			if ( $linked_coupons_count > $max_coupons_limit ) {
-				$linked_coupons = array_slice( $linked_coupons, 0, $max_coupons_limit );
-			} elseif ( $linked_coupons_count < $max_coupons_limit ) { // Try to find more linked coupons if number of found coupons are not matching $max_coupons_limit.
-				// Try to find linked coupons from the variations.
-				if ( $product->is_type( 'variable' ) && $product->has_child() ) {
-					$children = $product->get_children();
-					foreach ( $children as $variation_id ) {
-						$variation                = wc_get_product( $variation_id );
-						$variation_linked_coupons = ( $this->is_callable( $variation, 'get_meta' ) ) ? $variation->get_meta( '_coupon_title' ) : $this->get_post_meta( $variation_id, '_coupon_title', true );
-						if ( empty( $variation_linked_coupons ) || ! is_array( $variation_linked_coupons ) ) {
-							continue;
-						}
-						$linked_coupons       = array_merge( $linked_coupons, $variation_linked_coupons );
-						$linked_coupons       = array_filter( array_unique( $linked_coupons ) );
-						$linked_coupons_count = count( $linked_coupons );
-						if ( $linked_coupons_count === $max_coupons_limit ) {
-							break;
-						} elseif ( $linked_coupons_count > $max_coupons_limit ) {
-							$linked_coupons = array_slice( $linked_coupons, 0, $max_coupons_limit );
-							break;
+				if ( $linked_coupons_count > $max_coupons_limit ) {
+					$linked_coupons = array_slice( $linked_coupons, 0, $max_coupons_limit );
+				} elseif ( $linked_coupons_count < $max_coupons_limit ) { // Try to find more linked coupons if number of found coupons are not matching $max_coupons_limit.
+					// Try to find linked coupons from the variations.
+					if ( $product->is_type( 'variable' ) && $product->has_child() ) {
+						$children = $product->get_children();
+						foreach ( $children as $variation_id ) {
+							$variation                = wc_get_product( $variation_id );
+							$variation_linked_coupons = ( $this->is_callable( $variation, 'get_meta' ) ) ? $variation->get_meta( '_coupon_title' ) : $this->get_post_meta( $variation_id, '_coupon_title', true );
+							if ( empty( $variation_linked_coupons ) || ! is_array( $variation_linked_coupons ) ) {
+								continue;
+							}
+							$linked_coupons       = array_merge( $linked_coupons, $variation_linked_coupons );
+							$linked_coupons       = array_filter( array_unique( $linked_coupons ) );
+							$linked_coupons_count = count( $linked_coupons );
+							if ( $linked_coupons_count === $max_coupons_limit ) {
+								break;
+							} elseif ( $linked_coupons_count > $max_coupons_limit ) {
+								$linked_coupons = array_slice( $linked_coupons, 0, $max_coupons_limit );
+								break;
+							}
 						}
 					}
 				}
-			}
 
-			if ( empty( $linked_coupons ) || ! is_array( $linked_coupons ) ) {
-				echo esc_html( '&ndash;' );
-				return;
-			}
-
-			$linked_coupons = array_values( $linked_coupons );
-
-			$coupon_html = array();
-			foreach ( $linked_coupons as $index => $coupon_code ) {
-				if ( ! is_string( $coupon_code ) || empty( $coupon_code ) ) {
-					continue;
+				if ( empty( $linked_coupons ) || ! is_array( $linked_coupons ) ) {
+					echo esc_html( '&ndash;' );
+					return;
 				}
-				$coupon_id       = wc_get_coupon_id_by_code( $coupon_code );
-				$coupon_edit_url = add_query_arg(
+
+				$linked_coupons = array_values( $linked_coupons );
+
+				$coupon_html = array();
+				foreach ( $linked_coupons as $index => $coupon_code ) {
+					if ( ! is_string( $coupon_code ) || empty( $coupon_code ) ) {
+						continue;
+					}
+					$coupon_id       = wc_get_coupon_id_by_code( $coupon_code );
+					$coupon_edit_url = add_query_arg(
+						array(
+							'post'   => $coupon_id,
+							'action' => 'edit',
+						),
+						admin_url( 'post.php' )
+					);
+					$coupon_html[]   = '<a href="' . esc_url( $coupon_edit_url ) . '" target="_blank" title="' . esc_attr__( 'Open in a new tab', 'woocommerce-smart-coupons' ) . '"><code>' . esc_html( $coupon_code ) . '</code></a>';
+				}
+
+				$linked_coupons_html = apply_filters(
+					'wc_sc_product_column_linked_coupons_html',
+					implode( ' , ', $coupon_html ),
 					array(
-						'post'   => $coupon_id,
-						'action' => 'edit',
-					),
-					admin_url( 'post.php' )
+						'source'                       => $this,
+						'product_id'                   => $product_id,
+						'product_obj'                  => $product,
+						'maximum_linked_coupons_limit' => $max_coupons_limit,
+						'linked_coupons'               => $linked_coupons,
+					)
 				);
-				$coupon_html[]   = '<a href="' . esc_url( $coupon_edit_url ) . '" target="_blank" title="' . esc_attr__( 'Open in a new tab', 'woocommerce-smart-coupons' ) . '"><code>' . esc_html( $coupon_code ) . '</code></a>';
+
+				echo wp_kses_post( $linked_coupons_html );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				echo esc_html( '–' );
 			}
-
-			$linked_coupons_html = apply_filters(
-				'wc_sc_product_column_linked_coupons_html',
-				implode( ' , ', $coupon_html ),
-				array(
-					'source'                       => $this,
-					'product_id'                   => $product_id,
-					'product_obj'                  => $product,
-					'maximum_linked_coupons_limit' => $max_coupons_limit,
-					'linked_coupons'               => $linked_coupons,
-				)
-			);
-
-			echo wp_kses_post( $linked_coupons_html );
 
 		}
 

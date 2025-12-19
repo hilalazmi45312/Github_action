@@ -546,5 +546,7 @@
     "carousel_scrollbar_bg_color_group": null,
     "carousel_scrollbar_height": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIzIn0sInRhYmxldCI6eyJ1bml0IjoicHgiLCJ2YWx1ZSI6IiJ9LCJtb2JpbGUiOnsidW5pdCI6InB4IiwidmFsdWUiOiIifX19",
     "quick_view": "0",
-    "blog_columns": "3"
+    "blog_columns": "3",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -17,6 +17,10 @@ if ( ! class_exists( 'XTS_Email_Waitlist_Back_In_Stock' ) ) :
 		 * Create an instance of the class.
 		 */
 		public function __construct() {
+			if ( ! woodmart_get_opt( 'waitlist_enabled' ) ) {
+				return;
+			}
+
 			$this->id          = 'woodmart_waitlist_in_stock';
 			$this->title       = esc_html__( 'Waitlist: product back in stock', 'woodmart' );
 			$this->description = esc_html__( 'Set up the email notification that informs customers when a product they have been waiting for is back in stock.', 'woodmart' );
@@ -48,7 +52,15 @@ if ( ! class_exists( 'XTS_Email_Waitlist_Back_In_Stock' ) ) :
 
 				if ( ! empty( $waitlist->email_language ) ) {
 					$this->email_language = $waitlist->email_language;
-					do_action( 'wpml_switch_language', $this->email_language );
+
+					// Handle different multilingual systems.
+					if ( defined( 'WCML_VERSION' ) && defined( 'ICL_SITEPRESS_VERSION' ) ) {
+						// WPML support.
+						do_action( 'wpml_switch_language', $this->email_language );
+					} else {
+						// Support for LOCO Translate and other systems.
+						$this->switch_locale( $this->email_language );
+					}
 				}
 
 				if ( ! $this->is_enabled() || ! $this->get_recipient() || ! $this->object ) {
@@ -67,7 +79,14 @@ if ( ! class_exists( 'XTS_Email_Waitlist_Back_In_Stock' ) ) :
 
 				$this->db_storage->unsubscribe_by_token( $waitlist->unsubscribe_token );
 
-				do_action( 'wpml_switch_language', apply_filters( 'wpml_default_language', null ) );
+				// Restore original language.
+				if ( ! empty( $waitlist->email_language ) ) {
+					if ( defined( 'WCML_VERSION' ) && defined( 'ICL_SITEPRESS_VERSION' ) ) {
+						do_action( 'wpml_switch_language', apply_filters( 'wpml_default_language', null ) );
+					} else {
+						$this->restore_locale();
+					}
+				}
 			}
 		}
 	}

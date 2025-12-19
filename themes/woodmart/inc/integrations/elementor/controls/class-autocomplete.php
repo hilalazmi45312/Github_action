@@ -45,6 +45,7 @@ class Autocomplete extends Base_Data_Control {
 			'multiple'    => false,
 			'taxonomy'    => false,
 			'post_type'   => false,
+			'security'    => wp_create_nonce( 'woodmart_autocomplete_control_nonce' ),
 			'options'     => [],
 			'callback'    => '',
 		];

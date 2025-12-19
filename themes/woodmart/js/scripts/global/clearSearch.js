@@ -31,8 +31,30 @@ woodmartThemeModule.clearSearch = function() {
 			var input   = button.parentNode.querySelector('input');
 			input.value = '';
 
-			input.dispatchEvent(new Event('keyup'));
-			input.dispatchEvent(new Event('focus'));
+			toggleClearButton(input, button);
+
+			var searchFormWithOverlay = input.closest('.wd-search-form.wd-display-form.wd-with-overlay');
+			var dropdownResultsNode   = searchFormWithOverlay ? searchFormWithOverlay.querySelector('.wd-dropdown-results') : null;
+
+			if (dropdownResultsNode) {
+				var searchHistory   = dropdownResultsNode.querySelector('.wd-search-history');
+				var popularRequests = dropdownResultsNode.querySelector('.wd-search-requests');
+				var searchContent   = dropdownResultsNode.querySelector('.wd-search-area');
+
+				if (
+					(!searchHistory || 0 === searchHistory.childElementCount) &&
+					(!popularRequests || 0 === popularRequests.childElementCount) &&
+					(!searchContent || (0 === searchContent.childElementCount && 0 === searchContent.textContent.length))
+				) {
+					var closeSideButtons = document.querySelectorAll('.wd-close-side');
+
+					closeSideButtons.forEach(function(button) {
+						var event = new CustomEvent('wdCloseSideAction', { detail: ['hide', 'click'] });
+
+						button.dispatchEvent(event);
+					});
+				}
+			}
 		});
 	});
 
@@ -41,7 +63,6 @@ woodmartThemeModule.clearSearch = function() {
 			clearButton.classList.remove('wd-hide');
 		} else {
 			clearButton.classList.add('wd-hide')
-			serachInput.classList.remove('wd-search-inited');
 		}
 	}
 }

@@ -666,8 +666,11 @@ Helio X25 processor
 
 									if ( 'popup' === woodmart_get_opt( 'add_to_cart_action' ) ) {
 										woodmart_enqueue_js_library( 'magnific' );
+										
 										woodmart_enqueue_inline_style( 'add-to-cart-popup' );
 										woodmart_enqueue_inline_style( 'mfp-popup' );
+										woodmart_enqueue_inline_style( 'mod-animations-transform' );
+										woodmart_enqueue_inline_style( 'mod-transform' );
 									}
 									woocommerce_template_loop_add_to_cart();
 									?>

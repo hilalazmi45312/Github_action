@@ -14,6 +14,7 @@ if ( ! function_exists( 'woodmart_shortcode_popup' ) ) {
 				'id'                    => 'my_popup',
 				'title'                 => 'GO',
 				'link'                  => '',
+				'custom_attributes'     => '',
 				'width'                 => 800,
 				'padding'               => '',
 				'color'                 => 'default',
@@ -82,7 +83,10 @@ if ( ! function_exists( 'woodmart_shortcode_popup' ) ) {
 
 		woodmart_enqueue_js_library( 'magnific' );
 		woodmart_enqueue_js_script( 'popup-element' );
+		
 		woodmart_enqueue_inline_style( 'mfp-popup' );
+		woodmart_enqueue_inline_style( 'mod-animations-transform' );
+		woodmart_enqueue_inline_style( 'mod-transform' );
 
 		echo woodmart_shortcode_button( $parsed_atts, true );
 
@@ -92,7 +96,7 @@ if ( ! function_exists( 'woodmart_shortcode_popup' ) ) {
 			$content_classes .= ' ' . $content_class;
 		}
 
-		echo '<div id="' . esc_attr( $id ) . '" class="wd-popup wd-popup-element mfp-hide' . $content_classes . '" style="'. esc_attr( $inline_styles ) .'">' . do_shortcode( $content ) . '</div>';
+		echo '<div id="' . esc_attr( $id ) . '" class="mfp-hide wd-popup wd-popup-element wd-scroll-content' . $content_classes . '" style="'. esc_attr( $inline_styles ) .'">' . do_shortcode( $content ) . '</div>';
 
 		return ob_get_clean();
 	}

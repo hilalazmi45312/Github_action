@@ -475,6 +475,7 @@
     "buy_now_redirect": "checkout",
     "blog_with_shadow": "0",
     "blog_style": "shadow",
+    "blog_archive_layout": "full-width",
     "stretch_product_desktop": "1",
     "stretch_product_tablet": "1",
     "stretch_product_mobile": "1",
@@ -541,5 +542,7 @@
     "cookies_policy_page": "",
     "blog_hide_sidebar": "0",
     "blog_hide_sidebar_tablet": "1",
-    "blog_hide_sidebar_mobile": "1"
+    "blog_hide_sidebar_mobile": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -1,6 +1,10 @@
 /* global woodmart_settings */
 
 woodmartThemeModule.trackProductViewed = function() {
+	if ('visible' !== document.visibilityState) {
+		return;
+	}
+
 	var singleProduct = document.querySelector('.single-product-page');
 	var cookiesName = 'woodmart_recently_viewed_products';
 
@@ -16,8 +20,9 @@ woodmartThemeModule.trackProductViewed = function() {
 	} else {
 		recentlyProduct = recentlyProduct.split('|');
 
-		if ( recentlyProduct.indexOf(singleProductID) !== -1 ) {
-			return;
+		var existingIndex = recentlyProduct.indexOf(singleProductID);
+		if (existingIndex !== -1) {
+			recentlyProduct.splice(existingIndex, 1);
 		}
 
 		recentlyProduct.unshift(singleProductID);

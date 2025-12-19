@@ -22,7 +22,7 @@ class Query extends Singleton {
 	 * Register hooks.
 	 */
 	public function init() {
-		if ( ! woodmart_get_opt( 'show_single_variation' ) ) {
+		if ( ! woodmart_get_opt( 'show_single_variation' ) || ! woodmart_woocommerce_installed() ) {
 			return;
 		}
 
@@ -88,6 +88,24 @@ class Query extends Singleton {
 				WHERE $wpdb->posts.post_type = 'product'
 				AND {$wpdb->posts}.post_status != 'publish'
 			)";
+
+			$term = get_term_by( 'slug', 'exclude-from-catalog', 'product_visibility' );
+
+			if ( $term && ! is_wp_error( $term ) ) {
+				$clauses['where'] .= " AND (
+					{$wpdb->posts}.post_type != 'product_variation' 
+					OR (
+						{$wpdb->posts}.post_type = 'product_variation'
+						AND {$wpdb->posts}.post_parent NOT IN (
+							SELECT tr.object_id
+							FROM {$wpdb->term_relationships} AS tr
+							LEFT JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+							WHERE tt.taxonomy = 'product_visibility'
+							AND tt.term_taxonomy_id = {$term->term_taxonomy_id}
+						)
+					)
+				)";
+			}
 		}
 
 		return $clauses;
@@ -101,7 +119,8 @@ class Query extends Singleton {
 	 * @return void
 	 */
 	public function add_variations_to_query( $query ) {
-		$query->set( 'post_type', array( 'product', 'product_variation' ) );
+		$post_type = array_filter( (array) $query->get( 'post_type' ) );
+		$query->set( 'post_type', array_merge( $post_type, array( 'product', 'product_variation' ) ) );
 		$query->set( 'woodmart_single_variations_filter', 'yes' );
 	}
 
@@ -122,7 +141,7 @@ class Query extends Singleton {
 		$post_type = array_filter( (array) $query->get( 'post_type' ) );
 
 		if ( in_array( 'product', $post_type, true ) && 'edit.php' !== $pagenow ) {
-			$query->set( 'post_type', array( 'product', 'product_variation' ) );
+			$query->set( 'post_type', array_merge( $post_type, array( 'product', 'product_variation' ) ) );
 			$query->set( 'woodmart_single_variations_filter', 'yes' );
 		}
 	}
@@ -222,6 +241,8 @@ class Query extends Singleton {
 	 * Get variation product attributes.
 	 * This method works on Grid Shop Arhive when the "Hover Content" option is selected "Additional Information".
 	 *
+	 * @codeCoverageIgnore
+	 *
 	 * @param array  $product_attributes Products attributes.
 	 * @param object $product Product.
 	 * @return array
@@ -288,10 +309,25 @@ class Query extends Singleton {
 
 	public function add_variations_to_related_products( $query, $product_id ) {
 		if ( woodmart_get_opt( 'show_single_variation' ) ) {
+			global $wpdb;
+
 			$find    = "AND p.post_type = 'product'";
 			$replace = "AND ( p.post_type = 'product' OR p.post_type = 'product_variation' )";
 
 			$query['where'] = str_replace( $find, $replace, $query['where'] );
+
+			$pm_alias     = 'wd_postmeta';
+			$join_snippet = $wpdb->prepare(
+				" LEFT JOIN {$wpdb->postmeta} AS {$pm_alias} ON ( p.ID = {$pm_alias}.post_id AND {$pm_alias}.meta_key = %s AND {$pm_alias}.meta_value = %s ) ",
+				'_wd_show_variation',
+				'no'
+			);
+
+			if ( empty( $query['join'] ) || strpos( $query['join'], " {$pm_alias} " ) === false ) {
+				$query['join'] .= $join_snippet;
+			}
+
+			$query['where'] .= " AND {$pm_alias}.post_id IS NULL ";
 		}
 
 		return $query;

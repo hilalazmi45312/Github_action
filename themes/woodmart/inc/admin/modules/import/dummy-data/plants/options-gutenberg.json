@@ -498,6 +498,7 @@
     "parts_text": "0",
     "blog_share": "0",
     "blog_author_bio": "0",
+    "blog_archive_layout": "full-width",
     "grid_swatches_attribute": "pa_color",
     "hide_larger_price": "1",
     "single_product_variations_price": "1",
@@ -542,7 +543,6 @@
     "reviews_sorting": "1",
     "reviews_rating_summary": "1",
     "reviews_rating_summary_filter": "1",
-    "additional_tab_title": "Delivery Details",
     "fb_link": "",
     "isntagram_link": "#",
     "youtube_link": "",
@@ -585,5 +585,7 @@
     "products_columns": "3",
     "blog_hide_sidebar": "0",
     "blog_hide_sidebar_tablet": "1",
-    "blog_hide_sidebar_mobile": "1"
+    "blog_hide_sidebar_mobile": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

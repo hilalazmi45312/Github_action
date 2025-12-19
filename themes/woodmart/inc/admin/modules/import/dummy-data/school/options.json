@@ -189,5 +189,9 @@
     "prefooter_content_type": "text",
     "prefooter_area": "",
     "portfolio_page": "150",
-    "rounding_size": "12"
+    "rounding_size": "12",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

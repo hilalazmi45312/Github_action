@@ -20,6 +20,10 @@ class Frontend extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'discounts_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		add_filter( 'woocommerce_cart_item_price', array( $this, 'cart_item_price' ), 10, 2 );
 		add_filter( 'woocommerce_before_mini_cart_contents', array( $this, 'cart_item_price_on_ajax' ), 10, 2 );
 
@@ -162,7 +166,7 @@ class Frontend extends Singleton {
 			}
 
 			// Price column.
-			$product_price = Main::get_instance()->get_product_price(
+			$product_price = Manager::get_instance()->get_product_price(
 				$product->get_price(),
 				array(
 					'type'  => $rules['_woodmart_discount_type'],

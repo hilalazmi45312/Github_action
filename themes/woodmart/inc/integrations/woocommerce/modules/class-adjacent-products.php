@@ -88,8 +88,20 @@ if ( ! class_exists( 'WC_Adjacent_Products' ) ) :
 
 			// Try to get a valid product via `get_adjacent_post()`.
 			// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
+			$iteration        = 0;
+			$limit_iteration  = apply_filters( 'woodmart_adjacent_products_max_iterations', 10 );
+			$maybe_product_id = false;
+
 			while ( $adjacent = $this->get_adjacent() ) {
-				$product = wc_get_product( $adjacent->ID );
+				$iteration++;
+
+				if ( $iteration > $limit_iteration || $maybe_product_id === $adjacent->ID ) {
+					break;
+				}
+
+				$maybe_product_id = $adjacent->ID;
+
+				$product = wc_get_product( $maybe_product_id );
 
 				if ( $product && $product->is_visible() ) {
 					break;
@@ -148,6 +160,12 @@ if ( ! class_exists( 'WC_Adjacent_Products' ) ) :
 			$new = get_post( $this->current_product );
 
 			$where = str_replace( $post->post_date, $new->post_date, $where );
+
+			$where = preg_replace(
+				'/AND p.ID [<>=]+ \d+/',
+				'AND p.ID ' . ($this->previous ? '<' : '>') . ' ' . $new->ID,
+				$where
+			);
 
 			return $where;
 		}

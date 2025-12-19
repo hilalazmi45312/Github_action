@@ -64,7 +64,7 @@ class Popup extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'wd-elements' ];
+		return array( 'wd-elements' );
 	}
 
 	/**
@@ -83,29 +83,29 @@ class Popup extends Widget_Base {
 		 */
 		$this->start_controls_section(
 			'general_content_section',
-			[
+			array(
 				'label' => esc_html__( 'General', 'woodmart' ),
-			]
+			)
 		);
 
 		$this->add_control(
 			'popup_id',
-			[
+			array(
 				'label'   => esc_html__( 'ID', 'woodmart' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => 'popup-' . uniqid(),
-			]
+			)
 		);
 
 		$this->add_control(
 			'content',
-			[
+			array(
 				'label'       => esc_html__( 'Content', 'woodmart' ),
 				'type'        => Controls_Manager::SELECT,
 				'options'     => woodmart_get_elementor_html_blocks_array(),
 				'description' => function_exists( 'woodmart_get_html_block_links' ) ? woodmart_get_html_block_links() : '',
 				'default'     => '0',
-			]
+			)
 		);
 
 		$this->end_controls_section();
@@ -115,18 +115,32 @@ class Popup extends Widget_Base {
 		 */
 		$this->start_controls_section(
 			'button_content_section',
-			[
+			array(
 				'label' => esc_html__( 'Button', 'woodmart' ),
-			]
+			)
 		);
 
 		woodmart_get_button_content_general_map(
 			$this,
-			[
+			array(
 				'link'                => false,
 				'smooth_scroll'       => false,
 				'collapsible_content' => false,
-			]
+			)
+		);
+
+		$this->add_control(
+			'custom_attributes',
+			array(
+				'label'       => esc_html__( 'Custom attributes', 'woodmart' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'ai'          => array(
+					'active' => false,
+				),
+				'placeholder' => esc_html__( 'key|value', 'woodmart' ),
+				'description' => esc_html__( 'Set custom attributes for the link element. Separate attribute keys from values using the | (pipe) character. Separate key-value pairs with a comma.', 'woodmart' ),
+				'classes'     => 'elementor-control-direction-ltr',
+			)
 		);
 
 		$this->end_controls_section();
@@ -140,28 +154,28 @@ class Popup extends Widget_Base {
 		 */
 		$this->start_controls_section(
 			'general_style_section',
-			[
+			array(
 				'label' => esc_html__( 'General', 'woodmart' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
+			)
 		);
 
 		$this->add_control(
 			'width',
-			[
+			array(
 				'label'   => esc_html__( 'Width', 'woodmart' ),
 				'type'    => Controls_Manager::SLIDER,
-				'default' => [
+				'default' => array(
 					'size' => 800,
-				],
-				'range'   => [
-					'px' => [
+				),
+				'range'   => array(
+					'px' => array(
 						'min'  => 150,
 						'max'  => 2000,
 						'step' => 10,
-					],
-				],
-			]
+					),
+				),
+			)
 		);
 
 		$this->add_control(
@@ -187,10 +201,10 @@ class Popup extends Widget_Base {
 		 */
 		$this->start_controls_section(
 			'button_style_section',
-			[
+			array(
 				'label' => esc_html__( 'Button', 'woodmart' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
+			)
 		);
 
 		woodmart_get_button_style_general_map( $this );
@@ -210,12 +224,12 @@ class Popup extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$default_settings = [
+		$default_settings = array(
 			'popup_id' => 'my_popup',
 			'content'  => '',
 			'link'     => array(),
 			'width'    => 800,
-		];
+		);
 
 		$settings = wp_parse_args( $this->get_settings_for_display(), $default_settings );
 
@@ -233,17 +247,22 @@ class Popup extends Widget_Base {
 			$inline_styles .= $prop . ':' . $val . ';';
 		}
 
-		$settings['link']['url']    = '#' . esc_attr( $settings['popup_id'] );
+		$settings['link']['url']               = '#' . esc_attr( $settings['popup_id'] );
+		$settings['link']['custom_attributes'] = ! empty( $settings['custom_attributes'] ) ? $settings['custom_attributes'] : '';
+
 		$settings['custom_classes'] = 'wd-open-popup';
 
 		woodmart_enqueue_js_library( 'magnific' );
 		woodmart_enqueue_js_script( 'popup-element' );
+		
 		woodmart_enqueue_inline_style( 'mfp-popup' );
+		woodmart_enqueue_inline_style( 'mod-animations-transform' );
+		woodmart_enqueue_inline_style( 'mod-transform' );
 
 		?>
 		<?php woodmart_elementor_button_template( $settings ); ?>
 		<?php if ( $settings['content'] ) : ?>
-			<div id="<?php echo esc_attr( $settings['popup_id'] ); ?>" class="wd-popup wd-popup-element wd-entry-content mfp-hide<?php echo woodmart_get_old_classes( ' woodmart-content-popup' ); ?>" style="<?php echo esc_attr( $inline_styles ); ?>">
+			<div id="<?php echo esc_attr( $settings['popup_id'] ); ?>" class="mfp-hide wd-popup wd-popup-element wd-scroll-content wd-entry-content<?php echo woodmart_get_old_classes( ' woodmart-content-popup' ); ?>" style="<?php echo esc_attr( $inline_styles ); ?>">
 				<?php echo woodmart_get_html_block( $settings['content'], true ); // phpcs:ignore ?>
 			</div>
 		<?php endif; ?>

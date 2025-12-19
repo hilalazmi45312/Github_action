@@ -4,7 +4,7 @@
  *
  * @package     woocommerce-smart-coupons/includes/
  * @since       9.6.0
- * @version     1.0.0
+ * @version     1.2.0
  */
 
 // Exit if accessed directly.
@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WC_SC_Background_Process', false ) ) {
-	if ( file_exists( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/abstracts/class-wc-sc-background-process.php' ) ) {
-		include_once trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/abstracts/class-wc-sc-background-process.php';
+	if ( file_exists( WC_SC_PLUGIN_DIRPATH . 'includes/abstracts/class-wc-sc-background-process.php' ) ) {
+		include_once WC_SC_PLUGIN_DIRPATH . 'includes/abstracts/class-wc-sc-background-process.php';
 	}
 }
 
@@ -104,63 +104,71 @@ if ( ! class_exists( 'WC_SC_Order_Stats_Negative_Net_Total_Fix' ) && class_exist
 		 * @return array The function that needs to be processed.
 		 */
 		public function get_remaining_items() {
-			global $wpdb;
+			try {
+				global $wpdb, $woocommerce_smart_coupon;
 
-			// Apply filter for limit.
-			$limit = apply_filters( 'wc_sc_limit_for_get_orders_with_negative_value', 10 );
+				// Apply filter for limit.
+				$limit = apply_filters( 'wc_sc_limit_for_get_orders_with_negative_value', 10 );
 
-			$order_dates = apply_filters(
-				'wc_sc_date_for_get_orders_with_negative_value',
-				array(
-					'start_date' => '2024-01-01 00:00:00',
-					'end_date'   => current_time( 'mysql' ),
-				)
-			);
-			// phpcs:disable
-			$like_clause = '%' . $wpdb->esc_like('"sc_negative_net_total_stats_fix_status";s:3:"yes";') . '%';
-			$query = $wpdb->prepare(
-				"SELECT stats.order_id
-				FROM {$wpdb->prefix}wc_order_stats AS stats
-				INNER JOIN {$wpdb->prefix}wc_orders_meta AS meta ON stats.order_id = meta.order_id
-				WHERE stats.net_total < %d
-				AND meta.meta_key = %s
-				AND meta.meta_value != %s -- Exclude empty serialized array.
-				AND stats.date_created BETWEEN %s AND %s
-				AND (
-					-- Check in wc_orders_meta
-					NOT EXISTS (
-						SELECT 1
-						FROM {$wpdb->prefix}wc_orders_meta AS wc_orders_meta
-						WHERE wc_orders_meta.order_id = stats.order_id
-						AND wc_orders_meta.meta_key = %s
-						AND wc_orders_meta.meta_value != %s
+				$order_dates = apply_filters(
+					'wc_sc_date_for_get_orders_with_negative_value',
+					array(
+						'start_date' => '2024-01-01 00:00:00',
+						'end_date'   => current_time( 'mysql' ),
 					)
-					OR
-					-- Check in postmeta
-            		NOT EXISTS (
-						SELECT 1
-						FROM {$wpdb->prefix}postmeta AS env_meta
-						WHERE env_meta.post_id = stats.order_id
-						AND env_meta.meta_key = %s
-						AND env_meta.meta_value LIKE %s -- Exclude serialized 'yes' for 'sc_negative_net_total_stats_fix_status'
+				);
+				// phpcs:disable
+				$like_clause = '%' . $wpdb->esc_like('"sc_negative_net_total_stats_fix_status";s:3:"yes";') . '%';
+				$query = $wpdb->prepare(
+					"SELECT stats.order_id
+					FROM {$wpdb->prefix}wc_order_stats AS stats
+					INNER JOIN {$wpdb->prefix}wc_orders_meta AS meta ON stats.order_id = meta.order_id
+					WHERE stats.net_total < %d
+					AND meta.meta_key = %s
+					AND meta.meta_value != %s -- Exclude empty serialized array.
+					AND stats.date_created BETWEEN %s AND %s
+					AND (
+						-- Check in wc_orders_meta
+						NOT EXISTS (
+							SELECT 1
+							FROM {$wpdb->prefix}wc_orders_meta AS wc_orders_meta
+							WHERE wc_orders_meta.order_id = stats.order_id
+							AND wc_orders_meta.meta_key = %s
+							AND wc_orders_meta.meta_value != %s
+						)
+						OR
+						-- Check in postmeta
+	            		NOT EXISTS (
+							SELECT 1
+							FROM {$wpdb->prefix}postmeta AS env_meta
+							WHERE env_meta.post_id = stats.order_id
+							AND env_meta.meta_key = %s
+							AND env_meta.meta_value LIKE %s -- Exclude serialized 'yes' for 'sc_negative_net_total_stats_fix_status'
+						)
 					)
-				)
-				LIMIT %d",
-				0,  // net_total check.
-				'smart_coupons_contribution',  // Meta key for coupons.
-				'a:0:{}',  // Exclude empty serialized array.
-				$order_dates['start_date'],
-				$order_dates['end_date'],
-				'wc_sc_environment',  // wc_orders_meta meta key for environment.
-				$like_clause,  // Use esc_like for LIKE clause.
-				'wc_sc_environment',  // postmeta meta key for environment.
-				$like_clause,  // Use esc_like for LIKE clause.
-				$limit
-			);
+					LIMIT %d",
+					0,  // net_total check.
+					'smart_coupons_contribution',  // Meta key for coupons.
+					'a:0:{}',  // Exclude empty serialized array.
+					$order_dates['start_date'],
+					$order_dates['end_date'],
+					'wc_sc_environment',  // wc_orders_meta meta key for environment.
+					$like_clause,  // Use esc_like for LIKE clause.
+					'wc_sc_environment',  // postmeta meta key for environment.
+					$like_clause,  // Use esc_like for LIKE clause.
+					$limit
+				);
+	
+				$order_ids = $wpdb->get_col( $query ) ?: array();
+				// phpcs:enable
 
-			$order_ids = $wpdb->get_col( $query ) ?: array();
-			// phpcs:enable
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
 
+				$order_ids = array();
+			}
 			return $order_ids;
 		}
 
@@ -255,57 +263,63 @@ if ( ! class_exists( 'WC_SC_Order_Stats_Negative_Net_Total_Fix' ) && class_exist
 		 * @param int $order_id The order ID.
 		 */
 		public function update_wc_sc_environment_meta( $order_id ) {
-			global $wpdb;
+			try {
+				global $wpdb, $woocommerce_smart_coupon;
 
-			// Meta key to update.
-			$meta_key = 'wc_sc_environment';
-			// phpcs:disable
-			// Fetch meta from wc_orders_meta table.
-			$meta_from_wc_orders = $wpdb->get_var(
-				$wpdb->prepare(
-					"SELECT meta_value 
-					FROM {$wpdb->prefix}wc_orders_meta 
-					WHERE order_id = %d AND meta_key = %s",
-					$order_id,
-					$meta_key
-				)
-			);
-			// phpcs:enable
-			// Fetch meta from postmeta table.
-			$meta_from_postmeta = get_post_meta( $order_id, $meta_key, true );
+				// Meta key to update.
+				$meta_key = 'wc_sc_environment';
+				// phpcs:disable
+				// Fetch meta from wc_orders_meta table.
+				$meta_from_wc_orders = $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT meta_value 
+						FROM {$wpdb->prefix}wc_orders_meta 
+						WHERE order_id = %d AND meta_key = %s",
+						$order_id,
+						$meta_key
+					)
+				);
+				// phpcs:enable
+				// Fetch meta from postmeta table.
+				$meta_from_postmeta = get_post_meta( $order_id, $meta_key, true );
 
-			// Deserialize and combine meta from both sources.
-			$meta_from_wc_orders = maybe_unserialize( $meta_from_wc_orders );
-			$meta_from_postmeta  = maybe_unserialize( $meta_from_postmeta );
+				// Deserialize and combine meta from both sources.
+				$meta_from_wc_orders = maybe_unserialize( $meta_from_wc_orders );
+				$meta_from_postmeta  = maybe_unserialize( $meta_from_postmeta );
 
-			// Initialize final meta array.
-			$combined_meta = array();
+				// Initialize final meta array.
+				$combined_meta = array();
 
-			if ( is_array( $meta_from_wc_orders ) ) {
-				$combined_meta = array_merge( $combined_meta, $meta_from_wc_orders );
+				if ( is_array( $meta_from_wc_orders ) ) {
+					$combined_meta = array_merge( $combined_meta, $meta_from_wc_orders );
+				}
+
+				if ( is_array( $meta_from_postmeta ) ) {
+					$combined_meta = array_merge( $combined_meta, $meta_from_postmeta );
+				}
+
+				// Ensure required key exists in the combined meta.
+				$combined_meta['sc_negative_net_total_stats_fix_status'] = 'yes';
+				// phpcs:disable
+				// Update wc_orders_meta table.
+				$wpdb->replace(
+					$wpdb->prefix . 'wc_orders_meta',
+					array(
+						'order_id'   => $order_id,
+						'meta_key'   => $meta_key,
+						'meta_value' => maybe_serialize( $combined_meta ),
+					),
+					array( '%d', '%s', '%s' )
+				);
+				// phpcs:enable
+
+				// Update postmeta table.
+				update_post_meta( $order_id, $meta_key, $combined_meta );
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
 			}
-
-			if ( is_array( $meta_from_postmeta ) ) {
-				$combined_meta = array_merge( $combined_meta, $meta_from_postmeta );
-			}
-
-			// Ensure required key exists in the combined meta.
-			$combined_meta['sc_negative_net_total_stats_fix_status'] = 'yes';
-			// phpcs:disable
-			// Update wc_orders_meta table.
-			$wpdb->replace(
-				$wpdb->prefix . 'wc_orders_meta',
-				array(
-					'order_id'   => $order_id,
-					'meta_key'   => $meta_key,
-					'meta_value' => maybe_serialize( $combined_meta ),
-				),
-				array( '%d', '%s', '%s' )
-			);
-			// phpcs:enable
-
-			// Update postmeta table.
-			update_post_meta( $order_id, $meta_key, $combined_meta );
 		}
 
 		/**

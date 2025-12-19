@@ -938,7 +938,7 @@ class Product_Filters extends Widget_Base {
 
 		?>
 		<div class="wd-pf-checkboxes wd-pf-price-range multi_select widget_price_filter wd-col wd-event-<?php echo esc_attr( $settings['show_dropdown_on'] ); ?>">
-			<div class="wd-pf-title">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html( $settings['price_title'] ); ?>
 				</span>
@@ -999,7 +999,7 @@ class Product_Filters extends Widget_Base {
 		<div class="wd-pf-checkboxes wd-pf-stock multi_select wd-col wd-event-<?php echo esc_attr( $settings['show_dropdown_on'] ); ?>">
 			<input type="hidden" class="result-input" name="stock_status" value="<?php echo esc_attr( $result_value ); ?>">
 
-			<div class="wd-pf-title">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html( $settings['stock_title'] ); ?>
 				</span>
@@ -1083,7 +1083,7 @@ class Product_Filters extends Widget_Base {
 		<div class="wd-pf-checkboxes wd-pf-sortby wd-col wd-event-<?php echo esc_attr( $settings['show_dropdown_on'] ); ?>">
 			<input type="hidden" class="result-input" name="orderby" value="<?php echo ! empty( $current_filter ) ? esc_attr( $current_filter ) : ''; ?>">
 
-			<div class="wd-pf-title">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html__( 'Sort by', 'woodmart' ); ?>
 				</span>
@@ -1230,7 +1230,7 @@ class Product_Filters extends Widget_Base {
 
 		?>
 		<div class="wd-pf-checkboxes wd-pf-categories wd-col wd-event-<?php echo esc_attr( $settings['show_dropdown_on'] ); ?>">
-			<div class="wd-pf-title">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html( $settings['categories_title'] ); ?>
 				</span>

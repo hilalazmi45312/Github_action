@@ -27,6 +27,22 @@ if ( ! empty( $attrs['productsWithBackground'] ) && 'yes' === $attrs['productsWi
 	);
 }
 
+if ( ! empty( $attrs['productsBorderedGrid'] ) && 'enable' === $attrs['productsBorderedGrid'] ) {
+	$block_css->add_css_rules(
+		$block_selector . ' [class*="products-bordered-grid"], ' . $block_selector . ' [class*="products-bordered-grid"] .wd-product',
+		array(
+			array(
+				'attr_name' => 'productsBorderColorCode',
+				'template'  => '--wd-bordered-brd: {{value}};',
+			),
+			array(
+				'attr_name' => 'productsBorderColorVariable',
+				'template'  => '--wd-bordered-brd: var({{value}});',
+			),
+		)
+	);
+}
+
 $block_css->merge_with(
 	wd_get_block_advanced_css(
 		array(

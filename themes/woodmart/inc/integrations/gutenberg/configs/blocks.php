@@ -61,6 +61,10 @@
 			'attributes'      => wd_get_block_blog_attrs(),
 			'render_callback' => 'wd_gutenberg_blog',
 		),
+		'wd/breadcrumbs'                  => array(
+			'attributes'      => wd_get_block_breadcrumbs_attrs(),
+			'render_callback' => 'wd_gutenberg_breadcrumbs',
+		),
 		'wd/portfolio'                    => array(
 			'attributes'      => wd_get_block_portfolio_attrs(),
 			'render_callback' => 'wd_gutenberg_portfolio',
@@ -163,6 +167,10 @@
 		),
 		'wd/open-street-map'              => array(
 			'attributes' => wd_get_block_open_street_map_attrs(),
+		),
+		'wd/page-heading'                 => array(
+			'attributes'      => wd_get_page_heading_block_title_attrs(),
+			'render_callback' => 'wd_gutenberg_page_heading',
 		),
 		'wd/degree-view'                  => array(),
 		'wd/menu-anchor'                  => array(),

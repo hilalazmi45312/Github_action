@@ -56,8 +56,6 @@ if ( ! function_exists( 'wd_gutenberg_products' ) ) {
 			);
 		}
 
-		$block_attributes['inner_content'] = trim( $content );
-
 		return woodmart_shortcode_products( $block_attributes, $content );
 	}
 }

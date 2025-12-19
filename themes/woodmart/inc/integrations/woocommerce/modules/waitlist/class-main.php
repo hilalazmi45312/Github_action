@@ -8,13 +8,13 @@
 namespace XTS\Modules\Waitlist;
 
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
+use XTS\Modules\Managers\Module_Endpoints_Manager;
 use WC_Product;
 
 /**
  * Waitlist class.
  */
-class Main extends Singleton {
+class Main {
 	/**
 	 * DB_Storage instance.
 	 *
@@ -23,32 +23,34 @@ class Main extends Singleton {
 	protected $db_storage;
 
 	/**
-	 * Init.
+	 * Constructor.
 	 */
-	public function init() {
-		if ( ! woodmart_woocommerce_installed() ) {
-			return;
-		}
-
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
-		add_filter( 'woocommerce_settings_pages', array( $this, 'add_endpoint_option' ) );
-		add_filter( 'woocommerce_get_query_vars', array( $this, 'add_endpoint' ) );
 
-		if ( ! woodmart_get_opt( 'waitlist_enabled' ) ) {
-			return;
+		woodmart_include_files( __DIR__, $this->get_include_files() );
+
+		if ( woodmart_get_opt( 'waitlist_enabled' ) && woodmart_woocommerce_installed() ) {
+			$this->define_constants();
+
+			$this->db_storage = DB_Storage::get_instance();
+
+			add_action( 'init', array( $this, 'add_endpoint_options' ) );
+
+			add_action( 'before_delete_post', array( $this->db_storage, 'unsubscribe_by_product_id' ) );
+
+			add_action( 'woodmart_remove_not_confirmed_emails', array( $this->db_storage, 'remove_not_confirmed_emails' ) );
+
+			add_action( 'init', array( $this, 'schedule_cron_event' ) );
 		}
+	}
 
-		$this->define_constants();
-		$this->include_files();
-
-		$this->db_storage = DB_Storage::get_instance();
-
-		add_action( 'init', array( $this, 'custom_rewrite_rule' ) );
-
-		add_action( 'before_delete_post', array( $this->db_storage, 'unsubscribe_by_product_id' ) );
-
-		add_action( 'woodmart_remove_not_confirmed_emails', array( $this->db_storage, 'remove_not_confirmed_emails' ) );
-
+	/**
+	 * Schedule cron event on init hook.
+	 *
+	 * @return void
+	 */
+	public function schedule_cron_event() {
 		if ( ! wp_next_scheduled( 'woodmart_remove_not_confirmed_emails' ) ) {
 			wp_schedule_event( time(), apply_filters( 'woodmart_remove_not_confirmed_emails_time', 'daily' ), 'woodmart_remove_not_confirmed_emails' );
 		}
@@ -212,89 +214,59 @@ class Main extends Singleton {
 	}
 
 	/**
-	 * Add waiting list account endpoint option.
+	 * Get list of module include files.
+	 *
+	 * @return array
 	 */
-	public function add_endpoint_option( $settings ) {
-		$offset       = array_search(
-			'woocommerce_myaccount_payment_methods_endpoint',
-			array_column(
-				$settings,
-				'id'
-			),
-			true
-		) + 1;
-		$first_part   = array_slice( $settings, 0, $offset, true );
-		$last_part    = array_slice( $settings, $offset, null, true );
-		$first_part[] = array(
-			'title'    => esc_html__( 'Waitlist', 'woodmart' ),
-			'desc'     => esc_html__( 'Endpoint for the "My account &rarr; Waitlist" page.', 'woodmart' ),
-			'id'       => 'woodmart_myaccount_waitlist_endpoint',
-			'type'     => 'text',
-			'default'  => 'waitlist',
-			'desc_tip' => true,
-		);
-		$settings   = array_merge( $first_part, $last_part );
+	protected function get_include_files() {
+		$files = array();
 
-		return $settings;
+		if ( ! class_exists( 'WP_List_Table' ) ) {
+			$files[] = ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+		}
+
+		$files = array_merge(
+			$files,
+			array(
+				'./class-db-storage',
+				'./class-emails',
+				'./class-admin',
+				'./class-frontend',
+				'./list-tables/class-waitlist-table',
+				'./list-tables/class-users-table',
+			)
+		);
+
+		return $files;
 	}
 
 	/**
-	 * Add waiting list account endpoint
+	 * Add endpoint options for the module.
 	 */
-	public function add_endpoint( $query_vars ) {
-		$query_vars['waitlist'] = get_option( 'woodmart_myaccount_waitlist_endpoint', 'waitlist' );
+	public function add_endpoint_options() {
+		$endpoints_manager = Module_Endpoints_Manager::get_instance();
 
-		return $query_vars;
+		$endpoints_manager->add_endpoint_options(
+			array(
+				'title'    => esc_html__( 'Waitlist', 'woodmart' ),
+				'desc'     => esc_html__( 'Endpoint for the "My account &rarr; Waitlist" page.', 'woodmart' ),
+				'id'       => 'woodmart_myaccount_waitlist_endpoint',
+				'type'     => 'text',
+				'default'  => 'waitlist',
+				'desc_tip' => true,
+				'priority' => 10,
+			)
+		);
 	}
 
 	/**
 	 * Define constants.
 	 */
-	private function define_constants() {
+	protected function define_constants() {
 		if ( ! defined( 'XTS_WAITLIST_DIR' ) ) {
 			define( 'XTS_WAITLIST_DIR', WOODMART_THEMEROOT . '/inc/integrations/woocommerce/modules/waitlist/' );
 		}
 	}
-
-	/**
-	 * Include files.
-	 *
-	 * @return void
-	 */
-	public function include_files() {
-		$files = array(
-			'class-db-storage',
-			'class-emails',
-			'class-admin',
-			'class-frontend',
-		);
-
-		foreach ( $files as $file ) {
-			$path = XTS_WAITLIST_DIR . $file . '.php';
-
-			if ( file_exists( $path ) ) {
-				require_once $path;
-			}
-		}
-	}
-
-	/**
-	 * Add rewrite rules for wishlist.
-	 *
-	 * @return void
-	 */
-	public function custom_rewrite_rule() {
-		$myaccount_id = (int) get_option( 'woocommerce_myaccount_page_id' );
-		$slug         = (string) get_post_field( 'post_name', $myaccount_id );
-
-		if ( empty( $slug ) || ! array_key_exists( 'waitlist', WC()->query->query_vars ) ) {
-			return;
-		}
-
-		$waitlist_endpoint = WC()->query->query_vars['waitlist'];
-
-		add_rewrite_rule( '^' . $slug . '/' . $waitlist_endpoint . '/page/([^/]*)?', 'index.php?page_id=' . $myaccount_id . '&' . $waitlist_endpoint . '&paged=$matches[1]', 'top' );
-	}
 }
 
-Main::get_instance();
+new Main();

@@ -43,7 +43,7 @@
 
 					let $imagesIndicator    = $product.find('.wd-product-grid-slider-pagin');
 					let $productImage       = $product.find('.product-image-link > img, .product-image-link > picture > img');
-					let $productImageSource = $product.find('.product-image-link picture source');
+					let $productImageSource = $product.find('.product-image-link > picture source');
 					let hoverImageUrl;
 					let hoverImageSrcSet;
 					let currentImagesIndicator;
@@ -94,7 +94,7 @@
 
 					let $product            = $navButton.closest('.wd-product');
 					let $productImage       = $product.find('.product-image-link > img, .product-image-link > picture > img');
-					let $productImageSource = $product.find('.product-image-link picture source');
+					let $productImageSource = $product.find('.product-image-link > picture source');
 					let $imagesList         = $product.find('.wd-product-grid-slide');
 					let index               = $imagesList.hasClass('wd-active') ? $product.find('.wd-product-grid-slide.wd-active').data('image-id') : 0;
 

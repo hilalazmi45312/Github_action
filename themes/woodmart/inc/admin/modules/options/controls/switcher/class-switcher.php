@@ -73,6 +73,6 @@ class Switcher extends Field {
 	 * @return boolean
 	 */
 	private function is_activated() { // phpcs:ignore
-		return '1' == $this->get_field_value() || 'yes' == $this->get_field_value();
+		return in_array( $this->get_field_value(), array( 1, '1', 'yes', true ), true );
 	}
 }

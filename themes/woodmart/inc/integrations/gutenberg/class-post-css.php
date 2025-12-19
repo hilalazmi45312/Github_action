@@ -42,6 +42,14 @@ class Post_CSS extends Singleton {
 			return;
 		}
 
+		$css = array(
+			'only_desktop' => '',
+			'desktop'      => '',
+			'tablet'       => '',
+			'only_tablet'  => '',
+			'mobile'       => '',
+		);
+
 		if ( has_blocks( $post->post_content ) && ! empty( $post->post_content ) ) {
 			$blocks = xts_parse_blocks_from_content( $post->post_content );
 
@@ -53,6 +61,8 @@ class Post_CSS extends Singleton {
 		}
 
 		$storage = new Styles_Storage( $this->get_storage_key( $post_id ), 'post_meta', $post_id );
+
+		$css = apply_filters( 'woodmart_post_blocks_css', $css, $post_id, $post );
 
 		if ( empty( $css ) || ( empty( $css['desktop'] ) && empty( $css['only_desktop'] ) && empty( $css['tablet'] ) && empty( $css['only_tablet'] ) && empty( $css['mobile'] ) ) ) {
 			$storage->delete_css();

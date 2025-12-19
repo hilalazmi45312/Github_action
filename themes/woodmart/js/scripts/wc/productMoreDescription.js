@@ -30,7 +30,7 @@
 			if (delta > 30) {
 				$moreBtn.addClass('wd-shown');
 			} else if (delta > 0) {
-				$content.css('height', contentHeight + delta);
+				$content.css('max-height', contentHeight + delta);
 			}
 
 			$content.addClass('wd-more-desc-calculated');

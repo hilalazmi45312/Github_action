@@ -41,7 +41,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 
 		$this->paymenttype_options = array(
 			// --- Credit Card ---
-			'2'   => __( 'Credit Card', 'wc_ipay88' ),
+			'2'   => __( 'Credit / Debit Card', 'wc_ipay88' ),
 
 			// --- Internet Banking ---
 			'6'   => __( 'Maybank2U', 'wc_ipay88' ),
@@ -84,7 +84,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		$this->types_mapping = array(
 			'image' => array(
 				// Credit Card
-				'2'   => 'credit-card',
+				'2'   => 'payment_card',
 
 				// Internet Banking
 				'6'   => 'maybank2u',
@@ -168,7 +168,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 
 			'name' => array(
 				// Credit Card
-				'2'   => 'CreditCard',
+				'2'   => 'Credit/DebitCard',
 
 				// Internet Banking
 				'6'   => 'Maybank2U',
@@ -510,27 +510,18 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		<?php
 
 		$bnpl_options = apply_filters( 'wc_ipay88_bnpl_payment_types', array(
-			'111',
-			'112',
-			'115',
-			'157',
-			'174',
-			'179',
-			'534',
-			'606',
-			'727',
-			'891',
-			'523',
+			'891', // Atome
+			'523', // GrabPay
 		) );
 		
 		if ( (bool) array_intersect( $bnpl_options, $this->paymenttype_available ) ) {
-			echo '<div class="ipay88-payment-section">';
+			echo '<div class="ipay88-payment-section bnpl-section">';
 			echo '<h4 class="ipay88-section-title">';
 			echo '<div class="ipay88-section-content">';
 			if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/bnpl.' . $this->image_ext ) ) {
 				echo '<img class="ipay88-section-icon" alt="BNPL" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/bnpl.' . $this->image_ext ) . '">';
 			}
-			echo esc_html( __( 'Buy Now Pay Later / Instalment', 'wc_ipay88' ) );
+			echo esc_html( __( 'Buy Now Pay Later', 'wc_ipay88' ) );
 			echo '</div>';
 			echo '</h4>';
 			echo '<div class="ipay88-payment-grid bnpl-grid">';
@@ -596,7 +587,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/onlinebanking.' . $this->image_ext ) ) {
 				echo '<img class="ipay88-section-icon" alt="Online Banking" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/onlinebanking.' . $this->image_ext ) . '">';
 			}
-			echo esc_html( __( 'Internet Banking', 'wc_ipay88' ) );
+			echo esc_html( __( 'Internet Banking (FPX)', 'wc_ipay88' ) );
 			echo '</div>';
 			echo '</h4>';
 			echo '<div class="ipay88-payment-grid">';
@@ -619,15 +610,72 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			echo '</div></div>';
 		}
 
+		// Credit Card Instalment (bank EPPs - excluding Atome and GrabPay)
+		$cc_instalment_options = apply_filters( 'wc_ipay88_cc_instalment_payment_types', array(
+			'111', // Public Bank EPP
+			'112', // Maybank EzyPay (Visa/Mastercard)
+			'115', // Maybank EzyPay (AMEX)
+			'157', // HSBC Instalment
+			'174', // CIMB Easy Pay
+			'179', // Hong Leong Bank EPP
+			'534', // RHB Instalment
+			'606', // AmBank EPP
+			'727', // Standard Chartered Instalment
+		) );
+		
+		if ( (bool) array_intersect( $cc_instalment_options, $this->paymenttype_available ) ) {
+			echo '<div class="ipay88-payment-section cc-instalment-section">';
+			echo '<h4 class="ipay88-section-title">';
+			echo '<div class="ipay88-section-content">';
+			if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/cc.' . $this->image_ext ) ) {
+				echo '<img class="ipay88-section-icon" alt="Credit Card Instalment" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/cc.' . $this->image_ext ) . '">';
+			}
+			echo esc_html( __( 'Credit Card Instalment', 'wc_ipay88' ) );
+			echo '</div>';
+			echo '</h4>';
+			echo '<div class="ipay88-payment-grid bnpl-grid">';
+
+			foreach ( $cc_instalment_options as $number ) {
+				if ( in_array( $number, $this->paymenttype_available ) ) {
+					echo '<div class="ipay88-payment-option-wrapper">';
+					echo '<label class="ipay88-payment-option bnpl-option" for="ipay88' . esc_attr( $this->types_mapping['id'][ $number ] ) . '">';
+					echo '<input type="radio" id="ipay88' . esc_attr( $this->types_mapping['id'][ $number ] ) . '" name="ipay88_payment_type" value="' . esc_attr( $number ) . '" data-payment-type="bnpl">';
+
+					if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) ) {
+						echo '<img class="ipay88-bank-logo" alt="' . esc_attr( $this->paymenttype_options[ $number ] ) . '" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) . '">';
+					}
+					
+					echo '<div class="ipay88-payment-label">';
+					echo esc_html( $this->paymenttype_options[ $number ] );
+					echo '</div>';
+					echo '</label>';
+					
+					// Add installment options as radio buttons directly under each payment option
+					echo '<input type="hidden" id="ipay88_admin_fee' . esc_attr( $number ) . '" name="ipay88_admin_fee' . esc_attr( $number ) . '" value="">';
+					echo '<div class="ipay88-installment-options" id="installment-options-' . esc_attr( $number ) . '" style="display: none;">';
+					echo '<div class="ipay88-installment-header">';
+					echo '<h5>CHOOSE YOUR INSTALLMENT</h5>';
+					echo '</div>';
+					echo '<div class="ipay88-installment-list">';
+					// Default installment options will be populated by JavaScript
+					echo '</div>';
+					echo '</div>';
+					echo '</div>'; // Close wrapper
+				}
+			}
+			
+			echo '</div></div>';
+		}
+
 		$credit_options = apply_filters( 'wc_ipay88_credit_payment_types', array( '2' ) );
 		if ( (bool) array_intersect( $credit_options, $this->paymenttype_available ) ) {
 			echo '<div class="ipay88-payment-section">';
 			echo '<h4 class="ipay88-section-title">';
 			echo '<div class="ipay88-section-content">';
 			if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/cc.' . $this->image_ext ) ) {
-				echo '<img class="ipay88-section-icon" alt="Credit Card" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/cc.' . $this->image_ext ) . '">';
+				echo '<img class="ipay88-section-icon" alt="Credit / Debit Card" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/cc.' . $this->image_ext ) . '">';
 			}
-			echo esc_html( __( 'Credit Card', 'wc_ipay88' ) );
+			echo esc_html( __( 'Credit / Debit Card', 'wc_ipay88' ) );
 			echo '</div>';
 			echo '</h4>';
 			echo '<div class="ipay88-payment-grid">';
@@ -638,7 +686,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 					echo '<input type="radio" id="ipay88' . esc_attr( $this->types_mapping['id'][ $number ] ) . '" name="ipay88_payment_type" value="' . esc_attr( $number ) . '">';
 					
 					if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) ) {
-						echo '<img class="ipay88-bank-logo" alt="' . esc_attr( $this->paymenttype_options[ $number ] ) . '" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) . '">';
+						echo '<img class="ipay88-bank-logo" style="width: 80px;" alt="' . esc_attr( $this->paymenttype_options[ $number ] ) . '" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) . '">';
 					}
 					
 					echo '<div class="ipay88-payment-label">';
@@ -650,12 +698,13 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			echo '</div></div>';
 		}
 
+		// E-Wallet (without GrabPay - it's now in BNPL section)
 		$ewallet_options = apply_filters( 'wc_ipay88_ewallet_payment_types', array(
-			'210',
-			'523',
-			'538',
-			'542',
-			'801',
+			'210', // Boost Wallet
+			'523', // GrabPay
+			'538', // Touch n Go eWallet
+			'542', // Maybank PayQR
+			'801', // ShopeePay
 		) );
 		if ( (bool) array_intersect( $ewallet_options, $this->paymenttype_available ) ) {
 			echo '<div class="ipay88-payment-section">';
@@ -671,11 +720,11 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 
 			foreach ( $ewallet_options as $number ) {
 				if ( in_array( $number, $this->paymenttype_available ) ) {
-					echo '<label class="ipay88-payment-option" for="ipay88' . esc_attr( $this->types_mapping['id'][ $number ] ) . '">';
-					echo '<input type="radio" id="ipay88' . esc_attr( $this->types_mapping['id'][ $number ] ) . '" name="ipay88_payment_type" value="' . esc_attr( $number ) . '">';
+					echo '<label class="ipay88-payment-option" for="ipay88_wallet' . esc_attr( $this->types_mapping['id'][ $number ] ) . '">';
+					echo '<input type="radio" id="ipay88_wallet' . esc_attr( $this->types_mapping['id'][ $number ] ) . '" name="ipay88_payment_type" value="' . esc_attr( $number ) . '">';
 					
 					if ( file_exists( WC_iPay88::plugin_path() . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) ) {
-						echo '<img class="ipay88-bank-logo" alt="' . esc_attr( $this->paymenttype_options[ $number ] ) . '" src="' . esc_url( WC_HTTPS::force_https_url( WC_iPay88::plugin_url() ) . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) . '">';
+						echo '<img class="ipay88-bank-logo" alt="' . esc_attr( $this->paymenttype_options[ $number ] ) . '" src="' . esc_url( WC_HTTPS::force_https_url( WC_IPay88::plugin_url() ) . '/assets/images/' . $this->types_mapping['image'][ $number ] . '.' . $this->image_ext ) . '">';
 					}
 					
 					echo '<div class="ipay88-payment-label">';
@@ -725,7 +774,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 	function validate_fields() {
 		$ptype                     = WC_iPay88::get_field( 'ipay88_payment_type', $_POST );
 		$pPlan 				  = WC_iPay88::get_field( 'ipay88_payment_plan'.$ptype, $_POST );
-		$adminFee                  = WC_iPay88::get_field( 'ipay88_admin_fee.'.$ptype, $_POST );
+		$adminFee                  = WC_iPay88::get_field( 'ipay88_admin_fee'.$ptype, $_POST );
 		$this->posted_payment_type = null !== $ptype ? $ptype : '0';
 		$this->posted_payment_plan = null !== $pPlan ? $pPlan : '0';
 		$this->posted_admin_fee    = null !== $adminFee ? $adminFee : '0';
@@ -750,24 +799,45 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 	 */
 	public function get_order_description( $order ) {
 		$desc = '';
+
+		// Loop through the order items
 		if ( 0 < sizeof( $order->get_items() ) ) {
 			foreach ( $order->get_items() as $item ) {
 				if ( WC_Compat_iPay88::get_item_quantity( $item ) ) {
+					// Get the item meta if available
 					$item_meta = WC_Compat_iPay88::wc_display_item_meta( $item );
-					
+
+					// Get the item name
 					$item_name = WC_Compat_iPay88::get_item_name( $item );
+					
+					// Add meta info to item name
 					if ( $item_meta ) {
 						$item_name .= ' (' . $item_meta . ')';
 					}
-					
+
+					// Add the item quantity and name to the description
 					$desc .= WC_Compat_iPay88::get_item_quantity( $item ) . ' x ' . $item_name . ', ';
 				}
 			}
-			//Add the description
-			$desc = substr( $desc, 0, - 2 );
+			
+			// Remove trailing comma and space
+			$desc = rtrim( $desc, ', ' );
 		}
-		
-		return apply_filters( 'wc_ipay88_order_description', $desc, $order );
+
+		// If no description is generated, fallback to the order number
+		if ( empty( $desc ) ) {
+			$desc = 'Order #' . $order->get_order_number();
+		}
+
+		$prod_desc = wp_strip_all_tags( $desc );
+		$prod_desc = html_entity_decode( $prod_desc, ENT_QUOTES, 'UTF-8' );
+		$prod_desc = preg_replace('/[^A-Za-z0-9 ]/', '', $prod_desc);
+		$prod_desc = substr($prod_desc, 0, 60);
+
+		// Set the final product description
+		$ipay88_args['ProdDesc'] = $prod_desc;
+
+		return $prod_desc;
 	}
 	
 	/**
@@ -821,7 +891,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		$ipay88_args['Signature'] = $this->generate_sha512_signature( $ipay88_args, false );
 		$ipay88_args['SignatureType'] = 'HMACSHA512';
 		//Debug log
-		WC_iPay88::add_debug_log( 'Order form parameters: ' . print_r( $ipay88_args, true ) );
+		// WC_iPay88::add_debug_log( 'Order form parameters: ' . print_r( $ipay88_args, true ) );
 		
 		$ipay88_args = apply_filters( 'wc_ipay88_request_arguments', $ipay88_args, $order, $payment_type );
 		
@@ -892,31 +962,147 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 	 * @return array
 	 */
 	function process_payment( $order_id ) {
+		// Log the start
+		// WC_iPay88::add_debug_log( '=== Starting process_payment for order #' . $order_id );
+		// WC_iPay88::add_debug_log( 'POST data: ' . print_r( $_POST, true ) );
+		
 		if ( ! $this->check_pass ) {
-			$ptype                     = WC_iPay88::get_field( 'ipay88_payment_type', $_POST );
-			$pPlan 				  = WC_iPay88::get_field( 'ipay88_payment_plan'.$ptype, $_POST );
-			$adminFee                  = WC_iPay88::get_field( 'ipay88_admin_fee.'.$ptype, $_POST );
+			$ptype = WC_iPay88::get_field( 'ipay88_payment_type', $_POST );
+			$pPlan = WC_iPay88::get_field( 'ipay88_payment_plan'.$ptype, $_POST );
+			
 			$this->posted_payment_type = null !== $ptype ? $ptype : '0';
 			$this->posted_payment_plan = null !== $pPlan ? $pPlan : '0';
-			$this->posted_admin_fee    = null !== $adminFee ? $adminFee : '0';
+			$this->check_payment_fields( $this->posted_payment_type , $this->posted_payment_plan );
+		}
+
+		if ( $this->check_pass ) {
+			$ptype = WC_iPay88::get_field( 'ipay88_payment_type', $_POST );
+			$pPlan = WC_iPay88::get_field( 'ipay88_payment_plan'.$ptype, $_POST );
+			$adminFee = WC_iPay88::get_field( 'ipay88_admin_fee'.$ptype, $_POST );
+			// $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($ptype, $pPlan);
+			
+			$this->posted_payment_type = null !== $ptype ? $ptype : '0';
+			$this->posted_payment_plan = null !== $pPlan ? $pPlan : '0';
+			$this->posted_admin_fee = null !== $adminFee ? $adminFee : '0';
 			$this->check_payment_fields( $this->posted_payment_type , $this->posted_payment_plan );
 		}
 		
-		if ( ! wc_notice_count( 'error' ) ) {
+		// Check for validation errors
+		if ( wc_notice_count( 'error' ) ) {
+			WC_iPay88::add_debug_log( 'Validation errors found' );
+			return array(
+				'result' => 'failure',
+				'messages' => wc_print_notices( true )
+			);
+		}
+		
+		try {
 			$order = wc_get_order( $order_id );
+			
+			if ( ! $order ) {
+				WC_iPay88::add_debug_log( 'ERROR: Order not found' );
+				throw new Exception( 'Order not found' );
+			}
 
-			//store admin fee in post meta
+			// Store payment information
 			$paymentName = isset( $this->types_mapping['name'][ $this->posted_payment_type ] ) ? $this->types_mapping['name'][ $this->posted_payment_type ] : '';
 			update_post_meta( $order_id, '_ipay88_payment_type_name', sanitize_text_field( $paymentName ) );
 			update_post_meta( $order_id, '_ipay88_payment_type', sanitize_text_field( $this->posted_payment_type ) );
 			update_post_meta( $order_id, '_ipay88_payment_plan', sanitize_text_field( $this->posted_payment_plan ) );
 			update_post_meta( $order_id, '_ipay88_admin_fee', sanitize_text_field( $this->posted_admin_fee ) );
 			
+			// WC_iPay88::add_debug_log( 'Generating form data...' );
+
+
+			$payment_plan = (int) $this->posted_payment_plan;
+
+			if (
+				in_array( $this->posted_payment_type, ['523', '891'], true )
+				&& $payment_plan > 0
+			) {
+				WC_iPay88::add_debug_log(
+					'Using SECOND MerchantCode/MerchantKey (BNPL installment selected)'
+				);
+
+				$this->MerchantCode = SECOND_IPAY88_MERCHANT_CODE_LIVE;
+				$this->MerchantKey  = SECOND_IPAY88_MERCHANT_KEY_LIVE;
+			}
+			
+			// Generate iPay88 form data
+			$ipay88_form_data = $this->get_ipay88_form_data( $order_id );
+			
+			// WC_iPay88::add_debug_log( 'Form data generated successfully' );
+			// WC_iPay88::add_debug_log( 'Form URL: ' . $this->get_form_url() );
+			
+			// Return success with form data for AJAX submission
+			$response = array(
+				'result' => 'success',
+				'redirect' => '#ipay88-redirect',
+				'ipay88_form_data' => $ipay88_form_data,
+				'ipay88_form_url' => $this->get_form_url()
+			);
+			
+			WC_iPay88::add_debug_log( 'Returning response: ' . print_r( $response, true ) );
+			
+			return $response;
+			
+		} catch ( Exception $e ) {
+			WC_iPay88::add_debug_log( 'ERROR: ' . $e->getMessage() );
+			wc_add_notice( $e->getMessage(), 'error' );
 			return array(
-				'result'   => 'success',
-				'redirect' => add_query_arg( array( 'ptype' => $this->posted_payment_type, 'pPlan' => $this->posted_payment_plan ), $order->get_checkout_payment_url( true ) )
+				'result' => 'failure',
+				'messages' => wc_print_notices( true )
 			);
 		}
+	}
+
+	/**
+	 * Get iPay88 form data without generating HTML form
+	 */
+	function get_ipay88_form_data( $order_id ) {
+		$order = wc_get_order( $order_id );
+		
+		$currency = WC_Compat_iPay88::get_order_currency( $order );
+		
+		// Format the order total
+		$this->format_amount( $order->get_total() );
+		
+		$ipay88_args = array(
+			'MerchantCode' => $this->MerchantCode,
+			'RefNo'        => str_replace( '#', '', $order->get_order_number() ),
+			'Amount'       => $this->formatted_amount,
+			'Currency'     => $currency,
+			'ProdDesc'     => $this->get_order_description( $order ),
+			'UserName'     => WC_Compat_iPay88::get_order_billing_first_name( $order ) . ' ' . WC_Compat_iPay88::get_order_billing_last_name( $order ),
+			'UserEmail'    => WC_Compat_iPay88::get_order_billing_email( $order ),
+			'UserContact'  => WC_Compat_iPay88::get_order_billing_phone( $order ),
+			'ResponseURL'  => WC()->api_request_url( 'WC_Gateway_iPay88' ),
+			'BackendURL'   => WC_HTTPS::force_https_url( add_query_arg( 'iPay88_response', 'backend', WC()->api_request_url( 'WC_Gateway_iPay88' ) ) ),
+			'Xfield1'      => '',
+		);
+		
+		$payment_type = $this->posted_payment_type;
+		if ( null != $payment_type && 0 != $payment_type ) {
+			$ipay88_args['PaymentId'] = sanitize_text_field( $payment_type );
+		}
+
+		$payment_plan = $this->posted_payment_plan;
+		if ( null != $payment_plan && 0 != $payment_plan ) {
+			$ipay88_args['Plan'] = sanitize_text_field( $payment_plan );
+			$ipay88_args['ActionType'] = '';
+			$ipay88_args['TokenId'] = '';
+		}
+		
+		// Add signature
+		$ipay88_args['Signature'] = $this->generate_sha512_signature( $ipay88_args, false );
+		$ipay88_args['SignatureType'] = 'HMACSHA512';
+		
+		// Debug log
+		WC_iPay88::add_debug_log( 'Order form parameters: ' . print_r( $ipay88_args, true ) );
+		
+		$ipay88_args = apply_filters( 'wc_ipay88_request_arguments', $ipay88_args, $order, $payment_type );
+		
+		return $ipay88_args;
 	}
 	
 	/**
@@ -974,15 +1160,19 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			//Debug log
 			WC_iPay88::add_debug_log( 'Signature validation passed.' );
 			
-			$order_total = number_format( $order->get_total(), 2, '', '' );
 			$hash_amount = WC_iPay88::get_field( 'Amount', $_POST );
-			$this->hash_amount = str_replace( '.', '', $hash_amount );
+
+			// Remove commas AND dots, keep only numbers
+			$clean_received = preg_replace('/[^0-9]/', '', $hash_amount);
+
+			// Order total formatted the same way
+			$order_total = (string) intval($order->get_total() * 100);
+
 			WC_iPay88::add_debug_log( 'Order total is: ' . $order_total );
-			WC_iPay88::add_debug_log( 'Received amount is: ' . $this->hash_amount );
-			if ( abs( $order_total - $this->hash_amount ) == 0 ) {
-				//Debug log
+			WC_iPay88::add_debug_log( 'Received amount is: ' . $clean_received );
+
+			if ($order_total === $clean_received) {
 				WC_iPay88::add_debug_log( 'Amount validation passed.' );
-				
 				return true;
 			}
 			
@@ -1009,7 +1199,8 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		
 		$is_backend_notification = ( WC_iPay88::get_field( 'iPay88_response', $_GET ) == 'backend' );
 		
-		$received_ok = 'PH' == $this->gateway ? 'RECEIVEOK' : 'OK';
+		// $received_ok = 'PH' == $this->gateway ? 'RECEIVEOK' : 'OK';
+		$received_ok = 'RECEIVEOK';
 		
 		//Debug log
 		// Backend notification will get the OK response
@@ -1112,8 +1303,14 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			if ( $is_backend_notification ) {
 				echo $received_ok;
 			} else {
-				// Normal Payment notification needs to be redirected to the "Thank You" page.
-				wp_safe_redirect( $redirect_url );
+				// Normal Payment notification needs to be redirected
+				if ( $estatus == 1 ) {
+					// Success - redirect to thank you page
+					wp_safe_redirect( $redirect_url );
+				} else {
+					// Failed - redirect to checkout page with error notice
+					wp_safe_redirect( wc_get_checkout_url() );
+				}
 			}
 			exit;
 		}
@@ -1237,6 +1434,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 					'606',
 					'727',
 					'891',
+					'523',
 				) );
 
 				if ( in_array( $payment_type, $bnpl_options ) ) {
@@ -1313,4 +1511,3 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		return $order_id;
 	}
 } //end vanbodevelops ipay88 class
-

@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.7.1" created="2025-02-04 12:58" -->
+	<!-- generator="WordPress/6.7.2" created="2025-06-09 11:23" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>Vegetables gutenberg</title>
 	<link>https://dummy.xtemos.com/woodmart2/vegetables-gutenberg</link>
 	<description></description>
-	<pubDate>Tue, 04 Feb 2025 12:58:03 +0000</pubDate>
+	<pubDate>Mon, 09 Jun 2025 11:23:23 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
@@ -48,10 +48,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:78:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:31:"widget-layered-nav-stock-status";i:7;s:26:"widget-slider-price-filter";i:8;s:9:"blog-base";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:9:"wp-blocks";i:19;s:15:"block-paragraph";i:20;s:4:"list";i:21;s:11:"block-title";i:22;s:11:"block-table";i:23;s:6:"button";i:24;s:12:"block-button";i:25;s:12:"block-layout";i:26;s:11:"block-image";i:27;s:16:"mod-nav-vertical";i:28;s:10:"sticky-nav";i:29;s:20:"dropdown-full-height";i:30;s:23:"header-mod-content-calc";i:31;s:15:"block-container";i:32;s:12:"block-banner";i:33;s:20:"categories-loop-side";i:34;s:19:"woo-categories-loop";i:35;s:12:"product-loop";i:36;s:29:"product-loop-buttons-on-hover";i:37;s:23:"woo-mod-add-btn-replace";i:38;s:16:"woo-mod-quantity";i:39;s:24:"woo-mod-quantity-overlap";i:40;s:19:"woo-opt-title-limit";i:41;s:6:"swiper";i:42;s:22:"woo-mod-product-labels";i:43;s:13:"swiper-arrows";i:44;s:16:"swiper-scrollbar";i:45;s:11:"header-base";i:46;s:9:"mod-tools";i:47;s:20:"header-elements-base";i:48;s:18:"woo-mod-login-form";i:49;s:17:"header-my-account";i:50;s:13:"header-search";i:51;s:18:"header-search-form";i:52;s:14:"wd-search-form";i:53;s:16:"header-cart-side";i:54;s:11:"header-cart";i:55;s:20:"widget-shopping-cart";i:56;s:19:"widget-product-list";i:57;s:27:"header-mobile-nav-drilldown";i:58;s:33:"header-mobile-nav-drilldown-slide";i:59;s:17:"wd-search-results";i:60;s:10:"page-title";i:61;s:18:"blog-loop-base-old";i:62;s:21:"blog-loop-design-mask";i:63;s:12:"social-icons";i:64;s:15:"widget-collapse";i:65;s:11:"footer-base";i:66;s:10:"block-icon";i:67;s:18:"mod-nav-menu-label";i:68;s:12:"block-toggle";i:69;s:7:"el-menu";i:70;s:19:"social-icons-styles";i:71;s:10:"scroll-top";i:72;s:24:"header-search-fullscreen";i:73;s:26:"header-search-fullscreen-2";i:74;s:16:"popular-requests";i:75;s:13:"wd-search-cat";i:76;s:25:"header-my-account-sidebar";i:77;s:14:"bottom-toolbar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:category>
 			<wp:category>
@@ -81,10 +77,6 @@
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:78:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:31:"widget-layered-nav-stock-status";i:7;s:26:"widget-slider-price-filter";i:8;s:9:"blog-base";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:9:"wp-blocks";i:19;s:15:"block-paragraph";i:20;s:4:"list";i:21;s:11:"block-title";i:22;s:11:"block-table";i:23;s:6:"button";i:24;s:12:"block-button";i:25;s:12:"block-layout";i:26;s:11:"block-image";i:27;s:16:"mod-nav-vertical";i:28;s:10:"sticky-nav";i:29;s:20:"dropdown-full-height";i:30;s:23:"header-mod-content-calc";i:31;s:15:"block-container";i:32;s:12:"block-banner";i:33;s:20:"categories-loop-side";i:34;s:19:"woo-categories-loop";i:35;s:12:"product-loop";i:36;s:29:"product-loop-buttons-on-hover";i:37;s:23:"woo-mod-add-btn-replace";i:38;s:16:"woo-mod-quantity";i:39;s:24:"woo-mod-quantity-overlap";i:40;s:19:"woo-opt-title-limit";i:41;s:6:"swiper";i:42;s:22:"woo-mod-product-labels";i:43;s:13:"swiper-arrows";i:44;s:16:"swiper-scrollbar";i:45;s:11:"header-base";i:46;s:9:"mod-tools";i:47;s:20:"header-elements-base";i:48;s:18:"woo-mod-login-form";i:49;s:17:"header-my-account";i:50;s:13:"header-search";i:51;s:18:"header-search-form";i:52;s:14:"wd-search-form";i:53;s:16:"header-cart-side";i:54;s:11:"header-cart";i:55;s:20:"widget-shopping-cart";i:56;s:19:"widget-product-list";i:57;s:27:"header-mobile-nav-drilldown";i:58;s:33:"header-mobile-nav-drilldown-slide";i:59;s:17:"wd-search-results";i:60;s:10:"page-title";i:61;s:18:"blog-loop-base-old";i:62;s:21:"blog-loop-design-mask";i:63;s:12:"social-icons";i:64;s:15:"widget-collapse";i:65;s:11:"footer-base";i:66;s:10:"block-icon";i:67;s:18:"mod-nav-menu-label";i:68;s:12:"block-toggle";i:69;s:7:"el-menu";i:70;s:19:"social-icons-styles";i:71;s:10:"scroll-top";i:72;s:24:"header-search-fullscreen";i:73;s:26:"header-search-fullscreen-2";i:74;s:16:"popular-requests";i:75;s:13:"wd-search-cat";i:76;s:25:"header-my-account-sidebar";i:77;s:14:"bottom-toolbar";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:category>
 			<wp:category>
 			<wp:term_id>71</wp:term_id>
@@ -98,10 +90,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:78:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:31:"widget-layered-nav-stock-status";i:7;s:26:"widget-slider-price-filter";i:8;s:9:"blog-base";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:9:"wp-blocks";i:19;s:15:"block-paragraph";i:20;s:4:"list";i:21;s:11:"block-title";i:22;s:11:"block-table";i:23;s:6:"button";i:24;s:12:"block-button";i:25;s:12:"block-layout";i:26;s:11:"block-image";i:27;s:16:"mod-nav-vertical";i:28;s:10:"sticky-nav";i:29;s:20:"dropdown-full-height";i:30;s:23:"header-mod-content-calc";i:31;s:15:"block-container";i:32;s:12:"block-banner";i:33;s:20:"categories-loop-side";i:34;s:19:"woo-categories-loop";i:35;s:12:"product-loop";i:36;s:29:"product-loop-buttons-on-hover";i:37;s:23:"woo-mod-add-btn-replace";i:38;s:16:"woo-mod-quantity";i:39;s:24:"woo-mod-quantity-overlap";i:40;s:19:"woo-opt-title-limit";i:41;s:6:"swiper";i:42;s:22:"woo-mod-product-labels";i:43;s:13:"swiper-arrows";i:44;s:16:"swiper-scrollbar";i:45;s:11:"header-base";i:46;s:9:"mod-tools";i:47;s:20:"header-elements-base";i:48;s:18:"woo-mod-login-form";i:49;s:17:"header-my-account";i:50;s:13:"header-search";i:51;s:18:"header-search-form";i:52;s:14:"wd-search-form";i:53;s:16:"header-cart-side";i:54;s:11:"header-cart";i:55;s:20:"widget-shopping-cart";i:56;s:19:"widget-product-list";i:57;s:27:"header-mobile-nav-drilldown";i:58;s:33:"header-mobile-nav-drilldown-slide";i:59;s:17:"wd-search-results";i:60;s:10:"page-title";i:61;s:18:"blog-loop-base-old";i:62;s:21:"blog-loop-design-mask";i:63;s:12:"social-icons";i:64;s:15:"widget-collapse";i:65;s:11:"footer-base";i:66;s:10:"block-icon";i:67;s:18:"mod-nav-menu-label";i:68;s:12:"block-toggle";i:69;s:7:"el-menu";i:70;s:19:"social-icons-styles";i:71;s:10:"scroll-top";i:72;s:24:"header-search-fullscreen";i:73;s:26:"header-search-fullscreen-2";i:74;s:16:"popular-requests";i:75;s:13:"wd-search-cat";i:76;s:25:"header-my-account-sidebar";i:77;s:14:"bottom-toolbar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:category>
 					<wp:term>
@@ -168,10 +156,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[182]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -243,10 +227,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[119]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>19</wp:term_id>
@@ -282,10 +262,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[183]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>20</wp:term_id>
@@ -320,10 +296,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[178]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -395,10 +367,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[180]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>23</wp:term_id>
@@ -433,10 +401,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[126]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -473,10 +437,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[128]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>25</wp:term_id>
@@ -511,10 +471,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[181]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -586,10 +542,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[134]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>28</wp:term_id>
@@ -625,10 +577,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[138]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>29</wp:term_id>
@@ -663,10 +611,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[177]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -737,10 +681,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[171]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -845,10 +785,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[173]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>46</wp:term_id>
@@ -884,10 +820,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[174]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>47</wp:term_id>
@@ -922,10 +854,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[175]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:90:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:9:"wp-blocks";i:21;s:16:"mod-nav-vertical";i:22;s:10:"sticky-nav";i:23;s:20:"dropdown-full-height";i:24;s:23:"header-mod-content-calc";i:25;s:11:"block-title";i:26;s:6:"button";i:27;s:12:"block-button";i:28;s:15:"block-container";i:29;s:12:"block-banner";i:30;s:20:"categories-loop-side";i:31;s:19:"woo-categories-loop";i:32;s:12:"product-loop";i:33;s:29:"product-loop-buttons-on-hover";i:34;s:23:"woo-mod-add-btn-replace";i:35;s:16:"woo-mod-quantity";i:36;s:24:"woo-mod-quantity-overlap";i:37;s:19:"woo-opt-title-limit";i:38;s:6:"swiper";i:39;s:22:"woo-mod-product-labels";i:40;s:13:"swiper-arrows";i:41;s:16:"swiper-scrollbar";i:42;s:11:"header-base";i:43;s:9:"mod-tools";i:44;s:20:"header-elements-base";i:45;s:18:"woo-mod-login-form";i:46;s:17:"header-my-account";i:47;s:13:"header-search";i:48;s:18:"header-search-form";i:49;s:14:"wd-search-form";i:50;s:16:"header-cart-side";i:51;s:11:"header-cart";i:52;s:20:"widget-shopping-cart";i:53;s:19:"widget-product-list";i:54;s:27:"header-mobile-nav-drilldown";i:55;s:33:"header-mobile-nav-drilldown-slide";i:56;s:17:"wd-search-results";i:57;s:24:"el-off-canvas-column-btn";i:58;s:23:"block-off-canvas-layout";i:59;s:15:"block-paragraph";i:60;s:4:"list";i:61;s:10:"block-icon";i:62;s:17:"block-collapsible";i:63;s:16:"block-fw-section";i:64;s:34:"woo-categories-loop-layout-masonry";i:65;s:19:"woo-opt-products-bg";i:66;s:13:"filter-search";i:67;s:24:"woo-mod-swatches-style-1";i:68;s:29:"woo-shop-el-products-per-page";i:69;s:25:"woo-shop-el-products-view";i:70;s:20:"woo-shop-el-order-by";i:71;s:13:"sticky-loader";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:11:"block-image";i:75;s:18:"mod-nav-menu-label";i:76;s:12:"block-toggle";i:77;s:12:"block-layout";i:78;s:7:"el-menu";i:79;s:12:"social-icons";i:80;s:19:"social-icons-styles";i:81;s:10:"scroll-top";i:82;s:24:"header-search-fullscreen";i:83;s:26:"header-search-fullscreen-2";i:84;s:16:"popular-requests";i:85;s:13:"wd-search-cat";i:86;s:25:"header-my-account-sidebar";i:87;s:14:"bottom-toolbar";i:88;s:23:"shop-off-canvas-sidebar";i:89;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -989,10 +917,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[185]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:64:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:21:"widget-active-filters";i:17;s:16:"woo-shop-builder";i:18;s:9:"wp-blocks";i:19;s:11:"header-base";i:20;s:9:"mod-tools";i:21;s:20:"header-elements-base";i:22;s:12:"social-icons";i:23;s:26:"header-my-account-dropdown";i:24;s:18:"woo-mod-login-form";i:25;s:17:"header-my-account";i:26;s:13:"header-search";i:27;s:16:"header-cart-side";i:28;s:11:"header-cart";i:29;s:20:"widget-shopping-cart";i:30;s:19:"widget-product-list";i:31;s:26:"header-mobile-nav-dropdown";i:32;s:24:"el-off-canvas-column-btn";i:33;s:15:"block-container";i:34;s:23:"block-off-canvas-layout";i:35;s:11:"block-title";i:36;s:15:"block-paragraph";i:37;s:4:"list";i:38;s:10:"block-icon";i:39;s:6:"button";i:40;s:12:"block-button";i:41;s:17:"block-collapsible";i:42;s:16:"block-fw-section";i:43;s:20:"categories-loop-side";i:44;s:34:"woo-categories-loop-layout-masonry";i:45;s:19:"woo-categories-loop";i:46;s:19:"woo-opt-products-bg";i:47;s:13:"filter-search";i:48;s:24:"woo-mod-swatches-style-1";i:49;s:24:"woo-mod-swatches-style-4";i:50;s:29:"woo-shop-el-products-per-page";i:51;s:25:"woo-shop-el-products-view";i:52;s:20:"woo-shop-el-order-by";i:53;s:13:"sticky-loader";i:54;s:17:"wd-search-results";i:55;s:14:"wd-search-form";i:56;s:15:"widget-collapse";i:57;s:11:"footer-base";i:58;s:10:"scroll-top";i:59;s:24:"header-search-fullscreen";i:60;s:26:"header-search-fullscreen-1";i:61;s:14:"bottom-toolbar";i:62;s:23:"shop-off-canvas-sidebar";i:63;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>52</wp:term_id>
@@ -1024,10 +948,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[187]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:64:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:21:"widget-active-filters";i:17;s:16:"woo-shop-builder";i:18;s:9:"wp-blocks";i:19;s:11:"header-base";i:20;s:9:"mod-tools";i:21;s:20:"header-elements-base";i:22;s:12:"social-icons";i:23;s:26:"header-my-account-dropdown";i:24;s:18:"woo-mod-login-form";i:25;s:17:"header-my-account";i:26;s:13:"header-search";i:27;s:16:"header-cart-side";i:28;s:11:"header-cart";i:29;s:20:"widget-shopping-cart";i:30;s:19:"widget-product-list";i:31;s:26:"header-mobile-nav-dropdown";i:32;s:24:"el-off-canvas-column-btn";i:33;s:15:"block-container";i:34;s:23:"block-off-canvas-layout";i:35;s:11:"block-title";i:36;s:15:"block-paragraph";i:37;s:4:"list";i:38;s:10:"block-icon";i:39;s:6:"button";i:40;s:12:"block-button";i:41;s:17:"block-collapsible";i:42;s:16:"block-fw-section";i:43;s:20:"categories-loop-side";i:44;s:34:"woo-categories-loop-layout-masonry";i:45;s:19:"woo-categories-loop";i:46;s:19:"woo-opt-products-bg";i:47;s:13:"filter-search";i:48;s:24:"woo-mod-swatches-style-1";i:49;s:24:"woo-mod-swatches-style-4";i:50;s:29:"woo-shop-el-products-per-page";i:51;s:25:"woo-shop-el-products-view";i:52;s:20:"woo-shop-el-order-by";i:53;s:13:"sticky-loader";i:54;s:17:"wd-search-results";i:55;s:14:"wd-search-form";i:56;s:15:"widget-collapse";i:57;s:11:"footer-base";i:58;s:10:"scroll-top";i:59;s:24:"header-search-fullscreen";i:60;s:26:"header-search-fullscreen-1";i:61;s:14:"bottom-toolbar";i:62;s:23:"shop-off-canvas-sidebar";i:63;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>53</wp:term_id>
@@ -1058,10 +978,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[188]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:64:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:21:"widget-active-filters";i:17;s:16:"woo-shop-builder";i:18;s:9:"wp-blocks";i:19;s:11:"header-base";i:20;s:9:"mod-tools";i:21;s:20:"header-elements-base";i:22;s:12:"social-icons";i:23;s:26:"header-my-account-dropdown";i:24;s:18:"woo-mod-login-form";i:25;s:17:"header-my-account";i:26;s:13:"header-search";i:27;s:16:"header-cart-side";i:28;s:11:"header-cart";i:29;s:20:"widget-shopping-cart";i:30;s:19:"widget-product-list";i:31;s:26:"header-mobile-nav-dropdown";i:32;s:24:"el-off-canvas-column-btn";i:33;s:15:"block-container";i:34;s:23:"block-off-canvas-layout";i:35;s:11:"block-title";i:36;s:15:"block-paragraph";i:37;s:4:"list";i:38;s:10:"block-icon";i:39;s:6:"button";i:40;s:12:"block-button";i:41;s:17:"block-collapsible";i:42;s:16:"block-fw-section";i:43;s:20:"categories-loop-side";i:44;s:34:"woo-categories-loop-layout-masonry";i:45;s:19:"woo-categories-loop";i:46;s:19:"woo-opt-products-bg";i:47;s:13:"filter-search";i:48;s:24:"woo-mod-swatches-style-1";i:49;s:24:"woo-mod-swatches-style-4";i:50;s:29:"woo-shop-el-products-per-page";i:51;s:25:"woo-shop-el-products-view";i:52;s:20:"woo-shop-el-order-by";i:53;s:13:"sticky-loader";i:54;s:17:"wd-search-results";i:55;s:14:"wd-search-form";i:56;s:15:"widget-collapse";i:57;s:11:"footer-base";i:58;s:10:"scroll-top";i:59;s:24:"header-search-fullscreen";i:60;s:26:"header-search-fullscreen-1";i:61;s:14:"bottom-toolbar";i:62;s:23:"shop-off-canvas-sidebar";i:63;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -1125,10 +1041,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[190]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:64:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:21:"widget-active-filters";i:17;s:16:"woo-shop-builder";i:18;s:9:"wp-blocks";i:19;s:11:"header-base";i:20;s:9:"mod-tools";i:21;s:20:"header-elements-base";i:22;s:12:"social-icons";i:23;s:26:"header-my-account-dropdown";i:24;s:18:"woo-mod-login-form";i:25;s:17:"header-my-account";i:26;s:13:"header-search";i:27;s:16:"header-cart-side";i:28;s:11:"header-cart";i:29;s:20:"widget-shopping-cart";i:30;s:19:"widget-product-list";i:31;s:26:"header-mobile-nav-dropdown";i:32;s:24:"el-off-canvas-column-btn";i:33;s:15:"block-container";i:34;s:23:"block-off-canvas-layout";i:35;s:11:"block-title";i:36;s:15:"block-paragraph";i:37;s:4:"list";i:38;s:10:"block-icon";i:39;s:6:"button";i:40;s:12:"block-button";i:41;s:17:"block-collapsible";i:42;s:16:"block-fw-section";i:43;s:20:"categories-loop-side";i:44;s:34:"woo-categories-loop-layout-masonry";i:45;s:19:"woo-categories-loop";i:46;s:19:"woo-opt-products-bg";i:47;s:13:"filter-search";i:48;s:24:"woo-mod-swatches-style-1";i:49;s:24:"woo-mod-swatches-style-4";i:50;s:29:"woo-shop-el-products-per-page";i:51;s:25:"woo-shop-el-products-view";i:52;s:20:"woo-shop-el-order-by";i:53;s:13:"sticky-loader";i:54;s:17:"wd-search-results";i:55;s:14:"wd-search-form";i:56;s:15:"widget-collapse";i:57;s:11:"footer-base";i:58;s:10:"scroll-top";i:59;s:24:"header-search-fullscreen";i:60;s:26:"header-search-fullscreen-1";i:61;s:14:"bottom-toolbar";i:62;s:23:"shop-off-canvas-sidebar";i:63;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>56</wp:term_id>
@@ -1159,10 +1071,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[191]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:67:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:21:"widget-active-filters";i:17;s:16:"woo-shop-builder";i:18;s:9:"wp-blocks";i:19;s:11:"header-base";i:20;s:9:"mod-tools";i:21;s:20:"header-elements-base";i:22;s:12:"social-icons";i:23;s:26:"header-my-account-dropdown";i:24;s:18:"woo-mod-login-form";i:25;s:17:"header-my-account";i:26;s:13:"header-search";i:27;s:16:"header-cart-side";i:28;s:11:"header-cart";i:29;s:20:"widget-shopping-cart";i:30;s:19:"widget-product-list";i:31;s:26:"header-mobile-nav-dropdown";i:32;s:24:"el-off-canvas-column-btn";i:33;s:15:"block-container";i:34;s:23:"block-off-canvas-layout";i:35;s:11:"block-title";i:36;s:15:"block-paragraph";i:37;s:4:"list";i:38;s:10:"block-icon";i:39;s:6:"button";i:40;s:12:"block-button";i:41;s:17:"block-collapsible";i:42;s:16:"block-fw-section";i:43;s:20:"categories-loop-side";i:44;s:34:"woo-categories-loop-layout-masonry";i:45;s:19:"woo-categories-loop";i:46;s:19:"woo-opt-products-bg";i:47;s:6:"swiper";i:48;s:13:"swiper-arrows";i:49;s:16:"swiper-scrollbar";i:50;s:13:"filter-search";i:51;s:24:"woo-mod-swatches-style-1";i:52;s:24:"woo-mod-swatches-style-4";i:53;s:29:"woo-shop-el-products-per-page";i:54;s:25:"woo-shop-el-products-view";i:55;s:20:"woo-shop-el-order-by";i:56;s:13:"sticky-loader";i:57;s:17:"wd-search-results";i:58;s:14:"wd-search-form";i:59;s:15:"widget-collapse";i:60;s:11:"footer-base";i:61;s:10:"scroll-top";i:62;s:24:"header-search-fullscreen";i:63;s:26:"header-search-fullscreen-1";i:64;s:14:"bottom-toolbar";i:65;s:23:"shop-off-canvas-sidebar";i:66;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -1319,10 +1227,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[196]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:64:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:31:"widget-layered-nav-stock-status";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:21:"widget-active-filters";i:17;s:16:"woo-shop-builder";i:18;s:9:"wp-blocks";i:19;s:11:"header-base";i:20;s:9:"mod-tools";i:21;s:20:"header-elements-base";i:22;s:12:"social-icons";i:23;s:26:"header-my-account-dropdown";i:24;s:18:"woo-mod-login-form";i:25;s:17:"header-my-account";i:26;s:13:"header-search";i:27;s:16:"header-cart-side";i:28;s:11:"header-cart";i:29;s:20:"widget-shopping-cart";i:30;s:19:"widget-product-list";i:31;s:26:"header-mobile-nav-dropdown";i:32;s:24:"el-off-canvas-column-btn";i:33;s:15:"block-container";i:34;s:23:"block-off-canvas-layout";i:35;s:11:"block-title";i:36;s:15:"block-paragraph";i:37;s:4:"list";i:38;s:10:"block-icon";i:39;s:6:"button";i:40;s:12:"block-button";i:41;s:17:"block-collapsible";i:42;s:16:"block-fw-section";i:43;s:20:"categories-loop-side";i:44;s:34:"woo-categories-loop-layout-masonry";i:45;s:19:"woo-categories-loop";i:46;s:19:"woo-opt-products-bg";i:47;s:13:"filter-search";i:48;s:24:"woo-mod-swatches-style-1";i:49;s:24:"woo-mod-swatches-style-4";i:50;s:29:"woo-shop-el-products-per-page";i:51;s:25:"woo-shop-el-products-view";i:52;s:20:"woo-shop-el-order-by";i:53;s:13:"sticky-loader";i:54;s:17:"wd-search-results";i:55;s:14:"wd-search-form";i:56;s:15:"widget-collapse";i:57;s:11:"footer-base";i:58;s:10:"scroll-top";i:59;s:24:"header-search-fullscreen";i:60;s:26:"header-search-fullscreen-1";i:61;s:14:"bottom-toolbar";i:62;s:23:"shop-off-canvas-sidebar";i:63;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>72</wp:term_id>
@@ -1333,10 +1237,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-72-status]]></wp:meta_key>
 			<wp:meta_value><![CDATA[invalid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:78:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:31:"widget-layered-nav-stock-status";i:7;s:26:"widget-slider-price-filter";i:8;s:9:"blog-base";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:9:"wp-blocks";i:19;s:15:"block-paragraph";i:20;s:4:"list";i:21;s:11:"block-title";i:22;s:11:"block-table";i:23;s:6:"button";i:24;s:12:"block-button";i:25;s:12:"block-layout";i:26;s:11:"block-image";i:27;s:16:"mod-nav-vertical";i:28;s:10:"sticky-nav";i:29;s:20:"dropdown-full-height";i:30;s:23:"header-mod-content-calc";i:31;s:15:"block-container";i:32;s:12:"block-banner";i:33;s:20:"categories-loop-side";i:34;s:19:"woo-categories-loop";i:35;s:12:"product-loop";i:36;s:29:"product-loop-buttons-on-hover";i:37;s:23:"woo-mod-add-btn-replace";i:38;s:16:"woo-mod-quantity";i:39;s:24:"woo-mod-quantity-overlap";i:40;s:19:"woo-opt-title-limit";i:41;s:6:"swiper";i:42;s:22:"woo-mod-product-labels";i:43;s:13:"swiper-arrows";i:44;s:16:"swiper-scrollbar";i:45;s:11:"header-base";i:46;s:9:"mod-tools";i:47;s:20:"header-elements-base";i:48;s:18:"woo-mod-login-form";i:49;s:17:"header-my-account";i:50;s:13:"header-search";i:51;s:18:"header-search-form";i:52;s:14:"wd-search-form";i:53;s:16:"header-cart-side";i:54;s:11:"header-cart";i:55;s:20:"widget-shopping-cart";i:56;s:19:"widget-product-list";i:57;s:27:"header-mobile-nav-drilldown";i:58;s:33:"header-mobile-nav-drilldown-slide";i:59;s:17:"wd-search-results";i:60;s:10:"page-title";i:61;s:18:"blog-loop-base-old";i:62;s:21:"blog-loop-design-mask";i:63;s:12:"social-icons";i:64;s:15:"widget-collapse";i:65;s:11:"footer-base";i:66;s:10:"block-icon";i:67;s:18:"mod-nav-menu-label";i:68;s:12:"block-toggle";i:69;s:7:"el-menu";i:70;s:19:"social-icons-styles";i:71;s:10:"scroll-top";i:72;s:24:"header-search-fullscreen";i:73;s:26:"header-search-fullscreen-2";i:74;s:16:"popular-requests";i:75;s:13:"wd-search-cat";i:76;s:25:"header-my-account-sidebar";i:77;s:14:"bottom-toolbar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -1370,10 +1270,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[xts-term-75-status]]></wp:meta_key>
 			<wp:meta_value><![CDATA[invalid]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:78:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:31:"widget-layered-nav-stock-status";i:7;s:26:"widget-slider-price-filter";i:8;s:9:"blog-base";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"int-wordfence";i:12;s:16:"woocommerce-base";i:13;s:15:"mod-star-rating";i:14;s:18:"woo-el-track-order";i:15;s:25:"woocommerce-block-notices";i:16;s:25:"woo-opt-free-progress-bar";i:17;s:20:"woo-mod-progress-bar";i:18;s:9:"wp-blocks";i:19;s:15:"block-paragraph";i:20;s:4:"list";i:21;s:11:"block-title";i:22;s:11:"block-table";i:23;s:6:"button";i:24;s:12:"block-button";i:25;s:12:"block-layout";i:26;s:11:"block-image";i:27;s:16:"mod-nav-vertical";i:28;s:10:"sticky-nav";i:29;s:20:"dropdown-full-height";i:30;s:23:"header-mod-content-calc";i:31;s:15:"block-container";i:32;s:12:"block-banner";i:33;s:20:"categories-loop-side";i:34;s:19:"woo-categories-loop";i:35;s:12:"product-loop";i:36;s:29:"product-loop-buttons-on-hover";i:37;s:23:"woo-mod-add-btn-replace";i:38;s:16:"woo-mod-quantity";i:39;s:24:"woo-mod-quantity-overlap";i:40;s:19:"woo-opt-title-limit";i:41;s:6:"swiper";i:42;s:22:"woo-mod-product-labels";i:43;s:13:"swiper-arrows";i:44;s:16:"swiper-scrollbar";i:45;s:11:"header-base";i:46;s:9:"mod-tools";i:47;s:20:"header-elements-base";i:48;s:18:"woo-mod-login-form";i:49;s:17:"header-my-account";i:50;s:13:"header-search";i:51;s:18:"header-search-form";i:52;s:14:"wd-search-form";i:53;s:16:"header-cart-side";i:54;s:11:"header-cart";i:55;s:20:"widget-shopping-cart";i:56;s:19:"widget-product-list";i:57;s:27:"header-mobile-nav-drilldown";i:58;s:33:"header-mobile-nav-drilldown-slide";i:59;s:17:"wd-search-results";i:60;s:10:"page-title";i:61;s:18:"blog-loop-base-old";i:62;s:21:"blog-loop-design-mask";i:63;s:12:"social-icons";i:64;s:15:"widget-collapse";i:65;s:11:"footer-base";i:66;s:10:"block-icon";i:67;s:18:"mod-nav-menu-label";i:68;s:12:"block-toggle";i:69;s:7:"el-menu";i:70;s:19:"social-icons-styles";i:71;s:10:"scroll-top";i:72;s:24:"header-search-fullscreen";i:73;s:26:"header-search-fullscreen-2";i:74;s:16:"popular-requests";i:75;s:13:"wd-search-cat";i:76;s:25:"header-my-account-sidebar";i:77;s:14:"bottom-toolbar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -1528,7 +1424,7 @@
 	<wp:term><wp:term_id>67</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[mobile-navigation]]></wp:term_slug><wp:term_name><![CDATA[Mobile navigation]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.7.1</generator>
+	<generator>https://wordpress.org/?v=6.7.2</generator>
 
 					<item>
 					<title><![CDATA[Oranges]]></title>
@@ -2511,7 +2407,7 @@
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/?post_type=cms_block&#038;p=158</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"79addb1a-6488-4b6a-9c10-3aa151742926"} -->
 <div id="wd-79addb1a" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f16bd00-528f-4b48-9e81-7ac5d12d2a66","adjacentCount":4,"adjacentCountTablet":2,"colWidthTablet":50} -->
-<div id="wd-1f16bd00" class="wp-block-wd-column"><!-- wp:wd/products {"blockId":"0ee852bb-bde8-48a7-b420-0a0f999fda75","show_title":true,"post_type":"sale","columns":1,"spacing":"10","items_per_page":"3","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
+<div id="wd-1f16bd00" class="wp-block-wd-column"><!-- wp:wd/products {"blockId":"0ee852bb-bde8-48a7-b420-0a0f999fda75","show_title":true,"columns":1,"spacing":"10","items_per_page":"3","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"476aaadf-7257-4a14-908e-9edc079df10c","content":"Popular Products","tpFontSize":"18"} -->
 <h2 id="wd-476aaadf" class="wp-block-wd-title title">Popular Products</h2>
 <!-- /wp:wd/title -->
@@ -2527,7 +2423,7 @@
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"41f8de9d-6ad4-472e-bb82-72da65ca78e5","adjacentCount":4,"adjacentCountTablet":2,"colWidthTablet":50} -->
-<div id="wd-41f8de9d" class="wp-block-wd-column"><!-- wp:wd/products {"blockId":"3929f38b-8982-4696-8085-6a20f8783b91","show_title":true,"post_type":"featured","columns":1,"spacing":"10","items_per_page":"3","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
+<div id="wd-41f8de9d" class="wp-block-wd-column"><!-- wp:wd/products {"blockId":"3929f38b-8982-4696-8085-6a20f8783b91","show_title":true,"columns":1,"spacing":"10","items_per_page":"3","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"082d19d0-d221-4954-a95a-793ac8d843fd","content":"Popular Cookies \u0026amp; Brownies","tpFontSize":"18"} -->
 <h2 id="wd-082d19d0" class="wp-block-wd-title title">Popular Cookies &amp; Brownies</h2>
 <!-- /wp:wd/title -->
@@ -2535,7 +2431,7 @@
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3d9f8eb3-62ff-43a3-8a75-c03f0cad8ff6","adjacentCount":4,"adjacentCountTablet":2,"colWidthTablet":50} -->
-<div id="wd-3d9f8eb3" class="wp-block-wd-column"><!-- wp:wd/products {"blockId":"c9a67eac-e6e9-4c0b-9261-c39c90820ede","show_title":true,"post_type":"bestselling","query_type":"AND","columns":1,"spacing":"10","items_per_page":"3","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
+<div id="wd-3d9f8eb3" class="wp-block-wd-column"><!-- wp:wd/products {"blockId":"c9a67eac-e6e9-4c0b-9261-c39c90820ede","show_title":true,"query_type":"AND","columns":1,"spacing":"10","items_per_page":"3","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"68fbcff5-dc09-419d-b93b-88ee95667ae5","content":"Popular Tea","tpFontSize":"18"} -->
 <h2 id="wd-68fbcff5" class="wp-block-wd-title title">Popular Tea</h2>
 <!-- /wp:wd/title -->
@@ -2545,8 +2441,8 @@
 															<wp:post_id>158</wp:post_id>
 					<wp:post_date><![CDATA[2024-08-06 09:18:14]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-08-06 09:18:14]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:43:40]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:43:40]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-09 11:23:11]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-09 11:23:11]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[full-screen-search-vegetables]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -4979,7 +4875,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/title -->
 
 <!-- wp:wd/paragraph {"blockId":"a80a88ca-132d-4c34-b8ba-6a4411a72634","tpTextDecoration":"underline","tpFontVariant":"600","tpFontWeight":"600"} -->
-<p id="wd-a80a88ca" class="wp-block-wd-paragraph"><a href="mailto:xtemos.studio@gmail.com"></a><a href="mailto:xtemos.studio@gmail.com">xtemos.studio@gmail.com</a></p>
+<p id="wd-a80a88ca" class="wp-block-wd-paragraph"><a href="mailto:xtemos@mail.com"></a><a href="mailto:xtemos@mail.com">xtemos@mail.com</a></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row --></div>
@@ -5494,7 +5390,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"1d859265-2b76-407a-8302-c839aa6f03e5","adjacentCount":2,"colWidth":58,"adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-1d859265" class="wp-block-wd-column"><!-- wp:wd/open-street-map {"blockId":"e0dc056c-e6b8-4821-9a5c-422c6ddf10b6","zoom":6,"height":"744","locations":[{"title":"Liverpool","lat":"53.4042","lon":"-2.9832","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"},{"title":"Edinburgh","lat":"55.99014","lon":"-3.18184","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"},{"title":"Leads","lat":"54.0844","lon":"-1.8443","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"},{"title":"London","lat":"51.5144","lon":"-0.1341","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}],"heightTablet":"400"} -->
-<div id="wd-e0dc056c" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-e0dc056c-e6b8-4821-9a5c-422c6ddf10b6" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:6,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;53.75451133943738,-1.9978043475052485&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;53.4042&quot;,&quot;lng&quot;:&quot;-2.9832&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;Liverpool&quot;}},{&quot;lat&quot;:&quot;55.99014&quot;,&quot;lng&quot;:&quot;-3.18184&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;Edinburgh&quot;}},{&quot;lat&quot;:&quot;54.0844&quot;,&quot;lng&quot;:&quot;-1.8443&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;Leads&quot;}},{&quot;lat&quot;:&quot;51.5144&quot;,&quot;lng&quot;:&quot;-0.1341&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;London&quot;}}]}"></div></div>
+<div id="wd-e0dc056c" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-e0dc056c-e6b8-4821-9a5c-422c6ddf10b6" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:6,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;53.75451133943738,-1.9978043475052485&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;53.4042&quot;,&quot;lng&quot;:&quot;-2.9832&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;Liverpool&quot;}},{&quot;lat&quot;:&quot;55.99014&quot;,&quot;lng&quot;:&quot;-3.18184&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;Edinburgh&quot;}},{&quot;lat&quot;:&quot;54.0844&quot;,&quot;lng&quot;:&quot;-1.8443&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;Leads&quot;}},{&quot;lat&quot;:&quot;51.5144&quot;,&quot;lng&quot;:&quot;-0.1341&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;,&quot;marker_title&quot;:&quot;London&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->]]></content:encoded>
@@ -6073,7 +5969,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3812bce9-93b8-4aac-a60f-da9c6f98f685","adjacentCount":2,"colWidth":58,"bgColorCode":"#ffffff","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10","alignSelf":"start"} -->
-<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90"} -->
+<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"caf3a257-d400-4eb9-9e58-a1f000b66318","content":"Available in our store","tpFontSize":"22","tpFontSizeMobile":"20"} -->
 <h2 id="wd-caf3a257" class="wp-block-wd-title title">Available in our store</h2>
 <!-- /wp:wd/title -->
@@ -6110,7 +6006,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"d6b28b6f-d01f-40b8-8cdc-a44fe1abc927","adjacentCount":2} -->
 <div id="wd-d6b28b6f" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"1a3d1b0e-38bd-4c42-832d-bf478d9596d9","image":{"id":525,"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg","width":814,"height":750}} -->
-<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" /></div>
+<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6118,7 +6014,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"490c9860-2425-44a4-90d8-d58710cec194"} -->
 <div id="wd-490c9860" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"c902000b-7587-43af-9c59-073f5016e460","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-c902000b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"c6a9ec20-5fb7-4bb7-b718-1011948d2786","image":{"id":527,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg","width":815,"height":750}} -->
-<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" /></div>
+<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6166,7 +6062,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"38f47e0b-6d69-492a-a980-6a11b57c5afc","adjacentCount":2} -->
 <div id="wd-38f47e0b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"97659c4f-2577-4bad-a5ec-223171eed3d6","image":{"id":528,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg","width":814,"height":750}} -->
-<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" /></div>
+<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6174,7 +6070,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"60ae5667-ddac-4f5c-af13-3374c721eef6"} -->
 <div id="wd-60ae5667" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f5752f8-09f8-468a-a6fc-d3164bb0f148","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-1f5752f8" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"159f7a72-309b-41f5-9a79-3ae086f4162b","image":{"id":530,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg","width":815,"height":750}} -->
-<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" /></div>
+<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6199,8 +6095,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 															<wp:post_id>492</wp:post_id>
 					<wp:post_date><![CDATA[2024-02-14 11:27:00]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-02-14 11:27:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:41:33]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:41:33]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-30 13:17:50]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-30 13:17:50]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[olive-tapenade-bruschetta-with-mango-and-eggs]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -6208,8 +6104,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<wp:menu_order>0</wp:menu_order>
 					<wp:post_type><![CDATA[post]]></wp:post_type>
 												<category domain="post_tag" nicename="bananas"><![CDATA[Bananas]]></category>
-		<category domain="post_tag" nicename="recipe"><![CDATA[Recipe]]></category>
 		<category domain="category" nicename="recipe"><![CDATA[Recipe]]></category>
+		<category domain="post_tag" nicename="recipe"><![CDATA[Recipe]]></category>
 		<category domain="post_tag" nicename="tomatoes"><![CDATA[Tomatoes]]></category>
 		<category domain="post_tag" nicename="vegetable"><![CDATA[Vegetable]]></category>
 											<wp:postmeta>
@@ -6275,7 +6171,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3812bce9-93b8-4aac-a60f-da9c6f98f685","adjacentCount":2,"colWidth":58,"bgColorCode":"#ffffff","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10","alignSelf":"start"} -->
-<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90"} -->
+<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"caf3a257-d400-4eb9-9e58-a1f000b66318","content":"Available in our store","tpFontSize":"22","tpFontSizeMobile":"20"} -->
 <h2 id="wd-caf3a257" class="wp-block-wd-title title">Available in our store</h2>
 <!-- /wp:wd/title -->
@@ -6312,7 +6208,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"d6b28b6f-d01f-40b8-8cdc-a44fe1abc927","adjacentCount":2} -->
 <div id="wd-d6b28b6f" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"1a3d1b0e-38bd-4c42-832d-bf478d9596d9","image":{"id":525,"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg","width":814,"height":750}} -->
-<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" /></div>
+<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6320,7 +6216,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"490c9860-2425-44a4-90d8-d58710cec194"} -->
 <div id="wd-490c9860" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"c902000b-7587-43af-9c59-073f5016e460","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-c902000b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"c6a9ec20-5fb7-4bb7-b718-1011948d2786","image":{"id":527,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg","width":815,"height":750}} -->
-<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" /></div>
+<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6368,7 +6264,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"38f47e0b-6d69-492a-a980-6a11b57c5afc","adjacentCount":2} -->
 <div id="wd-38f47e0b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"97659c4f-2577-4bad-a5ec-223171eed3d6","image":{"id":528,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg","width":814,"height":750}} -->
-<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" /></div>
+<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6376,7 +6272,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"60ae5667-ddac-4f5c-af13-3374c721eef6"} -->
 <div id="wd-60ae5667" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f5752f8-09f8-468a-a6fc-d3164bb0f148","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-1f5752f8" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"159f7a72-309b-41f5-9a79-3ae086f4162b","image":{"id":530,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg","width":815,"height":750}} -->
-<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" /></div>
+<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6401,8 +6297,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 															<wp:post_id>495</wp:post_id>
 					<wp:post_date><![CDATA[2024-02-23 11:28:00]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-02-23 11:28:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:41:30]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:41:30]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-30 13:17:41]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-30 13:17:41]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[papaya-smoothie-bowl]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -6477,7 +6373,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3812bce9-93b8-4aac-a60f-da9c6f98f685","adjacentCount":2,"colWidth":58,"bgColorCode":"#ffffff","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10","alignSelf":"start"} -->
-<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90"} -->
+<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"caf3a257-d400-4eb9-9e58-a1f000b66318","content":"Available in our store","tpFontSize":"22","tpFontSizeMobile":"20"} -->
 <h2 id="wd-caf3a257" class="wp-block-wd-title title">Available in our store</h2>
 <!-- /wp:wd/title -->
@@ -6514,7 +6410,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"d6b28b6f-d01f-40b8-8cdc-a44fe1abc927","adjacentCount":2} -->
 <div id="wd-d6b28b6f" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"1a3d1b0e-38bd-4c42-832d-bf478d9596d9","image":{"id":525,"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg","width":814,"height":750}} -->
-<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" /></div>
+<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6522,7 +6418,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"490c9860-2425-44a4-90d8-d58710cec194"} -->
 <div id="wd-490c9860" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"c902000b-7587-43af-9c59-073f5016e460","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-c902000b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"c6a9ec20-5fb7-4bb7-b718-1011948d2786","image":{"id":527,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg","width":815,"height":750}} -->
-<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" /></div>
+<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6570,7 +6466,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"38f47e0b-6d69-492a-a980-6a11b57c5afc","adjacentCount":2} -->
 <div id="wd-38f47e0b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"97659c4f-2577-4bad-a5ec-223171eed3d6","image":{"id":528,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg","width":814,"height":750}} -->
-<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" /></div>
+<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6578,7 +6474,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"60ae5667-ddac-4f5c-af13-3374c721eef6"} -->
 <div id="wd-60ae5667" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f5752f8-09f8-468a-a6fc-d3164bb0f148","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-1f5752f8" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"159f7a72-309b-41f5-9a79-3ae086f4162b","image":{"id":530,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg","width":815,"height":750}} -->
-<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" /></div>
+<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6603,8 +6499,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 															<wp:post_id>498</wp:post_id>
 					<wp:post_date><![CDATA[2024-02-27 11:30:00]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-02-27 11:30:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:41:23]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:41:23]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-30 13:17:30]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-30 13:17:30]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[vegan-ube-mochi-waffles]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -6679,7 +6575,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3812bce9-93b8-4aac-a60f-da9c6f98f685","adjacentCount":2,"colWidth":58,"bgColorCode":"#ffffff","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10","alignSelf":"start"} -->
-<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90"} -->
+<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"caf3a257-d400-4eb9-9e58-a1f000b66318","content":"Available in our store","tpFontSize":"22","tpFontSizeMobile":"20"} -->
 <h2 id="wd-caf3a257" class="wp-block-wd-title title">Available in our store</h2>
 <!-- /wp:wd/title -->
@@ -6716,7 +6612,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"d6b28b6f-d01f-40b8-8cdc-a44fe1abc927","adjacentCount":2} -->
 <div id="wd-d6b28b6f" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"1a3d1b0e-38bd-4c42-832d-bf478d9596d9","image":{"id":525,"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg","width":814,"height":750}} -->
-<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" /></div>
+<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6724,7 +6620,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"490c9860-2425-44a4-90d8-d58710cec194"} -->
 <div id="wd-490c9860" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"c902000b-7587-43af-9c59-073f5016e460","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-c902000b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"c6a9ec20-5fb7-4bb7-b718-1011948d2786","image":{"id":527,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg","width":815,"height":750}} -->
-<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" /></div>
+<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6772,7 +6668,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"38f47e0b-6d69-492a-a980-6a11b57c5afc","adjacentCount":2} -->
 <div id="wd-38f47e0b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"97659c4f-2577-4bad-a5ec-223171eed3d6","image":{"id":528,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg","width":814,"height":750}} -->
-<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" /></div>
+<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6780,7 +6676,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"60ae5667-ddac-4f5c-af13-3374c721eef6"} -->
 <div id="wd-60ae5667" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f5752f8-09f8-468a-a6fc-d3164bb0f148","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-1f5752f8" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"159f7a72-309b-41f5-9a79-3ae086f4162b","image":{"id":530,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg","width":815,"height":750}} -->
-<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" /></div>
+<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6805,8 +6701,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 															<wp:post_id>501</wp:post_id>
 					<wp:post_date><![CDATA[2024-03-01 11:30:00]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-03-01 11:30:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:41:21]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:41:21]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-30 13:17:19]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-30 13:17:19]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[vegan-jaffa-cakes]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -6881,7 +6777,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3812bce9-93b8-4aac-a60f-da9c6f98f685","adjacentCount":2,"colWidth":58,"bgColorCode":"#ffffff","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10","alignSelf":"start"} -->
-<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90"} -->
+<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"caf3a257-d400-4eb9-9e58-a1f000b66318","content":"Available in our store","tpFontSize":"22","tpFontSizeMobile":"20"} -->
 <h2 id="wd-caf3a257" class="wp-block-wd-title title">Available in our store</h2>
 <!-- /wp:wd/title -->
@@ -6918,7 +6814,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"d6b28b6f-d01f-40b8-8cdc-a44fe1abc927","adjacentCount":2} -->
 <div id="wd-d6b28b6f" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"1a3d1b0e-38bd-4c42-832d-bf478d9596d9","image":{"id":525,"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg","width":814,"height":750}} -->
-<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" /></div>
+<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6926,7 +6822,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"490c9860-2425-44a4-90d8-d58710cec194"} -->
 <div id="wd-490c9860" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"c902000b-7587-43af-9c59-073f5016e460","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-c902000b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"c6a9ec20-5fb7-4bb7-b718-1011948d2786","image":{"id":527,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg","width":815,"height":750}} -->
-<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" /></div>
+<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -6974,7 +6870,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"38f47e0b-6d69-492a-a980-6a11b57c5afc","adjacentCount":2} -->
 <div id="wd-38f47e0b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"97659c4f-2577-4bad-a5ec-223171eed3d6","image":{"id":528,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg","width":814,"height":750}} -->
-<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" /></div>
+<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -6982,7 +6878,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"60ae5667-ddac-4f5c-af13-3374c721eef6"} -->
 <div id="wd-60ae5667" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f5752f8-09f8-468a-a6fc-d3164bb0f148","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-1f5752f8" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"159f7a72-309b-41f5-9a79-3ae086f4162b","image":{"id":530,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg","width":815,"height":750}} -->
-<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" /></div>
+<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -7007,8 +6903,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 															<wp:post_id>504</wp:post_id>
 					<wp:post_date><![CDATA[2024-03-05 11:31:00]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-03-05 11:31:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:40:55]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:40:55]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-30 13:17:07]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-30 13:17:07]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[prawns-and-banana-curry]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -7016,8 +6912,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<wp:menu_order>0</wp:menu_order>
 					<wp:post_type><![CDATA[post]]></wp:post_type>
 												<category domain="post_tag" nicename="bananas"><![CDATA[Bananas]]></category>
-		<category domain="post_tag" nicename="recipe"><![CDATA[Recipe]]></category>
 		<category domain="category" nicename="recipe"><![CDATA[Recipe]]></category>
+		<category domain="post_tag" nicename="recipe"><![CDATA[Recipe]]></category>
 		<category domain="post_tag" nicename="tomatoes"><![CDATA[Tomatoes]]></category>
 		<category domain="post_tag" nicename="vegetable"><![CDATA[Vegetable]]></category>
 											<wp:postmeta>
@@ -8259,7 +8155,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"3812bce9-93b8-4aac-a60f-da9c6f98f685","adjacentCount":2,"colWidth":58,"bgColorCode":"#ffffff","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10","alignSelf":"start"} -->
-<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90"} -->
+<div id="wd-3812bce9" class="wp-block-wd-column wd-align-s-start"><!-- wp:wd/products {"blockId":"cd78e208-a66f-49ee-a7a5-1c177bcdf16d","show_title":true,"columns":2,"items_per_page":"8","product_hover":"small","img_size":"custom","imgSizeCustomWidth":"70","imgSizeCustomHeight":"90","columnsMobile":1} -->
 <!-- wp:wd/title {"blockId":"caf3a257-d400-4eb9-9e58-a1f000b66318","content":"Available in our store","tpFontSize":"22","tpFontSizeMobile":"20"} -->
 <h2 id="wd-caf3a257" class="wp-block-wd-title title">Available in our store</h2>
 <!-- /wp:wd/title -->
@@ -8296,7 +8192,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"d6b28b6f-d01f-40b8-8cdc-a44fe1abc927","adjacentCount":2} -->
 <div id="wd-d6b28b6f" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"1a3d1b0e-38bd-4c42-832d-bf478d9596d9","image":{"id":525,"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg","width":814,"height":750}} -->
-<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" /></div>
+<div id="wd-1a3d1b0e" class="wp-block-wd-image wd-block-image"><img class="wp-image-525" src="https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/08/vg-blog-img-step-1-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -8304,7 +8200,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"490c9860-2425-44a4-90d8-d58710cec194"} -->
 <div id="wd-490c9860" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"c902000b-7587-43af-9c59-073f5016e460","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-c902000b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"c6a9ec20-5fb7-4bb7-b718-1011948d2786","image":{"id":527,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg","width":815,"height":750}} -->
-<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" /></div>
+<div id="wd-c6a9ec20" class="wp-block-wd-image wd-block-image"><img class="wp-image-527" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-2-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -8352,7 +8248,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"38f47e0b-6d69-492a-a980-6a11b57c5afc","adjacentCount":2} -->
 <div id="wd-38f47e0b" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"97659c4f-2577-4bad-a5ec-223171eed3d6","image":{"id":528,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg","width":814,"height":750}} -->
-<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" /></div>
+<div id="wd-97659c4f" class="wp-block-wd-image wd-block-image"><img class="wp-image-528" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-3-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -8360,7 +8256,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"60ae5667-ddac-4f5c-af13-3374c721eef6"} -->
 <div id="wd-60ae5667" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"1f5752f8-09f8-468a-a6fc-d3164bb0f148","adjacentCount":2,"flexOrderMobile":"2"} -->
 <div id="wd-1f5752f8" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"159f7a72-309b-41f5-9a79-3ae086f4162b","image":{"id":530,"url":"http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg","width":815,"height":750}} -->
-<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" /></div>
+<div id="wd-159f7a72" class="wp-block-wd-image wd-block-image"><img class="wp-image-530" src="http://dummy.xtemos.com/woodmart2/vegetables-gutenberg/wp-content/uploads/sites/37/2024/03/vg-blog-img-step-4-opt.jpg" alt="" /></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column -->
 
@@ -8385,8 +8281,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 															<wp:post_id>489</wp:post_id>
 					<wp:post_date><![CDATA[2024-02-03 11:26:00]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-02-03 11:26:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-08 16:41:27]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-08 16:41:27]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-30 13:18:00]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-30 13:18:00]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[japanese-corn-soup]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>

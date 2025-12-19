@@ -97,6 +97,9 @@
 .wd-icon-waitlist:before {
 	content: "\f186";
 }
+.wd-icon-price-drop-notifier:before {
+	content: "\f191";
+}
 .wd-icon-user:before {
 	content: "\f124";
 }
@@ -138,6 +141,9 @@
 }
 .wd-icon-external-link:before {
 	content: "\f11c";
+}
+.wd-icon-clock-history:before {
+	content: "\f190";
 }
 .wd-icon-shop:before {
 	content: "\f146";
@@ -223,6 +229,9 @@
 .wd-icon-account-waitlist:before {
 	content: "\f185";
 }
+.wd-icon-account-price-drop-notifier:before {
+	content: "\f18a";
+}
 .wd-icon-account-details:before {
 	content: "\f135";
 }
@@ -273,9 +282,6 @@
 }
 .wd-icon-dribbble-brands:before {
 	content: "\f166";
-}
-.wd-icon-skype-brands:before {
-	content: "\f167";
 }
 .wd-icon-vk-brands:before {
 	content: "\f168";

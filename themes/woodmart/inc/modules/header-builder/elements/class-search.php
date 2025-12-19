@@ -17,6 +17,19 @@ class Search extends Element {
 	}
 
 	public function map() {
+		$search_extra_content_options = array(
+			array(
+				'value' => '',
+				'label' => esc_html__( 'Inherit from Theme Settings', 'woodmart' ),
+			),
+		) + $this->get_html_block_options();
+
+		$search_extra_content_description = '';
+
+		if ( function_exists( 'woodmart_get_html_block_links' ) ) {
+			$search_extra_content_description .= woodmart_get_html_block_links();
+		}
+
 		$this->args = array(
 			'type'            => 'search',
 			'title'           => esc_html__( 'Search', 'woodmart' ),
@@ -31,6 +44,7 @@ class Search extends Element {
 			'addable'         => true,
 			'desktop'         => true,
 			'params'          => array(
+				// General.
 				'display'                => array(
 					'id'          => 'display',
 					'title'       => esc_html__( 'Display', 'woodmart' ),
@@ -71,10 +85,40 @@ class Search extends Element {
 					'tab'         => esc_html__( 'General', 'woodmart' ),
 					'group'       => esc_html__( 'General', 'woodmart' ),
 					'value'       => false,
+				),
+				'search_history_enabled' => array(
+					'id'          => 'search_history_enabled',
+					'title'       => esc_html__( 'Show search history', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'search-history-enabled.mp4" autoplay loop muted></video>',
+					'description' => esc_html__( 'Allowing users to quickly access their previous searches.', 'woodmart' ),
+					'type'        => 'switcher',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'General', 'woodmart' ),
+					'on-text'     => esc_html__( 'Yes', 'woodmart' ),
+					'off-text'    => esc_html__( 'No', 'woodmart' ),
+					'value'       => false,
+				),
+				'search_extra_content_enabled' => array(
+					'id'    => 'search_extra_content_enabled',
+					'title' => esc_html__( 'Search extra content', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'full-screen-search-extra-content.mp4" autoplay loop muted></video>',
+					'tab'   => esc_html__( 'General', 'woodmart' ),
+					'group' => esc_html__( 'General', 'woodmart' ),
+					'type'  => 'switcher',
+					'value' => false,
+				),
+				'search_extra_content'   => array(
+					'id'          => 'search_extra_content',
+					'type'        => 'select',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'General', 'woodmart' ),
+					'value'       => '',
+					'options'     => $search_extra_content_options,
+					'description' => $search_extra_content_description,
 					'requires'    => array(
-						'display' => array(
-							'comparison' => 'not_equal',
-							'value'      => array( 'form', 'dropdown' ),
+						'search_extra_content_enabled' => array(
+							'comparison' => 'equal',
+							'value'      => true,
 						),
 					),
 				),
@@ -141,10 +185,11 @@ class Search extends Element {
 					'requires'    => array(
 						'display' => array(
 							'comparison' => 'equal',
-							'value'      => 'dropdown',
+							'value'      => array( 'dropdown', 'form' ),
 						),
 					),
 				),
+				// Search result.
 				'ajax'                   => array(
 					'id'          => 'ajax',
 					'title'       => esc_html__( 'Search with AJAX', 'woodmart' ),
@@ -152,7 +197,7 @@ class Search extends Element {
 					'type'        => 'switcher',
 					'tab'         => esc_html__( 'General', 'woodmart' ),
 					'group'       => esc_html__( 'Search result', 'woodmart' ),
-					'value'       => false,
+					'value'       => true,
 					'description' => esc_html__( 'Enable instant AJAX search functionality for this form.', 'woodmart' ),
 				),
 				'ajax_result_count'      => array(
@@ -203,6 +248,27 @@ class Search extends Element {
 						),
 					),
 				),
+				'include_cat_search'     => array(
+					'id'          => 'include_cat_search',
+					'title'       => esc_html__( 'Include categories in search', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'include-cat-search.mp4" autoplay loop muted></video>',
+					'description' => esc_html__( 'When enabled, the search function will also look for and display categories that match the search query.', 'woodmart' ),
+					'type'        => 'switcher',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'Search result', 'woodmart' ),
+					'value'       => false,
+					'requires'    => array(
+						'ajax'      => array(
+							'comparison' => 'equal',
+							'value'      => true,
+						),
+						'post_type' => array(
+							'comparison' => 'equal',
+							'value'      => 'product',
+						),
+					),
+				),
+				// Form.
 				'search_style'           => array(
 					'id'       => 'search_style',
 					'title'    => esc_html__( 'Search style', 'woodmart' ),
@@ -274,6 +340,22 @@ class Search extends Element {
 						'display' => array(
 							'comparison' => 'not_equal',
 							'value'      => array( 'full-screen', 'dropdown' ),
+						),
+					),
+				),
+				'form_width'            => array(
+					'id'        => 'form_width',
+					'title'     => esc_html__( 'Form width', 'woodmart' ),
+					'type'      => 'slider',
+					'tab'       => esc_html__( 'Style', 'woodmart' ),
+					'group'     => esc_html__( 'Form', 'woodmart' ),
+					'from'      => 0,
+					'to'        => 1000,
+					'value'     => '',
+					'units'     => 'px',
+					'selectors' => array(
+						'{{WRAPPER}}' => array(
+							'max-width: {{VALUE}}px;',
 						),
 					),
 				),
@@ -393,6 +475,7 @@ class Search extends Element {
 					),
 					'extra_class' => 'xts-col-6',
 				),
+				// Icon.
 				'style'                  => array(
 					'id'          => 'style',
 					'title'       => esc_html__( 'Icon display', 'woodmart' ),
@@ -741,5 +824,182 @@ class Search extends Element {
 				),
 			),
 		);
+	}
+
+	public function get_extra_class( $args ) {
+		$params      = $args['params'];
+		$extra_class = '';
+
+		if ( in_array( $params['display'], array( 'icon', 'dropdown', 'full-screen' ), true ) ) {
+			$icon_type = $params['icon_type'];
+
+			if ( 'custom' === $icon_type ) {
+				$extra_class .= ' wd-tools-custom-icon';
+			}
+
+			if ( ! empty( $params['icon_design'] ) ) {
+				$extra_class .= ' wd-design-' . $params['icon_design'];
+			}
+
+			if ( ! empty( $params['style'] ) ) {
+				$extra_class .= ' wd-style-' . $params['style'];
+			}
+
+			if ( isset( $params['wrap_type'], $params['style'], $params['icon_design'] ) && 'icon_and_text' === $params['wrap_type'] && 'text' === $params['style'] && in_array( $params['icon_design'], array( '6', '7' ), true ) ) {
+				$extra_class .= ' wd-with-wrap';
+			}
+
+			$extra_class .= ' wd-display-' . $params['display'];
+
+			if ( isset( $args['id'] ) ) {
+				$extra_class .= ' whb-' . $args['id'];
+			}
+
+			if ( 'dropdown' === $params['display'] ) {
+				$extra_class .= ' wd-event-hover';
+
+				if ( ! empty( $params['bg_overlay'] ) ) {
+					$extra_class .= ' wd-with-overlay';
+				}
+			}
+
+			$extra_class .= woodmart_get_old_classes( ' search-button' );
+		}
+
+		return $extra_class;
+	}
+
+	public function should_wrap_icon( $args ) {
+		$params       = $args['params'];
+		$icon_wrapper = false;
+
+		if ( in_array( $params['display'], array( 'dropdown', 'full-screen', 'icon' ), true ) ) {
+			if ( '8' === $params['icon_design'] ) {
+				$icon_wrapper = true;
+			} elseif (
+				isset( $params['wrap_type'], $params['style'], $params['icon_design'] ) &&
+				'icon_and_text' === $params['wrap_type'] &&
+				'text' === $params['style'] &&
+				in_array( $params['icon_design'], array( '6', '7' ), true )
+			) {
+				$icon_wrapper = true;
+			}
+		}
+
+		return $icon_wrapper;
+	}
+
+	public function get_wrapper_classes( $args ) {
+		$params          = $args['params'];
+		$wrapper_classes = '';
+
+		if ( in_array( $params['display'], array( 'form', 'full-screen-2' ), true ) ) {
+			$wrapper_classes .= 'wd-header-search-form';
+			$wrapper_classes .= ' wd-display-' . $params['display'];
+
+			if ( isset( $args['id'] ) ) {
+				$wrapper_classes .= ' whb-' . $args['id'];
+			}
+
+			if ( 'form' === $params['display'] && ! empty( $params['bg_overlay'] ) ) {
+				$wrapper_classes .= ' wd-with-overlay';
+			}
+		}
+
+		return $wrapper_classes;
+	}
+
+	public function get_dropdown_search_args( $args ) {
+		$params      = $args['params'];
+		$search_args = array();
+
+		if ( 'full-screen' !== $params['display'] ) {
+			$search_args = array(
+				'count'              => isset( $params['ajax_result_count'] ) ? $params['ajax_result_count'] : 20,
+				'include_cat_search' => isset( $params['include_cat_search'] ) ? $params['include_cat_search'] : false,
+				'post_type'          => isset( $params['post_type'] ) ? $params['post_type'] : 'product',
+				'icon_type'          => isset( $params['icon_type'] ) ? $params['icon_type'] : '',
+				'custom_icon'        => isset( $params['custom_icon'] ) ? $params['custom_icon'] : '',
+				'search_style'       => 'default',
+				'cat_selector_style' => isset( $params['cat_selector_style'] ) ? $params['cat_selector_style'] : 'bordered',
+				'wrapper_classes'    => $this->get_wrapper_classes( $args ),
+			);
+
+			if ( 'full-screen-2' === $params['display'] ) {
+				$search_args['cat_selector_style'] = '';
+			}
+
+			if ( 'form' === $params['display'] ) {
+				$search_args['show_categories'] = isset( $params['categories_dropdown'] ) ? $params['categories_dropdown'] : false;
+			}
+
+			if ( 'form' === $params['display'] || 'full-screen-2' === $params['display'] ) {
+				$search_args['search_style'] = isset( $params['search_style'] ) ? $params['search_style'] : 'default';
+			}
+
+			if ( 'dropdown' === $params['display'] ) {
+				$search_args['type'] = 'dropdown';
+			}
+
+			if ( 'form' === $params['display'] || 'dropdown' === $params['display'] ) {
+				$search_extra_content = 'disable';
+
+				if ( ! empty( $params['search_extra_content_enabled'] ) ) {
+					$search_extra_content = ! empty( $params['search_extra_content'] ) ? $params['search_extra_content'] : 'inherit';
+				}
+
+				$search_args['ajax']                   = isset( $params['ajax'] ) ? $params['ajax'] : true;
+				$search_args['popular_requests']       = isset( $params['popular_requests'] ) ? $params['popular_requests'] : false;
+				$search_args['search_history_enabled'] = isset( $params['search_history_enabled'] ) ? $params['search_history_enabled'] : false;
+				$search_args['search_extra_content']   = $search_extra_content;
+			}
+		}
+
+		return $search_args;
+	}
+
+	public function get_full_screen_search_args( $args ) {
+		$params      = $args['params'];
+		$search_args = array();
+
+		if ( 'full-screen' !== $params['display'] && 'full-screen-2' !== $params['display'] ) {
+			return array();
+		}
+
+		$search_extra_content = 'disable';
+
+		if ( ! empty( $params['search_extra_content_enabled'] ) ) {
+			$search_extra_content = ! empty( $params['search_extra_content'] ) ? $params['search_extra_content'] : 'inherit';
+		}
+
+		$search_args['type']                   = isset( $params['display'] ) ? $params['display'] : 'full-screen';
+		$search_args['popular_requests']       = isset( $params['popular_requests'] ) ? $params['popular_requests'] : '';
+		$search_args['search_history_enabled'] = isset( $params['search_history_enabled'] ) ? $params['search_history_enabled'] : false;
+		$search_args['search_extra_content']   = $search_extra_content;
+		$search_args['post_type']              = isset( $params['post_type'] ) ? $params['post_type'] : 'product';
+		$search_args['ajax']                   = isset( $params['ajax'] ) ? $params['ajax'] : true;
+		$search_args['include_cat_search']     = isset( $params['include_cat_search'] ) ? $params['include_cat_search'] : false;
+		$search_args['count']                  = ( isset( $params['ajax_result_count'] ) && $params['ajax_result_count'] ) ? $params['ajax_result_count'] : 20;
+
+		if ( 'full-screen-2' === $params['display'] ) {
+			$search_args['show_categories']    = isset( $params['categories_dropdown'] ) ? $params['categories_dropdown'] : '';
+			$search_args['cat_selector_style'] = isset( $params['cat_selector_style'] ) ? $params['cat_selector_style'] : '';
+		}
+
+		$search_args['device'] = 'desktop';
+
+		return $search_args;
+	}
+
+	protected function parse_args( $el ) {
+		$args   = parent::parse_args( $el );
+		$params = $args['params'];
+
+		$args['params']['extra_class']             = $this->get_extra_class( $args );
+		$args['params']['icon_wrapper']            = $this->should_wrap_icon( $args );
+		$args['params']['dropdown_search_args']    = $this->get_dropdown_search_args( $args );
+		$args['params']['full_screen_search_args'] = $this->get_full_screen_search_args( $args );
+
+		return $args;
 	}
 }

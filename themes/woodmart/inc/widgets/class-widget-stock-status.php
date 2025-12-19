@@ -137,27 +137,28 @@ if ( ! class_exists( 'WOODMART_Stock_Status' ) ) {
 
 			$current_stock_status = isset( $_GET['stock_status'] ) ? explode( ',', $_GET['stock_status'] ) : array();
 
+			woodmart_enqueue_inline_style( 'woo-mod-widget-checkboxes' );
 			?>
-			<ul>
+			<ul class="wd-checkboxes-on">
 				<?php if ( $instance['onsale'] ) : ?>
-					<li>
-						<a href="<?php echo esc_url( $this->get_link( 'onsale' ) ); ?>" class="<?php echo in_array( 'onsale', $current_stock_status, true ) ? 'wd-active' : ''; ?>" rel="nofollow noopener">
+					<li class="<?php echo in_array( 'onsale', $current_stock_status, true ) ? 'wd-active' : ''; ?>">
+						<a href="<?php echo esc_url( $this->get_link( 'onsale' ) ); ?>" rel="nofollow noopener">
 							<?php esc_html_e( 'On sale', 'woodmart' ); ?>
 						</a>
 					</li>
 				<?php endif; ?>
 
 				<?php if ( $instance['instock'] ) : ?>
-					<li>
-						<a href="<?php echo esc_url( $this->get_link( 'instock' ) ); ?>" class="<?php echo in_array( 'instock', $current_stock_status, true ) ? 'wd-active' : ''; ?>" rel="nofollow noopener">
+					<li class="<?php echo in_array( 'instock', $current_stock_status, true ) ? 'wd-active' : ''; ?>">
+						<a href="<?php echo esc_url( $this->get_link( 'instock' ) ); ?>" rel="nofollow noopener">
 							<?php esc_html_e( 'In stock', 'woodmart' ); ?>
 						</a>
 					</li>
 				<?php endif; ?>
 
 				<?php if ( isset( $instance['onbackorder'] ) && $instance['onbackorder'] ) : ?>
-					<li>
-						<a href="<?php echo esc_url( $this->get_link( 'onbackorder' ) ); ?>" class="<?php echo in_array( 'onbackorder', $current_stock_status, true ) ? 'wd-active' : ''; ?>" rel="nofollow noopener">
+					<li class="<?php echo in_array( 'onbackorder', $current_stock_status, true ) ? 'wd-active' : ''; ?>">
+						<a href="<?php echo esc_url( $this->get_link( 'onbackorder' ) ); ?>" rel="nofollow noopener">
 							<?php esc_html_e( 'On backorder', 'woodmart' ); ?>
 						</a>
 					</li>

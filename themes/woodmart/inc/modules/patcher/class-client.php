@@ -188,7 +188,7 @@ class Client extends Singleton {
 			<?php if ( ! woodmart_get_opt( 'white_label' ) ) : ?>
 				<div class="xts-box-footer">
 					<p>
-						Read more about automatic patcher tool in our <a href="https://xtemos.com/docs-topic/automatic-patcher/" target="_blank">documentation</a>.
+						<?php _e( 'Read more about automatic patcher tool in our <a href="https://xtemos.com/docs-topic/automatic-patcher/" target="_blank">documentation</a>.', 'woodmart' ); ?>
 					</p>
 				</div>
 			<?php endif; ?>

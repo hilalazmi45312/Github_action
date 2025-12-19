@@ -95,7 +95,9 @@ class Status_Button {
 	 * @return string|void
 	 */
 	public function get_template( $post_id ) {
-		if ( is_ajax() ) {
+		$doing_ajax = function_exists( 'is_ajax' ) ? \is_ajax() : ( defined( 'DOING_AJAX' ) && DOING_AJAX );
+
+		if ( $doing_ajax ) {
 			ob_start();
 		}
 
@@ -104,7 +106,7 @@ class Status_Button {
 
 		include get_parent_theme_file_path( WOODMART_FRAMEWORK . '/admin/modules/dashboard/templates/status-button.php' );
 
-		if ( is_ajax() ) {
+		if ( $doing_ajax ) {
 			return ob_get_clean();
 		}
 	}

@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -26,7 +26,7 @@ namespace SkyVerge\WooCommerce\Local_Pickup_Plus\Fields;
 defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Data_Store\Package_Pickup_Data;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Field component to schedule an appointment for items to be picked up at checkout.
@@ -155,7 +155,7 @@ class Package_Pickup_Appointment_Field extends Field {
 
 						<small class="pickup-location-field-label">
 							<?php /* translators: Placeholder: %s - outputs an "(optional)" note if pickup appointments are optional */
-							printf( __( 'Schedule a pickup appointment %s', 'woocommerce-shipping-local-pickup-plus' ), 'required' !== $mode ? __( '(optional)', 'woocommerce-shipping-local-pickup-plus' ) : '' ); ?>
+							printf( esc_html__( 'Schedule a pickup appointment %s', 'woocommerce-shipping-local-pickup-plus' ), 'required' !== $mode ? esc_html__( '(optional)', 'woocommerce-shipping-local-pickup-plus' ) : '' ); ?>
 							<?php if ( 'required' === $mode ) : ?>
 								<abbr class="required" title="<?php esc_attr_e( 'Required', 'woocommerce-shipping-local-pickup-plus' ); ?>" style="border:none;">*</abbr>
 							<?php endif; ?>
@@ -227,9 +227,9 @@ class Package_Pickup_Appointment_Field extends Field {
 								<small class="pickup-location-field-label">
 									<?php printf(
 										/* translators: Placeholder: %1$s - day of the week name, %2$s - location timezone */
-										__( 'Available pickup times on %1$s (all times in %2$s):', 'woocommerce-shipping-local-pickup-plus' ),
-										'<strong>' . date_i18n( 'l', strtotime( $chosen_date ) ) . '</strong>',
-										! empty( $timezone_string ) ? $timezone_string : __( 'the location timezone', 'woocommerce-shipping-local-pickup-plus' )
+										esc_html__( 'Available pickup times on %1$s (all times in %2$s):', 'woocommerce-shipping-local-pickup-plus' ),
+										'<strong>' . esc_html( date_i18n( 'l', strtotime( $chosen_date ) ) ) . '</strong>',
+										! empty( $timezone_string ) ? esc_html( $timezone_string ) : esc_html__( 'the location timezone', 'woocommerce-shipping-local-pickup-plus' )
 									); ?>
 								</small>
 								<?php
@@ -264,8 +264,8 @@ class Package_Pickup_Appointment_Field extends Field {
 								<small class="pickup-location-field-label">
 									<?php printf(
 										/* translators: Placeholder: %s - day of the week name */
-										__( 'Opening hours for pickup on %s:', 'woocommerce-shipping-local-pickup-plus' ),
-										'<strong>' . date_i18n( 'l', strtotime( $chosen_date ) ) . '</strong>'
+										esc_html__( 'Opening hours for pickup on %s:', 'woocommerce-shipping-local-pickup-plus' ),
+										'<strong>' . esc_html( date_i18n( 'l', strtotime( $chosen_date ) ) ) . '</strong>'
 									); ?>
 								</small>
 								<ul>

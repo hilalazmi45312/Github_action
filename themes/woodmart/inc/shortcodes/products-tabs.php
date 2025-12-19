@@ -13,27 +13,36 @@ if ( ! function_exists( 'woodmart_shortcode_products_tabs' ) ) {
 
 		$atts = shortcode_atts(
 			array(
-				'title'                        => '',
-				'image'                        => '',
-				'img_size'                     => '30x30',
-				'design'                       => 'default',
-				'alignment'                    => 'center',
-				'icon_position_design_default' => 'top',
-				'icon_position'                => 'left',
-				'color'                        => '#83b735',
-				'description'                  => '',
-				'tabs_title_color_scheme'      => 'inherit',
-				'tabs_style'                   => 'underline',
-				'enable_heading_bg'            => 'no',
+				'title'                         => '',
+				'image'                         => '',
+				'img_size'                      => '30x30',
+				'design'                        => 'default',
+				'alignment'                     => 'center',
+				'icon_position'                 => 'left',
+				'color'                         => '#83b735',
+				'description'                   => '',
+				'tabs_title_color_scheme'       => 'inherit',
+				'tabs_style'                    => 'underline',
+				'enable_heading_bg'             => 'no',
 
-				'woodmart_css_id'              => '',
-				'el_class'                     => '',
-				'css'                          => '',
-				'wd_animation'                 => '',
-				'wd_animation_delay'           => '',
-				'wd_hide_on_desktop'           => '',
-				'wd_hide_on_tablet'            => '',
-				'wd_hide_on_mobile'            => '',
+				'woodmart_css_id'               => '',
+				'el_class'                      => '',
+				'css'                           => '',
+				'wd_animation'                  => '',
+				'wd_animation_delay'            => '',
+				'wd_hide_on_desktop'            => '',
+				'wd_hide_on_tablet'             => '',
+				'wd_hide_on_mobile'             => '',
+
+				'tabs_bg_color_enable'          => 'no',
+				'tabs_bg_hover_color_enable'    => 'no',
+				'tabs_bg_active_color_enable'   => 'no',
+				'tabs_border_enable'            => 'no',
+				'tabs_border_hover_enable'      => 'no',
+				'tabs_border_active_enable'     => 'no',
+				'tabs_box_shadow_enable'        => 'no',
+				'tabs_box_shadow_hover_enable'  => 'no',
+				'tabs_box_shadow_active_enable' => 'no',
 			),
 			$atts
 		);
@@ -59,16 +68,15 @@ if ( ! function_exists( 'woodmart_shortcode_products_tabs' ) ) {
 		$_i              = 0;
 		$wd_nav_classes  = '';
 
-		if ( 'simple' === $design ) {
-			$tabs_style = 'default';
-		}
-
 		$wd_nav_classes .= ' wd-style-' . $tabs_style;
+		$wd_nav_classes .= ' wd-icon-pos-' . $icon_position;
 
-		if ( 'default' === $design ) {
-			$wd_nav_classes .= ' wd-icon-pos-' . $icon_position_design_default;
-		} else {
-			$wd_nav_classes .= ' wd-icon-pos-' . $icon_position;
+		$tabs_bg_activated      = 'yes' === $tabs_bg_color_enable || 'yes' === $tabs_bg_hover_color_enable || 'yes' === $tabs_bg_active_color_enable;
+		$tabs_border_active     = 'yes' === $tabs_border_enable || 'yes' === $tabs_border_hover_enable || 'yes' === $tabs_border_active_enable;
+		$tabs_box_shadow_active = 'yes' === $tabs_box_shadow_enable || 'yes' === $tabs_box_shadow_hover_enable || 'yes' === $tabs_box_shadow_active_enable;
+
+		if ( $tabs_bg_activated || $tabs_box_shadow_active || $tabs_border_active ) {
+			$wd_nav_classes .= ' wd-add-pd';
 		}
 
 		$tabs_nav .= '<ul class="wd-nav wd-nav-tabs products-tabs-title' . esc_attr( $wd_nav_classes ) . '">';
@@ -147,7 +155,9 @@ if ( ! function_exists( 'woodmart_shortcode_products_tabs' ) ) {
 			$nav_tabs_wrapper_classes .= ' color-scheme-' . $tabs_title_color_scheme;
 		}
 
-		$header_classes .= ' text-' . $alignment;
+		if ( 'default' === $design ) {
+			$header_classes .= ' text-' . $alignment;
+		}
 
 		woodmart_enqueue_js_script( 'products-tabs' );
 
@@ -191,27 +201,6 @@ if ( ! function_exists( 'woodmart_shortcode_products_tabs' ) ) {
 				}
 
 				echo woodmart_shortcode_products_tab( $first_tab_atts );
-			}
-			?>
-			<?php
-			if ( $color && ! woodmart_is_css_encode( $color ) ) {
-				$css = '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-simple .tabs-name {';
-				$css .= 'border-color: ' . esc_attr( $color ) . ';';
-				$css .= '}';
-
-				$css .= '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-default .products-tabs-title .tab-label:after,';
-				$css .= '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-alt .products-tabs-title .tab-label:after {';
-				$css .= 'background-color: ' . esc_attr( $color ) . ';';
-				$css .= '}';
-
-				$css .= '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-simple .products-tabs-title li.wd-active a,';
-				$css .= '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-simple .products-tabs-title li:hover a,';
-				$css .= '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-simple .owl-nav > div:hover,';
-				$css .= '.tabs-' . esc_attr( $tabs_id  ) . '.tabs-design-simple .wd-ajax-arrows > div:not(.disabled):hover {';
-				$css .= 'color: ' . esc_attr( $color ) . ';';
-				$css .= '}';
-
-				wp_add_inline_style( 'woodmart-inline-css', $css );
 			}
 			?>
 		</div>

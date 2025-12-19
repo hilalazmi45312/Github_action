@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       9.15.0
- * @version     1.0.0
+ * @version     1.1.0
  * @package     WooCommerce Smart Coupons
  */
 
@@ -86,29 +86,34 @@ if ( ! class_exists( 'WPBP_Compatibility' ) ) {
 		 * @return array
 		 */
 		public function store_credit_discounts_array( $discounts = array(), $coupon = null ) {
-			if ( ! $coupon instanceof WC_Coupon ) {
-				return $discounts;
-			}
-			$discount_type = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
-			if ( 'smart_coupon' !== $discount_type ) {
-				return $discounts;
-			}
-			$cart = ( isset( WC()->cart ) ) ? WC()->cart : '';
-			if ( $cart instanceof WC_Cart ) {
-				$cart_contents = ( is_object( WC()->cart ) && is_callable( array( WC()->cart, 'get_cart' ) ) ) ? WC()->cart->get_cart() : array();
-				if ( ! empty( $cart_contents ) ) {
-					$discount_type = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
+			try {
+				if ( ! $coupon instanceof WC_Coupon ) {
+					return $discounts;
+				}
+				$discount_type = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
+				if ( 'smart_coupon' !== $discount_type ) {
+					return $discounts;
+				}
+				$cart = ( isset( WC()->cart ) ) ? WC()->cart : '';
+				if ( $cart instanceof WC_Cart ) {
+					$cart_contents = ( is_object( WC()->cart ) && is_callable( array( WC()->cart, 'get_cart' ) ) ) ? WC()->cart->get_cart() : array();
+					if ( ! empty( $cart_contents ) ) {
+						$discount_type = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
 
-					if ( ! empty( $discounts ) ) {
-						foreach ( $discounts as $item_key => $discount ) {
-							$cart_item = $cart_contents[ $item_key ];
-							if ( isset( $cart_item['woosb_ids'], $cart_item['woosb_price'] ) ) {
-								$discounts[ $item_key ] = 0;
+						if ( ! empty( $discounts ) ) {
+							foreach ( $discounts as $item_key => $discount ) {
+								$cart_item = $cart_contents[ $item_key ];
+								if ( isset( $cart_item['woosb_ids'], $cart_item['woosb_price'] ) ) {
+									$discounts[ $item_key ] = 0;
+								}
 							}
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
+
 			return $discounts;
 		}
 

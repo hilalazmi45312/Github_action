@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
+<?php use XTS\Modules\Layouts\Main;
+
+if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
 	exit( 'No direct script access allowed' );}
 /**
 * ------------------------------------------------------------------------------------------------
@@ -7,9 +9,21 @@
 */
 if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 	function woodmart_get_vc_map_blog() {
-		$post_types_list   = array();
-		$post_types_list[] = array( 'post', esc_html__( 'Post', 'woodmart' ) );
-		$post_types_list[] = array( 'ids', esc_html__( 'List of IDs', 'woodmart' ) );
+		$post_types_list = array(
+			array( 'post', esc_html__( 'Post', 'woodmart' ) ),
+			array( 'ids', esc_html__( 'List of IDs', 'woodmart' ) ),
+		);
+
+		if ( Main::is_layout_type( 'single_post' ) ) {
+			$post_types_list[] = array( 'related_posts', esc_html__( 'Related posts', 'woodmart' ) );
+		}
+
+		$typography = woodmart_get_typography_map(
+			array(
+				'key'      => 'title',
+				'selector' => '{{WRAPPER}} .wd-el-title',
+			)
+		);
 
 		return array(
 			'name'        => esc_html__( 'Blog', 'woodmart' ),
@@ -22,6 +36,59 @@ if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 					'type'       => 'woodmart_css_id',
 					'param_name' => 'woodmart_css_id',
 				),
+
+				/**
+				 * Blog title
+				 */
+
+				array(
+					'type'       => 'woodmart_title_divider',
+					'holder'     => 'div',
+					'title'      => esc_html__( 'Title', 'woodmart' ),
+					'param_name' => 'title_divider',
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => esc_html__( 'Element title', 'woodmart' ),
+					'param_name' => 'element_title',
+				),
+				array(
+					'type'             => 'dropdown',
+					'heading'          => esc_html__( 'Tag', 'woodmart' ),
+					'param_name'       => 'element_title_tag',
+					'value'            => array(
+						esc_html__( 'h1', 'woodmart' )   => 'h1',
+						esc_html__( 'h2', 'woodmart' )   => 'h2',
+						esc_html__( 'h3', 'woodmart' )   => 'h3',
+						esc_html__( 'h4', 'woodmart' )   => 'h4',
+						esc_html__( 'h5', 'woodmart' )   => 'h5',
+						esc_html__( 'h6', 'woodmart' )   => 'h6',
+						esc_html__( 'div', 'woodmart' )  => 'div',
+						esc_html__( 'p', 'woodmart' )    => 'p',
+						esc_html__( 'span', 'woodmart' ) => 'span',
+					),
+					'std'              => 'h4',
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'heading'          => esc_html__( 'Color', 'woodmart' ),
+					'type'             => 'wd_colorpicker',
+					'param_name'       => 'title_color',
+					'selectors'        => array(
+						'{{WRAPPER}} .wd-el-title' => array(
+							'color: {{VALUE}};',
+						),
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+
+				$typography['font_family'],
+				$typography['font_size'],
+				$typography['font_weight'],
+				$typography['text_transform'],
+				$typography['font_style'],
+				$typography['line_height'],
+
 				/**
 				 * Post source
 				 */
@@ -102,7 +169,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 					'hint'               => esc_html__( 'Enter categories, tags or custom taxonomies.', 'woodmart' ),
 					'dependency'         => array(
 						'element'            => 'post_type',
-						'value_not_equal_to' => array( 'ids', 'custom' ),
+						'value_not_equal_to' => array( 'ids', 'related_posts' ),
 					),
 					'edit_field_class'   => 'vc_col-sm-6 vc_column',
 				),
@@ -158,41 +225,53 @@ if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 						esc_html__( 'Default alternative', 'woodmart' ) => 'default-alt',
 						esc_html__( 'Small images', 'woodmart' ) => 'small-images',
 						esc_html__( 'Chess', 'woodmart' ) => 'chess',
-						esc_html__( 'Masonry grid', 'woodmart' ) => 'masonry',
+						esc_html__( 'Grid', 'woodmart' )  => 'masonry',
 						esc_html__( 'Mask on image', 'woodmart' ) => 'mask',
 						esc_html__( 'Meta on image', 'woodmart' ) => 'meta-image',
 						esc_html__( 'Carousel', 'woodmart' ) => 'carousel',
-						esc_html__( 'List', 'woodmart' ) => 'list',
+						esc_html__( 'List', 'woodmart' )  => 'list',
 					),
 					'hint'             => esc_html__( 'You can use different design for your blog styled for the theme', 'woodmart' ),
 					'group'            => esc_html__( 'Design', 'woodmart' ),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
-					'type'             => 'dropdown',
-					'heading'          => esc_html__( 'Blog carousel design', 'woodmart' ),
-					'param_name'       => 'blog_carousel_design',
-					'value'            => array(
+					'type'       => 'dropdown',
+					'heading'    => esc_html__( 'Blog carousel design', 'woodmart' ),
+					'param_name' => 'blog_carousel_design',
+					'value'      => array(
 						esc_html__( 'Default', 'woodmart' ) => 'masonry',
 						esc_html__( 'Small images', 'woodmart' ) => 'small-images',
 						esc_html__( 'Mask on image', 'woodmart' ) => 'mask',
 						esc_html__( 'Meta on image', 'woodmart' ) => 'meta-image',
 					),
-					'hint'             => esc_html__( 'You can use different design for your blog carousel', 'woodmart' ),
-					'group'            => esc_html__( 'Design', 'woodmart' ),
-					'dependency'       => array(
+					'hint'       => esc_html__( 'You can use different design for your blog carousel', 'woodmart' ),
+					'group'      => esc_html__( 'Design', 'woodmart' ),
+					'dependency' => array(
 						'element' => 'blog_design',
 						'value'   => array( 'carousel' ),
+					),
+				),
+				array(
+					'type'             => 'woodmart_switch',
+					'heading'          => esc_html__( 'Masonry', 'woodmart' ),
+					'param_name'       => 'blog_masonry',
+					'group'            => esc_html__( 'Design', 'woodmart' ),
+					'true_state'       => 1,
+					'false_state'      => 0,
+					'default'          => 0,
+					'dependency'       => array(
+						'element' => 'blog_design',
+						'value'   => array( 'masonry', 'mask' ),
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
-					'type'             => 'textfield',
-					'heading'          => esc_html__( 'Images size', 'woodmart' ),
-					'group'            => esc_html__( 'Design', 'woodmart' ),
-					'param_name'       => 'img_size',
-					'hint'             => esc_html__( 'Enter image size. Example: \'thumbnail\', \'medium\', \'large\', \'full\' or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use \'thumbnail\' size.', 'woodmart' ),
-					'edit_field_class' => 'vc_col-sm-6 vc_column',
+					'type'       => 'textfield',
+					'heading'    => esc_html__( 'Images size', 'woodmart' ),
+					'group'      => esc_html__( 'Design', 'woodmart' ),
+					'param_name' => 'img_size',
+					'hint'       => esc_html__( 'Enter image size. Example: \'thumbnail\', \'medium\', \'large\', \'full\' or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use \'thumbnail\' size.', 'woodmart' ),
 				),
 				array(
 					'type'             => 'woodmart_button_set',
@@ -508,7 +587,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 					'param_holder_class' => 'vc_grid-data-type-not-ids',
 					'dependency'         => array(
 						'element'            => 'post_type',
-						'value_not_equal_to' => array( 'ids', 'custom' ),
+						'value_not_equal_to' => array( 'ids' ),
 					),
 					'edit_field_class'   => 'vc_col-sm-6 vc_column',
 				),
@@ -524,7 +603,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 					'param_holder_class' => 'vc_grid-data-type-not-ids',
 					'dependency'         => array(
 						'element'            => 'post_type',
-						'value_not_equal_to' => array( 'ids', 'custom' ),
+						'value_not_equal_to' => array( 'ids', 'related_posts' ),
 						'callback'           => 'vc_grid_exclude_dependency_callback',
 					),
 					'edit_field_class'   => 'vc_col-sm-6 vc_column',
@@ -547,6 +626,12 @@ if ( ! function_exists( 'woodmart_get_vc_map_blog' ) ) {
 					'false_state'      => 'no',
 					'default'          => 'no',
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => esc_html__( 'Extra class name', 'woodmart' ),
+					'param_name' => 'el_class',
+					'hint'       => esc_html__( 'If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'woodmart' ),
 				),
 				array(
 					'type'       => 'css_editor',

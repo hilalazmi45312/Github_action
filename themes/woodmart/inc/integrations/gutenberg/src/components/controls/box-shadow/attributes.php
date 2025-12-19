@@ -21,7 +21,7 @@ if ( ! function_exists( 'wd_get_box_shadow_control_attrs' ) ) {
 				),
 				'blur'       => array(
 					'type'       => 'number',
-					'default'    => 0,
+					'default'    => 10,
 					'responsive' => true,
 				),
 				'spread'     => array(

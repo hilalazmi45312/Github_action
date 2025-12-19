@@ -414,6 +414,7 @@
     },
     "blog_design": "mask",
     "blog_excerpt_length": "105",
+    "blog_archive_layout": "full-width",
     "quick_shop_variable": "0",
     "variation_gallery": "0",
     "hide_larger_price": "1",
@@ -482,5 +483,7 @@
     "youtube_link": "#",
     "blog_columns": "3",
     "blog_hide_sidebar_tablet": "1",
-    "blog_hide_sidebar_mobile": "1"
+    "blog_hide_sidebar_mobile": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

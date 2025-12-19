@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.7.1" created="2025-02-04 13:28" -->
+	<!-- generator="WordPress/6.7.2" created="2025-06-04 12:27" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>admin</title>
 	<link>https://dummy.xtemos.com/woodmart2</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Tue, 04 Feb 2025 13:28:21 +0000</pubDate>
+	<pubDate>Wed, 04 Jun 2025 12:27:07 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
@@ -41,6 +41,10 @@
 			<wp:category_nicename><![CDATA[decoration]]></wp:category_nicename>
 			<wp:category_parent><![CDATA[]]></wp:category_parent>
 			<wp:cat_name><![CDATA[Decoration]]></wp:cat_name>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:62:{i:0;s:10:"style-base";i:1;s:16:"helpers-wpb-elem";i:2;s:17:"revolution-slider";i:3;s:13:"wpbakery-base";i:4;s:24:"wpbakery-base-deprecated";i:5;s:13:"int-wordfence";i:6;s:16:"woocommerce-base";i:7;s:15:"mod-star-rating";i:8;s:25:"woocommerce-block-notices";i:9;s:9:"wp-blocks";i:10;s:11:"header-base";i:11;s:9:"mod-tools";i:12;s:20:"header-elements-base";i:13;s:12:"social-icons";i:14;s:13:"header-search";i:15;s:18:"header-search-form";i:16;s:14:"wd-search-form";i:17;s:17:"wd-search-results";i:18;s:18:"wd-search-dropdown";i:19;s:13:"wd-search-cat";i:20;s:17:"header-my-account";i:21;s:16:"header-cart-side";i:22;s:11:"header-cart";i:23;s:20:"widget-shopping-cart";i:24;s:19:"widget-product-list";i:25;s:26:"header-mobile-nav-dropdown";i:26;s:21:"header-categories-nav";i:27;s:16:"mod-nav-vertical";i:28;s:31:"mod-nav-vertical-design-default";i:29;s:18:"mod-nav-menu-label";i:30;s:6:"brands";i:31;s:10:"text-block";i:32;s:8:"info-box";i:33;s:6:"banner";i:34;s:16:"banner-btn-hover";i:35;s:20:"mod-highlighted-text";i:36;s:6:"button";i:37;s:12:"product-loop";i:38;s:18:"product-loop-quick";i:39;s:23:"woo-mod-add-btn-replace";i:40;s:6:"swiper";i:41;s:22:"woo-mod-product-labels";i:42;s:28:"woo-mod-product-labels-round";i:43;s:9:"mfp-popup";i:44;s:13:"swiper-arrows";i:45;s:14:"dropdown-aside";i:46;s:13:"section-title";i:47;s:10:"page-title";i:48;s:14:"blog-loop-base";i:49;s:25:"post-types-mod-predefined";i:50;s:24:"blog-loop-design-masonry";i:51;s:34:"post-types-mod-categories-style-bg";i:52;s:28:"post-types-mod-date-style-bg";i:53;s:15:"blog-mod-author";i:54;s:15:"widget-collapse";i:55;s:11:"footer-base";i:56;s:4:"list";i:57;s:7:"el-list";i:58;s:22:"widget-wd-recent-posts";i:59;s:10:"widget-nav";i:60;s:10:"scroll-top";i:61;s:5:"mc4wp";}]]></wp:meta_value>
+		</wp:termmeta>
 		</wp:category>
 			<wp:category>
 			<wp:term_id>17</wp:term_id>
@@ -625,7 +629,7 @@
 	<wp:term><wp:term_id>76</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main-menu-right]]></wp:term_slug><wp:term_name><![CDATA[Main menu right]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.7.1</generator>
+	<generator>https://wordpress.org/?v=6.7.2</generator>
 
 					<item>
 					<title><![CDATA[Sweet seat: functional seat for IT folks]]></title>
@@ -647,8 +651,8 @@ Via Suspendisse 24 – Metro: Praesent Vehicula
 															<wp:post_id>128</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 14:35:55]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 14:35:55]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:06]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:06]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[sweet-seat-functional-seat-for-it-folks]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1579,21 +1583,21 @@ Id volutpat consequat <strong><a href="#">arcu tristique</a></strong> praesent s
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis in sodales. Fames at ullamcorper mus adipiscing consectetur fusce lectus vestibulum vivamus dictumst vivamus parturient nisl a aenean ornare consectetur dolor arcu a a scelerisque ad. In a dis vestibulum class a justo condimentum ad fermentum nostra lectus fames porta.[/woodmart_text_block][woodmart_gallery images="829,830,831,832" view="carousel" spacing="30" slides_per_view="3" hide_pagination_control="yes" caption="0" lightbox="yes" img_size="450x700" autoplay="no" hide_prev_next_buttons="no" wrap="no" center_mode="no" lazy_loading="no" scroll_carousel_init="no"][woodmart_text_block woodmart_css_id="60f9092005891" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis in sodales. Fames at ullamcorper mus adipiscing consectetur fusce lectus vestibulum vivamus dictumst vivamus parturient nisl a aenean ornare consectetur dolor arcu a a scelerisque ad. In a dis vestibulum class a justo condimentum ad fermentum nostra lectus fames porta.
 <h3>Parturient volutpat fames</h3>
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis in sodales. Fames at ullamcorper mus adipiscing consectetur fusce lectus vestibulum vivamus dictumst vivamus parturient nisl a aenean ornare consectetur dolor arcu a a scelerisque ad. In a dis vestibulum class a justo condimentum ad fermentum nostra lectus fames porta.[/woodmart_text_block][/vc_column][/vc_row][vc_row content_placement="top"][vc_column width="1/2"][woodmart_image click_action="lightbox" img_id="806" img_size="700x700" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60f9096422736" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
-<h4 style="text-align: center;">Austen Marshall – Semper Suspen</h4>
+<h4 style="text-align: center">Austen Marshall – Semper Suspen</h4>
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis.[/woodmart_text_block][/vc_column][vc_column width="1/2"][woodmart_image click_action="lightbox" img_id="805" img_size="700x700" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60f909b0c122a" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
-<h4 style="text-align: center;">Jarred Monte – Aliquet Parturient</h4>
+<h4 style="text-align: center">Jarred Monte – Aliquet Parturient</h4>
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis.[/woodmart_text_block][/vc_column][/vc_row][vc_row content_placement="top"][vc_column width="1/2"][woodmart_image click_action="lightbox" img_id="801" img_size="700x700" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60f90a04381b0" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
-<h4 style="text-align: center;">Tyrell Aubrey – Inceptos Element</h4>
+<h4 style="text-align: center">Tyrell Aubrey – Inceptos Element</h4>
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis.[/woodmart_text_block][/vc_column][vc_column width="1/2"][woodmart_image click_action="lightbox" img_id="802" img_size="700x700" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60f909e30a78e" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
-<h4 style="text-align: center;">Jimmy Chile – Nunc Penatibus</h4>
+<h4 style="text-align: center">Jimmy Chile – Nunc Penatibus</h4>
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis.[/woodmart_text_block][/vc_column][/vc_row][vc_row content_placement="top" css=".vc_custom_1490174111144{padding-top: 15px !important;padding-bottom: 15px !important;background-color: #f9f9f9 !important;}"][vc_column css=".vc_custom_1490174102578{padding-top: 0px !important;}"][testimonials align="left" slides_per_view="1" hide_pagination_control="yes"][testimonial image="834" name="Risus Parturient" title="Interior Stylist" img_size="100x100"]<em>"Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis."</em>[/testimonial][testimonial image="835" name="Metus Feugiat" title="Interior Stylist" img_size="100x100"]<em>"Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis."</em>[/testimonial][testimonial image="836" name="Euismod Nascetur" title="Interior Stylist" img_size="100x100"]<em>"Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis."</em>[/testimonial][/testimonials][/vc_column][/vc_row][vc_row][vc_column][woodmart_text_block woodmart_css_id="60f90a2662e3e" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
 <h3>Congue dis suspendisse</h3>
 Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis in sodales. Fames at ullamcorper mus adipiscing consectetur fusce lectus vestibulum vivamus dictumst vivamus parturient nisl a aenean ornare consectetur dolor arcu a a scelerisque ad. In a dis vestibulum class a justo condimentum ad fermentum nostra lectus fames porta.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="806" img_size="900x450" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60f90a4945787" content_width="100" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1626933836532{margin-bottom: 0px !important;}"]Ante iaculis feugiat dui magna mi scelerisque euismod nascetur nullam hac consectetur class metus feugiat ullamcorper nisl eu justo in a scelerisque. Feugiat sociis platea felis sed lacus maecenas consectetur elementum vestibulum ad aenean nostra sapien dictumst condimentum lectus. A pretium orci vestibulum aenean semper et congue sapien erat a cum adipiscing sagittis in sodales. Fames at ullamcorper mus adipiscing consectetur fusce lectus vestibulum vivamus dictumst vivamus parturient nisl a aenean ornare consectetur dolor arcu a a scelerisque ad. In a dis vestibulum class a justo condimentum ad fermentum nostra lectus fames porta.[/woodmart_text_block][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>226</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-16 07:46:22]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-16 07:46:22]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:04]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:04]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[the-big-design-wall-likes-pictures]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1695,8 +1699,8 @@ A luctus non viverra vestibulum eu hendrerit scelerisque malesuada ad dis cras i
 															<wp:post_id>232</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-16 08:04:22]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-16 08:04:22]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:06]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:06]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[new-home-decor-from-john-doerson]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2007,8 +2011,8 @@ Netus pretium tellus nulla commodo massa adipiscing in elementum magna congue co
 															<wp:post_id>1221</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-23 17:31:28]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-23 17:31:28]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:04]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:04]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[creative-water-features-and-exterior]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2092,8 +2096,8 @@ Rhoncus nibh aliquam a netus commodo a venenatis id a ullamcorper odio molestie 
 															<wp:post_id>1225</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-23 17:50:34]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-23 17:50:34]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:07]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:07]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[reinterprets-the-classic-bookshelf]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2176,8 +2180,8 @@ MD 20815</p>
 															<wp:post_id>1230</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-23 17:52:57]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-23 17:52:57]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-11-13 13:19:30]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-11-13 13:19:30]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[collar-brings-back-coffee-brewing-ritual]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2273,8 +2277,8 @@ Via Suspendisse 24 – Metro: Praesent Vehicula
 															<wp:post_id>1234</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-23 17:54:20]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-23 17:54:20]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:07]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:07]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[green-interior-design-inspiration]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2346,13 +2350,13 @@ Via Suspendisse 24 – Metro: Praesent Vehicula
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/?p=1238</guid>
 											<content:encoded><![CDATA[[vc_row][vc_column][woodmart_text_block woodmart_css_id="6156f7846a43d" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]<em>Vivamus enim sagittis aptent hac mi dui a per aptent suspendisse cras odio bibendum augue rhoncus laoreet dui praesent sodales sodales. Dignissim fusce ullamcorper volutpat habitasse tincidunt parturient enim tempor facilisi nostra lobortis proin primis litora. Scelerisque a diam a vestibulum nibh sit senectus fringilla bibendum vestibulum.</em>
 
-Hendrerit <a href="#"><strong>lacinia ullamcorper 2019</strong></a> penatibus convallis suspendisse aliquam sociis massa nam tempor nascetur nam a fusce ut. Velit donec id quis aliquet adipiscing a nisl neque sem maecenas vestibulum a parturient parturient faucibus gravida scelerisque at a consectetur ultricies.  Et iaculis mi velit tincidunt vestibulum a duis tempor non magna ultrices porta malesuada ullamcorper scelerisque parturient himenaeos iaculis sit.[/woodmart_text_block][woodmart_title size="small" color="primary" align="left" style="underlined" title="Parturient convallis" woodmart_css_id="6156f7b745a79" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTU2ZjdiNzQ1YTc5Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGl0bGUiLCJkYXRhIjp7InRhYmxldCI6e30sIm1vYmlsZSI6e319fQ=="][woodmart_text_block woodmart_css_id="6156f7a860599" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]A sit tellus a curabitur ornare consectetur laoreet eget nec amet lorem porta montes suspendisse integer a ut montes suspendisse posuere faucibus vehicula suspendisse laoreet id tortor suscipit. <strong>Lacus bibendum</strong> tortor natoque porttitor cursus non adipiscing facilisi ullamcorper parturient ultricies parturient non a.  Ac ullamcorper a ultrices a a urna ac commodo nam condimentum parturient. Libero suspendisse facilisis parturient elementum curabitur. Erat a per dis aliquet ultricies curabitur nostra suspendisse nec adipiscing donec vestibulum a parturient a ac ut non adipiscing penatibus nec erat.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6921" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_title size="small" color="primary" align="left" style="underlined" title="Scelerisque vulputate"][woodmart_text_block woodmart_css_id="6156f7fcb2b0d" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Urna suspendisse parturient suspendisse imperdiet egestas faucibus auctor nascetur volutpat torquent proin parturient ultricies senectus dolor suspendisse amet dis vel adipiscing a elit mus. Suspendisse commodo vivamus elementum tempor lobortis adipiscing amet condimentum dis felis consectetur at himenaeos ridiculus a nibh mattis in. <strong>Lacinia consequat</strong> congue parturient dapibus ad dignissim condimentum consequat rutrum parturient amet id euismod sem ad erat a lorem. Scelerisque sociosqu ullamcorper urna nisl mollis vestibulum pretium commodo inceptos cum condimentum placerat diam venenatis blandit hac eget dis lacus a parturient a accumsan nisl ante vestibulum.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6922" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_title size="small" color="primary" align="left" style="underlined" title="Iaculis vestibulum"][woodmart_text_block woodmart_css_id="6156f8258aaa6" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Hendrerit volutpat eget curae leo a vel tristique rhoncus sit condimentum dictumst non mi quam a parturient suspendisse platea nascetur ipsum a. Id nibh lacinia praesent mus arcu <a href="#"><strong>vel magna</strong></a> a malesuada cursus aliquam accumsan duis vestibulum imperdiet nascetur varius habitant. Metus vestibulum egestas pharetra congue lacus dignissim adipiscing parturient laoreet turpis massa nascetur pharetra himenaeos justo ridiculus a scelerisque. Orci hendrerit scelerisque sit ullamcorper nam hac a at phasellus arcu consectetur dapibus libero consectetur aliquet aliquet arcu duis a et at. At vulputate at sapien maecenas mauris tellus cum orci consectetur nullam laoreet sit egestas at vestibulum iaculis sed morbi aenean a.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6923" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_title size="small" color="primary" align="left" style="underlined" title="Cursus aliquam"][woodmart_text_block woodmart_css_id="6156f850aaeea" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Ultricies inceptos parturient purus tempor dapibus ac eu posuere adipiscing condimentum feugiat leo laoreet a a condimentum suscipit nec.Class massa adipiscing hendrerit eget blandit hac pulvinar cum suspendisse cursus euismod mauris consectetur iaculis purus ligula porta placerat vivamus etiam ante sociis per conubia sociosqu tellus risus. <a href="#"><strong>Convallis justo</strong></a> quam suspendisse facilisi parturient dis dolor per condimentum a adipiscing integer id conubia a molestie.Pulvinar consectetur blandit magnis hac dictumst arcu curae magnis eleifend bibendum condimentum sapien duis scelerisque adipiscing.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6924" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block woodmart_css_id="6156f87d1c8b6" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Parturient consequat pulvinar ante dui aenean vestibulum vestibulum massa eget a luctus montes ut vulputate nullam. Ligula condimentum a lacus habitant etiam <a href="#"><strong>sem adipiscing</strong></a> nulla a a laoreet quisque ullamcorper mus cubilia a mus donec adipiscing euismod ligula vehicula iaculis a a habitant. Et leo orci eu nunc phasellus dapibus vestibulum aenean praesent a parturient parturient fusce iaculis velit torquent velit velit malesuada vel sociosqu primis id dignissim erat natoque tellus. Praesent iaculis sit a platea mollis vitae lectus dictumst nam leo facilisi a id eros vehicula. Augue parturient arcu <a href="#"><strong>condimentum convallis</strong></a> turpis id consequat vestibulum vestibulum ullamcorper dignissim bibendum facilisi vulputate litora.[/woodmart_text_block][woodmart_google_map content_vertical="middle" lat="51.50735" lon="-0.12776" zoom="13" height="200" style_json="JTVCJTdCJTIyZmVhdHVyZVR5cGUlMjIlM0ElMjJhZG1pbmlzdHJhdGl2ZSUyMiUyQyUyMmVsZW1lbnRUeXBlJTIyJTNBJTIyYWxsJTIyJTJDJTIyc3R5bGVycyUyMiUzQSU1QiU3QiUyMnZpc2liaWxpdHklMjIlM0ElMjJvbiUyMiU3RCUyQyU3QiUyMnNhdHVyYXRpb24lMjIlM0EtMTAwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBMjAlN0QlNUQlN0QlMkMlN0IlMjJmZWF0dXJlVHlwZSUyMiUzQSUyMnJvYWQlMjIlMkMlMjJlbGVtZW50VHlwZSUyMiUzQSUyMmFsbCUyMiUyQyUyMnN0eWxlcnMlMjIlM0ElNUIlN0IlMjJ2aXNpYmlsaXR5JTIyJTNBJTIyb24lMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTEwMCU3RCUyQyU3QiUyMmxpZ2h0bmVzcyUyMiUzQTQwJTdEJTVEJTdEJTJDJTdCJTIyZmVhdHVyZVR5cGUlMjIlM0ElMjJ3YXRlciUyMiUyQyUyMmVsZW1lbnRUeXBlJTIyJTNBJTIyYWxsJTIyJTJDJTIyc3R5bGVycyUyMiUzQSU1QiU3QiUyMnZpc2liaWxpdHklMjIlM0ElMjJvbiUyMiU3RCUyQyU3QiUyMnNhdHVyYXRpb24lMjIlM0EtMTAlN0QlMkMlN0IlMjJsaWdodG5lc3MlMjIlM0EzMCU3RCU1RCU3RCUyQyU3QiUyMmZlYXR1cmVUeXBlJTIyJTNBJTIybGFuZHNjYXBlLm1hbl9tYWRlJTIyJTJDJTIyZWxlbWVudFR5cGUlMjIlM0ElMjJhbGwlMjIlMkMlMjJzdHlsZXJzJTIyJTNBJTVCJTdCJTIydmlzaWJpbGl0eSUyMiUzQSUyMnNpbXBsaWZpZWQlMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTYwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBMTAlN0QlNUQlN0QlMkMlN0IlMjJmZWF0dXJlVHlwZSUyMiUzQSUyMmxhbmRzY2FwZS5uYXR1cmFsJTIyJTJDJTIyZWxlbWVudFR5cGUlMjIlM0ElMjJhbGwlMjIlMkMlMjJzdHlsZXJzJTIyJTNBJTVCJTdCJTIydmlzaWJpbGl0eSUyMiUzQSUyMnNpbXBsaWZpZWQlMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTYwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBNjAlN0QlNUQlN0QlMkMlN0IlMjJmZWF0dXJlVHlwZSUyMiUzQSUyMnBvaSUyMiUyQyUyMmVsZW1lbnRUeXBlJTIyJTNBJTIyYWxsJTIyJTJDJTIyc3R5bGVycyUyMiUzQSU1QiU3QiUyMnZpc2liaWxpdHklMjIlM0ElMjJvZmYlMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTEwMCU3RCUyQyU3QiUyMmxpZ2h0bmVzcyUyMiUzQTYwJTdEJTVEJTdEJTJDJTdCJTIyZmVhdHVyZVR5cGUlMjIlM0ElMjJ0cmFuc2l0JTIyJTJDJTIyZWxlbWVudFR5cGUlMjIlM0ElMjJhbGwlMjIlMkMlMjJzdHlsZXJzJTIyJTNBJTVCJTdCJTIydmlzaWJpbGl0eSUyMiUzQSUyMm9mZiUyMiU3RCUyQyU3QiUyMnNhdHVyYXRpb24lMjIlM0EtMTAwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBNjAlN0QlNUQlN0QlNUQ=" content_width="270"][woodmart_text_block text_font_weight="600" text_color="title" text_color_scheme="dark" woodmart_css_id="6156fe679eaff" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]<span style="color: #000000;">Praesent Iaculis sit Vehicula</span>
-<span style="color: #000000;">Lap. 4 Tellus A17-B27</span>[/woodmart_text_block][/woodmart_google_map][/vc_column][/vc_row]]]></content:encoded>
+Hendrerit <a href="#"><strong>lacinia ullamcorper 2019</strong></a> penatibus convallis suspendisse aliquam sociis massa nam tempor nascetur nam a fusce ut. Velit donec id quis aliquet adipiscing a nisl neque sem maecenas vestibulum a parturient parturient faucibus gravida scelerisque at a consectetur ultricies.  Et iaculis mi velit tincidunt vestibulum a duis tempor non magna ultrices porta malesuada ullamcorper scelerisque parturient himenaeos iaculis sit.[/woodmart_text_block][woodmart_title size="small" color="primary" align="left" style="underlined" title="Parturient convallis" woodmart_css_id="6156f7b745a79" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTU2ZjdiNzQ1YTc5Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGl0bGUiLCJkYXRhIjp7InRhYmxldCI6e30sIm1vYmlsZSI6e319fQ=="][woodmart_text_block woodmart_css_id="6156f7a860599" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]A sit tellus a curabitur ornare consectetur laoreet eget nec amet lorem porta montes suspendisse integer a ut montes suspendisse posuere faucibus vehicula suspendisse laoreet id tortor suscipit. <strong>Lacus bibendum</strong> tortor natoque porttitor cursus non adipiscing facilisi ullamcorper parturient ultricies parturient non a.  Ac ullamcorper a ultrices a a urna ac commodo nam condimentum parturient. Libero suspendisse facilisis parturient elementum curabitur. Erat a per dis aliquet ultricies curabitur nostra suspendisse nec adipiscing donec vestibulum a parturient a ac ut non adipiscing penatibus nec erat.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6921" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_title size="small" color="primary" align="left" style="underlined" title="Scelerisque vulputate"][woodmart_text_block woodmart_css_id="6156f7fcb2b0d" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Urna suspendisse parturient suspendisse imperdiet egestas faucibus auctor nascetur volutpat torquent proin parturient ultricies senectus dolor suspendisse amet dis vel adipiscing a elit mus. Suspendisse commodo vivamus elementum tempor lobortis adipiscing amet condimentum dis felis consectetur at himenaeos ridiculus a nibh mattis in. <strong>Lacinia consequat</strong> congue parturient dapibus ad dignissim condimentum consequat rutrum parturient amet id euismod sem ad erat a lorem. Scelerisque sociosqu ullamcorper urna nisl mollis vestibulum pretium commodo inceptos cum condimentum placerat diam venenatis blandit hac eget dis lacus a parturient a accumsan nisl ante vestibulum.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6922" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_title size="small" color="primary" align="left" style="underlined" title="Iaculis vestibulum"][woodmart_text_block woodmart_css_id="6156f8258aaa6" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Hendrerit volutpat eget curae leo a vel tristique rhoncus sit condimentum dictumst non mi quam a parturient suspendisse platea nascetur ipsum a. Id nibh lacinia praesent mus arcu <a href="#"><strong>vel magna</strong></a> a malesuada cursus aliquam accumsan duis vestibulum imperdiet nascetur varius habitant. Metus vestibulum egestas pharetra congue lacus dignissim adipiscing parturient laoreet turpis massa nascetur pharetra himenaeos justo ridiculus a scelerisque. Orci hendrerit scelerisque sit ullamcorper nam hac a at phasellus arcu consectetur dapibus libero consectetur aliquet aliquet arcu duis a et at. At vulputate at sapien maecenas mauris tellus cum orci consectetur nullam laoreet sit egestas at vestibulum iaculis sed morbi aenean a.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6923" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_title size="small" color="primary" align="left" style="underlined" title="Cursus aliquam"][woodmart_text_block woodmart_css_id="6156f850aaeea" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Ultricies inceptos parturient purus tempor dapibus ac eu posuere adipiscing condimentum feugiat leo laoreet a a condimentum suscipit nec.Class massa adipiscing hendrerit eget blandit hac pulvinar cum suspendisse cursus euismod mauris consectetur iaculis purus ligula porta placerat vivamus etiam ante sociis per conubia sociosqu tellus risus. <a href="#"><strong>Convallis justo</strong></a> quam suspendisse facilisi parturient dis dolor per condimentum a adipiscing integer id conubia a molestie.Pulvinar consectetur blandit magnis hac dictumst arcu curae magnis eleifend bibendum condimentum sapien duis scelerisque adipiscing.[/woodmart_text_block][woodmart_image click_action="lightbox" img_id="6924" img_size="full" woodmart_box_shadow="no" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block woodmart_css_id="6156f87d1c8b6" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Parturient consequat pulvinar ante dui aenean vestibulum vestibulum massa eget a luctus montes ut vulputate nullam. Ligula condimentum a lacus habitant etiam <a href="#"><strong>sem adipiscing</strong></a> nulla a a laoreet quisque ullamcorper mus cubilia a mus donec adipiscing euismod ligula vehicula iaculis a a habitant. Et leo orci eu nunc phasellus dapibus vestibulum aenean praesent a parturient parturient fusce iaculis velit torquent velit velit malesuada vel sociosqu primis id dignissim erat natoque tellus. Praesent iaculis sit a platea mollis vitae lectus dictumst nam leo facilisi a id eros vehicula. Augue parturient arcu <a href="#"><strong>condimentum convallis</strong></a> turpis id consequat vestibulum vestibulum ullamcorper dignissim bibendum facilisi vulputate litora.[/woodmart_text_block][woodmart_google_map content_vertical="middle" lat="51.50735" lon="-0.12776" zoom="13" height="200" style_json="JTVCJTdCJTIyZmVhdHVyZVR5cGUlMjIlM0ElMjJhZG1pbmlzdHJhdGl2ZSUyMiUyQyUyMmVsZW1lbnRUeXBlJTIyJTNBJTIyYWxsJTIyJTJDJTIyc3R5bGVycyUyMiUzQSU1QiU3QiUyMnZpc2liaWxpdHklMjIlM0ElMjJvbiUyMiU3RCUyQyU3QiUyMnNhdHVyYXRpb24lMjIlM0EtMTAwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBMjAlN0QlNUQlN0QlMkMlN0IlMjJmZWF0dXJlVHlwZSUyMiUzQSUyMnJvYWQlMjIlMkMlMjJlbGVtZW50VHlwZSUyMiUzQSUyMmFsbCUyMiUyQyUyMnN0eWxlcnMlMjIlM0ElNUIlN0IlMjJ2aXNpYmlsaXR5JTIyJTNBJTIyb24lMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTEwMCU3RCUyQyU3QiUyMmxpZ2h0bmVzcyUyMiUzQTQwJTdEJTVEJTdEJTJDJTdCJTIyZmVhdHVyZVR5cGUlMjIlM0ElMjJ3YXRlciUyMiUyQyUyMmVsZW1lbnRUeXBlJTIyJTNBJTIyYWxsJTIyJTJDJTIyc3R5bGVycyUyMiUzQSU1QiU3QiUyMnZpc2liaWxpdHklMjIlM0ElMjJvbiUyMiU3RCUyQyU3QiUyMnNhdHVyYXRpb24lMjIlM0EtMTAlN0QlMkMlN0IlMjJsaWdodG5lc3MlMjIlM0EzMCU3RCU1RCU3RCUyQyU3QiUyMmZlYXR1cmVUeXBlJTIyJTNBJTIybGFuZHNjYXBlLm1hbl9tYWRlJTIyJTJDJTIyZWxlbWVudFR5cGUlMjIlM0ElMjJhbGwlMjIlMkMlMjJzdHlsZXJzJTIyJTNBJTVCJTdCJTIydmlzaWJpbGl0eSUyMiUzQSUyMnNpbXBsaWZpZWQlMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTYwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBMTAlN0QlNUQlN0QlMkMlN0IlMjJmZWF0dXJlVHlwZSUyMiUzQSUyMmxhbmRzY2FwZS5uYXR1cmFsJTIyJTJDJTIyZWxlbWVudFR5cGUlMjIlM0ElMjJhbGwlMjIlMkMlMjJzdHlsZXJzJTIyJTNBJTVCJTdCJTIydmlzaWJpbGl0eSUyMiUzQSUyMnNpbXBsaWZpZWQlMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTYwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBNjAlN0QlNUQlN0QlMkMlN0IlMjJmZWF0dXJlVHlwZSUyMiUzQSUyMnBvaSUyMiUyQyUyMmVsZW1lbnRUeXBlJTIyJTNBJTIyYWxsJTIyJTJDJTIyc3R5bGVycyUyMiUzQSU1QiU3QiUyMnZpc2liaWxpdHklMjIlM0ElMjJvZmYlMjIlN0QlMkMlN0IlMjJzYXR1cmF0aW9uJTIyJTNBLTEwMCU3RCUyQyU3QiUyMmxpZ2h0bmVzcyUyMiUzQTYwJTdEJTVEJTdEJTJDJTdCJTIyZmVhdHVyZVR5cGUlMjIlM0ElMjJ0cmFuc2l0JTIyJTJDJTIyZWxlbWVudFR5cGUlMjIlM0ElMjJhbGwlMjIlMkMlMjJzdHlsZXJzJTIyJTNBJTVCJTdCJTIydmlzaWJpbGl0eSUyMiUzQSUyMm9mZiUyMiU3RCUyQyU3QiUyMnNhdHVyYXRpb24lMjIlM0EtMTAwJTdEJTJDJTdCJTIybGlnaHRuZXNzJTIyJTNBNjAlN0QlNUQlN0QlNUQ=" content_width="270"][woodmart_text_block text_font_weight="600" text_color="title" text_color_scheme="dark" woodmart_css_id="6156fe679eaff" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]<span style="color: #000000">Praesent Iaculis sit Vehicula</span>
+<span style="color: #000000">Lap. 4 Tellus A17-B27</span>[/woodmart_text_block][/woodmart_google_map][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>1238</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-23 17:55:57]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-23 17:55:57]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:07]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:07]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:24]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:24]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[exploring-atlantas-modern-homes]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2403,6 +2407,10 @@ Hendrerit <a href="#"><strong>lacinia ullamcorper 2019</strong></a> penatibus c
 							<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Wooden single drawer]]></title>
@@ -2417,8 +2425,8 @@ A sodales hac dolor parturient tincidunt dictumst a condimentum nunc auctor part
 										<wp:post_id>42</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 08:07:28]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 08:07:28]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 05:23:42]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 05:23:42]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-02-25 20:19:21]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-25 20:19:21]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[wooden-single-drawer]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2618,8 +2626,8 @@ Etiam dictumst congue a non class risus sed a. Diam adipiscing a condimentum in 
 										<wp:post_id>45</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 08:22:56]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 08:22:56]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-30 17:03:47]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-30 17:03:47]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-02-25 20:19:02]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-25 20:19:02]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[smart-watches-wood-edition]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -3053,8 +3061,8 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 										<wp:post_id>48</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 08:36:16]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 08:36:16]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 11:43:16]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 11:43:16]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-04 12:25:46]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-04 12:25:46]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[decoration-wooden-present]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -3107,7 +3115,7 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -3160,10 +3168,6 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_stock]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:5;i:1;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_fbt_main_products]]></wp:meta_key>
@@ -3223,7 +3227,7 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -3278,10 +3282,6 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 							<wp:meta_value><![CDATA[2]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:5;i:1;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_fbt_main_products]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
@@ -3305,15 +3305,19 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:5;i:1;}]]></wp:meta_value>
+						</wp:postmeta>
 												<wp:comment>
-							<wp:comment_id>342</wp:comment_id>
+							<wp:comment_id>161570</wp:comment_id>
 							<wp:comment_author><![CDATA[Mr. Mackay]]></wp:comment_author>
 							<wp:comment_author_email><![CDATA[zak@asda.as]]></wp:comment_author_email>
 							<wp:comment_author_url></wp:comment_author_url>
-							<wp:comment_author_IP><![CDATA[176.98.90.252]]></wp:comment_author_IP>
-							<wp:comment_date><![CDATA[2021-11-18 13:21:42]]></wp:comment_date>
-							<wp:comment_date_gmt><![CDATA[2021-11-18 13:21:42]]></wp:comment_date_gmt>
-							<wp:comment_content><![CDATA[I’ve heard the argument that “lorem ipsum” is effective in wireframing or design because it helps people focus on the actual layout, or color scheme, or whatever. What kills me here is that we’re talking about creating a user experience that will (whether we like it or not) be DRIVEN by words.]]></wp:comment_content>
+							<wp:comment_author_IP><![CDATA[176.98.90.60]]></wp:comment_author_IP>
+							<wp:comment_date><![CDATA[2025-06-04 12:25:46]]></wp:comment_date>
+							<wp:comment_date_gmt><![CDATA[2025-06-04 12:25:46]]></wp:comment_date_gmt>
+							<wp:comment_content><![CDATA[Using dummy content or fake information in the Web design process can result in products with unrealistic assumptions and potentially serious design flaws. A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity.]]></wp:comment_content>
 							<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 							<wp:comment_type><![CDATA[review]]></wp:comment_type>
 							<wp:comment_parent>0</wp:comment_parent>
@@ -3324,6 +3328,18 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 								</wp:commentmeta>
 															<wp:commentmeta>
 									<wp:meta_key><![CDATA[verified]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_likes]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_dislikes]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_total_vote]]></wp:meta_key>
 									<wp:meta_value><![CDATA[0]]></wp:meta_value>
 								</wp:commentmeta>
 													</wp:comment>
@@ -3361,8 +3377,8 @@ Main: 76% Polyester, 24% Elastane.
 										<wp:post_id>49</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 08:42:20]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 08:42:20]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 16:11:57]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 16:11:57]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-04 12:26:09]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-04 12:26:09]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[wine-bottle-lantern]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -3412,7 +3428,7 @@ Main: 76% Polyester, 24% Elastane.
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -3449,10 +3465,6 @@ Main: 76% Polyester, 24% Elastane.
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_hide_tabs_titles]]></wp:meta_key>
 							<wp:meta_value><![CDATA[on]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:4;i:1;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_regular_price]]></wp:meta_key>
@@ -3492,7 +3504,7 @@ Main: 76% Polyester, 24% Elastane.
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -3531,10 +3543,6 @@ Main: 76% Polyester, 24% Elastane.
 							<wp:meta_value><![CDATA[on]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:4;i:1;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_fbt_bundles_id]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
@@ -3554,14 +3562,18 @@ Main: 76% Polyester, 24% Elastane.
 							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:4;i:1;}]]></wp:meta_value>
+						</wp:postmeta>
 												<wp:comment>
-							<wp:comment_id>344</wp:comment_id>
+							<wp:comment_id>161572</wp:comment_id>
 							<wp:comment_author><![CDATA[Mr. Mackay]]></wp:comment_author>
 							<wp:comment_author_email><![CDATA[zak@asda.as]]></wp:comment_author_email>
 							<wp:comment_author_url></wp:comment_author_url>
-							<wp:comment_author_IP><![CDATA[176.98.90.252]]></wp:comment_author_IP>
-							<wp:comment_date><![CDATA[2021-11-18 13:22:32]]></wp:comment_date>
-							<wp:comment_date_gmt><![CDATA[2021-11-18 13:22:32]]></wp:comment_date_gmt>
+							<wp:comment_author_IP><![CDATA[176.98.90.60]]></wp:comment_author_IP>
+							<wp:comment_date><![CDATA[2025-06-04 12:26:09]]></wp:comment_date>
+							<wp:comment_date_gmt><![CDATA[2025-06-04 12:26:09]]></wp:comment_date_gmt>
 							<wp:comment_content><![CDATA[Using dummy content or fake information in the Web design process can result in products with unrealistic assumptions and potentially serious design flaws. A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity.]]></wp:comment_content>
 							<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 							<wp:comment_type><![CDATA[review]]></wp:comment_type>
@@ -3573,6 +3585,18 @@ Main: 76% Polyester, 24% Elastane.
 								</wp:commentmeta>
 															<wp:commentmeta>
 									<wp:meta_key><![CDATA[verified]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_likes]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_dislikes]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_total_vote]]></wp:meta_key>
 									<wp:meta_value><![CDATA[0]]></wp:meta_value>
 								</wp:commentmeta>
 													</wp:comment>
@@ -3599,8 +3623,8 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 										<wp:post_id>50</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 08:50:29]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 08:50:29]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 16:06:55]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 16:06:55]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-04 12:26:05]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-04 12:26:05]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[iphone-dock]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -3662,7 +3686,7 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -3719,10 +3743,6 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_stock]]></wp:meta_key>
 							<wp:meta_value><![CDATA[30]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:4;i:1;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_sku]]></wp:meta_key>
@@ -3790,7 +3810,7 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -3849,10 +3869,6 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 							<wp:meta_value><![CDATA[30]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:4;i:1;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_sku]]></wp:meta_key>
 							<wp:meta_value><![CDATA[167655]]></wp:meta_value>
 						</wp:postmeta>
@@ -3884,15 +3900,19 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wc_rating_count]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:4;i:1;}]]></wp:meta_value>
+						</wp:postmeta>
 												<wp:comment>
-							<wp:comment_id>343</wp:comment_id>
+							<wp:comment_id>161571</wp:comment_id>
 							<wp:comment_author><![CDATA[Mr. Mackay]]></wp:comment_author>
 							<wp:comment_author_email><![CDATA[zak@asda.as]]></wp:comment_author_email>
 							<wp:comment_author_url></wp:comment_author_url>
-							<wp:comment_author_IP><![CDATA[176.98.90.252]]></wp:comment_author_IP>
-							<wp:comment_date><![CDATA[2021-11-18 13:22:10]]></wp:comment_date>
-							<wp:comment_date_gmt><![CDATA[2021-11-18 13:22:10]]></wp:comment_date_gmt>
-							<wp:comment_content><![CDATA[If the copy becomes distracting in the design then you are doing something wrong or they are discussing copy changes. It might be a bit annoying but you could tell them that that discussion would be best suited for another time. At worst the discussion is at least working towards the final goal of your site where questions about lorem ipsum don’t.]]></wp:comment_content>
+							<wp:comment_author_IP><![CDATA[176.98.90.60]]></wp:comment_author_IP>
+							<wp:comment_date><![CDATA[2025-06-04 12:26:05]]></wp:comment_date>
+							<wp:comment_date_gmt><![CDATA[2025-06-04 12:26:05]]></wp:comment_date_gmt>
+							<wp:comment_content><![CDATA[Using dummy content or fake information in the Web design process can result in products with unrealistic assumptions and potentially serious design flaws. A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity.]]></wp:comment_content>
 							<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 							<wp:comment_type><![CDATA[review]]></wp:comment_type>
 							<wp:comment_parent>0</wp:comment_parent>
@@ -3903,6 +3923,18 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 								</wp:commentmeta>
 															<wp:commentmeta>
 									<wp:meta_key><![CDATA[verified]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_likes]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_dislikes]]></wp:meta_key>
+									<wp:meta_value><![CDATA[0]]></wp:meta_value>
+								</wp:commentmeta>
+															<wp:commentmeta>
+									<wp:meta_key><![CDATA[wd_total_vote]]></wp:meta_key>
 									<wp:meta_value><![CDATA[0]]></wp:meta_value>
 								</wp:commentmeta>
 													</wp:comment>
@@ -3936,8 +3968,8 @@ Orlando, FL 32806[/woodmart_accordion_item][/woodmart_accordion][/vc_column][/vc
 										<wp:post_id>51</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 08:00:23]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 08:00:23]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 19:15:08]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 19:15:08]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-02-25 20:17:40]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-25 20:17:40]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[classic-wooden-chair]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -4152,8 +4184,8 @@ Commodo parturient tincidunt condim entum vestibulum <a href="#"><strong>dolor l
 										<wp:post_id>53</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-14 09:00:42]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-14 09:00:42]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 19:17:01]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 19:17:01]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-02-25 20:17:24]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-25 20:17:24]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[augue-adipiscing-euismod]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -4404,15 +4436,15 @@ Cum scelerisque montes conubia vivamus volutpat consectetur euismod ullamcorper 
 <img class="size-full alignleft" src="http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/10/brand-Rosenthal-blog.png" alt="" width="136" height="100" />Scelerisque leo fusce dui parturient ad a penatibus mauris adipiscing tempus vestibulum imperdiet gravida magnis a nec bulum penatibus augue dui.
 
 Cum scelerisque montes conubia vivamus volutpat consectetur euismod ullamcorper netus quis dui vestibulum hac lorem parturient a massa parturient cubilia cubilia mauris elementum. Condimentum condimentum hac egestas a dictumst potenti. Rutrum nam molestie suspendisse scelerisque platea.[/woodmart_text_block][/vc_column][/vc_row][vc_row][vc_column][woodmart_text_block woodmart_css_id="6156fb8d97c2d" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Purus lobortis senectus faucibus imperdiet rutrum porttitor tincidunt laoreet parturient consectetur tortor ad adipiscing id a duis hendrerit diam. A at nec rutrum nam molestie suspendisse scelerisque platea a ut commodo volutpat ullamcorper penatibus dis quis felis justo porta montes nam a vestibulum tristique parturient parturient eget tincidunt. Semper dui.[/woodmart_text_block][woodmart_title align="left" woodmart_css_id="6156fba1a9649" title="<u>2.</u> Alessi: the Italian Factory of Design" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTU2ZmJhMWE5NjQ5Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGl0bGUiLCJkYXRhIjp7InRhYmxldCI6e30sIm1vYmlsZSI6e319fQ==" css=".vc_custom_1633090471898{border-bottom-width: 1px !important;padding-bottom: 10px !important;border-bottom-color: rgba(119,119,119,0.17) !important;border-bottom-style: solid !important;}"][/vc_column][/vc_row][vc_row content_placement="top"][vc_column offset="vc_col-md-6"][woodmart_text_block woodmart_css_id="6156fbb9c231e" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Purus lobortis senectus faucibus imperdiet rutrum porttitor tincidunt laoreet parturient consectetur tortor ad adipiscing id a duis hendrerit diam. A at nec rutrum nam molestie suspendisse scelerisque platea a ut commodo volutpat ullamcorper penatibus dis quis felis justo porta montes nam a vestibulum tristique parturient parturient eget tincidunt. Semper dui.
-<p class="font-title" style="font-style: italic; font-size: 18px; color: #4a4a4a;">Scelerisque leo fusce dui parturient ad a penatibus mauris adipiscing tempus vestibulum imperdiet gravida magnis a nec penatibus augue ullamcorper quis sem a luctus leo eros ornare cubilia mauris elementum imperdiet tincidunt.</p>
+<p class="font-title" style="font-style: italic;font-size: 18px;color: #4a4a4a">Scelerisque leo fusce dui parturient ad a penatibus mauris adipiscing tempus vestibulum imperdiet gravida magnis a nec penatibus augue ullamcorper quis sem a luctus leo eros ornare cubilia mauris elementum imperdiet tincidunt.</p>
 Cum scelerisque montes conubia vivamus volutpat consectetur euismod ullamcorper netus quis dui vestibulum hac lorem parturient a massa parturient cubilia cubilia mauris elementum. Condimentum condimentum hac egestas a dictumst potenti.[/woodmart_text_block][/vc_column][vc_column offset="vc_col-md-6" css=".vc_custom_1490106865828{margin-bottom: 20px !important;}"][woodmart_gallery images="6942,6943,6944,6945" view="grid" spacing="10" columns="2" lightbox="yes" img_size="400x400" caption="0" lazy_loading="no"][/vc_column][/vc_row][vc_row][vc_column][woodmart_text_block woodmart_css_id="6156fbe370566" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Purus lobortis senectus faucibus imperdiet rutrum porttitor tincidunt laoreet parturient consectetur tortor ad adipiscing id a duis hendrerit diam. A at nec rutrum nam molestie suspendisse scelerisque platea a ut commodo volutpat ullamcorper penatibus dis quis felis justo porta montes nam a vestibulum tristique parturient parturient eget tincidunt. Semper dui.[/woodmart_text_block][woodmart_title align="left" woodmart_css_id="6156fbf329a4c" title="<u>1.</u> Leolux Design Furniture" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTU2ZmJmMzI5YTRjIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGl0bGUiLCJkYXRhIjp7InRhYmxldCI6e30sIm1vYmlsZSI6e319fQ==" css=".vc_custom_1633090554105{border-bottom-width: 1px !important;padding-bottom: 10px !important;border-bottom-color: rgba(119,119,119,0.17) !important;border-bottom-style: solid !important;}"][woodmart_gallery images="6946,6947,6948,6949,6950,6951" view="grid" spacing="10" columns="3" lightbox="yes" img_size="400x400" caption="0" lazy_loading="no" css=".vc_custom_1633090690049{margin-bottom: 20px !important;}"][woodmart_text_block woodmart_css_id="6156fc3294b0e" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Ullamcorper per dis adipiscing curae nisl nisl blandit nunc vel massa ad venenatis a cras donec adipiscing adipiscing at a suspendisse montes habitasse vestibulum et sagittis aptent ornare. Purus nostra orci nascetur ante aenean parturient nullam conubia parturient a porta felis dapibus potenti magna turpis a vestibulum nunc a vestibulum at parturient leo feugiat a.
 <blockquote>Scelerisque a vulputate varius duis a purus nam integer lacus ridiculus ullamcorper nec ac convallis mus hac parturient hendrerit erat a aliquam amet. Cras duis aliquet a cras hendrerit adipiscing maecenas adipiscing scelerisque mi parturient nostra urna non.Iaculis ornare vitae convallis duis ut tempus odio suspendisse adipiscing potenti vivamus odio eget a adipiscing hac.</blockquote>
 At habitant amet erat gravida lectus dapibus parturient per in praesent condimentum adipiscing gravida interdum rhoncus arcu condimentum dui scelerisque ipsum montes montes id a a.In tempor a a eu etiam per habitant dis condimentum vestibulum augue vivamus massa ullamcorper suspendisse tellus condimentum enim nunc varius sem dis.[/woodmart_text_block][woodmart_brands orderby="" order="" hover="default" brand_style="default" style="carousel" per_row="5" hide_pagination_control="yes" hide_prev_next_buttons="yes" ids=""][woodmart_button style="bordered" title="VIEW ALL BRANDS" link="url:%23|||"][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>368</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-22 08:59:53]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-22 08:59:53]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:09]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:09]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-05-26 11:51:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-26 11:51:14]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[minimalist-japanese-inspired-furniture]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -5050,8 +5082,8 @@ Etiam dictumst congue a non class risus sed a. Diam adipiscing a condimentum in 
 										<wp:post_id>1204</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-23 16:14:31]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-23 16:14:31]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-30 04:55:49]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-30 04:55:49]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-02-25 20:18:44]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-25 20:18:44]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[ornare-auctor]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -5768,22 +5800,18 @@ Main: 76% Polyester, 24% Elastane.
 								<item>
 					<title><![CDATA[Newsletter form]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/blog/mc4wp-form/74/</link>
-					<pubDate>Thu, 14 Oct 2021 14:31:03 +0000</pubDate>
+					<pubDate>Wed, 19 Feb 2025 15:57:39 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart/blog/mc4wp-form/74/</guid>
-											<content:encoded><![CDATA[<div class="row wd-spacing-10">
-  <p class="col">
-    <input type="email" name="EMAIL" placeholder="Your email address" required />
-  </p>
-  <p class="col-auto">
-     <input type="submit" value="Sign up"/>
-  </p>
+											<content:encoded><![CDATA[<div class="wd-grid-f-stretch" style="--wd-gap: 10px">
+<div class="wd-col"><input type="email" name="EMAIL" placeholder="Your email address" required /></div>
+<div class="wd-col-auto"><input type="submit" value="Sign up" /></div>
 </div>]]></content:encoded>
 															<wp:post_id>74</wp:post_id>
-					<wp:post_date><![CDATA[2021-10-14 14:31:03]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2021-10-14 14:31:03]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:15:45]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:15:45]]></wp:post_modified_gmt>
+					<wp:post_date><![CDATA[2025-02-19 15:57:39]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2025-02-19 15:57:39]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2025-02-19 15:57:39]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-19 15:57:39]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[74]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -5885,6 +5913,10 @@ Main: 76% Polyester, 24% Elastane.
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_date]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2021-09-08]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_old_date]]></wp:meta_key>
+							<wp:meta_value><![CDATA[2021-10-14]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -6487,8 +6519,8 @@ A sodales hac dolor parturient tincidunt dictumst a condimentum nunc auctor part
 										<wp:post_id>370</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-22 09:11:07]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-22 09:11:07]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 09:43:40]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 09:43:40]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-02-25 20:18:10]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-02-25 20:18:10]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[eames-plastic-side-chair]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -7163,51 +7195,6 @@ A sodales hac dolor parturient tincidunt dictumst a condimentum nunc auctor part
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_page-title-size]]></wp:meta_key>
 							<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[Shipping & Delivery]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/?cms_block=shipping-delivery</link>
-					<pubDate>Fri, 16 Jun 2017 09:33:22 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart/?post_type=cms_block&#038;p=242</guid>
-											<content:encoded><![CDATA[[vc_row content_placement="top" woodmart_css_id="6168284753667" woodmart_parallax="0" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTY4Mjg0NzUzNjY3Iiwic2hvcnRjb2RlIjoidmNfcm93IiwiZGF0YSI6eyJ0YWJsZXQiOnt9LCJtb2JpbGUiOnt9fX0=" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_box_shadow="no" wd_z_index="no" woodmart_disable_overflow="0" row_reverse_mobile="0" row_reverse_tablet="0" woodmart_gradient_switch="no"][vc_column offset="vc_col-md-6" css=".vc_custom_1497605639148{margin-bottom: 30px !important;}" woodmart_sticky_column="true"][woodmart_gallery images="934,935" view="grid" spacing="10" on_click="none" columns="2" img_size="350x450" lazy_loading="no"][/vc_column][vc_column offset="vc_col-md-6"][woodmart_title align="left" title="<strong>MAECENAS IACULIS</strong>" css=".vc_custom_1493111721016{margin-bottom: 20px !important;}"][woodmart_text_block woodmart_css_id="60f82fd41b5e3" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Vestibulum curae torquent diam diam commodo parturient penatibus nunc dui adipiscing convallis bulum parturient suspendisse parturient a.Parturient in parturient scelerisque nibh lectus quam a natoque adipiscing a vestibulum hendrerit et pharetra fames nunc natoque dui.[/woodmart_text_block][woodmart_title size="small" align="left" title="<strong>ADIPISCING CONVALLIS BULUM</strong>" css=".vc_custom_1493111832624{margin-bottom: 20px !important;}"][woodmart_text_block woodmart_css_id="60f8eca94e084" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
-<ul class="unordered-list">
- 	<li>Vestibulum penatibus nunc dui adipiscing convallis bulum parturient suspendisse.</li>
- 	<li>Abitur parturient praesent lectus quam a natoque adipiscing a vestibulum hendre.</li>
- 	<li>Diam parturient dictumst parturient scelerisque nibh lectus.</li>
-</ul>
-Scelerisque adipiscing bibendum sem vestibulum et in a a a purus lectus faucibus lobortis tincidunt purus lectus nisl class eros.Condimentum a et ullamcorper dictumst mus et tristique elementum nam inceptos hac parturient scelerisque vestibulum amet elit ut volutpat.[/woodmart_text_block][/vc_column][/vc_row]]]></content:encoded>
-															<wp:post_id>242</wp:post_id>
-					<wp:post_date><![CDATA[2017-06-16 09:33:22]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2017-06-16 09:33:22]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:14:11]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:11]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-					<wp:post_name><![CDATA[shipping-delivery]]></wp:post_name>
-					<wp:status><![CDATA[publish]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[cms_block]]></wp:post_type>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1497605639148{margin-bottom: 30px !important;}.vc_custom_1493111721016{margin-bottom: 20px !important;}.vc_custom_1493111832624{margin-bottom: 20px !important;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1497605639148{margin-bottom: 30px !important;}.vc_custom_1493111721016{margin-bottom: 20px !important;}.vc_custom_1493111832624{margin-bottom: 20px !important;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1497605639148{margin-bottom: 30px !important;}.vc_custom_1493111721016{margin-bottom: 20px !important;}.vc_custom_1493111832624{margin-bottom: 20px !important;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1497605639148{margin-bottom: 30px !important;}.vc_custom_1493111721016{margin-bottom: 20px !important;}.vc_custom_1493111832624{margin-bottom: 20px !important;}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
-							<wp:meta_value><![CDATA[1]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -8008,6 +7995,18 @@ Aliquam quam at et in ipsum at venenatis a eget dignissim aliquam tincidunt ultr
 							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_oembed_bc92734942177e55c7a79af12db851ea]]></wp:meta_key>
+							<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_oembed_603c52b1fe31236ef3f491901e689d5f]]></wp:meta_key>
+							<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_oembed_c52c50b5a4a7434a3115cf7cd52b0189]]></wp:meta_key>
+							<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
+						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Menu Shop]]></title>
@@ -8046,12 +8045,12 @@ Aliquam quam at et in ipsum at venenatis a eget dignissim aliquam tincidunt ultr
 					<pubDate>Thu, 30 Sep 2021 14:50:51 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/?post_type=cms_block&#038;p=6915</guid>
-											<content:encoded><![CDATA[[vc_section css=".vc_custom_1482224730326{padding-top: 5px !important;padding-bottom: 5px !important;}"][vc_row equal_height="yes" content_placement="top"][vc_column width="1/4" css=".vc_custom_1634216077760{margin-right: -60px !important;}" woodmart_css_id="6168288a196b8" woodmart_parallax="0" parallax_scroll="no" woodmart_sticky_column="false" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_box_shadow="no" wd_z_index="no" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTY4Mjg4YTE5NmI4Iiwic2hvcnRjb2RlIjoidmNfY29sdW1uIiwiZGF0YSI6eyJ0YWJsZXQiOnt9LCJtb2JpbGUiOnt9fX0=" wd_collapsible_content_switcher="no" mobile_reset_margin="no" tablet_reset_margin="no"][extra_menu label="red" title="Blog types" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F|title:Shop%20page"][extra_menu_list title="Alternative" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_alt|title:Alternative"][extra_menu_list title="Small images" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_small|title:Small%20images"][extra_menu_list title="Blog chess" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_chess|title:Blog%20chess"][extra_menu_list title="Masonry grid" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F|title:Masonry%20grid"][extra_menu_list title="Meta on image" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_meta_on_image|title:With%20background"][extra_menu_list label="red" title="Infinit scrolling" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_infinit|title:Infinit%20scrolling" label_text="FEATURE"][extra_menu_list title="Blog flat" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_flat|title:Blog%20flat"][extra_menu_list title="Default flat" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_default_flat|title:Default%20flat"][extra_menu_list label="orange" title="Blog mask" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_mask|title:Default%20flat" label_text="NEW"][/extra_menu][/vc_column][vc_column width="1/4" css=".vc_custom_1634216072705{margin-right: -90px !important;padding-left: 60px !important;}" woodmart_css_id="61682883374c2" woodmart_parallax="0" parallax_scroll="no" woodmart_sticky_column="false" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_box_shadow="no" wd_z_index="no" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTY4Mjg4MzM3NGMyIiwic2hvcnRjb2RlIjoidmNfY29sdW1uIiwiZGF0YSI6eyJ0YWJsZXQiOnt9LCJtb2JpbGUiOnt9fX0=" wd_collapsible_content_switcher="no" mobile_reset_margin="no" tablet_reset_margin="no"][extra_menu title="Single posts" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fcollar-brings-back-coffee-brewing-ritual%2F|title:Shop%20page" label_text="Examples"][extra_menu_list title="Post example <sup>#1</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fexploring-atlantas-modern-homes%2F|title:Exploring%20Atlanta%E2%80%99s%20modern%20homes"][extra_menu_list title="Post example <sup>#2</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F22%2Fminimalist-japanese-inspired-furniture%2F|title:Minimalist%20Japanese-inspired%20furniture"][extra_menu_list title="Post example <sup>#3</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F14%2Fsweet-seat-functional-seat-for-it-folks%2F|title:Green%20interior%20design%20inspiration"][extra_menu_list title="Post example <sup>#4</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Freinterprets-the-classic-bookshelf%2F"][extra_menu_list title="Post example <sup>#5</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fcollar-brings-back-coffee-brewing-ritual%2F"][extra_menu_list title="Post example <sup>#6</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fcreative-water-features-and-exterior%2F|title:Creative%20water%20features%20and%20exterior"][extra_menu_list title="Post example <sup>#7</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F16%2Fthe-big-design-wall-likes-pictures%2F"][extra_menu_list title="Post example <sup>#8</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F16%2Fnew-home-decor-from-john-doerson%2F"][/extra_menu][/vc_column][vc_column width="1/2" css=".vc_custom_1498552559778{margin-top: -35px !important;margin-right: -20px !important;margin-bottom: -5px !important;margin-left: 90px !important;border-left-width: 1px !important;padding-right: 30px !important;padding-left: 30px !important;background-color: rgba(0,0,0,0.02) !important;*background-color: rgb(0,0,0) !important;border-left-color: rgba(0,0,0,0.05) !important;border-left-style: solid !important;}"][woodmart_sidebar sidebar_name="sidebar-6916" woodmart_css_id="67bf173d8713c" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2N2JmMTczZDg3MTNjIiwic2hvcnRjb2RlIjoid29vZG1hcnRfc2lkZWJhciIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"][/vc_column][/vc_row][/vc_section]]]></content:encoded>
+											<content:encoded><![CDATA[[vc_section css=".vc_custom_1482224730326{padding-top: 5px !important;padding-bottom: 5px !important;}"][vc_row equal_height="yes" content_placement="top"][vc_column width="1/4" css=".vc_custom_1634216077760{margin-right: -60px !important;}" woodmart_css_id="6168288a196b8" woodmart_parallax="0" parallax_scroll="no" woodmart_sticky_column="false" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_box_shadow="no" wd_z_index="no" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTY4Mjg4YTE5NmI4Iiwic2hvcnRjb2RlIjoidmNfY29sdW1uIiwiZGF0YSI6eyJ0YWJsZXQiOnt9LCJtb2JpbGUiOnt9fX0=" wd_collapsible_content_switcher="no" mobile_reset_margin="no" tablet_reset_margin="no"][extra_menu label="red" title="Blog types" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F|title:Shop%20page"][extra_menu_list title="Alternative" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_alt|title:Alternative"][extra_menu_list title="Small images" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_small|title:Small%20images"][extra_menu_list title="Blog chess" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_chess|title:Blog%20chess"][extra_menu_list title="Masonry grid" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F|title:Masonry%20grid"][extra_menu_list title="Meta on image" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_meta_on_image|title:With%20background"][extra_menu_list label="red" title="Infinit scrolling" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_infinit|title:Infinit%20scrolling" label_text="FEATURE"][extra_menu_list title="Blog flat" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_flat|title:Blog%20flat"][extra_menu_list title="Default flat" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_default_flat|title:Default%20flat"][extra_menu_list label="orange" title="Blog mask" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F%3Fopts%3Dblog_mask|title:Default%20flat" label_text="NEW"][/extra_menu][/vc_column][vc_column width="1/4" css=".vc_custom_1634216072705{margin-right: -90px !important;padding-left: 60px !important;}" woodmart_css_id="61682883374c2" woodmart_parallax="0" parallax_scroll="no" woodmart_sticky_column="false" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_box_shadow="no" wd_z_index="no" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTY4Mjg4MzM3NGMyIiwic2hvcnRjb2RlIjoidmNfY29sdW1uIiwiZGF0YSI6eyJ0YWJsZXQiOnt9LCJtb2JpbGUiOnt9fX0=" wd_collapsible_content_switcher="no" mobile_reset_margin="no" tablet_reset_margin="no"][extra_menu title="Single posts" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fcollar-brings-back-coffee-brewing-ritual%2F|title:Shop%20page" label_text="Examples"][extra_menu_list title="Post example <sup>#1</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fexploring-atlantas-modern-homes%2F|title:Exploring%20Atlanta%E2%80%99s%20modern%20homes"][extra_menu_list title="Post example <sup>#2</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F22%2Fminimalist-japanese-inspired-furniture%2F|title:Minimalist%20Japanese-inspired%20furniture"][extra_menu_list title="Post example <sup>#3</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F14%2Fsweet-seat-functional-seat-for-it-folks%2F|title:Green%20interior%20design%20inspiration"][extra_menu_list title="Post example <sup>#4</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Freinterprets-the-classic-bookshelf%2F"][extra_menu_list title="Post example <sup>#5</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fcollar-brings-back-coffee-brewing-ritual%2F"][extra_menu_list title="Post example <sup>#6</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2021%2F07%2F23%2Fcreative-water-features-and-exterior%2F|title:Creative%20water%20features%20and%20exterior"][extra_menu_list title="Post example <sup>#7</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F16%2Fthe-big-design-wall-likes-pictures%2F"][extra_menu_list title="Post example <sup>#8</sup>" link="url:https%3A%2F%2Fdummy.xtemos.com%2Fwoodmart2%2Fblog%2F2017%2F06%2F16%2Fnew-home-decor-from-john-doerson%2F"][/extra_menu][/vc_column][vc_column width="1/2" css=".vc_custom_1498552559778{margin-top: -35px !important;margin-right: -20px !important;margin-bottom: -5px !important;margin-left: 90px !important;border-left-width: 1px !important;padding-right: 30px !important;padding-left: 30px !important;background-color: rgba(0,0,0,0.02) !important;*background-color: rgb(0,0,0) !important;border-left-color: rgba(0,0,0,0.05) !important;border-left-style: solid !important;}"][woodmart_sidebar sidebar_name="sidebar-6916" woodmart_css_id="683f048a22524" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDQ4YTIyNTI0Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfc2lkZWJhciIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"][/vc_column][/vc_row][/vc_section]]]></content:encoded>
 															<wp:post_id>6915</wp:post_id>
 					<wp:post_date><![CDATA[2021-09-30 14:50:51]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-09-30 14:50:51]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-02-07 14:15:45]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-02-07 14:15:45]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-03 14:20:00]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-03 14:20:00]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[menu-blog]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -8069,6 +8068,10 @@ Aliquam quam at et in ipsum at venenatis a eget dignissim aliquam tincidunt ultr
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
 							<wp:meta_value><![CDATA[1]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -8216,6 +8219,51 @@ Aliquam quam at et in ipsum at venenatis a eget dignissim aliquam tincidunt ultr
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
 							<wp:meta_value><![CDATA[1]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
+					<title><![CDATA[Shipping and Delivery]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/?wd_product_tabs=shipping-delivery</link>
+					<pubDate>Tue, 20 May 2025 13:57:35 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/?post_type=wd_product_tabs&#038;p=10401</guid>
+											<content:encoded><![CDATA[[vc_row content_placement="top" woodmart_css_id="6168284753667" woodmart_parallax="0" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTY4Mjg0NzUzNjY3Iiwic2hvcnRjb2RlIjoidmNfcm93IiwiZGF0YSI6eyJ0YWJsZXQiOnt9LCJtb2JpbGUiOnt9fX0=" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_box_shadow="no" wd_z_index="no" woodmart_disable_overflow="0" row_reverse_mobile="0" row_reverse_tablet="0" woodmart_gradient_switch="no"][vc_column offset="vc_col-md-6" css=".vc_custom_1497605639148{margin-bottom: 30px !important;}" woodmart_sticky_column="true"][woodmart_gallery images="934,935" view="grid" spacing="10" on_click="none" columns="2" img_size="350x450" lazy_loading="no"][/vc_column][vc_column offset="vc_col-md-6"][woodmart_title align="left" title="<strong>MAECENAS IACULIS</strong>" css=".vc_custom_1493111721016{margin-bottom: 20px !important;}"][woodmart_text_block woodmart_css_id="60f82fd41b5e3" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Vestibulum curae torquent diam diam commodo parturient penatibus nunc dui adipiscing convallis bulum parturient suspendisse parturient a.Parturient in parturient scelerisque nibh lectus quam a natoque adipiscing a vestibulum hendrerit et pharetra fames nunc natoque dui.[/woodmart_text_block][woodmart_title size="small" align="left" title="<strong>ADIPISCING CONVALLIS BULUM</strong>" css=".vc_custom_1493111832624{margin-bottom: 20px !important;}"][woodmart_text_block woodmart_css_id="60f8eca94e084" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]
+<ul class="unordered-list">
+ 	<li>Vestibulum penatibus nunc dui adipiscing convallis bulum parturient suspendisse.</li>
+ 	<li>Abitur parturient praesent lectus quam a natoque adipiscing a vestibulum hendre.</li>
+ 	<li>Diam parturient dictumst parturient scelerisque nibh lectus.</li>
+</ul>
+Scelerisque adipiscing bibendum sem vestibulum et in a a a purus lectus faucibus lobortis tincidunt purus lectus nisl class eros.Condimentum a et ullamcorper dictumst mus et tristique elementum nam inceptos hac parturient scelerisque vestibulum amet elit ut volutpat.[/woodmart_text_block][/vc_column][/vc_row]]]></content:encoded>
+															<wp:post_id>10401</wp:post_id>
+					<wp:post_date><![CDATA[2025-05-20 13:57:35]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2025-05-20 13:57:35]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2025-05-20 13:58:24]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-20 13:58:24]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+					<wp:post_name><![CDATA[shipping-delivery]]></wp:post_name>
+					<wp:status><![CDATA[publish]]></wp:status>
+					<wp:post_parent>0</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[wd_product_tabs]]></wp:post_type>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[product_tab_title]]></wp:meta_key>
+							<wp:meta_value><![CDATA[Shipping & Delivery]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[product_tab_condition]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:0;a:3:{s:10:"comparison";s:7:"include";s:4:"type";s:3:"all";s:18:"product-type-query";s:6:"simple";}}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
+							<wp:meta_value><![CDATA[.vc_custom_1497605639148{margin-bottom: 30px !important;}.vc_custom_1493111721016{margin-bottom: 20px !important;}.vc_custom_1493111832624{margin-bottom: 20px !important;}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
+							<wp:meta_value><![CDATA[1]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>

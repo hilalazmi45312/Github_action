@@ -47,7 +47,7 @@ if ( ! function_exists( 'woodmart_get_box_shadow_param' ) ) {
 				<div class="xts-input-append">
 					<input name="horizontal" id="horizontal" type="number" class="wd-text-input" value="<?php echo esc_attr( $desktop['horizontal'] ); ?>" aria-label="<?php esc_attr_e( 'Horizontal', 'woodmart' ); ?>">
 
-					<span class="add-on">px</span>
+					<span class="xts-add-on">px</span>
 				</div>
 			</div>
 
@@ -59,7 +59,7 @@ if ( ! function_exists( 'woodmart_get_box_shadow_param' ) ) {
 				<div class="xts-input-append">
 					<input name="vertical" id="vertical" type="number" class="wd-text-input" value="<?php echo esc_attr( $desktop['vertical'] ); ?>" aria-label="<?php esc_attr_e( 'Vertical', 'woodmart' ); ?>">
 
-					<span class="add-on">px</span>
+					<span class="xts-add-on">px</span>
 				</div>
 			</div>
 
@@ -71,7 +71,7 @@ if ( ! function_exists( 'woodmart_get_box_shadow_param' ) ) {
 				<div class="xts-input-append">
 					<input name="blur_radius" id="blur" type="number" class="wd-text-input" value="<?php echo esc_attr( $desktop['blur'] ); ?>" aria-label="<?php esc_attr_e( 'Blur radius', 'woodmart' ); ?>">
 
-					<span class="add-on">px</span>
+					<span class="xts-add-on">px</span>
 				</div>
 			</div>
 
@@ -83,7 +83,7 @@ if ( ! function_exists( 'woodmart_get_box_shadow_param' ) ) {
 				<div class="xts-input-append xts-input-append-wrap">
 					<input name="spread_radius" id="spread" type="number" class="wd-text-input" value="<?php echo esc_attr( $desktop['spread'] ); ?>" aria-label="<?php esc_attr_e( 'Spread radius', 'woodmart' ); ?>">
 
-					<span class="add-on">px</span>
+					<span class="xts-add-on">px</span>
 				</div>
 			</div>
 

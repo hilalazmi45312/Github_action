@@ -1,0 +1,18 @@
+*** Yoast SEO: WooCommerce Changelog ***
+
+
+2025-09-09 - version 16.6
+* add -  Aligns product variation `priceSpecification` with the simple product `priceSpecification` schema.
+* add -  Renames the _image alt tags_ assessment to _image alt attributes_ assessment.
+* add -  Adds a feedback string for the _image alt attributes_ assessments for when no content and/or image has been added.
+* add -  Enhances variable products schema output by adding support for the `variesBy` property.
+* fix -  Fixes a bug where a fatal error would be thrown in product pages when WooCommerce add-ons added schema but didn't account for the new WooCommerce schema structure, introduced in WooCommerce v9.5.0.
+* fix -  Fixes a bug where a variable product without a product image would lead to a malformed schema output.
+* fix -  Fixes a bug where product attributes would not be included in a product schema.
+* fix -  Fixes a bug where simple products having a custom attribute with multiple values would still be rendered in the schema.
+* update -  Drops compatibility with PHP 7.2 and 7.3.
+* update -  Sets the _WordPress tested up to_ version to 6.8.
+* update -  Sets the minimum supported WordPress version to 6.6.
+* update -  Sets the minimum supported WordPress version to 6.7.
+* update -  Bumps the minimum required version of Yoast SEO to 25.9.
+

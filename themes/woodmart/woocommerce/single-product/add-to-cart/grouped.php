@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 9.8.0
+ * @version 10.2.0
  */
 
 use XTS\Modules\Layouts\Main as Builder;
@@ -28,7 +28,7 @@ woodmart_enqueue_inline_style( 'woo-mod-shop-table' );
 ?>
 
 <form class="cart grouped_form" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
-	<table cellspacing="0" class="woocommerce-grouped-product-list group_table shop_table_responsive shop-table-with-img">
+	<table cellspacing="0" class="woocommerce-grouped-product-list group_table">
 		<tbody>
 			<?php
 				$quantites_required      = false;
@@ -110,7 +110,7 @@ woodmart_enqueue_inline_style( 'woo-mod-shop-table' );
 											'input_name'  => 'quantity[' . $grouped_product_child->get_id() . ']',
 											'input_value' => isset( $_POST['quantity'][ $grouped_product_child->get_id() ] ) ? wc_stock_amount( wc_clean( wp_unslash( $_POST['quantity'][ $grouped_product_child->get_id() ] ) ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Missing
 											'min_value'   => apply_filters( 'woocommerce_quantity_input_min', 0, $grouped_product_child ),
-											'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $grouped_product_child->get_max_purchase_quantity(), $grouped_product_child ),
+											'max_value'   => $grouped_product_child->get_max_purchase_quantity(),
 											'placeholder' => '0',
 										)
 									);

@@ -7,6 +7,8 @@
 
 namespace XTS\Modules\Product_Reviews;
 
+use WC_Product;
+
 if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
 	exit( 'No direct script access allowed' );
 }
@@ -24,8 +26,15 @@ class Helper {
 		global $product;
 
 		if ( ! empty( $_GET['product_id'] ) ) { //phpcs:ignore.
-			return wp_unslash( $_GET['product_id'] ); //phpcs:ignore.
-		} elseif ( isset( $product ) ) {
+			$product_id = intval( wp_unslash( $_GET['product_id'] ) ); //phpcs:ignore.
+			$wc_product = wc_get_product( $product_id );
+
+			if ( $wc_product instanceof WC_Product ) {
+				return $product_id;
+			}
+		}
+
+		if ( $product instanceof WC_Product ) {
 			return $product->get_id();
 		}
 

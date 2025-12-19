@@ -1,0 +1,61 @@
+/* Installment Display Widget Styles */
+.sh-installment-wrapper {
+    display: block;
+}
+
+.sh-installment-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.sh-installment-prefix {
+    font-weight: normal;
+}
+
+.sh-installment-price {
+    font-weight: 600;
+}
+
+.sh-installment-suffix {
+    font-weight: normal;
+}
+
+.sh-installment-tenure {
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* Hide when no payment plans available */
+.sh-installment-display.sh-no-plan {
+    display: none;
+}
+
+/* Info icon styles */
+.sh-installment-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 4px;
+    color: #666;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sh-installment-info-icon:hover {
+    color: #1877f2;
+    transform: scale(1.1);
+}
+
+.sh-installment-info-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.sh-installment-info-icon:focus {
+    outline: 2px solid #1877f2;
+    outline-offset: 2px;
+    border-radius: 50%;
+}

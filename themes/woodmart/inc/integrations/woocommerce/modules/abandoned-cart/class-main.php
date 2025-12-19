@@ -8,23 +8,18 @@
 namespace XTS\Modules\Abandoned_Cart;
 
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
 
 /**
  * Abandoned cart class.
  */
-class Main extends Singleton {
+class Main {
 	/**
-	 * Init.
+	 * Constructor.
 	 */
-	public function init() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
 
-		if ( ! woodmart_woocommerce_installed() || ! woodmart_get_opt( 'cart_recovery_enabled' ) ) {
-			return;
-		}
-
-		$this->include_files();
+		woodmart_include_files( __DIR__, $this->get_include_files() );
 	}
 
 	/**
@@ -65,7 +60,7 @@ class Main extends Singleton {
 			array(
 				'id'          => 'recover_guest_cart_enable_privacy_checkbox',
 				'name'        => esc_html__( 'Guest data consent', 'woodmart' ),
-				'description' => esc_html__( 'Adds a checkbox for guest users to consent to data storage, enabling abandoned cart email reminders.', 'woodmart' ),
+				'description' => esc_html__( 'Adds a checkbox for guest users to consent to data storage, enabling abandoned cart email reminder.', 'woodmart' ),
 				'type'        => 'switcher',
 				'section'     => 'abandoned_cart_section',
 				'default'     => false,
@@ -323,7 +318,7 @@ class Main extends Singleton {
 								'value' => strval( WEEK_IN_SECONDS ),
 							),
 							strval( MONTH_IN_SECONDS ) => array(
-								'name'  => esc_html__( 'Monts', 'woodmart' ),
+								'name'  => esc_html__( 'Months', 'woodmart' ),
 								'value' => strval( MONTH_IN_SECONDS ),
 							),
 						),
@@ -344,25 +339,30 @@ class Main extends Singleton {
 	}
 
 	/**
-	 * Include files.
+	 * Get list of module include files.
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function include_files() {
-		$files = array(
-			'class-abandoned-cart',
-			'class-admin',
-			'class-emails',
+	protected function get_include_files() {
+		$files = array();
+
+		if ( ! class_exists( 'WP_List_Table' ) ) {
+			$files[] = ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+		}
+
+		$files = array_merge(
+			$files,
+			array(
+				'./class-abandoned-cart',
+				'./class-admin',
+				'./class-emails',
+				'./list-tables/class-abandoned-cart-table',
+				'./list-tables/class-cart-content-table',
+			)
 		);
 
-		foreach ( $files as $file ) {
-			$file_path = get_parent_theme_file_path( WOODMART_FRAMEWORK . '/integrations/woocommerce/modules/abandoned-cart/' . $file . '.php' );
-
-			if ( file_exists( $file_path ) ) {
-				require_once $file_path;
-			}
-		}
+		return $files;
 	}
 }
 
-Main::get_instance();
+new Main();

@@ -1,7 +1,7 @@
 <?php
 
 use XTS\Modules\Layouts\Main;
-use XTS\Modules\Shipping_Progress_Bar\Main as Shipping_Progress_Bar_Module;
+use XTS\Modules\Shipping_Progress_Bar\Frontend as Shipping_Progress_Bar_Module;
 
 if ( ! function_exists( 'wd_gutenberg_woo_shipping_progress_bar' ) ) {
 	function wd_gutenberg_woo_shipping_progress_bar( $block_attributes ) {

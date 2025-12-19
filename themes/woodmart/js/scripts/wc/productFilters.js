@@ -220,8 +220,12 @@
 				var $this       = $(this);
 				var $btn        = $this.find('.wd-pf-title');
 				var multiSelect = $this.hasClass('multi_select');
-	
-				$btn.on('click', function(e) {
+
+				$btn.on('click keyup', function(e) {
+					if (e.type === 'keyup' && e.keyCode !== 13) {
+						return;
+					}
+
 					var target = e.target;
 	
 					if ($(target).is($btn.find('.selected-value'))) {

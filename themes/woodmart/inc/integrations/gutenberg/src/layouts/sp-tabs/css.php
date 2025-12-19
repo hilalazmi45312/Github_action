@@ -4,10 +4,10 @@ use XTS\Gutenberg\Block_CSS;
 $block_css = new Block_CSS( $attrs );
 
 if ( ! isset( $attrs['layout'] ) || 'tabs' === $attrs['layout'] ) {
-	$block_css->merge_with( wd_get_block_typography_css( $block_selector . ' .woocommerce-tabs > .wd-nav-wrapper li > a', $attrs, 'tabsTitleTp' ) );
+	$block_css->merge_with( wd_get_block_typography_css( $block_selector . ' .woocommerce-tabs > .wd-nav-wrapper .wd-nav-tabs > li > a', $attrs, 'tabsTitleTp' ) );
 
 	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs-wrapper',
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper',
 		array(
 			array(
 				'attr_name' => 'tabsAlignment',
@@ -17,59 +17,7 @@ if ( ! isset( $attrs['layout'] ) || 'tabs' === $attrs['layout'] ) {
 	);
 
 	$block_css->add_css_rules(
-		$block_selector . ' .woocommerce-tabs > .wd-nav-wrapper li > a',
-		array(
-			array(
-				'attr_name' => 'tabsTitleTextColorCode',
-				'template'  => 'color: {{value}};',
-			),
-			array(
-				'attr_name' => 'tabsTitleTextColorVariable',
-				'template'  => 'color: var({{value}});',
-			),
-		)
-	);
-
-	$block_css->add_css_rules(
-		$block_selector . ' .woocommerce-tabs > .wd-nav-wrapper li:hover > a',
-		array(
-			array(
-				'attr_name' => 'tabsTitleTextHoverColorCode',
-				'template'  => 'color: {{value}};',
-			),
-			array(
-				'attr_name' => 'tabsTitleTextHoverColorVariable',
-				'template'  => 'color: var({{value}});',
-			),
-		)
-	);
-
-	$block_css->add_css_rules(
-		$block_selector . ' .woocommerce-tabs > .wd-nav-wrapper li.active > a',
-		array(
-			array(
-				'attr_name' => 'tabsTitleTextActiveColorCode',
-				'template'  => 'color: {{value}};',
-			),
-			array(
-				'attr_name' => 'tabsTitleTextActiveColorVariable',
-				'template'  => 'color: var({{value}});',
-			),
-		)
-	);
-
-	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs',
-		array(
-			array(
-				'attr_name' => 'tabsSpaceBetweenTabsTitleH',
-				'template'  => '--nav-gap: {{value}}px;',
-			),
-		)
-	);
-
-	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs-wrapper',
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper',
 		array(
 			array(
 				'attr_name' => 'tabsSpaceBetweenTabsTitleV',
@@ -79,29 +27,111 @@ if ( ! isset( $attrs['layout'] ) || 'tabs' === $attrs['layout'] ) {
 	);
 
 	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs',
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
 		array(
 			array(
-				'attr_name' => 'tabsSpaceBetweenTabsTitleHTablet',
+				'attr_name' => 'tabsTitleTextColorCode',
+				'template'  => '--nav-color: {{value}};',
+			),
+			array(
+				'attr_name' => 'tabsTitleTextColorVariable',
+				'template'  => '--nav-color: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsTitleTextHoverColorCode',
+				'template'  => '--nav-color-hover: {{value}};',
+			),
+			array(
+				'attr_name' => 'tabsTitleTextHoverColorVariable',
+				'template'  => '--nav-color-hover: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsTitleTextActiveColorCode',
+				'template'  => '--nav-color-active: {{value}};',
+			),
+			array(
+				'attr_name' => 'tabsTitleTextActiveColorVariable',
+				'template'  => '--nav-color-active: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsBgColorCode',
+				'template'  => '--nav-bg: {{value}};',
+			),
+			array(
+				'attr_name' => 'tabsBgColorVariable',
+				'template'  => '--nav-bg: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsBgHoverColorCode',
+				'template'  => '--nav-bg-hover: {{value}};',
+			),
+			array(
+				'attr_name' => 'tabsBgHoverColorVariable',
+				'template'  => '--nav-bg-hover: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsBgActiveColorCode',
+				'template'  => '--nav-bg-active: {{value}};',
+			),
+			array(
+				'attr_name' => 'tabsBgActiveColorVariable',
+				'template'  => '--nav-bg-active: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsSpaceBetweenTabsTitleH',
 				'template'  => '--nav-gap: {{value}}px;',
 			),
-		),
-		'tablet'
+		)
 	);
 
-	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs-wrapper',
-		array(
-			array(
-				'attr_name' => 'tabsSpaceBetweenTabsTitleVTablet',
-				'template'  => 'margin-bottom: {{value}}px;',
-			),
-		),
-		'tablet'
-	);
+	$block_css->merge_with( wd_get_block_box_shadow_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsBoxShadow', '--nav-shadow' ) );
+	$block_css->merge_with( wd_get_block_box_shadow_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsBoxShadowHover', '--nav-shadow-hover' ) );
+	$block_css->merge_with( wd_get_block_box_shadow_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsBoxShadowActive', '--nav-shadow-active' ) );
+
+	$block_css->merge_with( wd_get_block_border_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsBorder', '--nav-border', '--nav-radius' ) );
+	$block_css->merge_with( wd_get_block_border_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsBorderHover', '--nav-border-hover', '--nav-radius-hover' ) );
+	$block_css->merge_with( wd_get_block_border_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsBorderActive', '--nav-border-active', '--nav-radius-active' ) );
+
+	$block_css->merge_with( wd_get_block_padding_css( $block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs', $attrs, 'tabsPadding', '--nav-pd', true ) );
 
 	$block_css->add_css_rules(
-		$block_selector,
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper',
 		array(
 			array(
 				'attr_name' => 'tabsAlignmentTablet',
@@ -112,18 +142,40 @@ if ( ! isset( $attrs['layout'] ) || 'tabs' === $attrs['layout'] ) {
 	);
 
 	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs',
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper',
 		array(
 			array(
-				'attr_name' => 'tabsSpaceBetweenTabsTitleHMobile',
+				'attr_name' => 'tabsSpaceBetweenTabsTitleVTablet',
+				'template'  => 'margin-bottom: {{value}}px;',
+			),
+		),
+		'tablet'
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
+		array(
+			array(
+				'attr_name' => 'tabsSpaceBetweenTabsTitleHTablet',
 				'template'  => '--nav-gap: {{value}}px;',
+			),
+		),
+		'tablet'
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper',
+		array(
+			array(
+				'attr_name' => 'tabsAlignmentMobile',
+				'template'  => '--wd-align: var(--wd-{{value}});',
 			),
 		),
 		'mobile'
 	);
 
 	$block_css->add_css_rules(
-		$block_selector . ' .wd-nav-tabs-wrapper',
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper',
 		array(
 			array(
 				'attr_name' => 'tabsSpaceBetweenTabsTitleVMobile',
@@ -134,11 +186,11 @@ if ( ! isset( $attrs['layout'] ) || 'tabs' === $attrs['layout'] ) {
 	);
 
 	$block_css->add_css_rules(
-		$block_selector,
+		$block_selector . ' .woocommerce-tabs > .wd-nav-tabs-wrapper .wd-nav-tabs',
 		array(
 			array(
-				'attr_name' => 'tabsAlignmentMobile',
-				'template'  => '--wd-align: var(--wd-{{value}});',
+				'attr_name' => 'tabsSpaceBetweenTabsTitleHMobile',
+				'template'  => '--nav-gap: {{value}}px;',
 			),
 		),
 		'mobile'

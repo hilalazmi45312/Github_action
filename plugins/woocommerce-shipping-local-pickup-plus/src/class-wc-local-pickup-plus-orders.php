@@ -17,14 +17,14 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Appointments\Appointment;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Handler of pickup location data for WooCommerce orders.
@@ -214,11 +214,13 @@ class WC_Local_Pickup_Plus_Orders {
 
 		$in_order_items    = Framework\SV_WC_Helper::get_escaped_id_list( $order_item_ids );
 		$order_items_table = $wpdb->prefix . 'woocommerce_order_items';
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$order_results     = $wpdb->get_results("
 			SELECT order_id
 			FROM {$order_items_table}
 			WHERE order_item_id IN ($in_order_items)
 		", ARRAY_N );
+		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 		if ( ! empty ( $order_results ) ) {
 			foreach ( $order_results as $orders ) {
@@ -258,12 +260,14 @@ class WC_Local_Pickup_Plus_Orders {
 		if ( is_int( $pickup_location_id ) && $pickup_location_id > 0 ) {
 
 			$order_item_meta_table = $wpdb->prefix . 'woocommerce_order_itemmeta';
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$item_results          = $wpdb->get_results( $wpdb->prepare( "
 				SELECT order_item_id
 				FROM {$order_item_meta_table}
 				WHERE meta_key = '_pickup_location_id'
 				AND meta_value = %d
 			", (int) $_GET['_pickup_location'] ), ARRAY_N );
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 			if ( ! empty( $item_results ) ) {
 
@@ -307,16 +311,24 @@ class WC_Local_Pickup_Plus_Orders {
 		$order_items    = $wpdb->prefix . 'woocommerce_order_items';
 		$order_itemmeta = $wpdb->prefix . 'woocommerce_order_itemmeta';
 
-		$order_ids = $wpdb->get_col( "
-			SELECT DISTINCT oi.order_id
-			FROM {$order_items} oi
-			LEFT JOIN {$order_itemmeta} appointment_start ON (oi.order_item_id = appointment_start.order_item_id AND appointment_start.meta_key = '_pickup_appointment_start')
-			LEFT JOIN {$order_itemmeta} appointment_date ON (oi.order_item_id = appointment_date.order_item_id AND appointment_date.meta_key = '_pickup_date')
-			WHERE (
-			    appointment_start.meta_value BETWEEN {$start} AND {$end}
-			    OR UNIX_TIMESTAMP( STR_TO_DATE( appointment_date.meta_value, '%Y-%m-%d' ) ) BETWEEN {$start} AND {$end}
-			)
-		" );
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$order_ids = $wpdb->get_col(
+			$wpdb->prepare("
+				SELECT DISTINCT oi.order_id
+				FROM {$order_items} oi
+				LEFT JOIN {$order_itemmeta} appointment_start ON (oi.order_item_id = appointment_start.order_item_id AND appointment_start.meta_key = '_pickup_appointment_start')
+				LEFT JOIN {$order_itemmeta} appointment_date ON (oi.order_item_id = appointment_date.order_item_id AND appointment_date.meta_key = '_pickup_date')
+				WHERE (
+					appointment_start.meta_value BETWEEN %d AND %d
+					OR UNIX_TIMESTAMP( STR_TO_DATE( appointment_date.meta_value, '%%Y-%%m-%%d' ) ) BETWEEN %d AND %d
+				)
+			",
+			$start,
+			$end,
+			$start,
+			$end
+		) );
+		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 		if ( false === $order_ids ) {
 			return [];

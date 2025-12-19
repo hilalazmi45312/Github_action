@@ -74,7 +74,7 @@ if ( empty( $attrs['bodyBgType'] ) || 'body' === $attrs['bodyBgType'] ) {
 	);
 }
 
-if ( $attrs['bodyBgType'] == 'h-even' ) {
+if ( ! empty( $attrs['bodyBgType'] ) && $attrs['bodyBgType'] == 'h-even' ) {
 	$block_css->add_css_rules(
 		$body_selector . ':nth-child(even)',
 		array(
@@ -119,7 +119,7 @@ if ( $attrs['bodyBgType'] == 'h-even' ) {
 	);
 }
 
-if ( $attrs['bodyBgType'] == 'v-even' ) {
+if ( ! empty( $attrs['bodyBgType'] ) && $attrs['bodyBgType'] == 'v-even' ) {
 	$block_css->add_css_rules(
 		$block_selector . ' tbody tr:nth-child(even)',
 		array(

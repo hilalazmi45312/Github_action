@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.7.1" created="2025-02-04 13:05" -->
+	<!-- generator="WordPress/6.7.4" created="2025-10-09 12:06" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>makup-gutenberg</title>
 	<link>https://dummy.xtemos.com/woodmart2/makeup-gutenberg</link>
 	<description></description>
-	<pubDate>Tue, 04 Feb 2025 13:05:56 +0000</pubDate>
+	<pubDate>Thu, 09 Oct 2025 12:06:54 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
@@ -852,7 +852,7 @@
 	<wp:term><wp:term_id>63</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[top-bar-right-makeup]]></wp:term_slug><wp:term_name><![CDATA[Top bar right Makeup]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.7.1</generator>
+	<generator>https://wordpress.org/?v=6.7.4</generator>
 
 					<item>
 					<title><![CDATA[Ink Airy Velvet]]></title>
@@ -4578,7 +4578,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"56a7bd56-837e-4b35-805d-95725b3d9ea7","adjacentCount":2,"colWidth":75,"blocksGap":0,"positionType":"relative","adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-56a7bd56" class="wp-block-wd-column"><!-- wp:wd/slider {"blockId":"634338af-9919-4ced-923c-76c7d12f39df","arrows":false,"arrowsTablet":false,"arrowsMobile":false,"pagination":false,"paginationTablet":false,"paginationMobile":false,"paginationAlign":"start","paginationColorScheme":"light","autoplay":true,"autoplaySpeed":"25000"} -->
-<div id="wd-634338af" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-slide"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="slide" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1" data-autoplay="yes" data-speed="25000"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"c373f998-9cee-4360-a12f-5b4edfa2e94a","align":"flex-start","colorScheme":"light","bgImage":{"id":281,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bg-1-opt.jpg"},"bgColorCode":"#F3F3F3","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0,"overlayOpacityMobile":0.15} -->
+<div id="wd-634338af" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-slide"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="slide" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1;" data-autoplay="yes" data-speed="25000"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"c373f998-9cee-4360-a12f-5b4edfa2e94a","align":"flex-start","colorScheme":"light","aspectRatio":"","bgImage":{"id":281,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bg-1-opt.jpg"},"bgColorCode":"#F3F3F3","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0,"overlayOpacityMobile":0.15} -->
 <div id="wd-c373f998" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light wd-bg-parent"><div class="wd-bg-overlay"></div><div class="wd-slide-container"><!-- wp:wd/title {"blockId":"f28d91e2-cfeb-48d9-b678-eaf4d2c86920","content":"Eye Patches With Chamomile Extract","tpFontSize":"52","tpLineHeight":"1.2","displayWidth":"custom","customWidth":"615","tpFontSizeTablet":"42","tpFontSizeMobile":"28","tpLineHeightUnits":"em","displayWidthTablet":"custom","customWidthTablet":"520"} -->
 <h2 id="wd-f28d91e2" class="wp-block-wd-title title wd-custom-width">Eye Patches With Chamomile Extract</h2>
 <!-- /wp:wd/title -->
@@ -4592,7 +4592,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/button --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"53b9d841-923c-4ffc-9f49-5a58e67877f2","align":"flex-start","colorScheme":"light","bgImage":{"id":283,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bg-2-opt.jpg"},"bgColorCode":"#F3F3F3","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0,"overlayOpacityMobile":0.15} -->
+<!-- wp:wd/slider-item {"blockId":"53b9d841-923c-4ffc-9f49-5a58e67877f2","align":"flex-start","colorScheme":"light","aspectRatio":"","bgImage":{"id":283,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bg-2-opt.jpg"},"bgColorCode":"#F3F3F3","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0,"overlayOpacityMobile":0.15} -->
 <div id="wd-53b9d841" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light wd-bg-parent"><div class="wd-bg-overlay"></div><div class="wd-slide-container"><!-- wp:wd/title {"blockId":"c96ea261-f133-4bb4-affc-50387175b61c","content":"Best Cleansing Oil for Oily Skin","tpFontSize":"52","tpLineHeight":"1.2","displayWidth":"custom","customWidth":"366","tpFontSizeTablet":"42","tpFontSizeMobile":"28","tpLineHeightUnits":"em","displayWidthTablet":"custom","customWidthTablet":"326"} -->
 <h2 id="wd-c96ea261" class="wp-block-wd-title title wd-custom-width">Best Cleansing Oil for Oily Skin</h2>
 <!-- /wp:wd/title -->
@@ -4606,7 +4606,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/button --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"395328c2-aab5-4469-a2e8-e72f8f4820a3","align":"flex-start","colorScheme":"light","bgImage":{"id":284,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bg-3-opt.jpg"},"bgColorCode":"#F3F3F3","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0,"overlayOpacityMobile":0.15} -->
+<!-- wp:wd/slider-item {"blockId":"395328c2-aab5-4469-a2e8-e72f8f4820a3","align":"flex-start","colorScheme":"light","aspectRatio":"","bgImage":{"id":284,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bg-3-opt.jpg"},"bgColorCode":"#F3F3F3","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0,"overlayOpacityMobile":0.15} -->
 <div id="wd-395328c2" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light wd-bg-parent"><div class="wd-bg-overlay"></div><div class="wd-slide-container"><!-- wp:wd/title {"blockId":"d436554b-e9cf-4135-8d1e-c5f3c9286a4f","content":"New Sunscreen for The Body and Face","tpFontSize":"52","tpLineHeight":"1.2","displayWidth":"custom","customWidth":"506","tpFontSizeTablet":"42","tpFontSizeMobile":"28","tpLineHeightUnits":"em","displayWidthTablet":"custom","customWidthTablet":"520"} -->
 <h2 id="wd-d436554b" class="wp-block-wd-title title wd-custom-width">New Sunscreen for The Body and Face</h2>
 <!-- /wp:wd/title -->
@@ -4622,39 +4622,39 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/slider -->
 
 <!-- wp:wd/marquee {"blockId":"ca4f2c82-0bf9-4e82-b71d-5fa00e8511da","speed":"35","positionType":"absolute","positionZIndex":"1","positionBottom":"0","bgColorCode":"#010101","paddingTop":"5","paddingBottom":"5","borderRadiusBottom":"10","borderRadiusLeft":"10","borderRadiusLock":false} -->
-<!-- wp:wd/marquee-item {"blockId":"bcf57473-b1d5-4c7d-a6f0-f4a93d845b88"} -->
-<div id="wd-bcf57473" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"ff9569cf-df5f-403f-9f71-2f313da1c10a","colorCode":"#fefefe","tpFontSize":"14"} -->
-<p id="wd-ff9569cf" class="wp-block-wd-paragraph">Free Shipping On Orders Over $100</p>
+<!-- wp:wd/marquee-item {"blockId":"ebb09998-1de9-4fde-b806-743a3dbcfc24"} -->
+<div id="wd-ebb09998" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"682b5c31-b65a-4bd1-bb54-0c989d7e954d","colorCode":"#fefefe","tpFontSize":"14"} -->
+<p id="wd-682b5c31" class="wp-block-wd-paragraph">Free Shipping On Orders Over $100</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/marquee-item -->
 
-<!-- wp:wd/marquee-item {"blockId":"4b3b03db-d8a8-4277-b080-3793fbc55fb9"} -->
-<div id="wd-4b3b03db" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"94f7284a-bcd2-4ce4-96e9-3a121e9628a6","colorCode":"#fefefe","tpFontSize":"14"} -->
-<p id="wd-94f7284a" class="wp-block-wd-paragraph">🚚</p>
+<!-- wp:wd/marquee-item {"blockId":"3cbc6ad4-b909-4ec9-ad5f-4a92fcc52d23"} -->
+<div id="wd-3cbc6ad4" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"5aa1b044-f49b-4d80-922c-fbf2564139b1","colorCode":"#fefefe","tpFontSize":"14"} -->
+<p id="wd-5aa1b044" class="wp-block-wd-paragraph">🚚</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/marquee-item -->
 
-<!-- wp:wd/marquee-item {"blockId":"16803473-fa04-4f5c-9bc0-ebe409974be6"} -->
-<div id="wd-16803473" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"9f0c768f-8723-4683-894b-f10c7bc7ed7a","colorCode":"#ffffff","tpFontSize":"14"} -->
-<p id="wd-9f0c768f" class="wp-block-wd-paragraph">Free Shipping On Orders Over $100</p>
+<!-- wp:wd/marquee-item {"blockId":"b0965da1-b7eb-44da-a925-18e41a67c117"} -->
+<div id="wd-b0965da1" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"279b5554-7307-4c80-b695-5ba0d6d365c7","colorCode":"#ffffff","tpFontSize":"14"} -->
+<p id="wd-279b5554" class="wp-block-wd-paragraph">Free Shipping On Orders Over $100</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/marquee-item -->
 
-<!-- wp:wd/marquee-item {"blockId":"a9e9ccca-a359-4262-a231-9adb9ef4d083"} -->
-<div id="wd-a9e9ccca" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"35153e4d-7cbe-4bb2-941a-77c2f30ac4df","colorCode":"#fefefe","tpFontSize":"14"} -->
-<p id="wd-35153e4d" class="wp-block-wd-paragraph">🚚</p>
+<!-- wp:wd/marquee-item {"blockId":"de38d734-6d98-4428-9aff-d8ff7a76248c"} -->
+<div id="wd-de38d734" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"09185657-9e5f-44e4-b5bb-2bcede0811f6","colorCode":"#fefefe","tpFontSize":"14"} -->
+<p id="wd-09185657" class="wp-block-wd-paragraph">🚚</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/marquee-item -->
 
-<!-- wp:wd/marquee-item {"blockId":"876726ce-8a49-4945-aa1d-7ce6f7db3c91"} -->
-<div id="wd-876726ce" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"0dce2b10-26ee-4cad-8d1b-058ebbfa3aa6","colorCode":"#ffffff","tpFontSize":"14"} -->
-<p id="wd-0dce2b10" class="wp-block-wd-paragraph">Free Shipping On Orders Over $100</p>
+<!-- wp:wd/marquee-item {"blockId":"c9063954-8e6e-4ea7-b8c3-b699f5675d35"} -->
+<div id="wd-c9063954" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"9a611d4b-e55b-4fc8-b8b2-adfe07156add","colorCode":"#ffffff","tpFontSize":"14"} -->
+<p id="wd-9a611d4b" class="wp-block-wd-paragraph">Free Shipping On Orders Over $100</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/marquee-item -->
 
-<!-- wp:wd/marquee-item {"blockId":"c68832ad-5847-403d-9846-be0c2052f0c1"} -->
-<div id="wd-c68832ad" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"1c46b7f3-7706-4bd1-adb6-db72e9f56b36","colorCode":"#fefefe","tpFontSize":"14"} -->
-<p id="wd-1c46b7f3" class="wp-block-wd-paragraph">🚚</p>
+<!-- wp:wd/marquee-item {"blockId":"39cb9f58-384e-4e1a-a8aa-ef0ed38e866b"} -->
+<div id="wd-39cb9f58" class="wp-block-wd-marquee-item wd-marquee-item"><!-- wp:wd/paragraph {"blockId":"a0beeda2-1f3e-46a9-a1fe-bc4b91f29a3c","colorCode":"#fefefe","tpFontSize":"14"} -->
+<p id="wd-a0beeda2" class="wp-block-wd-paragraph">🚚</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/marquee-item -->
 <!-- /wp:wd/marquee --></div>
@@ -4674,7 +4674,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/button {"blockId":"1ba16daf-9ee9-446f-a092-99c01dc27ca4","predefinedColor":"primary","shape":"round","icon":"right"} -->
 <a id="wd-1ba16daf" class="wp-block-wd-button btn btn-style-default btn-color-primary btn-size-default btn-shape-round btn-icon-pos-right" href="#"><span>More products</span><!-- wp:wd/icon {"blockId":"00aece3b-9a09-4db0-ab30-5776ad31c1ac","image":{"id":206,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/Icon.svg"},"width":"12"} -->
-<div id="wd-00aece3b" class="wp-block-wd-icon"><img class="wp-image-206" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/Icon.svg" alt="test" /></div>
+<div id="wd-00aece3b" class="wp-block-wd-icon"><img class="wp-image-206" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/Icon.svg" alt="test"/></div>
 <!-- /wp:wd/icon --></a>
 <!-- /wp:wd/button --></div>
 <!-- /wp:wd/container -->
@@ -4708,7 +4708,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"7a8c60f0-2a42-450a-92f1-d92e16db4b16","adjacentCount":2,"colWidth":40,"justifyContent":"center","adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-7a8c60f0" class="wp-block-wd-column"><!-- wp:wd/compare-images {"blockId":"5088602a-f29f-49fa-af29-2bc8be7e342b","firstImage":{"id":286,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bf.jpg"},"secondImage":{"id":287,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-af-opt.jpg"}} -->
-<div id="wd-5088602a" class="wp-block-wd-compare-images wd-compare-img-wrapp"><div class="wd-compare-img"><div class="wd-after-img"><img class="wp-image-287" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-af-opt.jpg" alt="" /></div><div class="wd-before-img"><img class="wp-image-286" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bf.jpg" alt="" /></div><div class="wd-compare-img-handle"><span></span></div></div></div>
+<div id="wd-5088602a" class="wp-block-wd-compare-images wd-compare-img-wrapp"><div class="wd-compare-img"><div class="wd-after-img"><img class="wp-image-287" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-af-opt.jpg" alt=""/></div><div class="wd-before-img"><img class="wp-image-286" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-sld-bf.jpg" alt=""/></div><div class="wd-compare-img-handle"><span></span></div></div></div>
 <!-- /wp:wd/compare-images --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -4720,7 +4720,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/button {"blockId":"2fcf2d52-f39d-444a-b209-f947c426113e","predefinedColor":"primary","shape":"round","icon":"right"} -->
 <a id="wd-2fcf2d52" class="wp-block-wd-button btn btn-style-default btn-color-primary btn-size-default btn-shape-round btn-icon-pos-right" href="#"><span>More products</span><!-- wp:wd/icon {"blockId":"bfd30e02-f16d-4f72-a880-0e4bc7984036","image":{"id":206,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/Icon.svg"},"width":"12"} -->
-<div id="wd-bfd30e02" class="wp-block-wd-icon"><img class="wp-image-206" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/Icon.svg" alt="test" /></div>
+<div id="wd-bfd30e02" class="wp-block-wd-icon"><img class="wp-image-206" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/Icon.svg" alt="test"/></div>
 <!-- /wp:wd/icon --></a>
 <!-- /wp:wd/button --></div>
 <!-- /wp:wd/container -->
@@ -4728,7 +4728,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/products {"blockId":"064dc2ca-ee50-4797-b38b-b17fe4051370","include":"","layout":"carousel","items_per_page":"7","products_with_background":true,"marginBottom":"80","slides_per_view":"5.1","disable_overflow_carousel":true,"hide_pagination_control":true,"sync_parent_id":"wd_8108f037","productsBackgroundCode":"#ffffff","marginBottomTablet":"60","marginBottomMobile":"40","slides_per_viewTablet":"3","hide_pagination_controlTablet":true,"hide_pagination_controlMobile":true} /-->
 
 <!-- wp:wd/carousel {"blockId":"eec8c3b1-b7d6-4cc7-b4fd-51c68fbe2f9a","currentSlide":2,"paginationControl":false,"paginationControlTablet":false,"paginationControlMobile":false,"syncParentId":"wd_eec8c3b1","marginBottom":"80","slidesPerViewTablet":"2","marginBottomTablet":"60","marginBottomMobile":"40"} -->
-<div id="wd-eec8c3b1" class="wp-block-wd-carousel wd-carousel-container"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" style="--wd-col-lg:3;--wd-col-md:2;--wd-col-sm:1;--wd-gap-lg:20px;--wd-gap-sm:10px" data-scroll_per_page="yes"><div class="wd-carousel-wrap"><!-- wp:wd/carousel-item {"blockId":"86356f64-f6f9-4d8f-a72d-854e06708cb7"} -->
+<div id="wd-eec8c3b1" class="wp-block-wd-carousel wd-carousel-container"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" style="--wd-col-lg:3;--wd-col-md:2;--wd-col-sm:1;--wd-gap-lg:20px;--wd-gap-sm:10px;" data-scroll_per_page="yes"><div class="wd-carousel-wrap"><!-- wp:wd/carousel-item {"blockId":"86356f64-f6f9-4d8f-a72d-854e06708cb7"} -->
 <div id="wd-86356f64" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/cover {"blockId":"258dcf3c-4993-447e-97d7-cce7effadfe9","hover":"zoom-in","align":"center","contentAlignHorizontal":"center","contentAlignVertical":"end","size":"aspectRatio","aspectRatio":"asImage","imageAspectRatio":"540/640","bgImage":{"id":288,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-prd-bnr-1-opt.jpg"}} -->
 <div id="wd-258dcf3c" class="wp-block-wd-cover wd-hover-parent wd-align wd-hover-zoom-in"><div class="wd-block-cover-img"></div><a class="wd-block-cover-link wd-fill" href="#" aria-label="Cover link"></a><!-- wp:wd/container {"blockId":"3ef115b2-9dc0-4e26-a421-ec4e02085b76","metadata":{"name":"Banner content"}} -->
 <div id="wd-3ef115b2" class="wp-block-wd-container wd-dir-col"><!-- wp:wd/title {"blockId":"82ebfa1f-c6dc-46dd-84d8-39ce0c3e5781","content":"Cotton Soft Sun Stick","tpFontSize":"28","colorCode":"#ba232d","tpFontSizeTablet":"24","tpFontSizeMobile":"22"} -->
@@ -4792,27 +4792,27 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/button {"blockId":"20e4424d-f789-42b0-8fb8-8c45cf7cf2fd","design":"link","predefinedColor":"","shape":"round","icon":"left","borderColorCode":"rgba(255,255,255,0)"} -->
 <a id="wd-20e4424d" class="wp-block-wd-button btn btn-style-link btn-size-default btn-icon-pos-left" href="#"><span>Subscribe</span><!-- wp:wd/icon {"blockId":"671ea3d2-84ca-4dd0-b5a1-6529ce72bea8","image":{"id":207,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/yt-sbs.svg"}} -->
-<div id="wd-671ea3d2" class="wp-block-wd-icon"><img class="wp-image-207" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/yt-sbs.svg" alt="" /></div>
+<div id="wd-671ea3d2" class="wp-block-wd-icon"><img class="wp-image-207" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/yt-sbs.svg" alt=""/></div>
 <!-- /wp:wd/icon --></a>
 <!-- /wp:wd/button --></div>
 <!-- /wp:wd/container -->
 
 <!-- wp:wd/carousel {"blockId":"e07c6cb5-e124-41b3-8e24-809f9bee7b4e","currentSlide":2,"paginationControl":false,"paginationControlTablet":false,"paginationControlMobile":false,"syncParentId":"wd_e07c6cb5"} -->
-<div id="wd-e07c6cb5" class="wp-block-wd-carousel wd-carousel-container"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" style="--wd-col-lg:3;--wd-col-md:3;--wd-col-sm:1;--wd-gap-lg:20px;--wd-gap-sm:10px" data-scroll_per_page="yes"><div class="wd-carousel-wrap"><!-- wp:wd/carousel-item {"blockId":"a9826e2d-55a0-4190-b801-557bf8b2dea9"} -->
-<div id="wd-a9826e2d" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/video {"blockId":"8ddf7447-47d4-42a5-8a02-5c33069afbe4","videoType":"external","videoHosted":{"id":733,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"overlay","videoOverlayLightbox":true,"videoImageOverlay":{"id":297,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-1-opt.jpg"},"videoSize":"aspect_ratio","videoAspectRatio":"16/10","playBtnIconSize":"62"} -->
-<div id="wd-8ddf7447" class="wp-block-wd-video wd-el-video wd-action-overlay wd-video-external wd-lightbox wd-with-aspect-ratio"><div class="wd-el-video-overlay wd-fill"><img src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-1-opt.jpg" alt="" class="wp-image-297" /></div><div class="wd-el-video-control color-scheme-light wd-fill"><span class="wd-el-video-play-btn"></span></div><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-link wd-el-video-btn-overlay wd-fill wd-el-video-lightbox"></a></div>
+<div id="wd-e07c6cb5" class="wp-block-wd-carousel wd-carousel-container"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" style="--wd-col-lg:3;--wd-col-md:3;--wd-col-sm:1;--wd-gap-lg:20px;--wd-gap-sm:10px;" data-scroll_per_page="yes"><div class="wd-carousel-wrap"><!-- wp:wd/carousel-item {"blockId":"a9826e2d-55a0-4190-b801-557bf8b2dea9"} -->
+<div id="wd-a9826e2d" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/video {"blockId":"8ddf7447-47d4-42a5-8a02-5c33069afbe4","videoType":"external","videoHosted":{"id":733,"url":"https://woodmart.xtemos.com/makup/wp-content/uploads/sites/22/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"overlay","videoOverlayLightbox":true,"videoImageOverlay":{"id":297,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-1-opt.jpg"},"videoSize":"aspect_ratio","videoAspectRatio":"16/10","playBtnIconSize":"62"} -->
+<div id="wd-8ddf7447" class="wp-block-wd-video wd-el-video wd-action-overlay wd-video-external wd-lightbox wd-with-aspect-ratio"><div class="wd-el-video-overlay wd-fill"><img src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-1-opt.jpg" alt="" class="wp-image-297"/></div><div class="wd-el-video-control color-scheme-light wd-fill"><span class="wd-el-video-play-btn"></span></div><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-link wd-el-video-btn-overlay wd-fill wd-el-video-lightbox"></a></div>
 <!-- /wp:wd/video --></div>
 <!-- /wp:wd/carousel-item -->
 
 <!-- wp:wd/carousel-item {"blockId":"3c26cde3-9e83-4962-a62c-e018371e5d62"} -->
-<div id="wd-3c26cde3" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/video {"blockId":"5f2b4b19-5ab4-433d-9739-b1ee7489aaca","videoType":"external","videoHosted":{"id":733,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"overlay","videoOverlayLightbox":true,"videoImageOverlay":{"id":298,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-2-opt.jpg"},"videoSize":"aspect_ratio","videoAspectRatio":"16/10","playBtnIconSize":"62"} -->
-<div id="wd-5f2b4b19" class="wp-block-wd-video wd-el-video wd-action-overlay wd-video-external wd-lightbox wd-with-aspect-ratio"><div class="wd-el-video-overlay wd-fill"><img src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-2-opt.jpg" alt="" class="wp-image-298" /></div><div class="wd-el-video-control color-scheme-light wd-fill"><span class="wd-el-video-play-btn"></span></div><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-link wd-el-video-btn-overlay wd-fill wd-el-video-lightbox"></a></div>
+<div id="wd-3c26cde3" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/video {"blockId":"5f2b4b19-5ab4-433d-9739-b1ee7489aaca","videoType":"external","videoHosted":{"id":733,"url":"https://woodmart.xtemos.com/makup/wp-content/uploads/sites/22/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"overlay","videoOverlayLightbox":true,"videoImageOverlay":{"id":298,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-2-opt.jpg"},"videoSize":"aspect_ratio","videoAspectRatio":"16/10","playBtnIconSize":"62"} -->
+<div id="wd-5f2b4b19" class="wp-block-wd-video wd-el-video wd-action-overlay wd-video-external wd-lightbox wd-with-aspect-ratio"><div class="wd-el-video-overlay wd-fill"><img src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-2-opt.jpg" alt="" class="wp-image-298"/></div><div class="wd-el-video-control color-scheme-light wd-fill"><span class="wd-el-video-play-btn"></span></div><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-link wd-el-video-btn-overlay wd-fill wd-el-video-lightbox"></a></div>
 <!-- /wp:wd/video --></div>
 <!-- /wp:wd/carousel-item -->
 
 <!-- wp:wd/carousel-item {"blockId":"bdc94fdf-e58a-4a86-843c-2e7a728b3788"} -->
-<div id="wd-bdc94fdf" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/video {"blockId":"2e952b7b-11a0-4718-afa5-1fa03e9cf752","videoType":"external","videoHosted":{"id":733,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"overlay","videoOverlayLightbox":true,"videoImageOverlay":{"id":300,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-3-opt.jpg"},"videoSize":"aspect_ratio","videoAspectRatio":"16/10","playBtnIconSize":"62"} -->
-<div id="wd-2e952b7b" class="wp-block-wd-video wd-el-video wd-action-overlay wd-video-external wd-lightbox wd-with-aspect-ratio"><div class="wd-el-video-overlay wd-fill"><img src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-3-opt.jpg" alt="" class="wp-image-300" /></div><div class="wd-el-video-control color-scheme-light wd-fill"><span class="wd-el-video-play-btn"></span></div><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-link wd-el-video-btn-overlay wd-fill wd-el-video-lightbox"></a></div>
+<div id="wd-bdc94fdf" class="wp-block-wd-carousel-item wd-carousel-item"><!-- wp:wd/video {"blockId":"2e952b7b-11a0-4718-afa5-1fa03e9cf752","videoType":"external","videoHosted":{"id":733,"url":"https://woodmart.xtemos.com/makup/wp-content/uploads/sites/22/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"overlay","videoOverlayLightbox":true,"videoImageOverlay":{"id":300,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-3-opt.jpg"},"videoSize":"aspect_ratio","videoAspectRatio":"16/10","playBtnIconSize":"62"} -->
+<div id="wd-2e952b7b" class="wp-block-wd-video wd-el-video wd-action-overlay wd-video-external wd-lightbox wd-with-aspect-ratio"><div class="wd-el-video-overlay wd-fill"><img src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-vid-blg-3-opt.jpg" alt="" class="wp-image-300"/></div><div class="wd-el-video-control color-scheme-light wd-fill"><span class="wd-el-video-play-btn"></span></div><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-link wd-el-video-btn-overlay wd-fill wd-el-video-lightbox"></a></div>
 <!-- /wp:wd/video --></div>
 <!-- /wp:wd/carousel-item --></div></div><div class="wd-nav-arrows wd-pos-sep wd-hover-1 wd-icon-1"><div class="wd-btn-arrow wd-prev"><div class="wd-arrow-inner"></div></div><div class="wd-btn-arrow wd-next"><div class="wd-arrow-inner"></div></div></div></div></div>
 <!-- /wp:wd/carousel --></div>
@@ -4858,15 +4858,15 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/button {"blockId":"64b4136d-8da9-4f8b-8071-d1260f73b90e","predefinedColor":"white","shape":"round","icon":"right"} -->
 <a id="wd-64b4136d" class="wp-block-wd-button btn btn-style-default btn-color-white btn-size-default btn-shape-round btn-icon-pos-right"><span>Read more</span><!-- wp:wd/icon {"blockId":"1be247f9-5ba5-44dc-891c-7e506cddceab","image":{"id":205,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/chevron-down-black.svg"},"width":"15"} -->
-<div id="wd-1be247f9" class="wp-block-wd-icon"><img class="wp-image-205" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/chevron-down-black.svg" alt="" /></div>
+<div id="wd-1be247f9" class="wp-block-wd-icon"><img class="wp-image-205" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/chevron-down-black.svg" alt=""/></div>
 <!-- /wp:wd/icon --></a>
 <!-- /wp:wd/button --></div>
 <!-- /wp:wd/collapsible-content -->]]></content:encoded>
 															<wp:post_id>15</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 14:49:56]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-10-28 14:49:56]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-11-18 10:45:41]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-11-18 10:45:41]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-10-09 12:04:57]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-09 12:04:57]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[home-makeup]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -4874,20 +4874,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<wp:menu_order>0</wp:menu_order>
 					<wp:post_type><![CDATA[page]]></wp:post_type>
 																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_whb_header]]></wp:meta_key>
-							<wp:meta_value><![CDATA[none]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_title_off]]></wp:meta_key>
 							<wp:meta_value><![CDATA[on]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_page-title-size]]></wp:meta_key>
-							<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
@@ -5044,7 +5032,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <h2 id="wd-ef0d8b21" class="wp-block-wd-title title">How We Start Our Business</h2>
 <!-- /wp:wd/title -->
 
-<!-- wp:wd/video {"blockId":"4b6fc58f-2812-4d9d-b818-42d07e42127f","videoType":"external","videoHosted":{"id":733,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"play","playBtnIconSize":"78"} -->
+<!-- wp:wd/video {"blockId":"4b6fc58f-2812-4d9d-b818-42d07e42127f","videoType":"external","videoHosted":{"id":733,"url":"https://woodmart.xtemos.com/cosmetics/wp-content/uploads/sites/22/2024/10/pexels-ron-lach-8143135-540p.mp4"},"externalUrl":"https://www.youtube.com/watch?v=LXb3EKWsInQ","videoActionButton":"play","playBtnIconSize":"78"} -->
 <div id="wd-4b6fc58f" class="wp-block-wd-video wd-el-video wd-action-play wd-video-external"><a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="wd-el-video-btn"><span class="wd-el-video-play-btn"></span></a></div>
 <!-- /wp:wd/video --></div>
 <!-- /wp:wd/column -->
@@ -5150,7 +5138,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/makeup-gutenberg/?page_id=66</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/open-street-map {"blockId":"94f33f3a-915f-4fe3-a212-13f148ca8fce","marginTop":"-20","marginBottom":"80","zoom":15,"height":"540","locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}],"marginBottomTablet":"60","marginBottomMobile":"40","heightTablet":"420"} -->
-<div id="wd-94f33f3a" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-94f33f3a-915f-4fe3-a212-13f148ca8fce" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
+<div id="wd-94f33f3a" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-94f33f3a-915f-4fe3-a212-13f148ca8fce" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/themes/woodmart8/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map -->
 
 <!-- wp:wd/row {"blockId":"88b2ed3a-8956-43bb-a209-fe97428e0981","columnsGap":20,"marginBottom":"20"} -->
@@ -6590,6 +6578,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -6640,6 +6632,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -6694,6 +6690,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -6746,6 +6746,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -6795,6 +6799,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -6849,56 +6857,8 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
-							<wp:meta_value><![CDATA[image]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_style_aside]]></wp:meta_key>
-							<wp:meta_value><![CDATA[default]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_scroll]]></wp:meta_key>
-							<wp:meta_value><![CDATA[no]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/makeup-gutenberg/2024/10/28/171/</link>
-					<pubDate>Mon, 28 Oct 2024 14:55:26 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/makeup-gutenberg/?p=171</guid>
-											<content:encoded><![CDATA[ ]]></content:encoded>
-															<wp:post_id>171</wp:post_id>
-					<wp:post_date><![CDATA[2024-10-28 14:55:26]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2024-10-28 14:55:26]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-28 14:55:26]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-28 14:55:26]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-					<wp:post_name><![CDATA[171]]></wp:post_name>
-					<wp:status><![CDATA[publish]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>4</wp:menu_order>
-					<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-												<category domain="nav_menu" nicename="mobile-navigation"><![CDATA[Mobile navigation]]></category>
-											<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-							<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-							<wp:meta_value><![CDATA[64]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-							<wp:meta_value><![CDATA[page]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
-							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -6953,6 +6913,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7003,6 +6967,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7061,6 +7029,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7115,6 +7087,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7173,6 +7149,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7227,6 +7207,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7285,6 +7269,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7335,6 +7323,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7389,6 +7381,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7441,6 +7437,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7491,6 +7491,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7746,6 +7750,145 @@ This email is a receipt for your contact form submission on our website ([_site_
 						</wp:postmeta>
 										</item>
 								<item>
+					<title><![CDATA[Application method]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/makeup-gutenberg/?wd_product_tabs=application-method</link>
+					<pubDate>Wed, 21 May 2025 11:47:47 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/makeup-gutenberg/?post_type=wd_product_tabs&#038;p=333</guid>
+											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"c6f8bc26-bb37-4c8d-8399-b0663345e714"} -->
+<p id="wd-c6f8bc26" class="wp-block-wd-paragraph">The power of makeup is undeniable; our favorite products help us create the beauty looks we love, enhance our favorite features, and encapsulate our individual definitions of beauty. The best makeup routines help the modern woman boost her confidence and face the world head on—no matter what the day has in store.</p>
+<!-- /wp:wd/paragraph -->
+
+<!-- wp:wd/title {"blockId":"ebf21362-72c7-4a1c-b43d-69e35dbb2881","content":"What Is the Correct Order of Makeup?","tpFontSize":"22","tpFontSizeTablet":"20","tpFontSizeMobile":"18"} -->
+<h2 id="wd-ebf21362" class="wp-block-wd-title title">What Is the Correct Order of Makeup?</h2>
+<!-- /wp:wd/title -->
+
+<!-- wp:wd/paragraph {"blockId":"ac88019d-0c92-489b-b386-5913a573e67e"} -->
+<p id="wd-ac88019d" class="wp-block-wd-paragraph">We know you’ve watched countless makeup tutorials online, seen your favorite celebrities get their makeup done with their favorite cosmetics, and you may have even done yours alongside them. But, there are never too many helpful tools and guides to aid you along on your makeup journey!</p>
+<!-- /wp:wd/paragraph -->
+
+<!-- wp:wd/paragraph {"blockId":"7e2a5200-e479-4026-98c9-12eb06ff2aaa"} -->
+<p id="wd-7e2a5200" class="wp-block-wd-paragraph"></p>
+<!-- /wp:wd/paragraph -->
+
+<!-- wp:wd/row {"blockId":"3dcf6884-3536-4f0d-8d30-527e581f0cb6","columnsGap":20} -->
+<div id="wd-3dcf6884" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"32b4d206-a4bc-4690-a015-286c42d9c688","adjacentCount":2,"colWidth":40} -->
+<div id="wd-32b4d206" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"7b6f4149-0539-4f23-8073-10451982d80c","image":{"id":272,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-img-5-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-img-5-opt.jpg","width":400,"height":500}} -->
+<div id="wd-7b6f4149" class="wp-block-wd-image wd-block-image"><img class="wp-image-272" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-img-5-opt.jpg" alt="" /></div>
+<!-- /wp:wd/image --></div>
+<!-- /wp:wd/column -->
+
+<!-- wp:wd/column {"blockId":"641b692e-dce1-4521-b8a1-0b93667399e7","adjacentCount":2,"colWidth":60,"bgColorCode":"rgba(0,0,0,0.05)","paddingTop":"20","paddingRight":"20","paddingBottom":"20","paddingLeft":"20","paddingLock":true,"borderRadius":"10","borderRadiusTop":"10","borderRadiusRight":"10","borderRadiusBottom":"10","borderRadiusLeft":"10"} -->
+<div id="wd-641b692e" class="wp-block-wd-column"><!-- wp:wd/title {"blockId":"1ed88ffd-25b2-41d0-8b14-8e05fc063d7a","content":"Liquid foundation","tpFontSize":"22","tpFontSizeTablet":"20","tpFontSizeMobile":"18"} -->
+<h2 id="wd-1ed88ffd" class="wp-block-wd-title title">Liquid foundation</h2>
+<!-- /wp:wd/title -->
+
+<!-- wp:wd/paragraph {"blockId":"5c6ac9bb-bd5c-4a1b-8a36-7f2f83499335"} -->
+<p id="wd-5c6ac9bb" class="wp-block-wd-paragraph">These are water-based solutions that may contain certain vitamins.</p>
+<!-- /wp:wd/paragraph -->
+
+<!-- wp:wd/infobox {"blockId":"7cb54931-dbeb-4c5a-b603-7e1d14a50ff9","iconPositionHorizontal":"start","iconPositionVertical":"center"} -->
+<div id="wd-7cb54931" class="wp-block-wd-infobox wd-hover-parent wd-icon-start"><!-- wp:wd/icon {"blockId":"1a3744b6-596f-4c45-a05e-bbe55beacd99","image":{"id":195,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-moisturizes.svg"},"width":"40"} -->
+<div id="wd-1a3744b6" class="wp-block-wd-icon"><img class="wp-image-195" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-moisturizes.svg" alt="" /></div>
+<!-- /wp:wd/icon -->
+
+<!-- wp:wd/container {"blockId":"f1234db8-5c2f-4c76-9b1d-894b087c5624","metadata":{"name":"Infobox content"}} -->
+<div id="wd-f1234db8" class="wp-block-wd-container wd-dir-col"><!-- wp:wd/title {"blockId":"df69007a-358c-4f08-b55a-ae9ae6cdc7c4","content":"Moisturizes","tpFontSize":"18"} -->
+<h2 id="wd-df69007a" class="wp-block-wd-title title">Moisturizes</h2>
+<!-- /wp:wd/title --></div>
+<!-- /wp:wd/container --></div>
+<!-- /wp:wd/infobox -->
+
+<!-- wp:wd/infobox {"blockId":"28aa4860-a6c9-41e2-bbce-8d727e43aa41","iconPositionHorizontal":"start","iconPositionVertical":"center"} -->
+<div id="wd-28aa4860" class="wp-block-wd-infobox wd-hover-parent wd-icon-start"><!-- wp:wd/icon {"blockId":"e4421287-287a-4cdd-a577-7b4ad74eb078","image":{"id":194,"url":"http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-irritation.svg"},"width":"40"} -->
+<div id="wd-e4421287" class="wp-block-wd-icon"><img class="wp-image-194" src="http://dummy.xtemos.com/woodmart2/makeup-gutenberg/wp-content/uploads/sites/40/2024/10/c2-blg-irritation.svg" alt="" /></div>
+<!-- /wp:wd/icon -->
+
+<!-- wp:wd/container {"blockId":"d6a4a5d7-ddaa-4b4f-b69f-9d7cd63938aa","metadata":{"name":"Infobox content"}} -->
+<div id="wd-d6a4a5d7" class="wp-block-wd-container wd-dir-col"><!-- wp:wd/title {"blockId":"0c2e3fbf-dd45-4f93-8bfd-0ccc5fdacab9","content":"Soothes irritation","tpFontSize":"18"} -->
+<h2 id="wd-0c2e3fbf" class="wp-block-wd-title title">Soothes irritation</h2>
+<!-- /wp:wd/title --></div>
+<!-- /wp:wd/container --></div>
+<!-- /wp:wd/infobox --></div>
+<!-- /wp:wd/column --></div>
+<!-- /wp:wd/row -->
+
+<!-- wp:wd/paragraph {"blockId":"3a21b75b-9044-42eb-82f6-b2aaab2148ab"} -->
+<p id="wd-3a21b75b" class="wp-block-wd-paragraph">That is where we come in with our guide that gives you the steps to apply makeup. Before we give you the 4-1-1 on steps to apply makeup, we want to let you know there really is no set-in-stone correct order. When it comes to following makeup steps in order, you want to remember that you should do what works best for your skill level, your skin.</p>
+<!-- /wp:wd/paragraph -->]]></content:encoded>
+															<wp:post_id>333</wp:post_id>
+					<wp:post_date><![CDATA[2025-05-21 11:47:47]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2025-05-21 11:47:47]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2025-05-21 11:47:48]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-21 11:47:48]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+					<wp:post_name><![CDATA[application-method]]></wp:post_name>
+					<wp:status><![CDATA[publish]]></wp:status>
+					<wp:post_parent>0</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[wd_product_tabs]]></wp:post_type>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[product_tab_condition]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:0;a:3:{s:10:"comparison";s:7:"include";s:4:"type";s:3:"all";s:18:"product-type-query";s:6:"simple";}}]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
+					<title><![CDATA[]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/makeup-gutenberg/2024/10/28/171/</link>
+					<pubDate>Mon, 28 Oct 2024 14:55:26 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/makeup-gutenberg/?p=171</guid>
+											<content:encoded><![CDATA[ ]]></content:encoded>
+															<wp:post_id>171</wp:post_id>
+					<wp:post_date><![CDATA[2024-10-28 14:55:26]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2024-10-28 14:55:26]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2024-10-28 14:55:26]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2024-10-28 14:55:26]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+					<wp:post_name><![CDATA[171]]></wp:post_name>
+					<wp:status><![CDATA[publish]]></wp:status>
+					<wp:post_parent>0</wp:post_parent>
+					<wp:menu_order>4</wp:menu_order>
+					<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+												<category domain="nav_menu" nicename="mobile-navigation"><![CDATA[Mobile navigation]]></category>
+											<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+							<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+							<wp:meta_value><![CDATA[64]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+							<wp:meta_value><![CDATA[page]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
+							<wp:meta_value><![CDATA[image]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_style_aside]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_scroll]]></wp:meta_key>
+							<wp:meta_value><![CDATA[no]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
 					<title><![CDATA[]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/makeup-gutenberg/2024/10/28/172/</link>
 					<pubDate>Mon, 28 Oct 2024 14:55:26 +0000</pubDate>
@@ -7783,6 +7926,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7840,6 +7987,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7895,6 +8046,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -7945,6 +8100,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -7999,6 +8158,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -8049,6 +8212,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>

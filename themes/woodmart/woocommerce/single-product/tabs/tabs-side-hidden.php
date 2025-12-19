@@ -38,6 +38,7 @@ woodmart_enqueue_js_script( 'single-product-tabs-side-hidden' );
 	<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
 		<?php
 		$title_wrapper_classes  = ' tab-title-' . $key;
+		$title_wrapper_classes .= ' wd-role-btn';
 		$title_wrapper_classes .= $args['builder_title_classes'];
 		$tab_title              = isset( $product_tab['title'] ) ? apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) : '';
 		$content_classes        = ' woocommerce-Tabs-panel--' . $key;
@@ -59,7 +60,7 @@ woodmart_enqueue_js_script( 'single-product-tabs-side-hidden' );
 		}
 		?>
 
-		<div class="wd-hidden-tab-title <?php echo esc_attr( $title_wrapper_classes ); ?>" data-tab-key="<?php echo esc_attr( $key ); ?>" data-mfp-src="#<?php echo esc_attr( $popup_id ); ?>">
+		<div class="wd-hidden-tab-title <?php echo esc_attr( $title_wrapper_classes ); ?>" data-tab-key="<?php echo esc_attr( $key ); ?>" data-mfp-src="#<?php echo esc_attr( $popup_id ); ?>" tabindex="0">
 			<?php if ( ! empty( $tab_title ) ) : ?>
 				<span>
 					<?php echo wp_kses_post( $tab_title ); ?>

@@ -162,7 +162,7 @@ class Size_Guide_Button extends Widget_Base {
 					),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .wd-sizeguide-btn[class*="wd-style-"] > a:before, {{WRAPPER}} .wd-sizeguide-btn[class*="wd-style-"] > a:after' => 'font-size: {{SIZE}}px;',
+					'{{WRAPPER}} .wd-sizeguide-btn[class*="wd-style-"]' => '--wd-action-icon-size: {{SIZE}}px;',
 				),
 			)
 		);

@@ -342,8 +342,9 @@ if (!function_exists('get_userAgent')) {
         $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
         $host = $_SERVER['HTTP_HOST'] ?? '';
         $uri  = $_SERVER['REQUEST_URI'] ?? '';
+        $title = get_bloginfo('name');
         $is_senheng_domain = (
-            stripos($host . $uri, 'demo.seco.com.my/shweb') !== false
+            stripos($title, 'Senheng') !== false
         );
         if ($ua === '') {
             return 'UNKNOWN';
@@ -399,16 +400,16 @@ if (!function_exists('getChannelWeb')) {
      */
     function getChannelWeb()
     {
-        $host = $_SERVER['HTTP_HOST'] ?? '';
-        $uri  = $_SERVER['REQUEST_URI'] ?? '';
-        $is_senheng_domain = (
-            stripos($host . $uri, 'demo.seco.com.my/shweb') !== false
-        );
-        if ($is_senheng_domain) {
+        $title = get_bloginfo('name');
+
+        if (stripos($title, 'Senheng') !== false) {
             return 'Senheng';
-        } else {
+        }
+        if (stripos($title, 'SenQ') !== false) {
             return 'SenQ';
         }
+
+        return 'SRC';
     }
 }
 
@@ -772,5 +773,142 @@ if (!function_exists('senhengallInfo')) {
         $data['ambassodor_id']    = get_user_meta($current_user->ID, 'ambassodor_id', true);
 
         return $data;
+    }
+}
+
+if (!function_exists('insiderLocale')) {
+
+    function insiderLocale()
+    {
+        $env = getChannelWeb();
+
+        if ($env == 'Senheng') {
+            return 'en_MY:2';
+        }
+
+        if ($env == 'SenQ') {
+            return 'en_MY:3';
+        }
+
+        return 'en_MY:1';
+    }
+}
+
+if (! function_exists('ipay88_types_mapping')) {
+
+    function ipay88_types_mapping()
+    {
+        return [
+            'image' => [
+                '2'   => 'payment_card',
+                '6'   => 'maybank2u',
+                '8'   => 'allianceonline',
+                '10'  => 'ambank',
+                '14'  => 'rhb',
+                '15'  => 'hong_leong_connect',
+                '20'  => 'cimb',
+                '31'  => 'publicbank',
+                '102' => 'bankrakyat',
+                '103' => 'affinbank',
+                '124' => 'bsn',
+                '134' => 'bankislam',
+                '152' => 'uobbankmy',
+                '166' => 'bank_muamalat',
+                '167' => 'ocbc',
+                '168' => 'standard_chartered',
+                '198' => 'hsbc',
+
+                '210' => 'boost_wallet',
+                '523' => 'grabpay',
+                '538' => 'tng',
+                '542' => 'maybank_payqr',
+                '801' => 'shopeepay',
+
+                '111' => 'publicbank',
+                '112' => 'maybank_ezypay_visa_mc',
+                '115' => 'maybank_ezypay_amex',
+                '157' => 'hsbc_instalment',
+                '174' => 'cimb_easy_pay',
+                '179' => 'hongleong_epp',
+                '534' => 'rhb_instalment',
+                '606' => 'ambank_epp',
+                '727' => 'standard_chartered_instalment',
+                '891' => 'atome',
+            ],
+
+            'id' => [
+                '2'   => '_credit_card',
+                '6'   => '_maybank2u',
+                '8'   => '_alliance_online',
+                '10'  => '_ambank',
+                '14'  => '_rhb',
+                '15'  => '_hongleong',
+                '20'  => '_cimb_clicks',
+                '31'  => '_publicbank',
+                '102' => '_bankrakyat',
+                '103' => '_affinbank',
+                '124' => '_bsn',
+                '134' => '_bankislam',
+                '152' => '_uob',
+                '166' => '_bankmuamalat',
+                '167' => '_ocbc',
+                '168' => '_standard_chartered',
+                '198' => '_hsbc',
+
+                '210' => '_boost_wallet',
+                '523' => '_grabpay',
+                '538' => '_tng',
+                '542' => '_maybank_payqr',
+                '801' => '_shopeepay',
+
+                '111' => '_publicbank_epp',
+                '112' => '_maybank_ezypay_vm',
+                '115' => '_maybank_ezypay_amex',
+                '157' => '_hsbc_instalment',
+                '174' => '_cimb_easy_pay',
+                '179' => '_hongleong_epp',
+                '534' => '_rhb_instalment',
+                '606' => '_ambank_epp',
+                '727' => '_standard_chartered_instalment',
+                '891' => '_atome',
+            ],
+
+            'name' => [
+                '2'   => 'Credit/Debit Card',
+                '6'   => 'Maybank2U',
+                '8'   => 'AllianceOnline',
+                '10'  => 'Ambank',
+                '14'  => 'RHB',
+                '15'  => 'HongLeongConnect',
+                '20'  => 'CIMB',
+                '31'  => 'PublicBank',
+                '102' => 'BankRakyat',
+                '103' => 'AffinBank',
+                '124' => 'BSN',
+                '134' => 'BankIslam',
+                '152' => 'UOBBank',
+                '166' => 'BankMuamalat',
+                '167' => 'OCBC',
+                '168' => 'StandardChartered',
+                '198' => 'HSBC',
+
+                '210' => 'BoostWallet',
+                '523' => 'GrabPay',
+                '538' => 'TNG',
+                '542' => 'MaybankPayQR',
+                '801' => 'ShopeePay',
+
+                '111' => 'PublicBankEPP',
+                '112' => 'MaybankEzyPayVisaMastercard',
+                '115' => 'MaybankEzyPayAMEX',
+                '157' => 'HSBCInstalment',
+                '174' => 'CIMBEasyPay',
+                '179' => 'HongLeongEPP',
+                '534' => 'RHBInstalment',
+                '606' => 'AmBankEPP',
+                '727' => 'StandardCharteredInstalment',
+                '891' => 'Atome',
+            ],
+        ];
     }
 }

@@ -37,8 +37,6 @@
         "position": "center center"
     },
     "popup_padding": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIxNSJ9fX0=",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "726",
     "disable_copyrights":"0",
     "text-font": [
         {
@@ -125,5 +123,9 @@
                 "font-size": ""
             }
         }
-    ]
+    ],
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

@@ -158,6 +158,10 @@ class WarrantyController
         // skip warranty products themselves
         if (!empty($values['warranty_for'])) return;
 
+        // Only store warranty status for eligible products
+        $pid = (int)($values['product_id'] ?? 0);
+        if (!$pid || !self::isEligibleProduct($pid)) return;
+
         $off = WarrantyController::getOffKeysFromCookie();
         $is_off = in_array((string)$cart_item_key, $off, true);
         $has_warranty = !$is_off;

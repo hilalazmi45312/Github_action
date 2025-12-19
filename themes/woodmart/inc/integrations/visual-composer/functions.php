@@ -272,6 +272,8 @@ if ( ! function_exists( 'woodmart_vc_extra_classes' ) ) {
 		}
 
 		if ( ! empty( $atts['wd_animation'] ) && 'none' !== $atts['wd_animation'] ) {
+			$class .= ' wd-animation';
+			$class .= ' wd-transform';
 			$class .= ' wd-animation-' . $atts['wd_animation'];
 
 			$duration = ! empty( $atts['wd_animation_duration'] ) ? $atts['wd_animation_duration'] : 'normal';
@@ -281,9 +283,10 @@ if ( ! function_exists( 'woodmart_vc_extra_classes' ) ) {
 				$class .= ' wd_delay_' . $atts['wd_animation_delay'];
 			}
 
-			woodmart_enqueue_js_library( 'waypoints' );
-			woodmart_enqueue_js_script( 'animations' );
-			woodmart_enqueue_inline_style( 'animations' );
+			woodmart_enqueue_js_script( 'css-animations' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform-base' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform' );
+			woodmart_enqueue_inline_style( 'mod-transform' );
 		}
 
 		if ( ! empty( $atts['woodmart_css_id'] ) ) {
@@ -496,6 +499,111 @@ if ( ! function_exists( 'woodmart_get_gradient_attr' ) ) {
 	add_filter( 'vc_shortcode_output', 'woodmart_get_gradient_attr', 10, 3 );
 }
 
+if ( ! function_exists( 'woodmart_parse_gradient_string' ) ) {
+	/**
+	 * Parse theme gradient attribute string into a valid CSS gradient() value.
+	 *
+	 * Expected input structure (pipes-delimited):
+	 *   colors|<unused>|type|position
+	 * Where colors is like: "rgba(r,g,b,a) - 0/ rgba(r,g,b,a) - 100".
+	 *
+	 * @param string $input Raw gradient attribute value.
+	 * @return string CSS gradient value or empty string on failure.
+	 */
+	function woodmart_parse_gradient_string( $input ) {
+		$parts = array_map( 'trim', explode( '|', (string) $input ) );
+
+		// We need at least: colors, (unused), type, position.
+		if ( count( $parts ) < 4 ) {
+			return '';
+		}
+
+		$colors_str = trim( $parts[0], " /\t\n\r\0\x0B" );
+		$type       = strtolower( (string) $parts[2] );
+		$pos        = trim( (string) $parts[3] );
+
+		// Extract all color stops like: rgba(...) - 0 | rgb(...) - 50.5.
+		$stops = array();
+		if ( preg_match_all( '/(rgba?\([^)]*\))\s*-\s*([+-]?\d+(?:\.\d+)?)/i', $colors_str, $matches, PREG_SET_ORDER ) ) {
+			foreach ( $matches as $m ) {
+				$stops[] = $m[1] . ' ' . $m[2] . '%';
+			}
+		}
+
+		if ( empty( $stops ) ) {
+			return '';
+		}
+
+		// Radial gradient: type is circle|ellipse; normalize position keywords.
+		if ( 'circle' === $type || 'ellipse' === $type ) {
+			$pos   = '' === $pos ? 'center' : $pos;
+			$words = preg_split( '/\s+/', trim( $pos ) );
+
+			if ( 1 === count( $words ) ) {
+				$w = strtolower( $words[0] );
+
+				if ( 'center' === $w ) {
+					$pos = 'center center';
+				} elseif ( in_array( $w, array( 'left', 'right' ), true ) ) {
+					$pos = $w . ' center';
+				} elseif ( in_array( $w, array( 'top', 'bottom' ), true ) ) {
+					$pos = 'center ' . $w;
+				} else {
+					$pos = $w; // Custom value, pass-through.
+				}
+			} else {
+				$pos = implode( ' ', $words );
+			}
+
+			return "radial-gradient({$type} at {$pos}, " . implode( ', ', $stops ) . ')';
+		}
+
+		// Linear gradient: accept angles (deg|rad|turn) or keyword directions.
+		if ( 'linear' === $type ) {
+			// Reverse direction keywords for gradient position.
+			$reverse_map = array(
+				'left'   => 'right',
+				'right'  => 'left',
+				'top'    => 'bottom',
+				'bottom' => 'top',
+			);
+
+			// Only reverse if it's a single direction or a pair.
+			if ( '' !== $pos ) {
+				$words = preg_split( '/\s+/', strtolower( $pos ) );
+
+				foreach ( $words as $i => $word ) {
+					if ( isset( $reverse_map[ $word ] ) ) {
+						$words[ $i ] = $reverse_map[ $word ];
+					}
+				}
+
+				$pos = implode( ' ', $words );
+			}
+
+			$dir      = '' === $pos ? '' : $pos;
+			$is_angle = (bool) preg_match( '/^\s*\d+(?:\.\d+)?(?:deg|rad|turn)\s*$/i', $dir );
+			$has_to   = (bool) preg_match( '/^\s*to\s+/i', $dir );
+
+			if ( '' !== $dir && ! $is_angle && ! $has_to ) {
+				// Normalize keyword directions. If contains center, drop direction.
+				if ( preg_match( '/\bcenter\b/i', $dir ) ) {
+					$dir = '';
+				} else {
+					$dir = 'to ' . $dir;
+				}
+			}
+
+			return ( '' === $dir )
+				? 'linear-gradient(' . implode( ', ', $stops ) . ')'
+				: "linear-gradient({$dir}, " . implode( ', ', $stops ) . ')';
+		}
+
+		// Unknown type.
+		return '';
+	}
+}
+
 if ( ! function_exists( 'woodmart_get_gradient_css' ) ) {
 	/**
 	 * Get gradient css.
@@ -504,17 +612,9 @@ if ( ! function_exists( 'woodmart_get_gradient_css' ) ) {
 	 * @return string
 	 */
 	function woodmart_get_gradient_css( $gradient_attr ) {
-		$gradient_css = explode( '|', $gradient_attr );
-		$css          = $gradient_css[1];
-		$webkit_css   = $gradient_css[1];
+		$css = woodmart_parse_gradient_string( $gradient_attr );
 
-		$css = str_replace( array( 'left', 'top', 'right', 'bottom' ), array( 'to side1', 'to side2', 'to side3', 'to side4' ), $css );
-		$css = str_replace( array( 'side1', 'side2', 'side3', 'side4' ), array( 'right', 'bottom', 'left', 'top' ), $css );
-
-		$result  = 'background-image:-webkit-' . $webkit_css . ';';
-		$result .= 'background-image:' . $css . ';';
-
-		return $result;
+		return ! empty( $css ) ? 'background-image:' . $css . ';' : '';
 	}
 }
 
@@ -537,3 +637,27 @@ if ( ! function_exists( 'woodmart_responsive_text_size_css' ) ) {
 	}
 }
 
+if ( ! function_exists( 'woodmart_register_vc_roles' ) ) {
+	/**
+	 * Register VC roles.
+	 */
+	function woodmart_register_vc_roles() {
+		if ( ! function_exists( 'vc_path_dir' ) || ! defined( 'WPB_VC_VERSION' ) ) {
+			return;
+		}
+
+		$post_types_to_enable = array( 'wd_floating_block', 'wd_popup', 'wd_product_tabs', 'woodmart_size_guide' );
+		$admin                = vc_role_access()->who( 'administrator' );
+
+		foreach ( $post_types_to_enable as $post_type ) {
+			$is_enabled = $admin->part( 'post_types' )->getCapRule( $post_type );
+
+			if ( ! $is_enabled ) {
+				$cap_key = $admin->part( 'post_types' )->getStateKey() . '/' . $post_type;
+				get_role( 'administrator' )->add_cap( $cap_key, true );
+			}
+		}
+	}
+
+	add_action( 'admin_init', 'woodmart_register_vc_roles' );
+}

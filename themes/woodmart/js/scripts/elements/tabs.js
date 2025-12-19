@@ -12,7 +12,7 @@
 	});
 
 	woodmartThemeModule.tabs = function () {
-		$('.wd-tabs').each(function() {
+		$('.wd-tabs:not(.wd-products-tabs)').each(function() {
 			var $tabsElement = $(this);
 			var $tabsList = $tabsElement.find('> .wd-tabs-header > .wd-nav-wrapper > .wd-nav-tabs > li');
 			var $content =  $tabsElement.find('> .wd-tabs-content-wrapper > .wd-tab-content');

@@ -105,6 +105,7 @@ class Metabox {
 		'conditions'        => 'XTS\Admin\Modules\Options\Controls\Conditions',
 		'discount_rules'    => 'XTS\Admin\Modules\Options\Controls\Discount_Rules',
 		'timetable'         => 'XTS\Admin\Modules\Options\Controls\Timetable',
+		'clear'             => 'XTS\Admin\Modules\Options\Controls\Clear',
 	);
 
 	/**
@@ -276,9 +277,9 @@ class Metabox {
 				foreach ( $field->args['requires'] as $require ) {
 					$value = get_metadata( $this->get_object(), $object_id, $require['key'], true );
 
-					if ( 'equals' === $require['compare'] && ( ( is_array( $require['value'] ) && ! in_array( $value, $require['value'], true ) ) || ( ! is_array( $require['value'] ) && $value !== $require['value'] ) ) ) {
+					if ( 'equals' === $require['compare'] && ( ( is_array( $require['value'] ) && ! in_array( $value, $require['value'], true ) ) || ( ! is_array( $require['value'] ) && (string) $value !== (string) $require['value'] ) ) ) {
 						$generate_field_css = false;
-					} elseif ( 'not_equals' === $require['compare'] && ( ( is_array( $require['value'] ) && in_array( $value, $require['value'], true ) ) || ( ! is_array( $require['value'] ) && $value === $require['value'] ) ) ) {
+					} elseif ( 'not_equals' === $require['compare'] && ( ( is_array( $require['value'] ) && in_array( $value, $require['value'], true ) ) || ( ! is_array( $require['value'] ) && (string) $value === (string) $require['value'] ) ) ) {
 						$generate_field_css = false;
 					}
 				}
@@ -319,6 +320,10 @@ class Metabox {
 
 				$output_css .= $this->get_heading_css_attribute( $css, $device );
 			}
+		}
+
+		if ( $object_id && strpos( $output_css, '{{ID}}' ) !== false ) {
+			$output_css = str_replace( '{{ID}}', $object_id, $output_css );
 		}
 
 		return $output_css;
@@ -483,7 +488,7 @@ class Metabox {
 
 			$subsections = array_filter(
 				$this->get_sections(),
-				function( $el ) use ( $section ) {
+				function ( $el ) use ( $section ) {
 					return isset( $el['parent'] ) && $el['parent'] === $section['id'];
 				}
 			);
@@ -493,7 +498,7 @@ class Metabox {
 			}
 			?>
 				<li class="<?php echo ( $key === $this->get_last_tab() ) ? 'xts-active-nav' : ''; ?>">
-					<a class="<?php echo esc_html( $section['icon'] ); ?>" href="" data-id="<?php echo esc_attr( $key ); ?>"  data-id="<?php echo esc_attr( $key ); ?>">
+					<a class="<?php echo esc_html( $section['icon'] ); ?>" href="" data-id="<?php echo esc_attr( $key ); ?>">
 						<span>
 							<?php echo $section['name']; // phpcs:ignore ?>
 						</span>
@@ -605,7 +610,13 @@ class Metabox {
 									$attrs .= 'data-dependency="' . esc_attr( $data ) . '"';
 								}
 
-								echo '<div class="wd-tabs xts-tabs wd-style-' . $field->args['t_tab']['style'] . '" ' . $attrs . '>';
+								$tab_class = ' wd-style-' . $field->args['t_tab']['style'];
+
+								if ( ! empty( $field->args['t_tab']['class'] ) ) {
+									$tab_class .= ' ' . esc_attr( $field->args['t_tab']['class'] );
+								}
+
+								echo '<div class="xts-field wd-tabs xts-tabs' . $tab_class . '" ' . $attrs . '>';
 
 								echo '<div class="xts-tabs-header wd-tabs-header">';
 								if ( isset( $field->args['t_tab']['title'] ) ) {
@@ -687,21 +698,54 @@ class Metabox {
 				continue;
 			}
 
+			if ( 'group' === $field->args['type'] && ! empty( $field->inner_fields ) ) {
+				foreach ( $field->inner_fields as $inner_field ) {
+					if ( ! array_key_exists( $inner_field->get_input_name(), $_POST ) ) { // phpcs:ignore
+						delete_metadata( 'post', $post_id, $inner_field->get_input_name() );
+					}
+
+					$this->save_post_field( $inner_field, $post_id );
+				}
+
+				continue;
+			}
+
 			if ( ! array_key_exists( $field->get_input_name(), $_POST ) ) { // phpcs:ignore
 				continue;
 			}
 
-			$value = $field->sanitize( $_POST[ $field->get_input_name() ] ); // phpcs:ignore
+			$this->save_post_field( $field, $post_id );
+		}
+	}
 
-			do_action( 'woodmart_metabox_before_update_metadata', $post_id, $field->get_input_name(), $value );
+	/**
+	 * Save field to the metadata database table for posts.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param object $field Field object.
+	 * @param int    $post_id Post id.
+	 */
+	private function save_post_field( $field, $post_id ) {
+		$value = $field->sanitize( isset( $_POST[ $field->get_input_name() ] ) ? $_POST[ $field->get_input_name() ] : '' ); // phpcs:ignore
+		do_action( 'woodmart_metabox_before_update_metadata', $post_id, $field->get_input_name(), $value );
 
-			update_metadata(
+		if ( $field->get_default_value() === $value ) {
+			delete_metadata(
 				'post',
 				$post_id,
-				$field->get_input_name(),
-				$value
+				$field->get_input_name()
 			);
+
+			return;
 		}
+
+		update_metadata(
+			'post',
+			$post_id,
+			$field->get_input_name(),
+			$value
+		);
 	}
 
 	/**
@@ -751,6 +795,16 @@ class Metabox {
 		}
 
 		$value = $field->sanitize( $_POST[ $field->get_input_name() ] ); // phpcs:ignore
+
+		if ( $field->get_default_value() === $value ) {
+			delete_metadata(
+				'term',
+				$term_id,
+				$field->get_input_name()
+			);
+
+			return;
+		}
 
 		update_metadata(
 			'term',

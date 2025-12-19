@@ -399,7 +399,12 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
 		 * @param int    $depth  Depth of menu item. Used for padding.
 		 */
 		$atts          = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
-		$atts['class'] = 'woodmart-nav-link';
+
+		if ( array_key_exists( 'class', $atts ) ) {
+			$atts['class'] .= ' woodmart-nav-link';
+		} else {
+			$atts['class'] = 'woodmart-nav-link';
+		}
 
 		$attributes = '';
 		foreach ( $atts as $attr => $value ) {
@@ -506,8 +511,14 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
 				$item_output .= "\n$indent<div class=\"container wd-entry-content\">\n";
 				if ( 'yes' === $dropdown_ajax ) {
 					$item_output .= '<div class="dropdown-html-placeholder wd-fill" data-id="' . $block . '"></div>';
+
+					woodmart_add_editable_post_to_admin_bar( $block );
 				} else {
+					add_filter( 'wp_min_priority_img_pixels', array( $this, 'get_max_value' ) );
+
 					$item_output .= woodmart_html_block_shortcode( array( 'id' => $block ) );
+
+					remove_filter( 'wp_min_priority_img_pixels', array( $this, 'get_max_value' ) );
 				}
 				$item_output .= "\n$indent</div>\n";
 
@@ -529,9 +540,13 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
 			if ( 'yes' === $dropdown_ajax ) {
 				$item_output .= '<div class="dropdown-html-placeholder wd-fill" data-id="' . $block . '"></div>';
 			} else {
+				add_filter( 'wp_min_priority_img_pixels', array( $this, 'get_max_value' ) );
+
 				woodmart_lazy_loading_deinit( true );
 				$item_output .= woodmart_html_block_shortcode( array( 'id' => $block ) );
 				woodmart_lazy_loading_init( true );
+
+				remove_filter( 'wp_min_priority_img_pixels', array( $this, 'get_max_value' ) );
 			}
 			$item_output .= '</div>';
 			$item_output .= '</div>';
@@ -552,5 +567,15 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
 		 * @param array  $args        An array of {@see wp_nav_menu()} arguments.
 		 */
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+	}
+
+	/**
+	 * Get the maximum value for the priority image pixels.
+	 *
+	 * @param int $value The current value.
+	 * @return int
+	 */
+	public function get_max_value( $value ) {
+		return PHP_INT_MAX;
 	}
 }

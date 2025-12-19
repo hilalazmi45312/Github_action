@@ -210,5 +210,11 @@
     "prefooter_html_block": "258",
     "promo_popup": "1",
     "promo_popup_content_type": "html_block",
-    "categories_with_shadow": "disable"
+    "categories_with_shadow": "disable",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

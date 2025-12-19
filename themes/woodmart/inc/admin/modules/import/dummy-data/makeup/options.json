@@ -514,6 +514,7 @@
     "blog_columns": "3",
     "blog_columns_tablet": "2",
     "blog_spacing": "20",
+    "blog_archive_layout": "full-width",
     "secondary-color": {
         "idle": "rgb(194,209,151)"
     },
@@ -558,11 +559,10 @@
     "photoswipe_icon": "0",
     "reviews_style": "style-2",
     "reviews_columns": "2",
-    "additional_tab_title": "Application method",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "614",
     "disable_copyrights": "0",
     "prefooter_content_type": "text",
     "prefooter_area": "",
-    "grid_swatches_attribute": "pa_color"
+    "grid_swatches_attribute": "pa_color",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

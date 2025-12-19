@@ -28,5 +28,6 @@ include_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/widgets/class-wi
 
 include_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/widgets/class-widget-mailchimp.php');
 
-
-
+if ( class_exists( 'WooCommerce' ) ) {
+	require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/widgets/class-product-category-filter.php' );
+}

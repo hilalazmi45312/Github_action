@@ -1,6 +1,6 @@
 <?php
 if ( ! function_exists( 'wd_gutenberg_portfolio' ) ) {
-	function wd_gutenberg_portfolio( $block_attributes ) {
+	function wd_gutenberg_portfolio( $block_attributes, $content ) {
 		wd_replace_boolean_to_yes_no( array( 'hide_pagination_control', 'hide_prev_next_buttons', 'scroll_per_page', 'center_mode', 'wrap', 'autoplay', 'hide_scrollbar', 'autoheight', 'disable_overflow_carousel', 'dynamic_pagination_control', 'scroll_carousel_init' ), $block_attributes );
 
 		$block_attributes['wrapper_classes'] = wd_get_gutenberg_element_classes( $block_attributes );
@@ -34,6 +34,8 @@ if ( ! function_exists( 'wd_gutenberg_portfolio' ) ) {
 				'height' => $block_attributes['imgSizeCustomHeight'],
 			);
 		}
+
+		$block_attributes['inner_content'] = trim( $content );
 
 		return woodmart_shortcode_portfolio( $block_attributes );
 	}

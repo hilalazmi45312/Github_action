@@ -30,12 +30,20 @@ const phoneNumberReg = document.getElementById('phone_number_reg');
 const passwordReg = document.getElementById('password_reg');
 const cPasswordReg = document.getElementById('c_password_reg');
 const otpInputsRegister = document.querySelectorAll('.otp-inputs-register input');
+let loginTurnstileRendered = false;
+let registerTurnstileRendered = false;
+let loginCfToken = "";
+let registerCfToken = "";
+let loginTurnstileWidgetId = null;
+let registerTurnstileWidgetId = null;
 
 // Utility Functions
 
 function closeLoginPopup() {
     jQuery('.login-container').removeClass('active').fadeOut(300);
     jQuery('.login-overlay').fadeOut(300);
+
+    destroyTurnstile(); // 🔥 Stop Turnstile
 }
 
 function filterPhoneNumber(countryCode, phoneNumber) {
@@ -104,7 +112,10 @@ function makeAjaxRequest(url, data, onSuccess) {
         dataType: 'json',
         data,
         success: onSuccess,
-        error: () => showSwalError('Error', 'An error occurred. Please contact support.')
+        error: () => {
+            hideLoading();
+            showSwalError('Error', 'An error occurred. Please contact support.');
+        }
     });
 }
 
@@ -193,27 +204,17 @@ function requestOtp(identifier, type) {
 }
 
 function verifyLogin(identifier, credential, type) {
-    // Swal.fire({
-    //     title: 'Logging in...',
-    //     html: 'Please wait while we process your login.',
-    //     allowOutsideClick: false,
-    //     didOpen: () => Swal.showLoading()
-    // });
+    if (!loginCfToken) {
+        return showSwalError(
+            'Verification required',
+            'Please complete the human verification.'
+        );
+    }
     showLoading();
-
-    makeAjaxRequest(ajaxUrl, { action: 'login', phone: identifier, otp: credential, tx_id: txId, type }, response => {
+    makeAjaxRequest(ajaxUrl, { action: 'login', phone: identifier, otp: credential, tx_id: txId, type, cf_token: loginCfToken }, response => {
         // Swal.close();
         hideLoading();
         if (response.success) {
-            // Swal.fire({
-            //     icon: 'success',
-            //     title: 'Success',
-            //     text: response.data.message || 'Login successful!',
-            //     timer: 2000,
-            //     timerProgressBar: true
-            // }).then(() => {
-            //     window.location.href = response.data.redirect_url;
-            // });
             jQuery('.login-container').removeClass('active');
             jQuery(this).fadeOut(300);
             setTimeout(() => {
@@ -223,6 +224,7 @@ function verifyLogin(identifier, credential, type) {
             popupVisible = false;
         } else {
             showSwalError('Error', response.data.message || 'Invalid OTP. Please try again.');
+            resetTurnstile("login");
         }
     });
 }
@@ -272,12 +274,25 @@ jQuery(document).ready(() => {
             return;
         }
 
-        popup.css('display', 'block');
-        setTimeout(() => {
-            popup.addClass('active');
-            jQuery('.login-overlay').fadeIn(300);
-        }, 0);
-        popupVisible = true;
+        // popup.css('display', 'block');
+        // setTimeout(() => {
+        //     popup.addClass('active');
+        //     jQuery('.login-overlay').fadeIn(300);
+        // }, 0);
+        // popupVisible = true;
+        if (!popupVisible) {
+            popup.css('display', 'block');
+            setTimeout(() => {
+                popup.addClass('active');
+                jQuery('.login-overlay').fadeIn(300);
+
+                // Load the Turnstile only now
+                renderLoginTurnstile();
+            }, 0);
+
+            popupVisible = true;
+            return;
+        }
     });
 
     jQuery(document).on('click', '.login-overlay', function () {
@@ -287,11 +302,19 @@ jQuery(document).ready(() => {
             jQuery('.login-container').css('display', 'none');
         }, 400);
         popupVisible = false;
+
+        destroyTurnstile(); // 🔥 Stop Turnstile
     });
 });
 
 // Login button handlers
 loginMobileButton.addEventListener('click', () => {
+    if (!loginCfToken) {
+        return showSwalError(
+            'Verification required',
+            'Please complete the human verification first.'
+        );
+    }
     if (!phoneNumber.value) return showSwalError('Required', 'Phone number cannot be empty.');
     if (phoneNumber.value.length < 8 || phoneNumber.value.length > 10) return showSwalError('Required', 'Please enter a valid phone number');
     const fullPhone = filterPhoneNumber(countryCode.value, phoneNumber.value);
@@ -365,6 +388,8 @@ document.querySelectorAll('.register-button').forEach(button => {
         phoneNumberReg.value = '';
         passwordReg.value = '';
         cPasswordReg.value = '';
+        // Move Turnstile into register card
+        renderRegisterTurnstile();
     });
 });
 
@@ -372,6 +397,8 @@ document.querySelectorAll('.login-button').forEach(button => {
     button.addEventListener('click', () => {
         registerCard.style.display = 'none';
         loginCard.style.display = 'block';
+        // Move Turnstile back to login card
+        renderLoginTurnstile();
     });
 });
 
@@ -389,4 +416,66 @@ function goToRegisterTab() {
     phoneNumberReg.value = '';
     passwordReg.value = '';
     cPasswordReg.value = '';
+    // Move Turnstile into register card
+    renderRegisterTurnstile();
+}
+
+
+function renderLoginTurnstile() {
+    const container = document.getElementById("cf-login");
+
+    // Ensure container is empty
+    container.innerHTML = "";
+
+    loginTurnstileWidgetId = turnstile.render("#cf-login", {
+        sitekey: "0x4AAAAAACGMt9jHIDiBnaff",
+        theme: "light",
+        callback: function (token) {
+            loginCfToken = token;
+            console.log("Login Turnstile token:", token);
+        }
+    });
+}
+
+function renderRegisterTurnstile() {
+    const container = document.getElementById("cf-register");
+
+    container.innerHTML = "";
+
+    registerTurnstileWidgetId = turnstile.render("#cf-register", {
+        sitekey: "0x4AAAAAACGMt9jHIDiBnaff",
+        theme: "light",
+        callback: function (token) {
+            registerCfToken = token;
+            console.log("Register Turnstile token:", token);
+        }
+    });
+}
+
+function destroyTurnstile() {
+    // Destroy login widget
+    if (loginTurnstileWidgetId) {
+        document.getElementById("cf-login").innerHTML = "";
+        loginTurnstileWidgetId = null;
+        loginCfToken = "";
+    }
+
+    // Destroy register widget
+    if (registerTurnstileWidgetId) {
+        document.getElementById("cf-register").innerHTML = "";
+        registerTurnstileWidgetId = null;
+        registerCfToken = "";
+    }
+}
+
+function resetTurnstile(type = "login") {
+    if (type === "login" && loginTurnstileWidgetId) {
+        turnstile.reset(loginTurnstileWidgetId);
+        loginCfToken = "";
+    }
+
+    if (type === "register" && registerTurnstileWidgetId) {
+        turnstile.reset(registerTurnstileWidgetId);
+        registerCfToken = "";
+    }
 }

@@ -72,6 +72,15 @@ add_action('admin_menu', function () {
         ['ProductImportController', 'renderPage']
     );
 
+    add_submenu_page(
+        'senheng-settings',
+        'Product URL Export',
+        'Product URL Export',
+        'manage_options',
+        'product-url-export',
+        ['ProductUrlExportController', 'renderPage']
+    );
+
     // Optional: Separate Cron Setup page (can be removed since URL is shown on main import page)
     // add_submenu_page(
     //     'senheng-settings',
@@ -110,9 +119,9 @@ add_action('admin_menu', function () {
     //     ['PaymentGatewayController', 'adminIndex']
     // );
 
-    remove_submenu_page('senheng-settings', 'senheng-payment-plans');
-    remove_submenu_page('senheng-settings', 'senheng-payment-settings-action');
-    remove_submenu_page('senheng-settings', 'senheng-payment-plan-settings-action');
+    // remove_submenu_page('senheng-settings', 'senheng-payment-plans');
+    // remove_submenu_page('senheng-settings', 'senheng-payment-settings-action');
+    // remove_submenu_page('senheng-settings', 'senheng-payment-plan-settings-action');
 });
 
 // add_filter('woocommerce_available_payment_gateways', function($gws){
@@ -127,6 +136,14 @@ add_action('admin_enqueue_scripts', function () {
         #toplevel_page_senheng-settings .wp-menu-image img {
             width: 20px !important;
             height: 20px !important;
+        }
+    </style>';
+});
+
+add_action('wp_enqueue_scripts', function () {
+    echo '<style>
+        .wd-dropdown-menu.wd-dropdown.wd-style-with-bg{
+            font-family: var(--wd-text-font);
         }
     </style>';
 });

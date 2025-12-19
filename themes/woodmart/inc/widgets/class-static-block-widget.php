@@ -43,8 +43,11 @@ if ( ! class_exists( 'WOODMART_Static_Block_Widget' ) ) {
 			if ( $this->is_widget_preview() ) {
 				return;
 			}
+			echo wp_kses_post( $args['before_widget'] );
 
 			echo woodmart_get_html_block( $instance['id'] );
+
+			echo wp_kses_post( $args['after_widget'] );
 		}
 	
 	} // class

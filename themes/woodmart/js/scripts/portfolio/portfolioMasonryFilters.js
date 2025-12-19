@@ -25,9 +25,16 @@
 
 			$filer.find('.wd-active').removeClass('wd-active');
 			$this.addClass('wd-active');
-			$this.parents('.portfolio-filter').siblings('.wd-masonry.wd-projects').isotope({
-				filter: filterValue
-			});
+
+			var $masonryContainer = $this.parents('.portfolio-filter').siblings('.wd-masonry.wd-projects');
+
+			if (!$masonryContainer.length) {
+			    $masonryContainer = $('.wd-portfolio-archive .wd-masonry.wd-projects');
+			}
+			
+			if ($masonryContainer.length) {
+			    $masonryContainer.isotope({ filter: filterValue });
+			}
 		});
 	};
 

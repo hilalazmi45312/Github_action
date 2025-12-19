@@ -17,14 +17,14 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Appointments\Appointment;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Handler of pickup location data stored in order items.
@@ -496,8 +496,9 @@ class WC_Local_Pickup_Plus_Order_Items {
 		if ( ! empty( $_POST['wc_local_pickup_plus_pickup_items'] ) && is_array( $_POST['wc_local_pickup_plus_pickup_items'] ) ) {
 
 			$cart_item_keys = array();
+			$pickup_items = array_map('sanitize_text_field', (array) $_POST['wc_local_pickup_plus_pickup_items']);
 
-			foreach ( $_POST['wc_local_pickup_plus_pickup_items'] as $package_key => $item_keys ) {
+			foreach ( $pickup_items as $package_key => $item_keys ) {
 
 				// we always ensure this is an array
 				$item_keys = explode( ',', $item_keys );
@@ -535,14 +536,14 @@ class WC_Local_Pickup_Plus_Order_Items {
 
 		if ( isset( $_POST['_shipping_method_pickup_location_id'][ $package_key ] ) ) {
 
-			$pickup_location = wc_local_pickup_plus_get_pickup_location( $_POST['_shipping_method_pickup_location_id'][ $package_key ] );
+			$pickup_location = wc_local_pickup_plus_get_pickup_location( sanitize_text_field($_POST['_shipping_method_pickup_location_id'][ $package_key ]) );
 
 			if ( $pickup_location && $pickup_location->get_id() > 0 && $this->set_order_item_pickup_location( $shipping_item, $pickup_location ) ) {
 
 				// prefixing the package key with a string is a conservative workaround to prevent index oddities with index key 0 and data type handling in PHP (so we are sure these are strings now)
 				$shipping_item->update_meta_data( $this->pickup_package_key_meta, "package_{$package_key}" );
 
-				$pickup_date = isset( $_POST['_shipping_method_pickup_date'][ $package_key ] ) ? trim( $_POST['_shipping_method_pickup_date'][ $package_key ] ) : '';
+				$pickup_date = isset( $_POST['_shipping_method_pickup_date'][ $package_key ] ) ? trim( sanitize_text_field( $_POST['_shipping_method_pickup_date'][ $package_key ] ) ) : '';
 
 				if ( $pickup_date && 'disabled' !== wc_local_pickup_plus_appointments_mode() ) {
 

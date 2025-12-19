@@ -2,9 +2,6 @@
 
 namespace XTS\Modules\Layouts;
 
-use Elementor\Plugin;
-use XTS\Gutenberg\Blocks_Assets;
-use XTS\Gutenberg\Post_CSS;
 use XTS\Singleton;
 
 abstract class Layout_Type extends Singleton {
@@ -13,6 +10,7 @@ abstract class Layout_Type extends Singleton {
 	 */
 	public function init() {
 		add_filter( 'template_include', array( $this, 'override_template' ), 20 );
+		add_action( 'body_class', array( $this, 'get_body_classes' ) );
 	}
 
 	/**
@@ -35,7 +33,8 @@ abstract class Layout_Type extends Singleton {
 	/**
 	 * Display template.
 	 */
-	private function display_template() {
+	protected function display_template() {
+		Main::get_instance()->set_is_custom_layout( true );
 	}
 
 	/**
@@ -67,42 +66,20 @@ abstract class Layout_Type extends Singleton {
 			return;
 		}
 
-		if ( woodmart_is_elementor_installed() && Plugin::$instance->documents->get( $id )->is_built_with_elementor() ) {
-			$content = woodmart_elementor_get_content( $id );
-		} elseif ( has_blocks( $post->post_content ) ) {
-			$content = '';
-			if ( woodmart_get_opt( 'gutenberg_blocks' ) ) {
-				$content  = Blocks_Assets::get_instance()->get_inline_scripts( $id );
-				$content .= Post_CSS::get_instance()->get_inline_blocks_css( $id );
-			}
+		echo woodmart_get_post_content( $id ); // phpcs:ignore
+	}
 
-			$content .= do_shortcode( do_blocks( $post->post_content ) );
-		} else {
-			$shortcodes_custom_css          = get_post_meta( $id, '_wpb_shortcodes_custom_css', true );
-			$woodmart_shortcodes_custom_css = get_post_meta( $id, 'woodmart_shortcodes_custom_css', true );
-
-			$content = '<style data-type="vc_shortcodes-custom-css">';
-			if ( ! empty( $shortcodes_custom_css ) ) {
-				$content .= $shortcodes_custom_css;
-			}
-
-			if ( ! empty( $woodmart_shortcodes_custom_css ) ) {
-				$content .= $woodmart_shortcodes_custom_css;
-			}
-			$content .= '</style>';
-
-			if ( function_exists( 'vc_modules_manager' ) && vc_modules_manager()->is_module_on( 'vc-custom-css' ) ) {
-				ob_start();
-
-				vc_modules_manager()->get_module( 'vc-custom-css' )->output_custom_css_to_page( $id );
-
-				$content .= ob_get_clean();
-			}
-
-			$content .= do_shortcode( apply_filters( 'the_content', $post->post_content ) );
+	/**
+	 * Get body classes.
+	 *
+	 * @param array $classes Classes for the body element.
+	 * @return array
+	 */
+	public function get_body_classes( $classes ) {
+		if ( is_singular( 'woodmart_layout' ) ) {
+			$classes[] = 'page';
 		}
 
-		echo $content; // phpcs:ignore
+		return $classes;
 	}
 }
-

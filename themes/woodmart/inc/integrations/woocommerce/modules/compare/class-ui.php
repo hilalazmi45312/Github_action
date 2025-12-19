@@ -55,7 +55,8 @@ class Ui extends Singleton {
 		?>
 		<div class="wd-compare-btn product-compare-button <?php echo esc_attr( $classes ); ?>">
 			<a href="<?php echo esc_url( $url ); ?>" data-id="<?php echo esc_attr( $product_id ); ?>" rel="nofollow" data-added-text="<?php esc_attr_e( 'Compare products', 'woodmart' ); ?>">
-				<span><?php esc_html_e( 'Add to compare', 'woodmart' ); ?></span>
+				<span class="wd-added-icon"></span>
+				<span class="wd-action-text"><?php esc_html_e( 'Add to compare', 'woodmart' ); ?></span>
 			</a>
 		</div>
 		<?php

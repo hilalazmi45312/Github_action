@@ -178,15 +178,6 @@ class Team_Member extends Widget_Base {
 		);
 
 		$this->add_control(
-			'skype',
-			array(
-				'label'   => esc_html__( 'Skype link', 'woodmart' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '#',
-			)
-		);
-
-		$this->add_control(
 			'instagram',
 			array(
 				'label'   => esc_html__( 'Instagram link', 'woodmart' ),
@@ -251,7 +242,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'woodmart_color_scheme',
 			array(
-				'label'   => esc_html__( 'Color Scheme', 'woodmart' ),
+				'label'   => esc_html__( 'Color scheme', 'woodmart' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => array(
 					''      => esc_html__( 'Inherit', 'woodmart' ),
@@ -357,7 +348,6 @@ class Team_Member extends Widget_Base {
 			'position'              => '',
 			'twitter'               => '',
 			'facebook'              => '',
-			'skype'                 => '',
 			'linkedin'              => '',
 			'instagram'             => '',
 			'image'                 => '',
@@ -468,7 +458,7 @@ class Team_Member extends Widget_Base {
 	 * @return string|void
 	 */
 	protected function show_member_social( $settings ) {
-		if ( ! $settings['facebook'] && ! $settings['twitter'] && ! $settings['linkedin'] && ! $settings['skype'] && ! $settings['instagram'] ) {
+		if ( ! $settings['facebook'] && ! $settings['twitter'] && ! $settings['linkedin'] && ! $settings['instagram'] ) {
 			return '';
 		}
 
@@ -480,31 +470,25 @@ class Team_Member extends Widget_Base {
 		<div class="member-social">
 			<div <?php echo $this->get_render_attribute_string( 'social' ); // phpcs:ignore. ?>>
 				<?php if ( $settings['facebook'] ) : ?>
-					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-facebook" href="<?php echo esc_url( $settings['facebook'] ); ?>">
+					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-facebook" href="<?php echo esc_url( $settings['facebook'] ); ?>" aria-label="<?php esc_attr_e( 'Facebook social link', 'woodmart' ); ?>">
 						<span class="wd-icon"></span>
 					</a>
 				<?php endif; ?>
 
 				<?php if ( $settings['twitter'] ) : ?>
-					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-twitter" href="<?php echo esc_url( $settings['twitter'] ); ?>">
+					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-twitter" href="<?php echo esc_url( $settings['twitter'] ); ?>" aria-label="<?php esc_attr_e( 'X social link', 'woodmart' ); ?>">
 						<span class="wd-icon"></span>
 					</a>
 				<?php endif; ?>
 
 				<?php if ( $settings['linkedin'] ) : ?>
-					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-linkedin" href="<?php echo esc_url( $settings['linkedin'] ); ?>">
-						<span class="wd-icon"></span>
-					</a>
-				<?php endif; ?>
-
-				<?php if ( $settings['skype'] ) : ?>
-					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-skype" href="<?php echo esc_url( $settings['skype'] ); ?>">
+					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-linkedin" href="<?php echo esc_url( $settings['linkedin'] ); ?>" aria-label="<?php esc_attr_e( 'Linkedin social link', 'woodmart' ); ?>">
 						<span class="wd-icon"></span>
 					</a>
 				<?php endif; ?>
 
 				<?php if ( $settings['instagram'] ) : ?>
-					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-instagram" href="<?php echo esc_url( $settings['instagram'] ); ?>">
+					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-instagram" href="<?php echo esc_url( $settings['instagram'] ); ?>" aria-label="<?php esc_attr_e( 'Instagram social link', 'woodmart' ); ?>">
 						<span class="wd-icon"></span>
 					</a>
 				<?php endif; ?>

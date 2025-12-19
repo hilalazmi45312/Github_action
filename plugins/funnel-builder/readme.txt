@@ -4,7 +4,7 @@ Tags: Funnel Builder, WooCommerce Checkout, Sales Funnels, One Click Upsells
 Requires at least: 5.4.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.13.1.4
+Stable tag: 3.13.1.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -140,7 +140,7 @@ Order Bumps are the offers made to the user on the WooCommerce checkout page. On
 
 With post-purchase upsells, secure the immediate order before pitching other offers. Users can accept them with a single click, which boosts the store's average order value. The friction-free purchases enhance user experience after the WooCommerce checkout page.
 
-https://www.youtube.com/watch?v=AJRa0aghVNE
+https://www.youtube.com/watch?v=VyK9jCP6qng
 
 - Rule-based upsells to present offers based on item(s) bought, payment gateway used, order total & more.
 - Mobile-responsive, pre-built one-click upsell offer page templates for Elementor.
@@ -378,6 +378,13 @@ If you face any difficulties with FunnelKit, feel free to contact our [Support T
 4. Start creating Funnels.
 
 == Change log ==
+
+= 3.13.1.6 (Dec 09, 2025) =
+* Improved: Funnel: Enhanced plugin security for optin related SQL queries. (#8402)
+
+= 3.13.1.5 (Nov 28, 2025) =
+* Fixed: Admin dashboard widget was not working correctly for WooCommerce version below 10.3.0 (#8353)
+* Fixed: Admin notifications for the admin steps screen conditions fixed. (#8353)
 
 = 3.13.1.4 (Nov 27, 2025) =
 * Improved: Checkout: Compatibility updated with Order Delivery Date for WooCommerce plugin by Tychesoftwares. (#8352)

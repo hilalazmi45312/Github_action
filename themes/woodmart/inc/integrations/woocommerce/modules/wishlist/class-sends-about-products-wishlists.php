@@ -23,13 +23,6 @@ use XTS\Singleton;
  */
 class Sends_About_Products_Wishlists extends Singleton {
 	/**
-	 * Name unsubscribed users option.
-	 *
-	 * @var string
-	 */
-	private $unsubscribed_users = 'woodmart_wishlist_unsubscribed_users';
-
-	/**
 	 * Init.
 	 */
 	public function init() {
@@ -124,13 +117,11 @@ class Sends_About_Products_Wishlists extends Singleton {
 			exit();
 		}
 
-		$unsubscribed_users = get_option( $this->unsubscribed_users, array() );
+		$unsubscribed_wishlist_back_in_stock    = woodmart_unsubscribe_user_from_mailing( $user->user_email, 'XTS_Email_Wishlist_Back_In_Stock' );
+		$unsubscribed_wishlist_on_sale_products = woodmart_unsubscribe_user_from_mailing( $user->user_email, 'XTS_Email_Wishlist_On_Sale_Products' );
+		$unsubscribed_wishlist_promotional      = woodmart_unsubscribe_user_from_mailing( $user->user_email, 'XTS_Email_Wishlist_Promotional' );
 
-		if ( ! in_array( $user->user_email, $unsubscribed_users, true ) ) {
-			$unsubscribed_users[] = $user->user_email;
-
-			update_option( $this->unsubscribed_users, $unsubscribed_users, false );
-
+		if ( $unsubscribed_wishlist_back_in_stock && $unsubscribed_wishlist_on_sale_products && $unsubscribed_wishlist_promotional ) {
 			delete_user_meta( $user_id, 'woodmart_send_wishlist_unsubscribe_token' );
 			delete_user_meta( $user_id, 'woodmart_send_wishlist_unsubscribe_token_expiration' );
 		}
@@ -173,7 +164,7 @@ class Sends_About_Products_Wishlists extends Singleton {
 	 */
 	private function get_dummy_product() {
 		$product = new WC_Product();
-		$product->set_name( 'Dummy Product' );
+		$product->set_name( __( 'Dummy Product', 'woodmart' ) );
 		$product->set_price( 25 );
 
 		return $product;

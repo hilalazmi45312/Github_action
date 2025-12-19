@@ -31,23 +31,20 @@ if ( ! function_exists( 'woodmart_shortcode_shop_archive_active_filters' ) ) {
 		}
 
 		ob_start();
+		woodmart_get_active_filters();
+		$active_filters_content = ob_get_clean();
+
+		ob_start();
 
 		Main::setup_preview();
 
-		$_chosen_attributes = WC_Query::get_layered_nav_chosen_attributes();
-		$min_price          = isset( $_GET['min_price'] ) ? wc_clean( wp_unslash( $_GET['min_price'] ) ) : 0; // phpcs:ignore.
-		$max_price          = isset( $_GET['max_price'] ) ? wc_clean( wp_unslash( $_GET['max_price'] ) ) : 0; // phpcs:ignore.
-		$rating_filter      = isset( $_GET['rating_filter'] ) ? array_filter( array_map( 'absint', explode( ',', wp_unslash( $_GET['rating_filter'] ) ) ) ) : array(); // phpcs:ignore.
-
-		if ( 0 === count( $_chosen_attributes ) && empty( $min_price ) && empty( $max_price ) && empty( $rating_filter ) ) {
-			return '';
-		}
-
+		if ( ! empty( $active_filters_content ) ) {
 		?>
 		<div class="wd-shop-active-filters wd-wpb<?php echo esc_attr( $wrapper_classes ); ?>">
-			<?php woodmart_get_active_filters(); ?>
+			<?php echo $active_filters_content; // phpcs:ignore. ?>
 		</div>
 		<?php
+		}
 
 		Main::restore_preview();
 

@@ -6,7 +6,7 @@
  */
 
 use XTS\Modules\Layouts\Main;
-use XTS\Modules\Shipping_Progress_Bar\Main as Shipping_Progress_Bar_Module;
+use XTS\Modules\Shipping_Progress_Bar\Frontend as Shipping_Progress_Bar_Module;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Direct access not allowed.
@@ -19,6 +19,10 @@ if ( ! function_exists( 'woodmart_shortcode_shipping_progress_bar' ) ) {
 	 * @param array $settings Shortcode attributes.
 	 */
 	function woodmart_shortcode_shipping_progress_bar( $settings ) {
+		if ( ! woodmart_get_opt( 'shipping_progress_bar_enabled' ) ) {
+			return;
+		}
+
 		$default_settings = array(
 			'css'       => '',
 			'alignment' => 'left',

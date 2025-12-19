@@ -129,7 +129,7 @@ $show_confirmed_column      = $confirm_subscription_email->is_enabled() && 'all'
 					</td>
 					<?php if ( $show_confirmed_column ) : ?>
 						<td data-title="<?php esc_attr_e( 'Confirmed', 'woodmart' ); ?>">
-							<span class="<?php echo $confirmed ? esc_attr( 'wd-confirmed' ) : esc_attr( 'wd-not-confirmed' ); ?>"></span>
+							<span class="<?php echo $confirmed ? esc_attr( 'wd-confirmed' ) : esc_attr( 'wd-cell-empty' ); ?>"></span>
 						</td>
 					<?php endif; ?>
 				</tr>

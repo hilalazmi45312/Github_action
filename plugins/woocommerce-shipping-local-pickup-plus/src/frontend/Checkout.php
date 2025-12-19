@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -31,7 +31,7 @@ use SkyVerge\WooCommerce\Local_Pickup_Plus\Fields\Cart_Item_Pickup_Location_Fiel
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Fields\Package_Pickup_Appointment_Field;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Fields\Package_Pickup_Items_Field;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Fields\Package_Pickup_Location_Field;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Checkout form shipping handler.
@@ -197,13 +197,13 @@ class Checkout {
 			if ( ! empty( $package['first_pickup_package'] ) ) {
 
 				echo '<tr class="woocommerce-shipping-total shipping"><th>' . esc_html( wc_local_pickup_plus_shipping_method()->get_method_title() ) . '</th><td>';
-				echo $this->add_package_wrapper_start();
+				echo $this->add_package_wrapper_start(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			if ( ! empty( $package['first_shipping_package'] ) ) {
 
 				echo '<tr class="woocommerce-shipping-total shipping"><th>' . esc_html__( 'Shipping', 'woocommerce-shipping-local-pickup-plus' ) . '</th><td>';
-				echo $this->add_package_wrapper_start();
+				echo $this->add_package_wrapper_start(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 	}
@@ -230,7 +230,7 @@ class Checkout {
 				if ( ! empty( $package['last_pickup_package'] )
 				     || ! empty( $package['last_shipping_package'] ) ) {
 
-					echo $this->add_package_wrapper_end() . '</td></tr>';
+					echo $this->add_package_wrapper_end() . '</td></tr>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 		}
@@ -403,7 +403,7 @@ class Checkout {
 		// maybe display additional disclaimer if an address was not provided yet and only Local Pickup Plus is available
 		if ( $this->should_display_address_additional_disclaimer( $local_pickup_plus_id, $package ) ) {
 
-			echo '<p>' . __( 'Enter your address to see all available shipping options.', 'woocommerce-shipping-local-pickup-plus' ) . '</p>';
+			echo '<p>' . esc_html__( 'Enter your address to see all available shipping options.', 'woocommerce-shipping-local-pickup-plus' ) . '</p>';
 		}
 	}
 
@@ -538,12 +538,12 @@ class Checkout {
 					<input
 						type="hidden"
 						id="wc-local-pickup-plus-packages-to-ship"
-						value="<?php echo $packages_to_ship; ?>"
+						value="<?php echo esc_attr( $packages_to_ship ); ?>"
 					/>
 					<input
 						type="hidden"
 						id="wc-local-pickup-plus-packages-to-pickup"
-						value="<?php echo $packages_to_pickup; ?>"
+						value="<?php echo esc_attr( $packages_to_pickup ); ?>"
 					/>
 				</td>
 			</tr>
@@ -815,8 +815,8 @@ class Checkout {
 		// check if there are any packages meant for local pickup
 		if ( $local_pickup_packages = ! empty( $shipping_methods ) ? array_keys( $shipping_methods, $local_pickup_method->get_method_id() ) : null ) {
 
-			$pickup_location_ids = isset( $_POST['_shipping_method_pickup_location_id'] ) ? $_POST['_shipping_method_pickup_location_id'] : [];
-			$pickup_dates        = isset( $_POST['_shipping_method_pickup_date'] )        ? $_POST['_shipping_method_pickup_date']        : [];
+			$pickup_location_ids = isset( $_POST['_shipping_method_pickup_location_id'] ) ? array_map('sanitize_text_field', (array) $_POST['_shipping_method_pickup_location_id']) : [];
+			$pickup_dates        = isset( $_POST['_shipping_method_pickup_date'] )        ? array_map('sanitize_text_field', (array) $_POST['_shipping_method_pickup_date'])        : [];
 			$appointment_offsets = Framework\SV_WC_Helper::get_posted_value( '_shipping_method_pickup_appointment_offset', [] );
 
 			foreach ( $local_pickup_packages as $package_id ) {

@@ -311,20 +311,64 @@ class Icon_List extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'text_color_hover',
+		$this->start_controls_tabs(
+			'title_color_tabs',
 			array(
-				'label'     => esc_html__( 'Text color hover', 'woodmart' ),
+				'condition' => array(
+					'color_scheme' => array( 'custom' ),
+				),
+			)
+		);
+
+		$this->start_controls_tab(
+			'title_color_tab',
+			array(
+				'label' => esc_html__( 'Idle', 'woodmart' ),
+			)
+		);
+
+		$this->add_control(
+			'link_color',
+			array(
+				'label'     => esc_html__( 'Link color', 'woodmart' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} li:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} li a' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
 					'color_scheme' => array( 'custom' ),
 				),
 			)
 		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'title_hover_color_tab',
+			array(
+				'label' => esc_html__( 'Hover', 'woodmart' ),
+			)
+		);
+
+		$this->add_control(
+			'text_color_hover',
+			array(
+				'label'     => esc_html__( 'Link color hover', 'woodmart' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} li a:hover' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'color_scheme' => array( 'custom' ),
+				),
+			)
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
@@ -596,10 +640,8 @@ class Icon_List extends Widget_Base {
 				$this->add_inline_editing_attributes( $repeater_label_key );
 
 				// Link settings.
-				$item['link']['class'] = 'wd-fill';
-				$item['image_size']    = ! empty( $item['image_size'] ) ? $item['image_size'] : 'thumbnail';
-				$link_attrs            = woodmart_get_link_attrs( $item['link'] );
-				$item_icon_output      = $icon_output;
+				$item['image_size'] = ! empty( $item['image_size'] ) ? $item['image_size'] : 'thumbnail';
+				$item_icon_output   = $icon_output;
 
 				if ( empty( $item['image_custom_dimension']['width'] ) ) {
 					$item['image_custom_dimension'] = $custom_image_size;
@@ -625,13 +667,14 @@ class Icon_List extends Widget_Base {
 					<?php endif ?>
 
 					<span <?php echo $this->get_render_attribute_string( $repeater_label_key ); ?>>
-						<?php echo $item['list_content']; ?>
+						<?php if ( isset( $item['link']['url'] ) && $item['link']['url'] ) : ?>
+							<a <?php echo woodmart_get_link_attrs( $item['link'] ); ?>>
+								<?php echo $item['list_content']; ?>
+							</a>
+						<?php else : ?>
+							<?php echo $item['list_content']; ?>
+						<?php endif; ?>
 					</span>
-
-					<?php if ( isset( $item['link']['url'] ) && $item['link']['url'] ) : ?>
-
-						<a <?php echo $link_attrs ?> aria-label="<?php esc_attr_e( 'List item link', 'woodmart' ); ?>"></a>
-					<?php endif; ?>
 				</li>
 			<?php endforeach ?>
 		</ul>

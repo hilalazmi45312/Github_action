@@ -20,6 +20,10 @@ if ( isset( $params['items_gap'] ) ) {
 	$menu_classes .= ' wd-gap-' . $params['items_gap'];
 }
 
+if ( ! empty( $params['icon_alignment'] ) && 'inherit' !== $params['icon_alignment'] ) {
+	$menu_classes .= ' wd-icon-' . $params['icon_alignment'];
+}
+
 if ( isset( $params['inline'] ) && $params['inline'] ) {
 	$classes     .= ' wd-inline';
 	$extra_class .= ' wd-inline';
@@ -56,6 +60,10 @@ if ( isset( $id ) ) {
 $classes     .= woodmart_get_old_classes( ' navigation-style-' . $menu_style );
 $extra_class .= woodmart_get_old_classes( ' full-screen-burger-icon woodmart-burger-icon' );
 
+if ( 'bg' === $params['menu_style'] ) {
+	woodmart_enqueue_inline_style( 'bg-navigation' );
+}
+
 if ( $params['full_screen'] ) {
 	woodmart_enqueue_inline_style( 'header-fullscreen-menu' );
 	?>
@@ -82,11 +90,11 @@ if ( $params['full_screen'] ) {
 	return;
 }
 ?>
-<div class="wd-header-nav wd-header-main-nav <?php echo esc_attr( $classes ); ?>" role="navigation" aria-label="<?php esc_attr_e( 'Main navigation', 'woodmart' ); ?>">
+<nav class="wd-header-nav wd-header-main-nav <?php echo esc_attr( $classes ); ?>" role="navigation" aria-label="<?php esc_attr_e( 'Main navigation', 'woodmart' ); ?>">
 	<?php
 	$args = array(
 		'container'  => '',
-		'menu_class' => 'menu wd-nav wd-nav-main' . $menu_classes,
+		'menu_class' => 'menu wd-nav wd-nav-header wd-nav-main' . $menu_classes,
 		'walker'     => new Mega_Menu_Walker(),
 	);
 
@@ -103,7 +111,7 @@ if ( $params['full_screen'] ) {
 	} else {
 		$menu_link = get_admin_url( null, 'nav-menus.php' );
 		?>
-				<div class="create-nav-msg">
+			<div class="create-nav-msg">
 			<?php
 				printf(
 					wp_kses(
@@ -117,8 +125,8 @@ if ( $params['full_screen'] ) {
 					$menu_link
 				);
 			?>
-				</div>
+			</div>
 			<?php
 	}
 	?>
-</div>
+</nav>

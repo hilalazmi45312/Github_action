@@ -65,6 +65,10 @@
       "type": "string",
       "default": "flex"
     },
+    "imageHoverAnimation": {
+      "type": "string",
+      "default": "none"
+    },
     "spaceAroundImage": {
       "type": "integer",
       "default": 0

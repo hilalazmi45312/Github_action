@@ -548,7 +548,6 @@ if( ! function_exists( 'woodmart_shortcode_info_box_carousel' ) ) {
 		}
 
 		if ( $scroll_carousel_init == 'yes' ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$class .= ' scroll-init';
 		}
 

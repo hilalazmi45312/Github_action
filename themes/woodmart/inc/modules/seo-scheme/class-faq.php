@@ -36,6 +36,7 @@ class Faq extends Singleton {
 
 		// WPBakery.
 		add_filter( 'woodmart_shortcode_accordion_content', array( $this, 'render_accordion_shortcode_faq_schema' ), 10, 3 );
+		add_filter( 'woodmart_shortcode_toggle_content', array( $this, 'render_toggle_shortcode_faq_schema' ), 10, 3 );
 
 		// Elementor.
 		add_action( 'elementor/frontend/widget/after_render', array( $this, 'render_elementor_accordion_faq_schema' ) );
@@ -157,6 +158,42 @@ class Faq extends Singleton {
 	}
 
 	/**
+	 * Render accordion shortcode faq schema.
+	 *
+	 * @param string $content Content.
+	 * @param array  $args Arguments.
+	 * @param string $raw_content Shortcode content.
+	 * @return string
+	 */
+	public function render_toggle_shortcode_faq_schema( $content, $args, $raw_content ) {
+		if ( ! empty( $args['faq_schema'] ) && 'yes' === $args['faq_schema'] ) {
+			$answer = trim(
+				strip_tags(
+					preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', do_shortcode( $raw_content ) ),
+					apply_filters( 'woodmart_allowed_faq_schema_html_tags', '<br>' )
+				)
+			);
+
+			$question = ! empty( $args['element_title'] ) ? trim( wp_strip_all_tags( $args['element_title'] ) ) : '';
+
+			if ( ! $question || ! $answer ) {
+				return $content;
+			}
+
+			$this->faq_entities[] = '{
+				"@type": "Question",
+				"name": ' . wp_json_encode( $question, JSON_UNESCAPED_UNICODE ) . ',
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": ' . wp_json_encode( $answer, JSON_UNESCAPED_UNICODE ) . '
+					}
+				}';
+		}
+
+		return $content;
+	}
+
+	/**
 	 * Render block accordion faq schema.
 	 *
 	 * @param string $block_content Block content.
@@ -238,6 +275,16 @@ class Faq extends Singleton {
 		}
 
 		return trim( $answer );
+	}
+
+	/**
+	 * Add faq schema.
+	 *
+	 * @param string $faq_schema Faq schema.
+	 * @return void
+	 */
+	public function add_faq_schema( $faq_schema ) {
+		$this->faq_entities[] = $faq_schema;
 	}
 
 	/**

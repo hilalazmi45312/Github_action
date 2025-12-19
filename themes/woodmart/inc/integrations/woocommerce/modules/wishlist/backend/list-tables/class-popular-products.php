@@ -59,7 +59,6 @@ class Popular_Products extends WP_List_Table {
 			return '';
 		}
 
-		$product_url      = $product->get_permalink();
 		$product_edit_url = get_edit_post_link( $item['product_id'] );
 		$product_name     = $product->get_name();
 
@@ -82,24 +81,13 @@ class Popular_Products extends WP_List_Table {
 				esc_html__( 'View a list with customers that have added this product to their wishlist', 'woodmart' ),
 				esc_html__( 'View customers', 'woodmart' )
 			),
-			'view_product' => sprintf( '<a href="%s" title="%s" rel="permalink">%s</a>', $product_url, esc_html__( 'View Product', 'woodmart' ), esc_html__( 'View Product', 'woodmart' ) ),
 		);
 		$row_actions = $this->row_actions( $actions );
 
 		return sprintf(
 			'%s<div class="product-details"><strong><a class="row-title" href="%s">%s</a></strong>%s</div>',
 			$product->get_image( 'thumbnail' ),
-			esc_url(
-				add_query_arg(
-					array(
-						'page'       => 'xts-wishlist-settings-page',
-						'tab'        => 'xts-users-popular-products',
-						'action'     => 'show_users',
-						'product_id' => $item['product_id'],
-					),
-					admin_url( 'edit.php?post_type=product' )
-				)
-			),
+			$product->get_permalink(),
 			$product_name,
 			$row_actions
 		);
@@ -285,7 +273,21 @@ class Popular_Products extends WP_List_Table {
 		$user_id  = get_current_user_id();
 
 		$data = $this->table_data();
-		usort( $data, array( $this, 'sort_data' ) );
+
+		$order_by = 'count';
+		$order    = 'desc';
+
+		// If orderby is set, use this as the sort column.
+		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
+			$order_by = $_GET['orderby']; // phpcs:ignore.
+		}
+
+		// If order is set use this as the order.
+		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
+			$order = $_GET['order']; // phpcs:ignore.
+		}
+
+		woodmart_sort_data( $data, $order_by, $order );
 
 		$per_page     = ! empty( get_user_meta( $user_id, 'wishlists_per_page', true) ) ? get_user_meta( $user_id, 'wishlists_per_page', true) : 20;
 		$current_page = $this->get_pagenum();
@@ -388,41 +390,6 @@ class Popular_Products extends WP_List_Table {
 		}
 
 		return $user_ids;
-	}
-
-	/**
-	 * Allows you to sort the data by the variables set in the $_GET.
-	 *
-	 * @param array $a First array.
-	 * @param array $b Next array.
-	 * @return int
-	 */
-	private function sort_data( $a, $b ) {
-		// Set defaults.
-		$order_by = 'count';
-		$order    = 'desc';
-
-		// If orderby is set, use this as the sort column.
-		if (!empty($_GET['orderby'])) { // phpcs:ignore.
-			$order_by = $_GET['orderby']; // phpcs:ignore.
-		}
-
-		// If order is set use this as the order.
-		if (!empty($_GET['order'])) { // phpcs:ignore.
-			$order = $_GET['order']; // phpcs:ignore.
-		}
-
-		$result = strcmp( $a[ $order_by ], $b[ $order_by ] );
-
-		if ( is_numeric( $a[ $order_by ] ) && is_numeric( $a[ $order_by ] ) ) {
-			$result = $a[ $order_by ] - $b[ $order_by ];
-		}
-
-		if ( 'asc' === $order ) {
-			return $result;
-		}
-
-		return -$result;
 	}
 
 	/**

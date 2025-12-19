@@ -247,3 +247,23 @@ Options::add_field(
 		'priority'    => 70,
 	)
 );
+
+Options::add_field(
+	array(
+		'id'          => 'auto_update_translations',
+		'name'        => esc_html__( 'Auto update translations', 'woodmart' ),
+		'description' => wp_kses(
+			__( 'Automatically install and update language packs for the theme. <strong>Note:</strong> This will override any existing translation customizations and requires theme license activation.', 'woodmart' ),
+			array(
+				'strong' => array(),
+				'br'     => array(),
+			)
+		),
+		'type'        => 'switcher',
+		'section'     => 'other_section',
+		'default'     => '0',
+		'on-text'     => esc_html__( 'Yes', 'woodmart' ),
+		'off-text'    => esc_html__( 'No', 'woodmart' ),
+		'priority'    => 80,
+	)
+);

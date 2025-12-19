@@ -1053,7 +1053,7 @@ if( ! function_exists( 'woodmart_get_products_shortcode_params' ) ) {
 					'param_holder_class' => 'vc_grid-data-type-not-ids',
 					'dependency' => array(
 						'element' => 'post_type',
-						'value_not_equal_to' => array( 'custom', 'recently_viewed', 'top_rated_products' ),
+						'value_not_equal_to' => array( 'custom', 'recently_viewed', 'top_rated_products', 'bestselling' ),
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
@@ -1066,7 +1066,7 @@ if( ! function_exists( 'woodmart_get_products_shortcode_params' ) ) {
 					'param_holder_class' => 'vc_grid-data-type-not-ids',
 					'dependency' => array(
 						'element' => 'post_type',
-						'value_not_equal_to' => array( 'ids', 'custom', 'recently_viewed' )
+						'value_not_equal_to' => array( 'ids', 'custom', 'recently_viewed', 'bestselling' )
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
@@ -1099,7 +1099,7 @@ if( ! function_exists( 'woodmart_get_products_shortcode_params' ) ) {
 					'hint' => esc_html__( 'Select sorting order.', 'woodmart' ),
 					'dependency' => array(
 						'element' => 'post_type',
-						'value_not_equal_to' => array( 'ids', 'custom', 'recently_viewed', 'top_rated_products' )
+						'value_not_equal_to' => array( 'ids', 'custom', 'recently_viewed', 'top_rated_products', 'bestselling' )
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),

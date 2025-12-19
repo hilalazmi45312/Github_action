@@ -7,25 +7,19 @@
 
 namespace XTS\Modules\Checkout_Fields;
 
-use XTS\Modules\Checkout_Fields\List_Table\Fields_Table;
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
 
 /**
  * Checkout fields class.
  */
-class Main extends Singleton {
+class Main {
 	/**
-	 * Init.
+	 * Constructor.
 	 */
-	public function init() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
 
-		if ( ! woodmart_woocommerce_installed() || ! woodmart_get_opt( 'checkout_fields_enabled' ) ) {
-			return;
-		}
-
-		$this->include_files();
+		woodmart_include_files( __DIR__, $this->get_include_files() );
 	}
 
 	/**
@@ -47,25 +41,30 @@ class Main extends Singleton {
 	}
 
 	/**
-	 * Include files.
+	 * Get list of module include files.
+	 *
+	 * @return array
 	 */
-	private function include_files() {
+	protected function get_include_files() {
+		$files = array();
+
 		if ( ! class_exists( 'WP_List_Table' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+			$files[] = ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 		}
 
-		$files = array(
-			'class-helper',
-			'list-tables/class-fields-table',
-			'class-admin',
-			'class-frontend',
-			'class-ajax-actions',
+		$files = array_merge(
+			$files,
+			array(
+				'./class-helper',
+				'./list-tables/class-fields-table',
+				'./class-admin',
+				'./class-frontend',
+				'./class-ajax-actions',
+			)
 		);
 
-		foreach ( $files as $file ) {
-			require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/integrations/woocommerce/modules/checkout-fields/' . $file . '.php' );
-		}
+		return $files;
 	}
 }
 
-Main::get_instance();
+new Main();

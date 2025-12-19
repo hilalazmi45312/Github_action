@@ -7,14 +7,14 @@
 					<?php if ( woodmart_get_opt( 'white_label_dashboard_title' ) ) : ?>
 						<?php echo esc_html( woodmart_get_opt( 'white_label_dashboard_title' ) ); ?>
 					<?php else : ?>
-						<?php esc_html_e( 'Welcome to WoodMart', 'woodmart' ); ?>
+						<?php esc_html_e( 'Welcome to WoodMart dashboard', 'woodmart' ); ?>
 					<?php endif; ?>
 				</h3>
 				<div class="xts-about-text">
 					<?php if ( woodmart_get_opt( 'white_label_dashboard_text' ) ) : ?>
 						<?php echo do_shortcode( wpautop( woodmart_get_opt( 'white_label_dashboard_text' ) ) ); ?>
 					<?php else : ?>
-						<?php esc_html_e( 'Thank you for choosing WoodMart, our premium eCommerce theme! Get started building your stunning online store by easily importing our prebuilt demo sites and customizing the theme options to suit your needs.', 'woodmart' ); ?>
+						<?php esc_html_e( 'Thank you for choosing WoodMart, our premium eCommerce theme! Get started building your stunning online store by easily importing one of our prebuilt demo sites and customizing the theme options to match your needs.', 'woodmart' ); ?>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 				</h3>
 
 				<p>
-					<?php esc_html_e( 'Thank you for choosing WoodMart, our premium eCommerce theme! Get started building your stunning online store by easily importing our prebuilt demo sites and customizing the theme options to suit your needs.', 'woodmart' ); ?>
+					<?php esc_html_e( 'Thank you for choosing WoodMart, our premium eCommerce theme! Get started building your stunning online store by easily importing one of our prebuilt demo sites and customizing the theme options to match your needs.', 'woodmart' ); ?>
 				</p>
 
 				<?php if ( woodmart_get_opt( 'white_label_changelog_tab' ) ) : ?>
@@ -40,9 +40,12 @@
 			</div>
 		</div>
 
+		
 		<div class="xts-row xts-welcome-row xts-sp-20 xts-theme-style">
+			<?php do_action( 'woodmart_after_welcome_box_content' ); ?>
+
 			<div class="xts-col-12 xts-col-xl-6">
-				<div class="xts-box xts-info-boxes">
+				<div class="xts-box xts-info-boxes xts-support xts-align-center">
 					<div class="xts-box-content">
 						<h4>
 							<?php esc_html_e( 'Need assistance?', 'woodmart' ); ?>
@@ -82,10 +85,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="xts-col-12 xts-col-xl-6">
-				<div class="xts-box xts-info-boxes xts-align-center">
+				<div class="xts-box xts-info-boxes xts-rate xts-align-center">
 					<div class="xts-box-content">
 						<h4>
 							<?php esc_html_e( 'Enjoying the theme?', 'woodmart' ); ?>

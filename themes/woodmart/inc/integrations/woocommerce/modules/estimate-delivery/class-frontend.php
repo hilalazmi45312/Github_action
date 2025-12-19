@@ -30,6 +30,10 @@ class Frontend extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'estimate_delivery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->manager = Manager::get_instance();
 
 		// Enqueue scripts.
@@ -231,7 +235,7 @@ class Frontend extends Singleton {
 			$date_created = $order->get_date_created();
 			$order_date   = $date_created ? $date_created->date( 'Y-m-d H:i:s' ) : false;
 
-			$this->render_delivery_detail( $product, $order_date );
+			$this->render_delivery_detail( $product, $order_date, ! $is_order_detail_page );
 		}
 	}
 
@@ -398,20 +402,15 @@ class Frontend extends Singleton {
 	 * @return void
 	 */
 	public function render_tooltip( $content ) {
-		$position = 'top';
+		woodmart_enqueue_js_library( 'tooltips' );
+		woodmart_enqueue_js_script( 'btns-tooltips' );
 
-		if ( is_wc_endpoint_url( 'view-order' ) || is_wc_endpoint_url( 'order-received' ) ) {
-			$position = ! is_rtl() ? 'right' : 'left';
-		}
 		?>
-			<div class="wd-hint wd-tltp">
-				<div class="tooltip <?php echo esc_attr( $position ); ?>">
-					<div class="tooltip-arrow"></div>
-					<div class="tooltip-inner color-scheme-light">
-					<?php echo wp_kses_post( $content ); ?>
-					</div>
-				</div>
-			</div>
+		<span class="wd-hint wd-tooltip wd-with-html">
+			<span class="wd-tooltip-content">
+				<?php echo wp_kses_post( $content ); ?>
+			</span>
+		</span>
 		<?php
 	}
 

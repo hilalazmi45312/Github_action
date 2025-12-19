@@ -4,7 +4,7 @@
  *
  * @package     woocommerce-smart-coupons/includes/
  * @since       9.16.0
- * @version     1.0.1
+ * @version     1.2.0
  */
 
 // Exit if accessed directly.
@@ -121,42 +121,46 @@ if ( ! class_exists( 'WC_SC_Coupon_Expiry_Reminder' ) ) {
 		 * @param bool           $notice    Show admin notice true/false.
 		 */
 		public function schedule_reminder_for_coupon( $coupon_id = 0, $coupon = null, $notice = true ) {
-			global $wpdb;
-			$coupon_id = (int) $coupon_id;
-			if ( empty( $coupon_id ) || ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) {
-				return;
-			}
+			try {
+				global $wpdb;
+				$coupon_id = (int) $coupon_id;
+				if ( empty( $coupon_id ) || ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) {
+					return;
+				}
 
-			$coupon = $coupon ?? new WC_Coupon( $coupon_id );
+				$coupon = $coupon ?? new WC_Coupon( $coupon_id );
 
-			if ( ! $coupon instanceof WC_Coupon || ! $this->email_enabled || empty( $coupon->get_email_restrictions() ) ) {
-				return;
-			}
-			// phpcs:disable
-			// Get the expiration date from custom table.
-			$expiration_date = $wpdb->get_var(
-				$wpdb->prepare(
-					"SELECT UNIX_TIMESTAMP(date_expires) FROM {$wpdb->prefix}wc_smart_coupons WHERE id = %d",
-					$coupon_id
-				)
-			);
-			// phpcs:enable
+				if ( ! $coupon instanceof WC_Coupon || ! $this->email_enabled || empty( $coupon->get_email_restrictions() ) ) {
+					return;
+				}
+				// phpcs:disable
+				// Get the expiration date from custom table.
+				$expiration_date = $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT UNIX_TIMESTAMP(date_expires) FROM {$wpdb->prefix}wc_smart_coupons WHERE id = %d",
+						$coupon_id
+					)
+				);
+				// phpcs:enable
 
-			if ( $expiration_date ) {
-				$reminder_time = (int) $expiration_date - ( $this->coupon_reminder_days * DAY_IN_SECONDS );
+				if ( $expiration_date ) {
+					$reminder_time = (int) $expiration_date - ( $this->coupon_reminder_days * DAY_IN_SECONDS );
 
-				// Check if the reminder time is in the future.
-				if ( $reminder_time > time() && $this->is_coupon_already_scheduled( $coupon_id, $reminder_time ) ) {
-					// Cancel any existing reminder before scheduling a new one.
-					$this->cancel_coupon_reminder( $coupon_id );
+					// Check if the reminder time is in the future.
+					if ( $reminder_time > time() && $this->is_coupon_already_scheduled( $coupon_id, $reminder_time ) ) {
+						// Cancel any existing reminder before scheduling a new one.
+						$this->cancel_coupon_reminder( $coupon_id );
 
-					// Schedule the reminder action.
-					as_schedule_single_action( $reminder_time, $this->action, array( $coupon_id ), 'woocommerce-smart-coupons' );
+						// Schedule the reminder action.
+						as_schedule_single_action( $reminder_time, $this->action, array( $coupon_id ), 'woocommerce-smart-coupons' );
 
-					if ( $notice ) {
-						set_transient( 'wc_sc_coupon_expiry_reminder_notice', $coupon_id, 60 );
+						if ( $notice ) {
+							set_transient( 'wc_sc_coupon_expiry_reminder_notice', $coupon_id, 60 );
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 

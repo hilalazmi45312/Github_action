@@ -415,6 +415,7 @@
     "blog_spacing": "20",
     "blog_excerpt_length": "100",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "quick_shop_variable": "1",
     "quick_shop_variable_type": "select_options",
     "grid_swatches_attribute": "pa_color",
@@ -504,5 +505,7 @@
     },
     "single_product_grid_columns_gap": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIyMCJ9LCJ0YWJsZXQiOnsidW5pdCI6InB4IiwidmFsdWUiOiIyMCJ9LCJtb2JpbGUiOnsidW5pdCI6InB4IiwidmFsdWUiOiIxMCJ9fX0=",
     "image_action": "popup",
-    "photoswipe_icon": "0"
+    "photoswipe_icon": "0",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

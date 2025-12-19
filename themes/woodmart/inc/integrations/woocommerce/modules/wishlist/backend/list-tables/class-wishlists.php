@@ -259,7 +259,21 @@ class Wishlists extends WP_List_Table {
 		$user_id  = get_current_user_id();
 
 		$data = $this->table_data();
-		usort( $data, array( $this, 'sort_data' ) );
+
+		$order_by = 'date_created';
+		$order    = 'desc';
+
+		// If orderby is set, use this as the sort column.
+		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
+			$order_by = $_GET['orderby']; // phpcs:ignore.
+		}
+
+		// If order is set use this as the order.
+		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
+			$order = $_GET['order']; // phpcs:ignore.
+		}
+
+		woodmart_sort_data( $data, $order_by, $order );
 
 		$per_page     = ! empty( get_user_meta( $user_id, 'wishlists_per_page', true) ) ? get_user_meta( $user_id, 'wishlists_per_page', true) : 20;
 		$current_page = $this->get_pagenum();
@@ -335,41 +349,6 @@ class Wishlists extends WP_List_Table {
 		}
 
 		return wp_cache_get( 'wishlists_list_table' );
-	}
-
-	/**
-	 * Allows you to sort the data by the variables set in the $_GET.
-	 *
-	 * @param array $a First array.
-	 * @param array $b Next array.
-	 * @return int
-	 */
-	private function sort_data( $a, $b ) {
-		// Set defaults.
-		$order_by = 'date_created';
-		$order    = 'asc';
-
-		// If orderby is set, use this as the sort column.
-		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
-			$order_by = $_GET['orderby']; // phpcs:ignore.
-		}
-
-		// If order is set use this as the order.
-		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
-			$order = $_GET['order']; // phpcs:ignore.
-		}
-
-		$result = strcmp( $a[ $order_by ], $b[ $order_by ] );
-
-		if ( is_numeric( $a[ $order_by ] ) && is_numeric( $a[ $order_by ] ) ) {
-			$result = $a[ $order_by ] - $b[ $order_by ];
-		}
-
-		if ( 'asc' === $order ) {
-			return $result;
-		}
-
-		return -$result;
 	}
 
 	/**

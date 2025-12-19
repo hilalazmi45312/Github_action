@@ -36,6 +36,10 @@ class Admin extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'estimate_delivery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->manager = Manager::get_instance();
 
 		add_action( 'new_to_publish', array( $this, 'clear_transients_on_publish' ) );
@@ -259,11 +263,41 @@ class Admin extends Singleton {
 
 		$metabox->add_field(
 			array(
-				'id'       => 'est_del_condition',
-				'group'    => esc_html__( 'Condition', 'woodmart' ),
-				'type'     => 'conditions',
-				'section'  => 'general',
-				'priority' => 70,
+				'id'           => 'est_del_condition',
+				'group'        => esc_html__( 'Condition', 'woodmart' ),
+				'type'         => 'conditions',
+				'section'      => 'general',
+				'inner_fields' => array(
+					'type'                 => array(
+						'name'    => esc_html__( 'Condition type', 'woodmart' ),
+						'options' => array(
+							'all'                    => esc_html__( 'All products', 'woodmart' ),
+							'product'                => esc_html__( 'Single product id', 'woodmart' ),
+							'product_cat'            => esc_html__( 'Product category', 'woodmart' ),
+							'product_cat_children'   => esc_html__( 'Child product categories', 'woodmart' ),
+							'product_tag'            => esc_html__( 'Product tag', 'woodmart' ),
+							'product_attr_term'      => esc_html__( 'Product attribute', 'woodmart' ),
+							'product_type'           => esc_html__( 'Product type', 'woodmart' ),
+							'product_stock_status'   => esc_html__( 'Product stock status', 'woodmart' ),
+							'product_shipping_class' => esc_html__( 'Product shipping class', 'woodmart' ),
+						),
+					),
+					'product-stock-status' => array(
+						'name'     => esc_html__( 'Condition query', 'woodmart' ),
+						'options'  => array(
+							'instock'     => esc_html__( 'In stock', 'woodmart' ),
+							'onbackorder' => esc_html__( 'On backorder', 'woodmart' ),
+						),
+						'requires' => array(
+							array(
+								'key'     => 'type',
+								'compare' => 'equals',
+								'value'   => 'product_stock_status',
+							),
+						),
+					),
+				),
+				'priority'     => 70,
 			)
 		);
 
@@ -304,12 +338,12 @@ class Admin extends Singleton {
 				'est_del_shipping_method',
 				'est_del_day_min',
 				'est_del_day_max',
-				'est_del_tooltip_content',
 				'est_del_skipped_date',
 				'est_del_daily_deadline',
 				'est_del_exclusion_dates',
 				'est_del_condition',
 				'est_del_priority',
+				'est_del_tooltip_content',
 			)
 		);
 	}

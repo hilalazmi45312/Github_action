@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="product-wrapper">
 	<div class="product-element-top">
-		<a href="<?php echo esc_url( get_permalink() ); ?>" class="product-image-link">
+		<a href="<?php echo esc_url( get_permalink() ); ?>" class="product-image-link" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
 			<?php do_action( 'woocommerce_before_shop_loop_item_title' ); ?>
 		</a>
 	</div>

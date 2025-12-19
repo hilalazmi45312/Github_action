@@ -114,8 +114,6 @@
     },
     "sticky_footer": "1",
     "products_hover": "quick",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "726",
     "btns_shop_style": "flat",
     "btns_default_bg": {
         "idle": "rgb(23,23,23)"
@@ -232,5 +230,11 @@
             "color": ""
           }
         }
-    }
+    },
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

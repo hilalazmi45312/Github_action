@@ -32,6 +32,7 @@
 
 		var pItem = document.querySelectorAll('img[data-src], source[data-srcset]');
 		var bgItem = document.querySelectorAll('.wd-lazy-bg');
+		var videoItem = document.querySelectorAll('video[data-poster]');
 		var pCount;
 		var bgCount;
 		var timer;
@@ -39,6 +40,7 @@
 		woodmartThemeModule.$document.on('wood-images-loaded added_to_cart updated_cart_totals updated_checkout wc_fragments_refreshed', function() {
 			pItem = document.querySelectorAll('img[data-src], source[data-srcset]');
 			bgItem = document.querySelectorAll('.wd-lazy-bg');
+			videoItem = document.querySelectorAll('video[data-poster]');
 
 			inView();
 		});
@@ -94,7 +96,7 @@
 
 		// image in view?
 		function inView() {
-			if (pItem.length || bgItem.length) {
+			if (pItem.length || bgItem.length || videoItem.length) {
 				requestAnimationFrame(function() {
 					var offset = parseInt(woodmart_settings.lazy_loading_offset);
 					var wT = window.pageYOffset, wB = wT + window.innerHeight + offset, cRect, pT, pB, p = 0, b = 0;
@@ -129,6 +131,24 @@
 						}
 
 						bgCount = bgItem.length;
+					}
+
+					if (videoItem.length) {
+						var v = 0;
+
+						while (v < videoItem.length) {
+							cRect = videoItem[v].getBoundingClientRect();
+							pT = wT + cRect.top;
+							pB = pT + cRect.height;
+
+							if (wT < pB && wB > pT && !videoItem[v].loaded) {
+								videoItem[v].poster = videoItem[v].dataset.poster;
+
+								videoItem[v].loaded = true;
+							} else {
+								v++;
+							}
+						}
 					}
 				});
 			}

@@ -201,8 +201,6 @@ function get_category_listing($data = [])
                 }
             }
 
-            // Sale quantity – not directly tracked, keep 0 or null
-            $sale_quantity = get_post_meta($product_id, '_sales_quantity', true);
 
             // Build one product entry like your sample
             $products_data[] = [
@@ -228,7 +226,7 @@ function get_category_listing($data = [])
                 'shopId'                   => get_current_blog_id(),
                 'productUrl'               => get_permalink($product_id),
                 'shopUrl'                  => $shop_url,
-                'saleQuantity'             => $sale_quantity,
+                'saleQuantity'             => null,
             ];
         }
         wp_reset_postdata();

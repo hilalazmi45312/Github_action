@@ -175,6 +175,6 @@ if ( ! function_exists( 'wd_gutenberg_is_rest_api' ) ) {
 	 * @return bool
 	 */
 	function wd_gutenberg_is_rest_api() {
-		return ! empty( $_SERVER['REQUEST_URI'] ) && false !== strpos( $_SERVER['REQUEST_URI'], trailingslashit( rest_get_url_prefix() ) ); //phpcs:ignore
+		return ( isset( $_GET['rest_route'] ) && false !== strpos( $_GET['rest_route'], '/' ) ) || ( ! empty( $_SERVER['REQUEST_URI'] ) && false !== strpos( $_SERVER['REQUEST_URI'], trailingslashit( rest_get_url_prefix() ) ) ); // phpcs:ignore
 	}
 }

@@ -79,6 +79,10 @@ class Products extends Widget_Base {
 	public function get_product_attributes_array() {
 		$attributes = [];
 
+		if ( taxonomy_exists( 'product_brand' ) ) {
+			$attributes[] = 'product_brand';
+		}
+
 		if ( woodmart_woocommerce_installed() ) {
 			foreach ( wc_get_attribute_taxonomies() as $attribute ) {
 				$attributes[] = 'pa_' . $attribute->attribute_name;
@@ -133,7 +137,7 @@ class Products extends Widget_Base {
 				'description' => esc_html__( 'Select content type for your grid.', 'woodmart' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'product',
-				'options'     => $this->get_options_depend_builder(
+				'options'     => woodmart_get_options_depend_builder(
 					array(
 						'product'            => esc_html__( 'All Products', 'woodmart' ),
 						'featured'           => esc_html__( 'Featured Products', 'woodmart' ),
@@ -198,7 +202,7 @@ class Products extends Widget_Base {
 				'type'        => 'wd_autocomplete',
 				'search'      => 'woodmart_get_taxonomies_by_query',
 				'render'      => 'woodmart_get_taxonomies_title_by_id',
-				'taxonomy'    => array_merge( [ 'product_cat', 'product_tag', 'product_brand' ], $this->get_product_attributes_array() ),
+				'taxonomy'    => array_merge( [ 'product_cat', 'product_tag' ], $this->get_product_attributes_array() ),
 				'multiple'    => true,
 				'label_block' => true,
 				'condition'   => [
@@ -229,7 +233,7 @@ class Products extends Widget_Base {
 					'price'          => esc_html__( 'Price', 'woodmart' ),
 				),
 				'condition'   => array(
-					'post_type!' => array( 'recently_viewed', 'top_rated_products' ),
+					'post_type!' => array( 'recently_viewed', 'top_rated_products', 'bestselling' ),
 				),
 			]
 		);
@@ -257,7 +261,7 @@ class Products extends Widget_Base {
 					'AND' => esc_html__( 'AND', 'woodmart' ),
 				),
 				'condition' => array(
-					'post_type!' => array( 'recently_viewed', 'top_rated_products' ),
+					'post_type!' => array( 'recently_viewed', 'top_rated_products', 'bestselling' ),
 				),
 			]
 		);
@@ -275,7 +279,7 @@ class Products extends Widget_Base {
 					'ASC'  => esc_html__( 'Ascending', 'woodmart' ),
 				),
 				'condition'   => [
-					'post_type!' => array( 'ids', 'recently_viewed' ),
+					'post_type!' => array( 'ids', 'recently_viewed', 'bestselling' ),
 				],
 			]
 		);
@@ -1037,27 +1041,6 @@ class Products extends Widget_Base {
 		Main::setup_preview();
 		woodmart_elementor_products_template( $this->get_settings_for_display() );
 		Main::restore_preview();
-	}
-
-	/**
-	 * This method checks on which layout this element is displayed, and depending on these displays the necessary additional options.
-	 *
-	 * @param array $default_array An array of options that should be independent of the builder.
-	 * @param array $additional_array Options that should appear only on the specific layout.
-	 * This array must have a key equal to the name of the builder layout on which you want to see additional options.
-	 * Example: array( 'single_product' => array( 'related' => esc_html__( 'Related (Single product)', 'woodmart' ) ) );.
-	 * @return array
-	 */
-	private function get_options_depend_builder( $default_array, $additional_array ) {
-		$result_array = $default_array;
-
-		foreach ( $additional_array as $needed_builder => $additional_options ) {
-			if ( Main::is_layout_type( $needed_builder ) ) {
-				$result_array = array_merge( $result_array, $additional_options );
-			}
-		}
-
-		return $result_array;
 	}
 }
 

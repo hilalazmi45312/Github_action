@@ -41,7 +41,7 @@ if ( ! woodmart_loop_prop( 'hide_categories_subcategories' ) ) {
 	<?php endif; ?>
 
 	<div class="wd-cat-inner">
-		<a class="wd-fill" href="<?php echo esc_url( get_term_link( $args['category']->slug, 'product_cat' ) ); ?>"></a>
+		<a class="wd-fill" href="<?php echo esc_url( get_term_link( $args['category']->slug, 'product_cat' ) ); ?>" aria-label="<?php echo esc_html( $args['category']->name ); ?>"></a>
 		<div class="wd-cat-thumb">
 			<?php do_action( 'woocommerce_after_subcategory', $args['category'] ); ?>
 			<div class="wd-cat-image">

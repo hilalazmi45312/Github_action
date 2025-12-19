@@ -132,5 +132,9 @@
     "footer-layout": "13",
     "footer_html_block": "4816",
     "prefooter_area": "",
-    "portfolio_page": "150"
+    "portfolio_page": "150",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

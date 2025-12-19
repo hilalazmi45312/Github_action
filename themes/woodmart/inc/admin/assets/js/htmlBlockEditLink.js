@@ -11,6 +11,10 @@
 		htmlBlockEditLink();
 	});
 
+	$(document).on('menu-item-added', function() {
+		htmlBlockEditLink();
+	});
+
 	jQuery(window).on('elementor:init', function() {
 		elementor.hooks.addAction('panel/open_editor/widget', function () {
 			htmlBlockEditLink();

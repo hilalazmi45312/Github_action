@@ -14,9 +14,12 @@ if ( ! function_exists( 'wd_get_block_border_css' ) ) {
 	 * @param string $selector CSS selector.
 	 * @param array  $attributes CSS attributes.
 	 * @param string $attr_prefix Attribute prefix.
+	 * @param string $border_rule Border rule.
+	 * @param string $radius_rule Radius rule.
+	 *
 	 * @return array
 	 */
-	function wd_get_block_border_css( $selector, $attributes, $attr_prefix ) {
+	function wd_get_block_border_css( $selector, $attributes, $attr_prefix, $border_rule = 'border', $radius_rule = 'border-radius' ) {
 		$block_css = new Block_CSS( $attributes );
 
 		foreach ( array( 'global', 'tablet', 'mobile' ) as $device ) {
@@ -32,18 +35,28 @@ if ( ! function_exists( 'wd_get_block_border_css' ) ) {
 					&& $attributes[ $attr_prefix . 'WidthTop' . $device_name ] === $attributes[ $attr_prefix . 'WidthLeft' . $device_name ]
 					&& ! empty( $attributes[ $attr_prefix . 'Type' ] )
 					&& 'none' !== $attributes[ $attr_prefix . 'Type' ]
-					&& ( ! empty( $attributes[ $attr_prefix . 'ColorCode' ] ) || ! empty( $attributes[ $attr_prefix . 'ColorVariable' ] ) )
 				) {
 					$width = $attributes[ $attr_prefix . 'WidthTop' . $device_name ];
 					$unit  = $block_css->get_units_for_attribute( $attr_prefix, $device );
-
 					$color = ! empty( $attributes[ $attr_prefix . 'ColorVariable' ] ) ? 'var(' . $attributes[ $attr_prefix . 'ColorVariable' ] . ')' : $attributes[ $attr_prefix . 'ColorCode' ];
+					$type  = $attributes[ $attr_prefix . 'Type' ];
 
-					$block_css->add_to_selector(
-						$selector,
-						'border:' . $width . $unit . ' ' . $attributes[ $attr_prefix . 'Type' ] . ' ' . $color . ';',
-						$device
+					$border_css = trim(
+						sprintf(
+							'%s %s %s',
+							( '' !== $width ) ? $width . $unit : '',
+							$type,
+							$color
+						)
 					);
+
+					if ( ! empty( $border_css ) ) {
+						$block_css->add_to_selector(
+							$selector,
+							$border_rule . ':' . $border_css . ';',
+							$device
+						);
+					}
 
 					$add_border_css = false;
 				} else {
@@ -52,15 +65,15 @@ if ( ! function_exists( 'wd_get_block_border_css' ) ) {
 						array(
 							array(
 								'attr_name' => $attr_prefix . 'Type',
-								'template'  => 'border-style: {{value}};',
+								'template'  => $border_rule . '-style: {{value}};',
 							),
 							array(
 								'attr_name' => $attr_prefix . 'ColorCode',
-								'template'  => 'border-color: {{value}};',
+								'template'  => $border_rule . '-color: {{value}};',
 							),
 							array(
 								'attr_name' => $attr_prefix . 'ColorVariable',
-								'template'  => 'border-color: var({{value}});',
+								'template'  => $border_rule . '-color: var({{value}});',
 							),
 						)
 					);
@@ -76,7 +89,7 @@ if ( ! function_exists( 'wd_get_block_border_css' ) ) {
 			) {
 				$block_css->add_to_selector(
 					$selector,
-					'border-width:' . $block_css->get_value_from_sides( $attr_prefix . 'Width', $device ) . ';',
+					$border_rule . '-width:' . $block_css->get_value_from_sides( $attr_prefix . 'Width', $device ) . ';',
 					$device
 				);
 			}
@@ -89,7 +102,7 @@ if ( ! function_exists( 'wd_get_block_border_css' ) ) {
 			) {
 				$block_css->add_to_selector(
 					$selector,
-					'border-radius:' . $block_css->get_value_from_sides( $attr_prefix . 'Radius', $device ) . ';',
+					$radius_rule . ':' . $block_css->get_value_from_sides( $attr_prefix . 'Radius', $device ) . ';',
 					$device
 				);
 			}

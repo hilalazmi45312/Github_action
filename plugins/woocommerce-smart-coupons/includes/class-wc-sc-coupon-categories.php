@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.8.0
- * @version     1.5.0
+ * @version     1.6.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -55,6 +55,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Categories' ) ) {
 			add_filter( 'manage_shop_coupon_posts_columns', array( $this, 'define_columns' ), 11 );
 			add_action( 'manage_shop_coupon_posts_custom_column', array( $this, 'render_columns' ), 10, 2 );
 			add_filter( 'is_sc_valid_apply_credit', array( $this, 'validate_applicable_store_credit_against_line_item' ), 11, 4 );
+			add_action( 'template_redirect', array( $this, 'wc_sc_redirect_coupon_category_to_shop' ) );
 		}
 
 		/**
@@ -84,6 +85,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Categories' ) ) {
 		 * Register custom taxonomy called sc_coupon_category.
 		 */
 		public function wc_sc_coupons_add_category() {
+
 			$labels = array(
 				'name'              => __( 'Coupon categories', 'woocommerce-smart-coupons' ),
 				'singular_name'     => __( 'Category', 'woocommerce-smart-coupons' ),
@@ -185,6 +187,7 @@ if ( ! class_exists( 'WC_SC_Coupon_Categories' ) ) {
 			if ( ! empty( $columns ) ) {
 				return array_slice( $columns, 0, 1, true ) + array( 'id' => 'ID' ) + array_slice( $columns, 1, count( $columns ) - 1, true );
 			}
+
 			return $columns;
 		}
 
@@ -235,15 +238,17 @@ if ( ! class_exists( 'WC_SC_Coupon_Categories' ) ) {
 		 * @param int    $post_id Post ID being shown.
 		 */
 		public function render_columns( $column = '', $post_id = 0 ) {
+			try {
+				if ( empty( $post_id ) || empty( $column ) || 'wc_sc_coupon_category' !== $column ) {
+					return;
+				}
 
-			if ( empty( $post_id ) || empty( $column ) || 'wc_sc_coupon_category' !== $column ) {
-				return;
+				$coupon = new WC_Coupon( $post_id );
+
+				$this->render_coupon_category_column( $post_id, $coupon );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			$coupon = new WC_Coupon( $post_id );
-
-			$this->render_coupon_category_column( $post_id, $coupon );
-
 		}
 
 		/**
@@ -256,18 +261,60 @@ if ( ! class_exists( 'WC_SC_Coupon_Categories' ) ) {
 		 * @return bool           $valid
 		 */
 		public function validate_applicable_store_credit_against_line_item( $valid = false, $product = null, $coupon = null, $cart_item = null ) {
-			if ( ! $coupon instanceof WC_Coupon || empty( $cart_item['product_id'] ) ) {
-				return $valid;
+			try {
+				if ( ! $coupon instanceof WC_Coupon || empty( $cart_item['product_id'] ) ) {
+					return $valid;
+				}
+				$coupon_product_ids   = ! empty( $coupon->get_product_ids() ) ? $coupon->get_product_ids() : array();
+				$coupon_category_ids  = ! empty( $coupon->get_product_categories() ) ? $coupon->get_product_categories() : array();
+				$product_category_ids = wc_get_product_cat_ids( $cart_item['product_id'] );
+				if ( in_array( $cart_item['product_id'], $coupon_product_ids, true ) || in_array( $cart_item['variation_id'], $coupon_product_ids, true ) || count( array_intersect( $product_category_ids, $coupon_category_ids ) ) > 0 ) {
+					$valid = true;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-			$coupon_product_ids   = ! empty( $coupon->get_product_ids() ) ? $coupon->get_product_ids() : array();
-			$coupon_category_ids  = ! empty( $coupon->get_product_categories() ) ? $coupon->get_product_categories() : array();
-			$product_category_ids = wc_get_product_cat_ids( $cart_item['product_id'] );
-			if ( in_array( $cart_item['product_id'], $coupon_product_ids, true ) || in_array( $cart_item['variation_id'], $coupon_product_ids, true ) || count( array_intersect( $product_category_ids, $coupon_category_ids ) ) > 0 ) {
-				$valid = true;
-			}
+
 			return $valid;
 		}
 
+		/**
+		 * Redirect sc_coupon_category taxonomy pages to WooCommerce shop page.
+		 * Admin users (with 'manage_options' capability) are exempt from this redirect by default.
+		 *
+		 * @return void
+		 *
+		 * @filter sc_coupon_category_should_redirect bool  Allows customizing the redirect condition.
+		 * @filter sc_coupon_category_redirect_url    string Allows customizing the redirect URL.
+		 */
+		public function wc_sc_redirect_coupon_category_to_shop() {
+			// Default condition: redirect on sc_coupon_category taxonomy pages for non-admins.
+			$should_redirect = is_tax( 'sc_coupon_category' ) && ! current_user_can( 'manage_options' );
+
+			/**
+			 * Filter the condition to redirect sc_coupon_category taxonomy pages.
+			 * Allows developers to customize the redirect behavior.
+			 *
+			 * @param bool $should_redirect Default condition (true/false).
+			 */
+			$should_redirect = apply_filters( 'sc_coupon_category_should_redirect', $should_redirect );
+
+			if ( $should_redirect ) {
+				// Get WooCommerce shop page URL.
+				$shop_page_url = get_permalink( wc_get_page_id( 'shop' ) );
+
+				/**
+				 * Filter the redirect URL for sc_coupon_category taxonomy pages.
+				 * Allows developers to customize the redirect target URL.
+				 *
+				 * @param string $shop_page_url Current shop page URL.
+				 */
+				$shop_page_url = apply_filters( 'sc_coupon_category_redirect_url', $shop_page_url );
+
+				wp_safe_redirect( $shop_page_url );
+				exit;
+			}
+		}
 
 	}
 

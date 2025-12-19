@@ -9,7 +9,7 @@
  * Developer URI:        https://sweetcode.com
  * Text Domain:          woocommerce-google-adwords-conversion-tracking-tag
  * Domain path:          /languages
- * Version:              1.51.1
+ * Version:              1.54.1
  *
  * WC requires at least: 3.7
  * WC tested up to:      10.2
@@ -21,7 +21,7 @@
 
 defined('ABSPATH') || exit; // Exit if accessed directly
 
-$pmw_version     = '1.51.1';
+$pmw_version     = '1.54.1';
 $plugin_basename = plugin_basename(__FILE__);
 
 require_once 'freemius-loader.php';

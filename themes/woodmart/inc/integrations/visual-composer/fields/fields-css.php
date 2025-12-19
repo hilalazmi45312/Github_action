@@ -277,6 +277,7 @@ if ( ! function_exists( 'woodmart_parse_shortcodes_css_data_new' ) ) {
 			'wd_select',
 			'wd_fonts',
 			'wd_dimensions',
+			'woodmart_gradient',
 		);
 
 		WPBMap::addAllMappedShortcodes();
@@ -408,20 +409,42 @@ if ( ! function_exists( 'woodmart_fields_css_data_to_css' ) ) {
 								$result = str_replace( '{{SPREAD}}', $device_value['spread'], $result );
 								$result = str_replace( '{{COLOR}}', $device_value['color'], $result );
 							} elseif ( isset( $params['type'] ) && 'wd_dimensions' === $params['type'] ) {
-								if ( false !== stripos( $property, '{{TOP}}' ) && ( $device_value['top'] || '0' === $device_value['top'] ) ) {
-									$result .= str_replace( '{{TOP}}', $device_value['top'], $property );
+								$result                 = $property;
+								$all_placeholders_exist = true;
+								$dimension_keys         = array( 'top', 'right', 'bottom', 'left' );
+
+								foreach ( $dimension_keys as $dim_key ) {
+									if ( false === strpos( $result, '{{' . strtoupper( $dim_key ) . '}}' ) ) {
+										$all_placeholders_exist = false;
+										break;
+									}
 								}
-								if ( false !== stripos( $property, '{{RIGHT}}' ) && ( $device_value['right'] || '0' === $device_value['right'] ) ) {
-									$result .= str_replace( '{{RIGHT}}', $device_value['right'], $property );
+
+								if ( empty( $device_value['top'] ) && empty( $device_value['right'] ) && empty( $device_value['bottom'] ) && empty( $device_value['left'] ) ) {
+									continue;
 								}
-								if ( false !== stripos( $property, '{{BOTTOM}}' ) && ( $device_value['bottom'] || '0' === $device_value['bottom'] ) ) {
-									$result .= str_replace( '{{BOTTOM}}', $device_value['bottom'], $property );
-								}
-								if ( false !== stripos( $property, '{{LEFT}}' ) && ( $device_value['left'] || '0' === $device_value['left'] ) ) {
-									$result .= str_replace( '{{LEFT}}', $device_value['left'], $property );
+
+								foreach ( $dimension_keys as $dim_key ) {
+									if ( false !== strpos( $result, '{{' . strtoupper( $dim_key ) . '}}' ) ) {
+										if ( $all_placeholders_exist && ! $device_value[ $dim_key ] ) {
+											$replace_val = '0';
+										} else {
+											$replace_val = $device_value[ $dim_key ] || '0' === $device_value[ $dim_key ] ? $device_value[ $dim_key ] : false;
+										}
+
+										if ( false !== $replace_val ) {
+											$result = str_replace( '{{' . strtoupper( $dim_key ) . '}}', $replace_val, $result );
+										} else {
+											$result = '';
+										}
+									}
 								}
 
 								$result = str_replace( '{{UNIT}}', $device_value['unit'], $result );
+							} elseif ( isset( $params['type'] ) && 'woodmart_gradient' === $params['type'] ) {
+								$gradient_value = woodmart_parse_gradient_string( $device_value['value'] );
+
+								$result .= str_replace( '{{VALUE}}', $gradient_value, $property );
 							} else {
 								if ( ! isset( $device_value['value'] ) || '-' === $device_value['value'] || ( isset( $params['generate_zero'] ) && '' === $device_value['value'] ) || ( ! isset( $params['generate_zero'] ) && empty( $device_value['value'] ) ) ) {
 									continue;

@@ -1,7 +1,7 @@
 /* global woodmart_settings */
 (function($) {
 	woodmartThemeModule.menuDropdownsAJAX = function() {
-		woodmartThemeModule.$body.on('mousemove', function(){
+		window.addEventListener('wdEventStarted', function() {
 			$('.menu').has('.dropdown-load-ajax').each(function() {
 				var $menu = $(this);
 
@@ -9,7 +9,13 @@
 					return;
 				}
 
-				loadDropdowns($menu);
+				if (woodmartThemeModule.windowWidth <= 1024) {
+					setTimeout(function() {
+						loadDropdowns($menu);
+					}, 500);
+				} else {
+					loadDropdowns($menu);
+				}
 			});
 		});
 

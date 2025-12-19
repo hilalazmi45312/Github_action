@@ -130,11 +130,7 @@ class CartController
                 $variation_id = isset($cart_item['variation_id']) ? $cart_item['variation_id'] : 0;
                 $product_obj = $variation_id ? wc_get_product($variation_id) : wc_get_product($product_id);
                 if ($product_obj) {
-                    if (!empty($cart_item['force_regular_price'])) {
-                        $base_price = $product_obj->get_regular_price();
-                    } else {
-                        $base_price = $product_obj->get_price();
-                    }
+                    $base_price = $product_obj->get_price();
                     $product_name .= '<div class="cart-actual-price"><small>' . esc_html__('Actual Price', 'senheng-core') . ': ' . wc_price($base_price) . '</small></div>';
                 }
             }
@@ -328,6 +324,19 @@ class CartController
                     if ($unit_price <= 0) {
                         $unit_price = isset($extra_product_data['price']) ? (float) $extra_product_data['price'] : 0;
                     }
+
+                    // Apply discount if available
+                    $child_discount = isset($extra_product_data['childDiscount']) ? floatval($extra_product_data['childDiscount']) : 0;
+                    $discount_type = isset($extra_product_data['discountType']) ? $extra_product_data['discountType'] : '';
+                    
+                    if ($unit_price > 0 && $child_discount > 0) {
+                         if ($discount_type === 'percent') {
+                             $unit_price = $unit_price - ($unit_price * ($child_discount / 100));
+                         } elseif ($discount_type === 'fixed') {
+                             $unit_price = max(0, $unit_price - $child_discount);
+                         }
+                    }
+
                     // Fallback to stored original price field from widget
                     if (is_null($unit_regular) || $unit_regular <= 0) {
                         if (isset($extra_product_data['originalPrice']) && is_numeric($extra_product_data['originalPrice'])) {
@@ -709,6 +718,18 @@ class CartController
                     $product_price = isset($extra_product_data['price']) ? floatval($extra_product_data['price']) : 0;
                     $product_quantity = isset($extra_product_data['quantity']) ? intval($extra_product_data['quantity']) : 1;
                     
+                    // Apply discount if available
+                    $child_discount = isset($extra_product_data['childDiscount']) ? floatval($extra_product_data['childDiscount']) : 0;
+                    $discount_type = isset($extra_product_data['discountType']) ? $extra_product_data['discountType'] : '';
+                    
+                    if ($product_price > 0 && $child_discount > 0) {
+                        if ($discount_type === 'percent') {
+                            $product_price = $product_price - ($product_price * ($child_discount / 100));
+                        } elseif ($discount_type === 'fixed') {
+                            $product_price = max(0, $product_price - $child_discount);
+                        }
+                    }
+                    
                     $extras_total += $product_price * $product_quantity;
                 }
             }
@@ -760,11 +781,7 @@ class CartController
             $deposit_value = floatval($cart_item['awcdp_deposit']['deposit']);
         } elseif ((isset($cart_item['awcdp_deposit_option']) && $cart_item['awcdp_deposit_option'] === 'yes') || (isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit')) {
             $use_deposit = true;
-            if ($variation_id) {
-                $base_price = $product->get_price();
-            } else {
-                $base_price = !empty($cart_item['force_regular_price']) ? $product->get_regular_price() : $product->get_price();
-            }
+            $base_price = $product->get_price();
             $meta_amount = get_post_meta($product_id, '_awcdp_deposits_deposit_amount', true);
             $meta_type = get_post_meta($product_id, '_awcdp_deposit_type', true);
             if (!empty($meta_amount)) {
@@ -779,11 +796,7 @@ class CartController
         }
         
         if (!$use_deposit) {
-            if (!empty($cart_item['force_regular_price'])) {
-                $base_price = $product->get_regular_price();
-            } else {
-                $base_price = $product->get_price();
-            }
+            $base_price = $product->get_price();
 
             // Apply Trade-In Discount
             if ($has_trade_in) {
@@ -809,6 +822,16 @@ class CartController
     public static function filter_cart_total_for_deposit_and_extras($total)
     {
         if (!function_exists('is_cart') || !is_cart() || !function_exists('WC') || !WC()->cart) {
+            return $total;
+        }
+
+        // Skip during coupon apply/remove operations to prevent bottleneck with Smart Coupons auto-apply
+        if (doing_action('woocommerce_applied_coupon') || 
+            doing_action('woocommerce_removed_coupon') ||
+            doing_action('woocommerce_coupon_applied') ||
+            doing_action('wc_ajax_apply_coupon') ||
+            doing_action('wp_ajax_woocommerce_apply_coupon') ||
+            doing_action('wp_ajax_nopriv_woocommerce_apply_coupon')) {
             return $total;
         }
 

@@ -1753,7 +1753,6 @@ Options::add_field(
 	array(
 		'id'          => 'product_show_meta',
 		'name'        => esc_html__( 'Show product meta', 'woodmart' ),
-		'hint'     => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'product_show_meta.jpg" alt="">', true ),
 		'description' => esc_html__( 'Categories, tags, SKU', 'woodmart' ),
 		'group'       => esc_html__( 'Meta', 'woodmart' ),
 		'type'        => 'buttons',
@@ -1785,7 +1784,7 @@ Options::add_field(
 	array(
 		'id'       => 'show_product_brand',
 		'name'     => esc_html__( 'Show product brands', 'woodmart' ),
-		'hint'  => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'show-product-brand.jpg" alt="">', true ),
+		'hint'     => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'show-product-brand.jpg" alt="">', true ),
 		'group'    => esc_html__( 'Meta', 'woodmart' ),
 		'type'     => 'switcher',
 		'section'  => 'product_elements',
@@ -2163,6 +2162,118 @@ Options::add_field(
 
 Options::add_field(
 	array(
+		'id'       => 'enable_description_tab',
+		'name'     => esc_html__( 'Enable description tab', 'woodmart' ),
+		'group'    => esc_html__( 'Default tabs', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'product_tabs',
+		'default'  => '1',
+		'on-text'  => esc_html__( 'Yes', 'woodmart' ),
+		'off-text' => esc_html__( 'No', 'woodmart' ),
+		'priority' => 50,
+		'class'    => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'         => 'description_tab_priority',
+		'name'       => esc_html__( 'Description tab priority', 'woodmart' ),
+		'group'      => esc_html__( 'Default tabs', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '10',
+		),
+		'section'    => 'product_tabs',
+		'priority'   => 60,
+		'class'      => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'enable_additional_info_tab',
+		'name'     => esc_html__( 'Enable additional info tab', 'woodmart' ),
+		'group'    => esc_html__( 'Default tabs', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'product_tabs',
+		'default'  => '1',
+		'on-text'  => esc_html__( 'Yes', 'woodmart' ),
+		'off-text' => esc_html__( 'No', 'woodmart' ),
+		'priority' => 70,
+		'class'    => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'         => 'additional_info_tab_priority',
+		'name'       => esc_html__( 'Additional info tab priority', 'woodmart' ),
+		'group'      => esc_html__( 'Default tabs', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '20',
+		),
+		'section'    => 'product_tabs',
+		'priority'   => 80,
+		'class'      => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'enable_reviews_tab',
+		'name'     => esc_html__( 'Enable reviews tab', 'woodmart' ),
+		'group'    => esc_html__( 'Default tabs', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'product_tabs',
+		'default'  => '1',
+		'on-text'  => esc_html__( 'Yes', 'woodmart' ),
+		'off-text' => esc_html__( 'No', 'woodmart' ),
+		'priority' => 90,
+		'class'    => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'         => 'reviews_tab_priority',
+		'name'       => esc_html__( 'Reviews tab priority', 'woodmart' ),
+		'group'      => esc_html__( 'Default tabs', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '30',
+		),
+		'section'    => 'product_tabs',
+		'priority'   => 100,
+		'class'      => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'legacy_product_tabs_enabled',
+		'name'     => esc_html__( 'Legacy tabs', 'woodmart' ),
+		'description' => esc_html__( 'Enables three optional product tabs on single product pages, which can be filled with plain text or HTML-blocks. Leave the field empty to disable the tab.', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'product_tabs',
+		'default'  => '1',
+		'on-text'  => esc_html__( 'On', 'woodmart' ),
+		'off-text' => esc_html__( 'Off', 'woodmart' ),
+		'status'   => 'deprecated',
+		'status_description' => esc_html__( 'This option is deprecated. You can now use "Custom tabs" to add an unlimited number of tabs with different display conditions.', 'woodmart' ),
+		'priority' => 107,
+	)
+);
+
+Options::add_field(
+	array(
 		'id'          => 'additional_tab_title',
 		'name'        => esc_html__( 'Tab title', 'woodmart' ),
 		'description' => esc_html__( 'Leave empty to disable custom tab', 'woodmart' ),
@@ -2170,13 +2281,56 @@ Options::add_field(
 		'default'     => 'Shipping & Delivery',
 		'section'     => 'product_tabs',
 		't_tab'       => array(
+			'id'       => 'additional_tabs_control_tabs',
+			'tab'      => esc_html__( 'Tab [1]', 'woodmart' ),
+			'title'    => esc_html__( 'Legacy tabs (deprecated)', 'woodmart' ),
+			'style'    => 'default',
+			'requires' => array(
+				array(
+					'key'     => 'legacy_product_tabs_enabled',
+					'compare' => 'equals',
+					'value'   => '1',
+				),
+			),
+		),
+		'requires'    => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
+		'priority'    => 110,
+		'class'       => 'xts-tab-field xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'         => 'additional_tab_priority',
+		'name'       => esc_html__( 'Priority', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '50',
+		),
+		'section'    => 'product_tabs',
+		't_tab'      => array(
 			'id'    => 'additional_tabs_control_tabs',
 			'tab'   => esc_html__( 'Tab [1]', 'woodmart' ),
-			'title' => esc_html__( 'Additional tabs', 'woodmart' ),
+			'title' => esc_html__( 'Legacy tabs (deprecated)', 'woodmart' ),
 			'style' => 'default',
 		),
-		'priority'    => 60,
-		'class'       => 'xts-tab-field',
+		'requires'   => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
+		'priority'   => 120,
+		'class'      => 'xts-tab-field xts-col-6',
 	)
 );
 
@@ -2200,8 +2354,15 @@ Options::add_field(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [1]', 'woodmart' ),
 		),
+		'requires' => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
 		'default'  => 'text',
-		'priority' => 61,
+		'priority' => 130,
 		'class'    => 'xts-html-block-switch',
 	)
 );
@@ -2220,12 +2381,17 @@ Options::add_field(
 				'compare' => 'equals',
 				'value'   => 'text',
 			),
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
 		),
 		't_tab'    => array(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [1]', 'woodmart' ),
 		),
-		'priority' => 62,
+		'priority' => 140,
 		'class'    => 'xts-tab-field xts-last-tab-field',
 	)
 );
@@ -2250,12 +2416,17 @@ Options::add_field(
 				'compare' => 'equals',
 				'value'   => 'html_block',
 			),
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
 		),
 		't_tab'        => array(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [1]', 'woodmart' ),
 		),
-		'priority'     => 63,
+		'priority'     => 150,
 		'class'        => 'xts-tab-field xts-last-tab-field',
 	)
 );
@@ -2271,8 +2442,42 @@ Options::add_field(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [2]', 'woodmart' ),
 		),
-		'priority'    => 70,
-		'class'       => 'xts-tab-field',
+		'requires'    => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
+		'priority'    => 160,
+		'class'       => 'xts-tab-field xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'         => 'additional_tab_2_priority',
+		'name'       => esc_html__( 'Priority', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '60',
+		),
+		'section'    => 'product_tabs',
+		't_tab'      => array(
+			'id'  => 'additional_tabs_control_tabs',
+			'tab' => esc_html__( 'Tab [2]', 'woodmart' ),
+		),
+		'requires'   => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
+		'priority'   => 170,
+		'class'      => 'xts-tab-field xts-col-6',
 	)
 );
 
@@ -2296,8 +2501,15 @@ Options::add_field(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [2]', 'woodmart' ),
 		),
+		'requires' => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
 		'default'  => 'text',
-		'priority' => 71,
+		'priority' => 180,
 		'class'    => 'xts-html-block-switch',
 	)
 );
@@ -2316,12 +2528,17 @@ Options::add_field(
 				'compare' => 'equals',
 				'value'   => 'text',
 			),
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
 		),
 		't_tab'    => array(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [2]', 'woodmart' ),
 		),
-		'priority' => 72,
+		'priority' => 190,
 		'class'    => 'xts-tab-field xts-last-tab-field',
 	)
 );
@@ -2346,12 +2563,17 @@ Options::add_field(
 				'compare' => 'equals',
 				'value'   => 'html_block',
 			),
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
 		),
 		't_tab'        => array(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [2]', 'woodmart' ),
 		),
-		'priority'     => 73,
+		'priority'     => 200,
 		'class'        => 'xts-tab-field xts-last-tab-field',
 	)
 );
@@ -2367,8 +2589,42 @@ Options::add_field(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [3]', 'woodmart' ),
 		),
-		'priority'    => 80,
-		'class'       => 'xts-tab-field',
+		'requires'    => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
+		'priority'    => 210,
+		'class'       => 'xts-tab-field xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'         => 'additional_tab_3_priority',
+		'name'       => esc_html__( 'Priority', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '70',
+		),
+		'section'    => 'product_tabs',
+		't_tab'      => array(
+			'id'  => 'additional_tabs_control_tabs',
+			'tab' => esc_html__( 'Tab [3]', 'woodmart' ),
+		),
+		'requires'   => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
+		'priority'   => 220,
+		'class'      => 'xts-tab-field xts-col-6',
 	)
 );
 
@@ -2392,8 +2648,15 @@ Options::add_field(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [3]', 'woodmart' ),
 		),
+		'requires' => array(
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
+		),
 		'default'  => 'text',
-		'priority' => 81,
+		'priority' => 230,
 		'class'    => 'xts-html-block-switch',
 	)
 );
@@ -2412,12 +2675,17 @@ Options::add_field(
 				'compare' => 'equals',
 				'value'   => 'text',
 			),
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
 		),
 		't_tab'    => array(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [3]', 'woodmart' ),
 		),
-		'priority' => 82,
+		'priority' => 240,
 		'class'    => 'xts-tab-field xts-last-tab-field',
 	)
 );
@@ -2442,12 +2710,17 @@ Options::add_field(
 				'compare' => 'equals',
 				'value'   => 'html_block',
 			),
+			array(
+				'key'     => 'legacy_product_tabs_enabled',
+				'compare' => 'equals',
+				'value'   => '1',
+			),
 		),
 		't_tab'        => array(
 			'id'  => 'additional_tabs_control_tabs',
 			'tab' => esc_html__( 'Tab [3]', 'woodmart' ),
 		),
-		'priority'     => 83,
+		'priority'     => 250,
 		'class'        => 'xts-tab-field xts-last-tab-field',
 	)
 );

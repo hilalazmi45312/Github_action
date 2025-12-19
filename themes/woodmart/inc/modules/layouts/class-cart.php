@@ -80,7 +80,8 @@ class Cart extends Layout_Type {
 	/**
 	 * Display custom template on the shop page.
 	 */
-	private function display_template() {
+	protected function display_template() {
+		parent::display_template();
 		$this->before_template_content();
 
 		?>

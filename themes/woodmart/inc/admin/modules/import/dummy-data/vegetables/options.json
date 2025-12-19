@@ -518,5 +518,7 @@
     "counter_visitor_data_source_min_number": "2",
     "counter_visitor_data_source_max_number": "20",
     "quick_view": "0",
-    "blog_columns": "3"
+    "blog_columns": "3",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

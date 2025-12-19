@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     1.1.0
+ * @version     1.2.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */

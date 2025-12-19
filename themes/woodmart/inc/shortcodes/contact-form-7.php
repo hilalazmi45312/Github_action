@@ -36,6 +36,31 @@ if ( ! function_exists( 'woodmart_shortcode_contact_form_7' ) ) {
 
 		woodmart_enqueue_inline_style( 'wpcf7', true );
 
+		if ( defined( 'WPCF7_PLUGIN' ) && function_exists( 'wpcf7_enqueue_scripts' ) && ! wp_script_is( 'contact-form-7', 'registered' ) ) {
+			$assets = include wpcf7_plugin_path( 'includes/js/index.asset.php' );
+
+			$assets = wp_parse_args(
+				$assets,
+				array(
+					'dependencies' => array(),
+					'version'      => WPCF7_VERSION,
+				)
+			);
+
+			wp_register_script(
+				'contact-form-7',
+				wpcf7_plugin_url( 'includes/js/index.js' ),
+				array_merge(
+					$assets['dependencies'],
+					array( 'swv' )
+				),
+				$assets['version'],
+				array( 'in_footer' => true )
+			);
+
+			wpcf7_enqueue_scripts();
+		}
+
 		ob_start();
 		?>
 		<?php if ( ! $settings['form_id'] || ! defined( 'WPCF7_PLUGIN' ) ) : ?>

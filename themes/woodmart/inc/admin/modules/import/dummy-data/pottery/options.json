@@ -314,6 +314,7 @@
     "blog_style": "flat",
     "blog_excerpt_length": "220",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "grid_swatches_attribute": "pa_color",
     "label_shape": "rectangular",
     "sale_label_bg_color": {
@@ -399,5 +400,7 @@
         "wishlist",
         "cart"
     ],
-    "hide_categories_subcategories": "1"
+    "hide_categories_subcategories": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

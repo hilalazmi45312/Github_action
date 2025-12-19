@@ -1,0 +1,10 @@
+{
+    "enabled": true,
+    "measurement_path": "\/mtc",
+    "proxy_url": "http:\/\/wordpress-deployment.test\/wp-content\/plugins\/woocommerce-google-adwords-conversion-tracking-tag\/includes\/pixels\/google\/pmw-gtg-proxy.php",
+    "site_url": "https:\/\/wordpress-deployment.test",
+    "logging_enabled": false,
+    "log_level": "warning",
+    "log_directory": "\/Users\/aleksandarvucenovic\/dev\/apps\/wordpress-deployment\/wp-content\/uploads\/pmw-logs",
+    "updated": 1765804774
+}

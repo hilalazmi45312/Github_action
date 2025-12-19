@@ -17,7 +17,7 @@ if ( post_password_required() ) {
 	return;
 }
 
-woodmart_enqueue_inline_style( 'mod-comments' );
+woodmart_enqueue_inline_style( 'post-types-mod-comments' );
 ?>
 
 <div id="comments" class="comments-area">

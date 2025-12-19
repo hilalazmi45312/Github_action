@@ -242,7 +242,7 @@ class After extends Singleton {
 
 		$vc_roles->save(
 			array(
-				'administrator' => json_decode( '{"post_types":{"_state":"custom","post":"1","page":"1","woodmart_slide":"1","woodmart_layout":"1","woodmart_size_guide":"1","cms_block":"1","woodmart_sidebar":"0","portfolio":"1","product":"1","woodmart_woo_lv":"0"},"backend_editor":{"_state":"1","disabled_ce_editor":"0"},"frontend_editor":{"_state":"1"},"post_settings":{"_state":"1"},"settings":{"_state":"1"},"templates":{"_state":"1"},"shortcodes":{"_state":"1"},"grid_builder":{"_state":"1"},"presets":{"_state":"1"}}' ),
+				'administrator' => json_decode( '{"post_types":{"_state":"custom","post":"1","page":"1","woodmart_slide":"1","woodmart_layout":"1","woodmart_size_guide":"1","cms_block":"1","wd_floating_block":"1","wd_popup":"1","woodmart_sidebar":"0","portfolio":"1","product":"1","woodmart_woo_lv":"0", "wd_product_tabs":"1"},"backend_editor":{"_state":"1","disabled_ce_editor":"0"},"frontend_editor":{"_state":"1"},"post_settings":{"_state":"1"},"settings":{"_state":"1"},"templates":{"_state":"1"},"shortcodes":{"_state":"1"},"grid_builder":{"_state":"1"},"presets":{"_state":"1"}}' ),
 			)
 		);
 	}
@@ -257,6 +257,9 @@ class After extends Singleton {
 		$post_types[] = 'cms_block';
 		$post_types[] = 'woodmart_slide';
 		$post_types[] = 'woodmart_layout';
+		$post_types[] = 'wd_product_tabs';
+		$post_types[] = 'wd_popup';
+		$post_types[] = 'wd_floating_block';
 
 		update_option( 'elementor_cpt_support', $post_types );
 		update_option( 'elementor_disable_color_schemes', 'yes' );

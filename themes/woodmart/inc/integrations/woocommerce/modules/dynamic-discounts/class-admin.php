@@ -27,6 +27,10 @@ class Admin extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'discounts_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->manager = Manager::get_instance();
 
 		add_action( 'new_to_publish', array( $this, 'clear_transients_on_publish' ) );

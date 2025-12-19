@@ -331,6 +331,31 @@ class Contact_Form_7 extends Widget_Base {
 			return;
 		}
 
+		if ( function_exists( 'wpcf7_enqueue_scripts' ) && ! wp_script_is( 'contact-form-7', 'registered' ) ) {
+			$assets = include wpcf7_plugin_path( 'includes/js/index.asset.php' );
+
+			$assets = wp_parse_args(
+				$assets,
+				array(
+					'dependencies' => array(),
+					'version'      => WPCF7_VERSION,
+				)
+			);
+
+			wp_register_script(
+				'contact-form-7',
+				wpcf7_plugin_url( 'includes/js/index.js' ),
+				array_merge(
+					$assets['dependencies'],
+					array( 'swv' )
+				),
+				$assets['version'],
+				array( 'in_footer' => true )
+			);
+
+			wpcf7_enqueue_scripts();
+		}
+
 		echo do_shortcode( '[contact-form-7 html_class="' . esc_attr( $settings['style'] ) . '" id="' . esc_attr( $settings['form_id'] ) . '"]' );
 	}
 }

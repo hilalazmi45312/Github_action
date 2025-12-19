@@ -64,3 +64,40 @@ table.wp-list-table .column-wc_sc_linked_coupons {
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+
+#sc-restriction-container .select2-container {
+	width: 50% !important;
+}
+
+.select2-container .select2-selection--single {
+	height: 2.5rem !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height: 2.5rem !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 2.5rem !important;
+}
+
+#wc-sc-add-restriction.button {
+	line-height: 2.375em;
+}
+
+#sc-restriction-container .smart-coupons-field {
+	border: none !important;
+}
+
+/* Changes for WooCommerce 9.9+ - Start */
+body.woocommerce_page_wc-settings-wc-smart-coupons #wpbody-content {
+	padding-bottom: 65px !important;
+	background: inherit !important;
+}
+/* Changes for WooCommerce 9.9+ - End */
+
+td.forminp-wc_sc_email_setting span {
+	display: inline-block;
+    height: 100%;
+    vertical-align: bottom;
+}

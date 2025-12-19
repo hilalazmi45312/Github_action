@@ -195,5 +195,9 @@
           "text-transform": "capitalize"
         }
     },
-    "sticky_toolbar": "0"
+    "sticky_toolbar": "0",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

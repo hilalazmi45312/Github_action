@@ -7,6 +7,7 @@
 
 namespace XTS\Elementor;
 
+use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
@@ -601,7 +602,7 @@ class Banner_Carousel extends Widget_Base {
 		$this->add_control(
 			'woodmart_color_scheme',
 			array(
-				'label'   => esc_html__( 'Color Scheme', 'woodmart' ),
+				'label'   => esc_html__( 'Color scheme', 'woodmart' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => array(
 					''      => esc_html__( 'Inherit', 'woodmart' ),
@@ -675,22 +676,6 @@ class Banner_Carousel extends Widget_Base {
 		);
 
 		$this->add_control(
-			'title_decoration_style',
-			array(
-				'label'       => esc_html__( 'Highlight text style', 'woodmart' ),
-				'description' => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => array(
-					'default'     => esc_html__( 'Default', 'woodmart' ),
-					'colored'     => esc_html__( 'Primary color', 'woodmart' ),
-					'colored-alt' => esc_html__( 'Primary color + secondary font', 'woodmart' ),
-					'bordered'    => esc_html__( 'Bordered', 'woodmart' ),
-				),
-				'default'     => 'default',
-			)
-		);
-
-		$this->add_control(
 			'custom_title_color',
 			array(
 				'label'     => esc_html__( 'Color', 'woodmart' ),
@@ -707,6 +692,35 @@ class Banner_Carousel extends Widget_Base {
 				'name'     => 'title_typography',
 				'label'    => esc_html__( 'Custom typography', 'woodmart' ),
 				'selector' => '{{WRAPPER}} .banner-title',
+			)
+		);
+
+		$this->add_control(
+			'title_decoration_style',
+			array(
+				'label'       => esc_html__( 'Highlight text style', 'woodmart' ),
+				'description' => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => array(
+					'default'     => esc_html__( 'Default', 'woodmart' ),
+					'colored'     => esc_html__( 'Primary color', 'woodmart' ),
+					'colored-alt' => esc_html__( 'Primary color + secondary font', 'woodmart' ),
+					'bordered'    => esc_html__( 'Bordered', 'woodmart' ),
+					'gradient'    => esc_html__( 'Gradient', 'woodmart' ),
+				),
+				'default'     => 'default',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'title_decoration_gradient',
+				'types'     => array( 'gradient' ),
+				'selector'  => '{{WRAPPER}} .wd-underline-gradient u',
+				'condition' => array(
+					'title_decoration_style' => 'gradient',
+				),
 			)
 		);
 
@@ -847,22 +861,35 @@ class Banner_Carousel extends Widget_Base {
 		$this->add_control(
 			'countdown_style',
 			[
-				'label'   => esc_html__( 'Style', 'woodmart' ),
+				'label'   => esc_html__( 'Background', 'woodmart' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'standard'    => esc_html__( 'Default', 'woodmart' ),
-					'transparent' => esc_html__( 'Shadow', 'woodmart' ),
-					'active'      => esc_html__( 'Primary color', 'woodmart' ),
-					'simple'      => esc_html__( 'Simple', 'woodmart' ),
+					'simple' => esc_html__( 'Default', 'woodmart' ),
+					'active' => esc_html__( 'Primary color', 'woodmart' ),
+					'custom' => esc_html__( 'Custom', 'woodmart' ),
 				],
-				'default' => 'standard',
+				'default' => 'simple',
 			]
+		);
+
+		$this->add_control(
+			'countdown_bg_color',
+			array(
+				'label'     => esc_html__( 'Background color', 'woodmart' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .wd-timer' => '--wd-timer-bg: {{VALUE}}',
+				),
+				'condition' => array(
+					'countdown_style' => 'custom',
+				),
+			)
 		);
 
 		$this->add_control(
 			'countdown_color_scheme',
 			[
-				'label'   => esc_html__( 'Color Scheme', 'woodmart' ),
+				'label'   => esc_html__( 'Color scheme', 'woodmart' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
 					''      => esc_html__( 'Inherit', 'woodmart' ),

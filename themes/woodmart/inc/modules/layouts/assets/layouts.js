@@ -1,10 +1,9 @@
 /* global woodmartConfig */
-/* global woodmartConfig */
 (function($) {
 	'use strict';
 
-	var $wrapper  = $('.wd-layout, #wd-layout-conditions');
-	var $template = $wrapper.find('.xts-layout-condition-template');
+	var $wrapper  = $('.xts-add-layout, #xts-layout-conditions');
+	var $template = $wrapper.find('.xts-popup-condition-template');
 	var $form     = $wrapper.find('form');
 	var $popup    = $wrapper.find('.xts-popup');
 
@@ -50,12 +49,12 @@
 		var layoutType = $form.find('.xts-layout-type').val();
 		var layoutName = $form.find('.xts-layout-name').val();
 
-		$form.find('.xts-layout-condition').each(function() {
+		$form.find('.xts-popup-condition').each(function() {
 			var $condition = $(this);
 			data.push({
-				condition_comparison: $condition.find('.xts-layout-condition-comparison').val(),
-				condition_type      : $condition.find('.xts-layout-condition-type').val(),
-				condition_query     : $condition.find('.xts-layout-condition-query').val()
+				condition_comparison: $condition.find('.xts-popup-condition-comparison').val(),
+				condition_type      : $condition.find('.xts-popup-condition-type').val(),
+				condition_query     : $condition.find('.xts-popup-condition-query').val()
 			});
 		});
 
@@ -69,7 +68,7 @@
 				data           : data,
 				type           : layoutType,
 				name           : layoutName,
-				predefined_name: $form.find('.xts-layout-predefined-layout.xts-active').data('name'),
+				predefined_name: $form.find('.xts-popup-predefined-layout.xts-active').data('name'),
 				security       : woodmartConfig.get_new_template_nonce
 			},
 			dataType: 'json',
@@ -90,43 +89,72 @@
 	$form.find('.xts-layout-type').on('change', function() {
 		var layoutType = $(this).val();
 
-		$form.find('.xts-layout-condition').remove();
-
-		$('.xts-layout-predefined-layouts').addClass('xts-hidden');
-		$('.xts-layout-predefined-layout').removeClass('xts-active');
-
-		if (!layoutType) {
-			$wrapper.find('.xts-layout-condition-add').addClass('xts-hidden');
-			$wrapper.find('.xts-layout-submit').addClass('xts-disabled');
-			$wrapper.find('.xts-layout-conditions-title').addClass('xts-hidden');
-		} else {
-			$wrapper.find('.xts-layout-condition-add').removeClass('xts-hidden');
-			$wrapper.find('.xts-layout-conditions-title').removeClass('xts-hidden');
-			$wrapper.find('.xts-layout-submit').removeClass('xts-disabled');
-			$wrapper.find('.xts-layout-condition-add').trigger('click');
-
-			$('.xts-layout-predefined-layouts[data-type="' + layoutType + '"]').removeClass('xts-hidden');
+		if ('' !== layoutType) {
+			var layoutTypeName = $(this).find('option:selected').text();
+			$form.find('.xts-layout-name').val(layoutTypeName.trim() + ' ' + woodmartConfig.layout_text);
 		}
 
-		if ('cart' === layoutType || 'empty_cart' === layoutType || 'checkout_form' === layoutType || 'checkout_content' === layoutType) {
-			$wrapper.find('.xts-layout-condition-add').addClass('xts-hidden');
-			$wrapper.find('.xts-layout-conditions-title').addClass('xts-hidden');
-			$form.find('.xts-layout-condition').addClass('xts-hidden');
+		$form.find('.xts-popup-condition').remove();
+
+		$('.xts-popup-predefined-layouts').addClass('xts-hidden');
+		$('.xts-popup-predefined-layout').removeClass('xts-active');
+
+		if (!layoutType) {
+			$wrapper.find('.xts-popup-condition-add').addClass('xts-hidden');
+			$wrapper.find('.xts-layout-submit').addClass('xts-disabled');
+			$wrapper.find('.xts-popup-conditions-title').addClass('xts-hidden');
+		} else {
+			$wrapper.find('.xts-popup-condition-add').removeClass('xts-hidden');
+			$wrapper.find('.xts-popup-conditions-title').removeClass('xts-hidden');
+			$wrapper.find('.xts-layout-submit').removeClass('xts-disabled');
+			$wrapper.find('.xts-popup-condition-add').trigger('click');
+
+			$('.xts-popup-predefined-layouts[data-type="' + layoutType + '"]').removeClass('xts-hidden');
+		}
+
+		if ('cart' === layoutType || 'empty_cart' === layoutType || 'checkout_form' === layoutType || 'checkout_content' === layoutType || 'thank_you_page' === layoutType || 'my_account_auth' === layoutType || 'my_account_lost_password' === layoutType) {
+			$wrapper.find('.xts-popup-condition-add').addClass('xts-hidden');
+			$wrapper.find('.xts-popup-conditions-title').addClass('xts-hidden');
+			$form.find('.xts-popup-condition').addClass('xts-hidden');
 		}
 	});
 
 	// Change condition type.
-	$(document).on('change', '.xts-layout-condition-type', function() {
+	$(document).on('change', '.xts-popup-condition-type', function() {
 		var $this = $(this);
 		var conditionType = $this.val();
-		var $querySelect = $this.siblings('.xts-layout-condition-query');
+		var $querySelect = $this.siblings('.xts-popup-condition-query');
 
 		if ($querySelect.data('select2')) {
 			$querySelect.val('');
 			$querySelect.select2('destroy');
 		}
+		
+		const conditions = [
+			'all',
+			'shop_page',
+			'product_search',
+			'product_cats',
+			'product_tags',
+			'checkout_form',
+			'checkout_content',
+			'cart',
+			'empty_cart',
+			'blog_search_result',
+			'blog_author',
+			'blog_date',
+			'portfolio_search_result',
+			'dashboard',
+			'orders',
+			'downloads',
+			'edit-address',
+			'edit-account',
+			'waitlist',
+			'wishlist',
+			'price-tracker'
+	   ];
 
-		if ('all' === conditionType || 'shop_page' === conditionType || 'product_search' === conditionType || 'product_cats' === conditionType || 'product_tags' === conditionType  || 'product_brands' === conditionType || 'checkout_form' === conditionType || 'checkout_content' === conditionType || 'cart' === conditionType || 'empty_cart' === conditionType || 'filtered_product_term_any' === conditionType) {
+		if (conditions.includes(conditionType)) {
 			$querySelect.addClass('xts-hidden');
 			$querySelect.removeAttr('data-query-type');
 		} else {
@@ -159,31 +187,31 @@
 	}
 
 	// Condition add.
-	$wrapper.find('.xts-layout-condition-add').on('click', function() {
+	$wrapper.find('.xts-popup-condition-add').on('click', function() {
 		var layoutType = $form.find('.xts-layout-type').val();
 		var $templateClone = $template.clone();
 
-		$templateClone.find('.xts-layout-condition-type[data-type="' + layoutType + '"]').siblings('.xts-layout-condition-type').remove();
+		$templateClone.find('.xts-popup-condition-type[data-type="' + layoutType + '"]').siblings('.xts-popup-condition-type').remove();
 
-		$wrapper.find('.xts-layout-conditions .xts-layout-conditions-title').after($templateClone.html());
+		$wrapper.find('.xts-popup-conditions .xts-popup-conditions-title').after($templateClone.html());
 	});
 
 	// Conditions edit add.
-	$(document).on('click', '.xts-layout-conditions-edit-add', function() {
+	$(document).on('click', '.xts-popup-conditions-edit-add', function() {
 		var $this = $(this);
 		var $wrapper = $this.parent();
 		var layoutType = $wrapper.data('type');
 		var $templateClone = $template.clone();
 
-		$templateClone.find('.xts-layout-condition-type[data-type="' + layoutType + '"]').siblings('.xts-layout-condition-type').remove();
+		$templateClone.find('.xts-popup-condition-type[data-type="' + layoutType + '"]').siblings('.xts-popup-condition-type').remove();
 
 		$this.before($templateClone.html());
 	});
 
 	// Conditions edit.
-	$(document).on('click', '.xts-layout-conditions-edit', function() {
+	$(document).on('click', '.xts-popup-conditions-edit', function() {
 		var $this = $(this);
-		var $wrapper = $this.parents('.xts-popup-holder').find('.xts-layout-conditions');
+		var $wrapper = $this.parents('.xts-popup-holder').find('.xts-popup-conditions');
 
 		$this.parents('.xts-popup-holder').find('.xts-layout-popup-notices').text('');
 
@@ -198,48 +226,48 @@
 			conditions.forEach(function(condition) {
 				var $templateClone = $template.clone();
 
-				$templateClone.find('.xts-layout-condition-type[data-type="' + layoutType + '"]').siblings('.xts-layout-condition-type').remove();
+				$templateClone.find('.xts-popup-condition-type[data-type="' + layoutType + '"]').siblings('.xts-popup-condition-type').remove();
 
-				$templateClone.find('.xts-layout-condition').attr('data-condition', JSON.stringify(condition));
+				$templateClone.find('.xts-popup-condition').attr('data-condition', JSON.stringify(condition));
 
-				$wrapper.find('.xts-layout-conditions-edit-add').before($templateClone.html());
+				$wrapper.find('.xts-popup-conditions-edit-add').before($templateClone.html());
 			});
 		}
 
-		$wrapper.find('.xts-layout-condition').each(function() {
+		$wrapper.find('.xts-popup-condition').each(function() {
 			var $this = $(this);
 			var condition = $this.data('condition');
 
 			if (condition) {
-				$this.find('.xts-layout-condition-comparison').val(condition.condition_comparison).trigger('change');
-				$this.find('.xts-layout-condition-type').val(condition.condition_type).trigger('change');
+				$this.find('.xts-popup-condition-comparison').val(condition.condition_comparison).trigger('change');
+				$this.find('.xts-popup-condition-type').val(condition.condition_type).trigger('change');
 
 				if (condition.condition_query_text) {
-					$this.find('.xts-layout-condition-query').append('<option value="' + condition.condition_query + '">' + condition.condition_query_text + '</option>').val(condition.condition_query).trigger('change');
+					$this.find('.xts-popup-condition-query').append('<option value="' + condition.condition_query + '">' + condition.condition_query_text + '</option>').val(condition.condition_query).trigger('change');
 				}
 			}
 		});
 
-		$wrapper.find('.xts-layout-conditions-edit-save').removeClass('xts-hidden');
-		$wrapper.find('.xts-layout-conditions-edit-add').removeClass('xts-hidden');
+		$wrapper.find('.xts-popup-conditions-edit-save').removeClass('xts-hidden');
+		$wrapper.find('.xts-popup-conditions-edit-add').removeClass('xts-hidden');
 		$wrapper.addClass('xts-inited');
 	});
 
 	// Conditions save.
-	$(document).on('click', '.xts-layout-conditions-edit-save', function() {
+	$(document).on('click', '.xts-popup-conditions-edit-save', function() {
 		var $this = $(this);
-		var $wrapper = $this.parents('.wd_layout_conditions, #wd-layout-conditions');
+		var $wrapper = $this.parents('.wd_layout_conditions, #xts-layout-conditions');
 		var $popup = $wrapper.find('.xts-popup');
-		var $conditionsWrapper = $wrapper.find('.xts-layout-conditions');
+		var $conditionsWrapper = $wrapper.find('.xts-popup-conditions');
 
 		var data = [];
 
-		$wrapper.find('.xts-popup-holder .xts-layout-condition').each(function() {
+		$wrapper.find('.xts-popup-holder .xts-popup-condition').each(function() {
 			var $condition = $(this);
 			data.push({
-				condition_comparison: $condition.find('.xts-layout-condition-comparison').val(),
-				condition_type      : $condition.find('.xts-layout-condition-type').val(),
-				condition_query     : $condition.find('.xts-layout-condition-query').val()
+				condition_comparison: $condition.find('.xts-popup-condition-comparison').val(),
+				condition_type      : $condition.find('.xts-popup-condition-type').val(),
+				condition_query     : $condition.find('.xts-popup-condition-query').val()
 			});
 		});
 
@@ -265,19 +293,19 @@
 	});
 
 	// Condition remove.
-	$(document).on('click', '.xts-layout-condition-remove', function() {
+	$(document).on('click', '.xts-popup-condition-remove', function() {
 		$(this).parent().remove();
 	});
 
 	// Predefined.
-	$('.xts-layout-predefined-layout').on('click', function() {
+	$('.xts-popup-predefined-layout').on('click', function() {
 		var $this = $(this);
 		$this.siblings().removeClass('xts-active');
 		$this.toggleClass('xts-active');
 	});
 
 	// Popup.
-	$('.page-title-action, .menu-icon-woodmart_layout li:not(.current) a').on('click', function(event) {
+	$('.page-title-action, .menu-icon-woodmart_layout li a[href="edit.php?post_type=woodmart_layout&create_template"], .post-type-woodmart_layout .wd-add-layout').on('click', function(event) {
 		event.preventDefault();
 		$wrapper.find('.xts-popup-holder').addClass('xts-opened');
 		$('html').addClass('xts-popup-opened');

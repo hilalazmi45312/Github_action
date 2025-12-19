@@ -25,14 +25,8 @@ if ( isset( $args['show_plugins'] ) && 'compatible' === $args['show_plugins'] ) 
 	$plugins_list = $install_plugins->get_plugins();
 }
 
-if ( $dashboard->is_setup() ) {
-	$button_item_class = 'xts-inline-btn xts-style-underline';
-} else {
-	$button_item_class = 'xts-btn';
-}
-
 ?>
-<div class="xts-plugins<?php echo $install_plugins->is_all_activated() ? ' xts-all-active' : ''; ?>">
+<div class="xts-plugins<?php echo ! count( $install_plugins->get_required_plugins_to_activate() ) ? ' xts-required-active' : ''; ?>">
 	<div class="xts-plugin-response"></div>
 
 	<?php if ( $dashboard->is_setup() ) : ?>
@@ -41,7 +35,7 @@ if ( $dashboard->is_setup() ) {
 		</h3>
 
 		<p>
-			<?php esc_html_e( 'Install and activate plugins for your website.', 'woodmart' ); ?>
+			<?php esc_html_e( 'Install and activate essential plugins for your website.', 'woodmart' ); ?>
 		</p>
 	<?php endif; ?>
 
@@ -87,8 +81,12 @@ if ( $dashboard->is_setup() ) {
 						<span class="xts-plugin-btn-text">
 							<?php esc_html_e( 'Plugin activated globally.', 'woodmart' ); ?>
 						</span>
+					<?php elseif ( isset( $plugin_data['status'] ) && $dashboard->is_setup() && 'deactivate' === $plugin_data['status'] ) : ?>
+						<span class="xts-plugin-btn-text">
+							<?php esc_html_e( 'Activated', 'woodmart' ); ?>
+						</span>
 					<?php elseif ( isset( $plugin_data['status'] ) && 'require_update' !== $plugin_data['status'] ) : ?>
-						<a class="<?php echo esc_attr( $button_item_class ); ?> xts-ajax-plugin xts-<?php echo esc_html( $plugin_data['status'] ); ?>"
+						<a class="xts-btn xts-ajax-plugin xts-<?php echo esc_html( $plugin_data['status'] ); ?>"
 							href="<?php echo esc_url( $install_plugins->get_action_url( $slug, $plugin_data['status'] ) ); ?>"
 							data-plugin="<?php echo esc_attr( $slug ); ?>"
 							data-builder="<?php echo esc_attr( $builder ); ?>"
@@ -113,21 +111,18 @@ if ( $dashboard->is_setup() ) {
 		<?php endforeach; ?>
 	</ul>
 
+	<?php if ( $dashboard->is_setup() ) : ?>
+		<div class="xts-step-actions">
+			<a class="xts-btn xts-color-primary xts-wizard-all-plugins" href="#">
+				<?php esc_html_e( 'Install & activate all', 'woodmart' ); ?>
+			</a>
+			<?php $dashboard->get_next_button( 'prebuilt-websites', '', count( $install_plugins->get_required_plugins_to_activate() ) > 0 ); ?>
+		</div>
+	<?php endif; ?>
+
 	<?php if ( $plugins_list && ( ! isset( $args['show_plugins'] ) || 'compatible' !== $args['show_plugins'] ) ) : ?>
 		<script>
 			var xtsPluginsData = <?php echo wp_json_encode( $plugins_list ); ?>
 		</script>
 	<?php endif; ?>
 </div>
-
-<?php if ( $dashboard->is_setup() ) : ?>
-	<div class="xts-wizard-footer">
-			<?php $dashboard->get_prev_button( 'page-builder' ); ?>
-		<div>
-			<a class="xts-inline-btn xts-style-underline xts-wizard-all-plugins" href="#">
-				<?php esc_html_e( 'Install & activate all', 'woodmart' ); ?>
-			</a>
-			<?php $dashboard->get_next_button( 'prebuilt-websites', '', count( $install_plugins->get_required_plugins_to_activate() ) > 0 ); ?>
-		</div>
-	</div>
-<?php endif; ?>

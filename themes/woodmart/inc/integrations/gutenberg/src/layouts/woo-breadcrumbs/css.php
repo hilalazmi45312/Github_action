@@ -73,7 +73,7 @@ $block_css->add_css_rules(
 	'mobile'
 );
 
-$block_css->merge_with( wd_get_block_typography_css( $block_selector, $attrs, 'tp' ) );
+$block_css->merge_with( wd_get_block_typography_css( $block_selector . ' :is(.wd-breadcrumbs,.yoast-breadcrumb)', $attrs, 'tp' ) );
 
 $block_css->merge_with(
 	wd_get_block_advanced_css(

@@ -715,7 +715,7 @@
 
 <!-- wp:wd/container {"blockId":"f79b0958-6130-42be-84bc-e552f3eeacf7","rowGap":"10","metadata":{"name":"Infobox content"}} -->
 <div id="wd-f79b0958" class="wp-block-wd-container wd-dir-col"><!-- wp:wd/paragraph {"blockId":"7444e125-68cb-4b61-b810-9f6a9c5ee2b8"} -->
-<p id="wd-7444e125" class="wp-block-wd-paragraph">johndoe@gmail.com</p>
+<p id="wd-7444e125" class="wp-block-wd-paragraph">johndoe@mail.com</p>
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"fc707b8b-6b10-4eca-bb44-be7d0a031774"} -->

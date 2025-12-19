@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       8.18.0
- * @version     1.0.0
+ * @version     1.1.0
  * @package     woocommerce-smart-coupons/includes/compat/
  */
 
@@ -108,22 +108,25 @@ if ( ! class_exists( 'WC_SC_WooPayments_Compatibility' ) ) {
 		 * @return float
 		 */
 		public function should_convert_product_price( $should_convert = true, $product = null ) {
+			try {
+				global $woocommerce_smart_coupon;
+				if ( ! $product instanceof WC_Product ) {
+					return $should_convert;
+				}
 
-			global $woocommerce_smart_coupon;
-			if ( ! $product instanceof WC_Product ) {
-				return $should_convert;
-			}
+				$coupons = $woocommerce_smart_coupon->get_coupon_titles( array( 'product_object' => $product ) );
+				if ( ! empty( $coupons ) && $woocommerce_smart_coupon->is_coupon_amount_pick_from_product_price( $coupons ) ) {
 
-			$coupons = $woocommerce_smart_coupon->get_coupon_titles( array( 'product_object' => $product ) );
-			if ( ! empty( $coupons ) && $woocommerce_smart_coupon->is_coupon_amount_pick_from_product_price( $coupons ) ) {
-
-				foreach ( $coupons as $coupon_title ) {
-					$coupon_of_product        = new WC_Coupon( $coupon_title );
-					$discount_type_of_product = ( is_object( $coupon_of_product ) && is_callable( array( $coupon_of_product, 'get_discount_type' ) ) ) ? $coupon_of_product->get_discount_type() : '';
-					if ( 'smart_coupon' === $discount_type_of_product ) {
-						return false;
+					foreach ( $coupons as $coupon_title ) {
+						$coupon_of_product        = new WC_Coupon( $coupon_title );
+						$discount_type_of_product = ( is_object( $coupon_of_product ) && is_callable( array( $coupon_of_product, 'get_discount_type' ) ) ) ? $coupon_of_product->get_discount_type() : '';
+						if ( 'smart_coupon' === $discount_type_of_product ) {
+							return false;
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $should_convert;

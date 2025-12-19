@@ -234,5 +234,11 @@
     "popup_width": "800",
     "popup_color_scheme": "light",
     "popup_padding": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIxNSJ9fX0=",
-    "btns_shop_style": "flat"
+    "btns_shop_style": "flat",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

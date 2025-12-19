@@ -57,14 +57,14 @@ function add_custom_billing_ic_field($fields)
 
         $fields['billing']['cust_icno_type'] = array(
             'type'     => 'select',
-            'label'    => __('ID Type', 'textdomain'),
+            'label'    => __('ID Type (Optional)', 'textdomain'),
             'required' => false,
             'priority' => 9,
             'options'  => [
-                'BRN'      => __('Business Registration Number (BRN)', 'textdomain'),
+                // 'BRN'      => __('Business Registration Number (BRN)', 'textdomain'),
                 'NRIC'     => __('National ID (NRIC)', 'textdomain'),
-                'Passport' => __('Passport', 'textdomain'),
-                'Army'     => __('Army', 'textdomain'),
+                // 'Passport' => __('Passport', 'textdomain'),
+                // 'Army'     => __('Army', 'textdomain'),
             ],
             'class'    => array('form-row-wide'),
             'default'  => 'NRIC',
@@ -72,7 +72,7 @@ function add_custom_billing_ic_field($fields)
 
         $fields['billing']['cust_icno'] = array(
             'label' => __('IC Number', 'woocommerce'),
-            'placeholder' => 'e.g. 800101145678',
+            'placeholder' => 'eg: 1234567891012',
             'required' => false,
             'class' => array('form-row-wide'),
             'clear' => true,

@@ -7,6 +7,7 @@ namespace XTS\Elementor;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -98,16 +99,65 @@ class Portfolio extends Widget_Base {
 		);
 
 		$this->add_control(
+			'element_title',
+			[
+				'label' => esc_html__( 'Element title', 'woodmart' ),
+				'type'  => Controls_Manager::TEXT,
+			]
+		);
+
+		$this->add_control(
+			'post_type',
+			[
+				'label'       => esc_html__( 'Data source', 'woodmart' ),
+				'description' => esc_html__( 'Select content type for your grid.', 'woodmart' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => woodmart_get_options_depend_builder(
+					array(
+						'portfolio' => esc_html__( 'Portfolio', 'woodmart' ),
+						'ids'       => esc_html__( 'List of IDs', 'woodmart' ),
+					),
+					array(
+						'single_portfolio' => array(
+							'related_projects' => esc_html__( 'Related projects', 'woodmart' ),
+						),
+					)
+				),
+				'default'     => 'portfolio',
+			]
+		);
+
+		$this->add_control(
+			'include',
+			[
+				'label'       => esc_html__( 'Include only', 'woodmart' ),
+				'description' => esc_html__( 'Add posts, pages, etc. by title.', 'woodmart' ),
+				'type'        => 'wd_autocomplete',
+				'search'      => 'woodmart_get_posts_by_query',
+				'render'      => 'woodmart_get_posts_title_by_id',
+				'post_type'   => 'portfolio',
+				'multiple'    => true,
+				'label_block' => true,
+				'condition'   => [
+					'post_type' => 'ids',
+				],
+			]
+		);
+
+		$this->add_control(
 			'categories',
 			[
 				'label'       => esc_html__( 'Categories or tags', 'woodmart' ),
-				'description' => esc_html__( 'List of product categories.', 'woodmart' ),
+				'description' => esc_html__( 'List of portfolio categories.', 'woodmart' ),
 				'type'        => 'wd_autocomplete',
 				'search'      => 'woodmart_get_taxonomies_by_query',
 				'render'      => 'woodmart_get_taxonomies_title_by_id',
 				'taxonomy'    => [ 'project-cat' ],
 				'multiple'    => true,
 				'label_block' => true,
+				'condition'   => [
+					'post_type!' => array( 'ids', 'related_projects' ),
+				]
 			]
 		);
 
@@ -125,6 +175,9 @@ class Portfolio extends Widget_Base {
 					'modified'   => esc_html__( 'Last modified date', 'woodmart' ),
 					'menu_order' => esc_html__( 'Menu order', 'woodmart' ),
 				),
+				'condition'   => [
+					'post_type!' => array( 'ids', 'related_projects' ),
+				]
 			]
 		);
 
@@ -139,6 +192,9 @@ class Portfolio extends Widget_Base {
 					'DESC' => esc_html__( 'Descending', 'woodmart' ),
 					'ASC'  => esc_html__( 'Ascending', 'woodmart' ),
 				),
+				'condition'   => [
+					'post_type!' => array( 'ids', 'related_projects' ),
+				],
 			]
 		);
 
@@ -312,6 +368,60 @@ class Portfolio extends Widget_Base {
 					'image_size' => 'custom',
 				],
 			]
+		);
+
+		$this->end_controls_section();
+		
+			/**
+		 * Title settings.
+		 */
+
+		 $this->start_controls_section(
+			'title_style_section',
+			array(
+				'label' => esc_html__( 'Title', 'woodmart' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'element_title_tag',
+			array(
+				'label'   => esc_html__( 'Tag', 'woodmart' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'h4',
+				'options' => array(
+					'h1'   => esc_html__( 'h1', 'woodmart' ),
+					'h2'   => esc_html__( 'h2', 'woodmart' ),
+					'h3'   => esc_html__( 'h3', 'woodmart' ),
+					'h4'   => esc_html__( 'h4', 'woodmart' ),
+					'h5'   => esc_html__( 'h5', 'woodmart' ),
+					'h6'   => esc_html__( 'h6', 'woodmart' ),
+					'div'  => esc_html__( 'div', 'woodmart' ),
+					'p'    => esc_html__( 'p', 'woodmart' ),
+					'span' => esc_html__( 'span', 'woodmart' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'title_color',
+			array(
+				'label'     => esc_html__( 'Color', 'woodmart' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .wd-el-title' => 'color: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'label'    => esc_html__( 'Typography', 'woodmart' ),
+				'selector' => '{{WRAPPER}} .wd-el-title',
+			)
 		);
 
 		$this->end_controls_section();

@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     1.8.0
+ * @version     1.10.0
  * @package     WooCommerce Smart Coupons
  */
 
@@ -40,141 +40,146 @@ if ( ! class_exists( 'WC_SC_Act_Deact' ) ) {
 		 * Process activation
 		 */
 		public static function process_activation() {
+			try {
+				global $wpdb, $blog_id, $woocommerce_smart_coupon;
 
-			global $wpdb, $blog_id, $woocommerce_smart_coupon;
-
-			// phpcs:disable
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . 'wc_smart_coupons' ) ) ) !== $wpdb->prefix . 'wc_smart_coupons' ) {
-				update_option( 'wc_sc_table_wc_smart_coupons_creation_status', array( 'create', 'insert', 'update' ), true );
-			}
-			// phpcs:enable
-
-			set_transient( 'sc_get_wc_negative_order_stats_status', array( 'update' ) );
-
-			$is_migrate_site_options = get_site_option( 'wc_sc_migrate_site_options', 'yes' );
-
-			if ( 'yes' === $is_migrate_site_options ) {
 				// phpcs:disable
-				$default_options  = array(
-					'all_tasks_count_woo_sc',                                   // => '',.
-					'bulk_coupon_action_woo_sc',                                // => '',.
-					'current_time_woo_sc',                                      // => '',.
-					'remaining_tasks_count_woo_sc',                             // => '',.
-					'smart_coupons_combine_emails',                             // => 'no',.
-					'smart_coupons_is_send_email',                              // => 'yes',.
-					'start_time_woo_sc',                                        // => '',.
-					'wc_sc_auto_apply_coupon_ids',                              // => maybe_serialize( array() ),.
-					'wc_sc_is_show_terms_notice',                               // => 'yes',.
-					'wc_sc_terms_page_id',                                      // => '',.
-					'woocommerce_wc_sc_combined_email_coupon_settings',         // => maybe_serialize( array() ),.
-					'woocommerce_wc_sc_email_coupon_settings',                  // => maybe_serialize( array() ),.
-					'woo_sc_action_data',                                       // => '',.
-					'woo_sc_generate_coupon_posted_data',                       // => '',.
-				);
+				if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . 'wc_smart_coupons' ) ) ) !== $wpdb->prefix . 'wc_smart_coupons' ) {
+					update_option( 'wc_sc_table_wc_smart_coupons_creation_status', array( 'create', 'insert', 'update' ), true );
+				}
 				// phpcs:enable
-				$existing_options = array();
-				foreach ( $default_options as $option_name ) {
-					$site_option = get_site_option( $option_name );
-					if ( ! empty( $site_option ) ) {
-						$existing_options[ $option_name ] = $site_option;
+
+				set_transient( 'sc_get_wc_negative_order_stats_status', array( 'update' ) );
+
+				$is_migrate_site_options = get_site_option( 'wc_sc_migrate_site_options', 'yes' );
+
+				if ( 'yes' === $is_migrate_site_options ) {
+					// phpcs:disable
+					$default_options  = array(
+						'all_tasks_count_woo_sc',                                   // => '',.
+						'bulk_coupon_action_woo_sc',                                // => '',.
+						'current_time_woo_sc',                                      // => '',.
+						'remaining_tasks_count_woo_sc',                             // => '',.
+						'smart_coupons_combine_emails',                             // => 'no',.
+						'smart_coupons_is_send_email',                              // => 'yes',.
+						'start_time_woo_sc',                                        // => '',.
+						'wc_sc_auto_apply_coupon_ids',                              // => maybe_serialize( array() ),.
+						'wc_sc_is_show_terms_notice',                               // => 'yes',.
+						'wc_sc_terms_page_id',                                      // => '',.
+						'woocommerce_wc_sc_combined_email_coupon_settings',         // => maybe_serialize( array() ),.
+						'woocommerce_wc_sc_email_coupon_settings',                  // => maybe_serialize( array() ),.
+						'woo_sc_action_data',                                       // => '',.
+						'woo_sc_generate_coupon_posted_data',                       // => '',.
+					);
+					// phpcs:enable
+					$existing_options = array();
+					foreach ( $default_options as $option_name ) {
+						$site_option = get_site_option( $option_name );
+						if ( ! empty( $site_option ) ) {
+							$existing_options[ $option_name ] = $site_option;
+						}
 					}
 				}
-			}
 
-			if ( is_multisite() ) {
-				$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}", 0 ); // WPCS: cache ok, db call ok.
-			} else {
-				$blog_ids = array( $blog_id );
-			}
+				if ( is_multisite() ) {
+					$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}", 0 ); // WPCS: cache ok, db call ok.
+				} else {
+					$blog_ids = array( $blog_id );
+				}
 
-			if ( ! get_option( 'smart_coupon_email_subject' ) ) {
-				add_option( 'smart_coupon_email_subject' );
-			}
+				if ( ! get_option( 'smart_coupon_email_subject' ) ) {
+					add_option( 'smart_coupon_email_subject' );
+				}
 
-			if ( ! is_object( $woocommerce_smart_coupon ) || ! is_a( $woocommerce_smart_coupon, 'WC_Smart_Coupons' ) || ! is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
-				if ( ! class_exists( 'WC_Smart_Coupons' ) ) {
-					if ( file_exists( WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php' ) ) {
-						include_once WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php';
-					}
-					if ( class_exists( 'WC_Smart_Coupons' ) && is_callable( array( 'WC_Smart_Coupons', 'get_instance' ) ) ) {
-						$woocommerce_smart_coupon = WC_Smart_Coupons::get_instance();
+				if ( ! is_object( $woocommerce_smart_coupon ) || ! is_a( $woocommerce_smart_coupon, 'WC_Smart_Coupons' ) || ! is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
+					if ( ! class_exists( 'WC_Smart_Coupons' ) ) {
+						if ( file_exists( WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php' ) ) {
+							include_once WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php';
+						}
+						if ( class_exists( 'WC_Smart_Coupons' ) && is_callable( array( 'WC_Smart_Coupons', 'get_instance' ) ) ) {
+							$woocommerce_smart_coupon = WC_Smart_Coupons::get_instance();
+						}
 					}
 				}
-			}
 
-			if ( is_multisite() ) {
-				require_once ABSPATH . WPINC . '/ms-blogs.php';
-			}
+				if ( is_multisite() ) {
+					require_once ABSPATH . WPINC . '/ms-blogs.php';
+				}
 
-			foreach ( $blog_ids as $blogid ) {
+				foreach ( $blog_ids as $blogid ) {
 
-				if ( ( file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) && ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) ) {
+					if ( ( file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) && ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) ) {
 
-					if ( is_multisite() ) {
-						switch_to_blog( $blogid );
-					}
+						if ( is_multisite() ) {
+							switch_to_blog( $blogid );
+						}
 
-					if ( 'yes' === $is_migrate_site_options ) {
-						$results = $wpdb->get_results( // phpcs:ignore
-							$wpdb->prepare(
-								"SELECT option_id,
-										option_name,
-										option_value
-									FROM {$wpdb->prefix}options
-									WHERE option_name IN (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-								'smart_coupons_is_send_email',
-								'smart_coupons_combine_emails',
-								'woocommerce_wc_sc_combined_email_coupon_settings',
-								'woocommerce_wc_sc_email_coupon_settings',
-								'wc_sc_is_show_terms_notice',
-								'wc_sc_terms_page_id',
-								'woo_sc_generate_coupon_posted_data',
-								'start_time_woo_sc',
-								'current_time_woo_sc',
-								'all_tasks_count_woo_sc',
-								'remaining_tasks_count_woo_sc',
-								'bulk_coupon_action_woo_sc',
-								'woo_sc_action_data',
-								'wc_sc_auto_apply_coupon_ids'
-							),
-							ARRAY_A
-						);
-						if ( ! empty( $results ) ) {
-							foreach ( $results as $result ) {
-								$option_value = ( ! empty( $existing_options[ $result['option_name'] ] ) ) ? $existing_options[ $result['option_name'] ] : '';
-								if ( ! empty( $option_value ) ) {
-									if ( is_array( $option_value ) ) {
-										$option_value = maybe_serialize( $option_value );
+						if ( 'yes' === $is_migrate_site_options ) {
+							$results = $wpdb->get_results( // phpcs:ignore
+								$wpdb->prepare(
+									"SELECT option_id,
+											option_name,
+											option_value
+										FROM {$wpdb->prefix}options
+										WHERE option_name IN (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+									'smart_coupons_is_send_email',
+									'smart_coupons_combine_emails',
+									'woocommerce_wc_sc_combined_email_coupon_settings',
+									'woocommerce_wc_sc_email_coupon_settings',
+									'wc_sc_is_show_terms_notice',
+									'wc_sc_terms_page_id',
+									'woo_sc_generate_coupon_posted_data',
+									'start_time_woo_sc',
+									'current_time_woo_sc',
+									'all_tasks_count_woo_sc',
+									'remaining_tasks_count_woo_sc',
+									'bulk_coupon_action_woo_sc',
+									'woo_sc_action_data',
+									'wc_sc_auto_apply_coupon_ids'
+								),
+								ARRAY_A
+							);
+							if ( ! empty( $results ) ) {
+								foreach ( $results as $result ) {
+									$option_value = ( ! empty( $existing_options[ $result['option_name'] ] ) ) ? $existing_options[ $result['option_name'] ] : '';
+									if ( ! empty( $option_value ) ) {
+										if ( is_array( $option_value ) ) {
+											$option_value = maybe_serialize( $option_value );
+										}
+										$wpdb->query( // phpcs:ignore
+											$wpdb->prepare(
+												"INSERT INTO {$wpdb->prefix}options (option_id, option_name, option_value, autoload)
+													VALUES (%d,%s,%s,%s)
+													ON DUPLICATE KEY UPDATE option_value = %s",
+												$result['option_id'],
+												$result['option_name'],
+												$option_value,
+												'no',
+												$option_value
+											)
+										);
 									}
-									$wpdb->query( // phpcs:ignore
-										$wpdb->prepare(
-											"INSERT INTO {$wpdb->prefix}options (option_id, option_name, option_value, autoload)
-												VALUES (%d,%s,%s,%s)
-												ON DUPLICATE KEY UPDATE option_value = %s",
-											$result['option_id'],
-											$result['option_name'],
-											$option_value,
-											'no',
-											$option_value
-										)
-									);
 								}
 							}
 						}
-					}
 
-					if ( is_multisite() ) {
-						restore_current_blog();  // phpcs:ignore
+						if ( is_multisite() ) {
+							restore_current_blog();  // phpcs:ignore
+						}
 					}
 				}
-			}
 
-			if ( 'yes' === $is_migrate_site_options ) {
-				update_site_option( 'wc_sc_migrate_site_options', 'no' );
-			}
+				if ( 'yes' === $is_migrate_site_options ) {
+					update_site_option( 'wc_sc_migrate_site_options', 'no' );
+				}
 
-			$woocommerce_smart_coupon->maybe_sync_orders_prior_to_800();
-			$woocommerce_smart_coupon->add_sc_options();
+				$woocommerce_smart_coupon->maybe_sync_orders_prior_to_800();
+				$woocommerce_smart_coupon->add_sc_options();
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+			}
 
 		}
 
@@ -184,25 +189,31 @@ if ( ! class_exists( 'WC_SC_Act_Deact' ) ) {
 		 * Delete option 'sc_display_global_coupons' if exists
 		 */
 		public static function smart_coupon_deactivate() {
-			global $woocommerce_smart_coupon;
+			try {
+				global $woocommerce_smart_coupon;
 
-			if ( false === ( get_option( 'sc_flushed_rules' ) ) || 'found' === ( get_option( 'sc_flushed_rules' ) ) ) {
-				delete_option( 'sc_flushed_rules' );
-			}
-			self::clear_cache();
+				if ( false === ( get_option( 'sc_flushed_rules' ) ) || 'found' === ( get_option( 'sc_flushed_rules' ) ) ) {
+					delete_option( 'sc_flushed_rules' );
+				}
+				self::clear_cache();
 
-			if ( ! is_object( $woocommerce_smart_coupon ) || ! is_a( $woocommerce_smart_coupon, 'WC_Smart_Coupons' ) || ! is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
-				if ( ! class_exists( 'WC_Smart_Coupons' ) ) {
-					if ( file_exists( WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php' ) ) {
-						include_once WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php';
-					}
-					if ( class_exists( 'WC_Smart_Coupons' ) && is_callable( array( 'WC_Smart_Coupons', 'get_instance' ) ) ) {
-						$woocommerce_smart_coupon = WC_Smart_Coupons::get_instance();
+				if ( ! is_object( $woocommerce_smart_coupon ) || ! is_a( $woocommerce_smart_coupon, 'WC_Smart_Coupons' ) || ! is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
+					if ( ! class_exists( 'WC_Smart_Coupons' ) ) {
+						if ( file_exists( WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php' ) ) {
+							include_once WP_PLUGIN_DIR . '/woocommerce-smart-coupons/includes/class-wc-smart-coupons.php';
+						}
+						if ( class_exists( 'WC_Smart_Coupons' ) && is_callable( array( 'WC_Smart_Coupons', 'get_instance' ) ) ) {
+							$woocommerce_smart_coupon = WC_Smart_Coupons::get_instance();
+						}
 					}
 				}
-			}
 
-			$woocommerce_smart_coupon->record_latest_800_order();
+				$woocommerce_smart_coupon->record_latest_800_order();
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+			}
 		}
 
 		/**
@@ -251,39 +262,46 @@ if ( ! class_exists( 'WC_SC_Act_Deact' ) ) {
 		 * @return string $message
 		 */
 		public static function maybe_set_smart_coupon_meta() {
-			global $wpdb, $store_credit_label, $woocommerce_smart_coupon;
-			$results = $wpdb->get_col(
-				$wpdb->prepare(
-					"SELECT postmeta.post_id FROM {$wpdb->prefix}postmeta as postmeta WHERE postmeta.meta_key = %s AND postmeta.meta_value = %s AND postmeta.post_id IN
-									(SELECT p.post_id FROM {$wpdb->prefix}postmeta AS p WHERE p.meta_key = %s AND p.meta_value = %s) ",
-					'discount_type',
-					'smart_coupon',
-					'customer_email',
-					'a:0:{}'
-				)
-			); // WPCS: cache ok, db call ok.
+			try {
+				global $wpdb, $store_credit_label, $woocommerce_smart_coupon;
+				$results = $wpdb->get_col(
+					$wpdb->prepare(
+						"SELECT postmeta.post_id FROM {$wpdb->prefix}postmeta as postmeta WHERE postmeta.meta_key = %s AND postmeta.meta_value = %s AND postmeta.post_id IN
+										(SELECT p.post_id FROM {$wpdb->prefix}postmeta AS p WHERE p.meta_key = %s AND p.meta_value = %s) ",
+						'discount_type',
+						'smart_coupon',
+						'customer_email',
+						'a:0:{}'
+					)
+				); // WPCS: cache ok, db call ok.
 
-			foreach ( $results as $result ) {
-				if ( is_object( $woocommerce_smart_coupon ) && is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
-					$woocommerce_smart_coupon->update_post_meta( $result, 'auto_generate_coupon', 'yes' );
-				} else {
-					update_post_meta( $result, 'auto_generate_coupon', 'yes' );
+				foreach ( $results as $result ) {
+					if ( is_object( $woocommerce_smart_coupon ) && is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
+						$woocommerce_smart_coupon->update_post_meta( $result, 'auto_generate_coupon', 'yes' );
+					} else {
+						update_post_meta( $result, 'auto_generate_coupon', 'yes' );
+					}
 				}
-			}
 
-			// To disable apply_before_tax option for Gift Certificates / Store Credit.
-			$tax_post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = %s AND meta_value = %s", 'discount_type', 'smart_coupon' ) ); // WPCS: cache ok, db call ok.
+				// To disable apply_before_tax option for Gift Certificates / Store Credit.
+				$tax_post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = %s AND meta_value = %s", 'discount_type', 'smart_coupon' ) ); // WPCS: cache ok, db call ok.
 
-			foreach ( $tax_post_ids as $tax_post_id ) {
-				if ( is_object( $woocommerce_smart_coupon ) && is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
-					$woocommerce_smart_coupon->update_post_meta( $tax_post_id, 'apply_before_tax', 'no' );
-				} else {
-					update_post_meta( $tax_post_id, 'apply_before_tax', 'no' );
+				foreach ( $tax_post_ids as $tax_post_id ) {
+					if ( is_object( $woocommerce_smart_coupon ) && is_callable( array( $woocommerce_smart_coupon, 'update_post_meta' ) ) ) {
+						$woocommerce_smart_coupon->update_post_meta( $tax_post_id, 'apply_before_tax', 'no' );
+					} else {
+						update_post_meta( $tax_post_id, 'apply_before_tax', 'no' );
+					}
 				}
-			}
 
-			/* translators: Discount type */
-			return sprintf( __( 'Missing meta for discount type "%s" set successfully!', 'woocommerce-smart-coupons' ), ! empty( $store_credit_label['singular'] ) ? ucwords( $store_credit_label['singular'] ) : __( 'Store Credit', 'woocommerce-smart-coupons' ) );
+				/* translators: Discount type */
+				return sprintf( __( 'Missing meta for discount type "%s" set successfully!', 'woocommerce-smart-coupons' ), ! empty( $store_credit_label['singular'] ) ? ucwords( $store_credit_label['singular'] ) : __( 'Store Credit', 'woocommerce-smart-coupons' ) );
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+				return false;
+			}
 		}
 
 		/**
@@ -292,16 +310,23 @@ if ( ! class_exists( 'WC_SC_Act_Deact' ) ) {
 		 * @return string $message
 		 */
 		public static function delete_table_wc_smart_coupons() {
-			global $wpdb;
-			$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wc_smart_coupons"  ); // phpcs:ignore
-			if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
-				include_once 'class-wc-sc-background-upgrade.php';
+			try {
+				global $wpdb, $woocommerce_smart_coupon;
+				$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wc_smart_coupons"  ); // phpcs:ignore
+				if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
+					include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-background-upgrade.php';
+				}
+				$wc_sc_background_upgrade = WC_SC_Background_Upgrade::get_instance();
+				$wc_sc_background_upgrade->set_status( '9.8.0', 'pending' );
+				update_option( 'wc_sc_table_wc_smart_coupons_creation_status', array( 'create', 'insert', 'update' ), true );
+				/* translators: Table name */
+				return sprintf( __( 'Table %s deleted successfully.', 'woocommerce-smart-coupons' ), $wpdb->prefix . 'wc_smart_coupons' );
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+				return false;
 			}
-			$wc_sc_background_upgrade = WC_SC_Background_Upgrade::get_instance();
-			$wc_sc_background_upgrade->set_status( '9.8.0', 'pending' );
-			update_option( 'wc_sc_table_wc_smart_coupons_creation_status', array( 'create', 'insert', 'update' ), true );
-			/* translators: Table name */
-			return sprintf( __( 'Table %s deleted successfully.', 'woocommerce-smart-coupons' ), $wpdb->prefix . 'wc_smart_coupons' );
 		}
 
 	}

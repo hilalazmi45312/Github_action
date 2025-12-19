@@ -46,7 +46,7 @@ class ProductImportController
 
         
 
-
+    
     
 
     /**
@@ -132,7 +132,7 @@ class ProductImportController
             }
 
             $import_id = uniqid('import_');
-            set_transient($import_id . '_file', $dest_path, 60 * 60);
+            update_option($import_id . '_file', $dest_path, false);
             update_option('sh_active_import_id', $import_id);
             
             // Set as active data source for CLI
@@ -154,7 +154,7 @@ class ProductImportController
             }
 
             // Initialize progress tracking
-            set_transient($import_id . '_progress', [
+            update_option($import_id . '_progress', [
                 'processed'      => 0,
                 'success_count'  => 0,
                 'error_count'    => 0,
@@ -162,7 +162,7 @@ class ProductImportController
                 'done'           => false,
                 'log'            => "File uploaded successfully. Total rows: $total_rows\n",
                 'status'         => 'ready', // ready, running, completed, error
-            ], 60 * 60);
+            ], false);
 
             $flags = [
                 'update_descriptions' => isset($_POST['update_descriptions']) && $_POST['update_descriptions'] === '1',
@@ -171,6 +171,7 @@ class ProductImportController
                 'use_enhanced_parent_finding' => isset($_POST['use_enhanced_parent_finding']) && $_POST['use_enhanced_parent_finding'] === '1',
                 'import_new_only' => isset($_POST['import_new_only']) && $_POST['import_new_only'] === '1',
                 'partial_update_existing' => isset($_POST['partial_update_existing']) && $_POST['partial_update_existing'] === '1',
+                'update_yoast_from_sku' => isset($_POST['update_yoast_from_sku']) && $_POST['update_yoast_from_sku'] === '1',
             ];
             update_option('sh_import_flags', $flags, false);
 
@@ -214,12 +215,12 @@ class ProductImportController
         // Update status to running
         $import_id = get_option('sh_active_import_id');
         if ($import_id) {
-            $progress = get_transient($import_id . '_progress');
+            $progress = get_option($import_id . '_progress');
             if ($progress) {
                 $progress['status'] = 'running';
                 $progress['log'] .= "\n=== Starting Import via PHP Script ===\n";
                 $progress['log'] .= "Triggering PHP script execution...\n";
-        set_transient($import_id . '_progress', $progress, 60 * 60);
+        update_option($import_id . '_progress', $progress, false);
             }
         }
 
@@ -274,20 +275,20 @@ class ProductImportController
         }
 
         // Store chunk state
-        $transientSet = set_transient($import_id . '_chunk_state', $chunkState, 60 * 60);
+        $transientSet = update_option($import_id . '_chunk_state', $chunkState, false);
         
         // Debug: Log chunk state creation
         error_log("Chunk state created for import $import_id: " . json_encode($chunkState));
-        error_log("Transient set result: " . ($transientSet ? 'true' : 'false'));
+        error_log("Option set result: " . ($transientSet ? 'true' : 'false'));
 
         // Update progress
-        $progress = get_transient($import_id . '_progress');
+        $progress = get_option($import_id . '_progress');
         if ($progress) {
             $progress['status'] = 'chunked_processing';
             $progress['log'] .= "\n=== Chunked Processing Started ===\n";
             $progress['log'] .= "Total chunks: {$chunkState['total_chunks']}\n";
             $progress['log'] .= "Chunk size: {$chunkState['chunk_size']} items\n";
-            set_transient($import_id . '_progress', $progress, 60 * 60);
+            update_option($import_id . '_progress', $progress, false);
         }
 
         return 'Chunked Processing (25 items per chunk)';
@@ -327,10 +328,10 @@ class ProductImportController
         $adjusted_chunk_size = max(5, $base_chunk_size - ($retry_count * 5)); // Reduce chunk size on retries
 
         // Get chunk state with error recovery
-        $chunkState = get_transient($import_id . '_chunk_state');
+        $chunkState = get_option($import_id . '_chunk_state');
         if (!$chunkState) {
             // Try to recover from lost chunk state (like WP All Import Pro)
-            $progress = get_transient($import_id . '_progress');
+            $progress = get_option($import_id . '_progress');
             if ($progress && isset($progress['processed'])) {
                 // Reconstruct chunk state from progress data
                 $dataSource = get_option('sh_import_data_source', '');
@@ -360,14 +361,14 @@ class ProductImportController
                         'retry_count' => $retry_count
                     ];
                     
-                    set_transient($import_id . '_chunk_state', $chunkState, 60 * 60);
+                    update_option($import_id . '_chunk_state', $chunkState, false);
                     
                     // Log recovery
                     if ($progress) {
                         $progress['log'] .= "\n=== Chunk State Recovered ===\n";
                         $progress['log'] .= "Resumed from chunk {$currentChunk}/{$totalChunks}\n";
                         $progress['log'] .= "Processed items: {$progress['processed']}\n";
-                        set_transient($import_id . '_progress', $progress, 60 * 60);
+                        update_option($import_id . '_progress', $progress, false);
                     }
                 }
             }
@@ -376,9 +377,9 @@ class ProductImportController
             if (!$chunkState) {
                 $debugInfo = [
                     'import_id' => $import_id,
-                    'transient_key' => $import_id . '_chunk_state',
-                    'transient_exists' => get_transient($import_id . '_chunk_state') !== false,
-                    'progress_exists' => get_transient($import_id . '_progress') !== false,
+                    'option_key' => $import_id . '_chunk_state',
+                    'option_exists' => get_option($import_id . '_chunk_state') !== false,
+                    'progress_exists' => get_option($import_id . '_progress') !== false,
                     'retry_count' => $retry_count
                 ];
                 wp_send_json_error('No chunk state found and recovery failed. Debug: ' . json_encode($debugInfo));
@@ -401,7 +402,7 @@ class ProductImportController
             }
             $chunkSize = max(1, (int)$chunkState['chunk_size']);
             $chunkState['total_chunks'] = (int) ceil($rowCount / $chunkSize);
-            set_transient($import_id . '_chunk_state', $chunkState, 60 * 60);
+            update_option($import_id . '_chunk_state', $chunkState, false);
         }
 
         // Check if we're done - fix for small datasets
@@ -418,7 +419,7 @@ class ProductImportController
             ];
             
             // Clean up chunk state to prevent further processing attempts
-            delete_transient($import_id . '_chunk_state');
+            delete_option($import_id . '_chunk_state');
             
             wp_send_json_success([
                 'status' => 'completed',
@@ -453,10 +454,10 @@ class ProductImportController
         $chunkState['status'] = 'processing';
         $chunkState['chunk_size'] = $adjusted_chunk_size; // Update chunk size in state
         $chunkState['retry_count'] = $retry_count; // Track retry count
-        set_transient($import_id . '_chunk_state', $chunkState, 60 * 60);
+        update_option($import_id . '_chunk_state', $chunkState, false);
 
         // Update progress with real statistics
-        $progress = get_transient($import_id . '_progress');
+        $progress = get_option($import_id . '_progress');
         if ($progress) {
             // Get current statistics from ProgressStore (state already loaded at start)
             $stats = ProgressStore::getStats();
@@ -472,7 +473,7 @@ class ProductImportController
             $progress['total_skipped'] = $stats['skipped'];
             $progress['total_errors'] = $stats['errors'];
             
-            set_transient($import_id . '_progress', $progress, 60 * 60);
+            update_option($import_id . '_progress', $progress, false);
         }
         
         // Get final statistics for frontend (state already loaded, no need to reload)

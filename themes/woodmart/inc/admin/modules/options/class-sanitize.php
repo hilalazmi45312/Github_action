@@ -55,8 +55,12 @@ class Sanitize {
 
 		switch ( $this->_field->args['type'] ) {
 			case 'typography':
-				if ( is_array( $val ) && ! isset( $val[0] ) ) {
-					$val = array( $val );
+				if ( is_array( $val ) ) {
+					$first = reset( $val );
+
+					if ( ! is_array( $first ) ) {
+						$val = array( $val );
+					}
 				}
 				break;
 
@@ -107,6 +111,7 @@ class Sanitize {
 
 			case 'textarea':
 				$val = wp_kses_post( $val );
+
 				break;
 
 			case 'editor':

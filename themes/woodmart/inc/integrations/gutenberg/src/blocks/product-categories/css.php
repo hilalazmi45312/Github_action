@@ -46,34 +46,6 @@ $block_css->add_css_rules(
 );
 
 $block_css->add_css_rules(
-	$block_selector . ' .wd-nav[class*=wd-style-] > li > a',
-	array(
-		array(
-			'attr_name' => 'titleIdleColorCode',
-			'template'  => 'color: {{value}};',
-		),
-		array(
-			'attr_name' => 'titleIdleColorVariable',
-			'template'  => 'color: var({{value}});',
-		),
-	)
-);
-
-$block_css->add_css_rules(
-	$block_selector . ' .wd-nav[class*=wd-style-] > li:hover > a',
-	array(
-		array(
-			'attr_name' => 'titleHoverColorCode',
-			'template'  => 'color: {{value}};',
-		),
-		array(
-			'attr_name' => 'titleHoverColorVariable',
-			'template'  => 'color: var({{value}});',
-		),
-	)
-);
-
-$block_css->add_css_rules(
 	$block_selector . ' .wd-products-with-bg, ' . $block_selector . ' .wd-products-with-bg .wd-cat, ' . $block_selector . '.wd-products-with-bg, ' . $block_selector . '.wd-products-with-bg .wd-cat',
 	array(
 		array(
@@ -113,6 +85,48 @@ if ( isset( $attrs['type'] ) && 'navigation' === $attrs['type'] ) {
 	);
 
 	$block_css->add_css_rules(
+		$block_selector . ' .wd-nav-product-cat',
+		array(
+			array(
+				'attr_name' => 'titleIdleColorCode',
+				'template'  => '--nav-color: {{value}};',
+			),
+			array(
+				'attr_name' => 'titleIdleColorVariable',
+				'template'  => '--nav-color: var({{value}});',
+			),
+		)
+	);
+	
+	$block_css->add_css_rules(
+		$block_selector . ' .wd-nav-product-cat',
+		array(
+			array(
+				'attr_name' => 'titleHoverColorCode',
+				'template'  => '--nav-color-hover: {{value}};',
+			),
+			array(
+				'attr_name' => 'titleHoverColorVariable',
+				'template'  => '--nav-color-hover: var({{value}});',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .wd-nav-product-cat > li > a .wd-nav-img',
+		array(
+			array(
+				'attr_name' => 'iconWidth',
+				'template'  => '--nav-img-width: {{value}}px;',
+			),
+			array(
+				'attr_name' => 'iconHeight',
+				'template'  => '--nav-img-height: {{value}}px;',
+			),
+		)
+	);
+
+	$block_css->add_css_rules(
 		$block_selector,
 		array(
 			array(
@@ -124,11 +138,41 @@ if ( isset( $attrs['type'] ) && 'navigation' === $attrs['type'] ) {
 	);
 
 	$block_css->add_css_rules(
+		$block_selector . ' .wd-nav-product-cat > li > a .wd-nav-img',
+		array(
+			array(
+				'attr_name' => 'iconWidthTablet',
+				'template'  => '--nav-img-width: {{value}}px;',
+			),
+			array(
+				'attr_name' => 'iconHeightTablet',
+				'template'  => '--nav-img-height: {{value}}px;',
+			),
+		),
+		'tablet'
+	);
+
+	$block_css->add_css_rules(
 		$block_selector,
 		array(
 			array(
 				'attr_name' => 'navAlignmentMobile',
 				'template'  => '--wd-align: var(--wd-{{value}});',
+			),
+		),
+		'mobile'
+	);
+
+	$block_css->add_css_rules(
+		$block_selector . ' .wd-nav-product-cat > li > a .wd-nav-img',
+		array(
+			array(
+				'attr_name' => 'iconWidthMobile',
+				'template'  => '--nav-img-width: {{value}}px;',
+			),
+			array(
+				'attr_name' => 'iconHeightMobile',
+				'template'  => '--nav-img-height: {{value}}px;',
 			),
 		),
 		'mobile'

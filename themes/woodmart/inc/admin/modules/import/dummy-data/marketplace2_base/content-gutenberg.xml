@@ -12406,10 +12406,6 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
-							<wp:meta_value><![CDATA[full-width]]></wp:meta_value>
-						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Contact Us]]></title>
@@ -12447,7 +12443,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/list-item -->
 
 <!-- wp:wd/list-item {"blockId":"4e13e4ae-9b0f-40f0-bf6b-756417642e61","iconType":"image","itemIconType":"image","svg":"","itemImage":{"id":397,"url":"http://dummy.xtemos.com/woodmart2/marketplace2-gutenberg/wp-content/uploads/sites/43/2025/01/email.svg"}} -->
-<li id="wd-4e13e4ae" class="wp-block-wd-list-item"><div class="wd-icon"><img src="http://dummy.xtemos.com/woodmart2/marketplace2-gutenberg/wp-content/uploads/sites/43/2025/01/email.svg" alt="" class="wp-image-397" /></div><span class="wd-list-content"><a href="#">woodmart@mail.com</a></span></li>
+<li id="wd-4e13e4ae" class="wp-block-wd-list-item"><div class="wd-icon"><img src="http://dummy.xtemos.com/woodmart2/marketplace2-gutenberg/wp-content/uploads/sites/43/2025/01/email.svg" alt="" class="wp-image-397" /></div><span class="wd-list-content"><a href="#">info@mail.com</a></span></li>
 <!-- /wp:wd/list-item --></ul>
 <!-- /wp:wd/list -->
 

@@ -20,13 +20,6 @@ use XTS\Singleton;
  */
 class Send_On_Sales_Products extends Singleton {
 	/**
-	 * Name unsubscribed users option.
-	 *
-	 * @var string
-	 */
-	private $unsubscribed_users = 'woodmart_wishlist_unsubscribed_users';
-
-	/**
 	 * Init.
 	 */
 	public function init() {
@@ -41,6 +34,15 @@ class Send_On_Sales_Products extends Singleton {
 
 		add_action( 'woodmart_wishlist_on_sales_products_email', array( $this, 'send_on_sales_products_email' ) );
 
+		add_action( 'init', array( $this, 'schedule_cron_event' ) );
+	}
+
+	/**
+	 * Schedule cron event on init hook.
+	 *
+	 * @return void
+	 */
+	public function schedule_cron_event() {
 		if ( ! wp_next_scheduled( 'woodmart_wishlist_on_sales_products_email' ) ) {
 			wp_schedule_event( time(), apply_filters( 'woodmart_schedule_on_sales_products_email', 'hourly' ), 'woodmart_wishlist_on_sales_products_email' );
 		}
@@ -101,16 +103,15 @@ class Send_On_Sales_Products extends Singleton {
 	 * @param WC_Product $product   The product object.
 	 */
 	public function register_sale_product( $product_id, $product ) {
-		$unsubscribed_users = get_option( $this->unsubscribed_users, array() );
-		$users_id           = $this->get_users_id_by_product_id( $product_id );
-		$products_on_sale   = get_option( 'woodmart_wishlist_products_on_sale', array() );
-		$regular_price      = (float) $product->get_regular_price();
-		$sale_price         = (float) $product->get_sale_price();
+		$users_id         = $this->get_users_id_by_product_id( $product_id );
+		$products_on_sale = get_option( 'woodmart_wishlist_products_on_sale', array() );
+		$regular_price    = (float) $product->get_regular_price();
+		$sale_price       = (float) $product->get_sale_price();
 
 		if ( ! empty( $users_id ) ) {
 			foreach ( $users_id as $user_id ) {
 				if ( $sale_price > 0 && $sale_price < $regular_price ) {
-					if ( in_array( get_userdata( $user_id )->user_email, $unsubscribed_users, true ) || ( isset( $products_on_sale[ $user_id ] ) && in_array( $product_id, $products_on_sale[ $user_id ], true ) ) ) {
+					if ( woodmart_is_user_unsubscribed_from_mailing( get_userdata( $user_id )->user_email, 'XTS_Email_Wishlist_On_Sale_Products' ) || ( isset( $products_on_sale[ $user_id ] ) && in_array( $product_id, $products_on_sale[ $user_id ], true ) ) ) {
 						continue;
 					}
 
@@ -134,21 +135,22 @@ class Send_On_Sales_Products extends Singleton {
 	 * @return void
 	 */
 	public function send_on_sales_products_email() {
-		$products_on_sales  = get_option( 'woodmart_wishlist_products_on_sale' );
-		$unsubscribed_users = get_option( $this->unsubscribed_users, array() );
-		$emails_limited     = apply_filters( 'woodmart_wishlist_send_emails_limited', 20 );
-		$counter            = 1;
+		$products_on_sales = get_option( 'woodmart_wishlist_products_on_sale' );
+		$emails_limited    = apply_filters( 'woodmart_wishlist_send_emails_limited', 20 );
+		$counter           = 1;
 
 		if ( ! $products_on_sales ) {
 			return;
 		}
 
 		foreach ( $products_on_sales as $user_id => $products ) {
-			if ( ! $user_id || ! $products ) {
+			$user_email = get_userdata( $user_id )->user_email;
+
+			if ( ! $user_id || ! $products || woodmart_should_skip_subscription_email( $user_email, $user_id ) ) {
 				continue;
 			}
 
-			if ( in_array( get_userdata( $user_id )->user_email, $unsubscribed_users, true ) ) {
+			if ( woodmart_is_user_unsubscribed_from_mailing( $user_email, 'XTS_Email_Wishlist_On_Sale_Products' ) ) {
 				unset( $products_on_sales[ $user_id ] );
 				continue;
 			}

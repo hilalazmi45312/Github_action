@@ -11,7 +11,7 @@ if ( ! function_exists( 'woodmart_shortcode_team_member_show_member_social' ) ) 
 	 * @return string|void
 	 */
 	function woodmart_shortcode_team_member_show_member_social( $settings ) {
-		if ( empty( $settings['linkedin'] ) && empty( $settings['twitter'] ) && empty( $settings['facebook'] ) && empty( $settings['skype'] ) && empty( $settings['instagram'] ) ) {
+		if ( empty( $settings['linkedin'] ) && empty( $settings['twitter'] ) && empty( $settings['facebook'] ) && empty( $settings['instagram'] ) ) {
 			return '';
 		}
 
@@ -40,11 +40,6 @@ if ( ! function_exists( 'woodmart_shortcode_team_member_show_member_social' ) ) 
 				<?php endif; ?>
 				<?php if ( ! empty( $settings['linkedin'] ) ) : ?>
 					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-linkedin" href="<?php echo esc_url( $settings['linkedin'] ); ?>" aria-label="<?php echo esc_attr( __( 'Social icon linkedin', 'woodmart' ) ); ?>">
-						<span class="wd-icon"></span>
-					</a>
-				<?php endif; ?>
-				<?php if ( ! empty( $settings['skype'] ) ) : ?>
-					<a rel="noopener noreferrer nofollow" class="wd-social-icon social-skype" href="<?php echo esc_url( $settings['skype'] ); ?>" aria-label="<?php echo esc_attr( __( 'Social icon skype', 'woodmart' ) ); ?>">
 						<span class="wd-icon"></span>
 					</a>
 				<?php endif; ?>
@@ -82,7 +77,6 @@ if ( ! function_exists( 'woodmart_shortcode_team_member' ) ) {
 				'position'              => '',
 				'twitter'               => '',
 				'facebook'              => '',
-				'skype'                 => '',
 				'linkedin'              => '',
 				'instagram'             => '',
 				'image'                 => '',

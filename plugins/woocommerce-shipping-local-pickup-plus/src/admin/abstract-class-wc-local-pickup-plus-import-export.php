@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup Locations abstract class for importing and exporting.
@@ -101,7 +101,7 @@ abstract class WC_Local_Pickup_Plus_Import_Export {
 				case 'admin_page_wc_local_pickup_plus_export' :
 				case 'admin_page_wc_local_pickup_plus_import' :
 					// trim `"admin_page_wc_local_pickup_plus_"` from `$current_screen->id`.
-					return $this->action_id === substr( $current_screen->id, 32, 6 ) ? $this->admin_page_title . $admin_title : $admin_title;
+					return $this->action_id === substr( $current_screen->id, 32, 6 ) ? $this->admin_page_title . ' - ' . $admin_title : $admin_title;
 				default :
 					return $admin_title;
 			}
@@ -160,7 +160,7 @@ abstract class WC_Local_Pickup_Plus_Import_Export {
 	protected function get_fields_delimiter() {
 
 		// get the delimiter from form submission, defaults to comma otherwise
-		$delimiter = ! empty( $this->delimiter_field_name ) && isset( $_POST[ $this->delimiter_field_name ] ) ? $_POST[ $this->delimiter_field_name ] : 'comma';
+		$delimiter = ! empty( $this->delimiter_field_name ) && isset( $_POST[ $this->delimiter_field_name ] ) ? sanitize_text_field( $_POST[ $this->delimiter_field_name ] ) : 'comma';
 
 		switch ( $delimiter ) {
 			case 'tab' :
@@ -281,7 +281,7 @@ abstract class WC_Local_Pickup_Plus_Import_Export {
 			<div id="wc-local-pickup-plus-<?php echo sanitize_html_class( $this->action_id ); ?>-pickup-locations" class="wc-local-pickup-plus">
 				<form
 					method="post"
-					action="<?php echo admin_url( 'admin-post.php' ); ?>"
+					action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
 					enctype="multipart/form-data">
 
 					<?php woocommerce_admin_fields( $this->get_fields() ); ?>

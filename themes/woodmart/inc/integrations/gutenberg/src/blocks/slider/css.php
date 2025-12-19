@@ -4,15 +4,27 @@ use XTS\Gutenberg\Block_CSS;
 $slide_selector = $block_selector . ' .wd-slide';
 $block_css      = new Block_CSS( $attrs );
 
-$block_css->add_css_rules(
-	$slide_selector,
-	array(
+if ( isset( $attrs['heightType'] ) && 'aspectRatio' === $attrs['heightType'] ) {
+	$block_css->add_css_rules(
+		$slide_selector,
 		array(
-			'attr_name' => 'height',
-			'template'  => 'min-height: {{value}}' . $block_css->get_units_for_attribute( 'height' ) . ';',
-		),
-	)
-);
+			array(
+				'attr_name' => 'customAspectRatio',
+				'template'  => '--wd-aspect-ratio: {{value}};',
+			),
+		)
+	);
+} elseif ( ! isset( $attrs['heightType'] ) || 'custom' === $attrs['heightType'] ) {
+	$block_css->add_css_rules(
+		$slide_selector,
+		array(
+			array(
+				'attr_name' => 'height',
+				'template'  => 'min-height: {{value}}' . $block_css->get_units_for_attribute( 'height' ) . ';',
+			),
+		)
+	);
+}
 
 $block_css->add_css_rules(
 	$block_selector . ' .wd-nav-pagin-wrap',
@@ -24,16 +36,29 @@ $block_css->add_css_rules(
 	)
 );
 
-$block_css->add_css_rules(
-	$slide_selector,
-	array(
+if ( isset( $attrs['heightType'] ) && 'aspectRatio' === $attrs['heightType'] ) {
+	$block_css->add_css_rules(
+		$slide_selector,
 		array(
-			'attr_name' => 'heightTablet',
-			'template'  => 'min-height: {{value}}' . $block_css->get_units_for_attribute( 'height', 'tablet' ) . ';',
+			array(
+				'attr_name' => 'customAspectRatioTablet',
+				'template'  => '--wd-aspect-ratio: {{value}};',
+			),
 		),
-	),
-	'tablet'
-);
+		'tablet'
+	);
+} elseif ( ! isset( $attrs['heightType'] ) || 'custom' === $attrs['heightType'] ) {
+	$block_css->add_css_rules(
+		$slide_selector,
+		array(
+			array(
+				'attr_name' => 'heightTablet',
+				'template'  => 'min-height: {{value}}' . $block_css->get_units_for_attribute( 'height', 'tablet' ) . ';',
+			),
+		),
+		'tablet'
+	);
+}
 
 $block_css->add_css_rules(
 	$block_selector . ' .wd-nav-pagin-wrap',
@@ -46,16 +71,29 @@ $block_css->add_css_rules(
 	'tablet'
 );
 
-$block_css->add_css_rules(
-	$slide_selector,
-	array(
+if ( isset( $attrs['heightType'] ) && 'aspectRatio' === $attrs['heightType'] ) {
+	$block_css->add_css_rules(
+		$slide_selector,
 		array(
-			'attr_name' => 'heightMobile',
-			'template'  => 'min-height: {{value}}' . $block_css->get_units_for_attribute( 'height', 'mobile' ) . ';',
+			array(
+				'attr_name' => 'customAspectRatioMobile',
+				'template'  => '--wd-aspect-ratio: {{value}};',
+			),
 		),
-	),
-	'mobile'
-);
+		'mobile'
+	);
+} elseif ( ! isset( $attrs['heightType'] ) || 'custom' === $attrs['heightType'] ) {
+	$block_css->add_css_rules(
+		$slide_selector,
+		array(
+			array(
+				'attr_name' => 'heightMobile',
+				'template'  => 'min-height: {{value}}' . $block_css->get_units_for_attribute( 'height', 'mobile' ) . ';',
+			),
+		),
+		'mobile'
+	);
+}
 
 $block_css->add_css_rules(
 	$block_selector . ' .wd-nav-pagin-wrap',

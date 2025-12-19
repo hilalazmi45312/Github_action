@@ -17,6 +17,10 @@ if ( woodmart_woocommerce_installed() && is_product() ) {
 	$opened = false;
 }
 
+if ( ! empty( $params['icon_alignment'] ) && 'inherit' !== $params['icon_alignment'] ) {
+	$menu_class .= ' wd-icon-' . $params['icon_alignment'];
+}
+
 $class = ( $params['color_scheme'] != 'inherit' ) ? 'color-scheme-' . $params['color_scheme'] : '';
 
 if ( ! empty( $params['background'] ) && ! empty( $params['background']['background-color'] ) ) {
@@ -90,7 +94,7 @@ woodmart_enqueue_inline_style( 'mod-nav-vertical-design-' . $params['design'] );
 			array(
 				'container'  => '',
 				'menu'       => $params['menu_id'],
-				'menu_class' => 'menu wd-nav wd-nav-vertical' . $menu_class,
+				'menu_class' => 'menu wd-nav wd-nav-vertical wd-dis-act' . $menu_class,
 				'walker'     => new Mega_Menu_Walker(),
 				'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s' . $html . '</ul>',
 			)

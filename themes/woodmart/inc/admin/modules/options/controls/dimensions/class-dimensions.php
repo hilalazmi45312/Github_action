@@ -37,6 +37,7 @@ class Dimensions extends Field {
 
 		$data['devices'] = array_merge( $this->args['devices'], $data['devices'] );
 
+
 		?>
 			<div class="xts-dimensions xts-field-type-<?php echo esc_attr( $control_type ); ?>">
 				<?php if ( $data['devices'] && ! empty( $this->args['dimensions'] ) ) : ?>
@@ -55,34 +56,39 @@ class Dimensions extends Field {
 					<?php foreach ( $data['devices'] as $device => $device_settings ) : ?>
 						<?php
 						$device_unit = isset( $device_settings['unit'] ) ? $device_settings['unit'] : '-';
+						$min_value   = isset( $this->args['range'][ $device_unit ]['min'] ) ? $this->args['range'][ $device_unit ]['min'] : '';
+						$max_value   = isset( $this->args['range'][ $device_unit ]['max'] ) ? $this->args['range'][ $device_unit ]['max'] : '';
+						$step_value  = isset( $this->args['range'][ $device_unit ]['step'] ) ? $this->args['range'][ $device_unit ]['step'] : '';
+
 						?>
 						<div class="xts-control-tab-content<?php echo array_key_first( $data['devices'] ) === $device ? esc_attr( ' xts-active' ) : ''; ?>"  data-device="<?php echo esc_attr( $device ); ?>" data-unit="<?php echo esc_attr( $device_unit ); ?>">
 							<?php foreach ( $this->args['dimensions'] as $key => $title ) : ?>
-								<div class="xts-dimensions-field xts-range-slider-wrap">
+								<div class="xts-dimensions-field">
 									<label>
 										<?php echo esc_html( $title ); ?>
 									</label>
 									<?php if ( 'slider' === $control_type ) : ?>
-										<div class="xts-dimensions-slider  xts-range-slider"></div>
+										<div class="xts-dimensions-slider"></div>
 									<?php endif; ?>
-									<span class="xts-dimensions-field-value-input xts-range-field-value-input">
-										<input type="number" data-key="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( isset( $device_settings[ $key ] ) ? $device_settings[ $key ] : '' ); ?>">
+									<span class="xts-dimensions-field-value-input">
+										<input type="number" data-key="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( isset( $device_settings[ $key ] ) ? $device_settings[ $key ] : '' ); ?>" min="<?php echo esc_attr( $min_value ); ?>" max="<?php echo esc_attr( $max_value ); ?>" step="<?php echo esc_attr( $step_value ); ?>"/>
 									</span>
-									<?php if ( ! empty( $this->args['range'] ) ) : ?>
-										<span class="xts-slider-units">
-										<?php foreach ( $this->args['range'] as $unit => $value ) : ?>
-											<?php if ( '-' === $unit ) : ?>
-												<?php continue; ?>
-											<?php endif; ?>
-
-											<span class="wd-slider-unit-control<?php echo esc_attr( $unit === $device_unit ? ' xts-active' : '' ); ?>" data-unit="<?php echo esc_attr( $unit ); ?>">
-												<?php echo esc_html( $unit ); ?>
-											</span>
-										<?php endforeach; ?>
-									</span>
-									<?php endif; ?>
 								</div>
 							<?php endforeach; ?>
+							<div class="xts-lock-units xts-add-on<?php echo ! empty( $data['is_lock'] ) ? ' xts-active' : ''; ?>"></div>
+							<?php if ( ! empty( $this->args['range'] ) ) : ?>
+								<div class="xts-slider-units">
+									<?php foreach ( $this->args['range'] as $unit => $value ) : ?>
+										<?php if ( '-' === $unit ) : ?>
+											<?php continue; ?>
+										<?php endif; ?>
+
+										<span class="wd-slider-unit-control<?php echo esc_attr( $unit === $device_unit ? ' xts-active' : '' ); ?>" data-unit="<?php echo esc_attr( $unit ); ?>">
+											<?php echo esc_html( $unit ); ?>
+										</span>
+									<?php endforeach; ?>
+								</div>
+							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
 				<?php endif; ?>
@@ -127,7 +133,7 @@ class Dimensions extends Field {
 			$generate_css = false;
 
 			foreach ( $this->args['dimensions'] as $key => $label ) {
-				if ( isset( $device_value[ $key ] ) && ( $device_value[ $key ] || ! empty( $this->args['generate_zero'] ) && isset( $device_value['value'] ) && '' !== $device_value['value'] ) ) {
+				if ( isset( $device_value[ $key ] ) && ( $device_value[ $key ] || ( '' !== $device_value[ $key ] && ! empty( $this->args['generate_zero'] ) ) ) ) {
 					$generate_css = true;
 
 					break;
@@ -144,25 +150,139 @@ class Dimensions extends Field {
 
 			foreach ( $this->args['selectors'] as $selector => $css_data ) {
 				foreach ( $css_data as $css ) {
-					$result = $css;
+					$dimension_keys = array_keys( $this->args['dimensions'] );
 
-					foreach ( $this->args['dimensions'] as $key => $label ) {
-						if ( isset( $device_value[ $key ] ) ) {
-							if ( ! $device_value[ $key ] ) {
-								$device_value[ $key ] = 0;
-							}
-
-							$result = str_replace( '{{' . strtoupper( $key ) . '}}', $device_value[ $key ], $result );
+					$all_placeholders_exist = true;
+					foreach ( $dimension_keys as $dim_key ) {
+						if ( strpos( $css, '{{' . strtoupper( $dim_key ) . '}}' ) === false ) {
+							$all_placeholders_exist = false;
+							break;
 						}
 					}
 
-					if ( isset( $device_value['unit'] ) ) {
-						$result = str_replace( '{{UNIT}}', $device_value['unit'], $result );
-					}
+					if ( $all_placeholders_exist ) {
+						$has_all_values = true;
 
-					$output_css[ $device ][ $selector ][] = $result . "\n";
+						foreach ( $dimension_keys as $dim_key ) {
+							if ( ! isset( $device_value[ $dim_key ] ) || '' === $device_value[ $dim_key ] ) {
+								$has_all_values = false;
+								break;
+							}
+						}
+
+						if ( $has_all_values ) {
+							$result = $css;
+
+							foreach ( $dimension_keys as $dim_key ) {
+								$result = str_replace( '{{' . strtoupper( $dim_key ) . '}}', $device_value[ $dim_key ], $result );
+							}
+
+							if ( isset( $device_value['unit'] ) ) {
+								$result = str_replace( '{{UNIT}}', $device_value['unit'], $result );
+							}
+
+							$output_css[ $device ][ $selector ][] = $result . "\n";
+						} else {
+							preg_match( '/^\s*([a-zA-Z\-]+)\s*:/', $css, $prop_match );
+							$property_prefix = isset( $prop_match[1] ) ? trim( $prop_match[1] ) : '';
+
+							if ( empty( $property_prefix ) ) {
+								continue;
+							}
+
+							foreach ( $dimension_keys as $dim_key ) {
+								if ( isset( $device_value[ $dim_key ] ) && '' !== $device_value[ $dim_key ] ) {
+									$unit = isset( $device_value['unit'] ) && '-' !== $device_value['unit'] ? $device_value['unit'] : '';
+
+									$output_css[ $device ][ $selector ][] = $property_prefix . '-' . $dim_key . ': ' . $device_value[ $dim_key ] . $unit . ';' . "\n";
+								}
+							}
+						}
+					} else {
+						preg_match_all( '/{{(.*?)}}/', $css, $matches );
+						$placeholders = $matches[1];
+
+						$value_keys = array_filter(
+							$placeholders,
+							function ( $key ) {
+								return strtoupper( $key ) !== 'UNIT';
+							}
+						);
+
+						if ( count( $value_keys ) === 1 ) {
+							$key = strtolower( $value_keys[0] );
+
+							if ( ! isset( $device_value[ $key ] ) ) {
+								continue;
+							}
+						}
+
+						$result = $css;
+
+						foreach ( $value_keys as $key ) {
+							$lower_key   = strtolower( $key );
+							$replace_val = '';
+
+							if ( isset( $device_value[ $lower_key ] ) ) {
+								$replace_val = $device_value[ $lower_key ];
+							} elseif ( ! empty( $this->args['generate_zero'] ) ) {
+								$replace_val = 0;
+							}
+
+							$result = str_replace( '{{' . strtoupper( $key ) . '}}', $replace_val, $result );
+						}
+
+						if ( isset( $device_value['unit'] ) ) {
+							$result = str_replace( '{{UNIT}}', $device_value['unit'], $result );
+						}
+
+						$output_css[ $device ][ $selector ][] = $result . "\n";
+					}
 				}
 			}
+
+//			foreach ( $this->args['selectors'] as $selector => $css_data ) {
+//				foreach ( $css_data as $css ) {
+//					preg_match_all( '/{{(.*?)}}/', $css, $matches );
+//					$placeholders = $matches[1];
+//
+//					$value_keys = array_filter(
+//						$placeholders,
+//						function ( $key ) {
+//							return strtoupper( $key ) !== 'UNIT';
+//						}
+//					);
+//
+//					if ( count( $value_keys ) === 1 ) {
+//						$key = strtolower( $value_keys[0] );
+//
+//						if ( ! isset( $device_value[ $key ] ) ) {
+//							continue;
+//						}
+//					}
+//
+//					$result = $css;
+//
+//					foreach ( $value_keys as $key ) {
+//						$lower_key   = strtolower( $key );
+//						$replace_val = '';
+//
+//						if ( isset( $device_value[ $lower_key ] ) ) {
+//							$replace_val = $device_value[ $lower_key ];
+//						} elseif ( ! empty( $this->args['generate_zero'] ) ) {
+//							$replace_val = 0;
+//						}
+//
+//						$result = str_replace( '{{' . strtoupper( $key ) . '}}', $replace_val, $result );
+//					}
+//
+//					if ( isset( $device_value['unit'] ) ) {
+//						$result = str_replace( '{{UNIT}}', $device_value['unit'], $result );
+//					}
+//
+//					$output_css[ $device ][ $selector ][] = $result . "\n";
+//				}
+//			}
 		}
 
 		return $output_css;

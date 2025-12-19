@@ -56,6 +56,7 @@ if ( ! function_exists( 'woodmart_shortcode_categories' ) ) {
 					'categories_bordered_grid_style' => 'outside',
 					'categories_with_background'     => '',
 					'subcategories'                  => '',
+					'icon_alignment'                 => 'inherit',
 
 					// Hidden sidebar.
 					'mobile_categories_menu_layout'            => 'dropdown',
@@ -66,6 +67,7 @@ if ( ! function_exists( 'woodmart_shortcode_categories' ) ) {
 					'mobile_categories_close_btn'              => 'no',
 
 					// Extra.
+					'is_wpb'                    => true,
 					'spacing'                   => woodmart_get_opt( 'products_spacing' ),
 					'spacing_tablet'            => '',
 					'spacing_mobile'            => '',
@@ -96,7 +98,7 @@ if ( ! function_exists( 'woodmart_shortcode_categories' ) ) {
 		$extra_wrapper_classes .= apply_filters( 'vc_shortcodes_css_class', '', '', $parsed_atts );
 		$extra_wrapper_classes .= $el_class ? ' ' . $el_class : '';
 
-		if ( 'wpb' === woodmart_get_current_page_builder() ) {
+		if ( $is_wpb && 'wpb' === woodmart_get_current_page_builder() ) {
 			$extra_wrapper_classes .= ' wd-wpb';
 		}
 
@@ -333,7 +335,6 @@ if ( ! function_exists( 'woodmart_shortcode_categories' ) ) {
 				$extra_class                .= ' wd-cats';
 
 				if ( 'yes' === $scroll_carousel_init ) {
-					woodmart_enqueue_js_library( 'waypoints' );
 					$carousel_classes .= ' scroll-init';
 				}
 
@@ -368,7 +369,7 @@ if ( ! function_exists( 'woodmart_shortcode_categories' ) ) {
 				woodmart_enqueue_inline_style( 'swiper' );
 
 				?>
-				<div id="<?php echo esc_attr( $carousel_id ); ?>" class="products woocommerce wd-carousel-container <?php echo esc_attr( $extra_wrapper_classes . $extra_class ); ?>">
+				<div id="<?php echo esc_attr( $carousel_id ); ?>" class="products wd-carousel-container <?php echo esc_attr( $extra_wrapper_classes . $extra_class ); ?>">
 					<div class="wd-carousel-inner">
 						<div class="wd-carousel wd-grid<?php echo esc_attr( $carousel_classes ); ?>" <?php echo woodmart_get_carousel_attributes( $parsed_atts ); ?>>
 							<div class="wd-carousel-wrap">
@@ -414,7 +415,7 @@ if ( ! function_exists( 'woodmart_shortcode_categories' ) ) {
 
 				?>
 				<div id="<?php echo esc_attr( $el_id ); ?>" class="<?php echo esc_attr( $extra_wrapper_classes ); ?>">
-					<div class="products woocommerce <?php echo esc_attr( $extra_class ); ?> columns-<?php echo esc_attr( $columns_desktop ); ?>" style="<?php echo esc_attr( $style_attrs ); ?>">
+					<div class="products <?php echo esc_attr( $extra_class ); ?> columns-<?php echo esc_attr( $columns_desktop ); ?>" style="<?php echo esc_attr( $style_attrs ); ?>">
 					<?php
 					foreach ( $product_categories as $category ) {
 						wc_get_template( 'content-product-cat.php', array( 'category' => $category ) );

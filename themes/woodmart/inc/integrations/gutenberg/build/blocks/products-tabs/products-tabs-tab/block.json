@@ -4,7 +4,7 @@
   "name": "wd/products-tabs-tab",
   "category": "xtemos",
   "textdomain": "woodmart",
-  "parent": [
-    "wd/products-tabs-heading"
+  "ancestor": [
+    "wd/products-tabs"
   ]
 }

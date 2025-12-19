@@ -339,7 +339,7 @@ Options::add_field(
 		'type'     => 'textarea',
 		'wysiwyg'  => false,
 		'name'     => esc_html__( 'Text', 'woodmart' ),
-		'default'  => '[html_block id="258"]',
+		'default'  => '',
 		'section'  => 'prefooter_section',
 		'tags'     => 'prefooter',
 		'requires' => array(

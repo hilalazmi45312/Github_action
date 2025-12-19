@@ -24,11 +24,11 @@ $classes     = ' whb-' . $id;
 ?>
 
 <div class="wd-header-nav wd-header-secondary-nav<?php echo esc_attr( $classes ); ?>">
-	<ul class="menu wd-nav wd-nav-secondary wd-style-default">
+	<ul class="menu wd-nav wd-nav-header wd-nav-secondary wd-style-default">
 		<li class="menu-item<?php echo esc_attr( $languages || ! $flag_url ? ' menu-item-has-children' . $extra_class : '' ); ?>">
 			<a href="<?php echo esc_url( $current_url ); ?>" class="woodmart-nav-link">
 				<?php if ( $flag_url && $params['show_language_flag'] ) : ?>
-					<img src="<?php echo esc_url( $flag_url ); ?>" alt="<?php echo esc_attr( $current_lang ); ?>" class="wd-nav-img">
+					<img src="<?php echo esc_url( $flag_url ); ?>" alt="<?php echo esc_attr( sprintf( __( 'Flag for %s', 'woodmart' ), $current_lang ) ); ?>" class="wd-nav-img">
 				<?php endif; ?>
 				<span class="nav-link-text">
 					<?php echo esc_html( $current_lang ); ?>
@@ -42,7 +42,7 @@ $classes     = ' whb-' . $id;
 								<li class="menu-item">
 									<a href="<?php echo esc_url( $language['url'] ); ?>" hreflang="<?php echo esc_attr( $language['language_code'] ); ?>" class="woodmart-nav-link">
 										<?php if ( $language['country_flag_url'] && $params['show_language_flag'] ) : ?>
-											<img src="<?php echo esc_url( $language['country_flag_url'] ); ?>" alt="<?php echo esc_attr( $language['native_name'] ); ?>" class="wd-nav-img">
+											<img src="<?php echo esc_url( $language['country_flag_url'] ); ?>" alt="<?php echo esc_attr( sprintf( __( 'Flag for %s', 'woodmart' ), $language['native_name'] ) ); ?>" class="wd-nav-img">
 										<?php endif; ?>
 										<span class="nav-link-text">
 											<?php echo esc_html( $language['native_name'] ); ?>

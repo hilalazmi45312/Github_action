@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.17.0
- * @version     1.0.0
+ * @version     1.1.0
  *
  * @package     woocommerce-smart-coupons/includes/compat/
  */
@@ -64,6 +64,7 @@ if ( ! class_exists( 'WC_SC_WMC_Compatibility' ) ) {
 				$currency = ( is_object( $order ) && is_callable( array( $order, 'get_currency' ) ) ) ? $order->get_currency() : false;
 				$price    = wmc_get_price( $price, $currency );
 			}
+
 			return $price;
 		}
 
@@ -78,6 +79,7 @@ if ( ! class_exists( 'WC_SC_WMC_Compatibility' ) ) {
 			if ( function_exists( 'wmc_get_price' ) ) {
 				$price = wmc_get_price( $price );
 			}
+
 			return $price;
 		}
 

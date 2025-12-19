@@ -27,6 +27,11 @@ if ( 'sidebar-left' === woodmart_get_page_layout() ) {
 		<?php
 		while ( have_posts() ) :
 			the_post();
+
+			woodmart_enqueue_inline_style( 'post-types-mod-predefined' );
+			woodmart_enqueue_inline_style( 'post-types-mod-categories-style-bg' );
+			woodmart_enqueue_inline_style( 'blog-single-predefined' );
+
 			?>
 
 			<?php get_template_part( 'content', get_post_format() ); ?>
@@ -35,7 +40,8 @@ if ( 'sidebar-left' === woodmart_get_page_layout() ) {
 
 				<div class="wd-single-footer">
 					<?php if ( get_the_tag_list() ) : ?>
-						<div class="tags-list">
+						<?php woodmart_enqueue_inline_style( 'single-post-el-tags' ); ?>
+						<div class="wd-tags-list wd-style-1">
 							<?php echo get_the_tag_list(); ?>
 						</div>
 					<?php endif; ?>
@@ -55,50 +61,49 @@ if ( 'sidebar-left' === woodmart_get_page_layout() ) {
 				</div>
 
 			<?php endif ?>
-
+			
 			<?php
 			if ( woodmart_get_opt( 'blog_navigation' ) ) {
-				woodmart_posts_navigation();}
+				woodmart_posts_navigation();
+			}
 			?>
 
-				<?php
+			<?php
+			if ( woodmart_get_opt( 'blog_related_posts' ) ) {
+				$args = woodmart_get_related_posts_args( $post->ID );
 
-				if ( woodmart_get_opt( 'blog_related_posts' ) ) {
-					$args = woodmart_get_related_posts_args( $post->ID );
+				$query  = new WP_Query( $args );
+				$design = woodmart_get_opt( 'blog_design' );
 
-					$query  = new WP_Query( $args );
-					$design = woodmart_get_opt( 'blog_design' );
+				woodmart_enqueue_inline_style( 'blog-loop-base' );
 
-					woodmart_enqueue_inline_style( 'blog-base' );
-					if ( 'meta-image' === $design ) {
-						woodmart_enqueue_inline_style( 'blog-loop-base' );
-						woodmart_enqueue_inline_style( 'blog-loop-design-' . $design );
-					} else {
-						woodmart_enqueue_inline_style( 'blog-loop-base-old' );
-						woodmart_enqueue_inline_style( 'blog-loop-design-masonry' );
-					}
-
-					if ( function_exists( 'woodmart_generate_posts_slider' ) ) {
-						echo woodmart_generate_posts_slider( //phpcs:ignore.
-							array(
-								'title'                => esc_html__( 'Related Posts', 'woodmart' ),
-								'blog_design'          => 'carousel',
-								'blog_carousel_design' => 'meta-image' === $design ? $design : 'masonry',
-								'wrapper_classes'      => ' related-posts-slider',
-								'slides_per_view'      => 2,
-								'parts_title'          => woodmart_get_opt( 'parts_title', true ),
-								'parts_meta'           => woodmart_get_opt( 'parts_meta', true ),
-								'parts_text'           => woodmart_get_opt( 'parts_text', true ),
-								'parts_btn'            => woodmart_get_opt( 'parts_btn', true ),
-								'spacing'              => 20,
-							),
-							$query
-						);
-					}
+				if ( 'meta-image' === $design ) {
+					woodmart_enqueue_inline_style( 'blog-loop-design-' . $design );
+				} else {
+					woodmart_enqueue_inline_style( 'blog-loop-design-masonry' );
 				}
-				?>
 
-				<?php comments_template(); ?>
+				if ( function_exists( 'woodmart_generate_posts_slider' ) ) {
+					echo woodmart_generate_posts_slider( //phpcs:ignore.
+						array(
+							'title'                => esc_html__( 'Related Posts', 'woodmart' ),
+							'blog_design'          => 'carousel',
+							'blog_carousel_design' => 'meta-image' === $design ? $design : 'masonry',
+							'wrapper_classes'      => ' related-posts-slider',
+							'slides_per_view'      => 2,
+							'parts_title'          => woodmart_get_opt( 'parts_title', true ),
+							'parts_meta'           => woodmart_get_opt( 'parts_meta', true ),
+							'parts_text'           => woodmart_get_opt( 'parts_text', true ),
+							'parts_btn'            => woodmart_get_opt( 'parts_btn', true ),
+							'spacing'              => 20,
+						),
+						$query
+					);
+				}
+			}
+			?>
+
+			<?php comments_template(); ?>
 
 		<?php endwhile; ?>
 

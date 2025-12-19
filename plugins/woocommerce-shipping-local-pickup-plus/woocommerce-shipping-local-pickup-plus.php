@@ -6,11 +6,11 @@
  * Description: A shipping plugin for WooCommerce that allows the store operator to define local pickup locations, which the customer can then choose from when making a purchase.
  * Author: SkyVerge
  * Author URI: http://woocommerce.com
- * Version: 2.11.7
+ * Version: 2.11.8
  * Text Domain: woocommerce-shipping-local-pickup-plus
  * Domain Path: /i18n/languages/
  *
- * Copyright: (c) 2012-2024 SkyVerge, Inc. (info@skyverge.com)
+ * Copyright: (c) 2012-2025 SkyVerge, Inc. (info@skyverge.com)
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -18,12 +18,12 @@
  * @package     WC-Shipping-Local-Pickup-Plus
  * @author      SkyVerge
  * @category    Shipping
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  * Woo: 18696:4d6fbe9e8968a669d11cec40b85a0caa
  * WC requires at least: 3.9.4
- * WC tested up to: 9.5.2
+ * WC tested up to: 10.2.2
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -46,7 +46,7 @@ class WC_Local_Pickup_Plus_Loader {
 	public const MINIMUM_WC_VERSION = '3.9.4';
 
 	/** SkyVerge plugin framework version used by this plugin */
-	public const FRAMEWORK_VERSION = '5.11.12';
+	public const FRAMEWORK_VERSION = '5.15.12';
 
 	/** the plugin name, for displaying notices */
 	public const PLUGIN_NAME = 'WooCommerce Local Pickup Plus';
@@ -90,7 +90,7 @@ class WC_Local_Pickup_Plus_Loader {
 	 */
 	public function __clone() {
 
-		_doing_it_wrong( __FUNCTION__, sprintf( 'You cannot clone instances of %s.', get_class( $this ) ), '2.4.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html( sprintf( 'You cannot clone instances of %s.', get_class( $this ) ) ), '2.4.0' );
 	}
 
 
@@ -101,7 +101,7 @@ class WC_Local_Pickup_Plus_Loader {
 	 */
 	public function __wakeup() {
 
-		_doing_it_wrong( __FUNCTION__, sprintf( 'You cannot unserialize instances of %s.', get_class( $this ) ), '2.4.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html( sprintf( 'You cannot unserialize instances of %s.', get_class( $this ) ) ), '2.4.0' );
 	}
 
 
@@ -180,7 +180,7 @@ class WC_Local_Pickup_Plus_Loader {
 
 			$this->deactivate_plugin();
 
-			wp_die( self::PLUGIN_NAME . ' could not be activated. ' . $this->get_environment_message() );
+			wp_die( esc_html( self::PLUGIN_NAME . ' could not be activated. ' . $this->get_environment_message() ) );
 		}
 	}
 
@@ -195,7 +195,7 @@ class WC_Local_Pickup_Plus_Loader {
 
 			$this->deactivate_plugin();
 
-			$this->add_admin_notice( 'bad_environment', 'error', self::PLUGIN_NAME . ' has been deactivated. ' . $this->get_environment_message() );
+			$this->add_admin_notice( 'bad_environment', 'error', esc_html( self::PLUGIN_NAME . ' has been deactivated. ' . $this->get_environment_message() ) );
 		}
 	}
 

@@ -19,6 +19,10 @@ class Emails extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'cart_recovery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		add_action( 'init', array( $this, 'unsubscribe_user' ) );
 
 		add_filter( 'woocommerce_email_classes', array( $this, 'register_email' ) );
@@ -34,22 +38,25 @@ class Emails extends Singleton {
 	 * Unsubscribe after the user has followed the link from email.
 	 */
 	public function unsubscribe_user() {
-		if ( ! isset( $_GET['token'] ) || ! isset( $_GET['email'] ) ) { //phpcs:ignore
+		if ( ! isset( $_GET['token'] ) || ! isset( $_GET['email'] ) || ! isset( $_GET['action'] ) || 'woodmart_abandoned_cart_unsubscribe' !== $_GET['action'] ) { //phpcs:ignore
 			return;
 		}
 
-		$redirect           = apply_filters( 'woodmart_abandoned_cart_after_unsubscribe_redirect', remove_query_arg( array( 'token', 'email' ) ) );
-		$token              = woodmart_clean( $_GET['token'] ); //phpcs:ignore.
-		$user_email         = isset( $_GET['email'] ) ? sanitize_email( wp_unslash( $_GET['email'] ) ) : '';
-		$unsubscribed_users = get_option( 'woodmart_abandoned_cart_unsubscribed_users', array() );
+		$redirect   = apply_filters( 'woodmart_abandoned_cart_after_unsubscribe_redirect', remove_query_arg( array( 'token', 'email', 'action' ) ) );
+		$token      = woodmart_clean( $_GET['token'] ); //phpcs:ignore.
+		$user_email = isset( $_GET['email'] ) ? sanitize_email( wp_unslash( $_GET['email'] ) ) : '';
+		$result     = false;
 
-		if ( ! empty( $user_email ) && ! in_array( $user_email, $unsubscribed_users, true ) && $this->validate_unsubscribe_token( $user_email, $token ) ) {
-			$unsubscribed_users[] = $user_email;
-
-			update_option( 'woodmart_abandoned_cart_unsubscribed_users', $unsubscribed_users, false );
+		if ( ! empty( $user_email ) && $this->validate_unsubscribe_token( $user_email, $token ) ) {
+			$result = woodmart_unsubscribe_user_from_mailing( $user_email, 'XTS_Email_Abandoned_Cart' );
 		}
 
-		wc_add_notice( esc_html__( 'You have unsubscribed from this product mailing lists', 'woodmart' ), 'success' );
+		if ( $result ) {
+			wc_add_notice( esc_html__( 'You have unsubscribed from this product mailing list', 'woodmart' ), 'success' );
+		} else {
+			wc_add_notice( esc_html__( 'Failed to unsubscribe from this product mailing list', 'woodmart' ), 'error' );
+		}
+
 		wp_safe_redirect( $redirect );
 		exit();
 	}
@@ -142,6 +149,13 @@ class Emails extends Singleton {
 				$cart_data[ $meta_key ] = maybe_unserialize( get_post_meta( $cart->ID, $meta_key, true ) );
 			}
 
+			if (
+				woodmart_is_user_unsubscribed_from_mailing( $cart_data['_user_email'], 'XTS_Email_Abandoned_Cart' ) ||
+				( 0 !== absint( $cart_data['_user_id'] ) && woodmart_should_skip_subscription_email( $cart_data['_user_email'], $cart_data['_user_id'] ) )
+			) {
+				continue;
+			}
+
 			do_action( 'woodmart_send_abandoned_cart', (object) $cart_data );
 
 			update_post_meta( $cart->ID, '_email_sent', gmdate( 'Y-m-d H:i:s', time() ) );
@@ -214,7 +228,7 @@ class Emails extends Singleton {
 	 */
 	private function get_dummy_cart_data() {
 		$dummy_product = new WC_Product();
-		$dummy_product->set_name( 'Dummy Product' );
+		$dummy_product->set_name( __( 'Dummy Product', 'woodmart' ) );
 		$dummy_product->set_price( 25 );
 
 		$dummy_cart = new class( $dummy_product ) {

@@ -146,7 +146,11 @@
     },
     "header_banner_shortcode": "<p style=\"text-align: center; color: white;\">Summer 25% discount on all last year's bike models<\/p>",
     "default_header": "header_547583",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "242",
-    "portfolio_page": "150"
+    "portfolio_page": "150",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

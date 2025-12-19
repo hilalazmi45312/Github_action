@@ -87,8 +87,12 @@ var filebirdGallery = {
           pageYScroll =
             window.pageYOffset || document.documentElement.scrollTop,
           rect = thumbnail.getBoundingClientRect();
-
-        return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+        //get height of #wpadminbar
+        var wpadminbarHeight = 0;
+        if (document.getElementById("wpadminbar")) {
+          wpadminbarHeight = document.getElementById("wpadminbar").offsetHeight;
+        }
+        return { x: rect.left, y: ((rect.top + pageYScroll) - wpadminbarHeight), w: rect.width };
       },
     };
 
@@ -114,7 +118,6 @@ var filebirdGallery = {
     if (disableAnimation) {
       options.showAnimationDuration = 0;
     }
-
     gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
   },

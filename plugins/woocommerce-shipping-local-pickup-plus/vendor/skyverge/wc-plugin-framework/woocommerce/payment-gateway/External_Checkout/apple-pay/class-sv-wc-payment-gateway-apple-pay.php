@@ -18,17 +18,17 @@
  *
  * @package   SkyVerge/WooCommerce/Payment-Gateway/External_Checkout/Apple-Pay
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2013-2024, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_12;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_12;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\Payment_Gateway\External_Checkout\Orders;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\Payment_Gateway\External_Checkout\Orders;
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_Payment_Gateway_Apple_Pay' ) ) :
+if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\SV_WC_Payment_Gateway_Apple_Pay' ) ) :
 
 
 /**
@@ -36,6 +36,7 @@ if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_
  *
  * @since 4.7.0
  */
+#[\AllowDynamicProperties]
 class SV_WC_Payment_Gateway_Apple_Pay extends Payment_Gateway\External_Checkout\External_Checkout {
 
 
@@ -58,13 +59,14 @@ class SV_WC_Payment_Gateway_Apple_Pay extends Payment_Gateway\External_Checkout\
 	 * @since 4.7.0
 	 *
 	 * @param SV_WC_Payment_Gateway_Plugin $plugin the plugin instance
+	 * @param array<string, mixed> $args optional arguments
 	 */
-	public function __construct( SV_WC_Payment_Gateway_Plugin $plugin ) {
+	public function __construct( SV_WC_Payment_Gateway_Plugin $plugin, array $args = [] ) {
 
 		$this->id    = 'apple_pay';
 		$this->label = __( 'Apple Pay', 'woocommerce-plugin-framework' );
 
-		parent::__construct( $plugin );
+		parent::__construct( $plugin, $args );
 
 		if ( $this->is_available() ) {
 			add_filter( 'woocommerce_customer_taxable_address', array( $this, 'set_customer_taxable_address' ) );
@@ -701,6 +703,9 @@ class SV_WC_Payment_Gateway_Apple_Pay extends Payment_Gateway\External_Checkout\
 	 * @return array
 	 */
 	public function set_customer_taxable_address( $address ) {
+		if ( ! WC()->customer ) {
+			return $address;
+		}
 
 		$billing_country = WC()->customer->get_billing_country();
 
@@ -752,11 +757,6 @@ class SV_WC_Payment_Gateway_Apple_Pay extends Payment_Gateway\External_Checkout\
 	public function get_api() {
 
 		if ( ! $this->api instanceof SV_WC_Payment_Gateway_Apple_Pay_API ) {
-
-			require_once( $this->get_plugin()->get_payment_gateway_framework_path() . '/External_Checkout/apple-pay/api/class-sv-wc-payment-gateway-apple-pay-api.php');
-			require_once( $this->get_plugin()->get_payment_gateway_framework_path() . '/External_Checkout/apple-pay/api/class-sv-wc-payment-gateway-apple-pay-api-request.php');
-			require_once( $this->get_plugin()->get_payment_gateway_framework_path() . '/External_Checkout/apple-pay/api/class-sv-wc-payment-gateway-apple-pay-api-response.php');
-
 			$this->api = new SV_WC_Payment_Gateway_Apple_Pay_API( $this->get_processing_gateway() );
 		}
 
@@ -940,7 +940,7 @@ class SV_WC_Payment_Gateway_Apple_Pay extends Payment_Gateway\External_Checkout\
 
 		$accepted_card_types = ( $this->get_processing_gateway() ) ? $this->get_processing_gateway()->get_card_types() : array();
 
-		$accepted_card_types = array_map( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_Payment_Gateway_Helper::normalize_card_type', $accepted_card_types );
+		$accepted_card_types = array_map( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\SV_WC_Payment_Gateway_Helper::normalize_card_type', $accepted_card_types );
 
 		$valid_networks = array(
 			SV_WC_Payment_Gateway_Helper::CARD_TYPE_AMEX       => 'amex',

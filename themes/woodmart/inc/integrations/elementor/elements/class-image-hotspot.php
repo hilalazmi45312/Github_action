@@ -618,7 +618,7 @@ class Image_Hotspot extends Widget_Base {
 					?>
 					<div class="wd-image-hotspot hotspot-type-<?php echo esc_attr( $settings['hotspot_type'] ); ?> elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
 						<span class="hotspot-sonar"></span>
-						<div class="hotspot-btn wd-fill"></div>
+						<div class="hotspot-btn wd-role-btn wd-fill" tabindex="0"></div>
 
 						<?php if ( 'product' === $settings['hotspot_type'] && isset( $product ) && $product ) : ?>
 							<div class="hotspot-product hotspot-content wd-scroll hotspot-dropdown-<?php echo esc_attr( $settings['hotspot_dropdown_side'] ); ?>">

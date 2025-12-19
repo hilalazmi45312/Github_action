@@ -18,6 +18,12 @@ class FlixmediaController
         $brand_terms = get_the_terms($product_id, 'product_brand');
         $brand_name  = (! empty($brand_terms) && ! is_wp_error($brand_terms)) ? $brand_terms[0]->name : '';
 
+        $distributor_id = '7158'; // Senheng Distributor ID
+        $WebChannel = getChannelWeb();
+
+        if ($WebChannel === 'SenQ') {
+            $distributor_id = '9248';
+        }
         // Only skip simple products with zero identifiers
         if ($product->is_type('simple') && empty($base_ean) && empty($base_mpn)) {
             return;
@@ -25,14 +31,22 @@ class FlixmediaController
 ?>
         <style>
             @media (max-width:680px) {
-                #flix-minisite {
+                /* #flix-minisite {
                     display: none !important
                 }
 
                 #flix_hotspots .flix_hs {
                     display: none !important
-                }
+                } */
             }
+
+            /* .additional_information_tab {
+                display: none !important;
+            }
+
+            .reviews_tab {
+                display: none !important;
+            } */
 
             .woocommerce-product-gallery--with-images {
                 position: relative
@@ -94,6 +108,12 @@ class FlixmediaController
                 display: block !important;
                 /* or flex if your theme uses flex */
             }
+
+            /* Hide other tabs when Flix is active */
+            #tab-description.flix-active~.additional_information_tab,
+            #tab-description.flix-active~.reviews_tab {
+                display: none !important;
+            }
         </style>
 
         <div id="flix-minisite"></div>
@@ -128,9 +148,9 @@ class FlixmediaController
                     const s = document.createElement('script');
                     s.async = true;
                     s.src = 'https://media.flixfacts.com/js/loader.js';
-                    s.setAttribute('data-flix-distributor', '7158');
+                    s.setAttribute('data-flix-distributor', '<?php echo $distributor_id; ?>');
                     s.setAttribute('data-flix-language', 'b3');
-                    s.setAttribute('data-flix-button', 'flix-minisite');
+                    // s.setAttribute('data-flix-button', 'flix-minisite'); #remove this cause Eda Nicol not wanted the
                     s.setAttribute('data-flix-inpage', 'flix-inpage');
                     s.setAttribute('data-flix-fallback-language', 'b3');
                     if (o.brand) s.setAttribute('data-flix-brand', o.brand);
@@ -156,6 +176,18 @@ class FlixmediaController
                 window.__updateFlixVisibility = function() {
                     const hasContent = inpage.children.length > 0 || inpage.innerHTML.trim() !== '';
                     descTab.classList.toggle('flix-active', hasContent);
+                    //hide reviews and additional info class when flix is active
+                    const addInfoTab = document.querySelector('.additional_information_tab');
+                    const reviewsTab = document.querySelector('.reviews_tab');
+                    //hide both tabs when flix is active
+                    if (hasContent) {
+                        if (addInfoTab) addInfoTab.style.display = 'none';
+                        if (reviewsTab) reviewsTab.style.display = 'none';
+                    } else {
+                        if (addInfoTab) addInfoTab.style.display = '';
+                        if (reviewsTab) reviewsTab.style.display = '';
+                    }
+
                 };
 
                 new MutationObserver(window.__updateFlixVisibility)
@@ -280,7 +312,7 @@ class FlixmediaController
         /**
          * VARIATIONS – keep your existing code, or hook into a variation inventory action
          */
-        add_action('woocommerce_product_after_variable_attributes', function ($loop, $variation_data, $variation) {
+        add_action('woocommerce_variation_options_pricing', function ($loop, $variation_data, $variation) {
             woocommerce_wp_text_input([
                 'id'          => "mpn_$loop",
                 'name'        => "mpn[$loop]",
@@ -288,6 +320,7 @@ class FlixmediaController
                 'label'       => __('MPN', 'woocommerce'),
                 'desc_tip'    => true,
                 'description' => __('Enter the internal or manufacturer part number.', 'woocommerce'),
+                'wrapper_class' => 'form-row form-row-full',
             ]);
         }, 30, 3);
 

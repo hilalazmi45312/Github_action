@@ -23,7 +23,7 @@ if ( ! function_exists( 'wd_gutenberg_single_product_reviews' ) ) {
 
 		woodmart_enqueue_inline_style( 'woo-single-prod-el-reviews' );
 		woodmart_enqueue_inline_style( 'woo-single-prod-el-reviews-' . woodmart_get_opt( 'reviews_style', 'style-1' ) );
-		woodmart_enqueue_inline_style( 'mod-comments' );
+		woodmart_enqueue_inline_style( 'post-types-mod-comments' );
 
 		global $withcomments;
 

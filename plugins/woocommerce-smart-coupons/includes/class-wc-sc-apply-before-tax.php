@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     2.3.0
+ * @version     2.5.0
  * @package     WooCommerce Smart Coupons
  */
 
@@ -111,137 +111,141 @@ if ( ! class_exists( 'WC_SC_Apply_Before_Tax' ) ) {
 		 * @param WC_Order $order Order object.
 		 */
 		public function order_calculate_discount_amount_before_tax( $and_taxes, $order ) {
-			$order_actions = array( 'woocommerce_add_coupon_discount', 'woocommerce_calc_line_taxes', 'woocommerce_save_order_items' );
+			try {
+				$order_actions = array( 'woocommerce_add_coupon_discount', 'woocommerce_calc_line_taxes', 'woocommerce_save_order_items' );
 
-			$order_id = ( $this->is_callable( $order, 'get_id' ) ) ? $order->get_id() : 0;
+				$order_id = ( $this->is_callable( $order, 'get_id' ) ) ? $order->get_id() : 0;
 
-			$post_post_type = ( ! empty( $_POST['post_type'] ) ) ? wc_clean( wp_unslash( $_POST['post_type'] ) ) : ''; // phpcs:ignore
-			$post_action = ( ! empty( $_POST['action'] ) ) ? wc_clean( wp_unslash( $_POST['action'] ) ) : ''; // phpcs:ignore
+				$post_post_type = ( ! empty( $_POST['post_type'] ) ) ? wc_clean( wp_unslash( $_POST['post_type'] ) ) : ''; // phpcs:ignore
+				$post_action = ( ! empty( $_POST['action'] ) ) ? wc_clean( wp_unslash( $_POST['action'] ) ) : ''; // phpcs:ignore
 
-			$post_type = ( ! empty( $order_id ) && $this->is_hpos() ) ? $this->get_post_type( $order_id ) : $post_post_type;
+				$post_type = ( ! empty( $order_id ) && $this->is_hpos() ) ? $this->get_post_type( $order_id ) : $post_post_type;
 
-			if ( $order instanceof WC_Order && ( in_array( $post_action, $order_actions, true ) || ( 'shop_order' === $post_type && in_array( $post_action, array( 'edit_order', 'editpost' ), true ) ) ) ) {
-				if ( ! is_object( $order ) || ! is_callable( array( $order, 'get_id' ) ) ) {
-					return;
-				}
-				if ( empty( $order_id ) ) {
-					return;
-				}
-				$coupons     = $order->get_items( 'coupon' );
-				$order_items = $order->get_items( 'line_item' );
+				if ( $order instanceof WC_Order && ( in_array( $post_action, $order_actions, true ) || ( 'shop_order' === $post_type && in_array( $post_action, array( 'edit_order', 'editpost' ), true ) ) ) ) {
+					if ( ! is_object( $order ) || ! is_callable( array( $order, 'get_id' ) ) ) {
+						return;
+					}
+					if ( empty( $order_id ) ) {
+						return;
+					}
+					$coupons     = $order->get_items( 'coupon' );
+					$order_items = $order->get_items( 'line_item' );
 
-				if ( empty( $order_items ) && empty( $coupons ) ) {
-					return;
-				}
-
-				foreach ( $coupons as $item_id => $item ) {
-
-					$coupon_code = ( is_object( $item ) && is_callable( array( $item, 'get_name' ) ) ) ? $item->get_name() : $item['name'];
-
-					if ( empty( $coupon_code ) ) {
-						continue;
+					if ( empty( $order_items ) && empty( $coupons ) ) {
+						return;
 					}
 
-					$coupon        = new WC_Coupon( $coupon_code );
-					$discount_type = $coupon->get_discount_type();
+					foreach ( $coupons as $item_id => $item ) {
 
-					if ( 'smart_coupon' === $discount_type ) {
-						$sc_include_tax             = $this->is_store_credit_include_tax();
-						$smart_coupons_contribution = $this->get_post_meta( $order_id, 'smart_coupons_contribution', true, true );
-						$smart_coupons_contribution = ( ! empty( $smart_coupons_contribution ) ) ? $smart_coupons_contribution : array();
+						$coupon_code = ( is_object( $item ) && is_callable( array( $item, 'get_name' ) ) ) ? $item->get_name() : $item['name'];
 
-						$discount_amount     = ( is_object( $item ) && is_callable( array( $item, 'get_discount' ) ) ) ? $item->get_discount() : $this->get_order_item_meta( $item_id, 'discount_amount', true, true );
-						$discount_amount_tax = ( is_object( $item ) && is_callable( array( $item, 'get_discount_tax' ) ) ) ? $item->get_discount_tax() : $this->get_order_item_meta( $item_id, 'discount_amount_tax', true, true );
+						if ( empty( $coupon_code ) ) {
+							continue;
+						}
 
-						if ( is_array( $smart_coupons_contribution ) && count( $smart_coupons_contribution ) > 0 && array_key_exists( $coupon_code, $smart_coupons_contribution ) ) {
-							// If store credit discount is inclusive of tax then remove discount given tax from Smart Coupons' contribution.
-							if ( 'yes' === $sc_include_tax && ! empty( $discount_amount_tax ) ) {
-								$new_discount = $smart_coupons_contribution[ $coupon_code ] - $discount_amount_tax;
+						$coupon        = new WC_Coupon( $coupon_code );
+						$discount_type = $coupon->get_discount_type();
+
+						if ( 'smart_coupon' === $discount_type ) {
+							$sc_include_tax             = $this->is_store_credit_include_tax();
+							$smart_coupons_contribution = $this->get_post_meta( $order_id, 'smart_coupons_contribution', true, true );
+							$smart_coupons_contribution = ( ! empty( $smart_coupons_contribution ) ) ? $smart_coupons_contribution : array();
+
+							$discount_amount     = ( is_object( $item ) && is_callable( array( $item, 'get_discount' ) ) ) ? $item->get_discount() : $this->get_order_item_meta( $item_id, 'discount_amount', true, true );
+							$discount_amount_tax = ( is_object( $item ) && is_callable( array( $item, 'get_discount_tax' ) ) ) ? $item->get_discount_tax() : $this->get_order_item_meta( $item_id, 'discount_amount_tax', true, true );
+
+							if ( is_array( $smart_coupons_contribution ) && count( $smart_coupons_contribution ) > 0 && array_key_exists( $coupon_code, $smart_coupons_contribution ) ) {
+								// If store credit discount is inclusive of tax then remove discount given tax from Smart Coupons' contribution.
+								if ( 'yes' === $sc_include_tax && ! empty( $discount_amount_tax ) ) {
+									$new_discount = $smart_coupons_contribution[ $coupon_code ] - $discount_amount_tax;
+								} else {
+									$new_discount = $smart_coupons_contribution[ $coupon_code ];
+								}
+								if ( is_object( $item ) && is_callable( array( $item, 'set_discount' ) ) ) {
+									$item->set_discount( $new_discount );
+								} else {
+									$item['discount_amount'] = $new_discount;
+								}
+							} elseif ( ! empty( $discount_amount ) ) {
+								if ( is_object( $item ) && is_callable( array( $item, 'set_discount' ) ) ) {
+									$item->set_discount( $discount_amount );
+								} else {
+									$item['discount_amount'] = $discount_amount;
+								}
+								// If discount includes tax then Smart Coupons contribution is sum of discount on product price and discount on tax.
+								if ( 'yes' === $sc_include_tax && ! empty( $discount_amount_tax ) ) {
+									$smart_coupons_contribution[ $coupon_code ] = $discount_amount + $discount_amount_tax;
+								} else {
+									$smart_coupons_contribution[ $coupon_code ] = $discount_amount;
+								}
+								$this->update_post_meta( $order_id, 'smart_coupons_contribution', $smart_coupons_contribution, true );
 							} else {
-								$new_discount = $smart_coupons_contribution[ $coupon_code ];
-							}
-							if ( is_object( $item ) && is_callable( array( $item, 'set_discount' ) ) ) {
-								$item->set_discount( $new_discount );
-							} else {
-								$item['discount_amount'] = $new_discount;
-							}
-						} elseif ( ! empty( $discount_amount ) ) {
-							if ( is_object( $item ) && is_callable( array( $item, 'set_discount' ) ) ) {
-								$item->set_discount( $discount_amount );
-							} else {
-								$item['discount_amount'] = $discount_amount;
-							}
-							// If discount includes tax then Smart Coupons contribution is sum of discount on product price and discount on tax.
-							if ( 'yes' === $sc_include_tax && ! empty( $discount_amount_tax ) ) {
-								$smart_coupons_contribution[ $coupon_code ] = $discount_amount + $discount_amount_tax;
-							} else {
-								$smart_coupons_contribution[ $coupon_code ] = $discount_amount;
-							}
-							$this->update_post_meta( $order_id, 'smart_coupons_contribution', $smart_coupons_contribution, true );
-						} else {
-							$coupon_amount       = $this->get_amount( $coupon, true, $order );
-							$coupon_product_ids  = $coupon->get_product_ids();
-							$coupon_category_ids = $coupon->get_product_categories();
+								$coupon_amount       = $this->get_amount( $coupon, true, $order );
+								$coupon_product_ids  = $coupon->get_product_ids();
+								$coupon_category_ids = $coupon->get_product_categories();
 
-							$subtotal              = 0;
-							$items_to_apply_credit = array();
+								$subtotal              = 0;
+								$items_to_apply_credit = array();
 
-							if ( count( $coupon_product_ids ) > 0 || count( $coupon_category_ids ) > 0 ) {
-								foreach ( $order_items as $order_item_id => $order_item ) {
+								if ( count( $coupon_product_ids ) > 0 || count( $coupon_category_ids ) > 0 ) {
+									foreach ( $order_items as $order_item_id => $order_item ) {
 
-									$product_category_ids = wc_get_product_cat_ids( $order_item['product_id'] );
+										$product_category_ids = wc_get_product_cat_ids( $order_item['product_id'] );
 
-									if ( count( $coupon_product_ids ) > 0 && count( $coupon_category_ids ) > 0 ) {
-										if ( ( in_array( $order_item['product_id'], $coupon_product_ids, true ) || in_array( $order_item['variation_id'], $coupon_product_ids, true ) ) && count( array_intersect( $product_category_ids, $coupon_category_ids ) ) > 0 ) {
-											$items_to_apply_credit[] = $order_item_id;
-										}
-									} else {
-										if ( in_array( $order_item['product_id'], $coupon_product_ids, true ) || in_array( $order_item['variation_id'], $coupon_product_ids, true ) || count( array_intersect( $product_category_ids, $coupon_category_ids ) ) > 0 ) {
-											$items_to_apply_credit[] = $order_item_id;
+										if ( count( $coupon_product_ids ) > 0 && count( $coupon_category_ids ) > 0 ) {
+											if ( ( in_array( $order_item['product_id'], $coupon_product_ids, true ) || in_array( $order_item['variation_id'], $coupon_product_ids, true ) ) && count( array_intersect( $product_category_ids, $coupon_category_ids ) ) > 0 ) {
+												$items_to_apply_credit[] = $order_item_id;
+											}
+										} else {
+											if ( in_array( $order_item['product_id'], $coupon_product_ids, true ) || in_array( $order_item['variation_id'], $coupon_product_ids, true ) || count( array_intersect( $product_category_ids, $coupon_category_ids ) ) > 0 ) {
+												$items_to_apply_credit[] = $order_item_id;
+											}
 										}
 									}
+								} else {
+									$items_to_apply_credit = array_keys( $order_items );
 								}
-							} else {
-								$items_to_apply_credit = array_keys( $order_items );
-							}
 
-							$subtotal = array_sum( array_map( array( $this, 'sc_get_order_subtotal' ), $items_to_apply_credit ) );
+								$subtotal = array_sum( array_map( array( $this, 'sc_get_order_subtotal' ), $items_to_apply_credit ) );
 
-							if ( $subtotal <= 0 ) {
-								continue;
-							}
-
-							$store_credit_used = 0;
-
-							foreach ( $items_to_apply_credit as $order_item_id ) {
-								$order_item         = $order_items[ $order_item_id ];
-								$discounting_amount = $order_item->get_total();
-								// If discount include tax then add item tax to discounting amount to allow discount calculation on tax also.
-								if ( 'yes' === $sc_include_tax ) {
-									$item_tax            = ( is_callable( array( $order, 'get_line_tax' ) ) ) ? $order->get_line_tax( $order_item ) : 0;
-									$discounting_amount += $item_tax;
+								if ( $subtotal <= 0 ) {
+									continue;
 								}
-								$quantity  = $order_item->get_quantity();
-								$discount  = $this->sc_get_discounted_price( $discounting_amount, $quantity, $subtotal, $coupon_amount );
-								$discount *= $quantity;
-								$order_item->set_total( $discounting_amount - $discount );
 
-								$store_credit_used += $discount;
+								$store_credit_used = 0;
+
+								foreach ( $items_to_apply_credit as $order_item_id ) {
+									$order_item         = $order_items[ $order_item_id ];
+									$discounting_amount = $order_item->get_total();
+									// If discount include tax then add item tax to discounting amount to allow discount calculation on tax also.
+									if ( 'yes' === $sc_include_tax ) {
+										$item_tax            = ( is_callable( array( $order, 'get_line_tax' ) ) ) ? $order->get_line_tax( $order_item ) : 0;
+										$discounting_amount += $item_tax;
+									}
+									$quantity  = $order_item->get_quantity();
+									$discount  = $this->sc_get_discounted_price( $discounting_amount, $quantity, $subtotal, $coupon_amount );
+									$discount *= $quantity;
+									$order_item->set_total( $discounting_amount - $discount );
+
+									$store_credit_used += $discount;
+								}
+
+								if ( is_object( $item ) && is_callable( array( $item, 'set_discount' ) ) ) {
+									$item->set_discount( $store_credit_used );
+								} else {
+									$item['discount_amount'] = $store_credit_used;
+								}
+
+								$smart_coupons_contribution[ $coupon_code ] = $store_credit_used;
+
+								$this->update_post_meta( $order_id, 'smart_coupons_contribution', $smart_coupons_contribution, true );
 							}
-
-							if ( is_object( $item ) && is_callable( array( $item, 'set_discount' ) ) ) {
-								$item->set_discount( $store_credit_used );
-							} else {
-								$item['discount_amount'] = $store_credit_used;
-							}
-
-							$smart_coupons_contribution[ $coupon_code ] = $store_credit_used;
-
-							$this->update_post_meta( $order_id, 'smart_coupons_contribution', $smart_coupons_contribution, true );
+							$order->update_meta_data( 'sc_total_credit_used', $smart_coupons_contribution );
 						}
-						$order->update_meta_data( 'sc_total_credit_used', $smart_coupons_contribution );
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -272,66 +276,82 @@ if ( ! class_exists( 'WC_SC_Apply_Before_Tax' ) ) {
 		 * Function to apply store credit before tax calculation for cart items
 		 */
 		public function cart_calculate_discount_amount() {
-			$cart = ( isset( WC()->cart ) ) ? WC()->cart : '';
+			try {
+				$cart = ( isset( WC()->cart ) ) ? WC()->cart : '';
 
-			if ( $cart instanceof WC_Cart ) {
-				$cart_contents = WC()->cart->get_cart();
-				$coupons       = $cart->get_coupons();
+				if ( $cart instanceof WC_Cart ) {
+					$cart_contents = WC()->cart->get_cart();
+					$coupons       = $cart->get_coupons();
 
-				if ( ! empty( $coupons ) ) {
-					$items_to_apply_credit = array();
+					if ( ! empty( $coupons ) ) {
+						$items_to_apply_credit = array();
 
-					foreach ( $coupons as $coupon_code => $coupon ) {
-						if ( ! $coupon instanceof WC_Coupon ) {
-							continue;
-						}
-						$discount_type = $coupon->get_discount_type();
-
-						if ( 'smart_coupon' === $discount_type ) {
-							$coupon_product_ids           = $coupon->get_product_ids();
-							$coupon_category_ids          = $coupon->get_product_categories();
-							$coupon_taxonomy_restrictions = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_taxonomy_restrictions' ) : $this->get_post_meta( $coupon->get_id(), 'wc_sc_taxonomy_restrictions', true );
-							$coupon_attribute_ids         = $coupon->get_meta( 'wc_sc_product_attribute_ids' );
-
-							// First apply credit on every item.
-							$items_to_apply_credit[ $coupon_code ] = array_keys( $cart_contents );
-							// If credit has any kind of restrictions, set $items_to_apply_credit again.
-							$coupon_has_restriction = false;
-							if ( ! empty( $coupon_product_ids ) || ! empty( $coupon_category_ids ) || ! empty( $coupon_taxonomy_restrictions ) || ! empty( $coupon_attribute_ids ) ) {
-								$coupon_has_restriction = true;
+						foreach ( $coupons as $coupon_code => $coupon ) {
+							if ( ! $coupon instanceof WC_Coupon ) {
+								continue;
 							}
-							if ( $coupon_has_restriction ) {
-								$items_to_apply_credit[ $coupon_code ] = array();
-								foreach ( $cart_contents as $cart_item_key => $cart_item ) {
+							$discount_type = $coupon->get_discount_type();
 
-									/**
-									 * Filter to allow us to validate store credit if applicable to any line item.
-									 *
-									 * @param WC_Product|null $product Product object.
-									 * @param WC_Coupon|null  $coupon Coupon object.
-									 * @param array|null      $cart_item Cart Item.
-									 * @since 9.33.0
-									 */
-									$valid = apply_filters(
-										'is_sc_valid_apply_credit',
-										false,
-										$cart_item['data'],
-										$coupon,
-										$cart_item
-									);
+							if ( 'smart_coupon' === $discount_type ) {
+								$coupon_product_ids           = $coupon->get_product_ids();
+								$coupon_category_ids          = $coupon->get_product_categories();
+								$coupon_taxonomy_restrictions = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_taxonomy_restrictions' ) : $this->get_post_meta( $coupon->get_id(), 'wc_sc_taxonomy_restrictions', true );
+								$coupon_attribute_ids         = $coupon->get_meta( 'wc_sc_product_attribute_ids' );
+								$brand_coupon_settings        = $this->get_coupon_brand_settings( $coupon->get_id() );
 
-									if ( $coupon_has_restriction && $valid ) {
-										$items_to_apply_credit[ $coupon_code ][] = $cart_item_key;
+								// First apply credit on every item.
+								$items_to_apply_credit[ $coupon_code ] = array_keys( $cart_contents );
+								// If credit has any kind of restrictions, set $items_to_apply_credit again.
+								$coupon_has_restriction = false;
+								if ( ! empty( $coupon_product_ids ) || ! empty( $coupon_category_ids ) || ! empty( $coupon_taxonomy_restrictions ) || ! empty( $coupon_attribute_ids ) ||
+									(
+										is_array( $brand_coupon_settings ) &&
+										( ! empty( $brand_coupon_settings['included_brands'] ) || ! empty( $brand_coupon_settings['excluded_brands'] ) )
+									)
+								) {
+									$coupon_has_restriction = true;
+								}
+								if ( $coupon_has_restriction ) {
+									$items_to_apply_credit[ $coupon_code ] = array();
+									foreach ( $cart_contents as $cart_item_key => $cart_item ) {
+										// Woocommerce validate cart item is vaild for coupon.
+										$valid = $coupon->is_valid_for_product( $cart_item['data'], $cart_item ) ? true : false;
+
+										if ( ! $valid ) {
+											continue;
+										}
+
+										/**
+										 * Filter to allow us to validate store credit if applicable to any line item.
+										 *
+										 * @param WC_Product|null $product Product object.
+										 * @param WC_Coupon|null  $coupon Coupon object.
+										 * @param array|null      $cart_item Cart Item.
+										 * @since 9.33.0
+										 */
+										$valid = apply_filters(
+											'is_sc_valid_apply_credit',
+											$valid,
+											$cart_item['data'],
+											$coupon,
+											$cart_item
+										);
+
+										if ( $coupon_has_restriction && $valid ) {
+											$items_to_apply_credit[ $coupon_code ][] = $cart_item_key;
+										}
 									}
 								}
 							}
 						}
-					}
 
-					if ( ! empty( $items_to_apply_credit ) ) {
-						WC()->cart->sc_items_to_apply_credit = $items_to_apply_credit;
+						if ( ! empty( $items_to_apply_credit ) ) {
+							WC()->cart->sc_items_to_apply_credit = $items_to_apply_credit;
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -347,62 +367,65 @@ if ( ! class_exists( 'WC_SC_Apply_Before_Tax' ) ) {
 		 * @return float      $discount
 		 */
 		public function cart_return_discount_amount( $discount, $discounting_amount, $cart_item, $single, $coupon ) {
+			try {
+				if ( ! is_object( $coupon ) || ! is_a( $coupon, 'WC_Coupon' ) ) {
+					return $discount;
+				}
 
-			if ( ! is_object( $coupon ) || ! is_a( $coupon, 'WC_Coupon' ) ) {
-				return $discount;
-			}
+				$discount_type = is_callable( array( $coupon, 'get_discount_type' ) ) ? $coupon->get_discount_type() : '';
+				if ( 'smart_coupon' !== $discount_type ) {
+					return $discount;
+				}
 
-			$discount_type = is_callable( array( $coupon, 'get_discount_type' ) ) ? $coupon->get_discount_type() : '';
-			if ( 'smart_coupon' !== $discount_type ) {
-				return $discount;
-			}
+				$coupon_code = is_callable( array( $coupon, 'get_code' ) ) ? $coupon->get_code() : '';
 
-			$coupon_code = is_callable( array( $coupon, 'get_code' ) ) ? $coupon->get_code() : '';
+				if ( is_object( $cart_item ) && is_a( $cart_item, 'WC_Order_Item_Product' ) ) {
+					return $this->calculate_discount_amount_for_rest_api( $discount, $discounting_amount, $cart_item, $single, $coupon );
+				}
 
-			if ( is_object( $cart_item ) && is_a( $cart_item, 'WC_Order_Item_Product' ) ) {
-				return $this->calculate_discount_amount_for_rest_api( $discount, $discounting_amount, $cart_item, $single, $coupon );
-			}
+				$coupon_amount = $this->get_amount( $coupon, true );
 
-			$coupon_amount = $this->get_amount( $coupon, true );
+				$product  = isset( $cart_item['data'] ) ? $cart_item['data'] : array();
+				$quantity = $cart_item['quantity'];
 
-			$product  = isset( $cart_item['data'] ) ? $cart_item['data'] : array();
-			$quantity = $cart_item['quantity'];
+				// Compatibility for WC version < 3.2.0.
+				if ( ! isset( $cart_item['key'] ) ) {
+					$product_id = ( ! empty( $cart_item['variation_id'] ) ) ? $cart_item['variation_id'] : $cart_item['product_id'];
 
-			// Compatibility for WC version < 3.2.0.
-			if ( ! isset( $cart_item['key'] ) ) {
-				$product_id = ( ! empty( $cart_item['variation_id'] ) ) ? $cart_item['variation_id'] : $cart_item['product_id'];
+					foreach ( WC()->cart->cart_contents as $key => $cart_data ) {
+						$cart_data_product_id = ( ! empty( $cart_data['variation_id'] ) ) ? $cart_data['variation_id'] : $cart_data['product_id'];
 
-				foreach ( WC()->cart->cart_contents as $key => $cart_data ) {
-					$cart_data_product_id = ( ! empty( $cart_data['variation_id'] ) ) ? $cart_data['variation_id'] : $cart_data['product_id'];
-
-					if ( $product_id === $cart_data_product_id ) {
-						$cart_item['key'] = $key;
+						if ( $product_id === $cart_data_product_id ) {
+							$cart_item['key'] = $key;
+						}
 					}
 				}
-			}
 
-			$prices_include_tax = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ) ? true : false;
-			if ( true === $prices_include_tax ) {
-				$sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
-				if ( 'no' === $sc_include_tax ) {
-					$discounting_amount = $cart_item['line_subtotal'] / $quantity;
+				$prices_include_tax = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ) ? true : false;
+				if ( true === $prices_include_tax ) {
+					$sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
+					if ( 'no' === $sc_include_tax ) {
+						$discounting_amount = $cart_item['line_subtotal'] / $quantity;
+					}
 				}
-			}
 
-			$items_to_apply_credit = isset( WC()->cart->sc_items_to_apply_credit ) ? WC()->cart->sc_items_to_apply_credit : array();
+				$items_to_apply_credit = isset( WC()->cart->sc_items_to_apply_credit ) ? WC()->cart->sc_items_to_apply_credit : array();
 
-			if ( ! empty( $items_to_apply_credit ) && is_array( $items_to_apply_credit ) && array_key_exists( $coupon_code, $items_to_apply_credit ) && in_array( $cart_item['key'], $items_to_apply_credit[ $coupon_code ], true ) ) {
+				if ( ! empty( $items_to_apply_credit ) && is_array( $items_to_apply_credit ) && array_key_exists( $coupon_code, $items_to_apply_credit ) && in_array( $cart_item['key'], $items_to_apply_credit[ $coupon_code ], true ) ) {
 
-				$credit_left              = isset( $this->sc_credit_left[ $coupon_code ] ) ? $this->sc_credit_left[ $coupon_code ] : $coupon_amount;
-				$total_discounting_amount = $discounting_amount * $quantity;
-				if ( isset( $this->remaining_total_to_apply_credit[ $cart_item['key'] ] ) ) {
-					$total_discounting_amount = wc_remove_number_precision( $this->remaining_total_to_apply_credit[ $cart_item['key'] ] );
+					$credit_left              = isset( $this->sc_credit_left[ $coupon_code ] ) ? $this->sc_credit_left[ $coupon_code ] : $coupon_amount;
+					$total_discounting_amount = $discounting_amount * $quantity;
+					if ( isset( $this->remaining_total_to_apply_credit[ $cart_item['key'] ] ) ) {
+						$total_discounting_amount = wc_remove_number_precision( $this->remaining_total_to_apply_credit[ $cart_item['key'] ] );
+					}
+					$applied_discount = min( $total_discounting_amount, $credit_left );
+
+					$this->sc_credit_left[ $coupon_code ] = ( $total_discounting_amount < $credit_left ) ? $credit_left - $total_discounting_amount : 0;
+
+					$discount = $applied_discount / $quantity;
 				}
-				$applied_discount = min( $total_discounting_amount, $credit_left );
-
-				$this->sc_credit_left[ $coupon_code ] = ( $total_discounting_amount < $credit_left ) ? $credit_left - $total_discounting_amount : 0;
-
-				$discount = $applied_discount / $quantity;
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $discount;
@@ -419,63 +442,68 @@ if ( ! class_exists( 'WC_SC_Apply_Before_Tax' ) ) {
 		 * @return float|int|mixed
 		 */
 		public function calculate_discount_amount_for_rest_api( $discount = 0, $discounting_amount = 0, $cart_item = object, $single = false, $coupon = object ) {
-
-			if ( ! is_object( $coupon ) || ! is_a( $coupon, 'WC_Coupon' ) ) {
-				return $discount;
-			}
-
-			if ( ! is_object( $cart_item ) || ! is_a( $cart_item, 'WC_Order_Item_Product' ) ) {
-				return $discount;
-			}
-
-			$quantity         = ( is_callable( array( $cart_item, 'get_quantity' ) ) ) ? $cart_item->get_quantity() : 1;
-			$item_id          = ( is_callable( array( $cart_item, 'get_id' ) ) ) ? $cart_item->get_id() : 0;
-			$product_subtotal = ( is_callable( array( $cart_item, 'get_subtotal' ) ) ) ? $cart_item->get_subtotal() : 0;
-			$order            = ( is_callable( array( $cart_item, 'get_order' ) ) ) ? $cart_item->get_order() : null;
-			$coupon_code      = ( is_callable( array( $coupon, 'get_code' ) ) ) ? $coupon->get_code() : '';
-			$discount_type    = ( is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
-
-			if ( 'smart_coupon' !== $discount_type ) {
-				return $discount;
-			}
-			$smart_coupons_contribution = ( is_callable( array( $order, 'get_meta' ) ) ) ? $order->get_meta( 'smart_coupons_contribution' ) : array();
-
-			if ( isset( $this->sc_api_credit_left[ $coupon_code ]['items'] ) && ! empty( $this->sc_api_credit_left[ $coupon_code ]['items'][ $item_id ] ) ) {
-				return $this->sc_api_credit_left[ $coupon_code ]['items'][ $item_id ];
-			}
-
-			$coupon_amount = is_array( $smart_coupons_contribution ) && isset( $smart_coupons_contribution[ $coupon_code ] ) ? $smart_coupons_contribution[ $coupon_code ] : (float) $this->get_amount( $coupon, true, $order );
-			// isset is required here to confirm that store credit was used but now it is empty.
-			if ( $coupon_amount < 1 || ( isset( $this->sc_api_credit_left[ $coupon_code ]['credit_left'] ) && empty( $this->sc_api_credit_left[ $coupon_code ]['credit_left'] ) ) ) {
-				return $discount;
-			}
-
-			$prices_include_tax = ( 'yes' === get_option( 'woocommerce_prices_include_tax' ) ) ? true : false;
-			if ( true === $prices_include_tax ) {
-				$sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
-				if ( 'no' === $sc_include_tax ) {
-					$discounting_amount = $product_subtotal / $quantity;
-				}
-			}
-
-			$credit_left = ( ! empty( $this->sc_api_credit_left ) && isset( $this->sc_api_credit_left[ $coupon_code ]['credit_left'] ) ) ? $this->sc_api_credit_left[ $coupon_code ]['credit_left'] : $coupon_amount;
-
-			if ( $credit_left > 0 ) {
-				$total_credit_already_applied_current_item = is_array( $this->sc_api_credit_left ) && count( $this->sc_api_credit_left ) > 0 ? (float) array_sum( wp_list_pluck( array_column( array_values( $this->sc_api_credit_left ), 'items' ), $item_id ) ) : 0;
-				if ( $single ) {
-					$discount = min( $quantity * ( $discounting_amount - $total_credit_already_applied_current_item ), $credit_left );
-				} else {
-					$discount = min( ( $discounting_amount - ( $total_credit_already_applied_current_item * $quantity ) ), $credit_left );
+			try {
+				if ( ! is_object( $coupon ) || ! is_a( $coupon, 'WC_Coupon' ) ) {
+					return $discount;
 				}
 
-				$credit_left -= $discount;
-				$this->sc_api_credit_left[ $coupon_code ]['credit_left'] = $credit_left;
-				$discount = (float) $discount / $quantity;
-			}
+				if ( ! is_object( $cart_item ) || ! is_a( $cart_item, 'WC_Order_Item_Product' ) ) {
+					return $discount;
+				}
 
-			// Note*: We always store discount credit inside sc_api_credit_left as discounting_amount not line total.
-			$this->sc_api_credit_left[ $coupon_code ]['items'][ $item_id ] = $discount;
-			return $single ? $discount : $discount * $quantity;
+				$quantity         = ( is_callable( array( $cart_item, 'get_quantity' ) ) ) ? $cart_item->get_quantity() : 1;
+				$item_id          = ( is_callable( array( $cart_item, 'get_id' ) ) ) ? $cart_item->get_id() : 0;
+				$product_subtotal = ( is_callable( array( $cart_item, 'get_subtotal' ) ) ) ? $cart_item->get_subtotal() : 0;
+				$order            = ( is_callable( array( $cart_item, 'get_order' ) ) ) ? $cart_item->get_order() : null;
+				$coupon_code      = ( is_callable( array( $coupon, 'get_code' ) ) ) ? $coupon->get_code() : '';
+				$discount_type    = ( is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
+
+				if ( 'smart_coupon' !== $discount_type ) {
+					return $discount;
+				}
+				$smart_coupons_contribution = ( is_callable( array( $order, 'get_meta' ) ) ) ? $order->get_meta( 'smart_coupons_contribution' ) : array();
+
+				if ( isset( $this->sc_api_credit_left[ $coupon_code ]['items'] ) && ! empty( $this->sc_api_credit_left[ $coupon_code ]['items'][ $item_id ] ) ) {
+					return $this->sc_api_credit_left[ $coupon_code ]['items'][ $item_id ];
+				}
+
+				$coupon_amount = is_array( $smart_coupons_contribution ) && isset( $smart_coupons_contribution[ $coupon_code ] ) ? $smart_coupons_contribution[ $coupon_code ] : (float) $this->get_amount( $coupon, true, $order );
+				// isset is required here to confirm that store credit was used but now it is empty.
+				if ( $coupon_amount < 1 || ( isset( $this->sc_api_credit_left[ $coupon_code ]['credit_left'] ) && empty( $this->sc_api_credit_left[ $coupon_code ]['credit_left'] ) ) ) {
+					return $discount;
+				}
+
+				$prices_include_tax = ( 'yes' === get_option( 'woocommerce_prices_include_tax' ) ) ? true : false;
+				if ( true === $prices_include_tax ) {
+					$sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
+					if ( 'no' === $sc_include_tax ) {
+						$discounting_amount = $product_subtotal / $quantity;
+					}
+				}
+
+				$credit_left = ( ! empty( $this->sc_api_credit_left ) && isset( $this->sc_api_credit_left[ $coupon_code ]['credit_left'] ) ) ? $this->sc_api_credit_left[ $coupon_code ]['credit_left'] : $coupon_amount;
+
+				if ( $credit_left > 0 ) {
+					$total_credit_already_applied_current_item = is_array( $this->sc_api_credit_left ) && count( $this->sc_api_credit_left ) > 0 ? (float) array_sum( wp_list_pluck( array_column( array_values( $this->sc_api_credit_left ), 'items' ), $item_id ) ) : 0;
+					if ( $single ) {
+						$discount = min( $quantity * ( $discounting_amount - $total_credit_already_applied_current_item ), $credit_left );
+					} else {
+						$discount = min( ( $discounting_amount - ( $total_credit_already_applied_current_item * $quantity ) ), $credit_left );
+					}
+
+					$credit_left -= $discount;
+					$this->sc_api_credit_left[ $coupon_code ]['credit_left'] = $credit_left;
+					$discount = (float) $discount / $quantity;
+				}
+
+				// Note*: We always store discount credit inside sc_api_credit_left as discounting_amount not line total.
+				$this->sc_api_credit_left[ $coupon_code ]['items'][ $item_id ] = $discount;
+				return $single ? $discount : $discount * $quantity;
+
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				return $discount;
+			}
 
 		}
 
@@ -488,62 +516,24 @@ if ( ! class_exists( 'WC_SC_Apply_Before_Tax' ) ) {
 		 * @return array
 		 */
 		public function store_credit_discounts_array( $discounts = array(), $coupon = null ) {
-			$cart = ( isset( WC()->cart ) ) ? WC()->cart : '';
-			if ( $cart instanceof WC_Cart ) {
-				$cart_contents = ( is_object( WC()->cart ) && is_callable( array( WC()->cart, 'get_cart' ) ) ) ? WC()->cart->get_cart() : array();
-				if ( ! empty( $cart_contents ) ) {
-					$discount_type = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
-					if ( 'smart_coupon' === $discount_type ) {
-						$prices_include_tax = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ) ? true : false;
-						if ( true === $prices_include_tax ) {
-							$sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
-							if ( 'no' === $sc_include_tax ) {
-								if ( ! empty( $discounts ) ) {
-									foreach ( $discounts as $item_key => $discount ) {
-										$line_subtotal                 = wc_round_discount( wc_add_number_precision( $cart_contents[ $item_key ]['line_subtotal'] ), 0 );
-										$line_subtotal                 = ( isset( $this->remaining_total_to_apply_credit[ $item_key ] ) ) ? min( $this->remaining_total_to_apply_credit[ $item_key ], $line_subtotal ) : $line_subtotal;
-										$discount                      = min( $discount, $line_subtotal );
-										$discounts       [ $item_key ] = $discount;
-										$this->remaining_total_to_apply_credit[ $item_key ] = $line_subtotal - $discount;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			return $discounts;
-		}
-
-		/**
-		 * Set smart coupon credit used
-		 */
-		public function cart_set_total_credit_used() {
-
-			$coupon_discount_totals     = ( is_callable( array( 'WC_Cart', 'get_coupon_discount_totals' ) ) ) ? WC()->cart->get_coupon_discount_totals() : WC()->cart->coupon_discount_amounts;
-			$coupon_discount_tax_totals = ( is_callable( array( 'WC_Cart', 'get_coupon_discount_tax_totals' ) ) ) ? WC()->cart->get_coupon_discount_tax_totals() : WC()->cart->coupon_discount_tax_amounts;
-			$sc_total_credit_used       = array();
-
-			if ( ! empty( $coupon_discount_totals ) && is_array( $coupon_discount_totals ) && count( $coupon_discount_totals ) > 0 ) {
-				foreach ( $coupon_discount_totals as $coupon_code => $total ) {
-					$coupon        = new WC_Coupon( $coupon_code );
-					$discount_type = $coupon->get_discount_type();
-
-					if ( 'smart_coupon' === $discount_type ) {
-						$sc_total_credit_used[ $coupon_code ] = $total;
-
-						if ( ! empty( $coupon_discount_tax_totals[ $coupon_code ] ) ) {
-							$sc_include_tax = $this->is_store_credit_include_tax();
-							if ( 'yes' === $sc_include_tax ) {
-								$sc_total_credit_used[ $coupon_code ] += $coupon_discount_tax_totals[ $coupon_code ];
-							} else {
-								$prices_include_tax = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ) ? true : false;
-								if ( true === $prices_include_tax ) {
-									$apply_before_tax = get_option( 'woocommerce_smart_coupon_apply_before_tax', 'no' );
-									if ( 'yes' === $apply_before_tax ) {
-										$_sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
-										if ( 'no' === $_sc_include_tax ) {
-											$sc_total_credit_used[ $coupon_code ] += $coupon_discount_tax_totals[ $coupon_code ];
+			try {
+				$cart = ( isset( WC()->cart ) ) ? WC()->cart : '';
+				if ( $cart instanceof WC_Cart ) {
+					$cart_contents = ( is_object( WC()->cart ) && is_callable( array( WC()->cart, 'get_cart' ) ) ) ? WC()->cart->get_cart() : array();
+					if ( ! empty( $cart_contents ) ) {
+						$discount_type = ( is_object( $coupon ) && is_callable( array( $coupon, 'get_discount_type' ) ) ) ? $coupon->get_discount_type() : '';
+						if ( 'smart_coupon' === $discount_type ) {
+							$prices_include_tax = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ) ? true : false;
+							if ( true === $prices_include_tax ) {
+								$sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
+								if ( 'no' === $sc_include_tax ) {
+									if ( ! empty( $discounts ) ) {
+										foreach ( $discounts as $item_key => $discount ) {
+											$line_subtotal                 = wc_round_discount( wc_add_number_precision( $cart_contents[ $item_key ]['line_subtotal'] ), 0 );
+											$line_subtotal                 = ( isset( $this->remaining_total_to_apply_credit[ $item_key ] ) ) ? min( $this->remaining_total_to_apply_credit[ $item_key ], $line_subtotal ) : $line_subtotal;
+											$discount                      = min( $discount, $line_subtotal );
+											$discounts       [ $item_key ] = $discount;
+											$this->remaining_total_to_apply_credit[ $item_key ] = $line_subtotal - $discount;
 										}
 									}
 								}
@@ -551,10 +541,56 @@ if ( ! class_exists( 'WC_SC_Apply_Before_Tax' ) ) {
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
-			if ( ! empty( $sc_total_credit_used ) ) {
-				WC()->cart->smart_coupon_credit_used = $sc_total_credit_used;
+			return $discounts;
+		}
+
+		/**
+		 * Set smart coupon credit used
+		 */
+		public function cart_set_total_credit_used() {
+			try {
+				$coupon_discount_totals     = ( is_callable( array( 'WC_Cart', 'get_coupon_discount_totals' ) ) ) ? WC()->cart->get_coupon_discount_totals() : WC()->cart->coupon_discount_amounts;
+				$coupon_discount_tax_totals = ( is_callable( array( 'WC_Cart', 'get_coupon_discount_tax_totals' ) ) ) ? WC()->cart->get_coupon_discount_tax_totals() : WC()->cart->coupon_discount_tax_amounts;
+				$sc_total_credit_used       = array();
+
+				if ( ! empty( $coupon_discount_totals ) && is_array( $coupon_discount_totals ) && count( $coupon_discount_totals ) > 0 ) {
+					foreach ( $coupon_discount_totals as $coupon_code => $total ) {
+						$coupon        = new WC_Coupon( $coupon_code );
+						$discount_type = $coupon->get_discount_type();
+
+						if ( 'smart_coupon' === $discount_type ) {
+							$sc_total_credit_used[ $coupon_code ] = $total;
+
+							if ( ! empty( $coupon_discount_tax_totals[ $coupon_code ] ) ) {
+								$sc_include_tax = $this->is_store_credit_include_tax();
+								if ( 'yes' === $sc_include_tax ) {
+									$sc_total_credit_used[ $coupon_code ] += $coupon_discount_tax_totals[ $coupon_code ];
+								} else {
+									$prices_include_tax = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ) ? true : false;
+									if ( true === $prices_include_tax ) {
+										$apply_before_tax = get_option( 'woocommerce_smart_coupon_apply_before_tax', 'no' );
+										if ( 'yes' === $apply_before_tax ) {
+											$_sc_include_tax = get_option( 'woocommerce_smart_coupon_include_tax', 'no' );
+											if ( 'no' === $_sc_include_tax ) {
+												$sc_total_credit_used[ $coupon_code ] += $coupon_discount_tax_totals[ $coupon_code ];
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				if ( ! empty( $sc_total_credit_used ) ) {
+					WC()->cart->smart_coupon_credit_used = $sc_total_credit_used;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 

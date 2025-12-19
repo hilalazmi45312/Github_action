@@ -175,12 +175,6 @@ if ( ! function_exists( 'woodmart_get_vc_map_team_member' ) ) {
 				),
 				array(
 					'type'             => 'textfield',
-					'heading'          => esc_html__( 'Skype link', 'woodmart' ),
-					'param_name'       => 'skype',
-					'edit_field_class' => 'vc_col-sm-6 vc_column',
-				),
-				array(
-					'type'             => 'textfield',
 					'heading'          => esc_html__( 'Instagram link', 'woodmart' ),
 					'param_name'       => 'instagram',
 					'edit_field_class' => 'vc_col-sm-6 vc_column',

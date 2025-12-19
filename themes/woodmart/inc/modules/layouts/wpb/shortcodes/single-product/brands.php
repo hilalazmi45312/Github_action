@@ -46,15 +46,25 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_brands' ) ) {
 
 		$attr = woodmart_get_opt( 'brands_attribute' );
 
-		if ( ! $attr || ( ! woodmart_get_opt( 'product_page_brand' ) && ! Main::get_instance()->has_custom_layout( 'single_product' ) ) ) {
+		if ( ( ! $attr && ! taxonomy_exists( 'product_brand' ) ) || ( ! woodmart_get_opt( 'product_page_brand' ) && ! Main::get_instance()->has_custom_layout( 'single_product' ) ) ) {
 			return '';
 		}
 
 		global $product;
 
-		$attributes = $product->get_attributes();
+		if ( $attr ) {
+			$attributes = $product->get_attributes();
 
-		if ( ! isset( $attributes[ $attr ] ) || empty( $attributes[ $attr ] ) || empty( wc_get_product_terms( $product->get_id(), $attr, array( 'fields' => 'all' ) ) ) ) {
+			if ( empty( $attributes[ $attr ] ) ) {
+				return '';
+			}
+		} else {
+			$attr = 'product_brand';
+		}
+
+		$brands = wc_get_product_terms( $product->get_id(), $attr, array( 'fields' => 'all' ) );
+
+		if ( empty( $brands ) ) {
 			return '';
 		}
 

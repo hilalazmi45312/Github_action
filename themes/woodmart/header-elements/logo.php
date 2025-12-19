@@ -20,8 +20,8 @@ $logo_attrs   = array(
 );
 
 if ( $width_height_needed ) {
-	$logo_attrs['width']  = 370;
-	$logo_attrs['height'] = 50;
+	$logo_attrs['width']  = 369;
+	$logo_attrs['height'] = 53;
 }
 
 if ( ! woodmart_get_opt( 'disable_wordpress_lazy_loading' ) ) {

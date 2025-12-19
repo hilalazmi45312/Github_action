@@ -52,7 +52,8 @@
 				var $product = $this.parents('.wd-product');
 				var value = $this.data('value');
 				var id = $this.parent().data('id');
-				var $select = $form.find('select#' + CSS.escape(id));
+				// var $select = $form.find('select#' + CSS.escape(id));
+				var $select = $this.parent().siblings('select');
 
 				if (! $form.hasClass('wd-form-inited')) {
 					$form.addClass('wd-form-inited');
@@ -84,6 +85,7 @@
 				}
 
 				$select.val(value).trigger('change');
+
 				$this.parent().find('.wd-active').removeClass('wd-active');
 				$this.addClass('wd-active');
 
@@ -107,21 +109,7 @@
 				loadVariations($form);
 			});
 
-			$form.on('show_variation', function(event, variation, purchasable) {
-				// Firefox fix after reload page.
-				if ( $form.find('.wd-swatch').length && ! $form.find('.wd-swatch.wd-active').length ) {
-					$form.find('select').each(function () {
-						var $select = $(this);
-						var value = $select.val();
-
-						if ( ! value ) {
-							return;
-						}
-
-						$select.siblings('.wd-swatches-product').find('.wd-swatch[data-value="' + value + '"]').addClass('wd-active');
-					});
-				}
-
+			$form.on('found_variation', function(event, variation) {
 				if (variation.price_html.length > 1) {
 					$price.html(variation.price_html);
 				}
@@ -158,6 +146,22 @@
 					$inputQty.val( originalQtyMin );
 
 					$inputQty.attr('max', variation.max_qty).attr('min', variation.min_qty);
+				}
+			});
+
+			$form.on('show_variation', function(event, variation, purchasable) {
+				// Firefox fix after reload page.
+				if ( $form.find('.wd-swatch').length && ! $form.find('.wd-swatch.wd-active').length ) {
+					$form.find('select').each(function () {
+						var $select = $(this);
+						var value = $select.val();
+
+						if ( ! value ) {
+							return;
+						}
+
+						$select.siblings('.wd-swatches-product').find('.wd-swatch[data-value="' + value + '"]').addClass('wd-active');
+					});
 				}
 
 				$form.addClass('variation-swatch-selected');

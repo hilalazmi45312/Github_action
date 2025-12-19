@@ -25,7 +25,7 @@ class Main extends Singleton {
 	public function init() {
 		add_action( 'init', array( $this, 'add_options' ), 10 );
 
-		if ( ! woodmart_get_opt( 'sold_counter_enabled' ) ) {
+		if ( ! woodmart_get_opt( 'sold_counter_enabled' ) || ! woodmart_woocommerce_installed() ) {
 			return;
 		}
 
@@ -236,6 +236,80 @@ class Main extends Singleton {
 	}
 
 	/**
+	 * Get timeframe period string.
+	 *
+	 * @return string
+	 */
+	public function get_timeframe_period_string() {
+		$timeframe_period        = woodmart_get_opt( 'sold_counter_timeframe_period', 'minutes' );
+		$sold_counter_timeframe  = woodmart_get_opt( 'sold_counter_timeframe' ) ? intval( woodmart_get_opt( 'sold_counter_timeframe' ) ) : 0;
+		$timeframe_period_string = '';
+
+		if ( empty( $timeframe_period ) || empty( $sold_counter_timeframe ) ) {
+			return '';
+		}
+
+		switch ( $timeframe_period ) {
+			case 'minutes':
+				$timeframe_period_string = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'minute', 'minutes', (int) $sold_counter_timeframe, 'woodmart' );
+				break;
+			case 'hours':
+				$timeframe_period_string = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'hour', 'hours', (int) $sold_counter_timeframe, 'woodmart' );
+				break;
+			case 'days':
+				$timeframe_period_string = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'day', 'days', (int) $sold_counter_timeframe, 'woodmart' );
+				break;
+			case 'weeks':
+				$timeframe_period_string = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'week', 'weeks', (int) $sold_counter_timeframe, 'woodmart' );
+				break;
+			case 'months':
+				$timeframe_period_string = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'month', 'months', (int) $sold_counter_timeframe, 'woodmart' );
+				break;
+			default:
+				$timeframe_period_string = $sold_counter_timeframe . ' ' . esc_html__( 'hours', 'woodmart' );
+				break;
+		}
+
+		return $timeframe_period_string;
+	}
+
+	/**
+	 * Get date after timestamp in seconds.
+	 *
+	 * @return false|int
+	 */
+	public function get_date_after_timestamp() {
+		$timeframe_period       = woodmart_get_opt( 'sold_counter_timeframe_period', 'minutes' );
+		$sold_counter_timeframe = woodmart_get_opt( 'sold_counter_timeframe' ) ? intval( woodmart_get_opt( 'sold_counter_timeframe' ) ) : 0;
+
+		if ( empty( $timeframe_period ) || empty( $sold_counter_timeframe ) ) {
+			return false;
+		}
+
+		$timeframe_period = intval(
+			str_replace(
+				array(
+					'minutes',
+					'hours',
+					'days',
+					'weeks',
+					'months',
+				),
+				array(
+					MINUTE_IN_SECONDS,
+					HOUR_IN_SECONDS,
+					DAY_IN_SECONDS,
+					WEEK_IN_SECONDS,
+					MONTH_IN_SECONDS,
+				),
+				$timeframe_period
+			)
+		);
+
+		return $sold_counter_timeframe * $timeframe_period;
+	}
+
+	/**
 	 * Get sales count data for render by product id.
 	 *
 	 * @param int $id Product id.
@@ -253,29 +327,6 @@ class Main extends Singleton {
 
 		$average_count = get_transient( 'woodmart_product_sales_' . $id );
 
-		$sold_counter_timeframe = woodmart_get_opt( 'sold_counter_timeframe' );
-
-		switch ( woodmart_get_opt( 'sold_counter_timeframe_period' ) ) {
-			case 'minutes':
-				$timeframe_period = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'minute', 'minutes', (int) $sold_counter_timeframe, 'woodmart' );
-				break;
-			case 'hours':
-				$timeframe_period = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'hour', 'hours', (int) $sold_counter_timeframe, 'woodmart' );
-				break;
-			case 'days':
-				$timeframe_period = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'day', 'days', (int) $sold_counter_timeframe, 'woodmart' );
-				break;
-			case 'weeks':
-				$timeframe_period = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'week', 'weeks', (int) $sold_counter_timeframe, 'woodmart' );
-				break;
-			case 'months':
-				$timeframe_period = ( $sold_counter_timeframe > 1 ? $sold_counter_timeframe . ' ' : '' ) . _n( 'month', 'months', (int) $sold_counter_timeframe, 'woodmart' );
-				break;
-			default:
-				$timeframe_period = $sold_counter_timeframe . ' ' . esc_html__( 'hours', 'woodmart' );
-				break;
-		}
-
 		if ( ! $average_count ) {
 			if ( 'fake_data' === woodmart_get_opt( 'sold_counter_sales_type' ) ) {
 				$min = abs( intval( woodmart_get_opt( 'sold_counter_min_count' ) ) );
@@ -283,38 +334,23 @@ class Main extends Singleton {
 
 				$average_count = wp_rand( $min, $max );
 			} else {
-				$date_before = strtotime(
-					'-' . $sold_counter_timeframe *
-					str_replace(
-						array(
-							'minutes',
-							'hours',
-							'days',
-							'weeks',
-							'months',
-						),
-						array(
-							MINUTE_IN_SECONDS,
-							HOUR_IN_SECONDS,
-							DAY_IN_SECONDS,
-							WEEK_IN_SECONDS,
-							MONTH_IN_SECONDS,
-						),
-						woodmart_get_opt( 'sold_counter_timeframe_period' )
-					) . ' seconds'
-				);
+				$date_after_timestamp = $this->get_date_after_timestamp();
 
-				$orders = wc_get_orders(
+				if ( false === $date_after_timestamp ) {
+					return false;
+				}
+
+				$date_after    = strtotime( '-' . $date_after_timestamp . ' seconds' );
+				$average_count = 0;
+				$orders        = wc_get_orders(
 					array(
 						'status'      => array( 'completed', 'wc-processing' ),
 						'limit'       => -1,
 						'type'        => 'shop_order',
-						'date_after'  => gmdate( 'Y-m-d H:i:s', $date_before ),
 						'date_before' => gmdate( 'Y-m-d H:i:s', strtotime( 'now' ) ),
+						'date_after'  => gmdate( 'Y-m-d H:i:s', $date_after ),
 					)
 				);
-
-				$average_count = 0;
 
 				foreach ( $orders as $order ) {
 					foreach ( $order->get_items() as $item_id => $item_values ) {
@@ -350,7 +386,7 @@ class Main extends Singleton {
 					'%s %s %s',
 					_n( 'Item', 'Items', $average_count, 'woodmart' ),
 					esc_html__( 'sold in last', 'woodmart' ),
-					esc_html( $timeframe_period )
+					esc_html( $this->get_timeframe_period_string() )
 				),
 			);
 		}

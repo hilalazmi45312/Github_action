@@ -24,7 +24,8 @@ if ( ! function_exists( 'woodmart_shortcode_cart_free_gifts' ) ) {
 		}
 
 		$default_settings = array(
-			'css' => '',
+			'css'        => '',
+			'show_title' => 'yes',
 		);
 
 		$settings = wp_parse_args( $settings, $default_settings );
@@ -34,6 +35,10 @@ if ( ! function_exists( 'woodmart_shortcode_cart_free_gifts' ) ) {
 
 		if ( $settings['css'] ) {
 			$wrapper_classes .= ' ' . vc_shortcode_custom_css_class( $settings['css'] );
+		}
+
+		if ( 'yes' === $settings['show_title'] ) {
+			$wrapper_classes .= ' wd-title-show';
 		}
 
 		$free_gifts_frontend = Free_Gifts_Frontend::get_instance();

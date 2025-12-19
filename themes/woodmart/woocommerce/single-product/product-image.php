@@ -251,6 +251,8 @@ wp_enqueue_script( 'imagesloaded' );
 			<div class="wd-carousel-wrap">
 
 				<?php
+				$alt_text   = trim( wp_strip_all_tags( get_post_meta( $post_thumbnail_id, '_wp_attachment_image_alt', true ) ) );
+				$alt_text   = ( empty( $alt_text ) && ( $product instanceof WC_Product ) ) ? woocommerce_get_alt_from_product_title_and_position( $product->get_title(), true, 0 ) : $alt_text;
 				$attributes = array(
 					'title'                   => get_post_field( 'post_title', $post_thumbnail_id ),
 					'data-caption'            => get_post_field( 'post_excerpt', $post_thumbnail_id ),
@@ -258,6 +260,7 @@ wp_enqueue_script( 'imagesloaded' );
 					'data-large_image'        => isset( $full_size_image[0] ) ? $full_size_image[0] : '',
 					'data-large_image_width'  => isset( $full_size_image[1] ) ? $full_size_image[1] : '',
 					'data-large_image_height' => isset( $full_size_image[2] ) ? $full_size_image[2] : '',
+					'alt'                     => $alt_text,
 					'class'                   => apply_filters( 'woodmart_single_product_gallery_image_class', 'wp-post-image' ),
 				);
 
@@ -272,7 +275,7 @@ wp_enqueue_script( 'imagesloaded' );
 					);
 
 					$thumbnail_src = get_the_post_thumbnail_url( $post->ID, $thumbnail_size );
-					$html          = '<div class="wd-carousel-item"><figure data-thumb="' . $thumbnail_src . '" class="woocommerce-product-gallery__image"><a data-elementor-open-lightbox="no" href="' . esc_url( $full_size_image[0] ) . '">';
+					$html          = '<div class="wd-carousel-item"><figure data-thumb="' . $thumbnail_src . '" data-thumb-alt="' . esc_attr( $alt_text ) . '" class="woocommerce-product-gallery__image"><a data-elementor-open-lightbox="no" href="' . esc_url( $full_size_image[0] ) . '">';
 					$html         .= get_the_post_thumbnail( $post->ID, $thumb_image_size, $attributes );
 					$html         .= '</a></figure></div>';
 				} else {
@@ -355,9 +358,22 @@ wp_enqueue_script( 'imagesloaded' );
 				<div class="wd-carousel wd-grid<?php echo esc_attr( $thumbs_classes ); ?>" <?php echo wp_kses( implode( ' ', $attributes ), true ); ?>>
 					<div class="wd-carousel-wrap">
 						<?php if ( $attachment_ids ) : ?>
-							<?php foreach ( $attachment_ids as $attachment_id ) : ?>
+							<?php foreach ( $attachment_ids as  $index => $attachment_id ) : ?>
+								<?php
+								$alt_text   = trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) );
+								$alt_text   = ( empty( $alt_text ) && ( $product instanceof WC_Product ) ) ? woocommerce_get_alt_from_product_title_and_position( $product->get_title(), false, $index - 1 ) : $alt_text;
+								?>
 								<div class="wd-carousel-item <?php echo esc_attr( apply_filters( 'woodmart_single_product_thumbnail_classes', '', $attachment_id ) ); ?>">
-									<?php echo wp_get_attachment_image( $attachment_id, $image_size ); ?>
+									<?php
+										echo wp_get_attachment_image(
+											$attachment_id,
+											$image_size,
+											false,
+											array(
+												'alt' => $alt_text,
+											)
+										);
+									?>
 								</div>
 							<?php endforeach; ?>
 						<?php endif; ?>

@@ -51,6 +51,10 @@ if ( ! function_exists( 'woodmart_get_vc_map_ajax_search' ) ) {
 					'true_state'       => 1,
 					'false_state'      => 0,
 					'default'          => 1,
+					'dependency'       => array(
+						'element' => 'search_post_type',
+						'value'   => 'product',
+					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
@@ -69,6 +73,10 @@ if ( ! function_exists( 'woodmart_get_vc_map_ajax_search' ) ) {
 					'true_state'       => 1,
 					'false_state'      => 0,
 					'default'          => 1,
+					'dependency'       => array(
+						'element' => 'search_post_type',
+						'value'   => 'product',
+					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
@@ -84,6 +92,19 @@ if ( ! function_exists( 'woodmart_get_vc_map_ajax_search' ) ) {
 					'dependency'       => array(
 						'element' => 'category',
 						'value'   => '1',
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'             => 'woodmart_switch',
+					'heading'          => esc_html__( 'Include categories in search', 'woodmart' ),
+					'param_name'       => 'include_cat_search',
+					'true_state'       => 1,
+					'false_state'      => 0,
+					'default'          => 0,
+					'dependency'       => array(
+						'element' => 'search_post_type',
+						'value'   => 'product',
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),

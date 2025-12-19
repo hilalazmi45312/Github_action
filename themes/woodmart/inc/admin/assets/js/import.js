@@ -4,11 +4,11 @@
 
 	var $importWrapper = $('.xts-import');
 	var $boxContent = $('.xts-box-content');
-	var $noticesArea = $boxContent.find('.xts-import-notices');
 	var $noticesAreaRemove = $('.xts-popup').find('.xts-import-remove-notices');
-	var $wizardFooter = $('.xts-wizard-footer');
 	var $wizardWrapper = $('.xts-wizard-dummy');
 	var $filesystemModal = $('.xts-request-credentials .request-filesystem-credentials-dialog');
+	var $importStatus = $('.xts-import-status');
+	var $setupWizard = $('.xts-setup-wizard');
 
 	// Lazy loading.
 	$boxContent.on('scroll', function() {
@@ -101,7 +101,6 @@
 
 			$this.addClass('xts-loading-item');
 			$wrapper.addClass('xts-loading');
-			$wizardFooter.addClass('xts-disabled');
 
 			clearNotices();
 
@@ -151,7 +150,7 @@
 							dataRequest = { ...dataRequest, ...woodmart_settings.filesystemCredentials }
 						}
 
-						if ( $noticesArea.find('.xts-notice.xts-error').length ) {
+						if ( $('.xts-import-notices .xts-notice.xts-error').length ) {
 							return;
 						}
 
@@ -170,7 +169,6 @@
 							error  : function() {
 								$this.removeClass('xts-loading-item');
 								$wrapper.removeClass('xts-loading');
-								$wizardFooter.removeClass('xts-disabled');
 
 								endProgress();
 								clearProgressBar();
@@ -181,7 +179,6 @@
 								if (! response.success && 'undefined' !== typeof response.data  && 'undefined' !== typeof response.data.errorMessage) {
 									$this.removeClass('xts-loading-item');
 									$wrapper.removeClass('xts-loading');
-									$wizardFooter.removeClass('xts-disabled');
 
 									endProgress();
 									clearProgressBar();
@@ -227,7 +224,11 @@
 							$this.addClass('xts-view-page');
 							$this.siblings().removeClass('xts-view-page');
 							$wrapper.removeClass('xts-loading');
-							$wizardFooter.removeClass('xts-disabled');
+
+							if ($setupWizard.length) {
+								$setupWizard.removeClass('xts-loading')
+								$setupWizard.addClass('xts-imported')
+							}
 
 							setTimeout(function() {
 								endProgress();
@@ -305,6 +306,14 @@
 							{
 								'name' : 'wpcf7_contact_form',
 								'value': 'on'
+							},
+							{
+								'name' : 'wd_floating_block',
+								'value': 'on'
+							},
+							{
+								'name' : 'wd_popup',
+								'value': 'on'
 							}
 						]
 					},
@@ -327,18 +336,19 @@
 		function updateProgressBar( type, process ) {
 			if ( 'base' === type ) {
 				if ( 'xml' === process ) {
-					updateProgress(15);
+					updateProgress(15, 1);
 				}
 				if ( process.indexOf('images') + 1 ) {
-					updateProgress(15 + ( 15 * process.substr(6) ) );
+					let step = parseInt(process.substr(6)) + 1;
+					updateProgress((15 * step), step);
 				}
 				if ( 'other' === process ) {
-					updateProgress(80);
+					updateProgress(80, 6);
 				}
 			} else if ( 'xml' === process ) {
-				updateProgress(90);
+				updateProgress(90, 7);
 			} else if ( 'other' === process ) {
-				updateProgress(95);
+				updateProgress(95, 8);
 			}
 		}
 
@@ -348,8 +358,15 @@
 			}, 150000);
 		}
 
-		function updateProgress(progress) {
+		function updateProgress(progress, step = 0) {
 			var timeout = 400;
+
+			if ($importStatus.length) {
+				$importStatus.find('li').removeClass('xts-active');
+				$importStatus.find('li').eq(step - 1).addClass('xts-active');
+			}
+
+			$(document).trigger('wd-import-progress', {progress: progress});
 
 			function update(value) {
 				$progressBar.attr('data-progress', value);
@@ -407,7 +424,7 @@
 
 		if (0 === $('.xts-search-show').length) {
 			clearNotices();
-			printNotice('info', 'Apologies, but no results were found.');
+			printNotice('info', 'No results were found.');
 		} else {
 			clearNotices();
 		}
@@ -583,7 +600,7 @@
 
 	// Wizard.
 	function wizardDone() {
-		var $dummy = $('.xts-setup-wizard').find('.xts-wizard-dummy');
+		var $dummy = $setupWizard.find('.xts-wizard-dummy');
 
 		if ($dummy.length === 0) {
 			return;
@@ -592,9 +609,11 @@
 		$('.xts-next, .xts-skip').on('click', function(e) {
 			e.preventDefault();
 
-			$('.xts-setup-wizard').addClass('xts-done');
+			$dummy.removeClass('xts-active');
+			$('.xts-wizard-import-template').removeClass('xts-active');
+			$('.xts-wizard-done').addClass('xts-active');
 			$('.xts-wizard-nav li[data-slug="done"]').removeClass('xts-disabled').addClass('xts-active');
-			$('.xts-wizard-nav li[data-slug="dummy-content"]').removeClass('xts-active');
+			$('.xts-wizard-nav li[data-slug="prebuilt-websites"]').removeClass('xts-active');
 		});
 	}
 
@@ -605,12 +624,12 @@
 		if ('remove' === location) {
 			$noticesAreaRemove.append('<div class="xts-notice xts-' + type + '">' + text + '</div>');
 		} else {
-			$noticesArea.append('<div class="xts-notice xts-' + type + '">' + text + '</div>');
+			$('.xts-import-notices').append('<div class="xts-notice xts-' + type + '">' + text + '</div>');
 		}
 	}
 
 	function clearNotices() {
-		$noticesArea.text('');
+		$('.xts-import-notices').text('');
 		$noticesAreaRemove.text('');
 	}
 

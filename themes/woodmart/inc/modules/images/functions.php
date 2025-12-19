@@ -74,16 +74,7 @@ if ( ! function_exists( 'woodmart_otf_get_image_html' ) ) {
 			add_filter( 'image_downsize', 'gambit_otf_regen_thumbs_media_downsize', 10, 3 );
 		}
 
-        // $image_html = wp_get_attachment_image( $image_id, $size, false, $attr );
-
-        // Custom code suggestion from WPVIP
-		$cache_key = 'woodmart_image_html_' . md5( serialize( array( $image_id, $size, $attr ) ) );
-        $image_html = wp_cache_get( $cache_key, 'woodmart_images' );
-		if ( false === $image_html ) {
-			$image_html = wp_get_attachment_image( $image_id, $size, false, $attr );
-			// Cache for 24 hours (86400 seconds)
-			wp_cache_set( $cache_key, $image_html, 'woodmart_images', 86400 );
-		}
+		$image_html = wp_get_attachment_image( $image_id, $size, false, $attr );
 
 		if ( is_array( $size ) ) {
 			remove_filter( 'image_downsize', 'gambit_otf_regen_thumbs_media_downsize', 10, 3 );
@@ -289,6 +280,8 @@ if ( ! function_exists( 'woodmart_allow_wp_kses_allowed_html' ) ) {
 				'loading'         => true,
 				'data-*'          => true,
 			);
+
+			$tags['div'] = array_merge( $tags['div'] ?? array(), array( 'tabindex' => true ) );
 		}
 
 		if ( ! woodmart_get_opt( 'allow_upload_svg' ) ) {
@@ -529,5 +522,42 @@ if ( ! function_exists( 'woodmart_get_svg_html' ) ) {
 			}
 		}
 		return apply_filters( 'woodmart_image', '<img ' . $html . '>' );
+	}
+}
+
+if ( ! function_exists( 'woodmart_get_default_image_sizes' ) ) {
+	/**
+	 * Get default image sizes.
+	 *
+	 * @return array
+	 */
+	function woodmart_get_default_image_sizes( $with_custom = true ) {
+		$image_sizes_raw = apply_filters(
+			'image_size_names_choose',
+			array(
+				'full'      => __( 'Full Size' ),
+				'thumbnail' => __( 'Thumbnail' ),
+				'medium'    => __( 'Medium' ),
+				'large'     => __( 'Large' ),
+			)
+		);
+
+		$image_sizes = array();
+
+		foreach ( $image_sizes_raw as $key => $label ) {
+			$image_sizes[ $key ] = array(
+				'name'  => esc_html( $label ),
+				'value' => esc_attr( $key ),
+			);
+		}
+
+		if ( $with_custom ) {
+			$image_sizes['custom'] = array(
+				'name'  => __( 'Custom size', 'woodmart' ),
+				'value' => 'custom',
+			);
+		}
+
+		return $image_sizes;
 	}
 }

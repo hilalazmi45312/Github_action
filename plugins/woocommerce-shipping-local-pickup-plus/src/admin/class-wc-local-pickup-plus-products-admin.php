@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * WooCommerce Products and Product Categories admin handler for local pickup.
@@ -204,7 +204,7 @@ class WC_Local_Pickup_Plus_Products_Admin {
 
 				?>
 				<label for="<?php echo esc_attr( $name ); ?>"><?php esc_html_e( 'Local Pickup', 'woocommerce-shipping-local-pickup-plus' ); ?></label>
-				<?php echo $this->get_local_pickup_availability_input_html( $name, $value, $desc ); ?>
+				<?php echo $this->get_local_pickup_availability_input_html( $name, $value, $desc ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</p>
 		</div>
 		<?php
@@ -220,10 +220,10 @@ class WC_Local_Pickup_Plus_Products_Admin {
 	 */
 	public function add_product_category_pickup_locations_options() {
 
-		echo $this->get_local_pickup_availability_input_html(
+		echo $this->get_local_pickup_availability_input_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'_wc_local_pickup_plus_local_pickup_product_cat_availability',
 			'allowed',
-			__( 'Choose whether local pickup is possible for this category of products, or if local pickup is the only type of shipment possible. Individual products may override this setting.', 'woocommerce-shipping-local-pickup-plus' ),
+			esc_html__( 'Choose whether local pickup is possible for this category of products, or if local pickup is the only type of shipment possible. Individual products may override this setting.', 'woocommerce-shipping-local-pickup-plus' ),
 			true
 		);
 	}
@@ -250,7 +250,7 @@ class WC_Local_Pickup_Plus_Products_Admin {
 		?>
 		<tr class="form-field term-name-wrap">
 			<th scope="row"><label for="<?php echo esc_attr( $name ); ?>"><?php esc_html_e( 'Local Pickup', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
-			<td><?php echo $this->get_local_pickup_availability_input_html( $name, $value, $desc, true ); ?></td>
+			<td><?php echo $this->get_local_pickup_availability_input_html( $name, $value, $desc, true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 		</tr>
 		<?php
 	}
@@ -268,7 +268,7 @@ class WC_Local_Pickup_Plus_Products_Admin {
 	public function save_product_local_pickup_availability( $post_id ) {
 
 		$meta_key     = '_wc_local_pickup_plus_local_pickup_product_availability';
-		$availability = isset( $_POST[ $meta_key ] ) ? $_POST[ $meta_key ] : null;
+		$availability = isset( $_POST[ $meta_key ] ) ? sanitize_text_field( $_POST[ $meta_key ] ) : null;
 
 		if (    $availability
 		     && ( $product = wc_get_product( $post_id ) )
@@ -294,7 +294,7 @@ class WC_Local_Pickup_Plus_Products_Admin {
 	public function save_product_cat_local_pickup_availability( $term_id, $taxonomy_id, $taxonomy_slug ) {
 
 		$meta_key     = '_wc_local_pickup_plus_local_pickup_product_cat_availability';
-		$availability = isset( $_POST[ $meta_key ] ) ? $_POST[ $meta_key ] : null;
+		$availability = isset( $_POST[ $meta_key ] ) ? sanitize_text_field( $_POST[ $meta_key ] ) : null;
 
 		if ( $availability && in_array( $availability, wc_local_pickup_plus()->get_products_instance()->get_local_pickup_category_availability_types(), true ) ) {
 

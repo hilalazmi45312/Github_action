@@ -54,7 +54,7 @@ class Free_Gifts extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'wd-woocommerce-elements' );
+		return array( 'wd-site-elements' );
 	}
 
 	/**
@@ -94,12 +94,27 @@ class Free_Gifts extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'title',
+			array(
+				'label'        => esc_html__( 'Enable title', 'woodmart' ),
+				'description'  => esc_html__( 'If "NO" title will be removed.', 'woodmart' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'show',
+				'return_value' => 'show',
+				'prefix_class' => 'wd-title-',
+			)
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Typography', 'woodmart' ),
-				'selector' => '{{WRAPPER}} .wd-el-title',
+				'name'      => 'title_typography',
+				'label'     => esc_html__( 'Typography', 'woodmart' ),
+				'selector'  => '{{WRAPPER}} .wd-el-title',
+				'condition' => array(
+					'title' => 'show',
+				),
 			)
 		);
 
@@ -110,6 +125,9 @@ class Free_Gifts extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .wd-el-title' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'title' => 'show',
 				),
 			)
 		);

@@ -37,9 +37,6 @@ class Activation {
 				<h3>
 					<?php esc_html_e( 'Theme license', 'woodmart' ); ?>
 				</h3>
-				<p>
-					<?php esc_html_e( 'Activate your purchase code for this domain to turn on auto updates function.', 'woodmart' ); ?>
-				</p>
 			</div>
 
 			<div class="xts-box-content">
@@ -49,19 +46,23 @@ class Activation {
 					</div>
 
 					<div class="xts-col-12 xts-col-xl-7 xts-license-content">
+
 						<?php $this->_notices->show_msgs(); ?>
 
 						<?php if ( woodmart_is_license_activated() ) : ?>
 							<div class="xts-activated-message">
-								<p>
+								<p class="xts-licanse-setup-label">
+									<?php echo esc_html__( 'Thank you for activating the theme. After activation, you will be able to receive automatic updates via', 'woodmart' ); ?> <strong><?php esc_html_e( 'Appearance → Themes', 'woodmart' ); ?></strong> <?php esc_html_e( 'or', 'woodmart' ); ?> <strong><?php esc_html_e( 'Dashboard → Updates', 'woodmart' ); ?></strong>. <?php esc_html_e( 'Once the theme installation is complete, you can also deactivate this domain on the', 'woodmart' ); ?> <strong><?php esc_html_e( 'Theme License', 'woodmart' ); ?></strong> <?php esc_html_e( 'page if you plan to transfer your website to a different domain or server.', 'woodmart' ); ?>
+								</p>
+								<p class="xts-licanse-dashboard-label">
 									<?php
 										printf(
-											'%s <a href="' . esc_url( admin_url( 'themes.php' ) ) . '">%s</a> %s <a href="' . esc_url( admin_url( 'update-core.php?force-check=1' ) ) . '">%s</a>%s<br>',
+											'%s <a href="' . esc_url( admin_url( 'themes.php' ) ) . '">%s</a> %s <a href="' . esc_url( admin_url( 'update-core.php?force-check=1' ) ) . '">%s</a>.%s',
 											esc_html__( 'Thank you for activation. Now you are able to get automatic updates for our theme via', 'woodmart' ),
 											esc_html__( 'Appearance -> Themes', 'woodmart' ),
 											esc_html__( 'or via', 'woodmart' ),
 											esc_html__( 'Dashboard -> Updates', 'woodmart' ),
-											esc_html__( '. You can click this button to deactivate your license code from this domain if you are going to transfer your website to some other domain or server.', 'woodmart' )
+											esc_html__( ' You can click this button to deactivate your license code from this domain if you are going to transfer your website to some other domain or server.', 'woodmart' )
 										);
 									?>
 								</p>
@@ -80,19 +81,15 @@ class Activation {
 								</form>
 							</div>
 						<?php else : ?>
+							<?php if ( ! woodmart_get_opt( 'white_label' ) ) : ?>
+								<p class="xts-license-label">
+									<?php esc_html_e( 'Activate your purchase code for this domain to enable the automatic updates feature.', 'woodmart' ); ?>
+
+									<a href="https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-" target="_blank"><span class="xts-hint"></span><?php esc_attr_e( 'Where is my code?', 'woodmart' ); ?></a>
+								</p>
+							<?php endif; ?>
 							<form action="" class="xts-form xts-activation-form" method="post">
 								<?php wp_nonce_field( 'xts-license-activation' ); ?>
-								<?php if ( ! woodmart_get_opt( 'white_label' ) ) : ?>
-									<label for="purchase-code">
-										<?php
-											printf(
-												'%s (<a href="https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-" target="_blank">%s</a>)',
-												esc_html__( 'Purchase code', 'woodmart' ),
-												esc_html__( 'Where can I get my purchase code?', 'woodmart' )
-											)
-										?>
-									</label>
-								<?php endif; ?>
 
 								<div class="xts-activation-form-inner">
 									<input type="text" name="purchase-code" placeholder="<?php esc_attr_e( 'Example: 1e71cs5f-13d9-41e8-a140-2cff01d96afb', 'woodmart' ); ?>" id="purchase-code" required>
@@ -112,6 +109,12 @@ class Activation {
 										<input id="xts-dev-domain-label" type="checkbox" name="xts-dev-domain" <?php checked( isset( $_REQUEST['xts-dev-domain'] ) && $_REQUEST['xts-dev-domain'], '1' ); // phpcs:ignore ?> value="1">
 										<?php esc_html_e( 'Development domain', 'woodmart' ); ?>
 									</label>
+
+									<div class="xts-hint">
+										<div class="xts-tooltip xts-top xts-top-left">
+											<?php esc_html_e( 'You are allowed to use our theme only on one domain if you purchased a regular license. But we give you an ability to activate our theme to turn on auto updates on two domains: for the development website and for your production (live) website.', 'woodmart' ); ?>
+										</div>
+									</div>
 								</div>
 
 								<div class="xts-activation-form-agree">
@@ -126,7 +129,7 @@ class Activation {
 
 									<div class="xts-hint">
 										<div class="xts-tooltip xts-top xts-top-left">
-											<?php esc_html_e( 'To activate the theme and access product support, please register your Envato purchase code on our site. This code, along with your support expiration date and user data, will be securely processed. Registration is essential for us to offer you product support and other customer services.', 'woodmart' ); ?>
+											<?php esc_html_e( 'To activate the theme and access product support, please register your Envato purchase code on our website. This code, along with your support expiration date and user information, will be securely processed. Registration is required for us to provide you with product support and other customer services.', 'woodmart' ); ?>
 										</div>
 									</div>
 								</div>
@@ -134,19 +137,20 @@ class Activation {
 								<div class="xts-license-btn xts-activate-btn xts-i-key">
 									<input class="xts-btn xts-color-primary" name="woodmart-purchase-code" type="submit" value="<?php esc_attr_e( 'Activate theme', 'woodmart' ); ?>" />
 								</div>
+
+								<div class="xts-note">
+									<?php
+										echo wp_kses(
+											__(
+												'<span>Note:</span> if you need to check all your active domains or you want to remove some of them you should visit <a href="https://xtemos.com/" target="_blank">our website</a> and check the activation list in your account.',
+												'woodmart'
+											),
+											woodmart_get_allowed_html()
+										);
+									?>
+								</div>
 							</form>
 						<?php endif; ?>
-						<p class="xts-note">
-							<?php
-								echo wp_kses(
-									__(
-										'<span>Note:</span> you are allowed to use our theme only on one domain if you purchased a regular license. But we give you an ability to activate our theme to turn on auto updates on two domains: for the development website and for your production (live) website. If you need to check all your active domains or you want to remove some of them you should visit <a href="https://xtemos.com/" target="_blank">our website</a> and check the activation list in your account.',
-										'woodmart'
-									),
-									woodmart_get_allowed_html()
-								);
-							?>
-						</p>
 					</div>
 				</div>
 			</div>
@@ -163,12 +167,12 @@ class Activation {
 		if ( isset( $_POST['purchase-code-deactivate'] ) ) {
 			check_admin_referer( 'xts-license-deactivation' );
 			$this->deactivate();
-			$this->_notices->add_success( 'Theme license is successfully deactivated.' );
+			$this->_notices->add_success( esc_html__( 'Theme license is successfully deactivated.', 'woodmart' ) );
 			return;
 		}
 
 		if ( isset( $_POST['woodmart-purchase-code'] ) && ( empty( $_POST['agree_stored'] ) ) ) {
-			$this->_notices->add_error( 'You must agree to store your purchase code and user data by xtemos.com' );
+			$this->_notices->add_error( esc_html__( 'You must agree to store your purchase code and user data by xtemos.com', 'woodmart' ) );
 			return;
 		}
 
@@ -195,7 +199,7 @@ class Activation {
 		}
 
 		if ( is_wp_error( $response ) ) {
-			$this->_notices->add_error( 'The API server can\'t be reached. Please, contact your hosting provider to check the connectivity with our xtemos.com server. If you need further help, please, contact our support center too.' );
+			$this->_notices->add_error( esc_html__( 'The API server can\'t be reached. Please, contact your hosting provider to check the connectivity with our xtemos.com server. If you need further help, please, contact our support center too.', 'woodmart' ) );
 			return;
 		}
 
@@ -207,13 +211,13 @@ class Activation {
 		}
 
 		if ( ( isset( $data['code'] ) && 'rest_forbidden' === $data['code'] ) || empty( $data['verified'] ) ) {
-			$this->_notices->add_error( 'The purchase code is invalid. <a target="_blank" href="https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-">Where can I get my purchase code?</a>' );
+			$this->_notices->add_error( __( 'The purchase code is invalid. <a target="_blank" href="https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-">Where can I get my purchase code?</a>', 'woodmart' ) );
 			return;
 		}
 
 		$this->activate( $code, $data['token'], $dev );
 
-		$this->_notices->add_success( 'The license is verified and theme is activated successfully. Auto updates function is enabled.' );
+		$this->_notices->add_success( esc_html__( 'The license is verified and theme is activated successfully. Auto updates function is enabled.', 'woodmart' ) );
 	}
 
 	/**

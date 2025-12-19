@@ -1,5 +1,6 @@
-<?php if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
-	exit( 'No direct script access allowed' );}
+<?php use XTS\Modules\Layouts\Main;
+
+if ( ! defined( 'WOODMART_THEME_DIR' ) ) exit( 'No direct script access allowed' );
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -18,9 +19,11 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 			array_merge(
 				woodmart_get_carousel_atts(),
 				array(
+					'post_type'              => 'portfolio',
 					'posts_per_page'         => woodmart_get_opt( 'portoflio_per_page' ),
 					'filters'                => false,
 					'filters_type'           => 'masonry',
+					'include'                => '',
 					'categories'             => '',
 					'style'                  => woodmart_get_opt( 'portoflio_style' ),
 					'columns'                => 3,
@@ -39,10 +42,13 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 					'slides_per_view_mobile' => 'auto',
 					'lazy_loading'           => 'no',
 					'el_class'               => '',
-					'el_id'                  => 'wd-' . uniqid(),
+					'el_id'                  => '',
 					'wrapper_classes'        => '',
 					'image_size'             => 'large',
 					'image_size_custom'      => array(),
+					'element_title'          => '',
+					'element_title_tag'      => 'h3',
+					'inner_content'          => '',
 					'css'                    => '',
 					'woodmart_css_id'        => '',
 				)
@@ -54,9 +60,13 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 
 		$encoded_atts     = json_encode( $parsed_atts );
 		$wrapper_classes .= apply_filters( 'vc_shortcodes_css_class', '', '', $parsed_atts );
-		$wrapper_classes .= $el_class;
-		$is_ajax          = ( defined( 'DOING_AJAX' ) && DOING_AJAX );
-		$paged            = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
+		if ( $el_class ) {
+			$wrapper_classes .= ' ' . $el_class;
+		}
+
+		$is_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX );
+		$paged   = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		if ( $ajax_page > 1 ) {
 			$paged = $ajax_page;
 		}
@@ -80,6 +90,11 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 			'paged'          => $paged,
 		);
 
+		if ( 'ids' === $post_type && '' !== $include ) {
+			$args['post__in']            = array_map( 'trim', explode( ',', $include ) );
+			$args['ignore_sticky_posts'] = true;
+		}
+
 		if ( $s ) {
 			$args['s'] = $s;
 		}
@@ -94,8 +109,7 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 			);
 		}
 
-		if( $categories ) {
-
+		if ( $categories ) {
 			$args['tax_query'] = array(
 				array(
 					'taxonomy' => 'project-cat',
@@ -104,6 +118,12 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 					'terms'    => $categories,
 				),
 			);
+		}
+
+		if ( 'related_projects' === $post_type ) {
+			Main::setup_preview();
+			$args = array_merge( $args, woodmart_get_related_projects_args( get_the_ID() ) );
+			Main::restore_preview();
 		}
 
 		ob_start();
@@ -160,7 +180,6 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 		}
 
 		if ( 'carousel' === $layout ) {
-
 			if ( 'wpb' === woodmart_get_current_page_builder() ) {
 				$parsed_atts['carousel_classes'] = 'wd-wpb';
 			}
@@ -190,8 +209,22 @@ if ( ! function_exists( 'woodmart_shortcode_portfolio' ) ) {
 		?>
 		<?php if ( $query->have_posts() ) : ?>
 			<?php if ( ! $is_ajax ) : ?>
-				<div id="<?php echo esc_attr( $el_id ); ?>" class="wd-portfolio-element<?php echo esc_attr( $wrapper_classes ); ?>">
+				<div
+				<?php if ( $el_id ) : ?>
+				id="<?php echo esc_attr( $el_id ); ?>"
+				<?php endif ?>
+				class="wd-portfolio-element<?php echo esc_attr( $wrapper_classes ); ?>">
+					<?php
+					if ( ! empty( $parsed_atts['inner_content'] ) ) {
+						echo do_shortcode( $parsed_atts['inner_content'] );
+					}
 
+					if ( $element_title ) {
+						$element_title_tag = in_array( $element_title_tag, array_keys( woodmart_get_allowed_html() ), true ) ? $element_title_tag : 'h4';
+
+						printf( '<%1$s class="wd-el-title title element-title">%2$s</%1$s>', esc_attr( $element_title_tag ), esc_html( $element_title ) );
+					}
+					?>
 					<?php if ( ! is_tax() && $filters && ! $s ) : ?>
 						<?php woodmart_portfolio_filters( $categories, $filters_type ); ?>
 					<?php endif ?>

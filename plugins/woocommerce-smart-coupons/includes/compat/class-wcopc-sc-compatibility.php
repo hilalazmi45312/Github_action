@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     1.1.0
+ * @version     1.3.0
  * @package     WooCommerce Smart Coupons
  */
 
@@ -80,9 +80,8 @@ if ( ! class_exists( 'WCOPC_SC_Compatibility' ) ) {
 		 * @return array $fragments
 		 */
 		public function update_order_review_fragments( $fragments = array() ) {
-
 			if ( ! class_exists( 'WC_SC_Purchase_Credit' ) ) {
-				include_once '../class-wc-sc-purchase-credit.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-purchase-credit.php';
 			}
 
 			$wc_sc_purchase_credit = WC_SC_Purchase_Credit::get_instance();
@@ -99,7 +98,7 @@ if ( ! class_exists( 'WCOPC_SC_Compatibility' ) ) {
 		 */
 		public function add_styles_and_scripts() {
 			if ( ! class_exists( 'WC_SC_Purchase_Credit' ) ) {
-				include_once '../class-wc-sc-purchase-credit.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-purchase-credit.php';
 			}
 			$wc_sc_purchase_credit = WC_SC_Purchase_Credit::get_instance();
 			$wc_sc_purchase_credit->enqueue_timepicker();

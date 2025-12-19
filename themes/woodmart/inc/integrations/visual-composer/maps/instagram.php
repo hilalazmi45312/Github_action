@@ -106,6 +106,27 @@ Follow our documentation <a href="https://xtemos.com/docs/woodmart/faq-guides/se
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
+					'heading'          => esc_html__( 'Aspect Ratio', 'woodmart' ),
+					'param_name'       => 'aspect_ratio',
+					'type'             => 'wd_select',
+					'style'            => 'select',
+					'selectors'        => array(
+						'{{WRAPPER}}.wd-insta' => array(
+							'--wd-aspect-ratio: {{VALUE}};',
+						),
+					),
+					'devices'          => array(
+						'desktop' => array(
+							'value' => '1/1',
+						),
+					),
+					'value'            => array(
+						'1:1' => '1/1',
+						'4:5' => '4/5',
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
 					'type'             => 'textfield',
 					'heading'          => esc_html__( 'Images link', 'woodmart' ),
 					'param_name'       => 'images_link',

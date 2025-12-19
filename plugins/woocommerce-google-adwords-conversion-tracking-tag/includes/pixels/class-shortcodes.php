@@ -91,6 +91,7 @@ class Shortcodes {
 			'snap-event'            => 'SIGN_UP',
 			'taboola-event'         => '',
 			'tiktok-event'          => 'SubmitForm',
+			'contentsquare-event'   => '',
 		];
 
 		$shortcode_attributes = shortcode_atts($pairs, $attributes);
@@ -200,6 +201,15 @@ class Shortcodes {
 		) {
 			self::conversion_html_twitter($shortcode_attributes);
 		}
+
+		// Contentsquare (Premium only)
+		if (
+			wpm_fs()->can_use_premium_code__premium_only()
+			&& self::should_tracking_event_be_injected($shortcode_attributes, 'contentsquare')
+			&& Options::is_contentsquare_active()
+		) {
+			self::conversion_html_contentsquare($shortcode_attributes);
+		}
 	}
 
 	private static function should_tracking_event_be_injected( $shortcode_attributes, $pixel_id = null ) {
@@ -224,6 +234,24 @@ class Shortcodes {
 					snaptr("track", "<?php echo esc_js($shortcode_attributes['snap-event']); ?>");
 				},
 			);
+		</script>
+		<?php
+	}
+
+	private static function conversion_html_contentsquare( $shortcode_attributes ) {
+
+		if (empty($shortcode_attributes['contentsquare-event'])) {
+			return;
+		}
+
+		?>
+
+		<script>
+			jQuery(document).on("pmw:ready", function () {
+				if (typeof window._uxa !== "undefined") {
+					window._uxa.push(["trackPageEvent", "<?php echo esc_js($shortcode_attributes['contentsquare-event']); ?>"]);
+				}
+			});
 		</script>
 		<?php
 	}

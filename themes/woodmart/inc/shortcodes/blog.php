@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'WOODMART_THEME_DIR' ) ) exit( 'No direct script access allowed' );
+<?php use XTS\Modules\Layouts\Main;
+
+if ( ! defined( 'WOODMART_THEME_DIR' ) ) exit( 'No direct script access allowed' );
 
 /**
 * ------------------------------------------------------------------------------------------------
@@ -34,6 +36,7 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 					'img_size' => 'medium',
 					'img_size_custom' => array(),
 					'blog_design'  => 'default',
+					'blog_masonry'  => false,
 					'blog_carousel_design' => 'masonry',
 					'blog_columns'  => 3,
 					'blog_columns_tablet' => 'auto',
@@ -55,6 +58,9 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 					'search' => '',
 					'css' => '',
 					'woodmart_css_id' => '',
+					'element_title' => '',
+					'element_title_tag' => 'h3',
+					'inner_content' => '',
 					'el_id' => 'wd-' . uniqid(),
 					'el_class' => '',
 					'wrapper_classes' => '',
@@ -67,7 +73,7 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 
 	    $encoded_atts = json_encode( $parsed_atts );
 
-		$is_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['action'] ) && $_POST['action'] !== 'woodmart_load_full_search_html' && $_POST['action'] !== 'woodmart_load_html_dropdowns' );
+		$is_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['action'] ) && $_POST['action'] !== 'woodmart_load_html_dropdowns' );
 
 	    $output = '';
 
@@ -154,6 +160,13 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 			$args['s'] = sanitize_text_field( $search );
 		}
 
+		if ( 'related_posts' === $post_type ) {
+			Main::setup_preview();
+			$args = array_merge( $args, woodmart_get_related_posts_args( get_the_ID() ) );
+			unset( $args['showposts'] );
+			Main::restore_preview();
+		}
+
 	    $blog_query = new WP_Query( $args );
 		
 		ob_start();
@@ -196,15 +209,8 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 			$true_blog_design = $blog_carousel_design;
 		}
 
-		if ( 'small' !== $true_blog_design ) {
-			woodmart_enqueue_inline_style( 'blog-base' );
-
-			if ( woodmart_is_blog_design_new( $true_blog_design ) ) {
-				woodmart_enqueue_inline_style( 'blog-loop-base' );
-			} else {
-				woodmart_enqueue_inline_style( 'blog-loop-base-old' );
-			}
-		}
+		woodmart_enqueue_inline_style( 'blog-loop-base' );
+		woodmart_enqueue_inline_style( 'post-types-mod-predefined' );
 
 		if ( 'small-images' === $true_blog_design || 'chess' === $true_blog_design ) {
 			woodmart_enqueue_inline_style( 'blog-loop-design-small-img-chess' );
@@ -238,7 +244,7 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 			}
 
 			if ( in_array( $blog_design, array( 'masonry', 'mask', 'meta-image' ), true ) ) {
-				if ( 'meta-image' !== $blog_design ) {
+				if ( $blog_masonry && 'meta-image' !== $blog_design ) {
 					$class .= ' wd-masonry wd-grid-f-col';
 
 					wp_enqueue_script( 'imagesloaded' );
@@ -258,13 +264,22 @@ if( ! function_exists( 'woodmart_shortcode_blog' ) ) {
 				) . '"';
 			}
 
-			if ( ! in_array( $blog_design, array( 'masonry', 'mask' ), true ) ) {
+			if ( ! $blog_masonry || ! in_array( $blog_design, array( 'masonry', 'mask' ), true ) ) {
 				$class .= ' wd-grid-g';
 			}
 
 			if ( ! $is_ajax ) {
+				if ( ! empty( $parsed_atts['inner_content'] ) ) {
+					echo do_shortcode( $parsed_atts['inner_content'] );
+				}
+
 				echo '<div id="' . esc_attr( $id ) . '" class="wd-blog-element' . esc_attr( $wrapper_classes ) . '">';
-				echo '<div class="wd-posts wd-blog-holder ' . esc_attr( $class ) . '" data-paged="1" data-atts="' . esc_attr( $encoded_atts ) . '" data-source="shortcode"' . $attributes . '>';
+				if ( $element_title ) {
+					$element_title_tag = in_array( $element_title_tag, array_keys( woodmart_get_allowed_html() ), true ) ? $element_title_tag : 'h4';
+
+					printf( '<%1$s class="wd-el-title title element-title">%2$s</%1$s>', esc_attr( $element_title_tag ), esc_html( $element_title ) );
+				}
+				echo '<div class="wd-posts wd-blog-holder' . esc_attr( $class ) . '" data-paged="1" data-atts="' . esc_attr( $encoded_atts ) . '" data-source="shortcode"' . $attributes . '>';
 			}
 
 			while ( $blog_query->have_posts() ) {

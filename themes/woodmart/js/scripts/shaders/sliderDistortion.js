@@ -10,6 +10,11 @@ woodmartThemeModule.sliderDistortion = function() {
 
 	document.querySelectorAll('.wd-slider.wd-anim-distortion').forEach( function ($slider) {
 		var $slides = $slider.querySelectorAll('.wd-carousel .wd-slide');
+
+		if ($slides.length < 2) {
+			return;
+		}
+
 		var imgSrc  = getImageSrc( $slides[0] );
 		var imgSrc2 = getImageSrc( $slides[1] );
 

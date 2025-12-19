@@ -147,7 +147,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_product_filters' ) ) {
 				array(
 					'type'             => 'wd_slider',
 					'heading'          => esc_html__( 'Space between', 'woodmart' ),
-					'param_name'       => 'space_between_responsive',
+					'param_name'       => 'space_between',
 					'group'            => esc_html__( 'Style', 'woodmart' ),
 					'selectors'        => array(),
 					'devices'          => array(

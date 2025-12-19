@@ -202,8 +202,11 @@ if ( ! function_exists( 'woodmart_sguide_display_table_template' ) ) {
 
 		woodmart_enqueue_js_library( 'magnific' );
 		woodmart_enqueue_js_script( 'popup-element' );
+		
 		woodmart_enqueue_inline_style( 'mfp-popup' );
 		woodmart_enqueue_inline_style( 'size-guide' );
+		woodmart_enqueue_inline_style( 'mod-animations-transform' );
+		woodmart_enqueue_inline_style( 'mod-transform' );
 
 		if ( woodmart_get_opt( 'gutenberg_blocks' ) && has_blocks( $sguide_post->post_content ) ) {
 			echo Blocks_Assets::get_instance()->get_inline_scripts( $sguide_post->ID );
@@ -220,7 +223,7 @@ if ( ! function_exists( 'woodmart_sguide_display_table_template' ) ) {
 				/* */
 				</style>
 			<?php endif; ?>
-			<div id="wd_sizeguide" class="mfp-hide wd-popup wd-sizeguide <?php echo woodmart_get_old_classes( ' woodmart-content-popup' ); ?>">
+			<div id="wd_sizeguide" data-wrap-class="wd-sizeguide-wrap" class="mfp-hide wd-popup wd-popup-element wd-sizeguide wd-scroll-content<?php echo woodmart_get_old_classes( ' woodmart-content-popup' ); ?>">
 				<h4 class="wd-sizeguide-title">
 					<?php echo esc_html( $sguide_post->post_title ); ?>
 				</h4>
@@ -250,7 +253,7 @@ if ( ! function_exists( 'woodmart_sguide_display_table_template' ) ) {
 
 			<div class="wd-sizeguide-btn wd-action-btn wd-sizeguide-icon<?php echo esc_attr( $args['builder_classes'] ); ?>">
 				<a class="wd-open-popup" rel="nofollow" href="#wd_sizeguide">
-					<span><?php esc_html_e( 'Size Guide', 'woodmart' ); ?></span>
+					<span><?php esc_html_e( 'Size guide', 'woodmart' ); ?></span>
 				</a>
 			</div>
 		<?php

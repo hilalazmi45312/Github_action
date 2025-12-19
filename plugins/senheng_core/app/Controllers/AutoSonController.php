@@ -2,7 +2,7 @@
 
 class AutoSonController
 {
-    protected static $channelName = 'SHWEB';
+    protected static $channelName = 'SRCSQV2';
 
     public static function includeUserMeta($response, $object, $request)
     {
@@ -75,7 +75,7 @@ class AutoSonController
         $end_date   = $request->get_param('end_date');
 
         $args = [
-            'status' => ['processing', 'completed'],
+            'status' => ['processing', 'completed','wc-partially-paid'],
         ];
 
         if (!empty($start_date) && !empty($end_date)) {
@@ -119,10 +119,15 @@ class AutoSonController
         $hasVirtualProduct = false;
         $total_scoin = (float) get_post_meta($order->get_id(), '_s_coin_total', true);
         $lines = [];
+        $cart_brands = [];
         foreach ($order->get_items() as $item) {
             $product = $item->get_product();
             if ($product && $product->is_virtual()) {
                 $hasVirtualProduct = true;
+            }
+            $brands = wp_get_post_terms($item['product_id'], 'product_brand', ['fields' => 'slugs']);
+            if (!is_wp_error($brands) && !empty($brands)) {
+                $cart_brands[] = strtolower($brands[0]); // only take first brand
             }
             $line = self::map_order_line($item, $order, $isProductWarranty, $shop_id);
             $lines[] = $line;
@@ -132,6 +137,9 @@ class AutoSonController
         $credit_card_no = get_post_meta($order->get_id(), '_ipay88_cc_no', true);
         $installment_term = get_post_meta($order->get_id(), '_ipay88_payment_plan', true);
         $admin_fee = get_post_meta($order->get_id(), '_ipay88_admin_fee', true);
+        $shipping_method = $order->get_shipping_method();
+        $isPickup = stripos($shipping_method, 'Store Pickup') !== false;
+        $isAdminFeeWaive = self::isBrandWaived($admin_fee, $cart_brands);
 
         return [
             'channel_file_name'  => self::$channelName,
@@ -164,8 +172,25 @@ class AutoSonController
             'esdEmail'           => $hasVirtualProduct ? $order->get_billing_email() : '',
             // 'shippingFeescoin'   => 0,
             // 'scoinRedemption'    => 0,
-            'isAdminFeeWaive'    => false
+            'isAdminFeeWaive'    => $isAdminFeeWaive,
+            'isStorePickUp' => $isPickup ? 'true' : 'false',
         ];
+    }
+
+    private static function isBrandWaived($admin_fee, $cart_brands)
+    {
+        if ($admin_fee > 0) {
+            $unique_brands = array_unique($cart_brands);
+            if (count($unique_brands) === 1 && in_array($unique_brands[0], $cart_brands, true)) {
+                if (in_array('apple', $unique_brands, true)) {
+                    return 1; // Apple brand
+                } elseif (in_array('viomi', $unique_brands, true)) {
+                    return 2; // Viomi brand
+                }
+            }
+        }
+
+        return false;
     }
 
     private static function map_buyer($order, $customer_id, $full_name)
@@ -248,7 +273,7 @@ class AutoSonController
                 [
                     'extraMap' =>
                     [
-                        'selling_price' => (string) round(wc_get_price_excluding_tax($product) * $item->get_quantity() * 100),
+                        'selling_price' => (string) round((float) wc_get_price_excluding_tax($product) * $item->get_quantity() * 100),
                         // 'categoryIds' => $categories['categoryIds'],
                         // 'unitQuantity' => (string) $item->get_quantity(),
                         // 'categoryIdListName' => $categories['categoryIdListName'],
@@ -268,7 +293,7 @@ class AutoSonController
             // 'deviceSource' => '',
             // 'masterId' => '',
             'price'    => [
-                'skuOriginTotalAmount'  => (int) round(wc_get_price_excluding_tax($product) * $item->get_quantity() * 100),
+                'skuOriginTotalAmount'  => (string) round((float) wc_get_price_excluding_tax($product) * $item->get_quantity() * 100),
                 // 'skuAdjustAmount' => 0,
                 'shipFeeOriginAmount'   => (int) round($order->get_shipping_total() * 100),
                 // 'shipFeeAdjustAmount' => 0,
@@ -480,11 +505,26 @@ class AutoSonController
             return [];
         }
 
+        $type = $order->get_meta('einvoiceIDType');
+        $tin  = $order->get_meta('einvoiceTinNo');
+
+        // Apply default TIN logic
+        if (empty($tin)) {
+
+            if ($type === 'Passport') {
+                // Foreigner – missing TIN
+                $tin = "EI00000000020";
+            } else {
+                // Malaysian individual with missing TIN
+                $tin = "EI00000000010";
+            }
+        }
+
         return [
             'einvoiceName'      => $order->get_meta('einvoiceName'),
-            'einvoiceIDType'    => $order->get_meta('einvoiceIDType'),
+            'einvoiceIDType'    => $type,
             'einvoiceIDNo'      => $order->get_meta('einvoiceIDNo'),
-            'einvoiceTinNo'     => $order->get_meta('einvoiceTinNo'),
+            'einvoiceTinNo'     => $tin, // <-- updated TIN value
             'einvoiceSSTNo'     => $order->get_meta('einvoiceSSTNo'),
             'einvoiceContactNo' => $order->get_meta('einvoiceContactNo'),
             'einvoiceEmail'     => $order->get_meta('einvoiceEmail'),
