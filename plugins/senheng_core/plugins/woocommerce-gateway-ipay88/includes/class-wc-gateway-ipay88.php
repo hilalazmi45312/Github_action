@@ -891,7 +891,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		$ipay88_args['Signature'] = $this->generate_sha512_signature( $ipay88_args, false );
 		$ipay88_args['SignatureType'] = 'HMACSHA512';
 		//Debug log
-		WC_iPay88::add_debug_log( 'Order form parameters: ' . print_r( $ipay88_args, true ) );
+		// WC_iPay88::add_debug_log( 'Order form parameters: ' . print_r( $ipay88_args, true ) );
 		
 		$ipay88_args = apply_filters( 'wc_ipay88_request_arguments', $ipay88_args, $order, $payment_type );
 		
@@ -963,8 +963,8 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 	 */
 	function process_payment( $order_id ) {
 		// Log the start
-		WC_iPay88::add_debug_log( '=== Starting process_payment for order #' . $order_id );
-		WC_iPay88::add_debug_log( 'POST data: ' . print_r( $_POST, true ) );
+		// WC_iPay88::add_debug_log( '=== Starting process_payment for order #' . $order_id );
+		// WC_iPay88::add_debug_log( 'POST data: ' . print_r( $_POST, true ) );
 		
 		if ( ! $this->check_pass ) {
 			$ptype = WC_iPay88::get_field( 'ipay88_payment_type', $_POST );
@@ -979,11 +979,11 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			$ptype = WC_iPay88::get_field( 'ipay88_payment_type', $_POST );
 			$pPlan = WC_iPay88::get_field( 'ipay88_payment_plan'.$ptype, $_POST );
 			$adminFee = WC_iPay88::get_field( 'ipay88_admin_fee'.$ptype, $_POST );
-			$adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($ptype, $pPlan);
+			// $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($ptype, $pPlan);
 			
 			$this->posted_payment_type = null !== $ptype ? $ptype : '0';
 			$this->posted_payment_plan = null !== $pPlan ? $pPlan : '0';
-			$this->posted_admin_fee = null !== $adminFeeDB ? $adminFeeDB : '0';
+			$this->posted_admin_fee = null !== $adminFee ? $adminFee : '0';
 			$this->check_payment_fields( $this->posted_payment_type , $this->posted_payment_plan );
 		}
 		
@@ -1011,7 +1011,7 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			update_post_meta( $order_id, '_ipay88_payment_plan', sanitize_text_field( $this->posted_payment_plan ) );
 			update_post_meta( $order_id, '_ipay88_admin_fee', sanitize_text_field( $this->posted_admin_fee ) );
 			
-			WC_iPay88::add_debug_log( 'Generating form data...' );
+			// WC_iPay88::add_debug_log( 'Generating form data...' );
 
 
 			$payment_plan = (int) $this->posted_payment_plan;
@@ -1031,8 +1031,8 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 			// Generate iPay88 form data
 			$ipay88_form_data = $this->get_ipay88_form_data( $order_id );
 			
-			WC_iPay88::add_debug_log( 'Form data generated successfully' );
-			WC_iPay88::add_debug_log( 'Form URL: ' . $this->get_form_url() );
+			// WC_iPay88::add_debug_log( 'Form data generated successfully' );
+			// WC_iPay88::add_debug_log( 'Form URL: ' . $this->get_form_url() );
 			
 			// Return success with form data for AJAX submission
 			$response = array(
@@ -1339,37 +1339,6 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		wc_add_notice( __( 'An error occurred while validating your payment notification.', 'wc_ipay88' ) );
 		wp_safe_redirect( wc_get_cart_url() );
 		exit;
-	}
-
-	private function detect_and_set_merchant_from_response( $posted ) {
-
-		// Keep original credentials
-		$primary_code = $this->MerchantCode;
-		$primary_key  = $this->MerchantKey;
-
-		// Try PRIMARY merchant first
-		$this->MerchantCode = PRIMARY_IPAY88_MERCHANT_CODE_LIVE;
-		$this->MerchantKey  = PRIMARY_IPAY88_MERCHANT_KEY_LIVE;
-
-		if ( $this->validate_response() ) {
-			WC_iPay88::add_debug_log('Callback validated with PRIMARY merchant.');
-			return true;
-		}
-
-		// Try SECOND merchant
-		$this->MerchantCode = SECOND_IPAY88_MERCHANT_CODE_LIVE;
-		$this->MerchantKey  = SECOND_IPAY88_MERCHANT_KEY_LIVE;
-
-		if ( $this->validate_response() ) {
-			WC_iPay88::add_debug_log('Callback validated with SECOND merchant.');
-			return true;
-		}
-
-		// Restore original (safety)
-		$this->MerchantCode = $primary_code;
-		$this->MerchantKey  = $primary_key;
-
-		return false;
 	}
 	
 	/**

@@ -71,7 +71,7 @@ add_action('woocommerce_order_refunded', function ($order_id, $refund_id) {
 add_action('woocommerce_admin_order_data_after_order_details', function ($order) {
     $irclickid = get_post_meta($order->get_id(), '_irclickid', true);
     if ($irclickid) {
-        echo '<p style="margin-top: 30px"><strong>Impact Click ID:</strong> ' . esc_html($irclickid) . '</p>';
+        echo '<p class="form-field form-field-wide" style="margin-top: 30px"><strong>Impact Click ID:</strong> ' . esc_html($irclickid) . '</p>';
     }
 
     $payment_type = get_post_meta($order->get_id(), '_ipay88_payment_type_name', true);

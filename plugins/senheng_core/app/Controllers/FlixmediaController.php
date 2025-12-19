@@ -18,6 +18,12 @@ class FlixmediaController
         $brand_terms = get_the_terms($product_id, 'product_brand');
         $brand_name  = (! empty($brand_terms) && ! is_wp_error($brand_terms)) ? $brand_terms[0]->name : '';
 
+        $distributor_id = '7158'; // Senheng Distributor ID
+        $WebChannel = getChannelWeb();
+
+        if ($WebChannel === 'SenQ') {
+            $distributor_id = '9248';
+        }
         // Only skip simple products with zero identifiers
         if ($product->is_type('simple') && empty($base_ean) && empty($base_mpn)) {
             return;
@@ -142,9 +148,9 @@ class FlixmediaController
                     const s = document.createElement('script');
                     s.async = true;
                     s.src = 'https://media.flixfacts.com/js/loader.js';
-                    s.setAttribute('data-flix-distributor', '7158');
+                    s.setAttribute('data-flix-distributor', '<?php echo $distributor_id; ?>');
                     s.setAttribute('data-flix-language', 'b3');
-                    s.setAttribute('data-flix-button', 'flix-minisite');
+                    // s.setAttribute('data-flix-button', 'flix-minisite'); #remove this cause Eda Nicol not wanted the
                     s.setAttribute('data-flix-inpage', 'flix-inpage');
                     s.setAttribute('data-flix-fallback-language', 'b3');
                     if (o.brand) s.setAttribute('data-flix-brand', o.brand);
