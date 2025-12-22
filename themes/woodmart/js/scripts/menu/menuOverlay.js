@@ -1,22 +1,24 @@
-/* global xts_settings */
 (function($) {
 	woodmartThemeModule.menuOverlay = function() {
 		var hoverSelector = '.wd-header-nav.wd-with-overlay .item-level-0.menu-item-has-children.wd-event-hover, .wd-header-cats.wd-with-overlay .item-level-0.menu-item-has-children.wd-event-hover, .wd-sticky-nav:not(.wd-opened), .wd-header-cats.wd-with-overlay.wd-event-hover, .wd-header-my-account.wd-with-overlay, .wd-header-cart.wd-with-overlay, .wd-header-search.wd-display-dropdown.wd-with-overlay';
-		var sideClasses;
+		var clickSelector = '.wd-header-nav.wd-with-overlay .item-level-0.menu-item-has-children.wd-event-click, .wd-header-cats.wd-with-overlay .item-level-0.menu-item-has-children.wd-event-click, .wd-header-cats.wd-with-overlay.wd-event-click, .wd-search-form.wd-with-overlay .wd-search-cat';
+		var closeSideLastAction = '';
+		var $side = $('.wd-close-side');
 
 		woodmartThemeModule.$document.on('mouseleave', hoverSelector, function() {
-			if ( $(this).parents('.wd-header-cats.wd-with-overlay.wd-event-click.wd-opened').length ) {
+			var $this = $(this);
+
+			if ( $this.parents('.wd-header-cats.wd-with-overlay.wd-event-click.wd-opened').length ) {
 				return;
 			}
 
-			$('.wd-close-side').attr('class', sideClasses);
+			$side.trigger('wdCloseSideAction', ['hide', 'hover', 'wd-location-header-sticky wd-location-header wd-location-header-cats wd-location-sticky-nav']);
 		});
 
 		woodmartThemeModule.$document.on('mouseenter mousemove', hoverSelector, function() {
 			var $this = $(this);
-			var $overlay = $('.wd-close-side');
 
-			if ($overlay.hasClass('wd-close-side-opened') || woodmartThemeModule.$window.width() < 768) {
+			if ($side.hasClass('wd-close-side-opened') || woodmartThemeModule.$window.width() < 768) {
 				return;
 			}
 
@@ -24,43 +26,60 @@
 			var isInCloneHeader = $this.parents('.whb-clone').length;
 			var isInCategories = $this.hasClass('wd-sticky-nav');
 			var isInHeaderCategories = $this.parents('.wd-header-cats').length;
-			sideClasses = $overlay.attr('class');
+			var extraClass = '';
 
 			if (isInHeader) {
 				if ($this.parents('.whb-sticked').length) {
-					$overlay.addClass('wd-location-header-sticky');
+					extraClass = 'wd-location-header-sticky';
 				} else {
-					$overlay.addClass('wd-location-header');
+					extraClass = 'wd-location-header';
 				}
 				if (isInHeaderCategories) {
-					$overlay.addClass('wd-location-header-cats');
+					extraClass += ' wd-location-header-cats';
 				}
 			} else if (isInCloneHeader) {
-				$overlay.addClass('wd-location-header-sticky');
+				extraClass = 'wd-location-header-sticky';
 			} else if (isInCategories) {
-				$overlay.addClass('wd-location-sticky-nav');
+				extraClass = 'wd-location-sticky-nav';
 			}
 
-			$overlay.addClass('wd-close-side-opened');
+			$side.trigger('wdCloseSideAction', ['show', 'hover', extraClass]);
 		});
 
-		woodmartThemeModule.$document.on('click', '.wd-header-nav.wd-with-overlay .item-level-0.menu-item-has-children.wd-event-click, .wd-header-cats.wd-with-overlay .item-level-0.menu-item-has-children.wd-event-click, .wd-header-cats.wd-with-overlay.wd-event-click', function() {
-			var $side = $('.wd-close-side');
+		woodmartThemeModule.$document.on('click', clickSelector, function(e) {
 			var $item = $(this);
-
-			if ( $item.hasClass('wd-opened') && $side.hasClass('wd-close-side-opened') ) {
-				return;
-			}
 
 			if ( $item.parents('.wd-header-cats.wd-with-overlay.wd-event-click.wd-opened').length || $item.parents('.wd-header-cats.wd-with-overlay.wd-event-hover').length ) {
 				return;
 			}
 
-			$side.toggleClass('wd-close-side-opened').toggleClass('wd-location-header');
+			setTimeout(function() {
+				var action = ! $item.hasClass('wd-opened') ? 'hide' : 'show';
+
+				$side.trigger('wdCloseSideAction', [action, 'click']);
+			});
 		});
 
 		woodmartThemeModule.$document.on('click touchstart', '.wd-close-side.wd-location-header', function() {
-			$(this).removeClass('wd-location-header');
+			$(this).removeClass('wd-location-header wd-close-side-opened');
+		});
+
+		$side.on('wdCloseSideAction', function( e, type, action, extraClass = 'wd-location-header' ) {
+			if ( 'hover' === action && 'click' === closeSideLastAction ) {
+				return;
+			}
+
+			if ( 'click' === action && 'hide' === type ) {
+				closeSideLastAction = '';
+			} else {
+				closeSideLastAction = action;
+			}
+
+			if ( 'show' === type ) {
+				$side.addClass('wd-close-side-opened').addClass(extraClass);
+			} else {
+				$side.removeClass('wd-close-side-opened').removeClass(extraClass);
+			}
 		});
 	};
 

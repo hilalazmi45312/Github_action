@@ -2,12 +2,12 @@
 (function($) {
 	woodmartThemeModule.menuSetUp = function() {
 		var hasChildClass = 'menu-item-has-children',
-		    mainMenu      = $('.wd-nav, .wd-header-cats'),
+		    mainMenu      = $('.wd-nav, .wd-header-cats, .wd-search-cat'),
 		    openedClass   = 'wd-opened';
 
 		$('.mobile-nav').find('ul.wd-nav-mobile').find(' > li').has('.wd-dropdown-menu').addClass(hasChildClass);
 
-		woodmartThemeModule.$document.on('click', '.wd-nav .wd-event-click > a, .wd-header-cats.wd-event-click > span', function(e) {
+		woodmartThemeModule.$document.on('click', '.wd-nav .wd-event-click > a, .wd-header-cats.wd-event-click > span, .wd-search-cat-btn', function(e) {
 			e.preventDefault();
 			var $this = $(this);
 
@@ -21,14 +21,29 @@
 		woodmartThemeModule.$document.on('click', function(e) {
 			var target = e.target;
 
-			if ($('.' + openedClass).length > 0 && !$(target).is('.wd-event-hover') && !$(target).parents().is('.wd-event-hover') && !$(target).parents().is('.' + openedClass + '') && !$(target).is('.' + openedClass + '') && ! target.closest('.wd-cookies-popup') && 0 === $('.mfp-ready').length && 0 === $('.pswp--open').length) {
+			if (
+				$('.' + openedClass).length > 0 &&
+				!$(target).is('.wd-event-hover') &&
+				!$(target).parents().is('.wd-event-hover') &&
+				!$(target).parents().is('.' + openedClass + '') &&
+				!$(target).is('.' + openedClass + '') &&
+				!$(target).is('.wd-sticky-nav') &&
+				! target.closest('.wd-cookies-popup') &&
+				! target.closest('.wd-fb-holder') &&
+				0 === $('.mfp-ready').length &&
+				0 === $('.pswp--open').length
+			) {
 				mainMenu.find('.wd-event-click.' + openedClass + '').removeClass(openedClass);
 
 				if (mainMenu.hasClass('wd-event-click')) {
 					mainMenu.removeClass(openedClass);
 				}
 
-				$('.wd-close-side').removeClass('wd-close-side-opened wd-location-header');
+				if ($(target).closest('.wd-with-overlay').length) {
+					return;
+				}
+
+				$('.wd-close-side').trigger('wdCloseSideAction', ['hide', 'click']);
 			}
 		});
 

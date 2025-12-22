@@ -23,6 +23,7 @@ jQuery(window).on('elementor:init', function() {
 					action: self.model.get('render'),
 					post_type: self.model.get('post_type'),
 					taxonomy: self.model.get('taxonomy'),
+					query_type: self.model.get('query_type'),
 					id: ids,
 				},
 
@@ -57,6 +58,8 @@ jQuery(window).on('elementor:init', function() {
 							action: self.model.get('search'),
 							post_type: self.model.get('post_type'),
 							taxonomy: self.model.get('taxonomy'),
+							query_type: self.model.get('query_type'),
+							security: self.model.get('security'),
 						};
 					},
 					processResults: function(data) {

@@ -1,6 +1,11 @@
 /* Senheng Core Product Display Styles - WoodMart Integration */
 
-.wd-product :where(.product-wrapper,.product-element-bottom){
+.amount,
+.price {
+    color: unset !important;
+}
+
+.wd-product :where(.product-wrapper, .product-element-bottom) {
     gap: 5px !important;
 }
 
@@ -234,6 +239,7 @@
     text-decoration: line-through;
     display: block;
     order: 2;
+    font-family: var(--wd-title-font);
 }
 
 .product-price .price ins,
@@ -241,17 +247,19 @@
     text-decoration: none;
     color: #ed1c24;
     display: block;
+    font-family: var(--wd-title-font);
     order: 1;
 }
 
 .product-price .price,
 .senheng-product-card .product-price .price {
-    color: #ed1c24;
+    color: #ed1c24 !important;
     font-size: 16px;
     display: flex !important;
     flex-direction: row;
     align-items: baseline;
     min-height: 0 !important;
+    font-family: var(--wd-title-font);
 }
 
 /* Price with 'From' prefix */
@@ -261,10 +269,6 @@
     color: #ed1c24;
     margin-right: 4px;
     font-family: var(--wd-title-font);
-}
-
-.senheng-price-wrapper .price {
-    font-weight: 600;
 }
 
 .senheng-price-wrapper .original-price {
@@ -372,10 +376,11 @@
 
 .senheng-price-wrapper .price {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     display: inline-flex;
     align-items: baseline;
     gap: 0;
+    color: #ed1c24 !important;
 }
 
 .senheng-price-wrapper .original-price-row {
@@ -491,7 +496,7 @@
     border-radius: 50%;
     border: 1px solid #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;  
+    transition: all 0.2s ease;
 }
 
 .swatches-overlay .wd-swatches .wd-swatch:hover {
@@ -515,9 +520,11 @@
 .senheng-product-card .scoin-badge .scoin-number[data-triple-digit="true"] {
     font-size: 12px;
 }
+
 .senheng-product-card .scoin-badge .scoin-number[data-decimal-two-digit="true"] {
     font-size: 15px;
 }
+
 .senheng-product-card .scoin-badge .scoin-number[data-decimal-three-digit="true"] {
     font-size: 12px;
 }
@@ -528,13 +535,15 @@
     font-family: var(--wd-text-font);
 }
 
-.senheng-product-card .scoin-badge .scoin-number[data-triple-digit="true"] + .scoin-percent {
+.senheng-product-card .scoin-badge .scoin-number[data-triple-digit="true"]+.scoin-percent {
     font-size: 6px;
 }
-.senheng-product-card .scoin-badge .scoin-number[data-decimal-two-digit="true"] + .scoin-percent {
+
+.senheng-product-card .scoin-badge .scoin-number[data-decimal-two-digit="true"]+.scoin-percent {
     font-size: 7px;
 }
-.senheng-product-card .scoin-badge .scoin-number[data-decimal-three-digit="true"] + .scoin-percent {
+
+.senheng-product-card .scoin-badge .scoin-number[data-decimal-three-digit="true"]+.scoin-percent {
     font-size: 6px;
 }
 
@@ -551,7 +560,7 @@
 
 .senheng-product-card .scoin-badge .scoin-container .scoin-text {
     position: absolute;
-    top: 23%;    
+    top: 23%;
     right: 16%;
     color: #ed1c24;
     font-weight: bold;
@@ -585,10 +594,12 @@
     right: 13%;
     top: 29%;
 }
+
 .senheng-product-card .scoin-badge .scoin-container .scoin-text.product-loop-decimal-two-digit,
 .wd-product .scoin-badge .scoin-container .scoin-text.product-loop-decimal-two-digit {
     right: 12% !important;
 }
+
 .senheng-product-card .scoin-badge .scoin-container .scoin-text.product-loop-decimal-three-digit,
 .wd-product .scoin-badge .scoin-container .scoin-text.product-loop-decimal-three-digit {
     right: 11% !important;
@@ -612,7 +623,7 @@
     top: 0 !important;
 }
 
-.senheng-product-card .product-labels .product-label{
+.senheng-product-card .product-labels .product-label {
     padding: 12px 2px;
     font-size: 11px;
     font-weight: 600;
@@ -621,7 +632,7 @@
     font-family: var(--wd-title-font);
 }
 
-.senheng-product-card .product-labels .out-of-stock{
+.senheng-product-card .product-labels .out-of-stock {
     display: none;
 }
 
@@ -673,9 +684,17 @@
 
 /* Animation for swatch selection */
 @keyframes swatchSelect {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1.1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
 }
 
 .senheng-color-swatches .swatch-item.selecting {
@@ -722,6 +741,7 @@
     0% {
         background-position: 200% 0;
     }
+
     100% {
         background-position: -200% 0;
     }
@@ -759,8 +779,13 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Fallback image styling */
@@ -827,68 +852,71 @@
 
 /* Tablet and Mobile - 768px and below */
 @media (max-width: 768px) {
+
     /* Product Card Layout */
     .senheng-product-card {
-        margin-bottom: 16px;
         border-radius: 10px;
     }
-    
+
     .product-info {
         padding: 5px;
     }
-    
+
     .product-title {
         font-size: 14px;
     }
-    
+
     /* Color Swatches */
     .color-swatches {
         padding: 10px 14px;
         gap: 6px;
     }
-    
+
     .color-swatch {
         width: 20px;
         height: 20px;
     }
-    
+
     .senheng-color-swatches {
         gap: 6px;
         margin: 3px 0;
     }
-    
+
     .senheng-color-swatches .color-swatch,
     .senheng-color-swatches .swatch-item img {
         width: 25px;
         height: 25px;
     }
-    
+
     /* Always-visible swatches */
     .swatches-overlay.always-visible .color-swatches {
         padding: 6px 8px;
         gap: 4px;
     }
-    
+
     .swatches-overlay.always-visible .color-swatch,
     .swatches-overlay.always-visible .swatch-item {
         width: 20px;
         height: 20px;
     }
-    
+
     /* Product Rating */
     .product-rating {
         padding: 10px 14px;
     }
-    
-    .product-rating, .senheng-product-card .product-rating{
+
+    .product-rating,
+    .senheng-product-card .product-rating {
         padding: 4px 6px;
     }
 
-    .senheng-product-card .scoin-badge .scoin-number[data-triple-digit="true"]{
-        font-size:10px;
+    .senheng-product-card .scoin-badge .scoin-number[data-triple-digit="true"] {
+        font-size: 10px;
     }
 
-    .rating-count, .product-rating .rating-count, .senheng-product-card .product-rating .rating-count{
+    .rating-count,
+    .product-rating .rating-count,
+    .senheng-product-card .product-rating .rating-count {
         font-size: 10px;
     }
 
@@ -896,52 +924,54 @@
     .senheng-product-card .product-rating .star-rating {
         font-size: 12px;
     }
-    
+
     /* Badges */
     .sale-badge,
     .scoin-badge {
         top: 0;
         right: 0;
     }
-    
+
     .sale-badge {
         left: 10px;
         padding: 4px 8px;
         font-size: 11px;
     }
-    
+
     .scoin-badge .scoin-icon {
         width: 14px;
         height: 14px;
     }
-    
+
     /* Typography */
-    .wd-product-brands-links, .senheng-product-card .wd-product-brands-links{
+    .wd-product-brands-links,
+    .senheng-product-card .wd-product-brands-links {
         font-size: 11px !important;
     }
 
     .product-price .woocommerce-Price-amount,
-    .senheng-product-card .product-price .woocommerce-Price-amount {    
+    .senheng-product-card .product-price .woocommerce-Price-amount {
         font-size: 11px;
     }
 
     .senheng-price-wrapper .price-from {
         font-size: 11px;
     }
-    
+
     .senheng-product-card h3.wd-entities-title {
         font-size: 11px;
     }
-    
+
     .senheng-price-wrapper .price {
         font-size: 14px;
     }
 
-    .product-price .price del, .senheng-product-card .product-price .price del{
+    .product-price .price del,
+    .senheng-product-card .product-price .price del {
         font-size: 11px;
         margin-top: 0;
     }
-    
+
     /* Image Loading States */
     .product-image-wrapper::before {
         width: 25px;
@@ -949,7 +979,7 @@
         margin: -12.5px 0 0 -12.5px;
         border-width: 2px;
     }
-    
+
     .product-image-wrapper.error {
         background-size: 30px 30px;
     }
@@ -960,34 +990,30 @@
     .swatches-overlay.always-visible .color-swatches {
         padding: 0;
     }
-    
+
     .swatches-overlay.always-visible .color-swatch,
     .swatches-overlay.always-visible .swatch-item {
         width: 14px;
         height: 14px;
     }
 
-    .senheng-product-card h3.wd-entities-title{
+    .senheng-product-card h3.wd-entities-title {
         min-height: 25px;
     }
 
-    .senheng-product-card .scoin-badge .scoin-number{
+    .senheng-product-card .scoin-badge .scoin-number {
         font-size: 14px;
     }
 
-    .senheng-product-card .scoin-badge .scoin-icon{
+    .senheng-product-card .scoin-badge .scoin-icon {
         width: 35px;
         height: 35px;
     }
 
-    .senheng-product-card .product-labels .product-label{
+    .senheng-product-card .product-labels .product-label {
         padding: 10px 0;
         font-size: 10px;
         min-width: 35px !important;
-    }
-
-    .product-price .price ins, .senheng-product-card .product-price .price ins{
-        margin-top: -20px;
     }
 
 }

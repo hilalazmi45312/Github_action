@@ -77,7 +77,7 @@ class Color extends Field {
 		wp_enqueue_script( 'wp-color-picker-alpha', WOODMART_ASSETS . '/js/libs/wp-color-picker-alpha.js', array( 'wp-color-picker' ), woodmart_get_theme_info( 'Version' ), true );
 	}
 
-	public function get_default_value( $value = '' ) {
+	public function get_default_value( $value = array() ) {
 		$value = parent::get_default_value( $value );
 
 		if ( ! $value ) {

@@ -134,7 +134,7 @@ class Layout {
 			$this->sidebar_name = 'sidebar-shop';
 		} elseif ( is_singular( 'product' ) ) {
 			$this->sidebar_name = 'sidebar-product-single';
-		} elseif ( is_singular( 'portfolio' ) || is_post_type_archive( 'portfolio' ) || is_tax( 'project-cat' ) ) {
+		} elseif ( is_singular( 'portfolio' ) || woodmart_is_portfolio_archive() ) {
 			$this->sidebar_name = 'portfolio-widgets-area';
 		}
 
@@ -172,18 +172,10 @@ class Layout {
 			$size = 12;
 		}
 
-		if (
-			12 === (int) $size && 12 === (int) $size_md
-			|| woodmart_woocommerce_installed()
-			&& (
-				is_cart() && Builder::get_instance()->has_custom_layout( 'cart' )
-				|| is_checkout() && Builder::get_instance()->has_custom_layout( 'checkout_form' )
-				|| is_singular( 'product' ) && ( Builder::get_instance()->has_custom_layout( 'single_product' ) || ( ! woodmart_get_opt( 'full_height_sidebar' ) && 'full-width' !== woodmart_get_opt( 'single_product_layout', 'full-width' ) ) )
-				|| ( woodmart_is_shop_archive() || ( is_search() && isset( $_GET['post_type'] ) && 'product' === $_GET['post_type'] ) ) && Builder::get_instance()->has_custom_layout( 'shop_archive' )
-				|| is_404()
-			) ) {
-				$this->has_sidebar_in_page = false;
-		}
+		$sidebar_removal_conditions = is_404()
+		|| ( woodmart_woocommerce_installed() && is_singular( 'product' ) && ( ! woodmart_get_opt( 'full_height_sidebar' ) && 'full-width' !== woodmart_get_opt( 'single_product_layout', 'full-width' ) ) )
+		|| ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width( true ) )
+		|| ( 12 === (int) $size && 12 === (int) $size_md );
 
 		if ( $page_id ) {
 			$specific = get_post_meta( $page_id, '_woodmart_main_layout', true );
@@ -193,7 +185,7 @@ class Layout {
 			}
 		}
 
-		if ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width( true ) ) {
+		if ( apply_filters( 'woodmart_disable_sidebar', $sidebar_removal_conditions ) ) {
 			$this->has_sidebar_in_page = false;
 		}
 
@@ -286,9 +278,18 @@ class Layout {
 		} elseif ( is_singular( 'product' ) ) {
 			// Get specific layout for SINGLE PRODUCT PAGE.
 			$this->sidebar_col_width = woodmart_get_opt( 'single_sidebar_width' );
-		} elseif ( is_home() || is_singular( 'post' ) || is_archive() ) {
-			// Get specific sidebar size for Blog Page.
+		} elseif ( is_singular( 'portfolio' ) ) {
+			// Get specific sidebar size for Single portfolio page.
+			$this->sidebar_col_width = woodmart_get_opt( 'single_portfolio_sidebar_width' );
+		} elseif ( woodmart_is_portfolio_archive() ) {
+			// Get specific sidebar size for Portfolio archive page.
+			$this->sidebar_col_width = woodmart_get_opt( 'portfolio_archive_sidebar_width', 3 );
+		} elseif ( is_singular( 'post' ) ) {
+			// Get specific sidebar size for Single blog page.
 			$this->sidebar_col_width = woodmart_get_opt( 'blog_sidebar_width' );
+		} elseif ( is_home() || is_archive() ) {
+			// Get specific sidebar size for Blog Page.
+			$this->sidebar_col_width = woodmart_get_opt( 'blog_archive_sidebar_width', 3 );
 		} elseif ( is_singular( 'woodmart_layout' ) ) {
 			$this->sidebar_col_width = 0;
 		}
@@ -361,14 +362,23 @@ class Layout {
 			$this->page_layout = woodmart_get_opt( 'single_product_layout' );
 		} elseif ( isset( $WCMp ) && is_tax( $WCMp->taxonomy->taxonomy_name ) ) {
 			$this->page_layout = woodmart_get_opt( 'blog_layout' );
-		} elseif ( is_singular( 'post' ) || woodmart_is_blog_archive() ) {
+		} elseif ( is_singular( 'post' ) ) {
 			// Get specific layout for Blog Page.
 			$this->page_layout = woodmart_get_opt( 'blog_layout' );
+		} elseif ( woodmart_is_blog_archive() ) {
+			// Get specific layout for Blog Page.
+			$this->page_layout = woodmart_get_opt( 'blog_archive_layout', 'sidebar-right' );
 
 			// Disable sidebar if blog design is Masonry Grid.
-			if ( 'masonry' === woodmart_get_opt( 'blog_design' ) && ! is_singular( 'post' ) ) {
+			if ( 'masonry' === woodmart_get_opt( 'blog_design' ) && woodmart_get_opt( 'blog_masonry' ) ) {
 				$this->page_layout = 'full-width';
 			}
+		} elseif ( is_singular( 'portfolio' ) ) {
+			// Get specific layout for Portfolio Page.
+			$this->page_layout = woodmart_get_opt( 'single_portfolio_layout' );
+		} elseif ( woodmart_is_portfolio_archive() ) {
+			// Get specific layout for Portfolio Archive.
+			$this->page_layout = woodmart_get_opt( 'portfolio_archive_layout' );
 		}
 
 		if ( $specific && 'default' !== $specific ) {
@@ -420,7 +430,7 @@ class Layout {
 	public function get_main_container_class() {
 		$classes = ' container';
 
-		if ( ( (int) woodmart_get_portfolio_page_id() === (int) woodmart_page_ID() ) && woodmart_get_opt( 'portfolio_full_width' ) || ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width() ) ) {
+		if ( ( (int) woodmart_get_portfolio_page_id() === (int) woodmart_page_ID() && ! Builder::get_instance()->has_custom_layout( 'portfolio_archive' ) && woodmart_get_opt( 'portfolio_full_width' ) ) || ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width() ) ) {
 			$classes = '';
 		}
 
@@ -439,14 +449,6 @@ class Layout {
 
 				if ( Builder::get_instance()->has_custom_layout( 'single_product' ) && 'enabled' === woodmart_get_opt( 'negative_gap' ) ) {
 					$classes = ' container';
-				}
-			}
-
-			if ( woodmart_is_shop_archive() || is_singular( 'product' ) || is_cart() || is_checkout() ) {
-				if ( Builder::get_instance()->has_custom_layout( 'single_product' ) || Builder::get_instance()->has_custom_layout( 'shop_archive' ) || Builder::get_instance()->has_custom_layout( 'cart' ) || Builder::get_instance()->has_custom_layout( 'empty_cart' ) || Builder::get_instance()->has_custom_layout( 'checkout_content' ) || Builder::get_instance()->has_custom_layout( 'checkout_form' ) ) {
-					$classes .= ' wd-builder-on';
-				} else {
-					$classes .= ' wd-builder-off';
 				}
 			}
 		}
@@ -470,14 +472,11 @@ class Layout {
 			return $this->offcanvas_classes;
 		}
 
-		if ( 'full-width' === $this->page_layout || ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width( true ) ) ) {
+		if ( 'full-width' === $this->page_layout || Builder::get_instance()->is_custom_layout() || ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width( true ) ) ) {
 			return '';
 		}
 
-		$is_product_builder = Builder::get_instance()->has_custom_layout( 'single_product' );
-		$is_shop_builder    = Builder::get_instance()->has_custom_layout( 'shop_archive' );
-
-		if ( woodmart_is_shop_archive() && ! $is_shop_builder ) {
+		if ( woodmart_is_shop_archive() ) {
 			if ( woodmart_get_opt( 'shop_hide_sidebar_desktop' ) ) {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-lg';
 			}
@@ -487,7 +486,7 @@ class Layout {
 			if ( woodmart_get_opt( 'shop_hide_sidebar', true ) ) {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-sm';
 			}
-		} elseif ( is_singular( 'product' ) && ! $is_product_builder ) {
+		} elseif ( is_singular( 'product' ) ) {
 			if ( woodmart_get_opt( 'single_product_hide_sidebar' ) ) {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-lg';
 			}
@@ -497,11 +496,17 @@ class Layout {
 			if ( woodmart_get_opt( 'single_product_hide_sidebar_mobile', true ) ) {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-sm';
 			}
-		} elseif ( woodmart_is_blog_archive() || is_singular( 'post' ) ) {
-			if ( ! is_singular( 'post' ) && 'masonry' === woodmart_get_opt( 'blog_design' ) ) {
-				return '';
+		} elseif ( is_singular( 'portfolio' ) ) {
+			if ( woodmart_get_opt( 'single_portfolio_hide_sidebar' ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-lg';
 			}
-
+			if ( woodmart_get_opt( 'single_portfolio_hide_sidebar_tablet', true ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-md-sm';
+			}
+			if ( woodmart_get_opt( 'single_portfolio_hide_sidebar_mobile', true ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-sm';
+			}
+		} elseif ( is_singular( 'post' ) ) {
 			if ( woodmart_get_opt( 'blog_hide_sidebar' ) ) {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-lg';
 			}
@@ -509,6 +514,30 @@ class Layout {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-md-sm';
 			}
 			if ( woodmart_get_opt( 'blog_hide_sidebar_mobile', true ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-sm';
+			}
+		} elseif ( woodmart_is_blog_archive() ) {
+			if ( 'masonry' === woodmart_get_opt( 'blog_design' ) && woodmart_get_opt( 'blog_masonry' ) ) {
+				return '';
+			}
+
+			if ( woodmart_get_opt( 'blog_archive_hide_sidebar' ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-lg';
+			}
+			if ( woodmart_get_opt( 'blog_archive_hide_sidebar_tablet', true ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-md-sm';
+			}
+			if ( woodmart_get_opt( 'blog_archive_hide_sidebar_mobile', true ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-sm';
+			}
+		} elseif ( woodmart_is_portfolio_archive() ) {
+			if ( woodmart_get_opt( 'portfolio_archive_hide_sidebar' ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-lg';
+			}
+			if ( woodmart_get_opt( 'portfolio_archive_hide_sidebar_tablet', true ) ) {
+				$this->offcanvas_classes .= ' wd-sidebar-hidden-md-sm';
+			}
+			if ( woodmart_get_opt( 'portfolio_archive_hide_sidebar_mobile', true ) ) {
 				$this->offcanvas_classes .= ' wd-sidebar-hidden-sm';
 			}
 		} elseif ( ! is_404() ) {

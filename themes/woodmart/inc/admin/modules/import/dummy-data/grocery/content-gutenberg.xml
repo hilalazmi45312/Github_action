@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2024-10-28 15:04" -->
+	<!-- generator="WordPress/6.7.4" created="2025-10-08 11:10" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,15 +29,13 @@
 	<title>Gutenberg base</title>
 	<link>https://dummy.xtemos.com/woodmart2/gutenberg</link>
 	<description></description>
-	<pubDate>Mon, 28 Oct 2024 15:04:29 +0000</pubDate>
+	<pubDate>Wed, 08 Oct 2025 11:10:41 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/gutenberg</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>491</wp:author_id><wp:author_login><![CDATA[Ethan Smith]]></wp:author_login><wp:author_email><![CDATA[ethan_smith@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Ethan Smith]]></wp:author_display_name><wp:author_first_name><![CDATA[Ethan]]></wp:author_first_name><wp:author_last_name><![CDATA[Smith]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>0</wp:term_id>
 			<wp:term_taxonomy><![CDATA[]]></wp:term_taxonomy>
@@ -47,7 +45,7 @@
 			<wp:term><wp:term_id>75</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[category-menu-grocery]]></wp:term_slug><wp:term_name><![CDATA[Category menu Grocery]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.4</generator>
 
 					<item>
 					<title><![CDATA[grocery-page-title]]></title>
@@ -516,7 +514,7 @@
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/?page_id=13783</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/slider {"blockId":"54921c99-924a-483a-93b0-36e9457694e6","effect":"fade","arrowsColorScheme":"light","pagination":false,"paginationTablet":false,"paginationMobile":false,"autoplay":true,"autoplaySpeed":"25000","stretch":true,"height":"580","arrowsCustomSettings":true,"arrowsHoverStyle":"1","marginTop":"-40","marginBottom":"0","heightTablet":"480","heightMobile":"600"} -->
-<div id="wd-54921c99" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-fade wd-stretched"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="fade" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1" data-autoplay="yes" data-speed="25000"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"4b8afb76-001d-47f3-b881-47c98cf8bb28","effect":"fade","colorScheme":"light","bgImage":{"id":13798,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-bg-1.jpg"},"bgColorCode":"#2a6796"} -->
+<div id="wd-54921c99" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-fade wd-stretched"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="fade" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1;" data-autoplay="yes" data-speed="25000"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"4b8afb76-001d-47f3-b881-47c98cf8bb28","effect":"fade","colorScheme":"light","aspectRatio":"","bgImage":{"id":13798,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-bg-1.jpg"},"bgColorCode":"#2a6796"} -->
 <div id="wd-4b8afb76" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light"><div class="wd-slide-container"><!-- wp:wd/row {"blockId":"a49702c6-92b3-4f8a-9502-0db132371897","displayWidth":"custom","customWidth":"1025","columnsGapMobile":40} -->
 <div id="wd-a49702c6" class="wp-block-wd-row wd-custom-width"><!-- wp:wd/column {"blockId":"7cede5b8-047a-417a-a9cf-953115dc8129","adjacentCount":2,"colWidth":42,"blocksGap":10,"justifyContent":"center","textAlignMobile":"center","paddingTopMobile":"40"} -->
 <div id="wd-7cede5b8" class="wp-block-wd-column wd-align"><!-- wp:wd/paragraph {"blockId":"09058d02-b413-4185-bf6d-21e29262712b","animation":"slide-from-bottom","animationDelay":"200"} -->
@@ -538,13 +536,13 @@
 
 <!-- wp:wd/column {"blockId":"87dd6b43-1194-405e-b525-ed2c4843b6f7","adjacentCount":2,"colWidth":58} -->
 <div id="wd-87dd6b43" class="wp-block-wd-column"><!-- wp:wd/image {"blockId":"03ef5801-6d9d-4dce-8a3f-468fdfa67eed","image":{"id":32395,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/09/grocery-slide-test-1.png"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/09/grocery-slide-test-1.png","width":504,"height":371},"animation":"zoom-in","animationDelay":"300"} -->
-<div id="wd-03ef5801" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_300"><img class="wp-image-32395" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/09/grocery-slide-test-1.png" /></div>
+<div id="wd-03ef5801" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_300"><img class="wp-image-32395" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/09/grocery-slide-test-1.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"635e4516-76d2-43b6-8b7e-44d43bb97472","effect":"fade","colorScheme":"light","bgImage":{"id":13800,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wood-food-market-slider-bg-2.jpg"},"bgColorCode":"#2a6796"} -->
+<!-- wp:wd/slider-item {"blockId":"635e4516-76d2-43b6-8b7e-44d43bb97472","effect":"fade","colorScheme":"light","aspectRatio":"","bgImage":{"id":13800,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wood-food-market-slider-bg-2.jpg"},"bgColorCode":"#2a6796"} -->
 <div id="wd-635e4516" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light"><div class="wd-slide-container"><!-- wp:wd/row {"blockId":"9a5a4bca-3d8d-410e-a189-906b44bef26b","displayWidth":"custom","customWidth":"1025","columnsGapMobile":40} -->
 <div id="wd-9a5a4bca" class="wp-block-wd-row wd-custom-width"><!-- wp:wd/column {"blockId":"d21bcdd6-2b87-442a-9481-e56cbc8337ba","adjacentCount":2,"colWidth":42,"blocksGap":10,"justifyContent":"center","textAlignMobile":"center","paddingTopMobile":"40"} -->
 <div id="wd-d21bcdd6" class="wp-block-wd-column wd-align"><!-- wp:wd/paragraph {"blockId":"8c746382-0e7f-4def-9134-bf75d4d66896","animation":"slide-from-bottom","animationDelay":"200"} -->
@@ -566,13 +564,13 @@
 
 <!-- wp:wd/column {"blockId":"6f85ad53-f08d-40f5-b5c5-5711bc546564","adjacentCount":2,"colWidth":58,"alignItems":"center"} -->
 <div id="wd-6f85ad53" class="wp-block-wd-column wd-align-is-lg-center"><!-- wp:wd/image {"blockId":"5eedcfd1-0547-497e-8b51-4dfcbcf16651","image":{"id":13801,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wood-food-market-slider-2.png"},"animation":"zoom-in","animationDelay":"300","displayWidthMobile":"custom","customWidthMobile":"212"} -->
-<div id="wd-5eedcfd1" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_300 wd-custom-width"><img class="wp-image-13801" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wood-food-market-slider-2.png" /></div>
+<div id="wd-5eedcfd1" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_300 wd-custom-width"><img class="wp-image-13801" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wood-food-market-slider-2.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"c4d727cf-9476-4d30-ac00-ee85156ce9c2","effect":"fade","colorScheme":"light","bgImage":{"id":13802,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-bg-3.jpg"},"bgColorCode":"#f59946"} -->
+<!-- wp:wd/slider-item {"blockId":"c4d727cf-9476-4d30-ac00-ee85156ce9c2","effect":"fade","colorScheme":"light","aspectRatio":"","bgImage":{"id":13802,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-bg-3.jpg"},"bgColorCode":"#f59946"} -->
 <div id="wd-c4d727cf" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light"><div class="wd-slide-container"><!-- wp:wd/row {"blockId":"edd506ba-3e7d-4011-85da-f3eefeb915d2","displayWidth":"custom","customWidth":"1025","columnsGapMobile":40} -->
 <div id="wd-edd506ba" class="wp-block-wd-row wd-custom-width"><!-- wp:wd/column {"blockId":"0ac90ac2-184c-480e-8e08-b1a60a27b70b","adjacentCount":2,"colWidth":42,"blocksGap":10,"justifyContent":"center","textAlignMobile":"center","paddingTopMobile":"40"} -->
 <div id="wd-0ac90ac2" class="wp-block-wd-column wd-align"><!-- wp:wd/paragraph {"blockId":"7124ccf5-4b78-44a5-b53a-dad17821dc07","animation":"slide-from-bottom","animationDelay":"200"} -->
@@ -594,7 +592,7 @@
 
 <!-- wp:wd/column {"blockId":"d989cff0-4025-4349-96cb-f437fa56dde5","adjacentCount":2,"colWidth":58,"alignItems":"center"} -->
 <div id="wd-d989cff0" class="wp-block-wd-column wd-align-is-lg-center"><!-- wp:wd/image {"blockId":"5c14b6ec-d025-4fe1-b37e-dc115534bc8e","image":{"id":13803,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-3.png"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-3.png","width":504,"height":371},"animation":"zoom-in","animationDelay":"300"} -->
-<div id="wd-5c14b6ec" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_300"><img class="wp-image-13803" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-3.png" /></div>
+<div id="wd-5c14b6ec" class="wp-block-wd-image wd-block-image wd-animation wd-transform wd-animation-zoom-in wd_delay_300"><img class="wp-image-13803" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/grocery-slide-3.png" alt=""/></div>
 <!-- /wp:wd/image --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row --></div><div class="wd-slide-bg wd-fill"></div></div>
@@ -605,7 +603,7 @@
 <div id="wd-de8e1943" class="wp-block-wd-row wd-custom-width"><!-- wp:wd/column {"blockId":"e6bebdeb-0d53-4b79-bdd7-0df54bf3ad30","adjacentCount":3,"paddingRight":"15","paddingLeft":"15","borderType":"solid","borderColorCode":"#e6e6e6","borderWidthRight":"1","borderWidthRightMobile":"0"} -->
 <div id="wd-e6bebdeb" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"7f51784d-402c-46b6-a7f4-c38c1a9b21e0","align":"center","borderWidthLock":false,"borderWidthLockMobile":false} -->
 <div id="wd-7f51784d" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"8d30d765-2a96-47ae-b1dc-fc04b136fb96","svg":"\u003csvg class=\u0022wd-svg-icon\u0022 xmlns=\u0022http://www.w3.org/2000/svg\u0022 width=\u002260\u0022 height=\u002260\u0022 viewBox=\u00220 0 60 60\u0022 fill=\u0022none\u0022\u003e\u003crect width=\u002260\u0022 height=\u002260\u0022 rx=\u002230\u0022 fill=\u0022#F6F6F6\u0022\u003e\u003c/rect\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M30.75 12C30.3358 12 30 12.3358 30 12.75V20.1056L27.0536 27.4715C27.0182 27.56 27 27.6546 27 27.75V47.25C27 47.6642 27.3358 48 27.75 48H30.75C31.1642 48 31.5 47.6642 31.5 47.25C31.5 46.8358 31.1642 46.5 30.75 46.5H28.5V27.8944L31.4464 20.5285C31.4818 20.44 31.5 20.3454 31.5 20.25V16.5H33V20.25C33 20.3454 33.0182 20.44 33.0536 20.5285L34.5536 24.2785C34.7075 24.6631 35.144 24.8502 35.5285 24.6964C35.9131 24.5425 36.1002 24.106 35.9464 23.7215L34.5 20.1056V12.75C34.5 12.3358 34.1642 12 33.75 12H30.75ZM33 15H31.5V13.5H33V15Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M36.75 27C36.3358 27 36 27.3358 36 27.75V30.5229L33.126 34.834C33.0438 34.9572 33 35.1019 33 35.25V47.25C33 47.6642 33.3358 48 33.75 48H47.25C47.6642 48 48 47.6642 48 47.25V35.25C48 35.1019 47.9562 34.9572 47.874 34.834L45 30.5229V27.75C45 27.3358 44.6642 27 44.25 27H36.75ZM35.1514 34.5L37.1514 31.5H43.2094L42.2094 34.5H35.1514ZM43.7906 34.5L44.4766 32.442L45.8486 34.5H43.7906ZM43.5 46.5V36H46.5V46.5H43.5ZM42 36V46.5H34.5V36H42ZM37.5 30H43.5V28.5H37.5V30Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M17.5268 30.0529L17.25 30.75L16.5137 30.6073C16.5562 30.3881 16.6941 30.1993 16.8899 30.0921C17.0858 29.9849 17.3192 29.9705 17.5268 30.0529Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M21 33.75C21.7363 33.6073 21.7362 33.607 21.7362 33.607L21.7356 33.604L21.7347 33.5992L21.7319 33.5854L21.7223 33.5418C21.7142 33.506 21.7025 33.457 21.6867 33.3975C21.6552 33.2793 21.6066 33.1165 21.537 32.9332C21.4042 32.5837 21.1674 32.0855 20.7655 31.7052C20.545 31.4966 20.2066 31.296 19.8994 31.1307C19.5708 30.9538 19.1963 30.7751 18.849 30.6174C18.5001 30.4591 18.1705 30.3184 17.9285 30.2174C17.8073 30.1668 17.7076 30.126 17.6379 30.0977L17.5568 30.0649L17.535 30.0562L17.5268 30.0529L17.25 30.75C16.5137 30.6073 16.5137 30.6073 16.5137 30.6073L16.5133 30.6096L16.5127 30.6126L16.5112 30.6208L16.5068 30.6454C16.5034 30.6655 16.499 30.6928 16.494 30.7265C16.4841 30.794 16.4721 30.888 16.4619 31.0028C16.4417 31.2309 16.428 31.5485 16.4553 31.9076C16.5083 32.6049 16.7256 33.5766 17.4845 34.2948C18.3164 35.0819 19.3816 35.0348 20.0819 34.8819C20.1392 34.8694 20.1953 34.856 20.25 34.8418V35.9319C19.6684 35.5793 18.8905 35.25 18 35.25C16.9906 35.25 16.0179 35.5807 15.3073 36.378C14.6064 37.1644 14.25 38.3046 14.25 39.75C14.25 41.2768 14.9829 43.1026 15.8067 44.5032C16.2253 45.215 16.6919 45.8592 17.1461 46.3365C17.3725 46.5744 17.6119 46.7881 17.8562 46.9474C18.0869 47.0977 18.3978 47.25 18.75 47.25C19.4637 47.25 20.1376 47.0165 20.6015 46.8104C20.7517 46.7436 20.8861 46.6769 21 46.6166C21.1139 46.6769 21.2483 46.7436 21.3985 46.8104C21.8624 47.0165 22.5363 47.25 23.25 47.25C23.4477 47.25 23.6722 47.1954 23.8546 47.1309C24.0437 47.064 24.2911 46.9504 24.4976 46.7673C24.8075 46.4925 24.836 46.0185 24.5612 45.7086C24.2863 45.3987 23.8123 45.3702 23.5024 45.645C23.5024 45.645 23.4882 45.656 23.4612 45.6705C23.4318 45.6863 23.3951 45.7024 23.3547 45.7166C23.3143 45.7309 23.2775 45.7408 23.2501 45.7466C23.2424 45.7482 23.2365 45.7492 23.2325 45.7499C22.8259 45.746 22.3822 45.6061 22.0077 45.4396C21.8243 45.3581 21.6713 45.2765 21.5655 45.216C21.5128 45.1859 21.4725 45.1615 21.4468 45.1454L21.4195 45.1282L21.416 45.126C21.1642 44.9583 20.836 44.9581 20.5842 45.1258L20.5805 45.1282L20.5532 45.1454C20.5275 45.1615 20.4872 45.1859 20.4345 45.216C20.3287 45.2765 20.1757 45.3581 19.9923 45.4396C19.6223 45.6041 19.1847 45.7426 18.7821 45.7497C18.7667 45.7435 18.7318 45.7276 18.6755 45.6909C18.5609 45.6161 18.4107 45.4896 18.2328 45.3026C17.8784 44.9302 17.4778 44.3859 17.0996 43.7428C16.3296 42.4337 15.75 40.8845 15.75 39.75C15.75 38.5341 16.0498 37.7993 16.4271 37.376C16.7946 36.9637 17.3219 36.75 18 36.75C18.627 36.75 19.2262 37.0329 19.7045 37.3657C19.9374 37.5277 20.1256 37.6905 20.2545 37.8118C20.3186 37.8721 20.3671 37.9212 20.398 37.9536C20.4135 37.9698 20.4245 37.9817 20.4308 37.9887L20.4366 37.995C20.579 38.1573 20.7841 38.25 21 38.25C21.2161 38.25 21.4217 38.1568 21.5641 37.9942L21.5692 37.9887C21.5755 37.9817 21.5865 37.9698 21.602 37.9536C21.6329 37.9212 21.6814 37.8721 21.7455 37.8118C21.8744 37.6905 22.0626 37.5277 22.2955 37.3657C22.7738 37.0329 23.373 36.75 24 36.75C24.4142 36.75 24.75 36.4142 24.75 36C24.75 35.5858 24.4142 35.25 24 35.25C23.1095 35.25 22.3316 35.5793 21.75 35.9319V33.75C21.75 33.7021 21.7453 33.654 21.7362 33.607L21 33.75ZM20.0791 33.3295C19.985 33.1147 19.8675 32.9206 19.7345 32.7948C19.6737 32.7373 19.4965 32.6173 19.1885 32.4515C18.9019 32.2972 18.5615 32.1342 18.2291 31.9834C18.1366 31.9414 18.0453 31.9006 17.9567 31.8615C18.0054 32.3746 18.1648 32.8734 18.5155 33.2052C18.8086 33.4826 19.2434 33.5297 19.7619 33.4165C19.8734 33.3921 19.9803 33.3619 20.0791 33.3295Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M8.67188 16H6.54297V5.22852H3.93555V3.65625L8.67188 3.20703V16Z\u0022 fill=\u0022#D12C2C\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M16.0742 13.9492V16H13.9453V13.9492H16.0742Z\u0022 fill=\u0022#D12C2C\u0022\u003e\u003c/path\u003e\u003c/svg\u003e","image":{"id":16256,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-1.svg"},"width":"60"} -->
-<div id="wd-8d30d765" class="wp-block-wd-icon"><img class="wp-image-16256" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-1.svg" /></div>
+<div id="wd-8d30d765" class="wp-block-wd-icon"><img class="wp-image-16256" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-1.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"6f6ddcf0-070a-4157-ad73-3cb373fb59c8"} -->
@@ -623,7 +621,7 @@
 <!-- wp:wd/column {"blockId":"7aabfad6-3213-483f-9189-05de838e742a","adjacentCount":3,"paddingRight":"15","paddingLeft":"15","borderType":"solid","borderColorCode":"#e6e6e6","borderWidthRight":"1","borderWidthRightMobile":"0"} -->
 <div id="wd-7aabfad6" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"be96b3c9-79e6-4582-917f-86f2f9fcdf52","align":"center","paddingRight":"5","paddingLeft":"5","paddingUnits":"%","borderWidthLock":false,"borderWidthLockMobile":false} -->
 <div id="wd-be96b3c9" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"f07941ad-594b-4dea-b171-3484228a381f","svg":"\u003csvg class=\u0022wd-svg-icon\u0022 xmlns=\u0022http://www.w3.org/2000/svg\u0022 width=\u002260\u0022 height=\u002260\u0022 viewBox=\u00220 0 60 60\u0022 fill=\u0022none\u0022\u003e\u003crect width=\u002260\u0022 height=\u002260\u0022 rx=\u002230\u0022 fill=\u0022#F6F6F6\u0022\u003e\u003c/rect\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M30.75 12C30.3358 12 30 12.3358 30 12.75V20.1056L27.0536 27.4715C27.0182 27.56 27 27.6546 27 27.75V47.25C27 47.6642 27.3358 48 27.75 48H30.75C31.1642 48 31.5 47.6642 31.5 47.25C31.5 46.8358 31.1642 46.5 30.75 46.5H28.5V27.8944L31.4464 20.5285C31.4818 20.44 31.5 20.3454 31.5 20.25V16.5H33V20.25C33 20.3454 33.0182 20.44 33.0536 20.5285L34.5536 24.2785C34.7075 24.6631 35.144 24.8502 35.5285 24.6964C35.9131 24.5425 36.1002 24.106 35.9464 23.7215L34.5 20.1056V12.75C34.5 12.3358 34.1642 12 33.75 12H30.75ZM33 15H31.5V13.5H33V15Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M36.75 27C36.3358 27 36 27.3358 36 27.75V30.5229L33.126 34.834C33.0438 34.9572 33 35.1019 33 35.25V47.25C33 47.6642 33.3358 48 33.75 48H47.25C47.6642 48 48 47.6642 48 47.25V35.25C48 35.1019 47.9562 34.9572 47.874 34.834L45 30.5229V27.75C45 27.3358 44.6642 27 44.25 27H36.75ZM35.1514 34.5L37.1514 31.5H43.2094L42.2094 34.5H35.1514ZM43.7906 34.5L44.4766 32.442L45.8486 34.5H43.7906ZM43.5 46.5V36H46.5V46.5H43.5ZM42 36V46.5H34.5V36H42ZM37.5 30H43.5V28.5H37.5V30Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M17.5268 30.0529L17.25 30.75L16.5137 30.6073C16.5562 30.3881 16.6941 30.1993 16.8899 30.0921C17.0858 29.9849 17.3192 29.9705 17.5268 30.0529Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M21 33.75C21.7363 33.6073 21.7362 33.607 21.7362 33.607L21.7356 33.604L21.7347 33.5992L21.7319 33.5854L21.7223 33.5418C21.7142 33.506 21.7025 33.457 21.6867 33.3975C21.6552 33.2793 21.6066 33.1165 21.537 32.9332C21.4042 32.5837 21.1674 32.0855 20.7655 31.7052C20.545 31.4966 20.2066 31.296 19.8994 31.1307C19.5708 30.9538 19.1963 30.7751 18.849 30.6174C18.5001 30.4591 18.1705 30.3184 17.9285 30.2174C17.8073 30.1668 17.7076 30.126 17.6379 30.0977L17.5568 30.0649L17.535 30.0562L17.5268 30.0529L17.25 30.75C16.5137 30.6073 16.5137 30.6073 16.5137 30.6073L16.5133 30.6096L16.5127 30.6126L16.5112 30.6208L16.5068 30.6454C16.5034 30.6655 16.499 30.6928 16.494 30.7265C16.4841 30.794 16.4721 30.888 16.4619 31.0028C16.4417 31.2309 16.428 31.5485 16.4553 31.9076C16.5083 32.6049 16.7256 33.5766 17.4845 34.2948C18.3164 35.0819 19.3816 35.0348 20.0819 34.8819C20.1392 34.8694 20.1953 34.856 20.25 34.8418V35.9319C19.6684 35.5793 18.8905 35.25 18 35.25C16.9906 35.25 16.0179 35.5807 15.3073 36.378C14.6064 37.1644 14.25 38.3046 14.25 39.75C14.25 41.2768 14.9829 43.1026 15.8067 44.5032C16.2253 45.215 16.6919 45.8592 17.1461 46.3365C17.3725 46.5744 17.6119 46.7881 17.8562 46.9474C18.0869 47.0977 18.3978 47.25 18.75 47.25C19.4637 47.25 20.1376 47.0165 20.6015 46.8104C20.7517 46.7436 20.8861 46.6769 21 46.6166C21.1139 46.6769 21.2483 46.7436 21.3985 46.8104C21.8624 47.0165 22.5363 47.25 23.25 47.25C23.4477 47.25 23.6722 47.1954 23.8546 47.1309C24.0437 47.064 24.2911 46.9504 24.4976 46.7673C24.8075 46.4925 24.836 46.0185 24.5612 45.7086C24.2863 45.3987 23.8123 45.3702 23.5024 45.645C23.5024 45.645 23.4882 45.656 23.4612 45.6705C23.4318 45.6863 23.3951 45.7024 23.3547 45.7166C23.3143 45.7309 23.2775 45.7408 23.2501 45.7466C23.2424 45.7482 23.2365 45.7492 23.2325 45.7499C22.8259 45.746 22.3822 45.6061 22.0077 45.4396C21.8243 45.3581 21.6713 45.2765 21.5655 45.216C21.5128 45.1859 21.4725 45.1615 21.4468 45.1454L21.4195 45.1282L21.416 45.126C21.1642 44.9583 20.836 44.9581 20.5842 45.1258L20.5805 45.1282L20.5532 45.1454C20.5275 45.1615 20.4872 45.1859 20.4345 45.216C20.3287 45.2765 20.1757 45.3581 19.9923 45.4396C19.6223 45.6041 19.1847 45.7426 18.7821 45.7497C18.7667 45.7435 18.7318 45.7276 18.6755 45.6909C18.5609 45.6161 18.4107 45.4896 18.2328 45.3026C17.8784 44.9302 17.4778 44.3859 17.0996 43.7428C16.3296 42.4337 15.75 40.8845 15.75 39.75C15.75 38.5341 16.0498 37.7993 16.4271 37.376C16.7946 36.9637 17.3219 36.75 18 36.75C18.627 36.75 19.2262 37.0329 19.7045 37.3657C19.9374 37.5277 20.1256 37.6905 20.2545 37.8118C20.3186 37.8721 20.3671 37.9212 20.398 37.9536C20.4135 37.9698 20.4245 37.9817 20.4308 37.9887L20.4366 37.995C20.579 38.1573 20.7841 38.25 21 38.25C21.2161 38.25 21.4217 38.1568 21.5641 37.9942L21.5692 37.9887C21.5755 37.9817 21.5865 37.9698 21.602 37.9536C21.6329 37.9212 21.6814 37.8721 21.7455 37.8118C21.8744 37.6905 22.0626 37.5277 22.2955 37.3657C22.7738 37.0329 23.373 36.75 24 36.75C24.4142 36.75 24.75 36.4142 24.75 36C24.75 35.5858 24.4142 35.25 24 35.25C23.1095 35.25 22.3316 35.5793 21.75 35.9319V33.75C21.75 33.7021 21.7453 33.654 21.7362 33.607L21 33.75ZM20.0791 33.3295C19.985 33.1147 19.8675 32.9206 19.7345 32.7948C19.6737 32.7373 19.4965 32.6173 19.1885 32.4515C18.9019 32.2972 18.5615 32.1342 18.2291 31.9834C18.1366 31.9414 18.0453 31.9006 17.9567 31.8615C18.0054 32.3746 18.1648 32.8734 18.5155 33.2052C18.8086 33.4826 19.2434 33.5297 19.7619 33.4165C19.8734 33.3921 19.9803 33.3619 20.0791 33.3295Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M8.67188 16H6.54297V5.22852H3.93555V3.65625L8.67188 3.20703V16Z\u0022 fill=\u0022#D12C2C\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M16.0742 13.9492V16H13.9453V13.9492H16.0742Z\u0022 fill=\u0022#D12C2C\u0022\u003e\u003c/path\u003e\u003c/svg\u003e","image":{"id":16257,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-2.svg"},"width":"60"} -->
-<div id="wd-f07941ad" class="wp-block-wd-icon"><img class="wp-image-16257" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-2.svg" /></div>
+<div id="wd-f07941ad" class="wp-block-wd-icon"><img class="wp-image-16257" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-2.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"e557caef-4490-4ca7-8565-57a963d55d41"} -->
@@ -641,7 +639,7 @@
 <!-- wp:wd/column {"blockId":"0039bfc2-1416-4262-96c1-7c0b30262dae","adjacentCount":3,"paddingRight":"15","paddingLeft":"15"} -->
 <div id="wd-0039bfc2" class="wp-block-wd-column"><!-- wp:wd/infobox {"blockId":"3bb60a73-e347-403e-8b2a-355fbeba765b","align":"center","paddingRight":"5","paddingLeft":"5","paddingUnits":"%","borderWidthLock":false} -->
 <div id="wd-3bb60a73" class="wp-block-wd-infobox wd-hover-parent wd-align wd-icon-top"><!-- wp:wd/icon {"blockId":"4f14d6db-5be7-4519-abae-f99ed1ebbae8","svg":"\u003csvg class=\u0022wd-svg-icon\u0022 xmlns=\u0022http://www.w3.org/2000/svg\u0022 width=\u002260\u0022 height=\u002260\u0022 viewBox=\u00220 0 60 60\u0022 fill=\u0022none\u0022\u003e\u003crect width=\u002260\u0022 height=\u002260\u0022 rx=\u002230\u0022 fill=\u0022#F6F6F6\u0022\u003e\u003c/rect\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M30.75 12C30.3358 12 30 12.3358 30 12.75V20.1056L27.0536 27.4715C27.0182 27.56 27 27.6546 27 27.75V47.25C27 47.6642 27.3358 48 27.75 48H30.75C31.1642 48 31.5 47.6642 31.5 47.25C31.5 46.8358 31.1642 46.5 30.75 46.5H28.5V27.8944L31.4464 20.5285C31.4818 20.44 31.5 20.3454 31.5 20.25V16.5H33V20.25C33 20.3454 33.0182 20.44 33.0536 20.5285L34.5536 24.2785C34.7075 24.6631 35.144 24.8502 35.5285 24.6964C35.9131 24.5425 36.1002 24.106 35.9464 23.7215L34.5 20.1056V12.75C34.5 12.3358 34.1642 12 33.75 12H30.75ZM33 15H31.5V13.5H33V15Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M36.75 27C36.3358 27 36 27.3358 36 27.75V30.5229L33.126 34.834C33.0438 34.9572 33 35.1019 33 35.25V47.25C33 47.6642 33.3358 48 33.75 48H47.25C47.6642 48 48 47.6642 48 47.25V35.25C48 35.1019 47.9562 34.9572 47.874 34.834L45 30.5229V27.75C45 27.3358 44.6642 27 44.25 27H36.75ZM35.1514 34.5L37.1514 31.5H43.2094L42.2094 34.5H35.1514ZM43.7906 34.5L44.4766 32.442L45.8486 34.5H43.7906ZM43.5 46.5V36H46.5V46.5H43.5ZM42 36V46.5H34.5V36H42ZM37.5 30H43.5V28.5H37.5V30Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M17.5268 30.0529L17.25 30.75L16.5137 30.6073C16.5562 30.3881 16.6941 30.1993 16.8899 30.0921C17.0858 29.9849 17.3192 29.9705 17.5268 30.0529Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath fill-rule=\u0022evenodd\u0022 d=\u0022M21 33.75C21.7363 33.6073 21.7362 33.607 21.7362 33.607L21.7356 33.604L21.7347 33.5992L21.7319 33.5854L21.7223 33.5418C21.7142 33.506 21.7025 33.457 21.6867 33.3975C21.6552 33.2793 21.6066 33.1165 21.537 32.9332C21.4042 32.5837 21.1674 32.0855 20.7655 31.7052C20.545 31.4966 20.2066 31.296 19.8994 31.1307C19.5708 30.9538 19.1963 30.7751 18.849 30.6174C18.5001 30.4591 18.1705 30.3184 17.9285 30.2174C17.8073 30.1668 17.7076 30.126 17.6379 30.0977L17.5568 30.0649L17.535 30.0562L17.5268 30.0529L17.25 30.75C16.5137 30.6073 16.5137 30.6073 16.5137 30.6073L16.5133 30.6096L16.5127 30.6126L16.5112 30.6208L16.5068 30.6454C16.5034 30.6655 16.499 30.6928 16.494 30.7265C16.4841 30.794 16.4721 30.888 16.4619 31.0028C16.4417 31.2309 16.428 31.5485 16.4553 31.9076C16.5083 32.6049 16.7256 33.5766 17.4845 34.2948C18.3164 35.0819 19.3816 35.0348 20.0819 34.8819C20.1392 34.8694 20.1953 34.856 20.25 34.8418V35.9319C19.6684 35.5793 18.8905 35.25 18 35.25C16.9906 35.25 16.0179 35.5807 15.3073 36.378C14.6064 37.1644 14.25 38.3046 14.25 39.75C14.25 41.2768 14.9829 43.1026 15.8067 44.5032C16.2253 45.215 16.6919 45.8592 17.1461 46.3365C17.3725 46.5744 17.6119 46.7881 17.8562 46.9474C18.0869 47.0977 18.3978 47.25 18.75 47.25C19.4637 47.25 20.1376 47.0165 20.6015 46.8104C20.7517 46.7436 20.8861 46.6769 21 46.6166C21.1139 46.6769 21.2483 46.7436 21.3985 46.8104C21.8624 47.0165 22.5363 47.25 23.25 47.25C23.4477 47.25 23.6722 47.1954 23.8546 47.1309C24.0437 47.064 24.2911 46.9504 24.4976 46.7673C24.8075 46.4925 24.836 46.0185 24.5612 45.7086C24.2863 45.3987 23.8123 45.3702 23.5024 45.645C23.5024 45.645 23.4882 45.656 23.4612 45.6705C23.4318 45.6863 23.3951 45.7024 23.3547 45.7166C23.3143 45.7309 23.2775 45.7408 23.2501 45.7466C23.2424 45.7482 23.2365 45.7492 23.2325 45.7499C22.8259 45.746 22.3822 45.6061 22.0077 45.4396C21.8243 45.3581 21.6713 45.2765 21.5655 45.216C21.5128 45.1859 21.4725 45.1615 21.4468 45.1454L21.4195 45.1282L21.416 45.126C21.1642 44.9583 20.836 44.9581 20.5842 45.1258L20.5805 45.1282L20.5532 45.1454C20.5275 45.1615 20.4872 45.1859 20.4345 45.216C20.3287 45.2765 20.1757 45.3581 19.9923 45.4396C19.6223 45.6041 19.1847 45.7426 18.7821 45.7497C18.7667 45.7435 18.7318 45.7276 18.6755 45.6909C18.5609 45.6161 18.4107 45.4896 18.2328 45.3026C17.8784 44.9302 17.4778 44.3859 17.0996 43.7428C16.3296 42.4337 15.75 40.8845 15.75 39.75C15.75 38.5341 16.0498 37.7993 16.4271 37.376C16.7946 36.9637 17.3219 36.75 18 36.75C18.627 36.75 19.2262 37.0329 19.7045 37.3657C19.9374 37.5277 20.1256 37.6905 20.2545 37.8118C20.3186 37.8721 20.3671 37.9212 20.398 37.9536C20.4135 37.9698 20.4245 37.9817 20.4308 37.9887L20.4366 37.995C20.579 38.1573 20.7841 38.25 21 38.25C21.2161 38.25 21.4217 38.1568 21.5641 37.9942L21.5692 37.9887C21.5755 37.9817 21.5865 37.9698 21.602 37.9536C21.6329 37.9212 21.6814 37.8721 21.7455 37.8118C21.8744 37.6905 22.0626 37.5277 22.2955 37.3657C22.7738 37.0329 23.373 36.75 24 36.75C24.4142 36.75 24.75 36.4142 24.75 36C24.75 35.5858 24.4142 35.25 24 35.25C23.1095 35.25 22.3316 35.5793 21.75 35.9319V33.75C21.75 33.7021 21.7453 33.654 21.7362 33.607L21 33.75ZM20.0791 33.3295C19.985 33.1147 19.8675 32.9206 19.7345 32.7948C19.6737 32.7373 19.4965 32.6173 19.1885 32.4515C18.9019 32.2972 18.5615 32.1342 18.2291 31.9834C18.1366 31.9414 18.0453 31.9006 17.9567 31.8615C18.0054 32.3746 18.1648 32.8734 18.5155 33.2052C18.8086 33.4826 19.2434 33.5297 19.7619 33.4165C19.8734 33.3921 19.9803 33.3619 20.0791 33.3295Z\u0022 fill=\u0022#373839\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M8.67188 16H6.54297V5.22852H3.93555V3.65625L8.67188 3.20703V16Z\u0022 fill=\u0022#D12C2C\u0022\u003e\u003c/path\u003e\u003cpath d=\u0022M16.0742 13.9492V16H13.9453V13.9492H16.0742Z\u0022 fill=\u0022#D12C2C\u0022\u003e\u003c/path\u003e\u003c/svg\u003e","image":{"id":16259,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-3.svg"},"width":"60"} -->
-<div id="wd-4f14d6db" class="wp-block-wd-icon"><img class="wp-image-16259" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-3.svg" /></div>
+<div id="wd-4f14d6db" class="wp-block-wd-icon"><img class="wp-image-16259" src="http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/06/grocery-3.svg" alt=""/></div>
 <!-- /wp:wd/icon -->
 
 <!-- wp:wd/container {"blockId":"7cb7576e-c6f2-44d5-bfc6-e7a4164bb1e3"} -->
@@ -658,21 +656,21 @@
 <!-- /wp:wd/row -->
 
 <!-- wp:wd/products-tabs {"blockId":"7412e998-60f7-4642-8133-61489be29fe7","design":"simple","marginBottom":"90","marginBottomMobile":"70"} -->
-<div id="wd-7412e998" class="wp-block-wd-products-tabs wd-tabs wd-products-tabs tabs-design-simple wd-hover-parent"><!-- wp:wd/products-tabs-header {"blockId":"099d78ab-0409-49a0-9d1a-cd467a95ab7b","title":"Discounts and promotions","design":"simple"} -->
+<div id="wd-7412e998" class="wp-block-wd-products-tabs wd-tabs wd-products-tabs tabs-design-simple wd-hover-parent"><!-- wp:wd/products-tabs-header {"blockId":"099d78ab-0409-49a0-9d1a-cd467a95ab7b","title":"Discounts and promotions","design":"simple","currentTab":"79b7b288-0dcb-4067-bf11-a1e30a7549c7"} -->
 <div id="wd-099d78ab" class="wp-block-wd-products-tabs-header wd-tabs-header"><div class="tabs-name title">Discounts and promotions</div><div class="wd-nav-wrapper wd-nav-tabs-wrapper"><ul class="wd-nav wd-nav-tabs products-tabs-title wd-icon-pos-start wd-style-default"><!-- wp:wd/products-tabs-tab {"blockId":"524cedd7-47dc-4099-a7d5-258ad19b4e9d","title":"NEW","layout":"carousel","items_per_page":"10","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_273d0d15","slides_per_viewTablet":"4","slides_per_viewMobile":"2","hide_pagination_controlTablet":true,"hide_pagination_controlMobile":true} -->
-<li id="wd-524cedd7" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;layout&quot;:&quot;carousel&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:&quot;yes&quot;,&quot;el_id&quot;:&quot;wd-524cedd7&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">NEW</span></a></li>
+<li id="wd-524cedd7" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;layout&quot;:&quot;carousel&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:&quot;yes&quot;,&quot;slides_per_view_tablet&quot;:&quot;4&quot;,&quot;slides_per_view_mobile&quot;:&quot;2&quot;,&quot;el_id&quot;:&quot;wd-524cedd7&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">NEW</span></a></li>
 <!-- /wp:wd/products-tabs-tab -->
 
 <!-- wp:wd/products-tabs-tab {"blockId":"c8ecee30-2742-49de-911d-2ae16047c3ec","title":"FEATURED","order":"DESC","layout":"carousel","items_per_page":"10","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_a5465fdd","slides_per_viewTablet":"4","slides_per_viewMobile":"2","hide_pagination_controlTablet":true,"hide_pagination_controlMobile":true} -->
-<li id="wd-c8ecee30" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;layout&quot;:&quot;carousel&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;order&quot;:&quot;DESC&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:&quot;yes&quot;,&quot;el_id&quot;:&quot;wd-c8ecee30&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">FEATURED</span></a></li>
+<li id="wd-c8ecee30" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;layout&quot;:&quot;carousel&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;order&quot;:&quot;DESC&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:&quot;yes&quot;,&quot;slides_per_view_tablet&quot;:&quot;4&quot;,&quot;slides_per_view_mobile&quot;:&quot;2&quot;,&quot;el_id&quot;:&quot;wd-c8ecee30&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">FEATURED</span></a></li>
 <!-- /wp:wd/products-tabs-tab -->
 
 <!-- wp:wd/products-tabs-tab {"blockId":"b185a11d-8aef-420f-8cd8-e54e839e4197","title":"TOP SALLERS","layout":"carousel","items_per_page":"10","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_c4aa71dd","slides_per_viewTablet":"4","slides_per_viewMobile":"2","hide_pagination_controlTablet":true,"hide_pagination_controlMobile":true} -->
-<li id="wd-b185a11d" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;layout&quot;:&quot;carousel&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:&quot;yes&quot;,&quot;el_id&quot;:&quot;wd-b185a11d&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">TOP SALLERS</span></a></li>
+<li id="wd-b185a11d" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;layout&quot;:&quot;carousel&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:&quot;yes&quot;,&quot;slides_per_view_tablet&quot;:&quot;4&quot;,&quot;slides_per_view_mobile&quot;:&quot;2&quot;,&quot;el_id&quot;:&quot;wd-b185a11d&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">TOP SALLERS</span></a></li>
 <!-- /wp:wd/products-tabs-tab --></ul></div></div>
 <!-- /wp:wd/products-tabs-header -->
 
-<!-- wp:wd/products-tabs-products {"blockId":"ca79209e-fefa-4549-9763-1ef9d411e7e9","title":"NEW","layout":"carousel","items_per_page":"10","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_273d0d15","slides_per_viewTablet":"4","slides_per_viewMobile":"2","hide_pagination_controlTablet":true,"hide_pagination_controlMobile":true} /--></div>
+<!-- wp:wd/products-tabs-products {"blockId":"524cedd7-47dc-4099-a7d5-258ad19b4e9d","title":"NEW","layout":"carousel","items_per_page":"10","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_273d0d15","slides_per_viewTablet":"4","slides_per_viewMobile":"2","hide_pagination_controlTablet":true,"hide_pagination_controlMobile":true} /--></div>
 <!-- /wp:wd/products-tabs -->
 
 <!-- wp:wd/row {"blockId":"3f724a64-cffb-4408-bffc-606e31b7d591","marginBottom":"90","marginBottomMobile":"70"} -->
@@ -722,21 +720,21 @@
 <!-- /wp:wd/row -->
 
 <!-- wp:wd/products-tabs {"blockId":"c9f61acb-5b84-44a5-96ce-e58ee503ba0b","design":"simple","marginBottom":"90","marginBottomMobile":"70"} -->
-<div id="wd-c9f61acb" class="wp-block-wd-products-tabs wd-tabs wd-products-tabs tabs-design-simple wd-hover-parent"><!-- wp:wd/products-tabs-header {"blockId":"ba908ad6-7808-42af-89cb-d240ba36870b","title":"New offers","design":"simple"} -->
+<div id="wd-c9f61acb" class="wp-block-wd-products-tabs wd-tabs wd-products-tabs tabs-design-simple wd-hover-parent"><!-- wp:wd/products-tabs-header {"blockId":"ba908ad6-7808-42af-89cb-d240ba36870b","title":"New offers","design":"simple","currentTab":"793d8cc6-c067-4fbb-8f3e-bd8b69ab28da"} -->
 <div id="wd-ba908ad6" class="wp-block-wd-products-tabs-header wd-tabs-header"><div class="tabs-name title">New offers</div><div class="wd-nav-wrapper wd-nav-tabs-wrapper"><ul class="wd-nav wd-nav-tabs products-tabs-title wd-icon-pos-start wd-style-default"><!-- wp:wd/products-tabs-tab {"blockId":"290cd0d4-0d4b-4f7a-8cd3-4c7e9001371d","title":"NEW","columns":5,"items_per_page":"10","pagination":"arrows","pagination_arrows_position":"together","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_2db89bea","columnsTablet":4,"columnsMobile":2,"slides_per_viewTablet":"4","slides_per_viewMobile":"2"} -->
-<li id="wd-290cd0d4" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;pagination&quot;:&quot;arrows&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;columns&quot;:5,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:true,&quot;columns_tablet&quot;:4,&quot;el_id&quot;:&quot;wd-290cd0d4&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">NEW</span></a></li>
+<li id="wd-290cd0d4" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;pagination&quot;:&quot;arrows&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;columns&quot;:5,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:true,&quot;columns_tablet&quot;:4,&quot;columns_mobile&quot;:2,&quot;el_id&quot;:&quot;wd-290cd0d4&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">NEW</span></a></li>
 <!-- /wp:wd/products-tabs-tab -->
 
 <!-- wp:wd/products-tabs-tab {"blockId":"e7e6bd9e-fc5b-436f-ada3-9524c5f30846","title":"FEATURED","order":"DESC","columns":5,"items_per_page":"10","pagination":"arrows","pagination_arrows_position":"together","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_2db89bea","columnsTablet":4,"columnsMobile":2,"slides_per_viewTablet":"4","slides_per_viewMobile":"2"} -->
-<li id="wd-e7e6bd9e" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;pagination&quot;:&quot;arrows&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;columns&quot;:5,&quot;order&quot;:&quot;DESC&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:true,&quot;columns_tablet&quot;:4,&quot;el_id&quot;:&quot;wd-e7e6bd9e&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">FEATURED</span></a></li>
+<li id="wd-e7e6bd9e" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;pagination&quot;:&quot;arrows&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;columns&quot;:5,&quot;order&quot;:&quot;DESC&quot;,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:true,&quot;columns_tablet&quot;:4,&quot;columns_mobile&quot;:2,&quot;el_id&quot;:&quot;wd-e7e6bd9e&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">FEATURED</span></a></li>
 <!-- /wp:wd/products-tabs-tab -->
 
 <!-- wp:wd/products-tabs-tab {"blockId":"6b04ac12-ecd0-4cf6-85ee-dc4e7b05e818","title":"TOP SALLERS","columns":5,"items_per_page":"10","pagination":"arrows","pagination_arrows_position":"together","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_2db89bea","columnsTablet":4,"columnsMobile":2,"slides_per_viewTablet":"4","slides_per_viewMobile":"2"} -->
-<li id="wd-6b04ac12" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;pagination&quot;:&quot;arrows&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;columns&quot;:5,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:true,&quot;columns_tablet&quot;:4,&quot;el_id&quot;:&quot;wd-6b04ac12&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">TOP SALLERS</span></a></li>
+<li id="wd-6b04ac12" class="wp-block-wd-products-tabs-tab" data-atts="{&quot;pagination&quot;:&quot;arrows&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;columns&quot;:5,&quot;slides_per_view&quot;:&quot;5&quot;,&quot;hide_pagination_control&quot;:true,&quot;columns_tablet&quot;:4,&quot;columns_mobile&quot;:2,&quot;el_id&quot;:&quot;wd-6b04ac12&quot;}"><a href="#" class="wd-nav-link"><span class="tab-label nav-link-text">TOP SALLERS</span></a></li>
 <!-- /wp:wd/products-tabs-tab --></ul></div></div>
 <!-- /wp:wd/products-tabs-header -->
 
-<!-- wp:wd/products-tabs-products {"blockId":"39327fca-873f-469b-95b5-2068330e2f36","title":"NEW","columns":5,"items_per_page":"10","pagination":"arrows","pagination_arrows_position":"together","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_2db89bea","columnsTablet":4,"columnsMobile":2,"slides_per_viewTablet":"4","slides_per_viewMobile":"2"} /--></div>
+<!-- wp:wd/products-tabs-products {"blockId":"290cd0d4-0d4b-4f7a-8cd3-4c7e9001371d","title":"NEW","columns":5,"items_per_page":"10","pagination":"arrows","pagination_arrows_position":"together","slides_per_view":"5","carousel_arrows_position":"together","hide_pagination_control":true,"sync_parent_id":"wd_2db89bea","columnsTablet":4,"columnsMobile":2,"slides_per_viewTablet":"4","slides_per_viewMobile":"2"} /--></div>
 <!-- /wp:wd/products-tabs -->
 
 <!-- wp:wd/title {"blockId":"e6da2607-6af6-4ca8-b39d-b027507b59c8","design":"underlined","content":"POPULAR CATEGORIES","tpFontSize":"22","activeBorderColorVariable":"\u002d\u002dwd-primary-color","marginBottom":"30"} -->
@@ -747,8 +745,8 @@
 															<wp:post_id>13783</wp:post_id>
 					<wp:post_date><![CDATA[2024-05-31 12:17:46]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-05-31 12:17:46]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-23 11:50:39]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-23 11:50:39]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-10-08 11:10:20]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-08 11:10:20]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[home-grocery]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -756,20 +754,8 @@
 					<wp:menu_order>0</wp:menu_order>
 					<wp:post_type><![CDATA[page]]></wp:post_type>
 																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_whb_header]]></wp:meta_key>
-							<wp:meta_value><![CDATA[none]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_title_off]]></wp:meta_key>
 							<wp:meta_value><![CDATA[on]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_page-title-size]]></wp:meta_key>
-							<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
@@ -1430,7 +1416,7 @@
 					<title><![CDATA[Footer 1 column Light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?cms_block=footer-1-column-light</link>
 					<pubDate>Fri, 24 May 2024 13:40:27 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/?post_type=cms_block&#038;p=12962</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"44ed7d08-e070-4837-b8c5-83401769c4d1","paddingTop":"40","paddingBottom":"40"} -->
 <div id="wd-44ed7d08" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"d5a06582-d2b6-4d73-83f9-ccc08f331d22","adjacentCount":5,"colWidth":25,"adjacentCountTablet":2,"adjacentCountMobile":1,"colWidthTablet":50,"colWidthMobile":100} -->
@@ -1719,6 +1705,10 @@
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -1772,6 +1762,10 @@
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -1829,6 +1823,10 @@
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -1884,6 +1882,10 @@
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[image]]></wp:meta_value>
 						</wp:postmeta>
@@ -1937,6 +1939,10 @@
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_design]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_menu_item_padding]]></wp:meta_key>
+							<wp:meta_value><![CDATA[]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_menu_item_image-type]]></wp:meta_key>
@@ -2091,7 +2097,7 @@
 					<title><![CDATA[wd-cursor-light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?attachment_id=34179</link>
 					<pubDate>Mon, 28 Oct 2024 10:31:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wd-cursor-light.svg</guid>
 															<wp:post_id>34179</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 10:31:47]]></wp:post_date>
@@ -2114,7 +2120,7 @@
 					<title><![CDATA[wd-envelope-light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?attachment_id=34180</link>
 					<pubDate>Mon, 28 Oct 2024 10:31:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wd-envelope-light.svg</guid>
 															<wp:post_id>34180</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 10:31:47]]></wp:post_date>
@@ -2137,7 +2143,7 @@
 					<title><![CDATA[wd-phone-light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?attachment_id=34181</link>
 					<pubDate>Mon, 28 Oct 2024 10:31:48 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wd-phone-light.svg</guid>
 															<wp:post_id>34181</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 10:31:48]]></wp:post_date>

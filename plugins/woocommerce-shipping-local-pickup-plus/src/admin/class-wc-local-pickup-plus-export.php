@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup Locations Export class.
@@ -48,9 +48,13 @@ class WC_Local_Pickup_Plus_Export extends \WC_Local_Pickup_Plus_Import_Export {
 	public function __construct() {
 
 		$this->action_id        = 'export';
-		$this->action_label     = __( 'Export', 'woocommerce-shipping-local-pickup-plus' );
-		$this->admin_page_title = __( 'Export Pickup Locations', 'woocommerce-shipping-local-pickup-plus' );
 		$this->delimiter_option = 'wc_local_pickup_plus_pickup_locations_csv_export_fields_delimiter';
+
+		// defer setting labels until after `init` due to translation loading
+		add_action('init', function() {
+			$this->action_label = __( 'Export', 'woocommerce-shipping-local-pickup-plus' );
+			$this->admin_page_title = __( 'Export Pickup Locations', 'woocommerce-shipping-local-pickup-plus' );
+		});
 
 		parent::__construct();
 
@@ -515,7 +519,7 @@ class WC_Local_Pickup_Plus_Export extends \WC_Local_Pickup_Plus_Import_Export {
 
 			if ( ! current_user_can( 'manage_woocommerce' ) ) {
 
-				wp_die( __( 'You are not allowed to perform this action.', 'woocommerce-shipping-local-pickup-plus' ) );
+				wp_die( esc_html__( 'You are not allowed to perform this action.', 'woocommerce-shipping-local-pickup-plus' ) );
 
 			} else {
 

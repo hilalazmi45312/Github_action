@@ -2,18 +2,31 @@
  * Side Cart CSS Styles
  * Contains all styling for side cart functionality including extra items display and mixed product validation
  */
- 
- .shopping-cart-widget-footer>*{
+
+.cart-widget-side .woocommerce-mini-cart .mini_cart_item {
+    font-family: var(--wd-title-font);
+}
+
+.shopping-cart-widget-footer>* {
     margin-bottom: 0;
- }
+}
 
-.widget_shopping_cart .sh-extras-price .woocommerce-Price-amount.amount{
+.product_list_widget>li .wd-entities-title {
+    font-size: 14px;
+}
+
+.woocommerce-mini-cart__total {
+    font-size: 110%;
+}
+
+.widget_shopping_cart .sh-extras-price .woocommerce-Price-amount.amount {
     color: unset;
- }
+    font-size: 10px;
+}
 
- .product_list_widget>li{
+.product_list_widget>li {
     border: none !important;
- }
+}
 
 /* Section Headers */
 .wd-extra-section-header {
@@ -29,7 +42,7 @@
 }
 
 .sh-extras-section-title {
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 600;
     color: #333;
     margin: 0;
@@ -54,7 +67,7 @@
 /* Container for image and content - match CartController layout */
 .widget_shopping_cart .sh-extras-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     padding: 8px 0;
 }
@@ -78,7 +91,7 @@
 
 /* Left side - title and variations */
 .widget_shopping_cart .sh-extras-left {
-    width: 50%;
+    width: 55%;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -87,7 +100,7 @@
 
 /* Title styling - match CartController */
 .widget_shopping_cart .sh-extras-title {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #333;
     font-weight: 500;
     line-height: 1.3;
@@ -96,7 +109,7 @@
 
 /* Right side - price and quantity */
 .widget_shopping_cart .sh-extras-right {
-    width: 50%;
+    width: 45%;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -135,10 +148,9 @@
 
 /* Quantity styling - match CartController */
 .sh-extras-qty {
-    font-size: 0.8em;
+    font-size: 0.65em;
     color: #666;
     font-weight: 400;
-    margin-top: 2px;
     font-family: var(--wd-title-font);
 }
 
@@ -148,6 +160,14 @@
 .wd-extra-cart-item .cart-item-image,
 .wd-extra-cart-item .cart-info {
     display: none !important;
+}
+
+.cart-info ul.variation {
+    font-size: 12px;
+}
+
+.cart-info span.quantity {
+    font-size: 80%;
 }
 
 /* Add border-bottom to items detected by JavaScript as the lowest in each group */
@@ -178,9 +198,9 @@ ul.variation .item-variation-name,
     display: flex;
 }
 
-.woocommerce-mini-cart .variation-TradeIn .item-variation-name{
+.woocommerce-mini-cart .variation-TradeIn .item-variation-name {
     display: block !important;
-    padding-right: 5px; 
+    padding-right: 5px;
 }
 
 /* Mini cart specific styling */
@@ -241,18 +261,20 @@ ul.variation .item-variation-name,
 
 /* Mixed Product Notice Styles - Matching WooCommerce Error Design */
 
-.sh-mixed-products-notice{
+.sh-mixed-products-notice {
     font-size: 12px;
 }
 
 .sh-mixed-products-notice:before {
     position: absolute !important;
     top: calc(50% - 9px) !important;
-    left: 24px !important;
-    font-size: 18px !important;
-    line-height: 18px !important;
-    font-family: var(--wd-title-font);
-    content: "\f100" !important;
+    left: 12px !important;
+    width: 18px !important;
+    height: 18px !important;
+    content: "" !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23dc3232'%3E%3Cpath d='M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0-64 0 32 32 0 1 0 64 0z'/%3E%3C/svg%3E") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
 }
 
 .sh-mixed-products-notice p:last-child {
@@ -275,30 +297,30 @@ ul.variation .item-variation-name,
         padding: 6px 8px;
         font-size: 0.8em;
     }
-    
+
     .wd-extra-cart-item:before {
         left: -15px;
         font-size: 10px;
     }
-    
+
     .sh-extras-item {
         gap: 8px;
         padding: 6px 0;
     }
-    
+
     .sh-extras-image {
         width: 32px;
         height: 32px;
     }
-    
+
     .sh-extras-title {
         font-size: 0.8em;
     }
-    
+
     .sh-extras-price {
         font-size: 0.8em;
     }
-    
+
     .sh-extras-qty {
         font-size: 0.7em;
     }

@@ -9,7 +9,7 @@ use XTS\Modules\Header_Builder\Element;
  *  Search icon for mobile devices
  * ------------------------------------------------------------------------------------------------
  */
-class Mobilesearch extends Element {
+class Mobilesearch extends Search {
 
 	public function __construct() {
 		parent::__construct();
@@ -17,6 +17,19 @@ class Mobilesearch extends Element {
 	}
 
 	public function map() {
+		$search_extra_content_options = array(
+			array(
+				'value' => '',
+				'label' => esc_html__( 'Inherit from Theme Settings', 'woodmart' ),
+			),
+		) + $this->get_html_block_options();
+
+		$search_extra_content_description = '';
+
+		if ( function_exists( 'woodmart_get_html_block_links' ) ) {
+			$search_extra_content_description .= woodmart_get_html_block_links();
+		}
+
 		$this->args = array(
 			'type'            => 'mobilesearch',
 			'title'           => esc_html__( 'Search', 'woodmart' ),
@@ -31,37 +44,151 @@ class Mobilesearch extends Element {
 			'addable'         => true,
 			'mobile'          => true,
 			'params'          => array(
+				// General.
 				'display'                => array(
 					'id'          => 'display',
 					'title'       => esc_html__( 'Display', 'woodmart' ),
 					'type'        => 'selector',
 					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'General', 'woodmart' ),
 					'value'       => 'icon',
 					'options'     => array(
 						'icon'          => array(
 							'value' => 'icon',
+							'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb-mobile-search-icon.mp4" autoplay loop muted></video>',
 							'label' => esc_html__( 'Icon', 'woodmart' ),
 						),
 						'full-screen'   => array(
 							'value' => 'full-screen',
+							'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb-mobile-search-full-screen.mp4" autoplay loop muted></video>',
 							'label' => esc_html__( 'Full screen', 'woodmart' ),
 						),
 						'full-screen-2' => array(
 							'value' => 'full-screen-2',
+							'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb-mobile-search-full-screen-2.mp4" autoplay loop muted></video>',
 							'label' => esc_html__( 'Full screen 2', 'woodmart' ),
 						),
 						'form'          => array(
 							'value' => 'form',
+							'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb-mobile-search-form.mp4" autoplay loop muted></video>',
 							'label' => esc_html__( 'Form', 'woodmart' ),
 						),
 					),
 					'description' => esc_html__( 'Display search icon/form in the header in different views.', 'woodmart' ),
 				),
+				'popular_requests'       => array(
+					'id'          => 'popular_requests',
+					'title'       => esc_html__( 'Show popular requests', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb_search_display_popular_requests.mp4" autoplay loop muted></video>',
+					'type'        => 'switcher',
+					'description' => __( 'You can write a list of popular requests in Theme Settings -> General -> Search', 'woodmart' ),
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'General', 'woodmart' ),
+					'value'       => false,
+					'requires'    => array(
+						'display' => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+					),
+				),
+				'search_history_enabled' => array(
+					'id'          => 'search_history_enabled',
+					'title'       => esc_html__( 'Show search history', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'search-history-enabled.mp4" autoplay loop muted></video>',
+					'description' => esc_html__( 'Allowing users to quickly access their previous searches.', 'woodmart' ),
+					'type'        => 'switcher',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'General', 'woodmart' ),
+					'on-text'     => esc_html__( 'Yes', 'woodmart' ),
+					'off-text'    => esc_html__( 'No', 'woodmart' ),
+					'value'       => false,
+					'requires'    => array(
+						'display' => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+					),
+				),
+				'search_extra_content_enabled' => array(
+					'id'       => 'search_extra_content_enabled',
+					'title'    => esc_html__( 'Search extra content', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'full-screen-search-extra-content.mp4" autoplay loop muted></video>',
+					'tab'      => esc_html__( 'General', 'woodmart' ),
+					'group'    => esc_html__( 'General', 'woodmart' ),
+					'type'     => 'switcher',
+					'value'    => false,
+					'requires' => array(
+						'display' => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+					),
+				),
+				'search_extra_content'         => array(
+					'id'          => 'search_extra_content',
+					'type'        => 'select',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'General', 'woodmart' ),
+					'value'       => '',
+					'options'     => $search_extra_content_options,
+					'description' => $search_extra_content_description,
+					'requires'    => array(
+						'display'                      => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+						'search_extra_content_enabled' => array(
+							'comparison' => 'equal',
+							'value'      => true,
+						),
+					),
+				),
+				// Search result.
+				'ajax'                   => array(
+					'id'          => 'ajax',
+					'title'       => esc_html__( 'Search with AJAX', 'woodmart' ),
+					'description' => esc_html__( 'Enable instant AJAX search functionality for this form.', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'hb_search_ajax.mp4" autoplay loop muted></video>',
+					'type'        => 'switcher',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'Search result', 'woodmart' ),
+					'value'       => true,
+					'requires'    => array(
+						'display' => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+					),
+				),
+				'ajax_result_count'      => array(
+					'id'          => 'ajax_result_count',
+					'title'       => esc_html__( 'AJAX search results count', 'woodmart' ),
+					'description' => esc_html__( 'Number of products to display in AJAX search results.', 'woodmart' ),
+					'type'        => 'slider',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'Search result', 'woodmart' ),
+					'from'        => 3,
+					'to'          => 50,
+					'value'       => 20,
+					'units'       => '',
+					'requires'    => array(
+						'display' => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+						'ajax'    => array(
+							'comparison' => 'equal',
+							'value'      => true,
+						),
+					),
+				),
 				'post_type'              => array(
 					'id'       => 'post_type',
-					'title'    => esc_html__( 'Search post type', 'woodmart' ),
+					'title'    => esc_html__( 'Post type', 'woodmart' ),
 					'type'     => 'selector',
 					'tab'      => esc_html__( 'General', 'woodmart' ),
+					'group'    => esc_html__( 'Search result', 'woodmart' ),
 					'value'    => 'product',
 					'options'  => array(
 						'product'   => array(
@@ -87,11 +214,36 @@ class Mobilesearch extends Element {
 					),
 					'requires' => array(
 						'display' => array(
-							'comparison' => 'not_equals',
+							'comparison' => 'not_equal',
 							'value'      => 'icon',
 						),
 					),
 				),
+				'include_cat_search'     => array(
+					'id'          => 'include_cat_search',
+					'title'       => esc_html__( 'Include categories in search', 'woodmart' ),
+					'hint'        => '<video src="' . WOODMART_TOOLTIP_URL . 'include-cat-search.mp4" autoplay loop muted></video>',
+					'description' => esc_html__( 'When enabled, the search function will also look for and display categories that match the search query.', 'woodmart' ),
+					'type'        => 'switcher',
+					'tab'         => esc_html__( 'General', 'woodmart' ),
+					'group'       => esc_html__( 'Search result', 'woodmart' ),
+					'value'       => false,
+					'requires'    => array(
+						'display'   => array(
+							'comparison' => 'not_equal',
+							'value'      => 'icon',
+						),
+						'ajax'      => array(
+							'comparison' => 'equal',
+							'value'      => true,
+						),
+						'post_type' => array(
+							'comparison' => 'equal',
+							'value'      => 'product',
+						),
+					),
+				),
+				// Form.
 				'search_style'           => array(
 					'id'       => 'search_style',
 					'title'    => esc_html__( 'Search style', 'woodmart' ),
@@ -163,6 +315,22 @@ class Mobilesearch extends Element {
 						'display' => array(
 							'comparison' => 'not_equal',
 							'value'      => array( 'full-screen', 'icon' ),
+						),
+					),
+				),
+				'form_width'            => array(
+					'id'        => 'form_width',
+					'title'     => esc_html__( 'Form width', 'woodmart' ),
+					'type'      => 'slider',
+					'tab'       => esc_html__( 'Style', 'woodmart' ),
+					'group'     => esc_html__( 'Form', 'woodmart' ),
+					'from'      => 0,
+					'to'        => 1000,
+					'value'     => '',
+					'units'     => 'px',
+					'selectors' => array(
+						'{{WRAPPER}}' => array(
+							'max-width: {{VALUE}}px;',
 						),
 					),
 				),
@@ -288,6 +456,7 @@ class Mobilesearch extends Element {
 					),
 					'extra_class' => 'xts-col-6',
 				),
+				// Icon.
 				'style'                  => array(
 					'id'          => 'style',
 					'title'       => esc_html__( 'Icon display', 'woodmart' ),
@@ -636,5 +805,35 @@ class Mobilesearch extends Element {
 				),
 			),
 		);
+	}
+
+	public function get_wrapper_classes( $args ) {
+		$params          = $args['params'];
+		$wrapper_classes = '';
+
+		if ( in_array( $params['display'], array( 'form', 'full-screen-2' ), true ) ) {
+			$wrapper_classes .= 'wd-header-search-form-mobile';
+			$wrapper_classes .= ' wd-display-' . $params['display'];
+
+			if ( isset( $args['id'] ) ) {
+				$wrapper_classes .= ' whb-' . $args['id'];
+			}
+		}
+
+		return $wrapper_classes;
+	}
+
+	public function get_full_screen_search_args( $args ) {
+		$params      = $args['params'];
+		$search_args = array();
+
+		if ( 'full-screen' !== $params['display'] && 'full-screen-2' !== $params['display'] ) {
+			return array();
+		}
+
+		$search_args           = parent::get_full_screen_search_args( $args );
+		$search_args['device'] = 'mobile';
+
+		return $search_args;
 	}
 }

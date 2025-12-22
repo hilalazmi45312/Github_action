@@ -2094,10 +2094,6 @@
 							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
-							<wp:meta_value><![CDATA[full-width]]></wp:meta_value>
-						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Contact us]]></title>
@@ -2126,7 +2122,7 @@
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"fd39720e-c003-4c64-9ed6-dcd422b0cbc7","colorCode":"#242424","tpFontFamily":"var(\u002d\u002dwd-title-font)"} -->
-<p id="wd-fd39720e" class="wp-block-wd-paragraph"><strong>xtemos@gmail.com<br>(686) 492-1044</strong></p>
+<p id="wd-fd39720e" class="wp-block-wd-paragraph"><strong>info@mail.com<br>(686) 492-1044</strong></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/column -->
 
@@ -2150,7 +2146,7 @@
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"410afe48-7770-4d4c-a9ea-c37eb951db90","colorCode":"#242424","tpFontFamily":"var(\u002d\u002dwd-title-font)"} -->
-<p id="wd-410afe48" class="wp-block-wd-paragraph"><strong>xtemos@gmail.com<br>(686) 492-1044</strong></p>
+<p id="wd-410afe48" class="wp-block-wd-paragraph"><strong>info@mail.com<br>(686) 492-1044</strong></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -2303,7 +2299,7 @@
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"6fd19892-f59a-4edd-851b-f911818dcfaf","colorCode":"#242424","tpFontFamily":"var(\u002d\u002dwd-title-font)"} -->
-<p id="wd-6fd19892" class="wp-block-wd-paragraph"><strong>xtemos@gmail.com<br>(686) 492-1044</strong></p>
+<p id="wd-6fd19892" class="wp-block-wd-paragraph"><strong>info@mail.com<br>(686) 492-1044</strong></p>
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/button {"blockId":"2f0cc490-260e-45c5-a452-452504f754cd","predefinedColor":"primary","shape":"round"} -->
@@ -2371,7 +2367,7 @@
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"54bc4e3c-fb5b-4513-98c7-4922e887aa76","colorCode":"#242424","tpFontFamily":"var(\u002d\u002dwd-title-font)"} -->
-<p id="wd-54bc4e3c" class="wp-block-wd-paragraph"><strong>xtemos@gmail.com<br>(686) 492-1044</strong></p>
+<p id="wd-54bc4e3c" class="wp-block-wd-paragraph"><strong>info@mail.com<br>(686) 492-1044</strong></p>
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/button {"blockId":"f005734f-c89f-4bd9-b1aa-00c9a4c3eb45","predefinedColor":"primary","shape":"round"} -->

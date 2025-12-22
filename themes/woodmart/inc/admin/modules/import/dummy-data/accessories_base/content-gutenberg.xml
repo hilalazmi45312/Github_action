@@ -4416,7 +4416,7 @@
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/google-map {"blockId":"fff7c47e-0b7d-4ede-9fdb-7d55ee9acc7b","showContent":true,"zoom":13,"height":"270","locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","image":{"url":"","id":""},"imageSize":"full"}]} -->
-<div id="wd-fff7c47e" class="wp-block-wd-google-map wd-map-container google-map-container" data-map-args="{&quot;multiple_markers&quot;:&quot;yes&quot;,&quot;zoom&quot;:13,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;selector&quot;:&quot;wd-map-id-fff7c47e-0b7d-4ede-9fdb-7d55ee9acc7b&quot;,&quot;markers&quot;:[{&quot;marker_lat&quot;:&quot;51.50735&quot;,&quot;marker_lon&quot;:&quot;-0.12776&quot;,&quot;marker_icon&quot;:&quot;https://dummy.xtemos.com/woodmart2/accessories-gutenberg/wp-content/themes/ woodmart/inc/admin/assets/images/google-icon.png&quot;,&quot;marker_icon_size&quot;:[40,40],&quot;marker_title&quot;:&quot;&quot;,&quot;marker_description&quot;:&quot;&quot;}]}"><div class="wd-google-map-wrapper wd-map-wrapper wd-fill"><div id="wd-map-id-fff7c47e-0b7d-4ede-9fdb-7d55ee9acc7b" class="wd-google-map wd-fill"></div></div><div class="wd-google-map-content-wrap wd-map-content-wrap"><!-- wp:wd/container {"blockId":"c0f075ca-8cbe-4817-a9be-111565a6c739","metadata":{"name":"Map content"}} -->
+<div id="wd-fff7c47e" class="wp-block-wd-google-map wd-map-container google-map-container" data-map-args="{&quot;multiple_markers&quot;:&quot;yes&quot;,&quot;zoom&quot;:13,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;selector&quot;:&quot;wd-map-id-fff7c47e-0b7d-4ede-9fdb-7d55ee9acc7b&quot;,&quot;markers&quot;:[{&quot;marker_lat&quot;:&quot;51.50735&quot;,&quot;marker_lon&quot;:&quot;-0.12776&quot;,&quot;marker_icon&quot;:&quot;https://dummy.xtemos.com/woodmart2/accessories-gutenberg/wp-content/themes/woodmart/inc/admin/assets/images/google-icon.png&quot;,&quot;marker_icon_size&quot;:[40,40],&quot;marker_title&quot;:&quot;&quot;,&quot;marker_description&quot;:&quot;&quot;}]}"><div class="wd-google-map-wrapper wd-map-wrapper wd-fill"><div id="wd-map-id-fff7c47e-0b7d-4ede-9fdb-7d55ee9acc7b" class="wd-google-map wd-fill"></div></div><div class="wd-google-map-content-wrap wd-map-content-wrap"><!-- wp:wd/container {"blockId":"c0f075ca-8cbe-4817-a9be-111565a6c739","metadata":{"name":"Map content"}} -->
 <div id="wd-c0f075ca" class="wp-block-wd-container wd-dir-col"><!-- wp:wd/paragraph {"blockId":"b5dbd2ee-6a30-4564-b09a-e59735bd459e","colorCode":"#333333","tpFontVariant":"600","tpFontWeight":"600"} -->
 <p id="wd-b5dbd2ee" class="wp-block-wd-paragraph">Praesent Iaculis sit&nbsp;Vehicula<br>Lap. 4&nbsp;Tellus&nbsp;A17-B27</p>
 <!-- /wp:wd/paragraph --></div>
@@ -5815,7 +5815,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:comment>
 							<wp:comment_id>3</wp:comment_id>
 							<wp:comment_author><![CDATA[Ethan Smith]]></wp:comment_author>
-							<wp:comment_author_email><![CDATA[m.kliakhin@gmail.com]]></wp:comment_author_email>
+							<wp:comment_author_email><![CDATA[info@mail.com]]></wp:comment_author_email>
 							<wp:comment_author_url></wp:comment_author_url>
 							<wp:comment_author_IP><![CDATA[176.98.71.148]]></wp:comment_author_IP>
 							<wp:comment_date><![CDATA[2024-07-16 07:42:41]]></wp:comment_date>
@@ -9894,7 +9894,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:comment>
 							<wp:comment_id>4</wp:comment_id>
 							<wp:comment_author><![CDATA[Ethan Smith]]></wp:comment_author>
-							<wp:comment_author_email><![CDATA[m.kliakhin@gmail.com]]></wp:comment_author_email>
+							<wp:comment_author_email><![CDATA[info@mail.com]]></wp:comment_author_email>
 							<wp:comment_author_url></wp:comment_author_url>
 							<wp:comment_author_IP><![CDATA[176.98.71.148]]></wp:comment_author_IP>
 							<wp:comment_date><![CDATA[2024-07-16 07:43:37]]></wp:comment_date>

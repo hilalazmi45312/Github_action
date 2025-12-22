@@ -460,6 +460,7 @@
     "blog_with_shadow": "0",
     "blog_columns": "4",
     "blog_spacing": "20",
+    "blog_archive_layout": "full-width",
     "discounts_enabled": "1",
     "label_shape": "rounded-sm",
     "sale_label_bg_color": {
@@ -529,5 +530,7 @@
     "reviews_rating_summary_content": "rating",
     "reviews_rating_summary_filter": "1",
     "promo_popup": "0",
-    "single_post_design": "large_image"
+    "single_post_design": "large_image",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -6628,7 +6628,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/list-item -->
 
 <!-- wp:wd/list-item {"blockId":"4e13e4ae-9b0f-40f0-bf6b-756417642e61","iconType":"image","itemIconType":"image","svg":"","itemImage":{"id":555,"url":"http://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/uploads/sites/27/2024/07/email.svg"}} -->
-<li id="wd-4e13e4ae" class="wp-block-wd-list-item"><div class="wd-icon"><img src="http://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/uploads/sites/27/2024/07/email.svg" alt="" class="wp-image-555" /></div><span class="wd-list-content"><a href="#">Email: woodmart@mail.com</a></span></li>
+<li id="wd-4e13e4ae" class="wp-block-wd-list-item"><div class="wd-icon"><img src="http://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/uploads/sites/27/2024/07/email.svg" alt="" class="wp-image-555" /></div><span class="wd-list-content"><a href="#">Email: info@mail.com</a></span></li>
 <!-- /wp:wd/list-item --></ul>
 <!-- /wp:wd/list -->
 
@@ -6847,7 +6847,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"e6adc1aa-549f-4ad1-ac26-8a45a28ca6a1","columnsGap":20,"marginBottom":"40","marginBottomTablet":"20"} -->
 <div id="wd-e6adc1aa" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"968937a4-4531-4031-812f-24a7a344bb1b","adjacentCount":3,"adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-968937a4" class="wp-block-wd-column"><!-- wp:wd/open-street-map {"blockId":"1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17","zoom":15,"height":"480","locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}]} -->
-<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
+<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map --></div>
 <!-- /wp:wd/column -->
 
@@ -6980,7 +6980,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"e6adc1aa-549f-4ad1-ac26-8a45a28ca6a1","columnsGap":20,"marginBottom":"40","marginBottomTablet":"20"} -->
 <div id="wd-e6adc1aa" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"968937a4-4531-4031-812f-24a7a344bb1b","adjacentCount":3,"adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-968937a4" class="wp-block-wd-column"><!-- wp:wd/open-street-map {"blockId":"1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17","zoom":15,"height":"480","locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}]} -->
-<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
+<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map --></div>
 <!-- /wp:wd/column -->
 
@@ -7119,7 +7119,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"e6adc1aa-549f-4ad1-ac26-8a45a28ca6a1","columnsGap":20,"marginBottom":"40","marginBottomTablet":"20"} -->
 <div id="wd-e6adc1aa" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"968937a4-4531-4031-812f-24a7a344bb1b","adjacentCount":3,"adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-968937a4" class="wp-block-wd-column"><!-- wp:wd/open-street-map {"blockId":"1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17","zoom":15,"height":"480","locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}]} -->
-<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
+<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map --></div>
 <!-- /wp:wd/column -->
 
@@ -7258,7 +7258,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- wp:wd/row {"blockId":"e6adc1aa-549f-4ad1-ac26-8a45a28ca6a1","columnsGap":20,"marginBottom":"40","marginBottomTablet":"20"} -->
 <div id="wd-e6adc1aa" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"968937a4-4531-4031-812f-24a7a344bb1b","adjacentCount":3,"adjacentCountTablet":1,"colWidthTablet":100} -->
 <div id="wd-968937a4" class="wp-block-wd-column"><!-- wp:wd/open-street-map {"blockId":"1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17","zoom":15,"height":"480","locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}]} -->
-<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
+<div id="wd-1f2fa4e4" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1f2fa4e4-6d40-40bf-9e4b-49175cbc5a17" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map --></div>
 <!-- /wp:wd/column -->
 
@@ -10781,7 +10781,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/?page_id=37</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/open-street-map {"blockId":"1a1388a0-1e60-41d7-befc-6f5be902a4f0","marginTop":"-20","zoom":15,"locations":[{"title":"","lat":"51.50735","lon":"-0.12776","description":"","showButton":false,"buttonText":"","buttonUrl":"","behavior":"popup","image":{"url":"","id":""},"imageSize":"full"}],"heightTablet":"200"} -->
-<div id="wd-1a1388a0" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1a1388a0-1e60-41d7-befc-6f5be902a4f0" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/ woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
+<div id="wd-1a1388a0" class="wp-block-wd-open-street-map wd-map-container wd-osm-map-container"><div id="wd-osm-map-1a1388a0-1e60-41d7-befc-6f5be902a4f0" class="wd-osm-map-wrapper wd-map-wrapper" data-settings="{&quot;zoom&quot;:15,&quot;scrollWheelZoom&quot;:&quot;no&quot;,&quot;zoomControl&quot;:&quot;yes&quot;,&quot;dragging&quot;:&quot;yes&quot;,&quot;init_type&quot;:&quot;page_load&quot;,&quot;init_offset&quot;:100,&quot;geoapify_tile&quot;:&quot;osm-carto&quot;,&quot;center&quot;:&quot;51.50735000000001,-0.12776&quot;,&quot;markers&quot;:[{&quot;lat&quot;:&quot;51.50735&quot;,&quot;lng&quot;:&quot;-0.12776&quot;,&quot;marker&quot;:{&quot;image&quot;:&quot;https://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/themes/woodmart/images/icons/marker-icon.png&quot;,&quot;image_size&quot;:[25,41],&quot;marker_behavior&quot;:&quot;popup&quot;,&quot;show_button&quot;:&quot;no&quot;}}]}"></div></div>
 <!-- /wp:wd/open-street-map -->
 
 <!-- wp:wd/row {"blockId":"ee744dca-0bdd-48d7-8e3f-a71d4797b5bc","columnsGap":20} -->
@@ -10797,7 +10797,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"83156def-e2ff-4635-bfd9-484de2e0f9e6","colorCode":"#242424","tpFontVariant":"600","tpFontWeight":"600","markColorVariable":"\u002d\u002dwd-primary-color"} -->
-<p id="wd-83156def" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>woodmart@mail.com</em></span></p>
+<p id="wd-83156def" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>info@mail.com</em></span></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/container --></div>
 <!-- /wp:wd/cover --></div>
@@ -10815,7 +10815,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"eae9272d-0359-46a7-952d-8f8a14121957","colorCode":"#242424","tpFontVariant":"600","tpFontWeight":"600","markColorVariable":"\u002d\u002dwd-primary-color"} -->
-<p id="wd-eae9272d" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>woodmart@mail.com</em></span></p>
+<p id="wd-eae9272d" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>info@mail.com</em></span></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/container --></div>
 <!-- /wp:wd/cover --></div>
@@ -10833,7 +10833,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"03489644-c226-47de-92f5-7bc7ed0e781f","colorCode":"#242424","tpFontVariant":"600","tpFontWeight":"600","markColorVariable":"\u002d\u002dwd-primary-color"} -->
-<p id="wd-03489644" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>woodmart@mail.com</em></span></p>
+<p id="wd-03489644" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>info@mail.com</em></span></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/container --></div>
 <!-- /wp:wd/cover --></div>
@@ -10851,7 +10851,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/paragraph -->
 
 <!-- wp:wd/paragraph {"blockId":"aec702e4-3681-4186-aadb-3abefab8418d","colorCode":"#242424","tpFontVariant":"600","tpFontWeight":"600","markColorVariable":"\u002d\u002dwd-primary-color"} -->
-<p id="wd-aec702e4" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>woodmart@mail.com</em></span></p>
+<p id="wd-aec702e4" class="wp-block-wd-paragraph">Phone: <span class="wd-highlight"><em>(208) 555-0112</em></span><br>Email: <span class="wd-highlight"><em>info@mail.com</em></span></p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/container --></div>
 <!-- /wp:wd/cover --></div>
@@ -10886,7 +10886,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/list-item -->
 
 <!-- wp:wd/list-item {"blockId":"4e13e4ae-9b0f-40f0-bf6b-756417642e61","iconType":"image","itemIconType":"image","svg":"","itemImage":{"id":555,"url":"http://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/uploads/sites/27/2024/07/email.svg"}} -->
-<li id="wd-4e13e4ae" class="wp-block-wd-list-item"><div class="wd-icon"><img src="http://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/uploads/sites/27/2024/07/email.svg" alt="" class="wp-image-555" /></div><span class="wd-list-content"><a href="#">Email: woodmart@mail.com</a></span></li>
+<li id="wd-4e13e4ae" class="wp-block-wd-list-item"><div class="wd-icon"><img src="http://dummy.xtemos.com/woodmart2/mega-electronics-gutenberg/wp-content/uploads/sites/27/2024/07/email.svg" alt="" class="wp-image-555" /></div><span class="wd-list-content"><a href="#">Email: info@mail.com</a></span></li>
 <!-- /wp:wd/list-item --></ul>
 <!-- /wp:wd/list -->
 

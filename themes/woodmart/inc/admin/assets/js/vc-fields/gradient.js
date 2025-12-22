@@ -19,6 +19,10 @@
 					var $gradient_settings = data[0].split('/');
 
 					$.each( $gradient_settings, function ( index, value ) {
+						if ( 0 === value.length ) {
+							return;
+						}
+
 						var points_values = value.split('-');
 
 						result_point_value.push( {color: points_values[0] ,position: points_values[1]} );
@@ -30,9 +34,19 @@
 				if ( 'undefined' !== typeof data[3] ) {
 					result_direction_value = data[3];
 				}
-			}
 
-			if ( ! result_point_value.length ) {
+				// Normalize direction for radial/circle/ellipse.
+				if (
+					(result_type_value === 'circle' || result_type_value === 'ellipse' || result_type_value === 'radial') &&
+					typeof result_direction_value === 'string' &&
+					result_direction_value.trim().split(/\s+/).length === 1
+				) {
+					// If only one word, duplicate it (e.g. 'center' => 'center center').
+					result_direction_value = result_direction_value.trim() + ' center';
+				}
+			}			
+
+			if ( 0 === result_point_value.length ) {
 				result_point_value.push(
 					{color:'rgb(60, 27, 59)',position:0},
 					{color:'rgb(90, 55, 105)',position: 33},

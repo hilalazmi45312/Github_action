@@ -344,6 +344,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_title' ) ) {
 				array(
 					'type'       => 'woodmart_empty_space',
 					'param_name' => 'woodmart_empty_space',
+					'group'      => esc_html__( 'Title', 'woodmart' ),
 				),
 				array(
 					'type'             => 'woodmart_colorpicker',
@@ -355,21 +356,6 @@ if ( ! function_exists( 'woodmart_get_vc_map_title' ) ) {
 							' .woodmart-title-container',
 						),
 					),
-					'edit_field_class' => 'vc_col-sm-6 vc_column',
-				),
-				array(
-					'type'             => 'dropdown',
-					'heading'          => esc_html__( 'Highlight text style', 'woodmart' ),
-					'hint'             => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
-					'group'            => esc_html__( 'Title', 'woodmart' ),
-					'param_name'       => 'title_decoration_style',
-					'value'            => array(
-						esc_html__( 'Default', 'woodmart' )  => 'default',
-						esc_html__( 'Primary color', 'woodmart' )  => 'colored',
-						esc_html__( 'Primary color + secondary font', 'woodmart' ) => 'colored-alt',
-						esc_html__( 'Bordered', 'woodmart' ) => 'bordered',
-					),
-					'std'              => 'colored',
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
@@ -390,6 +376,37 @@ if ( ! function_exists( 'woodmart_get_vc_map_title' ) ) {
 					),
 					'std'              => 'h4',
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'             => 'dropdown',
+					'heading'          => esc_html__( 'Highlight text style', 'woodmart' ),
+					'hint'             => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
+					'group'            => esc_html__( 'Title', 'woodmart' ),
+					'param_name'       => 'title_decoration_style',
+					'value'            => array(
+						esc_html__( 'Default', 'woodmart' )  => 'default',
+						esc_html__( 'Primary color', 'woodmart' )  => 'colored',
+						esc_html__( 'Primary color + secondary font', 'woodmart' ) => 'colored-alt',
+						esc_html__( 'Bordered', 'woodmart' ) => 'bordered',
+						esc_html__( 'Gradient', 'woodmart' ) => 'gradient',
+					),
+					'std'              => 'colored',
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'       => 'woodmart_gradient',
+					'heading'    => esc_html__( 'Highlight text gradient', 'woodmart' ),
+					'group'      => esc_html__( 'Title', 'woodmart' ),
+					'param_name' => 'title_decoration_gradient',
+					'selectors'  => array(
+						'{{WRAPPER}}.wd-underline-gradient u' => array(
+							'background-image: {{VALUE}};',
+						),
+					),
+					'dependency' => array(
+						'element' => 'title_decoration_style',
+						'value'   => array( 'gradient' ),
+					),
 				),
 				/**
 				 * Subtitle

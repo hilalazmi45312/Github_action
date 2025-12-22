@@ -186,6 +186,7 @@ class Install_Plugins extends Singleton {
 			'contact-form-7',
 			'mailchimp-for-wp',
 			'safe-svg',
+			'woodmart-images-optimizer',
 			'revslider',
 		);
 
@@ -202,6 +203,7 @@ class Install_Plugins extends Singleton {
 
 		if ( Setup_Wizard::get_instance()->is_setup() ) {
 			unset( $plugins['revslider'] );
+			unset( $plugins['woodmart-images-optimizer'] );
 		}
 
 		return $plugins;
@@ -235,6 +237,9 @@ class Install_Plugins extends Singleton {
 		$plugins = $this->get_plugins();
 		$tgmpa   = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
 		$output  = array();
+
+		unset( $plugins['revslider'] );
+		unset( $plugins['woodmart-images-optimizer'] );
 
 		foreach ( $plugins as $slug => $plugin ) {
 			if ( ! $tgmpa->is_plugin_active( $slug ) && $tgmpa->can_plugin_activate( $slug ) ) {

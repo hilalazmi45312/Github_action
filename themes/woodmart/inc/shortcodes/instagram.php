@@ -139,7 +139,6 @@ if ( ! function_exists( 'woodmart_shortcode_instagram' ) ) {
 			}
 
 			if ( 'yes' === $scroll_carousel_init ) {
-				woodmart_enqueue_js_library( 'waypoints' );
 				$pics_classes .= ' scroll-init';
 			}
 		} else {
@@ -388,7 +387,7 @@ if ( ! function_exists( 'woodmart_get_api_insta_images' ) ) {
 			);
 		}
 
-		if ( $instagram && woodmart_get_opt( 'insta_delete_outdated_images' ) ) {
+		if ( $instagram && woodmart_get_opt( 'insta_delete_outdated_images', true ) ) {
 			$image_ids   = array_column( $instagram, 'image_id' );
 			$attachments = new WP_Query(
 				array(

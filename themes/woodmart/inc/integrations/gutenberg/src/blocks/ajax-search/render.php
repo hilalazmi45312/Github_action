@@ -8,16 +8,17 @@ if ( ! function_exists( 'wd_gutenberg_ajax_search' ) ) {
 
 		woodmart_search_form(
 			array(
-				'ajax'                   => true,
-				'post_type'              => $block_attributes['search_post_type'],
-				'count'                  => $block_attributes['number'],
-				'thumbnail'              => $block_attributes['thumbnail'],
-				'price'                  => $block_attributes['price'],
-				'show_categories'        => $block_attributes['category'],
-				'search_style'           => $block_attributes['form_style'],
-				'cat_selector_style'     => $block_attributes['cat_selector_style'],
-				'wrapper_custom_classes' => $el_class,
-				'el_id'                  => wd_get_gutenberg_element_id( $block_attributes ),
+				'ajax'               => true,
+				'include_cat_search' => $block_attributes['include_cat_search'],
+				'post_type'          => $block_attributes['search_post_type'],
+				'count'              => $block_attributes['number'],
+				'thumbnail'          => $block_attributes['thumbnail'],
+				'price'              => $block_attributes['price'],
+				'show_categories'    => $block_attributes['category'],
+				'search_style'       => $block_attributes['form_style'],
+				'cat_selector_style' => $block_attributes['cat_selector_style'],
+				'wrapper_classes'    => $el_class,
+				'el_id'              => wd_get_gutenberg_element_id( $block_attributes ),
 			)
 		);
 

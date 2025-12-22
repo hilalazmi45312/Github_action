@@ -234,7 +234,7 @@ class BenefitBox
             return $boxes;
         }
         
-        usort($boxes, function($a, $b) {
+        uasort($boxes, function($a, $b) {
             $order_a = isset($a['sort_order']) ? intval($a['sort_order']) : 0;
             $order_b = isset($b['sort_order']) ? intval($b['sort_order']) : 0;
             return $order_a - $order_b;

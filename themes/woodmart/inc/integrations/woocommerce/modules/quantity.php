@@ -5,8 +5,12 @@ if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
 
 if ( ! function_exists( 'woodmart_product_quantity' ) ) {
 	function woodmart_product_quantity( $product ) {
-		if ( ! $product->is_sold_individually() && ( 'variable' !== $product->get_type() || 'variation_form' === woodmart_get_opt( 'quick_shop_variable_type' ) ) && $product->is_purchasable() && $product->is_in_stock() && ! woodmart_get_opt( 'catalog_mode' ) ) {
+		if ( ! $product->is_sold_individually() && $product->is_purchasable() && $product->is_in_stock() && ! woodmart_get_opt( 'catalog_mode' ) ) {
+			woodmart_enqueue_js_script( 'woocommerce-quantity' );
 			woodmart_enqueue_js_script( 'grid-quantity' );
+		}
+
+		if ( ! $product->is_sold_individually() && ( 'variable' !== $product->get_type() || 'variation_form' === woodmart_get_opt( 'quick_shop_variable_type' ) ) && $product->is_purchasable() && $product->is_in_stock() && ! woodmart_get_opt( 'catalog_mode' ) ) {
 			woocommerce_quantity_input(
 				array(
 					'min_value' => 1,
@@ -26,6 +30,7 @@ if ( ! function_exists( 'woodmart_update_cart_item' ) ) {
 
 			$cart_item_key = $_GET['item_id'];
 			$quantity      = $_GET['qty'];
+			$min_qty       = 0;
 			$values        = array();
 			$_product      = array();
 			$cart_updated  = false;
@@ -45,8 +50,16 @@ if ( ! function_exists( 'woodmart_update_cart_item' ) ) {
 			}
 
 			if ( $passed_validation && $quantity ) {
-				WC()->cart->set_quantity( $cart_item_key, $quantity, false );
-				$cart_updated = true;
+				if ( $_product ) {
+					$min_qty = apply_filters( 'woocommerce_quantity_input_min', $_product->get_min_purchase_quantity(), $_product );
+				}
+
+				if ( $quantity < $min_qty ) {
+					WC()->cart->remove_cart_item( $cart_item_key );
+				} else {
+					WC()->cart->set_quantity( $cart_item_key, $quantity, false );
+					$cart_updated = true;
+				}
 			} elseif ( ! $quantity ) {
 				WC()->cart->remove_cart_item( $cart_item_key );
 			}

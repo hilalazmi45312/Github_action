@@ -67,6 +67,9 @@ if ( ! function_exists( 'wd_get_block_brands_attrs' ) ) {
 				'with_bg_color'              => array(
 					'type' => 'boolean',
 				),
+				'with_border'                => array(
+					'type' => 'boolean',
+				),
 				'align'                      => array(
 					'type'       => 'string',
 					'responsive' => true,
@@ -82,6 +85,7 @@ if ( ! function_exists( 'wd_get_block_brands_attrs' ) ) {
 
 		wd_get_advanced_tab_attrs( $attr );
 		wd_get_carousel_settings_attrs( $attr );
+		wd_get_border_control_attrs( $attr, 'itemsBorder' );
 		$attr->add_attr( wd_get_color_control_attrs( 'brandBgColor' ) );
 
 		return $attr->get_attr();

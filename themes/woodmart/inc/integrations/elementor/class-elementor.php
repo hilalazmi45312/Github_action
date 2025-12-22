@@ -34,6 +34,9 @@ class Elementor extends Singleton {
 		add_action( 'elementor/controls/register', array( $this, 'register_controls' ) );
 		add_action( 'elementor/elements/categories_registered', array( $this, 'add_widget_categories' ) );
 		add_action( 'elementor/init', array( $this, 'files_include' ), 20 );
+
+		// Fix image loading optimization feature that breaks some theme features.
+		add_action( 'pre_option_elementor_optimized_image_loading', '__return_zero' );
 	}
 
 	/**
@@ -134,6 +137,8 @@ class Elementor extends Singleton {
 			'integrations/elementor/elements/class-text-block',
 			'integrations/elementor/elements/class-image',
 			'integrations/elementor/elements/class-title',
+			'integrations/elementor/elements/class-page-heading',
+			'integrations/elementor/elements/class-page-title',
 			'integrations/elementor/elements/class-images-gallery',
 			'integrations/elementor/elements/class-slider',
 			'integrations/elementor/elements/class-extra-menu-list',
@@ -142,6 +147,7 @@ class Elementor extends Singleton {
 			'integrations/elementor/elements/class-sidebar',
 			'integrations/elementor/elements/class-counter',
 			'integrations/elementor/elements/class-author-area',
+			'integrations/elementor/elements/class-breadcrumbs',
 			'integrations/elementor/elements/class-countdown',
 			'integrations/elementor/elements/class-list',
 			'integrations/elementor/elements/class-twitter',
@@ -175,6 +181,7 @@ class Elementor extends Singleton {
 			'integrations/elementor/elements/class-marquee',
 			'integrations/elementor/elements/class-nested-carousel',
 			'integrations/elementor/elements/class-compare-images',
+			'integrations/elementor/elements/class-toggle',
 		);
 
 		$woo_files = array(

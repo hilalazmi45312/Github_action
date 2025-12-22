@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Geolocation class.
@@ -99,18 +99,18 @@ class WC_Local_Pickup_Plus_Geolocation {
 
 		if ( isset( $_SERVER['X-Real-IP'] ) ) {
 
-			$ip_address = $_SERVER['X-Real-IP'];
+			$ip_address = sanitize_text_field( $_SERVER['X-Real-IP'] );
 
 		} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
 
 			// proxy servers can send through this header like this: X-Forwarded-For: client1, proxy1, proxy2
 			// make sure we always only send through the first IP in the list which should always be the client IP.
-			$ip_address = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
+			$ip_address = explode( ',', sanitize_text_field( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
 			$ip_address = (string) self::is_ip_address( trim( current( $ip_address ) ) );
 
 		} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
 
-			$ip_address = $_SERVER['REMOTE_ADDR'];
+			$ip_address = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
 		}
 
 		return $ip_address;

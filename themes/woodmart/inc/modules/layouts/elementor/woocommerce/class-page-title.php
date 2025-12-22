@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Elementor widget that inserts an embeddable content into the page, from any given URL.
  */
-class Page_Title extends Widget_Base {
+class Page_Title2 extends Widget_Base {
 	/**
 	 * Get widget name.
 	 *
@@ -148,4 +148,4 @@ class Page_Title extends Widget_Base {
 	}
 }
 
-Plugin::instance()->widgets_manager->register( new Page_Title() );
+Plugin::instance()->widgets_manager->register( new Page_Title2() );

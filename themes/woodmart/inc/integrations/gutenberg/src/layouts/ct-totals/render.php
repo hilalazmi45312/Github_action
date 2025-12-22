@@ -1,7 +1,6 @@
 <?php
 
 use XTS\Modules\Layouts\Main;
-use XTS\Modules\Shipping_Progress_Bar\Main as Shipping_Progress_Bar_Module;
 
 if ( ! function_exists( 'wd_gutenberg_cart_total' ) ) {
 	function wd_gutenberg_cart_total( $block_attributes ) {
@@ -26,6 +25,8 @@ if ( ! function_exists( 'wd_gutenberg_cart_total' ) ) {
 			$shortcode_cart = new WC_Shortcode_Cart();
 			$shortcode_cart->calculate_shipping();
 		}
+
+		do_action( 'woocommerce_check_cart_items' );
 
 		WC()->cart->calculate_fees();
 		WC()->cart->calculate_shipping();

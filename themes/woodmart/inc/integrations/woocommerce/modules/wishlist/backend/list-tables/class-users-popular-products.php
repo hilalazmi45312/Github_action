@@ -158,7 +158,7 @@ class Users_Popular_Products extends WP_List_Table {
 					'woodmart_send_promotion_email'
 				)
 			),
-			esc_html( in_array( get_userdata( $item['user_id'] )->user_email, get_option( 'woodmart_wishlist_unsubscribed_users', array() ) ) ? 'xts-disabled' : '' ),
+			esc_html( woodmart_is_user_unsubscribed_from_mailing( get_userdata( $item['user_id'] )->user_email, 'XTS_Email_Wishlist_Promotional' ) ? 'xts-disabled' : '' ),
 			esc_html__( 'Create promotion', 'woodmart' )
 		);
 	}
@@ -277,7 +277,20 @@ class Users_Popular_Products extends WP_List_Table {
 			$data[] = $item;
 		}
 
-		usort( $data, array( $this, 'sort_data' ) );
+		$order_by = 'date_added';
+		$order    = 'asc';
+
+		// If orderby is set, use this as the sort column.
+		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
+			$order_by = $_GET['orderby']; // phpcs:ignore.
+		}
+
+		// If order is set use this as the order.
+		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
+			$order = $_GET['order']; // phpcs:ignore.
+		}
+
+		woodmart_sort_data( $data, $order_by, $order );
 
 		$per_page     = ! empty( get_user_meta( $user_id, 'wishlists_per_page', true) ) ? get_user_meta( $user_id, 'wishlists_per_page', true) : 20;
 		$current_page = $this->get_pagenum();
@@ -342,40 +355,5 @@ class Users_Popular_Products extends WP_List_Table {
 		}
 
 		return wp_cache_get( 'users_popular_products_list_table' );
-	}
-
-	/**
-	 * Allows you to sort the data by the variables set in the $_GET.
-	 *
-	 * @param array $a First array.
-	 * @param array $b Next array.
-	 * @return int
-	 */
-	private function sort_data( $a, $b ) {
-		// Set defaults.
-		$order_by = 'date_added';
-		$order    = 'asc';
-
-		// If orderby is set, use this as the sort column.
-		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
-			$order_by = $_GET['orderby']; // phpcs:ignore.
-		}
-
-		// If order is set use this as the order.
-		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
-			$order = $_GET['order']; // phpcs:ignore.
-		}
-
-		$result = strcmp( $a[ $order_by ], $b[ $order_by ] );
-
-		if ( is_numeric( $a[ $order_by ] ) && is_numeric( $a[ $order_by ] ) ) {
-			$result = $a[ $order_by ] - $b[ $order_by ];
-		}
-
-		if ( 'asc' === $order ) {
-			return $result;
-		}
-
-		return -$result;
 	}
 }

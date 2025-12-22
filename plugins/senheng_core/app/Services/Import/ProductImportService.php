@@ -17,6 +17,7 @@ class ProductImportService
     private bool $useEnhancedParentFinding;
     private bool $importNewOnly;
     private bool $partialUpdateExisting;
+    private bool $updateYoastFromSku;
 
     // Track products that need cleanup at the end of batch
     private array $productsNeedingCleanup = [];
@@ -32,6 +33,7 @@ class ProductImportService
         $this->useEnhancedParentFinding = $cfg['use_enhanced_parent_finding'] ?? false;
         $this->importNewOnly = $cfg['import_new_only'] ?? false;
         $this->partialUpdateExisting = $cfg['partial_update_existing'] ?? false;
+        $this->updateYoastFromSku = $cfg['update_yoast_from_sku'] ?? false;
     }
 
     /**
@@ -320,6 +322,11 @@ class ProductImportService
             $this->upsertVariation($actualParentId, $r, $sku);
         } else {
             // No existing variation found - proceed with normal flow (create parent if needed)
+            if ($this->updateYoastFromSku) {
+                Logger::info($this->logFile, "SKIPPED NEW VARIATION (update_yoast_from_sku): $title (SKU: $sku) - creation disabled in this mode.");
+                ProgressStore::inc('total_skipped');
+                return;
+            }
             $parentId = $this->ensureVariableParent($title, $r, $sku);
             $this->upsertVariation($parentId, $r, $sku);
         }   
@@ -391,9 +398,24 @@ class ProductImportService
                 Logger::info($this->logFile, "Found existing simple product for update: $title (ID: $productId)");
             }
         } else {
+            if ($this->updateYoastFromSku) {
+                Logger::info($this->logFile, "SKIPPED NEW SIMPLE PRODUCT (update_yoast_from_sku): $title (SKU: $sku) - creation disabled in this mode.");
+                ProgressStore::inc('total_skipped');
+                return;
+            }
             // Create new product
             $product = new WC_Product_Simple();
             Logger::info($this->logFile, "Creating new simple product: $title");
+        }
+
+        if ($isUpdate && $this->updateYoastFromSku) {
+            $seoTitle = trim((string)($r['seo_meta_title'] ?? ''));
+            $seoDesc = trim((string)($r['seo_meta_description'] ?? ''));
+            
+            $this->updateYoastSeo($productId, $seoTitle, $seoDesc);
+            Logger::info($this->logFile, "YOAST Update Only (Simple): Updated YOAST for ID $productId using columns 'seo_meta_title' and 'seo_meta_description'. Other fields skipped.");
+            ProgressStore::inc('total_updated');
+            return;
         }
 
         // Only update name if it's different from existing
@@ -474,8 +496,10 @@ class ProductImportService
         // This helps group variations that belong to the same product family
         $relatedParentId = $this->findParentBySKUPattern($sku);
         if ($relatedParentId) {
-            // Update the parent title to the new title
-            $this->updateParentTitle($relatedParentId, $title);
+            // Update the parent title to the new title, UNLESS we are in YOAST-only mode
+            if (!$this->updateYoastFromSku) {
+                $this->updateParentTitle($relatedParentId, $title);
+            }
             return $relatedParentId;
         }
         
@@ -1090,7 +1114,8 @@ class ProductImportService
         }
         
         // If this is an existing variation and the toggle is enabled, update parent description
-        if ($isUpdate && !$this->importNewOnly && $this->updateParentFromVariations && !empty($r['pc_detail'])) {
+        // BUT SKIP if we are in YOAST-only mode
+        if ($isUpdate && !$this->importNewOnly && $this->updateParentFromVariations && !empty($r['pc_detail']) && !$this->updateYoastFromSku) {
             $this->updateParentDescriptionFromVariation($parentId, $r['pc_detail'], $sku);
         }
 
@@ -1100,7 +1125,24 @@ class ProductImportService
         if ($varId) {
             Logger::info($this->logFile, "Found existing variation for update: $sku (ID: $varId, Parent: $parentId)");
         } else {
+            if ($this->updateYoastFromSku) {
+                Logger::info($this->logFile, "SKIPPED NEW VARIATION (update_yoast_from_sku): $sku (Parent: $parentId) - creation disabled in this mode.");
+                ProgressStore::inc('total_skipped');
+                return;
+            }
             Logger::info($this->logFile, "Creating new variation: $sku (Parent: $parentId)");
+        }
+
+        if ($isUpdate && $this->updateYoastFromSku) {
+            if ($parentId) {
+                 $seoTitle = trim((string)($r['seo_meta_title'] ?? ''));
+                 $seoDesc = trim((string)($r['seo_meta_description'] ?? ''));
+                 
+                 $this->updateYoastSeo($parentId, $seoTitle, $seoDesc);
+                 Logger::info($this->logFile, "YOAST Update Only (Variation): Updated Parent ID $parentId via Variation SKU $sku using columns 'seo_meta_title' and 'seo_meta_description'.");
+            }
+            ProgressStore::inc('total_updated');
+            return;
         }
         
         $var->set_parent_id($parentId);
@@ -1115,6 +1157,11 @@ class ProductImportService
         }
 
         $this->applyCommonFields($var, $r);
+        
+        // 1. Handle Variation Status ("Enabled" checkbox)
+        // 'draft' from resolvePostStatus means 'inactive' in CSV
+        // For variations, 'private' status = Disabled (unticked Enabled)
+        // 'publish' status = Enabled (ticked Enabled)
         
         // 1. Handle Variation Status ("Enabled" checkbox)
         // 'draft' from resolvePostStatus means 'inactive' in CSV
@@ -1291,16 +1338,6 @@ class ProductImportService
         
         // Determine if we should skip heavy meta updates (partial update mode)
         $skipHeavyMeta = $isUpdate && $this->partialUpdateExisting;
-
-        // Sales quantity meta (ALWAYS update regardless of partial update)
-        if (isset($r['sale_quantity'])) {
-            $currentSalesQuantity = get_post_meta($postId, '_sales_quantity', true);
-            $newSalesQuantity = (int)$r['sale_quantity'];
-            if ((int)$currentSalesQuantity !== $newSalesQuantity) {
-                update_post_meta($postId, '_sales_quantity', $newSalesQuantity);
-                Logger::info($this->logFile, "Updated sale_quantity for product ID $postId: $newSalesQuantity");
-            }
-        }
 
         // ACF fields
         if (function_exists('update_field') && !$skipHeavyMeta) {

@@ -19,6 +19,18 @@ class AttachmentDownloader {
 		global $wpdb;
 
 		check_ajax_referer( 'fbv_nonce', 'nonce', true );
+
+		// Check if user has permission to access Media Library
+		if ( ! current_user_can( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'errorCode'    => 403,
+					'errorMessage' => __( 'You do not have permission to download folders.', 'filebird' ),
+				),
+				403
+			);
+		}
+
 		try {
 			if ( isset( $_GET['do-download'] ) ) {
 				if ( function_exists( 'set_time_limit' ) ) {
@@ -36,7 +48,7 @@ class AttachmentDownloader {
 					$options->setSendHttpHeaders( true );
 					$options->setEnableZip64( false );
 					$options->setFlushOutput( true );
-					$zipname = $folder->name . '-' . uniqid() . '-' . time() . '.zip';
+					$zipname = $folder->name . '.zip';
 					$zipname = apply_filters( 'fbv_download_filename', $zipname, $folder );
 
 					$zip = new \ZipStream\ZipStream( $zipname, $options );
@@ -129,6 +141,18 @@ class AttachmentDownloader {
 
 	public function ajaxDownloadFolderZip() {
 		check_ajax_referer( 'fbv_nonce', 'nonce', true );
+
+		// Check if user has permission to access Media Library
+		if ( ! current_user_can( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'errorCode'    => 403,
+					'errorMessage' => __( 'You do not have permission to download folders.', 'filebird' ),
+				),
+				403
+			);
+		}
+		
 		try {
 			$wp_dir        = wp_upload_dir();
 			$upload_folder = $wp_dir['path'] . DIRECTORY_SEPARATOR;

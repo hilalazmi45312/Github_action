@@ -1,3 +1,18 @@
+Dec 5, 2025 - Version 6.5.2
+- Added: Auto rename when add new folder and it's name exists
+- Fixed: Create new folder at post-type pages
+- Improved: Security
+
+Oct 22, 2025 - Version 6.5.1 
+- Improved: Security (Access Control Authenticated (Subscriber+))
+- Fixed: Inputs were not working properly
+
+Oct 17, 2025 – Version 6.5.0
+- Added: Double click folder to rename
+- Added: Hover effects 
+- Improved: Security for Clear All Data function
+- Fixed: Warning when delete users
+
 Aug 4, 2025 - Version 6.4.9
 - Added: Accessibility improvements based on WCAG guidelines
 - Fixed: Security

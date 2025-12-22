@@ -17,7 +17,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_shipping_progress_bar' ) ) {
 		return array(
 			'base'     => 'woodmart_shipping_progress_bar',
 			'name'     => esc_html__( 'Shipping progress bars', 'woodmart' ),
-			'category' => woodmart_get_tab_title_category_for_wpb( esc_html__( 'WooCommerce', 'woodmart' ) ),
+			'category' => woodmart_get_tab_title_category_for_wpb( esc_html__( 'Site', 'woodmart' ) ),
 			'icon'     => WOODMART_ASSETS . '/images/vc-icon/wc-icons/wc-shopping-progress-bar.svg',
 			'params'   => array(
 				array(

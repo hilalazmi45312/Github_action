@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -26,7 +26,7 @@ namespace SkyVerge\WooCommerce\Local_Pickup_Plus\Fields;
 defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Data_Store\Cart_Item_Pickup_Data;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Field component to toggle shipping handling method for a cart item.
@@ -124,9 +124,9 @@ class Cart_Item_Handling_Toggle extends Field {
 					<?php if ( isset( $item_handling_labels['set_for_pickup'], $item_handling_labels['set_for_shipping'] ) ) : ?>
 
 						<small
-							style="display: <?php echo $should_be_picked_up ? 'none' : 'block'; ?>;"><?php echo $item_handling_labels['set_for_pickup']; ?></small>
+							style="display: <?php echo $should_be_picked_up ? 'none' : 'block'; ?>;"><?php echo $item_handling_labels['set_for_pickup']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
 						<small
-							style="display: <?php echo ! $should_be_picked_up ? 'none' : 'block'; ?>;"><?php echo $item_handling_labels['set_for_shipping']; ?></small>
+							style="display: <?php echo ! $should_be_picked_up ? 'none' : 'block'; ?>;"><?php echo $item_handling_labels['set_for_shipping']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
 
 					<?php endif; ?>
 

@@ -39,8 +39,8 @@ if ( ! function_exists( 'woodmart_filter_block_categories_when_post_provided' ) 
 		array_unshift(
 			$block_categories,
 			array(
-				'slug'  => 'xtemos_woo_elements',
-				'title' => __( '[XTemos] WooCommerce', 'woodmart' ),
+				'slug'  => 'xtemos_site_elements',
+				'title' => __( '[XTemos] Site', 'woodmart' ),
 				'icon'  => null,
 			),
 			array(
@@ -54,6 +54,11 @@ if ( ! function_exists( 'woodmart_filter_block_categories_when_post_provided' ) 
 				'icon'  => null,
 			),
 			array(
+				'slug'  => 'xtemos_posts_elements',
+				'title' => __( '[XTemos] Posts elements', 'woodmart' ),
+				'icon'  => null,
+			),
+			array(
 				'slug'  => 'xtemos_cart_elements',
 				'title' => __( '[XTemos] Cart', 'woodmart' ),
 				'icon'  => null,
@@ -61,6 +66,21 @@ if ( ! function_exists( 'woodmart_filter_block_categories_when_post_provided' ) 
 			array(
 				'slug'  => 'xtemos_checkout_elements',
 				'title' => __( '[XTemos] Checkout', 'woodmart' ),
+				'icon'  => null,
+			),
+			array(
+				'slug'  => 'xtemos_my_account_elements',
+				'title' => __( '[XTemos] My account', 'woodmart' ),
+				'icon'  => null,
+			),
+			array(
+				'slug'  => 'xtemos_thank_you_page_elements',
+				'title' => __( '[XTemos] Thank you page', 'woodmart' ),
+				'icon'  => null,
+			),
+			array(
+				'slug'  => 'xtemos_post_archive_elements',
+				'title' => __( '[XTemos] Post archive', 'woodmart' ),
 				'icon'  => null,
 			)
 		);
@@ -160,7 +180,6 @@ if ( ! function_exists( 'woodmart_gutenberg_custom_scripts' ) ) {
 
 		woodmart_enqueue_js_library( 'panr-parallax-bundle' );
 		woodmart_enqueue_js_script( 'portfolio-effect' );
-		woodmart_enqueue_js_script( 'portfolio-wd-nav-portfolios' );
 
 		woodmart_enqueue_js_library( 'countdown-bundle' );
 

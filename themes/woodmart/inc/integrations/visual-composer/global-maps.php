@@ -302,7 +302,7 @@ if ( ! function_exists( 'woodmart_get_vc_carousel_map' ) ) {
 			),
 			array(
 				'type'       => 'woodmart_empty_space',
-				'param_name' => 'woodmart_empty_space',
+				'param_name' => 'woodmart_empty_space_carousel',
 			),
 			array(
 				'type'             => 'woodmart_switch',
@@ -355,7 +355,7 @@ if ( ! function_exists( 'woodmart_get_vc_carousel_map' ) ) {
 					),
 				),
 				'selectors'        => array(
-					'{{WRAPPER}} .wd-nav-arrows' => array(
+					'body {{WRAPPER}} .wd-nav-arrows' => array(
 						'--wd-arrow-offset-h: {{VALUE}}{{UNIT}};',
 					),
 				),
@@ -392,7 +392,7 @@ if ( ! function_exists( 'woodmart_get_vc_carousel_map' ) ) {
 					),
 				),
 				'selectors'        => array(
-					'{{WRAPPER}} .wd-nav-arrows' => array(
+					'body {{WRAPPER}} .wd-nav-arrows' => array(
 						'--wd-arrow-offset-v: {{VALUE}}{{UNIT}};',
 					),
 				),
@@ -932,7 +932,7 @@ if ( ! function_exists( 'woodmart_contact_form_7_custom_options' ) ) {
 				'param_name' => 'button_color_tabs',
 				'tabs'       => true,
 				'value'      => array(
-					esc_html__( 'IDLE', 'woodmart' )  => 'idle',
+					esc_html__( 'Idle', 'woodmart' )  => 'idle',
 					esc_html__( 'Hover', 'woodmart' ) => 'hover',
 				),
 				'default'    => 'idle',

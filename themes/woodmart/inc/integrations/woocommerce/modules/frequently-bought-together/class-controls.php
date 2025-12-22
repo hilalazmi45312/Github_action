@@ -19,6 +19,10 @@ class Controls extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'bought_together_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		add_action( 'init', array( $this, 'add_metaboxes' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
@@ -226,7 +230,7 @@ class Controls extends Singleton {
 				<div class="options_group">
 					<p class="form-field">
 						<label><?php esc_html_e( 'Add bundles', 'woodmart' ); ?></label>
-						<select class="xts-select xts-select2 xts-autocomplete" name="xts_bundle" data-type="post" data-value="woodmart_woo_fbt" data-search="woodmart_get_post_by_query_autocomplete" data-security="<?php echo esc_attr( wp_create_nonce( 'woodmart_get_post_by_query_autocomplete_nonce' ) ); ?>">
+						<select id="xts-bundle-products" class="xts-select xts-select2 xts-autocomplete" name="xts_bundle" data-type="post" data-value="woodmart_woo_fbt" data-search="woodmart_get_post_by_query_autocomplete" data-security="<?php echo esc_attr( wp_create_nonce( 'woodmart_get_post_by_query_autocomplete_nonce' ) ); ?>">
 							<option value=""><?php esc_html_e( 'Select', 'woodmart' ); ?></option>
 						</select>
 						<input type="hidden" class="xts-product-bundles-id" name="xts_product_bundles_id" value="<?php echo esc_attr( implode( ',', $bundles_id ) ); ?>" data-product-id="<?php the_ID(); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'woodmart_product_bundles_settings' ) ); ?>">
@@ -380,9 +384,13 @@ class Controls extends Singleton {
 			return;
 		}
 
-		$bundles_id = explode( ',', sanitize_text_field( $_REQUEST['xts_product_bundles_id'] ) ); //phpcs:ignore
+		$bundles_id = sanitize_text_field( $_REQUEST['xts_product_bundles_id'] ); //phpcs:ignore
 
-		update_post_meta( $post_id, 'woodmart_fbt_bundles_id', $bundles_id );
+		if ( $bundles_id ) {
+			update_post_meta( $post_id, 'woodmart_fbt_bundles_id', explode( ',', $bundles_id ) );
+		} else {
+			delete_post_meta( $post_id, 'woodmart_fbt_bundles_id' );
+		}
 	}
 }
 

@@ -130,7 +130,11 @@ class Main extends Singleton {
 	 * @return void
 	 */
 	public function save_option_for_product( $product_id, $option ) {
-		update_post_meta( $product_id, 'woodmart_price_unit_of_measure', $option );
+		if ( $option ) {
+			update_post_meta( $product_id, 'woodmart_price_unit_of_measure', $option );
+		} else {
+			delete_post_meta( $product_id, 'woodmart_price_unit_of_measure' );
+		}
 	}
 
 	/**

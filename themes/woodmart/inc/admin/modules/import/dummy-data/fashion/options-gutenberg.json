@@ -196,5 +196,7 @@
                 "font-size": ""
             }
         }
-    ]
+    ],
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

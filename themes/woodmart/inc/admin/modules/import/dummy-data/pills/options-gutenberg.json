@@ -502,6 +502,7 @@
     "blog_columns": "4",
     "blog_spacing": "20",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "blog_excerpt_length": "100",
     "discounts_enabled": "1",
     "swatches_use_variation_images": "1",
@@ -576,5 +577,7 @@
     "blog_hide_sidebar_tablet": "1",
     "blog_hide_sidebar_mobile": "0",
     "products_columns_tablet": "3",
-    "products_columns_mobile": "2"
+    "products_columns_mobile": "2",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

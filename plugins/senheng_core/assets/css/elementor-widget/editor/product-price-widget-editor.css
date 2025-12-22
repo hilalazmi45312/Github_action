@@ -40,15 +40,6 @@
     padding-bottom: 0;
 }
 
-/* Override WooCommerce price color for this widget only */
-.sh-price-widget .woocommerce-Price-amount.amount {
-    color: #000000;
-}
-
-.sh-price-widget .woocommerce-Price-amount.amount bdi {
-    color: #000000;
-}
-
 /* Editor-specific styles */
 .elementor-widget-sh_product_price .sh-price-widget {
     /* Editor-specific overrides if needed */

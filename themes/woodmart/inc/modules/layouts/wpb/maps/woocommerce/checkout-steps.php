@@ -17,7 +17,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_checkout_steps' ) ) {
 		return array(
 			'base'        => 'woodmart_woocommerce_checkout_steps',
 			'name'        => esc_html__( 'Checkout steps', 'woodmart' ),
-			'category'    => woodmart_get_tab_title_category_for_wpb( esc_html__( 'WooCommerce', 'woodmart' ) ),
+			'category'    => woodmart_get_tab_title_category_for_wpb( esc_html__( 'Site', 'woodmart' ) ),
 			'description' => esc_html__( 'Cart -> Checkout -> Complete', 'woodmart' ),
 			'icon'        => WOODMART_ASSETS . '/images/vc-icon/wc-icons/wc-checkout-steps.svg',
 			'params'      => array(

@@ -6,7 +6,7 @@
  * @author      StoreApps
  * @package     woocommerce-smart-coupons/includes
  * @since       5.0.0
- * @version     2.1.0
+ * @version     2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -89,180 +89,184 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @param WC_Coupon $coupon The coupon object.
 		 */
 		public function usage_restriction( $coupon_id = 0, $coupon = null ) {
-			if ( ! is_a( $coupon, 'WC_Coupon' ) || empty( $coupon_id ) ) {
-				return;
-			}
+			try {
+				if ( ! is_a( $coupon, 'WC_Coupon' ) || empty( $coupon_id ) ) {
+					return;
+				}
 
-			if ( ! is_a( $coupon, 'WC_Coupon' ) ) {
-				$coupon = ( ! empty( $coupon_id ) ) ? new WC_Coupon( $coupon_id ) : null;
-			}
+				if ( ! is_a( $coupon, 'WC_Coupon' ) ) {
+					$coupon = ( ! empty( $coupon_id ) ) ? new WC_Coupon( $coupon_id ) : null;
+				}
 
-			if ( $this->is_callable( $coupon, 'get_meta' ) ) {
-				$product_quantity_restrictions = $coupon->get_meta( 'wc_sc_product_quantity_restrictions' );
-			} else {
-				$product_quantity_restrictions = $this->get_post_meta( $coupon_id, 'wc_sc_product_quantity_restrictions', true );
-			}
+				if ( $this->is_callable( $coupon, 'get_meta' ) ) {
+					$product_quantity_restrictions = $coupon->get_meta( 'wc_sc_product_quantity_restrictions' );
+				} else {
+					$product_quantity_restrictions = $this->get_post_meta( $coupon_id, 'wc_sc_product_quantity_restrictions', true );
+				}
 
-			if ( ! is_array( $product_quantity_restrictions ) ) {
-				$product_quantity_restrictions = array();
-			}
+				if ( ! is_array( $product_quantity_restrictions ) ) {
+					$product_quantity_restrictions = array();
+				}
 
-			$cart_min_quantity                  = ! empty( $product_quantity_restrictions['values']['cart']['min'] ) ? intval( $product_quantity_restrictions['values']['cart']['min'] ) : '';
-			$cart_max_quantity                  = ! empty( $product_quantity_restrictions['values']['cart']['max'] ) ? intval( $product_quantity_restrictions['values']['cart']['max'] ) : '';
-			$product_quantity_restrictions_type = ! empty( $product_quantity_restrictions['type'] ) ? $product_quantity_restrictions['type'] : 'cart';
-			?>
-			<div class="options_group smart-coupons-field">
-				<h4 style="padding-left: 10px;"><?php echo esc_html__( 'Product quantity based restrictions', 'woocommerce-smart-coupons' ); ?></h4>
-				<p class="form-field">
-					<span class='left_column'><label for="wc_sc_product_quantity_type_cart"><?php echo esc_html__( 'Validate quantity of', 'woocommerce-smart-coupons' ); ?></label></span>
-					<label for="wc_sc_product_quantity_type_cart" class="cart_quantity">
-						<input type="radio" name="wc_sc_product_quantity_restrictions[type]" id="wc_sc_product_quantity_type_cart" class="wc_sc_product_quantity_type wc_sc_product_quantity_type_cart" value="cart" <?php checked( 'cart', $product_quantity_restrictions_type, true ); ?> />
-						<?php echo esc_html__( 'Cart', 'woocommerce-smart-coupons' ); ?>
-					</label>
-					<label for="wc_sc_product_quantity_type_product" class="product_quantity">
-						<input type="radio" name="wc_sc_product_quantity_restrictions[type]" id="wc_sc_product_quantity_type_product" class="wc_sc_product_quantity_type wc_sc_product_quantity_type_product" value="product" <?php checked( 'product', $product_quantity_restrictions_type, true ); ?>>
-						<?php echo esc_html__( 'Product', 'woocommerce-smart-coupons' ); ?>
-					</label>
-					<?php
-					$tooltip_text = esc_html__( 'Choose whether to validate the quantity, cart-wise or product-wise', 'woocommerce-smart-coupons' );
-                    echo wc_help_tip($tooltip_text); // phpcs:ignore ?>
-				</p>
-				<p class="form-field wc_sc_cart_quantity" style="<?php echo ( 'cart' === $product_quantity_restrictions_type ) ? '' : 'display: none;'; ?>">
-					<label for="wc_sc_min_product_quantity"><?php echo esc_html__( 'Minimum quantity', 'woocommerce-smart-coupons' ); ?></label>
-					<input type="number" name="wc_sc_product_quantity_restrictions[values][cart][min]" id="wc_sc_min_product_quantity" class="wc_sc_min_product_quantity" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $cart_min_quantity ); ?>" min="0">
-				</p>
-				<p class="form-field wc_sc_cart_quantity" style="<?php echo ( 'cart' === $product_quantity_restrictions_type ) ? '' : 'display: none;'; ?>">
-					<label for="wc_sc_max_product_quantity"><?php echo esc_html__( 'Maximum quantity', 'woocommerce-smart-coupons' ); ?></label>
-					<input type="number" name="wc_sc_product_quantity_restrictions[values][cart][max]" id="wc_sc_max_product_quantity" class="wc_sc_max_product_quantity" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $cart_max_quantity ); ?>" min="0">
-				</p>
-				<div class=" wc_sc_product_quantity" style="<?php echo isset( $product_quantity_restrictions['type'] ) && ( 'product' === $product_quantity_restrictions['type'] ) ? '' : 'display: none;'; ?>">
-					<?php
-					$product_quantities = ! empty( $product_quantity_restrictions['values']['product'] ) ? $product_quantity_restrictions['values']['product'] : array();
-					if ( ! empty( $product_quantities ) ) {
-						$display_label = true;
-						foreach ( $product_quantities as $product_id => $value ) {
-							if ( 0 !== $product_id ) {
-								$product = wc_get_product( $product_id );
-								if ( ! empty( $product ) && is_object( $product ) ) {
-									$product_name         = is_callable( array( $product, 'get_name' ) ) ? $product->get_name() : '';
-									$product_max_quantity = ! empty( $value['max'] ) ? intval( $value['max'] ) : '';
-									$product_min_quantity = ! empty( $value['min'] ) ? intval( $value['min'] ) : '';
-									?>
-									<p class="form-field" data-index="<?php echo esc_attr( $product_id ); ?>">
-										<?php if ( true === $display_label ) { ?>
-											<label><?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?></label>
-										<?php } ?>
-										<span>
-											<input type="text" name="wc_sc_product_quantity_restrictions[values][product][<?php echo esc_attr( $product_id ); ?>][product_id]" placeholder="<?php echo esc_attr( $product_id ); ?>" value="<?php echo esc_attr( $product_name ); ?>" disabled>
-											<input type="number" name="wc_sc_product_quantity_restrictions[values][product][<?php echo esc_attr( $product_id ); ?>][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $product_min_quantity ); ?>" min="0">
-											<input type="number" name="wc_sc_product_quantity_restrictions[values][product][<?php echo esc_attr( $product_id ); ?>][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $product_max_quantity ); ?>" min="0">
-										</span>
-									</p>
-									<?php
-								}
-							}
-							$display_label = false;
-						}
-					} else {
-						?>
-						<p class="form-field">
-							<span class='left_column'><label><?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?></label></span>
-							<label class="hypertext_css wc_sc_click_select_product">
-								<?php echo esc_html__( 'Please select some products in "Products" restrictions above...', 'woocommerce-smart-coupons' ); ?>
-							</label>
-						</p>
+				$cart_min_quantity                  = ! empty( $product_quantity_restrictions['values']['cart']['min'] ) ? intval( $product_quantity_restrictions['values']['cart']['min'] ) : '';
+				$cart_max_quantity                  = ! empty( $product_quantity_restrictions['values']['cart']['max'] ) ? intval( $product_quantity_restrictions['values']['cart']['max'] ) : '';
+				$product_quantity_restrictions_type = ! empty( $product_quantity_restrictions['type'] ) ? $product_quantity_restrictions['type'] : 'cart';
+				?>
+				<div class="options_group smart-coupons-field">
+					<h4 style="padding-left: 10px;"><?php echo esc_html__( 'Product quantity based restrictions', 'woocommerce-smart-coupons' ); ?></h4>
+					<p class="form-field">
+						<span class='left_column'><label for="wc_sc_product_quantity_type_cart"><?php echo esc_html__( 'Validate quantity of', 'woocommerce-smart-coupons' ); ?></label></span>
+						<label for="wc_sc_product_quantity_type_cart" class="cart_quantity">
+							<input type="radio" name="wc_sc_product_quantity_restrictions[type]" id="wc_sc_product_quantity_type_cart" class="wc_sc_product_quantity_type wc_sc_product_quantity_type_cart" value="cart" <?php checked( 'cart', $product_quantity_restrictions_type, true ); ?> />
+							<?php echo esc_html__( 'Cart', 'woocommerce-smart-coupons' ); ?>
+						</label>
+						<label for="wc_sc_product_quantity_type_product" class="product_quantity">
+							<input type="radio" name="wc_sc_product_quantity_restrictions[type]" id="wc_sc_product_quantity_type_product" class="wc_sc_product_quantity_type wc_sc_product_quantity_type_product" value="product" <?php checked( 'product', $product_quantity_restrictions_type, true ); ?>>
+							<?php echo esc_html__( 'Product', 'woocommerce-smart-coupons' ); ?>
+						</label>
 						<?php
-					}
-					?>
-				</div>
-				<div class=" wc_sc_category_quantity" style="<?php echo isset( $product_quantity_restrictions['type'] ) && ( 'product' === $product_quantity_restrictions['type'] ) ? '' : 'display: none;'; ?>">
-					<?php
-					$product_category_quantities = ! empty( $product_quantity_restrictions['values']['product_category'] ) ? $product_quantity_restrictions['values']['product_category'] : array();
-					if ( ! empty( $product_category_quantities ) ) {
-						$i = 0;
-						foreach ( $product_category_quantities as $category_id => $value ) {
-							if ( 0 !== $category_id ) {
-								$term = get_term_by( 'id', $category_id, 'product_cat', ARRAY_A );
-								if ( ! empty( $term ) && is_array( $term ) ) {
-									$category_name = ! empty( $term['name'] ) ? $term['name'] : '';
-									?>
-									<p class="form-field" data-index="<?php echo esc_attr( $category_id ); ?>">
-										<?php if ( 0 === $i ) { ?>
-											<label><?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?></label>
-										<?php } ?>
-										<span>
-											<input type="text" name="wc_sc_product_quantity_restrictions[values][product_category][<?php echo esc_attr( $category_id ); ?>][category_id]" placeholder="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $category_name ); ?>" disabled>
-											<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][<?php echo esc_attr( $category_id ); ?>][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( ! empty( $value['min'] ) ? intval( $value['min'] ) : '' ); ?>" min="0">
-											<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][<?php echo esc_attr( $category_id ); ?>][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( ! empty( $value['max'] ) ? intval( $value['max'] ) : '' ); ?>" min="0">
-										</span>
-									</p>
-									<?php
-
-								}
-							}
-							$i++;
-						}
-					} else {
-						?>
-						<p class="form-field">
-							<span class='left_column'><label><?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?></label></span>
-							<label for="product_categories" class="hypertext_css">
-								<?php echo esc_html__( 'Please select some categories in "Product categories" restrictions above...', 'woocommerce-smart-coupons' ); ?>
-							</label>
-						</p>
+						$tooltip_text = esc_html__( 'Choose whether to validate the quantity, cart-wise or product-wise', 'woocommerce-smart-coupons' );
+						echo wc_help_tip($tooltip_text); // phpcs:ignore ?>
+					</p>
+					<p class="form-field wc_sc_cart_quantity" style="<?php echo ( 'cart' === $product_quantity_restrictions_type ) ? '' : 'display: none;'; ?>">
+						<label for="wc_sc_min_product_quantity"><?php echo esc_html__( 'Minimum quantity', 'woocommerce-smart-coupons' ); ?></label>
+						<input type="number" name="wc_sc_product_quantity_restrictions[values][cart][min]" id="wc_sc_min_product_quantity" class="wc_sc_min_product_quantity" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $cart_min_quantity ); ?>" min="0">
+					</p>
+					<p class="form-field wc_sc_cart_quantity" style="<?php echo ( 'cart' === $product_quantity_restrictions_type ) ? '' : 'display: none;'; ?>">
+						<label for="wc_sc_max_product_quantity"><?php echo esc_html__( 'Maximum quantity', 'woocommerce-smart-coupons' ); ?></label>
+						<input type="number" name="wc_sc_product_quantity_restrictions[values][cart][max]" id="wc_sc_max_product_quantity" class="wc_sc_max_product_quantity" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $cart_max_quantity ); ?>" min="0">
+					</p>
+					<div class=" wc_sc_product_quantity" style="<?php echo isset( $product_quantity_restrictions['type'] ) && ( 'product' === $product_quantity_restrictions['type'] ) ? '' : 'display: none;'; ?>">
 						<?php
-					}
-					?>
+						$product_quantities = ! empty( $product_quantity_restrictions['values']['product'] ) ? $product_quantity_restrictions['values']['product'] : array();
+						if ( ! empty( $product_quantities ) ) {
+							$display_label = true;
+							foreach ( $product_quantities as $product_id => $value ) {
+								if ( 0 !== $product_id ) {
+									$product = wc_get_product( $product_id );
+									if ( ! empty( $product ) && is_object( $product ) ) {
+										$product_name         = is_callable( array( $product, 'get_name' ) ) ? $product->get_name() : '';
+										$product_max_quantity = ! empty( $value['max'] ) ? intval( $value['max'] ) : '';
+										$product_min_quantity = ! empty( $value['min'] ) ? intval( $value['min'] ) : '';
+										?>
+										<p class="form-field" data-index="<?php echo esc_attr( $product_id ); ?>">
+											<?php if ( true === $display_label ) { ?>
+												<label><?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?></label>
+											<?php } ?>
+											<span>
+												<input type="text" name="wc_sc_product_quantity_restrictions[values][product][<?php echo esc_attr( $product_id ); ?>][product_id]" placeholder="<?php echo esc_attr( $product_id ); ?>" value="<?php echo esc_attr( $product_name ); ?>" disabled>
+												<input type="number" name="wc_sc_product_quantity_restrictions[values][product][<?php echo esc_attr( $product_id ); ?>][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $product_min_quantity ); ?>" min="0">
+												<input type="number" name="wc_sc_product_quantity_restrictions[values][product][<?php echo esc_attr( $product_id ); ?>][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( $product_max_quantity ); ?>" min="0">
+											</span>
+										</p>
+										<?php
+									}
+								}
+								$display_label = false;
+							}
+						} else {
+							?>
+							<p class="form-field">
+								<span class='left_column'><label><?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?></label></span>
+								<label class="hypertext_css wc_sc_click_select_product">
+									<?php echo esc_html__( 'Please select some products in "Products" restrictions above...', 'woocommerce-smart-coupons' ); ?>
+								</label>
+							</p>
+							<?php
+						}
+						?>
+					</div>
+					<div class=" wc_sc_category_quantity" style="<?php echo isset( $product_quantity_restrictions['type'] ) && ( 'product' === $product_quantity_restrictions['type'] ) ? '' : 'display: none;'; ?>">
+						<?php
+						$product_category_quantities = ! empty( $product_quantity_restrictions['values']['product_category'] ) ? $product_quantity_restrictions['values']['product_category'] : array();
+						if ( ! empty( $product_category_quantities ) ) {
+							$i = 0;
+							foreach ( $product_category_quantities as $category_id => $value ) {
+								if ( 0 !== $category_id ) {
+									$term = get_term_by( 'id', $category_id, 'product_cat', ARRAY_A );
+									if ( ! empty( $term ) && is_array( $term ) ) {
+										$category_name = ! empty( $term['name'] ) ? $term['name'] : '';
+										?>
+										<p class="form-field" data-index="<?php echo esc_attr( $category_id ); ?>">
+											<?php if ( 0 === $i ) { ?>
+												<label><?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?></label>
+											<?php } ?>
+											<span>
+												<input type="text" name="wc_sc_product_quantity_restrictions[values][product_category][<?php echo esc_attr( $category_id ); ?>][category_id]" placeholder="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $category_name ); ?>" disabled>
+												<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][<?php echo esc_attr( $category_id ); ?>][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( ! empty( $value['min'] ) ? intval( $value['min'] ) : '' ); ?>" min="0">
+												<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][<?php echo esc_attr( $category_id ); ?>][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" value="<?php echo esc_attr( ! empty( $value['max'] ) ? intval( $value['max'] ) : '' ); ?>" min="0">
+											</span>
+										</p>
+										<?php
+
+									}
+								}
+								$i++;
+							}
+						} else {
+							?>
+							<p class="form-field">
+								<span class='left_column'><label><?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?></label></span>
+								<label for="product_categories" class="hypertext_css">
+									<?php echo esc_html__( 'Please select some categories in "Product categories" restrictions above...', 'woocommerce-smart-coupons' ); ?>
+								</label>
+							</p>
+							<?php
+						}
+						?>
+					</div>
 				</div>
-			</div>
 
 
-			<div class="wc_sc_auto_generate_product_quantity" style="display: none;">
-				<p class="form-field" data-index="{i}">
-					<label>{p}</label>
-					<span>
-						<input type="text" name="wc_sc_product_quantity_restrictions[values][product][{i}][product_id]" placeholder="{i}" value="{n}" disabled>
-						<input type="number" name="wc_sc_product_quantity_restrictions[values][product][{i}][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" min="0">
-						<input type="number" name="wc_sc_product_quantity_restrictions[values][product][{i}][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" min="0">
-					</span>
-				</p>
-			</div>
+				<div class="wc_sc_auto_generate_product_quantity" style="display: none;">
+					<p class="form-field" data-index="{i}">
+						<label>{p}</label>
+						<span>
+							<input type="text" name="wc_sc_product_quantity_restrictions[values][product][{i}][product_id]" placeholder="{i}" value="{n}" disabled>
+							<input type="number" name="wc_sc_product_quantity_restrictions[values][product][{i}][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" min="0">
+							<input type="number" name="wc_sc_product_quantity_restrictions[values][product][{i}][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" min="0">
+						</span>
+					</p>
+				</div>
 
 
-			<div class="wc_sc_auto_generate_category_quantity" style="display: none;">
-				<p class="form-field" data-index="{i}">
-					<label>{c}</label>
-					<span>
-						<input type="text" name="wc_sc_product_quantity_restrictions[values][product_category][{i}][category_id]" placeholder="{i}" value="{n}" disabled>
-						<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][{i}][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" min="0">
-						<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][{i}][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" min="0">
-					</span>
-				</p>
-			</div>
+				<div class="wc_sc_auto_generate_category_quantity" style="display: none;">
+					<p class="form-field" data-index="{i}">
+						<label>{c}</label>
+						<span>
+							<input type="text" name="wc_sc_product_quantity_restrictions[values][product_category][{i}][category_id]" placeholder="{i}" value="{n}" disabled>
+							<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][{i}][min]" class="product_min_quantity_field" placeholder="<?php echo esc_attr__( 'No minimum', 'woocommerce-smart-coupons' ); ?>" min="0">
+							<input type="number" name="wc_sc_product_quantity_restrictions[values][product_category][{i}][max]" class="product_max_quantity_field" placeholder="<?php echo esc_attr__( 'No maximum', 'woocommerce-smart-coupons' ); ?>" min="0">
+						</span>
+					</p>
+				</div>
 
-			<div class="wc_sc_empty_products" style="display: none;">
-				<p class="form-field">
-					<span class='left_column'><label><?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?></label></span>
-					<label class="hypertext_css wc_sc_click_select_product">
-						<?php echo esc_html__( 'Please select some products', 'woocommerce-smart-coupons' ); ?>
-					</label>
-				</p>
-			</div>
-			<div class="wc_sc_empty_categories" style="display: none;">
-				<p class="form-field">
-					<span class='left_column'><label><?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?></label></span>
-					<label for="product_categories" class="hypertext_css">
-						<?php echo esc_html__( 'Please select some categories', 'woocommerce-smart-coupons' ); ?>
-					</label>
-				</p>
-			</div>
-			<div class="wc_sc_product_section_title" style="display: none;">
-				<?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?>
-			</div>
-			<div class="wc_sc_category_section_title" style="display: none;">
-				<?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?>
-			</div>
-			<?php
+				<div class="wc_sc_empty_products" style="display: none;">
+					<p class="form-field">
+						<span class='left_column'><label><?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?></label></span>
+						<label class="hypertext_css wc_sc_click_select_product">
+							<?php echo esc_html__( 'Please select some products', 'woocommerce-smart-coupons' ); ?>
+						</label>
+					</p>
+				</div>
+				<div class="wc_sc_empty_categories" style="display: none;">
+					<p class="form-field">
+						<span class='left_column'><label><?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?></label></span>
+						<label for="product_categories" class="hypertext_css">
+							<?php echo esc_html__( 'Please select some categories', 'woocommerce-smart-coupons' ); ?>
+						</label>
+					</p>
+				</div>
+				<div class="wc_sc_product_section_title" style="display: none;">
+					<?php echo esc_html__( 'Products', 'woocommerce-smart-coupons' ); ?>
+				</div>
+				<div class="wc_sc_category_section_title" style="display: none;">
+					<?php echo esc_html__( 'Categories', 'woocommerce-smart-coupons' ); ?>
+				</div>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 
@@ -307,8 +311,8 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 			<script type="text/javascript">
 				jQuery(document).ready(function ($) {
 					/**
-					 *Change quantity type cart or product.
-					 */
+					*Change quantity type cart or product.
+					*/
 					$(document).on('change', '.wc_sc_product_quantity_type', function () {
 						let value = $('input[name="wc_sc_product_quantity_restrictions[type]"]:checked').val();
 						if ("product" === value) {
@@ -320,8 +324,8 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 						}
 					});
 					/**
-					 *Auto add product field.
-					 */
+					*Auto add product field.
+					*/
 					$(document).on('change', 'select[name="product_ids[]"]', function () {
 						var product_element_count = 0;
 						$('.wc_sc_product_quantity').empty();
@@ -353,8 +357,8 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 					});
 
 					/**
-					 *Auto add category field.
-					 */
+					*Auto add category field.
+					*/
 					$(document).on('change', 'select[name="product_categories[]"]', function () {
 						var category_element_count = 0;
 						$('.wc_sc_category_quantity').empty();
@@ -404,54 +408,57 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @param WC_Coupon $coupon The coupon object.
 		 */
 		public function process_meta( $post_id = 0, $coupon = null ) {
+			try {
+				if ( empty( $post_id ) ) {
+					return;
+				}
 
-			if ( empty( $post_id ) ) {
-				return;
-			}
+				$coupon = new WC_Coupon( $coupon );
 
-			$coupon = new WC_Coupon( $coupon );
+				$product_quantity_restrictions = (isset($_POST['wc_sc_product_quantity_restrictions'])) ? wc_clean(wp_unslash($_POST['wc_sc_product_quantity_restrictions'])) : array(); // phpcs:ignore
 
-            $product_quantity_restrictions = (isset($_POST['wc_sc_product_quantity_restrictions'])) ? wc_clean(wp_unslash($_POST['wc_sc_product_quantity_restrictions'])) : array(); // phpcs:ignore
+				if ( ! isset( $product_quantity_restrictions['condition'] ) ) {
+					$product_quantity_restrictions['condition'] = 'any'; // Values: any, all.
+				}
 
-			if ( ! isset( $product_quantity_restrictions['condition'] ) ) {
-				$product_quantity_restrictions['condition'] = 'any'; // Values: any, all.
-			}
+				if ( isset( $product_quantity_restrictions['values']['product']['{i}'] ) ) {
+					unset( $product_quantity_restrictions['values']['product']['{i}'] );
+				}
 
-			if ( isset( $product_quantity_restrictions['values']['product']['{i}'] ) ) {
-				unset( $product_quantity_restrictions['values']['product']['{i}'] );
-			}
+				if ( isset( $product_quantity_restrictions['values']['product_category']['{i}'] ) ) {
+					unset( $product_quantity_restrictions['values']['product_category']['{i}'] );
+				}
 
-			if ( isset( $product_quantity_restrictions['values']['product_category']['{i}'] ) ) {
-				unset( $product_quantity_restrictions['values']['product_category']['{i}'] );
-			}
-
-			if ( ! empty( $product_quantity_restrictions ) ) {
-				foreach ( $product_quantity_restrictions as $restriction_key => $restrictions ) {
-					if ( 'values' === $restriction_key ) {
-						// Max quantity feature not included for product quantity.
-						foreach ( $restrictions['product'] as $id => $restriction ) {
-							$id = absint( $id );
-							if ( 0 !== $id && isset( $product_quantity_restrictions['values']['product'][ $id ]['max'] ) ) {
-								$product_quantity_restrictions['values']['product'][ $id ]['max'] = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : '';
+				if ( ! empty( $product_quantity_restrictions ) ) {
+					foreach ( $product_quantity_restrictions as $restriction_key => $restrictions ) {
+						if ( 'values' === $restriction_key ) {
+							// Max quantity feature not included for product quantity.
+							foreach ( $restrictions['product'] as $id => $restriction ) {
+								$id = absint( $id );
+								if ( 0 !== $id && isset( $product_quantity_restrictions['values']['product'][ $id ]['max'] ) ) {
+									$product_quantity_restrictions['values']['product'][ $id ]['max'] = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : '';
+								}
 							}
-						}
 
-						// Max quantity feature not included for product category quantity.
-						foreach ( $restrictions['product_category'] as $id => $restriction ) {
-							$id = absint( $id );
-							if ( 0 !== $id && isset( $product_quantity_restrictions['values']['product_category'][ $id ]['max'] ) ) {
-								$product_quantity_restrictions['values']['product_category'][ $id ]['max'] = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : '';
+							// Max quantity feature not included for product category quantity.
+							foreach ( $restrictions['product_category'] as $id => $restriction ) {
+								$id = absint( $id );
+								if ( 0 !== $id && isset( $product_quantity_restrictions['values']['product_category'][ $id ]['max'] ) ) {
+									$product_quantity_restrictions['values']['product_category'][ $id ]['max'] = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : '';
+								}
 							}
 						}
 					}
 				}
-			}
 
-			if ( $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
-				$coupon->update_meta_data( 'wc_sc_product_quantity_restrictions', $product_quantity_restrictions );
-				$coupon->save();
-			} else {
-				$this->update_post_meta( $post_id, 'wc_sc_product_quantity_restrictions', $product_quantity_restrictions );
+				if ( $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
+					$coupon->update_meta_data( 'wc_sc_product_quantity_restrictions', $product_quantity_restrictions );
+					$coupon->save();
+				} else {
+					$this->update_post_meta( $post_id, 'wc_sc_product_quantity_restrictions', $product_quantity_restrictions );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -621,6 +628,7 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 */
 		public function generate_coupon_meta( $data = array(), $post = array() ) {
 
+			$data['wc_sc_product_quantity_restrictions'] = array();
 			if ( isset( $post['wc_sc_product_quantity_restrictions'] ) && is_array( $post['wc_sc_product_quantity_restrictions'] ) ) {
 				$data['wc_sc_product_quantity_restrictions'] = $this->product_quantity_restrictions_encode( $post['wc_sc_product_quantity_restrictions'] );
 			}
@@ -646,14 +654,17 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @return string Processed meta value
 		 */
 		public function export_coupon_meta( $meta_value = '', $args = array() ) {
+			try {
+				$index       = ( ! empty( $args['index'] ) ) ? $args['index'] : -1;
+				$meta_keys   = ( ! empty( $args['meta_keys'] ) ) ? $args['meta_keys'] : array();
+				$meta_values = ( ! empty( $args['meta_values'] ) ) ? $args['meta_values'] : array();
 
-			$index       = ( ! empty( $args['index'] ) ) ? $args['index'] : -1;
-			$meta_keys   = ( ! empty( $args['meta_keys'] ) ) ? $args['meta_keys'] : array();
-			$meta_values = ( ! empty( $args['meta_values'] ) ) ? $args['meta_values'] : array();
-
-			if ( $index >= 0 && ! empty( $meta_keys[ $index ] ) && 'wc_sc_product_quantity_restrictions' === $meta_keys[ $index ] && ! empty( $meta_values[ $index ] ) ) {
-				$meta_value = maybe_unserialize( $meta_values[ $index ] ); // phpcs:ignore
-				$meta_value = $this->product_quantity_restrictions_encode( $meta_value );
+				if ( $index >= 0 && ! empty( $meta_keys[ $index ] ) && 'wc_sc_product_quantity_restrictions' === $meta_keys[ $index ] && ! empty( $meta_values[ $index ] ) ) {
+					$meta_value = maybe_unserialize( $meta_values[ $index ] ); // phpcs:ignore
+					$meta_value = $this->product_quantity_restrictions_encode( $meta_value );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $meta_value;
@@ -698,34 +709,36 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @param  array $args The arguments.
 		 */
 		public function copy_meta( $args = array() ) {
+			try {
+				$new_coupon_id = ( ! empty( $args['new_coupon_id'] ) ) ? absint( $args['new_coupon_id'] ) : 0;
+				$coupon        = ( ! empty( $args['ref_coupon'] ) ) ? $args['ref_coupon'] : false;
 
-			$new_coupon_id = ( ! empty( $args['new_coupon_id'] ) ) ? absint( $args['new_coupon_id'] ) : 0;
-			$coupon        = ( ! empty( $args['ref_coupon'] ) ) ? $args['ref_coupon'] : false;
+				if ( empty( $new_coupon_id ) || empty( $coupon ) ) {
+					return;
+				}
 
-			if ( empty( $new_coupon_id ) || empty( $coupon ) ) {
-				return;
+				$add_product_details = array();
+				if ( $this->is_wc_gte_30() && $this->is_callable( $coupon, 'get_meta' ) && $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
+					$add_product_details = $coupon->get_meta( 'wc_sc_product_quantity_restrictions' );
+					$coupon->update_meta_data( 'wc_sc_product_quantity_restrictions', $add_product_details );
+					$coupon->save();
+				} else {
+					$old_coupon_id       = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+					$add_product_details = $this->get_post_meta( $old_coupon_id, 'wc_sc_product_quantity_restrictions', true );
+					$this->update_post_meta( $new_coupon_id, 'wc_sc_product_quantity_restrictions', $add_product_details );
+				}
+
+				$new_coupon = new WC_Coupon( $new_coupon_id );
+
+				if ( $this->is_callable( $new_coupon, 'update_meta_data' ) && $this->is_callable( $new_coupon, 'save' ) ) {
+					$new_coupon->update_meta_data( 'wc_sc_product_quantity_restrictions', $add_product_details );
+					$new_coupon->save();
+				} else {
+					update_post_meta( $new_coupon_id, 'wc_sc_product_quantity_restrictions', $add_product_details );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			$add_product_details = array();
-			if ( $this->is_wc_gte_30() && $this->is_callable( $coupon, 'get_meta' ) && $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
-				$add_product_details = $coupon->get_meta( 'wc_sc_product_quantity_restrictions' );
-				$coupon->update_meta_data( 'wc_sc_product_quantity_restrictions', $add_product_details );
-				$coupon->save();
-			} else {
-				$old_coupon_id       = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-				$add_product_details = $this->get_post_meta( $old_coupon_id, 'wc_sc_product_quantity_restrictions', true );
-				$this->update_post_meta( $new_coupon_id, 'wc_sc_product_quantity_restrictions', $add_product_details );
-			}
-
-			$new_coupon = new WC_Coupon( $new_coupon_id );
-
-			if ( $this->is_callable( $new_coupon, 'update_meta_data' ) && $this->is_callable( $new_coupon, 'save' ) ) {
-				$new_coupon->update_meta_data( 'wc_sc_product_quantity_restrictions', $add_product_details );
-				$new_coupon->save();
-			} else {
-				update_post_meta( $new_coupon_id, 'wc_sc_product_quantity_restrictions', $add_product_details );
-			}
-
 		}
 
 		/**
@@ -737,52 +750,57 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @throws Exception If empty product quantities.
 		 */
 		public function process_product_quantities( $product_quantity_restrictions = array(), $params = array() ) {
-			if ( ! empty( $product_quantity_restrictions ) ) {
-				$status            = array();
-				$condition         = ! empty( $params['condition'] ) ? $params['condition'] : 'any';
-				$items_to_validate = ! empty( $params['items_to_validate'] ) ? $params['items_to_validate'] : array();
-				foreach ( $product_quantity_restrictions as $id => $restriction ) {
-					if ( 0 === $id ) {
-						continue;
-					}
-					$min_quantity            = ! empty( $restriction['min'] ) ? intval( $restriction['min'] ) : 0;
-					$max_quantity            = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : 0;
-					$cart_product_quantities = $this->cart_product_quantities( $items_to_validate );
-					$product_quantity        = ! empty( $cart_product_quantities[ $id ] ) ? intval( $cart_product_quantities[ $id ] ) : 1;
+			try {
+				if ( ! empty( $product_quantity_restrictions ) ) {
+					$status            = array();
+					$condition         = ! empty( $params['condition'] ) ? $params['condition'] : 'any';
+					$items_to_validate = ! empty( $params['items_to_validate'] ) ? $params['items_to_validate'] : array();
+					foreach ( $product_quantity_restrictions as $id => $restriction ) {
+						if ( 0 === $id ) {
+							continue;
+						}
+						$min_quantity            = ! empty( $restriction['min'] ) ? intval( $restriction['min'] ) : 0;
+						$max_quantity            = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : 0;
+						$cart_product_quantities = $this->cart_product_quantities( $items_to_validate );
+						$product_quantity        = ! empty( $cart_product_quantities[ $id ] ) ? intval( $cart_product_quantities[ $id ] ) : 1;
 
-					if ( empty( $min_quantity ) && empty( $max_quantity ) ) {
-						$status[] = 'empty';
-					} elseif ( empty( $min_quantity ) && ! empty( $max_quantity ) && $product_quantity <= $max_quantity ) {
-						$status[] = 'true';
-					} elseif ( empty( $max_quantity ) && ! empty( $min_quantity ) && $product_quantity >= $min_quantity ) {
-						$status[] = 'true';
-					} elseif ( ! empty( $min_quantity ) && ! empty( $max_quantity ) && $product_quantity >= $min_quantity && $product_quantity <= $max_quantity ) {
-						$status[] = 'true';
-					} else {
-						$status[] = 'false';
+						if ( empty( $min_quantity ) && empty( $max_quantity ) ) {
+							$status[] = 'empty';
+						} elseif ( empty( $min_quantity ) && ! empty( $max_quantity ) && $product_quantity <= $max_quantity ) {
+							$status[] = 'true';
+						} elseif ( empty( $max_quantity ) && ! empty( $min_quantity ) && $product_quantity >= $min_quantity ) {
+							$status[] = 'true';
+						} elseif ( ! empty( $min_quantity ) && ! empty( $max_quantity ) && $product_quantity >= $min_quantity && $product_quantity <= $max_quantity ) {
+							$status[] = 'true';
+						} else {
+							$status[] = 'false';
+						}
+					}
+
+					switch ( $condition ) {
+						case 'all':
+							if ( in_array( 'false', $status, true ) ) {
+								return false;
+							} elseif ( in_array( 'true', $status, true ) ) {
+								return true;
+							} else {
+								return 'empty';
+							}
+						default:
+						case 'any':
+							if ( in_array( 'true', $status, true ) ) {
+								return true;
+							} elseif ( in_array( 'false', $status, true ) ) {
+								return false;
+							} else {
+								return 'empty';
+							}
 					}
 				}
-
-				switch ( $condition ) {
-					case 'all':
-						if ( in_array( 'false', $status, true ) ) {
-							return false;
-						} elseif ( in_array( 'true', $status, true ) ) {
-							return true;
-						} else {
-							return 'empty';
-						}
-					default:
-					case 'any':
-						if ( in_array( 'true', $status, true ) ) {
-							return true;
-						} elseif ( in_array( 'false', $status, true ) ) {
-							return false;
-						} else {
-							return 'empty';
-						}
-				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
+
 			return 'empty';
 		}
 
@@ -795,52 +813,55 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @throws Exception If empty cart category quantities.
 		 */
 		public function process_category_quantities( $product_category_quantity_restrictions = array(), $params = array() ) {
+			try {
+				if ( ! empty( $product_category_quantity_restrictions ) ) {
+					$status                             = array();
+					$condition                          = ! empty( $params['condition'] ) ? $params['condition'] : 'any';
+					$items_to_validate                  = ! empty( $params['items_to_validate'] ) ? $params['items_to_validate'] : array();
+					$cart_product_categories_quantities = $this->cart_product_categories_quantities( $items_to_validate );
+					foreach ( $product_category_quantity_restrictions as $id => $restriction ) {
+						$min_quantity = ! empty( $restriction['min'] ) ? intval( $restriction['min'] ) : '';
+						$max_quantity = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : '';
+						if ( 0 === $id ) {
+							continue;
+						}
+						$category_quantity = ! empty( $cart_product_categories_quantities[ $id ] ) ? intval( $cart_product_categories_quantities[ $id ] ) : 0;
 
-			if ( ! empty( $product_category_quantity_restrictions ) ) {
-				$status                             = array();
-				$condition                          = ! empty( $params['condition'] ) ? $params['condition'] : 'any';
-				$items_to_validate                  = ! empty( $params['items_to_validate'] ) ? $params['items_to_validate'] : array();
-				$cart_product_categories_quantities = $this->cart_product_categories_quantities( $items_to_validate );
-				foreach ( $product_category_quantity_restrictions as $id => $restriction ) {
-					$min_quantity = ! empty( $restriction['min'] ) ? intval( $restriction['min'] ) : '';
-					$max_quantity = ! empty( $restriction['max'] ) ? intval( $restriction['max'] ) : '';
-					if ( 0 === $id ) {
-						continue;
+						if ( empty( $min_quantity ) && empty( $max_quantity ) ) {
+							$status[] = 'empty';
+						} elseif ( empty( $min_quantity ) && ! empty( $max_quantity ) && $category_quantity <= $max_quantity ) {
+							$status[] = 'true';
+						} elseif ( empty( $max_quantity ) && ! empty( $min_quantity ) && $category_quantity >= $min_quantity ) {
+							$status[] = 'true';
+						} elseif ( ! empty( $min_quantity ) && ! empty( $max_quantity ) && $category_quantity >= $min_quantity && $category_quantity <= $max_quantity ) {
+							$status[] = 'true';
+						} else {
+							$status[] = 'false';
+						}
 					}
-					$category_quantity = ! empty( $cart_product_categories_quantities[ $id ] ) ? intval( $cart_product_categories_quantities[ $id ] ) : 0;
 
-					if ( empty( $min_quantity ) && empty( $max_quantity ) ) {
-						$status[] = 'empty';
-					} elseif ( empty( $min_quantity ) && ! empty( $max_quantity ) && $category_quantity <= $max_quantity ) {
-						$status[] = 'true';
-					} elseif ( empty( $max_quantity ) && ! empty( $min_quantity ) && $category_quantity >= $min_quantity ) {
-						$status[] = 'true';
-					} elseif ( ! empty( $min_quantity ) && ! empty( $max_quantity ) && $category_quantity >= $min_quantity && $category_quantity <= $max_quantity ) {
-						$status[] = 'true';
-					} else {
-						$status[] = 'false';
+					switch ( $condition ) {
+						case 'all':
+							if ( in_array( 'false', $status, true ) ) {
+								return false;
+							} elseif ( in_array( 'true', $status, true ) ) {
+								return true;
+							} else {
+								return 'empty';
+							}
+						default:
+						case 'any':
+							if ( in_array( 'true', $status, true ) ) {
+								return true;
+							} elseif ( in_array( 'false', $status, true ) ) {
+								return false;
+							} else {
+								return 'empty';
+							}
 					}
 				}
-
-				switch ( $condition ) {
-					case 'all':
-						if ( in_array( 'false', $status, true ) ) {
-							return false;
-						} elseif ( in_array( 'true', $status, true ) ) {
-							return true;
-						} else {
-							return 'empty';
-						}
-					default:
-					case 'any':
-						if ( in_array( 'true', $status, true ) ) {
-							return true;
-						} elseif ( in_array( 'false', $status, true ) ) {
-							return false;
-						} else {
-							return 'empty';
-						}
-				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 			return 'empty';
 		}
@@ -877,6 +898,7 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 					}
 				}
 			}
+
 			return $cart_product_quantities;
 		}
 
@@ -916,6 +938,7 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 					}
 				}
 			}
+
 			return $categories_quantities;
 		}
 
@@ -926,61 +949,65 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @return string
 		 */
 		public function product_quantity_restrictions_encode( $input_array = array() ) {
-			if ( ! is_array( $input_array ) || empty( $input_array ) || ! isset( $input_array['type'] ) ) {
-				return '';
-			}
+			try {
+				if ( ! is_array( $input_array ) || empty( $input_array ) || ! isset( $input_array['type'] ) ) {
+					return '';
+				}
 
-			$encode_string = '';
+				$encode_string = '';
 
-			switch ( $input_array['type'] ) {
-				case 'cart':
-					if ( isset( $input_array['values'] ) && isset( $input_array['values']['cart'] ) && ! empty( $input_array['values']['cart'] ) ) {
-						$cart_data     = $input_array['values']['cart'];
-						$min           = isset( $cart_data['min'] ) && ! empty( $cart_data['min'] ) && is_scalar( $cart_data['min'] ) ? (int) $cart_data['min'] : 0;
-						$max           = isset( $cart_data['max'] ) && ! empty( $cart_data['max'] ) && is_scalar( $cart_data['max'] ) ? (int) $cart_data['max'] : 0;
-						$encode_string = 'cart@' . $min . '_' . $max;
-					}
-					break;
-				case 'product':
-					$segment = array();
-					if ( isset( $input_array['values'] ) && isset( $input_array['values']['product'] ) && ! empty( $input_array['values']['product'] ) ) {
-						$item_product = array();
-						foreach ( $input_array['values']['product'] as $product_id => $product_data ) {
-							$product_id = (int) $product_id;
-							$min        = isset( $product_data['min'] ) && ! empty( $product_data['min'] ) && is_scalar( $product_data['min'] ) ? (int) $product_data['min'] : 0;
-							$max        = isset( $product_data['max'] ) && ! empty( $product_data['max'] ) && is_scalar( $product_data['max'] ) ? (int) $product_data['max'] : 0;
-							if ( ! empty( $product_id ) ) {
-								$item_product[] = $product_id . '-' . $min . '_' . $max;
+				switch ( $input_array['type'] ) {
+					case 'cart':
+						if ( isset( $input_array['values'] ) && isset( $input_array['values']['cart'] ) && ! empty( $input_array['values']['cart'] ) ) {
+							$cart_data     = $input_array['values']['cart'];
+							$min           = isset( $cart_data['min'] ) && ! empty( $cart_data['min'] ) && is_scalar( $cart_data['min'] ) ? (int) $cart_data['min'] : 0;
+							$max           = isset( $cart_data['max'] ) && ! empty( $cart_data['max'] ) && is_scalar( $cart_data['max'] ) ? (int) $cart_data['max'] : 0;
+							$encode_string = 'cart@' . $min . '_' . $max;
+						}
+						break;
+					case 'product':
+						$segment = array();
+						if ( isset( $input_array['values'] ) && isset( $input_array['values']['product'] ) && ! empty( $input_array['values']['product'] ) ) {
+							$item_product = array();
+							foreach ( $input_array['values']['product'] as $product_id => $product_data ) {
+								$product_id = (int) $product_id;
+								$min        = isset( $product_data['min'] ) && ! empty( $product_data['min'] ) && is_scalar( $product_data['min'] ) ? (int) $product_data['min'] : 0;
+								$max        = isset( $product_data['max'] ) && ! empty( $product_data['max'] ) && is_scalar( $product_data['max'] ) ? (int) $product_data['max'] : 0;
+								if ( ! empty( $product_id ) ) {
+									$item_product[] = $product_id . '-' . $min . '_' . $max;
+								}
+							}
+							if ( ! empty( $item_product ) ) {
+								$segment[] = 'product@' . implode( '#', $item_product );
 							}
 						}
-						if ( ! empty( $item_product ) ) {
-							$segment[] = 'product@' . implode( '#', $item_product );
-						}
-					}
 
-					if ( isset( $input_array['values'] ) && isset( $input_array['values']['product_category'] ) && ! empty( $input_array['values']['product_category'] ) ) {
-						$item_category = array();
-						foreach ( $input_array['values']['product_category'] as $category_id => $category_data ) {
-							$category_id = (int) $category_id;
-							$min         = isset( $category_data['min'] ) && ! empty( $category_data['min'] ) && is_scalar( $category_data['min'] ) ? (int) $category_data['min'] : 0;
-							$max         = isset( $category_data['max'] ) && ! empty( $category_data['max'] ) && is_scalar( $category_data['max'] ) ? (int) $category_data['max'] : 0;
-							if ( ! empty( $category_id ) ) {
-								$item_category[] = $category_id . '-' . $min . '_' . $max;
+						if ( isset( $input_array['values'] ) && isset( $input_array['values']['product_category'] ) && ! empty( $input_array['values']['product_category'] ) ) {
+							$item_category = array();
+							foreach ( $input_array['values']['product_category'] as $category_id => $category_data ) {
+								$category_id = (int) $category_id;
+								$min         = isset( $category_data['min'] ) && ! empty( $category_data['min'] ) && is_scalar( $category_data['min'] ) ? (int) $category_data['min'] : 0;
+								$max         = isset( $category_data['max'] ) && ! empty( $category_data['max'] ) && is_scalar( $category_data['max'] ) ? (int) $category_data['max'] : 0;
+								if ( ! empty( $category_id ) ) {
+									$item_category[] = $category_id . '-' . $min . '_' . $max;
+								}
+							}
+							if ( ! empty( $item_category ) ) {
+								$segment[] = 'category@' . implode( '#', $item_category );
 							}
 						}
-						if ( ! empty( $item_category ) ) {
-							$segment[] = 'category@' . implode( '#', $item_category );
-						}
-					}
 
-					if ( ! empty( $segment ) ) {
-						$encode_string = implode( '|', $segment );
-					}
-					break;
+						if ( ! empty( $segment ) ) {
+							$encode_string = implode( '|', $segment );
+						}
+						break;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$encode_string = '';
 			}
 
 			return $encode_string;
-
 		}
 
 		/**
@@ -990,55 +1017,60 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Product_Quantity' ) ) {
 		 * @return array
 		 */
 		public function product_quantity_restrictions_decode( $decode_string = '' ) {
-			if ( empty( $decode_string ) || ! is_string( $decode_string ) ) {
-				return array();
-			}
-			$input_array = array(
-				'type'      => '',
-				'values'    => array(),
-				'condition' => 'any',
-			);
+			try {
+				if ( empty( $decode_string ) || ! is_string( $decode_string ) ) {
+					return array();
+				}
+				$input_array = array(
+					'type'      => '',
+					'values'    => array(),
+					'condition' => 'any',
+				);
 
-			$segments = explode( '|', $decode_string );
-			if ( is_array( $segments ) && ! empty( $segments ) ) {
-				foreach ( $segments as $segment ) {
-					$parts = explode( '@', $segment );
+				$segments = explode( '|', $decode_string );
+				if ( is_array( $segments ) && ! empty( $segments ) ) {
+					foreach ( $segments as $segment ) {
+						$parts = explode( '@', $segment );
 
-					switch ( $parts[0] ) {
-						case 'cart':
-							$cart_values                   = explode( '_', $parts[1] );
-							$input_array['type']           = 'cart';
-							$input_array['values']['cart'] = array(
-								'min' => (int) ( $cart_values[0] ?? 0 ),
-								'max' => (int) ( $cart_values[1] ?? 0 ),
-							);
-							break;
-						case 'product':
-							$product_values = explode( '#', $parts[1] );
-							foreach ( $product_values as $product_item ) {
-								$product_data        = explode( '-', $product_item );
-								$input_array['type'] = 'product';
-								$min_max             = isset( $product_data[1] ) && ! empty( $product_data[1] ) ? explode( '_', $product_data[1] ) : array();
-								$input_array['values']['product'][ $product_data[0] ] = array(
-									'min' => (int) ( $min_max[0] ?? 0 ),
-									'max' => (int) ( $min_max[1] ?? 0 ),
+						switch ( $parts[0] ) {
+							case 'cart':
+								$cart_values                   = explode( '_', $parts[1] );
+								$input_array['type']           = 'cart';
+								$input_array['values']['cart'] = array(
+									'min' => (int) ( $cart_values[0] ?? 0 ),
+									'max' => (int) ( $cart_values[1] ?? 0 ),
 								);
-							}
-							break;
-						case 'category':
-							$category_values = explode( '#', $parts[1] );
-							foreach ( $category_values as $category_item ) {
-								$category_data       = explode( '-', $category_item );
-								$input_array['type'] = 'product';
-								$min_max             = isset( $category_data[1] ) && ! empty( $category_data[1] ) ? explode( '_', $category_data[1] ) : array();
-								$input_array['values']['product_category'][ $category_data[0] ] = array(
-									'min' => (int) ( $min_max[0] ?? 0 ),
-									'max' => (int) ( $min_max[1] ?? 0 ),
-								);
-							}
-							break;
+								break;
+							case 'product':
+								$product_values = explode( '#', $parts[1] );
+								foreach ( $product_values as $product_item ) {
+									$product_data        = explode( '-', $product_item );
+									$input_array['type'] = 'product';
+									$min_max             = isset( $product_data[1] ) && ! empty( $product_data[1] ) ? explode( '_', $product_data[1] ) : array();
+									$input_array['values']['product'][ $product_data[0] ] = array(
+										'min' => (int) ( $min_max[0] ?? 0 ),
+										'max' => (int) ( $min_max[1] ?? 0 ),
+									);
+								}
+								break;
+							case 'category':
+								$category_values = explode( '#', $parts[1] );
+								foreach ( $category_values as $category_item ) {
+									$category_data       = explode( '-', $category_item );
+									$input_array['type'] = 'product';
+									$min_max             = isset( $category_data[1] ) && ! empty( $category_data[1] ) ? explode( '_', $category_data[1] ) : array();
+									$input_array['values']['product_category'][ $category_data[0] ] = array(
+										'min' => (int) ( $min_max[0] ?? 0 ),
+										'max' => (int) ( $min_max[1] ?? 0 ),
+									);
+								}
+								break;
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$input_array = array();
 			}
 
 			return $input_array;

@@ -56,6 +56,7 @@ require_once __DIR__ . '/routes/web.php';
 require_once __DIR__ . '/routes/api.php';
 
 
+
 // Enqueue Font Awesome
 function senheng_enqueue_font_awesome() {
     wp_enqueue_style(
@@ -129,7 +130,7 @@ function senheng_run_table_creation_on_url()
 add_filter('woocommerce_attribute_slug_max_length', function() {
     return 200;
 });
-add_filter( 'woocommerce_coupons_enabled', '__return_false' );
+// add_filter( 'woocommerce_coupons_enabled', '__return_false' );
 // Disable cart fragments on non-WooCommerce pages
 add_action('wp_enqueue_scripts', function() {
     // Disable on all pages except cart, checkout, and shop pages

@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.7.0
- * @version     1.4.0
+ * @version     1.8.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -105,6 +105,24 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * Function to create and save terms page if already not created
 		 */
 		public function may_be_save_terms_page() {
+			global $pagenow;
+			// Skip non-front-end requests.
+			if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_rest_endpoint() || defined( 'REST_REQUEST' ) ) {
+				if ( function_exists( 'get_current_screen' ) ) {
+					$screen = get_current_screen();
+					if ( ! empty( $screen->post_type ) && 'product' === $screen->post_type ) {
+						return; // No need to run the following code when working with products.
+					}
+				}
+				$get_post      = ( ! empty( $_GET['post'] ) ) ? wc_clean( wp_unslash( $_GET['post'] ) ) : '';            // phpcs:ignore
+				$get_post_type = ( ! empty( $_GET['post_type'] ) ) ? wc_clean( wp_unslash( $_GET['post_type'] ) ) : '';  // phpcs:ignore
+				if ( 'post.php' === $pagenow && ! empty( $get_post ) && 'product' === get_post_type( $get_post ) ) {
+					return;  // No need to run the following code when working with products.
+				}
+				if ( 'post-new.php' === $pagenow && ! empty( $get_post_type ) && 'product' === $get_post_type ) {
+					return;  // No need to run the following code when working with products.
+				}
+			}
 			$terms_page_option = $this->get_terms_page_option();
 			$terms_page_id     = get_option( $terms_page_option, false );
 
@@ -119,7 +137,6 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * Function to add create terms page
 		 */
 		public function add_terms_page() {
-
 			$name          = _x( 'wc-sc-coupons-terms', 'Page slug', 'woocommerce-smart-coupons' );
 			$title         = _x( 'Smart Coupons Terms', 'Page title', 'woocommerce-smart-coupons' );
 			$terms_page_id = $this->create_page( $name, $title, '', 'private' );
@@ -138,7 +155,6 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * @return int     $page_id      Create page id
 		 */
 		public function create_page( $slug = '', $page_title = '', $page_content = '', $post_status = 'publish', $post_parent = 0 ) {
-
 			$page_id = 0;
 			if ( empty( $slug ) ) {
 				return $page_id;
@@ -172,7 +188,6 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * Function to get terms page id
 		 */
 		public function get_terms_page_id() {
-
 			$terms_page_option = $this->get_terms_page_option();
 			$terms_page_id     = get_option( $terms_page_option, false );
 
@@ -195,7 +210,6 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * @param  int $terms_page_id  Page parent.
 		 */
 		public function update_terms_page_option( $terms_page_id = 0 ) {
-
 			if ( ! empty( $terms_page_id ) && is_numeric( $terms_page_id ) ) {
 				$terms_page_option = $this->get_terms_page_option();
 				update_option( $terms_page_option, $terms_page_id, 'no' );
@@ -206,79 +220,82 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * Function to show notice for entering terms' page content
 		 */
 		public function may_be_show_terms_notice() {
+			try {
+				global $pagenow, $post;
 
-			global $pagenow, $post;
-
-			$is_coupon_enabled = wc_coupons_enabled();
-			// Don't show message if coupons are not enabled.
-			if ( false === $is_coupon_enabled ) {
-				return;
-			}
-
-			$terms_page_id = $this->get_terms_page_id();
-			// Return if terms page hasn't been set.
-			if ( empty( $terms_page_id ) ) {
-				return;
-			}
-
-			$valid_post_types     = array( 'shop_coupon', 'shop_order', 'product' );
-			$valid_pagenow        = array( 'edit.php', 'post.php', 'plugins.php' );
-			$is_show_terms_notice = get_option( 'wc_sc_is_show_terms_notice', false );
-			$get_post_type        = ( ! empty( $post->ID ) ) ? $this->get_post_type( $post->ID ) : '';
-			$get_page             = ( ! empty( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
-			$get_tab              = ( ! empty( $_GET['tab'] ) ) ? wc_clean( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore
-
-			$is_page = ( in_array( $pagenow, $valid_pagenow, true ) || in_array( $get_post_type, $valid_post_types, true ) || ( 'admin.php' === $pagenow && ( 'wc-smart-coupons' === $get_page || 'wc-smart-coupons' === $get_tab ) ) );
-
-			// Terms page notice.
-			if ( $is_page && 'no' !== $is_show_terms_notice ) {
-				if ( ! wp_script_is( 'jquery' ) ) {
-					wp_enqueue_script( 'jquery' );
+				$is_coupon_enabled = wc_coupons_enabled();
+				// Don't show message if coupons are not enabled.
+				if ( false === $is_coupon_enabled ) {
+					return;
 				}
-				?>
-				<style type="text/css" media="screen">
-					#wc_sc_terms_notice .wc_sc_terms_notice_action {
-						float: right;
-						padding: 0.5em 0;
-						text-align: right;
+
+				$terms_page_id = $this->get_terms_page_id();
+				// Return if terms page hasn't been set.
+				if ( empty( $terms_page_id ) ) {
+					return;
+				}
+
+				$valid_post_types     = array( 'shop_coupon', 'shop_order', 'product' );
+				$valid_pagenow        = array( 'edit.php', 'post.php', 'plugins.php' );
+				$is_show_terms_notice = get_option( 'wc_sc_is_show_terms_notice', false );
+				$get_post_type        = ( ! empty( $post->ID ) ) ? $this->get_post_type( $post->ID ) : '';
+				$get_page             = ( ! empty( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
+				$get_tab              = ( ! empty( $_GET['tab'] ) ) ? wc_clean( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore
+
+				$is_page = ( in_array( $pagenow, $valid_pagenow, true ) || in_array( $get_post_type, $valid_post_types, true ) || ( 'admin.php' === $pagenow && ( 'wc-smart-coupons' === $get_page || 'wc-smart-coupons' === $get_tab ) ) );
+
+				// Terms page notice.
+				if ( $is_page && 'no' !== $is_show_terms_notice ) {
+					if ( ! wp_script_is( 'jquery' ) ) {
+						wp_enqueue_script( 'jquery' );
 					}
-				</style>
-				<script type="text/javascript">
-					jQuery(function(){
-						jQuery('body').on('click', '#wc_sc_terms_notice a.wc_sc_terms_notice_remove, #wc_sc_terms_notice a.wc_sc_terms_redirect', function(){
-							let notice_action = jQuery( this ).data('action');
-							jQuery.ajax({
-								url: decodeURIComponent( '<?php echo rawurlencode( admin_url( 'admin-ajax.php' ) ); ?>' ),
-								type: 'post',
-								dataType: 'json',
-								data: {
-									action: 'wc_sc_terms_notice_action',
-									security: '<?php echo esc_html( wp_create_nonce( 'wc-sc-terms-notice-action' ) ); ?>',
-									do: notice_action
-								},
-								success: function( response ){
-									if ( response.success != undefined && response.success != '' && response.success == 'yes' ) {
-										if( response.redirect_url != undefined && response.redirect_url != '' ) {
-											window.location.href = response.redirect_url;
-										} else {
-											jQuery('#wc_sc_terms_notice').fadeOut(500, function(){ jQuery('#wc_sc_terms_notice').remove(); });
+					?>
+					<style type="text/css" media="screen">
+						#wc_sc_terms_notice .wc_sc_terms_notice_action {
+							float: right;
+							padding: 0.5em 0;
+							text-align: right;
+						}
+					</style>
+					<script type="text/javascript">
+						jQuery(function(){
+							jQuery('body').on('click', '#wc_sc_terms_notice a.wc_sc_terms_notice_remove, #wc_sc_terms_notice a.wc_sc_terms_redirect', function(){
+								let notice_action = jQuery( this ).data('action');
+								jQuery.ajax({
+									url: decodeURIComponent( '<?php echo rawurlencode( admin_url( 'admin-ajax.php' ) ); ?>' ),
+									type: 'post',
+									dataType: 'json',
+									data: {
+										action: 'wc_sc_terms_notice_action',
+										security: '<?php echo esc_html( wp_create_nonce( 'wc-sc-terms-notice-action' ) ); ?>',
+										do: notice_action
+									},
+									success: function( response ){
+										if ( response.success != undefined && response.success != '' && response.success == 'yes' ) {
+											if( response.redirect_url != undefined && response.redirect_url != '' ) {
+												window.location.href = response.redirect_url;
+											} else {
+												jQuery('#wc_sc_terms_notice').fadeOut(500, function(){ jQuery('#wc_sc_terms_notice').remove(); });
+											}
 										}
 									}
-								}
+								});
+								return false;
 							});
-							return false;
 						});
-					});
-				</script>
-				<div id="wc_sc_terms_notice" class="updated fade">
-					<div class="wc_sc_terms_notice_action">
-						<a href="javascript:void(0)" class="wc_sc_terms_notice_remove" data-action="remove"><?php echo esc_html__( 'Never show again', 'woocommerce-smart-coupons' ); ?></a>
+					</script>
+					<div id="wc_sc_terms_notice" class="updated fade">
+						<div class="wc_sc_terms_notice_action">
+							<a href="javascript:void(0)" class="wc_sc_terms_notice_remove" data-action="remove"><?php echo esc_html__( 'Never show again', 'woocommerce-smart-coupons' ); ?></a>
+						</div>
+						<p>
+							<?php echo esc_html__( 'Smart Coupons has created a coupon\'s terms page (used during coupon printing) for you. Please edit it as required from', 'woocommerce-smart-coupons' ) . ' <a href="javascript:void(0)" class="wc_sc_terms_redirect" data-action="redirect">' . esc_html__( 'here', 'woocommerce-smart-coupons' ) . '</a>'; ?>
+						</p>
 					</div>
-					<p>
-						<?php echo esc_html__( 'Smart Coupons has created a coupon\'s terms page (used during coupon printing) for you. Please edit it as required from', 'woocommerce-smart-coupons' ) . ' <a href="javascript:void(0)" class="wc_sc_terms_redirect" data-action="redirect">' . esc_html__( 'here', 'woocommerce-smart-coupons' ) . '</a>'; ?>
-					</p>
-				</div>
-				<?php
+					<?php
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -286,28 +303,32 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * Function to handle Smart Coupons terms notice action
 		 */
 		public function terms_notice_action() {
+			try {
+				check_ajax_referer( 'wc-sc-terms-notice-action', 'security' );
 
-			check_ajax_referer( 'wc-sc-terms-notice-action', 'security' );
+				$post_do = ( ! empty( $_POST['do'] ) ) ? wc_clean( wp_unslash( $_POST['do'] ) ) : ''; // phpcs:ignore
 
-			$post_do = ( ! empty( $_POST['do'] ) ) ? wc_clean( wp_unslash( $_POST['do'] ) ) : ''; // phpcs:ignore
+				if ( empty( $post_do ) ) {
+					return;
+				}
+				$response = array(
+					'success' => 'no',
+				);
 
-			if ( empty( $post_do ) ) {
-				return;
-			}
-			$response = array(
-				'success' => 'no',
-			);
-
-			$option_updated = update_option( 'wc_sc_is_show_terms_notice', 'no', 'no' );
-			if ( true === $option_updated ) {
-				$response['success'] = 'yes';
-				if ( 'redirect' === $post_do ) {
-					$terms_page_id  = $this->get_terms_page_id();
-					$terms_edit_url = get_edit_post_link( $terms_page_id, 'edit' );
-					if ( ! empty( $terms_edit_url ) ) {
-						$response['redirect_url'] = $terms_edit_url;
+				$option_updated = update_option( 'wc_sc_is_show_terms_notice', 'no', 'no' );
+				if ( true === $option_updated ) {
+					$response['success'] = 'yes';
+					if ( 'redirect' === $post_do ) {
+						$terms_page_id  = $this->get_terms_page_id();
+						$terms_edit_url = get_edit_post_link( $terms_page_id, 'edit' );
+						if ( ! empty( $terms_edit_url ) ) {
+							$response['redirect_url'] = $terms_edit_url;
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$response = array( 'success' => 'no' );
 			}
 
 			wp_send_json( $response );
@@ -317,90 +338,93 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * Print coupon codes along with terms' page content
 		 */
 		public function print_coupon_from_url() {
-			global $woocommerce_smart_coupon;
+			try {
+				global $woocommerce_smart_coupon;
 
-			if ( empty( $_SERVER['QUERY_STRING'] ) ) {
-				return;
-			}
-
-			parse_str( wp_unslash( $_SERVER['QUERY_STRING'] ), $coupon_args ); // phpcs:ignore
-			$coupon_args = wc_clean( $coupon_args );
-
-			if ( ! empty( $coupon_args['print-coupons'] ) && 'yes' === $coupon_args['print-coupons'] && ! empty( $coupon_args['source'] ) && 'wc-smart-coupons' === $coupon_args['source'] && ! empty( $coupon_args['coupon-codes'] ) ) {
-
-				$coupon_args['coupon-codes'] = urldecode( $coupon_args['coupon-codes'] );
-
-				$coupon_codes = explode( ',', $coupon_args['coupon-codes'] );
-
-				$coupon_codes = array_filter( $coupon_codes ); // Remove empty coupon codes if any.
-
-				$coupons_data = array();
-
-				foreach ( $coupon_codes as $coupon_code ) {
-
-					if ( empty( $coupon_code ) ) {
-						continue;
-					}
-
-					$coupons_data[] = array(
-						'code' => $coupon_code,
-					);
+				if ( empty( $_SERVER['QUERY_STRING'] ) ) {
+					return;
 				}
 
-				if ( ! empty( $coupons_data ) ) {
-					$terms_page_id      = $this->get_terms_page_id();
-					$terms_page_title   = '';
-					$terms_page_content = '';
-					if ( ! empty( $terms_page_id ) ) {
-						$terms_page = get_post( $terms_page_id );
-						if ( is_a( $terms_page, 'WP_Post' ) ) {
+				parse_str( wp_unslash( $_SERVER['QUERY_STRING'] ), $coupon_args ); // phpcs:ignore
+				$coupon_args = wc_clean( $coupon_args );
 
-							$terms_page_title = ( ! empty( $terms_page->post_title ) ) ? $terms_page->post_title : '';
+				if ( ! empty( $coupon_args['print-coupons'] ) && 'yes' === $coupon_args['print-coupons'] && ! empty( $coupon_args['source'] ) && 'wc-smart-coupons' === $coupon_args['source'] && ! empty( $coupon_args['coupon-codes'] ) ) {
 
-							$terms_page_content = ( ! empty( $terms_page->post_content ) ) ? $terms_page->post_content : '';
-							if ( ! empty( $terms_page_content ) ) {
-								$terms_page_content = apply_filters( 'the_content', $terms_page_content );
+					$coupon_args['coupon-codes'] = urldecode( $coupon_args['coupon-codes'] );
+
+					$coupon_codes = explode( ',', $coupon_args['coupon-codes'] );
+
+					$coupon_codes = array_filter( $coupon_codes ); // Remove empty coupon codes if any.
+
+					$coupons_data = array();
+
+					foreach ( $coupon_codes as $coupon_code ) {
+
+						if ( empty( $coupon_code ) ) {
+							continue;
+						}
+
+						$coupons_data[] = array(
+							'code' => $coupon_code,
+						);
+					}
+
+					if ( ! empty( $coupons_data ) ) {
+						$terms_page_id      = $this->get_terms_page_id();
+						$terms_page_title   = '';
+						$terms_page_content = '';
+						if ( ! empty( $terms_page_id ) ) {
+							$terms_page = get_post( $terms_page_id );
+							if ( is_a( $terms_page, 'WP_Post' ) ) {
+
+								$terms_page_title = ( ! empty( $terms_page->post_title ) ) ? $terms_page->post_title : '';
+
+								$terms_page_content = ( ! empty( $terms_page->post_content ) ) ? $terms_page->post_content : '';
+								if ( ! empty( $terms_page_content ) ) {
+									$terms_page_content = apply_filters( 'the_content', $terms_page_content );
+								}
 							}
 						}
+						$design           = get_option( 'wc_sc_setting_coupon_design', 'basic' );
+						$background_color = get_option( 'wc_sc_setting_coupon_background_color', '#39cccc' );
+						$foreground_color = get_option( 'wc_sc_setting_coupon_foreground_color', '#30050b' );
+						$third_color      = get_option( 'wc_sc_setting_coupon_third_color', '#39cccc' );
+
+						$show_coupon_description = get_option( 'smart_coupons_show_coupon_description', 'no' );
+
+						$valid_designs = $this->get_valid_coupon_designs();
+
+						if ( ! in_array( $design, $valid_designs, true ) ) {
+							$design = 'basic';
+						}
+
+						$coupon_styles = $woocommerce_smart_coupon->get_coupon_styles( $design );
+
+						$default_path  = $this->template_base;
+						$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
+
+						wc_get_template(
+							$this->template_html,
+							array(
+								'coupon_codes'            => $coupons_data,
+								'terms_page_title'        => $terms_page_title,
+								'terms_page_content'      => $terms_page_content,
+								'background_color'        => $background_color,
+								'foreground_color'        => $foreground_color,
+								'third_color'             => $third_color,
+								'coupon_styles'           => $coupon_styles,
+								'design'                  => $design,
+								'show_coupon_description' => $show_coupon_description,
+							),
+							$template_path,
+							$default_path
+						);
 					}
-					$design           = get_option( 'wc_sc_setting_coupon_design', 'basic' );
-					$background_color = get_option( 'wc_sc_setting_coupon_background_color', '#39cccc' );
-					$foreground_color = get_option( 'wc_sc_setting_coupon_foreground_color', '#30050b' );
-					$third_color      = get_option( 'wc_sc_setting_coupon_third_color', '#39cccc' );
-
-					$show_coupon_description = get_option( 'smart_coupons_show_coupon_description', 'no' );
-
-					$valid_designs = $this->get_valid_coupon_designs();
-
-					if ( ! in_array( $design, $valid_designs, true ) ) {
-						$design = 'basic';
-					}
-
-					$coupon_styles = $woocommerce_smart_coupon->get_coupon_styles( $design );
-
-					$default_path  = $this->template_base;
-					$template_path = $woocommerce_smart_coupon->get_template_base_dir( $this->template_html );
-
-					wc_get_template(
-						$this->template_html,
-						array(
-							'coupon_codes'            => $coupons_data,
-							'terms_page_title'        => $terms_page_title,
-							'terms_page_content'      => $terms_page_content,
-							'background_color'        => $background_color,
-							'foreground_color'        => $foreground_color,
-							'third_color'             => $third_color,
-							'coupon_styles'           => $coupon_styles,
-							'design'                  => $design,
-							'show_coupon_description' => $show_coupon_description,
-						),
-						$template_path,
-						$default_path
-					);
+					exit;
 				}
-				exit;
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
 		}
 
 		/**
@@ -410,7 +434,6 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 		 * @param WP_Post $post        The current post object.
 		 */
 		public function display_post_states( $post_states, $post ) {
-
 			$terms_page_id = $this->get_terms_page_id();
 
 			if ( ! empty( $post->ID ) && ! empty( $terms_page_id ) && absint( $terms_page_id ) === absint( $post->ID ) ) {
@@ -436,6 +459,7 @@ if ( ! class_exists( 'WC_SC_Print_Coupon' ) ) {
 			if ( ! empty( $post->ID ) && ! empty( $terms_page_id ) && absint( $terms_page_id ) === absint( $post->ID ) ) {
 				return false;
 			}
+
 			return $is_delete;
 		}
 

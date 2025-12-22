@@ -216,17 +216,36 @@ class Wishlists_Group extends Singleton {
 	 * @return array
 	 */
 	public function get_wishlist_groups_fragments( $fragments ) {
-		$content = '';
+		$content         = '';
+		$wishlist_groups = woodmart_get_wishlist_groups();
 
-		if ( woodmart_get_wishlist_groups() ) {
+		if ( $wishlist_groups ) {
 			ob_start();
 
-			$this->wishlist_create_group_popup();
+			?>
+			<ul class="wd-wishlist-group-list" data-product-id="" data-nonce="" data-group-count="<?php echo count( $wishlist_groups ); ?>">
+				<?php foreach ( $wishlist_groups as $id => $name ) : ?>
+					<li data-group-id="<?php echo esc_html( $id ); ?>">
+						<input type="radio" id="wd-wishlist-group-<?php echo esc_attr( $id ); ?>">
+						<label for="wd-wishlist-group-<?php echo esc_attr( $id ); ?>">
+							<?php echo esc_html( $name ); ?>
+						</label>
+					</li>
+				<?php endforeach; ?>
+				<li data-group-id="add_new">
+					<span class="wd-wishlist-add-group wd-action-btn wd-style-text">
+						<a href="#">
+							<?php esc_html_e( 'Add new wishlist', 'woodmart' ); ?>
+						</a>
+					</span>
+				</li>
+			</ul>
+			<?php
 
 			$content = ob_get_clean();
 		}
 
-		$fragments['div.wd-popup-wishlist'] = $content;
+		$fragments['ul.wd-wishlist-group-list'] = $content;
 
 		return $fragments;
 	}
@@ -332,14 +351,17 @@ class Wishlists_Group extends Singleton {
 			return;
 		}
 
-		woodmart_enqueue_inline_style( 'mfp-popup' );
-		woodmart_enqueue_inline_style( 'page-wishlist-popup' );
 		woodmart_enqueue_js_library( 'magnific' );
+		
+		woodmart_enqueue_inline_style( 'page-wishlist-popup' );
+		woodmart_enqueue_inline_style( 'mfp-popup' );
+		woodmart_enqueue_inline_style( 'mod-animations-transform' );
+		woodmart_enqueue_inline_style( 'mod-transform' );
 
 		$wishlist_groups = woodmart_get_wishlist_groups();
 
 		?>
-		<div class="wd-popup wd-popup-wishlist">
+		<div class="wd-popup wd-popup-wishlist wd-scroll-content" role="complementary" aria-label="<?php esc_attr_e( 'Wishlist', 'woodmart' ); ?>">
 			<div class="wd-wishlist-back-btn wd-action-btn wd-style-text">
 				<a href="#">
 					<?php esc_html_e( 'Back to list', 'woodmart' ); ?>

@@ -198,5 +198,11 @@
     "sticky_social": "1",
     "sticky_social_type": "follow",
     "sticky_social_position": "right",
-    "pinterest_link": ""
+    "pinterest_link": "",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

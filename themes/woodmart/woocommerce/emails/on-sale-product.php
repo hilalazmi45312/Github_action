@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr>
 				<td class="td xts-tbody-td  xts-align-start">
 					<a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="xts-thumb-link">
-						<?php echo get_the_post_thumbnail( $product->get_id(), array( '70', '70' ), array( 'class' => 'xts-thumb' ) ); ?>
+						<?php echo $email->get_product_image_html( $product, array( '70', '70' ), array( 'class' => 'xts-thumb' ) ); // phpcs:ignore. ?>
 						<span>
 							<?php echo esc_html( $product->get_title() ); ?>
 						</span>

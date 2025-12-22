@@ -49,6 +49,10 @@ class Frontend extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'bought_together_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		add_action( 'woodmart_after_product_tabs', array( $this, 'get_bought_together_products' ) );
 
 		add_action( 'wp_ajax_woodmart_update_frequently_bought_price', array( $this, 'update_frequently_bought_price' ) );
@@ -198,22 +202,20 @@ class Frontend extends Singleton {
 
 		woodmart_set_loop_prop( 'show_quick_shop', false );
 
-		if ( ! $settings['is_builder'] ) {
-			echo '<div class="container wd-fbt-wrap">';
-		}
-
-		if ( $content ) {
-			echo wp_kses( $content, true );
-		}
-
-		if ( ! $settings['is_builder'] || $settings['title'] ) {
-			$this->get_heading( $settings['title'], $settings['is_builder'] );
-		}
+		ob_start();
 
 		foreach ( $bundles_data as $bundle_id => $wfbt_products ) {
 			$this->bundle_id               = $bundle_id;
 			$this->wfbt_products           = array();
 			$this->subtotal_products_price = array();
+
+			if ( get_post_meta( $bundle_id, '_woodmart_show_checkbox', true ) && ! $product->is_in_stock() ) {
+				if ( get_post_meta( $bundle_id, '_woodmart_hide_out_of_stock_product', true ) ) {
+					continue;
+				} elseif ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
+					continue;
+				}
+			}
 
 			foreach ( $wfbt_products as $wfbt_product ) {
 				if ( empty( $wfbt_product['id'] ) || $this->main_product_id === (int) $wfbt_product['id'] ) {
@@ -230,8 +232,12 @@ class Frontend extends Singleton {
 					continue;
 				}
 
-				if ( get_post_meta( $bundle_id, '_woodmart_show_checkbox', true ) && get_post_meta( $bundle_id, '_woodmart_hide_out_of_stock_product', true ) && ! $current_product->is_in_stock() ) {
-					continue;
+				if ( get_post_meta( $bundle_id, '_woodmart_show_checkbox', true ) && ! $current_product->is_in_stock() ) {
+					if ( get_post_meta( $bundle_id, '_woodmart_hide_out_of_stock_product', true ) ) {
+						continue;
+					} elseif ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
+						continue;
+					}
 				}
 
 				$this->wfbt_products[ $wfbt_product['id'] ] = $wfbt_product;
@@ -240,8 +246,26 @@ class Frontend extends Singleton {
 			$this->get_form_content( $settings );
 		}
 
-		if ( ! $settings['is_builder'] ) {
-			echo '</div>';
+		$bundles_content = ob_get_clean();
+
+		if ( $this->wfbt_products && $bundles_content ) {
+			if ( ! $settings['is_builder'] ) {
+				echo '<div class="container wd-fbt-wrap">';
+			}
+
+			if ( $content ) {
+				echo wp_kses( $content, true );
+			}
+
+			if ( ! $settings['is_builder'] || $settings['title'] ) {
+				$this->get_heading( $settings['title'], $settings['is_builder'] );
+			}
+
+			echo $bundles_content; // phpcs:ignore
+
+			if ( ! $settings['is_builder'] ) {
+				echo '</div>';
+			}
 		}
 
 		woodmart_set_loop_prop( 'show_quick_shop', true );
@@ -446,11 +470,11 @@ class Frontend extends Singleton {
 										<?php foreach ( $current_product->get_visible_children() as $variation_id ) : ?>
 											<?php
 											$variation_product = wc_get_product( $variation_id );
-											$image_src         = wp_get_attachment_image_src( $variation_product->get_image_id(), 'woocommerce_thumbnail' );
+											$image_src         = wp_get_attachment_image_url( $variation_product->get_image_id(), 'woocommerce_thumbnail' );
 											$image_srcset      = wp_get_attachment_image_srcset( $variation_product->get_image_id(), 'woocommerce_thumbnail' );
 											?>
 
-											<option value="<?php echo esc_attr( $variation_product->get_id() ); ?>"<?php echo esc_attr( $variation->get_id() === $variation_product->get_id() ? ' selected="selected"' : '' ); ?> data-image-src="<?php echo esc_url( reset( $image_src ) ); ?>" data-image-srcset="<?php echo esc_attr( $image_srcset ); ?>">
+											<option value="<?php echo esc_attr( $variation_product->get_id() ); ?>"<?php echo esc_attr( $variation->get_id() === $variation_product->get_id() ? ' selected="selected"' : '' ); ?> data-image-src="<?php echo esc_url( $image_src ); ?>" data-image-srcset="<?php echo esc_attr( $image_srcset ); ?>">
 												<?php echo esc_html( wc_get_formatted_variation( $variation_product, true, false, false ) ); ?>
 											</option>
 										<?php endforeach; ?>

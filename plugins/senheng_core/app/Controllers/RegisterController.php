@@ -42,8 +42,23 @@ class RegisterController
     {
         $phone = sanitize_text_field($_POST['phone']);
         $type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : 'CONTACT';
+        $cf_token = sanitize_text_field($_POST['cf_token']);
+        $for = sanitize_textarea_field($_POST['for']);
+
         $api = new MagentoAPI();
+
+        if ($for == 'register') {
+            $cf_validation = $api->verify_turnstile_token($cf_token);
+            if ($cf_validation['flag'] !== 1) {
+                wp_send_json_error($cf_validation);
+                return;
+            }
+        }
         $response = $api->checkPhone($phone, $type);
+
+        if (isset($response['wp_error']) && $response['wp_error']) {
+            wp_send_json_error($response);
+        }
 
         wp_send_json_success($response);
     }
@@ -55,14 +70,18 @@ class RegisterController
         $api = new MagentoAPI();
         $otp_request = $api->requestOtp($phone, $type);
 
+        if (isset($response['wp_error']) && $response['wp_error']) {
+            wp_send_json_error($response);
+        }
+
         wp_send_json_success($otp_request);
 
-        wp_send_json_error([
-            'phone' => $phone,
-            'message' => 'Phone number already registered.',
-            'status'  => 'error',
-            'success' => false
-        ]);
+        // wp_send_json_error([
+        //     'phone' => $phone,
+        //     'message' => 'Phone number already registered.',
+        //     'status'  => 'error',
+        //     'success' => false
+        // ]);
     }
 
     public static function verifyOtp()
@@ -144,7 +163,7 @@ class RegisterController
         $plan_slug = mapping_membership_SH($registerData['cust_cardtype']);
         $plan_id   = my_get_membership_plan_id_by_slug($plan_slug);
         if ($plan_id) {
-            $assignMembership = my_assign_or_switch_membership( $user->ID, $plan_id, 'active', true );
+            $assignMembership = my_assign_or_switch_membership($user->ID, $plan_id, 'active', true);
         }
 
         // User meta fields to update

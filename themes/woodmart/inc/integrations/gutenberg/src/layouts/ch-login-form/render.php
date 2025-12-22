@@ -1,7 +1,6 @@
 <?php
 
 use XTS\Modules\Layouts\Main;
-use XTS\Modules\Shipping_Progress_Bar\Main as Shipping_Progress_Bar_Module;
 
 if ( ! function_exists( 'wd_gutenberg_checkout_login_form' ) ) {
 	function wd_gutenberg_checkout_login_form( $block_attributes ) {

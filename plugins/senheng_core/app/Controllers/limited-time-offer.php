@@ -24,8 +24,10 @@ class LimitedTimeOfferController
         $offer = '';
         $end_date = '';
         $visible = false;
-        if ($product->is_type('variable')) {
-            // Do not display until a variation is selected
+        $is_variable = $product->is_type('variable');
+        
+        if ($is_variable) {
+            // For variable products, don't display initially - will be shown via JS when variation is selected
             $visible = false;
         } elseif ($product->is_on_sale()) {
             $offer = $product->get_regular_price() - $product->get_sale_price();
@@ -39,9 +41,15 @@ class LimitedTimeOfferController
             $end_date_iso = $end_date ? date('c', strtotime($end_date)) : '';
         }
 
+        // For simple products: if not on sale or no end date, don't render anything
+        if (!$is_variable && (!$visible || empty($end_date_iso))) {
+            return;
+        }
+
         $variation_sale_data = [];
-        if ($product->is_type('variable')) {
+        if ($is_variable) {
             $variations = $product->get_children();
+            $has_any_sale = false;
             foreach ($variations as $variation_id) {
                 $variation = wc_get_product($variation_id);
                 $variation_sale_data[$variation_id] = [
@@ -50,12 +58,21 @@ class LimitedTimeOfferController
                     'display_price' => $variation ? ($variation->get_regular_price() ?: $variation->get_sale_price()) : 0,
                 ];
                 if ($variation && $variation->is_on_sale()) {
+                    $var_end_date = $variation->get_date_on_sale_to();
+                    if ($var_end_date) {
+                        $has_any_sale = true;
+                    }
                     $variation_sale_data[$variation_id] = [
                         'discount' => $variation->get_regular_price() - $variation->get_sale_price(),
-                        'end_date' => $variation->get_date_on_sale_to() ? $variation->get_date_on_sale_to()->date('c') : null,
+                        'end_date' => $var_end_date ? $var_end_date->date('c') : null,
                         'display_price' => $variation->get_sale_price() ?: $variation->get_regular_price(),
                     ];
                 }
+            }
+            
+            // If no variation has a sale with end date, don't render anything
+            if (!$has_any_sale) {
+                return;
             }
         }
 
@@ -96,7 +113,10 @@ class LimitedTimeOfferController
         $offer = '';
         $end_date = '';
         $visible = false;
-        if ($product->is_type('variable')) {
+        $is_variable = $product->is_type('variable');
+        
+        if ($is_variable) {
+            // For variable products, don't display initially - will be shown via JS when variation is selected
             $visible = false;
         } elseif ($product->is_on_sale()) {
             $offer = $product->get_regular_price() - $product->get_sale_price();
@@ -110,9 +130,15 @@ class LimitedTimeOfferController
             $end_date_iso = $end_date ? date('c', strtotime($end_date)) : '';
         }
 
+        // For simple products: if not on sale or no end date, don't render anything
+        if (!$is_variable && (!$visible || empty($end_date_iso))) {
+            return '';
+        }
+
         $variation_sale_data = [];
-        if ($product->is_type('variable')) {
+        if ($is_variable) {
             $variations = $product->get_children();
+            $has_any_sale = false;
             foreach ($variations as $variation_id) {
                 $variation = wc_get_product($variation_id);
                 $variation_sale_data[$variation_id] = [
@@ -121,12 +147,21 @@ class LimitedTimeOfferController
                     'display_price' => $variation ? ($variation->get_regular_price() ?: $variation->get_sale_price()) : 0,
                 ];
                 if ($variation && $variation->is_on_sale()) {
+                    $var_end_date = $variation->get_date_on_sale_to();
+                    if ($var_end_date) {
+                        $has_any_sale = true;
+                    }
                     $variation_sale_data[$variation_id] = [
                         'discount' => $variation->get_regular_price() - $variation->get_sale_price(),
-                        'end_date' => $variation->get_date_on_sale_to() ? $variation->get_date_on_sale_to()->date('c') : null,
+                        'end_date' => $var_end_date ? $var_end_date->date('c') : null,
                         'display_price' => $variation->get_sale_price() ?: $variation->get_regular_price(),
                     ];
                 }
+            }
+            
+            // If no variation has a sale with end date, don't render anything
+            if (!$has_any_sale) {
+                return '';
             }
         }
 

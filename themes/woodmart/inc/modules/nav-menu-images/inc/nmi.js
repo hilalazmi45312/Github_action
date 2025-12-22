@@ -19,56 +19,53 @@ function WPSetThumbnailID(id) {
 
 function WPSetThumbnailHTML(html) {
 }
-
-jQuery(document).ready(function($) {
-	// Get all menu items
-	var items = $('ul#menu-to-edit li.menu-item');
-
-	// Go through all items and display link & thumb
-	for (var i = 0; i < items.length; i++) {
-		var id = $(items[i]).children('#nmi_item_id').val();
-
-		var sibling = $('#edit-menu-item-attr-title-' + id).parent().parent();
-		var image_div = $('li#menu-item-' + id + ' .nmi-current-image');
-		var link_div = $('li#menu-item-' + id + ' .nmi-upload-link');
-		var customFields = $('li#menu-item-' + id + ' .nmi-item-custom-fields');
-
-		if (customFields) {
-			sibling.after(customFields);
-			customFields.show();
-		}
-
-		if (link_div) {
-			link_div.show();
-		}
-
-		if (image_div) {
-			image_div.show();
-		}
-	}
-
-	// Save item ID on click on a link
-	$('.nmi-upload-link').click(function() {
-		window.clicked_item_id = $(this).parent().parent().children('#nmi_item_id').val();
+(function($) {
+	$(document).on('menu-item-added', function() {
+		initCustomMenuFields();
 	});
 
-	// Display alert when not added as featured
-	window.send_to_editor = function(html) {
-		alert(nmi_vars.alert);
-		tb_remove();
-	};
+	jQuery(document).ready(function() {
+		initCustomMenuFields();
+	});
 
-	$('.nmi-item-custom-fields').find('select').on('change', function() {
-		var $this = $(this);
-		var selectValue = $this.val();
+	function initCustomMenuFields() {
+		// Get all menu items
+		var items = $('ul#menu-to-edit li.menu-item');
 
-		if ( 'nmi-design' === $this.data('field') ) {
-			$this.parents('.nmi-item-custom-fields').removeClass('wd-design-default wd-design-full-width wd-design-full-height wd-design-sized wd-design-aside').addClass('wd-design-' + selectValue );
+		// Go through all items and display link & thumb
+		for (var i = 0; i < items.length; i++) {
+			var id = $(items[i]).children('#nmi_item_id').val();
+			var sibling = $('#edit-menu-item-attr-title-' + id).parent().parent();
+			var customFields = $('li#menu-item-' + id + ' .nmi-item-custom-fields');
+
+			if (customFields) {
+				sibling.after(customFields);
+			}
 		}
-	})
 
-	// Menu block edit link
-	$('.nmi-block select').on('change', function() {
-		$('.edit-block-link').attr('href', $(this).find('option:selected').data('edit-link')).show();
-	})
-});
+		// Save item ID on click on a link
+		$('.nmi-upload-link').click(function() {
+			window.clicked_item_id = $(this).parent().parent().children('#nmi_item_id').val();
+		});
+
+		// Display alert when not added as featured
+		window.send_to_editor = function(html) {
+			alert(nmi_vars.alert);
+			tb_remove();
+		};
+
+		$('.nmi-item-custom-fields').find('select').on('change', function() {
+			var $this = $(this);
+			var selectValue = $this.val();
+
+			if ( 'nmi-design' === $this.data('field') ) {
+				$this.parents('.nmi-item-custom-fields').removeClass('wd-design-default wd-design-full-width wd-design-full-height wd-design-sized wd-design-aside').addClass('wd-design-' + selectValue );
+			}
+		})
+
+		// Menu block edit link
+		$('.nmi-block select').on('change', function() {
+			$('.edit-block-link').attr('href', $(this).find('option:selected').data('edit-link')).show();
+		})
+	}
+})(jQuery);

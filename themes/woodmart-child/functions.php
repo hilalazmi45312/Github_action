@@ -7,6 +7,24 @@ function woodmart_child_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'woodmart_child_enqueue_styles', 10010 );
 
+/**
+ * Fix: Pre-define woodmartThemeModule.googleMapsCallback to prevent
+ * "Uncaught InvalidValueError: woodmartThemeModule.googleMapsCallback is not a function"
+ * error when opening Elementor editor (Google Maps API loads before helpers.js)
+ */
+add_action( 'wp_head', function() {
+    ?>
+    <script>
+    if (typeof woodmartThemeModule === 'undefined') {
+        var woodmartThemeModule = {};
+    }
+    if (typeof woodmartThemeModule.googleMapsCallback !== 'function') {
+        woodmartThemeModule.googleMapsCallback = function() { return ''; };
+    }
+    </script>
+    <?php
+}, 1 );
+
 
 function my_admin_inline_css() {
     echo '<style>
@@ -129,17 +147,24 @@ add_action('woocommerce_product_options_shipping', function () {
 
 // Save the flag and normalize the product's own class
 add_action('woocommerce_process_product_meta', function ($post_id) {
+    static $updating = false;
+    if ($updating) {
+        return;
+    }
+
     // read our hidden field set by JS; default to 'yes' if missing
     $use_cat = isset($_POST['_use_category_shipping_class']) && $_POST['_use_category_shipping_class'] === 'no' ? 'no' : 'yes';
     update_post_meta($post_id, '_use_category_shipping_class', $use_cat);
 
     // If using category-level, clear product's own class so it doesn't conflict
     if ($use_cat === 'yes') {
+        $updating = true;
         $product = wc_get_product($post_id);
         if ($product) {
             $product->set_shipping_class_id(0); // remove direct class
             $product->save();
         }
+        $updating = false;
     }
 }, 5); // run early, but we'll still override after if needed
 
@@ -594,6 +619,69 @@ add_filter( 'wc_order_statuses', function ( $statuses ) {
     return $statuses;
 } );
 
+// Rename bulk actions for HPOS (High-Performance Order Storage)
+add_filter( 'bulk_actions-woocommerce_page_wc-orders', function( $actions ) {
+    if ( isset( $actions['mark_pending'] ) ) {
+        $actions['mark_pending'] = __( 'Change status to To Pay', 'woocommerce' );
+    }
+    if ( isset( $actions['mark_processing'] ) ) {
+        $actions['mark_processing'] = __( 'Change status to To Pack', 'woocommerce' );
+    }
+    return $actions;
+});
+
+// Rename bulk actions for legacy post-based orders
+add_filter( 'bulk_actions-edit-shop_order', function( $actions ) {
+    if ( isset( $actions['mark_pending'] ) ) {
+        $actions['mark_pending'] = __( 'Change status to To Pay', 'woocommerce' );
+    }
+    if ( isset( $actions['mark_processing'] ) ) {
+        $actions['mark_processing'] = __( 'Change status to To Pack', 'woocommerce' );
+    }
+    return $actions;
+});
+
+/**
+ * Add "Completed" to order status filter tabs (subsubsub list) in WooCommerce admin
+ * Works with both HPOS and legacy post-based orders
+ */
+add_filter( 'views_woocommerce_page_wc-orders', 'sh_add_completed_to_order_views', 10, 1 );
+add_filter( 'views_edit-shop_order', 'sh_add_completed_to_order_views', 10, 1 );
+function sh_add_completed_to_order_views( $views ) {
+    // Count completed orders
+    if ( class_exists( 'Automattic\WooCommerce\Utilities\OrderUtil' ) && 
+         Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+        // HPOS: Use WooCommerce's built-in function
+        $count = wc_orders_count( 'completed' );
+    } else {
+        // Legacy: Use posts table
+        $count = (int) wp_count_posts( 'shop_order' )->{'wc-completed'};
+    }
+
+    // Build the URL for completed orders
+    $current_status = isset( $_GET['status'] ) ? sanitize_text_field( $_GET['status'] ) : '';
+    $class = ( $current_status === 'completed' || $current_status === 'wc-completed' ) ? 'current' : '';
+    
+    // Determine the correct admin URL based on HPOS or legacy
+    if ( class_exists( 'Automattic\WooCommerce\Utilities\OrderUtil' ) && 
+         Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+        $url = admin_url( 'admin.php?page=wc-orders&status=completed' );
+    } else {
+        $url = admin_url( 'edit.php?post_type=shop_order&post_status=wc-completed' );
+    }
+
+    // Add Completed view
+    $views['wc-completed'] = sprintf(
+        '<a href="%s" class="%s">%s <span class="count">(%s)</span></a>',
+        esc_url( $url ),
+        esc_attr( $class ),
+        esc_html__( 'Completed', 'woocommerce' ),
+        number_format_i18n( $count )
+    );
+
+    return $views;
+}
+
 
 /**
  * Rename the Multiple Customer Addresses "Identifier / Name" field on add/edit address modal.
@@ -835,16 +923,20 @@ function sh_handle_full_clone() {
         }
 
         foreach ( $values as $value ) {
-            // Ensure Elementor JSON stays valid (and any serialized content is preserved)
+            // Handle Elementor meta specially - need wp_slash to preserve JSON escaping
             if ( str_starts_with( $meta_key, '_elementor_' ) ) {
-                // If the value is an array/object, encode; otherwise keep as string
-                if ( is_array( $value ) || is_object( $value ) ) {
-                    $value = wp_json_encode( $value );
+                // WordPress from stripping escape characters which corrupts widgets
+                if ( $meta_key === '_elementor_data' ) {
+                    // Use wp_slash to preserve all escape sequences in the JSON
+                    update_post_meta( $new_post_id, $meta_key, wp_slash( $value ) );
+                } else {
+                    // Other Elementor meta (like _elementor_template_type, _elementor_version, etc.)
+                    // This handles cases where the source meta is corrupted/double-serialized
+                    $clean_value = maybe_unserialize( $value );
+                    update_post_meta( $new_post_id, $meta_key, $clean_value );
                 }
-                $value = wp_slash( (string) $value );
-                update_post_meta( $new_post_id, $meta_key, $value );
             } else {
-                // Preserve serialized data & strings safely
+                // Preserve serialized data & strings safely for non-Elementor meta
                 $value = maybe_unserialize( $value );
                 $value = is_string( $value ) ? wp_slash( $value ) : $value;
                 add_post_meta( $new_post_id, $meta_key, $value );
@@ -911,42 +1003,34 @@ add_action( 'admin_footer', function () {
 });
 
 
+// /**
+//  * Fix WooCommerce brand archive pagination (/product_brand/haier/page/2 etc.).
+//  */
+// function custom_fix_brand_archive_query( $query ) {
 
+//     // Only adjust the main front-end query for the brand taxonomy
+//     if ( is_admin() || ! $query->is_main_query() ) {
+//         return;
+//     }
 
-/**
- * Fix WooCommerce brand archive pagination (/brand/haier/page/2 etc.).
- */
-function sh_fix_brand_archive_query( $q ) {
+//     // Ensure we're on the brand taxonomy page (replace 'product_brand' with your actual taxonomy slug if needed)
+//     if ( $query->is_tax( 'product_brand' ) ) {
 
-    // Only adjust main front-end query.
-    if ( is_admin() || ! $q->is_main_query() ) {
-        return;
-    }
+//         // Always query products on the brand archive page
+//         $query->set( 'post_type', 'product' );
+//         $query->set( 'post_status', 'publish' );
 
-    // If your brand taxonomy slug is not "brand", change it here.
-    if ( $q->is_tax( 'brand' ) ) {
+//         // Ensure the pagination is set correctly
+//         $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
+//         $query->set( 'paged', $paged );
 
-        // Always query products.
-        $q->set( 'post_type', 'product' );
-        $q->set( 'post_status', 'publish' );
-
-        // Ensure paged is set correctly.
-        $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
-        $q->set( 'paged', $paged );
-
-        // Offsets + pagination cause empty pages – remove any offset.
-        if ( $q->get( 'offset' ) ) {
-            $q->set( 'offset', 0 );
-        }
-    }
-}
-add_action( 'pre_get_posts', 'sh_fix_brand_archive_query', 999 );
-
-
-
-
-
-
+//         // Remove any offsets that could cause pagination issues
+//         if ( $query->get( 'offset' ) ) {
+//             $query->set( 'offset', 0 );
+//         }
+//     }
+// }
+// add_action( 'pre_get_posts', 'custom_fix_brand_archive_query', 999 );
 
 
 
@@ -1162,13 +1246,227 @@ JS;
     wp_add_inline_script( 'wc-add-to-cart-variation', $script );
 }
 
-// Defeerd Wocoomerce Cart Fragments Script
-add_filter( 'script_loader_tag', function( $tag, $handle ) {
-    if ( $handle === 'wc-cart-fragments' ) {
-        return str_replace( ' src', ' defer src', $tag );
-    }
-    return $tag;
-}, 10, 2 );
+// /**
+//  * Debug script to identify what's causing checkout cart errors
+//  * 
+//  * Add this temporarily to your theme's functions.php or run as a standalone script
+//  * 
+//  * This will log detailed information about what's causing cart validation errors
+//  * 
+//  * Logs can be found in: wp-content/uploads/wc-logs/checkout-cart-debug-{date}.log
+//  */
+
+// // Hook into cart validation to capture all errors
+// add_action( 'woocommerce_check_cart_items', 'debug_checkout_cart_errors', 999 );
+
+// function debug_checkout_cart_errors() {
+//     if ( ! is_checkout() ) {
+//         return; // Only run on checkout page
+//     }
+
+//     $cart = WC()->cart;
+//     if ( ! $cart || $cart->is_empty() ) {
+//         return;
+//     }
+
+//     // Get WooCommerce logger
+//     $logger = wc_get_logger();
+//     $context = array( 'source' => 'checkout-cart-debug' );
+
+//     $debug_info = array(
+//         'timestamp' => current_time( 'mysql' ),
+//         'cart_items' => array(),
+//         'errors_found' => array(),
+//         'notices_before' => wc_get_notices( 'error' ),
+//     );
+
+//     // Check each cart item in detail
+//     foreach ( $cart->get_cart() as $cart_item_key => $cart_item ) {
+//         $product = $cart_item['data'];
+
+//         if ( ! $product ) {
+//             $debug_info['errors_found'][] = "Cart item {$cart_item_key}: Product object is null";
+//             continue;
+//         }
+
+//         $item_debug = array(
+//             'cart_item_key' => $cart_item_key,
+//             'product_id' => $product->get_id(),
+//             'product_name' => $product->get_name(),
+//             'product_type' => $product->get_type(),
+//             'quantity' => $cart_item['quantity'],
+//             'checks' => array(),
+//         );
+
+//         // Check 1: Product exists
+//         $item_debug['checks']['exists'] = $product->exists();
+//         if ( ! $product->exists() ) {
+//             $debug_info['errors_found'][] = "{$product->get_name()}: Product does not exist";
+//         }
+
+//         // Check 2: Product status
+//         $status = $product->get_status();
+//         $item_debug['checks']['status'] = $status;
+//         if ( 'publish' !== $status && ! current_user_can( 'edit_post', $product->get_id() ) ) {
+//             $debug_info['errors_found'][] = "{$product->get_name()}: Product status is '{$status}' (not publish)";
+//         }
+
+//         // Check 3: Product is purchasable
+//         $is_purchasable = $product->is_purchasable();
+//         $item_debug['checks']['is_purchasable'] = $is_purchasable;
+//         if ( ! $is_purchasable ) {
+//             $debug_info['errors_found'][] = "{$product->get_name()}: Product is not purchasable";
+
+//             // Check why it's not purchasable
+//             $price = $product->get_price();
+//             $item_debug['checks']['price'] = $price;
+//             if ( '' === $price ) {
+//                 $debug_info['errors_found'][] = "{$product->get_name()}: Product has empty price";
+//             }
+//         }
+
+//         // Check 4: Stock status
+//         $is_in_stock = $product->is_in_stock();
+//         $item_debug['checks']['is_in_stock'] = $is_in_stock;
+//         if ( ! $is_in_stock ) {
+//             $debug_info['errors_found'][] = "{$product->get_name()}: Product is out of stock";
+//         }
+
+//         // Check 5: Stock quantity (if managing stock)
+//         if ( $product->managing_stock() && ! $product->backorders_allowed() ) {
+//             $stock_qty = $product->get_stock_quantity();
+//             $held_stock = wc_get_held_stock_quantity( $product, isset( WC()->session->order_awaiting_payment ) ? absint( WC()->session->order_awaiting_payment ) : 0 );
+//             $required_stock = $cart->get_cart_item_quantities()[ $product->get_stock_managed_by_id() ] ?? 0;
+
+//             $item_debug['checks']['stock_quantity'] = $stock_qty;
+//             $item_debug['checks']['held_stock'] = $held_stock;
+//             $item_debug['checks']['required_stock'] = $required_stock;
+//             $item_debug['checks']['available_stock'] = $stock_qty - $held_stock;
+
+//             if ( $stock_qty < ( $held_stock + $required_stock ) ) {
+//                 $debug_info['errors_found'][] = sprintf(
+//                     "%s: Insufficient stock. Required: %d, Available: %d (Stock: %d, Held: %d)",
+//                     $product->get_name(),
+//                     $required_stock,
+//                     $stock_qty - $held_stock,
+//                     $stock_qty,
+//                     $held_stock
+//                 );
+//             }
+//         }
+
+//         // Check 6: Sold individually
+//         if ( $product->is_sold_individually() && $cart_item['quantity'] > 1 ) {
+//             $debug_info['errors_found'][] = "{$product->get_name()}: Product is sold individually but quantity is {$cart_item['quantity']}";
+//         }
+
+//         // Check 7: Variation visibility (for variations)
+//         if ( $product->is_type( 'variation' ) ) {
+//             $is_visible = $product->variation_is_visible();
+//             $item_debug['checks']['variation_is_visible'] = $is_visible;
+//             if ( ! $is_visible ) {
+//                 $debug_info['errors_found'][] = "{$product->get_name()}: Variation is not visible";
+//             }
+
+//             // Check parent status
+//             $parent_id = $product->get_parent_id();
+//             if ( $parent_id ) {
+//                 $parent = wc_get_product( $parent_id );
+//                 if ( $parent ) {
+//                     $item_debug['checks']['parent_status'] = $parent->get_status();
+//                     if ( 'publish' !== $parent->get_status() && ! current_user_can( 'edit_post', $parent_id ) ) {
+//                         $debug_info['errors_found'][] = "{$product->get_name()}: Parent product status is '{$parent->get_status()}'";
+//                     }
+//                 }
+//             }
+//         }
+
+//         $debug_info['cart_items'][] = $item_debug;
+//     }
+
+//     // Check for any error notices that were added
+//     $notices_after = wc_get_notices( 'error' );
+//     $debug_info['notices_after'] = $notices_after;
+//     $debug_info['new_notices'] = array_diff_assoc( $notices_after, $debug_info['notices_before'] );
+
+//     // Log all debug info
+//     $logger->info( '=== CHECKOUT CART VALIDATION DEBUG ===', $context );
+//     $logger->info( print_r( $debug_info, true ), $context );
+
+//     // Log errors found separately for easier reading
+//     if ( ! empty( $debug_info['errors_found'] ) ) {
+//         $logger->error( 'VALIDATION ERRORS FOUND:', $context );
+//         foreach ( $debug_info['errors_found'] as $error ) {
+//             $logger->error( '  - ' . $error, $context );
+//         }
+//     }
+
+//     // Log cart items summary
+//     $logger->info( 'CART ITEMS SUMMARY:', $context );
+//     foreach ( $debug_info['cart_items'] as $item ) {
+//         $logger->info( sprintf(
+//             '  Product: %s (ID: %d) | Type: %s | Qty: %d | Purchasable: %s | In Stock: %s | Status: %s',
+//             $item['product_name'],
+//             $item['product_id'],
+//             $item['product_type'],
+//             $item['quantity'],
+//             $item['checks']['is_purchasable'] ? 'Yes' : 'No',
+//             isset( $item['checks']['is_in_stock'] ) && $item['checks']['is_in_stock'] ? 'Yes' : 'No',
+//             $item['checks']['status']
+//         ), $context );
+//     }
+
+//     // Also check what hooks are attached to woocommerce_check_cart_items
+//     global $wp_filter;
+//     if ( isset( $wp_filter['woocommerce_check_cart_items'] ) ) {
+//         $hooks = $wp_filter['woocommerce_check_cart_items'];
+//         $logger->info( '=== HOOKS ATTACHED TO woocommerce_check_cart_items ===', $context );
+//         foreach ( $hooks->callbacks as $priority => $callbacks ) {
+//             foreach ( $callbacks as $callback ) {
+//                 $function_name = 'Unknown';
+//                 if ( is_array( $callback['function'] ) ) {
+//                     if ( is_object( $callback['function'][0] ) ) {
+//                         $function_name = get_class( $callback['function'][0] ) . '::' . $callback['function'][1];
+//                     } else {
+//                         $function_name = $callback['function'][0] . '::' . $callback['function'][1];
+//                     }
+//                 } elseif ( is_string( $callback['function'] ) ) {
+//                     $function_name = $callback['function'];
+//                 }
+//                 $logger->info( "Priority {$priority}: {$function_name}", $context );
+//             }
+//         }
+//         $logger->info( '=== END HOOKS ===', $context );
+//     }
+
+//     $logger->info( '=== END DEBUG ===', $context );
+// }
+
+// // Also hook into the checkout process to see what happens
+// add_action( 'woocommerce_before_checkout_form', 'debug_checkout_before_form', 1 );
+
+// function debug_checkout_before_form() {
+//     $notices = wc_get_notices( 'error' );
+//     if ( ! empty( $notices ) ) {
+//         $logger = wc_get_logger();
+//         $context = array( 'source' => 'checkout-cart-debug' );
+
+//         $logger->warning( '=== ERROR NOTICES BEFORE CHECKOUT FORM ===', $context );
+//         foreach ( $notices as $notice ) {
+//             $message = isset( $notice['notice'] ) ? $notice['notice'] : ( is_string( $notice ) ? $notice : print_r( $notice, true ) );
+//             $logger->warning( 'Notice: ' . $message, $context );
+//         }
+//         $logger->warning( '=== END NOTICES ===', $context );
+//     }
+// }
+
+// // Defeerd Wocoomerce Cart Fragments Script
+// add_filter( 'script_loader_tag', function( $tag, $handle ) {
+//     if ( $handle === 'wc-cart-fragments' ) {
+//         return str_replace( ' src', ' defer src', $tag );
+//     }
+//     return $tag;
+// }, 10, 2 );
 
 
 // Fix woocommerce-analytics Concatenation Issue
@@ -1189,3 +1487,179 @@ add_filter( 'wp_headers', function( $headers ) {
 
     return $headers;
 }, 999 );
+
+
+/**
+ * Export WooCommerce Attributes with Each Value on Separate Row
+ * Access via: yoursite.com/?export_attributes=1
+ */
+function export_woocommerce_attributes_csv() {
+    // Check if WooCommerce is active
+    if (!function_exists('wc_get_attribute_taxonomies')) {
+        return;
+    }
+    
+    // Get all attribute taxonomies
+    $attribute_taxonomies = wc_get_attribute_taxonomies();
+    
+    // Set headers for CSV download
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="woocommerce-attributes-' . date('Y-m-d') . '.csv"');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+    
+    // Open output stream
+    $output = fopen('php://output', 'w');
+    
+    // Add UTF-8 BOM for Excel compatibility
+    fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
+    
+    // Write header row
+    fputcsv($output, array('Attribute Name', 'Attribute Slug', 'All Values'));
+    
+    // Loop through each attribute
+    foreach ($attribute_taxonomies as $tax) {
+        $taxonomy = 'pa_' . $tax->attribute_name;
+        
+        // Get all terms for this attribute
+        $terms = get_terms(array(
+            'taxonomy'   => $taxonomy,
+            'hide_empty' => false,
+            'orderby'    => 'name',
+            'order'      => 'ASC'
+        ));
+        
+        // Check if terms exist
+        if (!is_wp_error($terms) && !empty($terms)) {
+            // First row: show attribute name and slug with first value
+            $first_term = array_shift($terms);
+            fputcsv($output, array(
+                $tax->attribute_label,      // Attribute Name
+                $tax->attribute_name,       // Attribute Slug
+                $first_term->name           // First Value
+            ));
+            
+            // Remaining rows: empty name and slug, just values
+            foreach ($terms as $term) {
+                fputcsv($output, array(
+                    '',                     // Empty Attribute Name
+                    '',                     // Empty Attribute Slug
+                    $term->name             // Value
+                ));
+            }
+        } else {
+            // No values for this attribute
+            fputcsv($output, array(
+                $tax->attribute_label,
+                $tax->attribute_name,
+                '(No values)'
+            ));
+        }
+    }
+    
+    fclose($output);
+    exit;
+}
+// Hook to WordPress init to check for export trigger
+add_action('init', function() {
+    // Check if export parameter is set and user has permission
+    if (isset($_GET['export_attributes']) && current_user_can('manage_woocommerce')) {
+        export_woocommerce_attributes_csv();
+    }
+});
+
+
+// // Force Elementor image widget to use FULL size when "Full" is selected.
+// add_filter( 'wp_get_attachment_image_src', function( $image, $attachment_id, $size ) {
+//     if ( $size === 'full' ) {
+//         return wp_get_attachment_image_src( $attachment_id, 'full' );
+//     }
+//     return $image;
+// }, 10, 3 );
+
+// // Disable WordPress + theme automatic big image scaling
+// add_filter( 'big_image_size_threshold', '__return_false' );
+// add_filter( 'woodmart_big_image_threshold', '__return_false' );
+
+function add_facebook_domain_verification() {
+    echo '<meta name="facebook-domain-verification" content="ewfb4qsfe1szehynw7k9q8wz8ew3k0" />' . "\n";
+}
+add_action('wp_head', 'add_facebook_domain_verification');
+
+add_action( 'woocommerce_gla_get_google_product_offer_id', function ( $mc_id, $product_id ) { return (string) $product_id; }, 10, 2 );
+
+
+/**
+ * Auto-enable "Manage stock" checkbox for simple products and variations (not parent variable product)
+ */
+add_action('admin_footer', function() {
+    global $pagenow, $post_type;
+    
+    // Only run on product pages (new or edit)
+    if (($pagenow !== 'post-new.php' && $pagenow !== 'post.php') || $post_type !== 'product') {
+        return;
+    }
+    ?>
+    <script>
+    jQuery(function($) {
+        // Auto-tick manage stock for simple products on new product page only
+        <?php if ($GLOBALS['pagenow'] === 'post-new.php'): ?>
+        // Only tick if product type is simple (not variable)
+        function checkAndTickSimple() {
+            var productType = $('#product-type').val();
+            if (productType === 'simple' || productType === '' || productType === undefined) {
+                $('#_manage_stock').prop('checked', true).trigger('change');
+            }
+        }
+        checkAndTickSimple();
+        
+        // Handle product type change
+        $('#product-type').on('change', function() {
+            var productType = $(this).val();
+            if (productType === 'simple') {
+                $('#_manage_stock').prop('checked', true).trigger('change');
+            } else if (productType === 'variable') {
+                // Untick for variable products (parent)
+                $('#_manage_stock').prop('checked', false).trigger('change');
+            }
+        });
+        <?php endif; ?>
+        
+        // Function to tick all unchecked variation manage stock checkboxes
+        function tickVariationManageStock() {
+            $('.woocommerce_variations .variable_manage_stock:not(:checked)').each(function() {
+                $(this).prop('checked', true).trigger('change');
+            });
+        }
+        
+        // Auto-tick manage stock for new variations when they are added
+        $(document).on('woocommerce_variations_added', function() { 
+            setTimeout(tickVariationManageStock, 500);
+        });
+        
+        // Also handle when variations are loaded (for existing products)
+        $(document).on('woocommerce_variations_loaded', function() {
+            // Only tick newly added (unchecked) ones, don't override existing settings
+        });
+        
+        // Handle when variation panel is opened/expanded
+        $(document).on('click', '.woocommerce_variation h3', function() {
+            setTimeout(tickVariationManageStock, 300);
+        });
+        
+        // MutationObserver to catch dynamically added variations
+        var variationsContainer = document.querySelector('.woocommerce_variations');
+        if (variationsContainer) {
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length) {
+                        setTimeout(tickVariationManageStock, 500);
+                    }
+                });
+            });
+            observer.observe(variationsContainer, { childList: true, subtree: true });
+        }
+    });
+    </script>
+    <?php
+});

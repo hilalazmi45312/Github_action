@@ -28,6 +28,10 @@ if ( ! function_exists( 'wd_get_block_ajax_search_attrs' ) ) {
 					'type'    => 'boolean',
 					'default' => true,
 				),
+				'include_cat_search'    => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
 				'cat_selector_style'    => array(
 					'type'    => 'string',
 					'default' => 'bordered',

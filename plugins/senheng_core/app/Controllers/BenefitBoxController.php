@@ -11,7 +11,22 @@ class BenefitBoxController
             return;
         }
 
-        if (!function_exists('is_product') || !is_product()) {
+        // Check if we're in Elementor editor or preview mode
+        $is_elementor_context = false;
+        if (class_exists('\\Elementor\\Plugin')) {
+            $elementor = \Elementor\Plugin::instance();
+            if ($elementor->editor->is_edit_mode() || $elementor->preview->is_preview_mode()) {
+                $is_elementor_context = true;
+            }
+        }
+        
+        // Also check for Elementor preview via query params
+        if (isset($_GET['elementor-preview']) || (isset($_GET['action']) && $_GET['action'] === 'elementor')) {
+            $is_elementor_context = true;
+        }
+
+        // Enqueue if on product page OR in Elementor context
+        if (!$is_elementor_context && (!function_exists('is_product') || !is_product())) {
             return;
         }
 
@@ -67,46 +82,81 @@ class BenefitBoxController
             return '';
         }
 
+        // Get product ID - handle Elementor editor context
         $product_id = get_the_ID();
-        $base_url = SENHENG_CORE_URL . 'assets/uploads/';
-
-        // Delivery options mapped to individual ACF fields
-        $delivery_options = [
-            'delivery_free' => [
-                'title' => 'Free delivery',
-                'image' => 'free-delivery.png',
-                'description' => '',
-            ],
-            'delivery_normal' => [
-                'title' => 'Normal delivery',
-                'image' => 'free-delivery.png',
-                'description' => 'West Malaysia: 1-3 working days<br>East Malaysia: 3-5 working days',
-            ],
-            'delivery_pickup' => [
-                'title' => 'Pickup in store',
-                'image' => 'pickup.png',
-                'description' => '3-5 working days',
-            ],
-        ];
-
-        $cards = [];
-
-        // Check each independent field
-        foreach ($delivery_options as $acf_field => $option) {
-            $enabled = get_field($acf_field, $product_id);
-            error_log("Delivery option check - Field: $acf_field, Enabled: " . ($enabled ? 'true' : 'false'));
-            if ($enabled) {
-                $cards[] = [
-                    'icon' => $base_url . $option['image'],
-                    'title' => $option['title'],
-                    'subtitle' => $option['description'],
-                ];
+        $is_elementor_edit_mode = false;
+        
+        // Check if we're in Elementor editor mode
+        if (class_exists('\Elementor\Plugin')) {
+            $elementor = \Elementor\Plugin::instance();
+            if ($elementor->editor->is_edit_mode() || $elementor->preview->is_preview_mode()) {
+                $is_elementor_edit_mode = true;
+                
+                // Try to get product ID from Elementor document
+                $document = $elementor->documents->get_current();
+                if ($document) {
+                    $post_id = $document->get_main_id();
+                    if ($post_id && get_post_type($post_id) === 'product') {
+                        $product_id = $post_id;
+                    }
+                }
             }
         }
+        
+        // Also check for Elementor AJAX/preview via query params
+        if (isset($_GET['elementor-preview']) || isset($_GET['action']) && $_GET['action'] === 'elementor') {
+            $is_elementor_edit_mode = true;
+            if (isset($_GET['elementor-preview'])) {
+                $preview_id = intval($_GET['elementor-preview']);
+                if ($preview_id && get_post_type($preview_id) === 'product') {
+                    $product_id = $preview_id;
+                }
+            }
+        }
+
+        $cards = [];
 
         // Get benefit box settings from database
         $benefit_settings = BenefitBox::getActiveSettings();
         foreach ($benefit_settings as $setting) {
+            // Check if this is a warranty type - display only if product has warranty
+            if ($setting['type'] === 'warranty') {
+                // Try ACF get_field first, then fallback to get_post_meta
+                $warranty_value = '';
+                
+                // Method 1: ACF get_field
+                if (function_exists('get_field')) {
+                    $warranty_value = get_field('product_warranty', $product_id);
+                }
+                
+                // Method 2: Fallback to get_post_meta (ACF stores with underscore prefix sometimes)
+                if (empty($warranty_value)) {
+                    $warranty_value = get_post_meta($product_id, 'product_warranty', true);
+                }
+                
+                // Method 3: Try with underscore prefix (ACF reference field storage)
+                if (empty($warranty_value)) {
+                    $warranty_value = get_post_meta($product_id, '_product_warranty', true);
+                }
+                
+                if (empty($warranty_value)) {
+                    continue; // Skip warranty card if product has no warranty
+                }
+                
+                // Process shortcodes in title and subtitle
+                $title = str_replace('[product_warranty]', $warranty_value, $setting['title']);
+                $subtitle = str_replace('[product_warranty]', $warranty_value, $setting['subtitle']);
+                
+                $card = [
+                    'icon' => $setting['icon'],
+                    'title' => $title,
+                    'subtitle' => $subtitle,
+                    'is_warranty' => true,
+                ];
+                $cards[] = $card;
+                continue;
+            }
+            
             $card = [
                 'icon' => $setting['icon'],
                 'title' => $setting['title'],
@@ -399,5 +449,48 @@ class BenefitBoxController
     public static function toggleEnabled(bool $enabled): bool
     {
         return update_option(self::OPTION_KEY_ENABLED, $enabled ? 1 : 0);
+    }
+
+    /**
+     * Register product warranty shortcode
+     */
+    public static function registerProductWarrantyShortcode(): void
+    {
+        add_shortcode('product_warranty', [self::class, 'renderProductWarrantyShortcode']);
+    }
+
+    /**
+     * Render product warranty shortcode
+     * Displays the ACF product_warranty field value for the current product
+     */
+    public static function renderProductWarrantyShortcode($atts = []): string
+    {
+        $atts = shortcode_atts([
+            'product_id' => 0,
+        ], $atts);
+
+        // Get product ID from attributes or current post
+        $product_id = intval($atts['product_id']);
+        if ($product_id <= 0) {
+            $product_id = get_the_ID();
+        }
+
+        // Check if we have a valid product ID
+        if (!$product_id || get_post_type($product_id) !== 'product') {
+            return '';
+        }
+
+        // Get the product_warranty ACF field
+        $warranty = get_field('product_warranty', $product_id);
+
+        if (empty($warranty)) {
+            return '';
+        }
+
+        // Return the warranty text wrapped in a styled container
+        return sprintf(
+            '<div class="product-warranty-display">%s</div>',
+            wp_kses_post($warranty)
+        );
     }
 }

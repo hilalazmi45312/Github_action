@@ -59,6 +59,8 @@ if ( ! function_exists( 'woodmart_shortcode_cart_totals' ) ) {
 			$shortcode_cart->calculate_shipping();
 		}
 
+		do_action( 'woocommerce_check_cart_items' );
+
 		?>
 		<div class="wd-cart-totals wd-wpb<?php echo esc_attr( $wrapper_classes ); ?>">
 			<?php wc()->cart->calculate_fees(); ?>

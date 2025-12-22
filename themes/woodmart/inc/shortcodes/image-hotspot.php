@@ -124,6 +124,8 @@ if ( ! function_exists( 'woodmart_hotspot_shortcode' ) ) {
 				woodmart_enqueue_js_library( 'magnific' );
 				woodmart_enqueue_inline_style( 'add-to-cart-popup' );
 				woodmart_enqueue_inline_style( 'mfp-popup' );
+				woodmart_enqueue_inline_style( 'mod-animations-transform' );
+				woodmart_enqueue_inline_style( 'mod-transform' );
 			}
 
 			$args = array(
@@ -200,7 +202,7 @@ if ( ! function_exists( 'woodmart_hotspot_shortcode' ) ) {
 		}
 		echo '<div class="wd-image-hotspot' . esc_attr( $classes ) . '" style="left: ' . esc_attr( $left ) . '%; top: ' . esc_attr( $top ) . '%;">';
 			echo '<span class="hotspot-sonar"></span>';
-			echo '<div class="hotspot-btn wd-fill"></div>';
+			echo '<div class="hotspot-btn wd-role-btn wd-fill" tabindex="0"></div>';
 			echo apply_filters( 'woodmart_hotspot_content', $output );
 		echo '</div>';
 

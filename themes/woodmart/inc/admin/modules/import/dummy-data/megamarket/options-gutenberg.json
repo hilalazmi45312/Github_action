@@ -373,6 +373,7 @@
     "blog_design": "meta-image",
     "blog_style": "flat",
     "blog_pagination": "load_more",
+    "blog_archive_layout": "full-width",
     "mini_cart_quantity": "1",
     "show_sku_in_mini_cart": "1",
     "show_sku_in_cart": "1",
@@ -430,8 +431,6 @@
     "shipping_progress_bar_location_checkout": "1",
     "shipping_progress_bar_location_card_page": "1",
     "shipping_progress_bar_location_mini_cart": "1",
-    "additional_tab_title": "",
-    "additional_tab_text": "",
     "blog_columns": "3",
     "blog_spacing": "20",
     "prefooter_html_block": "1112",
@@ -440,5 +439,7 @@
     "checkout_show_product_image": "1",
     "checkout_product_quantity": "1",
     "checkout_remove_button": "1",
-    "checkout_link_to_product": "1"
+    "checkout_link_to_product": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

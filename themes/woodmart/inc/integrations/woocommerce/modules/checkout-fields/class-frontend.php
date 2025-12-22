@@ -24,6 +24,10 @@ class Frontend extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'checkout_fields_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->helper = Helper::get_instance();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );

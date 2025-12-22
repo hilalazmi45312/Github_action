@@ -287,6 +287,16 @@ Options::add_section(
 	)
 );
 
+Options::add_section(
+	array(
+		'id'       => 'general_links',
+		'parent'   => 'general_styles_section',
+		'name'     => esc_html__( 'Links', 'woodmart' ),
+		'priority' => 70,
+		'icon'     => 'xts-i-brush',
+	)
+);
+
 /**
  * Blog.
  */
@@ -301,20 +311,10 @@ Options::add_section(
 
 Options::add_section(
 	array(
-		'id'       => 'blog_section',
-		'name'     => esc_html__( 'Blog', 'woodmart' ),
-		'parent'   => 'general_blog_section',
-		'priority' => 10,
-		'icon'     => 'xts-i-book-edit',
-	)
-);
-
-Options::add_section(
-	array(
 		'id'       => 'blog_archive_section',
 		'name'     => esc_html__( 'Blog archive', 'woodmart' ),
 		'parent'   => 'general_blog_section',
-		'priority' => 20,
+		'priority' => 10,
 		'icon'     => 'xts-i-book-edit',
 	)
 );
@@ -324,7 +324,7 @@ Options::add_section(
 		'id'       => 'blog_singe_post_section',
 		'name'     => esc_html__( 'Single post', 'woodmart' ),
 		'parent'   => 'general_blog_section',
-		'priority' => 30,
+		'priority' => 20,
 		'icon'     => 'xts-i-book-edit',
 	)
 );
@@ -529,6 +529,17 @@ Options::add_section(
 		'parent'   => 'general_shop_section',
 		'name'     => esc_html__( 'Abandoned cart', 'woodmart' ),
 		'priority' => 160,
+		'icon'     => 'xts-i-cart',
+		'class'    => 'xts-preset-section-disabled',
+	)
+);
+
+Options::add_section(
+	array(
+		'id'       => 'price_tracker_section',
+		'parent'   => 'general_shop_section',
+		'name'     => esc_html__( 'Price tracker', 'woodmart' ),
+		'priority' => 170,
 		'icon'     => 'xts-i-cart',
 		'class'    => 'xts-preset-section-disabled',
 	)
@@ -888,10 +899,20 @@ Options::add_section(
 
 Options::add_section(
 	array(
+		'id'       => 'lcp_section',
+		'name'     => esc_html__( 'LCP', 'woodmart' ),
+		'parent'   => 'general_performance',
+		'priority' => 70,
+		'icon'     => 'xts-i-performance',
+	)
+);
+
+Options::add_section(
+	array(
 		'id'       => 'performance_other',
 		'name'     => esc_html__( 'Other', 'woodmart' ),
 		'parent'   => 'general_performance',
-		'priority' => 70,
+		'priority' => 80,
 		'icon'     => 'xts-i-performance',
 	)
 );

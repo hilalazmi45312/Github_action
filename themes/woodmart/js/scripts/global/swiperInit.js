@@ -1,6 +1,5 @@
 woodmartThemeModule.$document.on('wdInstagramAjaxSuccess wdLoadDropdownsSuccess wdProductsTabsLoaded wdSearchFullScreenContentLoaded wdShopPageInit wdRecentlyViewedProductLoaded wdQuickViewOpen300', function() {
 	woodmartThemeModule.carouselsInit();
-	woodmartThemeModule.sliderInit();
 });
 
 [
@@ -17,48 +16,13 @@ woodmartThemeModule.$document.on('wdInstagramAjaxSuccess wdLoadDropdownsSuccess 
 	'frontend/element_ready/wd_instagram.default',
 	'frontend/element_ready/wd_testimonials.default',
 	'frontend/element_ready/wd_nested_carousel.default',
-	'frontend/element_ready/wd_single_product_fbt_products.default'
+	'frontend/element_ready/wd_single_product_fbt_products.default',
+	'frontend/element_ready/wd_slider.default',
 ].forEach( function (value) {
 	woodmartThemeModule.wdElementorAddAction(value, function() {
 		woodmartThemeModule.carouselsInit();
 	});
 });
-
-[
-	'frontend/element_ready/wd_slider.default',
-].forEach( function (value) {
-	woodmartThemeModule.wdElementorAddAction(value, function() {
-		woodmartThemeModule.sliderInit();
-	});
-});
-
-woodmartThemeModule.sliderInit = function() {
-	if ('undefined' === typeof wdSwiper) {
-		console.error('Swiper is not defined');
-
-		return;
-	}
-
-	document.querySelectorAll('.wd-carousel-container.wd-slider > .wd-carousel-inner > .wd-carousel:not(.scroll-init)').forEach( function (carousel) {
-		woodmartThemeModule.swiperInit(carousel);
-	});
-
-	if ('undefined' !== typeof window.Waypoint) {
-		document.querySelectorAll('.wd-carousel-container.wd-slider > .wd-carousel-inner > .wd-carousel.scroll-init').forEach( function (carousel) {
-			new Waypoint({
-				element: carousel,
-				handler: function() {
-					if (carousel.classList.contains('wd-initialized')) {
-						this.destroy();
-					}
-
-					woodmartThemeModule.swiperInit(this.element);
-				},
-				offset: '100%'
-			});
-		});
-	}
-};
 
 woodmartThemeModule.carouselsInit = function() {
 	if ('undefined' === typeof wdSwiper) {
@@ -67,25 +31,37 @@ woodmartThemeModule.carouselsInit = function() {
 		return;
 	}
 
-	document.querySelectorAll('.wd-carousel-container:not(.wd-slider) > .wd-carousel-inner > .wd-carousel:not(.scroll-init)').forEach( function (carousel) {
+	document.querySelectorAll('.wd-carousel-container > .wd-carousel-inner > .wd-carousel:not(.scroll-init)').forEach( function (carousel) {
 		woodmartThemeModule.swiperInit(carousel);
 	});
 
-	if ('undefined' !== typeof window.Waypoint) {
-		document.querySelectorAll('.wd-carousel-container:not(.wd-slider) > .wd-carousel-inner > .wd-carousel.scroll-init').forEach( function (carousel) {
-			new Waypoint({
-				element: carousel,
-				handler: function() {
-					if (carousel.classList.contains('wd-initialized')) {
-						this.destroy();
-					}
+	const carouselOnScrollObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				let carousel = entry.target;
 
-					woodmartThemeModule.swiperInit(this.element);
-				},
-				offset: '100%'
-			});
+				if (carousel && ! carousel.classList.contains('wd-initialized')) {
+					woodmartThemeModule.swiperInit(carousel);
+				}
+
+				carouselOnScrollObserver.unobserve(carousel);
+			}
 		});
-	}
+	}, { rootMargin: '200px 0px 200px 0px' });
+
+	document.querySelectorAll('.wd-carousel-container > .wd-carousel-inner > .wd-carousel.scroll-init:not(.wd-initialized)').forEach((carousel) => {
+		carouselOnScrollObserver.observe(carousel);
+	});
+
+	window.addEventListener('popstate', function() {
+		document.querySelectorAll('.wd-carousel.wd-initialized').forEach( function (carousel) {
+			if ('undefined' === typeof carousel.swiper) {
+				carousel.classList.remove('wd-initialized');
+
+				woodmartThemeModule.swiperInit(carousel);
+			}
+		});
+	});
 };
 
 woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
@@ -136,13 +112,19 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 
 	var config = {
 		slidesPerView         : mainSlidesPerView,
-		loop                  : 'yes' === carousel.dataset.wrap && ('yes' !== carousel.dataset.center_mode || parseInt( mainSlidesPerView, 10) + 1 < carouselItemsLength ),
+		loop                  : 'yes' === carousel.dataset.wrap && (1 === parseInt(mainSlidesPerView, 10) || parseInt(mainSlidesPerView, 10) + 1 < carouselItemsLength),
 		loopAddBlankSlides    : false,
 		centeredSlides        : 'yes' === carousel.dataset.center_mode,
 		autoHeight            : 'yes' === carousel.dataset.autoheight,
 		grabCursor            : true,
 		a11y                  : {
-			enabled: false
+			enabled: true,
+			prevSlideMessage: woodmart_settings.swiper_prev_slide_msg,
+			nextSlideMessage: woodmart_settings.swiper_next_slide_msg,
+			firstSlideMessage: woodmart_settings.swiper_first_slide_msg,
+			lastSlideMessage: woodmart_settings.swiper_last_slide_msg,
+			paginationBulletMessage: woodmart_settings.swiper_pagination_bullet_msg,
+			slideLabelMessage: woodmart_settings.swiper_slide_label_msg,
 		},
 		breakpoints           : breakpoints,
 		watchSlidesProgress   : true,
@@ -162,6 +144,9 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 				setTimeout(function() {
 					woodmartThemeModule.$document.trigger('wdSwiperCarouselInited');
 				}, 100);
+			},
+			slideChange: function() {
+				woodmartThemeModule.$document.trigger('wood-images-loaded');
 			}
 		}
 	};
@@ -214,6 +199,7 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 			paginationDisabledClass: 'wd-disabled',
 			renderBullet           : function(index, className) {
 				var innerContent = '';
+				var label = woodmart_settings.swiper_pagination_bullet_msg.replace('{{index}}', index + 1);
 
 				if (pagination.classList.contains('wd-style-number-2')) {
 					innerContent = index + 1;
@@ -223,7 +209,7 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 					}
 				}
 
-				return '<li class="' + className + '"><span>' + innerContent + '</span></li>';
+				return '<li class="' + className + '" tabindex="0" aria-label="' + label + '"><span>' + innerContent + '</span></li>';
 			}
 		};
 	}
@@ -278,11 +264,20 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 		var childCarousel = document.querySelector('.wd-carousel[data-sync_child_id=' + carousel.dataset.sync_parent_id + ']');
 
 		if ( childCarousel ) {
-			config.thumbs = {
-				swiper               : woodmartThemeModule.swiperInit(childCarousel, true),
-				slideThumbActiveClass: 'wd-thumb-active',
-				thumbsContainerClass : 'wd-thumbs'
-			};
+			var childCarouselStyle = window.getComputedStyle(childCarousel);
+			var mainSlidesPerViewChild = childCarouselStyle.getPropertyValue('--wd-col');
+
+			if ( mainSlidesPerViewChild === mainSlidesPerView ) {
+				config.controller = {
+					control: woodmartThemeModule.swiperInit(childCarousel, true),
+				}
+			} else {
+				config.thumbs = {
+					swiper               : woodmartThemeModule.swiperInit(childCarousel, true),
+					slideThumbActiveClass: 'wd-thumb-active',
+					thumbsContainerClass : 'wd-thumbs'
+				};
+			}
 		}
 	}
 
@@ -300,6 +295,10 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 
 	const swiper = new wdSwiper(carousel, config);
 
+	if (config.controller) {
+		swiper.controller.control.controller.control = swiper;
+	}
+
 	if (carouselWrapper && carouselWrapper.classList.contains('wd-slider')) {
 		swiper.on('realIndexChange', function (swiper) {
 			setTimeout(function () {
@@ -310,20 +309,9 @@ woodmartThemeModule.swiperInit = function(carousel, thumbs = false) {
 		});
 	}
 
-	window.addEventListener('popstate', function() {
-		document.querySelectorAll('.wd-carousel.wd-initialized').forEach( function (carousel) {
-			if ('undefined' === typeof carousel.swiper) {
-				carousel.classList.remove('wd-initialized');
-
-				woodmartThemeModule.swiperInit(carousel);
-			}
-		});
-	});
-
 	return swiper;
 }
 
 window.addEventListener('load',function() {
-	woodmartThemeModule.sliderInit();
 	woodmartThemeModule.carouselsInit();
 });

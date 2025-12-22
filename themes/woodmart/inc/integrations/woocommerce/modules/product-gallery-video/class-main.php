@@ -8,12 +8,12 @@
 namespace XTS\Modules\Product_Gallery_Video;
 
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
 
 /**
  * Product image gallery with video.
  */
-class Main extends Singleton {
+class Main {
+
 	/**
 	 * Default settings.
 	 *
@@ -40,38 +40,13 @@ class Main extends Singleton {
 	 */
 	public $thumbnails_settings = array();
 
+
 	/**
-	 * Init.
+	 * Constructor.
 	 */
-	public function init() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
 		add_action( 'init', array( $this, 'hooks' ), 20 );
-	}
-
-	/**
-	 * Ноокs.
-	 *
-	 * @return void
-	 */
-	public function hooks() {
-		if ( ! woodmart_get_opt( 'single_product_main_gallery_video', true ) ) {
-			return;
-		}
-
-		add_filter( 'admin_post_thumbnail_html', array( $this, 'get_main_image_video_btn' ), 10, 3 );
-		add_action( 'woocommerce_admin_after_product_gallery_item', array( $this, 'get_gallery_product_video_btn' ), 10, 2 );
-
-		add_action( 'edit_form_advanced', array( $this, 'get_product_thumbnail_popup' ) );
-
-		add_action( 'woocommerce_process_product_meta', array( $this, 'save_product_gallery' ), 10, 2 );
-
-		add_filter( 'woocommerce_single_product_image_thumbnail_html', array( $this, 'product_image_thumbnail' ), 10, 2 );
-		add_filter( 'woodmart_single_product_thumbnail_classes', array( $this, 'product_thumbnails_classes' ), 10, 2 );
-
-		add_filter( 'woodmart_get_single_product_image_data', array( $this, 'get_single_image_data' ), 10, 2 );
-
-		add_filter( 'woodmart_admin_localized_string_array', array( $this, 'admin_localized_settings' ) );
-		add_filter( 'woodmart_localized_string_array', array( $this, 'localized_settings' ) );
 	}
 
 	/**
@@ -97,6 +72,32 @@ class Main extends Singleton {
 	}
 
 	/**
+	 * Ноокs.
+	 *
+	 * @return void
+	 */
+	public function hooks() {
+		if ( ! woodmart_get_opt( 'single_product_main_gallery_video', true ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
+		add_filter( 'admin_post_thumbnail_html', array( $this, 'get_main_image_video_btn' ), 10, 3 );
+		add_action( 'woocommerce_admin_after_product_gallery_item', array( $this, 'get_gallery_product_video_btn' ), 10, 2 );
+
+		add_action( 'edit_form_advanced', array( $this, 'get_product_thumbnail_popup' ) );
+
+		add_action( 'woocommerce_process_product_meta', array( $this, 'save_product_gallery' ), 10, 2 );
+
+		add_filter( 'woocommerce_single_product_image_thumbnail_html', array( $this, 'product_image_thumbnail' ), 10, 2 );
+		add_filter( 'woodmart_single_product_thumbnail_classes', array( $this, 'product_thumbnails_classes' ), 10, 2 );
+
+		add_filter( 'woodmart_get_single_product_image_data', array( $this, 'get_single_image_data' ), 10, 2 );
+
+		add_filter( 'woodmart_admin_localized_string_array', array( $this, 'admin_localized_settings' ) );
+		add_filter( 'woodmart_localized_string_array', array( $this, 'localized_settings' ) );
+	}
+
+	/**
 	 * Get button for gallery image.
 	 *
 	 * @codeCoverageIgnore
@@ -118,6 +119,9 @@ class Main extends Singleton {
 			$classes = ' xts-add-video';
 		}
 
+		if ( empty( $attachment_id ) ) {
+			return;
+		}
 		?>
 		<div class="xts-product-video-wrapp">
 			<a href="#" class="xts-btn xts-color-primary xts-product-gallery-video xts-i-add<?php echo esc_attr( $classes ); ?>">
@@ -184,14 +188,18 @@ class Main extends Singleton {
 		foreach ( $attachments_settings as $attachment_id => $settings ) {
 			$settings = json_decode( wp_unslash( $settings ), true );
 
-			if ( empty( $settings['video_type'] ) || 'custom' === $settings['video_type'] && empty( $settings['custom_url'] ) || 'upload' === $settings['video_type'] && empty( $settings['upload_video_id'] ) ) {
+			if ( empty( $settings['video_type'] ) || 'youtube' === $settings['video_type'] && empty( $settings['youtube_url'] ) || 'vimeo' === $settings['video_type'] && empty( $settings['vimeo_url'] ) || 'mp4' === $settings['video_type'] && empty( $settings['upload_video_id'] ) ) {
 				continue;
 			}
 
 			$product_settings[ $attachment_id ] = $settings;
 		}
 
-		update_post_meta( $product_id, 'woodmart_wc_video_gallery', $product_settings );
+		if ( $product_settings ) {
+			update_post_meta( $product_id, 'woodmart_wc_video_gallery', $product_settings );
+		} else {
+			delete_post_meta( $product_id, 'woodmart_wc_video_gallery' );
+		}
 	}
 
 	/**
@@ -598,4 +606,4 @@ class Main extends Singleton {
 	}
 }
 
-Main::get_instance();
+new Main();

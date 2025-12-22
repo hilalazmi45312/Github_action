@@ -100,7 +100,11 @@ if ( ! function_exists( 'woodmart_save_total_stock_quantity' ) ) {
 	function woodmart_save_total_stock_quantity( $post_id ) { // phpcs:ignore
 		$stock_quantity = isset( $_POST['woodmart_total_stock_quantity'] ) && $_POST['woodmart_total_stock_quantity'] ? wc_clean( $_POST['woodmart_total_stock_quantity'] ) : ''; // phpcs:ignore
 
-		update_post_meta( $post_id, 'woodmart_total_stock_quantity', $stock_quantity );
+		if ( '' !== $stock_quantity ) {
+			update_post_meta( $post_id, 'woodmart_total_stock_quantity', $stock_quantity );
+		} else {
+			delete_post_meta( $post_id, 'woodmart_total_stock_quantity' );
+		}
 	}
 
 	add_action( 'woocommerce_process_product_meta_simple', 'woodmart_save_total_stock_quantity' );

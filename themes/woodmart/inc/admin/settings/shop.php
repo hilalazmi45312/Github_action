@@ -928,6 +928,21 @@ Options::add_field(
 
 Options::add_field(
 	array(
+		'id'         => 'brand_tab_priority',
+		'name'       => esc_html__( 'Brand tab priority', 'woodmart' ),
+		'type'       => 'text_input',
+		'attributes' => array(
+			'type'        => 'number',
+			'min'         => '1',
+			'placeholder' => '50',
+		),
+		'section'    => 'brands_section',
+		'priority'   => 45,
+	)
+);
+
+Options::add_field(
+	array(
 		'id'          => 'brand_tab_name',
 		'name'        => esc_html__( 'Use brand name for tab title', 'woodmart' ),
 		'description' => esc_html__( 'If you enable this option, the tab with the brand information will be called "About [Brand name]".', 'woodmart' ),
@@ -1002,7 +1017,7 @@ Options::add_field(
 		'max'         => 1200,
 		'priority'    => 30,
 		'selectors'   => array(
-			'.wd-popup.popup-quick-view' => array(
+			'.mfp-wrap.wd-popup-quick-view-wrap' => array(
 				'--wd-popup-width: {{VALUE}}px;',
 			),
 		),

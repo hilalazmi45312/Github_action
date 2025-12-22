@@ -342,9 +342,13 @@ abstract class Field {
 	 *
 	 * @since 1.0.0
 	 */
-	private function dependency_class() {
-		if ( ! isset( $this->args['requires'] ) ) {
-			return;
+	public function dependency_class( $requires = array() ) {
+		if ( ! $requires && isset( $this->args['requires'] ) ) {
+			$requires = $this->args['requires'];
+		}
+
+		if ( ! $requires ) {
+			return '';
 		}
 
 		$shown = true;
@@ -354,22 +358,24 @@ abstract class Field {
 				continue;
 			}
 
+			$parent_value = isset( $this->options[ $dependency['key'] ] ) ? $this->options[ $dependency['key'] ] : null;
+
 			switch ( $dependency['compare'] ) {
 				case 'equals':
-					if ( isset( $this->options[ $dependency['key'] ] ) ) {
+					if ( ! is_null( $parent_value ) ) {
 						if ( is_array( $dependency['value'] ) ) {
-							$shown = in_array( $this->options[ $dependency['key'] ], $dependency['value'] );
+							$shown = in_array( $parent_value, $dependency['value'] );
 						} else {
-							$shown = $this->options[ $dependency['key'] ] == $dependency['value'];
+							$shown = $parent_value == $dependency['value'];
 						}
 					}
 					break;
 				case 'not_equals':
-					if ( isset( $this->options[ $dependency['key'] ] ) ) {
+					if ( ! is_null( $parent_value ) ) {
 						if ( is_array( $dependency['value'] ) ) {
-							$shown = ! in_array( $this->options[ $dependency['key'] ], $dependency['value'] );
+							$shown = ! in_array( $parent_value, $dependency['value'] );
 						} else {
-							$shown = $this->options[ $dependency['key'] ] != $dependency['value'];
+							$shown = $parent_value != $dependency['value'];
 						}
 					}
 					break;

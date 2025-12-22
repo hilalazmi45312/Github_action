@@ -121,7 +121,7 @@ class Setup_Wizard extends Singleton {
 
 		$page = 'welcome';
 
-		if ( isset( $_GET['step'] ) && ! empty( $_GET['step'] ) ) { // phpcs:ignore
+		if ( ! empty( $_GET['step'] ) && in_array( $_GET['step'], array( 'activation', 'child-theme',  'page-builder', 'plugins', 'prebuilt-websites', 'done') ) ) { // phpcs:ignore
 			$page = trim( wp_unslash( $_GET['step'] ) ); // phpcs:ignore
 		}
 
@@ -146,19 +146,6 @@ class Setup_Wizard extends Singleton {
 				</div>
 			</div>
 		</div>
-		<?php
-	}
-
-	/**
-	 * Get previous page button.
-	 *
-	 * @param string $page Page slug.
-	 */
-	public function get_prev_button( $page ) {
-		?>
-		<a class="xts-inline-btn xts-prev" href="<?php echo esc_url( $this->get_page_url( $page ) ); ?>">
-			<?php esc_html_e( 'Previous step', 'woodmart' ); ?>
-		</a>
 		<?php
 	}
 
@@ -192,7 +179,7 @@ class Setup_Wizard extends Singleton {
 
 		?>
 		<a class="xts-btn xts-color-primary xts-next<?php echo esc_attr( $classes ); ?>" href="<?php echo esc_url( $url ); ?>">
-			<?php esc_html_e( 'Next step', 'woodmart' ); ?>
+			<?php esc_html_e( 'Continue', 'woodmart' ); ?>
 		</a>
 		<?php
 	}
@@ -205,7 +192,7 @@ class Setup_Wizard extends Singleton {
 	public function get_skip_button( $page ) {
 		?>
 		<a class="xts-inline-btn xts-color-primary xts-skip" href="<?php echo esc_url( $this->get_page_url( $page ) ); ?>">
-			<?php esc_html_e( 'Skip', 'woodmart' ); ?>
+			<?php esc_html_e( 'Skip this step', 'woodmart' ); ?>
 		</a>
 		<?php
 	}

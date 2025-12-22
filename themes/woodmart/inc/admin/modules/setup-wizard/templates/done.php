@@ -8,8 +8,8 @@
 ?>
 
 <div class="xts-wizard-content-inner xts-wizard-done">
-	<div class="xts-wizard-logo">
-		<img src="<?php echo esc_url( $this->get_image_url( 'logo.svg' ) ); ?>" alt="logo">
+	<div class="xts-wizard-img">
+		<img src="<?php echo esc_url( $this->get_image_url( 'done.svg' ) ); ?>" alt="done">
 	</div>
 
 	<h3>
@@ -25,21 +25,12 @@
 		?>
 	</p>
 
-	<div class="xts-wizard-buttons">
-		<a class="xts-btn xts-color-primary xts-i-view" href="<?php echo esc_url( get_home_url() ); ?>">
-			<?php esc_html_e( 'View home page', 'woodmart' ); ?>
+	<div class="xts-step-actions">
+		<a class="xts-btn xts-color-primary xts-i-theme-settings" href="<?php echo esc_url( admin_url( 'admin.php?page=xts_dashboard' ) ); ?>">
+			<?php esc_html_e( 'Start customizing', 'woodmart' ); ?>
 		</a>
-
-		<a class="xts-inline-btn xts-i-cart" href="<?php echo esc_url( wc_admin_url( '&path=/setup-wizard' ) ); ?>">
-			<?php esc_html_e( 'WooCommerce setup', 'woodmart' ); ?>
-		</a>
-
-		<a class="xts-inline-btn xts-i-theme-settings" href="<?php echo esc_url( admin_url( 'admin.php?page=xts_theme_settings' ) ); ?>">
-			<?php esc_html_e( 'Theme settings', 'woodmart' ); ?>
-		</a>
-
-		<a class="xts-inline-btn xts-i-header-builder" href="<?php echo esc_url( admin_url( 'admin.php?page=xts_header_builder' ) ); ?>">
-			<?php esc_html_e( 'Header builder', 'woodmart' ); ?>
+		<a class="xts-inline-btn xts-color-primary" href="<?php echo esc_url( get_home_url() ); ?>">
+			<?php esc_html_e( 'Close and view website', 'woodmart' ); ?>
 		</a>
 	</div>
 </div>

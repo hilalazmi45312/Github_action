@@ -119,5 +119,9 @@
     "disable_footer": "1",
     "footer_content_type": "html_block",
     "footer_html_block": "3804",
-    "portfolio_page": "51"
+    "portfolio_page": "51",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

@@ -8,7 +8,6 @@
 namespace XTS\Modules\Show_Single_Variations;
 
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Direct access not allowed.
@@ -17,29 +16,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * The main show single variations class.
  */
-class Main extends Singleton {
+class Main {
 	/**
-	 * Register hooks.
+	 * Constructor.
 	 */
-	public function init() {
-		add_action( 'init', array( $this, 'add_options' ), 10 );
+	public function __construct() {
+		add_action( 'init', array( $this, 'add_options' ) );
 
-		if ( ! woodmart_get_opt( 'show_single_variation' ) ) {
-			return;
+		if ( woodmart_get_opt( 'show_single_variation' ) && woodmart_woocommerce_installed() ) {
+			add_action( 'woocommerce_variation_options', array( $this, 'add_exclude_variation_option' ), 1, 3 );
+			add_action( 'woocommerce_variation_options', array( $this, 'get_option' ), 15, 3 );
 		}
 
-		$this->include_files();
-
-		add_action( 'woocommerce_variation_options', array( $this, 'add_exclude_variation_option' ), 1, 3 );
-		add_action( 'woocommerce_variation_options', array( $this, 'get_option' ), 15, 3 );
-	}
-
-	/**
-	 * Include files.
-	 */
-	public function include_files() {
-		require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/integrations/woocommerce/modules/show-single-variations/class-save.php' );
-		require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/integrations/woocommerce/modules/show-single-variations/class-query.php' );
+		woodmart_include_files(
+			__DIR__,
+			array(
+				'./class-save',
+				'./class-query',
+			)
+		);
 	}
 
 	/**
@@ -136,4 +131,4 @@ class Main extends Singleton {
 	}
 }
 
-Main::get_instance();
+new Main();

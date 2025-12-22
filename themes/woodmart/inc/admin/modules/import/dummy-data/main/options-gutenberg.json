@@ -212,6 +212,9 @@
     "form_fields_style": "square",
     "form_border_width": "2",
     "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
     "blog_style": "shadow",
     "blog_columns": "3",
     "blog_spacing": "20",
@@ -232,8 +235,7 @@
     "products_columns": "3",
     "products_spacing": "20",
     "products_hover": "base",
-    "additional_tab_title": "Shipping & Delivery",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "242",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0",
     "products_use_gutenberg_editor": null
 }

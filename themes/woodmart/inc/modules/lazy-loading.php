@@ -17,7 +17,11 @@ if ( ! function_exists( 'woodmart_lazy_loading_init' ) ) {
 	 * @return void
 	 */
 	function woodmart_lazy_loading_init( $force_init = false ) {
-		if ( ( ! woodmart_get_opt( 'lazy_loading' ) || is_admin() ) && ! $force_init ) {
+		if ( ( woodmart_get_opt( 'lazy_loading_bg_images' ) || $force_init ) && ! is_admin() ) {
+			add_filter( 'render_block', 'woodmart_add_lazy_load_background', 10, 3 );
+		}
+
+		if ( ( ! woodmart_get_opt( 'lazy_loading' ) || is_admin() ) && ! $force_init || ! apply_filters( 'woodmart_enable_lazy_loading', true ) ) {
 			return;
 		}
 
@@ -38,6 +42,9 @@ if ( ! function_exists( 'woodmart_lazy_loading_init' ) ) {
 
 		// Gutenberg.
 		add_action( 'wp_content_img_tag', 'woodmart_lazy_gutenberg_images', 20, 3 );
+
+		add_filter( 'render_block_wd/video', 'woodmart_video_poster_lazy_loading', 10, 2 );
+		add_filter( 'woodmart_video_html', 'woodmart_video_poster_lazy_loading', 10, 2 );
 	}
 
 	add_action( 'init', 'woodmart_lazy_loading_init', 120 );
@@ -120,6 +127,10 @@ if ( ! function_exists( 'woodmart_lazy_loading_deinit' ) ) {
 	 * @return void
 	 */
 	function woodmart_lazy_loading_deinit( $force_deinit = false ) {
+		if ( ! woodmart_get_opt( 'lazy_loading_bg_images' ) || $force_deinit ) {
+			remove_filter( 'render_block', 'woodmart_add_lazy_load_background', 10, 3 );
+		}
+
 		if ( woodmart_get_opt( 'lazy_loading' ) && ! $force_deinit ) {
 			return;
 		}
@@ -130,6 +141,8 @@ if ( ! function_exists( 'woodmart_lazy_loading_deinit' ) ) {
 		remove_action( 'wp_get_attachment_image_attributes', 'woodmart_lazy_attributes', 10 );
 		remove_action( 'elementor/image_size/get_attachment_image_html', 'woodmart_filter_elementor_images', 10 );
 		remove_action( 'wp_content_img_tag', 'woodmart_lazy_gutenberg_images', 20 );
+		remove_action( 'render_block_wd/video', 'woodmart_video_poster_lazy_loading', 10, 2 );
+		remove_action( 'woodmart_video_html', 'woodmart_video_poster_lazy_loading', 10, 2 );
 	}
 }
 
@@ -238,6 +251,16 @@ if ( ! function_exists( 'woodmart_lazy_replace_image' ) ) {
 	 * @return string
 	 */
 	function woodmart_lazy_replace_image( $html, $src ) {
+		if ( ! preg_match( '/<img[^>]*\ssrc=(["\'])(.*?)\1/i', $html, $match ) || str_contains( $html, 'fetchpriority' ) ) {
+			return $html;
+		}
+
+		$original_src = $match[2];
+
+		if ( in_array( $original_src, apply_filters( 'woodmart_exclude_lazyload_urls', array() ), true ) ) {
+			return $html;
+		}
+
 		$class = woodmart_lazy_css_class();
 
 		$new = preg_replace( '/<img(.*?)src=/is', '<img$1src="' . $src . '" data-src=', $html );
@@ -265,7 +288,7 @@ if ( ! function_exists( 'woodmart_lazy_attributes' ) ) {
 	 * @return array
 	 */
 	function woodmart_lazy_attributes( $attr, $attachment, $size ) {
-		if ( wp_is_serving_rest_request() || $attr['src'] == woodmart_lazy_get_default_preview() ) {
+		if ( wp_is_serving_rest_request() || woodmart_lazy_get_default_preview() === $attr['src'] || in_array( $attr['src'], apply_filters( 'woodmart_exclude_lazyload_urls', array() ), true ) || ! empty( $attr['fetchpriority'] ) ) {
 			return $attr;
 		}
 
@@ -299,7 +322,7 @@ if ( ! function_exists( 'woodmart_lazy_css_class' ) ) {
 		$class       = '';
 		$lazy_effect = woodmart_get_opt( 'lazy_effect', 'none' );
 
-		if ( 'none' !== $lazy_effect ) {
+		if ( $lazy_effect && 'none' !== $lazy_effect ) {
 			$class .= ' wd-lazy-' . $lazy_effect;
 		}
 
@@ -349,7 +372,7 @@ if ( ! function_exists( 'woodmart_add_lazy_load_background' ) ) {
 			$has_bg_image = array_filter(
 				$bg_attributes,
 				function( $key ) use ( $block ) {
-					return ! empty( $block['attrs'][ $key ] ) && is_array( $block['attrs'][ $key ] ) && ! empty( $block['attrs'][ $key ]['url'] );
+					return ! empty( $block['attrs'][ $key ] ) && is_array( $block['attrs'][ $key ] ) && ! empty( $block['attrs'][ $key ]['url'] ) && ! in_array( $block['attrs'][ $key ]['url'], apply_filters( 'woodmart_exclude_lazyload_urls', array() ), true );
 				}
 			);
 
@@ -360,7 +383,7 @@ if ( ! function_exists( 'woodmart_add_lazy_load_background' ) ) {
 			$has_overlay = array_filter(
 				$bg_overlay_attributes,
 				function( $key ) use ( $block ) {
-					return ! empty( $block['attrs'][ $key ] ) && is_array( $block['attrs'][ $key ] ) && ! empty( $block['attrs'][ $key ]['url'] );
+					return ! empty( $block['attrs'][ $key ] ) && is_array( $block['attrs'][ $key ] ) && ! empty( $block['attrs'][ $key ]['url'] ) && ! in_array( $block['attrs'][ $key ]['url'], apply_filters( 'woodmart_exclude_lazyload_urls', array() ), true );
 				}
 			);
 
@@ -375,6 +398,22 @@ if ( ! function_exists( 'woodmart_add_lazy_load_background' ) ) {
 
 		return $block_content;
 	}
+}
 
-	add_filter( 'render_block', 'woodmart_add_lazy_load_background', 10, 3 );
+if ( ! function_exists( 'woodmart_video_poster_lazy_loading' ) ) {
+	/**
+	 * Filters video poster HTML and adds lazy loading attributes.
+	 *
+	 * @param string $html Video HTML.
+	 * @return string
+	 */
+	function woodmart_video_poster_lazy_loading( $html ) {
+		if ( str_contains( $html, 'data-poster' ) ) {
+			return $html;
+		}
+
+		woodmart_enqueue_js_script( 'lazy-loading' );
+
+		return preg_replace( '/\bposter\s*=\s*([\'"])(.*?)\1/i', 'data-poster=$1$2$1', $html );
+	}
 }

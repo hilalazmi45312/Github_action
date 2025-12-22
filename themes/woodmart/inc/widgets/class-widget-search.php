@@ -76,11 +76,10 @@ if( ! class_exists( 'WOODMART_Widget_Search' ) ) {
 
 			echo wp_kses_post( $before_widget );
 
-			$number = empty( $instance['number'] ) ? 3 : absint( $instance['number'] );
-			$thumbnail = empty( $instance['thumbnail'] ) ? 0 : absint( $instance['thumbnail'] );
-			$price = empty( $instance['price'] ) ? 0 : absint( $instance['price'] );
-			$post_type = empty( $instance['post_type'] ) ? 'product' : $instance['post_type'];
-
+			$number     = empty( $instance['number'] ) ? 3 : absint( $instance['number'] );
+			$thumbnail  = empty( $instance['thumbnail'] ) ? 0 : absint( $instance['thumbnail'] );
+			$price      = empty( $instance['price'] ) ? 0 : absint( $instance['price'] );
+			$post_type  = empty( $instance['post_type'] ) ? 'product' : $instance['post_type'];
 			$categories = true;
 
 			if ( isset( $instance['categories'] ) ) {

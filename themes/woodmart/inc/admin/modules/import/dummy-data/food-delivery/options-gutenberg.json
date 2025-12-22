@@ -268,5 +268,9 @@
         "idle": "rgb(255,255,255)"
     },
     "popup_padding": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiI0NSJ9fX0=",
-    "promo_version": "2"
+    "promo_version": "2",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

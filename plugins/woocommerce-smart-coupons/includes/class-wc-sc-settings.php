@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     2.7.0
+ * @version     2.16.0
  * @package     woocommerce-smart-coupons/includes/
  */
 
@@ -45,6 +45,7 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 			add_action( 'woocommerce_update_options_' . self::$tab_slug, array( $this, 'save_smart_coupon_admin_settings' ) );
 
 			add_action( 'woocommerce_admin_field_wc_sc_radio_with_html', array( $this, 'radio_with_html' ) );
+			add_action( 'woocommerce_admin_field_wc_sc_email_setting', array( $this, 'email_setting' ) );
 		}
 
 		/**
@@ -90,7 +91,6 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * @return array
 		 */
 		public function add_smart_coupon_settings_tab( $settings_tabs ) {
-
 			$settings_tabs[ self::$tab_slug ] = __( 'Smart Coupons', 'woocommerce-smart-coupons' );
 
 			return $settings_tabs;
@@ -299,7 +299,7 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 					text-align: center;
 					width: 50%;
 					box-sizing: border-box;
-					background-color: transparent !important; 
+					background-color: transparent !important;
 				}
 				a.smart_coupons_storewide_offer_coupon_code small {
 					vertical-align: sub;
@@ -361,14 +361,13 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 				wp_nonce_field( 'wc_smart_coupons_settings', 'sc_security', false );
 				$this->sc_settings_page_styles_scripts();
 			}
-
 		}
 
 		/**
 		 * Function to get Smart Coupons admin settings grouped by sections
 		 */
 		public function get_sections() {
-			global $store_credit_label;
+			global $store_credit_label, $woocommerce_smart_coupon;
 
 			$singular = ( ! empty( $store_credit_label['singular'] ) ) ? $store_credit_label['singular'] : __( 'store credit', 'woocommerce-smart-coupons' );
 			$plural   = ( ! empty( $store_credit_label['plural'] ) ) ? $store_credit_label['plural'] : __( 'store credits', 'woocommerce-smart-coupons' );
@@ -414,6 +413,49 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 
 			$default_store_notice_design = 'notification';
 
+			$email_classes          = $this->register_email_classes();
+			$email_section_fields   = array();
+			$email_section_fields[] = array(
+				'title' => __( 'Email notifications', 'woocommerce-smart-coupons' ),
+				'type'  => 'title',
+				/* translators: 1. The plugin name 2. Button name */
+				'desc'  => sprintf( __( 'Email notifications sent from %1$s are listed below. Click on %2$s button to configure it.', 'woocommerce-smart-coupons' ), '<strong>' . $woocommerce_smart_coupon->plugin_data['Name'] . '</strong>', '<strong>' . __( 'Manage', 'woocommerce-smart-coupons' ) . '</strong>' ),
+				'id'    => 'wc_sc_coupon_emails',
+			);
+			foreach ( $email_classes as $key => $email_class ) {
+				$email_id               = ! empty( $email_class->id ) ? $email_class->id : strtolower( $key );
+				$email_section_fields[] = array(
+					'type'              => 'wc_sc_email_setting',
+					'id'                => $email_id,
+					'label'             => ! empty( $email_class->title ) ? substr( $email_class->title, 16 ) : $key,
+					'link_text'         => __( 'Manage', 'woocommerce-smart-coupons' ),
+					'link_url'          => add_query_arg(
+						array(
+							'page'    => 'wc-settings',
+							'tab'     => 'email',
+							'section' => $email_id,
+						),
+						admin_url( 'admin.php' )
+					),
+					'link_class'        => 'button',
+					'custom_attributes' => array( 'target' => '_blank' ),
+					'desc'              => ! empty( $email_class->description ) ? $email_class->description : '',
+					'data'              => array( 'enabled' => $email_class->enabled ),
+				);
+			}
+			$email_section_fields[] = array(
+				'type' => 'sectionend',
+				'id'   => 'wc_sc_coupon_emails',
+			);
+
+			$wc_sc_cashback          = get_option( 'wc_sc_cashback' );
+			$cashback_template_value = array();
+			if ( ! empty( $wc_sc_cashback[1]['template_coupon_id'] ) ) {
+				$cashback_template_coupon               = new WC_Coupon( $wc_sc_cashback[1]['template_coupon_id'] );
+				$cashback_template_coupon_discount_type = ( is_object( $cashback_template_coupon ) && is_callable( array( $cashback_template_coupon, 'get_discount_type' ) ) ) ? $cashback_template_coupon->get_discount_type() : 'percent';
+				/* translators: 1. The coupon code, 2. The discount type */
+				$cashback_template_value[ $wc_sc_cashback[1]['template_coupon_id'] ] = sprintf( __( '%1$s (Type: %2$s)', 'woocommerce-smart-coupons' ), $wc_sc_cashback[1]['template_coupon_id'], ( ( array_key_exists( $cashback_template_coupon_discount_type, $all_discount_types ) ) ? $all_discount_types[ $cashback_template_coupon_discount_type ] : $cashback_template_coupon_discount_type ) );
+			}
 			$sc_sections = apply_filters(
 				'wc_sc_sections_with_settings',
 				array(
@@ -478,7 +520,7 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 							array(
 								'name'          => __( 'Automatic deletion', 'woocommerce-smart-coupons' ),
 								/* translators: %s: Note for admin */
-								'desc'          => sprintf( __( 'Delete the %1$s when entire credit amount is used up %2$s', 'woocommerce-smart-coupons' ), strtolower( $singular ), '<small>' . __( '(Note: It\'s recommended to keep it Disabled)', 'woocommerce-smart-coupons' ) . '</small>' ),
+								'desc'          => sprintf( __( 'Delete the %1$s when entire credit amount is used up %2$s', 'woocommerce-smart-coupons' ), $singular, '<small>' . __( '(Note: It\'s recommended to keep it Disabled)', 'woocommerce-smart-coupons' ) . '</small>' ),
 								'id'            => 'woocommerce_delete_smart_coupon_after_usage',
 								'type'          => 'checkbox',
 								'default'       => 'no',
@@ -505,16 +547,16 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 							),
 							array(
 								/* translators: %s: Label for store credit */
-								'name'          => sprintf( __( 'Sell %s at less price?', 'woocommerce-smart-coupons' ), strtolower( $plural ) ),
+								'name'          => sprintf( __( 'Sell %s at less price?', 'woocommerce-smart-coupons' ), $plural ),
 								/* translators: %s: Label for store credit, 1: : Label for store credit, 2: Label for store credit, 3: Label for store credit */
-								'desc'          => sprintf( __( 'Allow selling %s at discounted price', 'woocommerce-smart-coupons' ), strtolower( $plural ) ) . ' <a href="https://woocommerce.com/document/smart-coupons/how-to-sell-gift-card-at-less-price/" target="_blank"><small>' . __( '[Read More]', 'woocommerce-smart-coupons' ) . '</small></a>',
+								'desc'          => sprintf( __( 'Allow selling %s at discounted price', 'woocommerce-smart-coupons' ), $plural ) . ' <a href="https://woocommerce.com/document/smart-coupons/how-to-sell-gift-card-at-less-price/" target="_blank"><small>' . __( '[Read More]', 'woocommerce-smart-coupons' ) . '</small></a>',
 								'id'            => 'smart_coupons_sell_store_credit_at_less_price',
 								'type'          => 'checkbox',
 								'checkboxgroup' => 'start',
 								'default'       => 'no',
 								'autoload'      => false,
 								/* translators: %s: Label for store credit, 1: : Label for store credit, 2: Label for store credit, 3: Label for store credit */
-								'desc_tip'      => '<span>' . sprintf( __( 'When selling %1$s, if Regular and Sale price is found for the product, then coupon will be created with product\'s Regular Price but customer will pay product\'s Sale price. This setting will also make sure if any discount coupon is applied on the %2$s while purchasing, then customer will get %3$s in their picked price', 'woocommerce-smart-coupons' ), strtolower( $singular ), strtolower( $singular ), strtolower( $singular ) ) . '</span>',
+								'desc_tip'      => '<span>' . sprintf( __( 'When selling %1$s, if Regular and Sale price is found for the product, then coupon will be created with product\'s Regular Price but customer will pay product\'s Sale price. This setting will also make sure if any discount coupon is applied on the %2$s while purchasing, then customer will get %3$s in their picked price', 'woocommerce-smart-coupons' ), $singular, $singular, $singular ) . '</span>',
 							),
 							array(
 								'type' => 'sectionend',
@@ -721,6 +763,50 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 								'autoload'      => false,
 							),
 							array(
+								'name'     => __( 'Show coupons on Cart page', 'woocommerce-smart-coupons' ),
+								'id'       => 'smart_coupons_show_on_cart',
+								'type'     => 'checkbox',
+								'default'  => 'yes',
+								'desc'     => __( 'Enable to show coupons on Cart page.', 'woocommerce-smart-coupons' ),
+								'autoload' => false,
+							),
+							array(
+								'name'     => __( 'Show coupons on Checkout page', 'woocommerce-smart-coupons' ),
+								'id'       => 'smart_coupons_show_on_checkout',
+								'type'     => 'checkbox',
+								'default'  => 'yes',
+								'desc'     => __( 'Enable to show coupons on Checkout page.', 'woocommerce-smart-coupons' ),
+								'autoload' => false,
+							),
+							array(
+								'name'            => __( 'Always show the coupons section (even if no coupons)', 'woocommerce-smart-coupons' ),
+								'desc'            => __( 'This section will always be visible, even if no coupons are currently available.', 'woocommerce-smart-coupons' ),
+								'id'              => 'smart_coupons_always_show_coupon_section',
+								'class'           => 'sc-coupon-section-conditional-setting',
+								'type'            => 'checkbox',
+								'default'         => 'no',
+								'autoload'        => false,
+								'show_if_checked' => 'option',
+							),
+							array(
+								'name'            => __( 'Show section open by default', 'woocommerce-smart-coupons' ),
+								'desc'            => __( 'Expand the coupon section by default when visible.', 'woocommerce-smart-coupons' ),
+								'id'              => 'smart_coupons_default_section_open',
+								'class'           => 'sc-coupon-section-conditional-setting',
+								'type'            => 'checkbox',
+								'default'         => 'yes',
+								'autoload'        => false,
+								'show_if_checked' => 'option',
+							),
+							array(
+								'name'     => __( 'Enable Cart Threshold Promotion', 'woocommerce-smart-coupons' ),
+								'id'       => 'smart_coupons_enable_cart_threshold_promotion',
+								'type'     => 'checkbox',
+								'default'  => 'no',
+								'desc'     => __( 'Enable this option to display eligible promotions based on the customer’s cart value or contents.', 'woocommerce-smart-coupons' ),
+								'autoload' => false,
+							),
+							array(
 								'type' => 'sectionend',
 								'id'   => 'sc_display_coupon_settings',
 							),
@@ -784,7 +870,7 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 								/* translators: %s: Label for store credit */
 								'name'        => sprintf( __( '%s product CTA', 'woocommerce-smart-coupons' ), ucfirst( $singular ) ),
 								/* translators: %s: Label for store credit */
-								'desc'        => sprintf( __( 'This is what will be shown instead of "Add to Cart" for products that sell %s. ', 'woocommerce-smart-coupons' ), strtolower( $plural ) ) . '<a class="thickbox" href="' . add_query_arg( array( 'TB_iframe' => 'true' ), 'https://woocommerce.com/wp-content/uploads/2012/08/sc-purchase-credit-shop-text.png' ) . '"><small>' . __( '[Preview]', 'woocommerce-smart-coupons' ) . '</small></a>',
+								'desc'        => sprintf( __( 'This is what will be shown instead of "Add to Cart" for products that sell %s. ', 'woocommerce-smart-coupons' ), $plural ) . '<a class="thickbox" href="' . add_query_arg( array( 'TB_iframe' => 'true' ), 'https://woocommerce.com/wp-content/uploads/2012/08/sc-purchase-credit-shop-text.png' ) . '"><small>' . __( '[Preview]', 'woocommerce-smart-coupons' ) . '</small></a>',
 								'id'          => 'sc_gift_certificate_shop_loop_button_text',
 								'type'        => 'text',
 								'desc_tip'    => false,
@@ -794,9 +880,9 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 							),
 							array(
 								/* translators: %s: Label for store credit */
-								'name'        => sprintf( __( 'While purchasing %s', 'woocommerce-smart-coupons' ), strtolower( $plural ) ),
+								'name'        => sprintf( __( 'While purchasing %s', 'woocommerce-smart-coupons' ), $plural ),
 								/* translators: %s: Label for store credit */
-								'desc'        => sprintf( __( 'When you opt to allow people to buy %s of any amount, this label will be used. ', 'woocommerce-smart-coupons' ), strtolower( $plural ) ) . '<a class="thickbox" href="' . add_query_arg( array( 'TB_iframe' => 'true' ), 'https://woocommerce.com/wp-content/uploads/2012/08/sc-purchase-credit-product-page-text.png' ) . '"><small>' . __( '[Preview]', 'woocommerce-smart-coupons' ) . '</small></a>',
+								'desc'        => sprintf( __( 'When you opt to allow people to buy %s of any amount, this label will be used. ', 'woocommerce-smart-coupons' ), $plural ) . '<a class="thickbox" href="' . add_query_arg( array( 'TB_iframe' => 'true' ), 'https://woocommerce.com/wp-content/uploads/2012/08/sc-purchase-credit-product-page-text.png' ) . '"><small>' . __( '[Preview]', 'woocommerce-smart-coupons' ) . '</small></a>',
 								'id'          => 'smart_coupon_store_gift_page_text',
 								'type'        => 'text',
 								'desc_tip'    => false,
@@ -816,11 +902,11 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 							),
 							array(
 								'name'        => __( 'On Cart/Checkout pages', 'woocommerce-smart-coupons' ),
-								'desc'        => __( 'This is the title for the list of available coupons, shown on Cart and Checkout pages. ', 'woocommerce-smart-coupons' ) . '<a class="thickbox" href="' . add_query_arg( array( 'TB_iframe' => 'true' ), 'https://woocommerce.com/wp-content/uploads/2012/08/sc-coupon-cart-checkout-title.png' ) . '"><small>' . __( '[Preview]', 'woocommerce-smart-coupons' ) . '</small></a>',
+								'desc'        => __( 'This is the title for the list of available coupons, shown on Cart and Checkout pages.', 'woocommerce-smart-coupons' ) . ' ' . __( 'You can use <code>{{coupons_count}}</code> as a placeholder to show the number of available coupons dynamically.', 'woocommerce-smart-coupons' ) . ' <a class="thickbox" href="' . esc_url( add_query_arg( array( 'TB_iframe' => 'true' ), 'https://woocommerce.com/wp-content/uploads/2012/08/sc-coupon-cart-checkout-title.png' ) ) . '"><small>' . __( '[Preview]', 'woocommerce-smart-coupons' ) . '</small></a>',
 								'id'          => 'smart_coupon_cart_page_text',
 								'type'        => 'text',
 								'desc_tip'    => false,
-								'placeholder' => __( 'Available Coupons (click on a coupon to use it)', 'woocommerce-smart-coupons' ),
+								'placeholder' => __( 'Available Coupons ({coupons_count})', 'woocommerce-smart-coupons' ),
 								'css'         => 'min-width:300px;',
 								'autoload'    => false,
 							),
@@ -886,7 +972,7 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 								'checkboxgroup' => 'start',
 								'default'       => 'no',
 								'autoload'      => false,
-								'desc_tip'      => '<span>' . esc_attr__( 'The coupons will be sent to the recipients via email on the selected date & time', 'woocommerce-smart-coupons' ) . '</span>',
+								'desc_tip'      => '<span>' . __( 'The coupons will be sent to the recipients via email on the selected date & time', 'woocommerce-smart-coupons' ) . '</span>',
 							),
 							array(
 								'name'     => __( 'Combine emails', 'woocommerce-smart-coupons' ),
@@ -899,6 +985,102 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 							array(
 								'type' => 'sectionend',
 								'id'   => 'sc_coupon_receiver_settings',
+							),
+						),
+					),
+					'emails'            => array(
+						'title'  => __( 'Emails', 'woocommerce-smart-coupons' ),
+						'fields' => $email_section_fields,
+					),
+					'cashback-rewards'  => array(
+						'title'  => __( 'Cashback Rewards', 'woocommerce-smart-coupons' ),
+						'fields' => array(
+							array(
+								'title' => __( 'Cashback Rewards', 'woocommerce-smart-coupons' ),
+								'type'  => 'title',
+								'desc'  => __( 'Configure rules to automatically reward your customers with cashback credits based on cart total.', 'woocommerce-smart-coupons' ),
+								'id'    => 'wc_sc_setting_cashback_rewards',
+							),
+							array(
+								'name'          => __( 'Enable', 'woocommerce-smart-coupons' ),
+								'desc'          => __( 'Activate this cashback rule.', 'woocommerce-smart-coupons' ),
+								'id'            => 'wc_sc_cashback_enabled',
+								'field_name'    => 'wc_sc_cashback[1][enabled]',
+								'type'          => 'checkbox',
+								'default'       => 'no',
+								'autoload'      => false,
+								'value'         => isset( $wc_sc_cashback[1]['enabled'] ) && $wc_sc_cashback[1]['enabled'] ? 'yes' : 'no',
+								'checkboxgroup' => 'start',
+							),
+							array(
+								'name'       => __( 'Cashback Type', 'woocommerce-smart-coupons' ),
+								'desc'       => __( 'Select if cashback is a percentage of order total or a fixed amount.', 'woocommerce-smart-coupons' ),
+								'id'         => 'wc_sc_cashback_type',
+								'field_name' => 'wc_sc_cashback[1][type]',
+								'type'       => 'select',
+								'options'    => array(
+									'fixed'      => __( 'Fixed', 'woocommerce-smart-coupons' ),
+									'percentage' => __( 'Percentage', 'woocommerce-smart-coupons' ),
+								),
+								'default'    => 'fixed',
+								'autoload'   => false,
+								'value'      => $wc_sc_cashback[1]['type'] ?? 'fixed',
+							),
+							array(
+								'name'              => __( 'Cashback Value', 'woocommerce-smart-coupons' ),
+								'desc'              => __( 'Enter the percentage or flat amount for cashback', 'woocommerce-smart-coupons' ),
+								'id'                => 'wc_sc_cashback_amount',
+								'field_name'        => 'wc_sc_cashback[1][amount]',
+								'type'              => 'number',
+								'custom_attributes' => array(
+									'step' => 'any',
+									'min'  => '0',
+								),
+								'default'           => '0',
+								'autoload'          => false,
+								'value'             => $wc_sc_cashback[1]['amount'] ?? '0',
+							),
+							array(
+								'name'              => __( 'Minimum Order Value', 'woocommerce-smart-coupons' ),
+								'desc'              => __( 'Set the minimum order total required for this rule', 'woocommerce-smart-coupons' ),
+								'id'                => 'wc_sc_cashback_min_order_value',
+								'field_name'        => 'wc_sc_cashback[1][min_order_value]',
+								'type'              => 'number',
+								'custom_attributes' => array(
+									'step' => 'any',
+									'min'  => '0',
+								),
+								'default'           => '0',
+								'autoload'          => false,
+								'value'             => $wc_sc_cashback[1]['min_order_value'] ?? '0',
+							),
+							array(
+								'name'              => __( 'Template Coupon', 'woocommerce-smart-coupons' ),
+								'id'                => 'wc_sc_cashback_template_coupon_id',
+								'field_name'        => 'wc_sc_cashback[1][template_coupon_id]',
+								'type'              => 'select',
+								'default'           => '',
+								'desc'              => sprintf(
+									/* translators: %s: The singular form of the store credit label (e.g. "Store Credit"). */
+									_x( 'Search & select a %s coupon to copy its restrictions and settings, except coupon code.', 'cashback template coupon description in cashback settings', 'woocommerce-smart-coupons' ),
+									( ! empty( $store_credit_label['singular'] ) ) ? ucwords( $store_credit_label['singular'] ) : _x( 'Store Credit', 'singular store credit label', 'woocommerce-smart-coupons' )
+								),
+								'desc_tip'          => false,
+								'class'             => 'wc-sc-storewide-coupon-search',
+								'css'               => 'min-width:300px;',
+								'autoload'          => false,
+								'custom_attributes' => array(
+									/* translators: %s: The singular form of the store credit label (e.g. "Store Credit"). */
+									'data-placeholder' => sprintf( _x( 'Search for a %s coupon...', 'search placeholder for store credit coupon', 'woocommerce-smart-coupons' ), ( ! empty( $store_credit_label['singular'] ) ) ? ucwords( $store_credit_label['singular'] ) : _x( 'Store Credit', 'singular store credit label', 'woocommerce-smart-coupons' ) ),
+									'data-action'      => 'sc_json_search_store_credit_coupons',
+									'data-security'    => wp_create_nonce( 'search-coupons' ),
+									'data-allow_clear' => true,
+								),
+								'options'           => $cashback_template_value,
+							),
+							array(
+								'type' => 'sectionend',
+								'id'   => 'wc_sc_setting_cashback_rewards',
 							),
 						),
 					),
@@ -945,110 +1127,118 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * Function for saving settings for Gift Certificate
 		 */
 		public function save_smart_coupon_admin_settings() {
-			if ( empty( $_POST['sc_security'] ) || ! wp_verify_nonce( wp_unslash( $_POST['sc_security'] ), 'wc_smart_coupons_settings' ) ) { // phpcs:ignore
-				return;
-			}
-
-			$current_section = isset( $_GET['section'] ) ? sanitize_text_field( wp_unslash( $_GET['section'] ) ) : 'general'; // phpcs:ignore
-			$sections        = $this->get_sections();
-			if ( isset( $sections[ $current_section ] ) ) {
-				woocommerce_update_options( $sections[ $current_section ]['fields'] );
-				switch ( $current_section ) {
-					case 'general':
-						$is_send_email  = get_option( 'smart_coupons_is_send_email', 'yes' );
-						$email_settings = get_option( 'woocommerce_wc_sc_email_coupon_settings', array() );
-						if ( is_array( $email_settings ) ) {
-							$email_settings['enabled'] = $is_send_email;
-							update_option( 'woocommerce_wc_sc_email_coupon_settings', $email_settings, 'no' );
-						}
-						break;
-
-					case 'customize-coupons':
-						$predefined_colors = array(
-							'2b2d42-edf2f4-d90429',
-							'003459-ffffff-00a8e8',
-							'334752-fffdf5-46b39d',
-							'edf2f4-bb2538-fcbf49',
-							'd6b56d-231f20-ffe09c',
-							'362f78-f8f9fa-5950ec',
-							'a82f82-f5f8ff-f45dc4',
-							'2c5f72-f3d2b3-f16a6c',
-							'e37332-fefefe-de4f3c',
-							'8e6e5d-f2f2f2-333333',
-							'a7e7ff-418fde-ffffff',
-							'f12f2f-0067b0-ffffff',
-							'f12f2d-ffffff-681740',
-							'ffffff-f0302d-01b16e',
-							'f6e034-01b26e-f0302f',
-							'f12f2e-02b16e-000000',
-							'f12f30-000000-ffffff',
-							'01b26c-ffffff-000000',
-						);
-
-						$color_options = array(
-							'wc_sc_setting_coupon_background_color',
-							'wc_sc_setting_coupon_foreground_color',
-							'wc_sc_setting_coupon_third_color',
-						);
-						$colors        = array();
-						foreach ( $color_options as $option ) {
-							$post_option = ( isset( $_POST[ $option ] ) ) ? wc_clean( wp_unslash( $_POST[ $option ] ) ) : ''; // phpcs:ignore
-							if ( ! empty( $post_option ) ) {
-								$colors[] = $post_option;
-								update_option( $option, $post_option, 'no' );
-							}
-						}
-						$color_scheme = implode( '-', $colors );
-						$color_scheme = str_replace( '#', '', $color_scheme );
-						if ( in_array( $color_scheme, $predefined_colors, true ) ) {
-							update_option( 'wc_sc_setting_coupon_design_colors', $color_scheme, 'no' );
-						}
-						break;
-
-					case 'display-coupons':
-						$old_storewide_offer_coupon_code  = get_option( 'smart_coupons_storewide_offer_coupon_code' );
-						$post_storewide_offer_coupon_code = ( ! empty( $_POST['smart_coupons_storewide_offer_coupon_code'] ) ) ? wc_clean( wp_unslash( $_POST['smart_coupons_storewide_offer_coupon_code'] ) ) : ''; // phpcs:ignore
-						if ( $old_storewide_offer_coupon_code !== $post_storewide_offer_coupon_code ) {
-							update_option( 'smart_coupons_storewide_offer_coupon_code', $post_storewide_offer_coupon_code, 'no' );
-							if ( ! empty( $post_storewide_offer_coupon_code ) ) {
-								$coupon_id                         = wc_get_coupon_id_by_code( $post_storewide_offer_coupon_code );
-								$coupon                            = new WC_Coupon( $coupon_id );
-								$coupon_status                     = ( $this->is_wc_greater_than( '6.1.2' ) && $this->is_callable( $coupon, 'get_status' ) ) ? $coupon->get_status() : get_post_status( $coupon_id );
-								$wc_sc_setting_store_notice_design = $this->sc_get_option( 'wc_sc_setting_store_notice_design' );
-								if ( 'publish' === $coupon_status ) {
-									if ( empty( $wc_sc_setting_store_notice_design ) ) {
-										update_option( 'wc_sc_setting_store_notice_design', 'notification', 'no' );
-									}
-								} elseif ( 'publish' !== $coupon_status ) {
-									if ( ! empty( $wc_sc_setting_store_notice_design ) ) {
-										update_option( 'wc_sc_setting_store_notice_design', '', 'no' );
-									}
-								}
-								$notice = get_option( 'smart_coupons_store_notice' );
-								if ( empty( $notice ) ) {
-									$notice = $this->generate_storewide_offer_coupon_description( array( 'coupon_object' => $coupon ) );
-									update_option( 'smart_coupons_store_notice', wp_filter_post_kses( $notice ), 'no' );
-								}
-							}
-						}
-						break;
-
-					case 'tax':
-						break;
-
-					case 'labels':
-						break;
-
-					case 'send-coupon-form':
-						$combine_emails         = get_option( 'smart_coupons_combine_emails', 'no' );
-						$combine_email_settings = get_option( 'woocommerce_wc_sc_combined_email_coupon_settings', array() );
-						if ( is_array( $combine_email_settings ) ) {
-							$combine_email_settings['enabled'] = $combine_emails;
-							update_option( 'woocommerce_wc_sc_combined_email_coupon_settings', $combine_email_settings, 'no' );
-						}
-						break;
-
+			try {
+				if ( empty( $_POST['sc_security'] ) || ! wp_verify_nonce( wp_unslash( $_POST['sc_security'] ), 'wc_smart_coupons_settings' ) ) { // phpcs:ignore
+					return;
 				}
+
+				$current_section = isset( $_GET['section'] ) ? sanitize_text_field( wp_unslash( $_GET['section'] ) ) : 'general'; // phpcs:ignore
+				$sections        = $this->get_sections();
+				if ( isset( $sections[ $current_section ] ) ) {
+					woocommerce_update_options( $sections[ $current_section ]['fields'] );
+					switch ( $current_section ) {
+						case 'general':
+							$is_send_email  = get_option( 'smart_coupons_is_send_email', 'yes' );
+							$email_settings = get_option( 'woocommerce_wc_sc_email_coupon_settings', array() );
+							if ( is_array( $email_settings ) ) {
+								$email_settings['enabled'] = $is_send_email;
+								update_option( 'woocommerce_wc_sc_email_coupon_settings', $email_settings, 'no' );
+							}
+							break;
+
+						case 'customize-coupons':
+							$predefined_colors = array(
+								'2b2d42-edf2f4-d90429',
+								'003459-ffffff-00a8e8',
+								'334752-fffdf5-46b39d',
+								'edf2f4-bb2538-fcbf49',
+								'd6b56d-231f20-ffe09c',
+								'362f78-f8f9fa-5950ec',
+								'a82f82-f5f8ff-f45dc4',
+								'2c5f72-f3d2b3-f16a6c',
+								'e37332-fefefe-de4f3c',
+								'8e6e5d-f2f2f2-333333',
+								'a7e7ff-418fde-ffffff',
+								'f12f2f-0067b0-ffffff',
+								'f12f2d-ffffff-681740',
+								'ffffff-f0302d-01b16e',
+								'f6e034-01b26e-f0302f',
+								'f12f2e-02b16e-000000',
+								'f12f30-000000-ffffff',
+								'01b26c-ffffff-000000',
+							);
+
+							$color_options = array(
+								'wc_sc_setting_coupon_background_color',
+								'wc_sc_setting_coupon_foreground_color',
+								'wc_sc_setting_coupon_third_color',
+							);
+							$colors        = array();
+							foreach ( $color_options as $option ) {
+								$post_option = ( isset( $_POST[ $option ] ) ) ? wc_clean( wp_unslash( $_POST[ $option ] ) ) : ''; // phpcs:ignore
+								if ( ! empty( $post_option ) ) {
+									$colors[] = $post_option;
+									update_option( $option, $post_option, 'no' );
+								}
+							}
+							$color_scheme = implode( '-', $colors );
+							$color_scheme = str_replace( '#', '', $color_scheme );
+							if ( in_array( $color_scheme, $predefined_colors, true ) ) {
+								update_option( 'wc_sc_setting_coupon_design_colors', $color_scheme, 'no' );
+							}
+							break;
+
+						case 'display-coupons':
+							$old_storewide_offer_coupon_code  = get_option( 'smart_coupons_storewide_offer_coupon_code' );
+							$post_storewide_offer_coupon_code = ( ! empty( $_POST['smart_coupons_storewide_offer_coupon_code'] ) ) ? wc_clean( wp_unslash( $_POST['smart_coupons_storewide_offer_coupon_code'] ) ) : ''; // phpcs:ignore
+							if ( $old_storewide_offer_coupon_code !== $post_storewide_offer_coupon_code ) {
+								update_option( 'smart_coupons_storewide_offer_coupon_code', $post_storewide_offer_coupon_code, 'no' );
+								if ( ! empty( $post_storewide_offer_coupon_code ) ) {
+									$coupon_id                         = wc_get_coupon_id_by_code( $post_storewide_offer_coupon_code );
+									$coupon                            = new WC_Coupon( $coupon_id );
+									$coupon_status                     = ( $this->is_wc_greater_than( '6.1.2' ) && $this->is_callable( $coupon, 'get_status' ) ) ? $coupon->get_status() : get_post_status( $coupon_id );
+									$wc_sc_setting_store_notice_design = $this->sc_get_option( 'wc_sc_setting_store_notice_design' );
+									if ( 'publish' === $coupon_status ) {
+										if ( empty( $wc_sc_setting_store_notice_design ) ) {
+											update_option( 'wc_sc_setting_store_notice_design', 'notification', 'no' );
+										}
+									} elseif ( 'publish' !== $coupon_status ) {
+										if ( ! empty( $wc_sc_setting_store_notice_design ) ) {
+											update_option( 'wc_sc_setting_store_notice_design', '', 'no' );
+										}
+									}
+									$notice = get_option( 'smart_coupons_store_notice' );
+									if ( empty( $notice ) ) {
+										$notice = $this->generate_storewide_offer_coupon_description( array( 'coupon_object' => $coupon ) );
+										update_option( 'smart_coupons_store_notice', wp_filter_post_kses( $notice ), 'no' );
+									}
+								}
+							}
+							break;
+
+						case 'tax':
+							break;
+
+						case 'labels':
+							break;
+
+						case 'send-coupon-form':
+							$combine_emails         = get_option( 'smart_coupons_combine_emails', 'no' );
+							$combine_email_settings = get_option( 'woocommerce_wc_sc_combined_email_coupon_settings', array() );
+							if ( is_array( $combine_email_settings ) ) {
+								$combine_email_settings['enabled'] = $combine_emails;
+								update_option( 'woocommerce_wc_sc_combined_email_coupon_settings', $combine_email_settings, 'no' );
+							}
+							break;
+
+						case 'cashback-rewards':
+							$cashback_settings = isset( $_POST['wc_sc_cashback'] ) ? wc_clean( wp_unslash( $_POST['wc_sc_cashback'] ) ) : array(); // phpcs:ignore
+							update_option( 'wc_sc_cashback', $cashback_settings, false );
+							break;
+					}
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -1057,22 +1247,25 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * Function to Add Delete Credit After Usage Notice
 		 */
 		public function add_delete_credit_after_usage_notice() {
+			try {
+				$is_delete_smart_coupon_after_usage = get_option( 'woocommerce_delete_smart_coupon_after_usage' );
 
-			$is_delete_smart_coupon_after_usage = get_option( 'woocommerce_delete_smart_coupon_after_usage' );
+				if ( 'yes' !== $is_delete_smart_coupon_after_usage ) {
+					return;
+				}
 
-			if ( 'yes' !== $is_delete_smart_coupon_after_usage ) {
-				return;
-			}
+				$admin_email = get_option( 'admin_email' );
 
-			$admin_email = get_option( 'admin_email' );
+				$user = get_user_by( 'email', $admin_email );
 
-			$user = get_user_by( 'email', $admin_email );
+				$current_user_id = get_current_user_id();
 
-			$current_user_id = get_current_user_id();
-
-			if ( ! empty( $current_user_id ) && ! empty( $user->ID ) && $current_user_id === $user->ID ) {
-				add_action( 'admin_notices', array( $this, 'delete_credit_after_usage_notice' ) );
-				add_action( 'admin_footer', array( $this, 'ignore_delete_credit_after_usage_notice' ) );
+				if ( ! empty( $current_user_id ) && ! empty( $user->ID ) && $current_user_id === $user->ID ) {
+					add_action( 'admin_notices', array( $this, 'delete_credit_after_usage_notice' ) );
+					add_action( 'admin_footer', array( $this, 'ignore_delete_credit_after_usage_notice' ) );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -1096,14 +1289,12 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 				}
 				echo '</p></div>';
 			}
-
 		}
 
 		/**
 		 * Function to Ignore Delete Credit After Usage Notice
 		 */
 		public function ignore_delete_credit_after_usage_notice() {
-
 			if ( ! wp_script_is( 'jquery' ) ) {
 				wp_enqueue_script( 'jquery' );
 			}
@@ -1130,7 +1321,6 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 				});
 			</script>
 			<?php
-
 		}
 
 		/**
@@ -1139,55 +1329,106 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * @param array $value Field arguments.
 		 */
 		public function radio_with_html( $value = array() ) {
-			$custom_attributes = array();
+			try {
+				$custom_attributes = array();
 
-			if ( ! empty( $value['custom_attributes'] ) && is_array( $value['custom_attributes'] ) ) {
-				foreach ( $value['custom_attributes'] as $attribute => $attribute_value ) {
-					$custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+				if ( ! empty( $value['custom_attributes'] ) && is_array( $value['custom_attributes'] ) ) {
+					foreach ( $value['custom_attributes'] as $attribute => $attribute_value ) {
+						$custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+					}
 				}
+
+				$field_description = WC_Admin_Settings::get_field_description( $value );
+				$description       = $field_description['description'];
+				$tooltip_html      = $field_description['tooltip_html'];
+
+				$option_value = $value['value'];
+				?>
+				<tr valign="top">
+					<th scope="row" class="titledesc">
+						<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo wp_kses_post( $tooltip_html ); // phpcs:ignore ?></label>
+					</th>
+					<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
+						<fieldset id="sc-cc">
+							<?php echo $description; // phpcs:ignore ?>
+							<ul class="<?php echo esc_attr( $value['class'] ); ?>">
+							<?php
+							foreach ( $value['options'] as $key => $val ) {
+								?>
+								<li class="<?php echo ( $key === $option_value ) ? 'selected' : ''; ?>">
+									<input
+									name="<?php echo esc_attr( $value['id'] ); ?>"
+									value="<?php echo esc_attr( $key ); ?>"
+									type="radio"
+									style="<?php echo esc_attr( $value['css'] ); ?>"
+									<?php echo implode( ' ', $custom_attributes ); // phpcs:ignore ?>
+									<?php checked( $key, $option_value ); ?>
+									/>
+									<?php
+									if ( ! empty( $value['args']['html_callback'] ) ) {
+										call_user_func_array( $value['args']['html_callback'], array( $key ) );
+									}
+									?>
+								</li>
+								<?php
+							}
+							?>
+							</ul>
+						</fieldset>
+					</td>
+				</tr>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
-			$field_description = WC_Admin_Settings::get_field_description( $value );
-			$description       = $field_description['description'];
-			$tooltip_html      = $field_description['tooltip_html'];
+		}
 
-			$option_value = $value['value'];
-			?>
-			<tr valign="top">
-				<th scope="row" class="titledesc">
-					<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo wp_kses_post( $tooltip_html ); // phpcs:ignore ?></label>
-				</th>
-				<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
-					<fieldset id="sc-cc">
-						<?php echo $description; // phpcs:ignore ?>
-						<ul class="<?php echo esc_attr( $value['class'] ); ?>">
-						<?php
-						foreach ( $value['options'] as $key => $val ) {
-							?>
-							<li class="<?php echo ( $key === $option_value ) ? 'selected' : ''; ?>">
-								<input
-								name="<?php echo esc_attr( $value['id'] ); ?>"
-								value="<?php echo esc_attr( $key ); ?>"
-								type="radio"
-								style="<?php echo esc_attr( $value['css'] ); ?>"
-								<?php echo implode( ' ', $custom_attributes ); // phpcs:ignore ?>
-								<?php checked( $key, $option_value ); ?>
-								/>
-								<?php
-								if ( ! empty( $value['args']['html_callback'] ) ) {
-									call_user_func_array( $value['args']['html_callback'], array( $key ) );
-								}
-								?>
-							</li>
-							<?php
-						}
-						?>
-						</ul>
-					</fieldset>
-				</td>
-			</tr>
-			<?php
+		/**
+		 * Draw form field for displaying a link
+		 *
+		 * @param array $value Field arguments.
+		 */
+		public function email_setting( $value = array() ) {
+			try {
+				// Extract values with defaults.
+				$id          = ! empty( $value['id'] ) ? $value['id'] : '';
+				$label       = ! empty( $value['label'] ) ? $value['label'] : '';
+				$link_text   = ! empty( $value['link_text'] ) ? $value['link_text'] : '';
+				$link_url    = ! empty( $value['link_url'] ) ? $value['link_url'] : '#';
+				$link_class  = ! empty( $value['link_class'] ) ? $value['link_class'] : '';
+				$description = ! empty( $value['desc'] ) ? $value['desc'] : '';
+				$data        = ! empty( $value['data'] ) ? $value['data'] : array();
+				$attributes  = '';
 
+				// Handle custom attributes.
+				if ( ! empty( $value['custom_attributes'] ) && is_array( $value['custom_attributes'] ) ) {
+					foreach ( $value['custom_attributes'] as $attr => $attr_value ) {
+						$attributes .= ' ' . esc_attr( $attr ) . '="' . esc_attr( $attr_value ) . '"';
+					}
+				}
+
+				?>
+				<tr valign="top">
+					<th scope="row" class="titledesc">
+						<?php if ( $label ) : ?>
+							<label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $label ); ?></label>
+						<?php endif; ?>
+					</th>
+					<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
+						<span class="<?php echo esc_attr( ! empty( $value['data']['enabled'] ) && 'yes' === $value['data']['enabled'] ? 'status-enabled' : 'status-disabled' ); ?> tips" data-tip="<?php echo esc_attr( ! empty( $value['data']['enabled'] ) && 'yes' === $value['data']['enabled'] ? __( 'Enabled', 'woocommerce-smart-coupons' ) : __( 'Disabled', 'woocommerce-smart-coupons' ) ); ?>"><?php echo esc_html( ucwords( $value['data']['enabled'] ) ); ?></span>
+						<a href="<?php echo esc_url( $link_url ); ?>" class="<?php echo esc_attr( $link_class ); ?>" <?php echo esc_attr( $attributes ); // phpcs:ignore ?>>
+							<?php echo esc_html( $link_text ); ?>
+						</a>
+						<?php if ( $description ) : ?>
+							<p class="description"><?php echo wp_kses_post( $description ); ?></p>
+						<?php endif; ?>
+					</td>
+				</tr>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**
@@ -1196,34 +1437,38 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * @param string $colors Colors.
 		 */
 		public function color_scheme_html( $colors = '' ) {
-			if ( empty( $colors ) ) {
-				return;
-			}
-			if ( 'custom' === $colors ) {
-				$color_codes   = array();
-				$color_options = array(
-					'wc_sc_setting_coupon_background_color' => '#39cccc',
-					'wc_sc_setting_coupon_foreground_color' => '#30050b',
-					'wc_sc_setting_coupon_third_color' => '#39cccc',
-				);
-				foreach ( $color_options as $option => $default ) {
-					$color_code = get_option( $option, $default );
-					?>
-					<span style="background-color: <?php echo esc_attr( $color_code ); ?>">
-						<input type="color" id="<?php echo esc_attr( $option ); ?>" name="<?php echo esc_attr( $option ); ?>" value="<?php echo esc_attr( $color_code ); ?>">
-					</span>
-					<?php
+			try {
+				if ( empty( $colors ) ) {
+					return;
 				}
-				?>
-				<div class="randomize-container"><span class="wc-sc-randomize-colors dashicons dashicons-randomize"></span></div>
-				<?php
-			} else {
-				$color_codes = explode( '-', $colors );
-				foreach ( $color_codes as $color_code ) {
+				if ( 'custom' === $colors ) {
+					$color_codes   = array();
+					$color_options = array(
+						'wc_sc_setting_coupon_background_color' => '#39cccc',
+						'wc_sc_setting_coupon_foreground_color' => '#30050b',
+						'wc_sc_setting_coupon_third_color' => '#39cccc',
+					);
+					foreach ( $color_options as $option => $default ) {
+						$color_code = get_option( $option, $default );
+						?>
+						<span style="background-color: <?php echo esc_attr( $color_code ); ?>">
+							<input type="color" id="<?php echo esc_attr( $option ); ?>" name="<?php echo esc_attr( $option ); ?>" value="<?php echo esc_attr( $color_code ); ?>">
+						</span>
+						<?php
+					}
 					?>
-					<span style="background-color: #<?php echo esc_attr( $color_code ); ?>"></span>
+					<div class="randomize-container"><span class="wc-sc-randomize-colors dashicons dashicons-randomize"></span></div>
 					<?php
+				} else {
+					$color_codes = explode( '-', $colors );
+					foreach ( $color_codes as $color_code ) {
+						?>
+						<span style="background-color: #<?php echo esc_attr( $color_code ); ?>"></span>
+						<?php
+					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -1234,26 +1479,30 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * @return void
 		 */
 		public function coupon_design_html( $design = '' ) {
-			if ( empty( $design ) ) {
-				return;
+			try {
+				if ( empty( $design ) ) {
+					return;
+				}
+				$args = array(
+					'coupon_amount'      => 10,
+					'amount_symbol'      => get_woocommerce_currency_symbol(),
+					'discount_type'      => __( 'Discount', 'woocommerce-smart-coupons' ),
+					'coupon_description' => __( 'Hurry. Going fast! On the entire range of products.', 'woocommerce-smart-coupons' ),
+					'coupon_code'        => 'sample-code',
+					'coupon_expiry'      => $this->get_expiration_format( $this->strtotime( 'Dec 31' ) ),
+					'thumbnail_src'      => $this->get_coupon_design_thumbnail_src(),
+					'classes'            => '',
+					'template_id'        => $design,
+					'is_percent'         => false,
+				);
+				?>
+				<div style="display: inline-block;">
+					<?php wc_get_template( 'coupon-design/' . $design . '.php', $args, '', plugin_dir_path( WC_SC_PLUGIN_FILE ) . 'templates/' ); ?>
+				</div>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-			$args = array(
-				'coupon_amount'      => 10,
-				'amount_symbol'      => get_woocommerce_currency_symbol(),
-				'discount_type'      => __( 'Discount', 'woocommerce-smart-coupons' ),
-				'coupon_description' => __( 'Hurry. Going fast! On the entire range of products.', 'woocommerce-smart-coupons' ),
-				'coupon_code'        => 'sample-code',
-				'coupon_expiry'      => $this->get_expiration_format( $this->strtotime( 'Dec 31' ) ),
-				'thumbnail_src'      => $this->get_coupon_design_thumbnail_src(),
-				'classes'            => '',
-				'template_id'        => $design,
-				'is_percent'         => false,
-			);
-			?>
-			<div style="display: inline-block;">
-				<?php wc_get_template( 'coupon-design/' . $design . '.php', $args, '', plugin_dir_path( WC_SC_PLUGIN_FILE ) . 'templates/' ); ?>
-			</div>
-			<?php
 		}
 
 		/**
@@ -1263,14 +1512,18 @@ if ( ! class_exists( 'WC_SC_Settings' ) ) {
 		 * @return void
 		 */
 		public function store_notice_design_html( $design = '' ) {
-			if ( empty( $design ) ) {
-				return;
+			try {
+				if ( empty( $design ) ) {
+					return;
+				}
+				?>
+				<div style="display: inline-block;">
+					<img src="<?php echo esc_url( untrailingslashit( plugins_url( '/', WC_SC_PLUGIN_FILE ) ) . '/assets/images/store-notice-design/' . $design . '.png' ); ?>" />
+				</div>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-			?>
-			<div style="display: inline-block;">
-				<img src="<?php echo esc_url( untrailingslashit( plugins_url( '/', WC_SC_PLUGIN_FILE ) ) . '/assets/images/store-notice-design/' . $design . '.png' ); ?>" />
-			</div>
-			<?php
 		}
 
 	}

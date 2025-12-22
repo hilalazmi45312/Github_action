@@ -68,6 +68,7 @@ if ( ! function_exists( 'woodmart_generate_posts_slider' ) ) {
 		);
 
 		extract( $parsed_atts );
+		$is_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['action'] ) && $_POST['action'] === 'woodmart_get_recently_viewed_products' );
 
 		if ( empty( $product_hover ) || $product_hover == 'inherit' ) {
 			$product_hover = woodmart_get_opt( 'products_hover' );
@@ -276,7 +277,6 @@ if ( ! function_exists( 'woodmart_generate_posts_slider' ) ) {
 		}
 
 		if ( $scroll_carousel_init == 'yes' ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$carousel_classes .= ' scroll-init';
 		}
 
@@ -304,6 +304,8 @@ if ( ! function_exists( 'woodmart_generate_posts_slider' ) ) {
 
 		if ( ( $query && $query->have_posts() ) || $products || 'yes' === $ajax_recently_viewed ) {
 			?>
+			<?php if ( ! $is_ajax ) : ?>
+
 			<div id="<?php echo esc_attr( $carousel_id ); ?>" class="wd-carousel-container <?php echo esc_attr( $wrapper_classes ); ?>">
 				<?php if ( $inner_content ) : ?>
 					<?php echo do_shortcode( $inner_content ); ?>
@@ -311,6 +313,8 @@ if ( ! function_exists( 'woodmart_generate_posts_slider' ) ) {
 
 				<?php if ( $title || $element_title ) : ?>
 					<?php
+					$element_title_tag = in_array( $element_title_tag, array_keys( woodmart_get_allowed_html() ), true ) ? $element_title_tag : 'h4';
+
 					printf(
 						'<%1$s class="wd-el-title title slider-title element-title"><span>%2$s</span></%1$s>',
 						esc_attr( apply_filters( 'woodmart_products_title_tag', $element_title_tag ) ),
@@ -318,6 +322,7 @@ if ( ! function_exists( 'woodmart_generate_posts_slider' ) ) {
 					);
 					?>
 				<?php endif; ?>
+			<?php endif; ?>
 
 				<div class="wd-carousel-inner">
 					<div class="<?php echo esc_attr( $carousel_classes ); ?>" <?php echo wp_kses( $carousel_atts, true ); ?>>
@@ -339,9 +344,11 @@ if ( ! function_exists( 'woodmart_generate_posts_slider' ) ) {
 					<?php woodmart_get_carousel_nav_template( $nav_classes, $parsed_atts ); ?>
 				</div>
 
+			<?php if ( ! $is_ajax ) : ?>
 				<?php woodmart_get_carousel_pagination_template( $parsed_atts ); ?>
 				<?php woodmart_get_carousel_scrollbar_template( $parsed_atts ); ?>
 			</div>
+			<?php endif; ?>
 			<?php
 		}
 		wp_reset_postdata();

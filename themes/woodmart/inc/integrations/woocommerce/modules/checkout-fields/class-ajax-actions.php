@@ -29,6 +29,10 @@ class Ajax_Actions extends Singleton {
 	 * @see Ajax_Actions::save_fields_position() Handler for the 'save_fields_position' ajax event.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'checkout_fields_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->helper = Helper::get_instance();
 
 		$actions = array(

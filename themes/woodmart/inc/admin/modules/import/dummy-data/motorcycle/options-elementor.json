@@ -131,8 +131,6 @@
     "page-title-size": "large",
     "form_fields_style": "semi-rounded",
     "promo_popup_content_type": "html_block",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "726",
     "page-title-color": "light",
     "title-background": {
         "color": "#0a0a0a",
@@ -143,5 +141,11 @@
         "attachment": "",
         "position": "center center"
     },
-    "portfolio_page": "51"
+    "portfolio_page": "51",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

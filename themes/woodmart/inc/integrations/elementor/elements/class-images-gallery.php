@@ -506,7 +506,6 @@ class Images_Gallery extends Widget_Base {
 			$this->add_render_attribute( 'item', 'class', 'wd-carousel-item' );
 
 			if ( 'yes' === $settings['scroll_carousel_init'] ) {
-				woodmart_enqueue_js_library( 'waypoints' );
 				$this->add_render_attribute( 'gallery', 'class', 'scroll-init' );
 			}
 

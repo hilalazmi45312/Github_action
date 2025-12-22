@@ -50,8 +50,17 @@
 			woodmartThemeModule.hideShopSidebar();
 		});
 
+		woodmartThemeModule.$document.on('keyup', function(e) {
+			if (e.keyCode === 27) {
+				woodmartThemeModule.hideShopSidebar();
+			}
+		});
+
 		var showSidebar = function() {
-			$('.wd-sidebar').addClass('wd-opened');
+			var $sidebarContainer = $('.wd-sidebar');
+
+			$sidebarContainer.addClass('wd-opened');
+			$sidebarContainer.trigger('wdOpenSide');
 			$('.wd-close-side').addClass('wd-close-side-opened');
 		};
 
@@ -62,6 +71,7 @@
 		var $sidebarContainer = $('.wd-sidebar');
 
 		if ( $sidebarContainer.hasClass('wd-opened') ) {
+			$sidebarContainer.trigger('wdCloseSide');
 			$sidebarContainer.removeClass('wd-opened');
 			$('.wd-close-side').removeClass('wd-close-side-opened');
 			$('.wd-show-sidebar-btn, .wd-sidebar-opener, .wd-toolbar-sidebar').removeClass('wd-opened');

@@ -27,6 +27,10 @@ class Emails extends Singleton {
 	 * Constructor.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'waitlist_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->db_storage = DB_Storage::get_instance();
 
 		add_action( 'init', array( $this, 'confirm_subscription' ) );
@@ -128,7 +132,10 @@ class Emails extends Singleton {
 	 * @return void
 	 */
 	public function send_instock_email_emails( $product_id, $stock_status, $product ) {
-		if ( 'instock' !== $stock_status || in_array( $product->get_type(), array( 'variable', 'variable-subscription' ), true ) ) {
+		$variable_product_types = apply_filters( 'woodmart_variable_product_types', array( 'variable' ) );
+		$is_variable            = in_array( $product->get_type(), $variable_product_types, true );
+
+		if ( 'instock' !== $stock_status || $is_variable ) {
 			return;
 		}
 
@@ -185,7 +192,7 @@ class Emails extends Singleton {
 	 */
 	private function get_dummy_product() {
 		$product = new WC_Product();
-		$product->set_name( 'Dummy Product' );
+		$product->set_name( __( 'Dummy Product', 'woodmart' ) );
 		$product->set_price( 25 );
 
 		return $product;

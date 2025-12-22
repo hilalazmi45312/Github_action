@@ -2,37 +2,50 @@
 
 class OneSyncController
 {
+
     public static function one_sync_dynamic_script()
     {
+        // Elementor editor or preview – do not load Flix
+        if (
+            (did_action('elementor/loaded') && \Elementor\Plugin::$instance->editor->is_edit_mode()) ||
+            isset($_GET['elementor-preview'])
+        ) {
+            return;
+        }
+
         if (!is_product()) return;
 
         global $product;
         if (!$product || !is_a($product, 'WC_Product')) return;
 
-        $cpn = $product->get_sku() ?: '';
-        // if (!preg_match('/^MS-MIC-?/i', $cpn)) {
-        //     return; // Only run for MS-MIC prefixed products
-        // }
-
-        $pn          = preg_replace('/^MS-(?:MIC|ESD)-?/i', '', $cpn);
+        $parent_sku = $product->get_sku() ?: '';
+        $parent_mpn = get_post_meta($product->get_id(), 'mpn', true); // ← MPN field
         $brand_terms = get_the_terms($product->get_id(), 'product_brand');
         $brand_name  = (!empty($brand_terms) && !is_wp_error($brand_terms)) ? $brand_terms[0]->name : '';
 
-        // Early exit for simple products with no valid PN
-        if ($product->is_type('simple') && empty($pn)) {
-            return;
-        }
+        // // Helper: check if SKU is valid for 1WorldSync
+        // $is_valid_sku = function ($sku) {
+        //     return !empty($sku) && preg_match('/^MS-(?:MIC|ESD)-/i', $sku);
+        // };
+
+        // // Helper: extract PN from valid CPN
+        // $get_pn = function ($sku) {
+        //     return preg_replace('/^MS-(?:MIC|ESD)-?/i', '', $sku);
+        // };
+
+        $parent_cpn = $parent_sku;
+        $parent_pn  = $parent_mpn;
 ?>
         <style>
             @media (max-width:680px) {
 
                 #ccs-feature-icons,
                 #ccs-logos {
-                    display: none !important
+                    display: none !important;
                 }
             }
 
-            /* Smart description replacement - real hide/show */
+            /* Smart description replacement */
             #tab-description {
                 position: relative;
                 transition: all 0.3s ease;
@@ -71,6 +84,8 @@ class OneSyncController
                 const ZONEID = "2f75f80ad4";
                 const CCID = "645e91b6-db45-48a4-98a4-89f52732864c";
 
+                window._1wsLastSku = null;
+
                 function remove1WSScript() {
                     const s = document.querySelector('script[src*="cdn.cs.1worldsync.com/jsc/h1ws.js"]');
                     if (s && s.parentNode) s.parentNode.removeChild(s);
@@ -85,20 +100,14 @@ class OneSyncController
 
                 window.__clear1WS = clear1WSContainers;
 
-                window.__load1WSFor = function({
-                    cpn,
-                    mf,
-                    pn
-                }) {
+                window.__load1WSFor = function(cpn, pn, mf) {
                     if (!cpn || !pn) {
                         clear1WSContainers();
                         if (window.__update1WSVisibility) setTimeout(window.__update1WSVisibility, 100);
                         return;
                     }
 
-                    window.ccs_cc_args = window.ccs_cc_args || [];
-                    window.ccs_cc_args.length = 0;
-
+                    window.ccs_cc_args = [];
                     window.ccs_cc_args.push(["cpn", cpn]);
                     window.ccs_cc_args.push(["mf", mf]);
                     window.ccs_cc_args.push(["pn", pn]);
@@ -122,96 +131,109 @@ class OneSyncController
                 };
             })();
 
-            /* Smart Description Toggle (same logic as FlixMedia) */
+            /* Smart Description Toggle + Visibility */
             document.addEventListener('DOMContentLoaded', function() {
                 const inlineDiv = document.getElementById('ccs-inline-content');
                 const descTab = document.getElementById('tab-description');
-                if (!inlineDiv || !descTab) return;
 
-                if (!descTab.contains(inlineDiv)) {
+                if (inlineDiv && descTab && !descTab.contains(inlineDiv)) {
                     descTab.appendChild(inlineDiv);
                 }
 
                 window.__update1WSVisibility = function() {
+                    if (!inlineDiv || !descTab) return;
                     const hasContent = inlineDiv.children.length > 0 || inlineDiv.innerHTML.trim() !== '';
                     descTab.classList.toggle('onews-active', hasContent);
                 };
 
-                new MutationObserver(window.__update1WSVisibility)
-                    .observe(inlineDiv, {
-                        childList: true,
-                        subtree: true,
-                        characterData: true
-                    });
+                if (inlineDiv) {
+                    new MutationObserver(window.__update1WSVisibility)
+                        .observe(inlineDiv, {
+                            childList: true,
+                            subtree: true,
+                            characterData: true
+                        });
+                }
 
                 window.__update1WSVisibility();
             });
 
-            /* Position feature icons & logos after gallery */
+            /* Position icons & logos after gallery */
             document.addEventListener('DOMContentLoaded', function() {
                 const gallery = document.querySelector('.woocommerce-product-gallery');
                 const icons = document.getElementById('ccs-feature-icons');
                 const logos = document.getElementById('ccs-logos');
 
-                if (gallery && icons && logos) {
+                if (gallery && (icons || logos)) {
                     gallery.after(icons, logos);
                 }
             });
 
-            /* Initial Load - only if base product has valid CPN/PN */
-            <?php
-            $has_base = !empty($cpn) && !empty($pn);
-            if ($has_base):
-            ?>
-                document.addEventListener('DOMContentLoaded', function() {
-                    window.__load1WSFor({
-                        cpn: <?php echo wp_json_encode($cpn); ?>,
-                        mf: <?php echo wp_json_encode($brand_name); ?>,
-                        pn: <?php echo wp_json_encode($pn); ?>
-                    });
-                });
-            <?php endif; ?>
-
-            /* Variation Handler */
-            jQuery(function($) {
+            /* Main Logic */
+            jQuery(document).ready(function($) {
                 const $form = $('form.variations_form');
-                if (!$form.length) return;
+                const isVariable = $form.length > 0;
+                const parentCpn = <?php echo wp_json_encode($parent_cpn); ?>;
+                const parentPn = <?php echo wp_json_encode($parent_pn); ?>;
+                const brand = <?php echo wp_json_encode($brand_name); ?>;
 
-                let lastSku = null;
-                const baseCpn = <?php echo wp_json_encode($cpn); ?>;
-                const basePn = <?php echo wp_json_encode($pn); ?>;
-                const baseMf = <?php echo wp_json_encode($brand_name); ?>;
+                const getVariationPN = v => v.mpn || "";
 
-                $form.on('found_variation', function(e, variation) {
-                    const sku = variation.sku || '';
-                    if (!sku || !sku.match(/^MS-(?:MIC|ESD)-?/i)) {
-                        if (window.__clear1WS) window.__clear1WS();
-                        lastSku = null;
+                function load1WS(cpn, pn) {
+                    if (!cpn || !pn) {
+                        window.__clear1WS();
+                        window._1wsLastSku = null;
                         return;
                     }
 
-                    const pn = sku.replace(/^MS-(?:MIC|ESD)-?/i, '');
+                    if (window._1wsLastSku === cpn) return;
+                    window._1wsLastSku = cpn;
 
-                    if (lastSku === sku) return;
-                    lastSku = sku;
+                    window.__load1WSFor(cpn, pn, brand);
+                }
 
-                    window.__load1WSFor({
-                        cpn: sku,
-                        mf: baseMf,
-                        pn: pn
-                    });
+                // Simple Product
+                if (!isVariable) {
+                    if (parentCpn) load1WS(parentCpn);
+                    return;
+                }
+
+                // Variable Product
+                const variations = $form.data('product_variations') || [];
+
+                // Initial load: use parent if it has valid CPN (and preferably PN/MPN)
+                if (parentCpn && parentPn) {
+                    load1WS(parentCpn, parentPn);
+                } else {
+                    // Find first variation with MPN
+                    const firstWithMPN = variations.find(v => v.mpn && v.mpn.length > 0);
+
+                    if (firstWithMPN) {
+                        load1WS(firstWithMPN.sku, firstWithMPN.mpn);
+                    } else {
+                        window.__clear1WS();
+                    }
+                }
+
+                // On variation select
+                $form.on('found_variation', function(e, variation) {
+                    const cpn = variation.sku || "";
+                    const pn = variation.mpn || ""; // ← use variation mpn
+
+                    load1WS(cpn, pn);
                 });
 
+                // On reset/clear
                 $form.on('reset_data', function() {
-                    lastSku = null;
-                    if (baseCpn && basePn) {
-                        window.__load1WSFor({
-                            cpn: baseCpn,
-                            mf: baseMf,
-                            pn: basePn
-                        });
+                    window._1wsLastSku = null;
+
+                    if (parentCpn && parentPn) { // ← was parent_sku && parent_mpn (wrong vars)
+                        load1WS(parentCpn, parentPn);
                     } else {
-                        if (window.__clear1WS) window.__clear1WS();
+                        const firstWithMPN = variations.find(v => v.mpn && v.mpn.length > 0);
+                        if (firstWithMPN) {
+                            load1WS(firstWithMPN.sku, firstWithMPN.mpn);
+                        }
                     }
                 });
             });

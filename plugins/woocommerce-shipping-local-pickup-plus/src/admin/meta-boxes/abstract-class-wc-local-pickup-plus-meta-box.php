@@ -17,11 +17,11 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 defined( 'ABSPATH' ) or exit;
 
@@ -275,7 +275,7 @@ abstract class WC_Local_Pickup_Plus_Meta_Box {
 		}
 
 		// output the child meta box HTML ?>
-		<div class="wc-local-pickup-plus wc-local-pickup-plus-meta-box <?php echo $this->id; ?>">
+		<div class="wc-local-pickup-plus wc-local-pickup-plus-meta-box <?php echo esc_attr( $this->id ); ?>">
 			<?php $this->output( $post ); ?>
 		</div>
 		<?php
@@ -306,7 +306,7 @@ abstract class WC_Local_Pickup_Plus_Meta_Box {
 	public function save_post( $post_id, \WP_Post $post ) {
 
 		// check nonce
-		if ( ! isset( $_POST[ $this->get_nonce_name() ] ) || ! wp_verify_nonce( $_POST[ $this->get_nonce_name() ], $this->get_nonce_action() ) ) {
+		if ( ! isset( $_POST[ $this->get_nonce_name() ] ) || ! wp_verify_nonce( sanitize_text_field( $_POST[ $this->get_nonce_name() ] ), $this->get_nonce_action() ) ) {
 			return;
 		}
 

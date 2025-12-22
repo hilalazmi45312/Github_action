@@ -26,14 +26,23 @@ class Admin extends Singleton {
 	public $post_type_name;
 
 	/**
+	 * Page slug for the abandoned cart admin page.
+	 *
+	 * @var string
+	 */
+	public $abandoned_cart_page;
+
+	/**
 	 * Constructor.
 	 */
 	public function init() {
-		$this->include_files();
+		if ( ! woodmart_get_opt( 'cart_recovery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
 
 		$this->post_type_name = Abandoned_Cart::get_instance()->post_type_name;
 
-		add_action( 'init', array( $this, 'delete_abandoned_cart' ) );
+		add_action( 'admin_init', array( $this, 'delete_abandoned_cart' ) );
 
 		add_action( 'admin_menu', array( $this, 'register_abandoned_cart_page' ) );
 
@@ -50,36 +59,12 @@ class Admin extends Singleton {
 	}
 
 	/**
-	 * Include files.
-	 */
-	private function include_files() {
-		if ( ! class_exists( 'WP_List_Table' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-		}
-
-		$files = array(
-			'class-abandoned-cart-table',
-			'class-cart-content-table',
-		);
-
-		foreach ( $files as $file ) {
-			$file_path = WOODMART_THEMEROOT . '/inc/integrations/woocommerce/modules/abandoned-cart/list-tables/' . $file . '.php';
-
-			if ( file_exists( $file_path ) ) {
-				require_once $file_path;
-			}
-		}
-	}
-
-	/**
 	 * Register abandoned cart page on admin panel.
 	 *
 	 * @return void
 	 */
 	public function register_abandoned_cart_page() {
-		global $wd_abandoned_cart_page;
-
-		$wd_abandoned_cart_page = add_submenu_page(
+		$this->abandoned_cart_page = add_submenu_page(
 			'edit.php?post_type=product',
 			esc_html__( 'Abandoned carts', 'woodmart' ),
 			esc_html__( 'Abandoned carts', 'woodmart' ),
@@ -88,7 +73,7 @@ class Admin extends Singleton {
 			array( $this, 'render_abandoned_cart_page' )
 		);
 
-		add_action( 'load-' . $wd_abandoned_cart_page, array( $this, 'abandoned_cart_screen_options' ) );
+		add_action( 'load-' . $this->abandoned_cart_page, array( $this, 'abandoned_cart_screen_options' ) );
 	}
 
 	/**
@@ -101,7 +86,7 @@ class Admin extends Singleton {
 
 		$list_table->prepare_items();
 		?>
-			<div class="wrap xts-wtl-page-wrap">
+			<div class="wrap xts-post-type-table">
 				<h2 class="wp-heading-inline"><?php echo esc_html__( 'Abandoned carts', 'woodmart' ); ?></h2>
 
 				<form id="xts-abandoned-cart-settings-page-form" method="get" action="">
@@ -120,11 +105,9 @@ class Admin extends Singleton {
 	 * Add screen options to abandoned_cart admin page.
 	 */
 	public function abandoned_cart_screen_options() {
-		global $wd_abandoned_cart_page;
-
 		$screen = get_current_screen();
 
-		if ( ! is_object( $screen ) || $screen->id !== $wd_abandoned_cart_page ) {
+		if ( ! is_object( $screen ) || $screen->id !== $this->abandoned_cart_page ) {
 			return;
 		}
 
@@ -246,7 +229,9 @@ class Admin extends Singleton {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		if ( get_post_type() !== $this->post_type_name ) {
+		$is_recovered_cart_order_page = ! empty( $_GET['id'] ) && ! empty( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && get_post_meta( $_GET['id'], '_wd_is_recovered_cart', true );
+
+		if ( get_post_type() !== $this->post_type_name && ! $is_recovered_cart_order_page ) {
 			return;
 		}
 
@@ -377,6 +362,11 @@ class Admin extends Singleton {
 		}
 
 		$cart_id = intval( $_GET['cart_id'] ); //phpcs:ignore.
+		$cart    = get_post( $cart_id );
+
+		if ( $this->post_type_name !== $cart->post_type ) {
+			return;
+		}
 
 		wp_delete_post( $cart_id, true );
 

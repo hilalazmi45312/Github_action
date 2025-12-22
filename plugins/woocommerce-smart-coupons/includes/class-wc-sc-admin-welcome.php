@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     1.7.0
+ * @version     1.8.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -167,13 +167,11 @@ if ( ! class_exists( 'WC_SC_Admin_Welcome' ) ) {
 						justify-content: center;
 						margin-top: 1em;
 					}
-
 					@media (min-width: 719px) {
 						.wc-sc-grid-container {
 							grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
 						}
 					}
-
 					@media screen and (min-width: 720px) and (max-width: 1199px) {
 						.wc-sc-grid-container {
 							grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
@@ -199,7 +197,6 @@ if ( ! class_exists( 'WC_SC_Admin_Welcome' ) ) {
 							grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
 						}
 					}
-
 					.wc-sc-grid-item {
 						border: 1px solid #e1e1e1;
 						border-radius: 8px;
@@ -212,7 +209,6 @@ if ( ! class_exists( 'WC_SC_Admin_Welcome' ) ) {
 						position: relative;
 						height: 100%;
 					}
-
 					.wc-sc-grid-item .dashicons {
 						font-size: 1.5em;
 						color: var(--wp-admin-theme-color);
@@ -222,42 +218,34 @@ if ( ! class_exists( 'WC_SC_Admin_Welcome' ) ) {
 						font-size: 10em;
 						opacity: 0.1;
 					}
-
 					.wc-sc-grid-item:nth-child(3n+1) {
 						background-color: #e0f7fa; /* Light cyan */
 					}
-
 					.wc-sc-grid-item:nth-child(3n+2) {
 						background-color: #f1f8e9; /* Light green */
 					}
-
 					.wc-sc-grid-item:nth-child(3n) {
 						background-color: #fff3e0; /* Light orange */
 					}
-
 					.wc-sc-grid-item:hover {
 						transform: translateY(-5px);
 						box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 					}
-
 					.icon-title-wrapper {
 						display: flex;
 						align-items: center;
 						justify-content: center;
 						margin-bottom: 1.5em;
 					}
-
 					.icon-title-wrapper h3 {
 						font-size: 1.5em;
 						margin: 0;
 						text-align: center;
 					}
-
 					.wc-sc-grid-item p {
 						font-size: 14px;
 						margin-bottom: 20px;
 					}
-
 					.wc-sc-grid-item .button-primary {
 						text-decoration: none;
 						font-size: 1em;
@@ -266,20 +254,17 @@ if ( ! class_exists( 'WC_SC_Admin_Welcome' ) ) {
 						display: inline-block;
 						width: 90%;
 					}
-
 					button.start-tour {
 						position: absolute;
 						bottom: 1em;
 						left: 50%;
 						transform: translateX(-50%);
 					}
-
 				<?php } ?>
 				/*]]>*/
 			</style>
 				<?php
 			}
-
 		}
 
 		/**

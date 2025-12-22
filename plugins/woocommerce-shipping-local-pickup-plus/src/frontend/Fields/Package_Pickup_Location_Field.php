@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -26,7 +26,7 @@ namespace SkyVerge\WooCommerce\Local_Pickup_Plus\Fields;
 defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Data_Store\Package_Pickup_Data;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Field component to attach pickup data for items to be picked up at checkout.
@@ -104,7 +104,7 @@ class Package_Pickup_Location_Field extends Pickup_Location_Field {
 
 		<?php if ( $shipping_method->is_per_order_selection_enabled() ) : ?>
 
-			<?php echo $this->get_location_select_html( $this->get_package_id(), $chosen_location, $this->get_single_product() ); ?>
+			<?php echo $this->get_location_select_html( $this->get_package_id(), $chosen_location, $this->get_single_product() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 		<?php elseif ( $chosen_location ) : ?>
 
@@ -127,7 +127,7 @@ class Package_Pickup_Location_Field extends Pickup_Location_Field {
 
 				<?php if ( is_cart() && $shipping_method->is_per_item_selection_enabled() ) : ?>
 					<?php /* translators: Placeholder: %s - the name of the pickup location */
-					echo sprintf( __( 'Pickup Location: %s', 'woocommerce-shipping-local-pickup-plus' ), esc_html( $chosen_location->get_name() ) ) . '<br />'; ?>
+					echo sprintf( esc_html__( 'Pickup Location: %s', 'woocommerce-shipping-local-pickup-plus' ), esc_html( $chosen_location->get_name() ) ) . '<br />'; ?>
 				<?php endif; ?>
 
 				<?php $address = $chosen_location->get_address()->get_formatted_html( true ); ?>
@@ -171,7 +171,7 @@ class Package_Pickup_Location_Field extends Pickup_Location_Field {
 			data-pickup-object-id="<?php echo esc_attr( $this->get_package_id() ); ?>">
 
 			<?php // display the selected location, or location select field ?>
-			<?php echo $this->get_pickup_location_html(); ?>
+			<?php echo $this->get_pickup_location_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 		</div>
 		<?php

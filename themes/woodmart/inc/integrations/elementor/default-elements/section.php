@@ -128,9 +128,10 @@ if ( ! function_exists( 'woodmart_section_before_render' ) ) {
 		$settings = $widget->get_settings_for_display();
 
 		if ( isset( $settings['wd_animation'] ) && $settings['wd_animation'] ) {
-			woodmart_enqueue_inline_style( 'animations' );
-			woodmart_enqueue_js_script( 'animations' );
-			woodmart_enqueue_js_library( 'waypoints' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform-base' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform' );
+			woodmart_enqueue_inline_style( 'mod-transform' );
+			woodmart_enqueue_js_script( 'css-animations' );
 		}
 	}
 

@@ -14,7 +14,7 @@
 	</h3>
 
 	<p>
-		<?php esc_html_e( 'Choose one of the following page builders.', 'woodmart' ); ?>
+		<?php esc_html_e( 'Select one of the page builders below.', 'woodmart' ); ?>
 	</p>
 
 	<div class="xts-wizard-builder-select">
@@ -67,11 +67,10 @@
 		</div>
 	</div>
 
-</div>
+	<div class="xts-step-actions">
+		<?php $this->get_next_button( 'plugins', 'elementor' ); ?>
+		<?php $this->get_next_button( 'plugins', 'gutenberg' ); ?>
+		<?php $this->get_next_button( 'plugins', 'wpb' ); ?>
+	</div>
 
-<div class="xts-wizard-footer">
-	<?php $this->get_prev_button( 'child-theme' ); ?>
-	<?php $this->get_next_button( 'plugins', 'elementor' ); ?>
-	<?php $this->get_next_button( 'plugins', 'gutenberg' ); ?>
-	<?php $this->get_next_button( 'plugins', 'wpb' ); ?>
 </div>

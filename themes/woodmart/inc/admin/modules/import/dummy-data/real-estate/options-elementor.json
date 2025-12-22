@@ -137,5 +137,9 @@
     "prefooter_area": "",
     "portfolio_page": "51",
     "rounding_size": "8",
-    "promo_popup": "0"
+    "promo_popup": "0",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

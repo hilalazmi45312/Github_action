@@ -142,3 +142,8 @@
         padding-top: 5px;
     }
 }
+
+/* Remove diagonal line for disabled swatches in style 3 */
+[class*="wd-swatches"].wd-dis-style-3 .wd-swatch.wd-disabled:before {
+    display: none !important;
+}

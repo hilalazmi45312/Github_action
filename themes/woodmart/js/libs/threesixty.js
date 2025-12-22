@@ -250,9 +250,9 @@
 
 				base.$el.prepend(nav_bar);
 
-				next.bind('mousedown touchstart', base.next);
-				previous.bind('mousedown touchstart', base.previous);
-				play_stop.bind('mousedown touchstart', base.play_stop);
+				next.bind('click touchstart', base.next);
+				previous.bind('click touchstart', base.previous);
+				play_stop.bind('click touchstart', base.play_stop);
 				AppConfig.navigation_init = true;
 			}
 		};

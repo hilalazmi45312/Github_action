@@ -46,6 +46,7 @@ class Admin extends Singleton {
 	public function init() {
 		add_action( 'init', array( $this, 'set_layout_types' ) );
 		add_filter( 'woodmart_admin_localized_string_array', array( $this, 'add_localized_settings' ) );
+		add_action( 'admin_menu', array( $this, 'add_pages_to_dashboard_menu' ), 100 );
 
 		$this->add_actions();
 	}
@@ -54,20 +55,34 @@ class Admin extends Singleton {
 	 * Set layout type.
 	 */
 	public function set_layout_types() {
-		$this->layout_types = array(
-			'single_product'   => esc_html__( 'Single product', 'woodmart' ),
-			'shop_archive'     => esc_html__( 'Products archive', 'woodmart' ),
-			'cart'             => esc_html__( 'Cart', 'woodmart' ),
-			'empty_cart'       => esc_html__( 'Empty cart', 'woodmart' ),
-			'checkout_form'    => esc_html__( 'Checkout form', 'woodmart' ),
-			'checkout_content' => esc_html__( 'Checkout top content', 'woodmart' ),
+		$woocommerce_types = array(
+			'single_product'           => esc_html__( 'Single product', 'woodmart' ),
+			'shop_archive'             => esc_html__( 'Products archive', 'woodmart' ),
+			'cart'                     => esc_html__( 'Cart', 'woodmart' ),
+			'empty_cart'               => esc_html__( 'Empty cart', 'woodmart' ),
+			'checkout_form'            => esc_html__( 'Checkout form', 'woodmart' ),
+			'checkout_content'         => esc_html__( 'Checkout top content', 'woodmart' ),
+			'thank_you_page'           => esc_html__( 'Thank you page', 'woodmart' ),
+			'my_account_page'          => esc_html__( 'My account', 'woodmart' ),
+			'my_account_auth'         => esc_html__( 'Login/Register', 'woodmart' ),
+			'my_account_lost_password' => esc_html__( 'Lost password', 'woodmart' ),
 		);
 
-		if ( 'native' === woodmart_get_opt( 'current_builder' ) ) {
-			$this->layout_types['checkout_form'] = esc_html__( 'Checkout', 'woodmart' );
+		if ( woodmart_woocommerce_installed() ) {
+			$this->layout_types += $woocommerce_types;
 
-			unset( $this->layout_types['checkout_content'] );
+			if ( 'native' === woodmart_get_opt( 'current_builder' ) ) {
+				$this->layout_types['checkout_form'] = esc_html__( 'Checkout', 'woodmart' );
+				unset( $this->layout_types['checkout_content'] );
+			}
 		}
+
+		$this->layout_types += array(
+			'single_post'       => esc_html__( 'Single post', 'woodmart' ),
+			'blog_archive'      => esc_html__( 'Blog', 'woodmart' ),
+			'single_portfolio'  => esc_html__( 'Single project', 'woodmart' ),
+			'portfolio_archive' => esc_html__( 'Portfolio', 'woodmart' ),
+		);
 	}
 
 	/**
@@ -116,18 +131,18 @@ class Admin extends Singleton {
 
 		$type = get_post_meta( $post->ID, $this->type_meta_key, true );
 
-		if ( 'cart' === $type || 'empty_cart' === $type || 'checkout_content' === $type || 'checkout_form' === $type ) {
+		if ( 'cart' === $type || 'empty_cart' === $type || 'checkout_content' === $type || 'checkout_form' === $type || 'thank_you_page' === $type || 'my_account_auth' === $type || 'my_account_lost_password' === $type ) {
 			return;
 		}
 
 		add_meta_box(
-			'wd-layout-conditions',
+			'xts-layout-conditions',
 			esc_html__( 'Layout conditions', 'woodmart' ),
 			array(
 				$this,
 				'conditions_box_callback',
 			),
-			'woodmart_layout'
+			'woodmart_layout',
 		);
 	}
 
@@ -182,11 +197,23 @@ class Admin extends Singleton {
 		$current_tab = sanitize_text_field( $_GET['wd_layout_type_tab'] ); // phpcs:ignore
 
 		if ( 'checkout' === $current_tab ) {
-			$current_tab = array( 'checkout_form', 'checkout_content' );
+			$current_tab = array( 'checkout_form', 'checkout_content', 'thank_you_page' );
+		}
+
+		if ( 'my_account' === $current_tab ) {
+			$current_tab = array( 'my_account_page', 'my_account_auth', 'my_account_lost_password' );
 		}
 
 		if ( 'cart' === $current_tab ) {
 			$current_tab = array( 'cart', 'empty_cart' );
+		}
+
+		if ( 'post' === $current_tab ) {
+			$current_tab = array( 'single_post', 'single_portfolio' );
+		}
+
+		if ( 'archive' === $current_tab ) {
+			$current_tab = array( 'blog_archive', 'portfolio_archive' );
 		}
 
 		$query->query_vars['type_meta_key'] = $this->type_meta_key; // phpcs:ignore
@@ -243,11 +270,11 @@ class Admin extends Singleton {
 	public function admin_columns_titles( $posts_columns ) {
 		$offset = 2;
 
-		return array_slice( $posts_columns, 0, $offset, true ) + [
+		return array_slice( $posts_columns, 0, $offset, true ) + array(
 			'wd_layout_type'       => esc_html__( 'Type', 'elementor' ),
 			'wd_layout_conditions' => esc_html__( 'Conditions', 'elementor' ),
 			'wd_layout_status'     => esc_html__( 'Active', 'elementor' ),
-		] + array_slice( $posts_columns, $offset, null, true );
+		) + array_slice( $posts_columns, $offset, null, true );
 	}
 
 	/**
@@ -284,17 +311,22 @@ class Admin extends Singleton {
 		$conditions = get_post_meta( $post_id, $this->conditions_meta_key, true );
 		$type       = get_post_meta( $post_id, $this->type_meta_key, true );
 
-		if ( 'cart' === $type || 'empty_cart' === $type || 'checkout_content' === $type || 'checkout_form' === $type ) {
+		if ( 'cart' === $type || 'empty_cart' === $type || 'checkout_content' === $type || 'checkout_form' === $type || 'thank_you_page' === $type || 'my_account_auth' === $type || 'my_account_lost_password' === $type ) {
 			return ob_get_clean();
 		}
 
 		if ( $conditions ) {
 			foreach ( $conditions as $key => $condition ) {
 				if ( ! empty( $condition['condition_query'] ) ) {
-					if ( 'product' === $condition['condition_type'] ) {
+					if ( in_array( $condition['condition_type'], array( 'product', 'post_id', 'project_id' ), true ) ) {
 						$post = get_post( $condition['condition_query'] );
 
 						$conditions[ $key ]['condition_query_text'] = $post->post_title . ' (ID: ' . $post->ID . ')';
+					} elseif ( 'post_format' === $condition['condition_type'] ) {
+						$post_formats = get_post_format_strings();
+						if ( isset( $post_formats[ $condition['condition_query'] ] ) ) {
+							$conditions[ $key ]['condition_query_text'] = $post_formats[ $condition['condition_query'] ];
+						}
 					} elseif ( 'product_attr' === $condition['condition_type'] || 'filtered_product_term' === $condition['condition_type'] ) {
 						$taxonomy = get_taxonomy( $condition['condition_query'] );
 
@@ -456,6 +488,33 @@ class Admin extends Singleton {
 				// Accessories.
 				'layout-3' => array(),
 			),
+			'thank_you_page' => array(
+				'layout-1' => array(),
+			),
+			'blog_archive' => array(
+				'layout-1' => array(),
+				'layout-2' => array(),
+			),
+			'portfolio_archive' => array(
+				'layout-1' => array(),
+				'layout-2' => array(),
+			),
+			'single_post' => array(
+				'layout-1' => array(),
+				'layout-2' => array(),
+			),
+			'single_portfolio' => array(
+				'layout-1' => array(),
+			),
+			'my_account_page' => array(
+				'layout-1' => array(),
+			),
+			'my_account_auth' => array(
+				'layout-1' => array(),
+			),
+			'my_account_lost_password' => array(
+				'layout-1' => array(),
+			),
 		);
 
 		$this->get_template(
@@ -496,13 +555,33 @@ class Admin extends Singleton {
 	public function print_tabs() {
 		$tabs = array(
 			'all' => esc_html__( 'All', 'woodmart' ),
-		) + $this->layout_types + array(
-			'checkout' => esc_html__( 'Checkout', 'woodmart' ),
-		);
+		) + $this->layout_types;
 
-		unset( $tabs['checkout_content'] );
-		unset( $tabs['checkout_form'] );
-		unset( $tabs['empty_cart'] );
+		if ( woodmart_woocommerce_installed() ) {
+			$tabs = array_slice( $tabs, 0, 4, true ) +
+				array( 'checkout' => esc_html__( 'Checkout', 'woodmart' ) ) +
+				array_slice( $tabs, 4, null, true );
+
+			$tabs = array_slice( $tabs, 0, 5, true ) +
+			array( 'my_account' => esc_html__( 'My account', 'woodmart' ) ) +
+			array_slice( $tabs, 5, null, true );
+
+			unset( $tabs['my_account_auth'] );
+			unset( $tabs['my_account_page'] );
+			unset( $tabs['my_account_lost_password'] );
+			unset( $tabs['checkout_content'] );
+			unset( $tabs['checkout_form'] );
+			unset( $tabs['thank_you_page'] );
+			unset( $tabs['empty_cart'] );
+		}
+
+		$tabs['post'] = esc_html__( 'Single post', 'woodmart' );
+		unset( $tabs['single_post'] );
+		unset( $tabs['single_portfolio'] );
+
+		$tabs['archive'] = esc_html__( 'Posts archive', 'woodmart' );
+		unset( $tabs['blog_archive'] );
+		unset( $tabs['portfolio_archive'] );
 
 		$current_tab = 'all';
 
@@ -510,12 +589,20 @@ class Admin extends Singleton {
 			$current_tab = $_GET['wd_layout_type_tab']; // phpcs:ignore
 		}
 
-		if ( 'checkout_content' === $current_tab || 'checkout_form' === $current_tab ) {
+		if ( woodmart_woocommerce_installed() && ( 'checkout_content' === $current_tab || 'checkout_form' === $current_tab || 'thank_you_page' === $current_tab ) ) {
 			$current_tab = 'checkout';
 		}
 
-		if ( 'empty_cart' === $current_tab ) {
+		if ( woodmart_woocommerce_installed() && 'empty_cart' === $current_tab ) {
 			$current_tab = 'cart';
+		}
+
+		if ( 'post' === $current_tab ) {
+			$current_tab = 'post';
+		}
+
+		if ( 'archive' === $current_tab ) {
+			$current_tab = 'archive';
 		}
 
 		$base_url = add_query_arg(
@@ -545,11 +632,29 @@ class Admin extends Singleton {
 		return array_merge(
 			$settings,
 			array(
+				'layout_text'    => esc_html__( 'layout', 'woodmart' ),
 				'creation_error' => esc_html__( 'Something went wrong with the creation of the layout!', 'woodmart' ),
 				'editing_error'  => esc_html__( 'Something went wrong with editing the layout!', 'woodmart' ),
 				'success_save'   => esc_html__( 'Conditions has been successfully saved', 'woodmart' ),
 			)
 		);
+	}
+
+	/**
+	 * Add pages to dashboard menu.
+	 *
+	 * @return void
+	 */
+	public function add_pages_to_dashboard_menu() {
+		global $submenu;
+
+		if ( ! empty( $submenu['edit.php?post_type=woodmart_layout'] ) ) {
+			foreach ( $submenu['edit.php?post_type=woodmart_layout'] as $key => $value ) {
+				if ( 'post-new.php?post_type=woodmart_layout' === $value[2] ) {
+					$submenu['edit.php?post_type=woodmart_layout'][ $key ][2] = 'edit.php?post_type=woodmart_layout&create_template';
+				}
+			}
+		}
 	}
 }
 

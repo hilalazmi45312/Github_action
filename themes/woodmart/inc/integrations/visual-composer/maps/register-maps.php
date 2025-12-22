@@ -5,6 +5,8 @@
  * @package Woodmart
  */
 
+use XTS\Modules\Layouts\Main;
+
 if ( ! function_exists( 'woodmart_vc_register_maps' ) ) {
 	function woodmart_vc_register_maps() {
 		if ( ! woodmart_is_core_installed() ) {
@@ -48,6 +50,8 @@ if ( ! function_exists( 'woodmart_vc_register_maps' ) ) {
 			'woodmart_nested_carousel_item'      => 'woodmart_get_vc_map_nested_carousel_item',
 			'woodmart_off_canvas_btn'            => 'woodmart_get_vc_map_off_canvas_btn',
 			'woodmart_open_street_map'           => 'woodmart_get_vc_map_open_street_map',
+			'woodmart_page_heading'              => 'woodmart_get_vc_map_page_heading',
+			'woodmart_page_title'                => 'woodmart_get_vc_map_page_title',
 			'woodmart_popup'                     => 'woodmart_get_vc_map_popup',
 			'woodmart_portfolio'                 => 'woodmart_get_vc_map_portfolio',
 			'pricing_tables'                     => 'woodmart_get_vc_map_pricing_tables',
@@ -79,11 +83,26 @@ if ( ! function_exists( 'woodmart_vc_register_maps' ) ) {
 			'woodmart_timeline'                  => 'woodmart_get_vc_map_timeline',
 			'woodmart_timeline_item'             => 'woodmart_get_vc_map_timeline_item',
 			'woodmart_timeline_breakpoint'       => 'woodmart_get_vc_map_timeline_breakpoint',
+			'woodmart_toggle'                    => 'woodmart_get_vc_map_toggle',
 			'woodmart_twitter'                   => 'woodmart_get_vc_map_twitter',
 			'woodmart_video'                     => 'woodmart_get_vc_map_video',
 			'woodmart_shortcode_products_widget' => 'woodmart_get_vc_map_shortcode_products_widget',
 			'woodmart_wishlist'                  => 'woodmart_get_vc_map_wishlist',
 		);
+
+		if (
+			wp_doing_ajax() ||
+			! Main::is_layout_type( 'single_product' ) &&
+			! Main::is_layout_type( 'shop_archive' ) &&
+			! Main::is_layout_type( 'checkout_form' ) &&
+			! Main::is_layout_type( 'cart' ) &&
+			! Main::is_layout_type( 'checkout_content' ) &&
+			! Main::is_layout_type( 'thank_you_page' ) &&
+			! Main::is_layout_type( 'my_account_page' ) &&
+			! Main::is_layout_type( 'my_account_auth' ) &&
+			! Main::is_layout_type( 'my_account_lost_password' ) ) {
+			$maps['woodmart_el_breadcrumbs'] = 'woodmart_get_vc_map_breadcrumbs';
+		}
 
 		if ( ! woodmart_woocommerce_installed() ) {
 			$woo_maps = array(
@@ -91,6 +110,7 @@ if ( ! function_exists( 'woodmart_vc_register_maps' ) ) {
 				'products_tab'                       => 'woodmart_get_vc_map_products_tab',
 				'woodmart_brands'                    => 'woodmart_get_vc_map_brands',
 				'woodmart_categories'                => 'woodmart_get_vc_shortcode_categories',
+				'woodmart_page_heading'              => 'woodmart_get_vc_map_page_heading',
 				'woodmart_product_filters'           => 'woodmart_get_vc_map_product_filters',
 				'woodmart_products'                  => 'woodmart_get_products_shortcode_map_params',
 				'woodmart_filter_categories'         => 'woodmart_get_vc_map_filter_categories',

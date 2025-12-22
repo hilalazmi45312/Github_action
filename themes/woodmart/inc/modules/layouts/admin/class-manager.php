@@ -182,6 +182,64 @@ class Manager extends Singleton {
 			}
 		}
 
+		if ( 'single_post' === $type ) {
+			$published_posts = get_posts(
+				array(
+					'post_type'   => 'post',
+					'post_status' => 'publish',
+					'numberposts' => 1,
+				)
+			);
+
+			if ( empty( $published_posts ) ) {
+				$create_post_link = add_query_arg(
+					array(
+						'post_type' => 'post',
+					),
+					admin_url( 'post-new.php' )
+				);
+
+				wp_send_json_error(
+					array(
+						'message' => sprintf(
+							'%s <a href="' . $create_post_link . '">%s</a>',
+							esc_html__( 'In order to create a Single post layout, you must first publish at least one post!', 'woodmart' ),
+							esc_html__( 'Add new post', 'woodmart' )
+						),
+					)
+				);
+			}
+		}
+
+		if ( 'single_portfolio' === $type ) {
+			$published_projects = get_posts(
+				array(
+					'post_type'   => 'portfolio',
+					'post_status' => 'publish',
+					'numberposts' => 1,
+				)
+			);
+
+			if ( empty( $published_projects ) ) {
+				$create_project_link = add_query_arg(
+					array(
+						'post_type' => 'portfolio',
+					),
+					admin_url( 'post-new.php' )
+				);
+
+				wp_send_json_error(
+					array(
+						'message' => sprintf(
+							'%s <a href="' . $create_project_link . '">%s</a>',
+							esc_html__( 'In order to create a Single portfolio layout, you must first publish at least one project!', 'woodmart' ),
+							esc_html__( 'Add new project', 'woodmart' )
+						),
+					)
+				);
+			}
+		}
+
 		$post_id = wp_insert_post( $post_args );
 
 		if ( $predefined_name ) {
@@ -218,6 +276,7 @@ class Manager extends Singleton {
 		$items = array();
 
 		switch ( $query_type ) {
+			// Single product.
 			case 'product_cat':
 			case 'product_cat_children':
 			case 'product_tag':
@@ -314,6 +373,154 @@ class Manager extends Singleton {
 							'id'   => $post->ID,
 							'text' => $post->post_title . ' (ID: ' . $post->ID . ')',
 						);
+					}
+				}
+				break;
+			// Single post.
+			case 'post_cat':
+			case 'post_tag':
+				$taxonomy = array();
+
+				if ( 'post_cat' === $query_type ) {
+					$taxonomy[] = 'category';
+				}
+				if ( 'post_tag' === $query_type ) {
+					$taxonomy[] = 'post_tag';
+				}
+
+				$terms = get_terms(
+					array(
+						'hide_empty' => false,
+						'fields'     => 'all',
+						'taxonomy'   => $taxonomy,
+						'search'     => $search,
+					)
+				);
+
+				if ( count( $terms ) > 0 ) {
+					foreach ( $terms as $term ) {
+							$items[] = array(
+								'id'   => $term->term_id,
+								'text' => $term->name . ' (ID: ' . $term->term_id . ') (Tax: ' . $term->taxonomy . ')',
+							);
+					}
+				}
+				break;
+			case 'post_id':
+				$posts = get_posts(
+					array(
+						's'              => $search,
+						'post_type'      => 'post',
+						'posts_per_page' => 100,
+					)
+				);
+
+				if ( count( $posts ) > 0 ) {
+					foreach ( $posts as $post ) {
+						$items[] = array(
+							'id'   => $post->ID,
+							'text' => $post->post_title . ' (ID: ' . $post->ID . ')',
+						);
+					}
+				}
+				break;
+			case 'post_format':
+				$post_formats = get_post_format_strings();
+
+				foreach ( $post_formats as $format => $label ) {
+					$items[] = array(
+						'id'   => $format,
+						'text' => $label,
+					);
+				}
+				break;
+			// Single portfolio.
+			case 'project_cat':
+				$taxonomy = array();
+
+				if ( 'project_cat' === $query_type ) {
+					$taxonomy[] = 'project-cat';
+				}
+
+				$terms = get_terms(
+					array(
+						'post-type'  => 'portfolio',
+						'hide_empty' => false,
+						'fields'     => 'all',
+						'taxonomy'   => $taxonomy,
+						'search'     => $search,
+					)
+				);
+
+				if ( count( $terms ) > 0 ) {
+					foreach ( $terms as $term ) {
+							$items[] = array(
+								'id'   => $term->term_id,
+								'text' => $term->name . ' (ID: ' . $term->term_id . ') (Tax: ' . $term->taxonomy . ')',
+							);
+					}
+				}
+				break;
+			case 'project_id':
+				$posts = get_posts(
+					array(
+						's'              => $search,
+						'post_type'      => 'portfolio',
+						'posts_per_page' => 100,
+					)
+				);
+
+				if ( count( $posts ) > 0 ) {
+					foreach ( $posts as $post ) {
+						$items[] = array(
+							'id'   => $post->ID,
+							'text' => $post->post_title . ' (ID: ' . $post->ID . ')',
+						);
+					}
+				}
+				break;
+
+			// Blog.
+			case 'blog_category':
+			case 'blog_tag':
+				$taxonomy = ( 'blog_category' === $query_type ) ? 'category' : 'post_tag';
+
+				$terms = get_terms(
+					array(
+						'hide_empty' => false,
+						'fields'     => 'all',
+						'taxonomy'   => $taxonomy,
+						'search'     => $search,
+					)
+				);
+
+				if ( ! empty( $terms ) ) {
+					foreach ( $terms as $term ) {
+							$items[] = array(
+								'id'   => $term->term_id,
+								'text' => $term->name . ' (ID: ' . $term->term_id . ')',
+							);
+					}
+				}
+				break;
+
+			// Portfolio.
+			case 'portfolio_category':
+				$terms = get_terms(
+					array(
+						'hide_empty' => false,
+						'fields'     => 'all',
+						'taxonomy'   => 'project-cat',
+						'search'     => $search,
+					)
+				);
+
+				if ( ! empty( $terms ) ) {
+					foreach ( $terms as $term ) {
+							$items[] = array(
+								'id'   => $term->term_id,
+								'text' => $term->name . ' (ID: ' . $term->term_id . ')',
+							);
 					}
 				}
 				break;

@@ -5,7 +5,7 @@
  * @author      StoreApps
  * @category    Admin
  * @package     wocommerce-smart-coupons/includes
- * @version     1.0.0
+ * @version     1.3.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -114,6 +114,10 @@ if ( ! class_exists( 'WC_SC_Combo_Coupons' ) ) {
 				)
 			);
 
+			echo '</div>';
+
+			echo '<div class="options_group smart-coupons-field">';
+
 			// Coupons that cannot be used together.
 			woocommerce_wp_select(
 				array(
@@ -219,38 +223,41 @@ JS;
 		 * @param WC_Coupon $coupon  Coupon object.
 		 */
 		public function save_combine_coupon_fields( $post_id, $coupon ) {
+			try {
+				// Helper to sanitize and prepare IDs from POST for a given meta key.
+				$sanitize_ids = function( $key ) use ( $post_id ) {
+					$ids = isset( $_POST[ $key ] ) ? array_filter( array_map( 'absint', (array) wc_clean( wp_unslash( $_POST[ $key ] ) ) ) ) : array(); //phpcs:ignore
 
-			// Helper to sanitize and prepare IDs from POST for a given meta key.
-			$sanitize_ids = function( $key ) use ( $post_id ) {
-				$ids = isset( $_POST[ $key ] ) ? array_filter( array_map( 'absint', (array) wc_clean( wp_unslash( $_POST[ $key ] ) ) ) ) : array(); //phpcs:ignore
+					// Remove self-reference (a coupon shouldn't reference itself).
+					return array_diff( $ids, array( $post_id ) );
+				};
 
-				// Remove self-reference (a coupon shouldn't reference itself).
-				return array_diff( $ids, array( $post_id ) );
-			};
+				// Get new allowed and blocked coupon IDs from POST.
+				$new_allowed_ids = $sanitize_ids( 'wc_sc_combined_coupons_allowed' );
+				$new_blocked_ids = $sanitize_ids( 'wc_sc_combined_coupons_blocked' );
 
-			// Get new allowed and blocked coupon IDs from POST.
-			$new_allowed_ids = $sanitize_ids( 'wc_sc_combined_coupons_allowed' );
-			$new_blocked_ids = $sanitize_ids( 'wc_sc_combined_coupons_blocked' );
+				// Prevent overlap between allowed and blocked lists.
+				$new_allowed_ids = array_diff( $new_allowed_ids, $new_blocked_ids );
+				$new_blocked_ids = array_diff( $new_blocked_ids, $new_allowed_ids );
 
-			// Prevent overlap between allowed and blocked lists.
-			$new_allowed_ids = array_diff( $new_allowed_ids, $new_blocked_ids );
-			$new_blocked_ids = array_diff( $new_blocked_ids, $new_allowed_ids );
+				// Fetch previously saved values to calculate what changed.
+				$prev_allowed_ids = $this->get_post_meta( $post_id, 'wc_sc_combined_coupons_allowed', true );
+				$prev_blocked_ids = $this->get_post_meta( $post_id, 'wc_sc_combined_coupons_blocked', true );
 
-			// Fetch previously saved values to calculate what changed.
-			$prev_allowed_ids = $this->get_post_meta( $post_id, 'wc_sc_combined_coupons_allowed', true );
-			$prev_blocked_ids = $this->get_post_meta( $post_id, 'wc_sc_combined_coupons_blocked', true );
+				// Ensure previous values are arrays.
+				$prev_allowed_ids = is_array( $prev_allowed_ids ) ? $prev_allowed_ids : array();
+				$prev_blocked_ids = is_array( $prev_blocked_ids ) ? $prev_blocked_ids : array();
 
-			// Ensure previous values are arrays.
-			$prev_allowed_ids = is_array( $prev_allowed_ids ) ? $prev_allowed_ids : array();
-			$prev_blocked_ids = is_array( $prev_blocked_ids ) ? $prev_blocked_ids : array();
+				// Update the meta for the current coupon.
+				$this->update_post_meta( $post_id, 'wc_sc_combined_coupons_allowed', $new_allowed_ids );
+				$this->update_post_meta( $post_id, 'wc_sc_combined_coupons_blocked', $new_blocked_ids );
 
-			// Update the meta for the current coupon.
-			$this->update_post_meta( $post_id, 'wc_sc_combined_coupons_allowed', $new_allowed_ids );
-			$this->update_post_meta( $post_id, 'wc_sc_combined_coupons_blocked', $new_blocked_ids );
-
-			// Sync both directions for allowed and blocked coupons.
-			$this->helper_sync_meta( $new_allowed_ids, $prev_allowed_ids, 'wc_sc_combined_coupons_allowed', $post_id );
-			$this->helper_sync_meta( $new_blocked_ids, $prev_blocked_ids, 'wc_sc_combined_coupons_blocked', $post_id );
+				// Sync both directions for allowed and blocked coupons.
+				$this->helper_sync_meta( $new_allowed_ids, $prev_allowed_ids, 'wc_sc_combined_coupons_allowed', $post_id );
+				$this->helper_sync_meta( $new_blocked_ids, $prev_blocked_ids, 'wc_sc_combined_coupons_blocked', $post_id );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**
@@ -262,81 +269,82 @@ JS;
 		 * @throws Exception When coupon combination is not allowed.
 		 */
 		public function validate_combine_coupons( $is_valid, $coupon ) {
-
-			if ( ! $is_valid || ! ( is_object( $coupon ) && $coupon instanceof WC_Coupon ) ) {
+			if ( ! $is_valid || ! ( $coupon instanceof WC_Coupon ) ) {
 				return $is_valid;
 			}
 
-			if ( $this->is_wc_gte_30() ) {
-				// For WooCommerce 3.0 and above, we can use the get_code() method.
-				$coupon_code = is_callable( array( $coupon, 'get_code' ) ) ? $coupon->get_code() : '';
-				$coupon_id   = is_callable( array( $coupon, 'get_id' ) ) ? $coupon->get_id() : 0;
-			} else {
-				// For older versions, we use the deprecated method.
-				$coupon_code = ( ! empty( $coupon->code ) ) ? $coupon->code : '';
-				$coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+			if ( ! function_exists( 'WC' ) || ! WC()->session ) {
+				return $is_valid;
 			}
+
+			// WooCommerce version compatibility for coupon code and ID.
+			$is_wc_3_plus = $this->is_wc_gte_30();
+			$coupon_code  = $is_wc_3_plus && is_callable( array( $coupon, 'get_code' ) ) ? $coupon->get_code() : ( $coupon->code ?? '' );
+			$coupon_id    = $is_wc_3_plus && is_callable( array( $coupon, 'get_id' ) ) ? $coupon->get_id() : ( $coupon->id ?? 0 );
 
 			if ( empty( $coupon_code ) || empty( $coupon_id ) ) {
-				// If coupon code or ID is empty, we cannot validate.
 				return $is_valid;
 			}
 
-			// Get the session data for combined coupons.
-			$session_data = function_exists( 'WC' ) && WC()->session ? WC()->session->get( 'wc_sc_combined_coupons', array() ) : array();
-
-			// If no session data, or only one coupon (the one being validated) is applied, skip validation.
-			if ( empty( $session_data ) || ( count( $session_data ) === 1 && isset( $session_data[ $coupon_code ] ) ) ) {
-				return $is_valid;
+			// Use only coupons that have allowed/blocked rules present in the session.
+			$session_data = WC()->session->get( 'wc_sc_combined_coupons', array() );
+			if ( empty( $session_data ) ) {
+				return $is_valid; // No special combine rules in play.
 			}
 
-			// Handle if get_applied_coupons method does not exist.
-			$applied_coupons = method_exists( WC()->cart, 'get_applied_coupons' ) ? WC()->cart->get_applied_coupons() : array();
+			$current_allowed = array_map( 'absint', (array) ( $session_data[ $coupon_code ]['allowed'] ?? array() ) );
+			$current_blocked = array_map( 'absint', (array) ( $session_data[ $coupon_code ]['disallowed'] ?? array() ) );
 
-			if ( empty( $applied_coupons ) ) {
-				// If no coupons are applied, we cannot validate.
-				if ( function_exists( 'WC' ) && WC()->session ) {
-					// Clear the session data for combined coupons.
-					WC()->session->set( 'wc_sc_combined_coupons', array() );
-				}
-
-				// If no coupons are applied, we cannot validate.
-				return $is_valid; // No other coupons applied, so no need to validate against combine rules.
+			// Get all session-tracked coupons except the one being validated.
+			$other_coupon_codes = array_diff( array_keys( $session_data ), array( $coupon_code ) );
+			if ( empty( $other_coupon_codes ) ) {
+				return $is_valid; // Only coupon in the session: always allowed.
 			}
 
-			$is_allowed    = false;
-			$is_disallowed = false;
+			$is_allowed_by_others = false;
 
-			foreach ( $session_data as $code => $data ) {
-				if ( $code === $coupon_code ) {
-					continue; // Skip validating against itself.
+			foreach ( $other_coupon_codes as $other_code ) {
+				$other_data    = $session_data[ $other_code ];
+				$other_allowed = array_map( 'absint', (array) ( $other_data['allowed'] ?? array() ) );
+				$other_blocked = array_map( 'absint', (array) ( $other_data['disallowed'] ?? array() ) );
+
+				// Grab other coupon ID for checks.
+				$other_coupon = new WC_Coupon( $other_code );
+				$other_id     = $is_wc_3_plus && is_callable( array( $other_coupon, 'get_id' ) ) ? $other_coupon->get_id() : ( $other_coupon->id ?? 0 );
+
+				// 1. If either coupon blocks the other – fail immediately.
+				if ( in_array( $coupon_id, $other_blocked, true ) || in_array( $other_id, $current_blocked, true ) ) {
+					/* translators: Coupon cannot be combined error message */
+					throw new Exception( _x( 'This coupon cannot be used together with another applied coupon.', 'Error message when coupon cannot be combined', 'woocommerce-smart-coupons' ) );
 				}
 
-				$allowed    = isset( $data['allowed'] ) ? (array) $data['allowed'] : array();
-				$disallowed = isset( $data['disallowed'] ) ? (array) $data['disallowed'] : array();
-
-				// If coupon ID is not in either list, skip.
-				if ( ! in_array( $coupon_id, $allowed, true ) && ! in_array( $coupon_id, $disallowed, true ) ) {
-					continue;
-				}
-				// If coupon ID is in the disallowed list, set is_disallowed to true.
-				if ( in_array( $coupon_id, $disallowed, true ) ) {
-					$is_disallowed = true;
-					break;
-				}
-				// If coupon ID is in the allowed list, set is_allowed to true.
-				if ( in_array( $coupon_id, $allowed, true ) ) {
-					$is_allowed = true;
+				// 2. If either side allows – flag as allowed.
+				if ( in_array( $other_id, $current_allowed, true ) || in_array( $coupon_id, $other_allowed, true ) ) {
+					$is_allowed_by_others = true;
 				}
 			}
 
-			if ( ! $is_allowed || $is_disallowed ) {
-				throw new Exception( _x( 'This coupon cannot be used together with one of the other coupons already applied.', 'Error message when coupon cannot be combined', 'woocommerce-smart-coupons' ) );
+			// If the current coupon has an allowed list but none matched – deny.
+			if ( ! empty( $current_allowed ) && ! $is_allowed_by_others ) {
+				/* translators: Coupon cannot be combined error message */
+				throw new Exception( _x( 'This coupon cannot be combined with the applied coupon(s).', 'Error message when coupon cannot be combined', 'woocommerce-smart-coupons' ) );
 			}
 
-			// Return the validity status.
+			// If current has no rules, but another in session has "allowed" rules and doesn't allow this coupon – deny.
+			if ( empty( $current_allowed ) && empty( $current_blocked ) && ! $is_allowed_by_others ) {
+				foreach ( $other_coupon_codes as $other_code ) {
+					$other_data    = $session_data[ $other_code ];
+					$other_allowed = array_map( 'absint', (array) ( $other_data['allowed'] ?? array() ) );
+					if ( ! empty( $other_allowed ) && ! in_array( $coupon_id, $other_allowed, true ) ) {
+						/* translators: Coupon cannot be combined error message */
+						throw new Exception( _x( 'This coupon cannot be used with one of the other applied coupons.', 'Error message when coupon cannot be combined', 'woocommerce-smart-coupons' ) );
+					}
+				}
+			}
+
 			return $is_valid;
 		}
+
 
 		/**
 		 * Store coupon meta to WC session
@@ -346,44 +354,48 @@ JS;
 		 * @return void
 		 */
 		public function maybe_store_combine_coupon_session( $coupon_code ) {
-			// Validate the coupon code and session.
-			if ( ! is_string( $coupon_code ) || empty( $coupon_code ) || ! function_exists( 'WC' ) || ! WC()->session ) {
-				return;
-			}
+			try {
+				// Validate the coupon code and session.
+				if ( ! is_string( $coupon_code ) || empty( $coupon_code ) || ! function_exists( 'WC' ) || ! WC()->session ) {
+					return;
+				}
 
-			// Get the coupon object.
-			$coupon = new WC_Coupon( $coupon_code );
+				// Get the coupon object.
+				$coupon = new WC_Coupon( $coupon_code );
 
-			if ( ! is_object( $coupon ) || ! $coupon instanceof WC_Coupon ) {
-				return;
-			}
+				if ( ! is_object( $coupon ) || ! $coupon instanceof WC_Coupon ) {
+					return;
+				}
 
-			if ( $this->is_wc_gte_30() ) {
-				// For WooCommerce 3.0 and above, we can use the get_code() method.
-				$coupon_id = is_callable( array( $coupon, 'get_id' ) ) ? $coupon->get_id() : 0;
-			} else {
-				// For older versions, we use the deprecated method.
-				$coupon_id = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-			}
+				if ( $this->is_wc_gte_30() ) {
+					// For WooCommerce 3.0 and above, we can use the get_code() method.
+					$coupon_id = is_callable( array( $coupon, 'get_id' ) ) ? $coupon->get_id() : 0;
+				} else {
+					// For older versions, we use the deprecated method.
+					$coupon_id = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+				}
 
-			// Get allowed and blocked coupons.
-			$allowed_coupons = $this->get_post_meta( $coupon_id, 'wc_sc_combined_coupons_allowed', true );
-			$blocked_coupons = $this->get_post_meta( $coupon_id, 'wc_sc_combined_coupons_blocked', true );
+				// Get allowed and blocked coupons.
+				$allowed_coupons = $this->get_post_meta( $coupon_id, 'wc_sc_combined_coupons_allowed', true );
+				$blocked_coupons = $this->get_post_meta( $coupon_id, 'wc_sc_combined_coupons_blocked', true );
 
-			// Ensure both are arrays.
-			$allowed_coupons = is_array( $allowed_coupons ) ? $allowed_coupons : array();
-			$blocked_coupons = is_array( $blocked_coupons ) ? $blocked_coupons : array();
+				// Ensure both are arrays.
+				$allowed_coupons = is_array( $allowed_coupons ) ? $allowed_coupons : array();
+				$blocked_coupons = is_array( $blocked_coupons ) ? $blocked_coupons : array();
 
-			// If there are no allowed or blocked coupons, do not store in session.
-			if ( ! empty( $allowed_coupons ) || ! empty( $blocked_coupons ) ) {
-				$session_data = WC()->session->get( 'wc_sc_combined_coupons', array() );
+				// If there are no allowed or blocked coupons, do not store in session.
+				if ( ! empty( $allowed_coupons ) || ! empty( $blocked_coupons ) ) {
+					$session_data = WC()->session->get( 'wc_sc_combined_coupons', array() );
 
-				$session_data[ $coupon_code ] = array(
-					'allowed'    => $allowed_coupons,
-					'disallowed' => $blocked_coupons,
-				);
-				// Store in session.
-				WC()->session->set( 'wc_sc_combined_coupons', $session_data );
+					$session_data[ $coupon_code ] = array(
+						'allowed'    => $allowed_coupons,
+						'disallowed' => $blocked_coupons,
+					);
+					// Store in session.
+					WC()->session->set( 'wc_sc_combined_coupons', $session_data );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -416,45 +428,49 @@ JS;
 		 * @return void Sends a JSON response.
 		 */
 		public function combine_coupon_ajax_search() {
+			try {
+				$security = isset( $_GET['security'] ) ? sanitize_text_field( wp_unslash( $_GET['security'] ) ) : '';
 
-			$security = isset( $_GET['security'] ) ? sanitize_text_field( wp_unslash( $_GET['security'] ) ) : '';
-
-			if ( empty( $security ) || ! wp_verify_nonce( $security, 'wc_sc_nonce_combine_coupon_search' ) ) {
-				wp_send_json_error( array( 'message' => _x( 'Invalid nonce', 'Error message for invalid nonce', 'woocommerce-smart-coupons' ) ), 403 );
-			}
-
-			if ( ! current_user_can( 'edit_products' ) ) {
-				wp_send_json_error( _x( 'Unauthorized', 'Error message for unauthorized access', 'woocommerce-smart-coupons' ) );
-			}
-
-			// Get the search query.
-			$query = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
-
-			$args = array(
-				'posts_per_page' => -1,
-				'post_status'    => 'publish',
-				'post_type'      => 'shop_coupon',
-				's'              => $query,
-				'orderby'        => 'title',
-				'order'          => 'ASC',
-				'fields'         => 'ids',
-			);
-
-			$coupon_ids = get_posts( $args );
-
-			$options = array();
-
-			foreach ( $coupon_ids as $coupon_id ) {
-				$title = get_the_title( $coupon_id ); // Get the coupon title.
-				if ( $title ) {
-					$options[] = array(
-						'id'   => $coupon_id,
-						'text' => $title,
-					);
+				if ( empty( $security ) || ! wp_verify_nonce( $security, 'wc_sc_nonce_combine_coupon_search' ) ) {
+					wp_send_json_error( array( 'message' => _x( 'Invalid nonce', 'Error message for invalid nonce', 'woocommerce-smart-coupons' ) ), 403 );
 				}
-			}
 
-			wp_send_json( $options );
+				if ( ! current_user_can( 'edit_products' ) ) {
+					wp_send_json_error( _x( 'Unauthorized', 'Error message for unauthorized access', 'woocommerce-smart-coupons' ) );
+				}
+
+				// Get the search query.
+				$query = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
+
+				$args = array(
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
+					'post_type'      => 'shop_coupon',
+					's'              => $query,
+					'orderby'        => 'title',
+					'order'          => 'ASC',
+					'fields'         => 'ids',
+				);
+
+				$coupon_ids = get_posts( $args );
+
+				$options = array();
+
+				foreach ( $coupon_ids as $coupon_id ) {
+					$title = get_the_title( $coupon_id ); // Get the coupon title.
+					if ( $title ) {
+						$options[] = array(
+							'id'   => $coupon_id,
+							'text' => $title,
+						);
+					}
+				}
+
+				wp_send_json( $options );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				wp_send_json_error( array( 'message' => _x( 'An unexpected error occurred.', 'Error message', 'woocommerce-smart-coupons' ) ), 500 );
+			}
 		}
 
 		/**

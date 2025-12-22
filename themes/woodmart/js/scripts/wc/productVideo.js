@@ -1,4 +1,4 @@
-/* global woodmart_settings */
+/* global woodmart_settings, woodmartThemeModule, jQuery */
 (function($) {
 	woodmartThemeModule.productVideo = function() {
 		if ('undefined' === typeof $.fn.magnificPopup) {
@@ -6,13 +6,12 @@
 		}
 
 		$('.product-video-button a').magnificPopup({
-			tClose         : woodmart_settings.close,
 			tLoading       : woodmart_settings.loading,
 			type           : 'iframe',
 			removalDelay   : 600,
 			iframe         : {
-				markup  : '<div class="wd-popup wd-with-video">' +
-					'<div class="mfp-close"></div>' +
+				markup  : woodmart_settings.close_markup +
+					'<div class="wd-popup wd-with-video wd-scroll-content">' +
 					'<iframe class="mfp-iframe" src="//about:blank" allowfullscreen></iframe>' +
 					'</div>',
 				patterns: {
@@ -27,8 +26,8 @@
 			fixedContentPos: true,
 			callbacks      : {
 				beforeOpen: function() {
-					this.wrap.addClass('wd-popup-slide-from-left');
-				}
+					this.wrap.addClass('wd-video-popup-wrap');
+				},
 			}
 		});
 	};

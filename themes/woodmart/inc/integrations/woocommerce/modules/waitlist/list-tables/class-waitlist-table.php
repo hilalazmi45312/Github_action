@@ -26,6 +26,17 @@ class Waitlist_Table extends WP_List_Table {
 	protected $db_storage;
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		if ( ! woodmart_get_opt( 'waitlist_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
+		parent::__construct();
+	}
+
+	/**
 	 * Define what data to show on each column of the table.
 	 *
 	 * @param array  $item        Data.
@@ -99,7 +110,6 @@ class Waitlist_Table extends WP_List_Table {
 				esc_html__( 'View a list with customers that have added this product to their waitlist', 'woodmart' ),
 				esc_html__( 'View customers', 'woodmart' )
 			),
-			'view_product' => sprintf( '<a href="%s" title="%s" rel="permalink">%s</a>', $product->get_permalink(), esc_html__( 'View Product', 'woodmart' ), esc_html__( 'View Product', 'woodmart' ) ),
 		);
 
 		if ( in_array( $product->get_type(), array( 'variation', 'subscription_variation' ), true ) ) {
@@ -113,7 +123,7 @@ class Waitlist_Table extends WP_List_Table {
 		?>
 		<div class="product-details">
 			<strong>
-				<a class="row-title" href="<?php echo esc_url( $product_edit_url ); ?>">
+				<a class="row-title" href="<?php echo esc_url( $product->get_permalink() ); ?>">
 					<?php echo esc_html( $product->get_title() ); ?>
 				</a>
 			</strong>
@@ -286,7 +296,21 @@ class Waitlist_Table extends WP_List_Table {
 		$user_id          = get_current_user_id();
 
 		$data = $this->table_data();
-		usort( $data, array( $this, 'sort_data' ) );
+
+		$order_by = 'created_date';
+		$order    = 'desc';
+
+		// If orderby is set, use this as the sort column.
+		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
+			$order_by = $_GET['orderby']; // phpcs:ignore.
+		}
+
+		// If order is set use this as the order.
+		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
+			$order = $_GET['order']; // phpcs:ignore.
+		}
+
+		woodmart_sort_data( $data, $order_by, $order );
 
 		$per_page     = ! empty( get_user_meta( $user_id, 'waitlist_per_page', true ) ) ? get_user_meta( $user_id, 'waitlist_per_page', true ) : 20;
 		$current_page = $this->get_pagenum();
@@ -319,6 +343,7 @@ class Waitlist_Table extends WP_List_Table {
 		$search      = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : false; // phpcs:ignore.
 		$_product_id = isset( $_REQUEST['_product_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_product_id'] ) ) : false; // phpcs:ignore.
 		$_user_id    = isset( $_REQUEST['_user_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_user_id'] ) ) : false; // phpcs:ignore.
+		$_user_email = isset( $_REQUEST['_user_email'] ) ? sanitize_email( wp_unslash( $_REQUEST['_user_email'] ) ) : false; // phpcs:ignore.
 
 		if ( $search ) {
 			$where_query[] = $wpdb->prepare( "$wpdb->posts.`post_title` LIKE %s", '%' . $wpdb->esc_like( $search ) . '%' );
@@ -330,6 +355,10 @@ class Waitlist_Table extends WP_List_Table {
 
 		if ( $_user_id ) {
 			$where_query[] = $wpdb->prepare( "$wpdb->wd_waitlists.user_id = %d", $_user_id );
+		}
+
+		if ( $_user_email ) {
+			$where_query[] = $wpdb->prepare( "$wpdb->wd_waitlists.user_email = %s", $_user_email );
 		}
 
 		$where_query_text = ! empty( $where_query ) ? ' WHERE ' . implode( ' AND ', $where_query ) : '';
@@ -361,43 +390,6 @@ class Waitlist_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Allows you to sort the data by the variables set in the $_GET.
-	 *
-	 * @codeCoverageIgnore
-	 *
-	 * @param array $a First array.
-	 * @param array $b Next array.
-	 * @return int
-	 */
-	private function sort_data( $a, $b ) {
-		// Set defaults.
-		$order_by = 'created_date';
-		$order    = 'desc';
-
-		// If orderby is set, use this as the sort column.
-		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
-			$order_by = $_GET['orderby']; // phpcs:ignore.
-		}
-
-		// If order is set use this as the order.
-		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
-			$order = $_GET['order']; // phpcs:ignore.
-		}
-
-		$result = strcmp( $a[ $order_by ], $b[ $order_by ] );
-
-		if ( is_numeric( $a[ $order_by ] ) && is_numeric( $a[ $order_by ] ) ) {
-			$result = $a[ $order_by ] - $b[ $order_by ];
-		}
-
-		if ( 'asc' === $order ) {
-			return $result;
-		}
-
-		return -$result;
-	}
-
-	/**
 	 * Print filters for current table
 	 *
 	 * @codeCoverageIgnore
@@ -412,91 +404,13 @@ class Waitlist_Table extends WP_List_Table {
 			return;
 		}
 
-		$need_reset = false;
-		$product_id = isset( $_REQUEST['_product_id'] ) ? intval( $_REQUEST['_product_id'] ) : false; // phpcs:ignore.
-		$user_id    = isset( $_REQUEST['_user_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_user_id'] ) ) : false; // phpcs:ignore.
-
-		if ( ! empty( $product_id ) ) {
-			$product = wc_get_product( $product_id );
-
-			if ( $product ) {
-				$selected_product = '#' . $product_id . ' &ndash; ' . $product->get_title();
-			}
-		}
-
-		if ( ! empty( $user_id ) ) {
-			$user = get_user_by( 'id', $user_id );
-
-			if ( $user ) {
-				$selected_user = $user->get( 'user_login' );
-			}
-		}
-
-		if ( $product_id || $user_id ) {
-			$need_reset = true;
-		}
-
-		wp_enqueue_style(
-			'xts-jquery-ui',
-			WOODMART_ASSETS . '/css/jquery-ui.css',
-			array(),
-			WOODMART_VERSION
-		);
-
-		wp_enqueue_script(
-			'xts-admin-waitlist',
-			WOODMART_ASSETS . '/js/waitlist.js',
+		$reset_link = add_query_arg(
 			array(
-				'jquery',
-				'jquery-ui-datepicker',
-				'select2',
+				'page' => 'xts-waitlist-page',
 			),
-			WOODMART_VERSION,
-			true
+			admin_url( '/edit.php?post_type=product' )
 		);
-		?>
-		<select
-			id="_product_id"
-			name="_product_id"
-			class="wc-product-search"
-			data-security="<?php echo esc_attr( wp_create_nonce( 'search-products' ) ); ?>"
-			style="width: 300px;"
-		>
-			<?php if ( $product_id && isset( $selected_product ) ) : ?>
-				<option value="<?php echo esc_attr( $product_id ); ?>" <?php selected( true, true, true ); ?> >
-					<?php echo esc_html( $selected_product ); ?>
-				</option>
-			<?php endif; ?>
-		</select>
-		<select
-			id="_user_id"
-			name="_user_id"
-			class="xts-users-search"
-			data-security="<?php echo esc_attr( wp_create_nonce( 'search-users' ) ); ?>"
-			style="width: 300px;"
-		>
-			<?php if ( $user_id && isset( $selected_user ) ) : ?>
-				<option value="<?php echo esc_attr( $user_id ); ?>" <?php selected( true, true, true ); ?> >
-					<?php echo esc_html( $selected_user ); ?>
-				</option>
-			<?php endif; ?>
-		</select>
-		<?php
-		submit_button( esc_html__( 'Filter', 'woodmart' ), 'button', 'filter_action', false, array( 'id' => 'post-query-submit' ) );
 
-		if ( $need_reset ) {
-			echo sprintf(
-				'<a href="%s" class="button button-secondary reset-button">%s</a>',
-				esc_url(
-					add_query_arg(
-						array(
-							'page' => 'xts-waitlist-page',
-						),
-						admin_url( '/edit.php?post_type=product' )
-					)
-				),
-				esc_html__( 'Reset', 'woodmart' )
-			);
-		}
+		woodmart_add_list_table_filters( $reset_link );
 	}
 }

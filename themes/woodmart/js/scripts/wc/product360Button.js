@@ -1,4 +1,4 @@
-/* global woodmart_settings */
+/* global woodmart_settings, woodmartThemeModule, jQuery */
 (function($) {
 	woodmartThemeModule.product360Button = function() {
 		if ('undefined' === typeof $.fn.magnificPopup) {
@@ -9,17 +9,17 @@
 			type           : 'inline',
 			mainClass      : 'mfp-fade',
 			preloader      : false,
-			tClose         : woodmart_settings.close,
+			closeMarkup    : woodmart_settings.close_markup,
 			tLoading       : woodmart_settings.loading,
 			fixedContentPos: true,
 			removalDelay   : 600,
 			callbacks      : {
 				beforeOpen: function() {
-					this.wrap.addClass('wd-popup-slide-from-left');
+					this.wrap.addClass('wd-product-360-view-wrap');
 				},
-				open      : function() {
+				open: function() {
 					woodmartThemeModule.$window.trigger('resize');
-				}
+				},
 			}
 		});
 	};

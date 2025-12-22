@@ -19,6 +19,30 @@ class Slider extends Singleton {
 		add_action( 'woodmart_slider_term_edit_form_top', [ $this, 'add_slides_to_slider_page' ], 9 );
 		add_action( 'wp_ajax_woodmart_get_slides_data', [ $this, 'get_slides_data' ] );
 		add_action( 'post_edit_form_tag', [ $this, 'enqueue_script' ] );
+
+		add_filter( 'hidden_meta_boxes', array( $this, 'hide_custom_fields' ), 10, 3 );
+	}
+
+	/**
+	 * Hide Custom Fields meta box by default for this post type.
+	 *
+	 * @param array     $hidden Hidden meta boxes.
+	 * @param WP_Screen $screen Current screen.
+	 * @param bool      $use_defaults Whether to use default meta boxes.
+	 *
+	 * @return array
+	 */
+	public function hide_custom_fields( $hidden, $screen, $use_defaults ) {
+		if ( isset( $screen->id ) && 'woodmart_slide' === $screen->id ) {
+			if ( ! is_array( $hidden ) ) {
+				$hidden = array();
+			}
+			if ( ! in_array( 'postcustom', $hidden, true ) ) {
+				$hidden[] = 'postcustom';
+			}
+		}
+
+		return $hidden;
 	}
 
 	/**
@@ -156,6 +180,7 @@ class Slider extends Singleton {
 						</div>
 						<?php foreach ( $slides->posts as $slide ) : ?>
 							<?php
+							$slide_image           = get_post_meta( $slide->ID, 'image', true );
 							$bg_image_desktop      = has_post_thumbnail( $slide->ID ) ? wp_get_attachment_url( get_post_thumbnail_id( $slide->ID ) ) : '';
 							$meta_bg_image_desktop = get_post_meta( $slide->ID, 'bg_image_desktop', true );
 							$bg_slide_color        = get_post_meta( $slide->ID, 'bg_color', true );
@@ -183,7 +208,9 @@ class Slider extends Singleton {
 							?>
 							<div class="xts-wp-row">
 								<div class="xts-wp-table-img">
-									<?php if ( $bg_image_desktop ) : ?>
+									<?php if ( ! empty( $slide_image['url'] ) ) : ?>
+										<img src="<?php echo esc_url( $slide_image['url'] ); ?>" alt="slide image">
+									<?php elseif ( $bg_image_desktop ) : ?>
 										<img src="<?php echo esc_url( $bg_image_desktop ); ?>" alt="slide image">
 									<?php elseif ( $bg_slide_color ) : ?>
 										<div class="xts-slider-bg-color" style="background-color: <?php echo esc_attr( $bg_slide_color ); ?>"></div>

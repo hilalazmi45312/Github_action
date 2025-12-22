@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup location typical business hours for order collection.
@@ -340,11 +340,15 @@ class WC_Local_Pickup_Plus_Business_Hours {
 
 								<?php foreach ( $schedule[ $d ] as $start => $end ) : ?>
 
+									<?php // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
 									<li><?php echo $this->get_time_range_picker_input_html( array(
 											'name'           =>  $args['name'] . '_' . $d,
 											'selected_start' => $start,
 											'selected_end'   => $end, )
 										); ?></li>
+
+									<?php // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 								<?php endforeach; ?>
 
@@ -377,7 +381,7 @@ class WC_Local_Pickup_Plus_Business_Hours {
 	 * @param array $args
 	 */
 	public function output_field_html( array $args ) {
-		echo $this->get_field_html( $args );
+		echo $this->get_field_html( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 
@@ -410,7 +414,7 @@ class WC_Local_Pickup_Plus_Business_Hours {
 				class="start"
 				name="<?php echo esc_attr( $args['name'] . '_start[]' ); ?>">
 				<?php for ( $t = 0; $t <= DAY_IN_SECONDS; $t += 0.25 * HOUR_IN_SECONDS ) : ?>
-					<option value="<?php echo $t; ?>" <?php selected( $t, (int) $args['selected_start'], true ); ?>><?php echo esc_html( date_i18n( wc_time_format(), $t ) ); ?></option>
+					<option value="<?php echo esc_attr( $t ); ?>" <?php selected( $t, (int) $args['selected_start'], true ); ?>><?php echo esc_html( date_i18n( wc_time_format(), $t ) ); ?></option>
 				<?php endfor; ?>
 			</select>
 
@@ -418,7 +422,7 @@ class WC_Local_Pickup_Plus_Business_Hours {
 				class="end"
 				name="<?php echo esc_attr( $args['name'] . '_end[]' ); ?>">
 				<?php for ( $t = 0; $t <= DAY_IN_SECONDS; $t += 0.25 * HOUR_IN_SECONDS ) : ?>
-					<option value="<?php echo $t; ?>" <?php selected( $t, (int) $args['selected_end'], true ); ?>><?php echo esc_html( date_i18n( wc_time_format(), $t ) ); ?></option>
+					<option value="<?php echo esc_attr( $t ); ?>" <?php selected( $t, (int) $args['selected_end'], true ); ?>><?php echo esc_html( date_i18n( wc_time_format(), $t ) ); ?></option>
 				<?php endfor; ?>
 			</select>
 
@@ -442,7 +446,7 @@ class WC_Local_Pickup_Plus_Business_Hours {
 	 */
 	public function output_time_range_picker_input_html( array $args ) {
 
-		echo $this->get_time_range_picker_input_html( $args );
+		echo $this->get_time_range_picker_input_html( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 

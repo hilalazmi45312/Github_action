@@ -311,7 +311,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_table' ) ) {
 					'heading'    => esc_html__( 'Table cell padding', 'woodmart' ),
 					'group'      => esc_html__( 'Settings', 'woodmart' ),
 					'type'       => 'wd_dimensions',
-					'param_name' => 'padding',
+					'param_name' => 'table_cell_padding',
 					'selectors'  => array(
 						'{{WRAPPER}} .wd-el-table th, {{WRAPPER}} .wd-el-table td' => array(
 							'padding-top: {{TOP}}px;',

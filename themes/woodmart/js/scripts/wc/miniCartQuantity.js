@@ -42,7 +42,7 @@
 										$('.shopping-cart-widget-footer').replaceWith(dataFooterValue);
 									}
 								} else {
-									$(key).replaceWith(value);
+									$(key.replace('_wd', '')).replaceWith(value);
 								}
 							});
 

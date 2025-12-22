@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Appointments\Appointment as Appointment;
 
 /**
@@ -182,7 +182,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 				$output = '&ndash;';
 			}
 
-			echo $output;
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 
@@ -326,7 +326,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 
 		if ( 'disabled' !== wc_local_pickup_plus()->get_shipping_method_instance()->pickup_appointments_mode() ) :
 
-			$appointment_time = ! empty( $_GET['_appointment_time'] ) ? $_GET['_appointment_time'] : '';
+			$appointment_time = ! empty( $_GET['_appointment_time'] ) ? sanitize_text_field( $_GET['_appointment_time'] ) : '';
 			$options          = [
 				''          => __( 'All pickup dates', 'woocommerce-shipping-local-pickup-plus' ),
 				'today'     => __( 'Pickup today', 'woocommerce-shipping-local-pickup-plus' ),
@@ -370,7 +370,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 	 */
 	public function filter_orders_by_appointment_time( $args ) {
 
-		$appointment_time = $_GET['_appointment_time'] ?? null;
+		$appointment_time = ! empty($_GET['_appointment_time']) ? sanitize_text_field($_GET['_appointment_time']) : null;
 		$orders_handler = wc_local_pickup_plus()->get_orders_instance();
 
 		if ( $orders_handler && is_array( $args ) && ! empty( $appointment_time ) ) {
@@ -437,7 +437,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 		}
 
 		if ( empty( $order ) && ! empty( $_POST['order_id'] ) && wp_doing_ajax() ) {
-			$order = wc_get_order( $_POST['order_id'] );
+			$order = wc_get_order( absint($_POST['order_id']) );
 		}
 
 		$shipping_method = $item['method_id'] ?? null;
@@ -457,7 +457,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 
 			?>
 			<div
-				id="wc-local-pickup-plus-order-shipping-item-pickup-data-<?php echo $item_id; ?>"
+				id="wc-local-pickup-plus-order-shipping-item-pickup-data-<?php echo esc_attr( $item_id ); ?>"
 				class="wc-local-pickup-plus wc-local-pickup-plus-order-shipping-item-pickup-data view">
 				<table
 					class="display_meta">
@@ -465,7 +465,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 					<tbody>
 
 						<tr>
-							<th><label for="<?php echo 'wc-local-pickup-plus-pickup-location-search-for-item-' . $item_id; ?>"><?php esc_html_e( 'Pickup location:', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
+							<th><label for="<?php echo esc_attr( 'wc-local-pickup-plus-pickup-location-search-for-item-' . $item_id ); ?>"><?php esc_html_e( 'Pickup location:', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
 							<td class="pickup-location">
 								<div class="value">
 									<?php echo esc_html( wc_local_pickup_plus()->get_orders_instance()->get_order_items_instance()->get_order_item_pickup_location_name( $item_id ) ); ?><br />
@@ -473,6 +473,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 									<?php echo esc_html( wc_local_pickup_plus()->get_orders_instance()->get_order_items_instance()->get_order_item_pickup_location_phone( $item_id, false ) ); ?>
 								</div>
 								<div class="field" style="display:none;">
+									<?php // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									<?php echo $local_pickup_plus->get_admin_instance()->get_search_pickup_locations_field( [
 										'id'                => 'wc-local-pickup-plus-pickup-location-search-for-item-' . $item_id,
 										'input_name'        => '_pickup_location[' . $item_id .']',
@@ -486,6 +487,7 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 											'data-selected'    => $pickup_location instanceof \WC_Local_Pickup_Plus_Pickup_Location ? htmlspecialchars( $pickup_location->get_name() ) : '',
 										],
 									] ); ?>
+									<?php // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</div>
 							</td>
 						</tr>
@@ -494,17 +496,17 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 						<?php if ( 'disabled' !== $appointments_mode ) : ?>
 
 							<tr>
-								<th><label for="<?php echo 'wc-local-pickup-plus-pickup-date-for-item-' . $item_id; ?>"><?php esc_html_e( 'Pickup date:', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
+								<th><label for="<?php echo esc_attr( 'wc-local-pickup-plus-pickup-date-for-item-' . $item_id ); ?>"><?php esc_html_e( 'Pickup date:', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
 								<td class="pickup-date">
 									<div class="set-pickup-appointment" style="display:none;">
 										<input
 											type="checkbox"
-											id="<?php echo 'wc-local-pickup-plus-set-pickup-appointment-for-item-' . $item_id; ?>"
-											name="_set_pickup_appointment[<?php echo $item_id; ?>]"
+											id="<?php echo esc_attr( 'wc-local-pickup-plus-set-pickup-appointment-for-item-' . $item_id ); ?>"
+											name="_set_pickup_appointment[<?php echo esc_attr( $item_id ); ?>]"
 											<?php disabled( 'required' === $appointments_mode ); ?>
 											<?php checked( $appointment || 'required' === $appointments_mode ); ?>
 										/>
-										<label for="<?php echo 'wc-local-pickup-plus-set-pickup-appointment-for-item-' . $item_id; ?>">
+										<label for="<?php echo esc_attr( 'wc-local-pickup-plus-set-pickup-appointment-for-item-' . $item_id ); ?>">
 											 <em><?php echo 'required' === $appointments_mode ? esc_html__( 'Appointment required', 'woocommerce-shipping-local-pickup-plus' ) : esc_html__( 'Set an appointment', 'woocommerce-shipping-local-pickup-plus' ); ?></em>
 										</label>
 									</div>
@@ -520,15 +522,15 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 									</div>
 									<div class="field" style="display:none;">
 										<input
-											name="_pickup_date[<?php echo $item_id; ?>]"
-											id="<?php echo 'wc-local-pickup-plus-pickup-date-for-item-' . $item_id; ?>"
+											name="_pickup_date[<?php echo esc_attr( $item_id ); ?>]"
+											id="<?php echo esc_attr( 'wc-local-pickup-plus-pickup-date-for-item-' . $item_id ); ?>"
 											class="pickup-date"
 											type="text"
 											<?php if ( $pickup_date ) : // output chosen date ?>
-												value="<?php echo date( 'Y-m-d', $pickup_date->getTimestamp() + $pickup_date->getOffset() ); ?>"
+												value="<?php echo esc_attr( date( 'Y-m-d', $pickup_date->getTimestamp() + $pickup_date->getOffset() ) ); ?>"
 											<?php elseif ( 'required' === $appointments_mode ) : // output the order date or today's date if appointments are required ?>
 												<?php $order_date = $order->get_date_created(); ?>
-												value="<?php echo $order_date instanceof \DateTime ? $order_date->format( 'Y-m-d' ) : date( 'Y-m-d', current_time( 'timestamp' ) ); ?>"
+												value="<?php echo $order_date instanceof \DateTime ? esc_attr( $order_date->format( 'Y-m-d' ) ) : esc_attr( date( 'Y-m-d', current_time( 'timestamp' ) ) ); ?>"
 											<?php else : // output empty choice if appointments are enabled, but not required ?>
 												value=""
 											<?php endif; ?>
@@ -540,9 +542,9 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 											<span class="wc-local-pickup-plus-date-time-separator">@</span>
 
 											<select
-												id="wc-local-pickup-plus-pickup-appointment-offset-for-item-<?php echo $item_id; ?>"
+												id="wc-local-pickup-plus-pickup-appointment-offset-for-item-<?php echo esc_attr( $item_id ); ?>"
 												class="wc-enhanced-select wc-local-pickup-plus-appointment-offset"
-												name="_pickup_appointment_offset[<?php echo $item_id; ?>]"
+												name="_pickup_appointment_offset[<?php echo esc_attr( $item_id ); ?>]"
 												style="width:100%;">
 												<?php $selected_offset = $pickup_date ? ( $pickup_date->getTimestamp() - ( clone $pickup_date )->setTime( 0, 0, 0 )->getTimestamp() ) : 0; ?>
 												<?php for ( $t = 0; $t <= DAY_IN_SECONDS; $t += 0.25 * HOUR_IN_SECONDS ) : ?>
@@ -558,21 +560,21 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 						<?php endif; ?>
 
 						<tr>
-							<th><label for="<?php echo 'wc-local-pickup-plus-pickup-items-for-item-' . $item_id; ?>"><?php esc_html_e( 'Items to pickup:', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
+							<th><label for="<?php echo esc_attr( 'wc-local-pickup-plus-pickup-items-for-item-' . $item_id ); ?>"><?php esc_html_e( 'Items to pickup:', 'woocommerce-shipping-local-pickup-plus' ); ?></label></th>
 							<td class="pickup-items">
 								<div class="value">
 									<?php $items = []; ?>
 									<?php foreach ( $items_to_choose as $id => $item_data ) : ?>
 										<?php if ( isset( $item_data['name'], $item_data['qty'] ) && in_array( $id, $items_to_pickup, false ) ) : ?>
-											<?php $items[] = is_rtl() ? '&times; ' . $item_data['qty'] . ' ' . $item_data['name'] : $item_data['name'] . ' &times; ' . $item_data['qty']; ?>
+											<?php $items[] = is_rtl() ? '&times; ' . esc_html( $item_data['qty'] ) . ' ' . esc_html( $item_data['name'] ) : esc_html( $item_data['name'] ) . ' &times; ' . esc_html( $item_data['qty'] ); ?>
 										<?php endif; ?>
 									<?php endforeach; ?>
-									<?php echo ! empty( $items ) ? implode( ', ', $items ) : '&mdash;'; ?>
+									<?php echo ! empty( $items ) ? implode( ', ', $items ) : '&mdash;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</div>
 								<div class="field" style="display:none;">
 									<select
-										name="_pickup_items[<?php echo $item_id; ?>]"
-										id="<?php echo 'wc-local-pickup-plus-pickup-items-for-item-' . $item_id; ?>"
+										name="_pickup_items[<?php echo esc_attr( $item_id ); ?>]"
+										id="<?php echo esc_attr( 'wc-local-pickup-plus-pickup-items-for-item-' . $item_id ); ?>"
 										class="wc-enhanced-select"
 										style="width: 100%;"
 										multiple="multiple">
@@ -581,8 +583,8 @@ class WC_Local_Pickup_Plus_Orders_Admin {
 											<?php $name = isset( $item_data['name'] ) ? $item_data['name'] : null; ?>
 											<?php $qty  = isset( $item_data['qty'] )  ? $item_data['qty']  : null; ?>
 											<?php if ( $name && $qty ) : ?>
-												<?php $label = is_rtl() ? '&times; ' . $qty . ' ' . $name : $name . ' &times; ' . $qty; ?>
-												<option value="<?php echo $id; ?>" <?php selected( true, in_array( $id, $items_to_pickup, false ) ); ?>><?php esc_html_e( $label ); ?></option>
+												<?php $label = is_rtl() ? '&times; ' . esc_html( $qty ) . ' ' . esc_html( $name ) : esc_html( $name ) . ' &times; ' . esc_html( $qty ); ?>
+												<option value="<?php echo esc_attr( $id ); ?>" <?php selected( true, in_array( $id, $items_to_pickup, false ) ); ?>><?php esc_html_e( $label ); ?></option>
 											<?php endif; ?>
 										<?php endforeach; ?>
 									</select>

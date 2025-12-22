@@ -11,7 +11,7 @@ woodmartThemeModule.abandonedCart = function() {
 			return;
 		}
 
-		var privacyCkeckbox = document.querySelector('#wd-data-consent');
+		var privacyCkeckbox = document.querySelector('#_wd_recover_guest_cart_consent');
 
 		if (privacyCkeckbox) {
 			privacyCkeckbox.addEventListener('change', function (e) {
@@ -67,27 +67,13 @@ woodmartThemeModule.abandonedCart = function() {
 			return true;
 		}
 
-		var privacyInput = document.querySelector('#wd-data-consent');
+		var privacyInput = document.querySelector('#_wd_recover_guest_cart_consent');
 
 		return privacyInput && privacyInput.checked;
 	};
 
 	init();
 }
-
-woodmartThemeModule.showPrivecyCheckbox = function() {
-	var privacyWrapper    = document.querySelector('.wd-data-consent');
-	var billingEmailField = document.querySelector('#billing_email_field');
-
-	if ( 'no' === woodmart_settings.abandoned_cart_needs_privacy || ! privacyWrapper || ! billingEmailField) {
-		return;
-	}
-
-	billingEmailField.appendChild(privacyWrapper);
-	privacyWrapper.classList.remove('wd-hide');
-}
-
-woodmartThemeModule.showPrivecyCheckbox();
 
 window.addEventListener('load', function() {
 	woodmartThemeModule.abandonedCart();

@@ -38,8 +38,14 @@ function goBackRegister() {
 }
 
 function checkingPhoneForRegister(phone, button) {
+    if (!registerCfToken) {
+        return showSwalError(
+            'Verification required',
+            'Please complete the human verification.'
+        );
+    }
     manageButtonState(button, false);
-    makeAjaxRequest(ajaxUrl, { action: 'checking_phone', phone }, response => {
+    makeAjaxRequest(ajaxUrl, { action: 'checking_phone', phone, cf_token: registerCfToken, for: 'register' }, response => {
         const { success, data } = response;
         if (success) {
             if (data.dialog_info && data.flag === 5) {
@@ -52,6 +58,10 @@ function checkingPhoneForRegister(phone, button) {
                 requestOtpRegister(phone, 'REGISTER');
             }
         }
+        else{
+            showSwalError('Error', data.message || 'An error occurred. Please try again.');
+            resetTurnstile("register");
+        }
         manageButtonState(button, true, 'Next');
     });
 }
@@ -63,7 +73,7 @@ function requestOtpRegister(identifier, type) {
     makeAjaxRequest(ajaxUrl, { action: 'request_otp', phone: identifier, type }, response => {
         if (response.success && response.data.flag === 1) {
             txId = response.data.tx_id || '';
-            registerMaskedPhone.textContent = response.data.masked_phone;
+            registerMaskedPhone.textContent = `A verification code has been sent to ${response.data.masked_phone}`;
         } else {
             showSwalError('Error', response.data.message || 'Failed to send OTP. Please try again.');
             if (response.data.flag === 2) goBackRegister();

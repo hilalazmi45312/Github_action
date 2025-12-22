@@ -3,7 +3,7 @@
  * Coupon Email Content
  *
  * @author      StoreApps
- * @version     2.2.0
+ * @version     2.3.0
  * @package     woocommerce-smart-coupons/templates/
  */
 
@@ -213,7 +213,7 @@ if ( ! empty( $coupon_target ) ) {
 	<p>
 		<?php
 			/* translators: %s: singular name for store credit */
-			echo ( ! empty( $store_credit_label['singular'] ) ? sprintf( esc_html__( 'You got this %s', 'woocommerce-smart-coupons' ), esc_html( strtolower( $store_credit_label['singular'] ) ) ) : esc_html__( 'You got this gift card', 'woocommerce-smart-coupons' ) ) . ' ' . esc_html( $from ) . esc_html( $sender );
+			echo ( ! empty( $store_credit_label['singular'] ) ? sprintf( esc_html__( 'You got this %s', 'woocommerce-smart-coupons' ), esc_html( $store_credit_label['singular'] ) ) : esc_html__( 'You got this gift card', 'woocommerce-smart-coupons' ) ) . ' ' . esc_html( $from ) . esc_html( $sender );
 		?>
 	</p>
 <?php } ?>

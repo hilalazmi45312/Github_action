@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2025-01-20 15:41" -->
+	<!-- generator="WordPress/6.7.4" created="2025-10-08 12:39" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,14 +29,13 @@
 	<title>Pills elementor</title>
 	<link>https://dummy.xtemos.com/woodmart2/pills-elementor</link>
 	<description></description>
-	<pubDate>Mon, 20 Jan 2025 15:41:06 +0000</pubDate>
+	<pubDate>Wed, 08 Oct 2025 12:39:40 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/pills-elementor</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>0</wp:term_id>
 			<wp:term_taxonomy><![CDATA[]]></wp:term_taxonomy>
@@ -44,7 +43,7 @@
 			<wp:term_parent><![CDATA[]]></wp:term_parent>
 					</wp:term>
 		
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.4</generator>
 
 					<item>
 					<title><![CDATA[w-pas-banner-1-opt]]></title>
@@ -67,6 +66,10 @@
 																					<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 							<wp:meta_value><![CDATA[2024/03/w-pas-banner-1-opt.jpg]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -458,84 +461,97 @@
 					<pubDate>Tue, 26 Mar 2024 15:29:53 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/pills-elementor/?post_type=woodmart_layout&#038;p=842</guid>
-											<content:encoded><![CDATA[ 			<nav aria-label="Breadcrumb">				
+											<content:encoded><![CDATA[<link rel="stylesheet" id="wd-woo-el-breadcrumbs-builder-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-el-breadcrumbs-builder.min.css?ver=8.2.7" type="text/css" media="all" /> 			<nav aria-label="Breadcrumb">				
 					Home				
-			</nav>		
-						 			
+			</nav>				
+								<link rel="stylesheet" id="wd-woo-single-prod-el-navigation-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-single-prod-el-navigation.min.css?ver=8.2.7" type="text/css" media="all" /> 			
 			<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/product/allergy-relief-60-softgels/" aria-label="Previous product"></a>
 				<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/product/allergy-relief-60-softgels/">
-					<img width="430" height="491" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-60-softgel-1-430x491.jpg" alt="" />				</a>
+					<img width="430" height="491" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-60-softgel-1-430x491.jpg" alt="Allergy Relief 60 Softgels" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-60-softgel-1-430x491.jpg 430w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-60-softgel-1-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-60-softgel-1.jpg 700w" sizes="auto, (max-width: 430px) 100vw, 430px" />				</a>
 					<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/product/allergy-relief-60-softgels/">
 						Allergy Relief 60 Softgels					</a>
-						&#036;25.00					
+						<bdi>&#36;25.00</bdi>					
 	<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/shop/">
 			Back to products		
 	</a>
 			<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/product/allergy-relief-30-tablets/" aria-label="Next product"></a>
 				<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/product/allergy-relief-30-tablets/">
-					<img width="430" height="491" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-30-tablets-1-430x491.jpg" alt="" />				</a>
+					<img width="430" height="491" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-30-tablets-1-430x491.jpg" alt="Allergy Relief 30 Tablets" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-30-tablets-1-430x491.jpg 430w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-30-tablets-1-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ar-30-tablets-1.jpg 700w" sizes="auto, (max-width: 430px) 100vw, 430px" />				</a>
 					<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/product/allergy-relief-30-tablets/">
 						Allergy Relief 30 Tablets					</a>
-						&#036;15.00					
-						 						 						 			
-		<figure style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1">
-			<figure data-thumb="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg"><a data-elementor-open-lightbox="no" href="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg"><img width="700" height="800" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg" alt="" title="w-pas-ev-120-gummies-1.jpg" data-caption="" data-src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg" data-large_image="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg" data-large_image_width="700" data-large_image_height="800" /></a></figure>
-			<figure data-thumb="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-263x300.jpg">
+						<bdi>&#36;15.00</bdi>					
+								<link rel="stylesheet" id="wd-woo-single-prod-el-gallery-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-single-prod-el-gallery.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-woo-single-prod-el-gallery-opt-thumb-left-desktop-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-single-prod-el-gallery-opt-thumb-left-desktop.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-swiper-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/lib-swiper.min.css?ver=8.2.7" type="text/css" media="all" /> 			
+		<figure style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1;">
+				<figure data-thumb="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg" data-thumb-alt="Eye &amp; Vision 120 Gummies - Image 1"><a data-elementor-open-lightbox="no" href="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg"><img width="700" height="800" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg" alt="Eye &amp; Vision 120 Gummies - Image 1" title="w-pas-ev-120-gummies-1.jpg" data-caption="" data-src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg" data-large_image="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg" data-large_image_width="700" data-large_image_height="800" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg 700w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-430x491.jpg 430w" sizes="auto, (max-width: 700px) 100vw, 700px" /></a></figure>
+			<figure data-thumb="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-263x300.jpg" data-thumb-alt="Eye &amp; Vision 120 Gummies - Image 2">
 				<a data-elementor-open-lightbox="no" href="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg">
-					<img width="700" height="800" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg" alt="" title="w-pas-ev-30-gummies-2.jpg" data-caption="" data-src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg" data-large_image="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg" data-large_image_width="700" data-large_image_height="800" />				</a>
+					<img width="700" height="800" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg" alt="Eye &amp; Vision 120 Gummies - Image 2" title="w-pas-ev-30-gummies-2.jpg" data-caption="" data-src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg" data-large_image="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg" data-large_image_width="700" data-large_image_height="800" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg 700w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-430x491.jpg 430w" sizes="auto, (max-width: 700px) 100vw, 700px" />				</a>
 			</figure>
-				</figure>
-					 			
-									<img width="150" height="171" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg" alt="" />								
-									<img width="150" height="171" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-263x300.jpg" alt="" />								
+		</figure>
+					<link rel="stylesheet" id="wd-swiper-arrows-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/lib-swiper-arrows.min.css?ver=8.2.7" type="text/css" media="all" /> 			
+									<img width="150" height="171" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg" alt="Eye &amp; Vision 120 Gummies" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-430x491.jpg 430w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg 700w" sizes="auto, (max-width: 150px) 100vw, 150px" />								
+									<img width="150" height="171" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-263x300.jpg" alt="Eye &amp; Vision 120 Gummies - Image 2" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2-430x491.jpg 430w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-30-gummies-2.jpg 700w" sizes="auto, (max-width: 150px) 100vw, 150px" />								
 <h1>
 	Eye &#038; Vision 120 Gummies
 	</h1>
 	<p>At worst the discussion is at least working towards the final goal of your site where questions about lorem ipsum don’t, commercial publishing platforms and content management systems.</p>
-			<p>&#036;50.00</p>
-						 						 			
-
-			<table cellspacing="0">
+					<p><bdi>&#36;50.00</bdi></p>
+								<link rel="stylesheet" id="wd-woo-mod-variation-form-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-mod-variation-form.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-woo-mod-swatches-base-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-mod-swatches-base.min.css?ver=8.2.7" type="text/css" media="all" /> 			
+<form action="https://dummy.xtemos.com/woodmart2/pills-elementor/product/eye-vision-120-gummies/" method="post" enctype='multipart/form-data' data-product_id="128" data-product_variations="[{&quot;attributes&quot;:{&quot;attribute_pa_color&quot;:&quot;mint&quot;},&quot;availability_html&quot;:&quot;&quot;,&quot;backorders_allowed&quot;:false,&quot;dimensions&quot;:{&quot;length&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;height&quot;:&quot;&quot;},&quot;dimensions_html&quot;:&quot;N/A&quot;,&quot;display_price&quot;:50,&quot;display_regular_price&quot;:50,&quot;image&quot;:{&quot;title&quot;:&quot;w-pas-ev-120-gummies-1.jpg&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg&quot;,&quot;alt&quot;:&quot;w-pas-ev-120-gummies-1.jpg&quot;,&quot;src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg&quot;,&quot;srcset&quot;:&quot;https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg 700w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-430x491.jpg 430w&quot;,&quot;sizes&quot;:&quot;(max-width: 700px) 100vw, 700px&quot;,&quot;full_src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg&quot;,&quot;full_src_w&quot;:700,&quot;full_src_h&quot;:800,&quot;gallery_thumbnail_src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg&quot;,&quot;gallery_thumbnail_src_w&quot;:150,&quot;gallery_thumbnail_src_h&quot;:171,&quot;thumb_src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-430x491.jpg&quot;,&quot;thumb_src_w&quot;:430,&quot;thumb_src_h&quot;:491,&quot;src_w&quot;:700,&quot;src_h&quot;:800},&quot;image_id&quot;:162,&quot;is_downloadable&quot;:false,&quot;is_in_stock&quot;:true,&quot;is_purchasable&quot;:true,&quot;is_sold_individually&quot;:&quot;no&quot;,&quot;is_virtual&quot;:false,&quot;max_qty&quot;:&quot;&quot;,&quot;min_qty&quot;:1,&quot;price_html&quot;:&quot;&quot;,&quot;sku&quot;:&quot;WP-057&quot;,&quot;variation_description&quot;:&quot;&quot;,&quot;variation_id&quot;:245,&quot;variation_is_active&quot;:true,&quot;variation_is_visible&quot;:true,&quot;weight&quot;:&quot;&quot;,&quot;weight_html&quot;:&quot;N/A&quot;},{&quot;attributes&quot;:{&quot;attribute_pa_color&quot;:&quot;coffee&quot;},&quot;availability_html&quot;:&quot;&quot;,&quot;backorders_allowed&quot;:false,&quot;dimensions&quot;:{&quot;length&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;height&quot;:&quot;&quot;},&quot;dimensions_html&quot;:&quot;N/A&quot;,&quot;display_price&quot;:50,&quot;display_regular_price&quot;:50,&quot;image&quot;:{&quot;title&quot;:&quot;w-pas-ev-120-gummies-1.jpg&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg&quot;,&quot;alt&quot;:&quot;w-pas-ev-120-gummies-1.jpg&quot;,&quot;src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg&quot;,&quot;srcset&quot;:&quot;https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg 700w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg 263w, https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-430x491.jpg 430w&quot;,&quot;sizes&quot;:&quot;(max-width: 700px) 100vw, 700px&quot;,&quot;full_src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1.jpg&quot;,&quot;full_src_w&quot;:700,&quot;full_src_h&quot;:800,&quot;gallery_thumbnail_src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-263x300.jpg&quot;,&quot;gallery_thumbnail_src_w&quot;:150,&quot;gallery_thumbnail_src_h&quot;:171,&quot;thumb_src&quot;:&quot;http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-ev-120-gummies-1-430x491.jpg&quot;,&quot;thumb_src_w&quot;:430,&quot;thumb_src_h&quot;:491,&quot;src_w&quot;:700,&quot;src_h&quot;:800},&quot;image_id&quot;:162,&quot;is_downloadable&quot;:false,&quot;is_in_stock&quot;:true,&quot;is_purchasable&quot;:true,&quot;is_sold_individually&quot;:&quot;no&quot;,&quot;is_virtual&quot;:false,&quot;max_qty&quot;:&quot;&quot;,&quot;min_qty&quot;:1,&quot;price_html&quot;:&quot;&quot;,&quot;sku&quot;:&quot;WP-057&quot;,&quot;variation_description&quot;:&quot;&quot;,&quot;variation_id&quot;:246,&quot;variation_is_active&quot;:true,&quot;variation_is_visible&quot;:true,&quot;weight&quot;:&quot;&quot;,&quot;weight_html&quot;:&quot;N/A&quot;}]">
+			<table role="presentation">
 			<tbody>
-													 						 							<tr>
+													<link rel="stylesheet" id="wd-woo-mod-swatches-style-1-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-mod-swatches-style-1.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-woo-mod-swatches-dis-1-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-mod-swatches-dis-style-1.min.css?ver=8.2.7" type="text/css" media="all" /> 							<tr>
 					<th><label for="pa_color">Color</label></th>
 					<td>
-																								Choose an optionCoffeeMint<a href="#">Clear</a>					</td>
+																								<select id="pa_color" name="attribute_pa_color" data-attribute_name="attribute_pa_color" data-show_option_none="yes"><option value="">Choose an option</option><option value="coffee" >Coffee</option><option value="mint" >Mint</option></select><a href="#" aria-label="Clear options">Clear</a>					</td>
 				</tr>
 					</tbody>
 	</table>
-			
-	<label for="quantity_67852509bc4b7">Eye &amp; Vision 120 Gummies quantity</label>
-	
-			
+			<input type="button" value="-" aria-label="Decreace quantity" />
+	<label for="quantity_68e65b7e435c6">Eye &amp; Vision 120 Gummies quantity</label>
+	<input
+		type="number"
+				id="quantity_68e65b7e435c6"
+		class="input-text qty text"
+		value="1"
+		aria-label="Product quantity"
+				min="1"
+				name="quantity"
+					step="1"
+			placeholder=""
+			inputmode="numeric"
+			autocomplete="off"
+			>
+			<input type="button" value="+" aria-label="Increace quantity" />
 	<button type="submit">Add to cart</button>
-	
-	
-	
-	
+	<input type="hidden" name="add-to-cart" value="128" />
+	<input type="hidden" name="product_id" value="128" />
+	<input type="hidden" name="variation_id" value="0" />
+	</form>
 			<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/compare/" data-id="128" rel="nofollow" data-added-text="Compare products">
-				Compare
+				Add to compare
 			</a>
-				<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/wishlist/" data-key="feb95f3cb4" data-product-id="128" rel="nofollow" data-added-text="Browse Wishlist">
+				<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/wishlist/" data-key="9bdf5a0dfc" data-product-id="128" rel="nofollow" data-added-text="Browse wishlist">
 					Add to wishlist
 				</a>
-																							 					
-															<img width="100" height="118" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-100x118.png" alt="" />													
+																							<link rel="stylesheet" id="wd-info-box-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-info-box.min.css?ver=8.2.7" type="text/css" media="all" /> 					
+															<img width="100" height="118" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-opt-100x118.png" alt="" decoding="async" loading="lazy" />													
+														<link rel="stylesheet" id="wd-el-subtitle-style-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-subtitle-style.min.css?ver=8.2.7" type="text/css" media="all" /> 			
 							SAVE 15%						
-											<h4 class="info-box-title title box-title-style-default wd-fontsize-m" data-elementor-setting-key="title">
+											<h4						class="info-box-title title box-title-style-default wd-fontsize-m" data-elementor-setting-key="title">
 								more 2 products						</h4>
 									<a href="#" aria-label="Infobox link"></a>
-															<img width="100" height="118" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-2-100x118.png" alt="" />													
+															<img width="100" height="118" src="http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-2-opt-100x118.png" alt="" decoding="async" loading="lazy" />													
 							SAVE 50%						
-											<h4 class="info-box-title title box-title-style-default wd-fontsize-m" data-elementor-setting-key="title">
+											<h4						class="info-box-title title box-title-style-default wd-fontsize-m" data-elementor-setting-key="title">
 								6 for the price of 3						</h4>
 									<a href="#" aria-label="Infobox link"></a>
-									 					
-						 					
+									<link rel="stylesheet" id="wd-swiper-scrollbar-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/lib-swiper-scrollbar.min.css?ver=8.2.7" type="text/css" media="all" /> 					
+								<link rel="stylesheet" id="wd-text-block-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-text-block.min.css?ver=8.2.7" type="text/css" media="all" /> 					
 			<p>* The information on this page is a summary and is not intended to cover all available information about this medication. It does not cover all possible uses, directions, precautions, drug interactions or adverse effects and is not a substitute for the expertise and judgement of your healthcare professional.</p>
-			.elementor-128 .elementor-element.elementor-element-27e1170{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--gap:40px 40px;--background-transition:0.3s;}.elementor-128 .elementor-element.elementor-element-b9703dd{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--background-transition:0.3s;}.elementor-128 .elementor-element.elementor-element-65b015a{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--background-transition:0.3s;}.elementor-128 .elementor-element.elementor-element-92fcb7f th{background-color:#FFFFFF;font-size:14px;text-transform:none;padding:10px 20px 10px 20px;}.elementor-128 .elementor-element.elementor-element-92fcb7f tbody td{background-color:#FFFFFF;}.elementor-128 .elementor-element.elementor-element-92fcb7f td{font-size:12px;padding:10px 20px 10px 20px;}.elementor-128 .elementor-element.elementor-element-92fcb7f &gt; .elementor-widget-container{border-radius:16px 16px 16px 16px;}.elementor-128 .elementor-element.elementor-element-f30b5e0 .wd-text-block{font-size:12px;}.elementor-128 .elementor-element.elementor-element-0defd0d{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--background-transition:0.3s;}@media(max-width:1024px){.elementor-128 .elementor-element.elementor-element-27e1170{--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;}}@media(min-width:768px){.elementor-128 .elementor-element.elementor-element-b9703dd{--width:33%;}.elementor-128 .elementor-element.elementor-element-65b015a{--width:33%;}.elementor-128 .elementor-element.elementor-element-0defd0d{--width:33%;}}@media(max-width:1024px) and (min-width:768px){.elementor-128 .elementor-element.elementor-element-b9703dd{--width:100%;}.elementor-128 .elementor-element.elementor-element-65b015a{--width:100%;}.elementor-128 .elementor-element.elementor-element-0defd0d{--width:100%;}}		
+					<style>.elementor-128 .elementor-element.elementor-element-27e1170{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--gap:40px 40px;--row-gap:40px;--column-gap:40px;}.elementor-128 .elementor-element.elementor-element-b9703dd{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;}.elementor-128 .elementor-element.elementor-element-65b015a{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;}.elementor-128 .elementor-element.elementor-element-92fcb7f th{background-color:#FFFFFF;font-size:14px;text-transform:none;padding:10px 20px 10px 20px;}.elementor-128 .elementor-element.elementor-element-92fcb7f tbody td{background-color:#FFFFFF;}.elementor-128 .elementor-element.elementor-element-92fcb7f td{font-size:12px;padding:10px 20px 10px 20px;}.elementor-128 .elementor-element.elementor-element-92fcb7f > .elementor-widget-container{border-radius:16px 16px 16px 16px;}.elementor-128 .elementor-element.elementor-element-f30b5e0 .wd-text-block{font-size:12px;}.elementor-128 .elementor-element.elementor-element-0defd0d{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;}@media(max-width:1024px){.elementor-128 .elementor-element.elementor-element-27e1170{--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;}}@media(min-width:768px){.elementor-128 .elementor-element.elementor-element-b9703dd{--width:33%;}.elementor-128 .elementor-element.elementor-element-65b015a{--width:33%;}.elementor-128 .elementor-element.elementor-element-0defd0d{--width:33%;}}@media(max-width:1024px) and (min-width:768px){.elementor-128 .elementor-element.elementor-element-b9703dd{--width:100%;}.elementor-128 .elementor-element.elementor-element-65b015a{--width:100%;}.elementor-128 .elementor-element.elementor-element-0defd0d{--width:100%;}}</style>		
 			<h4>Application method</h4><p>Temporary relief of occasional headaches and minor aches and pains with accompanying sleeplessness:</p><ul><li>One tablet per day with your main meal</li><li>Swallow with water or a cold drink.</li><li>Not to be chewed.</li><li>Do not exceed the recommended intake.</li><li>To be taken on a full stomach.</li><li>This comprehensive formula replaces other multivitamins.</li><li>There is no need to take an additional multivitamin.</li></ul>
-						 					
+								<link rel="stylesheet" id="wd-el-table-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-table.min.css?ver=8.2.7" type="text/css" media="all" /> 					
 			<table>
 									<thead>
 																														<tr>
@@ -640,9 +656,9 @@
 			</table>
 			<p>*NRV – Nutrient Reference Value, µg – microgram, mg – milligram, IU – International Units.</p>
 			<h4>Ingredients</h4><p>Bulking Agent: Microcrystalline Cellulose, Magnesium Oxide, Vitamin C (Ascorbic Acid), L-Carnitine Tartrate, Zinc Sulphate, Vitamin E (D-Alpha Tocopheryl Acid Succinate) (from Soya), Tablet Coating: (Hydroxypropylmethylcellulose, Polydextrose, Medium Chain Triglycerides, Purified Talc, Colours [Calcium Carbonate, Iron Oxides]), Niacin (as Nicotinamide), L-Arginine, Thiamin (Vitamin B1 as Mononitrate), Para Amino Benzoic Acid, Silicon Dioxide, L-Methionine, Ferrous Fumarate, Citrus Bioflavonoids, Pantothenic Acid (as Calcium Salt), Vitamin B6 (Pyridoxine HCl), Betacarotene, Vitamin A (Acetate), Manganese Sulphate, Anti-Caking Agents: Silicon Dioxide &amp; Magnesium Stearate, Riboflavin, Hydroxypropylmethylcellulose, Vitamin D3 (Cholecalciferol), Siberian Ginseng Extract, Copper Sulphate, Coenzyme Q10, Folic Acid (as Pteroylmonoglutamic Acid), Sodium Selenate, Chromium Trichloride, Potassium Iodide, Biotin, Vitamin B12 (as Cyanocobalamin).</p><p>Allergy Advice: For allergens, see ingredients in bold.</p>
-						 					
+								<link rel="stylesheet" id="wd-section-title-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-section-title.min.css?ver=8.2.7" type="text/css" media="all" /> 					
 				<h4>Frequently asked questions</h4> 
-						 			
+								<link rel="stylesheet" id="wd-accordion-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-accordion.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-accordion-elem-wpb-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-accordion-wpb-elem.min.css?ver=8.2.7" type="text/css" media="all" /> 			
 								How does my subscription work?							
 							<p>A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn’t reflect what a living, breathing application must endure. Real data does.</p>
 								How do I edit what&#039;s in my plan?							
@@ -651,16 +667,17 @@
 							<p>A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn’t reflect what a living, breathing application must endure. Real data does.</p>
 								It&#039;s been a while since I took the quiz. Can I get a new recommendation?							
 							<p>Websites in professional use templating systems. Commercial publishing platforms and content management systems ensure that you can show different text, different data using the same template. When it’s about controlling hundreds of articles, product pages for web shops.</p>
-			<a href="https://dummy.xtemos.com/woodmart2/pills-elementor/contact-us/">
+								<link rel="stylesheet" id="wd-button-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/el-button.min.css?ver=8.2.7" type="text/css" media="all" /> 					
+			<a  href="https://dummy.xtemos.com/woodmart2/pills-elementor/contact-us/">
 					Still stumped? Contact us				
 							</a>
 				<h4>Customer Reviews</h4> 
-						 						 						]]></content:encoded>
+								<link rel="stylesheet" id="wd-woo-single-prod-el-reviews-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-single-prod-el-reviews.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-woo-single-prod-el-reviews-style-1-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/woo-single-prod-el-reviews-style-1.min.css?ver=8.2.7" type="text/css" media="all" /> 						<link rel="stylesheet" id="wd-post-types-mod-comments-css" href="https://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/themes/woodmart8/css/parts/post-types-mod-comments.min.css?ver=8.2.7" type="text/css" media="all" />]]></content:encoded>
 															<wp:post_id>842</wp:post_id>
 					<wp:post_date><![CDATA[2024-03-26 15:29:53]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-03-26 15:29:53]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-13 14:36:57]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-13 14:36:57]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-10-08 12:39:26]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-08 12:39:26]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[single-product-layout-pills]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -685,7 +702,7 @@
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[3.24.7]]></wp:meta_value>
+							<wp:meta_value><![CDATA[3.28.0]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
@@ -693,57 +710,11 @@
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-							<wp:meta_value><![CDATA[[{"id":"68c756e","elType":"container","settings":{"flex_direction":"column","wd_section_stretch":"stretch","background_background":"classic","background_color":"#F7F7F7","margin":{"unit":"px","top":"-40","right":"0","bottom":"80","left":"0","isLinked":""},"margin_tablet":{"unit":"px","top":"-40","right":"0","bottom":"60","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"-40","right":"0","bottom":"40","left":"0","isLinked":""},"padding":{"unit":"px","top":"30","right":"15","bottom":"30","left":"15","isLinked":""},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"ab86041","elType":"container","settings":{"flex_direction":"row","flex_justify_content":"space-between","flex_align_items":"center","padding_tablet":{"unit":"%","top":"0","right":"0","bottom":"0","left":"50","isLinked":""},"padding_mobile":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"f1b4d97","elType":"widget","settings":{"nowrap_md":"md","_margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"0","left":"10","isLinked":""},"_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"scroll_y":"-80"},"elements":[],"widgetType":"wd_wc_breadcrumb"},{"id":"755d292","elType":"widget","settings":{"scroll_y":"-80","hide_tablet":"hidden-tablet","hide_mobile":"hidden-mobile"},"elements":[],"widgetType":"wd_single_product_nav"}],"isInner":"1"},{"id":"9d32419","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_wc_notices"},{"id":"e1308ce","elType":"container","settings":{"content_width":"full","flex_direction":"row","flex_direction_mobile":"column","container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"0a1ff3e","elType":"container","settings":{"content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"padding":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"padding_tablet":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"padding_mobile":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"container_sticky":"yes","container_sticky_offset":"0","scroll_y":"-80"},"elements":[{"id":"f265085","elType":"widget","settings":{"scroll_y":"-80","_padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"19","isLinked":""},"_padding_tablet":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"_padding_mobile":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_gallery"}],"isInner":"1"},{"id":"690423c","elType":"container","settings":{"content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"flex_gap":{"column":"40","row":"40","isLinked":"1","unit":"px","size":"40"},"flex_gap_tablet":{"column":"20","row":"20","isLinked":"1","unit":"px","size":"20"},"padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"8","isLinked":""},"padding_tablet":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"padding_mobile":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"ef67dae","elType":"widget","settings":{"typography_typography":"custom","typography_font_size":{"unit":"px","size":"48","sizes":[]},"typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"typography_font_size_mobile":{"unit":"px","size":"22","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_title"},{"id":"b33d0a5","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_rating"},{"id":"839894e","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_short_description"},{"id":"8b984a1","elType":"widget","settings":{"main_price_typography_typography":"custom","main_price_typography_font_size":{"unit":"px","size":"38","sizes":[]},"main_price_typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"main_price_typography_font_size_mobile":{"unit":"px","size":"20","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_price"},{"id":"447356d","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_stock_progress_bar"},{"id":"4853f1e","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_countdown"},{"id":"b79eeb3","elType":"container","settings":{"flex_direction":"row","flex_align_items":"flex-end","flex_gap":{"column":"10","row":"20","isLinked":"","unit":"px","size":"10"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"44eb12e","elType":"widget","settings":{"button_design":"full","_element_width":"initial","_element_custom_width":{"unit":"%","size":"77","sizes":[]},"_element_custom_width_tablet":{"unit":"%","size":"72","sizes":[]},"_element_custom_width_mobile":{"unit":"px","size":"250","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_add_to_cart"},{"id":"2a6793f","elType":"widget","settings":{"style":"icon","_padding":{"unit":"px","top":"8","right":"11","bottom":"8","left":"11","isLinked":""},"scroll_y":"-80","_background_background":"classic","_background_color":"#FFFFFF","_border_radius":{"unit":"px","top":"21","right":"21","bottom":"21","left":"21","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_compare_button"},{"id":"6bc5f1f","elType":"widget","settings":{"style":"icon","_padding":{"unit":"px","top":"8","right":"11","bottom":"8","left":"11","isLinked":""},"scroll_y":"-80","_background_background":"classic","_background_color":"#FFFFFF","_border_radius":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_wishlist_button"}],"isInner":"1"},{"id":"0505e45","elType":"widget","settings":{"content_width":"full","hook":"woocommerce_single_product_summary","scroll_y":"-80"},"elements":[],"widgetType":"wd_wc_hook"},{"id":"3b7b13d","elType":"widget","settings":{"content_repeater":[{"title":"more 2 products","subtitle":"SAVE 15%","_id":"5a77a7c","icon_type":"icon","icon_text":"01.","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/pills-elementor\/wp-content\/uploads\/sites\/23\/2024\/03\/w-pas-limited-offer.png","id":"849","size":"","alt":"","source":"library"},"image_size":"custom","image_custom_dimension":{"width":"100","height":"118"},"content":"","btn_text":""},{"title":"6 for the price of 3","subtitle":"SAVE 50%","icon_type":"icon","icon_text":"01.","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/pills-elementor\/wp-content\/uploads\/sites\/23\/2024\/03\/w-pas-limited-offer-2.png","id":"850","size":"","alt":"","source":"library"},"image_size":"custom","image_custom_dimension":{"width":"100","height":"118"},"content":"","btn_text":"","_id":"74964da"}],"alignment":"left","image_alignment":"left","image_vertical_alignment":"middle","box_bg_color":"#EAEAEA","slides_per_view":{"unit":"px","size":"2","sizes":[]},"slides_per_view_tablet":{"unit":"px","size":"1","sizes":[]},"slides_per_view_mobile":{"unit":"px","size":"1","sizes":[]},"slider_spacing":"20","hide_prev_next_buttons":"yes","hide_pagination_control":"yes","hide_scrollbar_mobile":"","sync_parent_id":"wd_6602e92475e25","subtitle_color":"primary","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"unit":"px","size":"18","sizes":[]},"subtitle_typography_font_weight":"600","title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"16","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_infobox_carousel"},{"id":"aa60370","elType":"widget","settings":{"text":"<p>* The information on this page is a summary and is not intended to cover all available information about this medication. It does not cover all possible uses, directions, precautions, drug interactions or adverse effects and is not a substitute for the expertise and judgement of your healthcare professional.<\/p>","typography_typography":"custom","typography_font_size":{"unit":"px","size":"14","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_text_block"}],"isInner":"1"}],"isInner":"1"}],"isInner":""},{"id":"4fa8dcf","elType":"container","settings":{"flex_direction":"column","container_sticky_offset":"50","scroll_y":"-80","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""}},"elements":[{"id":"e5fe58b","elType":"widget","settings":{"_padding":{"unit":"px","top":"30","right":"30","bottom":"30","left":"30","isLinked":"1"},"scroll_y":"-80","_background_background":"classic","_background_color":"#F7F7F7","_border_radius":{"unit":"px","top":"16","right":"16","bottom":"16","left":"16","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_content"}],"isInner":""},{"id":"017d5d1","elType":"container","settings":{"flex_direction":"row","flex_gap":{"unit":"px","size":"","column":"","row":"","isLinked":"1"},"flex_direction_tablet":"column","container_sticky_offset":"50","scroll_y":"-80","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""}},"elements":[{"id":"4dad127","elType":"container","settings":{"flex_direction":"column","content_width":"full","width":{"unit":"%","size":"42"},"width_tablet":{"unit":"%","size":"100","sizes":[]},"width_mobile":{"unit":"%","size":"","sizes":[]},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"7447245","elType":"widget","settings":{"subtitle":"","title":"Frequently asked questions","after_title":"","size":"large","align":"left","width":{"unit":"px","size":"415","sizes":[]},"width_tablet":{"unit":"px","size":"","sizes":[]},"width_mobile":{"unit":"px","size":"","sizes":[]},"title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"38","sizes":[]},"title_typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"title_typography_font_size_mobile":{"unit":"px","size":"22","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_title"}],"isInner":"1"},{"id":"20d0aed","elType":"container","settings":{"flex_direction":"column","content_width":"full","width":{"unit":"%","size":"58"},"width_tablet":{"unit":"%","size":"100","sizes":[]},"width_mobile":{"unit":"%","size":"","sizes":[]},"flex_gap":{"column":"0","row":"0","isLinked":"1","unit":"px","size":"0"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"6c951bc","elType":"widget","settings":{"items":[{"item_title":"How does my subscription work?","item_content":"<p>A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn\u2019t reflect what a living, breathing application must endure. Real data does.<\/p>","_id":"1e1b2a1"},{"item_title":"How do I edit what's in my plan?","item_content":"<p>Websites in professional use templating systems. Commercial publishing platforms and content management systems ensure that you can show different text, different data using the same template. When it\u2019s about controlling hundreds of articles, product pages for web shops.<\/p>","_id":"dec2db5"},{"item_title":"Can I change my next delivery date?","item_content":"<p>A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn\u2019t reflect what a living, breathing application must endure. Real data does.<\/p>","_id":"fc0d4c7"},{"item_title":"It's been a while since I took the quiz. Can I get a new recommendation?","item_content":"<p>Websites in professional use templating systems. Commercial publishing platforms and content management systems ensure that you can show different text, different data using the same template. When it\u2019s about controlling hundreds of articles, product pages for web shops.<\/p>","_id":"145a3f3"}],"state":"all_closed","hide_top_bottom_border":"yes","title_typography_typography":"custom","title_typography_font_family":"Geologica","title_typography_font_size":{"unit":"px","size":"18","sizes":[]},"title_typography_font_weight":"500","opener_style":"plus","opener_alignment":"right","scroll_y":"-80"},"elements":[],"widgetType":"wd_accordion"},{"id":"0ce22a3","elType":"widget","settings":{"text":"Still stumped? Contact us","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/pills-elementor\/contact-us\/","is_external":"","nofollow":"","custom_attributes":""},"style":"link","color":"black","align":"left","scroll_y":"-80"},"elements":[],"widgetType":"wd_button"}],"isInner":"1"}],"isInner":""},{"id":"2209f4e","elType":"container","settings":{"flex_direction":"column","flex_gap":{"column":"0","row":"0","isLinked":"1","unit":"px","size":"0"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"d824cf0","elType":"widget","settings":{"text":"Divider","color":"#0000001C","gap":{"unit":"px","size":"0","sizes":[]},"_margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"_margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""},"scroll_y":"-80"},"elements":[],"widgetType":"divider"},{"id":"f2e4ba1","elType":"widget","settings":{"subtitle":"","title":"Customer Reviews","after_title":"","size":"large","align":"left","title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"38","sizes":[]},"title_typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"title_typography_font_size_mobile":{"unit":"px","size":"22","sizes":[]},"_margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":""},"scroll_y":"-80"},"elements":[],"widgetType":"wd_title"},{"id":"263ae3d","elType":"widget","settings":{"layout":"two-column","reviews_columns":"2","scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_reviews"}],"isInner":""}]]]></wp:meta_value>
+							<wp:meta_value><![CDATA[[{"id":"68c756e","elType":"container","settings":{"flex_direction":"column","wd_section_stretch":"stretch","background_background":"classic","background_color":"#F7F7F7","margin":{"unit":"px","top":"-40","right":"0","bottom":"80","left":"0","isLinked":""},"margin_tablet":{"unit":"px","top":"-40","right":"0","bottom":"60","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"-40","right":"0","bottom":"40","left":"0","isLinked":""},"padding":{"unit":"px","top":"30","right":"15","bottom":"30","left":"15","isLinked":""},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"ab86041","elType":"container","settings":{"flex_direction":"row","flex_justify_content":"space-between","flex_align_items":"center","padding_tablet":{"unit":"%","top":"0","right":"0","bottom":"0","left":"50","isLinked":""},"padding_mobile":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"f1b4d97","elType":"widget","settings":{"nowrap_md":"md","_margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"0","left":"10","isLinked":""},"_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"scroll_y":"-80"},"elements":[],"widgetType":"wd_wc_breadcrumb"},{"id":"755d292","elType":"widget","settings":{"scroll_y":"-80","hide_tablet":"hidden-tablet","hide_mobile":"hidden-mobile"},"elements":[],"widgetType":"wd_single_product_nav"}],"isInner":"1"},{"id":"9d32419","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_wc_notices"},{"id":"e1308ce","elType":"container","settings":{"content_width":"full","flex_direction":"row","flex_direction_mobile":"column","container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"0a1ff3e","elType":"container","settings":{"content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"padding":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"padding_tablet":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"padding_mobile":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"container_sticky":"yes","container_sticky_offset":"0","scroll_y":"-80"},"elements":[{"id":"f265085","elType":"widget","settings":{"scroll_y":"-80","_padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"19","isLinked":""},"_padding_tablet":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"_padding_mobile":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_gallery"}],"isInner":"1"},{"id":"690423c","elType":"container","settings":{"content_width":"full","width":{"unit":"%","size":"50","sizes":[]},"flex_gap":{"column":"40","row":"40","isLinked":"1","unit":"px","size":"40"},"flex_gap_tablet":{"column":"20","row":"20","isLinked":"1","unit":"px","size":"20"},"padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"8","isLinked":""},"padding_tablet":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":"1"},"padding_mobile":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":"1"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"ef67dae","elType":"widget","settings":{"typography_typography":"custom","typography_font_size":{"unit":"px","size":"48","sizes":[]},"typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"typography_font_size_mobile":{"unit":"px","size":"22","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_title"},{"id":"b33d0a5","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_rating"},{"id":"839894e","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_short_description"},{"id":"8b984a1","elType":"widget","settings":{"main_price_typography_typography":"custom","main_price_typography_font_size":{"unit":"px","size":"38","sizes":[]},"main_price_typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"main_price_typography_font_size_mobile":{"unit":"px","size":"20","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_price"},{"id":"447356d","elType":"widget","settings":{"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_stock_progress_bar"},{"id":"4853f1e","elType":"widget","settings":{"scroll_y":"-80","separator_text":":"},"elements":[],"widgetType":"wd_single_product_countdown"},{"id":"b79eeb3","elType":"container","settings":{"flex_direction":"row","flex_align_items":"flex-end","flex_gap":{"column":"10","row":"20","isLinked":"","unit":"px","size":"10"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"44eb12e","elType":"widget","settings":{"button_design":"full","_element_width":"initial","_element_custom_width":{"unit":"%","size":"77","sizes":[]},"_element_custom_width_tablet":{"unit":"%","size":"72","sizes":[]},"_element_custom_width_mobile":{"unit":"px","size":"250","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_add_to_cart"},{"id":"2a6793f","elType":"widget","settings":{"style":"icon","_padding":{"unit":"px","top":"11","right":"11","bottom":"11","left":"11","isLinked":""},"scroll_y":"-80","_background_background":"classic","_background_color":"#FFFFFF","_border_radius":{"unit":"px","top":"21","right":"21","bottom":"21","left":"21","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_compare_button"},{"id":"6bc5f1f","elType":"widget","settings":{"style":"icon","_padding":{"unit":"px","top":"11","right":"11","bottom":"11","left":"11","isLinked":""},"scroll_y":"-80","_background_background":"classic","_background_color":"#FFFFFF","_border_radius":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_wishlist_button"}],"isInner":"1"},{"id":"0505e45","elType":"widget","settings":{"content_width":"full","hook":"woocommerce_single_product_summary","scroll_y":"-80"},"elements":[],"widgetType":"wd_wc_hook"},{"id":"3b7b13d","elType":"widget","settings":{"content_repeater":[{"title":"more 2 products","subtitle":"SAVE 15%","_id":"5a77a7c","icon_type":"icon","icon_text":"01.","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/pills-elementor\/wp-content\/uploads\/sites\/23\/2024\/03\/w-pas-limited-offer-opt.png","id":1129,"size":"","alt":"","source":"library"},"image_size":"custom","image_custom_dimension":{"width":"100","height":"118"},"content":"","btn_text":""},{"title":"6 for the price of 3","subtitle":"SAVE 50%","icon_type":"icon","icon_text":"01.","image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/pills-elementor\/wp-content\/uploads\/sites\/23\/2024\/03\/w-pas-limited-offer-2-opt.png","id":1130,"size":"","alt":"","source":"library"},"image_size":"custom","image_custom_dimension":{"width":"100","height":"118"},"content":"","btn_text":"","_id":"74964da"}],"alignment":"left","image_alignment":"left","image_vertical_alignment":"middle","box_bg_color":"#EAEAEA","slides_per_view":{"unit":"px","size":"2","sizes":[]},"slides_per_view_tablet":{"unit":"px","size":"1","sizes":[]},"slides_per_view_mobile":{"unit":"px","size":"1","sizes":[]},"slider_spacing":"20","hide_prev_next_buttons":"yes","hide_pagination_control":"yes","hide_scrollbar_mobile":"","sync_parent_id":"wd_6602e92475e25","subtitle_color":"primary","subtitle_typography_typography":"custom","subtitle_typography_font_size":{"unit":"px","size":"18","sizes":[]},"subtitle_typography_font_weight":"600","title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"16","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_infobox_carousel"},{"id":"aa60370","elType":"widget","settings":{"text":"<p>* The information on this page is a summary and is not intended to cover all available information about this medication. It does not cover all possible uses, directions, precautions, drug interactions or adverse effects and is not a substitute for the expertise and judgement of your healthcare professional.<\/p>","typography_typography":"custom","typography_font_size":{"unit":"px","size":"14","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_text_block"}],"isInner":"1"}],"isInner":"1"}],"isInner":false},{"id":"4fa8dcf","elType":"container","settings":{"flex_direction":"column","container_sticky_offset":"50","scroll_y":"-80","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""}},"elements":[{"id":"e5fe58b","elType":"widget","settings":{"_padding":{"unit":"px","top":"30","right":"30","bottom":"30","left":"30","isLinked":"1"},"scroll_y":"-80","_background_background":"classic","_background_color":"#F7F7F7","_border_radius":{"unit":"px","top":"16","right":"16","bottom":"16","left":"16","isLinked":"1"}},"elements":[],"widgetType":"wd_single_product_content"}],"isInner":false},{"id":"017d5d1","elType":"container","settings":{"flex_direction":"row","flex_gap":{"unit":"px","size":"","column":"","row":"","isLinked":"1"},"flex_direction_tablet":"column","container_sticky_offset":"50","scroll_y":"-80","margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""}},"elements":[{"id":"4dad127","elType":"container","settings":{"flex_direction":"column","content_width":"full","width":{"unit":"%","size":"42"},"width_tablet":{"unit":"%","size":"100","sizes":[]},"width_mobile":{"unit":"%","size":"","sizes":[]},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"7447245","elType":"widget","settings":{"subtitle":"","title":"Frequently asked questions","after_title":"","size":"large","align":"left","width":{"unit":"px","size":"415","sizes":[]},"width_tablet":{"unit":"px","size":"","sizes":[]},"width_mobile":{"unit":"px","size":"","sizes":[]},"title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"38","sizes":[]},"title_typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"title_typography_font_size_mobile":{"unit":"px","size":"22","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_title"}],"isInner":"1"},{"id":"20d0aed","elType":"container","settings":{"flex_direction":"column","content_width":"full","width":{"unit":"%","size":"58"},"width_tablet":{"unit":"%","size":"100","sizes":[]},"width_mobile":{"unit":"%","size":"","sizes":[]},"flex_gap":{"column":"0","row":"0","isLinked":"1","unit":"px","size":"0"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"6c951bc","elType":"widget","settings":{"items":[{"item_title":"How does my subscription work?","item_content":"<p>A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn\u2019t reflect what a living, breathing application must endure. Real data does.<\/p>","_id":"1e1b2a1"},{"item_title":"How do I edit what's in my plan?","item_content":"<p>Websites in professional use templating systems. Commercial publishing platforms and content management systems ensure that you can show different text, different data using the same template. When it\u2019s about controlling hundreds of articles, product pages for web shops.<\/p>","_id":"dec2db5"},{"item_title":"Can I change my next delivery date?","item_content":"<p>A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn\u2019t reflect what a living, breathing application must endure. Real data does.<\/p>","_id":"fc0d4c7"},{"item_title":"It's been a while since I took the quiz. Can I get a new recommendation?","item_content":"<p>Websites in professional use templating systems. Commercial publishing platforms and content management systems ensure that you can show different text, different data using the same template. When it\u2019s about controlling hundreds of articles, product pages for web shops.<\/p>","_id":"145a3f3"}],"state":"all_closed","hide_top_bottom_border":"yes","title_typography_typography":"custom","title_typography_font_family":"Geologica","title_typography_font_size":{"unit":"px","size":"18","sizes":[]},"title_typography_font_weight":"500","opener_style":"plus","opener_alignment":"right","scroll_y":"-80"},"elements":[],"widgetType":"wd_accordion"},{"id":"0ce22a3","elType":"widget","settings":{"text":"Still stumped? Contact us","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/pills-elementor\/contact-us\/","is_external":"","nofollow":"","custom_attributes":""},"style":"link","color":"black","align":"left","scroll_y":"-80"},"elements":[],"widgetType":"wd_button"}],"isInner":"1"}],"isInner":false},{"id":"2209f4e","elType":"container","settings":{"flex_direction":"column","flex_gap":{"column":"0","row":"0","isLinked":"1","unit":"px","size":"0"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"d824cf0","elType":"widget","settings":{"text":"Divider","color":"#0000001C","gap":{"unit":"px","size":"0","sizes":[]},"_margin":{"unit":"px","top":"0","right":"0","bottom":"80","left":"0","isLinked":""},"_margin_tablet":{"unit":"px","top":"0","right":"0","bottom":"60","left":"0","isLinked":""},"_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""},"scroll_y":"-80"},"elements":[],"widgetType":"divider"},{"id":"f2e4ba1","elType":"widget","settings":{"subtitle":"","title":"Customer Reviews","after_title":"","size":"large","align":"left","title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":"38","sizes":[]},"title_typography_font_size_tablet":{"unit":"px","size":"24","sizes":[]},"title_typography_font_size_mobile":{"unit":"px","size":"22","sizes":[]},"_margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":""},"scroll_y":"-80"},"elements":[],"widgetType":"wd_title"},{"id":"263ae3d","elType":"widget","settings":{"layout":"two-column","reviews_columns":"2","scroll_y":"-80"},"elements":[],"widgetType":"wd_single_product_reviews"}],"isInner":false}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:2:{s:7:"scripts";a:2:{i:0;s:4:"zoom";i:1;s:17:"wc-single-product";}s:6:"styles";a:1:{i:0;s:14:"widget-divider";}}]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[w-pas-limited-offer]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/pills-elementor/woodmart_layout/single-product-layout-pills/w-pas-limited-offer/</link>
-					<pubDate>Tue, 26 Mar 2024 15:44:16 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer.png</guid>
-															<wp:post_id>849</wp:post_id>
-					<wp:post_date><![CDATA[2024-03-26 15:44:16]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2024-03-26 15:44:16]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-03-26 15:44:16]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-03-26 15:44:16]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[w-pas-limited-offer]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>842</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer.png]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2024/03/w-pas-limited-offer.png]]></wp:meta_value>
-						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[w-pas-limited-offer-2]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/pills-elementor/woodmart_layout/single-product-layout-pills/w-pas-limited-offer-2/</link>
-					<pubDate>Tue, 26 Mar 2024 15:45:00 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-2.png</guid>
-															<wp:post_id>850</wp:post_id>
-					<wp:post_date><![CDATA[2024-03-26 15:45:00]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2024-03-26 15:45:00]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-03-26 15:45:00]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-03-26 15:45:00]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[open]]></wp:comment_status>
-					<wp:post_name><![CDATA[w-pas-limited-offer-2]]></wp:post_name>
-					<wp:status><![CDATA[inherit]]></wp:status>
-					<wp:post_parent>842</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[attachment]]></wp:post_type>
-											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-2.png]]></wp:attachment_url>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-							<wp:meta_value><![CDATA[2024/03/w-pas-limited-offer-2.png]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -1172,12 +1143,12 @@
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:1:{s:7:"scripts";a:1:{i:0;s:11:"wc-checkout";}}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
 							<wp:meta_value><![CDATA[wp-post]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{s:7:"scripts";a:1:{i:0;s:11:"wc-checkout";}}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
@@ -1269,12 +1240,58 @@
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
+							<wp:meta_value><![CDATA[wp-post]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:1:{s:7:"scripts";a:2:{i:0;s:11:"wc-checkout";i:1;s:21:"wc-add-payment-method";}}]]></wp:meta_value>
 						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-							<wp:meta_value><![CDATA[wp-post]]></wp:meta_value>
+										</item>
+								<item>
+					<title><![CDATA[w-pas-limited-offer-opt]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/pills-elementor/woodmart_layout/single-product-layout-pills/w-pas-limited-offer-opt/</link>
+					<pubDate>Wed, 08 Oct 2025 12:39:14 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-opt.png</guid>
+															<wp:post_id>1129</wp:post_id>
+					<wp:post_date><![CDATA[2025-10-08 12:39:14]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2025-10-08 12:39:14]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2025-10-08 12:39:14]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-08 12:39:14]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[open]]></wp:comment_status>
+					<wp:post_name><![CDATA[w-pas-limited-offer-opt]]></wp:post_name>
+					<wp:status><![CDATA[inherit]]></wp:status>
+					<wp:post_parent>842</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[attachment]]></wp:post_type>
+											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-opt.png]]></wp:attachment_url>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+							<wp:meta_value><![CDATA[2024/03/w-pas-limited-offer-opt.png]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
+					<title><![CDATA[w-pas-limited-offer-2-opt]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/pills-elementor/woodmart_layout/single-product-layout-pills/w-pas-limited-offer-2-opt/</link>
+					<pubDate>Wed, 08 Oct 2025 12:39:23 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-2-opt.png</guid>
+															<wp:post_id>1130</wp:post_id>
+					<wp:post_date><![CDATA[2025-10-08 12:39:23]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2025-10-08 12:39:23]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2025-10-08 12:39:23]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-08 12:39:23]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[open]]></wp:comment_status>
+					<wp:post_name><![CDATA[w-pas-limited-offer-2-opt]]></wp:post_name>
+					<wp:status><![CDATA[inherit]]></wp:status>
+					<wp:post_parent>842</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[attachment]]></wp:post_type>
+											<wp:attachment_url><![CDATA[http://dummy.xtemos.com/woodmart2/pills-elementor/wp-content/uploads/sites/23/2024/03/w-pas-limited-offer-2-opt.png]]></wp:attachment_url>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+							<wp:meta_value><![CDATA[2024/03/w-pas-limited-offer-2-opt.png]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 				</channel>

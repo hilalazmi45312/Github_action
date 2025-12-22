@@ -28,25 +28,29 @@
 			    symbols_count = parseInt($this.data('symbols_count')),
 			    productCat    = $this.find('[name="product_cat"]'),
 				$parent       = $this.parent(),
-				$results      = $parent.find('.wd-dropdown-results > .wd-scroll-content'),
 			    postType      = $this.data('post_type'),
 			    url           = woodmart_settings.ajaxurl + '?action=woodmart_ajax_search',
 			    price         = parseInt($this.data('price')),
 			    sku           = $this.data('sku'),
+				isFullScreen  = $this.parents('.wd-search-full-screen').length,
 				isFullScreen2 = $this.parents('.wd-search-full-screen-2').length,
-				$parentResult = $parent.find('.wd-dropdown-results');
+				isDropdown    = $this.parents('.wd-search-dropdown').length,
+				$results      = $parent.find(`.wd-search-results${ isFullScreen || isFullScreen2 ? '' : ' > ' }.wd-scroll-content`),
+				$parentResult = $parent.find('.wd-search-results');
+
+			var	enqueueProductCatResults = $this.data('include_cat_search');
 
 			if (number > 0) {
 				url += '&number=' + number;
 			}
 			url += '&post_type=' + postType;
 
-			$results.on('click', '.view-all-results', function() {
-				$this.submit();
-			});
-
 			if (productCat.length && productCat.val() !== '') {
 				url += '&product_cat=' + productCat.val();
+			}			
+
+			if (enqueueProductCatResults && 'yes' === enqueueProductCatResults) {
+				url += '&include_cat_search=' + enqueueProductCatResults;
 			}
 
 			$this.find('[type="text"]').on('focus keyup cat_selected', function(e) {
@@ -63,35 +67,64 @@
 						appendTo        : $results,
 						minChars        : symbols_count,
 						deferRequestBy  : woodmart_settings.ajax_search_delay,
-						onSelect        : function(suggestion) {
-							if (suggestion.permalink.length > 0) {
-								window.location.href = suggestion.permalink;
-							}
-						},
-						onHide          : function() {
+						onHide          : function(container, isClearBtn) {
 							if ( isFullScreen2 ) {
 								$parentResult.removeClass('wd-no-results');
 							}
 
-							$parentResult.removeClass('wd-opened');
+							var $formWrapper          = isFullScreen2 ? $this.parent().parent() : $this.parent();
+							var isBeforeSearchContent = 'function' === typeof woodmartThemeModule.beforeSearchcontent && $formWrapper.find('.wd-search-history, .wd-search-requests, .wd-search-area').length;
+							
+							if (!isClearBtn && !isBeforeSearchContent) {
+								overlayBackground('close');
+							}
+
+							if (isClearBtn || isFullScreen2 || isFullScreen) {
+								$formWrapper.removeClass('wd-searched');
+							} else if ( ! isBeforeSearchContent ) {
+								$formWrapper.find('.wd-search-results').removeClass('wd-opened');
+
+								setTimeout(function() {
+									$formWrapper.removeClass('wd-searched');
+								}, 400);
+							}
 						},
 						onSearchStart   : function() {
-							$this.addClass('search-loading');
+							$this.addClass('wd-search-loading');
 						},
 						beforeRender    : function(container) {
-							$(container).find('.suggestion-divider-title').parent().addClass('suggestion-divider');
-							$(container).find('.no-found-msg').parent().addClass('suggestion-no-found');
-							if (container[0].childElementCount > 2) {
-								$(container).append('<div class="view-all-results"><span>' + woodmart_settings.all_results + '</span></div>');
+							if (!isDropdown) {
+								overlayBackground('open');
+							}
+
+							$(container).find('.wd-not-found-msg').parent().addClass('wd-not-found');
+
+							var showViewAllBtn = $(container).find('.wd-suggestion:not(.wd-not-found)').length > 0;
+
+							if (! $(container).find('[class*="wd-type-"]')) {
+								showViewAllBtn = container[0].childElementCount > 2;
+							}
+
+							if (showViewAllBtn) {
+								var formData  = $this.serializeArray();
+								var submitUrl = $this.attr('action') + '?' + $.param(formData);
+
+								$(container).append('<a class="wd-all-results" href="' + submitUrl + '">' + woodmart_settings.all_results + '</a>');
 							}
 
 							$(container).removeAttr('style');
 						},
+						onSelect: function(suggestion) {							
+							if (suggestion.permalink.length > 0) {
+								window.location.href = suggestion.permalink;
+							}
+
+							$this.parent().find('.wd-search-results').removeClass('wd-opened');
+						},
 						onSearchComplete: function() {
-							$this.removeClass('search-loading');
+							$this.removeClass('wd-search-loading');
 
 							woodmartThemeModule.$document.trigger('wood-images-loaded');
-
 						},
 						formatResult    : function(suggestion, currentValue) {
 							if (currentValue === '&') {
@@ -101,22 +134,22 @@
 								returnValue = '';
 
 							if (suggestion.divider) {
-								returnValue += ' <h5 class="suggestion-divider-title">' + suggestion.divider + '</h5>';
+								returnValue += ' <div class="suggestion-divider-title title">' + suggestion.divider + '</div>';
 							}
 
 							if (thumbnail && suggestion.thumbnail) {
-								returnValue += ' <div class="suggestion-thumb">' + suggestion.thumbnail + '</div>';
+								returnValue += ' <div class="wd-suggestion-thumb">' + suggestion.thumbnail + '</div>';
 							}
 
 							if (suggestion.value) {
-								returnValue += ' <div class="suggestion-content wd-set-mb reset-last-child">';
-								returnValue += '<h4 class="wd-entities-title">' + suggestion.value
+								returnValue += ' <div class="wd-suggestion-content wd-set-mb reset-last-child">';
+								returnValue += '<div class="wd-entities-title">' + suggestion.value
 									.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
-									.replace(/&lt;(\/?strong)&gt;/g, '<$1>') + '</h4>';
+									.replace(/&lt;(\/?strong)&gt;/g, '<$1>') + '</div>';
 							}
 
 							if (sku && suggestion.sku) {
-								returnValue += ' <p class="suggestion-sku">' + suggestion.sku + '</p>';
+								returnValue += ' <p class="wd-suggestion-sku">' + suggestion.sku + '</p>';
 							}
 
 							if (price && suggestion.price) {
@@ -127,8 +160,18 @@
 								returnValue += ' </div>';
 							}
 
+							if (suggestion.permalink) {
+								var ariaLabel = '';
+
+								if (suggestion.value) {
+									ariaLabel = `aria-label="${suggestion.value.replace(/(<([^>]+)>)/ig, '')}"`;
+								}
+
+								returnValue += ` <a class="wd-fill" href="${suggestion.permalink}" ${ariaLabel}></a>`;
+							}
+
 							if (suggestion.products_not_found) {
-								returnValue = '<span class="no-found-msg">' + suggestion.value + '</span>';
+								returnValue = '<span class="wd-not-found-msg">' + suggestion.value + '</span>';
 							}
 
 							if ( isFullScreen2 ) {
@@ -139,8 +182,15 @@
 								}
 							}
 
-							$parentResult.addClass('wd-opened');
-							$this.parents('div[class*=\'wd-search-full-\']').addClass('wd-searched');
+							if (! isFullScreen && ! isFullScreen2) {
+								$parentResult.addClass('wd-opened');
+							}
+
+							if (isFullScreen2) {
+								$this.parent().parent().addClass('wd-searched');
+							} else {
+								$this.parent().addClass('wd-searched');
+							}
 
 							return returnValue;
 						}
@@ -157,6 +207,10 @@
 					let searchForm = $this.find('[type="text"]').devbridgeAutocomplete()
 					let serviceUrl = woodmart_settings.ajaxurl + '?' + new URLSearchParams(serviceUrlData).toString();
 
+					if (enqueueProductCatResults && 'yes' === enqueueProductCatResults) {
+						serviceUrl += '&include_cat_search=' + enqueueProductCatResults;
+					}
+
 					searchForm.setOptions({
 						serviceUrl: serviceUrl
 					});
@@ -169,14 +223,22 @@
 			woodmartThemeModule.$document.on('click', function(e) {
 				var target = e.target;
 
-				if (!$(target).is('.wd-search-form') && !$(target).parents().is('.wd-search-form') && !$(target).is('.wd-search-full-screen') && !$(target).parents().is('.wd-search-full-screen')) {
+				if (!$(target).is('.wd-search-form') && !$(target).parents().is('.wd-search-form') && !$(target).is('.wd-search-full-screen') && !$(target).parents().is('.wd-search-full-screen') && !$(target).is('.wd-clear-search')) {
 					$this.find('[type="text"]').devbridgeAutocomplete('hide');
 				}
 			});
 
-			$('.wd-dropdown-results > .wd-scroll-content').on('click', function(e) {
+			$('.wd-search-results > .wd-scroll-content').on('click', function(e) {
 				e.stopPropagation();
 			});
+
+			function overlayBackground( action ) {
+				if (0 === $this.parents('.wd-search-form.wd-display-form.wd-with-overlay').length) {
+					return;
+				}
+
+				$('.wd-close-side').trigger('wdCloseSideAction', ['open' === action ? 'show' : 'hide', 'click']);
+			}
 		});
 
 		$('.wd-header-search.wd-display-dropdown > a').on('click', function(e) {

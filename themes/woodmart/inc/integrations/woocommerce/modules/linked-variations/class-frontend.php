@@ -11,12 +11,16 @@ class Frontend extends Singleton {
 	 *
 	 * @var array
 	 */
-	private $linked_data = [];
+	private $linked_data = array();
 
 	/**
 	 * Construct.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'linked_variations' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->hooks();
 	}
 
@@ -24,7 +28,7 @@ class Frontend extends Singleton {
 	 * Hooks.
 	 */
 	public function hooks() {
-		add_action( 'woocommerce_single_product_summary', [ $this, 'output' ], 25 );
+		add_action( 'woocommerce_single_product_summary', array( $this, 'output' ), 25 );
 	}
 
 	/**
@@ -54,7 +58,7 @@ class Frontend extends Singleton {
 		woodmart_enqueue_inline_style( 'woo-mod-swatches-base' );
 
 		$current_attributes     = $this->get_product_attributes( $product->get_id() );
-		$linked_variations_data = $this->get_linked_variations( $product->get_id() );
+		$linked_variations_data = $this->get_linked_variations( $current_attributes );
 		$swatch_limit           = false;
 		$more_limit_swathes     = (int) apply_filters( 'woodmart_show_more_limit_swatches_count', 1 );
 
@@ -131,7 +135,7 @@ class Frontend extends Singleton {
 											$classes = wd_add_cssclass( 'wd-bg wd-tooltip', $classes );
 
 											if ( is_array( $term_meta['image'] ) ) {
-												$image = wp_get_attachment_image( $term_meta['image']['id'], 'full' );
+												$image = wp_get_attachment_image( $term_meta['image']['id'], 'woocommerce_thumbnail' );
 											} else {
 												$image = '<img src="' . $term_meta['image'] . '" alt="' . esc_attr__( 'Swatch image', 'woodmart' ) . '">';
 											}
@@ -193,52 +197,52 @@ class Frontend extends Singleton {
 	/**
 	 * Get linked variations data.
 	 *
-	 * @param int $product_id Product id.
+	 * @param array $attributes Product attribute.
 	 *
 	 * @return array
 	 */
-	public function get_linked_variations( $product_id ) {
-		$attributes = $this->get_product_attributes( $product_id );
-		$output     = array();
+	public function get_linked_variations( $attributes ) {
+		$cached_attrs    = array();
+		$cached_products = array();
+		$output          = array();
 
 		if ( empty( $attributes['slugs'] ) ) {
 			return $output;
 		}
 
+		foreach ( $this->linked_data['products'] as $id ) {
+			$product = wc_get_product( $id );
+			if ( $product && $product->get_status() === 'publish' ) {
+				$cached_products[ $id ] = $product;
+				$cached_attrs[ $id ]    = $product->get_attributes();
+			}
+		}
+
 		foreach ( $attributes['slugs'] as $taxonomy => $attribute ) {
 			$taxonomy_ids = array();
 
-			foreach ( $this->linked_data['products'] as $current_product_id ) {
-				$current_product = wc_get_product( $current_product_id );
-
-				if ( ! $current_product || $current_product->get_status() !== 'publish' ) {
+			foreach ( $cached_attrs as $attrs ) {
+				if ( empty( $attrs[ $taxonomy ] ) || ! $attrs[ $taxonomy ]->get_options() ) {
 					continue;
 				}
-
-				$current_product_attrs = $current_product->get_attributes();
-
-				if ( is_wp_error( $current_product_attrs ) || empty( $current_product_attrs[ $taxonomy ] ) || ! $current_product_attrs[ $taxonomy ]->get_options() ) {
-					continue;
-				}
-
-				$taxonomy_ids = array_merge( $taxonomy_ids, $current_product_attrs[ $taxonomy ]->get_options() );
+				$taxonomy_ids = array_merge( $taxonomy_ids, $attrs[ $taxonomy ]->get_options() );
 			}
 
 			$terms = get_terms(
-				[
+				array(
 					'taxonomy' => $taxonomy,
 					'include'  => array_unique( $taxonomy_ids ),
-				]
+				)
 			);
 
-			foreach ( $terms as $term ) {
-				$data = $this->get_linked_variation_data_for_attribute( $product_id, $taxonomy, $term->slug );
+			$linked_variations_data = $this->get_linked_variations_data_cached( $cached_products );
 
-				// @codeCoverageIgnoreStart
+			foreach ( $terms as $term ) {
+				$data = $this->get_linked_variation_data_for_attribute_cached( $taxonomy, $term->slug, $attributes, $linked_variations_data );
+
 				if ( ! $data ) {
 					continue;
 				}
-				// @codeCoverageIgnoreEnd
 
 				$output[ $taxonomy ]['terms'][ $term->slug ] = $data;
 				$output[ $taxonomy ]['label'][ $term->slug ] = $term->name;
@@ -249,23 +253,69 @@ class Frontend extends Singleton {
 	}
 
 	/**
+	 * Get linked variations data.
+	 *
+	 * @param array $products Products.
+	 * @return array
+	 */
+	private function get_linked_variations_data_cached( $products ) {
+		$linked_product = array();
+
+		foreach ( $products as $id => $product ) {
+			$linked_product[ $id ] = array(
+				'id'             => $id,
+				'permalink'      => $product->get_permalink(),
+				'image'          => $product->get_image( 'shop_thumbnail' ),
+				'title'          => $product->get_title(),
+				'stock_status'   => $product->get_stock_status(),
+				'is_purchasable' => $product->is_purchasable(),
+				'attributes'     => $this->get_product_attributes( $id ),
+			);
+		}
+
+		return $linked_product;
+	}
+
+	/**
+	 * Get linked variation data for attribute.
+	 *
+	 * @param string $taxonomy Taxonomy.
+	 * @param string $term_slug Term slug.
+	 * @param array  $current_attributes Current attributes.
+	 * @param array  $linked_variations Linked variations.
+	 * @return array
+	 */
+	public function get_linked_variation_data_for_attribute_cached( $taxonomy, $term_slug, $current_attributes, $linked_variations ) {
+		$current_attributes['slugs'][ $taxonomy ] = $term_slug;
+
+		foreach ( $linked_variations as $linked_variation ) {
+			if ( ! empty( $linked_variation['attributes'] ) &&
+				! array_diff_assoc( $current_attributes['slugs'], $linked_variation['attributes']['slugs'] ) ) {
+				return $linked_variation;
+			}
+		}
+
+		return array();
+	}
+
+	/**
 	 * Set data.
 	 *
 	 * @param int $product_id Product id.
 	 */
 	private function set_linked_data( $product_id ) {
 		$post = new WP_Query(
-			[
+			array(
 				'post_type'   => 'woodmart_woo_lv',
 				'numberposts' => 1,
 				'meta_query'  => [ // phpcs:ignore
-					[
+					array(
 						'key'     => '_woodmart_linked_products',
 						'value'   => sprintf( '"%d"', $product_id ),
 						'compare' => 'LIKE',
-					],
+					),
 				],
-			]
+			)
 		);
 
 		// @codeCoverageIgnoreStart
@@ -274,11 +324,11 @@ class Frontend extends Singleton {
 		}
 		// @codeCoverageIgnoreEnd
 
-		$this->linked_data = [
+		$this->linked_data = array(
 			'products'  => get_post_meta( $post->posts[0]->ID, '_woodmart_linked_products', true ),
 			'attrs'     => get_post_meta( $post->posts[0]->ID, '_woodmart_linked_attrs', true ),
 			'use_image' => get_post_meta( $post->posts[0]->ID, '_woodmart_linked_use_product_image', true ),
-		];
+		);
 	}
 
 	/**
@@ -289,7 +339,7 @@ class Frontend extends Singleton {
 	 * @return array
 	 */
 	private function get_product_attributes( $product_id ) {
-		$attributes = [];
+		$attributes = array();
 
 		foreach ( $this->linked_data['attrs'] as $attribute ) {
 			$terms = get_the_terms( $product_id, $attribute );
@@ -300,73 +350,16 @@ class Frontend extends Singleton {
 
 			$first_term = array_pop( $terms );
 
-			$attributes[ $product_id ]['slugs'][ $attribute ]    = $first_term->slug;
-			$attributes[ $product_id ]['labels'][ $attribute ]   = $first_term->name;
-			$attributes[ $product_id ]['taxonomy'][ $attribute ] = get_taxonomy( $attribute )->labels->singular_name;
-			$attributes[ $product_id ]['meta'][ $attribute ]     = [
+			$attributes['slugs'][ $attribute ]    = $first_term->slug;
+			$attributes['labels'][ $attribute ]   = $first_term->name;
+			$attributes['taxonomy'][ $attribute ] = get_taxonomy( $attribute )->labels->singular_name;
+			$attributes['meta'][ $attribute ]     = array(
 				'color' => get_term_meta( $first_term->term_id, 'color', true ),
 				'image' => get_term_meta( $first_term->term_id, 'image', true ),
-			];
+			);
 		}
 
-		return array_key_exists( $product_id, $attributes ) ? $attributes[ $product_id ] : array();
-	}
-
-	/**
-	 * Get linked variation data for attribute.
-	 *
-	 * @param int    $product_id Product id.
-	 * @param string $taxonomy Taxonomy.
-	 * @param string $term_slug Term slug.
-	 *
-	 * @return array
-	 */
-	public function get_linked_variation_data_for_attribute( $product_id, $taxonomy, $term_slug ) {
-		$current_attributes = $this->get_product_attributes( $product_id );
-		$linked_variations  = $this->get_linked_variations_data( $product_id );
-
-		$current_attributes['slugs'][ $taxonomy ] = $term_slug;
-
-		$output = [];
-
-		foreach ( $linked_variations as $linked_variation ) {
-			if ( ! empty( $linked_variation['attributes'] ) && ! array_diff_assoc( $current_attributes['slugs'], $linked_variation['attributes']['slugs'] ) ) {
-				$output = $linked_variation;
-			}
-		}
-
-		return $output;
-	}
-
-	/**
-	 * Get product attributes.
-	 *
-	 * @param int $product_id Product id.
-	 *
-	 * @return array
-	 */
-	private function get_linked_variations_data( $product_id ) {
-		$linked_products = [];
-
-		foreach ( $this->linked_data['products'] as $linked_variation_id ) {
-			$linked_variation = wc_get_product( $linked_variation_id );
-
-			if ( ! $linked_variation || $linked_variation->get_status() !== 'publish' ) {
-				continue;
-			}
-
-			$linked_products[ $product_id ][ $linked_variation_id ] = [
-				'id'             => $linked_variation_id,
-				'permalink'      => $linked_variation->get_permalink(),
-				'image'          => $linked_variation->get_image( 'shop_thumbnail' ),
-				'title'          => $linked_variation->get_title(),
-				'stock_status'   => $linked_variation->get_stock_status(),
-				'is_purchasable' => $linked_variation->is_purchasable(),
-				'attributes'     => $this->get_product_attributes( $linked_variation_id ),
-			];
-		}
-
-		return $linked_products[ $product_id ];
+		return $attributes;
 	}
 }
 

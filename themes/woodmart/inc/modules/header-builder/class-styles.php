@@ -315,7 +315,7 @@ class Styles {
 <?php if ( ! $options['top-bar']['hide_desktop'] ) : ?>
 <?php // DROPDOWN ALIGN BOTTOM IN TOP BAR. ?>
 .whb-top-bar .wd-dropdown {
-	margin-top: <?php echo esc_html( $options['top-bar']['height'] / 2 - 20 ); ?>px;
+	margin-top: <?php echo esc_html( $options['top-bar']['height'] / 2 - 21 ); ?>px;
 }
 
 .whb-top-bar .wd-dropdown:after {
@@ -324,7 +324,7 @@ class Styles {
 
 <?php if ( ! $sticky_clone && $options['top-bar']['sticky'] ) : ?>
 .whb-sticked .whb-top-bar .wd-dropdown:not(.sub-sub-menu) {
-	margin-top: <?php echo esc_html( $options['top-bar']['sticky_height'] / 2 - 20 ); ?>px;
+	margin-top: <?php echo esc_html( $options['top-bar']['sticky_height'] / 2 - 21 ); ?>px;
 }
 
 .whb-sticked .whb-top-bar .wd-dropdown:not(.sub-sub-menu):after {
@@ -335,7 +335,7 @@ class Styles {
 
 <?php if ( ! $options['general-header']['hide_desktop'] && ! $sticky_clone && $options['general-header']['sticky'] ) : ?>
 .whb-sticked .whb-general-header .wd-dropdown:not(.sub-sub-menu) {
-	margin-top: <?php echo esc_html( $options['general-header']['sticky_height'] / 2 - 20 ); ?>px;
+	margin-top: <?php echo esc_html( $options['general-header']['sticky_height'] / 2 - 21 ); ?>px;
 }
 
 .whb-sticked .whb-general-header .wd-dropdown:not(.sub-sub-menu):after {
@@ -382,7 +382,7 @@ class Styles {
 <?php if ( ! $options['header-bottom']['hide_desktop'] ) : ?>
 <?php // DROPDOWN ALIGN BOTTOM IN HEADER BOTTOM. ?>
 .whb-header-bottom .wd-dropdown {
-	margin-top: <?php echo esc_html( $options['header-bottom']['height'] / 2 - 20 ); ?>px;
+	margin-top: <?php echo esc_html( $options['header-bottom']['height'] / 2 - 21 ); ?>px;
 }
 
 .whb-header-bottom .wd-dropdown:after {
@@ -391,7 +391,7 @@ class Styles {
 
 <?php if ( ! $sticky_clone && $options['header-bottom']['sticky'] ) : ?>
 .whb-sticked .whb-header-bottom .wd-dropdown:not(.sub-sub-menu) {
-	margin-top: <?php echo esc_html( $options['header-bottom']['sticky_height'] / 2 - 20 ); ?>px;
+	margin-top: <?php echo esc_html( $options['header-bottom']['sticky_height'] / 2 - 21 ); ?>px;
 }
 
 .whb-sticked .whb-header-bottom .wd-dropdown:not(.sub-sub-menu):after {
@@ -403,7 +403,7 @@ class Styles {
 <?php if ( $sticky_clone ) : ?>
 <?php // DROPDOWN ALIGN BOTTOM IN HEADER CLONE. ?>
 .whb-clone.whb-sticked .wd-dropdown:not(.sub-sub-menu) {
-	margin-top: <?php echo esc_html( $options['sticky_height'] / 2 - 20 ); ?>px;
+	margin-top: <?php echo esc_html( $options['sticky_height'] / 2 - 21 ); ?>px;
 }
 
 .whb-clone.whb-sticked .wd-dropdown:not(.sub-sub-menu):after {

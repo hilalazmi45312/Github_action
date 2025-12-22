@@ -18,15 +18,15 @@
  *
  * @package   SkyVerge/WooCommerce/Payment-Gateway/Admin
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2013-2024, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_12;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_12;
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_Payment_Gateway_Admin_Order' ) ) :
+if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\SV_WC_Payment_Gateway_Admin_Order' ) ) :
 
 
 /**
@@ -34,6 +34,7 @@ if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\SV_WC_
  *
  * @since 5.0.0
  */
+#[\AllowDynamicProperties]
 class SV_WC_Payment_Gateway_Admin_Order {
 
 
@@ -121,7 +122,9 @@ class SV_WC_Payment_Gateway_Admin_Order {
 	 */
 	protected function enqueue_edit_order_assets( \WC_Order $order ) {
 
-		wp_enqueue_script( 'sv-wc-payment-gateway-admin-order', $this->get_plugin()->get_payment_gateway_framework_assets_url() . '/dist/admin/sv-wc-payment-gateway-admin-order.js', array( 'jquery' ), SV_WC_Plugin::VERSION, true );
+		$version = $this->get_plugin()->get_assets_version();
+
+		wp_enqueue_script( 'sv-wc-payment-gateway-admin-order', $this->get_plugin()->get_payment_gateway_framework_assets_url() . '/dist/admin/sv-wc-payment-gateway-admin-order.js', [ 'jquery' ], $version, true );
 
 		wp_localize_script( 'sv-wc-payment-gateway-admin-order', 'sv_wc_payment_gateway_admin_order', array(
 			'ajax_url'       => admin_url( 'admin-ajax.php' ),
@@ -133,7 +136,7 @@ class SV_WC_Payment_Gateway_Admin_Order {
 			'capture_error'  => _x( 'Something went wrong, and the capture could not be completed. Please try again.', 'Payment transaction capture failed error message', 'woocommerce-plugin-framework' ),
 		) );
 
-		wp_enqueue_style( 'sv-wc-payment-gateway-admin-order', $this->get_plugin()->get_payment_gateway_framework_assets_url() . '/css/admin/sv-wc-payment-gateway-admin-order.min.css', SV_WC_Plugin::VERSION );
+		wp_enqueue_style( 'sv-wc-payment-gateway-admin-order', $this->get_plugin()->get_payment_gateway_framework_assets_url() . '/css/admin/sv-wc-payment-gateway-admin-order.min.css', $version );
 	}
 
 
@@ -153,7 +156,7 @@ class SV_WC_Payment_Gateway_Admin_Order {
 			return;
 		}
 
-		if ( ! SV_WC_Order_Compatibility::is_orders_screen_for_status( 'trash' ) ) {
+		if ( SV_WC_Order_Compatibility::is_orders_screen() && ! SV_WC_Order_Compatibility::is_orders_screen_for_status( 'trash' ) ) {
 
 			$can_capture_charge = false;
 

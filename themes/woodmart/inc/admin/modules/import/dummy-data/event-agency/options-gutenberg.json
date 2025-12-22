@@ -255,5 +255,9 @@
             "background": ""
         }
     },
-    "btns_shop_style": "flat"
+    "btns_shop_style": "flat",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

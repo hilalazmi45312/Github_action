@@ -32,7 +32,7 @@ woodmartThemeModule.waitlistSubscribeForm = function() {
 			}
 
 			jQuery(`${addToCartWrapperSelector} .variations_form`)
-				.on('found_variation', function(e, variation) {
+				.on('show_variation', function(e, variation) {
 					if (variation.is_in_stock) {
 						var form = document.querySelector('.wd-wtl-form:not(.wd-wtl-is-template)');
 

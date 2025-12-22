@@ -1,0 +1,932 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Product Badges\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-19 11:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.3.9\n"
+"X-Domain: wcpb-product-badges"
+
+#. %s: ssettings link
+#: includes/class-wcpb-product-badges-admin.php:170
+#, php-format
+msgid ""
+"%s to enable multiple badges per product or if you are experiencing any "
+"badge display issues."
+msgstr ""
+
+#. %s: badges link
+#: includes/class-wcpb-product-badges-admin.php:1199
+#, php-format
+msgid "%s which use the \"specific\" display option can be selected here."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:539
+#: includes/class-wcpb-product-badges-admin.php:556
+#: includes/class-wcpb-product-badges-admin.php:571
+#: includes/class-wcpb-product-badges-admin.php:585
+#: includes/class-wcpb-product-badges-admin.php:1316
+#: includes/class-wcpb-product-badges-admin.php:1369
+#: includes/class-wcpb-product-badges-admin.php:1419
+#: includes/class-wcpb-product-badges-admin.php:1461
+msgid "-"
+msgstr ""
+
+#. %s: settings URL
+#: includes/class-wcpb-product-badges-admin.php:1214
+#, php-format
+msgid ""
+"<a href=\"%s\">Multiple badges per product</a> is disabled, so only one "
+"badge will display on this product."
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Add badges to products to highlight key features, special offers and more."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:212
+msgid "Add New"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:211
+msgid "Add New Product Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1145
+msgid ""
+"Add your code here, it is recommended you use a block element for the "
+"contents of your badge to ensure it fits to the badge size width."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:361
+#: includes/class-wcpb-product-badges-admin.php:389
+#: includes/class-wcpb-product-badges-admin.php:493
+#: includes/class-wcpb-product-badges-admin.php:505
+#: includes/class-wcpb-product-badges-admin.php:830
+msgid "All"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:770
+msgid "Animation"
+msgstr ""
+
+#. %s: wp_kses_post() documentation link
+#: includes/class-wcpb-product-badges-admin.php:1151
+#, php-format
+msgid ""
+"Any code entered is output through %s which sanitizes the code for allowed "
+"tags."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:207
+msgid "Archives"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:208
+msgid "Attributes"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:840
+msgid "Availability"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:981
+#: includes/class-wcpb-product-badges-admin.php:1076
+msgid "Background color"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-public.php:485
+#: includes/class-wcpb-product-badges-admin.php:450
+msgid "Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:221
+msgid "Badge image custom"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:205
+#: includes/class-wcpb-product-badges-admin.php:210
+#: includes/class-wcpb-product-badges-admin.php:461
+#: includes/class-wcpb-product-badges-admin.php:1199
+msgid "Badges"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:884
+msgid "Black"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:844
+msgid "Black friday"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:888
+msgid "Blue"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1004
+#: includes/class-wcpb-product-badges-admin.php:1099
+msgid "Bold"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:608
+msgid "Boolean, default false"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1037
+#: includes/class-wcpb-product-badges-admin.php:1132
+msgid "Border radius bottom left"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1041
+#: includes/class-wcpb-product-badges-admin.php:1136
+msgid "Border radius bottom right"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1029
+#: includes/class-wcpb-product-badges-admin.php:1124
+msgid "Border radius top left"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1033
+#: includes/class-wcpb-product-badges-admin.php:1128
+msgid "Border radius top right"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:341
+#: includes/class-wcpb-product-badges-admin.php:735
+msgid "Bottom left"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:345
+#: includes/class-wcpb-product-badges-admin.php:737
+msgid "Bottom right"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:773
+msgid "Bounce"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:774
+msgid "Breathing"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:547
+msgid "Categories"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:970
+#: includes/class-wcpb-product-badges-admin.php:1065
+msgid "Center"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:848
+msgid "Christmas"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:317
+#: includes/class-wcpb-product-badges-admin.php:722
+#: includes/class-wcpb-product-badges-admin.php:1144
+msgid "Code"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1566
+msgid "Compatibility mode product loops position"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:174
+msgid "Compatibility mode product loops position is enabled"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1575
+msgid "Compatibility mode product pages"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:180
+msgid "Compatibility mode product pages is enabled"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:152
+#: includes/class-wcpb-product-badges-admin.php:170
+msgid "Configure settings"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:309
+#: includes/class-wcpb-product-badges-admin.php:718
+msgid "Countdown"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:950
+msgid "Countdown to"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1231
+msgid "Create one now."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:417
+#: includes/class-wcpb-product-badges-admin.php:519
+msgid "Custom rules"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:597
+msgid ""
+"Custom rules are applied via a WordPress filter hook. To create custom rules,"
+" add code to your theme's functions.php file or via a code snippets plugin:"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:852
+msgid "Cyber monday"
+msgstr ""
+
+#: assets/js/public-badge-countdown.js:40
+msgid "d"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:152
+msgid "Dismiss notice"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:441
+msgid "Display"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:785
+msgid "Duration (milliseconds)"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:856
+msgid "Easter"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:214
+msgid "Edit Product Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1569
+msgid "Enable compatibility mode product loops position"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1586
+msgid "Enable multiple badges per product"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:764
+msgid "Example CSS"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:613
+msgid "Example:"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1579
+#, php-format
+msgid "Example: %s"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:860
+msgid "Father's day"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:413
+#: includes/class-wcpb-product-badges-admin.php:517
+msgid "Featured"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:229
+msgid "Filter product badges list"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:987
+#: includes/class-wcpb-product-badges-admin.php:1082
+msgid "Font size"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:992
+#: includes/class-wcpb-product-badges-admin.php:1087
+msgid "Font style"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1001
+#: includes/class-wcpb-product-badges-admin.php:1096
+msgid "Font weight"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:864
+msgid "General"
+msgstr ""
+
+#: assets/js/admin.js:40
+msgid "Getting categories..."
+msgstr ""
+
+#: assets/js/admin.js:92
+msgid "Getting products..."
+msgstr ""
+
+#: assets/js/admin.js:118
+msgid "Getting shipping classes..."
+msgstr ""
+
+#: assets/js/admin.js:66
+msgid "Getting tags..."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:892
+msgid "Gray"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:896
+msgid "Green"
+msgstr ""
+
+#: assets/js/public-badge-countdown.js:46
+msgid "h"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:868
+msgid "Halloween"
+msgstr ""
+
+#. %s: responsive breakpoints link
+#: includes/class-wcpb-product-badges-admin.php:756
+#, php-format
+msgid ""
+"Height is automatically calculated from width, learn how to use different "
+"widths for %s. Set to 0 to fit to content. Use of 0 is only recommended for "
+"countdown or text based badges."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:596
+msgid "How to use custom rules:"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://kestrelwp.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://woocommerce.com/products/product-badges/"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:539
+#: includes/class-wcpb-product-badges-admin.php:556
+#: includes/class-wcpb-product-badges-admin.php:571
+#: includes/class-wcpb-product-badges-admin.php:585
+#: includes/class-wcpb-product-badges-admin.php:1316
+#: includes/class-wcpb-product-badges-admin.php:1369
+#: includes/class-wcpb-product-badges-admin.php:1419
+#: includes/class-wcpb-product-badges-admin.php:1461
+msgid "ID:"
+msgstr ""
+
+#. %s: example
+#: includes/class-wcpb-product-badges-admin.php:1579
+msgid ""
+"If you have product badge and/or product image display issues on product "
+"pages it is likely that your theme, plugins/extensions and/or development "
+"changes have amended the standard WooCommerce product image/gallery display "
+"functionality. By default this extension automatically attempts to display "
+"badges in product pages via the standard WooCommerce product image/gallery "
+"display functionality. Alternatively, you can populate the above with CSS "
+"selectors that contain product images on your product page and badges will "
+"attempt to be added to those elements. You may need to use multiple and "
+"specifically targeted CSS selectors for products with one image versus "
+"products within multiple images. If you are unsure which CSS selectors to "
+"use then please contact this extension's support for help before populating "
+"the above. Set to empty to disable. Default is disabled."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1570
+msgid ""
+"If you have product badge position and/or product image display issues on "
+"product loops it is likely that your theme, plugins/extensions and/or "
+"development changes have amended the standard WooCommerce product image "
+"display functionality. By default this extension automatically attempts to "
+"position badges in product loops via the standard WooCommerce product image "
+"display functionality. Alternatively, you can enable this setting which will "
+"attempt to position product badges in product loops using an alternative "
+"method. When enabled badges may be displayed outside product images in some "
+"areas of your website, this is most likely to occur with bottom positioned "
+"badges. In this scenario if you wish to keep bottom positioned badges then "
+"we recommend applying custom CSS to position as required. Default is "
+"disabled."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:761
+msgid ""
+"If you wish to use different widths for specific breakpoints you can do so "
+"using some custom CSS added into your theme options/stylesheet."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:305
+#: includes/class-wcpb-product-badges-admin.php:716
+msgid "Image custom"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:301
+#: includes/class-wcpb-product-badges-admin.php:714
+msgid "Image library"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:725
+msgid "Image library filters"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-public.php:637
+msgid "In Stock"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:225
+msgid "Insert into product badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:995
+#: includes/class-wcpb-product-badges-admin.php:1090
+msgid "Italic"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:775
+msgid "Jiggle"
+msgstr ""
+
+#. Author of the plugin
+msgid "Kestrel"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:971
+#: includes/class-wcpb-product-badges-admin.php:1066
+msgid "Left"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:405
+#: includes/class-wcpb-product-badges-admin.php:513
+msgid "Low stock"
+msgstr ""
+
+#: assets/js/public-badge-countdown.js:52
+msgid "m"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:152
+msgid "Manage badges"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:872
+msgid "Mother's day"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1583
+msgid "Multiple badges per product"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:186
+msgid "Multiple badges per product is enabled"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:213
+msgid "New Product Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:822
+msgid ""
+"No library images available for your selected filters, try changing the "
+"filters set."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1230
+msgid "No product badges have been created yet."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:397
+#: includes/class-wcpb-product-badges-admin.php:509
+msgid "Non-sale"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:772
+msgid "None"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:994
+#: includes/class-wcpb-product-badges-admin.php:1003
+#: includes/class-wcpb-product-badges-admin.php:1089
+#: includes/class-wcpb-product-badges-admin.php:1098
+msgid "Normal"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:219
+msgid "Not found"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:220
+msgid "Not found in Trash"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:740
+msgid "Offset"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:745
+msgid "Offsets the badge from the edge. Set to 0 for no offset from the edge."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-public.php:633
+msgid "On Backorder"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:409
+#: includes/class-wcpb-product-badges-admin.php:515
+msgid "On backorder"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:900
+msgid "Orange"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:268
+msgid "Order"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-public.php:629
+msgid "Out of Stock"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:401
+#: includes/class-wcpb-product-badges-admin.php:511
+msgid "Out of stock"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1019
+#: includes/class-wcpb-product-badges-admin.php:1114
+msgid "Padding bottom"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1023
+#: includes/class-wcpb-product-badges-admin.php:1118
+msgid "Padding left"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1015
+#: includes/class-wcpb-product-badges-admin.php:1110
+msgid "Padding right"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1011
+#: includes/class-wcpb-product-badges-admin.php:1106
+msgid "Padding top"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:606
+msgid "Parameters:"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:209
+msgid "Parent Product Badge:"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:904
+msgid "Pink"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:742
+msgid "Pixels"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:265
+#: includes/class-wcpb-product-badges-admin.php:729
+msgid "Position"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:204
+#: includes/class-wcpb-product-badges-admin.php:206
+msgid "Product Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:230
+msgid "Product badge published"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:231
+msgid "Product badge published privately"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:232
+msgid "Product badge reverted to draft"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:233
+msgid "Product badge scheduled"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:234
+msgid "Product badge updated"
+msgstr ""
+
+#. Name of the plugin
+#: includes/class-wcpb-product-badges-admin.php:203
+msgid "Product Badges"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1549
+#: includes/class-wcpb-product-badges-admin.php:1561
+msgid "Product badges"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:152
+msgid "Product Badges has been activated."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:227
+msgid "Product badges list"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:228
+msgid "Product badges list navigation"
+msgstr ""
+
+#: wcpb-product-badges.php:89
+msgid "Product Badges requires WooCommerce to be installed and activated."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:369
+#: includes/class-wcpb-product-badges-admin.php:497
+msgid "Product loops"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:365
+#: includes/class-wcpb-product-badges-admin.php:495
+msgid "Product pages"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:499
+msgid ""
+"Product pages are individual product pages, product loops are the display of "
+"products on the shop, category and search pages, and areas such as related "
+"products and WooCommerce product blocks."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:267
+#: includes/class-wcpb-product-badges-admin.php:501
+#: includes/class-wcpb-product-badges-admin.php:534
+msgid "Products"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:908
+msgid "Purple"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:152
+msgid "Read documentation"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:912
+msgid "Red"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:223
+msgid "Remove image"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:756
+msgid "Responsive breakpoints"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:756
+msgid "responsive breakpoints"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:972
+#: includes/class-wcpb-product-badges-admin.php:1067
+msgid "Right"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:776
+msgid "Rotate"
+msgstr ""
+
+#: assets/js/public-badge-countdown.js:56
+msgid "s"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:393
+#: includes/class-wcpb-product-badges-admin.php:507
+msgid "Sale"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:218
+msgid "Search Product Badges"
+msgstr ""
+
+#: assets/js/admin.js:125
+msgid "Select a badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:943
+msgid "Select a custom image using the \"Badge image custom\" meta box."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:222
+msgid "Set custom badge image"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:525
+msgid "settings"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:777
+msgid "Shadow Pulse"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:778
+msgid "Shake"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:580
+msgid "Shipping classes"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:748
+msgid "Size"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:385
+#: includes/class-wcpb-product-badges-admin.php:503
+msgid "Specific"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:779
+msgid "Sway"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:566
+msgid "Tags"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:313
+#: includes/class-wcpb-product-badges-admin.php:720
+#: includes/class-wcpb-product-badges-admin.php:1051
+msgid "Text"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:962
+msgid "Text after"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:968
+#: includes/class-wcpb-product-badges-admin.php:1063
+msgid "Text align"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:956
+msgid "Text before"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:977
+#: includes/class-wcpb-product-badges-admin.php:1072
+msgid "Text color"
+msgstr ""
+
+#. %s: badge ID
+#: includes/class-wcpb-product-badges-admin.php:611
+#, php-format
+msgid "The badge ID (the badge you're currently editing is %s)"
+msgstr ""
+
+#. %s: badge ID
+#: includes/class-wcpb-product-badges-admin.php:617
+#, php-format
+msgid ""
+"The example above shows how to display this badge (ID: %s) only for products "
+"with a price greater than 100."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:760
+msgid ""
+"The width set on the badge is used across all breakpoints e.g. desktop, "
+"tablet and mobile. The height is automatically calculated based on the width "
+"set."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:766
+msgid ""
+"This example sets the badge width to 80px when the browser window is 600px "
+"wide or less. You can add multiple media queries and different widths "
+"depending on how you would like badges to be sized at different breakpoints."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:762
+msgid ""
+"This is done via CSS using media queries and targeting the elements which "
+"have the following class:"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:780
+msgid "Tilt"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:333
+#: includes/class-wcpb-product-badges-admin.php:731
+msgid "Top left"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:337
+#: includes/class-wcpb-product-badges-admin.php:733
+msgid "Top right"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:264
+#: includes/class-wcpb-product-badges-admin.php:712
+msgid "Type"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:215
+msgid "Update Product Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:226
+msgid "Uploaded to this product badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:224
+msgid "Use as image"
+msgstr ""
+
+#. %1$s - product price, %2$s - stock quantity or status, %3$s - sale price if on sale, %4$s - regular price, %5$s - discount percentage if on sale.
+#: includes/class-wcpb-product-badges-admin.php:1058
+#, php-format
+msgid ""
+"Use these placeholders to display product information: %1$s - product price, "
+"%2$s - stock quantity or status, %3$s - sale price if on sale, %4$s - "
+"regular price, %5$s - discount percentage if on sale."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:876
+msgid "Valentine's"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:216
+msgid "View Product Badge"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:217
+msgid "View Product Badges"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:491
+msgid "Visibility"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:266
+msgid "Visiblity"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:781
+msgid "Wave"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:609
+msgid "WC_Product object"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:1587
+msgid ""
+"When enabled if more than one badge is assigned to a product then all "
+"assigned badges will be displayed instead of one. In this scenario the order "
+"attribute used for prioritizing badges for display over others is ignored. "
+"This setting may cause clashes between badges. When enabled the standard "
+"WooCommerce magnify icon will be hidden to avoid clashes. Additionally your "
+"theme, plugins/extensions and/or development changes may have added other "
+"icons to product images which you may need to hide using custom CSS. Default "
+"is disabled."
+msgstr ""
+
+#. %s: settings link
+#: includes/class-wcpb-product-badges-admin.php:525
+#, php-format
+msgid ""
+"Where there are multiple product badges assigned to a product then only one "
+"product badge will display and is prioritized by the order number set from "
+"high to low (see \"Attributes\" meta box). If you wish to assign multiple "
+"badges per product instead of one, see %s."
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:916
+msgid "White"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:750
+msgid "Width"
+msgstr ""
+
+#: includes/class-wcpb-product-badges-admin.php:920
+msgid "Yellow"
+msgstr ""

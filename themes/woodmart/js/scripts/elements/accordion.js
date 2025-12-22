@@ -104,7 +104,7 @@
 					}
 				}
 
-				if ($this.parents('.tabs-layout-accordion').length) {
+				if ($this.parents('.tabs-layout-accordion').length || $this.parents('.wd-single-tabs').length) {
 					setTimeout(function() {
 						if (woodmartThemeModule.$window.width() < 1024 && currentIndex > oldIndex) {
 							var $header = $('.whb-sticky-header');

@@ -17,10 +17,11 @@ $arrows_style     = get_term_meta( $slider_id, 'arrows_style', true );
 $pagination_style = get_term_meta( $slider_id, 'pagination_style', true );
 
 woodmart_enqueue_inline_style( 'slider' );
-woodmart_enqueue_inline_style( 'animations' );
+woodmart_enqueue_inline_style( 'mod-animations-transform-base' );
+woodmart_enqueue_inline_style( 'mod-animations-transform' );
+woodmart_enqueue_inline_style( 'mod-transform' );
 woodmart_enqueue_js_script( 'slider-element' );
-woodmart_enqueue_js_script( 'animations' );
-woodmart_enqueue_js_library( 'waypoints' );
+woodmart_enqueue_js_script( 'css-animations' );
 
 if ( 'distortion' === $animation ) {
 	woodmart_enqueue_inline_style( 'slider-anim-distortion' );

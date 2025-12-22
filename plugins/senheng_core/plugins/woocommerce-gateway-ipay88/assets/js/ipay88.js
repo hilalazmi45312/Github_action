@@ -7,21 +7,21 @@ window.ipay88AjaxInProgress = false; // NEW: Prevent overlapping AJAX calls
 
 // AJAX: Update admin fee (global)
 function updateAdminFee(adminFee, paymentValue, months) {
-    var $ = jQuery;
+	var $ = jQuery;
 
-    // Prevent overlapping AJAX calls
+	// Prevent overlapping AJAX calls
 	if (window.ipay88AjaxInProgress) {
 		return;
 	}
 
-    // Always update the hidden admin fee input
-    const adminFeeInput = $('#ipay88_admin_fee' + paymentValue);
-    adminFeeInput.val(adminFee);
+	// Always update the hidden admin fee input
+	const adminFeeInput = $('#ipay88_admin_fee' + paymentValue);
+	adminFeeInput.val(adminFee);
 
-    // Determine if this is a clearing action (non-BNPL switch)
-    const isClearing = Number(adminFee) === 0;
+	// Determine if this is a clearing action (non-BNPL switch)
+	const isClearing = Number(adminFee) === 0;
 
-    // Require a valid paymentValue always
+	// Require a valid paymentValue always
 	if (!paymentValue) {
 		window.ipay88RestoringSelections = false;
 		window.ipay88PendingInstallmentSelection = null;
@@ -29,7 +29,7 @@ function updateAdminFee(adminFee, paymentValue, months) {
 		return;
 	}
 
-    // For BNPL fee updates, months must be provided. For clearing, allow months to be falsy.
+	// For BNPL fee updates, months must be provided. For clearing, allow months to be falsy.
 	if (!isClearing && !months) {
 		window.ipay88RestoringSelections = false;
 		window.ipay88PendingInstallmentSelection = null;
@@ -37,9 +37,9 @@ function updateAdminFee(adminFee, paymentValue, months) {
 		return;
 	}
 
-    const normalizedMonths = isClearing ? (months || 0) : months;
+	const normalizedMonths = isClearing ? (months || 0) : months;
 
-    const key = `${paymentValue}_${normalizedMonths}_${adminFee}`;
+	const key = `${paymentValue}_${normalizedMonths}_${adminFee}`;
 	if (key === window.ipay88LastPlanKey) {
 		return;
 	}
@@ -48,30 +48,30 @@ function updateAdminFee(adminFee, paymentValue, months) {
 	window.ipay88AjaxInProgress = true;
 	window.ipay88RestoringSelections = true;
 
-    // Store the NEW selection (used for restoring after checkout update)
-    if (!isClearing) {
-        window.ipay88PendingInstallmentSelection = {
-            paymentValue: paymentValue,
-            months: normalizedMonths,
-            installmentId: `installment_${paymentValue}_${normalizedMonths}`
-        };
-    } else {
-        window.ipay88PendingInstallmentSelection = null;
-    }
+	// Store the NEW selection (used for restoring after checkout update)
+	if (!isClearing) {
+		window.ipay88PendingInstallmentSelection = {
+			paymentValue: paymentValue,
+			months: normalizedMonths,
+			installmentId: `installment_${paymentValue}_${normalizedMonths}`
+		};
+	} else {
+		window.ipay88PendingInstallmentSelection = null;
+	}
 
-    $.ajax({
-        url: wc_checkout_params.ajax_url,
-        type: 'POST',
-        data: {
-            action: 'update_ipay88_admin_fee',
-            admin_fee: adminFee,
-            payment_plan: paymentValue,
-            months: normalizedMonths
-        },
-        success: function (response) {
-            if (response.success) {
-                $(document.body).trigger('update_checkout');
-            } else {
+	$.ajax({
+		url: wc_checkout_params.ajax_url,
+		type: 'POST',
+		data: {
+			action: 'update_ipay88_admin_fee',
+			admin_fee: adminFee,
+			payment_plan: paymentValue,
+			months: normalizedMonths
+		},
+		success: function (response) {
+			if (response.success) {
+				$(document.body).trigger('update_checkout');
+			} else {
 				window.ipay88RestoringSelections = false;
 				window.ipay88PendingInstallmentSelection = null;
 				window.ipay88AjaxInProgress = false;
@@ -86,7 +86,7 @@ function updateAdminFee(adminFee, paymentValue, months) {
 }
 
 function initIPay88PaymentOptions() {
-    var $ = jQuery;
+	var $ = jQuery;
 
 	// CRITICAL: Remove ALL old event handlers first
 	$(document).off('change.ipay88');
@@ -99,23 +99,23 @@ function initIPay88PaymentOptions() {
 		$('.ipay88-payment-option').removeClass('selected');
 
 		const previousPaymentValue = window.ipay88SelectedPaymentValue;
-		
+
 		if (!window.ipay88RestoringSelections) {
 			$('.ipay88-installment-options').hide();
 			$('.ipay88-installment-options input[type="radio"]').prop('checked', false);
 			$('.ipay88-installment-option').removeClass('selected');
 		}
-		
+
 		$('.ipay88-month-dropdown').hide();
 
 		if ($(this).is(':checked')) {
 			const $option = $(this).closest('.ipay88-payment-option');
 			$option.addClass('selected');
-			
+
 			if ($(this).data('payment-type') === 'bnpl' && !$option.hasClass('bnpl-option')) {
 				$option.addClass('bnpl-option');
 			}
-			
+
 			const bankName = $option.find('.ipay88-payment-label').text().trim();
 			const bankLogo = $option.find('img').attr('src');
 			const paymentBOX = $('.payment_box');
@@ -125,7 +125,7 @@ function initIPay88PaymentOptions() {
 			);
 
 			const paymentValue = $(this).val();
-			
+
 			// If switching to DIFFERENT payment, clear everything
 			if (previousPaymentValue && String(previousPaymentValue) !== String(paymentValue)) {
 				window.ipay88SelectedInstallmentMonths = null;
@@ -134,7 +134,7 @@ function initIPay88PaymentOptions() {
 				window.ipay88PendingInstallmentSelection = null;
 				window.ipay88AjaxInProgress = false;
 			}
-			
+
 			window.ipay88SelectedPaymentValue = paymentValue;
 			window.ipay88SelectedPaymentType = $(this).data('payment-type');
 
@@ -144,27 +144,27 @@ function initIPay88PaymentOptions() {
 				const toNum = (x) => parseFloat(String(x).replace(/[^\d.]/g, '')) || 0;
 
 				let html = '';
-				
+
 				if (paymentPlans.length > 0) {
 					const eligiblePlans = (() => {
-					// keep same provider and affordability rule
-					const base = paymentPlans
-						.filter(p => String(p.ipay88_id) === String(paymentValue))
-						.filter(p => toNum(total) >= toNum(p.min_amount));
+						// keep same provider and affordability rule
+						const base = paymentPlans
+							.filter(p => String(p.ipay88_id) === String(paymentValue))
+							.filter(p => toNum(total) >= toNum(p.min_amount));
 
-					// group by months and keep the one with the HIGHEST admin fee
-					const byMonth = {};
-					base.forEach(p => {
-						const m = String(p.months);                      // group key
-						const fee = toNum(p.apply_admin_fee);            // numeric fee
-						if (!byMonth[m] || fee > toNum(byMonth[m].apply_admin_fee)) {
-						byMonth[m] = p;
-						}
-					});
+						// group by months and keep the one with the HIGHEST admin fee
+						const byMonth = {};
+						base.forEach(p => {
+							const m = String(p.months);                      // group key
+							const fee = toNum(p.apply_admin_fee);            // numeric fee
+							if (!byMonth[m] || fee > toNum(byMonth[m].apply_admin_fee)) {
+								byMonth[m] = p;
+							}
+						});
 
-					// return one per month, sorted by months asc
-					return Object.values(byMonth)
-						.sort((a, b) => toNum(a.months) - toNum(b.months));
+						// return one per month, sorted by months asc
+						return Object.values(byMonth)
+							.sort((a, b) => toNum(a.months) - toNum(b.months));
 					})();
 
 					if (!eligiblePlans.length) {
@@ -185,13 +185,13 @@ function initIPay88PaymentOptions() {
 
 				// CRITICAL: Remove ALL duplicate containers before proceeding
 				$(`[id='installment-options-${paymentValue}']`).not(':first').remove();
-				
+
 				const $installmentContainer = $(`#installment-options-${paymentValue}`).first();
 				const $installmentList = $installmentContainer.find('.ipay88-installment-list');
-				
+
 				// Clear and rebuild
 				$installmentList.empty().html(html);
-				
+
 				if ($installmentContainer.length) {
 					$installmentContainer.show();
 				}
@@ -199,35 +199,35 @@ function initIPay88PaymentOptions() {
 				// Attach change handler with strict guards
 				$installmentList.off('change.ipay88').on('change.ipay88', 'input[type="radio"]', function (e) {
 					e.stopImmediatePropagation(); // Prevent duplicate events
-					
+
 					const months = $(this).val();
 					const adminFee = parseFloat($(this).data('admin-fee')) || 0;
 					const radioPaymentId = $(this).data('payment-id');
 
-				// STRICT GUARD: Only process if this belongs to current payment
-				if (String(radioPaymentId) !== String(paymentValue)) {
-					return false;
-				}
+					// STRICT GUARD: Only process if this belongs to current payment
+					if (String(radioPaymentId) !== String(paymentValue)) {
+						return false;
+					}
 
-				// STRICT GUARD: Only process if this is the checked radio
-				if (!$(this).is(':checked')) {
-					return false;
-				}
+					// STRICT GUARD: Only process if this is the checked radio
+					if (!$(this).is(':checked')) {
+						return false;
+					}
 
-				// STRICT GUARD: Prevent if AJAX in progress
-				if (window.ipay88AjaxInProgress) {
-					return false;
-				}
+					// STRICT GUARD: Prevent if AJAX in progress
+					if (window.ipay88AjaxInProgress) {
+						return false;
+					}
 
 
 					if (months) {
 						window.ipay88SelectedInstallmentMonths = months;
 						window.ipay88SelectedInstallmentId = `installment_${paymentValue}_${months}`;
 						window.ipay88SelectedPaymentValue = paymentValue;
-						
+
 						updateAdminFee(adminFee, paymentValue, months);
 					}
-					
+
 					return false;
 				});
 
@@ -264,19 +264,19 @@ function initIPay88PaymentOptions() {
 		const $title = $(this);
 		const $grid = $title.next('.ipay88-payment-grid');
 		const sectionText = $title.text().trim();
-		
+
 		$title.toggleClass('collapsed');
 		$grid.toggleClass('collapsed');
-		
+
 		const isCollapsed = $title.hasClass('collapsed');
 		$title.attr('aria-expanded', isCollapsed ? 'true' : 'false');
-		
+
 		if (isCollapsed) {
 			if (!window.ipay88CollapsedSections.includes(sectionText)) {
 				window.ipay88CollapsedSections.push(sectionText);
 			}
 		} else {
-			window.ipay88CollapsedSections = window.ipay88CollapsedSections.filter(function(text) {
+			window.ipay88CollapsedSections = window.ipay88CollapsedSections.filter(function (text) {
 				return text !== sectionText;
 			});
 		}
@@ -302,7 +302,7 @@ jQuery(document).on('updated_checkout', function () {
 	const $scope = $('.ipay88-payment-container').first();
 	if ($scope.length) {
 		const seenIds = {};
-		$scope.find('[id]').each(function() {
+		$scope.find('[id]').each(function () {
 			const id = this.id;
 			if (seenIds[id]) {
 				$(this).remove();
@@ -311,41 +311,41 @@ jQuery(document).on('updated_checkout', function () {
 			}
 		});
 	}
-	
+
 	let selectedPaymentValue, selectedInstallmentId, selectedInstallmentMonths;
-	
+
 	if (window.ipay88PendingInstallmentSelection) {
 		selectedPaymentValue = window.ipay88PendingInstallmentSelection.paymentValue;
 		selectedInstallmentMonths = window.ipay88PendingInstallmentSelection.months;
 		selectedInstallmentId = window.ipay88PendingInstallmentSelection.installmentId;
-		
+
 		window.ipay88SelectedPaymentValue = selectedPaymentValue;
 		window.ipay88SelectedInstallmentMonths = selectedInstallmentMonths;
 		window.ipay88SelectedInstallmentId = selectedInstallmentId;
-		
+
 		/* logging removed */
 	} else {
 		const selectedPaymentRadio = $('.ipay88-payment-option input[type="radio"]:checked').first();
 		selectedPaymentValue = selectedPaymentRadio.val() || window.ipay88SelectedPaymentValue;
-		
+
 		const selectedInstallmentRadio = $('.ipay88-installment-list input[type="radio"]:checked').first();
 		selectedInstallmentId = selectedInstallmentRadio.attr('id') || window.ipay88SelectedInstallmentId;
 		selectedInstallmentMonths = selectedInstallmentRadio.val() || window.ipay88SelectedInstallmentMonths;
 	}
-	
+
 	/* logging removed */
-	
+
 	initIPay88PaymentOptions();
-	
+
 	if (!selectedInstallmentId && !selectedInstallmentMonths) {
 		window.ipay88RestoringSelections = false;
 		window.ipay88PendingInstallmentSelection = null;
 	}
 
-	setTimeout(function() {
+	setTimeout(function () {
 		// Restore collapsed sections
-		window.ipay88CollapsedSections.forEach(function(sectionText) {
-			$('.ipay88-section-title').each(function() {
+		window.ipay88CollapsedSections.forEach(function (sectionText) {
+			$('.ipay88-section-title').each(function () {
 				if ($(this).text().trim() === sectionText) {
 					const $title = $(this);
 					const $grid = $title.next('.ipay88-payment-grid');
@@ -355,42 +355,42 @@ jQuery(document).on('updated_checkout', function () {
 				}
 			});
 		});
-		
+
 		if (window.ipay88RestoringSelections && selectedPaymentValue) {
 			const $paymentRadio = $('input[name="ipay88_payment_type"][value="' + selectedPaymentValue + '"]').first();
 			if ($paymentRadio.length) {
 				$paymentRadio.prop('checked', true);
 				const $paymentOption = $paymentRadio.closest('.ipay88-payment-option');
 				$paymentOption.addClass('selected');
-				
+
 				if ($paymentRadio.data('payment-type') === 'bnpl' && !$paymentOption.hasClass('bnpl-option')) {
 					$paymentOption.addClass('bnpl-option');
 				}
-				
-				setTimeout(function() {
+
+				setTimeout(function () {
 					// Remove duplicates again
 					$(`[id='installment-options-${selectedPaymentValue}']`).not(':first').remove();
-					
+
 					const $installmentContainer = $(`#installment-options-${selectedPaymentValue}`).first();
 					if ($installmentContainer.length) {
 						$installmentContainer.show();
-						
-						if (selectedInstallmentId && selectedInstallmentMonths && 
+
+						if (selectedInstallmentId && selectedInstallmentMonths &&
 							String(selectedInstallmentId).indexOf('installment_' + selectedPaymentValue + '_') === 0) {
-							
+
 							let $installmentRadio = $('#' + selectedInstallmentId).first();
-							
+
 							if (!$installmentRadio.length) {
 								$installmentRadio = $(`#installment-options-${selectedPaymentValue} input[name="ipay88_payment_plan${selectedPaymentValue}"][value="${selectedInstallmentMonths}"]`).first();
 							}
-							
-						if ($installmentRadio.length) {
-							$installmentRadio.prop('checked', true);
-							$installmentRadio.closest('.ipay88-installment-option').addClass('selected');
-						}
+
+							if ($installmentRadio.length) {
+								$installmentRadio.prop('checked', true);
+								$installmentRadio.closest('.ipay88-installment-option').addClass('selected');
+							}
 						}
 					}
-					
+
 					// Clear ALL flags
 					window.ipay88RestoringSelections = false;
 					window.ipay88PendingInstallmentSelection = null;
@@ -402,35 +402,35 @@ jQuery(document).on('updated_checkout', function () {
 			if ($paymentRadio.length) {
 				const $paymentOption = $paymentRadio.closest('.ipay88-payment-option');
 				$paymentOption.addClass('selected');
-				
+
 				if ($paymentRadio.data('payment-type') === 'bnpl') {
 					if (!$paymentOption.hasClass('bnpl-option')) {
 						$paymentOption.addClass('bnpl-option');
 					}
-					
-					setTimeout(function() {
+
+					setTimeout(function () {
 						$(`[id='installment-options-${selectedPaymentValue}']`).not(':first').remove();
-						
+
 						const $installmentContainer = $(`#installment-options-${selectedPaymentValue}`).first();
 						if ($installmentContainer.length) {
 							$installmentContainer.show();
-							
+
 							if (selectedInstallmentId && selectedInstallmentMonths &&
 								String(selectedInstallmentId).indexOf('installment_' + selectedPaymentValue + '_') === 0) {
-								
+
 								let $installmentRadio = $('#' + selectedInstallmentId).first();
-								
+
 								if (!$installmentRadio.length) {
 									$installmentRadio = $(`#installment-options-${selectedPaymentValue} input[name="ipay88_payment_plan${selectedPaymentValue}"][value="${selectedInstallmentMonths}"]`).first();
 								}
-								
+
 								if ($installmentRadio.length) {
 									$installmentRadio.prop('checked', true);
 									$installmentRadio.closest('.ipay88-installment-option').addClass('selected');
 								}
 							}
 						}
-						
+
 						window.ipay88RestoringSelections = false;
 						window.ipay88PendingInstallmentSelection = null;
 						window.ipay88AjaxInProgress = false;
@@ -449,27 +449,27 @@ jQuery(document).on('updated_checkout', function () {
 
 // Handle payment method re-render
 jQuery(document).on('payment_method_selected', function () {
-    setTimeout(function () {
-        initIPay88PaymentOptions();
-        jQuery('.ipay88-installment-options').hide();
-        window.ipay88SelectedInstallmentMonths = null;
-        window.ipay88SelectedInstallmentId = null;
-        window.ipay88RestoringSelections = false;
-        window.ipay88PendingInstallmentSelection = null;
-        window.ipay88LastPlanKey = null;
-        window.ipay88AjaxInProgress = false;
-    }, 100);
+	setTimeout(function () {
+		initIPay88PaymentOptions();
+		jQuery('.ipay88-installment-options').hide();
+		window.ipay88SelectedInstallmentMonths = null;
+		window.ipay88SelectedInstallmentId = null;
+		window.ipay88RestoringSelections = false;
+		window.ipay88PendingInstallmentSelection = null;
+		window.ipay88LastPlanKey = null;
+		window.ipay88AjaxInProgress = false;
+	}, 100);
 });
 
 // Handle update_order_review
-jQuery(document.body).on('updated_wc_div', function() {
+jQuery(document.body).on('updated_wc_div', function () {
 	const $ = jQuery;
 
 	// Clean duplicate IDs only within IPay88 container
 	const $scope = $('.ipay88-payment-container').first();
 	if ($scope.length) {
 		const seenIds = {};
-		$scope.find('[id]').each(function() {
+		$scope.find('[id]').each(function () {
 			const id = this.id;
 			if (seenIds[id]) {
 				$(this).remove();
@@ -478,36 +478,36 @@ jQuery(document.body).on('updated_wc_div', function() {
 			}
 		});
 	}
-	
+
 	let selectedPaymentValue, selectedInstallmentId, selectedInstallmentMonths;
-	
+
 	if (window.ipay88PendingInstallmentSelection) {
 		selectedPaymentValue = window.ipay88PendingInstallmentSelection.paymentValue;
 		selectedInstallmentMonths = window.ipay88PendingInstallmentSelection.months;
 		selectedInstallmentId = window.ipay88PendingInstallmentSelection.installmentId;
-		
+
 		window.ipay88SelectedPaymentValue = selectedPaymentValue;
 		window.ipay88SelectedInstallmentMonths = selectedInstallmentMonths;
 		window.ipay88SelectedInstallmentId = selectedInstallmentId;
 	} else {
 		const selectedPaymentRadio = $('.ipay88-payment-option input[type="radio"]:checked').first();
 		selectedPaymentValue = selectedPaymentRadio.val() || window.ipay88SelectedPaymentValue;
-		
+
 		const selectedInstallmentRadio = $('.ipay88-installment-list input[type="radio"]:checked').first();
 		selectedInstallmentId = selectedInstallmentRadio.attr('id') || window.ipay88SelectedInstallmentId;
 		selectedInstallmentMonths = selectedInstallmentRadio.val() || window.ipay88SelectedInstallmentMonths;
 	}
-	
+
 	initIPay88PaymentOptions();
 
 	if (!selectedInstallmentId && !selectedInstallmentMonths) {
 		window.ipay88RestoringSelections = false;
 		window.ipay88PendingInstallmentSelection = null;
 	}
-	
-	setTimeout(function() {
-		window.ipay88CollapsedSections.forEach(function(sectionText) {
-			$('.ipay88-section-title').each(function() {
+
+	setTimeout(function () {
+		window.ipay88CollapsedSections.forEach(function (sectionText) {
+			$('.ipay88-section-title').each(function () {
 				if ($(this).text().trim() === sectionText) {
 					const $title = $(this);
 					const $grid = $title.next('.ipay88-payment-grid');
@@ -517,28 +517,28 @@ jQuery(document.body).on('updated_wc_div', function() {
 				}
 			});
 		});
-		
+
 		if (selectedPaymentValue) {
 			const $paymentRadio = $('input[name="ipay88_payment_type"][value="' + selectedPaymentValue + '"]').first();
 			if ($paymentRadio.length) {
 				$paymentRadio.prop('checked', true);
-				
+
 				const $paymentOption = $paymentRadio.closest('.ipay88-payment-option');
 				const isBNPL = $paymentRadio.data('payment-type') === 'bnpl';
-				
+
 				$paymentOption.addClass('selected');
 				if (isBNPL && !$paymentOption.hasClass('bnpl-option')) {
 					$paymentOption.addClass('bnpl-option');
 				}
-				
+
 				// Do not trigger change here; init already rebuilt options for checked radios
-				
-				setTimeout(function() {
+
+				setTimeout(function () {
 					$paymentOption.addClass('selected');
 					if (isBNPL && !$paymentOption.hasClass('bnpl-option')) {
 						$paymentOption.addClass('bnpl-option');
 					}
-					
+
 					if (isBNPL) {
 						$(`[id='installment-options-${selectedPaymentValue}']`).not(':first').remove();
 
@@ -551,22 +551,22 @@ jQuery(document.body).on('updated_wc_div', function() {
 						$('.ipay88-installment-options').hide();
 						updateAdminFee(0, selectedPaymentValue, 0);
 					}
-					
-					if (selectedInstallmentId && selectedInstallmentMonths && 
+
+					if (selectedInstallmentId && selectedInstallmentMonths &&
 						String(selectedInstallmentId).indexOf('installment_' + selectedPaymentValue + '_') === 0) {
-						
+
 						let $installmentRadio = $('#' + selectedInstallmentId).first();
-						
+
 						if (!$installmentRadio.length) {
 							$installmentRadio = $(`#installment-options-${selectedPaymentValue} input[name="ipay88_payment_plan${selectedPaymentValue}"][value="${selectedInstallmentMonths}"]`).first();
 						}
-						
+
 						if ($installmentRadio.length) {
 							$installmentRadio.prop('checked', true);
 							$installmentRadio.closest('.ipay88-installment-option').addClass('selected');
 						}
 					}
-					
+
 					window.ipay88RestoringSelections = false;
 					window.ipay88PendingInstallmentSelection = null;
 					window.ipay88AjaxInProgress = false;
@@ -586,4 +586,129 @@ jQuery(function ($) {
 		window.shBnplData = window.shBnplData || {};
 		window.shBnplData.total = numericTotal;
 	});
+});
+
+jQuery(function($) {
+    'use strict';
+    
+    // Check if checkout form exists
+    if (!$('form.checkout').length) {
+        return;
+    }
+    
+    console.log('iPay88: Script loaded');
+    
+    // Handle the checkout process
+    $('form.checkout').on('checkout_place_order_ipay88', function() {
+        console.log('iPay88: Place order triggered');
+        return true; // Allow the order to be placed
+    });
+    
+    // Listen for AJAX complete
+    $(document).ajaxComplete(function(event, xhr, settings) {
+        // Check if this is the checkout AJAX request
+        if (settings.url && settings.url.indexOf('wc-ajax=checkout') > -1) {
+            console.log('iPay88: Checkout AJAX complete');
+            
+            try {
+                var response = JSON.parse(xhr.responseText);
+                console.log('iPay88: Response:', response);
+                
+                if (response.result === 'success' && response.ipay88_form_data && response.ipay88_form_url) {
+                    console.log('iPay88: Submitting form to iPay88');
+                    
+                    // Block the UI
+                    $.blockUI({
+                        message: 'Thank you for your order. We are now redirecting you to iPay88 to make payment.',
+                        overlayCSS: {
+                            background: '#fff',
+                            opacity: 0.6
+                        },
+                        css: {
+                            padding: 20,
+                            textAlign: 'center',
+                            color: '#555',
+                            border: '3px solid #aaa',
+                            backgroundColor: '#fff',
+                            cursor: 'wait',
+                            lineHeight: '32px',
+                            zIndex: 9999
+                        }
+                    });
+                    
+                    // Create and submit the form
+                    var $form = $('<form>', {
+                        method: 'POST',
+                        action: response.ipay88_form_url,
+                        target: '_top'
+                    });
+                    
+                    // Add all hidden fields
+                    $.each(response.ipay88_form_data, function(name, value) {
+                        $form.append($('<input>', {
+                            type: 'hidden',
+                            name: name,
+                            value: value
+                        }));
+                    });
+                    
+                    console.log('iPay88: Form created, submitting...');
+                    
+                    // Append to body and submit
+                    $('body').append($form);
+                    
+                    // Small delay to ensure form is in DOM
+                    setTimeout(function() {
+                        $form.submit();
+                    }, 100);
+                }
+            } catch (e) {
+                console.error('iPay88: Error parsing response', e);
+            }
+        }
+    });
+});
+
+jQuery(function($) {
+    // Define a function to hide payment plans based on eligibility
+    function updatePaymentPlansVisibility() {
+        const paymentPlans = shBnplData.paymentPlans || [];
+        const total = shBnplData.total || 0;
+        let anyEligiblePlans = false; // Flag to track if there are any eligible plans
+
+        // loop through each BNPL payment option wrapper
+        $('.ipay88-payment-option-wrapper').each(function() {
+            const $wrapper = $(this);
+            const paymentValue = $wrapper.find('input[name="ipay88_payment_type"]').val();
+
+            // find plans for this payment type
+            const eligiblePlans = paymentPlans
+                .filter(p => String(p.ipay88_id) === String(paymentValue))
+                .filter(p => total >= (p.min_amount));
+
+            if (eligiblePlans.length === 0) {
+                // hide the entire wrapper if no eligible plans
+                $wrapper.hide();
+            } else {
+                // Show the wrapper if there are eligible plans
+                $wrapper.show();
+                anyEligiblePlans = true; // At least one plan is available
+            }
+        });
+
+        // If no eligible plans are available, hide the .bnpl-section
+        if (anyEligiblePlans === false) {
+            $('.bnpl-section').hide();
+        } else {
+            $('.bnpl-section').show();
+        }
+    }
+
+    // Run the function on page load
+    updatePaymentPlansVisibility();
+
+    // Reapply the visibility check after WooCommerce AJAX updates (i.e., after checkout updates)
+    $(document.body).on('updated_checkout', function() {
+        updatePaymentPlansVisibility();
+    });
 });

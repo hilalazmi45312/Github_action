@@ -415,8 +415,10 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 
             // Set up the menu and notices if we still have outstanding actions.
             if ( true !== $this->is_tgmpa_complete() ) {
-                // Sort the plugins.
-                array_multisort( $this->sort_order, SORT_ASC, $this->plugins );
+                // Sort the plugins safely - only if arrays are consistent.
+                if ( ! empty( $this->plugins ) && count( $this->sort_order ) === count( $this->plugins ) ) {
+                    array_multisort( $this->sort_order, SORT_ASC, $this->plugins );
+                }
 
                 add_action( 'admin_menu', array( $this, 'admin_menu' ) );
                 add_action( 'admin_head', array( $this, 'dismiss' ) );

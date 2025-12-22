@@ -146,8 +146,8 @@ if ( ! function_exists( 'woodmart_get_vc_map_single_product_compare_button' ) ) 
 					'type'       => 'wd_slider',
 					'param_name' => 'icon_size',
 					'selectors'  => array(
-						'{{WRAPPER}} .wd-compare-btn[class*="wd-style-"] > a:before, {{WRAPPER}} .wd-compare-btn[class*="wd-style-"] > a:after' => array(
-							'font-size: {{VALUE}}px;',
+						'{{WRAPPER}} .wd-compare-btn[class*="wd-style-"]' => array(
+							'--wd-action-icon-size: {{VALUE}}px;',
 						),
 					),
 					'devices'    => array(

@@ -37,6 +37,16 @@
                                         "value": "l",
                                         "type": "selector"
                                     },
+                                    "icon_width": {
+                                        "id": "icon_width",
+                                        "value": "",
+                                        "type": "slider"
+                                    },
+                                    "icon_height": {
+                                        "id": "icon_height",
+                                        "value": "",
+                                        "type": "slider"
+                                    },
                                     "bg_overlay": {
                                         "id": "bg_overlay",
                                         "value": false,
@@ -83,6 +93,16 @@
                                         "id": "items_gap",
                                         "value": "l",
                                         "type": "selector"
+                                    },
+                                    "icon_width": {
+                                        "id": "icon_width",
+                                        "value": "",
+                                        "type": "slider"
+                                    },
+                                    "icon_height": {
+                                        "id": "icon_height",
+                                        "value": "",
+                                        "type": "slider"
                                     },
                                     "bg_overlay": {
                                         "id": "bg_overlay",
@@ -217,6 +237,11 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
                                     },
                                     "hide_product_count": {
                                         "id": "hide_product_count",
@@ -361,6 +386,11 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
                                     },
                                     "bg_overlay": {
                                         "id": "bg_overlay",
@@ -650,6 +680,11 @@
                                         "value": "",
                                         "type": "image"
                                     },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
+                                    },
                                     "mouse_event": {
                                         "id": "mouse_event",
                                         "value": "click",
@@ -675,6 +710,21 @@
                                         "id": "popular_requests",
                                         "value": true,
                                         "type": "switcher"
+                                    },
+                                    "search_history_enabled": {
+                                        "id": "search_history_enabled",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content_enabled": {
+                                        "id": "search_extra_content_enabled",
+                                        "value": true,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content": {
+                                        "id": "search_extra_content",
+                                        "value": "",
+                                        "type": "options"
                                     },
                                     "categories_dropdown": {
                                         "id": "categories_dropdown",
@@ -705,6 +755,11 @@
                                         "id": "post_type",
                                         "value": "product",
                                         "type": "selector"
+                                    },
+                                    "include_cat_search": {
+                                        "id": "include_cat_search",
+                                        "value": false,
+                                        "type": "switcher"
                                     },
                                     "search_style": {
                                         "id": "search_style",
@@ -810,6 +865,11 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
                                     }
                                 }
                             },
@@ -836,6 +896,16 @@
                                         "id": "items_gap",
                                         "value": "m",
                                         "type": "selector"
+                                    },
+                                    "icon_width": {
+                                        "id": "icon_width",
+                                        "value": "",
+                                        "type": "slider"
+                                    },
+                                    "icon_height": {
+                                        "id": "icon_height",
+                                        "value": "",
+                                        "type": "slider"
                                     },
                                     "bg_overlay": {
                                         "id": "bg_overlay",
@@ -953,6 +1023,11 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
                                     }
                                 }
                             }
@@ -1087,16 +1162,6 @@
                                         "value": false,
                                         "type": "switcher"
                                     },
-                                    "search_form": {
-                                        "id": "search_form",
-                                        "value": false,
-                                        "type": "switcher"
-                                    },
-                                    "post_type": {
-                                        "id": "post_type",
-                                        "value": "any",
-                                        "type": "selector"
-                                    },
                                     "show_wishlist": {
                                         "id": "show_wishlist",
                                         "value": true,
@@ -1125,6 +1190,51 @@
                                     "show_language_flag": {
                                         "id": "show_language_flag",
                                         "value": true,
+                                        "type": "switcher"
+                                    },
+                                    "search_form": {
+                                        "id": "search_form",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "popular_requests": {
+                                        "id": "popular_requests",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_history_enabled": {
+                                        "id": "search_history_enabled",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content_enabled": {
+                                        "id": "search_extra_content_enabled",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content": {
+                                        "id": "search_extra_content",
+                                        "value": "",
+                                        "type": "options"
+                                    },
+                                    "ajax": {
+                                        "id": "ajax",
+                                        "value": true,
+                                        "type": "switcher"
+                                    },
+                                    "ajax_result_count": {
+                                        "id": "ajax_result_count",
+                                        "value": 20,
+                                        "type": "slider"
+                                    },
+                                    "post_type": {
+                                        "id": "post_type",
+                                        "value": "any",
+                                        "type": "selector"
+                                    },
+                                    "include_cat_search": {
+                                        "id": "include_cat_search",
+                                        "value": false,
                                         "type": "switcher"
                                     },
                                     "categories_menu": {
@@ -1236,6 +1346,21 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
+                                    },
+                                    "icon_width": {
+                                        "id": "icon_width",
+                                        "value": "",
+                                        "type": "slider"
+                                    },
+                                    "icon_height": {
+                                        "id": "icon_height",
+                                        "value": "",
+                                        "type": "slider"
                                     }
                                 }
                             },
@@ -1248,10 +1373,45 @@
                                         "value": "full-screen-2",
                                         "type": "selector"
                                     },
+                                    "popular_requests": {
+                                        "id": "popular_requests",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_history_enabled": {
+                                        "id": "search_history_enabled",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content_enabled": {
+                                        "id": "search_extra_content_enabled",
+                                        "value": false,
+                                        "type": "switcher"
+                                    },
+                                    "search_extra_content": {
+                                        "id": "search_extra_content",
+                                        "value": "",
+                                        "type": "options"
+                                    },
+                                    "ajax": {
+                                        "id": "ajax",
+                                        "value": true,
+                                        "type": "switcher"
+                                    },
+                                    "ajax_result_count": {
+                                        "id": "ajax_result_count",
+                                        "value": 20,
+                                        "type": "slider"
+                                    },
                                     "post_type": {
                                         "id": "post_type",
                                         "value": "product",
                                         "type": "selector"
+                                    },
+                                    "include_cat_search": {
+                                        "id": "include_cat_search",
+                                        "value": false,
+                                        "type": "switcher"
                                     },
                                     "search_style": {
                                         "id": "search_style",
@@ -1357,6 +1517,11 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
                                     }
                                 }
                             },
@@ -1443,6 +1608,11 @@
                                         "id": "custom_icon",
                                         "value": "",
                                         "type": "image"
+                                    },
+                                    "custom_icon_width": {
+                                        "id": "custom_icon_width",
+                                        "value": 0,
+                                        "type": "slider"
                                     },
                                     "bg_overlay": {
                                         "id": "bg_overlay",

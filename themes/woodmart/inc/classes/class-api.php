@@ -54,19 +54,21 @@ class Api {
 	 * @return array|\WP_Error
 	 */
 	public function call( $endpoint, $data = array(), $method = 'get', $base_url = '' ) {
+		$headers = $this->get_headers( $method );
+
 		switch ( $method ) {
 			case 'get':
 				return wp_remote_get(
 					$this->get_url( $endpoint, $data, $base_url ),
 					array(
-						'headers' => $this->get_headers(),
+						'headers' => $headers,
 					)
 				);
 			case 'post':
 				return wp_remote_post(
 					$this->get_url( $endpoint, array(), $base_url ),
 					array(
-						'headers'     => array( 'Content-Type' => 'application/json; charset=utf-8' ),
+						'headers'     => $headers,
 						'body'        => wp_json_encode( $data ),
 						'method'      => 'POST',
 						'data_format' => 'body',
@@ -78,16 +80,20 @@ class Api {
 	/**
 	 * Get header request.
 	 *
+	 * @param string $method Request method.
+	 *
 	 * @return array
 	 */
-	public function get_headers() {
-		if ( empty( $this->token ) ) {
-			return array();
+	public function get_headers( $method ) {
+		$headers = array( 'User-Agent' => 'Woodmart-Theme/' . woodmart_get_theme_info( 'Version' ) );
+
+		if ( 'post' === $method ) {
+			$headers['Content-Type'] = 'application/json; charset=utf-8';
+		} elseif ( ! empty( $this->token ) ) {
+			$headers['Authorization'] = 'Bearer ' . $this->token;
 		}
 
-		return array(
-			'Authorization' => 'Bearer ' . $this->token,
-		);
+		return $headers;
 	}
 
 	/**

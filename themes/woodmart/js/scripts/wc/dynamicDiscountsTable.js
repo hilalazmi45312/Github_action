@@ -44,7 +44,7 @@
             let $variation_form = $(this);
 
             $variation_form
-                .on('found_variation', function (event, variation) {
+                .on('show_variation', function (event, variation) {
                     $.ajax({
                         url     : woodmart_settings.ajaxurl,
                         data    : {

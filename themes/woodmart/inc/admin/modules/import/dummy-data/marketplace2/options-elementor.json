@@ -407,6 +407,7 @@
     "blog_with_shadow": "0",
     "blog_columns": "4",
     "blog_excerpt_length": "125",
+    "blog_archive_layout": "full-width",
     "grid_swatches_attribute": "pa_color",
     "quick_shop_variable_type": "variation_form",
     "quick_shop_clear_action": "none",
@@ -466,5 +467,7 @@
         "wishlist",
         "cart",
         "account"
-    ]
+    ],
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

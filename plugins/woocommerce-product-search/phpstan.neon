@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		- '#^Constant WOO_PS_ADMIN_LIB not found\.$#'
+		- '#^Constant WOO_PS_BLOCKS_LIB not found\.$#'
+		- '#^Constant WOO_PS_CACHE_LIB not found\.$#'
+		- '#^Constant WOO_PS_COMPAT_LIB not found\.$#'
+		- '#^Constant WOO_PS_CONTROL_LIB not found\.$#'
+		- '#^Constant WOO_PS_CORE_DIR not found\.$#'
+		- '#^Constant WOO_PS_CORE_LIB not found\.$#'
+		- '#^Constant WOO_PS_ENGINE_LIB not found\.$#'
+		- '#^Constant WOO_PS_EXT_LIB not found\.$#'
+		- '#^Constant WOO_PS_PLUGIN_URL not found\.$#'
+		- '#^Constant WOO_PS_REST_LIB not found\.$#'
+		- '#^Constant WOO_PS_VIEWS_LIB not found\.$#'
+		- '#^Constant WOO_PS_VIEWS_LIB not found\.$#'
+		-
+			identifier: constructor.unusedParameter

@@ -7,6 +7,7 @@
 
 namespace XTS\Elementor;
 
+use Elementor\Group_Control_Border;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
@@ -317,7 +318,7 @@ class Products_Brands extends Widget_Base {
 		$this->add_control(
 			'with_bg_color',
 			array(
-				'label'        => esc_html__( 'With background', 'woodmart' ),
+				'label'        => esc_html__( 'Background', 'woodmart' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'label_on'     => esc_html__( 'Yes', 'woodmart' ),
@@ -336,6 +337,29 @@ class Products_Brands extends Widget_Base {
 				),
 				'condition' => array(
 					'with_bg_color' => array( 'yes' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'with_border',
+			array(
+				'label'        => esc_html__( 'Border', 'woodmart' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'no',
+				'label_on'     => esc_html__( 'Yes', 'woodmart' ),
+				'label_off'    => esc_html__( 'No', 'woodmart' ),
+				'return_value' => 'yes',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'      => 'items_border',
+				'selector'  => '{{WRAPPER}} .wd-brand-item',
+				'condition' => array(
+					'with_border' => array( 'yes' ),
 				),
 			)
 		);
@@ -439,6 +463,7 @@ class Products_Brands extends Widget_Base {
 			'disable_link'               => 'no',
 			'custom_sizes'               => apply_filters( 'woodmart_brands_shortcode_custom_sizes', false ),
 			'with_bg_color'              => 'no',
+			'with_border'                => 'no',
 		);
 
 		$settings = wp_parse_args( $this->get_settings_for_display(), array_merge( woodmart_get_carousel_atts(), $default_settings ) );
@@ -483,6 +508,10 @@ class Products_Brands extends Widget_Base {
 			$this->add_render_attribute( 'wrapper', 'class', 'wd-with-bg' );
 		}
 
+		if ( 'yes' === $settings['with_border'] ) {
+			$this->add_render_attribute( 'wrapper', 'class', 'wd-with-brd' );
+		}
+
 		if ( $settings['align'] ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'text-' . $settings['align'] );
 		}
@@ -513,7 +542,6 @@ class Products_Brands extends Widget_Base {
 			$this->add_render_attribute( 'items', 'class', 'wd-carousel-item' );
 
 			if ( 'yes' === $settings['scroll_carousel_init'] ) {
-				woodmart_enqueue_js_library( 'waypoints' );
 				$this->add_render_attribute( 'items_wrapper', 'class', 'scroll-init' );
 			}
 
@@ -618,12 +646,13 @@ class Products_Brands extends Widget_Base {
 							}
 						}
 
-						if ( is_object( $taxonomy ) && $taxonomy->public ) {
-							$attr_link = get_term_link( $brand->term_id, $brand->taxonomy );
-						} else {
-							$attr_link = add_query_arg( $filter_name, $brand->slug, $link );
-						}
+						if ( ( 'yes' === $settings['filter_in_current_category'] && is_product_category() ) || ! is_object( $taxonomy ) || ! $taxonomy->public ) {
+							$filter_value = 'product_brand' === $attribute ? $brand->term_id : $brand->slug;
 
+							$attr_link = add_query_arg( $filter_name, $filter_value, $link );
+						} else {
+							$attr_link = get_term_link( $brand->term_id, $brand->taxonomy );
+						}
 						?>
 
 						<div <?php echo $this->get_render_attribute_string( 'items' ); ?>>

@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) or exit;
 
 		<div>
 			<?php if ( $packages_count > 1 ) : ?>
-				<h5><?php echo sprintf( is_rtl() ? '#%2$s %1$s': '%1$s #%2$s', esc_html( $shipping_method->get_method_title() ), $package_number ); ?></h5>
+				<h5><?php echo sprintf( is_rtl() ? '#%2$s %1$s': '%1$s #%2$s', esc_html( $shipping_method->get_method_title() ), esc_html( $package_number ) ); ?></h5>
 			<?php endif; ?>
 			<ul>
 				<?php foreach ( $pickup_meta as $label => $value ) : ?>
@@ -67,4 +67,3 @@ defined( 'ABSPATH' ) or exit;
 
 	<?php endforeach; ?>
 </div>
-

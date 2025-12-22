@@ -60,6 +60,10 @@ class Delivery_Date {
 	 * @return void
 	 */
 	public function __construct( $product, $shipping_method_id = false, $start_date = false ) {
+		if ( ! woodmart_get_opt( 'estimate_delivery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		$this->manager    = Manager::get_instance();
 		$this->product    = $product;
 		$this->start_date = $start_date;
@@ -279,16 +283,16 @@ class Delivery_Date {
 			++$j;
 		}
 
-		if ( 0 === $number_of_days ) {
-			return strtotime( $current_date );
-		}
-
 		if ( $daily_deadline && ! $current_date_skipped ) {
 			$time_format_pattern = '/^(?:2[0-3]|[01][0-9]):[0-5][0-9](?::[0-5][0-9])?$/';
 
 			if ( preg_match( $time_format_pattern, $daily_deadline ) && strtotime( $current_date . ' ' . $current_time ) > strtotime( $current_date . ' ' . $daily_deadline ) ) {
 				++$number_of_days;
+			} elseif ( 0 === $number_of_days ) {
+				return strtotime( $current_date );
 			}
+		} elseif ( 0 === $number_of_days ) {
+			return strtotime( $current_date );
 		}
 
 		while ( ( count( $available ) < $number_of_days ) && ( $i <= 100 ) ) { // phpcs:ignore.

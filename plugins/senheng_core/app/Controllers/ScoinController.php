@@ -55,41 +55,7 @@ class ScoinController
         }
         return $default;
     }
-
-
-    // Using ACF to add S-Coin field to product variations
-    public static function add_s_coin_field($loop, $variation_data, $variation)
-    {
-        $variation_id = $variation->ID;
-        $value = get_post_meta($variation_id, 's_coin_cashback', true);
-        $value_value = get_post_meta($variation_id, 's_coin_value', true);
-?>
-        <tr>
-            <td style="width: 50%; vertical-align: top;">
-                <p><strong>S-Coin Value (%)</strong></p>
-                <input type="text" name="s_coin_value[<?php echo esc_attr($variation_id); ?>]"
-                    value="<?php echo esc_attr($value_value); ?>" style="width: 100%;" />
-                <em>(S-Coin value for this variation)</em>
-            </td>
-<?php
-    }
-
-    public static function save_s_coin_field($variation_id, $i)
-    {
-        // if (isset($_POST['s_coin_cashback'][$variation_id])) {
-        //     $value = sanitize_text_field($_POST['s_coin_cashback'][$variation_id]);
-        //     update_post_meta($variation_id, 's_coin_cashback', $value);
-        // }
-        if (isset($_POST['s_coin_value'][$variation_id])) {
-            $value = sanitize_text_field($_POST['s_coin_value'][$variation_id]);
-            update_post_meta($variation_id, 's_coin_value', $value);
-        }
-    }
-
-    // Removed: scoin_display_on_product_loop method - moved to ProductLoopController
-
-
-
+    
     /**
      * Return S-Coin cashback percentage for current single product context.
      * Assumes s_coin_value already contains the percentage.
@@ -245,7 +211,7 @@ class ScoinController
                     %s S-Coin (Worth RM%s)
                 </button>
             </div>',
-            esc_url(SENHENG_CORE_ASSETS_URL . 'images/9da3d7cdff54ce03bf0c1bb08efa3a86.png'),
+            esc_url(SENHENG_CORE_ASSETS_URL . 'uploads/s-coin-nobg.png'),
             $s_coin_formatted,
             $rm_formatted
         );
@@ -293,6 +259,49 @@ class ScoinController
         return (float) $total_scoins;
     }
 
+    /**
+     * Add S-Coin Value field to WooCommerce variation settings
+     * Hooks into woocommerce_variation_options_pricing to display the field
+     */
+    public static function add_variation_scoin_field($loop, $variation_data, $variation)
+    {
+        $variation_id = $variation->ID;
+        $s_coin_value = get_field('s_coin_value', $variation_id);
+        
+        woocommerce_wp_text_input([
+            'id'            => "s_coin_value_{$loop}",
+            'name'          => "s_coin_value[{$loop}]",
+            'value'         => $s_coin_value !== false ? $s_coin_value : '',
+            'label'         => __('S-Coin Value (%)', 'senheng'),
+            'desc_tip'      => true,
+            'description'   => __('Enter the S-Coin cashback percentage for this variation. Note: if parent product has S-Coin value, it will inherit from parent.', 'senheng'),
+            'type'          => 'number',
+            'custom_attributes' => [
+                'step' => '0.01',
+                'min'  => '0',
+            ],
+            'wrapper_class' => 'form-row',
+        ]);
+    }
+
+    /**
+     * Save S-Coin Value field for variations
+     * Hooks into woocommerce_save_product_variation to save the ACF field
+     */
+    public static function save_variation_scoin_field($variation_id, $loop)
+    {
+        if (isset($_POST['s_coin_value'][$loop])) {
+            $s_coin_value = wc_clean($_POST['s_coin_value'][$loop]);
+            
+            if ($s_coin_value !== '' && is_numeric($s_coin_value)) {
+                update_field('s_coin_value', floatval($s_coin_value), $variation_id);
+            } else {
+                // Delete the field if empty (allows inheriting from parent)
+                delete_field('s_coin_value', $variation_id);
+            }
+        }
+    }
+
     public static function sh_cart_totals_scoin_row()
     {
         // Use WooCommerce conditional functions for cart/checkout detection (more reliable, works with AJAX)
@@ -311,14 +320,13 @@ class ScoinController
             $s_coin_formatted = 'Earn total ' . $s_coin_formatted . ' S-Coin (worth RM' . $rm_formatted . ')';
         }
 
-        $icon_url = esc_url(SENHENG_CORE_ASSETS_URL . 'images/9da3d7cdff54ce03bf0c1bb08efa3a86.png');
+        $icon_url = esc_url(SENHENG_CORE_ASSETS_URL . 'uploads/s-coin-nobg.png');
 
         echo '<tr class="scoin-total-row">';
-        echo '  <th>' . esc_html__('S-Coin earn', 'senheng') . '</th>';
+        echo '  <th>' . esc_html__('S-Coin Earn', 'senheng') . '</th>';
         echo '  <td data-title="' . esc_attr__('S-Coin earn', 'senheng') . '">';
         echo '      <button type="button" style="pointer-events:none;cursor:default;" class="scoin-cont-total"><img src="' . $icon_url . '" alt="S-Coin"> ' . esc_html($s_coin_formatted) . '</button>';
         echo '  </td>';
         echo '</tr>';
     }
 }
-    

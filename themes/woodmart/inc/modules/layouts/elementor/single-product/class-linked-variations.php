@@ -152,6 +152,10 @@ class Linked_Variations extends Widget_Base {
 	 * Render the widget output on the frontend.
 	 */
 	protected function render() {
+		if ( ! woodmart_get_opt( 'linked_variations' ) ) {
+			return '';
+		}
+
 		$default_settings = array(
 			'alignment'             => 'left',
 			'layout'                => 'default',

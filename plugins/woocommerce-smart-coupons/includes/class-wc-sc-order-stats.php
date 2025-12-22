@@ -3,7 +3,7 @@
  * Stats of Order
  *
  * @author      StoreApps
- * @version     1.0.0
+ * @version     1.1.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -78,48 +78,52 @@ if ( ! class_exists( 'WC_SC_Order_Stats' ) ) {
 		 * @return array Modified data for the order, adjusted for Smart Coupons.
 		 */
 		public function adjust_order_stats( $data, $order ) {
-			// Ensure the order object is valid and contains store credit, and the data array is not empty.
-			if ( $order instanceof WC_Order && ! empty( $data ) && $this->is_order_contains_store_credit( $order ) && $data['net_total'] < 0 ) {
+			try {
+				// Ensure the order object is valid and contains store credit, and the data array is not empty.
+				if ( $order instanceof WC_Order && ! empty( $data ) && $this->is_order_contains_store_credit( $order ) && $data['net_total'] < 0 ) {
 
-				// Get the original order total before discounts.
-				$order_total_before_discount = (float) $this->get_original_order_total_before_discount( $order );
+					// Get the original order total before discounts.
+					$order_total_before_discount = (float) $this->get_original_order_total_before_discount( $order );
 
-				// Initialize totals.
-				$order_discount_total = 0.0;
-				$order_discount_tax   = 0.0;
+					// Initialize totals.
+					$order_discount_total = 0.0;
+					$order_discount_tax   = 0.0;
 
-				// Retrieve coupon items.
-				$coupons = $order->get_items( 'coupon' );
+					// Retrieve coupon items.
+					$coupons = $order->get_items( 'coupon' );
 
-				if ( ! empty( $coupons ) ) {
-					foreach ( $coupons as $item_id => $item ) {
-						// Retrieve coupon code.
-						$coupon_code = ( is_object( $item ) && is_callable( array( $item, 'get_name' ) ) ) ? $item->get_name() : trim( $item['name'] );
+					if ( ! empty( $coupons ) ) {
+						foreach ( $coupons as $item_id => $item ) {
+							// Retrieve coupon code.
+							$coupon_code = ( is_object( $item ) && is_callable( array( $item, 'get_name' ) ) ) ? $item->get_name() : trim( $item['name'] );
 
-						if ( empty( $coupon_code ) ) {
-							continue;
+							if ( empty( $coupon_code ) ) {
+								continue;
+							}
+
+							// Retrieve discount amount and tax.
+							$discount_amount     = ( is_object( $item ) && is_callable( array( $item, 'get_discount' ) ) ) ? $item->get_discount() : $this->get_order_item_meta( $item_id, 'discount_amount', true, true );
+							$discount_amount_tax = ( is_object( $item ) && is_callable( array( $item, 'get_discount_tax' ) ) ) ? $item->get_discount_tax() : $this->get_order_item_meta( $item_id, 'discount_amount_tax', true, true );
+
+							// Ensure amounts are numeric and add to totals.
+							$order_discount_total += (float) $discount_amount;
+							$order_discount_tax   += (float) $discount_amount_tax;
 						}
 
-						// Retrieve discount amount and tax.
-						$discount_amount     = ( is_object( $item ) && is_callable( array( $item, 'get_discount' ) ) ) ? $item->get_discount() : $this->get_order_item_meta( $item_id, 'discount_amount', true, true );
-						$discount_amount_tax = ( is_object( $item ) && is_callable( array( $item, 'get_discount_tax' ) ) ) ? $item->get_discount_tax() : $this->get_order_item_meta( $item_id, 'discount_amount_tax', true, true );
+						// Adjust the net total.
+						$data['net_total'] = $order_total_before_discount
+							- (float) $order->get_shipping_total()
+							- (float) $order->get_shipping_tax()
+							- $order_discount_total
+							- $order_discount_tax;
 
-						// Ensure amounts are numeric and add to totals.
-						$order_discount_total += (float) $discount_amount;
-						$order_discount_tax   += (float) $discount_amount_tax;
-					}
-
-					// Adjust the net total.
-					$data['net_total'] = $order_total_before_discount
-						- (float) $order->get_shipping_total()
-						- (float) $order->get_shipping_tax()
-						- $order_discount_total
-						- $order_discount_tax;
-
-					if ( $data['net_total'] < 0 ) {
-						$data['net_total'] = $order->get_total();
+						if ( $data['net_total'] < 0 ) {
+							$data['net_total'] = $order->get_total();
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $data;

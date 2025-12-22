@@ -17,7 +17,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_woocommerce_notices' ) ) {
 		return array(
 			'base'        => 'woodmart_woocommerce_notices',
 			'name'        => esc_html__( 'WooCommerce notices', 'woodmart' ),
-			'category'    => woodmart_get_tab_title_category_for_wpb( esc_html__( 'WooCommerce', 'woodmart' ) ),
+			'category'    => woodmart_get_tab_title_category_for_wpb( esc_html__( 'Site', 'woodmart' ) ),
 			'description' => esc_html__( 'WooCommerce notices area', 'woodmart' ),
 			'icon'        => WOODMART_ASSETS . '/images/vc-icon/sp-icons/sp-notices.svg',
 			'params'      => array(

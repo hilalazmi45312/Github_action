@@ -22,7 +22,7 @@ define( 'WOODMART_PLUGINS_URL', WOODMART_DEMO_URL . 'plugins/' );
 define( 'WOODMART_DUMMY_URL', WOODMART_DEMO_URL . 'dummy-content-new/' );
 define( 'WOODMART_TOOLTIP_URL', WOODMART_DEMO_URL . 'theme-settings-tooltips/' );
 define( 'WOODMART_SLUG', 'woodmart' );
-define( 'WOODMART_CORE_VERSION', '1.1.1' );
+define( 'WOODMART_CORE_VERSION', '1.1.5' );
 define( 'WOODMART_WPB_CSS_VERSION', '1.0.2' );
 
 if ( ! function_exists( 'woodmart_load_classes' ) ) {

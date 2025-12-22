@@ -7,6 +7,10 @@
 
 			clearTimeout(timeout);
 
+			if ($input.val().trim() === '') {
+				return;
+			}
+
 			timeout = setTimeout(function() {
 				$input.parents('.woocommerce-cart-form').find('button[name=update_cart]').trigger('click');
 			}, 500);

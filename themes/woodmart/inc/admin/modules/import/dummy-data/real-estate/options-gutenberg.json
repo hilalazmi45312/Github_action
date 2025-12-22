@@ -143,5 +143,9 @@
     "form_border_width": "2",
     "form_brd_color": {
         "idle": "rgb(229,229,229)"
-    }
+    },
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

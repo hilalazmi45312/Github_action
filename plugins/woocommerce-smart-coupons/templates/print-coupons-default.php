@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.7.0
- * @version     1.8.0
+ * @version     1.9.0
  * @package     woocommerce-smart-coupons/templates/
  */
 
@@ -108,7 +108,7 @@ $bloginfo = get_bloginfo( 'name', 'display' );
 				$coupon_id = ( $woocommerce_smart_coupon->is_wc_gte_30() ) ? ( is_object( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ? $coupon->get_id() : 0 ) : ( ! empty( $coupon->id ) ? $coupon->id : 0 );
 
 				if ( empty( $coupon_id ) ) {
-					if ( 'sc_dummy_coupon' === $coupon_data['code'] ) {
+					if ( $woocommerce_smart_coupon->sc_is_same_coupon_code( 'sc_dummy_coupon', $coupon_data['code'] ) ) {
 						$email_preview = WC_SC_Email_Preview::get_instance();
 						$coupon        = $email_preview->get_sc_dummy_coupon();
 						$coupon_id     = ( $woocommerce_smart_coupon->is_wc_gte_30() ) ? ( is_object( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ? $coupon->get_id() : 0 ) : ( ! empty( $coupon->id ) ? $coupon->id : 0 );

@@ -883,7 +883,7 @@ if ( ! class_exists( 'WPH_Widget' ) )
 	        $out .= ' /> ';
 
             if ( isset( $key['desc'] ) )
-                $out .= '<br/><small class="description">'.esc_html( $key['desc'] ).'</small>';
+                $out .= '<small class="description">'.esc_html( $key['desc'] ).'</small>';
 
             return $out;            
         }

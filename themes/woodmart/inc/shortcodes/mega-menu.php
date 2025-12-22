@@ -19,22 +19,33 @@ if ( ! function_exists( 'woodmart_shortcode_mega_menu' ) ) {
 
 		$atts = shortcode_atts(
 			array(
-				'title'                 => '',
-				'nav_menu'              => '',
-				'style'                 => 'default',
-				'design'                => 'vertical',
-				'dropdown_design'       => 'default',
-				'items_gap'             => 's',
-				'vertical_items_gap'    => 's',
-				'alignment'             => '',
-				'color'                 => '',
-				'icon_alignment'        => 'inherit',
-				'woodmart_color_scheme' => 'light',
-				'el_class'              => '',
-				'el_id'                 => '',
-				'woodmart_css_id'       => '',
-				'css'                   => '',
-				'is_wpb'                => true,
+				'title'                          => '',
+				'nav_menu'                       => '',
+				'style'                          => 'default',
+				'design'                         => 'vertical',
+				'dropdown_design'                => 'default',
+				'items_gap'                      => 's',
+				'vertical_items_gap'             => 's',
+				'alignment'                      => '',
+				'color'                          => '',
+				'icon_alignment'                 => 'inherit',
+				'woodmart_color_scheme'          => 'light',
+				'el_class'                       => '',
+				'menu_classes'                   => '',
+				'el_id'                          => '',
+				'woodmart_css_id'                => '',
+				'css'                            => '',
+				'is_wpb'                         => true,
+				'items_bg_color_enable'          => 'no',
+				'items_bg_hover_color_enable'    => 'no',
+				'items_bg_active_color_enable'   => 'no',
+				'items_border_enable'            => 'no',
+				'items_border_hover_enable'      => 'no',
+				'items_border_active_enable'     => 'no',
+				'items_box_shadow_enable'        => 'no',
+				'items_box_shadow_hover_enable'  => 'no',
+				'items_box_shadow_active_enable' => 'no',
+				'disable_active_style'           => 'no',
 			),
 			$atts
 		);
@@ -69,11 +80,30 @@ if ( ! function_exists( 'woodmart_shortcode_mega_menu' ) ) {
 
 		if ( 'vertical' === $atts['design'] ) {
 			$menu_classes .= ' wd-design-' . $atts['dropdown_design'];
-			$menu_classes .= ' wd-gap-' . $atts['vertical_items_gap'];
+
+			if ( 'simple' === $atts['dropdown_design'] ) {
+				$menu_classes .= ' wd-gap-' . $atts['vertical_items_gap'];
+			}
 		}
 
 		if ( $atts['icon_alignment'] && 'inherit' !== $atts['icon_alignment'] ) {
 			$menu_classes .= ' wd-icon-' . $atts['icon_alignment'];
+		}
+
+		if ( ! empty( $atts['menu_classes'] ) ) {
+			$menu_classes .= $atts['menu_classes'];
+		}
+
+		$items_bg_activated      = 'yes' === $atts['items_bg_color_enable'] || 'yes' === $atts['items_bg_hover_color_enable'] || 'yes' === $atts['items_bg_active_color_enable'];
+		$items_border_active     = 'yes' === $atts['items_border_enable'] || 'yes' === $atts['items_border_hover_enable'] || 'yes' === $atts['items_border_active_enable'];
+		$items_box_shadow_active = 'yes' === $atts['items_box_shadow_enable'] || 'yes' === $atts['items_box_shadow_hover_enable'] || 'yes' === $atts['items_box_shadow_active_enable'];
+
+		if ( $items_bg_activated || $items_box_shadow_active || $items_border_active ) {
+			$menu_classes .= ' wd-add-pd';
+		}
+
+		if ( 'yes' === $atts['disable_active_style'] ) {
+			$menu_classes .= ' wd-dis-act';
 		}
 
 		ob_start();
@@ -87,6 +117,10 @@ if ( ! function_exists( 'woodmart_shortcode_mega_menu' ) ) {
 		if ( 'vertical' === $atts['design'] ) {
 			woodmart_enqueue_inline_style( 'mod-nav-vertical' );
 			woodmart_enqueue_inline_style( 'mod-nav-vertical-design-' . $atts['dropdown_design'] );
+		}
+
+		if ( 'horizontal' === $atts['design'] && 'bg' === $atts['style'] ) {
+			woodmart_enqueue_inline_style( 'bg-navigation' );
 		}
 		?>
 

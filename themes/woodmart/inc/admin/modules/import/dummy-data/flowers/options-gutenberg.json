@@ -200,5 +200,11 @@
     "blog_excerpt_length": "100",
     "update_cart_quantity_change": "1",
     "single_product_header": "header_431223",
-    "blog_excerpt": "excerpt"
+    "blog_excerpt": "excerpt",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -5,7 +5,7 @@ if ( ! function_exists( 'wd_gutenberg_brands' ) ) {
 			return '';
 		}
 
-		wd_replace_boolean_to_yes_no( array( 'hide_empty', 'filter_in_current_category', 'disable_link', 'with_bg_color', 'hide_pagination_control', 'hide_prev_next_buttons', 'scroll_per_page', 'center_mode', 'wrap', 'autoplay', 'hide_scrollbar', 'autoheight', 'disable_overflow_carousel', 'dynamic_pagination_control', 'scroll_carousel_init' ), $block_attributes );
+		wd_replace_boolean_to_yes_no( array( 'hide_empty', 'filter_in_current_category', 'disable_link', 'with_bg_color', 'with_border', 'hide_pagination_control', 'hide_prev_next_buttons', 'scroll_per_page', 'center_mode', 'wrap', 'autoplay', 'hide_scrollbar', 'autoheight', 'disable_overflow_carousel', 'dynamic_pagination_control', 'scroll_carousel_init' ), $block_attributes );
 
 		$block_attributes['el_class'] = wd_get_gutenberg_element_classes( $block_attributes );
 		$block_attributes['el_id']    = wd_get_gutenberg_element_id( $block_attributes );

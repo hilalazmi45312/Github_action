@@ -86,7 +86,7 @@
                 onSearchComplete: noop,
                 onSearchError: noop,
                 preserveInput: false,
-                containerClass: 'autocomplete-suggestions',
+                containerClass: 'wd-search-suggestions',
                 tabDisabled: false,
                 dataType: 'text',
                 currentRequest: null,
@@ -121,8 +121,8 @@
         that.noSuggestionsContainer = null;
         that.options = $.extend({}, defaults, options);
         that.classes = {
-            selected: 'autocomplete-selected',
-            suggestion: 'autocomplete-suggestion'
+            selected: 'wd-active',
+            suggestion: 'wd-suggestion'
         };
         that.hint = null;
         that.hintValue = '';
@@ -155,7 +155,7 @@
 
         initialize: function () {
             var that = this,
-                suggestionSelector = '.' + that.classes.suggestion,
+                suggestionSelector = `.${that.classes.suggestion}`,
                 selected = that.classes.selected,
                 options = that.options,
                 container;
@@ -165,7 +165,7 @@
 
             that.killerFn = function (e) {
                 if ($(e.target).closest('.' + that.options.containerClass).length === 0) {
-                    that.killSuggestions();
+                    that.killSuggestions(e);
                     that.disableKillerFn();
                 }
             };
@@ -186,19 +186,31 @@
             }
 
             // Listen for mouse over event on suggestions list:
-            container.on('mouseover.autocomplete', suggestionSelector, function () {
+            container.on('mouseover.autocomplete', suggestionSelector, function (e) {
+                if ($(this).hasClass('wd-not-found')) {
+                    e.preventDefault();
+                    return false;
+                }
+
                 that.activate($(this).data('index'));
             });
 
             // Deselect active element when mouse leaves suggestions container:
             container.on('mouseout.autocomplete', function () {
                 that.selectedIndex = -1;
-                container.children('.' + selected).removeClass(selected);
+                container.find('.' + selected).removeClass(selected);
             });
 
             // Listen for click event on suggestions list:
-            container.on('click.autocomplete', suggestionSelector, function () {
-                that.select($(this).data('index'));
+            container.on('click.autocomplete', suggestionSelector, function (e) {
+                if ($(this).hasClass('wd-not-found') || $(this).hasClass('wd-search-title')) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                var doNothing = $(this).find('> a').length > 0;
+
+                that.select($(this).data('index'), doNothing);
             });
 
             that.fixPositionCapture = function () {
@@ -215,6 +227,24 @@
             that.el.on('focus.autocomplete', function () { that.onFocus(); });
             that.el.on('change.autocomplete', function (e) { that.onKeyUp(e); });
             that.el.on('input.autocomplete', function (e) { that.onKeyUp(e); });
+
+            var clearBtn = that.el.parent().find('.wd-clear-search');
+
+            if (clearBtn) {
+                clearBtn.on('click', function (e) { that.onClearSearch(e); });
+            }
+        },
+
+        onClearSearch: function (e) {
+            var that = this;
+
+            if (e.target.classList.contains('wd-clear-search')) {
+                e.target.classList.add('wd-hide');
+            }
+
+            that.clear();
+            that.killSuggestions(e);
+            that.el.trigger('focus');
         },
 
         onFocus: function () {
@@ -228,7 +258,7 @@
         onBlur: function () {
             this.enableKillerFn();
         },
-        
+
         abortAjax: function () {
             var that = this;
             if (that.currentRequest) {
@@ -353,13 +383,16 @@
             $(document).off('click.autocomplete', that.killerFn);
         },
 
-        killSuggestions: function () {
+        killSuggestions: function (e) {
             var that = this;
+            var isClearBtn = $(e.target).hasClass('wd-clear-search');
+
             that.stopKillSuggestions();
+
             that.intervalId = window.setInterval(function () {
                 if (that.visible) {
                     that.el.val(that.currentValue);
-                    that.hide();
+                    that.hide(false, isClearBtn);
                 }
                 
                 that.stopKillSuggestions();
@@ -426,11 +459,12 @@
                     }
                     break;
                 case keys.RETURN:
-                    if (that.selectedIndex === -1) {
-                        that.hide();
+                    if (-1 === that.selectedIndex) {
+                        that.hide(true);
                         return;
                     }
-                    that.select(that.selectedIndex);
+
+                    that.select(that.selectedIndex, true);
                     break;
                 case keys.UP:
                     that.moveUp();
@@ -623,12 +657,16 @@
             return false;
         },
 
-        hide: function () {
-            var that = this,
-                container = $(that.suggestionsContainer);
+        hide: function (doNothing = false, isClearBtn = false) {
+            if (doNothing) {
+                return;
+            }
+
+            var that = this;
+            var container = $(that.suggestionsContainer);
 
             if (typeof that.options.onHide === "function" && that.visible) {
-                that.options.onHide.call(that.element, container);
+                that.options.onHide.call(that.element, container, isClearBtn);
             }
 
             that.visible = false;
@@ -677,14 +715,60 @@
                 return;
             }
 
-            // Build suggestions inner HTML:
-            $.each(that.suggestions, function (i, suggestion) {
-                if (groupBy){
-                    html += formatGroup(suggestion, value, i);
-                }
+            var getSuggestionsHtml = function(suggestions, html = '') {
+                $.each(suggestions, function (i, suggestion) {
+                    if (groupBy){
+                        html += formatGroup(suggestion, value, i);
+                    }
+    
+                    var itemClassName = className;
+    
+                    if (suggestion.item_classes) {
+                        itemClassName += ' ' + suggestion.item_classes;
+                    }
 
-                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value) + '</div>';
-            });
+                    html += '<div class="' + itemClassName + '" data-index="' + i + '">' + formatResult(suggestion, value) + '</div>';
+                });
+
+                return html;
+            }
+
+            var indexCounter = 0;
+            var grupedSuggestions = that.suggestions.reduce((acc, suggestion) => {
+                const group = suggestion.group || 'default';
+                if (!acc[group]) {
+                    acc[group] = {};
+                }
+                acc[group][indexCounter] = suggestion;
+                indexCounter++;
+                return acc;
+            }, {});
+
+            if (grupedSuggestions) {
+                $.each(grupedSuggestions, function (group, suggestions) {
+                    $.each(suggestions, function(i, suggestion) {
+                        if (! suggestion) {
+                            return;
+                        }
+
+                        if (suggestion.divider) {
+                            html += '<div class="wd-search-title title" data-index="' + i + '">' + suggestion.divider + '</div>';
+
+                            delete suggestions[i];
+                        }
+                    });
+
+                    var groupClassName = `wd-suggestions-group wd-type-${group}`;
+        
+                    html += '<div class="' + groupClassName + '">';
+
+                    html = getSuggestionsHtml(suggestions, html);
+    
+                    html += '</div>';
+                });
+            } else {
+                html = getSuggestionsHtml(that.suggestions);
+            }
 
             this.adjustContainerWidth();
 
@@ -822,19 +906,18 @@
         },
 
         activate: function (index) {
-            var that = this,
-                activeItem,
-                selected = that.classes.selected,
-                container = $(that.suggestionsContainer),
-                children = container.find('.' + that.classes.suggestion);
+            var that = this;
+            var selected = that.classes.selected;
+            var container = $(that.suggestionsContainer);
+            var activeItem = container.find(`.${that.classes.suggestion}[data-index="${index}"]`);
 
             container.find('.' + selected).removeClass(selected);
 
             that.selectedIndex = index;
 
-            if (that.selectedIndex !== -1 && children.length > that.selectedIndex) {
-                activeItem = children.get(that.selectedIndex);
+            if (that.selectedIndex !== -1 && activeItem) {
                 $(activeItem).addClass(selected);
+
                 return activeItem;
             }
 
@@ -848,7 +931,11 @@
             that.select(i);
         },
 
-        select: function (i) {
+        select: function (i, doNothing = false) {            
+            if (doNothing) {
+                return;
+            }
+
             var that = this;
             that.hide();
             that.onSelect(i);

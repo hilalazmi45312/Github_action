@@ -44,13 +44,6 @@ class Parts_Css_Files extends Singleton {
 	);
 
 	/**
-	 * Theme version.
-	 *
-	 * @var string
-	 */
-	private $theme_version;
-
-	/**
 	 * Is mobile.
 	 *
 	 * @var string
@@ -75,11 +68,13 @@ class Parts_Css_Files extends Singleton {
 	 * Hooks.
 	 */
 	public function init() {
-		$this->theme_version = woodmart_get_theme_info( 'Version' );
-		$this->is_mobile     = wp_is_mobile() && woodmart_get_opt( 'mobile_optimization', 0 );
+		$this->is_mobile = wp_is_mobile() && woodmart_get_opt( 'mobile_optimization', 0 );
 
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_page_css_files' ), 30 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_page_css_files' ), 10100 );
+
 		add_action( 'wp_footer', array( $this, 'save_page_css_files' ), 10000 );
+
 		add_action( 'save_post', array( $this, 'delete_post_meta' ), 10 );
 		add_action( 'saved_term', array( $this, 'delete_term_meta' ), 10 );
 		add_action( 'save_post_cms_block', array( $this, 'delete_all_meta' ), 10 );
@@ -88,6 +83,7 @@ class Parts_Css_Files extends Singleton {
 		add_action( 'xts_theme_settings_save', array( $this, 'delete_all_meta' ), 10 );
 		add_action( 'activated_plugin', array( $this, 'delete_all_meta' ), 10 );
 		add_action( 'deactivated_plugin', array( $this, 'delete_all_meta' ), 10 );
+
 		add_action( 'wp', array( $this, 'set_page_data' ), 10 );
 		add_action( 'wp', array( $this, 'set_page_css_files' ), 20 );
 
@@ -246,7 +242,7 @@ class Parts_Css_Files extends Singleton {
 			return array();
 		}
 
-		if ( get_option( 'wd_page_css_files_theme_version' ) !== $this->theme_version ) {
+		if ( get_option( 'wd_page_css_files_theme_version' ) !== WOODMART_VERSION ) {
 			$this->delete_all_meta();
 		}
 
@@ -272,11 +268,39 @@ class Parts_Css_Files extends Singleton {
 	}
 
 	/**
+	 * Register page css files.
+	 *
+	 * @return void
+	 */
+	public function register_page_css_files() {
+		$config = woodmart_get_config( 'css-files' );
+
+		foreach ( $config as $value ) {
+			foreach ( $value as $file ) {
+				if ( isset( $file['wpb_file'] ) && 'wpb' === woodmart_get_current_page_builder() ) {
+					$file['file'] = $file['wpb_file'];
+				}
+
+				if ( is_rtl() && isset( $file['rtl'] ) ) {
+					$file['file'] = $file['file'] . '-rtl';
+				}
+
+				if ( ! empty( $file['media'] ) ) {
+					$media = $file['media'];
+				} else {
+					$media = 'all';
+				}
+
+				wp_register_style( 'wd-' . $file['name'], WOODMART_THEME_DIR . $file['file'] . '.min.css', array(), WOODMART_VERSION, $media );
+			}
+		}
+	}
+
+	/**
 	 * Enqueue page css files.
 	 */
 	public function enqueue_page_css_files() {
 		$config     = woodmart_get_config( 'css-files' );
-		$version    = woodmart_get_theme_info( 'Version' );
 		$page_files = $this->page_css_files;
 		$localize   = array();
 
@@ -328,17 +352,11 @@ class Parts_Css_Files extends Singleton {
 					$file['file'] = $file['file'] . '-rtl';
 				}
 
-				if ( ! empty( $file['media'] ) ) {
-					$media = $file['media'];
-				} else {
-					$media = 'all';
-				}
-
 				$src = WOODMART_THEME_DIR . $file['file'] . '.min.css';
 
 				$localize[ 'wd-' . $file['name'] . '-css' ] = $src;
 
-				wp_enqueue_style( 'wd-' . $file['name'], $src, array( 'woodmart-style' ), $version, $media );
+				wp_enqueue_style( 'wd-' . $file['name'] );
 			}
 		}
 
@@ -352,7 +370,6 @@ class Parts_Css_Files extends Singleton {
 	 */
 	public function enqueue_style( $key, $ignore_combined = false ) {
 		$config         = woodmart_get_config( 'css-files' );
-		$version        = woodmart_get_theme_info( 'Version' );
 		$styles_not_use = woodmart_get_opt( 'styles_not_use' );
 
 		if ( woodmart_is_combined_needed( 'combined_css' ) && ! $ignore_combined || ! isset( $config[ $key ] ) ) {
@@ -364,23 +381,13 @@ class Parts_Css_Files extends Singleton {
 				continue;
 			}
 
-			if ( isset( $file['wpb_file'] ) && 'wpb' === woodmart_get_current_page_builder() ) {
-				$file['file'] = $file['wpb_file'];
-			}
-
-			if ( is_rtl() && isset( $file['rtl'] ) ) {
-				$file['file'] = $file['file'] . '-rtl';
-			}
-
-			$src = WOODMART_THEME_DIR . $file['file'] . '.min.css';
-
 			if ( $this->is_mobile ) {
 				$this->inline_enqueue_styles_mobile[] = $file['name'];
 			} else {
 				$this->inline_enqueue_styles[] = $file['name'];
 			}
 
-			wp_enqueue_style( 'wd-' . $file['name'], $src, array( 'woodmart-style' ), $version );
+			wp_enqueue_style( 'wd-' . $file['name'] );
 		}
 	}
 
@@ -415,7 +422,7 @@ class Parts_Css_Files extends Singleton {
 			update_option( 'wd_page_css_files_' . $data['type'], $this->inline_enqueue_styles );
 		}
 
-		update_option( 'wd_page_css_files_theme_version', $this->theme_version );
+		update_option( 'wd_page_css_files_theme_version', WOODMART_VERSION );
 	}
 
 	/**
@@ -471,7 +478,7 @@ class Parts_Css_Files extends Singleton {
 			}
 
 			?>
-			<link rel="stylesheet" id="<?php echo esc_attr( 'wd-' . $data['name'] ); ?>-css" href="<?php echo esc_attr( $src ); ?>?ver=<?php echo esc_attr( $this->theme_version ); ?>" type="text/css" media="<?php echo esc_attr( $media ); ?>" /> <?php // phpcs:ignore ?>
+			<link rel="stylesheet" id="<?php echo esc_attr( 'wd-' . $data['name'] ); ?>-css" href="<?php echo esc_attr( $src ); ?>?ver=<?php echo esc_attr( WOODMART_VERSION ); ?>" type="text/css" media="<?php echo esc_attr( $media ); ?>" /> <?php // phpcs:ignore ?>
 			<?php
 		}
 	}

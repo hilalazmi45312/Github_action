@@ -1,0 +1,31 @@
+/* Sticky Footer Design for Single Product Page */
+
+/* 
+ * Fix for wd-sticky-btn-cart on variation selection 
+ * When a variation is selected, it displays two prices (striked and non-striked).
+ * We want the non-striked one (current price) to be red.
+ */
+
+/* Striked price (Original Price) */
+.wd-sticky-btn .price del,
+.wd-sticky-btn-cart .price del {
+    opacity: 0.7;
+    margin-right: 8px;
+    display: inline-block;
+    color: #777;
+}
+
+/* Non-striked price (Current/Sale Price) - Make it Red */
+.wd-sticky-btn .price ins,
+.wd-sticky-btn-cart .price ins {
+    background: transparent;
+    text-decoration: none;
+    color: #ed1c24 !important; /* Red color */
+    font-size: 14px;
+}
+
+/* Ensure the amount inside inherits the color */
+.wd-sticky-btn .price ins .amount,
+.wd-sticky-btn-cart .price ins .amount {
+    color: inherit !important;
+}

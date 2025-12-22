@@ -1,5 +1,220 @@
 *** WooCommerce Smart Coupons Changelog ***
 
+2025.11.27 - version 9.63.0
+* New: Tested up to WooCommerce 10.3.5
+* Fix: Products set under 'Actions' tab is not considering tax settings, causing invalidation of coupon spend limit
+* Fix: Coupon scheduling not setting correct time when scheduled from shortcode-based checkout page
+* Fix: Coupon meta not updating
+* Fix: Coupons restricted to product, when applied via URL coupons, not applying & redirecting to home page
+* Fix: Treating everything passed in the URL as coupons, causing performance issues
+* Fix: URL coupons redirects to the same page when the page slug and coupon code are the same
+* Fix: Coupon applied via URL not showing in CheckoutWC Side Cart on first load due to timing issue
+* Update: Label & descriptions of some of the fields of Cashback Rewards settings
+* Developer: Added filter 'sc_shareable_link_url' to customize coupon URL
+
+2025.11.07 - version 9.62.0
+* New: Added REST API endpoint to retrieve detailed store credit and available coupons for authenticated users
+* Fix: Error in cart for auto apply coupon for subscription variable product
+* Fix: Product meta for image upload not saving properly
+* Developer: Added filters 'wc_sc_unused_coupon_reminder_coupon_ids' and 'wc_sc_unused_reminder_email_coupon' to modify coupon IDs and coupon object before sending unused reminder emails
+* Tweak: Some additional checks to prevent running unnecessary code on the product edit page on the admin side
+* Update: Moved shortcode 'wc_sc_balance' and 'smart_coupons_balance' to run with hook 'init'
+* Update: Moved error logging for feature of image upload from system level logging to error logging of the plugin
+* Update: Translations
+
+2025.11.01 - version 9.61.1
+* Fix: Uncaught Error: Class 'WC_SC_Email' not found
+* Update: Restricted some code execution from the places where it's not required
+* Update: Translations
+
+2025.10.30 - version 9.61.0
+* New: Tested up to WooCommerce 10.3.3
+* New: Issue a new coupon for every new order that matches a specified criteria
+* Fix: Attribute-based exclusions not working consistently with variable products
+* Fix: Excluded products added from 'Actions' tab from the calculation of subtotal for Usage restrictions 'Minimum spend' and 'Maximum spend'
+* Update: Copy email notifications settings from 'Emails' tab to 'Smart Coupons' tab under 'WooCommerce > Settings'
+* Update: Use of store credit label in email notification setting for 'Store Credit email with image'
+* Update: Translations
+
+2025.10.23 - version 9.60.0
+* New: Tested up to WooCommerce 10.3.0
+* New: Display notices on the cart & the checkout page about additional action to perform for an offer like discount or free shipping
+* Fix: Restrict guest users from viewing and applying role-restricted coupons during checkout
+* Fix: Expired coupons were being incorrectly selected in the 'Unused Coupon Reminder' query when expiry reminders were enabled or disabled
+* Update: Translations
+
+2025.10.16 - version 9.59.0
+* Fix: When 'Give to someone else' is selected on block-based checkout page, gift card emails were sent to the admin instead of the recipient's email address
+* Fix: Compatibility with CheckoutWC where 'Available Coupons' appeared on checkout despite being disabled in settings
+* Fix: URL Coupons redirecting visitors to the homepage
+* Update: Made the gift card image upload process more reliable
+* Update: Translations
+
+2025.10.09 - version 9.58.0
+* New: Coupons were not showing in the "Available Coupons" section after being removed from Auto Apply
+* Fix: Auto-generated coupon emails used the gift card template even when product image upload was disabled
+* Fix: Sender message not appearing in gift card recipient email after switching to gift-card-email.php template
+* Fix: Translation support for the word 'percent' in the coupon actions tab for products
+* Fix: Store Credit usage restriction not excluding product brands correctly
+* Fix: Attribute restrictions not working for auto-applied coupons
+* Update: Translations
+
+2025.10.07 - version 9.57.0
+* New: Tested up to WordPress 6.8.3
+* New: Feature 'Unused Coupon Reminder' email to automatically notify customers about their coupons that are unused for a specified duration
+* Fix: Fatal error in WC_SC_Gift_Card_Image::display_order_item_meta by making the 4th parameter optional when 'woocommerce_order_item_meta_end' passes only 3 arguments
+* Update: Translations
+
+2025.10.02 - version 9.56.0
+* New: Tested up to WooCommerce 10.2.2
+* New: Shortcodes 'wc_sc_balance' and 'smart_coupons_balance' to show store credit balance
+* Fix: Prevent coupon category archive pages from non-admin users by redirecting them to shop page
+* Fix: Prevent auto-generation of coupons during subscription switching to avoid granting coupons without payment
+* Fix: Unnecessary loading of some JavaScript and CSS on pages where they are not required
+* Fix: Improved plugin reliability by enhancing exception handling
+* Developer: Filters 'sc_coupon_category_should_redirect' and 'sc_coupon_category_redirect_url' added for customizing URL coupon behavior
+* Update: Accept coupon from URL even if it is passed like endpoint or pretty permalinks
+* Update: Translations
+
+2025.09.24 - version 9.55.0
+* New: Added support for gift card image uploads, allowing customers to upload an image to personalize their gift cards
+* Update: Translations
+
+2025.09.10 - version 9.54.0
+* Fix: Coupons are not auto-generating when 'Apple Pay' is used to pay for the order
+* Fix: Error in Danish translation strings that caused fatal error with unknown format specifier '&'
+* Fix: Translation issue with coupon action's gift product message so it now displays correctly in all languages
+* Fix: Coupons set to 'First Order Only' were incorrectly applied to registered users who had previously purchased as guests
+* Fix: Gift Card not added via AJAX when using 'WPC AJAX Add to Cart for WooCommerce' plugin
+* Update: Improvements in usage restriction based on number of orders like default values, arguments in filter 'wc_sc_coupons_by_order_count_statuses' and 'wc_sc_coupons_by_order_count_error_message', use of CRUD-based meta functions for better consistency
+* Update: Translations
+
+2025.09.03 - version 9.53.0
+* Fix: Validated coupon quantities to prevent automatic application under unexpected cart conditions
+* Update: Translations
+
+2025.09.01 - version 9.52.0
+* New: Coupon restrictions - 'Number of orders made' to limit coupon usage based on the customer's completed orders
+* Update: Improved file inclusion method using WordPress functions
+* Update: Migrated class 'SA_WC_Compatibility_4_4' to 'SA_WC_SC_Compatibility'
+* Update: Translations
+
+2025.08.28 - version 9.51.0
+* New: Tested up to WooCommerce 10.1.2
+* Fix: Incorrect discount amount shown in admin order email
+* Fix: Improved plugin reliability by enhancing exception handling
+* Update: Translations
+
+2025.08.22 - version 9.50.0
+* New: Tested up to WooCommerce 10.1.1
+* Fix: Coupon code case sensitivity issue causing compatibility problems with other plugins
+* Update: Translations
+
+2025.08.18 - version 9.49.0
+* Fix: Gift product not added to the cart when 'FunnelKit Cart for WooCommerce' plugin is enabled
+* Fix: Improved plugin reliability with better exception handling
+* Update: Translations
+
+2025.08.07 - version 9.48.0
+* Fix: Auto-generated coupon details were not displaying in the order confirmation email
+* Fix: Translation issue in the email header when the customer receives the email from the plugin
+* Fix: 'Generated coupons' section on order admin shows all older coupons
+* Fix: Broken CSS for text 'And' under 'Coupon data > Usage restriction' with WooCommerce version 9.6.2 & lower
+* Developer: Filter 'wc_sc_email_coupon_description_text' to manage display for email coupon description text
+* Update: Translations
+
+2025.07.31 - version 9.47.0
+* Fix: Free product from "Actions" tab not added to cart when applying coupon causes page reload
+* Fix: Improved UI scripts for the "Available Coupons" section
+* Fix: Shortcode-based "Available Coupons" section will no longer follow hide settings of collapsible "Available coupons" section
+* Fix: Settings "Always show section" and "Open by default" are now always visible
+* Fix: "Preview email" styles no longer affect the entire admin page ["Bulk Generate" & "Send store credit" tab]
+* Update: Translations
+
+2025.07.28 - version 9.46.0
+* New: Tested up to WooCommerce 10.0.4
+* Fix: {coupon_type} merge tag doesn't work in the Acknowledgement email
+* Fix: Updated combined coupon validation to allow unspecified combinations by default
+* Fix: Improved conditional check for `$subtotal` using `! empty()` to prevent potential warnings and improve code reliability
+* Update: Translations
+
+2025.07.23 - version 9.45.2
+* Fix: Corrected SQL error caused by unset $subtotal in amount conditions
+* Update: Translations
+
+2025.07.22 - version 9.45.1
+* New: Tested up to WooCommerce 10.0.3
+* Fix: Added checks to prevent fatal errors in some cases
+* Update: Translations
+
+2025.07.21 - version 9.45.0
+* New: Tested up to WordPress 6.8.2
+* New: Tested up to WooCommerce 10.0.2
+* Fix: Sender and receiver details now visible in 'More Details' on My Account > Coupons
+* Fix: Showing coupon validation notice when not required
+* Fix: Resolved translation issue in checkout related to incorrect handling of single quotes in localized strings
+* Fix: Improved layout in the "Send Store Credit" tab
+* Fix: Discount amount in admin order email now reflects accurate value
+* Fix: Prevented JS error in French by escaping inline translations with `esc_js()`
+* Fix: On the plugin's admin setting page, footer notes are overlapping the 'Save changes' button
+* Fix: Wrong escaping function, using 'esc_attr__()' in a context outside of HTML attributes
+* Update: Improved handling of adding products to the cart via AJAX in the Coupon Action tab [Admin]
+* Update: Translations
+
+2025.07.15 - version 9.44.0
+* Update: Prevent coupon generation overlap when multiple admins run bulk generation simultaneously
+* Fix: Added CheckoutWC compatibility file to resolve integration issues
+* Fix: Auto-apply coupons no longer disappear during checkout transition
+* Fix: Optimized background AJAX call frequency to improve performance and reduce server load
+* Fix: Illegal string offset ‘global_coupons’
+* Fix: Array to string conversion warning
+* Fix: PHP Fatal error: translations on Swedish language
+* Update: Translations
+
+2025.07.04 - version 9.43.0
+* New: Settings to manage the display of 'Available coupons' section on the Cart & the Checkout page
+* Fix: Double display of coupon application success notification triggered by auto-apply coupons
+* Fix: Store Credit coupon amount not deducting correctly when coupon code case did not match
+* Fix: Case sensitivity in coupon code handling causing incorrect behavior on orders admin pages
+* Update: Improvements in 'Available coupons' section on the cart & the checkout page like smooth loading & transitions
+* Update: Improved compatibility with WooCommerce's case-sensitive coupon validation logic
+* Update: By default, store credit will not reduce line total & line taxes
+* Developer: Filter hook 'wc_sc_store_credit_reduce_line_totals' to control whether store credit will reduce the line total & line taxes or not
+* Update: Translations
+
+2025.06.27 - version 9.42.0
+* New: Tested up to WooCommerce 9.9.5
+* Fix: Improved data migration logic to ensure reliable batch processing into `wc_smart_coupons` custom table
+* Fix: Emails sent from the plugin now respects the case defined in custom label set for discount type 'Store credit' and no longer forces lowercase
+* Fix: Improved UI/UX of coupon Usage restrictions and separated multiple include/exclude settings for better clarity and control
+* Update: Replaced Chosen.js with Select2 for Usage restriction > 'Allowed locations' to improve performance and support asynchronous data loading
+* Update: Translations
+
+2025.06.19 - version 9.41.0
+* New: Tested up to WooCommerce 9.9.4
+* New: Swedish, Danish & Korean translations (AI-generated)
+* Fix: Bulk-generated coupons were imported with an incorrect author
+* Fix: Issue where multiple notices were displayed and Action tab-related products remained in the checkout after coupon removal
+* Fix: Available coupons were not displaying on the checkout page when using the CheckoutWC plugin
+* Fix: Auto Apply coupon with Individual use set is causing infinite loop
+* Update: Translation
+
+2025.06.16 - version 9.40.0
+* New: Tested up to WooCommerce 9.9.3
+* New: Polish, Turkish & Portuguese(Brazil & Portugal) translations (AI-generated)
+* Fix: Improved SQL logic to avoid partial matches in product exclusion for Auto Apply coupons
+* Fix: Persistent "Display message to user" after coupon/product removal
+* Fix: Layout issue in "Send Store Credit" tab
+* Fix: New Customer Discount not applying on guest checkout
+* Fix: Store credit not reflecting in 'Preview email'
+* Fix: Infinite loop causing max execution time errors
+* Fix: YITH Cart Messages disappeared when clicking on Available Coupons
+* Fix: Product selection popup not opening on Classic Checkout for coupons with multiple choices.
+* Fix: Prevented cart page from scrolling to top when changing shipping methods after applying a coupon via accordion UI
+* Update: [Admin] Enhanced UI/UX for new user restrictions
+* Update: [Admin] Enhanced UI/UX for Bulk Generate Coupon settings
+* Update: Translation
+
 2025.06.06 - version 9.39.0
 * New: Coupon restrictions - "Coupon(s) can be used with" and "Coupon(s) can't be used with"
 * New: Arabic, Dutch & Italian translations (AI-generated)

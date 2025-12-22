@@ -163,14 +163,28 @@ if ( woodmart_get_opt( 'white_label' ) ) {
 							'condition' => current_user_can( apply_filters( 'woodmart_capability_menu_page', 'manage_options', 'xts_header_builder' ) ),
 						),
 						array(
-							'link'      => array(
+							'link'       => array(
 								'url' => admin_url( 'edit.php?post_type=woodmart_layout' ),
 							),
-							'type'      => 'post_type',
-							'slug'      => 'woodmart_layout',
-							'icon'      => 'layouts',
-							'text'      => esc_html__( 'Layouts', 'woodmart' ),
-							'condition' => in_array( 'edit.php?post_type=woodmart_layout', array_column( $menu, 2 ) ),
+							'type'       => 'post_type',
+							'slug'       => 'woodmart_layout',
+							'icon'       => 'layouts',
+							'text'       => esc_html__( 'Layouts', 'woodmart' ),
+							'condition'  => in_array( 'edit.php?post_type=woodmart_layout', array_column( $menu, 2 ) ),
+							'child_menu' => array(
+								'items' => array(
+									array(
+										'link'      => array(
+											'url' => admin_url( 'edit.php?post_type=woodmart_layout&create_template' ),
+										),
+										'type'      => 'post_type_new',
+										'slug'      => 'woodmart_layout',
+										'condition' => in_array( 'edit.php?post_type=woodmart_layout', array_column( $menu, 2 ) ),
+										'text'      => esc_html__( 'Add layout', 'woodmart' ),
+										'class'     => 'wd-add-layout',
+									),
+								),
+							),
 						),
 						array(
 							'link'       => array(
@@ -199,7 +213,7 @@ if ( woodmart_get_opt( 'white_label' ) ) {
 										'type'      => 'post_type_new',
 										'slug'      => 'woodmart_slide',
 										'condition' => woodmart_get_opt( 'woodmart_slider', '1' ) && isset( $submenu['edit.php?post_type=woodmart_slide'] ),
-										'text'      => esc_html__( 'Add new slide', 'woodmart' ),
+										'text'      => esc_html__( 'Add slide', 'woodmart' ),
 									),
 								),
 							),
@@ -217,6 +231,15 @@ if ( woodmart_get_opt( 'white_label' ) ) {
 								'items' => array(
 									array(
 										'link'      => array(
+											'url' => admin_url( 'post-new.php?post_type=cms_block' ),
+										),
+										'type'      => 'post_type_new',
+										'slug'      => 'cms_block',
+										'condition' => isset( $submenu['edit.php?post_type=cms_block'] ),
+										'text'      => esc_html__( 'Add block', 'woodmart' ),
+									),
+									array(
+										'link'      => array(
 											'url' => admin_url( 'edit-tags.php?taxonomy=cms_block_cat&post_type=cms_block' ),
 										),
 										'type'      => 'post_type_taxonomy',
@@ -224,14 +247,71 @@ if ( woodmart_get_opt( 'white_label' ) ) {
 										'condition' => isset( $submenu['edit.php?post_type=cms_block'] ),
 										'text'      => esc_html__( 'Categories', 'woodmart' ),
 									),
+								),
+							),
+						),
+						array(
+							'link'       => array(
+								'url' => admin_url( 'edit.php?post_type=wd_popup' ),
+							),
+							'type'       => 'post_type',
+							'slug'       => 'wd_popup',
+							'icon'       => 'popup',
+							'text'       => esc_html__( 'Popups', 'woodmart' ),
+							'condition'  => in_array( 'edit.php?post_type=wd_popup', array_column( $menu, 2 ) ),
+							'child_menu' => array(
+								'items' => array(
 									array(
 										'link'      => array(
-											'url' => admin_url( 'post-new.php?post_type=cms_block' ),
+											'url' => admin_url( 'edit.php?post_type=wd_popup&create_template' ),
 										),
 										'type'      => 'post_type_new',
-										'slug'      => 'cms_block',
-										'condition' => isset( $submenu['edit.php?post_type=cms_block'] ),
-										'text'      => esc_html__( 'Add new', 'woodmart' ),
+										'slug'      => 'wd_popup',
+										'condition' => isset( $submenu['edit.php?post_type=wd_popup'] ),
+										'text'      => esc_html__( 'Add popup', 'woodmart' ),
+										'class'     => 'wd-add-popup',
+									),
+									array(
+										'link'      => array(
+											'url' => admin_url( 'edit-tags.php?taxonomy=wd_popup_cat&post_type=wd_popup' ),
+										),
+										'type'      => 'post_type_taxonomy',
+										'slug'      => 'wd_popup_cat',
+										'condition' => isset( $submenu['edit.php?post_type=wd_popup'] ),
+										'text'      => esc_html__( 'Categories', 'woodmart' ),
+									),
+								),
+							),
+						),
+						array(
+							'link'       => array(
+								'url' => admin_url( 'edit.php?post_type=wd_floating_block' ),
+							),
+							'type'       => 'post_type',
+							'slug'       => 'wd_floating_block',
+							'icon'       => 'fb',
+							'text'       => esc_html__( 'Floating Blocks', 'woodmart' ),
+							'condition'  => in_array( 'edit.php?post_type=wd_floating_block', array_column( $menu, 2 ) ),
+							'child_menu' => array(
+								'items' => array(
+									array(
+										'link'      => array(
+											'url' => admin_url( 'edit.php?post_type=wd_floating_block&create_template' ),
+										),
+										'type'      => 'post_type_new',
+										'slug'      => 'wd_floating_block',
+										'condition' => isset( $submenu['edit.php?post_type=wd_popup'] ),
+										'text'      => esc_html__( 'Add block', 'woodmart' ),
+										'class'     => 'wd-add-floating-block',
+									),
+									array(
+										'link'      => array(
+											'url' => admin_url( 'edit-tags.php?taxonomy=wd_floating_block_cat&post_type=wd_floating_block' ),
+										),
+										'type'      => 'post_type_taxonomy',
+										'slug'      => 'wd_floating_block_cat',
+										'condition' => isset( $submenu['edit.php?post_type=wd_floating_block'] ),
+										'text'      => esc_html__( 'Categories', 'woodmart' ),
 									),
 								),
 							),
@@ -254,7 +334,7 @@ if ( woodmart_get_opt( 'white_label' ) ) {
 										'type'      => 'post_type_new',
 										'slug'      => 'woodmart_sidebar',
 										'condition' => isset( $submenu['edit.php?post_type=woodmart_sidebar'] ),
-										'text'      => esc_html__( 'Add new', 'woodmart' ),
+										'text'      => esc_html__( 'Add sidebar', 'woodmart' ),
 									),
 								),
 							),

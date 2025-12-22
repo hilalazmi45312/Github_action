@@ -283,18 +283,6 @@ Options::add_field(
 
 Options::add_field(
 	array(
-		'id'       => 'skype_link',
-		'name'     => esc_html__( 'Skype link', 'woodmart' ),
-		'type'     => 'text_input',
-		'section'  => 'social_links',
-		'default'  => '',
-		'priority' => 170,
-		'class'    => 'xts-col-6',
-	)
-);
-
-Options::add_field(
-	array(
 		'id'       => 'whatsapp_link',
 		'name'     => esc_html__( 'WhatsApp link', 'woodmart' ),
 		'type'     => 'text_input',

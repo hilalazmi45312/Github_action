@@ -140,5 +140,11 @@
     },
     "form_fields_style": "semi-rounded",
     "sticky_toolbar": "0",
-    "rounding_size": "8"
+    "rounding_size": "8",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

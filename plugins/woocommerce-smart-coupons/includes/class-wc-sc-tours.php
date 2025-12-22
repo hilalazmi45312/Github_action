@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       9.9.0
- * @version     1.2.0
+ * @version     1.7.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -46,11 +46,7 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 		 */
 		private function __construct() {
 
-			$this->set_tour_scripts();
-			$this->set_tour_script_tags();
-
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
-			add_action( 'admin_head', array( $this, 'add_tour_button' ) );
+			add_action( 'current_screen', array( $this, 'load_tour_scripts' ) );
 
 		}
 
@@ -92,6 +88,62 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 		}
 
 		/**
+		 * Conditionally load tour scripts and buttons on specific WooCommerce admin pages.
+		 *
+		 * This function is hooked to the 'current_screen' action and runs only when
+		 * the current admin screen is available.
+		 *
+		 * @param WP_Screen $screen Current screen object.
+		 */
+		public function load_tour_scripts( $screen ) {
+			try {
+				global $pagenow;
+				// Skip non-front-end requests.
+				if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_rest_endpoint() || defined( 'REST_REQUEST' ) ) {
+					if ( function_exists( 'get_current_screen' ) ) {
+						$screen = get_current_screen();
+						if ( ! empty( $screen->post_type ) && 'product' === $screen->post_type ) {
+							return; // No need to run the following code when working with products.
+						}
+					}
+					$get_post      = ( ! empty( $_GET['post'] ) ) ? wc_clean( wp_unslash( $_GET['post'] ) ) : '';            // phpcs:ignore
+					$get_post_type = ( ! empty( $_GET['post_type'] ) ) ? wc_clean( wp_unslash( $_GET['post_type'] ) ) : '';  // phpcs:ignore
+					if ( 'post.php' === $pagenow && ! empty( $get_post ) && 'product' === get_post_type( $get_post ) ) {
+						return;  // No need to run the following code when working with products.
+					}
+					if ( 'post-new.php' === $pagenow && ! empty( $get_post_type ) && 'product' === $get_post_type ) {
+						return;  // No need to run the following code when working with products.
+					}
+				}
+
+				if ( empty( $screen->id ) ) {
+					return;
+				}
+
+				$screen_id = $screen->id;
+
+				$allowed_screens = array(
+					'woocommerce_page_wc-settings',
+					'edit-shop_coupon',
+					'shop_coupon',
+					'marketing_page_wc-smart-coupons',
+					'marketing_page_sc-tour',
+				);
+
+				if ( in_array( $screen_id, $allowed_screens, true ) ) {
+					$this->set_tour_scripts();
+					$this->set_tour_script_tags();
+
+					add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
+					add_action( 'admin_head', array( $this, 'add_tour_button' ) );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
+		}
+
+
+		/**
 		 * Function to get tour script JS files
 		 *
 		 * @return array
@@ -100,6 +152,7 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 			if ( empty( $this->tour_scripts ) ) {
 				$this->set_tour_scripts();
 			}
+
 			return $this->tour_scripts;
 		}
 
@@ -107,7 +160,7 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 		 * Function to set tour script JS files
 		 */
 		public function set_tour_scripts() {
-			$this->tour_scripts = glob( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'assets/js/tours/tour-*.min.js' );
+			$this->tour_scripts = glob( WC_SC_PLUGIN_DIRPATH . 'assets/js/tours/tour-*.min.js' );
 		}
 
 		/**
@@ -119,6 +172,7 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 			if ( empty( $this->tour_script_tags ) ) {
 				$this->set_tour_script_tags();
 			}
+
 			return $this->tour_script_tags;
 		}
 
@@ -126,14 +180,15 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 		 * Function to get tour script tags
 		 */
 		public function set_tour_script_tags() {
-			$files                  = $this->get_tour_scripts();
-			$file_tags              = array_map(
+			$files     = $this->get_tour_scripts();
+			$file_tags = array_map(
 				function( $file ) {
 					$file_name = basename( $file, '.js' );
 					return $file_name . '-js';
 				},
 				$files
 			);
+
 			$this->tour_script_tags = array_merge( $file_tags, array( 'wc-sc-admin-shepherd-js' ) );
 		}
 
@@ -141,49 +196,52 @@ if ( ! class_exists( 'WC_SC_Tours' ) ) {
 		 * Enqueue styles and scripts
 		 */
 		public function enqueue_styles_and_scripts() {
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			try {
+				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			if ( ! wp_style_is( 'wc-sc-admin-shepherd-css', 'registered' ) ) {
-				$style_path = '/assets/css/shepherd.css';
-				$style_url  = $this->get_plugin_directory_url( $style_path );
-				wp_register_style( 'wc-sc-admin-shepherd-css', $style_url, array(), $this->get_smart_coupons_version() );
-			}
-			if ( ! wp_style_is( 'wc-sc-admin-shepherd-css' ) ) {
-				wp_enqueue_style( 'wc-sc-admin-shepherd-css' );
-			}
+				if ( ! wp_style_is( 'wc-sc-admin-shepherd-css', 'registered' ) ) {
+					$style_path = '/assets/css/shepherd.css';
+					$style_url  = $this->get_plugin_directory_url( $style_path );
+					wp_register_style( 'wc-sc-admin-shepherd-css', $style_url, array(), $this->get_smart_coupons_version() );
+				}
+				if ( ! wp_style_is( 'wc-sc-admin-shepherd-css' ) ) {
+					wp_enqueue_style( 'wc-sc-admin-shepherd-css' );
+				}
 
-			if ( ! wp_style_is( 'wc-sc-tour-css', 'registered' ) ) {
-				$style_path = '/assets/css/wc-sc-tour' . $suffix . '.css';
-				$style_url  = $this->get_plugin_directory_url( $style_path );
-				wp_register_style( 'wc-sc-tour-css', $style_url, array( 'wc-sc-admin-shepherd-css' ), $this->get_smart_coupons_version() );
-			}
-			if ( ! wp_style_is( 'wc-sc-tour-css' ) ) {
-				wp_enqueue_style( 'wc-sc-tour-css' );
-			}
+				if ( ! wp_style_is( 'wc-sc-tour-css', 'registered' ) ) {
+					$style_path = '/assets/css/wc-sc-tour' . $suffix . '.css';
+					$style_url  = $this->get_plugin_directory_url( $style_path );
+					wp_register_style( 'wc-sc-tour-css', $style_url, array( 'wc-sc-admin-shepherd-css' ), $this->get_smart_coupons_version() );
+				}
+				if ( ! wp_style_is( 'wc-sc-tour-css' ) ) {
+					wp_enqueue_style( 'wc-sc-tour-css' );
+				}
 
-			if ( ! wp_script_is( 'wc-sc-admin-shepherd-js', 'registered' ) ) {
-				$script_path = '/assets/js/shepherd.min.js';
-				$script_url  = $this->get_plugin_directory_url( $script_path );
-				wp_register_script( 'wc-sc-admin-shepherd-js', $script_url, array(), $this->get_smart_coupons_version(), true );
-			}
-			if ( ! wp_script_is( 'wc-sc-admin-shepherd-js' ) ) {
-				wp_enqueue_script( 'wc-sc-admin-shepherd-js' );
-			}
-
-			$files = $this->get_tour_scripts();
-
-			foreach ( $files as $file ) {
-				$file_name = basename( $file, '.js' );
-				if ( ! wp_script_is( $file_name . '-js', 'registered' ) ) {
-					$script_path = '/assets/js/tours/' . $file_name . '.js';
+				if ( ! wp_script_is( 'wc-sc-admin-shepherd-js', 'registered' ) ) {
+					$script_path = '/assets/js/shepherd.min.js';
 					$script_url  = $this->get_plugin_directory_url( $script_path );
-					wp_register_script( $file_name . '-js', $script_url, array( 'wc-sc-admin-shepherd-js' ), $this->get_smart_coupons_version(), true );
+					wp_register_script( 'wc-sc-admin-shepherd-js', $script_url, array(), $this->get_smart_coupons_version(), true );
 				}
-				if ( ! wp_script_is( $file_name . '-js' ) ) {
-					wp_enqueue_script( $file_name . '-js' );
+				if ( ! wp_script_is( 'wc-sc-admin-shepherd-js' ) ) {
+					wp_enqueue_script( 'wc-sc-admin-shepherd-js' );
 				}
-			}
 
+				$files = $this->get_tour_scripts();
+
+				foreach ( $files as $file ) {
+					$file_name = basename( $file, '.js' );
+					if ( ! wp_script_is( $file_name . '-js', 'registered' ) ) {
+						$script_path = '/assets/js/tours/' . $file_name . '.js';
+						$script_url  = $this->get_plugin_directory_url( $script_path );
+						wp_register_script( $file_name . '-js', $script_url, array( 'wc-sc-admin-shepherd-js' ), $this->get_smart_coupons_version(), true );
+					}
+					if ( ! wp_script_is( $file_name . '-js' ) ) {
+						wp_enqueue_script( $file_name . '-js' );
+					}
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**

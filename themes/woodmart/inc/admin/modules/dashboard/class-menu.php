@@ -86,7 +86,10 @@ class Menu {
 			$classes = ' ' . add_cssclass( $active_class, $classes );
 		} elseif ( ! empty( $item_data['type'] ) && 'post_type_taxonomy' === $item_data['type'] && isset( $_GET['post_type'] ) && $item_data['slug'] === $_GET['post_type'] && isset( $_GET['taxonomy'] ) ) { // phpcs:ignore
 			$classes = ' ' . add_cssclass( $active_class, $classes );
+		} elseif ( ! empty( $item_data['type'] ) && 'wd_layout_type_tab' === $item_data['type'] && isset( $_GET['wd_layout_type_tab'] ) && $item_data['slug'] === $_GET['wd_layout_type_tab'] ) { // phpcs:ignore
+			$classes = ' ' . add_cssclass( $active_class, $classes );
 		}
+
 
 		return $classes;
 	}

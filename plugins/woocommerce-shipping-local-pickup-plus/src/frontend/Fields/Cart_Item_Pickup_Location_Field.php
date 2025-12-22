@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -26,7 +26,7 @@ namespace SkyVerge\WooCommerce\Local_Pickup_Plus\Fields;
 defined( 'ABSPATH' ) or exit;
 
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Data_Store\Cart_Item_Pickup_Data;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Field component to select a pickup location for a cart item.
@@ -113,7 +113,7 @@ class Cart_Item_Pickup_Location_Field extends Pickup_Location_Field {
 
 				<?php // if the item is set to be shipped, hide the select instead of removing it, to preserve the chosen location ?>
 				<div style="display: <?php echo $must_be_picked_up || $should_be_picked_up ? 'block' : 'none'; ?>;">
-					<?php echo $this->get_location_select_html( $cart_item_id, $chosen_pickup_location, $this->data_store->get_product() ); ?>
+					<?php echo $this->get_location_select_html( $cart_item_id, $chosen_pickup_location, $this->data_store->get_product() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
 			</div>

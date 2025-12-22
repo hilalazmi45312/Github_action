@@ -11,7 +11,7 @@ class Shop_Archive extends Layout_Type {
 	 *
 	 * @var array Switched data.
 	 */
-	private static $switched_data = array();
+	private static $original_post = array();
 
 	/**
 	 * Check.
@@ -57,8 +57,14 @@ class Shop_Archive extends Layout_Type {
 			case 'product_tags':
 				$is_active = is_product_tag();
 				break;
-			case 'product_brands':
-				$is_active = is_tax( 'product_brand' );
+			case 'product_brand':
+				$object      = get_queried_object();
+				$taxonomy_id = is_object( $object ) && property_exists(
+					$object,
+					'term_id'
+				) ? $object->term_id : false;
+
+				$is_active = (int) $taxonomy_id === (int) $condition['condition_query'];
 				break;
 			case 'product_attr':
 				$object   = get_queried_object();
@@ -108,6 +114,10 @@ class Shop_Archive extends Layout_Type {
 				break;
 		}
 
+		if ( 'fragments' === woodmart_is_woo_ajax() ) {
+			$is_active = false;
+		}
+
 		return $is_active;
 	}
 
@@ -131,7 +141,8 @@ class Shop_Archive extends Layout_Type {
 	/**
 	 * Display custom template on the shop page.
 	 */
-	private function display_template() {
+	protected function display_template() {
+		parent::display_template();
 		$this->before_template_content();
 		$this->template_content( 'shop_archive' );
 		$this->after_template_content();
@@ -141,11 +152,6 @@ class Shop_Archive extends Layout_Type {
 	 * Before template content.
 	 */
 	public function before_template_content() {
-		if ( woodmart_is_woo_ajax() === 'fragments' ) {
-			woodmart_woocommerce_main_loop( true );
-			die();
-		}
-
 		if ( ! woodmart_is_woo_ajax() ) {
 			get_header();
 		} else {
@@ -187,23 +193,23 @@ class Shop_Archive extends Layout_Type {
 
 		// If is already switched, or is the same query, return.
 		if ( $current_query_vars === $new_query ) {
-			self::$switched_data[] = false;
+			self::$original_post = false;
 
 			return;
 		}
 
 		$new_query = new WP_Query( $new_query );
 
-		$switched_data = array(
+		$original_post = array(
 			'switched' => $new_query,
 			'original' => $wp_query,
 		);
 
 		if ( ! empty( $GLOBALS['post'] ) ) {
-			$switched_data['post'] = $GLOBALS['post'];
+			$original_post['post'] = $GLOBALS['post'];
 		}
 
-		self::$switched_data[] = $switched_data;
+		self::$original_post = $original_post;
 
 		$wp_query = $new_query; // phpcs:ignore
 
@@ -220,7 +226,7 @@ class Shop_Archive extends Layout_Type {
 	 * @return void
 	 */
 	public static function restore_current_query() {
-		$data = array_pop( self::$switched_data );
+		$data = self::$original_post;
 
 		// If not switched, return.
 		if ( ! $data ) {
@@ -243,6 +249,22 @@ class Shop_Archive extends Layout_Type {
 
 		WC()->query->product_query( $wp_query );
 		wc_reset_loop();
+	}
+
+	/**
+	 * Get body classes.
+	 *
+	 * @param array $classes Classes for the body element.
+	 * @return array
+	 */
+	public function get_body_classes( $classes ) {
+		parent::get_body_classes( $classes );
+
+		if ( is_singular( 'woodmart_layout' ) && Main::get_instance()->has_custom_layout( 'shop_archive' ) ) {
+			$classes[] = 'woodmart-archive-shop';
+		}
+
+		return $classes;
 	}
 }
 

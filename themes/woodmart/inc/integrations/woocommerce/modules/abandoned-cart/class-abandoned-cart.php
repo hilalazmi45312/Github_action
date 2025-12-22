@@ -11,6 +11,7 @@ use XTS\Singleton;
 use WOOMC\Currency;
 use WC_Cart;
 use WC_Order;
+use WC_Order_Item_Product;
 
 /**
  * Abandoned cart class.
@@ -41,8 +42,20 @@ class Abandoned_Cart extends Singleton {
 	 * Init.
 	 */
 	public function init() {
-		$this->cutoff                = intval( woodmart_get_opt( 'abandoned_cart_timeframe', 2 ) ) * intval( woodmart_get_opt( 'abandoned_cart_timeframe_period', DAY_IN_SECONDS ) );
-		$this->delete_abandoned_time = intval( woodmart_get_opt( 'abandoned_cart_delete_timeframe', 30 ) ) * intval( woodmart_get_opt( 'abandoned_cart_delete_timeframe_period', DAY_IN_SECONDS ) );
+		if ( ! woodmart_get_opt( 'cart_recovery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
+		$cutoff                = intval( woodmart_get_opt( 'abandoned_cart_timeframe', 2 ) ) * intval( woodmart_get_opt( 'abandoned_cart_timeframe_period', DAY_IN_SECONDS ) );
+		$delete_abandoned_time = intval( woodmart_get_opt( 'abandoned_cart_delete_timeframe', 30 ) ) * intval( woodmart_get_opt( 'abandoned_cart_delete_timeframe_period', DAY_IN_SECONDS ) );
+
+		if ( $cutoff ) {
+			$this->cutoff = $cutoff;
+		}
+
+		if ( $delete_abandoned_time ) {
+			$this->delete_abandoned_time = $delete_abandoned_time;
+		}
 
 		// Enqueue scripts.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -56,7 +69,7 @@ class Abandoned_Cart extends Singleton {
 		add_action( 'wp_ajax_woodmart_recover_guest_cart', array( $this, 'recover_guest_cart' ) );
 		add_action( 'wp_ajax_nopriv_woodmart_recover_guest_cart', array( $this, 'recover_guest_cart' ) );
 
-		add_action( 'wp_footer', array( $this, 'maybe_add_privacy_checkbox' ), 10 );
+		add_action( 'woocommerce_after_checkout_billing_form', array( $this, 'maybe_add_privacy_checkbox' ) );
 
 		add_action( 'wp_loaded', array( $this, 'recovery_cart' ), 10 );
 
@@ -67,9 +80,7 @@ class Abandoned_Cart extends Singleton {
 		add_action( 'woodmart_abandoned_cart_cron', array( $this, 'remove_carts_abandoned_is_expired' ) );
 		add_action( 'woodmart_abandoned_cart_cron', array( $this, 'update_carts' ), 20 );
 
-		if ( ! wp_next_scheduled( 'woodmart_abandoned_cart_cron' ) ) {
-			wp_schedule_event( time(), apply_filters( 'woodmart_schedule_abandoned_cart_cron', 'fifteen_minutes' ), 'woodmart_abandoned_cart_cron' );
-		}
+		add_action( 'init', array( $this, 'schedule_cron_event' ) );
 	}
 
 	/**
@@ -84,6 +95,17 @@ class Abandoned_Cart extends Singleton {
 		);
 
 		return $schedules;
+	}
+
+	/**
+	 * Schedule cron event on init hook.
+	 *
+	 * @return void
+	 */
+	public function schedule_cron_event() {
+		if ( ! wp_next_scheduled( 'woodmart_abandoned_cart_cron' ) ) {
+			wp_schedule_event( time(), apply_filters( 'woodmart_schedule_abandoned_cart_cron', 'fifteen_minutes' ), 'woodmart_abandoned_cart_cron' );
+		}
 	}
 
 	/**
@@ -115,9 +137,18 @@ class Abandoned_Cart extends Singleton {
 		}
 
 		?>
-			<p class="form-field form-field-wide">
-				<strong><?php esc_html_e( 'Recovered Cart', 'woodmart' ); ?></strong> 
+		<div class="form-field form-field-wide xts-order-description">
+			<p>
+				<strong><?php esc_html_e( 'Recovered cart', 'woodmart' ); ?></strong>
 			</p>
+			<div class="xts-hint">
+				<div class="xts-tooltip xts-top">
+					<div class="xts-tooltip-inner">
+						<?php esc_html_e( 'This order was created using the abandoned cart recovery feature. The customer received a reminder email and successfully recovered their cart.', 'woodmart' ); ?>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php
 	}
 
@@ -127,17 +158,21 @@ class Abandoned_Cart extends Singleton {
 	 * @codeCoverageIgnore
 	 */
 	public function maybe_add_privacy_checkbox() {
-		if ( is_checkout() && woodmart_get_opt( 'recover_guest_cart_enable_privacy_checkbox' ) && ! is_user_logged_in() ) {
-			$privacy_text = woodmart_get_opt( 'recover_guest_cart_privacy_checkbox_text' );
-			?>
-				<div class="wd-data-consent wd-hide">
-					<input type="checkbox" id="wd-data-consent">
-					<label for="wd-data-consent">
-						<?php echo wp_kses_post( $privacy_text ); ?>
-					</label>
-				</div>
-			<?php
+		if ( ! woodmart_get_opt( 'recover_guest_cart_enable_privacy_checkbox' ) || is_user_logged_in() ) {
+			return;
 		}
+
+		$privacy_text = woodmart_get_opt( 'recover_guest_cart_privacy_checkbox_text' );
+
+		woocommerce_form_field(
+			'_wd_recover_guest_cart_consent',
+			array(
+				'type'  => 'checkbox',
+				'class' => array( 'form-row-wide' ),
+				'label' => $privacy_text,
+			),
+			0
+		);
 	}
 
 	/**
@@ -262,8 +297,20 @@ class Abandoned_Cart extends Singleton {
 			return;
 		}
 
-		if ( isset( $_GET['wd_rec_cart'] ) || is_admin() || apply_filters( 'woodmart_skip_register_cart', false ) ) { //phpcs:ignore
+		if ( isset( $_GET['wd_rec_cart'] ) || current_user_can( 'administrator' ) || apply_filters( 'woodmart_skip_register_cart', false ) ) { //phpcs:ignore
 			return;
+		}
+
+		// Run only if cart hash changed to avoid executing on every page load.
+		if ( function_exists( 'WC' ) && WC()->cart && WC()->session ) {
+			$current_hash = WC()->cart->get_cart_hash();
+			$last_hash    = WC()->session->get( 'wd_last_cart_hash' );
+
+			if ( $last_hash === $current_hash ) {
+				return;
+			}
+
+			WC()->session->set( 'wd_last_cart_hash', $current_hash );
 		}
 
 		if ( is_user_logged_in() ) {
@@ -271,7 +318,7 @@ class Abandoned_Cart extends Singleton {
 			$user_details = get_userdata( $user_id );
 			$email        = $user_details->user_email;
 
-			if ( $this->check_is_unsubscribed_user( $email ) ) {
+			if ( woodmart_is_user_unsubscribed_from_mailing( $email, 'XTS_Email_Abandoned_Cart' ) ) {
 				return;
 			}
 
@@ -294,7 +341,7 @@ class Abandoned_Cart extends Singleton {
 
 			if ( ! $previous_cart && ! empty( $get_cart ) ) {
 				$post_id = $this->add_abandoned_cart( $title, $metas );
-			} elseif ( $previous_cart ) {
+			} elseif ( $previous_cart && is_object( $previous_cart ) && $this->post_type_name === $previous_cart->post_type ) {
 				$post_id = $previous_cart->ID;
 
 				if ( ! empty( $get_cart ) && WC()->cart->get_displayed_subtotal() > 0 ) {
@@ -314,7 +361,7 @@ class Abandoned_Cart extends Singleton {
 			$post_id = sanitize_text_field( wp_unslash( $_COOKIE['woodmart_guest_cart'] ) );
 			$post    = get_post( $post_id );
 
-			if ( ! empty( $post ) ) {
+			if ( ! empty( $post ) && $this->post_type_name === $post->post_type ) {
 				$this->update_abandoned_cart(
 					$post_id,
 					array(
@@ -325,12 +372,6 @@ class Abandoned_Cart extends Singleton {
 				);
 			}
 		}
-	}
-
-	public function check_is_unsubscribed_user( $email ) {
-		$unsubscribed_users = get_option( 'woodmart_abandoned_cart_unsubscribed_users', array() );
-
-		return ! empty( $unsubscribed_users ) && in_array( $email, $unsubscribed_users, true );
 	}
 
 	/**
@@ -349,8 +390,8 @@ class Abandoned_Cart extends Singleton {
 
 		$email = sanitize_email( wp_unslash( $_POST['email'] ) );
 
-		if ( $this->check_is_unsubscribed_user( $email ) ) {
-			return;
+		if ( woodmart_is_user_unsubscribed_from_mailing( $email, 'XTS_Email_Abandoned_Cart' ) ) {
+			woodmart_delete_user_unsubscription_from_mailing( $email, 'XTS_Email_Abandoned_Cart' );
 		}
 
 		$post_id  = 0;
@@ -372,7 +413,7 @@ class Abandoned_Cart extends Singleton {
 				)
 			);
 
-			setcookie( 'woodmart_guest_cart', $post_id, time() + $this->delete_abandoned_time * 60, '/' );
+			setcookie( 'woodmart_guest_cart', $post_id, time() + $this->delete_abandoned_time, '/' );
 
 			if ( isset( $_COOKIE['woodmart_recovered_cart'] ) && $post_id !== $_COOKIE['woodmart_recovered_cart'] ) {
 				setcookie( 'woodmart_recovered_cart', '', time() - 1, '/' );
@@ -382,7 +423,7 @@ class Abandoned_Cart extends Singleton {
 		} elseif ( isset( $_COOKIE['woodmart_guest_cart'] ) && ! empty( $_COOKIE['woodmart_guest_cart'] ) ) {
 			$cart = get_post( sanitize_text_field( wp_unslash( $_COOKIE['woodmart_guest_cart'] ) ) );
 
-			if ( ! empty( $cart ) ) {
+			if ( ! empty( $cart ) && $this->post_type_name === $cart->post_type ) {
 				$this->update_abandoned_cart(
 					$cart->ID,
 					array(
@@ -396,7 +437,7 @@ class Abandoned_Cart extends Singleton {
 					)
 				);
 
-				setcookie( 'woodmart_guest_cart', $cart->ID, time() + $this->delete_abandoned_time * 60, '/' );
+				setcookie( 'woodmart_guest_cart', $cart->ID, time() + $this->delete_abandoned_time, '/' );
 
 				if ( isset( $_COOKIE['woodmart_recovered_cart'] ) && $cart->ID !== $_COOKIE['woodmart_recovered_cart'] ) {
 					setcookie( 'woodmart_recovered_cart', '', time() - 1, '/' );
@@ -427,7 +468,7 @@ class Abandoned_Cart extends Singleton {
 
 			if ( $post_id ) {
 				// Add a cookie to the user.
-				setcookie( 'woodmart_guest_cart', $post_id, time() + $this->delete_abandoned_time * 60, '/' );
+				setcookie( 'woodmart_guest_cart', $post_id, time() + $this->delete_abandoned_time, '/' );
 			}
 		}
 
@@ -497,16 +538,10 @@ class Abandoned_Cart extends Singleton {
 
 			update_post_meta( $cart_id, '_cart', maybe_serialize( WC()->cart ) );
 
-			$order    = new WC_Order();
-			$checkout = WC()->checkout();
+			$order_totals_snapshot = $this->build_order_totals_snapshot();
 
-			$checkout->set_data_from_cart( $order );
-
-			$order_totals = $order->get_order_item_totals();
-			$subtotal     = $order->get_subtotal();
-
-			update_post_meta( $cart_id, '_order_totals', maybe_serialize( $order_totals ) );
-			update_post_meta( $cart_id, '_subtotal', maybe_serialize( $subtotal ) );
+			update_post_meta( $cart_id, '_order_totals', maybe_serialize( $order_totals_snapshot['order_totals'] ) );
+			update_post_meta( $cart_id, '_subtotal', maybe_serialize( $order_totals_snapshot['order_totals'] ) );
 		}
 
 		return $cart_id;
@@ -522,6 +557,10 @@ class Abandoned_Cart extends Singleton {
 	 * @return int|false|WP_Error
 	 */
 	public function update_abandoned_cart( $cart_id, $post_data, $metas ) {
+		if ( get_post_type( $cart_id ) !== $this->post_type_name ) {
+			return false;
+		}
+
 		$cart = WC()->cart;
 
 		if ( 0 === $cart->get_cart_contents_count() ) {
@@ -532,8 +571,7 @@ class Abandoned_Cart extends Singleton {
 
 		$post_updated = array_merge(
 			array(
-				'ID'        => $cart_id,
-				'post_type' => $this->post_type_name,
+				'ID' => $cart_id,
 			),
 			$post_data
 		);
@@ -547,16 +585,10 @@ class Abandoned_Cart extends Singleton {
 
 			update_post_meta( $cart_id, '_cart', maybe_serialize( $cart ) );
 
-			$order    = new WC_Order();
-			$checkout = WC()->checkout();
+			$order_totals_snapshot = $this->build_order_totals_snapshot();
 
-			$checkout->set_data_from_cart( $order );
-
-			$order_totals = $order->get_order_item_totals();
-			$subtotal     = $order->get_subtotal();
-
-			update_post_meta( $cart_id, '_order_totals', maybe_serialize( $order_totals ) );
-			update_post_meta( $cart_id, '_subtotal', maybe_serialize( $subtotal ) );
+			update_post_meta( $cart_id, '_order_totals', maybe_serialize( $order_totals_snapshot['order_totals'] ) );
+			update_post_meta( $cart_id, '_subtotal', maybe_serialize( $order_totals_snapshot['order_totals'] ) );
 		}
 
 		return $updated;
@@ -578,8 +610,18 @@ class Abandoned_Cart extends Singleton {
 		$coupon_code = isset( $_GET['coupon_code'] ) ? sanitize_text_field( wp_unslash( $_GET['coupon_code'] ) ) : '';
 		$cart        = get_post( $cart_id );
 
-		if ( empty( $cart ) ) {
+		if ( empty( $cart ) || $this->post_type_name !== $cart->post_type ) {
 			wc_add_notice( esc_html__( 'The cart you\'re trying to recover has expired.', 'woodmart' ), 'error' );
+			wp_safe_redirect( wc_get_cart_url() );
+			exit;
+		}
+
+		if (
+			( is_user_logged_in() && get_current_user_id() !== intval( $cart->post_author ) ) ||
+			( ! is_user_logged_in() && ( ! isset( $_COOKIE['woodmart_guest_cart'] ) ||
+			intval( $_COOKIE['woodmart_guest_cart'] ) !== $cart_id ) )
+		) {
+			wc_add_notice( esc_html__( 'You are not allowed to recover this cart.', 'woodmart' ), 'error' );
 			wp_safe_redirect( wc_get_cart_url() );
 			exit;
 		}
@@ -738,6 +780,88 @@ class Abandoned_Cart extends Singleton {
 		} else {
 			return substr( get_bloginfo( 'language' ), 0, 2 );
 		}
+	}
+
+	/**
+	 * Builds a snapshot of the current WooCommerce cart's order totals.
+	 *
+	 * This method creates a temporary WC_Order object, adds cart items and shipping rates,
+	 * copies main financial indicators from the cart, and returns an array containing
+	 * the order totals and subtotal.
+	 *
+	 * @return array {
+	 *     @type array $order_totals Array of order total lines (label and value).
+	 *     @type float $subtotal     The subtotal amount of the order.
+	 * }
+	 */
+	public function build_order_totals_snapshot() {
+		$cart = WC()->cart;
+
+		if ( ! $cart || $cart->is_empty() ) {
+			return array(
+				'order_totals' => array(),
+				'subtotal'     => 0,
+			);
+		}
+
+		$order = new WC_Order();
+
+		// Add items to the cart.
+		foreach ( $cart->get_cart() as $cart_item_key => $values ) {
+			$product = $values['data'];
+
+			$item = new WC_Order_Item_Product();
+
+			$item->set_props(
+				array(
+					'quantity'     => $values['quantity'],
+					'variation'    => $values['variation'],
+					'subtotal'     => $values['line_subtotal'],
+					'total'        => $values['line_total'],
+					'subtotal_tax' => $values['line_subtotal_tax'],
+					'total_tax'    => $values['line_tax'],
+					'taxes'        => $values['line_tax_data'],
+					'product'      => $product,
+				)
+			);
+
+			$order->add_item( $item );
+		}
+
+		// Add the cost of delivery.
+		foreach ( $cart->get_shipping_packages() as $package ) {
+			if ( empty( $package['rates'] ) || ! is_array( $package['rates'] ) ) {
+				continue;
+			}
+
+			foreach ( $package['rates'] as $rate ) {
+				$shipping_item = new WC_Order_Item_Shipping();
+
+				$shipping_item->set_props(
+					array(
+						'method_title' => $rate->get_label(),
+						'method_id'    => $rate->get_id(),
+						'total'        => $rate->get_cost(),
+						'taxes'        => $rate->get_taxes(),
+					)
+				);
+				$order->add_item( $shipping_item );
+			}
+		}
+
+		// Copy the main financial indicators from the basket.
+		$order->set_cart_tax( $cart->get_cart_contents_tax() );
+		$order->set_shipping_tax( $cart->get_shipping_tax() );
+		$order->set_discount_total( $cart->get_discount_total() );
+		$order->set_discount_tax( $cart->get_discount_tax() );
+		$order->set_shipping_total( $cart->get_shipping_total() );
+		$order->set_total( $cart->get_total( 'edit' ) );
+
+		// Returning the final results.
+		return array(
+			'order_totals' => $order->get_order_item_totals(),
+			'subtotal'     => $order->get_subtotal(),
+		);
 	}
 }
 

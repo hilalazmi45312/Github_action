@@ -7,7 +7,7 @@
 
 <div class="product-wrapper">
 	<div class="product-element-top wd-quick-shop">
-		<a href="<?php echo esc_url( get_permalink() ); ?>" class="product-image-link">
+		<a href="<?php echo esc_url( get_permalink() ); ?>" class="product-image-link" tabindex="-1" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
 			<?php
 			/**
 			 * Hook woocommerce_before_shop_loop_item_title.
@@ -28,7 +28,6 @@
 
 		<div class="top-information">
 			<?php
-				woodmart_product_brands_links();
 				/**
 				 * woocommerce_shop_loop_item_title hook
 				 *
@@ -38,6 +37,7 @@
 			?>
 			<?php
 				woodmart_product_categories();
+				woodmart_product_brands_links();
 				woodmart_product_sku();
 				woodmart_stock_status_after_title();
 				do_action( 'woocommerce_after_shop_loop_item' );

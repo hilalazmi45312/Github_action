@@ -17,11 +17,11 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 defined( 'ABSPATH' ) or exit;
 
@@ -316,7 +316,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 								data-action="woocommerce_json_search_products">
 								<?php foreach ( $product_ids as $product_id ) : ?>
 									<?php if ( $product = wc_get_product( $product_id ) ) : ?>
-										<option value="<?php echo $product_id; ?>" selected="selected"><?php echo wp_kses_post( $product->get_formatted_name() ); ?></option>
+										<option value="<?php echo esc_attr( $product_id ); ?>" selected="selected"><?php echo wp_kses_post( $product->get_formatted_name() ); ?></option>
 									<?php endif; ?>
 								<?php endforeach; ?>
 							</select>
@@ -551,8 +551,8 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 				<div class="options_group">
 					<p><span class="description"><?php
 						/* translators: Placeholders: %1$s - opening <a> HTML link tag, %2$s - closing </a> HTML link tag */
-						printf( __( 'To set collection hours for pickup appointment scheduling, you need to enable pickup appointments from %1$sLocal Pickup Plus settings%2$s.', 'woocommerce-shipping-local-pickup-plus' ),
-							'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=shipping&section=local_pickup_plus' ) . '">', '</a>' );
+						printf( esc_html__( 'To set collection hours for pickup appointment scheduling, you need to enable pickup appointments from %1$sLocal Pickup Plus settings%2$s.', 'woocommerce-shipping-local-pickup-plus' ),
+							'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=local_pickup_plus' ) ) . '">', '</a>' );
 						?></span></p>
 				</div>
 
@@ -603,7 +603,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 		/* Products availability */
 
-		$products_availability = ! empty( $_POST['_products_availability_mode'] ) ? $_POST['_products_availability_mode'] : 'any';
+		$products_availability = ! empty( $_POST['_products_availability_mode'] ) ? sanitize_text_field( $_POST['_products_availability_mode'] ) : 'any';
 
 		if ( 'any' === $products_availability ) {
 
@@ -611,8 +611,8 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 		} else {
 
-			$products     = ! empty( $_POST['_product_availability_product_ids'] )        ? (array) $_POST['_product_availability_product_ids']         : array();
-			$product_cats = ! empty( $_POST['_product_availability_product_categories'] ) ? (array) $_POST['_product_availability_product_categories']  : array();
+			$products     = ! empty( $_POST['_product_availability_product_ids'] )        ? array_map('absint', (array) $_POST['_product_availability_product_ids']) : array();
+			$product_cats = ! empty( $_POST['_product_availability_product_categories'] ) ? array_map('absint', (array) $_POST['_product_availability_product_categories']) : array();
 
 			$pickup_location->set_products( $products );
 			$pickup_location->set_product_categories( $product_cats );
@@ -627,9 +627,9 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 			update_post_meta( $post_id, '_pickup_location_price_adjustment_enabled', 'yes' );
 
-			$adjustment = $_POST['_price_adjustment'];
-			$amount     = $_POST['_price_adjustment_amount'];
-			$type       = $_POST['_price_adjustment_type'];
+			$adjustment = sanitize_text_field( $_POST['_price_adjustment'] );
+			$amount     = sanitize_text_field( $_POST['_price_adjustment_amount'] );
+			$type       = sanitize_text_field( $_POST['_price_adjustment_type'] );
 
 			$pickup_location->set_price_adjustment( $adjustment, (float) $amount, $type );
 
@@ -679,7 +679,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 			update_post_meta( $post_id, '_pickup_location_public_holidays_enabled', 'yes' );
 
 			if ( ! empty( $_POST['_public_holidays'] ) ) {
-				$pickup_location->set_public_holidays( $_POST['_public_holidays'] );
+				$pickup_location->set_public_holidays( array_map('sanitize_text_field', (array) $_POST['_public_holidays']) );
 			} else {
 				$pickup_location->delete_public_holidays();
 			}
@@ -700,7 +700,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 			update_post_meta( $post_id, '_pickup_location_pickup_lead_time_enabled', 'yes' );
 
-			$pickup_location->set_pickup_lead_time( max( 0, (int) $_POST['_pickup_lead_time_amount'] ), $_POST['_pickup_lead_time_interval'] );
+			$pickup_location->set_pickup_lead_time( max( 0, (int) $_POST['_pickup_lead_time_amount'] ), sanitize_text_field( $_POST['_pickup_lead_time_interval'] ) );
 
 		} else {
 
@@ -718,7 +718,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 			update_post_meta( $post_id, '_pickup_location_pickup_deadline_enabled', 'yes' );
 
-			$pickup_location->set_pickup_deadline( max( 0, (int) $_POST['_pickup_deadline_amount'] ), $_POST['_pickup_deadline_interval'] );
+			$pickup_location->set_pickup_deadline( max( 0, (int) $_POST['_pickup_deadline_amount'] ), sanitize_text_field( $_POST['_pickup_deadline_interval'] ) );
 
 		} else {
 
@@ -730,7 +730,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 		/* Email notification recipients */
 
-		$notification_recipients = ! empty( $_POST['_notification_recipients'] ) ? sanitize_text_field( trim( $_POST['_notification_recipients'] ) ) : null;
+		$notification_recipients = ! empty( $_POST['_notification_recipients'] ) ? trim( sanitize_text_field( $_POST['_notification_recipients'] ) ) : null;
 
 		if ( ! empty( $notification_recipients ) ) {
 			$pickup_location->set_email_recipients( $notification_recipients );
@@ -747,7 +747,7 @@ class WC_Local_Pickup_Plus_Meta_Box_Pickup_Location_Data extends \WC_Local_Picku
 
 		foreach ( $keys as $key ) {
 			if ( 'country' === $key ) {
-				$pieces = ! empty( $_POST['_country'] ) ? explode( ':', $_POST['_country'] ) : array();
+				$pieces = ! empty( $_POST['_country'] ) ? explode( ':', sanitize_text_field( $_POST['_country'] ) ) : array();
 				// also get the state
 				$address['country'] = isset( $pieces[0] ) ? sanitize_text_field( $pieces[0] ) : '';
 				$address['state']   = isset( $pieces[1] ) ? sanitize_text_field( $pieces[1] ) : '';

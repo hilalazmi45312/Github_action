@@ -125,6 +125,13 @@ class ActivePro {
 			exit( esc_html__( 'Validation failed (Nonce Errors), please try again later. Or you can <a href="https://ninjateam.org/support" target="_blank"><strong>contact support</strong></a>.', 'filebird' ) );
 		}
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'mess' => __( 'You do not have permission to perform this action.', 'filebird' ) ),
+				403
+			);
+		}
+		
 		$purchase_code   = isset( $_GET['code'] ) ? sanitize_text_field( $_GET['code'] ) : '';
 		$email           = isset( $_GET['email'] ) ? sanitize_text_field( $_GET['email'] ) : '';
 		$success         = isset( $_GET['success'] ) ? sanitize_text_field( $_GET['success'] ) : '';
@@ -161,7 +168,12 @@ class ActivePro {
 	}
 	public function ajax_fbv_deactivate_license() {
 		check_ajax_referer( 'deactivate_license_nonce', 'nonce' );
-
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'mess' => __( 'You do not have permission to perform this action.', 'filebird' ) ),
+				403
+			);
+		}
 		wp_remote_get(
             add_query_arg(
              array(

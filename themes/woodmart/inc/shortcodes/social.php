@@ -35,7 +35,6 @@ if( ! function_exists( 'woodmart_shortcode_social' )) {
 			'viber_link'      => '',
 			'tiktok_link'     => '',
 			'discord_link'    => '',
-			'skype_link'      => '',
 			'yelp_link'       => '',
 		);
 
@@ -130,7 +129,11 @@ if( ! function_exists( 'woodmart_shortcode_social' )) {
 			woodmart_enqueue_inline_style( 'social-icons-styles' );
 		}
 		?>
-			<div id="<?php echo esc_attr( $el_id ); ?>" class="<?php echo esc_attr( $classes ); ?>">
+			<div
+			<?php if ( $el_id ) : ?>
+			id="<?php echo esc_attr( $el_id ); ?>"
+			<?php endif ?>
+			class="<?php echo esc_attr( $classes ); ?>">
 				<?php echo do_shortcode( $content ); ?>
 
 				<?php if ( 'yes' === $show_label && $label_text ) : ?>
@@ -286,15 +289,6 @@ if( ! function_exists( 'woodmart_shortcode_social' )) {
 						<span class="wd-icon"></span>
 						<?php if ( $sticky ) : ?>
 							<span class="wd-icon-name"><?php esc_html_e('Spotify', 'woodmart') ?></span>
-						<?php endif; ?>
-					</a>
-				<?php endif ?>
-
-				<?php if ( $type == 'follow' && $skype_link != ''): ?>
-					<a rel="noopener noreferrer nofollow" href="<?php echo esc_url( $skype_link ); ?>" target="<?php echo esc_attr( $target ); ?>" class="<?php if( $tooltip == "yes" ) echo 'wd-tooltip'; ?> wd-social-icon social-skype" aria-label="<?php esc_html_e( 'Skype social link', 'woodmart' ); ?>">
-						<span class="wd-icon"></span>
-						<?php if ( $sticky ) : ?>
-							<span class="wd-icon-name"><?php esc_html_e('Skype', 'woodmart') ?></span>
 						<?php endif; ?>
 					</a>
 				<?php endif ?>

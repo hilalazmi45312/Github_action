@@ -8,6 +8,15 @@ if ( ! function_exists( 'wd_get_block_slider_attrs' ) ) {
 
 		$attr->add_attr(
 			array(
+				'heightType'           => array(
+					'type'    => 'string',
+					'default' => 'custom',
+				),
+				'aspectRatio'          => array(
+					'type'       => 'string',
+					'default'    => 'asImage',
+					'responsive' => true,
+				),
 				'height'               => array(
 					'type'       => 'string',
 					'default'    => '500',

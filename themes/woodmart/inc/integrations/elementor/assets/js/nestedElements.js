@@ -5,16 +5,16 @@ jQuery( window ).on('elementor/nested-element-type-loaded', async () => {
 		}
 	}
 
-	class StickyColumn extends elementor.modules.elements.types.NestedElementBase {
+	class wdToggle extends elementor.modules.elements.types.NestedElementBase {
 		getType() {
-			return 'wd_sticky_columns';
+			return 'wd_toggle';
 		}
 	}
 
 	class Module {
 		constructor() {
 			elementor.elementsManager.registerElementType( new NestedCarousel() );
-			elementor.elementsManager.registerElementType( new StickyColumn() );
+			elementor.elementsManager.registerElementType( new wdToggle() );
 		}
 	}
 
@@ -29,8 +29,6 @@ jQuery( window ).on('elementor/frontend/init', function() {
 	elementorFrontend.hooks.addAction('frontend/element_ready/container', function($wrapper) {
 		if ( $wrapper.parent().hasClass('wd-carousel-wrap') ) {
 			$wrapper.addClass('wd-carousel-item');
-		} else if ( $wrapper.parent().parent().parent().is('[data-widget_type="wd_sticky_columns.default"]')) {
-			$wrapper.addClass('wd-col');
 		}
 	});
 });

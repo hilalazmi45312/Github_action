@@ -8,23 +8,27 @@
 namespace XTS\Modules\Estimate_Delivery;
 
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
 
 /**
  * Estimate delivery class.
  */
-class Main extends Singleton {
+class Main {
 	/**
-	 * Init.
+	 * Constructor.
 	 */
-	public function init() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
 
-		if ( ! woodmart_woocommerce_installed() || ! woodmart_get_opt( 'estimate_delivery_enabled' ) ) {
-			return;
-		}
-
-		$this->include_files();
+		woodmart_include_files(
+			__DIR__,
+			array(
+				'./class-manager',
+				'./class-delivery-date',
+				'./class-overal-delivery-date',
+				'./class-admin',
+				'./class-frontend',
+			)
+		);
 	}
 
 	/**
@@ -105,7 +109,7 @@ class Main extends Singleton {
 				'group'    => esc_html__( 'Locations', 'woodmart' ),
 				'type'     => 'switcher',
 				'section'  => 'estimate_delivery_section',
-				'default'  => true,
+				'default'  => false,
 				'on-text'  => esc_html__( 'On', 'woodmart' ),
 				'off-text' => esc_html__( 'Off', 'woodmart' ),
 				'priority' => 50,
@@ -241,25 +245,6 @@ class Main extends Singleton {
 
 		return $options;
 	}
-
-	/**
-	 * Include files.
-	 *
-	 * @return void
-	 */
-	public function include_files() {
-		$files = array(
-			'class-manager',
-			'class-delivery-date',
-			'class-overal-delivery-date',
-			'class-admin',
-			'class-frontend',
-		);
-
-		foreach ( $files as $file ) {
-			require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/integrations/woocommerce/modules/estimate-delivery/' . $file . '.php' );
-		}
-	}
 }
 
-Main::get_instance();
+new Main();

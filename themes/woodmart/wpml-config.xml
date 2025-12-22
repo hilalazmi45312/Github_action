@@ -17,6 +17,7 @@
             <key name="wishlist_page"/>
             <key name="compare_page"/>
             <key name="default_header"/>
+            <key name="single_product_header"/>
             <key name="popup_text"/>
             <key name="popup_html_block"/>
             <key name="reg_text"/>
@@ -40,7 +41,6 @@
             <key name="additional_tab_3_content_type"/>
             <key name="additional_tab_3_html_block"/>
             <key name="additional_tab_3_text"/>
-            <key name="single_product_header"/>
             <key name="empty_compare_text"/>
             <key name="reg_title"/>
             <key name="login_title"/>
@@ -516,6 +516,27 @@
                 <attribute>title</attribute>
             </attributes>
         </shortcode>
+
+        <shortcode>
+            <tag>woodmart_products</tag>
+            <attributes>
+                <attribute>element_title</attribute>
+            </attributes>
+        </shortcode>
+
+        <shortcode>
+            <tag>woodmart_blog</tag>
+            <attributes>
+                <attribute>element_title</attribute>
+            </attributes>
+        </shortcode>
+
+        <shortcode>
+            <tag>woodmart_portfolio</tag>
+            <attributes>
+                <attribute>element_title</attribute>
+            </attributes>
+        </shortcode>
     </shortcodes>
 
     <elementor-widgets>
@@ -720,6 +741,7 @@
             </conditions>
             <fields>
                 <field type="[Woodmart] Promo Banner - Link" editor_type="LINK" key_of="link">url</field>
+                <field label="[Woodmart] Promo Banner - Image ID" type="post-ids" sub-type="attachment">image>id</field>
                 <field type="[Woodmart] Promo Banner - Subtitle" editor_type="LINE">subtitle</field>
                 <field type="[Woodmart] Promo Banner - Title" editor_type="LINE">title</field>
                 <field type="[Woodmart] Promo Banner - Content" editor_type="AREA">content</field>
@@ -733,6 +755,7 @@
             </conditions>
             <fields-in-item items_of="content_repeater">
                 <field type="[Woodmart] Banners carousel - Link" editor_type="LINK" key_of="link">url</field>
+                <field type="[Woodmart] Banners carousel - Image ID" sub-type="attachment">image>id</field>
                 <field type="[Woodmart] Banners carousel - Subtitle" editor_type="LINE">subtitle</field>
                 <field type="[Woodmart] Banners carousel - Title" editor_type="LINE">title</field>
                 <field type="[Woodmart] Banners carousel - Content" editor_type="AREA">content</field>
@@ -932,14 +955,41 @@
                 <condition key="widgetType">wd_single_product_fbt_products</condition>
             </conditions>
             <fields>
-                <field type="[Woodmart] Product additional information table - Element title" editor_type="LINE">title</field>
+                <field type="[Woodmart] Frequently bought together - Element title" editor_type="LINE">title</field>
+            </fields>
+        </widget>
+
+        <widget name="wd_products">
+            <conditions>
+                <condition key="widgetType">wd_products</condition>
+            </conditions>
+            <fields>
+                <field type="[Woodmart] Products - Element title" editor_type="LINE">element_title</field>
+            </fields>
+        </widget>
+        
+        <widget name="wd_blog">
+            <conditions>
+                <condition key="widgetType">wd_blog</condition>
+            </conditions>
+            <fields>
+                <field type="[Woodmart] Blog - Element title" editor_type="LINE">element_title</field>
+            </fields>
+        </widget>
+
+        <widget name="wd_portfolio">
+            <conditions>
+                <condition key="widgetType">wd_portfolio</condition>
+            </conditions>
+            <fields>
+                <field type="[Woodmart] Portfolio - Element title" editor_type="LINE">element_title</field>
             </fields>
         </widget>
     </elementor-widgets>
 
     <gutenberg-blocks>
         <gutenberg-block type="wd/paragraph" translate="1" label="[Woodmart] Paragraph">
-            <xpath>//p</xpath>
+            <xpath>//*[self::p or self::span or self::div]</xpath>
         </gutenberg-block>
 
         <gutenberg-block type="wd/title" translate="1" label="[Woodmart] Title">
@@ -969,7 +1019,7 @@
         </gutenberg-block>
 
         <gutenberg-block type="wd/video" translate="1" label="[Woodmart] Video">
-            <xpath>//div/span[class="wd-el-video-play-label"]</xpath>
+            <xpath>//div/span[@class="wd-el-video-play-label"]</xpath>
         </gutenberg-block>
 
         <gutenberg-block type="wd/quote" translate="1" label="[Woodmart] Quote">
@@ -977,7 +1027,7 @@
         </gutenberg-block>
 
         <gutenberg-block type="wd/accordion-pane" translate="1" label="[Woodmart] Accordion pane">
-            <xpath>//div[class="wd-accordion-title-text"]/span</xpath>
+            <xpath>//div[@class="wd-accordion-title-text"]/span</xpath>
         </gutenberg-block>
 
         <gutenberg-block type="wd/image" translate="1" label="[Woodmart] Image">
@@ -986,6 +1036,10 @@
 
         <gutenberg-block type="wd/gallery-item" translate="1" label="[Woodmart] Gallery Image">
             <xpath>//div/figcaption</xpath>
+        </gutenberg-block>
+
+        <gutenberg-block type="wd/off-sidebar" translate="1" label="[Woodmart] Off canvas sidebar">
+            <xpath>//div[@class="close-side-widget"]/a</xpath>
         </gutenberg-block>
 
         <gutenberg-block type="wd/off-canvas-button" translate="1" label="[Woodmart] Off canvas button">

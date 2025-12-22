@@ -18,18 +18,18 @@
  *
  * @package   SkyVerge/WooCommerce/Payment-Gateway/External_Checkout/Google-Pay
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2013-2024, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
-namespace SkyVerge\WooCommerce\PluginFramework\v5_11_12\Payment_Gateway\External_Checkout\Google_Pay;
+namespace SkyVerge\WooCommerce\PluginFramework\v5_15_12\Payment_Gateway\External_Checkout\Google_Pay;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\SV_WC_Payment_Gateway_Exception;
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12\SV_WC_Payment_Gateway_Plugin;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Payment_Gateway_Exception;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12\SV_WC_Payment_Gateway_Plugin;
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\Payment_Gateway\\External_Checkout\\Google_Pay\\Frontend' ) ) :
+if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_15_12\\Payment_Gateway\\External_Checkout\\Google_Pay\\Frontend' ) ) :
 
 
 /**
@@ -37,7 +37,8 @@ if ( ! class_exists( '\\SkyVerge\\WooCommerce\\PluginFramework\\v5_11_12\\Paymen
  *
  * @since 5.10.0
  */
-class Frontend extends \SkyVerge\WooCommerce\PluginFramework\v5_11_12\Payment_Gateway\External_Checkout\Frontend {
+#[\AllowDynamicProperties]
+class Frontend extends \SkyVerge\WooCommerce\PluginFramework\v5_15_12\Payment_Gateway\External_Checkout\Frontend {
 
 
 	/** @var string JS handler base class name, without the FW version */
@@ -91,10 +92,17 @@ class Frontend extends \SkyVerge\WooCommerce\PluginFramework\v5_11_12\Payment_Ga
 	 */
 	public function enqueue_scripts() {
 
+		if ( ! $this->should_enqueue_scripts() ) {
+			return;
+		}
+
 		parent::enqueue_scripts();
 
-		wp_enqueue_script( 'google-pay-js-library', 'https://pay.google.com/gp/p/js/pay.js', array(), null, true );
-		wp_enqueue_script( 'sv-wc-google-pay-v5_11_12', $this->get_plugin()->get_payment_gateway_framework_assets_url() . '/dist/frontend/sv-wc-payment-gateway-google-pay.js', [ 'google-pay-js-library', 'jquery' ], $this->get_plugin()->get_version(), true );
+		$gateway = $this->get_gateway();
+		$version = $gateway->get_plugin()->get_assets_version( $gateway->get_id() );
+
+		wp_enqueue_script( 'google-pay-js-library', 'https://pay.google.com/gp/p/js/pay.js', [], $version, true );
+		wp_enqueue_script( 'sv-wc-google-pay-v5_15_12', $this->get_plugin()->get_payment_gateway_framework_assets_url() . '/dist/frontend/sv-wc-payment-gateway-google-pay.js', [ 'google-pay-js-library', 'jquery' ], $version, true );
 	}
 
 
@@ -117,9 +125,10 @@ class Frontend extends \SkyVerge\WooCommerce\PluginFramework\v5_11_12\Payment_Ga
 		return (array) apply_filters( 'wc_' . $this->get_gateway()->get_id() . '_google_pay_js_handler_params', [
 			'plugin_id'                => $this->get_gateway()->get_plugin()->get_id(),
 			'merchant_id'              => $this->get_handler()->get_merchant_id(),
-			'merchant_name'            => get_bloginfo( 'name' ),
+			'merchant_name'            => $this->get_handler()->get_merchant_name(),
 			'gateway_id'               => $this->get_gateway()->get_id(),
 			'gateway_id_dasherized'    => $this->get_gateway()->get_id_dasherized(),
+			'gateway_merchant_id'      => $this->get_handler()->get_gateway_merchant_id(),
 			'environment'              => $this->get_gateway()->get_environment() == 'production' ? 'PRODUCTION' : 'TEST',
 			'ajax_url'                 => admin_url( 'admin-ajax.php' ),
 			'recalculate_totals_nonce' => wp_create_nonce( 'wc_' . $this->get_gateway()->get_id() . '_google_pay_recalculate_totals' ),

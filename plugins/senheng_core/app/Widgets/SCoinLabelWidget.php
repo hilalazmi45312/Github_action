@@ -175,6 +175,20 @@ class SCoinLabelWidget extends \Elementor\Widget_Base
 		);
 
 		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'label_typography',
+				'label' => esc_html__('Typography', 'senheng_core'),
+				'selector' => '{{WRAPPER}} .sh-scoin-label, {{WRAPPER}} .sh-scoin-label .percentage-number, {{WRAPPER}} .sh-scoin-label .percentage-symbol',
+				'fields_options' => [
+					'typography' => ['default' => 'yes'],
+					'font_size' => ['default' => ['size' => '']],
+					'line_height' => ['default' => ['size' => '']],
+				],
+			]
+		);
+
+		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name' => 'label_border',
@@ -280,6 +294,10 @@ class SCoinLabelWidget extends \Elementor\Widget_Base
 
 	protected function render()
 	{
+		// Enqueue widget assets only when widget is rendered
+		wp_enqueue_style('sh-s-coin-label-widget-css');
+		wp_enqueue_script('sh-s-coin-label-widget-js');
+
 		$settings = $this->get_settings_for_display();
 
 		// Only show on product pages or in editor

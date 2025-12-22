@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Google for WooCommerce 3.5.0\n"
+"Project-Id-Version: Google for WooCommerce 3.5.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-listings-and-ads\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-04T07:38:15+00:00\n"
+"POT-Creation-Date: 2025-12-10T06:32:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: google-listings-and-ads\n"
@@ -296,8 +296,8 @@ msgstr ""
 #: src/Ads/AdsRecommendationsService.php:258
 #: src/API/Google/BudgetRecommendations.php:154
 #: src/API/Site/Controllers/Ads/BudgetRecommendationController.php:200
-#: js/build/commons.js:1
 #: js/build/commons.js:44
+#: js/build/commons.js:99
 msgid "Recommended"
 msgstr ""
 
@@ -401,24 +401,24 @@ msgid "A campaign with this name already exists"
 msgstr ""
 
 #. translators: %s Error message
-#: src/API/Google/AdsCampaign.php:328
+#: src/API/Google/AdsCampaign.php:332
 msgid "Error editing campaign: %s"
 msgstr ""
 
 #. translators: %s Error message
-#: src/API/Google/AdsCampaign.php:364
+#: src/API/Google/AdsCampaign.php:368
 msgid "Error deleting campaign: %s"
 msgstr ""
 
-#: src/API/Google/AdsCampaign.php:367
+#: src/API/Google/AdsCampaign.php:371
 msgid "This campaign has already been deleted"
 msgstr ""
 
-#: src/API/Google/AdsCampaign.php:652
+#: src/API/Google/AdsCampaign.php:663
 msgid "Invalid campaign ID"
 msgstr ""
 
-#: src/API/Google/AdsCampaign.php:668
+#: src/API/Google/AdsCampaign.php:679
 msgid "Invalid geo target location ID"
 msgstr ""
 
@@ -567,36 +567,36 @@ msgstr ""
 msgid "Error linking account"
 msgstr ""
 
-#: src/API/Google/Middleware.php:536
+#: src/API/Google/Middleware.php:551
 msgid "Merchant ID must be set before updating in SDI."
 msgstr ""
 
-#: src/API/Google/Middleware.php:559
+#: src/API/Google/Middleware.php:574
 msgid "Invalid response when updating merchant account in Google Partner APP."
 msgstr ""
 
-#: src/API/Google/Middleware.php:567
+#: src/API/Google/Middleware.php:582
 msgid "Error updating merchant account in Google Partner APP."
 msgstr ""
 
 #. translators: 1: current date in the format Y-m-d
-#: src/API/Google/Middleware.php:592
+#: src/API/Google/Middleware.php:607
 msgid "Account %1$s"
 msgstr ""
 
-#: src/API/Google/Middleware.php:669
+#: src/API/Google/Middleware.php:684
 msgid "Invalid response authenticating partner app."
 msgstr ""
 
-#: src/API/Google/Middleware.php:679
+#: src/API/Google/Middleware.php:694
 msgid "Error authenticating Google Partner APP."
 msgstr ""
 
-#: src/API/Google/Middleware.php:714
+#: src/API/Google/Middleware.php:729
 msgid "Invalid response when fetching incentive credits."
 msgstr ""
 
-#: src/API/Google/Middleware.php:755
+#: src/API/Google/Middleware.php:770
 msgid "Error fetching incentive credits."
 msgstr ""
 
@@ -836,49 +836,53 @@ msgstr ""
 msgid "Successfully deleted campaign."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:320
+#: src/API/Site/Controllers/Ads/CampaignController.php:321
 msgid "Exclude removed campaigns."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:326
+#: src/API/Site/Controllers/Ads/CampaignController.php:327
 #: src/API/Site/Controllers/BaseReportsController.php:79
 #: src/API/Site/Controllers/MerchantCenter/IssuesController.php:208
 #: src/API/Site/Controllers/MerchantCenter/ProductFeedController.php:169
 msgid "Maximum number of rows to be returned in result data."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:345
+#: src/API/Site/Controllers/Ads/CampaignController.php:346
 #: src/API/Site/Controllers/Ads/ReportsController.php:149
 msgid "ID number."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:351
+#: src/API/Site/Controllers/Ads/CampaignController.php:352
 msgid "Descriptive campaign name."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:359
+#: src/API/Site/Controllers/Ads/CampaignController.php:360
 #: src/API/Site/Controllers/Ads/ReportsController.php:160
 msgid "Campaign status."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:366
+#: src/API/Site/Controllers/Ads/CampaignController.php:367
 msgid "Campaign type."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:372
+#: src/API/Site/Controllers/Ads/CampaignController.php:373
 msgid "Daily budget amount in the local currency."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:379
+#: src/API/Site/Controllers/Ads/CampaignController.php:380
 msgid "Country code of sale country in ISO 3166-1 alpha-2 format."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:387
+#: src/API/Site/Controllers/Ads/CampaignController.php:388
 msgid "The locations that an Ads campaign is targeting in ISO 3166-1 alpha-2 format."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:399
+#: src/API/Site/Controllers/Ads/CampaignController.php:400
 msgid "The name of the label to assign to the campaign."
+msgstr ""
+
+#: src/API/Site/Controllers/Ads/CampaignController.php:408
+msgid "Whether the Campaign has political content as defined by Google's EU political content policy."
 msgstr ""
 
 #: src/API/Site/Controllers/Ads/IncentiveCreditsController.php:62
@@ -1702,23 +1706,19 @@ msgstr ""
 msgid "Minimum price eligible for free shipping."
 msgstr ""
 
-#: src/API/Site/Controllers/TourController.php:100
+#: src/API/Site/Controllers/TourController.php:86
 msgid "Successfully updated the tour."
 msgstr ""
 
-#: src/API/Site/Controllers/TourController.php:105
+#: src/API/Site/Controllers/TourController.php:91
 msgid "Unable to updated the tour."
 msgstr ""
 
-#: src/API/Site/Controllers/TourController.php:132
-msgid "Tour not found"
-msgstr ""
-
-#: src/API/Site/Controllers/TourController.php:146
+#: src/API/Site/Controllers/TourController.php:116
 msgid "The Id for the tour."
 msgstr ""
 
-#: src/API/Site/Controllers/TourController.php:153
+#: src/API/Site/Controllers/TourController.php:123
 msgid "Whether the tour was checked."
 msgstr ""
 
@@ -2828,125 +2828,6 @@ msgstr ""
 #: js/build/commons.js:1
 #: js/build/settings.js:1
 msgid "Store address"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Unable to complete your Google Ads account setup. Please try again later."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "You do not have billing information set up in your Google Ads account. Once you have set up billing, you can start running ads."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "You will be directed to Google Ads for this step. In case your browser is unable to open the pop-up, <link>click here instead <icon /></link>."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Set up billing"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Billing method for Google Ads added successfully"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Set your budget"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "With Performance Max campaigns, you can set your own budget and Google’s Smart Bidding technology will serve the most appropriate ad, with the optimal bid, to maximize campaign performance. You only pay when people click on your ads, and you can start or stop your campaign whenever you want."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Average daily budget"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "These values are based on your settings and the budgets of similar advertisers."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "We recommend running campaigns at least 1 month so it can learn to optimize for your business."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "How does Google Ads work?"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Google Ads works by displaying your ad when people search online for the products and services you offer. By leveraging smart technology, Google Ads helps get your ads in front of potential customers at just the moment they’re ready to take action."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "What is a product feed?"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Your product feed is the central data source that contains a list of products you want to advertise through Merchant Center. By default, Google syncs all active products from your WooCommerce inventory. You can choose to exclude products later after this setup."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "How much does Google Ads cost?"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "With Google Ads, you decide how much to spend. There’s no minimum spend, and no time commitment. Your costs may vary from day to day, but you won’t be charged more than your daily budget times the number of days in a month. You pay only for the actual clicks and calls that your ad receives."
-msgstr ""
-
-#: js/build/commons.js:1
-#: js/build/get-started-page.js:1
-msgid "Where will my products appear?"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "If you’re selling in the US, then eligible product feed can appear in search results across Google Search, Google Images, and the Google Shopping tab. If you’re selling outside the US, product feed will appear on the Shopping tab."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "If you’re running a Performance Max Campaign, your approved products can appear on Google Search, Google Maps, the Shopping tab, Gmail, Youtube, the Google Display Network, and Discover feed."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "How long until I see results with Google Ads?"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Google’s Performance Max campaigns are powered by machine learning models. These models train and adapt based on the data you provide in your campaign. This means performance optimization can take time. Typically, this learning process takes 1—2 weeks."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Set a daily budget, and only pay when people click on your ads."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Performance Max campaign"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Performance Max uses the best of Google’s AI to show the most impactful ads for your products at the right time and place. Google will use your product data to create ads for this campaign. "
-msgstr ""
-
-#: js/build/commons.js:1
-#: js/build/onboarding.js:1
-msgid "Learn more about Performance Max"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Drive more sales with Performance Max"
-msgstr ""
-
-#: js/build/commons.js:1
-#: js/build/get-started-page.js:1
-msgid "Reach more customers by advertising your products across Google Ads channels like Search, YouTube and Discover. Set up your campaign now so your products are included as soon as they’re approved."
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "Performance Max campaigns are automatically optimized for you by Google. <link>See what your ads will look like.</link>"
-msgstr ""
-
-#: js/build/commons.js:1
-msgid "You’re ready to set up a Performance Max campaign to drive more sales with ads. Your products will be included in the campaign after they’re approved."
 msgstr ""
 
 #: js/build/commons.js:1
@@ -4060,6 +3941,149 @@ msgid "Connect to existing Merchant Center account"
 msgstr ""
 
 #: js/build/commons.js:99
+msgid "Unable to complete your Google Ads account setup. Please try again later."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "You do not have billing information set up in your Google Ads account. Once you have set up billing, you can start running ads."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "You will be directed to Google Ads for this step. In case your browser is unable to open the pop-up, <link>click here instead <icon /></link>."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Set up billing"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Billing method for Google Ads added successfully"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Set your budget"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "With Performance Max campaigns, you can set your own budget and Google’s Smart Bidding technology will serve the most appropriate ad, with the optimal bid, to maximize campaign performance. You only pay when people click on your ads, and you can start or stop your campaign whenever you want."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Average daily budget"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "These values are based on your settings and the budgets of similar advertisers."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "We recommend running campaigns at least 1 month so it can learn to optimize for your business."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "How does Google Ads work?"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Google Ads works by displaying your ad when people search online for the products and services you offer. By leveraging smart technology, Google Ads helps get your ads in front of potential customers at just the moment they’re ready to take action."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "What is a product feed?"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Your product feed is the central data source that contains a list of products you want to advertise through Merchant Center. By default, Google syncs all active products from your WooCommerce inventory. You can choose to exclude products later after this setup."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "How much does Google Ads cost?"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "With Google Ads, you decide how much to spend. There’s no minimum spend, and no time commitment. Your costs may vary from day to day, but you won’t be charged more than your daily budget times the number of days in a month. You pay only for the actual clicks and calls that your ad receives."
+msgstr ""
+
+#: js/build/commons.js:99
+#: js/build/get-started-page.js:1
+msgid "Where will my products appear?"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "If you’re selling in the US, then eligible product feed can appear in search results across Google Search, Google Images, and the Google Shopping tab. If you’re selling outside the US, product feed will appear on the Shopping tab."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "If you’re running a Performance Max Campaign, your approved products can appear on Google Search, Google Maps, the Shopping tab, Gmail, Youtube, the Google Display Network, and Discover feed."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "How long until I see results with Google Ads?"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Google’s Performance Max campaigns are powered by machine learning models. These models train and adapt based on the data you provide in your campaign. This means performance optimization can take time. Typically, this learning process takes 1—2 weeks."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Set a daily budget, and only pay when people click on your ads."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Performance Max campaign"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Performance Max uses the best of Google’s AI to show the most impactful ads for your products at the right time and place. Google will use your product data to create ads for this campaign. "
+msgstr ""
+
+#: js/build/commons.js:99
+#: js/build/onboarding.js:1
+msgid "Learn more about Performance Max"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Drive more sales with Performance Max"
+msgstr ""
+
+#: js/build/commons.js:99
+#: js/build/get-started-page.js:1
+msgid "Reach more customers by advertising your products across Google Ads channels like Search, YouTube and Discover. Set up your campaign now so your products are included as soon as they’re approved."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "EU political content"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "My ads include political content as defined by Google's <link>EU political content policy</link>."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "If selected, your ads will not run in the EU unless you complete Google's political advertiser verification."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Your ads will not run in the EU"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "EU regulations"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Advertisers must confirm whether their ads include political content."
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "Performance Max campaigns are automatically optimized for you by Google. <link>See what your ads will look like.</link>"
+msgstr ""
+
+#: js/build/commons.js:99
+msgid "You’re ready to set up a Performance Max campaign to drive more sales with ads. Your products will be included in the campaign after they’re approved."
+msgstr ""
+
+#: js/build/commons.js:99
 msgid "This offer won’t last long!"
 msgstr ""
 
@@ -4848,7 +4872,7 @@ msgid "There was an error getting the store categories."
 msgstr ""
 
 #: js/build/index.js:1
-msgid "There was an error getting the tour."
+msgid "There was an error getting the tours."
 msgstr ""
 
 #: js/build/index.js:1

@@ -46,7 +46,11 @@
 				loadTab(atts, index, $inner, $this, cache, function(data) {
 					if (data.html) {
 						woodmartThemeModule.removeDuplicatedStylesFromHTML(data.html, function(html) {
-							$inner.find('.wd-products-element').replaceWith(html);
+							if ($inner.find('.wd-products-element').length) {
+								$inner.find('.wd-products-element').replaceWith(html);
+							} else {
+								$inner.append(html);
+							}
 
 							$inner.find('.wd-products-element').addClass('wd-active');
 

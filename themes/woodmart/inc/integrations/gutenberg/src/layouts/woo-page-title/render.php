@@ -11,6 +11,8 @@ if ( ! function_exists( 'wd_gutenberg_woo_page_title' ) ) {
 			$classes .= ' wd-stretched';
 		}
 
+		Builder_Data::get_instance()->set_data( 'is_post_layout', Main::get_instance()->has_custom_layout( 'single_post' ) );
+
 		Main::setup_preview();
 
 		Builder_Data::get_instance()->set_data( 'builder', true );

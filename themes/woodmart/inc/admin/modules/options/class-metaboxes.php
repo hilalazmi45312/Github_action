@@ -184,10 +184,12 @@ class Metaboxes extends Singleton {
 	 * @param  int $post_id ID of the post to save.
 	 */
 	public function save_post( $post_id ) {
-		$posts_metaboxes = self::get_posts_metaboxes();
+		$posts_metaboxes = self::get_posts_metaboxes( $post_id );
 		foreach ( $posts_metaboxes as $key => $metabox ) {
 			$metabox->save_posts_fields( $post_id );
 		}
+
+//		wp_die();
 	}
 
 	/**
@@ -245,11 +247,13 @@ class Metaboxes extends Singleton {
 	 *
 	 * @since 1.0.0
 	 */
-	public static function get_posts_metaboxes() {
+	public static function get_posts_metaboxes( $post_id = 0 ) {
+		$post_id = ! $post_id && isset( $_REQUEST['post'] ) ? (int) $_REQUEST['post'] : $post_id; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 		return array_filter(
 			self::$_metaboxes,
-			function( $box ) {
-				return $box->get_object() === 'post';
+			function( $box ) use ( $post_id ) {
+				return $box->get_object() === 'post' && in_array( get_post_type( $post_id ), $box->get_post_types(), true );
 			}
 		);
 	}

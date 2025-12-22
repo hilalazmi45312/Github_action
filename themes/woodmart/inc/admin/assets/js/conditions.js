@@ -28,24 +28,54 @@
             $querySelect.select2('destroy');
         }
 
-        var $conditionQueryFieldTitle      = $querySelect.parents('.xts-controls-wrapper').find('.xts-condition-query').first();
-        var $querySelectWrapper            = $querySelect.parent();
-        var $productTypeQuerySelectWrapper = $querySelect.parent().siblings('.xts-product-type-condition-query');
+        var $conditionQueryFieldTitle = $querySelect.parents('.xts-controls-wrapper').find('.xts-condition-query').first();
+        var $dependencFields          = $querySelect.parents('.xts-table-controls').find('[data-dependency]');
 
-        if ('all' === conditionType) {
-            $querySelectWrapper.addClass('xts-hidden');
-            $productTypeQuerySelectWrapper.addClass('xts-hidden');
-            $querySelect.removeAttr('data-query-type');
-        } else if ('product_type' === conditionType) {
-            $querySelectWrapper.addClass('xts-hidden');
-            $productTypeQuerySelectWrapper.removeClass('xts-hidden');
-            $querySelect.removeAttr('data-query-type');
-        } else {
-            $querySelectWrapper.removeClass('xts-hidden');
-            $productTypeQuerySelectWrapper.addClass('xts-hidden');
-            $querySelect.attr('data-query-type', conditionType);
-            conditionQuerySelect2($querySelect);
-        }
+        $dependencFields.each(function( key, field ) {
+            var $field     = $(field);
+            var $select    = $field.find('select');
+            var dependency = $field.data('dependency').split(';').filter(function( val ) {
+                return val.length > 0;
+            });
+            $showField     = false;
+
+            for (var i = 0; i < dependency.length; i++) {
+                var dep = dependency[i];
+                var parts = dep.split(':');
+
+                var key     = parts[0];
+                var compare = parts[1];
+                var value   = parts[2].split(',').filter(function( val ) {
+                    return val.length > 0;
+                });
+
+                if ( 'type' === key && 'all' !== conditionType ) {
+                    $showField = 'equals' === compare ? value.includes( conditionType ) : ! value.includes( conditionType );
+                }
+
+                // This field will appear if at least one dependency returns a value of true.
+                if ( $showField ) {
+                    break;
+                }
+            }
+
+            if ( $showField ) {
+                $field.removeClass('xts-hidden');
+
+                if ( $field.hasClass('xts-condition-query') ) {
+                    $select.attr('data-query-type', conditionType);
+                    conditionQuerySelect2($select);
+                }
+            } else {
+                $field.addClass('xts-hidden');
+
+                if ( $select.data('select2') ) {
+                    $select.removeAttr('data-query-type', conditionType);
+                    $select.val('');
+                    $select.select2('destroy');
+                }
+            }
+        });
 
         // Show or hide Condition query field title.
         var showTitle = false;
@@ -100,6 +130,10 @@
         });
 
     $(document).on('xts_select_with_table_control_row_removed', function( e, $control ) {
+        if ( ! $control.hasClass('xts-conditions-control') ) {
+            return;
+        }
+
         var $conditionQueryFieldTitle = $control.find('.xts-controls-wrapper .xts-condition-query').first();
 
         var showTitle = false;

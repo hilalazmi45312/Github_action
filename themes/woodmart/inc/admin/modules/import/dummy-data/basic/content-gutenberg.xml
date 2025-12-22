@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2024-12-08 08:40" -->
+	<!-- generator="WordPress/6.7.4" created="2025-10-08 11:16" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,15 +29,13 @@
 	<title>Gutenberg base</title>
 	<link>https://dummy.xtemos.com/woodmart2/gutenberg</link>
 	<description></description>
-	<pubDate>Sun, 08 Dec 2024 08:40:41 +0000</pubDate>
+	<pubDate>Wed, 08 Oct 2025 11:16:14 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/gutenberg</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>491</wp:author_id><wp:author_login><![CDATA[Ethan Smith]]></wp:author_login><wp:author_email><![CDATA[ethan_smith@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Ethan Smith]]></wp:author_display_name><wp:author_first_name><![CDATA[Ethan]]></wp:author_first_name><wp:author_last_name><![CDATA[Smith]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>0</wp:term_id>
 			<wp:term_taxonomy><![CDATA[]]></wp:term_taxonomy>
@@ -45,7 +43,7 @@
 			<wp:term_parent><![CDATA[]]></wp:term_parent>
 					</wp:term>
 		
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.4</generator>
 
 					<item>
 					<title><![CDATA[promo-popup]]></title>
@@ -97,10 +95,10 @@
 					<title><![CDATA[Home Basic]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/home-basic/</link>
 					<pubDate>Wed, 19 Jun 2024 07:43:59 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/?page_id=17608</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/slider {"blockId":"f5923d4d-3cfc-48e7-9c9f-c10057eeb540","arrows":false,"arrowsTablet":false,"arrowsMobile":false,"paginationStyle":"3","stretch":true,"height":"700","marginTop":"-40","marginBottom":"20","heightTablet":"660","heightMobile":"580"} -->
-<div id="wd-f5923d4d" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-slide wd-stretched"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="slide" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"73de1be7-6d81-40e4-9ddc-c102b0a0222f","align":"flex-start","bgImage":{"id":20817,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-slide-bg-1.jpg"},"bgPosition":"center center","bgRepeat":"no-repeat","bgColorCode":"#F3F3F3","bgHoverImage":{"id":"","url":""},"paddingRightMobile":"15","paddingLeftMobile":"15"} -->
+<div id="wd-f5923d4d" class="wp-block-wd-slider wd-slider wd-carousel-container wd-anim-slide wd-stretched"><div class="wd-carousel-inner"><div class="wd-carousel wd-grid" data-effect="slide" data-wrap="yes" data-autoheight="yes" data-sliding_speed="700" style="--wd-col-lg:1;--wd-col-md:1;--wd-col-sm:1;"><div class="wd-carousel-wrap"><!-- wp:wd/slider-item {"blockId":"73de1be7-6d81-40e4-9ddc-c102b0a0222f","align":"flex-start","aspectRatio":"","bgImage":{"id":20817,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-slide-bg-1.jpg"},"bgPosition":"center center","bgRepeat":"no-repeat","bgColorCode":"#F3F3F3","bgHoverImage":{"id":"","url":""},"paddingRightMobile":"15","paddingLeftMobile":"15"} -->
 <div id="wd-73de1be7" class="wp-block-wd-slider-item wd-slide wd-carousel-item"><div class="wd-slide-container"><!-- wp:wd/container {"blockId":"d2184a11-6e00-408b-9451-8ae9e2e14f66","textAlign":"center","rowGap":"","displayWidth":"custom","customWidth":"580","displayWidthTablet":"custom","displayWidthMobile":"full-width","customWidthTablet":"390"} -->
 <div id="wd-d2184a11" class="wp-block-wd-container wd-dir-col wd-align wd-custom-width"><!-- wp:wd/paragraph {"blockId":"4eecd4ad-c59b-44fe-9ce6-c87ede3a5e9c","colorVariable":"\u002d\u002dwd-primary-color","tpFontSize":"18","tpFontVariant":"700","tpFontWeight":"700","animation":"slide-from-top","animationDelay":"400","tpFontSizeTablet":"16","tpFontSizeMobile":"14"} -->
 <p id="wd-4eecd4ad" class="wp-block-wd-paragraph wd-animation wd-transform wd-animation-slide-from-top wd_delay_400">THIS IS CUSTOM SUBTITLE</p>
@@ -126,7 +124,7 @@
 <!-- /wp:wd/container --></div><div class="wd-slide-bg wd-fill"></div></div>
 <!-- /wp:wd/slider-item -->
 
-<!-- wp:wd/slider-item {"blockId":"fdf2b8a7-48c2-406e-b876-3f47cd825ef3","align":"flex-start","colorScheme":"light","bgImage":{"id":20818,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/sliders-basic-slide-2.jpg"},"bgPosition":"center center","bgRepeat":"no-repeat","bgColorCode":"#F3F3F3","bgHoverImage":{"id":"","url":""},"paddingRightMobile":"15","paddingLeftMobile":"15"} -->
+<!-- wp:wd/slider-item {"blockId":"fdf2b8a7-48c2-406e-b876-3f47cd825ef3","align":"flex-start","colorScheme":"light","aspectRatio":"","bgImage":{"id":20818,"url":"http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/sliders-basic-slide-2.jpg"},"bgPosition":"center center","bgRepeat":"no-repeat","bgColorCode":"#F3F3F3","bgHoverImage":{"id":"","url":""},"paddingRightMobile":"15","paddingLeftMobile":"15"} -->
 <div id="wd-fdf2b8a7" class="wp-block-wd-slider-item wd-slide wd-carousel-item color-scheme-light"><div class="wd-slide-container"><!-- wp:wd/paragraph {"blockId":"d3dca1a3-99e1-4705-9161-ff459287e54d","textAlign":"center","tpFontSize":"18","tpFontVariant":"700","tpFontWeight":"700","animation":"slide-from-left","tpFontSizeTablet":"16","tpFontSizeMobile":"14"} -->
 <p id="wd-d3dca1a3" class="wp-block-wd-paragraph wd-align wd-animation wd-transform wd-animation-slide-from-left wd_delay_100">THIS IS CUSTOM SUBTITLE</p>
 <!-- /wp:wd/paragraph -->
@@ -236,7 +234,7 @@
 <!-- wp:wd/products {"blockId":"8857a461-c0bd-461f-91f5-ca196f45cc79","layout":"carousel","items_per_page":"5","marginBottom":"90","slides_per_view":"4","sync_parent_id":"wd_e26533fe","marginBottomTablet":"60","slides_per_viewMobile":"2"} /-->
 
 <!-- wp:wd/section {"blockId":"b8f6c5d9-6696-422b-8240-40bf440a07e5","bgType":"video","bgExternalVideo":"https://www.youtube.com/watch?v=lR3spOdggNc","bgVideo":{"id":27070,"url":"https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/wd-basic-video-bg.mp4"},"bgVideoSource":"local","bgColorCode":"#dddddd","paddingTop":"130","paddingRight":"30","paddingBottom":"130","paddingLeft":"30","marginBottom":"80","overlayColorCode":"#000000","overlay":true,"overlayOpacity":0.5,"paddingTopMobile":"70","paddingRightMobile":"20","paddingBottomMobile":"70","paddingLeftMobile":"20","marginBottomTablet":"60","marginBottomMobile":"60"} -->
-<div id="wd-b8f6c5d9" class="wp-block-wd-section wd-bg-parent"><div class="wd-bg-video"><video class="wd-bg-video-html" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/wd-basic-video-bg.mp4" autoplay muted loop></video></div><div class="wd-bg-overlay"></div><!-- wp:wd/container {"blockId":"63a3479b-186b-4a5f-a52c-09ddb96b99fa","textAlign":"center","rowGap":"10","colorScheme":"light","paddingTop":"90","paddingRight":"15","paddingBottom":"90","paddingLeft":"15","borderType":"solid","borderColorCode":"rgba(255,255,255,0.15)","borderWidth":"5","borderWidthTop":"5","borderWidthRight":"5","borderWidthBottom":"5","borderWidthLeft":"5","displayWidth":"custom","customWidth":"815","paddingTopMobile":"70","paddingBottomMobile":"70","alignSelfTablet":"center","displayWidthTablet":"custom","customWidthTablet":"650"} -->
+<div id="wd-b8f6c5d9" class="wp-block-wd-section wd-bg-parent"><div class="wd-bg-video"><video class="wd-bg-video-html" src="https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/wd-basic-video-bg.mp4" autoplay muted loop playsinline></video></div><div class="wd-bg-overlay"></div><!-- wp:wd/container {"blockId":"63a3479b-186b-4a5f-a52c-09ddb96b99fa","textAlign":"center","rowGap":"10","colorScheme":"light","paddingTop":"90","paddingRight":"15","paddingBottom":"90","paddingLeft":"15","borderType":"solid","borderColorCode":"rgba(255,255,255,0.15)","borderWidth":"5","borderWidthTop":"5","borderWidthRight":"5","borderWidthBottom":"5","borderWidthLeft":"5","displayWidth":"custom","customWidth":"815","paddingTopMobile":"70","paddingBottomMobile":"70","alignSelfTablet":"center","displayWidthTablet":"custom","customWidthTablet":"650"} -->
 <div id="wd-63a3479b" class="wp-block-wd-container wd-dir-col color-scheme-light wd-align wd-custom-width wd-align-s-center-md"><!-- wp:wd/paragraph {"blockId":"6c94779d-ed68-4cfe-b75f-2cd5a772ceeb","tpFontFamily":"var(\u002d\u002dwd-title-font)","tpFontSize":"18","tpFontVariant":"600","tpFontWeight":"600"} -->
 <p id="wd-6c94779d" class="wp-block-wd-paragraph">LAOREET IN VITAE AMET​</p>
 <!-- /wp:wd/paragraph -->
@@ -293,8 +291,8 @@
 															<wp:post_id>17608</wp:post_id>
 					<wp:post_date><![CDATA[2024-06-19 07:43:59]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-06-19 07:43:59]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-11-21 13:36:10]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-11-21 13:36:10]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-10-08 11:15:49]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-08 11:15:49]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[home-basic]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -310,14 +308,6 @@
 							<wp:meta_value><![CDATA[on]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_page-title-size]]></wp:meta_key>
-							<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
 							<wp:meta_value><![CDATA[full-width]]></wp:meta_value>
 						</wp:postmeta>
@@ -330,7 +320,7 @@
 					<title><![CDATA[basic-banner-1-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-banner-1-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:35 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-banner-1-1.jpg</guid>
 															<wp:post_id>20802</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:35]]></wp:post_date>
@@ -353,7 +343,7 @@
 					<title><![CDATA[basic-banner-2-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-banner-2-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:36 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-banner-2-1.jpg</guid>
 															<wp:post_id>20803</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:36]]></wp:post_date>
@@ -376,7 +366,7 @@
 					<title><![CDATA[basic-banner-3-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-banner-3-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:37 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-banner-3-1.jpg</guid>
 															<wp:post_id>20804</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:37]]></wp:post_date>
@@ -399,7 +389,7 @@
 					<title><![CDATA[basic-inst-1-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-1-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:37 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-1-1.jpg</guid>
 															<wp:post_id>20805</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:37]]></wp:post_date>
@@ -422,7 +412,7 @@
 					<title><![CDATA[basic-inst-3-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-3-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:38 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-3-1.jpg</guid>
 															<wp:post_id>20807</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:38]]></wp:post_date>
@@ -445,7 +435,7 @@
 					<title><![CDATA[basic-inst-4-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-4-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:38 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-4-1.jpg</guid>
 															<wp:post_id>20808</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:38]]></wp:post_date>
@@ -468,7 +458,7 @@
 					<title><![CDATA[basic-inst-5-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-5-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:39 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-5-1.jpg</guid>
 															<wp:post_id>20809</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:39]]></wp:post_date>
@@ -491,7 +481,7 @@
 					<title><![CDATA[basic-inst-6-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-6-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:39 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-6-1.jpg</guid>
 															<wp:post_id>20810</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:39]]></wp:post_date>
@@ -514,7 +504,7 @@
 					<title><![CDATA[basic-inst-7-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-7-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:39 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-7-1.jpg</guid>
 															<wp:post_id>20811</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:39]]></wp:post_date>
@@ -537,7 +527,7 @@
 					<title><![CDATA[basic-inst-8-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-8-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:40 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-8-1.jpg</guid>
 															<wp:post_id>20812</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:40]]></wp:post_date>
@@ -560,7 +550,7 @@
 					<title><![CDATA[basic-inst-9-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-9-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:40 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-9-1.jpg</guid>
 															<wp:post_id>20813</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:40]]></wp:post_date>
@@ -583,7 +573,7 @@
 					<title><![CDATA[basic-inst-10-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-10-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:41 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-10-1.jpg</guid>
 															<wp:post_id>20814</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:41]]></wp:post_date>
@@ -606,7 +596,7 @@
 					<title><![CDATA[basic-inst-11-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-11-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:41 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-11-1.jpg</guid>
 															<wp:post_id>20815</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:41]]></wp:post_date>
@@ -629,7 +619,7 @@
 					<title><![CDATA[basic-inst-12-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-12-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:41 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-12-1.jpg</guid>
 															<wp:post_id>20816</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:41]]></wp:post_date>
@@ -652,7 +642,7 @@
 					<title><![CDATA[basic-slide-bg-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-slide-bg-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:42 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-slide-bg-1.jpg</guid>
 															<wp:post_id>20817</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:42]]></wp:post_date>
@@ -675,7 +665,7 @@
 					<title><![CDATA[sliders-basic-slide-2]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/sliders-basic-slide-2/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:43 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/sliders-basic-slide-2.jpg</guid>
 															<wp:post_id>20818</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:43]]></wp:post_date>
@@ -698,7 +688,7 @@
 					<title><![CDATA[wd-basic-video-bg]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/home-basic/wd-basic-video-bg/</link>
 					<pubDate>Thu, 18 Jul 2024 14:23:52 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/wd-basic-video-bg.mp4</guid>
 															<wp:post_id>27070</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-18 14:23:52]]></wp:post_date>
@@ -744,7 +734,7 @@
 					<title><![CDATA[Footer 1 column Light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?cms_block=footer-1-column-light</link>
 					<pubDate>Fri, 24 May 2024 13:40:27 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/?post_type=cms_block&#038;p=12962</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"44ed7d08-e070-4837-b8c5-83401769c4d1","paddingTop":"40","paddingBottom":"40"} -->
 <div id="wd-44ed7d08" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"d5a06582-d2b6-4d73-83f9-ccc08f331d22","adjacentCount":5,"colWidth":25,"adjacentCountTablet":2,"adjacentCountMobile":1,"colWidthTablet":50,"colWidthMobile":100} -->
@@ -931,7 +921,7 @@
 					<title><![CDATA[basic-inst-2-1]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/basic-inst-2-1/</link>
 					<pubDate>Mon, 01 Jul 2024 07:09:37 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/07/basic-inst-2-1.jpg</guid>
 															<wp:post_id>20806</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-01 07:09:37]]></wp:post_date>
@@ -954,7 +944,7 @@
 					<title><![CDATA[wd-cursor-light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?attachment_id=34179</link>
 					<pubDate>Mon, 28 Oct 2024 10:31:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wd-cursor-light.svg</guid>
 															<wp:post_id>34179</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 10:31:47]]></wp:post_date>
@@ -977,7 +967,7 @@
 					<title><![CDATA[wd-envelope-light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?attachment_id=34180</link>
 					<pubDate>Mon, 28 Oct 2024 10:31:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wd-envelope-light.svg</guid>
 															<wp:post_id>34180</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 10:31:47]]></wp:post_date>
@@ -1000,7 +990,7 @@
 					<title><![CDATA[wd-phone-light]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/gutenberg/?attachment_id=34181</link>
 					<pubDate>Mon, 28 Oct 2024 10:31:48 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/gutenberg/wp-content/uploads/sites/24/2024/05/wd-phone-light.svg</guid>
 															<wp:post_id>34181</wp:post_id>
 					<wp:post_date><![CDATA[2024-10-28 10:31:48]]></wp:post_date>

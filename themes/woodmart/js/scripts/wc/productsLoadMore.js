@@ -165,12 +165,12 @@
 					$this.attr('href', data.nextPage);
 
 					if (data.status === 'no-more-posts') {
-						$this.hide().remove();
+						$this.parent().hide().remove();
 					}
 				}
 
 				if (data.status === 'no-more-posts') {
-					$this.hide();
+					$this.parent().hide();
 				}
 			});
 		});

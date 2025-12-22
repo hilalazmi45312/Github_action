@@ -58,7 +58,7 @@ if ( woodmart_get_opt( 'reviews_enable_pros_cons' ) || woodmart_get_opt( 'review
 				</h2>
 
 				<?php if ( woodmart_get_opt( 'reviews_rating_summary' ) || ( woodmart_get_opt( 'show_reviews_only_image_filter' ) && woodmart_get_opt( 'single_product_comment_images' ) ) ) : ?>
-					<a rel="nofollow" class="wd-reviews-sorting-clear <?php echo ! Helper::get_ratings_from_request() && ! Helper::show_only_image() ? esc_attr( 'wd-hide' ) : ''; ?>">
+					<a href="#" rel="nofollow" class="wd-reviews-sorting-clear <?php echo ! Helper::get_ratings_from_request() && ! Helper::show_only_image() ? esc_attr( 'wd-hide' ) : ''; ?>">
 						<?php echo esc_html__( 'Clear filters', 'woodmart' ); ?>
 					</a>
 				<?php endif; ?>

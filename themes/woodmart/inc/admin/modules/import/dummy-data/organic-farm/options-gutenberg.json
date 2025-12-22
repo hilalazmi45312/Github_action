@@ -425,6 +425,7 @@
     "blog_excerpt_length": "105",
     "size_guides": "1",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "hide_larger_price": "1",
     "single_product_variations_price": "1",
     "variation_gallery": "1",
@@ -477,9 +478,6 @@
     "show_reviews_only_image_filter": "1",
     "reviews_rating_summary": "1",
     "reviews_rating_summary_filter": "1",
-    "additional_tab_title": "Delivery Details",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "101",
     "header_banner_height": "40",
     "carousel_arrows_together_gap": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIxNSJ9LCJ0YWJsZXQiOnsidW5pdCI6InB4IiwidmFsdWUiOiIifSwibW9iaWxlIjp7InVuaXQiOiJweCIsInZhbHVlIjoiMTAifX19",
     "carousel_arrows_together_size": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiI1MCJ9LCJ0YWJsZXQiOnsidW5pdCI6InB4IiwidmFsdWUiOiI0MiJ9LCJtb2JpbGUiOnsidW5pdCI6InB4IiwidmFsdWUiOiIifX19",
@@ -525,5 +523,7 @@
         "position": ""
     },
     "blog_columns_tablet": "3",
-    "blog_columns_mobile": "1"
+    "blog_columns_mobile": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

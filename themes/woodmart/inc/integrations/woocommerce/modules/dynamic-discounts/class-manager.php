@@ -247,6 +247,7 @@ class Manager extends Singleton {
 				case 'product_tag':
 				case 'product_brand':
 				case 'product_attr_term':
+				case 'product_shipping_class':
 					$terms = wp_get_post_terms( $product->get_id(), get_taxonomies(), array( 'fields' => 'ids' ) );
 
 					if ( $terms ) {
@@ -311,6 +312,7 @@ class Manager extends Singleton {
 			case 'product_tag':
 			case 'product_brand':
 			case 'product_attr_term':
+			case 'product_shipping_class':
 				$priority = 30;
 				break;
 			case 'product':
@@ -331,6 +333,33 @@ class Manager extends Singleton {
 	 */
 	public function sort_by_priority( $a, $b ) {
 		return $b['woodmart_discount_priority'] <=> $a['woodmart_discount_priority'];
+	}
+
+	/**
+	 * Get product price after applying discount.
+	 *
+	 * @param float $product_price Price before applying discount.
+	 * @param array $discount Array with 2 args('type', 'value') for calculate new price.
+	 *
+	 * @return float
+	 */
+	public function get_product_price( $product_price, $discount ) {
+		if ( empty( $discount['type'] ) || empty( $discount['value'] ) || empty( $product_price ) ) {
+			return $product_price;
+		}
+
+		switch ( $discount['type'] ) {
+			case 'amount':
+				$product_price -= $discount['value'];
+				break;
+			case 'percentage':
+				$product_price -= $product_price * ( $discount['value'] / 100 );
+				break;
+			default:
+				break;
+		}
+
+		return (float) $product_price;
 	}
 }
 

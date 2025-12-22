@@ -52,7 +52,7 @@ class Notices extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'wd-woocommerce-elements' );
+		return array( 'wd-site-elements' );
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Notices extends Widget_Base {
 	 * @return bool Whether to show the widget in the panel or not.
 	 */
 	public function show_in_panel() {
-		return woodmart_woocommerce_installed();
+		return Main::is_layout_type( 'single_product' ) || Main::is_layout_type( 'shop_archive' ) || Main::is_layout_type( 'checkout_form' ) || Main::is_layout_type( 'cart' ) || Main::is_layout_type( 'checkout_content' ) || Main::is_layout_type( 'thank_you_page' ) || Main::is_layout_type( 'my_account_page' ) || Main::is_layout_type( 'my_account_auth' ) || Main::is_layout_type( 'my_account_lost_password' );
 	}
 
 	/**

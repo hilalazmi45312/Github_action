@@ -55,7 +55,7 @@
 			if (source === 'main_loop') {
 				ajaxurl = $this.attr('href');
 				method = 'GET';
-				data = {};
+				data = atts ? { atts: atts } : {};
 			}
 
 			$.ajax({
@@ -99,7 +99,7 @@
 
 						if (data.status === 'no-more-posts') {
 							$this.addClass('no-more-posts');
-							$this.hide();
+							$this.parent().hide();
 						}
 					});
 				},

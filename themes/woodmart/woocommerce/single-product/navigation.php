@@ -27,7 +27,7 @@ woodmart_enqueue_inline_style( 'woo-single-prod-el-navigation' );
 
 			<div class="wd-dropdown">
 				<a href="<?php echo esc_url( $prev->get_permalink() ); ?>" class="wd-product-nav-thumb">
-					<?php echo apply_filters( 'woodmart_products_nav_image', $prev->get_image() ); // phpcs:ignore ?>
+					<?php echo apply_filters( 'woodmart_products_nav_image', $prev->get_image( 'thumbnail' ) ); // phpcs:ignore ?>
 				</a>
 
 				<div class="wd-product-nav-desc">
@@ -55,7 +55,7 @@ woodmart_enqueue_inline_style( 'woo-single-prod-el-navigation' );
 
 			<div class="wd-dropdown">
 				<a href="<?php echo esc_url( $next->get_permalink() ); ?>" class="wd-product-nav-thumb">
-					<?php echo apply_filters( 'woodmart_products_nav_image', $next->get_image() ); // phpcs:ignore ?>
+					<?php echo apply_filters( 'woodmart_products_nav_image', $next->get_image( 'thumbnail' ) ); // phpcs:ignore ?>
 				</a>
 
 				<div class="wd-product-nav-desc">

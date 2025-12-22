@@ -299,7 +299,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 											}
 
 											?>
-												<div class="<?php echo esc_attr( $class ); ?>"<?php echo wp_kses( $title, true ); ?> data-value="<?php echo esc_attr( $term->slug ); ?>" data-title="<?php echo esc_attr( $term->name ); ?>" <?php echo selected( sanitize_title( $selected_value ), sanitize_title( $term->slug ), false ); ?> role="radio" aria-checked="false" tabindex="0">
+												<div class="<?php echo esc_attr( $class ); ?>"<?php echo wp_kses( $title, true ); ?> data-value="<?php echo esc_attr( $term->slug ); ?>" <?php echo selected( sanitize_title( $selected_value ), sanitize_title( $term->slug ), false ); ?> role="radio" aria-checked="false" aria-label="<?php echo esc_attr( $term->name ); ?>" tabindex="0">
 													<?php if ( $style || $image ) : ?>
 														<span class="wd-swatch-bg" style="<?php echo esc_attr( $style ); ?>">
 															<?php if ( $image ) : ?>
@@ -358,6 +358,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 						<?php
 						wc_dropdown_variation_attribute_options(
 							array(
+								'id'        => $is_quick_shop2 ? sanitize_title( $attribute_name ) . '-' . $product->get_id() : '',
 								'selected'  => $is_quick_shop2 ? '' : false,
 								'options'   => $options,
 								'attribute' => $attribute_name,

@@ -383,6 +383,22 @@ Follow our documentation <a href="https://xtemos.com/docs/woodmart/faq-guides/se
 		);
 
 		$this->add_control(
+			'aspect_ratio',
+			array(
+				'label'     => esc_html__( 'Aspect Ratio', 'woodmart' ),
+				'type'      => Controls_Manager::SELECT,
+				'selectors' => array(
+					'{{WRAPPER}} .wd-insta' => '--wd-aspect-ratio: {{VALUE}};',
+				),
+				'options'   => array(
+					'1/1' => '1:1',
+					'4/5' => '4:5',
+				),
+				'default'   => '1/1',
+			)
+		);
+
+		$this->add_control(
 			'rounded',
 			array(
 				'label'        => esc_html__( 'Rounded corners for images', 'woodmart' ),

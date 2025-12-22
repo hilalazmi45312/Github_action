@@ -25,16 +25,16 @@
 			dayjs.extend(window.dayjs_plugin_utc);
 			dayjs.extend(window.dayjs_plugin_timezone);
 			var time = dayjs.tz($this.data('end-date'), timezone);
+
 			$this.countdown(time.toDate(), function(event) {
 				if ( 'yes' === $this.data('hide-on-finish') && 'finish' === event.type ) {
 					$this.parent().addClass('wd-hide');
 				}
 
-				$this.html(event.strftime(''
-					+ '<span class="wd-timer-days"><span class="wd-timer-value">%-D </span><span class="wd-timer-text">' + woodmart_settings.countdown_days + '</span></span> '
-					+ '<span class="wd-timer-hours"><span class="wd-timer-value">%H </span><span class="wd-timer-text">' + woodmart_settings.countdown_hours + '</span></span> '
-					+ '<span class="wd-timer-min"><span class="wd-timer-value">%M </span><span class="wd-timer-text">' + woodmart_settings.countdown_mins + '</span></span> '
-					+ '<span class="wd-timer-sec"><span class="wd-timer-value">%S </span><span class="wd-timer-text">' + woodmart_settings.countdown_sec + '</span></span>'));
+				$this.find('.wd-timer-days .wd-timer-value').text(event.strftime('%-D'))
+				$this.find('.wd-timer-hours .wd-timer-value').text(event.strftime('%H'))
+				$this.find('.wd-timer-min .wd-timer-value').text(event.strftime('%M'))
+				$this.find('.wd-timer-sec .wd-timer-value').text(event.strftime('%S'))
 			});
 		});
 	};

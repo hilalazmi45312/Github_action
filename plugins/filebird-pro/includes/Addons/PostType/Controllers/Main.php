@@ -102,13 +102,15 @@ class Main {
 
             return rest_ensure_response(
                 array(
-                    'id'         => $res['term_id'],
-                    'key'        => $res['term_id'],
-                    'data-id'    => $res['term_id'],
-                    'parent'     => $parent,
-                    'data-count' => 0,
-                    'children'   => array(),
-                    'title'      => $folder_name,
+                    array(
+                        'id'         => $res['term_id'],
+                        'key'        => $res['term_id'],
+                        'data-id'    => $res['term_id'],
+                        'parent'     => $parent,
+                        'data-count' => 0,
+                        'children'   => array(),
+                        'title'      => $folder_name,
+                    )
                 )
             );
         }

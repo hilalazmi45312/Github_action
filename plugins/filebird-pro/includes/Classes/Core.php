@@ -34,6 +34,9 @@ class Core {
         add_filter( 'media_library_infinite_scrolling', '__return_true' );
 		add_filter( 'ajax_query_attachments_args', array( $this, 'ajaxQueryAttachmentsArgs' ), 20 );
 		add_filter( 'mla_media_modal_query_final_terms', array( $this, 'ajaxQueryAttachmentsArgs' ), 20 );
+
+		add_filter( 'wp_prepare_attachment_for_js', array( $this, 'wpPrepareAttachmentForJs' ), 10, 3 );
+
 		add_filter( 'restrict_manage_posts', array( $this, 'restrictManagePosts' ) );
 		add_filter( 'posts_clauses', array( $this, 'postsClauses' ), 10, 2 );
 		add_filter( 'attachment_fields_to_save', array( $this, 'attachment_fields_to_save' ), 10, 2 );
@@ -123,6 +126,14 @@ class Core {
 
     public function ajax_first_folder_notice() {
 		check_ajax_referer( 'fbv_nonce', 'nonce', true );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'mess' => __( 'You do not have permission to perform this action.', 'filebird' ) ),
+				403
+			);
+		}
+		
 		update_option( 'fbv_first_folder_notice', time() + 30 * 60 * 60 * 24 ); //After 3 months show
 		wp_send_json_success();
 	}
@@ -266,6 +277,12 @@ class Core {
 		return $query;
 	}
 
+	public function wpPrepareAttachmentForJs( $response, $attachment, $meta ) {
+		$folders = FolderModel::getFolderFromPostId( $attachment->ID );
+		$response['fbv'] = count( $folders ) > 0 ? (int)$folders[0]->folder_id : 0;
+		return $response;
+	}
+
     public function attachment_fields_to_edit( $form_fields, $post ) {
 		$fbv_folder  = FolderModel::getFolderFromPostId( $post->ID );
 		$fbv_folder  = count( $fbv_folder ) > 0 ? $fbv_folder[0] : (object) array(
@@ -342,16 +359,15 @@ class Core {
 	public function users_have_additional_content( $users_have_content, $userids ) {
 		global $wpdb;
 		if ( $userids && ! $users_have_content ) {
-			$userids = array_filter( array_map( 'intval', (array) $userids ) );
-			if ( ! empty( $userids ) ) {
-				$placeholders = implode( ',', array_fill( 0, 5, '%d' ) );
-				$query = $wpdb->prepare( 
-					"SELECT id FROM {$wpdb->prefix}fbv WHERE created_by IN( $placeholders ) LIMIT 1", 
-					$userids 
-				);
-				if ( $wpdb->get_var( $query ) ) {
-					$users_have_content = true;
-				}
+			$userids = array_map( 'intval', (array) $userids );
+			$userids = array_filter( $userids, function( $id ) {
+				return $id !== 0;
+			} );
+			if ( empty( $userids ) ) {
+				return $users_have_content;
+			}
+			if ( $wpdb->get_var( "SELECT id FROM {$wpdb->prefix}fbv WHERE created_by IN( " . implode( ',', $userids ) . ' ) LIMIT 1' ) ) {
+				$users_have_content = true;
 			}
 		}
 		return $users_have_content;

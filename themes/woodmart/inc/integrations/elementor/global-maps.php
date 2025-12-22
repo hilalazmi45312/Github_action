@@ -90,6 +90,21 @@ if ( ! function_exists( 'woodmart_get_animation_map' ) ) {
 				'prefix_class' => 'wd_delay_',
 			)
 		);
+
+		$element->add_control(
+			'wd_animation_main_classes',
+			array(
+				'type'         => 'wd_css_class',
+				'default'      => 'wd-animation wd-transform',
+				'prefix_class' => '',
+				'condition'    => array_merge(
+					array(
+						'wd_animation!' => '',
+					),
+					$condition
+				),
+			)
+		);
 	}
 }
 

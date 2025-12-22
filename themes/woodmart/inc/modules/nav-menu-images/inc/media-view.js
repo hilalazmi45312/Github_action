@@ -7,15 +7,11 @@
  * @subpackage Media View
  */
 jQuery(document).ready(function($){
-	// Workaround to make "Uploaded to this post" default
-	// Based on http://wordpress.stackexchange.com/a/76213
-	$(document).ajaxStop(function() {
-		$('.media-toolbar select.attachment-filters option[value="uploaded"]').attr( 'selected', true ).parent().trigger('change');
-	});
-
-    // Prepare the variable that holds our custom media manager.
+	// Prepare the variable that holds our custom media manager.
 	// Based on wp.media.featuredImage
-	wp.media.nmi = {
+	if (!wp.media.nmi) wp.media.nmi = {};
+
+	$.extend(wp.media.nmi, {
 		get: function() {
 			return wp.media.view.settings.post.featuredImageId;
 		},
@@ -42,8 +38,8 @@ jQuery(document).ready(function($){
 		},
 
 		frame: function() {
-			/*if ( this._frame )
-				return this._frame;*/
+			// Make sure the frame is only initialized once
+			if (this._frame) return this._frame;
 
 			this._frame = wp.media({
 				state: 'featured-image',
@@ -73,7 +69,7 @@ jQuery(document).ready(function($){
 		init: function() {
 			// Open the content media manager to the 'featured image' tab when
 			// the post thumbnail is clicked.
-			$('.nmi-div').on( 'click', '.add_media', function( event ) {
+			$('.nmi-div').off('click').on( 'click', '.add_media', function( event ) {
 				event.preventDefault();
 				// Stop propagation to prevent thickbox from activating.
 				event.stopPropagation();
@@ -88,12 +84,30 @@ jQuery(document).ready(function($){
 				nmi_settings[nmi_clicked_item_id].post.featuredImageId = -1;
 			});
 		}
-	};
+	});
 
+	// Initialize the media manager
 	$( wp.media.nmi.init );
 
+	// Clear frame and re-initialize on new menu item added
+	$(document).on('menu-item-added', function(e, menuItem) {
+		// Remove the previous frame and its references
+		if (wp.media.nmi && wp.media.nmi._frame) {
+			wp.media.nmi._frame.remove(); // Remove DOM
+			wp.media.nmi._frame = null;   // Remove the reference
+		}
+
+		// Reset settings if they exist
+		if (wp.media.view && wp.media.view.settings) {
+			delete wp.media.view.settings.post;
+		}
+
+		// Re-initialize the media frame
+		wp.media.nmi.init();
+	});
+
 	// Based on WPRemoveThumbnail
-	NMIRemoveThumbnail = function(nonce,post_id){
+	NMIRemoveThumbnail = function(nonce, post_id){
 		$.post(ajaxurl, {
 			action:"set-post-thumbnail", post_id: post_id, thumbnail_id: -1, _ajax_nonce: nonce, cookie: encodeURIComponent(document.cookie), nmi_request: true
 		}, function(str){
@@ -103,8 +117,7 @@ jQuery(document).ready(function($){
 				$( '.nmi-upload-link', "li#menu-item-"+post_id ).hide();
 				$( '.nmi-current-image', "li#menu-item-"+post_id ).html( str );
 			}
-		}
-		);
+		});
 	};
 
 });

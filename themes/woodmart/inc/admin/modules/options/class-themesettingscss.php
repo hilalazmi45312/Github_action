@@ -610,6 +610,20 @@ class Themesettingscss {
 	<?php endif; ?>
 <?php endif; ?>
 
+<?php if ( ! apply_filters( 'woodmart_generate_legacy_page_title_bg', false ) && ( ! $this->is_preset_active() || ( $this->is_preset_active() && woodmart_is_opt_changed( 'title-background' ) ) ) ) : ?>
+	<?php if ( woodmart_get_opt( 'title-background' ) ): ?>
+		<?php
+		$settings = woodmart_get_opt( 'title-background' );
+		$title_color = ! empty( $settings['color'] ) ? $settings['color'] : '';
+		?>
+		<?php if ( $title_color ) : ?>
+			.wd-page-title {
+				background-color: <?php echo esc_attr( $title_color ); ?>;
+			}
+		<?php endif; ?>
+	<?php endif; ?>
+<?php endif; ?>
+
 <?php
 
 return str_replace( "\t", '', ob_get_clean() );

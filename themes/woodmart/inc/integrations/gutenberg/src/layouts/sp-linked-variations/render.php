@@ -5,7 +5,7 @@ use XTS\Modules\Linked_Variations\Frontend;
 
 if ( ! function_exists( 'wd_gutenberg_single_product_linked_variations' ) ) {
 	function wd_gutenberg_single_product_linked_variations( $block_attributes ) {
-		if ( ! woodmart_woocommerce_installed() ) {
+		if ( ! woodmart_woocommerce_installed() || ! woodmart_get_opt( 'linked_variations' ) ) {
 			return '';
 		}
 

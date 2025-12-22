@@ -6,7 +6,6 @@
  */
 
 use XTS\Modules\Waitlist\DB_Storage;
-use XTS\Modules\Unit_Of_Measure\Main as Unit_Of_Measure;
 
 if ( ! class_exists( 'XTS_Email_Waitlist_Confirm_Subscription' ) ) :
 
@@ -32,6 +31,10 @@ if ( ! class_exists( 'XTS_Email_Waitlist_Confirm_Subscription' ) ) :
 		 * Create an instance of the class.
 		 */
 		public function __construct() {
+			if ( ! woodmart_get_opt( 'waitlist_enabled' ) ) {
+				return;
+			}
+
 			$this->id          = 'woodmart_waitlist_confirm_subscription_email';
 			$this->title       = esc_html__( 'Waitlist: confirm your subscription', 'woodmart' );
 			$this->description = esc_html__( 'Configure the email that notifies customers when a product they are interested in is back in stock, ensuring they are among the first to know and can make a purchase promptly.', 'woodmart' );

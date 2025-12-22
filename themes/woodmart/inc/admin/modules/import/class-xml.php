@@ -45,15 +45,28 @@ class XML {
 	private $helpers;
 
 	/**
+	 * File name.
+	 *
+	 * @var string
+	 */
+	private $file;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param string $version Version name.
 	 * @param string $type    File type.
+	 * @param string $file_path File path.
 	 */
-	public function __construct( $version, $type ) {
+	public function __construct( $version = '', $type = '', $file_path = '' ) {
+		if ( ! $version || ! $type ) {
+			return;
+		}
+
 		$this->helpers = Helpers::get_instance();
 		$this->version = $version;
 		$this->type    = $type;
+		$this->file    = $file_path ? $file_path : $this->helpers->get_file_path( $this->get_file_name(), $this->version );
 
 		define( 'WP_IMPORTING', true );
 
@@ -101,9 +114,8 @@ class XML {
 		ob_start();
 
 		$importer = $this->get_importer();
-		$file     = $this->helpers->get_file_path( $this->get_file_name(), $this->version );
 
-		if ( ! $file ) {
+		if ( ! $this->file ) {
 			return;
 		}
 
@@ -117,7 +129,7 @@ class XML {
 
 			$importer->fetch_attachments = true;
 
-			$importer->import( $file, $this->version );
+			$importer->import( $this->file, $this->version );
 		} catch ( Exception $e ) {
 			echo esc_html( '[ERROR] XML import<br>' );
 		}
@@ -130,7 +142,7 @@ class XML {
 	 *
 	 * @return WOODCORE_Import|bool;
 	 */
-	private function get_importer() {
+	public function get_importer() {
 		require_once ABSPATH . 'wp-admin/includes/import.php';
 
 		if ( ! function_exists( 'WOODMART_Theme_Plugin' ) ) {
@@ -251,6 +263,7 @@ class XML {
 			'_menu_item_block',
 			'woodmart_sguide_select',
 			'wd_layout_conditions',
+			'wd_backgroundImage',
 		);
 		if ( ! empty( $this->imported_data['all_posts'] ) ) {
 			foreach ( $this->imported_data['all_posts'] as $value ) {
@@ -403,25 +416,7 @@ class XML {
 					$wd_post_content
 				);
 
-				if ( str_contains( $wd_post_content, 'dummy.xtemos.com' ) ) {
-					$links = $this->helpers->links;
-
-					foreach ( $links as $key => $link_value ) {
-						if ( 'uploads' === $key ) {
-							foreach ( $link_value as $link ) {
-								$url_data = wp_upload_dir();
-
-								$wd_post_content = str_replace( $link, $url_data['baseurl'] . '/', $wd_post_content );
-							}
-						}
-
-						if ( 'simple' === $key ) {
-							foreach ( $link_value as $link ) {
-								$wd_post_content = str_replace( $link, get_home_url() . '/', $wd_post_content );
-							}
-						}
-					}
-				}
+				$wd_post_content = $this->replace_url_in_content( $wd_post_content );
 
 				wp_update_post(
 					array(
@@ -564,6 +559,7 @@ class XML {
 						'/include="([^"]*)"/i',
 						'/sidebar_id="([^"]*)"/i',
 						'/html_block_id="([^"]*)"/i',
+						'/wp-image-([^"]*)/i',
 					)
 				);
 
@@ -577,6 +573,8 @@ class XML {
 					},
 					$wd_post_content
 				);
+
+				$wd_post_content = $this->replace_url_in_content( $wd_post_content );
 
 				wp_update_post(
 					array(
@@ -707,9 +705,11 @@ class XML {
 
 						$terms_data = array();
 
-						foreach ( $imported_data['term'] as $terms ) {
-							foreach ( $terms as $key => $term ) {
-								$terms_data[ $key ] = $term;
+						if ( isset( $imported_data['term'] ) ) {
+							foreach ( $imported_data['term'] as $terms ) {
+								foreach ( $terms as $key => $term ) {
+									$terms_data[ $key ] = $term;
+								}
 							}
 						}
 
@@ -884,6 +884,36 @@ class XML {
 				update_post_meta( $value['new'], '_elementor_data', wp_slash( $post_meta ) );
 			}
 		}
+	}
+
+	/**
+	 * Replace URL in content.
+	 *
+	 * @param string $content Content to replace URLs in.
+	 * @return string
+	 */
+	private function replace_url_in_content( $content ) {
+		if ( str_contains( $content, 'dummy.xtemos.com' ) ) {
+			$links = $this->helpers->links;
+
+			foreach ( $links as $key => $link_value ) {
+				if ( 'uploads' === $key ) {
+					foreach ( $link_value as $link ) {
+						$url_data = wp_upload_dir();
+
+						$content = str_replace( $link, $url_data['baseurl'] . '/', $content );
+					}
+				}
+
+				if ( 'simple' === $key ) {
+					foreach ( $link_value as $link ) {
+						$content = str_replace( $link, get_home_url() . '/', $content );
+					}
+				}
+			}
+		}
+
+		return $content;
 	}
 
 	/**

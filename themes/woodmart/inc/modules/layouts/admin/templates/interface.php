@@ -11,14 +11,15 @@ use XTS\Modules\Layouts\Admin;
 
 ?>
 
-<div class="wd-layout">
+<div class="xts-add-layout">
 	<?php
 	$admin->get_template(
 		'popup',
 		array(
-			'btn_text'   => '',
-			'title_text' => esc_html__( 'Create layout', 'woodmart' ),
-			'content'    => $admin->get_form(),
+			'btn_text'      => '',
+			'title_text'    => esc_html__( 'Create layout', 'woodmart' ),
+			'content'       => $admin->get_form(),
+			'create_layout' => true,
 		)
 	);
 	?>

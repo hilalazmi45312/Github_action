@@ -37,6 +37,7 @@ if ( ! function_exists( 'woodmart_elementor_enqueue_scripts' ) ) {
 	 */
 	function woodmart_elementor_enqueue_scripts() {
 		wp_enqueue_script( 'wd-nested-elements', WOODMART_THEME_DIR . '/inc/integrations/elementor/assets/js/nestedElements.js', array(), woodmart_get_theme_info( 'Version' ), true );
+		wp_enqueue_script( 'wd-reload-preview', WOODMART_THEME_DIR . '/inc/integrations/elementor/assets/js/reloadPreview.js', array(), woodmart_get_theme_info( 'Version' ), true );
 
 		if ( Main::is_layout_type( 'single_product' ) ) {
 			wp_enqueue_script( 'wd-single-gallery-fix', WOODMART_THEME_DIR . '/inc/integrations/elementor/assets/js/singleGalleryFix.js', array(), woodmart_get_theme_info( 'Version' ), true );
@@ -175,34 +176,126 @@ if ( ! function_exists( 'woodmart_get_posts_by_query' ) ) {
 	 * @since 1.0.0
 	 */
 	function woodmart_get_posts_by_query() {
+		check_ajax_referer( 'woodmart_autocomplete_control_nonce', 'security' );
+
 		$search_string = isset( $_POST['q'] ) ? sanitize_text_field( wp_unslash( $_POST['q'] ) ) : ''; // phpcs:ignore
 		$post_type     = isset( $_POST['post_type'] ) ? $_POST['post_type'] : 'post'; // phpcs:ignore
+		$query_type    = isset( $_POST['query_type'] ) ? $_POST['query_type'] : ''; // phpcs:ignore
 		$results       = array();
 
-		$query = new WP_Query(
-			array(
-				's'              => $search_string,
-				'post_type'      => $post_type,
-				'posts_per_page' => - 1,
-			)
-		);
+		switch ( $query_type ) {
+			case 'post_type':
+				$post_types = get_post_types( array( 'public' => true ), 'objects' );
+				foreach ( $post_types as $post_type_obj ) {
+					if ( $search_string && stripos( $post_type_obj->label, $search_string ) === false ) {
+						continue;
+					}
+					$results[] = array(
+						'id'   => $post_type_obj->name,
+						'text' => $post_type_obj->label,
+					);
+				}
+				break;
 
-		if ( ! isset( $query->posts ) ) {
-			return;
-		}
+			case 'single_post_type':
+				$post_types = get_post_types( array( 'public' => true ), 'objects' );
+				foreach ( $post_types as $post_type_obj ) {
+					if ( $search_string && stripos( $post_type_obj->label, $search_string ) === false ) {
+						continue;
+					}
+					$results[] = array(
+						'id'   => $post_type_obj->name,
+						'text' => $post_type_obj->label,
+					);
+				}
+				break;
 
-		foreach ( $query->posts as $post ) {
-			$results[] = array(
-				'id'   => $post->ID,
-				'text' => $post->post_title,
-			);
+			case 'post_id':
+				$args = array(
+					'post_type'      => get_post_types( array( 'public' => true ) ),
+					'posts_per_page' => 100,
+					's'              => $search_string,
+				);
+
+				$posts = get_posts( $args );
+
+				if ( count( $posts ) > 0 ) {
+					foreach ( $posts as $post ) {
+						$results[] = array(
+							'id'   => $post->ID,
+							'text' => $post->post_title . ' (ID:' . $post->ID . ')',
+						);
+					}
+				}
+				break;
+
+			case 'taxonomy':
+				$taxonomies = get_taxonomies(
+					array(
+						'public' => true,
+					),
+					'objects'
+				);
+
+				foreach ( $taxonomies as $taxonomy ) {
+					if ( $search_string && stripos( $taxonomy->label, $search_string ) === false ) {
+						continue;
+					}
+					$results[] = array(
+						'id'   => $taxonomy->name,
+						'text' => $taxonomy->label,
+					);
+				}
+				break;
+
+			case 'term_id':
+			case 'single_posts_term_id':
+				$taxonomies = get_taxonomies();
+
+				foreach ( $taxonomies as $taxonomy ) {
+					$terms = get_terms(
+						array(
+							'taxonomy'   => $taxonomy,
+							'hide_empty' => false,
+							'search'     => $search_string,
+						)
+					);
+
+					if ( ! empty( $terms ) ) {
+						foreach ( $terms as $term ) {
+							$results[] = array(
+								'id'   => $term->term_id,
+								'text' => $term->name . ' (ID: ' . $term->term_id . ')',
+							);
+						}
+					}
+				}
+				break;
+
+			default:
+				$query = new WP_Query(
+					array(
+						's'              => $search_string,
+						'post_type'      => $post_type,
+						'post_status'    => 'publish',
+						'posts_per_page' => - 1,
+					)
+				);
+
+				foreach ( $query->posts as $post ) {
+					$results[] = array(
+						'id'   => $post->ID,
+						'text' => $post->post_title,
+					);
+				}
+
+				break;
 		}
 
 		wp_send_json( $results );
 	}
 
 	add_action( 'wp_ajax_woodmart_get_posts_by_query', 'woodmart_get_posts_by_query' );
-	add_action( 'wp_ajax_nopriv_woodmart_get_posts_by_query', 'woodmart_get_posts_by_query' );
 }
 
 if ( ! function_exists( 'woodmart_get_posts_title_by_id' ) ) {
@@ -212,25 +305,74 @@ if ( ! function_exists( 'woodmart_get_posts_title_by_id' ) ) {
 	 * @since 1.0.0
 	 */
 	function woodmart_get_posts_title_by_id() {
-		$ids       = isset( $_POST['id'] ) ? $_POST['id'] : array(); // phpcs:ignore
-		$post_type = isset( $_POST['post_type'] ) ? $_POST['post_type'] : 'post'; // phpcs:ignore
-		$results   = array();
+		$ids        = isset( $_POST['id'] ) ? $_POST['id'] : array(); // phpcs:ignore
+		$post_type  = isset( $_POST['post_type'] ) ? $_POST['post_type'] : 'post'; // phpcs:ignore
+		$query_type = isset( $_POST['query_type'] ) ? $_POST['query_type'] : ''; // phpcs:ignore
+		$results    = array();
 
-		$query = new WP_Query(
-			array(
-				'post_type'      => $post_type,
-				'post__in'       => $ids,
-				'posts_per_page' => - 1,
-				'orderby'        => 'post__in',
-			)
-		);
+		switch ( $query_type ) {
+			case 'post_type':
+			case 'single_post_type':
+				foreach ( $ids as $id ) {
+					$post_type_object = get_post_type_object( $id );
+					if ( $post_type_object ) {
+						$results[ $id ] = $post_type_object->label;
+					}
+				}
+				break;
 
-		if ( ! isset( $query->posts ) ) {
-			return;
-		}
+			case 'post_id':
+				$query = new WP_Query(
+					array(
+						'post_type'      => get_post_types( array( 'public' => true ) ),
+						'post__in'       => $ids,
+						'posts_per_page' => - 1,
+						'orderby'        => 'post__in',
+					)
+				);
 
-		foreach ( $query->posts as $post ) {
-			$results[ $post->ID ] = $post->post_title;
+				if ( isset( $query->posts ) ) {
+					foreach ( $query->posts as $post ) {
+						$results[ $post->ID ] = $post->post_title . ' (ID:' . $post->ID . ')';
+					}
+				}
+				break;
+
+			case 'taxonomy':
+				foreach ( $ids as $id ) {
+					$taxonomy = get_taxonomy( $id );
+					if ( $taxonomy ) {
+						$results[ $id ] = $taxonomy->label;
+					}
+				}
+				break;
+
+			case 'term_id':
+			case 'single_posts_term_id':
+				foreach ( $ids as $id ) {
+					$term = get_term( $id );
+					if ( $term && ! is_wp_error( $term ) ) {
+						$results[ $id ] = $term->name . ' (ID: ' . $term->term_id . ')';
+					}
+				}
+				break;
+
+			default:
+				$query = new WP_Query(
+					array(
+						'post_type'      => $post_type,
+						'post__in'       => $ids,
+						'posts_per_page' => - 1,
+						'orderby'        => 'post__in',
+					)
+				);
+
+				if ( isset( $query->posts ) ) {
+					foreach ( $query->posts as $post ) {
+						$results[ $post->ID ] = $post->post_title;
+					}
+				}
+				break;
 		}
 
 		wp_send_json( $results );
@@ -403,4 +545,27 @@ if ( ! function_exists( 'woodmart_add_custom_fonts_to_theme_group' ) ) {
 	}
 
 	add_filter( 'elementor/fonts/additional_fonts', 'woodmart_add_custom_fonts_to_theme_group' );
+}
+
+if ( ! function_exists( 'woodmart_add_custom_post_types_for_elementor' ) ) {
+	/**
+	 * Add custom post types for elementor
+	 *
+	 * @param array $post_types Post types.
+	 * @return array
+	 */
+	function woodmart_add_custom_post_types_for_elementor( $post_types ) {
+		$post_types_keys = array( 'woodmart_size_guide', 'wd_popup', 'wd_floating_block', 'wd_product_tabs' );
+		foreach ( $post_types_keys as $key ) {
+			$cpt = get_post_type_object( $key );
+
+			if ( $cpt ) {
+				$post_types[ $key ] = $cpt;
+			}
+		}
+
+		return $post_types;
+	}
+
+	add_filter( 'elementor/settings/controls/checkbox_list_cpt/post_type_objects', 'woodmart_add_custom_post_types_for_elementor' );
 }

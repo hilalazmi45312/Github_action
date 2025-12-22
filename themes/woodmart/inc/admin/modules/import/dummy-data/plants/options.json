@@ -456,6 +456,7 @@
     "blog_excerpt": "excerpt",
     "blog_share": "0",
     "blog_author_bio": "0",
+    "blog_archive_layout": "full-width",
     "size_guides": "1",
     "quick_shop_variable_type": "select_options",
     "grid_swatches_attribute": "pa_color",
@@ -514,5 +515,7 @@
     "youtube_link": "",
     "compare": "0",
     "categories_under_title": "0",
-    "parts_text": "0"
+    "parts_text": "0",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

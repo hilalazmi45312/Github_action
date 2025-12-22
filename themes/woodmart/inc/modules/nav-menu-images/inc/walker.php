@@ -70,7 +70,6 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 		// Hidden field with item's ID
 		$output .= '<input type="hidden" name="nmi_item_id" id="nmi_item_id" value="' . esc_attr( $item_id ) . '" />';
 
-
 		$blocks = woodmart_get_static_blocks_array();
 
 		ob_start();
@@ -93,7 +92,7 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 
 		$extra_class = ' wd-design-' . ( $design ? $design : 'default' );
 
-		$output .= '<div class="nmi-item-custom-fields' . $extra_class . '">';
+		$custom_field_html = '<div class="nmi-item-custom-fields' . $extra_class . '">';
 
 		ob_start();
 
@@ -126,7 +125,7 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 						<?php esc_html_e( 'Dropdown width', 'woodmart' ); ?><br>
 						<span class="xts-input-append">
 							<input type="number" id="edit-menu-item-width-<?php echo esc_attr( $item_id ); ?>" class="widefat" name="menu-item-width[<?php echo esc_attr( $item_id ); ?>]" value="<?php echo esc_attr( $width ); ?>">
-							<span class="add-on">px</span>
+							<span class="xts-add-on">px</span>
 						</span>
 					</label>
 				</p>
@@ -135,7 +134,7 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 						<?php esc_html_e( 'Dropdown height', 'woodmart' ); ?><br>
 						<span class="xts-input-append">
 							<input type="number" id="edit-menu-item-height-<?php echo esc_attr( $item_id ); ?>" class="widefat" name="menu-item-height[<?php echo esc_attr( $item_id ); ?>]" value="<?php echo esc_attr( $height ); ?>">
-							<span class="add-on">px</span>
+							<span class="xts-add-on">px</span>
 						</span>
 					</label>
 				</p>
@@ -144,7 +143,7 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 						<?php esc_html_e( 'Dropdown padding', 'woodmart' ); ?><br>
 						<span class="xts-input-append">
 						<input type="number" id="edit-menu-item-padding-<?php echo esc_attr( $item_id ); ?>" class="widefat" name="menu-item-padding[<?php echo esc_attr( $item_id ); ?>]" value="<?php echo esc_attr( $padding ); ?>">
-						<span class="add-on">px</span>
+						<span class="xts-add-on">px</span>
 						</span>
 					</label>
 				</p>
@@ -243,17 +242,17 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 				</p>
 				<?php if ( has_post_thumbnail( $item_id ) ) : ?>
 					<?php $link_text = esc_html__( 'Change image', 'woodmart' ); ?>
-					<div class="nmi-current-image nmi-div nmi-change-image" style="display: none;">
+					<div class="nmi-current-image nmi-div nmi-change-image">
 						<a href="<?php echo esc_url( $upload_url ); ?>" data-id="<?php echo esc_attr( $item_id ); ?>" class="thickbox add_media link-with-image">
 							<?php echo get_the_post_thumbnail( $item_id, 'thumb' ); ?>
 						</a>
 					</div>
 				<?php else : ?>
 					<?php $link_text = esc_html__( 'Upload image', 'woodmart' ); ?>
-					<div class="nmi-current-image nmi-div nmi-upload-image" style="display: none;"></div>
+					<div class="nmi-current-image nmi-div nmi-upload-image"></div>
 				<?php endif; ?>
 
-				<div class="nmi-upload-link nmi-div" style="display: none;">
+				<div class="nmi-upload-link nmi-div">
 					<a href="<?php echo esc_url( $upload_url ); ?>" data-id="<?php echo esc_attr( $item_id ); ?>" class="thickbox add_media">
 						<?php echo esc_html( $link_text ); ?>
 					</a>
@@ -292,10 +291,19 @@ class NMI_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 				<span class="description"><?php esc_html_e( 'The icon code from FontAwesome 5 list.', 'woodmart' ); ?><?php esc_html_e( ' Example:', 'woodmart' ); ?> <code>envelope-open fas</code></span>
 			</p>
 		<?php
-		$output .= ob_get_contents();
-		ob_end_clean();
+		$custom_field_html .= ob_get_clean();
+		$custom_field_html .= '</div>';
 
-		$output .= '</div>';
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$output = preg_replace(
+				'/(<p[^>]+class="[^"]*field-title-attribute[^"]*"[^>]*>.*?<\/p>)/s',
+				'$1' . $custom_field_html,
+				$output,
+				1
+			);
+		} else {
+			$output .= $custom_field_html;
+		}
 
 		// Filter output
 		do_action_ref_array( 'nmi_menu_item_walker_output', array( &$output, $item, $depth, $args ) );

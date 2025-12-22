@@ -339,22 +339,6 @@ class Title extends Widget_Base {
 		);
 
 		$this->add_control(
-			'title_decoration_style',
-			array(
-				'label'       => esc_html__( 'Highlight text style', 'woodmart' ),
-				'description' => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => array(
-					'default'     => esc_html__( 'Default', 'woodmart' ),
-					'colored'     => esc_html__( 'Primary color', 'woodmart' ),
-					'colored-alt' => esc_html__( 'Primary color + secondary font', 'woodmart' ),
-					'bordered'    => esc_html__( 'Bordered', 'woodmart' ),
-				),
-				'default'     => 'default',
-			)
-		);
-
-		$this->add_control(
 			'image',
 			array(
 				'label'     => esc_html__( 'Choose image', 'woodmart' ),
@@ -414,6 +398,35 @@ class Title extends Widget_Base {
 				'name'     => 'title_typography',
 				'label'    => esc_html__( 'Typography', 'woodmart' ),
 				'selector' => '{{WRAPPER}} .title',
+			)
+		);
+
+		$this->add_control(
+			'title_decoration_style',
+			array(
+				'label'       => esc_html__( 'Highlight text style', 'woodmart' ),
+				'description' => esc_html__( 'The text must be wrapped with the <u></u> tag to highlight it.', 'woodmart' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => array(
+					'default'     => esc_html__( 'Default', 'woodmart' ),
+					'colored'     => esc_html__( 'Primary color', 'woodmart' ),
+					'colored-alt' => esc_html__( 'Primary color + secondary font', 'woodmart' ),
+					'bordered'    => esc_html__( 'Bordered', 'woodmart' ),
+					'gradient'    => esc_html__( 'Gradient', 'woodmart' ),
+				),
+				'default'     => 'default',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'title_decoration_gradient',
+				'types'     => array( 'gradient' ),
+				'selector'  => '{{WRAPPER}} .wd-underline-gradient u',
+				'condition' => array(
+					'title_decoration_style' => 'gradient',
+				),
 			)
 		);
 

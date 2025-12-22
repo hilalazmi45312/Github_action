@@ -43,6 +43,16 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_tabs' ) ) {
 			'tabs_alignment'                      => 'center',
 			'tabs_content_text_color_scheme'      => 'inherit',
 
+			'tabs_bg_color_enable'                => 'no',
+			'tabs_bg_hover_color_enable'          => 'no',
+			'tabs_bg_active_color_enable'         => 'no',
+			'tabs_border_enable'                  => 'no',
+			'tabs_border_hover_enable'            => 'no',
+			'tabs_border_active_enable'           => 'no',
+			'tabs_box_shadow_enable'              => 'no',
+			'tabs_box_shadow_hover_enable'        => 'no',
+			'tabs_box_shadow_active_enable'       => 'no',
+
 			/**
 			 * Accordion Settings.
 			 */
@@ -118,6 +128,14 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_tabs' ) ) {
 				$title_wrapper_classes .= ' color-scheme-' . $settings['tabs_title_text_color_scheme'];
 			}
 
+			$tabs_title_bg_activated      = 'yes' === $settings['tabs_bg_color_enable'] || 'yes' === $settings['tabs_bg_hover_color_enable'] || 'yes' === $settings['tabs_bg_active_color_enable'];
+			$tabs_title_box_shadow_active = 'yes' === $settings['tabs_box_shadow_enable'] || 'yes' === $settings['tabs_box_shadow_hover_enable'] || 'yes' === $settings['tabs_box_shadow_active_enable'];
+			$tabs_title_border_active     = 'yes' === $settings['tabs_border_enable'] || 'yes' === $settings['tabs_border_hover_enable'] || 'yes' === $settings['tabs_border_active_enable'];
+
+			if ( $tabs_title_bg_activated || $tabs_title_box_shadow_active || $tabs_title_border_active ) {
+				$title_classes .= ' wd-add-pd';
+			}
+
 			$args = array(
 				'builder_tabs_classes'             => $title_classes,
 				'builder_tabs_wrapper_classes'     => 'yes' === $settings['accordion_on_mobile'] ? ' wd-opener-pos-right' : '',
@@ -159,17 +177,25 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_tabs' ) ) {
 
 		$args = array_merge( $default_args, $args );
 
-		if ( 'yes' !== $settings['enable_additional_info'] ) {
-			add_filter( 'woocommerce_product_tabs', 'woodmart_single_product_remove_additional_information_tab', 98 );
-		}
+		add_filter(
+			'woocommerce_product_tabs',
+			function ( $tabs ) use ( $settings ) {
+				if ( isset( $tabs['description'] ) ) {
+					$tabs['description']['wd_show'] = $settings['enable_description'];
+				}
 
-		if ( 'yes' !== $settings['enable_reviews'] ) {
-			add_filter( 'woocommerce_product_tabs', 'woodmart_single_product_remove_reviews_tab', 98 );
-		}
+				if ( isset( $tabs['additional_information'] ) ) {
+					$tabs['additional_information']['wd_show'] = $settings['enable_additional_info'];
+				}
 
-		if ( 'yes' !== $settings['enable_description'] ) {
-			add_filter( 'woocommerce_product_tabs', 'woodmart_single_product_remove_description_tab', 98 );
-		}
+				if ( isset( $tabs['reviews'] ) ) {
+					$tabs['reviews']['wd_show'] = $settings['enable_reviews'];
+				}
+
+				return $tabs;
+			},
+			97 // The priority must be lower than the one used in the woodmart_maybe_unset_wc_tabs fucntion.
+		);
 
 		ob_start();
 
@@ -178,7 +204,7 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_tabs' ) ) {
 		Main::setup_preview();
 
 		if ( 'yes' === $settings['enable_reviews'] ) {
-			woodmart_enqueue_inline_style( 'mod-comments' );
+			woodmart_enqueue_inline_style( 'post-types-mod-comments' );
 		}
 
 		if ( comments_open() ) {
@@ -194,12 +220,11 @@ if ( ! function_exists( 'woodmart_shortcode_single_product_tabs' ) ) {
 		if ( 'accordion' === $settings['layout'] ) {
 			woodmart_enqueue_inline_style( 'accordion-elem-wpb' );
 		}
-
 		?>
 		<div class="wd-single-tabs wd-wpb<?php echo esc_attr( $wrapper_classes ); ?>">
 			<?php
 			wc_get_template(
-				'single-product/tabs/tabs-' . $settings['layout'] . '.php',
+				'single-product/tabs/tabs-' . sanitize_file_name( $settings['layout'] ) . '.php',
 				$args
 			);
 			?>

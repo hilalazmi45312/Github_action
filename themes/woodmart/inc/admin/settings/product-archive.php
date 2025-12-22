@@ -163,7 +163,7 @@ Options::add_field(
 			array(
 				'key'     => 'products_hover',
 				'compare' => 'equals',
-				'value'   => array( 'base' ),
+				'value'   => array( 'base', 'fw-button' ),
 			),
 			array(
 				'key'     => 'shop_view',
@@ -2092,7 +2092,7 @@ Options::add_field(
 		'max'         => 800,
 		'priority'    => 30,
 		'selectors'   => array(
-			'.woodmart-woocommerce-layered-nav .wd-scroll-content' => array(
+			':is(.woodmart-woocommerce-layered-nav, .wd-product-category-filter) .wd-scroll-content' => array(
 				'max-height: {{VALUE}}px;',
 			),
 		),

@@ -85,16 +85,20 @@ class Buttons extends Field {
 			$wrapper_class .= ' xts-with-deselect';
 		}
 
+		if ( ! empty( $this->args['presets'] ) ) {
+			$wrapper_class .= ' xts-presets';
+		}
+
 		$value = isset( $this->args['tabs'] ) ? $this->args['default'] : $this->get_field_value();
-		$name  = isset( $this->args['tabs'] ) ? '' : $this->get_input_name();
+		$name  = isset( $this->args['tabs'] ) || isset( $this->args['presets'] ) ? '' : $this->get_input_name();
 		?>
 			<div class="xts-btns-set<?php echo esc_attr( $wrapper_class ); ?>">
 				<?php foreach ( $this->_options as $key => $option ) : ?>
-					<div class="xts-set-item <?php echo esc_attr( $btn_class . ( $value == $key ? ' xts-active' : '' ) ); ?>" data-value="<?php echo esc_attr( $key ); ?>"<?php echo ! empty( $option['onclick'] ) ? ' onclick="' . esc_js( $option['onclick'] ) . '"' : ''; ?>>
+					<div class="xts-set-item <?php echo esc_attr( $btn_class . ( $value == $key ? ' xts-active' : '' ) ); ?>" data-value="<?php echo esc_attr( $key ); ?>"<?php echo ! empty( $option['onclick'] ) ? ' onclick="' . esc_js( $option['onclick'] ) . '"' : ''; ?><?php echo ! empty( $option['title'] ) ? ' title="' . $option['title'] . '"' : ''; ?>>
 						<?php if ( $this->_is_images_set ) : ?>
 							<img src="<?php echo esc_url( $option['image'] ); ?>" title="<?php echo esc_attr( $option['name'] ); ?>" alt="<?php echo esc_attr( $option['name'] ); ?>">
 							<span class="xts-images-set-lable"><?php echo esc_html( $option['name'] ); ?></span>
-						<?php else : ?>
+						<?php elseif ( isset( $option['name'] ) ) : ?>
 							<span><?php echo esc_html( $option['name'] ); ?></span>
 						<?php endif ?>
 

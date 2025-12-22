@@ -2,9 +2,9 @@
 Contributors: alekv, wolfbaer, freemius
 Tags: woocommerce, google analytics, google ads, facebook pixel, conversion tracking
 Requires at least: 3.7
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.3
-Stable tag: 1.51.1
+Stable tag: 1.54.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -106,8 +106,11 @@ Have a look at the full feature list over [here](https://sweetcode.com/docs/wpm/
 
 <strong>Premium Pixels</strong>
 
+* Adroll Ads
+* Contentsquare Statistics
 * LinkedIn Ads
 * Microsoft Ads
+* Outbrain Ads
 * Pinterest Ads
 * Reddit Ads
 * Snapchat Ads
@@ -300,6 +303,48 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 1. Settings page
 
 == Changelog ==
+
+= 1.54.1  =
+*Release date - 15.12.2025*
+
+* Tweak: Added a missing check for Contentsquare
+
+= 1.54.0  =
+*Release date - 15.12.2025*
+* Tweak: Admin UX improvements in the settings page.
+* Tweak: Refactored opportunity card output: sort by impact level and streamline dismissed opportunities
+* Tweak: Enhanced client IP address handling
+* Tweak: Add external object cache detection and enhance debug info output
+* Tweak: Enhanced transient handling: add verification for transient storage to improve reliability with external object caches
+
+= 1.53.0  =
+*Release date - 09.12.2025*
+
+* New: Implement Google Tag Gateway Proxy for proxying requests to Google's First-Party Servers
+* Tweak: Added support for loading deprecated functions with user toggle in settings
+* Tweak: Simplified documentation link retrieval by removing unnecessary parameters
+* Tweak: Added notification badges
+* Tweak: Enhanced Facebook Pixel script loading and user data caching
+* Tweak: Added multiple enhancement opportunity notifications for various settings
+* Tweak: Added crossDomain option to AJAX requests
+* Tweak: Replaced jQuery.ajax with native script loading for improved performance and error handling
+* Tweak: Removed unused code and files
+
+= 1.52.1  =
+*Release date - 03.12.2025*
+
+* Tweak: Added new documenation links.
+* Tweak: Updated the GA4 tag ID format.
+* Tweak: Updated Google tag ID suppression logic in functions.js
+* Tweak: Implemented public front-end API for third-party integrations with event dispatching and consent context
+
+= 1.52.0  =
+*Release date - 01.12.2025*
+
+* Tweak: Bumped up WP version compatibility to 6.9
+* Tweak: Filter out non-existent or unpublished products from transient data
+* Tweak: Refactored pixel file structure to unify server-side and browser-side handling, implementing a centralized pixel registry for improved management and automatic detection of active pixels.
+* Tweak: Added validations for some input data.
 
 = 1.51.1  =
 *Release date - 27.11.2025*

@@ -3,16 +3,16 @@
  * Plugin Name: WooCommerce Smart Coupons
  * Plugin URI: https://woocommerce.com/products/smart-coupons/
  * Description: <strong>WooCommerce Smart Coupons</strong> lets customers buy gift certificates, store credits or coupons easily. They can use purchased credits themselves or gift to someone else.
- * Version: 9.39.0
+ * Version: 9.63.0
  * Author: StoreApps
  * Author URI: https://www.storeapps.org/
  * Developer: StoreApps
  * Developer URI: https://www.storeapps.org/
  * Requires PHP: 5.6
  * Requires at least: 4.4
- * Tested up to: 6.8.1
+ * Tested up to: 6.8.3
  * WC requires at least: 3.0.0
- * WC tested up to: 9.8.5
+ * WC tested up to: 10.3.5
  * Requires Plugins: woocommerce
  * Text Domain: woocommerce-smart-coupons
  * Domain Path: /languages/
@@ -25,20 +25,36 @@
 
  */
 
+if ( ! defined( 'WC_SC_PLUGIN_FILE' ) ) {
+	define( 'WC_SC_PLUGIN_FILE', __FILE__ ); // Full path to "wp-content/plugins/woocommerce-smart-coupons/woocommerce-smart-coupons.php".
+}
+if ( ! defined( 'WC_SC_PLUGIN_DIRPATH' ) ) {
+	define( 'WC_SC_PLUGIN_DIRPATH', plugin_dir_path( WC_SC_PLUGIN_FILE ) ); // Full path to "wp-content/plugins/woocommerce-smart-coupons/".
+}
+if ( ! defined( 'WC_SC_PLUGIN_BASENAME' ) ) {
+	define( 'WC_SC_PLUGIN_BASENAME', plugin_basename( WC_SC_PLUGIN_FILE ) ); // "woocommerce-smart-coupons/woocommerce-smart-coupons.php".
+}
+if ( ! defined( 'WC_SC_PLUGIN_DIRNAME' ) ) {
+	define( 'WC_SC_PLUGIN_DIRNAME', dirname( WC_SC_PLUGIN_BASENAME ) ); // "woocommerce-smart-coupons".
+}
+if ( ! defined( 'WC_SC_PLUGIN_URL' ) ) {
+	define( 'WC_SC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+
 /**
  * Include class having function to execute during activation & deactivation of plugin
  */
-require_once 'includes/class-wc-sc-act-deact.php';
+require_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-act-deact.php';
 
 /**
  * On activation
  */
-register_activation_hook( __FILE__, array( 'WC_SC_Act_Deact', 'smart_coupon_activate' ) );
+register_activation_hook( WC_SC_PLUGIN_FILE, array( 'WC_SC_Act_Deact', 'smart_coupon_activate' ) );
 
 /**
  * On deactivation
  */
-register_deactivation_hook( __FILE__, array( 'WC_SC_Act_Deact', 'smart_coupon_deactivate' ) );
+register_deactivation_hook( WC_SC_PLUGIN_FILE, array( 'WC_SC_Act_Deact', 'smart_coupon_deactivate' ) );
 
 
 /**
@@ -74,13 +90,6 @@ function smart_coupons_woocommerce_missing_wc_notice() {
 	echo '</div>';
 }
 
-if ( ! defined( 'WC_SC_PLUGIN_FILE' ) ) {
-	define( 'WC_SC_PLUGIN_FILE', __FILE__ );
-}
-if ( ! defined( 'WC_SC_PLUGIN_DIRNAME' ) ) {
-	define( 'WC_SC_PLUGIN_DIRNAME', dirname( plugin_basename( __FILE__ ) ) );
-}
-
 add_action(
 	'plugins_loaded',
 	function() {
@@ -89,9 +98,10 @@ add_action(
 			return;
 		}
 
-		include_once 'includes/class-wc-smart-coupons.php';
+		include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-smart-coupons.php';
 		$GLOBALS['woocommerce_smart_coupon'] = WC_Smart_Coupons::get_instance();
 
-		include_once 'blocks/blocks.php';
+		include_once WC_SC_PLUGIN_DIRPATH . 'blocks/blocks.php';
 	}
 );// End woocommerce active check.
+

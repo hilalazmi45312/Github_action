@@ -110,7 +110,7 @@ $is_creating = isset($_GET['action']) && $_GET['action'] === 'new';
                                 <input type="checkbox" name="post[]" value="<?php echo $id; ?>" class="benefit-box-checkbox">
                             </th>
                             <td class="column-type">
-                                <span class="badge badge-<?php echo $setting['type'] === 'whatsapp' ? 'success' : ($setting['type'] === 'regular' ? 'primary' : 'info'); ?>">
+                                <span class="badge badge-<?php echo $setting['type'] === 'whatsapp' ? 'success' : ($setting['type'] === 'regular' ? 'primary' : ($setting['type'] === 'warranty' ? 'warning' : 'info')); ?>">
                                     <?php echo ucfirst($setting['type']); ?>
                                 </span>
                             </td>
@@ -181,6 +181,7 @@ $is_creating = isset($_GET['action']) && $_GET['action'] === 'new';
                                 <select name="type" id="modal-type" required>
                                     <option value="">Select Type</option>
                                     <option value="regular">Regular Box</option>
+                                    <option value="warranty">Warranty Box</option>
                                     <option value="whatsapp">WhatsApp</option>
                                     <option value="installment">Installment</option>
                                 </select>

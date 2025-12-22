@@ -7,14 +7,13 @@
 
 namespace XTS\Modules\Dynamic_Discounts;
 
-use WC_Cart;
 use XTS\Admin\Modules\Options;
-use XTS\Singleton;
+use WC_Cart;
 
 /**
  * Dynamic discounts class.
  */
-class Main extends Singleton {
+class Main {
 	/**
 	 * Make sure that the same discount is not applied twice for the same product.
 	 *
@@ -23,18 +22,23 @@ class Main extends Singleton {
 	public $applied = array();
 
 	/**
-	 * Init.
+	 * Constructor.
 	 */
-	public function init() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'add_options' ) );
 
-		if ( ! woodmart_woocommerce_installed() || ! woodmart_get_opt( 'discounts_enabled', 0 ) ) {
-			return;
+		if ( woodmart_get_opt( 'discounts_enabled' ) ) {
+			add_action( 'woocommerce_before_calculate_totals', array( $this, 'calculate_discounts' ), 10, 1 );
 		}
 
-		$this->include_files();
-
-		add_action( 'woocommerce_before_calculate_totals', array( $this, 'calculate_discounts' ), 10, 1 );
+		woodmart_include_files(
+			__DIR__,
+			array(
+				'./class-manager',
+				'./class-admin',
+				'./class-frontend',
+			)
+		);
 	}
 
 	/**
@@ -71,25 +75,15 @@ class Main extends Singleton {
 				'off-text'    => esc_html__( 'No', 'woodmart' ),
 				'priority'    => 130,
 				'class'       => 'xts-preset-field-disabled',
+				'requires'    => array(
+					array(
+						'key'     => 'discounts_enabled',
+						'compare' => 'equals',
+						'value'   => '1',
+					),
+				),
 			)
 		);
-	}
-
-	/**
-	 * Include files.
-	 *
-	 * @return void
-	 */
-	public function include_files() {
-		$files = array(
-			'class-manager',
-			'class-admin',
-			'class-frontend',
-		);
-
-		foreach ( $files as $file ) {
-			require_once get_parent_theme_file_path( WOODMART_FRAMEWORK . '/integrations/woocommerce/modules/dynamic-discounts/' . $file . '.php' );
-		}
 	}
 
 	/**
@@ -151,7 +145,7 @@ class Main extends Singleton {
 							}
 							// @codeCoverageIgnoreEnd
 
-							$product_price = $this->get_product_price(
+							$product_price = Manager::get_instance()->get_product_price(
 								$product_price,
 								array(
 									'type'  => $discount_type,
@@ -175,33 +169,6 @@ class Main extends Singleton {
 			$this->applied[] = $product->get_id();
 		}
 	}
-
-	/**
-	 * Get product price after applying discount.
-	 *
-	 * @param float $product_price Price before applying discount.
-	 * @param array $discount Array with 2 args('type', 'value') for calculate new price.
-	 *
-	 * @return float
-	 */
-	public function get_product_price( $product_price, $discount ) {
-		if ( empty( $discount['type'] ) || empty( $discount['value'] ) || empty( $product_price ) ) {
-			return $product_price;
-		}
-
-		switch ( $discount['type'] ) {
-			case 'amount':
-				$product_price -= $discount['value'];
-				break;
-			case 'percentage':
-				$product_price -= $product_price * ( $discount['value'] / 100 );
-				break;
-			default:
-				break;
-		}
-
-		return (float) $product_price;
-	}
 }
 
-Main::get_instance();
+new Main();

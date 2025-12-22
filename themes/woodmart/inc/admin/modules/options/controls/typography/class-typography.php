@@ -191,7 +191,6 @@ class Typography extends Field {
 				'value'  => $section_value,
 			)
 		);
-
 	}
 
 	/**
@@ -229,20 +228,22 @@ class Typography extends Field {
 		$background       = isset( $value['background'] ) ? $value['background'] : '';
 		$background_hover = isset( $value['hover']['background'] ) ? $value['hover']['background'] : '';
 
+		if ( ! $font_weight && ! $font_family ) {
+			if ( isset( $default['font-family'] ) ) {
+				$font_family = $default['font-family'];
+			}
+
+			if ( isset( $default['font-weight'] ) ) {
+				$font_weight = $default['font-weight'];
+			}
+		}
+
 		if ( ! $font_size && isset( $default['font-size'] ) ) {
 			$font_size = $default['font-size'];
 		}
 
-		if ( ! $font_weight && isset( $default['font-weight'] ) ) {
-			$font_weight = $default['font-weight'];
-		}
-
 		if ( ! $transform && isset( $default['text-transform'] ) ) {
 			$transform = $default['text-transform'];
-		}
-
-		if ( ! $font_family && isset( $default['font-family'] ) ) {
-			$font_family = $default['font-family'];
 		}
 
 		if ( ! $font_subset && isset( $default['font-subset'] ) ) {
@@ -369,20 +370,20 @@ class Typography extends Field {
 								<div class="xts-typography-size-point xts-typography-control-desktop xts-input-append-wrap">
 									<label class="xts-i-desktop"><?php esc_html_e( 'Font size', 'woodmart' ); ?></label>
 									<div class="xts-input-append">
-										<input type="number" name="<?php echo esc_attr( $this->get_input_name( $index, 'font-size' ) ); ?>" value="<?php echo esc_attr( $font_size ); ?>"  /><span class="add-on">px</span>
+										<input type="number" name="<?php echo esc_attr( $this->get_input_name( $index, 'font-size' ) ); ?>" value="<?php echo esc_attr( $font_size ); ?>"  /><span class="xts-add-on">px</span>
 									</div>
 								</div>
 								<div class="xts-typography-responsive-opener xts-i-button-right" title="Responsive controls"></div>
 								<div class="xts-typography-size-point xts-typography-control-tablet xts-input-append-wrap <?php echo ( ! empty( $value['tablet']['font-size'] ) ? 'show' : 'hide' ); ?>">
 									<label class="xts-i-tablet"><?php esc_html_e( 'Tablet', 'woodmart' ); ?></label>
 									<div class="xts-input-append">
-										<input type="number" name="<?php echo esc_attr( $this->get_input_name( $index, 'tablet', 'font-size' ) ); ?>" value="<?php echo esc_attr( $value['tablet']['font-size'] ); ?>"  /><span class="add-on">px</span>
+										<input type="number" name="<?php echo esc_attr( $this->get_input_name( $index, 'tablet', 'font-size' ) ); ?>" value="<?php echo esc_attr( $value['tablet']['font-size'] ); ?>"  /><span class="xts-add-on">px</span>
 									</div>
 								</div>
 								<div class="xts-typography-size-point xts-typography-control-mobile xts-input-append-wrap <?php echo ( ! empty( $value['tablet']['font-size'] ) ? 'show' : 'hide' ); ?>">
 									<label class="xts-i-phone"><?php esc_html_e( 'Mobile', 'woodmart' ); ?></label>
 									<div class="xts-input-append">
-										<input type="number" name="<?php echo esc_attr( $this->get_input_name( $index, 'mobile', 'font-size' ) ); ?>" value="<?php echo esc_attr( $value['mobile']['font-size'] ); ?>"  /><span class="add-on">px</span>
+										<input type="number" name="<?php echo esc_attr( $this->get_input_name( $index, 'mobile', 'font-size' ) ); ?>" value="<?php echo esc_attr( $value['mobile']['font-size'] ); ?>"  /><span class="xts-add-on">px</span>
 									</div>
 								</div>
 							</div>
@@ -394,20 +395,20 @@ class Typography extends Field {
 								<div class="xts-typography-height-point xts-typography-control-desktop xts-input-append-wrap">
 									<label class="xts-i-desktop"><?php esc_html_e( 'Line height', 'woodmart' ); ?></label>
 									<div class="xts-input-append">
-										<input type="number" step="0.01" name="<?php echo esc_attr( $this->get_input_name( $index, 'line-height' ) ); ?>" value="<?php echo esc_attr( $value['line-height'] ); ?>"/><span class="add-on">px</span>
+										<input type="number" step="0.01" name="<?php echo esc_attr( $this->get_input_name( $index, 'line-height' ) ); ?>" value="<?php echo esc_attr( $value['line-height'] ); ?>"/><span class="xts-add-on">px</span>
 									</div>
 								</div>
 								<div class="xts-typography-responsive-opener xts-i-button-right" title="Responsive controls"></div>
 								<div class="xts-typography-height-point xts-typography-control-tablet xts-input-append-wrap <?php echo ( ! empty( $value['tablet']['line-height'] ) ) ? 'show' : 'hide'; ?>">
 									<label class="xts-i-tablet"><?php esc_html_e( 'Tablet', 'woodmart' ); ?></label>
 									<div class="xts-input-append">
-										<input type="number" step="0.01" name="<?php echo esc_attr( $this->get_input_name( $index, 'tablet', 'line-height' ) ); ?>" value="<?php echo esc_attr( $value['tablet']['line-height'] ); ?>"/><span class="add-on">px</span>
+										<input type="number" step="0.01" name="<?php echo esc_attr( $this->get_input_name( $index, 'tablet', 'line-height' ) ); ?>" value="<?php echo esc_attr( $value['tablet']['line-height'] ); ?>"/><span class="xts-add-on">px</span>
 									</div>
 								</div>
 								<div class="xts-typography-height-point xts-typography-control-mobile xts-input-append-wrap <?php echo ( ! empty( $value['tablet']['line-height'] ) ) ? 'show' : 'hide'; ?>">
 									<label class="xts-i-phone"><?php esc_html_e( 'Mobile', 'woodmart' ); ?></label>
 									<div class="xts-input-append">
-										<input type="number" step="0.01" name="<?php echo esc_attr( $this->get_input_name( $index, 'mobile', 'line-height' ) ); ?>" value="<?php echo esc_attr( $value['mobile']['line-height'] ); ?>"/><span class="add-on">px</span>
+										<input type="number" step="0.01" name="<?php echo esc_attr( $this->get_input_name( $index, 'mobile', 'line-height' ) ); ?>" value="<?php echo esc_attr( $value['mobile']['line-height'] ); ?>"/><span class="xts-add-on">px</span>
 									</div>
 								</div>
 							</div>

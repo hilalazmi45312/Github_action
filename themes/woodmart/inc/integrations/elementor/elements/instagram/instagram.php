@@ -101,7 +101,6 @@ if ( ! function_exists( 'woodmart_elementor_instagram_template' ) ) {
 			);
 
 			if ( 'yes' === $settings['scroll_carousel_init'] ) {
-				woodmart_enqueue_js_library( 'waypoints' );
 				$pics_classes .= ' scroll-init';
 			}
 

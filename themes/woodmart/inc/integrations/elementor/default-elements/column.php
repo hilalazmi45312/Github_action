@@ -32,9 +32,10 @@ if ( ! function_exists( 'woodmart_column_before_render' ) ) {
 		}
 
 		if ( isset( $settings['wd_animation'] ) && $settings['wd_animation'] ) {
-			woodmart_enqueue_inline_style( 'animations' );
-			woodmart_enqueue_js_script( 'animations' );
-			woodmart_enqueue_js_library( 'waypoints' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform-base' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform' );
+			woodmart_enqueue_inline_style( 'mod-transform' );
+			woodmart_enqueue_js_script( 'css-animations' );
 		}
 
 		if ( isset( $settings['wd_collapsible_content_switcher'] ) && $settings['wd_collapsible_content_switcher'] ) {

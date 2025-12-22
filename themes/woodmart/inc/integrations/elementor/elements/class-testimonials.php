@@ -190,7 +190,7 @@ class Testimonials extends Widget_Base {
 		$this->add_control(
 			'woodmart_color_scheme',
 			array(
-				'label'   => esc_html__( 'Color Scheme', 'woodmart' ),
+				'label'   => esc_html__( 'Color scheme', 'woodmart' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => array(
 					''      => esc_html__( 'Inherit', 'woodmart' ),
@@ -463,7 +463,6 @@ class Testimonials extends Widget_Base {
 			$this->add_render_attribute( 'wrapper', 'class', 'wd-carousel-container' );
 
 			if ( 'yes' === $settings['scroll_carousel_init'] ) {
-				woodmart_enqueue_js_library( 'waypoints' );
 				$this->add_render_attribute( 'carousel', 'class', 'scroll-init' );
 			}
 

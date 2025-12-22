@@ -474,5 +474,7 @@
         "hover": "rgb(28,97,231)"
     },
     "blog_hide_sidebar_tablet": "1",
-    "blog_columns": "3"
+    "blog_columns": "3",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

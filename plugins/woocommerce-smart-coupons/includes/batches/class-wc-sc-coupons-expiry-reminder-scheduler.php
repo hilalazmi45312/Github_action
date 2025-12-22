@@ -4,7 +4,7 @@
  *
  * @package     woocommerce-smart-coupons/includes/
  * @since       9.17.0
- * @version     1.1.0
+ * @version     1.3.0
  */
 
 // Exit if accessed directly.
@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WC_SC_Background_Process', false ) ) {
-	if ( file_exists( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/abstracts/class-wc-sc-background-process.php' ) ) {
-		include_once trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/abstracts/class-wc-sc-background-process.php';
+	if ( file_exists( WC_SC_PLUGIN_DIRPATH . 'includes/abstracts/class-wc-sc-background-process.php' ) ) {
+		include_once WC_SC_PLUGIN_DIRPATH . 'includes/abstracts/class-wc-sc-background-process.php';
 	}
 }
 
@@ -102,45 +102,53 @@ if ( ! class_exists( 'WC_SC_Coupons_Expiry_Reminder_Scheduler' ) && class_exists
 		 * @return array The coupon ids to process.
 		 */
 		public function get_remaining_items() {
-			global $wpdb;
+			try {
+				global $wpdb, $woocommerce_smart_coupon;
 
-			// Get the current timestamp.
-			$current_timestamp = time();
+				// Get the current timestamp.
+				$current_timestamp = time();
 
-			// Subtract days from the current timestamp for the comparison.
-			$days_to_subtract = $this->wc_sc_coupon_expiry_reminder_class->coupon_reminder_days;
+				// Subtract days from the current timestamp for the comparison.
+				$days_to_subtract = $this->wc_sc_coupon_expiry_reminder_class->coupon_reminder_days;
 
-			// phpcs:disable
-			// Prepare the SQL query to fetch coupon IDs.
-			$query = $wpdb->prepare(
-				"
-				SELECT 
-					wcsc.id 
-				FROM 
-					{$wpdb->prefix}wc_smart_coupons AS wcsc 
-				WHERE wcsc.date_expires IS NOT NULL
-            		AND wcsc.date_expires > FROM_UNIXTIME(%d) + INTERVAL %d DAY
-					AND wcsc.customer_email IS NOT NULL 
-					AND wcsc.customer_email != '' 
-					AND wcsc.customer_email != 'a:0:{}' 
-					AND NOT EXISTS (
-						SELECT 1 
-						FROM {$wpdb->prefix}actionscheduler_actions AS a 
-						WHERE 
-							a.args LIKE CONCAT('%', wcsc.id, '%') 
-							AND a.hook = 'wc_sc_send_coupon_expiry_reminder' 
-							AND a.status IN ('pending', 'in-progress')
-					)
-				LIMIT %d
-				",
-				$current_timestamp, // %d for the current timestamp minus the days.
-				$days_to_subtract, // %d for the days to subtract.
-				apply_filters( 'wc_sc_batch_size_for_coupons_for_reminder', $this->batch_limit, array( 'source' => $this ) ) // %d for the limit.
-			);
-			// Execute the query and fetch the coupon IDs.
-			$coupon_ids = $wpdb->get_col( $query ) ?: array();
-			// phpcs:enable
+				// phpcs:disable
+				// Prepare the SQL query to fetch coupon IDs.
+				$query = $wpdb->prepare(
+					"
+					SELECT 
+						wcsc.id 
+					FROM 
+						{$wpdb->prefix}wc_smart_coupons AS wcsc 
+					WHERE wcsc.date_expires IS NOT NULL
+	            		AND wcsc.date_expires > FROM_UNIXTIME(%d) + INTERVAL %d DAY
+						AND wcsc.customer_email IS NOT NULL 
+						AND wcsc.customer_email != '' 
+						AND wcsc.customer_email != 'a:0:{}' 
+						AND NOT EXISTS (
+							SELECT 1 
+							FROM {$wpdb->prefix}actionscheduler_actions AS a 
+							WHERE 
+								a.args LIKE CONCAT('%', wcsc.id, '%') 
+								AND a.hook = 'wc_sc_send_coupon_expiry_reminder' 
+								AND a.status IN ('pending', 'in-progress')
+						)
+					LIMIT %d
+					",
+					$current_timestamp, // %d for the current timestamp minus the days.
+					$days_to_subtract, // %d for the days to subtract.
+					apply_filters( 'wc_sc_batch_size_for_coupons_for_reminder', $this->batch_limit, array( 'source' => $this ) ) // %d for the limit.
+				);
+				// Execute the query and fetch the coupon IDs.
+				$coupon_ids = $wpdb->get_col( $query ) ?: array();
+				// phpcs:enable
 
+			} catch ( \Throwable $e ) {
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
+
+				$coupon_ids = array();
+			}
 			return $coupon_ids;
 		}
 
@@ -196,14 +204,21 @@ if ( ! class_exists( 'WC_SC_Coupons_Expiry_Reminder_Scheduler' ) && class_exists
 		 * Display the appropriate notice based on process status.
 		 */
 		public function wc_sc_schedule_coupon_expiry_reminder_notice() {
-			$status = get_transient( 'wc_sc_coupons_expiry_reminder_status' );
+			try {
+				$status = get_transient( 'wc_sc_coupons_expiry_reminder_status' );
 
-			if ( 'in-progress' === $status ) {
-				$this->processing_notice();
-			}
+				if ( 'in-progress' === $status ) {
+					$this->processing_notice();
+				}
 
-			if ( 'completed' === $status ) {
-				$this->completed_notice();
+				if ( 'completed' === $status ) {
+					$this->completed_notice();
+				}
+			} catch ( \Throwable $e ) {
+				global $woocommerce_smart_coupon;
+				if ( is_object( $woocommerce_smart_coupon ) && method_exists( $woocommerce_smart_coupon, 'sc_block_catch_error' ) ) {
+					$woocommerce_smart_coupon->sc_block_catch_error( $e );
+				}
 			}
 		}
 	}

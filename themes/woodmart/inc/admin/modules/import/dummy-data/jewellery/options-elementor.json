@@ -155,11 +155,15 @@
     "popup_padding": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIxNSJ9fX0=",
     "prefooter_content_type": "html_block",
     "prefooter_html_block": "728",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "726",
     "portfolio_page": "51",
     "icon_font": {
         "font": "1",
         "weight": "300"
-      }
+    },
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

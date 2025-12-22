@@ -276,6 +276,8 @@ woodmartThemeModule.openMobileNavigation             = function(mobileNav) {
 
 	if ( mobileNav ) {
 		mobileNav.classList.add('wd-opened');
+
+		jQuery(mobileNav).trigger('wdOpenSide');
 	}
 
 	if ( closeSide ) {
@@ -296,6 +298,8 @@ woodmartThemeModule.closeMobileNavigation            = function() {
 
 	if (activeMobileNav) {
 		activeMobileNav.classList.remove('wd-opened');
+
+		jQuery(activeMobileNav).trigger('wdCloseSide');
 	}
 
 	if (activeMobileNav && activeCloseSide) {
@@ -335,6 +339,16 @@ woodmartThemeModule.mobileNavigation                 = function() {
 			woodmartThemeModule.closeMobileNavigation();
 		}, {passive: false});
 	}
+
+	woodmartThemeModule.$document.on('keyup', function(e) {
+		if (e.keyCode === 27) {
+			var mobileNavContent = document.querySelector('.wd-side-hidden-nav');
+
+			if (mobileNavContent.classList.contains('wd-opened')) {
+				woodmartThemeModule.closeMobileNavigation();
+			}
+		}
+	});
 
 	woodmartThemeModule.mobileNavigationCloseSideWidgets(closeSideWidgets);
 }

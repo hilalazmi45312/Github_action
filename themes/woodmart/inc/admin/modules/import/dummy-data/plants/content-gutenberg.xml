@@ -165,7 +165,7 @@
 <!-- wp:wd/toggle-content {"blockId":"b31b61b8-4afd-4486-bce5-55e982c78532"} -->
 <div id="wd-b31b61b8" class="wp-block-wd-toggle-content wd-toggle-content"><div class="wd-toggle-content-inner"><!-- wp:wd/list {"blockId":"f0803a47-857e-4bdc-9f5a-df455b14501a","iconType":"without"} -->
 <ul id="wd-f0803a47" class="wp-block-wd-list wd-list wd-type-without"><!-- wp:wd/list-item {"blockId":"41017fa4-f4fb-4df8-a4c7-1c34c508fba5","iconType":"without","svg":"","image":""} -->
-<li id="wd-41017fa4" class="wp-block-wd-list-item"><span class="wd-list-content"><a href="#">wood.plants@gmail.com</a></span></li>
+<li id="wd-41017fa4" class="wp-block-wd-list-item"><span class="wd-list-content"><a href="#">wood.plants@mail.com</a></span></li>
 <!-- /wp:wd/list-item -->
 
 <!-- wp:wd/list-item {"blockId":"d5112b44-0ffe-4531-adba-80727c82bedc","iconType":"without","svg":"","image":""} -->

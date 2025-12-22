@@ -85,6 +85,10 @@ if ( ! function_exists( 'wd_get_block_instagram_attrs' ) ) {
 					'type'    => 'boolean',
 					'default' => false,
 				),
+				'aspectRatio'          => array(
+					'type'    => 'string',
+					'default' => '1/1',
+				),
 			)
 		);
 

@@ -83,6 +83,8 @@
 
         </div>
 
+        <div id="cf-login" style="text-align: center; margin-top:20px;"></div>
+
         <div class="divider-login-popup"><span style="font-weight: bold;">Or</span></div>
 
         <div class="social-login">
@@ -121,7 +123,8 @@
 
             <!-- Step 2: TAC Input -->
             <div id="enter-tac-register" class="register-step" style="display: block;">
-                <small>A verification code has been sent to <strong id="register_masked_phone">+60****690</strong></small>
+                <!-- <small>A verification code has been sent to <strong id="register_masked_phone">+60****690</strong></small> -->
+                <small id="register_masked_phone">Sending your verification code…</small>
                 <div class="otp-inputs-register">
                     <input type="text" maxlength="1" class="step-2-otp-register">
                     <input type="text" maxlength="1" class="step-2-otp-register">
@@ -181,6 +184,8 @@
             </div>
         </div>
 
+        <div id="cf-register" style="text-align: center; margin-top:20px;"></div>
+
         <div class="divider-login-popup"><span style="font-weight: bold;">Or</span></div>
 
         <div class="social-login" style="padding-bottom: 20px;">
@@ -211,7 +216,7 @@
 
 
 
-
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
     const ajaxUrl = "<?php echo admin_url('admin-ajax.php'); ?>";
 
@@ -262,44 +267,48 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<script>
+    const WEB_CHANNEL = "<?php echo getChannelWeb(); ?>";
+</script>
+
 <script type="module">
-    // Import the functions you need from the SDKs you need
     import {
         initializeApp
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import {
         getAnalytics
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyDhpF_fW-zNNNmlfJomTUwA5zSSJMDiQk4",
-        authDomain: "api-project-1042599928422.firebaseapp.com",
-        databaseURL: "https://api-project-1042599928422.firebaseio.com",
-        projectId: "api-project-1042599928422",
-        storageBucket: "api-project-1042599928422.appspot.com",
-        messagingSenderId: "1042599928422",
-        appId: "1:1042599928422:web:25d9839fbf1469d38a43a7",
-        measurementId: "G-9ZH6CP39V9"
-    };
+    let firebaseConfig;
 
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    // const firebaseConfig = {
-    //     apiKey: "AIzaSyARlRQwX6js592NYPXX1ZEstsK0Z8Ev6xs",
-    //     authDomain: "sh-web-stg.firebaseapp.com",
-    //     projectId: "sh-web-stg",
-    //     storageBucket: "sh-web-stg.firebasestorage.app",
-    //     messagingSenderId: "83908092148",
-    //     appId: "1:83908092148:web:d61b85263936dc087f3ea1",
-    //     measurementId: "G-CFHQ6TZQ72"
-    // };
+    if (WEB_CHANNEL === 'SenQ') {
+        // ✅ SenQ Firebase
+        firebaseConfig = {
+            apiKey: "AIzaSyDK602ofT_ejdLVgKhPyymnMsI87Dziubc",
+            authDomain: "senq-a40a9.firebaseapp.com",
+            projectId: "senq-a40a9",
+            storageBucket: "senq-a40a9.firebasestorage.app",
+            messagingSenderId: "970112883696",
+            appId: "1:970112883696:web:8aebc9dc8db2369ead1b35",
+            measurementId: "G-JZNVQLQ0ZH"
+        };
+    } else {
+        // ✅ Senheng / SRC Firebase (current one)
+        firebaseConfig = {
+            apiKey: "AIzaSyARlRQwX6js592NYPXX1ZEstsK0Z8Ev6xs",
+            authDomain: "sh-web-stg.firebaseapp.com",
+            projectId: "sh-web-stg",
+            storageBucket: "sh-web-stg.firebasestorage.app",
+            messagingSenderId: "83908092148",
+            appId: "1:83908092148:web:d61b85263936dc087f3ea1",
+            measurementId: "G-CFHQ6TZQ72"
+        };
+    }
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    console.log('Firebase initialized for channel:', WEB_CHANNEL);
 </script>
 <script src="<?php echo SENHENG_CORE_ASSETS_URL . 'js/facebook-auth.js'; ?>"></script>
 <script type="module" src="<?php echo SENHENG_CORE_ASSETS_URL . 'js/firebase-auth.js'; ?>"></script>

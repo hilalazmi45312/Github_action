@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.7.2" created="2025-02-25 15:00" -->
+	<!-- generator="WordPress/6.7.2" created="2025-06-04 11:30" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>Marketplace 2</title>
 	<link>https://dummy.xtemos.com/woodmart2/marketplace2</link>
 	<description></description>
-	<pubDate>Tue, 25 Feb 2025 15:00:50 +0000</pubDate>
+	<pubDate>Wed, 04 Jun 2025 11:30:26 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
@@ -131,10 +131,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[product_count_product_cat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[28]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:74:{i:0;s:19:"widget-price-filter";i:1;s:16:"helpers-wpb-elem";i:2;s:27:"widget-recent-post-comments";i:3;s:22:"widget-wd-recent-posts";i:4;s:10:"widget-nav";i:5;s:21:"widget-wd-layered-nav";i:6;s:21:"woo-mod-swatches-base";i:7;s:23:"woo-mod-swatches-filter";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"wpbakery-base";i:12;s:24:"wpbakery-base-deprecated";i:13;s:13:"int-wordfence";i:14;s:16:"woocommerce-base";i:15;s:15:"mod-star-rating";i:16;s:18:"woo-el-track-order";i:17;s:25:"woocommerce-block-notices";i:18;s:25:"woo-opt-free-progress-bar";i:19;s:20:"woo-mod-progress-bar";i:20;s:21:"widget-active-filters";i:21;s:16:"woo-shop-builder";i:22;s:9:"wp-blocks";i:23;s:11:"header-base";i:24;s:9:"mod-tools";i:25;s:20:"header-elements-base";i:26;s:12:"social-icons";i:27;s:13:"header-search";i:28;s:18:"header-search-form";i:29;s:17:"wd-search-results";i:30;s:14:"wd-search-form";i:31;s:8:"info-box";i:32;s:20:"header-cart-design-3";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:27:"header-mobile-nav-drilldown";i:38;s:33:"header-mobile-nav-drilldown-slide";i:39;s:17:"header-my-account";i:40;s:18:"mod-nav-menu-label";i:41;s:6:"swiper";i:42;s:6:"banner";i:43;s:17:"banner-hover-zoom";i:44;s:16:"banner-btn-hover";i:45;s:20:"mod-highlighted-text";i:46;s:17:"el-subtitle-style";i:47;s:13:"swiper-arrows";i:48;s:6:"brands";i:49;s:26:"woo-el-breadcrumbs-builder";i:50;s:34:"woo-categories-loop-layout-masonry";i:51;s:19:"woo-categories-loop";i:52;s:15:"categories-loop";i:53;s:19:"woo-opt-title-limit";i:54;s:20:"woo-opt-stretch-cont";i:55;s:19:"woo-opt-products-bg";i:56;s:12:"product-loop";i:57;s:18:"product-loop-quick";i:58;s:23:"woo-mod-add-btn-replace";i:59;s:20:"woo-opt-grid-gallery";i:60;s:9:"mfp-popup";i:61;s:22:"woo-mod-product-labels";i:62;s:19:"collapsible-content";i:63;s:13:"section-title";i:64;s:10:"text-block";i:65;s:6:"button";i:66;s:15:"widget-collapse";i:67;s:11:"footer-base";i:68;s:19:"social-icons-styles";i:69;s:10:"scroll-top";i:70;s:20:"dropdown-full-height";i:71;s:23:"header-mod-content-calc";i:72;s:14:"bottom-toolbar";i:73;s:23:"shop-off-canvas-sidebar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -313,7 +309,7 @@
 		</wp:termmeta>
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:87:{i:0;s:19:"widget-price-filter";i:1;s:16:"helpers-wpb-elem";i:2;s:27:"widget-recent-post-comments";i:3;s:22:"widget-wd-recent-posts";i:4;s:10:"widget-nav";i:5;s:21:"widget-wd-layered-nav";i:6;s:21:"woo-mod-swatches-base";i:7;s:23:"woo-mod-swatches-filter";i:8;s:26:"widget-slider-price-filter";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:13:"wpbakery-base";i:12;s:24:"wpbakery-base-deprecated";i:13;s:13:"int-wordfence";i:14;s:16:"woocommerce-base";i:15;s:15:"mod-star-rating";i:16;s:18:"woo-el-track-order";i:17;s:25:"woocommerce-block-notices";i:18;s:25:"woo-opt-free-progress-bar";i:19;s:20:"woo-mod-progress-bar";i:20;s:21:"widget-active-filters";i:21;s:16:"woo-shop-builder";i:22;s:9:"wp-blocks";i:23;s:11:"header-base";i:24;s:9:"mod-tools";i:25;s:20:"header-elements-base";i:26;s:12:"social-icons";i:27;s:13:"header-search";i:28;s:18:"header-search-form";i:29;s:17:"wd-search-results";i:30;s:14:"wd-search-form";i:31;s:8:"info-box";i:32;s:20:"header-cart-design-3";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:27:"header-mobile-nav-drilldown";i:38;s:33:"header-mobile-nav-drilldown-slide";i:39;s:18:"woo-mod-login-form";i:40;s:17:"header-my-account";i:41;s:18:"mod-nav-menu-label";i:42;s:6:"swiper";i:43;s:6:"banner";i:44;s:17:"banner-hover-zoom";i:45;s:16:"banner-btn-hover";i:46;s:20:"mod-highlighted-text";i:47;s:17:"el-subtitle-style";i:48;s:13:"swiper-arrows";i:49;s:6:"brands";i:50;s:26:"woo-el-breadcrumbs-builder";i:51;s:34:"woo-categories-loop-layout-masonry";i:52;s:19:"woo-categories-loop";i:53;s:15:"categories-loop";i:54;s:29:"int-wpb-opt-off-canvas-column";i:55;s:13:"filter-search";i:56;s:24:"woo-mod-swatches-style-1";i:57;s:24:"woo-mod-swatches-style-4";i:58;s:18:"off-canvas-sidebar";i:59;s:24:"el-off-canvas-column-btn";i:60;s:29:"woo-shop-el-products-per-page";i:61;s:25:"woo-shop-el-products-view";i:62;s:20:"woo-shop-el-order-by";i:63;s:13:"sticky-loader";i:64;s:19:"woo-opt-title-limit";i:65;s:12:"product-loop";i:66;s:18:"product-loop-quick";i:67;s:23:"woo-mod-add-btn-replace";i:68;s:20:"woo-opt-stretch-cont";i:69;s:19:"woo-opt-products-bg";i:70;s:20:"woo-opt-grid-gallery";i:71;s:22:"woo-mod-product-labels";i:72;s:9:"mfp-popup";i:73;s:19:"collapsible-content";i:74;s:13:"section-title";i:75;s:10:"text-block";i:76;s:6:"button";i:77;s:15:"widget-collapse";i:78;s:11:"footer-base";i:79;s:19:"social-icons-styles";i:80;s:10:"scroll-top";i:81;s:20:"dropdown-full-height";i:82;s:23:"header-mod-content-calc";i:83;s:25:"header-my-account-sidebar";i:84;s:14:"bottom-toolbar";i:85;s:23:"shop-off-canvas-sidebar";i:86;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:83:{i:0;s:19:"widget-price-filter";i:1;s:10:"style-base";i:2;s:16:"helpers-wpb-elem";i:3;s:13:"wpbakery-base";i:4;s:24:"wpbakery-base-deprecated";i:5;s:13:"int-wordfence";i:6;s:16:"woocommerce-base";i:7;s:15:"mod-star-rating";i:8;s:25:"woocommerce-block-notices";i:9;s:25:"woo-opt-free-progress-bar";i:10;s:20:"woo-mod-progress-bar";i:11;s:21:"widget-active-filters";i:12;s:16:"woo-shop-builder";i:13;s:9:"wp-blocks";i:14;s:11:"header-base";i:15;s:9:"mod-tools";i:16;s:20:"header-elements-base";i:17;s:12:"social-icons";i:18;s:13:"header-search";i:19;s:18:"header-search-form";i:20;s:14:"wd-search-form";i:21;s:17:"wd-search-results";i:22;s:18:"wd-search-dropdown";i:23;s:8:"info-box";i:24;s:20:"header-cart-design-3";i:25;s:16:"header-cart-side";i:26;s:11:"header-cart";i:27;s:20:"widget-shopping-cart";i:28;s:19:"widget-product-list";i:29;s:27:"header-mobile-nav-drilldown";i:30;s:33:"header-mobile-nav-drilldown-slide";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:18:"mod-nav-menu-label";i:34;s:6:"swiper";i:35;s:6:"banner";i:36;s:17:"banner-hover-zoom";i:37;s:16:"banner-btn-hover";i:38;s:20:"mod-highlighted-text";i:39;s:17:"el-subtitle-style";i:40;s:13:"swiper-arrows";i:41;s:6:"brands";i:42;s:26:"woo-el-breadcrumbs-builder";i:43;s:19:"woo-categories-loop";i:44;s:15:"categories-loop";i:45;s:29:"int-wpb-opt-off-canvas-column";i:46;s:26:"widget-slider-price-filter";i:47;s:21:"widget-wd-layered-nav";i:48;s:21:"woo-mod-swatches-base";i:49;s:23:"woo-mod-swatches-filter";i:50;s:13:"filter-search";i:51;s:24:"woo-mod-swatches-style-1";i:52;s:24:"woo-mod-swatches-style-4";i:53;s:18:"off-canvas-sidebar";i:54;s:24:"el-off-canvas-column-btn";i:55;s:29:"woo-shop-el-products-per-page";i:56;s:25:"woo-shop-el-products-view";i:57;s:20:"woo-shop-el-order-by";i:58;s:13:"sticky-loader";i:59;s:19:"woo-opt-title-limit";i:60;s:12:"product-loop";i:61;s:18:"product-loop-quick";i:62;s:23:"woo-mod-add-btn-replace";i:63;s:20:"woo-opt-stretch-cont";i:64;s:19:"woo-opt-products-bg";i:65;s:20:"woo-opt-grid-gallery";i:66;s:22:"woo-mod-product-labels";i:67;s:9:"mfp-popup";i:68;s:19:"collapsible-content";i:69;s:13:"section-title";i:70;s:10:"text-block";i:71;s:6:"button";i:72;s:15:"widget-collapse";i:73;s:11:"footer-base";i:74;s:19:"social-icons-styles";i:75;s:9:"el-toggle";i:76;s:5:"mc4wp";i:77;s:10:"scroll-top";i:78;s:20:"dropdown-full-height";i:79;s:23:"header-mod-content-calc";i:80;s:25:"header-my-account-sidebar";i:81;s:14:"bottom-toolbar";i:82;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -594,6 +590,10 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[product_count_product_cat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:82:{i:0;s:19:"widget-price-filter";i:1;s:10:"style-base";i:2;s:16:"helpers-wpb-elem";i:3;s:13:"wpbakery-base";i:4;s:24:"wpbakery-base-deprecated";i:5;s:13:"int-wordfence";i:6;s:16:"woocommerce-base";i:7;s:15:"mod-star-rating";i:8;s:25:"woocommerce-block-notices";i:9;s:25:"woo-opt-free-progress-bar";i:10;s:20:"woo-mod-progress-bar";i:11;s:21:"widget-active-filters";i:12;s:16:"woo-shop-builder";i:13;s:9:"wp-blocks";i:14;s:11:"header-base";i:15;s:9:"mod-tools";i:16;s:20:"header-elements-base";i:17;s:12:"social-icons";i:18;s:13:"header-search";i:19;s:18:"header-search-form";i:20;s:14:"wd-search-form";i:21;s:17:"wd-search-results";i:22;s:18:"wd-search-dropdown";i:23;s:8:"info-box";i:24;s:20:"header-cart-design-3";i:25;s:16:"header-cart-side";i:26;s:11:"header-cart";i:27;s:20:"widget-shopping-cart";i:28;s:19:"widget-product-list";i:29;s:27:"header-mobile-nav-drilldown";i:30;s:33:"header-mobile-nav-drilldown-slide";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:18:"mod-nav-menu-label";i:34;s:6:"swiper";i:35;s:6:"banner";i:36;s:17:"banner-hover-zoom";i:37;s:16:"banner-btn-hover";i:38;s:20:"mod-highlighted-text";i:39;s:17:"el-subtitle-style";i:40;s:13:"swiper-arrows";i:41;s:6:"brands";i:42;s:26:"woo-el-breadcrumbs-builder";i:43;s:19:"woo-categories-loop";i:44;s:15:"categories-loop";i:45;s:29:"int-wpb-opt-off-canvas-column";i:46;s:26:"widget-slider-price-filter";i:47;s:21:"widget-wd-layered-nav";i:48;s:21:"woo-mod-swatches-base";i:49;s:23:"woo-mod-swatches-filter";i:50;s:13:"filter-search";i:51;s:24:"woo-mod-swatches-style-1";i:52;s:24:"woo-mod-swatches-style-4";i:53;s:18:"off-canvas-sidebar";i:54;s:24:"el-off-canvas-column-btn";i:55;s:29:"woo-shop-el-products-per-page";i:56;s:25:"woo-shop-el-products-view";i:57;s:20:"woo-shop-el-order-by";i:58;s:13:"sticky-loader";i:59;s:19:"woo-opt-title-limit";i:60;s:12:"product-loop";i:61;s:18:"product-loop-quick";i:62;s:23:"woo-mod-add-btn-replace";i:63;s:20:"woo-opt-stretch-cont";i:64;s:19:"woo-opt-products-bg";i:65;s:20:"woo-opt-grid-gallery";i:66;s:9:"mfp-popup";i:67;s:19:"collapsible-content";i:68;s:13:"section-title";i:69;s:10:"text-block";i:70;s:6:"button";i:71;s:15:"widget-collapse";i:72;s:11:"footer-base";i:73;s:19:"social-icons-styles";i:74;s:9:"el-toggle";i:75;s:5:"mc4wp";i:76;s:10:"scroll-top";i:77;s:20:"dropdown-full-height";i:78;s:23:"header-mod-content-calc";i:79;s:25:"header-my-account-sidebar";i:80;s:14:"bottom-toolbar";i:81;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -6737,8 +6737,8 @@ unified memory[/woodmart_text_block][/vc_column][/vc_row][vc_row css=".vc_custom
 										<wp:post_id>333</wp:post_id>
 					<wp:post_date><![CDATA[2025-01-03 12:18:44]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2025-01-03 12:18:44]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-01-31 15:40:51]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-01-31 15:40:51]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-04 11:26:22]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-04 11:26:22]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[electrolux-ew8w261bu]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -6764,7 +6764,7 @@ unified memory[/woodmart_text_block][/vc_column][/vc_row][vc_row css=".vc_custom
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.8.5]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
@@ -6776,11 +6776,11 @@ unified memory[/woodmart_text_block][/vc_column][/vc_row][vc_row css=".vc_custom
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
-							<wp:meta_value><![CDATA[384]]></wp:meta_value>
+							<wp:meta_value><![CDATA[1757]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_attributes]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:3:{s:8:"pa_brand";a:6:{s:4:"name";s:8:"pa_brand";s:5:"value";s:0:"";s:8:"position";i:0;s:10:"is_visible";i:1;s:12:"is_variation";i:0;s:11:"is_taxonomy";i:1;}s:8:"pa_color";a:6:{s:4:"name";s:8:"pa_color";s:5:"value";s:0:"";s:8:"position";i:1;s:10:"is_visible";i:1;s:12:"is_variation";i:0;s:11:"is_taxonomy";i:1;}s:7:"pa_size";a:6:{s:4:"name";s:7:"pa_size";s:5:"value";s:0:"";s:8:"position";i:5;s:10:"is_visible";i:1;s:12:"is_variation";i:0;s:11:"is_taxonomy";i:1;}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[a:2:{s:8:"pa_color";a:6:{s:4:"name";s:8:"pa_color";s:5:"value";s:0:"";s:8:"position";i:1;s:10:"is_visible";i:1;s:12:"is_variation";i:0;s:11:"is_taxonomy";i:1;}s:7:"pa_size";a:6:{s:4:"name";s:7:"pa_size";s:5:"value";s:0:"";s:8:"position";i:5;s:10:"is_visible";i:1;s:12:"is_variation";i:0;s:11:"is_taxonomy";i:1;}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
@@ -6800,7 +6800,7 @@ unified memory[/woodmart_text_block][/vc_column][/vc_row][vc_row css=".vc_custom
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_wc_video_gallery]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:4:{i:384;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}i:192;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}i:283;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}i:439;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[a:4:{i:1757;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}i:192;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}i:283;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}i:439;a:11:{s:10:"video_type";s:3:"mp4";s:15:"upload_video_id";s:0:"";s:16:"upload_video_url";s:0:"";s:11:"youtube_url";s:0:"";s:9:"vimeo_url";s:0:"";s:8:"autoplay";s:1:"0";s:10:"video_size";s:7:"contain";s:13:"video_control";s:5:"theme";s:16:"hide_gallery_img";s:1:"0";s:16:"hide_information";s:1:"0";s:12:"audio_status";s:6:"unmute";}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_whb_header]]></wp:meta_key>
@@ -6845,6 +6845,18 @@ unified memory[/woodmart_text_block][/vc_column][/vc_row][vc_row css=".vc_custom
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
 							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_woodmart_product_custom_tab_content_type_3]]></wp:meta_key>
+							<wp:meta_value><![CDATA[text]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_woodmart_product_custom_tab_content_type_4]]></wp:meta_key>
+							<wp:meta_value><![CDATA[text]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_woodmart_product_custom_tab_content_type_5]]></wp:meta_key>
+							<wp:meta_value><![CDATA[text]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>

@@ -57,6 +57,13 @@ if ( ! function_exists( 'woodmart_get_button_shortcode_params' ) ) {
 					'param_name'       => 'link',
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
+				array(
+					'type'             => 'textfield',
+					'heading'          => esc_html__( 'Custom attributes', 'woodmart' ),
+					'param_name'       => 'custom_attributes',
+					'hint'             => esc_html__( 'Set custom attributes for the link element. Separate attribute keys from values using the | (pipe) character. Separate key-value pairs with a comma.', 'woodmart' ),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
 				/**
 				 * Smooth scroll
 				 */

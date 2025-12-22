@@ -19,6 +19,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Abandoned_Cart_Table extends WP_List_Table {
 	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		if ( ! woodmart_get_opt( 'cart_recovery_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
+		parent::__construct();
+	}
+
+	/**
 	 * Define what data to show on each column of the table.
 	 *
 	 * @param array  $item        Data.
@@ -50,25 +61,7 @@ class Abandoned_Cart_Table extends WP_List_Table {
 	 * @return string
 	 */
 	public function column_name( $item ) {
-		$user_name = '';
-
-		if ( ! empty( $item['_user_id'] ) ) {
-			$user      = get_user_by( 'id', $item['_user_id'] );
-			$user_name = $user->user_login;
-		} else {
-			if ( ! empty( $item['_user_first_name'] ) ) {
-				$user_name .= $item['_user_first_name'];
-			}
-
-			if ( ! empty( $item['_user_last_name'] ) ) {
-				$user_name .= ' ' . $item['_user_last_name'];
-			}
-
-			if ( empty( $user_name ) ) {
-				$user_name = esc_html__( 'guest', 'woodmart' );
-			}
-		}
-
+		$user_name          = $item['_user_name'];
 		$abandoned_cart_url = admin_url( 'post.php?post=' . $item['ID'] . '&action=edit' );
 		$delete_cart_url    = add_query_arg(
 			array(
@@ -121,34 +114,10 @@ class Abandoned_Cart_Table extends WP_List_Table {
 	 * @return string
 	 */
 	public function column_subtotal( $item ) {
-		$cart     = $item['_cart'];
-		$total    = 0;
+		$subtotal = $item['_cart_subtotal'] ? $item['_cart_subtotal'] : 0;
 		$currency = get_woocommerce_currency();
 
-		if ( ! $cart ) {
-			return 0;
-		}
-
-		foreach ( $cart->get_cart_contents() as $cart_item_key => $cart_item ) {
-			$_product = $cart_item['data'];
-			$quantity = $cart_item['quantity'];
-
-			if ( ! $_product || ! $_product->exists() || $quantity <= 0 ) {
-				continue;
-			}
-
-			if ( $cart->display_prices_including_tax() ) {
-				$product_price = wc_get_price_including_tax( $_product );
-			} else {
-				$product_price = wc_get_price_excluding_tax( $_product );
-			}
-
-			$product_subtotal = $product_price * $quantity;
-
-			$total += $product_subtotal;
-		}
-
-		return wc_price( $total, array( 'currency' => $currency ) );
+		return wc_price( $subtotal, array( 'currency' => $currency ) );
 	}
 
 	/**
@@ -217,11 +186,11 @@ class Abandoned_Cart_Table extends WP_List_Table {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'        => array( 'name', false ),
-			'email'       => array( 'email', false ),
-			'subtotal'    => array( 'subtotal', false ),
-			'status'      => array( 'status', false ),
-			'last_update' => array( 'last_update', false ),
+			'name'        => array( '_user_name', false ),
+			'email'       => array( '_user_email', false ),
+			'subtotal'    => array( '_cart_subtotal', false ),
+			'status'      => array( '_cart_status', false ),
+			'last_update' => array( 'post_modified_gmt', false ),
 		);
 	}
 
@@ -271,7 +240,21 @@ class Abandoned_Cart_Table extends WP_List_Table {
 		$user_id  = get_current_user_id();
 
 		$data = $this->table_data();
-		usort( $data, array( $this, 'sort_data' ) );
+
+		$order_by = 'last_update';
+		$order    = 'desc';
+
+		// If orderby is set, use this as the sort column.
+		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
+			$order_by = $_GET['orderby']; // phpcs:ignore.
+		}
+
+		// If order is set use this as the order.
+		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
+			$order = $_GET['order']; // phpcs:ignore.
+		}
+
+		woodmart_sort_data( $data, $order_by, $order );
 
 		$per_page     = ! empty( get_user_meta( $user_id, 'abandoned_cart_per_page', true ) ) ? get_user_meta( $user_id, 'abandoned_cart_per_page', true ) : 20;
 		$current_page = $this->get_pagenum();
@@ -303,6 +286,7 @@ class Abandoned_Cart_Table extends WP_List_Table {
 			array(
 				'post_type'      => Abandoned_Cart::get_instance()->post_type_name,
 				'posts_per_page' => -1,
+				'fields'         => 'ids',
 				'meta_query'     => array( //phpcs:ignore
 					array(
 						'key'   => '_cart_status',
@@ -317,19 +301,25 @@ class Abandoned_Cart_Table extends WP_List_Table {
 			'_user_first_name',
 			'_user_last_name',
 			'_cart_status',
-			'_language',
-			'_cart',
 		);
 
-		foreach ( $posts as $post ) {
+		foreach ( $posts as $post_id ) {
 			$item_data = array(
-				'ID'                => $post->ID,
-				'title'             => $post->post_title,
-				'post_modified_gmt' => $post->post_modified_gmt,
+				'ID'                => $post_id,
+				'title'             => get_the_title( $post_id ),
+				'post_modified_gmt' => get_post_field( 'post_modified_gmt', $post_id ),
 			);
 
 			foreach ( $meta_keys as $meta_key ) {
-				$item_data[ $meta_key ] = maybe_unserialize( get_post_meta( $post->ID, $meta_key, true ) );
+				$item_data[ $meta_key ] = maybe_unserialize( get_post_meta( $post_id, $meta_key, true ) );
+			}
+
+			$item_data['_user_name'] = $this->get_user_name( $item_data );
+
+			$cart_data = maybe_unserialize( get_post_meta( $post_id, '_cart', true ) );
+
+			if ( ! empty( $cart_data ) ) {
+				$item_data['_cart_subtotal'] = $this->get_cart_subtotal( $cart_data );
 			}
 
 			$items[] = $item_data;
@@ -339,41 +329,67 @@ class Abandoned_Cart_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Allows you to sort the data by the variables set in the $_GET.
+	 * Get user name.
 	 *
-	 * @param array $a First array.
-	 * @param array $b Next array.
-	 * @return int
+	 * @param array $item Item to use to print record.
+	 *
+	 * @return string
 	 */
-	private function sort_data( $a, $b ) {
-		// Set defaults.
-		$order_by = 'last_update';
-		$order    = 'desc';
+	private function get_user_name( $item ) {
+		$user_name = '';
 
-		// If orderby is set, use this as the sort column.
-		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
-			$order_by = $_GET['orderby']; // phpcs:ignore.
+		if ( ! empty( $item['_user_id'] ) ) {
+			$user      = get_user_by( 'id', $item['_user_id'] );
+			$user_name = $user->user_login;
+		} else {
+			if ( ! empty( $item['_user_first_name'] ) ) {
+				$user_name .= $item['_user_first_name'];
+			}
+
+			if ( ! empty( $item['_user_last_name'] ) ) {
+				$user_name .= ' ' . $item['_user_last_name'];
+			}
+
+			if ( empty( $user_name ) ) {
+				$user_name = esc_html__( 'guest', 'woodmart' );
+			}
 		}
 
-		// If order is set use this as the order.
-		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
-			$order = $_GET['order']; // phpcs:ignore.
-		}
+		return $user_name;
+	}
 
-		if ( ! isset( $a[ $order_by ] ) || ! isset( $b[ $order_by ] ) ) {
+	/**
+	 * Get cart subtotal.
+	 *
+	 * @param WC_Cart $cart Cart object.
+	 *
+	 * @return float Cart subtotal.
+	 */
+	private function get_cart_subtotal( $cart ) {
+		if ( ! $cart ) {
 			return 0;
 		}
 
-		$result = strcmp( $a[ $order_by ], $b[ $order_by ] );
+		$total = 0;
 
-		if ( is_numeric( $a[ $order_by ] ) && is_numeric( $a[ $order_by ] ) ) {
-			$result = $a[ $order_by ] - $b[ $order_by ];
+		foreach ( $cart->get_cart_contents() as $cart_item_key => $cart_item ) {
+			$_product = $cart_item['data'];
+			$quantity = $cart_item['quantity'];
+
+			if ( ! $_product || ! $_product->exists() || $quantity <= 0 ) {
+				continue;
+			}
+
+			if ( $cart->display_prices_including_tax() ) {
+				$product_price = wc_get_price_including_tax( $_product );
+			} else {
+				$product_price = wc_get_price_excluding_tax( $_product );
+			}
+
+			$product_subtotal = $product_price * $quantity;
+			$total           += $product_subtotal;
 		}
 
-		if ( 'asc' === $order ) {
-			return $result;
-		}
-
-		return -$result;
+		return $total;
 	}
 }

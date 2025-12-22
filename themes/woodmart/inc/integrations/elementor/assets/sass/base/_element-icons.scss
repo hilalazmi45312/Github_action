@@ -93,6 +93,10 @@
 	background-image: url(../../../../admin/assets/images/vc-icon/compare.svg);
 }
 
+.wd-icon-compare-images:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/compare-images.svg);
+}
+
 .wd-icon-widget-products:before {
 	background-image: url(../../../../admin/assets/images/vc-icon/wc-product-widget.svg);
 }
@@ -394,6 +398,10 @@
 	background-image: url(../../../../admin/assets/images/vc-icon/sp-icons/sp-sold-counter.svg);
 }
 
+.wd-icon-sp-est-del:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/sp-icons/sp-est-del.svg);
+}
+
 // Shop archive.
 .wd-icon-sa-active-filters:before {
 	background-image: url(../../../../admin/assets/images/vc-icon/sa-icons/sa-active-filters.svg);
@@ -487,10 +495,142 @@
 	background-image: url(../../../../admin/assets/images/vc-icon/ch-icons/ch-shipping-details.svg);
 }
 
-// WooCommerce.
+// Thank you page.
+
+.wd-icon-tp-customer-details:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/tp-icons/tp-customer-details.svg);
+}
+
+.wd-icon-tp-order-details:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/tp-icons/tp-order-details.svg);
+}
+
+.wd-icon-tp-order-message:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/tp-icons/tp-order-message.svg);
+}
+
+.wd-icon-tp-order-overview:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/tp-icons/tp-order-overview.svg);
+}
+
+.wd-icon-tp-payment-instructions:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/tp-icons/tp-payment-instructions.svg);
+}
+
+.wd-icon-tp-order-meta:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/tp-icons/tp-order-meta.svg);
+}
+
+// My account.
+
+.wd-icon-ma-login:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/ma-icons/login.svg);
+ }
+ 
+ .wd-icon-ma-register:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/ma-icons/register.svg);
+ }
+ 
+ .wd-icon-ma-lost-password:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/ma-icons/lost-password.svg);
+ }
+ 
+ .wd-icon-ma-content:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/ma-icons/content.svg);
+ }
+ 
+ .wd-icon-ma-navigation:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/ma-icons/navigation.svg);
+ } 
+
+// Archives.
+
+.wd-icon-blog-archive:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/pa-blog-icons/blog-archive.svg);
+}
+
+.wd-icon-portfolio-archive:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/pa-portfolio-icons/portfolio-archive.svg);
+}
+
+.wd-icon-portfolio-categories:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/pa-portfolio-icons/portfolio-categories-filters.svg);
+}
+
+// Posts.
+
+.wd-icon-author-bio:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/author-bio.svg);
+}
+
+.wd-icon-post-author:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-author.svg);
+}
+
+.wd-icon-post-categories:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-categories.svg);
+}
+
+.wd-icon-post-content:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-content.svg);
+}
+
+.wd-icon-post-comment-form:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-comment-form.svg);
+}
+
+.wd-icon-post-comments:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-comments.svg);
+}
+
+.wd-icon-post-comments-button:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-comments-button.svg);
+}
+
+.wd-icon-post-date:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-date.svg);
+}
+
+.wd-icon-post-excerpt:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-excerpt.svg);
+}
+
+.wd-icon-post-image:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-image.svg);
+}
+
+.wd-icon-post-meta-value:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-meta-value.svg);
+}
+
+.wd-icon-post-navigation:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-navigation.svg);
+}
+
+.wd-icon-post-tags:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-tags.svg);
+}
+
+.wd-icon-post-title:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/post-icons/post-title.svg);
+}
+
+// Site.
 
 .wd-icon-wc-page-title:before {
 	background-image: url(../../../../admin/assets/images/vc-icon/wc-icons/wc-page-title.svg);
+}
+
+.wd-icon-breadcrumbs:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/breadcrumbs.svg);
+}
+
+.wd-icon-page-heading:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/page-heading.svg);
+}
+
+.wd-icon-toggle:before {
+	background-image: url(../../../../admin/assets/images/vc-icon/toggle.svg);
 }
 
 .wd-icon-wc-checkout-steps:before {

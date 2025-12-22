@@ -5,16 +5,19 @@
 			return;
 		}
 
-		function shopPageInitEvent (e) {
-			e.target.removeEventListener('popstate', shopPageInitEvent, false);
+		var filtersState = false;
+		var isPopstateNavigation = false;
 
-			woodmartThemeModule.$document.trigger('wdShopPageInit');
-		}
+		woodmartThemeModule.$document.on('pjax:popstate', function(e) {
+			isPopstateNavigation = true;
+		});
 
-		window.addEventListener('popstate', shopPageInitEvent);
-
-		var that         = this,
-		    filtersState = false;
+		woodmartThemeModule.$document.on('pjax:end', function() {
+		    if (isPopstateNavigation) {
+				woodmartThemeModule.$document.trigger('wdShopPageInit');
+				isPopstateNavigation = false;
+			}
+		});
 
 		woodmartThemeModule.$body.on('click', '.post-type-archive-product .products-footer .woocommerce-pagination a', function() {
 			scrollToTop(true);
@@ -127,10 +130,6 @@
 	};
 
 	$(document).ready(function() {
-		woodmartThemeModule.ajaxFilters();
-	});
-
-	window.addEventListener('popstate', function() {
 		woodmartThemeModule.ajaxFilters();
 	});
 })(jQuery);

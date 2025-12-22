@@ -18,6 +18,10 @@ class Render extends Singleton {
 	 * Init.
 	 */
 	public function init() {
+		if ( ! woodmart_get_opt( 'bought_together_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		add_action( 'woocommerce_before_mini_cart_contents', array( $this, 'enqueue_style' ) );
 		add_action( 'woocommerce_order_details_before_order_table_items', array( $this, 'enqueue_order_style' ) );
 
@@ -49,6 +53,8 @@ class Render extends Singleton {
 		add_filter( 'woocommerce_get_cart_item_from_session', array( $this, 'get_cart_item_from_session' ), 10, 2 );
 
 		add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'add_custom_cart_meta_to_order_items' ), 10, 4 );
+
+		add_action( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
 	}
 
 	/**
@@ -681,6 +687,23 @@ class Render extends Singleton {
 				$item->update_meta_data( '_wd_fbt_last_item', true );
 			}
 		}
+	}
+
+	/**
+	 * Add hidden order item meta for frequently bought together products.
+	 *
+	 * @param array $meta Meta keys.
+	 * @return array
+	 */
+	public function hidden_order_itemmeta( $meta ) {
+		$meta[] = '_wd_fbt_parent_id';
+		$meta[] = '_wd_fbt_discount';
+		$meta[] = '_wd_fbt_bundle_id';
+		$meta[] = '_wd_fbt_parent_keys';
+		$meta[] = '_wd_fbt_keys';
+		$meta[] = '_wd_fbt_last_item';
+
+		return $meta;
 	}
 }
 

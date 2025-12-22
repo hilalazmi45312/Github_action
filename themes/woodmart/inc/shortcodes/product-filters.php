@@ -23,7 +23,7 @@ if ( ! function_exists( 'woodmart_product_filters_shortcode' ) ) {
 				'woodmart_color_scheme'    => '',
 				'css'                      => '',
 				'el_class'                 => '',
-				'el_id'                    => 'wd-' . uniqid(),
+				'el_id'                    => '',
 				'submit_form_on'           => 'click',
 				'show_selected_values'     => 'yes',
 				'show_dropdown_on'         => 'click',
@@ -44,9 +44,12 @@ if ( ! function_exists( 'woodmart_product_filters_shortcode' ) ) {
 		if ( $atts['is_wpb'] && 'wpb' === woodmart_get_current_page_builder() ) {
 			$wrapper_classes .= ' wd-wpb';
 
-			$atts['space_between_tablet']     = woodmart_vc_get_control_data( $atts['space_between'], 'tablet' );
-			$atts['space_between_mobile']     = woodmart_vc_get_control_data( $atts['space_between'], 'mobile' );
-			$atts['space_between']            = woodmart_vc_get_control_data( $atts['space_between'], 'desktop' );
+			if ( ! empty( $atts['space_between'] ) ) {
+				$atts['space_between_tablet'] = woodmart_vc_get_control_data( $atts['space_between'], 'tablet' );
+				$atts['space_between_mobile'] = woodmart_vc_get_control_data( $atts['space_between'], 'mobile' );
+				$atts['space_between']        = woodmart_vc_get_control_data( $atts['space_between'], 'desktop' );
+			}
+
 			$atts['display_grid_col_desktop'] = woodmart_vc_get_control_data( $atts['display_grid_col'], 'desktop' );
 			$atts['display_grid_col_tablet']  = woodmart_vc_get_control_data( $atts['display_grid_col'], 'tablet' );
 			$atts['display_grid_col_mobile']  = woodmart_vc_get_control_data( $atts['display_grid_col'], 'mobile' );
@@ -130,7 +133,11 @@ if ( ! function_exists( 'woodmart_product_filters_shortcode' ) ) {
 			<div class="wd-product-filters-wrapp wd-wpb<?php echo esc_attr( $wrapper_classes ); ?>">
 		<?php endif; ?>
 
-		<form id="<?php echo esc_attr( $el_id ); ?>" action="<?php echo esc_url( $form_action ); ?>" class="wd-product-filters<?php echo esc_attr( $classes ); ?>" method="GET" style="<?php echo esc_attr( $style_attrs ); ?>">
+		<form
+		<?php if ( $el_id ) : ?>
+		id="<?php echo esc_attr( $el_id ); ?>"
+		<?php endif; ?>
+		action="<?php echo esc_url( $form_action ); ?>" class="wd-product-filters<?php echo esc_attr( $classes ); ?>" method="GET" style="<?php echo esc_attr( $style_attrs ); ?>">
 			<?php echo do_shortcode( $content ); ?>
 
 			<?php if ( $is_wpb && 'click' === $submit_form_on ) : ?>
@@ -229,7 +236,7 @@ if ( ! function_exists( 'woodmart_filters_categories_shortcode' ) ) {
 		ob_start();
 		?>
 			<div id="<?php echo esc_attr( $el_id ); ?>" class="wd-pf-checkboxes wd-col wd-pf-categories wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $classes ); ?>">
-			<div class="wd-pf-title">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html( $title ); ?>
 				</span>
@@ -295,7 +302,7 @@ if ( ! function_exists( 'woodmart_stock_status_shortcode' ) ) {
 					'onsale'      => 1,
 					'onbackorder' => 1,
 					'el_class'    => '',
-					'el_id'       => 'wd-' . uniqid(),
+					'el_id'       => '',
 				),
 				$atts
 			)
@@ -303,9 +310,13 @@ if ( ! function_exists( 'woodmart_stock_status_shortcode' ) ) {
 
 		ob_start();
 		?>
-			<div id="<?php echo esc_attr( $el_id ); ?>" class="wd-pf-checkboxes wd-col wd-pf-stock multi_select wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $el_class ); ?>">
+			<div
+			<?php if ( $el_id ) : ?>
+			id="<?php echo esc_attr( $el_id ); ?>"
+			<?php endif; ?>
+			class="wd-pf-checkboxes wd-col wd-pf-stock multi_select wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $el_class ); ?>">
 				<input type="hidden" class="result-input" name="stock_status" value="<?php echo esc_attr( $result_value ); ?>">
-				<div class="wd-pf-title">
+				<div class="wd-pf-title" tabindex="0">
 					<span class="title-text"><?php echo esc_html( $title ); ?></span>
 					<?php if ( 'yes' === $woodmart_product_filters_attr['show_selected_values'] ) : ?>
 						<ul class="wd-pf-results">
@@ -513,8 +524,12 @@ if ( ! function_exists( 'woodmart_filters_price_slider_shortcode' ) ) {
 		$max_price = isset( $_GET['max_price'] ) ? wc_clean( wp_unslash( $_GET['max_price'] ) ) : $max;
 
 		?>
-		<div id="<?php echo esc_attr( $el_id ); ?>" class="wd-pf-checkboxes wd-col wd-pf-price-range multi_select widget_price_filter wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $classes ); ?>">
-			<div class="wd-pf-title">
+		<div
+		<?php if ( $el_id ) : ?>
+		id="<?php echo esc_attr( $el_id ); ?>"
+		<?php endif; ?>
+		class="wd-pf-checkboxes wd-col wd-pf-price-range multi_select widget_price_filter wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $classes ); ?>">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html( $title ); ?>
 				</span>
@@ -600,7 +615,7 @@ if ( ! function_exists( 'woodmart_orderby_filter_template' ) ) {
 		$woodmart_product_filters_attr = (array) Global_Data::get_instance()->get_data( 'woodmart_product_filters_attr' );
 		$current_filter                = isset( $_GET['orderby'] ) ? $_GET['orderby'] : '';
 		$el_class                      = ! empty( $atts['el_class'] ) ? ' ' . $atts['el_class'] : '';
-		$el_id                         = ! empty( $atts['el_id'] ) ? $atts['el_id'] : 'wd-' . uniqid();
+		$el_id                         = ! empty( $atts['el_id'] ) ? $atts['el_id'] : '';
 		$title                         = ! empty( $atts['title'] ) ? $atts['title'] : esc_html__( 'Sort by', 'woodmart' );
 		$link                          = woodmart_filters_get_page_base_url();
 
@@ -622,10 +637,14 @@ if ( ! function_exists( 'woodmart_orderby_filter_template' ) ) {
 
 		ob_start();
 		?>
-		<div id="<?php echo esc_attr( $el_id ); ?>" class="wd-pf-checkboxes wd-col wd-pf-sortby wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $el_class ); ?>">
+		<div
+		<?php if ( $el_id ) : ?>
+		id="<?php echo esc_attr( $el_id ); ?>"
+		<?php endif; ?>
+		class="wd-pf-checkboxes wd-col wd-pf-sortby wd-event-<?php echo esc_attr( $woodmart_product_filters_attr['show_dropdown_on'] ); ?><?php echo esc_attr( $el_class ); ?>">
 			<input type="hidden" class="result-input" name="orderby" value="<?php echo ! empty( $current_filter ) ? esc_attr( $current_filter ) : ''; ?>">
 
-			<div class="wd-pf-title">
+			<div class="wd-pf-title" tabindex="0">
 				<span class="title-text">
 					<?php echo esc_html( $title ); ?>
 				</span>

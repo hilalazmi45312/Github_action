@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Local Pickup Plus lifecycle scripts.
@@ -99,7 +99,7 @@ class WC_Local_Pickup_Plus_Lifecycle extends Framework\Plugin\Lifecycle {
 
 		foreach ( $this->get_table_names() as $table_name ) {
 
-			if ( $table_name !== $wpdb->get_var( "SHOW TABLES LIKE '{$table_name}'" ) ) {
+			if ( $table_name !== $wpdb->get_var( $wpdb->prepare("SHOW TABLES LIKE %s", $wpdb->esc_like( $table_name ) ) ) ) {
 
 				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 

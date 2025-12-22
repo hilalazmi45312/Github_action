@@ -524,5 +524,7 @@
     "blog_hide_sidebar_tablet": "1",
     "blog_columns": "3",
     "quick_view": "0",
-    "shop_view": "grid"
+    "shop_view": "grid",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

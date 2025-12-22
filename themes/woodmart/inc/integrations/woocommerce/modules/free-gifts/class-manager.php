@@ -54,7 +54,9 @@ class Manager extends Singleton {
 	 * Constructor.
 	 */
 	public function init() {
-		add_action( 'init', array( $this, 'set_notices' ) );
+		if ( woodmart_get_opt( 'free_gifts_enabled', 0 ) && woodmart_get_opt( 'free_gifts_limit', 5 ) >= 1 && woodmart_woocommerce_installed() ) {
+			add_action( 'init', array( $this, 'set_notices' ) );
+		}
 	}
 
 	/**
@@ -267,6 +269,7 @@ class Manager extends Singleton {
 				case 'product_tag':
 				case 'product_brand':
 				case 'product_attr_term':
+				case 'product_shipping_class':
 					$terms = wp_get_post_terms( $product->get_id(), get_taxonomies(), array( 'fields' => 'ids' ) );
 
 					if ( $terms ) {
@@ -306,6 +309,8 @@ class Manager extends Singleton {
 			}
 		}
 
+		$is_active = apply_filters( 'woodmart_check_free_gifts_condition', $is_active, $gift_rule, $product );
+
 		return $is_active;
 	}
 
@@ -322,8 +327,21 @@ class Manager extends Singleton {
 			$totals     = WC()->cart->get_totals();
 			$cart_price = $totals['subtotal'];
 
-			if ( isset( $gift_rule['free_gifts_cart_price_type'] ) && in_array( $gift_rule['free_gifts_cart_price_type'], array( 'subtotal', 'total' ), true ) ) {
-				$cart_price = $totals[ $gift_rule['free_gifts_cart_price_type'] ];
+			if ( isset( $gift_rule['free_gifts_cart_price_type'] ) ) {
+				switch ( $gift_rule['free_gifts_cart_price_type'] ) {
+					case 'subtotal':
+						$cart_price = $totals['subtotal'];
+						break;
+					case 'subtotal_after_discount':
+						$cart_price = $totals['subtotal'] - $totals['discount_total'];
+						break;
+					case 'total':
+						$cart_price = $totals['total'];
+						break;
+					default:
+						$cart_price = $totals['subtotal'];
+						break;
+				}
 			}
 		}
 
@@ -361,6 +379,7 @@ class Manager extends Singleton {
 			case 'product_tag':
 			case 'product_brand':
 			case 'product_attr_term':
+			case 'product_shipping_class':
 				$priority = 30;
 				break;
 			case 'product':

@@ -47,16 +47,19 @@ if ( $product->is_in_stock() ) : ?>
 							// Out of stock - show only 0
 							echo '<option value="0" disabled selected>0</option>';
 						} else {
+							// Maximum 5 per add-to-cart action
+							$max_per_add = 5;
+							
 							// Determine max options based on actual stock
 							if ( $stock_quantity !== null && $stock_quantity > 0 ) {
-								// Use actual stock quantity
-								$max_options = $stock_quantity;
+								// Use actual stock quantity, capped at max_per_add
+								$max_options = min( $stock_quantity, $max_per_add );
 							} elseif ( $max_value && $max_value > 0 ) {
-								// If max purchase quantity is set, use that
-								$max_options = $max_value;
+								// If max purchase quantity is set, use that, capped at max_per_add
+								$max_options = min( $max_value, $max_per_add );
 							} else {
-								// If no stock management and no max value, allow reasonable quantity
-								$max_options = 999;
+								// If no stock management and no max value, cap at max_per_add
+								$max_options = $max_per_add;
 							}
 							
 							// Ensure minimum is at least 1
@@ -91,9 +94,9 @@ if ( $product->is_in_stock() ) : ?>
 
 		<div class="custom-cart-wrapper" data-out-of-stock="true">
 			<div class="custom-cart-actions">
-				<div class="quantity-selector">
+				<div class="quantity-selector out-of-stock">
 					<select name="quantity" class="custom-qty-dropdown" id="quantity_<?php echo esc_attr( $product->get_id() ); ?>" disabled>
-						<option value="0" disabled selected>0</option>
+						<option value="" disabled selected></option>
 					</select>
 				</div>
 				<button type="button" class="custom-add-to-basket-btn single_add_to_cart_button disabled wc-variation-is-unavailable" disabled>

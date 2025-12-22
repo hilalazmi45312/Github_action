@@ -65,9 +65,9 @@ if( ! class_exists( 'WOODMART_Widget_Price_Filter' ) ) {
 			} else {
 				$prices = $this->get_filtered_price_new();
 			}
-			
-			$min = apply_filters( 'woocommerce_price_filter_widget_min_amount', floor( $prices->min_price ) );
-			$max = apply_filters( 'woocommerce_price_filter_widget_max_amount', ceil( $prices->max_price ) );
+
+			$min = apply_filters( 'woocommerce_price_filter_widget_min_amount', ! is_null( $prices->min_price ) ? floor( $prices->min_price ) : 0 );
+			$max = apply_filters( 'woocommerce_price_filter_widget_max_amount', ! is_null( $prices->max_price ) ? ceil( $prices->max_price ) : 0 );
 
 			if ( $min === $max ) {
 				return;

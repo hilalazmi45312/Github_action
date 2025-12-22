@@ -10,7 +10,7 @@ namespace XTS\Modules\Layouts;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
-use XTS\Modules\Shipping_Progress_Bar\Main as Shipping_Progress_Bar_Module;
+use XTS\Modules\Shipping_Progress_Bar\Frontend as Shipping_Progress_Bar_Module;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Direct access not allowed.
@@ -53,7 +53,7 @@ class Shipping_Progress_Bar extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'wd-woocommerce-elements' );
+		return array( 'wd-site-elements' );
 	}
 
 	/**

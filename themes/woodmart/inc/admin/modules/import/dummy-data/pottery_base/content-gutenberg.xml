@@ -2244,7 +2244,7 @@
 <!-- wp:wd/column {"blockId":"f217ef97-11fc-4434-ade5-57e3fe8ba6ed","adjacentCount":4,"paddingTop":"40","paddingRight":"40","paddingBottom":"40","paddingLeft":"40","paddingLock":true,"adjacentCountTablet":2,"colWidthTablet":50,"paddingTopMobile":"30","paddingRightMobile":"15","paddingBottomMobile":"30","paddingLeftMobile":"15"} -->
 <div id="wd-f217ef97" class="wp-block-wd-column"><!-- wp:wd/list {"blockId":"767971e2-426e-4f69-865f-8c6cbe896fc0","iconType":"without","itemsTpFontFamily":"var(\u002d\u002dwd-title-font)","itemsTpFontSize":"16","itemsTpFontVariant":"500","itemsTpFontWeight":"500","textColorCode":"#101010","linkColorCode":"#101010","linkColorHoverCode":"#0f52d6"} -->
 <ul id="wd-767971e2" class="wp-block-wd-list wd-list wd-type-without"><!-- wp:wd/list-item {"blockId":"10339e86-3cc4-427b-8bc0-a101d1b8c3b1","iconType":"without","svg":"","image":""} -->
-<li id="wd-10339e86" class="wp-block-wd-list-item"><span class="wd-list-content"><a href="#">info@woodmart.com</a></span></li>
+<li id="wd-10339e86" class="wp-block-wd-list-item"><span class="wd-list-content"><a href="#">info@mail.com</a></span></li>
 <!-- /wp:wd/list-item -->
 
 <!-- wp:wd/list-item {"blockId":"3c16945d-5df9-4581-ba87-efd11e788da0","iconType":"without","svg":"","image":""} -->
@@ -2810,7 +2810,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"79d82a4e-3fa1-4b0a-ab10-09c0c64e2f9b","adjacentCount":2} -->
 <div id="wd-79d82a4e" class="wp-block-wd-column"><!-- wp:wd/paragraph {"blockId":"fe108adc-cb83-4a1d-8cc7-03847b2dcbb7","colorCode":"#242424","tpFontVariant":"600","tpFontWeight":"600"} -->
-<p id="wd-fe108adc" class="wp-block-wd-paragraph">info@woodmart.com</p>
+<p id="wd-fe108adc" class="wp-block-wd-paragraph">info@mail.com</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row -->
@@ -2824,7 +2824,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 
 <!-- wp:wd/column {"blockId":"2ec763f4-75bb-42d9-8866-b76759cc5be9","adjacentCount":2} -->
 <div id="wd-2ec763f4" class="wp-block-wd-column"><!-- wp:wd/paragraph {"blockId":"8f8d922e-f367-4b08-846f-78294418f448","colorCode":"#242424","tpFontVariant":"600","tpFontWeight":"600"} -->
-<p id="wd-8f8d922e" class="wp-block-wd-paragraph">learn@woodmart.com</p>
+<p id="wd-8f8d922e" class="wp-block-wd-paragraph">learn@mail.com</p>
 <!-- /wp:wd/paragraph --></div>
 <!-- /wp:wd/column --></div>
 <!-- /wp:wd/row --></div>
@@ -2896,10 +2896,6 @@ This email is a receipt for your contact form submission on our website ([_site_
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_woodmart_title_image]]></wp:meta_key>
 							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_woodmart_main_layout]]></wp:meta_key>
-							<wp:meta_value><![CDATA[full-width]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>

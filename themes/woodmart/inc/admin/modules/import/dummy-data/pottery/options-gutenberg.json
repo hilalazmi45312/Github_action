@@ -320,6 +320,7 @@
     "blog_design": "list",
     "blog_style": "flat",
     "blog_excerpt_length": "220",
+    "blog_archive_layout": "full-width",
     "grid_swatches_attribute": "pa_color",
     "label_shape": "rectangular",
     "sale_label_bg_color": {
@@ -370,5 +371,7 @@
     "shipping_progress_bar_amount": "1000",
     "shipping_progress_bar_location_card_page": "1",
     "shipping_progress_bar_location_mini_cart": "1",
-    "shipping_progress_bar_location_checkout": "1"
+    "shipping_progress_bar_location_checkout": "1",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

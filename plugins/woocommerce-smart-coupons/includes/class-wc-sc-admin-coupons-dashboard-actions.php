@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.4.0
- * @version     1.5.0
+ * @version     1.7.0
  * @package     WooCommerce Smart Coupons
  */
 
@@ -105,13 +105,7 @@ if ( ! class_exists( 'WC_SC_Admin_Coupons_Dashboard_Actions' ) ) {
 				$shop_page_id = 'cart';
 			}
 
-			$coupon_share_url = add_query_arg(
-				array(
-					'coupon-code' => $coupon_code,
-					'sc-page'     => $shop_page_id,
-				),
-				home_url( '/' )
-			);
+			$coupon_share_url = home_url( '/coupon-code/' . $post->post_title . '/' . $shop_page_id . '/' );
 
 			$actions['copy'] = '<a href="#" id="sc-click-to-copy-' . esc_attr( $coupon_id ) . '" onclick="sc_copy_to_clipboard(' . "'" . esc_js( $coupon_code ) . "'" . ')" data-clipboard-action="copy" data-clipboard-target=".row-title" title="' . __( 'Copy this coupon code', 'woocommerce-smart-coupons' ) . '" rel="permalink">' . __( 'Copy', 'woocommerce-smart-coupons' ) . '</a>';
 
@@ -133,24 +127,28 @@ if ( ! class_exists( 'WC_SC_Admin_Coupons_Dashboard_Actions' ) ) {
 		 * @param int $new_id ID of duplicated coupon.
 		 */
 		public function woocommerce_duplicate_coupon_post_meta( $id, $new_id ) {
-			global $wpdb;
+			try {
+				global $wpdb;
 
-			$meta_keys = array( 'expiry_date', 'usage_count', '_used_by', 'date_expires' );
+				$meta_keys = array( 'expiry_date', 'usage_count', '_used_by', 'date_expires' );
 
-			$how_many     = count( $meta_keys );
-			$placeholders = array_fill( 0, $how_many, '%s' );
+				$how_many     = count( $meta_keys );
+				$placeholders = array_fill( 0, $how_many, '%s' );
 
-			$post_meta_infos = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=%d AND meta_key NOT IN ( " . implode( ',', $placeholders ) . ' )', array_merge( array( $id ), $meta_keys ) ) ); // phpcs:ignore
+				$post_meta_infos = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=%d AND meta_key NOT IN ( " . implode( ',', $placeholders ) . ' )', array_merge( array( $id ), $meta_keys ) ) ); // phpcs:ignore
 
-			if ( 0 !== count( $post_meta_infos ) ) {
-				$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
-				foreach ( $post_meta_infos as $meta_info ) {
-						$meta_key        = $meta_info->meta_key;
-						$meta_value      = $meta_info->meta_value;
-						$sql_query_sel[] = $wpdb->prepare( 'SELECT %d, %s, %s', $new_id, $meta_key, $meta_value );
+				if ( 0 !== count( $post_meta_infos ) ) {
+					$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
+					foreach ( $post_meta_infos as $meta_info ) {
+							$meta_key        = $meta_info->meta_key;
+							$meta_value      = $meta_info->meta_value;
+							$sql_query_sel[] = $wpdb->prepare( 'SELECT %d, %s, %s', $new_id, $meta_key, $meta_value );
+					}
+					$sql_query .= implode( ' UNION ALL ', $sql_query_sel );
+					$wpdb->query( $sql_query ); // phpcs:ignore
 				}
-				$sql_query .= implode( ' UNION ALL ', $sql_query_sel );
-				$wpdb->query( $sql_query ); // phpcs:ignore
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -183,61 +181,67 @@ if ( ! class_exists( 'WC_SC_Admin_Coupons_Dashboard_Actions' ) ) {
 		 * @return int $new_post_id
 		 */
 		public function woocommerce_create_duplicate_from_coupon( $post, $parent = 0, $post_status = '' ) {
-			global $wpdb;
+			try {
+				global $wpdb;
 
-			$new_post_author   = wp_get_current_user();
-			$new_post_date     = current_time( 'mysql' );
-			$new_post_date_gmt = get_gmt_from_date( $new_post_date );
+				$new_post_author   = wp_get_current_user();
+				$new_post_date     = current_time( 'mysql' );
+				$new_post_date_gmt = get_gmt_from_date( $new_post_date );
 
-			if ( $parent > 0 ) {
-				$post_parent = $parent;
-				$post_status = $post_status ? $post_status : 'publish';
-				$suffix      = '';
-			} else {
-				$post_parent = $post->post_parent;
-				$post_status = $post_status ? $post_status : 'draft';
-				$suffix      = __( '(Copy)', 'woocommerce-smart-coupons' );
+				if ( $parent > 0 ) {
+					$post_parent = $parent;
+					$post_status = $post_status ? $post_status : 'publish';
+					$suffix      = '';
+				} else {
+					$post_parent = $post->post_parent;
+					$post_status = $post_status ? $post_status : 'draft';
+					$suffix      = __( '(Copy)', 'woocommerce-smart-coupons' );
+				}
+
+				$new_post_type         = $post->post_type;
+				$post_content          = str_replace( "'", "''", $post->post_content );
+				$post_content_filtered = str_replace( "'", "''", $post->post_content_filtered );
+				$post_excerpt          = str_replace( "'", "''", $post->post_excerpt );
+				$post_title            = strtolower( str_replace( "'", "''", $post->post_title ) . $suffix );
+				$post_name             = str_replace( "'", "''", $post->post_name );
+				$comment_status        = str_replace( "'", "''", $post->comment_status );
+				$ping_status           = str_replace( "'", "''", $post->ping_status );
+
+				$wpdb->insert(
+					$wpdb->posts,
+					array(
+						'post_author'           => $new_post_author->ID,
+						'post_date'             => $new_post_date,
+						'post_date_gmt'         => $new_post_date_gmt,
+						'post_content'          => $post_content,
+						'post_content_filtered' => $post_content_filtered,
+						'post_title'            => $post_title,
+						'post_excerpt'          => $post_excerpt,
+						'post_status'           => $post_status,
+						'post_type'             => $new_post_type,
+						'comment_status'        => $comment_status,
+						'ping_status'           => $ping_status,
+						'post_password'         => $post->post_password,
+						'to_ping'               => $post->to_ping,
+						'pinged'                => $post->pinged,
+						'post_modified'         => $new_post_date,
+						'post_modified_gmt'     => $new_post_date_gmt,
+						'post_parent'           => 0, // No need to link it with any other coupon.
+						'menu_order'            => $post->menu_order,
+						'post_mime_type'        => $post->post_mime_type,
+					)
+				); // WPCS: db call ok.
+
+				$new_post_id = $wpdb->insert_id;
+
+				$this->woocommerce_duplicate_coupon_post_taxonomies( $post->ID, $new_post_id, $post->post_type );
+
+				$this->woocommerce_duplicate_coupon_post_meta( $post->ID, $new_post_id );
+
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$new_post_id = 0;
 			}
-
-			$new_post_type         = $post->post_type;
-			$post_content          = str_replace( "'", "''", $post->post_content );
-			$post_content_filtered = str_replace( "'", "''", $post->post_content_filtered );
-			$post_excerpt          = str_replace( "'", "''", $post->post_excerpt );
-			$post_title            = strtolower( str_replace( "'", "''", $post->post_title ) . $suffix );
-			$post_name             = str_replace( "'", "''", $post->post_name );
-			$comment_status        = str_replace( "'", "''", $post->comment_status );
-			$ping_status           = str_replace( "'", "''", $post->ping_status );
-
-			$wpdb->insert(
-				$wpdb->posts,
-				array(
-					'post_author'           => $new_post_author->ID,
-					'post_date'             => $new_post_date,
-					'post_date_gmt'         => $new_post_date_gmt,
-					'post_content'          => $post_content,
-					'post_content_filtered' => $post_content_filtered,
-					'post_title'            => $post_title,
-					'post_excerpt'          => $post_excerpt,
-					'post_status'           => $post_status,
-					'post_type'             => $new_post_type,
-					'comment_status'        => $comment_status,
-					'ping_status'           => $ping_status,
-					'post_password'         => $post->post_password,
-					'to_ping'               => $post->to_ping,
-					'pinged'                => $post->pinged,
-					'post_modified'         => $new_post_date,
-					'post_modified_gmt'     => $new_post_date_gmt,
-					'post_parent'           => 0, // No need to link it with any other coupon.
-					'menu_order'            => $post->menu_order,
-					'post_mime_type'        => $post->post_mime_type,
-				)
-			); // WPCS: db call ok.
-
-			$new_post_id = $wpdb->insert_id;
-
-			$this->woocommerce_duplicate_coupon_post_taxonomies( $post->ID, $new_post_id, $post->post_type );
-
-			$this->woocommerce_duplicate_coupon_post_meta( $post->ID, $new_post_id );
 
 			return $new_post_id;
 		}
@@ -249,13 +253,18 @@ if ( ! class_exists( 'WC_SC_Admin_Coupons_Dashboard_Actions' ) ) {
 		 * @return object $post Duplicated post object.
 		 */
 		public function woocommerce_get_coupon_to_duplicate( $id ) {
-			global $wpdb;
-			$post = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID=%d", $id ) ); // WPCS: cache ok, db call ok.
-			if ( isset( $post->post_type ) && 'revision' === $post->post_type ) {
-				$id   = $post->post_parent;
+			try {
+				global $wpdb;
 				$post = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID=%d", $id ) ); // WPCS: cache ok, db call ok.
+				if ( isset( $post->post_type ) && 'revision' === $post->post_type ) {
+					$id   = $post->post_parent;
+					$post = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID=%d", $id ) ); // WPCS: cache ok, db call ok.
+				}
+				return $post[0];
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				return null;
 			}
-			return $post[0];
 		}
 
 		/**
@@ -293,34 +302,39 @@ if ( ! class_exists( 'WC_SC_Admin_Coupons_Dashboard_Actions' ) ) {
 		 * Function to call function to create duplicate coupon
 		 */
 		public function woocommerce_duplicate_coupon_action() {
-			$coupon_id = ( ! empty( $_REQUEST['post'] ) ) ? absint( $_REQUEST['post'] ) : 0;
+			try {
+				$coupon_id = ( ! empty( $_REQUEST['post'] ) ) ? absint( $_REQUEST['post'] ) : 0;
 
-			check_admin_referer( 'woocommerce-duplicate-coupon_' . $coupon_id );
+				check_admin_referer( 'woocommerce-duplicate-coupon_' . $coupon_id );
 
-			$action = ( ! empty( $_REQUEST['action'] ) ) ? wc_clean( wp_unslash( $_REQUEST['action'] ) ) : ''; // phpcs:ignore
+				$action = ( ! empty( $_REQUEST['action'] ) ) ? wc_clean( wp_unslash( $_REQUEST['action'] ) ) : ''; // phpcs:ignore
 
-			if ( 'duplicate_coupon' !== $action ) {
-				return;
-			}
-
-			if ( $this->is_wc_gte_30() ) {
-				$coupon = new WC_Coupon( $coupon_id );
-
-				if ( false === $coupon ) {
-					/* translators: %s: coupon id */
-					wp_die( sprintf( esc_html__( 'Coupon creation failed, could not find original coupon: %s', 'woocommerce-smart-coupons' ), esc_html( $coupon_id ) ) );
+				if ( 'duplicate_coupon' !== $action ) {
+					return;
 				}
 
-				$duplicate = $this->coupon_duplicate( $coupon );
+				if ( $this->is_wc_gte_30() ) {
+					$coupon = new WC_Coupon( $coupon_id );
 
-				// Hook rename to match other woocommerce_coupon_* hooks, and to move away from depending on a response from the wp_posts table.
-				do_action( 'wc_sc_duplicate_coupon', $duplicate, $coupon );
+					if ( false === $coupon ) {
+						/* translators: %s: coupon id */
+						wp_die( sprintf( esc_html__( 'Coupon creation failed, could not find original coupon: %s', 'woocommerce-smart-coupons' ), esc_html( $coupon_id ) ) );
+					}
 
-				// Redirect to the edit screen for the new draft page.
-				wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $duplicate->get_id() ) );
-				exit;
-			} else {
-				$this->woocommerce_duplicate_coupon();
+					$duplicate = $this->coupon_duplicate( $coupon );
+
+					// Hook rename to match other woocommerce_coupon_* hooks, and to move away from depending on a response from the wp_posts table.
+					do_action( 'wc_sc_duplicate_coupon', $duplicate, $coupon );
+
+					// Redirect to the edit screen for the new draft page.
+					wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $duplicate->get_id() ) );
+					exit;
+				} else {
+					$this->woocommerce_duplicate_coupon();
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				wp_die( esc_html__( 'An unexpected error occurred while duplicating the coupon. Please try again.', 'woocommerce-smart-coupons' ) );
 			}
 		}
 
@@ -338,65 +352,70 @@ if ( ! class_exists( 'WC_SC_Admin_Coupons_Dashboard_Actions' ) ) {
 			 * @param array $existing_meta_keys The meta keys that the coupon already has.
 			 * @since 7.2.0
 			 */
-			$meta_to_exclude = array_filter(
-				apply_filters(
-					'wc_sc_duplicate_coupon_exclude_meta',
-					array(),
-					array_map(
-						function ( $meta ) {
-							return $meta->key;
-						},
-						$coupon->get_meta_data()
+			try {
+				$meta_to_exclude = array_filter(
+					apply_filters(
+						'wc_sc_duplicate_coupon_exclude_meta',
+						array(),
+						array_map(
+							function ( $meta ) {
+								return $meta->key;
+							},
+							$coupon->get_meta_data()
+						)
 					)
-				)
-			);
-
-			$duplicate = clone $coupon;
-			$duplicate->set_id( 0 );
-			/* translators: %s contains the code of the original coupon. */
-			$duplicate->set_code( sprintf( '%s-copy', $duplicate->get_code() ) );
-			$duplicate->set_date_created( null );
-			$duplicate->set_usage_count( 0 );
-			$duplicate->set_used_by( array() );
-			$duplicate->set_date_expires( null );
-
-			if ( $this->is_wc_greater_than( '6.1.2' ) && $this->is_callable( $duplicate, 'set_status' ) ) {
-				$duplicate->set_status( 'draft' );
-			}
-
-			foreach ( $meta_to_exclude as $meta_key ) {
-				$duplicate->delete_meta_data( $meta_key );
-			}
-
-			/**
-			 * This action can be used to modify the object further before it is created - it will be passed by reference.
-			 *
-			 * @since 3.0
-			 */
-			do_action( 'wc_sc_coupon_duplicate_before_save', $duplicate, $coupon );
-
-			// Save parent coupon.
-			$duplicate_id = $duplicate->save();
-
-			$duplicate = new WC_Coupon( $duplicate );
-
-			$this->woocommerce_duplicate_coupon_post_taxonomies( $coupon->get_id(), $duplicate_id, 'shop_coupon' );
-
-			if ( $this->is_wc_greater_than( '6.1.2' ) && $this->is_callable( $duplicate, 'get_status' ) ) {
-				$coupon_status = $duplicate->get_status();
-			} else {
-				$coupon_status = get_post_status( $duplicate_id );
-			}
-
-			if ( ! empty( $duplicate_id ) && 'draft' !== $coupon_status ) {
-				$args = array(
-					'ID'          => $duplicate_id,
-					'post_status' => 'draft',
 				);
-				wp_update_post( $args ); // Because $coupon->set_status( 'draft' ) not working.
-			}
 
-			return new WC_Coupon( $duplicate_id );
+				$duplicate = clone $coupon;
+				$duplicate->set_id( 0 );
+				/* translators: %s contains the code of the original coupon. */
+				$duplicate->set_code( sprintf( '%s-copy', $duplicate->get_code() ) );
+				$duplicate->set_date_created( null );
+				$duplicate->set_usage_count( 0 );
+				$duplicate->set_used_by( array() );
+				$duplicate->set_date_expires( null );
+
+				if ( $this->is_wc_greater_than( '6.1.2' ) && $this->is_callable( $duplicate, 'set_status' ) ) {
+					$duplicate->set_status( 'draft' );
+				}
+
+				foreach ( $meta_to_exclude as $meta_key ) {
+					$duplicate->delete_meta_data( $meta_key );
+				}
+
+				/**
+				 * This action can be used to modify the object further before it is created - it will be passed by reference.
+				 *
+				 * @since 3.0
+				 */
+				do_action( 'wc_sc_coupon_duplicate_before_save', $duplicate, $coupon );
+
+				// Save parent coupon.
+				$duplicate_id = $duplicate->save();
+
+				$duplicate = new WC_Coupon( $duplicate );
+
+				$this->woocommerce_duplicate_coupon_post_taxonomies( $coupon->get_id(), $duplicate_id, 'shop_coupon' );
+
+				if ( $this->is_wc_greater_than( '6.1.2' ) && $this->is_callable( $duplicate, 'get_status' ) ) {
+					$coupon_status = $duplicate->get_status();
+				} else {
+					$coupon_status = get_post_status( $duplicate_id );
+				}
+
+				if ( ! empty( $duplicate_id ) && 'draft' !== $coupon_status ) {
+					$args = array(
+						'ID'          => $duplicate_id,
+						'post_status' => 'draft',
+					);
+					wp_update_post( $args ); // Because $coupon->set_status( 'draft' ) not working.
+				}
+
+				return new WC_Coupon( $duplicate_id );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				return null;
+			}
 		}
 
 		/**

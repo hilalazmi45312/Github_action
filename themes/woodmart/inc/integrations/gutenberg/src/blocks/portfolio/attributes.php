@@ -8,6 +8,17 @@ if ( ! function_exists( 'wd_get_block_portfolio_attrs' ) ) {
 
 		$attr->add_attr(
 			array(
+				'show_title'           => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
+				'post_type'            => array(
+					'type'    => 'string',
+					'default' => 'portfolio',
+				),
+				'include'              => array(
+					'type' => 'string',
+				),
 				'layout'               => array(
 					'type'    => 'string',
 					'default' => 'grid',

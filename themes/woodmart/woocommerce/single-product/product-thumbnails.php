@@ -30,7 +30,7 @@ $classes       = 'wd-carousel-item';
 $attachment_ids = $product->get_gallery_image_ids();
 
 if ( $attachment_ids && $product->get_image_id() ) {
-	foreach ( $attachment_ids as $attachment_id ) {
+	foreach ( $attachment_ids as $index => $attachment_id ) {
 		$gallery_thumbnail = wc_get_image_size( 'gallery_thumbnail' );
 		$thumbnail_size    = apply_filters(
 			'woocommerce_gallery_thumbnail_size',
@@ -41,6 +41,8 @@ if ( $attachment_ids && $product->get_image_id() ) {
 		);
 		$full_size_image   = wp_get_attachment_image_src( $attachment_id, 'full' );
 		$thumbnail         = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
+		$alt_text          = trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) );
+		$alt_text          = ( empty( $alt_text ) && ( $product instanceof WC_Product ) ) ? woocommerce_get_alt_from_product_title_and_position( $product->get_title(), false, $index ) : $alt_text;
 
 		$attributes = array(
 			'title'                   => get_post_field( 'post_title', $attachment_id ),
@@ -50,13 +52,14 @@ if ( $attachment_ids && $product->get_image_id() ) {
 			'data-large_image_width'  => isset( $full_size_image[1] ) ? $full_size_image[1] : '',
 			'data-large_image_height' => isset( $full_size_image[2] ) ? $full_size_image[2] : '',
 			'class'                   => apply_filters( 'woodmart_single_product_gallery_image_class', '' ),
+			'alt'                     => $alt_text,
 		);
 
 		ob_start();
 
 		?>
 		<div class="<?php echo esc_attr( $classes ); ?>">
-			<figure data-thumb="<?php echo esc_url( isset( $thumbnail[0] ) ? $thumbnail[0] : '' ); ?>" class="woocommerce-product-gallery__image">
+			<figure data-thumb="<?php echo esc_url( isset( $thumbnail[0] ) ? $thumbnail[0] : '' ); ?>" data-thumb-alt="<?php echo esc_attr( $alt_text ); ?>" class="woocommerce-product-gallery__image">
 				<a data-elementor-open-lightbox="no" href="<?php echo esc_url( isset( $full_size_image[0] ) ? $full_size_image[0] : '' ); ?>">
 					<?php echo apply_filters( 'woodmart_get_single_product_thumbnails', wp_get_attachment_image( $attachment_id, 'woocommerce_single', false, $attributes ), $attachment_id, $attributes ); // phpcs:ignore ?>
 				</a>

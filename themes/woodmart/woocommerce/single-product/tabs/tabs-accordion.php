@@ -41,6 +41,7 @@ woodmart_enqueue_js_script( 'accordion-element' );
 			<?php
 			$title_wrapper_classes  = ' tab-title-' . $key;
 			$title_wrapper_classes .= $args['builder_title_classes'];
+			$title_wrapper_classes .= ' wd-role-btn';
 			$content_classes        = ' woocommerce-Tabs-panel--' . $key;
 
 			if ( isset( $args['builder_content_classes'] ) && ! empty( $args['builder_content_classes'] ) ) {
@@ -63,7 +64,7 @@ woodmart_enqueue_js_script( 'accordion-element' );
 			}
 			?>
 			<div class="wd-accordion-item">
-				<div id="tab-title-<?php echo esc_attr( $key ); ?>" class="wd-accordion-title<?php echo esc_attr( $title_wrapper_classes ); ?>" data-accordion-index="<?php echo esc_attr( $key ); ?>">
+				<div id="tab-title-<?php echo esc_attr( $key ); ?>" class="wd-accordion-title<?php echo esc_attr( $title_wrapper_classes ); ?>" data-accordion-index="<?php echo esc_attr( $key ); ?>" tabindex="0">
 					<div class="wd-accordion-title-text">
 						<?php if ( isset( $product_tab['title'] ) ) : ?>
 							<span>

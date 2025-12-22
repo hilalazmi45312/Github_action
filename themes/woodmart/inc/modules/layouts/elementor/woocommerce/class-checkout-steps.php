@@ -52,7 +52,7 @@ class Checkout_Steps extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'wd-woocommerce-elements' );
+		return array( 'wd-site-elements' );
 	}
 
 	/**

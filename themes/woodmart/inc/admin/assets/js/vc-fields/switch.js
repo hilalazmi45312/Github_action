@@ -3,7 +3,7 @@
         $('.xts-switcher-btn').each(function() {
             var $switcherBtn = $(this);
 
-            if ( $switcherBtn.hasClass('wd-inited') ) {
+            if ( $switcherBtn.hasClass('wd-inited') || $switcherBtn.parents('.xts-metaboxes').length > 0 ) {
                 return;
             }
 

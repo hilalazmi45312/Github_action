@@ -26,6 +26,17 @@ class Users_Table extends WP_List_Table {
 	protected $db_storage;
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		if ( ! woodmart_get_opt( 'waitlist_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
+		parent::__construct();
+	}
+
+	/**
 	 * Define what data to show on each column of the table.
 	 *
 	 * @param array  $item        Data.
@@ -112,6 +123,16 @@ class Users_Table extends WP_List_Table {
 					array(
 						'page'     => 'xts-waitlist-page',
 						'_user_id' => $item['user_id'],
+					),
+					admin_url( 'edit.php?post_type=product' )
+				)
+			);
+		} elseif ( ! empty( $item['user_email'] ) ) {
+			$view_waitlist_url = esc_url(
+				add_query_arg(
+					array(
+						'page'        => 'xts-waitlist-page',
+						'_user_email' => $item['user_email'],
 					),
 					admin_url( 'edit.php?post_type=product' )
 				)
@@ -288,7 +309,20 @@ class Users_Table extends WP_List_Table {
 			$data[] = $item;
 		}
 
-		usort( $data, array( $this, 'sort_data' ) );
+		$order_by = 'created_date';
+		$order    = 'desc';
+
+		// If orderby is set, use this as the sort column.
+		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
+			$order_by = $_GET['orderby']; // phpcs:ignore.
+		}
+
+		// If order is set use this as the order.
+		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
+			$order = $_GET['order']; // phpcs:ignore.
+		}
+
+		woodmart_sort_data( $data, $order_by, $order );
 
 		$per_page     = ! empty( get_user_meta( $user_id, 'waitlist_per_page', true ) ) ? get_user_meta( $user_id, 'waitlist_per_page', true ) : 20;
 		$current_page = $this->get_pagenum();
@@ -356,37 +390,21 @@ class Users_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Allows you to sort the data by the variables set in the $_GET.
+	 * Extra controls to be displayed between bulk actions and pagination.
 	 *
-	 * @param array $a First array.
-	 * @param array $b Next array.
-	 * @return int
+	 * @param string $which Position of the extra controls (top or bottom).
 	 */
-	private function sort_data( $a, $b ) {
-		// Set defaults.
-		$order_by = 'created_date';
-		$order    = 'desc';
-
-		// If orderby is set, use this as the sort column.
-		if ( ! empty( $_GET['orderby'] ) ) { // phpcs:ignore.
-			$order_by = $_GET['orderby']; // phpcs:ignore.
+	protected function extra_tablenav( $which ) {
+		if ( 'top' === $which ) {
+			if ( isset( $_GET['tab'] ) && 'users' === $_GET['tab'] ) {
+				echo '<input type="hidden" name="tab" value="users" />';
+			}
+			if ( isset( $_GET['product_id'] ) ) {
+				echo '<input type="hidden" name="product_id" value="' . esc_attr( $_GET['product_id'] ) . '" />';
+			}
+			if ( isset( $_GET['variation_id'] ) ) {
+				echo '<input type="hidden" name="variation_id" value="' . esc_attr( $_GET['variation_id'] ) . '" />';
+			}
 		}
-
-		// If order is set use this as the order.
-		if ( ! empty( $_GET['order'] ) ) { // phpcs:ignore.
-			$order = $_GET['order']; // phpcs:ignore.
-		}
-
-		$result = strcmp( $a[ $order_by ], $b[ $order_by ] );
-
-		if ( is_numeric( $a[ $order_by ] ) && is_numeric( $a[ $order_by ] ) ) {
-			$result = $a[ $order_by ] - $b[ $order_by ];
-		}
-
-		if ( 'asc' === $order ) {
-			return $result;
-		}
-
-		return -$result;
 	}
 }

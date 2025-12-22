@@ -31,8 +31,8 @@ class ProductLoopController
         // Ensure assets are available for AJAX requests
         add_action('wp_ajax_woodmart_get_products_shortcode', [self::class, 'enqueue_styles'], 1);
         add_action('wp_ajax_nopriv_woodmart_get_products_shortcode', [self::class, 'enqueue_styles'], 1);
-        add_action('wp_ajax_woodmart_get_products_tab_shortcode', [self::class, 'enqueue_styles'], 1);
-        add_action('wp_ajax_nopriv_woodmart_get_products_tab_shortcode', [self::class, 'enqueue_styles'], 1);
+        // add_action('wp_ajax_woodmart_get_products_tab_shortcode', [self::class, 'enqueue_styles'], 1);
+        // add_action('wp_ajax_nopriv_woodmart_get_products_tab_shortcode', [self::class, 'enqueue_styles'], 1);
 
         // AJAX handlers
         add_action('wp_ajax_get_variation_image', [self::class, 'ajax_get_variation_image']);
@@ -91,42 +91,57 @@ class ProductLoopController
     }
 
     /**
-     * Enqueue custom styles and scripts for product display
-     */
-    public static function enqueue_styles()
-    {
-        // Always enqueue product-loop assets globally to ensure they're available for wc_get_template_part
-        wp_enqueue_style(
-            'senheng-product-loop',
-            SENHENG_CORE_URL . 'assets/css/product-loop.css',
-            [],
-            '1.0.0'
-        );
+ * Enqueue custom styles and scripts for product display
+ */
+public static function enqueue_styles()
+{
+    static $enqueued = false;
+    
+    // Prevent duplicate enqueuing
+    if ($enqueued) {
+        return;
+    }
+    $enqueued = true;
+    
+    // Use file modification time for cache busting
+    $css_file = SENHENG_CORE_PATH . 'assets/css/product-loop.css';
+    $js_file = SENHENG_CORE_PATH . 'assets/js/product-loop.js';
+    $css_version = file_exists($css_file) ? filemtime($css_file) : '1.0.0';
+    $js_version = file_exists($js_file) ? filemtime($js_file) : '1.0.0';
+    
+    // Enqueue CSS
+    wp_enqueue_style(
+        'senheng-product-loop',
+        SENHENG_CORE_URL . 'assets/css/product-loop.css',
+        [],
+        $css_version
+    );
 
-        wp_enqueue_script(
-            'senheng-product-loop',
-            SENHENG_CORE_URL . 'assets/js/product-loop.js',
-            ['jquery', 'wc-add-to-cart'],
-            '1.0.0',
-            true
-        );
+    // Enqueue JS with defer strategy for better performance
+    wp_enqueue_script(
+        'senheng-product-loop',
+        SENHENG_CORE_URL . 'assets/js/product-loop.js',
+        ['jquery', 'wc-add-to-cart'],
+        $js_version,
+        ['in_footer' => true, 'strategy' => 'defer']
+    );
 
-        // Enqueue WoodMart extras on relevant pages
-        $is_ajax_request = function_exists('woodmart_is_woo_ajax') ? woodmart_is_woo_ajax() : false;
-        $is_doing_ajax = wp_doing_ajax();
-        
-        if (is_woocommerce() || $is_ajax_request || is_search() || $is_doing_ajax) {
-            // WoodMart extras
-            if (function_exists('woodmart_enqueue_js_script')) {
-                woodmart_enqueue_js_script('swatches-on-grid');
-                woodmart_enqueue_js_script('swatches-variations');
-            }
+    // Enqueue WoodMart extras on relevant pages
+    $is_ajax_request = function_exists('woodmart_is_woo_ajax') ? woodmart_is_woo_ajax() : false;
+    $is_doing_ajax = wp_doing_ajax();
+    
+    if (is_woocommerce() || $is_ajax_request || is_search() || $is_doing_ajax) {
+        // WoodMart extras
+        if (function_exists('woodmart_enqueue_js_script')) {
+            woodmart_enqueue_js_script('swatches-on-grid');
+            woodmart_enqueue_js_script('swatches-variations');
+        }
 
-            if (function_exists('woodmart_enqueue_inline_style')) {
-                woodmart_enqueue_inline_style('woo-mod-swatches-base');
-            }
+        if (function_exists('woodmart_enqueue_inline_style')) {
+            woodmart_enqueue_inline_style('woo-mod-swatches-base');
         }
     }
+}
 
 
 
@@ -763,7 +778,7 @@ class ProductLoopController
              if (class_exists('SenhengCore\Controllers\ScoinController') && method_exists('SenhengCore\Controllers\ScoinController', 'get_scoin_icon_url')) {
                  $icon_url = ScoinController::get_scoin_icon_url();
              } else {
-                 $icon_url = defined('SENHENG_CORE_ASSETS_URL') ? SENHENG_CORE_ASSETS_URL . 'uploads/s-coin-label.png' : '';
+                 $icon_url = defined('SENHENG_CORE_ASSETS_URL') ? SENHENG_CORE_ASSETS_URL . 'uploads/s-coin-label-1.webp' : '';
              }
 
             $s_coin_display = ((float) $s_coin_cashback == floor((float) $s_coin_cashback)) ? (string) (int) $s_coin_cashback : number_format((float) $s_coin_cashback, 1);

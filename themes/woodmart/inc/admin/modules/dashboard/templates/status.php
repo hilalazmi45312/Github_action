@@ -58,6 +58,26 @@
 					<?php echo defined( 'WP_DEBUG' ) && WP_DEBUG ? esc_html__( 'Enabled', 'woodmart' ) : esc_html__( 'Disabled', 'woodmart' ); ?>
 				</div>
 			</div>
+			
+			<?php if ( get_option( 'woodmart_translations_version', '' ) ) : ?>
+			<div class="xts-table-row">
+				<div>
+					<?php esc_html_e( 'Installed languages', 'woodmart' ); ?>:
+				</div>
+				<div>
+					<?php echo implode( ', ', get_option( 'woodmart_installed_languages', array() ) ); ?>
+				</div>
+			</div>
+			<?php endif; ?>
+
+			<div class="xts-table-row">
+				<div>
+					<?php esc_html_e( 'Translations version', 'woodmart' ); ?>:
+				</div>
+				<div>
+					<?php echo esc_html( get_option( 'woodmart_translations_version', '' ) ? get_option( 'woodmart_translations_version', '' ) : esc_html__( 'Not installed', 'woodmart' ) ); ?>
+				</div>
+			</div>
 		</div>
 		<h4>
 			<?php esc_html_e( 'Server', 'woodmart' ); ?>
@@ -236,6 +256,26 @@
 						<?php echo esc_html( count( (array) wp_get_active_and_valid_plugins() ) + count( (array) wp_get_active_network_plugins() ) ); ?>
 					<?php else : ?>
 						<?php echo esc_html( count( (array) wp_get_active_and_valid_plugins() ) ); ?>
+					<?php endif; ?>
+				</div>
+			</div>
+
+			<div class="xts-table-row">
+				<div>
+					<?php esc_html_e( 'Filesystem Method', 'woodmart' ); ?>:
+				</div>
+				<div>
+					<?php
+					$fs_method = get_filesystem_method(); // phpcs:ignore.
+
+					echo esc_html( $fs_method );
+					?>
+					<?php if ( 'direct' !== $fs_method ) : ?>
+						<div class="xts-status-error">
+							<span>
+								<?php esc_html_e( 'It is recommended to set FS_METHOD to "direct" in wp-config.php file for proper theme functionality.', 'woodmart' ); ?>
+							</span>
+						</div>
 					<?php endif; ?>
 				</div>
 			</div>

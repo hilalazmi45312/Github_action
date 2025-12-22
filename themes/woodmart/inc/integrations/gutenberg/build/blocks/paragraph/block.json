@@ -8,6 +8,11 @@
   "keywords": [
     "text"
   ],
+  "usesContext": [
+    "postId",
+    "postType",
+    "queryId"
+  ],
   "supports": {
     "splitting": true,
     "__experimentalSelector": ".wp-block-wd-paragraph",

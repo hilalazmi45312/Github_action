@@ -182,7 +182,7 @@ if ( ! class_exists( 'WOODMART_Widget_Layered_Nav' ) ) {
 				return;
 			}
 
-			if ( 'product_brand' === $instance['attribute'] && taxonomy_exists( 'product_brand' ) ) {
+			if ( isset( $instance['attribute'] ) && 'product_brand' === $instance['attribute'] && taxonomy_exists( 'product_brand' ) ) {
 				$taxonomy = 'product_brand';
 			}
 
@@ -243,6 +243,8 @@ if ( ! class_exists( 'WOODMART_Widget_Layered_Nav' ) ) {
 				if ( 'dropdown' === $display ) {
 					wp_enqueue_script( 'selectWoo' );
 					wp_enqueue_style( 'select2' );
+					woodmart_enqueue_inline_style( 'woo-mod-widget-dropdown-form' );
+
 					$found = $this->layered_nav_dropdown( $terms, $taxonomy, $query_type );
 				} else {
 					$found = $this->layered_nav_list( $terms, $taxonomy, $query_type, $instance );
@@ -328,7 +330,7 @@ if ( ! class_exists( 'WOODMART_Widget_Layered_Nav' ) ) {
 
 				woodmart_enqueue_js_script( 'filter-dropdowns' );
 
-				echo '<form method="get" action="' . esc_url( $form_action ) . '" class="wd-widget-layered-nav-dropdown-form">';
+				echo '<form method="get" action="' . esc_url( $form_action ) . '" class="wd-widget-layered-nav-dropdown-form wd-filter-form">';
 				echo '<select class="wd-widget-layered-nav-dropdown woodmart_dropdown_layered_nav_' . esc_attr( $taxonomy_filter_name ) . '"' . ( $multiple ? 'multiple="multiple"' : '' ) . ' data-placeholder="' . esc_attr( $any_label ) . '" data-noResults="' . esc_html__( 'No matches found', 'woodmart' ) . '" data-slug="' . esc_attr( $taxonomy_filter_name ) . '">';
 				echo '<option value="">' . esc_html( $any_label ) . '</option>';
 
@@ -535,6 +537,8 @@ if ( ! class_exists( 'WOODMART_Widget_Layered_Nav' ) ) {
 			}
 
 			if ( 'on' === $checkboxes ) {
+				woodmart_enqueue_inline_style( 'woo-mod-widget-checkboxes' );
+
 				$class .= ' wd-checkboxes-on';
 			}
 
@@ -677,7 +681,11 @@ if ( ! class_exists( 'WOODMART_Widget_Layered_Nav' ) ) {
 
 				echo '<li class="wc-layered-nav-term' . esc_attr( $class ) . '">';
 
-				echo ( true == $option_is_set || $count > 0 ) ? '<a rel="nofollow noopener" href="' . esc_url( apply_filters( 'woocommerce_layered_nav_link', $link ) ) . '" class="layered-nav-link">' : '<span>';
+				if ( $option_is_set || $count > 0 ) {
+					echo '<a rel="nofollow noopener" href="' . esc_url( apply_filters( 'woocommerce_layered_nav_link', $link ) ) . '" class="layered-nav-link" aria-label="' . esc_attr( sprintf( __( 'Filter by %s', 'woodmart' ), $term->name ) ) . '">';
+				} else {
+					echo '<span>';
+				}
 
 				if ( $swatch_style || $swatch_text || $swatch_image ) {
 					echo '<span class="wd-swatch' . esc_attr( $filter_classes ) . '">';
@@ -803,7 +811,7 @@ if ( ! class_exists( 'WOODMART_Widget_Layered_Nav' ) ) {
 				echo '<input name="query_type_' . esc_attr( $taxonomy_filter_name ) . '" type="hidden" value="' . esc_attr( $query_type ) . '">';
 			}
 
-			echo '<div class="wd-pf-title"><span class="title-text">' . esc_html( $title ) . '</span>';
+			echo '<div class="wd-pf-title" tabindex="0"><span class="title-text">' . esc_html( $title ) . '</span>';
 
 			if ( 'yes' === $show_selected_values ) {
 				echo '<ul class="wd-pf-results">';

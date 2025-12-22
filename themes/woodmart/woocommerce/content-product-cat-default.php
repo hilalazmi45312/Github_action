@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="wd-cat-inner wrapp-category">
 		<div class="wd-cat-thumb category-image-wrapp">
-			<a class="wd-cat-image category-image" href="<?php echo esc_url( get_term_link( $args['category']->slug, 'product_cat' ) ); ?>" aria-label="<?php esc_html_e( 'Category image', 'woodmart' ); ?>">
+			<a class="wd-cat-image category-image" href="<?php echo esc_url( get_term_link( $args['category']->slug, 'product_cat' ) ); ?>" aria-label="<?php echo esc_html( $args['category']->name ); ?>">
 				<?php do_action( 'woocommerce_before_subcategory', $args['category'] ); ?>
 
 				<?php

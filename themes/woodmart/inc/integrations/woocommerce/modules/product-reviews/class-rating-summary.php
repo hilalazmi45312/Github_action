@@ -8,6 +8,7 @@
 namespace XTS\Modules\Product_Reviews;
 
 use XTS\Singleton;
+use WC_Product;
 
 if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
 	exit( 'No direct script access allowed' );
@@ -48,10 +49,10 @@ class Rating_Summary extends Singleton {
 		}
 
 		if ( 0 === $count || 0 === $total_rating_count ) {
-			return  0;
-		} else if ( 'average' === $format ) {
+			return 0;
+		} elseif ( 'average' === $format ) {
 			return $total_rating_count / $count;
-		} else if ( 'percentage' === $format ) {
+		} elseif ( 'percentage' === $format ) {
 			if ( $is_criteria_count ) {
 				return $total_rating_count / $count / 5 * 100;
 			} else {
@@ -59,7 +60,7 @@ class Rating_Summary extends Singleton {
 			}
 		}
 
-		return  0;
+		return 0;
 	}
 
 	/**
@@ -74,7 +75,12 @@ class Rating_Summary extends Singleton {
 			return '';
 		}
 
-		$product                = wc_get_product( Helper::get_product_id() );
+		$product = wc_get_product( Helper::get_product_id() );
+
+		if ( ! $product instanceof WC_Product ) {
+			return;
+		}
+
 		$ratings                = array( '5', '4', '3', '2', '1' );
 		$average_rating         = round( $product->get_average_rating(), 1 );
 		$reviews_count          = $product->get_review_count();

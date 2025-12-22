@@ -69,6 +69,8 @@ if ( ! class_exists( 'XTS_Email_Wishlist_Promotional' ) ) :
 		 * Constructor.
 		 */
 		public function __construct() {
+			$this->template_base = WOODMART_THEMEROOT . '/woocommerce/';
+
 			$this->id          = 'woodmart_promotional_email';
 			$this->title       = esc_html__( 'Wishlist: promotional', 'woodmart' );
 			$this->description = esc_html__( 'This email is sent to the customer that has a product on his wishlist. You can send these emails via Dashboard -> Products -> Wishlists -> Popular products -> Create promotion.', 'woodmart' );

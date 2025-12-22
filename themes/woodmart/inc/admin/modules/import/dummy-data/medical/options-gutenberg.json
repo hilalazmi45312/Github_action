@@ -197,5 +197,11 @@
     "products_hover": "info",
     "product_sticky": "1",
     "single_product_header": "header_486100",
-    "blog_excerpt": "excerpt"
+    "blog_excerpt": "excerpt",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

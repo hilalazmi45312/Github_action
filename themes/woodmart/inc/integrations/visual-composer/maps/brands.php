@@ -421,16 +421,16 @@ if ( ! function_exists( 'woodmart_get_vc_map_brands' ) ) {
 					'edit_field_class' => 'wd-res-item vc_col-sm-12 vc_column',
 				),
 				array(
-					'type'       => 'wd_slider',
-					'heading'    => esc_html__( 'Padding', 'woodmart' ),
-					'param_name' => 'padding',
-					'selectors'  => array(
+					'type'          => 'wd_slider',
+					'heading'       => esc_html__( 'Padding', 'woodmart' ),
+					'param_name'    => 'padding',
+					'selectors'     => array(
 						'{{WRAPPER}}.wd-brands' => array(
 							'--wd-brand-pd: {{VALUE}}{{UNIT}};',
 						),
 					),
 					'generate_zero' => true,
-					'devices'    => array(
+					'devices'       => array(
 						'desktop' => array(
 							'value' => '',
 							'unit'  => 'px',
@@ -444,7 +444,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_brands' ) ) {
 							'unit'  => 'px',
 						),
 					),
-					'range'      => array(
+					'range'         => array(
 						'px' => array(
 							'min'  => 0,
 							'max'  => 100,
@@ -483,15 +483,11 @@ if ( ! function_exists( 'woodmart_get_vc_map_brands' ) ) {
 				),
 				array(
 					'type'             => 'woodmart_switch',
-					'heading'          => esc_html__( 'With background', 'woodmart' ),
+					'heading'          => esc_html__( 'Background', 'woodmart' ),
 					'param_name'       => 'with_bg_color',
 					'true_state'       => 'yes',
 					'false_state'      => 'no',
 					'default'          => 'no',
-					'dependency'       => array(
-						'element' => 'brand_style',
-						'value'   => array( 'default' ),
-					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),
 				array(
@@ -508,6 +504,84 @@ if ( ! function_exists( 'woodmart_get_vc_map_brands' ) ) {
 						'value'   => array( 'yes' ),
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'type'        => 'woodmart_switch',
+					'heading'     => esc_html__( 'Border', 'woodmart' ),
+					'param_name'  => 'with_border',
+					'true_state'  => 'yes',
+					'false_state' => 'no',
+					'default'     => 'no',
+				),
+				array(
+					'heading'          => esc_html__( 'Border type', 'woodmart' ),
+					'type'             => 'wd_select',
+					'param_name'       => 'border_type',
+					'style'            => 'select',
+					'selectors'        => array(
+						'body {{WRAPPER}}.wd-with-brd .wd-brand-item' => array(
+							'border-style: {{VALUE}};',
+						),
+					),
+					'devices'          => array(
+						'desktop' => array(
+							'value' => '',
+						),
+					),
+					'value'            => array(
+						esc_html__( 'Default', 'woodmart' ) => '',
+						esc_html__( 'None', 'woodmart' )   => 'none',
+						esc_html__( 'Solid', 'woodmart' )  => 'solid',
+						esc_html__( 'Dotted', 'woodmart' ) => 'dotted',
+						esc_html__( 'Double', 'woodmart' ) => 'double',
+						esc_html__( 'Dashed', 'woodmart' ) => 'dashed',
+						esc_html__( 'Groove', 'woodmart' ) => 'groove',
+					),
+					'dependency'       => array(
+						'element' => 'with_border',
+						'value'   => array( 'yes' ),
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'heading'          => esc_html__( 'Border color', 'woodmart' ),
+					'type'             => 'wd_colorpicker',
+					'param_name'       => 'border_color',
+					'selectors'        => array(
+						'body {{WRAPPER}}.wd-with-brd .wd-brand-item' => array(
+							'border-color: {{VALUE}};',
+						),
+					),
+					'dependency'       => array(
+						'element' => 'with_border',
+						'value'   => array( 'yes' ),
+					),
+					'edit_field_class' => 'vc_col-sm-6 vc_column',
+				),
+				array(
+					'heading'    => esc_html__( 'Border width', 'woodmart' ),
+					'type'       => 'wd_dimensions',
+					'param_name' => 'border_width',
+					'selectors'  => array(
+						'body {{WRAPPER}}.wd-with-brd .wd-brand-item' => array(
+							'border-top-width: {{TOP}}px;',
+							'border-right-width: {{RIGHT}}px;',
+							'border-bottom-width: {{BOTTOM}}px;',
+							'border-left-width: {{LEFT}}px;',
+						),
+					),
+					'devices'    => array(
+						'desktop' => array(
+							'unit' => 'px',
+						),
+					),
+					'range'      => array(
+						'px' => array(),
+					),
+					'dependency' => array(
+						'element' => 'with_border',
+						'value'   => array( 'yes' ),
+					),
 				),
 				/**
 				 * Images

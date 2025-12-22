@@ -5,133 +5,6 @@ if ( ! defined( 'WOODMART_THEME_DIR' ) ) {
 
 use XTS\Admin\Modules\Options;
 
-Options::add_field(
-	array(
-		'id'          => 'blog_layout',
-		'name'        => esc_html__( 'Sidebar position', 'woodmart' ),
-		'description' => esc_html__( 'Select main content and sidebar alignment for blog pages.', 'woodmart' ),
-		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
-		'type'        => 'buttons',
-		'section'     => 'blog_section',
-		'options'     => array(
-			'full-width'    => array(
-				'name'  => esc_html__( '1 Column', 'woodmart' ),
-				'value' => 'full-width',
-				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/none.png',
-			),
-			'sidebar-left'  => array(
-				'name'  => esc_html__( '2 Columns Left', 'woodmart' ),
-				'value' => 'sidebar-left',
-				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/left.png',
-			),
-			'sidebar-right' => array(
-				'name'  => esc_html__( '2 Columns Right', 'woodmart' ),
-				'value' => 'sidebar-right',
-				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/right.png',
-			),
-		),
-		'default'     => 'sidebar-right',
-		'priority'    => 10,
-	)
-);
-
-Options::add_field(
-	array(
-		'id'          => 'blog_sidebar_width',
-		'name'        => esc_html__( 'Sidebar size', 'woodmart' ),
-		'description' => esc_html__( 'You can set different sizes for your blog pages sidebar', 'woodmart' ),
-		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
-		'type'        => 'buttons',
-		'section'     => 'blog_section',
-		'options'     => array(
-			2 => array(
-				'name'  => esc_html__( 'Small', 'woodmart' ),
-				'value' => 2,
-			),
-			3 => array(
-				'name'  => esc_html__( 'Medium', 'woodmart' ),
-				'value' => 2,
-			),
-			4 => array(
-				'name'  => esc_html__( 'Large', 'woodmart' ),
-				'value' => 2,
-			),
-		),
-		'default'     => 3,
-		'priority'    => 20,
-		'class'       => 'xts-tooltip-bordered',
-	)
-);
-
-Options::add_field(
-	array(
-		'id'          => 'blog_hide_sidebar',
-		'section'     => 'blog_section',
-		'name'        => esc_html__( 'Off canvas sidebar for desktop', 'woodmart' ),
-		'description' => esc_html__( 'You can hide the sidebar on desktop and show it nicely with a button click.', 'woodmart' ),
-		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
-		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'off-canvas-sidebar-for-mobile.mp4" autoplay loop muted></video>',
-		'type'        => 'switcher',
-		'default'     => '0',
-		't_tab'       => array(
-			'id'    => 'blog_hide_sidebar_tabs',
-			'tab'   => esc_html__( 'Desktop', 'woodmart' ),
-			'icon'  => 'xts-i-desktop',
-			'style' => 'devices',
-		),
-		'priority'    => 30,
-	)
-);
-
-Options::add_field(
-	array(
-		'id'          => 'blog_hide_sidebar_tablet',
-		'name'        => esc_html__( 'Off canvas sidebar for tablet', 'woodmart' ),
-		'description' => esc_html__( 'You can hide the sidebar on tablet and show it nicely with a button click.', 'woodmart' ),
-		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
-		'section'     => 'blog_section',
-		'type'        => 'switcher',
-		'default'     => '1',
-		't_tab'       => array(
-			'id'   => 'blog_hide_sidebar_tabs',
-			'tab'  => esc_html__( 'Tablet', 'woodmart' ),
-			'icon' => 'xts-i-tablet',
-		),
-		'priority'    => 31,
-	)
-);
-
-Options::add_field(
-	array(
-		'id'          => 'blog_hide_sidebar_mobile',
-		'name'        => esc_html__( 'Off canvas sidebar for mobile', 'woodmart' ),
-		'description' => esc_html__( 'You can hide the sidebar on mobile devices and show it nicely with a button click.', 'woodmart' ),
-		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
-		'section'     => 'blog_section',
-		'type'        => 'switcher',
-		'default'     => '1',
-		't_tab'       => array(
-			'id'   => 'blog_hide_sidebar_tabs',
-			'tab'  => esc_html__( 'Mobile', 'woodmart' ),
-			'icon' => 'xts-i-phone',
-		),
-		'priority'    => 32,
-	)
-);
-
-Options::add_field(
-	array(
-		'id'          => 'single_post_justified_gallery',
-		'name'        => esc_html__( 'Justify gallery', 'woodmart' ),
-		'hint'        => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'blog-justify-gallery.jpg" alt="">', true ),
-		'description' => esc_html__( 'This option will replace standard WordPress gallery with “Justified gallery” JS library.', 'woodmart' ),
-		'type'        => 'switcher',
-		'section'     => 'blog_section',
-		'default'     => '0',
-		'priority'    => 40,
-	)
-);
-
 /**
  * Blog archive.
  */
@@ -161,7 +34,7 @@ Options::add_field(
 				'value' => 'chess',
 			),
 			'masonry'      => array(
-				'name'  => esc_html__( 'Masonry grid', 'woodmart' ),
+				'name'  => esc_html__( 'Grid', 'woodmart' ),
 				'value' => 'masonry',
 			),
 			'mask'         => array(
@@ -179,6 +52,79 @@ Options::add_field(
 		),
 		'default'     => 'masonry',
 		'priority'    => 10,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'blog_image_size',
+		'name'     => esc_html__( 'Images size', 'woodmart' ),
+		'group'    => esc_html__( 'Style', 'woodmart' ),
+		'type'     => 'select',
+		'section'  => 'blog_archive_section',
+		'default'  => 'large',
+		'options'  => woodmart_get_default_image_sizes(),
+		'priority' => 15,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'blog_image_custom_width',
+		'name'     => esc_html__( 'Width', 'woodmart' ),
+		'group'    => esc_html__( 'Style', 'woodmart' ),
+		'type'     => 'text_input',
+		'section'  => 'blog_archive_section',
+		'default'  => '',
+		'requires' => array(
+			array(
+				'key'     => 'blog_image_size',
+				'compare' => 'equals',
+				'value'   => 'custom',
+			),
+		),
+		'priority' => 16,
+		'class'    => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'blog_image_custom_height',
+		'name'     => esc_html__( 'Height', 'woodmart' ),
+		'group'    => esc_html__( 'Style', 'woodmart' ),
+		'type'     => 'text_input',
+		'section'  => 'blog_archive_section',
+		'default'  => '',
+		'requires' => array(
+			array(
+				'key'     => 'blog_image_size',
+				'compare' => 'equals',
+				'value'   => 'custom',
+			),
+		),
+		'priority' => 17,
+		'class'    => 'xts-col-6',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'       => 'blog_masonry',
+		'name'     => esc_html__( 'Masonry', 'woodmart' ),
+		'group'    => esc_html__( 'Style', 'woodmart' ),
+		'type'     => 'switcher',
+		'section'  => 'blog_archive_section',
+		'default'  => false,
+		'requires' => array(
+			array(
+				'key'     => 'blog_design',
+				'compare' => 'equals',
+				'value'   => array( 'masonry', 'mask' ),
+			),
+		),
+		'class'    => 'xts-col-6',
+		'priority' => 20,
 	)
 );
 
@@ -203,7 +149,7 @@ Options::add_field(
 			),
 		),
 		'default'     => 'shadow',
-		'priority'    => 20,
+		'priority'    => 40,
 	)
 );
 
@@ -221,7 +167,7 @@ Options::add_field(
 			array(
 				'key'     => 'blog_style',
 				'compare' => 'equals',
-				'value'   => array( 'shadow' ),
+				'value'   => 'shadow',
 			),
 		),
 		'priority' => 50,
@@ -254,7 +200,7 @@ Options::add_field(
 				'value' => 4,
 			),
 		),
-		'default'     => 3,
+		'default'     => 2,
 		'priority'    => 60,
 		'requires'    => array(
 			array(
@@ -539,6 +485,120 @@ Options::add_field(
 
 Options::add_field(
 	array(
+		'id'          => 'blog_archive_layout',
+		'name'        => esc_html__( 'Sidebar position', 'woodmart' ),
+		'description' => esc_html__( 'Select main content and sidebar alignment for blog pages.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'blog_archive_section',
+		'options'     => array(
+			'full-width'    => array(
+				'name'  => esc_html__( '1 Column', 'woodmart' ),
+				'value' => 'full-width',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/none.png',
+			),
+			'sidebar-left'  => array(
+				'name'  => esc_html__( '2 Columns Left', 'woodmart' ),
+				'value' => 'sidebar-left',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/left.png',
+			),
+			'sidebar-right' => array(
+				'name'  => esc_html__( '2 Columns Right', 'woodmart' ),
+				'value' => 'sidebar-right',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/right.png',
+			),
+		),
+		'default'     => 'sidebar-right',
+		'priority'    => 130,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_archive_sidebar_width',
+		'name'        => esc_html__( 'Sidebar size', 'woodmart' ),
+		'description' => esc_html__( 'You can set different sizes for your blog pages sidebar', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'blog_archive_section',
+		'options'     => array(
+			2 => array(
+				'name'  => esc_html__( 'Small', 'woodmart' ),
+				'value' => 2,
+			),
+			3 => array(
+				'name'  => esc_html__( 'Medium', 'woodmart' ),
+				'value' => 2,
+			),
+			4 => array(
+				'name'  => esc_html__( 'Large', 'woodmart' ),
+				'value' => 2,
+			),
+		),
+		'default'     => 3,
+		'priority'    => 140,
+		'class'       => 'xts-tooltip-bordered',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_archive_hide_sidebar',
+		'section'     => 'blog_archive_section',
+		'name'        => esc_html__( 'Off canvas sidebar for desktop', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on desktop and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'off-canvas-sidebar-for-mobile.mp4" autoplay loop muted></video>',
+		'type'        => 'switcher',
+		'default'     => '0',
+		't_tab'       => array(
+			'id'    => 'blog_archive_hide_sidebar_tabs',
+			'tab'   => esc_html__( 'Desktop', 'woodmart' ),
+			'icon'  => 'xts-i-desktop',
+			'style' => 'devices',
+		),
+		'priority'    => 150,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_archive_hide_sidebar_tablet',
+		'name'        => esc_html__( 'Off canvas sidebar for tablet', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on tablet and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'blog_archive_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'blog_archive_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Tablet', 'woodmart' ),
+			'icon' => 'xts-i-tablet',
+		),
+		'priority'    => 151,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_archive_hide_sidebar_mobile',
+		'name'        => esc_html__( 'Off canvas sidebar for mobile', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on mobile devices and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'blog_archive_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'blog_archive_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+			'icon' => 'xts-i-phone',
+		),
+		'priority'    => 152,
+	)
+);
+
+Options::add_field(
+	array(
 		'id'          => 'blog_excerpt',
 		'name'        => esc_html__( 'Posts excerpt', 'woodmart' ),
 		'hint'        => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'posts-excerpt.jpg" alt="">', true ),
@@ -557,7 +617,7 @@ Options::add_field(
 			),
 		),
 		'default'     => 'excerpt',
-		'priority'    => 130,
+		'priority'    => 160,
 	)
 );
 
@@ -587,7 +647,7 @@ Options::add_field(
 			),
 		),
 		'default'     => 'letter',
-		'priority'    => 140,
+		'priority'    => 170,
 		'class'       => 'xts-col-6',
 	)
 );
@@ -611,7 +671,7 @@ Options::add_field(
 			),
 		),
 		'default'     => 135,
-		'priority'    => 150,
+		'priority'    => 180,
 		'class'       => 'xts-col-6',
 	)
 );
@@ -627,7 +687,7 @@ Options::add_field(
 		'section'     => 'blog_archive_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 160,
+		'priority'    => 190,
 	)
 );
 
@@ -642,7 +702,7 @@ Options::add_field(
 		'section'     => 'blog_archive_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 170,
+		'priority'    => 200,
 	)
 );
 
@@ -657,7 +717,7 @@ Options::add_field(
 		'section'     => 'blog_archive_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 180,
+		'priority'    => 210,
 	)
 );
 
@@ -672,7 +732,7 @@ Options::add_field(
 		'section'     => 'blog_archive_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 190,
+		'priority'    => 220,
 	)
 );
 
@@ -687,7 +747,7 @@ Options::add_field(
 		'section'     => 'blog_archive_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 200,
+		'priority'    => 230,
 	)
 );
 
@@ -737,6 +797,120 @@ Options::add_field(
 
 Options::add_field(
 	array(
+		'id'          => 'blog_layout',
+		'name'        => esc_html__( 'Sidebar position', 'woodmart' ),
+		'description' => esc_html__( 'Select main content and sidebar alignment for blog pages.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'blog_singe_post_section',
+		'options'     => array(
+			'full-width'    => array(
+				'name'  => esc_html__( '1 Column', 'woodmart' ),
+				'value' => 'full-width',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/none.png',
+			),
+			'sidebar-left'  => array(
+				'name'  => esc_html__( '2 Columns Left', 'woodmart' ),
+				'value' => 'sidebar-left',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/left.png',
+			),
+			'sidebar-right' => array(
+				'name'  => esc_html__( '2 Columns Right', 'woodmart' ),
+				'value' => 'sidebar-right',
+				'image' => WOODMART_ASSETS_IMAGES . '/settings/sidebar-layout/right.png',
+			),
+		),
+		'default'     => 'sidebar-right',
+		'priority'    => 30,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_sidebar_width',
+		'name'        => esc_html__( 'Sidebar size', 'woodmart' ),
+		'description' => esc_html__( 'You can set different sizes for your blog pages sidebar', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'type'        => 'buttons',
+		'section'     => 'blog_singe_post_section',
+		'options'     => array(
+			2 => array(
+				'name'  => esc_html__( 'Small', 'woodmart' ),
+				'value' => 2,
+			),
+			3 => array(
+				'name'  => esc_html__( 'Medium', 'woodmart' ),
+				'value' => 2,
+			),
+			4 => array(
+				'name'  => esc_html__( 'Large', 'woodmart' ),
+				'value' => 2,
+			),
+		),
+		'default'     => 3,
+		'priority'    => 40,
+		'class'       => 'xts-tooltip-bordered',
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_hide_sidebar',
+		'section'     => 'blog_singe_post_section',
+		'name'        => esc_html__( 'Off canvas sidebar for desktop', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on desktop and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'hint'        => '<video data-src="' . WOODMART_TOOLTIP_URL . 'off-canvas-sidebar-for-mobile.mp4" autoplay loop muted></video>',
+		'type'        => 'switcher',
+		'default'     => '0',
+		't_tab'       => array(
+			'id'    => 'blog_hide_sidebar_tabs',
+			'tab'   => esc_html__( 'Desktop', 'woodmart' ),
+			'icon'  => 'xts-i-desktop',
+			'style' => 'devices',
+		),
+		'priority'    => 50,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_hide_sidebar_tablet',
+		'name'        => esc_html__( 'Off canvas sidebar for tablet', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on tablet and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'blog_singe_post_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'blog_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Tablet', 'woodmart' ),
+			'icon' => 'xts-i-tablet',
+		),
+		'priority'    => 51,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'blog_hide_sidebar_mobile',
+		'name'        => esc_html__( 'Off canvas sidebar for mobile', 'woodmart' ),
+		'description' => esc_html__( 'You can hide the sidebar on mobile devices and show it nicely with a button click.', 'woodmart' ),
+		'group'       => esc_html__( 'Sidebar', 'woodmart' ),
+		'section'     => 'blog_singe_post_section',
+		'type'        => 'switcher',
+		'default'     => '1',
+		't_tab'       => array(
+			'id'   => 'blog_hide_sidebar_tabs',
+			'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+			'icon' => 'xts-i-phone',
+		),
+		'priority'    => 52,
+	)
+);
+
+Options::add_field(
+	array(
 		'id'          => 'blog_share',
 		'name'        => esc_html__( 'Share buttons', 'woodmart' ),
 		'hint'        => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'single-post-share-buttons.jpg" alt="">', true ),
@@ -746,7 +920,7 @@ Options::add_field(
 		'section'     => 'blog_singe_post_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 30,
+		'priority'    => 60,
 	)
 );
 
@@ -761,7 +935,7 @@ Options::add_field(
 		'section'     => 'blog_singe_post_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 40,
+		'priority'    => 70,
 	)
 );
 
@@ -776,7 +950,7 @@ Options::add_field(
 		'section'     => 'blog_singe_post_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 50,
+		'priority'    => 80,
 	)
 );
 
@@ -791,7 +965,7 @@ Options::add_field(
 		'section'     => 'blog_singe_post_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 60,
+		'priority'    => 90,
 	)
 );
 
@@ -806,6 +980,41 @@ Options::add_field(
 		'section'     => 'blog_singe_post_section',
 		'default'     => '1',
 		'class'       => 'xts-col-6',
-		'priority'    => 70,
+		'priority'    => 100,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'          => 'single_post_justified_gallery',
+		'name'        => esc_html__( 'Justify gallery', 'woodmart' ),
+		'hint'        => wp_kses( '<img data-src="' . WOODMART_TOOLTIP_URL . 'blog-justify-gallery.jpg" alt="">', true ),
+		'description' => esc_html__( 'This option will replace standard WordPress gallery with “Justified gallery” JS library.', 'woodmart' ),
+		'group'       => esc_html__( 'Settings', 'woodmart' ),
+		'type'        => 'switcher',
+		'section'     => 'blog_singe_post_section',
+		'default'     => '0',
+		'priority'    => 110,
+	)
+);
+
+Options::add_field(
+	array(
+		'id'           => 'single_post_builder_post_data',
+		'name'         => esc_html__( 'Select preview post for builder', 'woodmart' ),
+		'description'  => esc_html__( 'The information from this post will be used as an example while you are working with the post template and Elementor.', 'woodmart' ),
+		'group'        => esc_html__( 'Builder', 'woodmart' ),
+		'type'         => 'select',
+		'section'      => 'blog_singe_post_section',
+		'select2'      => true,
+		'empty_option' => true,
+		'autocomplete' => array(
+			'type'   => 'post',
+			'value'  => 'post',
+			'search' => 'woodmart_get_post_by_query_autocomplete',
+			'render' => 'woodmart_get_post_by_ids_autocomplete',
+		),
+		'priority'     => 120,
+		'class'        => 'xts-preset-field-disabled',
 	)
 );

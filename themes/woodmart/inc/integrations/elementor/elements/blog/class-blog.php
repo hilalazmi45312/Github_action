@@ -9,6 +9,7 @@ namespace XTS\Elementor;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -100,15 +101,30 @@ class Blog extends Widget_Base {
 		);
 
 		$this->add_control(
+			'element_title',
+			[
+				'label' => esc_html__( 'Element title', 'woodmart' ),
+				'type'  => Controls_Manager::TEXT,
+			]
+		);
+
+		$this->add_control(
 			'post_type',
 			[
 				'label'       => esc_html__( 'Data source', 'woodmart' ),
 				'description' => esc_html__( 'Select content type for your grid.', 'woodmart' ),
 				'type'        => Controls_Manager::SELECT,
-				'options'     => [
-					'post' => esc_html__( 'Post', 'woodmart' ),
-					'ids'  => esc_html__( 'List of IDs', 'woodmart' ),
-				],
+				'options'     => woodmart_get_options_depend_builder(
+					array(
+						'post' => esc_html__( 'Post', 'woodmart' ),
+						'ids'  => esc_html__( 'List of IDs', 'woodmart' ),
+					),
+					array(
+						'single_post' => array(
+							'related_posts' => esc_html__( 'Related posts', 'woodmart' ),
+						),
+					)
+				),
 				'default'     => 'post',
 			]
 		);
@@ -142,8 +158,8 @@ class Blog extends Widget_Base {
 				'multiple'    => true,
 				'label_block' => true,
 				'condition'   => [
-					'post_type!' => 'ids',
-				],
+					'post_type!' => array( 'ids', 'related_posts' ),
+				]
 			]
 		);
 
@@ -220,7 +236,7 @@ class Blog extends Widget_Base {
 				'multiple'    => true,
 				'label_block' => true,
 				'condition'   => [
-					'post_type!' => 'ids',
+					'post_type!' => array( 'ids', 'related_posts' ),
 				],
 			]
 		);
@@ -254,11 +270,23 @@ class Blog extends Widget_Base {
 					'default-alt'  => esc_html__( 'Default alternative', 'woodmart' ),
 					'small-images' => esc_html__( 'Small images', 'woodmart' ),
 					'chess'        => esc_html__( 'Chess', 'woodmart' ),
-					'masonry'      => esc_html__( 'Masonry grid', 'woodmart' ),
+					'masonry'      => esc_html__( 'Grid', 'woodmart' ),
 					'mask'         => esc_html__( 'Mask on image', 'woodmart' ),
 					'meta-image'   => esc_html__( 'Meta on image', 'woodmart' ),
 					'carousel'     => esc_html__( 'Carousel', 'woodmart' ),
 					'list'         => esc_html__( 'List', 'woodmart' ),
+				),
+			]
+		);
+
+		$this->add_control(
+			'blog_masonry',
+			[
+				'label'        => esc_html__( 'Masonry', 'woodmart' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => '1',
+				'condition'    => array(
+					'blog_design' => array( 'masonry', 'mask' ),
 				),
 			]
 		);
@@ -369,7 +397,7 @@ class Blog extends Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '',
 				'options'   => array(
-					''         => esc_html__( 'Inherit', 'woodmart' ),
+					''         => esc_html__( 'Disabled', 'woodmart' ),
 					'more-btn' => esc_html__( 'Load more button', 'woodmart' ),
 					'infinit'  => esc_html__( 'Infinit scrolling', 'woodmart' ),
 				),
@@ -377,6 +405,60 @@ class Blog extends Widget_Base {
 					'blog_design!' => 'carousel',
 				],
 			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * Title settings.
+		 */
+
+		$this->start_controls_section(
+			'title_style_section',
+			array(
+				'label' => esc_html__( 'Title', 'woodmart' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'element_title_tag',
+			array(
+				'label'   => esc_html__( 'Tag', 'woodmart' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'h4',
+				'options' => array(
+					'h1'   => esc_html__( 'h1', 'woodmart' ),
+					'h2'   => esc_html__( 'h2', 'woodmart' ),
+					'h3'   => esc_html__( 'h3', 'woodmart' ),
+					'h4'   => esc_html__( 'h4', 'woodmart' ),
+					'h5'   => esc_html__( 'h5', 'woodmart' ),
+					'h6'   => esc_html__( 'h6', 'woodmart' ),
+					'div'  => esc_html__( 'div', 'woodmart' ),
+					'p'    => esc_html__( 'p', 'woodmart' ),
+					'span' => esc_html__( 'span', 'woodmart' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'title_color',
+			array(
+				'label'     => esc_html__( 'Color', 'woodmart' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .wd-el-title' => 'color: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'label'    => esc_html__( 'Typography', 'woodmart' ),
+				'selector' => '{{WRAPPER}} .wd-el-title',
+			)
 		);
 
 		$this->end_controls_section();

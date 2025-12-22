@@ -232,6 +232,10 @@ class Compare extends Singleton {
 			$_COOKIE[ $this->cookie_name ] = wp_json_encode( $product_ids );
 		}
 
+		if ( class_exists( 'WPBMap' ) ) {
+			WPBMap::addAllMappedShortcodes();
+		}
+
 		wp_send_json(
 			array(
 				'count'     => $this->get_compare_count(),

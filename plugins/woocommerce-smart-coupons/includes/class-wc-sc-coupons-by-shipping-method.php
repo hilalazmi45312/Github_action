@@ -5,7 +5,7 @@
  * @author      StoreApps
  * @category    Admin
  * @package     wocommerce-smart-coupons/includes
- * @version     2.2.0
+ * @version     2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -92,35 +92,38 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		 * @param WC_Coupon $coupon    The coupon object.
 		 */
 		public function usage_restriction( $coupon_id = 0, $coupon = null ) {
-
-			$shipping_method_ids = array();
-			if ( ! empty( $coupon_id ) ) {
-				$shipping_method_ids = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_shipping_method_ids' ) : $this->get_post_meta( $coupon_id, 'wc_sc_shipping_method_ids', true );
-				if ( empty( $shipping_method_ids ) || ! is_array( $shipping_method_ids ) ) {
-					$shipping_method_ids = array();
+			try {
+				$shipping_method_ids = array();
+				if ( ! empty( $coupon_id ) ) {
+					$shipping_method_ids = ( $this->is_callable( $coupon, 'get_meta' ) ) ? $coupon->get_meta( 'wc_sc_shipping_method_ids' ) : $this->get_post_meta( $coupon_id, 'wc_sc_shipping_method_ids', true );
+					if ( empty( $shipping_method_ids ) || ! is_array( $shipping_method_ids ) ) {
+						$shipping_method_ids = array();
+					}
 				}
-			}
-			$available_shipping_methods = WC()->shipping->get_shipping_methods();
-			?>
-			<div class="options_group smart-coupons-field">
-				<p class="form-field">
-					<label for="wc_sc_shipping_method_ids"><?php echo esc_html__( 'Shipping methods', 'woocommerce-smart-coupons' ); ?></label>
-					<select id="wc_sc_shipping_method_ids" name="wc_sc_shipping_method_ids[]" style="width: 50%;"  class="wc-enhanced-select" multiple="multiple" data-placeholder="<?php esc_attr_e( 'No shipping methods', 'woocommerce-smart-coupons' ); ?>">
-						<?php
-						if ( is_array( $available_shipping_methods ) && ! empty( $available_shipping_methods ) ) {
-							foreach ( $available_shipping_methods as $shipping_method ) {
-								echo '<option value="' . esc_attr( $shipping_method->id ) . '"' . esc_attr( selected( in_array( $shipping_method->id, $shipping_method_ids, true ), true, false ) ) . '>' . esc_html( $shipping_method->get_method_title() ) . '</option>';
+				$available_shipping_methods = WC()->shipping->get_shipping_methods();
+				?>
+				<div class="options_group smart-coupons-field">
+					<p class="form-field">
+						<label for="wc_sc_shipping_method_ids"><?php echo esc_html__( 'Shipping methods', 'woocommerce-smart-coupons' ); ?></label>
+						<select id="wc_sc_shipping_method_ids" name="wc_sc_shipping_method_ids[]" style="width: 50%;"  class="wc-enhanced-select" multiple="multiple" data-placeholder="<?php esc_attr_e( 'No shipping methods', 'woocommerce-smart-coupons' ); ?>">
+							<?php
+							if ( is_array( $available_shipping_methods ) && ! empty( $available_shipping_methods ) ) {
+								foreach ( $available_shipping_methods as $shipping_method ) {
+									echo '<option value="' . esc_attr( $shipping_method->id ) . '"' . esc_attr( selected( in_array( $shipping_method->id, $shipping_method_ids, true ), true, false ) ) . '>' . esc_html( $shipping_method->get_method_title() ) . '</option>';
+								}
 							}
-						}
+							?>
+						</select>
+						<?php
+						$tooltip_text = esc_html__( 'Coupon will apply only if any of the selected shipping methods are used during checkout.', 'woocommerce-smart-coupons' );
+						echo wc_help_tip( $tooltip_text ); // phpcs:ignore
 						?>
-					</select>
-					<?php
-					$tooltip_text = esc_html__( 'Coupon will apply only if any of the selected shipping methods are used during checkout.', 'woocommerce-smart-coupons' );
-					echo wc_help_tip( $tooltip_text ); // phpcs:ignore
-					?>
-				</p>
-			</div>
-			<?php
+					</p>
+				</div>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**
@@ -130,19 +133,23 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		 * @param  WC_Coupon $coupon    The coupon object.
 		 */
 		public function process_meta( $post_id = 0, $coupon = null ) {
-			if ( empty( $post_id ) ) {
-				return;
-			}
+			try {
+				if ( empty( $post_id ) ) {
+					return;
+				}
 
-			$coupon = new WC_Coupon( $coupon );
+				$coupon = new WC_Coupon( $coupon );
 
-			$shipping_method_ids = ( isset( $_POST['wc_sc_shipping_method_ids'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_shipping_method_ids'] ) ) : array(); // phpcs:ignore
+				$shipping_method_ids = ( isset( $_POST['wc_sc_shipping_method_ids'] ) ) ? wc_clean( wp_unslash( $_POST['wc_sc_shipping_method_ids'] ) ) : array(); // phpcs:ignore
 
-			if ( $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
-				$coupon->update_meta_data( 'wc_sc_shipping_method_ids', $shipping_method_ids );
-				$coupon->save();
-			} else {
-				$this->update_post_meta( $post_id, 'wc_sc_shipping_method_ids', $shipping_method_ids );
+				if ( $this->is_callable( $coupon, 'update_meta_data' ) && $this->is_callable( $coupon, 'save' ) ) {
+					$coupon->update_meta_data( 'wc_sc_shipping_method_ids', $shipping_method_ids );
+					$coupon->save();
+				} else {
+					$this->update_post_meta( $post_id, 'wc_sc_shipping_method_ids', $shipping_method_ids );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -251,21 +258,23 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		 * @return string Processed meta value
 		 */
 		public function export_coupon_meta_data( $meta_value = '', $args = array() ) {
-
-			if ( ! empty( $args['meta_key'] ) && 'wc_sc_shipping_method_ids' === $args['meta_key'] ) {
-				if ( isset( $args['meta_value'] ) && ! empty( $args['meta_value'] ) ) {
-					$shipping_method_ids = maybe_unserialize( stripslashes( $args['meta_value'] ) );
-					if ( is_array( $shipping_method_ids ) && ! empty( $shipping_method_ids ) ) {
-						$shipping_method_titles = $this->get_shipping_method_titles_by_ids( $shipping_method_ids );
-						if ( is_array( $shipping_method_titles ) && ! empty( $shipping_method_titles ) ) {
-							$meta_value = implode( '|', wc_clean( wp_unslash( $shipping_method_titles ) ) );  // Replace shipping method ids with their respective method titles.
+			try {
+				if ( ! empty( $args['meta_key'] ) && 'wc_sc_shipping_method_ids' === $args['meta_key'] ) {
+					if ( isset( $args['meta_value'] ) && ! empty( $args['meta_value'] ) ) {
+						$shipping_method_ids = maybe_unserialize( stripslashes( $args['meta_value'] ) );
+						if ( is_array( $shipping_method_ids ) && ! empty( $shipping_method_ids ) ) {
+							$shipping_method_titles = $this->get_shipping_method_titles_by_ids( $shipping_method_ids );
+							if ( is_array( $shipping_method_titles ) && ! empty( $shipping_method_titles ) ) {
+								$meta_value = implode( '|', wc_clean( wp_unslash( $shipping_method_titles ) ) );  // Replace shipping method ids with their respective method titles.
+							}
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $meta_value;
-
 		}
 
 		/**
@@ -289,17 +298,20 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		 * @return array $data Modified row data
 		 */
 		public function generate_coupon_meta( $data = array(), $post = array() ) {
+			try {
+				$shipping_method_titles = '';
 
-			$shipping_method_titles = '';
-
-			if ( ! empty( $post['wc_sc_shipping_method_ids'] ) && is_array( $post['wc_sc_shipping_method_ids'] ) ) {
-				$shipping_method_titles = $this->get_shipping_method_titles_by_ids( $post['wc_sc_shipping_method_ids'] );
-				if ( is_array( $shipping_method_titles ) && ! empty( $shipping_method_titles ) ) {
-					$shipping_method_titles = implode( '|', wc_clean( wp_unslash( $shipping_method_titles ) ) );
+				if ( ! empty( $post['wc_sc_shipping_method_ids'] ) && is_array( $post['wc_sc_shipping_method_ids'] ) ) {
+					$shipping_method_titles = $this->get_shipping_method_titles_by_ids( $post['wc_sc_shipping_method_ids'] );
+					if ( is_array( $shipping_method_titles ) && ! empty( $shipping_method_titles ) ) {
+						$shipping_method_titles = implode( '|', wc_clean( wp_unslash( $shipping_method_titles ) ) );
+					}
 				}
-			}
 
-			$data['wc_sc_shipping_method_ids'] = $shipping_method_titles; // Replace shipping method ids with their respective method titles.
+				$data['wc_sc_shipping_method_ids'] = $shipping_method_titles; // Replace shipping method ids with their respective method titles.
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 
 			return $data;
 		}
@@ -311,9 +323,7 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		 * @return array $shipping_method_titles titles of shipping methods
 		 */
 		public function get_shipping_method_titles_by_ids( $shipping_method_ids = array() ) {
-
 			$shipping_method_titles = array();
-
 			if ( is_array( $shipping_method_ids ) && ! empty( $shipping_method_ids ) ) {
 				$available_shipping_methods = WC()->shipping->load_shipping_methods();
 				foreach ( $shipping_method_ids as $index => $shipping_method_id ) {
@@ -340,23 +350,27 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		 * @return mixed $meta_value
 		 */
 		public function process_coupon_meta_value_for_import( $meta_value = null, $args = array() ) {
+			try {
+				if ( ! empty( $args['meta_key'] ) && 'wc_sc_shipping_method_ids' === $args['meta_key'] ) {
 
-			if ( ! empty( $args['meta_key'] ) && 'wc_sc_shipping_method_ids' === $args['meta_key'] ) {
-
-				$meta_value = ( ! empty( $args['postmeta']['wc_sc_shipping_method_ids'] ) ) ? explode( '|', wc_clean( wp_unslash( $args['postmeta']['wc_sc_shipping_method_ids'] ) ) ) : array();
-				if ( is_array( $meta_value ) && ! empty( $meta_value ) ) {
-					$available_shipping_methods = WC()->shipping->load_shipping_methods();
-					if ( is_array( $available_shipping_methods ) && ! empty( $available_shipping_methods ) ) {
-						foreach ( $meta_value as $index => $shipping_method_title ) {
-							foreach ( $available_shipping_methods as $shipping_method ) {
-								$method_title = is_callable( array( $shipping_method, 'get_method_title' ) ) ? $shipping_method->get_method_title() : '';
-								if ( $method_title === $shipping_method_title && ! empty( $shipping_method->id ) ) {
-									$meta_value[ $index ] = $shipping_method->id; // Replace shipping method title with it's repective id.
+					$meta_value = ( ! empty( $args['postmeta']['wc_sc_shipping_method_ids'] ) ) ? explode( '|', wc_clean( wp_unslash( $args['postmeta']['wc_sc_shipping_method_ids'] ) ) ) : array();
+					if ( is_array( $meta_value ) && ! empty( $meta_value ) ) {
+						$available_shipping_methods = WC()->shipping->load_shipping_methods();
+						if ( is_array( $available_shipping_methods ) && ! empty( $available_shipping_methods ) ) {
+							foreach ( $meta_value as $index => $shipping_method_title ) {
+								foreach ( $available_shipping_methods as $shipping_method ) {
+									$method_title = is_callable( array( $shipping_method, 'get_method_title' ) ) ? $shipping_method->get_method_title() : '';
+									if ( $method_title === $shipping_method_title && ! empty( $shipping_method->id ) ) {
+										$meta_value[ $index ] = $shipping_method->id; // Replace shipping method title with it's repective id.
+									}
 								}
 							}
 						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$meta_value = array();
 			}
 
 			return $meta_value;
@@ -425,25 +439,29 @@ if ( ! class_exists( 'WC_SC_Coupons_By_Shipping_Method' ) ) {
 		public function get_shipping_method_with_instance_id( $method_id ) {
 			global $wpdb;
 
-			if ( empty( $method_id ) ) {
-				return false;
-			}
-			$query = $wpdb->prepare(
-				"
-				SELECT instance_id 
-				FROM {$wpdb->prefix}woocommerce_shipping_zone_methods 
-				WHERE method_id = %s 
-				AND is_enabled = 1
-				LIMIT 1
-				",
-				$method_id
-			);
-			// phpcs:disable
-			$instance_id = $wpdb->get_var( $query );
-			// phpcs:enable
+			try {
+				if ( empty( $method_id ) ) {
+					return false;
+				}
+				$query = $wpdb->prepare(
+					"
+					SELECT instance_id 
+					FROM {$wpdb->prefix}woocommerce_shipping_zone_methods 
+					WHERE method_id = %s 
+					AND is_enabled = 1
+					LIMIT 1
+					",
+					$method_id
+				);
+				// phpcs:disable
+				$instance_id = $wpdb->get_var( $query );
+				// phpcs:enable
 
-			if ( $instance_id ) {
-				return sanitize_text_field( $method_id . ':' . $instance_id );
+				if ( $instance_id ) {
+					return sanitize_text_field( $method_id . ':' . $instance_id );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return false;

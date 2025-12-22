@@ -410,6 +410,7 @@
     "blog_spacing": "20",
     "blog_excerpt_length": "100",
     "blog_excerpt": "excerpt",
+    "blog_archive_layout": "full-width",
     "label_shape": "rounded-sm",
     "shop_categories": "0",
     "disable_footer": "1",
@@ -522,5 +523,7 @@
     "carousel_arrows_together_border_style": "",
     "carousel_pagin_border_style": "",
     "popup_padding": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIwIn19fQ==",
-    "promo_version": "4"
+    "promo_version": "4",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

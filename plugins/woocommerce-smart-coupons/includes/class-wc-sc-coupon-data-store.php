@@ -4,7 +4,7 @@
  *
  * @package     woocommerce-smart-coupons/includes/
  * @since       9.8.0
- * @version     1.5.0
+ * @version     1.6.0
  */
 
 // Exit if accessed directly.
@@ -128,7 +128,6 @@ if ( ! class_exists( 'WC_SC_Coupon_Data_Store' ) ) {
 		 * @param WP_Post $post Post data.
 		 */
 		public function restore_coupon_smart_coupons_db( $post = null ) {
-
 			if ( ! $post instanceof WP_Post || ! isset( $post->ID ) || ! isset( $post->post_type ) || ( isset( $post->post_type ) && ! in_array( $post->post_type, array( 'shop_coupon' ), true ) ) ) {
 				return;
 			}
@@ -142,23 +141,27 @@ if ( ! class_exists( 'WC_SC_Coupon_Data_Store' ) ) {
 		 * @param int $coupon_id The coupon id.
 		 */
 		public function remove_coupon_from_custom_table( $coupon_id = null ) {
-			if ( ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) {
-				return;
-			}
-			if ( empty( $coupon_id ) ) {
-				return;
-			}
-			if ( 'shop_coupon' !== $this->get_post_type( $coupon_id ) ) {
-				return;
-			}
+			try {
+				if ( ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) {
+					return;
+				}
+				if ( empty( $coupon_id ) ) {
+					return;
+				}
+				if ( 'shop_coupon' !== $this->get_post_type( $coupon_id ) ) {
+					return;
+				}
 
-			$coupon = new WC_Coupon( $coupon_id );
+				$coupon = new WC_Coupon( $coupon_id );
 
-			if ( is_a( $coupon, 'WC_Coupon' ) ) {
-				// delete coupon from custom table.
-				global $wpdb;
-				$wpdb->delete( $wpdb->prefix . 'wc_smart_coupons', array( 'id' => $coupon_id ) ); // phpcs:ignore
-				return;
+				if ( is_a( $coupon, 'WC_Coupon' ) ) {
+					// delete coupon from custom table.
+					global $wpdb;
+					$wpdb->delete( $wpdb->prefix . 'wc_smart_coupons', array( 'id' => $coupon_id ) ); // phpcs:ignore
+					return;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -168,10 +171,10 @@ if ( ! class_exists( 'WC_SC_Coupon_Data_Store' ) ) {
 		 * @param int $coupon_id The coupon id.
 		 */
 		public function maybe_update_coupons_data( $coupon_id = null ) {
-			if ( ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) {
-				return;
-			}
 			try {
+				if ( ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) {
+					return;
+				}
 				global $wpdb;
 				$replace_query = $wpdb->prepare(
 					"REPLACE INTO {$wpdb->prefix}wc_smart_coupons (

@@ -5,7 +5,7 @@
  * @author      StoreApps
  * @category    Admin
  * @package     woocommerce-smart-coupons/includes
- * @version     1.0.0
+ * @version     1.4.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -75,41 +75,54 @@ if ( ! class_exists( 'WC_SC_Email_Preview' ) ) {
 		 * @return WC_Email Modified email object.
 		 */
 		public function modify_email_preview_object( $email ) {
-			if ( isset( $email->id ) && strpos( $email->id, 'wc_sc_' ) !== false ) {
-				$order        = $email->object;
-				$dummy_coupon = $this->get_sc_dummy_coupon();
+			try {
+				if ( isset( $email->email_args ) && isset( $email->id ) && strpos( (string) $email->id, 'wc_sc_' ) !== false ) {
+					$order        = $email->object;
+					$dummy_coupon = $this->get_sc_dummy_coupon();
 
-				$email->email_args['is_gift']                       = 'yes';
-				$email->email_args['email']                         = $order->get_billing_email();
-				$email->email_args['receiver_name']                 = $order->get_billing_first_name() . '' . $order->get_billing_last_name();
-				$email->email_args['message_from_sender']           = '';
-				$email->email_args['gift_certificate_sender_name']  = $order->get_billing_first_name() . '' . $order->get_billing_last_name();
-				$email->email_args['gift_certificate_sender_email'] = $order->get_billing_email();
-				$email->email_args['coupon']['code']                = $dummy_coupon->get_code();
-				$email->email_args['coupon']['amount']              = $dummy_coupon->get_amount();
-				$email->email_args['coupon']['discount_type']       = $dummy_coupon->get_discount_type();
+					$email->email_args['is_gift']                       = 'yes';
+					$email->email_args['email']                         = $order->get_billing_email();
+					$email->email_args['receiver_name']                 = $order->get_billing_first_name() . '' . $order->get_billing_last_name();
+					$email->email_args['message_from_sender']           = '';
+					$email->email_args['gift_certificate_sender_name']  = $order->get_billing_first_name() . '' . $order->get_billing_last_name();
+					$email->email_args['gift_certificate_sender_email'] = $order->get_billing_email();
+					$email->email_args['coupon']['code']                = $dummy_coupon->get_code();
+					$email->email_args['coupon']['amount']              = $dummy_coupon->get_amount();
+					$email->email_args['coupon']['discount_type']       = $dummy_coupon->get_discount_type();
 
-				switch ( $email->id ) {
-					case 'wc_sc_expiry_reminder_email':
-						$email->set_object( $dummy_coupon );
-						break;
+					switch ( $email->id ) {
+						case 'wc_sc_expiry_reminder_email' || 'wc_sc_unused_reminder_email':
+							$email->set_object( $dummy_coupon );
+							break;
 
-					case 'wc_sc_combined_email_coupon':
-						$email->email_args['receiver_details'] = array(
-							array(
+						case 'wc_sc_combined_email_coupon':
+							$email->email_args['receiver_details'] = array(
+								array(
+									'code'    => $dummy_coupon->get_code(),
+									'message' => $dummy_coupon->get_description(),
+								),
+							);
+							break;
+						case 'wc_sc_acknowledgement_email':
+							$email->email_args['receivers_detail'] = array(
 								'code'    => $dummy_coupon->get_code(),
-								'message' => 'This is a dummy Smart Coupons coupon for email previews.',
-							),
-						);
-						break;
-					case 'wc_sc_acknowledgement_email':
-						$email->email_args['receivers_detail'] = array(
-							'code'    => $dummy_coupon->get_code(),
-							'message' => 'This is a dummy Smart Coupons coupon for email previews.',
-						);
-						break;
+								'message' => $dummy_coupon->get_description(),
+							);
+							break;
+						case 'wc_sc_email_coupon_image':
+							$email->email_args['receiver_details'] = array(
+								array(
+									'code'    => $dummy_coupon->get_code(),
+									'message' => $dummy_coupon->get_description(),
+								),
+							);
+							break;
+					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
+
 			return $email;
 		}
 
@@ -126,25 +139,30 @@ if ( ! class_exists( 'WC_SC_Email_Preview' ) ) {
 		 * @since 9.6.0
 		 */
 		public function get_sc_dummy_coupon() {
-			$coupon = new WC_Coupon();
+			try {
+				$coupon = new WC_Coupon();
 
-			// Set dummy coupon properties.
-			$coupon->set_id( 99999 );
-			$coupon->set_code( 'SC_DUMMY_COUPON' );
-			$coupon->set_discount_type( 'smart_coupon' );
-			$coupon->set_amount( 15 );
-			$coupon->set_date_created( time() );
-			$coupon->set_date_expires( strtotime( '+7 days' ) );
-			$coupon->set_usage_limit( 0 );
-			$coupon->set_usage_limit_per_user( 1 );
-			$coupon->set_description( _x( 'This is a dummy Smart Coupons coupon for email previews.', 'Coupon description', 'woocommerce-smart-coupons' ) );
+				// Set dummy coupon properties.
+				$coupon->set_id( 1234 );
+				$coupon->set_code( 'SC_DUMMY_COUPON' );
+				$coupon->set_discount_type( 'smart_coupon' );
+				$coupon->set_amount( 15 );
+				$coupon->set_date_created( time() );
+				$coupon->set_date_expires( strtotime( '+7 days' ) );
+				$coupon->set_usage_limit( 0 );
+				$coupon->set_usage_limit_per_user( 1 );
+				$coupon->set_description( _x( 'This is a dummy coupon for email previews.', 'Coupon description', 'woocommerce-smart-coupons' ) );
 
-			/**
-			 * Filter to modify the dummy coupon used in Smart Coupons email previews.
-			 *
-			 * @param WC_Coupon $coupon The dummy coupon object.
-			 */
-			return apply_filters( 'sc_email_preview_dummy_coupon', $coupon );
+				/**
+				 * Filter to modify the dummy coupon used in Smart Coupons email previews.
+				 *
+				 * @param WC_Coupon $coupon The dummy coupon object.
+				 */
+				return apply_filters( 'sc_email_preview_dummy_coupon', $coupon );
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				return null;
+			}
 		}
 
 	}

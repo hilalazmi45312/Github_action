@@ -38,6 +38,10 @@ if ( ! class_exists( 'XTS_Email_Waitlist_Subscribe' ) ) :
 		 * Create an instance of the class.
 		 */
 		public function __construct() {
+			if ( ! woodmart_get_opt( 'waitlist_enabled' ) ) {
+				return;
+			}
+
 			$this->id          = 'woodmart_waitlist_subscribe_email';
 			$this->title       = esc_html__( 'Waitlist: subscription confirmed', 'woodmart' );
 			$this->description = esc_html__( 'Configure the email that confirms a customer\'s subscription to the waitlist, assuring them that they will receive updates when the requested item is back in stock.', 'woodmart' );

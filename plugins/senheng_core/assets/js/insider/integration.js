@@ -4,6 +4,7 @@ window.InsiderObject = {
     userDataReady: false,
     initializationPromise: null,
     queue: [],
+    oldQuantities: {},
 
     async init() {
         window.InsiderQueue = window.InsiderQueue || [];
@@ -123,6 +124,15 @@ window.InsiderObject = {
 
         //Handle source
         this.handleSource();
+    },
+
+    // Capture initial quantities from the page load
+    captureInitialQuantities() {
+        jQuery('input[type="number"].qty').each((_, input) => {
+            const cartKey = jQuery(input).attr('name').match(/cart\[(.*?)\]\[qty\]/)[1]; // Extract cart key
+            const initialQty = parseInt(jQuery(input).val(), 10) || 0; // Get the initial quantity
+            this.oldQuantities[cartKey] = initialQty; // Store it
+        });
     },
 
     async processQueuedEvents() {
@@ -316,8 +326,54 @@ window.InsiderObject = {
 
     //Initialize All Cart Event AJAX
     bindAjaxCartEvent() {
-        jQuery(document).ajaxComplete((_, __, settings) => {
 
+        //This one for action insider Cart Page
+        jQuery(document).on('change', 'input[type="number"].qty', (event) => {
+            const cartKey = jQuery(event.target).attr('name').match(/cart\[(.*?)\]\[qty\]/)[1];
+            const newQty = parseInt(jQuery(event.target).val(), 10) || 0;
+            const oldQty = this.oldQuantities[cartKey] || 0;
+
+            // Calculate the quantity change (whether it's an add or remove event)
+            const qtyChange = newQty - oldQty;
+
+            // Update the stored old quantity
+            this.oldQuantities[cartKey] = newQty;
+
+            console.log("CartKey:", cartKey, "oldQty:", oldQty, "newQty:", newQty, "qtyChange:", qtyChange);
+
+            // Only trigger if there's a change in quantity
+            if (qtyChange !== 0) {
+                // If qtyChange is positive, it's an add-to-cart event
+                if (qtyChange > 0) {
+                    jQuery.post(ajaxurl, {
+                        action: "get_wc_products",
+                        cart_key: cartKey
+                    }, (response) => {
+                        if (response.success) {
+                            this.handleAddToCartEvent(response.data, qtyChange); // Pass qtyChange dynamically
+                        }
+                    });
+                }
+                // If qtyChange is negative, it's a remove-from-cart event
+                else if (qtyChange < 0) {
+                    jQuery.post(ajaxurl, {
+                        action: "get_wc_products",
+                        cart_key: cartKey
+                    }, (response) => {
+                        if (response.success) {
+                            this.handleRemoveFromCartEvent(response.data, Math.abs(qtyChange)); // Always pass positive qtyChange for removal
+                        }
+                    });
+                }
+            }
+        });
+
+        // Capture initial quantities once the page is ready
+        jQuery(document).ready(() => {
+            this.captureInitialQuantities();
+        });
+
+        jQuery(document).ajaxComplete((_, __, settings) => {
             // Add to Cart event
             if ((settings.url.indexOf("wc-ajax=add_to_cart") !== -1) || (typeof settings.data === "string" && settings.data.includes("action=woodmart_ajax_add_to_cart"))) {
                 try {
@@ -565,9 +621,9 @@ window.InsiderObject = {
             value: productData.currency
         });
         window.InsiderQueue.push(productAddedCart);
-        window.InsiderQueue.push({
-            type: 'init'
-        });
+        // window.InsiderQueue.push({
+        //     type: 'init'
+        // });
 
         console.log('📡 Add to Cart pushed:', productAddedCart);
 
@@ -593,7 +649,7 @@ window.InsiderObject = {
     /**
      * Handle Remove from Cart event
      */
-    handleRemoveFromCartEvent(productData) {
+    handleRemoveFromCartEvent(productData, quantity=0) {
         const productRemovedCart = {
             type: 'remove_from_cart',
             value: {
@@ -604,7 +660,7 @@ window.InsiderObject = {
                 unit_sale_price: productData.product_sale_price,
                 url: productData.product_url,
                 product_image_url: productData.product_image_url,
-                quantity: productData.quantity,
+                quantity: quantity != 0 ? quantity : productData.quantity,
                 custom: {
                     channel: productData.channel,
                     store_name: productData.store_name,
@@ -995,13 +1051,44 @@ window.InsiderObject = {
                 });
             }
 
+            // --- Helper: find variation by SKU ---
+            function findVariationBySKU() {
+                const variations = $form.data('product_variations') || [];
+                return variations.find(v => v.sku && v.sku.length > 0);
+            }
+
+            // --- Auto-select default variation ---
+            function autoSelectDefaultVariation() {
+                let variations = $form.data('product_variations');
+                if (!variations || !variations.length) {
+                    console.log("No variations loaded.");
+                    return;
+                }
+
+                // Find variation with SKU first, otherwise fallback to first variation
+                let defaultVar = findVariationBySKU() || variations[0];
+
+                console.log("Default variation selected:", defaultVar);
+
+                // Auto-set its attributes
+                $.each(defaultVar.attributes, function (name, value) {
+                    console.log("Setting", name, "=", value);
+                    const field = $('[name="' + name + '"]');
+                    if (field.length) {
+                        field.val(value).trigger('change');
+                    } else {
+                        console.log("Attribute field not found:", name);
+                    }
+                });
+            }
+
             // --- Trigger Woo image swap manually when only color changes ---
             function updateImagesForColor(colorSlug) {
                 const v = findVariationByColor(colorSlug);
                 if (v && v.image && v.image.src) {
                     manuallyTriggered = true;
                     $form.trigger('found_variation', [v]);
-                    // reset immediately so the next event (Woo's own) isn't skipped
+                    // Reset immediately so the next event (Woo's own) isn't skipped
                     setTimeout(() => { manuallyTriggered = false; }, 0);
                 }
             }
@@ -1019,10 +1106,10 @@ window.InsiderObject = {
 
             // --- Handle found_variation once (AJAX logic) ---
             $form.on('found_variation', (event, variation) => {
-                if (manuallyTriggered) return; // skip the manual image-only trigger
+                if (manuallyTriggered) return; // Skip the manual image-only trigger
 
                 const variation_id = variation.variation_id;
-                if (variation_id === lastVariationId) return; // skip duplicates
+                if (variation_id === lastVariationId) return; // Skip duplicates
 
                 lastVariationId = variation_id;
 
@@ -1035,13 +1122,13 @@ window.InsiderObject = {
                     },
                     success: (response) => {
                         if (response.success && response.data) {
-                            this.handleProductViewEvent(response.data); // works now
+                            this.handleProductViewEvent(response.data); // Handle the product view event
                         } else {
                             console.log("Error:", response.data?.message);
                         }
                     },
                     error: () => {
-                        console.log("AJAX request failed while removing from wishlist");
+                        console.log("AJAX request failed while handling product view.");
                     }
                 });
             });
@@ -1050,6 +1137,9 @@ window.InsiderObject = {
             $form.on('reset_data', () => {
                 lastVariationId = null;
             });
+
+            // Auto-select the default variation when the page loads
+            autoSelectDefaultVariation();
         });
     },
 
@@ -1096,9 +1186,8 @@ window.InsiderObject = {
         };
 
         window.InsiderQueue = window.InsiderQueue || [];
-        window.InsiderQueue.push({ type: 'product' });
         window.InsiderQueue.push(productViewed);
-        window.InsiderQueue.push({ type: 'currency', value: productData.currency || 'USD' });
+        window.InsiderQueue.push({ type: 'currency', value: productData.currency || 'MYR' });
         window.InsiderQueue.push({ type: 'init' });
 
         console.log('📡 Product Viewed pushed:', productViewed);

@@ -275,5 +275,11 @@
     "btns_shop_style": "flat",
     "popup_color_scheme": "light",
     "footer-style": "light",
-    "single_product_header": "header_243648"
+    "single_product_header": "header_243648",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

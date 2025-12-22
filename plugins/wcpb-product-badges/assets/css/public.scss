@@ -1,0 +1,212 @@
+// Keyframes
+
+@keyframes wcpb-product-badges-animation-bounce {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-8px);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-breathing {
+	0%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.08);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-jiggle {
+	0%, 100% {
+		transform: translateX(0) rotate(0deg);
+	}
+	25% {
+		transform: translateX(1px) rotate(1deg);
+	}
+	50% {
+		transform: translateX(-1px) rotate(-1deg);
+	}
+	75% {
+		transform: translateX(1px) rotate(0.5deg);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-shadow-pulse {
+	0%, 100% {
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+	}
+	50% {
+		filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+	}
+}
+
+@keyframes wcpb-product-badges-animation-shake {
+	0%, 100% {
+		transform: translateX(0);
+	}
+	10%, 30%, 50%, 70%, 90% {
+		transform: translateX(-2px);
+	}
+	20%, 40%, 60%, 80% {
+		transform: translateX(2px);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-sway {
+	0%, 100% {
+		transform: translateX(-3px);
+	}
+	50% {
+		transform: translateX(3px);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-tilt {
+	0%, 100% {
+		transform: rotate(-2deg);
+	}
+	50% {
+		transform: rotate(2deg);
+	}
+}
+
+@keyframes wcpb-product-badges-animation-wave {
+	0%, 100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(2px);
+	}
+	75% {
+		transform: translateX(-2px);
+	}
+}
+
+// Badge
+
+.wcpb-product-badges-badge {
+	position: absolute;
+	width: 120px;
+	pointer-events: none;
+	z-index: 10; // Some themes may set a high z-index on product images, this z-index ensures the badge is displayed on top of the product image, we keep it low as a lot of themes can use lowish z-indexes for sticky headers
+	.wcpb-product-badges-badge-img {
+		all: unset !important; // Some themes add unwanted CSS to all img elements in the product display, below rules stop this
+		position: relative !important; // Stops themes attempting to position this element as they mistakenly think it is the product image causing the badge image to not display at all or positioned incorrectly
+		display: block !important; // Ensures img doesn't include the few pixels below which inline img block elements get
+		width: 100% !important; // Stops themes overriding this
+		height: auto !important; // Stops themes overriding this
+	}
+	&.wcpb-product-badges-badge-top-left {
+		top: 0;
+		left: 0;
+	}
+	&.wcpb-product-badges-badge-top-right {
+		top: 0;
+		right: 0;
+	}
+	&.wcpb-product-badges-badge-bottom-left {
+		bottom: 0;
+		left: 0;
+	}
+	&.wcpb-product-badges-badge-bottom-right {
+		bottom: 0;
+		right: 0;
+	}
+	&.wcpb-product-badges-animation-bounce {
+		animation: wcpb-product-badges-animation-bounce var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	&.wcpb-product-badges-animation-breathing {
+		animation: wcpb-product-badges-animation-breathing var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	&.wcpb-product-badges-animation-jiggle {
+		animation: wcpb-product-badges-animation-jiggle var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	&.wcpb-product-badges-animation-rotate {
+		animation: wcpb-product-badges-animation-rotate var(--wcpb-product-badges-animation-duration, 1000ms) infinite linear;
+	}
+	&.wcpb-product-badges-animation-shadow-pulse {
+		animation: wcpb-product-badges-animation-shadow-pulse var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	&.wcpb-product-badges-animation-shake {
+		animation: wcpb-product-badges-animation-shake var(--wcpb-product-badges-animation-duration, 1000ms) infinite;
+	}
+	&.wcpb-product-badges-animation-sway {
+		animation: wcpb-product-badges-animation-sway var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	&.wcpb-product-badges-animation-tilt {
+		animation: wcpb-product-badges-animation-tilt var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	&.wcpb-product-badges-animation-wave {
+		animation: wcpb-product-badges-animation-wave var(--wcpb-product-badges-animation-duration, 1000ms) infinite ease-in-out;
+	}
+	.wcpb-product-badges-badge-countdown {
+		.wcpb-product-badges-badge-countdown-parts {
+			.wcpb-product-badges-badge-countdown-part {
+				margin: 0 2px;
+			}
+		}
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.wcpb-product-badges-badge {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+// Compatibility modes
+
+#wcpb-product-badges-compatibility-mode-product-pages {
+	display: none !important;
+}
+
+// WooCommerce
+
+.woocommerce-product-gallery,
+.woocommerce-product-gallery__wrapper {
+	position: relative !important; // Ensures the gallery containers are relative or the positioning won't work, it is relative by default but some themes may amend it
+}
+
+.woocommerce-product-gallery__image {
+	position: relative; // Ensures image containers are relative, not !important as some themes may override this with position absolute, etc
+}
+
+.woocommerce-product-gallery__trigger {
+	transition: none !important; // Ensures the changed positions don't get transitioned in
+}
+
+.product {
+	position: relative; // Ensures the product container is relative or the positioning won't work, it is relative by default but some themes may amend it, not !important as some themes may change it to position absolute, but would still allow positioning if absolute
+}
+
+.wc-block-grid__product-onsale {
+	display: none !important; // Hides the sale flash on product blocks as they do not take the woocommerce_sale_flash filter we have returned false into account
+}
+
+.wc-block-grid__product-image {
+	img {
+		display: block !important; // Ensures block product images are display block otherwise they are inline and have the small margin below so would cause badge bottom absolute position to be offset
+	}
+}
+
+// Theme compatibility
+
+.theme-flatsome {
+	&.single-product {
+		.product-thumbnails .wcpb-product-badges-badge {
+			display: none !important; // Flatsome uses the woocommerce_single_product_image_thumbnail_html filter for all additional gallery images unlike WooCommerce which just uses it for the main image, therefore we hide the badges in here
+		}
+	}
+}

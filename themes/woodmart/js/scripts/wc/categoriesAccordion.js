@@ -10,32 +10,33 @@
 			return;
 		}
 
-		var $widget = $('.widget_product_categories'),
+		var $widget = $('.widget_product_categories, .wd-product-category-filter'),
 		    $list   = $widget.find('.product-categories'),
 		    time    = 300;
 
-		$list.find('.cat-parent').each(function() {
+		$list.find('.wd-active-parent').each(function() {
 			var $this = $(this);
 
 			if ($this.find(' > .wd-cats-toggle').length > 0) {
 				return;
 			}
+
 			if ($this.find(' > .children').length === 0 || $this.find(' > .children > *').length === 0) {
 				return;
 			}
 
-			if ($this.hasClass('current-cat') || $this.hasClass('current-cat-parent')) {
-				$this.append('<div class="wd-cats-toggle toggle-active"></div>');
+			if ($this.hasClass('wd-active') || $this.hasClass('wd-current-active-parent')) {
+				$this.children().eq(0).after('<div class="wd-cats-toggle toggle-active wd-role-btn" tabindex="0"></div>');
 
 				$this.find('> .children').addClass('list-shown');
 			} else {
-				$this.append('<div class="wd-cats-toggle"></div>');
+				$this.children().eq(0).after('<div class="wd-cats-toggle wd-role-btn"  tabindex="0"></div>');
 			}
 		});
 
 		$list.on('click', '.wd-cats-toggle', function() {
-			var $btn     = $(this),
-			    $subList = $btn.prev();
+			var $btn     = $(this);
+			var	$subList = $btn.parent().find('> .children');
 
 			if ($subList.hasClass('list-shown')) {
 				$btn.removeClass('toggle-active');

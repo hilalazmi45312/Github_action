@@ -8,17 +8,22 @@
 namespace XTS\Modules\Frequently_Bought_Together;
 
 use WP_Query;
+use WP_List_Table;
 
 /**
  * Class Table
  *
  * @package Woodmart
  */
-class Bundles_Table extends \WP_List_Table {
+class Bundles_Table extends WP_List_Table {
 	/**
 	 * Constructor.
 	 */
 	public function __construct( $product_id = '' ) {
+		if ( ! woodmart_get_opt( 'bought_together_enabled' ) || ! woodmart_woocommerce_installed() ) {
+			return;
+		}
+
 		parent::__construct(
 			array(
 				'singular' => __( 'types', 'woodmart' ),

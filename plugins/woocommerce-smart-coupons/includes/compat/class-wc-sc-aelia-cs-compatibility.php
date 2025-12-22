@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       6.1.0
- * @version     1.2.0
+ * @version     1.3.0
  *
  * @package     woocommerce-smart-coupons/includes/compat/
  */
@@ -66,6 +66,7 @@ if ( ! class_exists( 'WC_SC_Aelia_CS_Compatibility' ) ) {
 			if ( ! in_array( 'smart_coupon', $coupon_types, true ) ) {
 				$coupon_types[] = 'smart_coupon';
 			}
+
 			return $coupon_types;
 		}
 
@@ -116,27 +117,31 @@ if ( ! class_exists( 'WC_SC_Aelia_CS_Compatibility' ) ) {
 		 * @param mixed  $meta_value The new meta value.
 		 */
 		public function update_order_credit_meta_on_base_currency_change( $meta_id, $order_id, $meta_key, $meta_value ) {
-			// Ensure we are targeting the correct meta key.
-			if ( '_order_total_base_currency' !== $meta_key ) {
-				return;
-			}
+			try {
+				// Ensure we are targeting the correct meta key.
+				if ( '_order_total_base_currency' !== $meta_key ) {
+					return;
+				}
 
-			// Get the order object.
-			$order = wc_get_order( $order_id );
-			if ( ! $order instanceof WC_Order ) {
-				return;
-			}
+				// Get the order object.
+				$order = wc_get_order( $order_id );
+				if ( ! $order instanceof WC_Order ) {
+					return;
+				}
 
-			// Ensure WC_SC_Purchase_Credit class exists before using it.
-			if ( ! class_exists( 'WC_SC_Purchase_Credit' ) ) {
-				return;
-			}
+				// Ensure WC_SC_Purchase_Credit class exists before using it.
+				if ( ! class_exists( 'WC_SC_Purchase_Credit' ) ) {
+					return;
+				}
 
-			$purchase_credit = WC_SC_Purchase_Credit::get_instance();
+				$purchase_credit = WC_SC_Purchase_Credit::get_instance();
 
-			// Loop through order items and update credit details.
-			foreach ( $order->get_items() as $item_id => $item ) {
-				$purchase_credit->save_called_credit_details_in_order_item_meta( $item_id, $item );
+				// Loop through order items and update credit details.
+				foreach ( $order->get_items() as $item_id => $item ) {
+					$purchase_credit->save_called_credit_details_in_order_item_meta( $item_id, $item );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 

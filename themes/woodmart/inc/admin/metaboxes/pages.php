@@ -66,6 +66,18 @@ if ( ! function_exists( 'woodmart_register_page_metaboxes' ) ) {
 			)
 		);
 
+		if ( woodmart_get_opt( 'preload_lcp_image' ) ) {
+			$page_metabox->add_section(
+				array(
+					'id'         => 'preload',
+					'name'       => esc_html__( 'Preload image', 'woodmart' ),
+					'priority'   => 45,
+					'icon'       => 'xts-i-performance',
+					'post_types' => array( 'page' ),
+				)
+			);
+		}
+
 		$page_metabox->add_section(
 			array(
 				'id'         => 'mobile',
@@ -119,7 +131,7 @@ if ( ! function_exists( 'woodmart_register_page_metaboxes' ) ) {
 				'section'     => 'header',
 				'options'     => '',
 				'callback'    => 'woodmart_get_theme_settings_headers_array',
-				'default'     => 'inherit',
+				'default'     => 'none',
 				'priority'    => 20,
 			)
 		);
@@ -194,6 +206,74 @@ if ( ! function_exists( 'woodmart_register_page_metaboxes' ) ) {
 				'data_type'   => 'hex',
 				'priority'    => 60,
 				'class'       => 'xts-col-6',
+			)
+		);
+
+		$page_metabox->add_field(
+			array(
+				'id'       => $woodmart_prefix . 'title_image_size',
+				'name'     => esc_html__( 'Image size', 'woodmart' ),
+				'type'     => 'select',
+				'section'  => 'page_title',
+				'options'  => woodmart_get_default_image_sizes(),
+				'default'  => 'full',
+				'priority' => 61,
+				'requires' => array(
+					array(
+						'key'     => $woodmart_prefix . 'title_image',
+						'compare' => 'not_equals',
+						'value'   => '',
+					),
+				),
+				'class'    => 'xts-col-4',
+			)
+		);
+
+		$page_metabox->add_field(
+			array(
+				'id'       => $woodmart_prefix . 'title_image_size_custom_width',
+				'name'     => esc_html__( 'Custom width (px)', 'woodmart' ),
+				'type'     => 'text_input',
+				'section'  => 'page_title',
+				'default'  => '',
+				'requires' => array(
+					array(
+						'key'     => $woodmart_prefix . 'title_image',
+						'compare' => 'not_equals',
+						'value'   => '',
+					),
+					array(
+						'key'     => $woodmart_prefix . 'title_image_size',
+						'compare' => 'equals',
+						'value'   => array( 'custom' ),
+					),
+				),
+				'priority' => 62,
+				'class'    => 'xts-col-4',
+			)
+		);
+
+		$page_metabox->add_field(
+			array(
+				'id'       => $woodmart_prefix . 'title_image_size_custom_height',
+				'name'     => esc_html__( 'Custom height (px)', 'woodmart' ),
+				'type'     => 'text_input',
+				'section'  => 'page_title',
+				'default'  => '',
+				'requires' => array(
+					array(
+						'key'     => $woodmart_prefix . 'title_image',
+						'compare' => 'not_equals',
+						'value'   => '',
+					),
+					array(
+						'key'     => $woodmart_prefix . 'title_image_size',
+						'compare' => 'equals',
+						'value'   => array( 'custom' ),
+					),
+				),
+				'priority' => 63,
+				'class'    => 'xts-col-4',
 			)
 		);
 
@@ -295,6 +375,7 @@ if ( ! function_exists( 'woodmart_register_page_metaboxes' ) ) {
 				'section'  => 'sidebar',
 				'options'  => '',
 				'callback' => 'woodmart_get_theme_settings_sidebars_array',
+				'default'  => 'none',
 				'priority' => 100,
 			)
 		);
@@ -343,6 +424,178 @@ if ( ! function_exists( 'woodmart_register_page_metaboxes' ) ) {
 				'class'       => 'xts-tooltip-bordered xts-field-sidebar-switcher',
 			)
 		);
+
+		if ( woodmart_get_opt( 'preload_lcp_image' ) ) {
+			$page_metabox->add_field(
+				array(
+					'id'          => $woodmart_prefix . 'preload_image',
+					'type'        => 'upload',
+					'name'        => esc_html__( 'Image', 'woodmart' ),
+					'description' => esc_html__( 'Upload an image', 'woodmart' ),
+					'section'     => 'preload',
+					't_tab'       => array(
+						'id'    => 'preload_image_tabs',
+						'tab'   => esc_html__( 'Desktop', 'woodmart' ),
+						'style' => 'default',
+					),
+					'priority'    => 10,
+					'class'       => 'xts-col-6',
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'       => $woodmart_prefix . 'preload_image_size',
+					'name'     => esc_html__( 'Image size', 'woodmart' ),
+					'type'     => 'select',
+					'section'  => 'preload',
+					'options'  => woodmart_get_default_image_sizes(),
+					'default'  => 'full',
+					't_tab'    => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-desktop',
+						'tab'  => esc_html__( 'Desktop', 'woodmart' ),
+					),
+					'priority' => 20,
+					'class'    => 'xts-col-6',
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'       => $woodmart_prefix . 'preload_image_size_custom',
+					'name'     => esc_html__( 'Custom image size', 'woodmart' ),
+					'type'     => 'text_input',
+					'section'  => 'preload',
+					'default'  => '',
+					't_tab'    => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-desktop',
+						'tab'  => esc_html__( 'Desktop', 'woodmart' ),
+					),
+					'requires' => array(
+						array(
+							'key'     => $woodmart_prefix . 'preload_image_size',
+							'compare' => 'equals',
+							'value'   => array( 'custom' ),
+						),
+					),
+					'priority' => 25,
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'       => $woodmart_prefix . 'preload_image_type',
+					'name'     => esc_html__( 'Image type', 'woodmart' ),
+					'type'     => 'buttons',
+					'section'  => 'preload',
+					'options'  => array(
+						'image'      => array(
+							'name'  => esc_html__( 'Image tag (<img>)', 'woodmart' ),
+							'value' => 'image',
+						),
+						'background' => array(
+							'name'  => esc_html__( 'Background image (CSS)', 'woodmart' ),
+							'value' => 'background',
+						),
+					),
+					't_tab'    => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-desktop',
+						'tab'  => esc_html__( 'Desktop', 'woodmart' ),
+					),
+					'description'  => esc_html__( 'Choose whether your image is added to the page using an "img" tag or as a background via CSS. Selecting the correct placement type will help determine whether srcsets are used for the image, ensuring each of them is considered in the LCP option. If you set the image using "Find" function, this value will be selected automatically.', 'woodmart' ),
+					'default'  => 'image',
+					'priority' => 30,
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'          => $woodmart_prefix . 'preload_image_mobile',
+					'type'        => 'upload',
+					'name'        => esc_html__( 'Image', 'woodmart' ),
+					'description' => esc_html__( 'Upload an image', 'woodmart' ),
+					'section'     => 'preload',
+					'priority'    => 40,
+					't_tab'       => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-phone',
+						'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+					),
+					'class'       => 'xts-col-6',
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'       => $woodmart_prefix . 'preload_image_mobile_size',
+					'name'     => esc_html__( 'Image size', 'woodmart' ),
+					'type'     => 'select',
+					'section'  => 'preload',
+					'options'  => woodmart_get_default_image_sizes(),
+					'default'  => 'full',
+					't_tab'    => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-phone',
+						'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+					),
+					'priority' => 50,
+					'class'    => 'xts-col-6',
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'       => $woodmart_prefix . 'preload_image_mobile_custom_size',
+					'name'     => esc_html__( 'Custom image size', 'woodmart' ),
+					'type'     => 'text_input',
+					'section'  => 'preload',
+					'default'  => '',
+					'priority' => 55,
+					't_tab'    => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-phone',
+						'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+					),
+					'requires' => array(
+						array(
+							'key'     => $woodmart_prefix . 'preload_image_mobile_size',
+							'compare' => 'equals',
+							'value'   => array( 'custom' ),
+						),
+					),
+				)
+			);
+
+			$page_metabox->add_field(
+				array(
+					'id'       => $woodmart_prefix . 'preload_image_mobile_type',
+					'name'     => esc_html__( 'Image type', 'woodmart' ),
+					'type'     => 'buttons',
+					'section'  => 'preload',
+					'options'  => array(
+						'image'      => array(
+							'name'  => esc_html__( 'Image tag (<img>)', 'woodmart' ),
+							'value' => 'image',
+						),
+						'background' => array(
+							'name'  => esc_html__( 'Background image (CSS)', 'woodmart' ),
+							'value' => 'background',
+						),
+					),
+					'default'  => 'image',
+					't_tab'    => array(
+						'id'   => 'preload_image_tabs',
+						'icon' => 'xts-i-phone',
+						'tab'  => esc_html__( 'Mobile', 'woodmart' ),
+					),
+					'description'  => esc_html__( 'Choose whether your image is added to the page using an "img" tag or as a background via CSS. Selecting the correct placement type will help determine whether srcsets are used for the image, ensuring each of them is considered in the LCP option. If you set the image using "Find" function, this value will be selected automatically.', 'woodmart' ),
+					'priority' => 60,
+				)
+			);
+		}
 	}
 
 	add_action( 'init', 'woodmart_register_page_metaboxes', 100 );
@@ -396,7 +649,7 @@ $post_category_metabox->add_field(
 				'value' => 'chess',
 			),
 			'masonry'      => array(
-				'name'  => esc_html__( 'Masonry grid', 'woodmart' ),
+				'name'  => esc_html__( 'Grid', 'woodmart' ),
 				'value' => 'default',
 			),
 			'mask'         => array(

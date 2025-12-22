@@ -25,6 +25,7 @@ if ( ! function_exists( 'whb_generate_header' ) ) {
 	 */
 	function whb_generate_header() {
 		woodmart_enqueue_inline_style( 'header-base' );
+		woodmart_enqueue_inline_style( 'mod-tools' );
 
 		Frontend::get_instance()->generate_header();
 	}

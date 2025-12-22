@@ -482,6 +482,7 @@
     "blog_columns": "3",
     "blog_columns_tablet": "2",
     "blog_spacing": "20",
+    "blog_archive_layout": "full-width",
     "grid_swatches_attribute": "pa_color",
     "label_shape": "rounded-sm",
     "sale_label_bg_color": {
@@ -523,9 +524,6 @@
     "photoswipe_icon": "0",
     "reviews_style": "style-2",
     "reviews_columns": "2",
-    "additional_tab_title": "Application method",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "210",
     "multi_custom_fonts": {
         "0": {
             "font-name": "Satoshi",
@@ -563,5 +561,7 @@
                 "id": ""
             }
         }
-    }
+    },
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

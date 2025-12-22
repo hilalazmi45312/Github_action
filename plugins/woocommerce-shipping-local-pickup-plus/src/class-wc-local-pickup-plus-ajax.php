@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Appointments\Appointment;
 
 /**
@@ -271,7 +271,8 @@ class WC_Local_Pickup_Plus_Ajax {
 			}
 		}
 
-		wp_send_json_error( sprintf( 'Could not set pickup data for order item %s', isset( $_POST['item_id'] ) && ( is_string( $_POST['item_id'] ) || is_numeric( $_POST['item_id'] ) ) ? $_POST['item_id'] : '' ) );
+		$order_item = isset( $_POST['item_id'] ) && ( is_string( $_POST['item_id'] ) || is_numeric( $_POST['item_id'] ) ) ? sanitize_text_field( $_POST['item_id'] ) : '';
+		wp_send_json_error( esc_html( sprintf( 'Could not set pickup data for order item %s', $order_item ) ) );
 	}
 
 
@@ -415,7 +416,8 @@ class WC_Local_Pickup_Plus_Ajax {
 			wp_send_json_success( $pickup_location->get_formatted_name() );
 		}
 
-		wp_send_json_error( sprintf( 'Could not determine Pickup Location from requested ID %s', isset( $_POST['id'] ) && ( is_string( $_POST['id'] ) || is_numeric( $_POST['id'] ) ) ? $_POST['id'] : '' ) );
+		$id = isset( $_POST['id'] ) && ( is_string( $_POST['id'] ) || is_numeric( $_POST['id'] ) ) ? sanitize_text_field( $_POST['id'] ) : '';
+		wp_send_json_error( esc_html( sprintf( 'Could not determine Pickup Location from requested ID %s', $id ) ) );
 	}
 
 
@@ -471,8 +473,8 @@ class WC_Local_Pickup_Plus_Ajax {
 		     &&   in_array( $_POST['pickup_data']['handling'], array( 'ship', 'pickup' ), true )
 		     && ! WC()->cart->is_empty() ) {
 
-			$cart_item_key = $_POST['cart_item_key'];
-			$handling_type = $_POST['pickup_data']['handling'];
+			$cart_item_key = sanitize_text_field( $_POST['cart_item_key'] );
+			$handling_type = sanitize_text_field( $_POST['pickup_data']['handling'] );
 			$session_data  = wc_local_pickup_plus()->get_session_instance()->get_cart_item_pickup_data( $cart_item_key );
 
 			if ( is_string( $cart_item_key ) && '' !== $cart_item_key ) {
@@ -488,7 +490,7 @@ class WC_Local_Pickup_Plus_Ajax {
 
 					if ( ! empty( $_POST['pickup_data']['pickup_location_id'] ) ) {
 
-						$pickup_location = wc_local_pickup_plus_get_pickup_location( $_POST['pickup_data']['pickup_location_id'] );
+						$pickup_location = wc_local_pickup_plus_get_pickup_location( sanitize_text_field( $_POST['pickup_data']['pickup_location_id'] ) );
 
 						if ( $pickup_location instanceof \WC_Local_Pickup_Plus_Pickup_Location ) {
 							$session_data['pickup_location_id'] = $pickup_location->get_id();
@@ -612,7 +614,7 @@ class WC_Local_Pickup_Plus_Ajax {
 			// gather request variables
 			$search_term  = sanitize_text_field( $_REQUEST['term'] );
 			$product_id   = isset( $_REQUEST['product_id'] )  ? (int) $_REQUEST['product_id']                       : null;
-			$current_area = ! empty( $_REQUEST['area'] )      ? wc_format_country_state_string( $_REQUEST['area'] ) : null;
+			$current_area = ! empty( $_REQUEST['area'] )      ? wc_format_country_state_string( sanitize_text_field( $_REQUEST['area'] ) ) : null;
 			$country      = isset( $current_area['country'] ) ? $current_area['country']                            : '';
 			$state        = isset( $current_area['state'] )   ? $current_area['state']                              : '';
 
@@ -729,7 +731,7 @@ class WC_Local_Pickup_Plus_Ajax {
 		     && ( $location_id = is_numeric( $_POST['location'] ) ? (int) $_POST['location'] : null ) ) {
 
 			$location  = wc_local_pickup_plus_get_pickup_location( $location_id );
-			$formatted = isset( $_POST['formatted'] ) && $_POST['formatted'];
+			$formatted = isset( $_POST['formatted'] ) && $_POST['formatted']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			if ( $location && 'publish' === $location->get_post()->post_status ) {
 
@@ -969,7 +971,7 @@ class WC_Local_Pickup_Plus_Ajax {
 
 			if ( $location_id ) {
 
-				$date       = $_POST['date'];
+				$date       = sanitize_text_field( $_POST['date'] );
 				$location   = wc_local_pickup_plus_get_pickup_location( $location_id );
 				$package_id = (int) Framework\SV_WC_Helper::get_posted_value( 'package_id' );
 
@@ -1021,8 +1023,8 @@ class WC_Local_Pickup_Plus_Ajax {
 
 				<small class="pickup-location-field-label"><?php
 					/* translators: Placeholder: %s - day of the week name */
-					printf( __( 'Opening hours for pickup on %s:', 'woocommerce-shipping-local-pickup-plus' ),
-						'<strong>' . date_i18n( 'l', strtotime( $date ) ) . '</strong>'
+					printf( esc_html__( 'Opening hours for pickup on %s:', 'woocommerce-shipping-local-pickup-plus' ),
+						'<strong>' . esc_html( date_i18n( 'l', strtotime( $date ) ) ) . '</strong>'
 					); ?></small>
 				<ul>
 					<?php foreach ( $opening_hours as $time_string ) : ?>

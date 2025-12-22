@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup Locations Admin class.
@@ -151,7 +151,7 @@ class WC_Local_Pickup_Plus_Pickup_Locations_Admin {
 				$address = $pickup_location->get_address()->get_street_address( 'string' );
 
 				if ( ! empty( $address ) ) {
-					echo $address;
+					echo $address; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				} else {
 					echo '&ndash;';
 				}
@@ -165,7 +165,7 @@ class WC_Local_Pickup_Plus_Pickup_Locations_Admin {
 				$method  = 'get_' . $column;
 				$piece   = method_exists( $address, $method ) ? $address->$method() : '';
 
-				echo empty( $piece ) ? '&ndash;' : $piece;
+				echo empty( $piece ) ? '&ndash;' : $piece; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			break;
 
@@ -180,16 +180,16 @@ class WC_Local_Pickup_Plus_Pickup_Locations_Admin {
 					$name = $pickup_location->get_address()->get_state_name();
 				}
 
-				echo empty( $name ) ? '&ndash;' : esc_html( $name );
+				echo empty( $name ) ? '&ndash;' : esc_html( $name ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			break;
 
 			case 'geocoded_status' :
 
 				if ( $pickup_location->has_coordinates() ) {
-					echo '<span title="' . __( 'This pickup location has coordinates.', 'woocommerce-shipping-local-pickup-plus' ) .'" class="geocoded-status-dot has-coordinates"></span>';
+					echo '<span title="' . esc_attr__( 'This pickup location has coordinates.', 'woocommerce-shipping-local-pickup-plus' ) .'" class="geocoded-status-dot has-coordinates"></span>';
 				} else {
-					echo '<span title="' . __( 'No coordinates have been set for this pickup location.', 'woocommerce-shipping-local-pickup-plus' ) .'" class="geocoded-status-dot no-coordinates"></span>';
+					echo '<span title="' . esc_attr__( 'No coordinates have been set for this pickup location.', 'woocommerce-shipping-local-pickup-plus' ) .'" class="geocoded-status-dot no-coordinates"></span>';
 				}
 
 			break;
@@ -370,8 +370,8 @@ class WC_Local_Pickup_Plus_Pickup_Locations_Admin {
 
 		?>
 		<div id="wc-local-pickup-plus-edit-pickup-locations-import-export" style="display: none;">
-			<a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=wc_local_pickup_plus_import' ); ?>"><?php esc_html_e( 'Import Pickup Locations', 'woocommerce-shipping-local-pickup-plus' ) ?></a>
-			<a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=wc_local_pickup_plus_export' ); ?>"><?php esc_html_e( 'Export Pickup Locations', 'woocommerce-shipping-local-pickup-plus' ) ?></a>
+			<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=wc_local_pickup_plus_import' ) ); ?>"><?php esc_html_e( 'Import Pickup Locations', 'woocommerce-shipping-local-pickup-plus' ) ?></a>
+			<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=wc_local_pickup_plus_export' ) ); ?>"><?php esc_html_e( 'Export Pickup Locations', 'woocommerce-shipping-local-pickup-plus' ) ?></a>
 		</div>
 		<?php
 
@@ -404,7 +404,7 @@ class WC_Local_Pickup_Plus_Pickup_Locations_Admin {
 
 			if ( ! current_user_can( 'manage_woocommerce' ) ) {
 
-				wp_die( __( 'You are not allowed to perform this action.', 'woocommerce-shipping-local-pickup-plus' ) );
+				wp_die( esc_html__( 'You are not allowed to perform this action.', 'woocommerce-shipping-local-pickup-plus' ) );
 
 			} elseif ( $local_pickup_plus->geocoding_enabled() ) {
 
@@ -527,7 +527,7 @@ class WC_Local_Pickup_Plus_Pickup_Locations_Admin {
 
 		if ( $this->is_search() ) {
 
-			$keyword   = $wpdb->esc_like( $_GET['s'] );
+			$keyword   = $wpdb->esc_like( sanitize_text_field( $_GET['s'] ) );
 			$pieces    = '';
 			$meta_keys = [
 				'_pickup_location_phone',

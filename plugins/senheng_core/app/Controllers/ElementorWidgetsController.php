@@ -44,6 +44,7 @@ class ElementorWidgetsController
         require_once(__DIR__ . '/../Widgets/BrandDisplayWidget.php');
         require_once(__DIR__ . '/../Widgets/ProductExtrasWidget.php');
         require_once(__DIR__ . '/../Widgets/TradeInWidget.php');
+        require_once(__DIR__ . '/../Widgets/InstallmentDisplayWidget.php');
 
         // Register widgets
         $widgets_manager->register(new \Senheng\Widgets\ProductPriceWidget());
@@ -52,19 +53,23 @@ class ElementorWidgetsController
         $widgets_manager->register(new \Senheng\Widgets\BrandDisplayWidget());
         $widgets_manager->register(new \Senheng\Widgets\ProductExtrasWidget());
         $widgets_manager->register(new \Senheng\Widgets\TradeInWidget());
+        $widgets_manager->register(new \Senheng\Widgets\InstallmentDisplayWidget());
     }
 
     public static function enqueueAssets()
     {
-        // Always enqueue brand widget assets
-        wp_enqueue_style(
+        // Register (not enqueue) widget assets - they will be enqueued by each widget's render() method
+        // This ensures assets only load on pages where the widget is actually used
+
+        // Brand Display Widget assets
+        wp_register_style(
             'sh-brand-display-widget-css',
             SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/brand-display-widget.css',
             array(),
             '1.0.0'
         );
 
-        wp_enqueue_script(
+        wp_register_script(
             'sh-brand-display-widget-js',
             SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/brand-display-widget.js',
             array('jquery'),
@@ -72,15 +77,15 @@ class ElementorWidgetsController
             true
         );
 
-        // Always enqueue Trade In Widget assets (needed for Elementor preview)
-        wp_enqueue_style(
+        // Trade In Widget assets
+        wp_register_style(
             'sh-trade-in-widget-css',
             SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/trade-in-widget.css',
             array(),
             '1.0.0'
         );
 
-        wp_enqueue_script(
+        wp_register_script(
             'sh-trade-in-widget-js',
             SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/trade-in-widget.js',
             array('jquery'),
@@ -88,19 +93,15 @@ class ElementorWidgetsController
             ['in_footer' => true, 'strategy' => 'defer']
         );
 
-        if (!is_product()) {
-            return;
-        }
-
-        // Enqueue Product Price Widget assets
-        wp_enqueue_style(
+        // Product Price Widget assets
+        wp_register_style(
             'sh-product-price-widget-css',
             SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/product-price-widget.css',
             array(),
             '1.0.0'
         );
 
-        wp_enqueue_script(
+        wp_register_script(
             'sh-product-price-widget-js',
             SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/product-price-widget.js',
             array('jquery'),
@@ -108,15 +109,15 @@ class ElementorWidgetsController
             true
         );
 
-        // Enqueue Product Variation Widget assets
-        wp_enqueue_style(
+        // Product Variation Widget assets
+        wp_register_style(
             'sh-product-variation-widget-css',
             SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/product-variation-widget.css',
             array(),
             '1.0.0'
         );
 
-        wp_enqueue_script(
+        wp_register_script(
             'sh-product-variation-widget-js',
             SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/product-variation-widget.js',
             array('jquery', 'wc-add-to-cart-variation'),
@@ -124,38 +125,53 @@ class ElementorWidgetsController
             ['in_footer' => true, 'strategy' => 'defer']
         );
 
-		// Enqueue S-Coin Label Widget assets
-		wp_enqueue_style(
-			'sh-s-coin-label-widget-css',
-			SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/s-coin-label-widget.css',
-			array(),
-			'1.0.0'
-		);
+        // S-Coin Label Widget assets
+        wp_register_style(
+            'sh-s-coin-label-widget-css',
+            SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/s-coin-label-widget.css',
+            array(),
+            '1.0.0'
+        );
 
-		wp_enqueue_script(
-			'sh-s-coin-label-widget-js',
-			SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/s-coin-label-widget.js',
-			array('jquery'),
-			'1.0.0',
-			['in_footer' => true, 'strategy' => 'defer']
-		);
+        wp_register_script(
+            'sh-s-coin-label-widget-js',
+            SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/s-coin-label-widget.js',
+            array('jquery'),
+            '1.0.0',
+            ['in_footer' => true, 'strategy' => 'defer']
+        );
 
-		// Enqueue Product Extras Widget assets
-		wp_enqueue_style(
-			'sh-product-extras-widget-css',
-			SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/product-extras-widget.css',
-			array(),
-			'1.0.0'
-		);
+        // Product Extras Widget assets
+        wp_register_style(
+            'sh-product-extras-widget-css',
+            SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/product-extras-widget.css',
+            array(),
+            '1.0.0'
+        );
 
-		wp_enqueue_script(
-			'sh-product-extras-widget-js',
-			SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/product-extras-widget.js',
-			array('jquery'),
-			'1.0.0',
-			['in_footer' => true, 'strategy' => 'defer']
-		);
+        wp_register_script(
+            'sh-product-extras-widget-js',
+            SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/product-extras-widget.js',
+            array('jquery'),
+            '1.0.0',
+            ['in_footer' => true, 'strategy' => 'defer']
+        );
 
+        // Installment Display Widget assets
+        wp_register_style(
+            'sh-installment-display-widget-css',
+            SENHENG_CORE_ASSETS_URL . 'css/elementor-widget/frontend/installment-display-widget.css',
+            array(),
+            '1.0.0'
+        );
+
+        wp_register_script(
+            'sh-installment-display-widget-js',
+            SENHENG_CORE_ASSETS_URL . 'js/elementor-widget/frontend/installment-display-widget.js',
+            array('jquery'),
+            '1.0.0',
+            ['in_footer' => true, 'strategy' => 'defer']
+        );
     }
 
     public static function enqueueElementorAssets()

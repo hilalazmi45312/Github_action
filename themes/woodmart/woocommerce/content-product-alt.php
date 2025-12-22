@@ -7,7 +7,7 @@
 
 <div class="product-wrapper">
 	<div class="product-element-top wd-quick-shop">
-		<a href="<?php echo esc_url( get_permalink() ); ?>" class="product-image-link">
+		<a href="<?php echo esc_url( get_permalink() ); ?>" class="product-image-link" tabindex="-1" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
 			<?php
 			/**
 			 * Hook woocommerce_before_shop_loop_item_title.

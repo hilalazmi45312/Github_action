@@ -1,7 +1,9 @@
 /* global woodmart_settings */
 (function($) {
 	woodmartThemeModule.$document.on('wdReplaceMainGalleryNotQuickView wdShowVariationNotQuickView wdResetVariation', function () {
-		woodmartThemeModule.initZoom();
+		setTimeout( function() {
+			woodmartThemeModule.initZoom();
+		}, 300);
 	});
 
 	$.each([

@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     2.9.0
+ * @version     2.17.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -99,7 +99,6 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 		 * @return array $views
 		 */
 		public function smart_coupons_views_row( $views = null ) {
-
 			global $typenow;
 
 			if ( 'shop_coupon' === $typenow ) {
@@ -326,7 +325,6 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 		 * Function to include script in admin footer
 		 */
 		public function smart_coupons_script_in_footer() {
-
 			global $pagenow;
 			if ( empty( $pagenow ) ) {
 				return;
@@ -361,14 +359,12 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 				</script>
 				<?php
 			}
-
 		}
 
 		/**
 		 * Function to register the coupon importer
 		 */
 		public function woocommerce_coupon_admin_init() {
-
 			$get_import = ( isset( $_GET['import'] ) ) ? wc_clean( wp_unslash( $_GET['import'] ) ) : ''; // phpcs:ignore
 			$get_page   = ( isset( $_GET['page'] ) ) ? wc_clean( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
 			$get_action = ( isset( $_GET['action'] ) ) ? wc_clean( wp_unslash( $_GET['action'] ) ) : ''; // phpcs:ignore
@@ -401,75 +397,78 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 		 * @param string $message Optional.
 		 */
 		public function send_gift_certificate( $email, $amount, $message = '' ) {
+			try {
+				$emails           = explode( ',', $email );
+				$location         = add_query_arg(
+					array(
+						'page' => 'wc-smart-coupons',
+						'tab'  => 'send-smart-coupons',
+					),
+					admin_url( 'admin.php' )
+				);
+				$validation_error = '';
 
-			$emails           = explode( ',', $email );
-			$location         = add_query_arg(
-				array(
-					'page' => 'wc-smart-coupons',
-					'tab'  => 'send-smart-coupons',
-				),
-				admin_url( 'admin.php' )
-			);
-			$validation_error = '';
+				// Check for valid amount.
+				if ( ! $amount || ! is_numeric( $amount ) ) {
+					$validation_error = 'amount_error';
+				}
 
-			// Check for valid amount.
-			if ( ! $amount || ! is_numeric( $amount ) ) {
-				$validation_error = 'amount_error';
-			}
-
-			if ( empty( $validation_error ) ) {
-				foreach ( $emails as $email ) {
-					$email = sanitize_email( $email );
-					// Check for valid email address.
-					if ( ( ! $email || ! is_email( $email ) ) ) {
-						$validation_error = 'email_error';
-						break;
+				if ( empty( $validation_error ) ) {
+					foreach ( $emails as $email ) {
+						$email = sanitize_email( $email );
+						// Check for valid email address.
+						if ( ( ! $email || ! is_email( $email ) ) ) {
+							$validation_error = 'email_error';
+							break;
+						}
 					}
 				}
-			}
 
-			// Proceed to bulk generate if there isn't any validation error.
-			if ( empty( $validation_error ) ) {
+				// Proceed to bulk generate if there isn't any validation error.
+				if ( empty( $validation_error ) ) {
 
-				// Set required $_POST data for bulk generate.
-				$_POST['no_of_coupons_to_generate']     = count( $emails );
-				$_POST['discount_type']                 = 'smart_coupon';
-				$_POST['smart_coupons_generate_action'] = 'send_store_credit';
+					// Set required $_POST data for bulk generate.
+					$_POST['no_of_coupons_to_generate']     = count( $emails );
+					$_POST['discount_type']                 = 'smart_coupon';
+					$_POST['smart_coupons_generate_action'] = 'send_store_credit';
 
-				// includes.
-				require 'class-wc-sc-coupon-import.php';
-				require 'class-wc-sc-coupon-parser.php';
+					// includes.
+					require WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-import.php';
+					require WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-parser.php';
 
-				$coupon_importer  = WC_SC_Coupon_Import::get_instance();
-				$action_processed = $coupon_importer->process_bulk_generate_action();
+					$coupon_importer  = WC_SC_Coupon_Import::get_instance();
+					$action_processed = $coupon_importer->process_bulk_generate_action();
 
-				if ( false === $action_processed ) {
+					if ( false === $action_processed ) {
+						$location = add_query_arg(
+							array(
+								'process_error' => 'yes',
+							),
+							$location
+						);
+					}
+				} elseif ( 'amount_error' === $validation_error ) {
 					$location = add_query_arg(
 						array(
-							'process_error' => 'yes',
+							'amount_error' => 'yes',
+						),
+						$location
+					);
+				} elseif ( 'email_error' === $validation_error ) {
+					$location = add_query_arg(
+						array(
+							'email_error' => 'yes',
 						),
 						$location
 					);
 				}
-			} elseif ( 'amount_error' === $validation_error ) {
-				$location = add_query_arg(
-					array(
-						'amount_error' => 'yes',
-					),
-					$location
-				);
-			} elseif ( 'email_error' === $validation_error ) {
-				$location = add_query_arg(
-					array(
-						'email_error' => 'yes',
-					),
-					$location
-				);
-			}
 
-			if ( ! empty( $location ) ) {
-				wp_safe_redirect( $location );
-				exit;
+				if ( ! empty( $location ) ) {
+					wp_safe_redirect( $location );
+					exit;
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -504,8 +503,8 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 			}
 
 			// includes.
-			require 'class-wc-sc-coupon-import.php';
-			require 'class-wc-sc-coupon-parser.php';
+			require WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-import.php';
+			require WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-parser.php';
 
 			$wc_csv_coupon_import = new WC_SC_Coupon_Import();
 
@@ -662,8 +661,8 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 			}
 
 			// includes.
-			require 'class-wc-sc-coupon-import.php';
-			require 'class-wc-sc-coupon-parser.php';
+			require WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-import.php';
+			require WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-parser.php';
 
 			$coupon_importer = WC_SC_Coupon_Import::get_instance();
 			$coupon_importer->dispatch();
@@ -729,6 +728,47 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 				.sc-send-smart-coupon-container form table tbody tr td #amount {
 					vertical-align: initial;
 				}
+
+				.currency-cell .currency-input-wrapper {
+					position: relative;
+					display: inline-block;
+					width: 7.5em;
+				}
+
+				.currency-cell .input-text {
+					width: 100% !important;
+					box-sizing: border-box;
+					padding-left: 0.5em !important;
+					padding-right: 0.5em !important;
+					text-align: left;
+				}
+
+				.currency-cell.currency-right .input-text {
+					text-align: right;
+				}
+
+				.currency-cell .currency-symbol {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+					color: #666;
+					font-size: 0.875em; /* 14px = 0.875em */
+					pointer-events: none;
+					white-space: nowrap;
+				}
+
+				.currency-cell.currency-left .currency-symbol {
+					left: 0.5em;
+				}
+
+				.currency-cell.currency-right .currency-symbol {
+					right: 0.5em;
+				}
+
+				.currency-cell.currency-space .currency-symbol::after {
+					content: ' ';
+				}
+
 			</style>
 
 			<?php
@@ -738,7 +778,7 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 			<?php
 			if ( ! empty( $store_credit_label['singular'] ) ) {
 				/* translators: %s: singular name for store credit */
-				echo sprintf( esc_html__( 'Quickly create and email %s to one or more people.', 'woocommerce-smart-coupons' ), esc_html( strtolower( $store_credit_label['singular'] ) ) );
+				echo sprintf( esc_html__( 'Quickly create and email %s to one or more people.', 'woocommerce-smart-coupons' ), esc_html( $store_credit_label['singular'] ) );
 			} else {
 				echo esc_html__( 'Quickly create and email Store Credit or Gift Card to one or more people.', 'woocommerce-smart-coupons' );
 			}
@@ -751,6 +791,9 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 				),
 				admin_url( 'admin.php' )
 			);
+
+			$is_currency_left  = in_array( get_option( 'woocommerce_currency_pos' ), array( 'left', 'left_space' ), true );
+			$is_currency_space = in_array( get_option( 'woocommerce_currency_pos' ), array( 'left_space', 'right_space' ), true );
 			?>
 			</p>
 
@@ -792,11 +835,18 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 							<th>
 								<label for="smart_coupon_amount"><?php echo esc_html__( 'Worth', 'woocommerce-smart-coupons' ); ?><span class="sc-required-mark">*</span></label>
 							</th>
-							<td>
-								<?php
-									$price_format = get_woocommerce_price_format();
-									echo sprintf( $price_format, '<span class="woocommerce-Price-currencySymbol">' . esc_html( get_woocommerce_currency_symbol() ) . '</span>', '&nbsp;<input type="text" name="coupon_amount" id="amount" required placeholder="' . esc_attr__( '0.00', 'woocommerce-smart-coupons' ) . '" class="input-text" style="width: 100px;" />&nbsp;' ); // phpcs:ignore
-								?>
+							<td class="currency-cell <?php echo $is_currency_left ? 'currency-left' : 'currency-right'; ?> <?php echo $is_currency_space ? 'currency-space' : ''; ?>">
+								<div class="currency-input-wrapper">
+									<?php if ( $is_currency_left ) : ?>
+									<span class="currency-symbol"><?php echo esc_html( get_woocommerce_currency_symbol() ); ?></span>
+									<?php endif; ?>
+
+									<input type="text" name="coupon_amount" id="amount" required placeholder="0.00" class="input-text" />
+
+									<?php if ( ! $is_currency_left ) : ?>
+									<span class="currency-symbol"><?php echo esc_html( get_woocommerce_currency_symbol() ); ?></span>
+									<?php endif; ?>
+								</div>
 							</td>
 							<td>
 								<?php
@@ -848,6 +898,30 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 					</p>
 				</form>
 			</div>
+			<script>
+				const cell = document.querySelector('.currency-cell');
+				const input = cell.querySelector('input.input-text');
+				const symbol = cell.querySelector('.currency-symbol');
+
+				// Get font size in pixels to convert px → em
+				const fontSize = parseFloat(getComputedStyle(input).fontSize); // usually 16px
+				let symbolWidth = symbol.offsetWidth; // in px
+
+				if (cell.classList.contains('currency-space')) {
+					symbolWidth += 6; // add 6px for space
+				}
+
+				// Convert px to em
+				const symbolWidthEm = (symbolWidth + 8) / fontSize; // add 8px buffer
+
+				if (cell.classList.contains('currency-left')) {
+					input.style.setProperty('padding-left', `${symbolWidthEm}em`, 'important');
+					input.style.setProperty('text-align', 'left', 'important');
+				} else if (cell.classList.contains('currency-right')) {
+					input.style.setProperty('padding-right', `${symbolWidthEm}em`, 'important');
+					input.style.setProperty('text-align', 'right', 'important');
+				}
+			</script>
 			<?php
 			if ( ! empty( $coupon_code ) ) {
 				$this->get_preview_email_html( $coupon_code );
@@ -858,46 +932,52 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 		 * Function to get sample coupon code
 		 */
 		public function get_sample_coupon_code() {
-			global $wpdb;
-			$coupon_code = wp_cache_get( 'wc_sc_any_coupon_code', 'woocommerce_smart_coupons' );
-			if ( false === $coupon_code ) {
-				$coupon_code = $wpdb->get_var( // phpcs:ignore
-					$wpdb->prepare(
-						"SELECT post_title
-								FROM $wpdb->posts AS p
-									LEFT JOIN $wpdb->postmeta AS pm
-										ON (p.ID = pm.post_id)
-								WHERE post_type = %s
-									AND ( pm.meta_key = %s AND pm.meta_value = %s )
-								LIMIT 1",
-						'shop_coupon',
-						'discount_type',
-						'smart_coupon'
-					)
-				);
-				wp_cache_set( 'wc_sc_any_coupon_code', $coupon_code, 'woocommerce_smart_coupons' );
-				$this->maybe_add_cache_key( 'wc_sc_any_coupon_code' );
-			}
-			if ( empty( $coupon_code ) ) {
-				$args        = array(
-					'return'             => 'code',
-					'discount_type'      => 'smart_coupon',
-					'amount'             => 1.99,
-					'description'        => __( 'This is a sample coupon', 'woocommerce-smart-coupons' ),
-					'date_expires'       => $this->strtotime( '+20 years' ),
-					'email_restrictions' => array( get_option( 'admin_email' ) ),
-				);
-				$coupon_code = $this->generate_coupon( $args );
-				$coupon      = new WC_Coupon( $coupon_code );
-				$coupon_id   = $this->is_callable( $coupon, 'get_id' ) ? $coupon->get_id() : 0;
-				if ( ! empty( $coupon_id ) ) {
-					$args = array(
-						'ID'          => $coupon_id,
-						'post_status' => 'auto-draft',
+			try {
+				global $wpdb;
+				$coupon_code = wp_cache_get( 'wc_sc_any_coupon_code', 'woocommerce_smart_coupons' );
+				if ( false === $coupon_code ) {
+					$coupon_code = $wpdb->get_var( // phpcs:ignore
+						$wpdb->prepare(
+							"SELECT post_title
+									FROM $wpdb->posts AS p
+										LEFT JOIN $wpdb->postmeta AS pm
+											ON (p.ID = pm.post_id)
+									WHERE post_type = %s
+										AND ( pm.meta_key = %s AND pm.meta_value = %s )
+									LIMIT 1",
+							'shop_coupon',
+							'discount_type',
+							'smart_coupon'
+						)
 					);
-					wp_update_post( $args ); // Because $coupon->set_status( 'auto-draft' ) not working.
+					wp_cache_set( 'wc_sc_any_coupon_code', $coupon_code, 'woocommerce_smart_coupons' );
+					$this->maybe_add_cache_key( 'wc_sc_any_coupon_code' );
 				}
+				if ( empty( $coupon_code ) ) {
+					$args        = array(
+						'return'             => 'code',
+						'discount_type'      => 'smart_coupon',
+						'amount'             => 1.99,
+						'description'        => __( 'This is a sample coupon', 'woocommerce-smart-coupons' ),
+						'date_expires'       => $this->strtotime( '+20 years' ),
+						'email_restrictions' => array( get_option( 'admin_email' ) ),
+					);
+					$coupon_code = $this->generate_coupon( $args );
+					$coupon      = new WC_Coupon( $coupon_code );
+					$coupon_id   = $this->is_callable( $coupon, 'get_id' ) ? $coupon->get_id() : 0;
+					if ( ! empty( $coupon_id ) ) {
+						$args = array(
+							'ID'          => $coupon_id,
+							'post_status' => 'auto-draft',
+						);
+						wp_update_post( $args ); // Because $coupon->set_status( 'auto-draft' ) not working.
+					}
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+				$coupon_code = '';
 			}
+
 			return $coupon_code;
 		}
 
@@ -907,462 +987,465 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 		 * @param  string $coupon_code Coupon code.
 		 */
 		public function get_preview_email_html( $coupon_code = '' ) {
-			?>
-			<div class="sc-preview-email-container postbox" style="display: none;">
-				<div class="sc-email-content">
-					<?php
-					if ( ! empty( $coupon_code ) ) {
-						$posts   = $this->get_post_by_title( $coupon_code, OBJECT, 'shop_coupon' ); // phpcs:ignore
-						$sanitized_coupon_code = sanitize_title( $coupon_code ); // The generated string will be checked in an array key to locate post object.
-						if ( empty( $posts ) || ! array_key_exists( $sanitized_coupon_code, $posts ) ) {
-							return;
-						}
-						$post   = ( ! empty( $posts[ $sanitized_coupon_code ] ) ) ? $posts[ $sanitized_coupon_code ] : null;
-						$revert = false;
-						if ( ! empty( $post->post_status ) && 'publish' !== $post->post_status ) {
-							$args = array(
-								'ID'          => $post->ID,
-								'post_status' => 'publish',
-							);
-							wp_update_post( $args );
-							$revert = true;
-						}
-						WC()->mailer();
-						if ( class_exists( 'WC_SC_Email_Coupon' ) ) {
-							$email_coupon             = new WC_SC_Email_Coupon();
-							$email_args               = array(
-								'coupon' => array(
-									'code'   => $coupon_code,
-									'amount' => 0,
-								),
-							);
-							$email_coupon->email_args = wp_parse_args( $email_args, $email_coupon->email_args );
-							$email_coupon->set_placeholders();
-							$email_content = $email_coupon->get_content();
-							// Replace placeholders with values in the email content.
-							$email_content = ( is_callable( array( $email_coupon, 'format_string' ) ) ) ? $email_coupon->format_string( $email_content ) : $email_content;
-
-							if ( true === $revert ) {
+			try {
+				?>
+				<div class="sc-preview-email-container postbox" style="display: none;">
+					<div class="sc-email-content">
+						<?php
+						if ( ! empty( $coupon_code ) ) {
+							$posts   = $this->get_post_by_title( $coupon_code, OBJECT, 'shop_coupon' ); // phpcs:ignore
+							$sanitized_coupon_code = sanitize_title( $coupon_code ); // The generated string will be checked in an array key to locate post object.
+							if ( empty( $posts ) || ! array_key_exists( $sanitized_coupon_code, $posts ) ) {
+								return;
+							}
+							$post   = ( ! empty( $posts[ $sanitized_coupon_code ] ) ) ? $posts[ $sanitized_coupon_code ] : null;
+							$revert = false;
+							if ( ! empty( $post->post_status ) && 'publish' !== $post->post_status ) {
 								$args = array(
 									'ID'          => $post->ID,
-									'post_status' => 'auto-draft',
+									'post_status' => 'publish',
 								);
 								wp_update_post( $args );
-								$revert = false;
+								$revert = true;
 							}
+							WC()->mailer();
+							if ( class_exists( 'WC_SC_Email_Coupon' ) ) {
+								$email_coupon             = new WC_SC_Email_Coupon();
+								$email_args               = array(
+									'coupon' => array(
+										'code'   => $coupon_code,
+										'amount' => 0,
+									),
+								);
+								$email_coupon->email_args = wp_parse_args( $email_args, $email_coupon->email_args );
+								$email_coupon->set_placeholders();
+								$email_content = $email_coupon->get_content();
+								// Replace placeholders with values in the email content.
+								$email_content = ( is_callable( array( $email_coupon, 'format_string' ) ) ) ? $email_coupon->format_string( $email_content ) : $email_content;
 
-							ob_start();
-							wc_get_template( 'emails/email-styles.php' );
-							$css = ob_get_clean();
-							$css = apply_filters( 'woocommerce_email_styles', str_replace( '"', "'", $css ), $email_coupon );
-							ob_start();
-							echo '<div id="wc-sc-preview-email-template-css" data-css="' . esc_attr( $css ) . '"></div>'; // phpcs:ignore
-							echo $email_content; // phpcs:ignore
-							echo ob_get_clean(); // phpcs:ignore
+								if ( true === $revert ) {
+									$args = array(
+										'ID'          => $post->ID,
+										'post_status' => 'auto-draft',
+									);
+									wp_update_post( $args );
+									$revert = false;
+								}
+
+								ob_start();
+								wc_get_template( 'emails/email-styles.php' );
+								$css = ob_get_clean();
+								$css = apply_filters( 'woocommerce_email_styles', str_replace( '"', "'", $css ), $email_coupon );
+								ob_start();
+								echo '<div id="wc-sc-preview-email-template-css" data-css="' . esc_attr( $css ) . '"></div>'; // phpcs:ignore
+								echo $email_content; // phpcs:ignore
+								echo ob_get_clean(); // phpcs:ignore
+							}
 						}
-					}
-					?>
+						?>
+					</div>
 				</div>
-			</div>
-			<?php
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**
 		 * Form to show 'Auto generate Bulk Coupons' with other fields
 		 */
 		public function admin_generate_bulk_coupons_and_export() {
+			try {
+				global $woocommerce_smart_coupon, $post;
 
-			global $woocommerce_smart_coupon, $post;
+				$empty_reference_coupon = get_option( 'empty_reference_smart_coupons' );
 
-			$empty_reference_coupon = get_option( 'empty_reference_smart_coupons' );
-
-			if ( false === $empty_reference_coupon ) {
-				$coupon            = new WC_Coupon( $this->generate_unique_code() );
-				$reference_post_id = ( $this->is_callable( $coupon, 'save' ) ) ? $coupon->save() : 0;
-				if ( ! empty( $reference_post_id ) ) {
-					$args = array(
-						'ID'          => $reference_post_id,
-						'post_status' => 'auto-draft',
-					);
-					wp_update_post( $args ); // Because $coupon->set_status( 'draft' ) not working.
-					update_option( 'empty_reference_smart_coupons', $reference_post_id, 'no' );
+				if ( false === $empty_reference_coupon ) {
+					$coupon            = new WC_Coupon( $this->generate_unique_code() );
+					$reference_post_id = ( $this->is_callable( $coupon, 'save' ) ) ? $coupon->save() : 0;
+					if ( ! empty( $reference_post_id ) ) {
+						$args = array(
+							'ID'          => $reference_post_id,
+							'post_status' => 'auto-draft',
+						);
+						wp_update_post( $args ); // Because $coupon->set_status( 'draft' ) not working.
+						update_option( 'empty_reference_smart_coupons', $reference_post_id, 'no' );
+					}
+				} else {
+					$reference_post_id = $empty_reference_coupon;
 				}
-			} else {
-				$reference_post_id = $empty_reference_coupon;
-			}
 
-			$post = get_post( $reference_post_id ); // phpcs:ignore
-
-			if ( empty( $post ) ) {
-				$coupon            = new WC_Coupon( $this->generate_unique_code() );
-				$reference_post_id = ( $this->is_callable( $coupon, 'save' ) ) ? $coupon->save() : 0;
-				if ( ! empty( $reference_post_id ) ) {
-					$args = array(
-						'ID'          => $reference_post_id,
-						'post_status' => 'auto-draft',
-					);
-					wp_update_post( $args ); // Because $coupon->set_status( 'auto-draft' ) not working.
-					update_option( 'empty_reference_smart_coupons', $reference_post_id, 'no' );
-				}
 				$post = get_post( $reference_post_id ); // phpcs:ignore
-			}
 
-			if ( ! class_exists( 'WC_Meta_Box_Coupon_Data' ) ) {
-				require_once WC()->plugin_path() . '/includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php';
-			}
-			if ( ! class_exists( 'WC_Admin_Post_Types' ) ) {
-				require_once WC()->plugin_path() . '/includes/admin/class-wc-admin-post-types.php';
-			}
-			$admin_post_types = new WC_Admin_Post_Types();
+				if ( empty( $post ) ) {
+					$coupon            = new WC_Coupon( $this->generate_unique_code() );
+					$reference_post_id = ( $this->is_callable( $coupon, 'save' ) ) ? $coupon->save() : 0;
+					if ( ! empty( $reference_post_id ) ) {
+						$args = array(
+							'ID'          => $reference_post_id,
+							'post_status' => 'auto-draft',
+						);
+						wp_update_post( $args ); // Because $coupon->set_status( 'auto-draft' ) not working.
+						update_option( 'empty_reference_smart_coupons', $reference_post_id, 'no' );
+					}
+					$post = get_post( $reference_post_id ); // phpcs:ignore
+				}
 
-			$is_post_generate_and_import        = ( isset( $_POST['generate_and_import'] ) ) ? true : false; // phpcs:ignore
-			$post_smart_coupons_generate_action = ( ! empty( $_POST['smart_coupons_generate_action'] ) ) ? wc_clean( wp_unslash( $_POST['smart_coupons_generate_action'] ) ) : ''; // phpcs:ignore
+				if ( ! class_exists( 'WC_Meta_Box_Coupon_Data' ) ) {
+					require_once WC()->plugin_path() . '/includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php';
+				}
+				if ( ! class_exists( 'WC_Admin_Post_Types' ) ) {
+					require_once WC()->plugin_path() . '/includes/admin/class-wc-admin-post-types.php';
+				}
+				$admin_post_types = new WC_Admin_Post_Types();
 
-			$message     = '';
-			$editor_args = array(
-				'textarea_name' => 'smart_coupon_message',
-				'textarea_rows' => 7,
-				'editor_class'  => 'wp-editor-message',
-				'media_buttons' => true,
-				'tinymce'       => true,
-			);
-			$editor_id   = 'edit_smart_coupon_message';
-			?>
+				$is_post_generate_and_import        = ( isset( $_POST['generate_and_import'] ) ) ? true : false; // phpcs:ignore
+				$post_smart_coupons_generate_action = ( ! empty( $_POST['smart_coupons_generate_action'] ) ) ? wc_clean( wp_unslash( $_POST['smart_coupons_generate_action'] ) ) : ''; // phpcs:ignore
 
-			<script type="text/javascript">
-				jQuery(function(){
-					jQuery('input#generate_and_import').on('click', function(){
-						if( jQuery( this ).hasClass('disabled') ) {
-							jQuery('html, body').animate({
-								scrollTop: jQuery('#wc_sc_folder_permission_warning').offset().top - 100 // Scroll to admin notice.
-							}, 'slow');
-							return false;
-						} else if( jQuery('input#no_of_coupons_to_generate').val() == "" ){
-							jQuery("div#message").removeClass("updated fade").addClass("error fade");
-							jQuery('div#message p').html( "<?php echo esc_html__( 'Please enter a valid value for Number of Coupons to Generate', 'woocommerce-smart-coupons' ); ?>");
-							scrollTop();
-							return false;
-						} else {
-							jQuery("div#message").removeClass("error fade").addClass("updated fade").hide();
-							return true;
-						}
-					});
+				$message     = '';
+				$editor_args = array(
+					'textarea_name' => 'smart_coupon_message',
+					'textarea_rows' => 7,
+					'editor_class'  => 'wp-editor-message',
+					'media_buttons' => true,
+					'tinymce'       => true,
+				);
+				$editor_id   = 'edit_smart_coupon_message';
+				?>
 
-					var showHideBulkSmartCouponsOptions = function() {
-						jQuery('input#sc_coupon_validity').parent('p').show();
-						jQuery('div#for_prefix_suffix').show();
-						jQuery('input#wc_sc_auto_apply_coupon').parent('p').hide();
-						jQuery('input#sc_restrict_to_new_user').parent('p').hide();
-					};
+				<script type="text/javascript">
+					jQuery(function(){
+						jQuery('input#generate_and_import').on('click', function(){
+							if( jQuery( this ).hasClass('disabled') ) {
+								jQuery('html, body').animate({
+									scrollTop: jQuery('#wc_sc_folder_permission_warning').offset().top - 100 // Scroll to admin notice.
+								}, 'slow');
+								return false;
+							} else if( jQuery('input#no_of_coupons_to_generate').val() == "" ){
+								jQuery("div#message").removeClass("updated fade").addClass("error fade");
+								jQuery('div#message p').html( "<?php echo esc_html__( 'Please enter a valid value for Number of Coupons to Generate', 'woocommerce-smart-coupons' ); ?>");
+								scrollTop();
+								return false;
+							} else {
+								jQuery("div#message").removeClass("error fade").addClass("updated fade").hide();
+								return true;
+							}
+						});
 
-					setTimeout(function(){
-						showHideBulkSmartCouponsOptions();
-					}, 400);
+						var showHideBulkSmartCouponsOptions = function() {
+							jQuery('input#sc_coupon_validity').parent('p').show();
+							jQuery('div#for_prefix_suffix').show();
+							jQuery('input#wc_sc_auto_apply_coupon').parent('p').hide();
+						};
 
-					jQuery('select#discount_type').on('change', function(){
 						setTimeout(function(){
 							showHideBulkSmartCouponsOptions();
 						}, 400);
+
+						jQuery('select#discount_type').on('change', function(){
+							setTimeout(function(){
+								showHideBulkSmartCouponsOptions();
+							}, 400);
+						});
+
+						jQuery('body').on('click', '#woo_sc_is_email_imported_coupons', function() {
+							jQuery('span#sc_note_about_emailing_recipients,#wc_sc_bulk_email_metabox').show();
+						});
+						jQuery('body').on('click', '#add_to_store, #sc_export_and_import', function() {
+							jQuery('span#sc_note_about_emailing_recipients,#wc_sc_bulk_email_metabox').hide();
+						});
 					});
 
-					jQuery('body').on('click', '#woo_sc_is_email_imported_coupons', function() {
-						jQuery('span#sc_note_about_emailing_recipients,#wc_sc_bulk_email_metabox').show();
+					jQuery(document).ready(function() {
+						var syncChecks,
+							noSyncChecks = false;
+
+						/**
+						 * Handle display of category tabs 'All coupon categories' and 'Most used', showing & hiding
+						 *
+						 * sc_coupon_category postbox tab show-hide
+						 */
+						jQuery('#sc_coupon_category-tabs a').on( 'click', function(){
+							let tab = jQuery(this).attr('href');
+							jQuery(this).parent().addClass('tabs').siblings('li').removeClass('tabs');
+							jQuery('.tabs-panel').hide();
+							jQuery(tab).show();
+							return false;
+						});
+
+						/**
+						 * Synchronize category checkboxes.
+						 *
+						 * This function makes sure that the checkboxes are synced between the 'All coupon categories' tab
+						 * and the 'Most used' tab.
+						 */
+						syncChecks = function() {
+							if ( noSyncChecks ) {
+								return;
+							}
+							noSyncChecks = true;
+							var current_element = jQuery(this),
+								is_checked      = current_element.is(':checked'),
+								term_id         = current_element.val().toString();
+							jQuery( '#in-sc_coupon_category-' + term_id + ', #in-popular-sc_coupon_category-' + term_id ).prop( 'checked', is_checked );
+							noSyncChecks = false;
+						};
+
+						/**
+						 * Synchronize category checkboxes for sc_coupon_category postbox
+						 */
+						jQuery('.categorychecklist :checkbox').on( 'change', syncChecks ).filter( ':checked' ).trigger( 'change' );
 					});
-					jQuery('body').on('click', '#add_to_store, #sc_export_and_import', function() {
-						jQuery('span#sc_note_about_emailing_recipients,#wc_sc_bulk_email_metabox').hide();
-					});
-				});
 
+				</script>
+				<div class="woo-sc-form-wrapper">
+					<div id="message"><p></p></div>
+					<div class="tool-box">
 
-				jQuery(document).ready(function() {
-					var syncChecks,
-						noSyncChecks = false;
+						<p class="description"><?php echo esc_html__( 'Need a lot of coupons? You can easily do that with Smart Coupons.', 'woocommerce-smart-coupons' ); ?></p>
 
-					/**
-					 * Handle display of category tabs 'All coupon categories' and 'Most used', showing & hiding
-					 *
-					 * sc_coupon_category postbox tab show-hide
-					 */
-					jQuery('#sc_coupon_category-tabs a').on( 'click', function(){
-						let tab = jQuery(this).attr('href');
-						jQuery(this).parent().addClass('tabs').siblings('li').removeClass('tabs');
-						jQuery('.tabs-panel').hide();
-						jQuery(tab).show();
-						return false;
-					});
+						<style type="text/css">
+							.coupon_actions {
+								margin-left: 14px;
+							}
+							#smart-coupon-action-panel p label {
+								width: 30%;
+							}
+							#smart-coupon-action-panel {
+								width: 100% !important;
+							}
+							.sc-required-mark {
+								color: red;
+							}
+							#wc_sc_bulk_email_metabox {
+								padding: 0 1.5em;
+							}
+							#wc_sc_bulk_email_metabox table.form-table td:first-child {
+								width: 25%;
+							}
+							#wc_sc_bulk_email_metabox textarea#edit_smart_coupon_message {
+								width: 100%;
+							}
+							.sc-bulk-generate-coupon-data-main{
+								display: grid;
+								grid-template-columns: 75% 24%;
+								grid-gap: 1%;
+							}
+						</style>
+						<?php
+							$import_step_2_url = add_query_arg(
+								array(
+									'page' => 'wc-smart-coupons',
+									'tab'  => 'import-smart-coupons',
+									'step' => '2',
+								),
+								admin_url( 'admin.php' )
+							);
+						?>
+						<form id="generate_coupons" action="<?php echo esc_url( $import_step_2_url ); ?>" method="post">
+							<?php wp_nonce_field( 'import-woocommerce-coupon' ); ?>
+							<div id="poststuff">
+								<div id="woocommerce-coupon-data" class="postbox " >
+									<h3><span class="coupon_actions"><?php echo esc_html__( 'Action', 'woocommerce-smart-coupons' ); ?></span></h3>
+									<div class="inside">
+										<div class="panel-wrap">
+											<div id="smart-coupon-action-panel" class="panel woocommerce_options_panel">
 
-					/**
-					 * Synchronize category checkboxes.
-					 *
-					 * This function makes sure that the checkboxes are synced between the 'All coupon categories' tab
-					 * and the 'Most used' tab.
-					 */
-					syncChecks = function() {
-						if ( noSyncChecks ) {
-							return;
-						}
-						noSyncChecks = true;
-						var current_element = jQuery(this),
-							is_checked      = current_element.is(':checked'),
-							term_id         = current_element.val().toString();
-						jQuery( '#in-sc_coupon_category-' + term_id + ', #in-popular-sc_coupon_category-' + term_id ).prop( 'checked', is_checked );
-						noSyncChecks = false;
-					};
+												<p class="form-field">
+													<label for="no_of_coupons_to_generate"><?php echo esc_html__( 'Number of coupons to generate', 'woocommerce-smart-coupons' ); ?>&nbsp;<span title="<?php echo esc_attr__( 'Required', 'woocommerce-smart-coupons' ); ?>" class="sc-required-mark">*</span></label>
+													<input type="number" name="no_of_coupons_to_generate" id="no_of_coupons_to_generate" placeholder="<?php echo esc_attr__( '10', 'woocommerce-smart-coupons' ); ?>" class="short" min="1" required />
+												</p>
 
-					/**
-					 * Synchronize category checkboxes for sc_coupon_category postbox
-					 */
-					jQuery('.categorychecklist :checkbox').on( 'change', syncChecks ).filter( ':checked' ).trigger( 'change' );
-				});
+												<p class="form-field">
+													<label><?php echo esc_html__( 'Generate coupons and', 'woocommerce-smart-coupons' ); ?></label>
+													<input type="radio" name="smart_coupons_generate_action" value="add_to_store" id="add_to_store" checked="checked"/>&nbsp;
+													<strong><?php echo esc_html__( 'Add to store', 'woocommerce-smart-coupons' ); ?></strong>
+												</p>
 
-
-
-			</script>
-			<div class="woo-sc-form-wrapper">
-				<div id="message"><p></p></div>
-				<div class="tool-box">
-
-					<p class="description"><?php echo esc_html__( 'Need a lot of coupons? You can easily do that with Smart Coupons.', 'woocommerce-smart-coupons' ); ?></p>
-
-					<style type="text/css">
-						.coupon_actions {
-							margin-left: 14px;
-						}
-						#smart-coupon-action-panel p label {
-							width: 30%;
-						}
-						#smart-coupon-action-panel {
-							width: 100% !important;
-						}
-						.sc-required-mark {
-							color: red;
-						}
-						#wc_sc_bulk_email_metabox {
-							padding: 0 1.5em;
-						}
-						#wc_sc_bulk_email_metabox table.form-table td:first-child {
-							width: 25%;
-						}
-						#wc_sc_bulk_email_metabox textarea#edit_smart_coupon_message {
-							width: 100%;
-						}
-						.sc-bulk-generate-coupon-data-main{
-							display: grid;
-							grid-template-columns: 75% 24%;
-							grid-gap: 1%;
-						}
-					</style>
-					<?php
-						$import_step_2_url = add_query_arg(
-							array(
-								'page' => 'wc-smart-coupons',
-								'tab'  => 'import-smart-coupons',
-								'step' => '2',
-							),
-							admin_url( 'admin.php' )
-						);
-					?>
-					<form id="generate_coupons" action="<?php echo esc_url( $import_step_2_url ); ?>" method="post">
-						<?php wp_nonce_field( 'import-woocommerce-coupon' ); ?>
-						<div id="poststuff">
-							<div id="woocommerce-coupon-data" class="postbox " >
-								<h3><span class="coupon_actions"><?php echo esc_html__( 'Action', 'woocommerce-smart-coupons' ); ?></span></h3>
-								<div class="inside">
-									<div class="panel-wrap">
-										<div id="smart-coupon-action-panel" class="panel woocommerce_options_panel">
-
-											<p class="form-field">
-												<label for="no_of_coupons_to_generate"><?php echo esc_html__( 'Number of coupons to generate', 'woocommerce-smart-coupons' ); ?>&nbsp;<span title="<?php echo esc_attr__( 'Required', 'woocommerce-smart-coupons' ); ?>" class="sc-required-mark">*</span></label>
-												<input type="number" name="no_of_coupons_to_generate" id="no_of_coupons_to_generate" placeholder="<?php echo esc_attr__( '10', 'woocommerce-smart-coupons' ); ?>" class="short" min="1" required />
-											</p>
-
-											<p class="form-field">
-												<label><?php echo esc_html__( 'Generate coupons and', 'woocommerce-smart-coupons' ); ?></label>
-												<input type="radio" name="smart_coupons_generate_action" value="add_to_store" id="add_to_store" checked="checked"/>&nbsp;
-												<strong><?php echo esc_html__( 'Add to store', 'woocommerce-smart-coupons' ); ?></strong>
-											</p>
-
-											<p class="form-field">
-												<label for="sc_export_and_import"><?php echo '&nbsp;'; ?></label>
-												<input type="radio" name="smart_coupons_generate_action" value="sc_export_and_import" id="sc_export_and_import" />&nbsp;
-												<strong><?php echo esc_html__( 'Export to CSV', 'woocommerce-smart-coupons' ); ?></strong>
-												<?php
-													$import_tab_url = add_query_arg(
-														array(
-															'page' => 'wc-smart-coupons',
-															'tab'  => 'import-smart-coupons',
-														),
-														admin_url( 'admin.php' )
-													);
-												?>
-												<span class="description">
-												<?php
-												echo esc_html__( '(Does not add to store, but creates a .csv file, that you can', 'woocommerce-smart-coupons' ) . ' <a href="' . esc_url( $import_tab_url ) . '">' . esc_html__( 'import', 'woocommerce-smart-coupons' ) . '</a> ' . esc_html__( 'later', 'woocommerce-smart-coupons' ) . ')';
-												?>
-												</span>
-											</p>
-
-											<p class="form-field">
-												<label><?php echo '&nbsp;'; ?></label>
-												<input type="radio" name="smart_coupons_generate_action" value="woo_sc_is_email_imported_coupons" id="woo_sc_is_email_imported_coupons" />&nbsp;
-												<strong><?php echo esc_html__( 'Email to recipients', 'woocommerce-smart-coupons' ); ?></strong>
-												<span class="description">
-													<?php echo esc_html__( '(Add to store and email generated coupons to recipients)', 'woocommerce-smart-coupons' ); ?>
-												</span><br>
-												<span class="description wc-sc-description-container" id="sc_note_about_emailing_recipients" style="display: none;">
-													<span class="wc-sc-description">
+												<p class="form-field">
+													<label for="sc_export_and_import"><?php echo '&nbsp;'; ?></label>
+													<input type="radio" name="smart_coupons_generate_action" value="sc_export_and_import" id="sc_export_and_import" />&nbsp;
+													<strong><?php echo esc_html__( 'Export to CSV', 'woocommerce-smart-coupons' ); ?></strong>
 													<?php
-													/* translators: 1: Path to setting 2: Setting to set email address 3: Setting for number of coupons to generate */
-													echo sprintf( esc_html__( 'Enter the email addresses of the recipients separated by comma under %1$1s. Make sure to match the count of email addresses in %2$2s to %3$3s', 'woocommerce-smart-coupons' ), '<strong>' . esc_html__( 'Send to', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Send to', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Number of coupons to generate', 'woocommerce-smart-coupons' ) . '</strong>' );
+														$import_tab_url = add_query_arg(
+															array(
+																'page' => 'wc-smart-coupons',
+																'tab'  => 'import-smart-coupons',
+															),
+															admin_url( 'admin.php' )
+														);
+													?>
+													<span class="description">
+													<?php
+													echo esc_html__( '(Does not add to store, but creates a .csv file, that you can', 'woocommerce-smart-coupons' ) . ' <a href="' . esc_url( $import_tab_url ) . '">' . esc_html__( 'import', 'woocommerce-smart-coupons' ) . '</a> ' . esc_html__( 'later', 'woocommerce-smart-coupons' ) . ')';
 													?>
 													</span>
-												</span>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="wc_sc_bulk_email_metabox" class="postbox" style="display:none;">
-								<h3>
-									<?php
-										echo esc_html__( 'Email to ', 'woocommerce-smart-coupons' );
-									?>
-								</h3>
-								<table class="form-table">
-									<tr>
-										<th>
-											<label for="smart_coupon_email"><?php echo esc_html__( 'Send to', 'woocommerce-smart-coupons' ); ?><span class="sc-required-mark">*</span></label>
-										</th>
-										<td>
-											<input type="text" name="smart_coupon_email" id="email" class="input-text" cols="50" rows="5" placeholder="johnsmith@example.com">
-										</td>
-										<td>
-											<span class="description"><?php echo esc_html__( 'Use comma "," to separate multiple email addresses', 'woocommerce-smart-coupons' ); ?></span>
-										</td>
-									</tr>
-									<tr>
-										<th>
-											<label for="smart_coupon_message"><?php echo esc_html__( 'Message', 'woocommerce-smart-coupons' ); ?> <small><?php echo esc_html__( '(optional)', 'woocommerce-smart-coupons' ); ?></small></label>
-										</th>
-										<td colspan="2">
-											<?php
-												wp_editor( $message, $editor_id, $editor_args );
-											?>
-										</td>
-									</tr>
-									<tr>
-										<th></th>
-										<td>
-											<?php
-												$sample_coupon_code = $this->get_sample_coupon_code();
-											if ( ! empty( $sample_coupon_code ) ) {
-												?>
-														<input type="button" id="sc-preview-email" class="button button-secondary" value="<?php echo esc_attr__( 'Preview Email', 'woocommerce-smart-coupons' ); ?>">
-													<?php
-											}
-											?>
-										</td>
-									</tr>
-								</table>
-								<div class="form-field wc-sc-email-preview-html">
-									<?php
-									if ( ! empty( $sample_coupon_code ) ) {
-										$this->get_preview_email_html( $sample_coupon_code );
-									}
-									?>
-								</div>
-							</div>
-							<?php
-								$this->get_preview_email_js( $editor_id );
-							?>
-							<div id="woocommerce-coupon-data" class="postbox" >
-								<h3>
-									<span class="coupon_actions">
-										<?php
-											echo esc_html__( 'Coupon Description ', 'woocommerce-smart-coupons' );
-											/* translators: 1: HTML small tag start 2: HTML small tag end */
-											echo sprintf( esc_html__( '%1$s(This will add the same coupon description in all the bulk generated coupons)%2$s', 'woocommerce-smart-coupons' ), '<small>', '</small>' );
-										?>
-									</span>
-								</h3>
-								<div class="sc_bulk_description">
-									<?php
-									if ( ! empty( $post->ID ) && $this->is_hpos_order( $post->ID ) ) {
-										$post_or_order = wc_get_order( $post->ID );
-									} else {
-										$post_or_order = $post;
-									}
-										$admin_post_types->edit_form_after_title( $post_or_order );
-									?>
-								</div>
-							</div>
-							<div class="sc-bulk-generate-coupon-data-main">
-								<div class="sc-bulk-generate-coupon-data">
-									<div id="woocommerce-coupon-data" class="postbox">
-										<h3>
-									<span class="coupon_actions">
-										<?php echo esc_html__( 'Coupon Data', 'woocommerce-smart-coupons' ); ?>
-									</span>
-										</h3>
-										<div class="inside">
-											<?php WC_Meta_Box_Coupon_Data::output( $post ); ?>
-										</div>
-									</div>
-								</div>
-								<div class="sc-bulk-generate-coupon-category">
-									<div id="sc_coupon_categorydiv" class="postbox ">
-									<div class="postbox-header"><h2 class="hndle ui-sortable-handle"><?php echo esc_html__( 'Coupon categories', 'woocommerce-smart-coupons' ); ?></h2>
-										</div><div class="inside">
-										<div id="taxonomy-sc_coupon_category" class="categorydiv">
-											<div class="sc-manage-category">
-												<a target="_blank" title="" href="<?php echo esc_url( admin_url( 'edit-tags.php?taxonomy=sc_coupon_category&post_type=shop_coupon' ) ); ?>"><?php echo esc_html__( 'Manage coupon categories', 'woocommerce-smart-coupons' ); ?></a>
-											</div>
+												</p>
 
-											<?php
-											$args     = array( 'taxonomy' => 'sc_coupon_category' );
-											$tax_name = esc_attr( $args['taxonomy'] );
-											$taxonomy = get_taxonomy( $args['taxonomy'] );
-											?>
-											<div id="taxonomy-<?php echo esc_attr( $tax_name ); ?>" class="categorydiv">
-												<ul id="<?php echo esc_attr( $tax_name ); ?>-tabs" class="category-tabs">
-													<li class="tabs"><a href="#<?php echo esc_attr( $tax_name ); ?>-all"><?php echo esc_html( $taxonomy->labels->all_items ); ?></a></li>
-													<li class="hide-if-no-js"><a href="#<?php echo esc_attr( $tax_name ); ?>-pop"><?php echo esc_html( $taxonomy->labels->most_used ); ?></a></li>
-												</ul>
-
-												<div id="<?php echo esc_attr( $tax_name ); ?>-pop" class="tabs-panel" style="display: none;">
-													<ul id="<?php echo esc_attr( $tax_name ); ?>checklist-pop" class="categorychecklist form-no-clear" >
-														<?php $popular_ids = wp_popular_terms_checklist( $tax_name ); ?>
-													</ul>
-												</div>
-
-												<div id="<?php echo esc_attr( $tax_name ); ?>-all" class="tabs-panel">
-													<ul id="<?php echo esc_attr( $tax_name ); ?>checklist" data-wp-lists="list:<?php echo esc_attr( $tax_name ); ?>" class="categorychecklist form-no-clear">
+												<p class="form-field">
+													<label><?php echo '&nbsp;'; ?></label>
+													<input type="radio" name="smart_coupons_generate_action" value="woo_sc_is_email_imported_coupons" id="woo_sc_is_email_imported_coupons" />&nbsp;
+													<strong><?php echo esc_html__( 'Email to recipients', 'woocommerce-smart-coupons' ); ?></strong>
+													<span class="description">
+														<?php echo esc_html__( '(Add to store and email generated coupons to recipients)', 'woocommerce-smart-coupons' ); ?>
+													</span><br>
+													<span class="description wc-sc-description-container" id="sc_note_about_emailing_recipients" style="display: none;">
+														<span class="wc-sc-description">
 														<?php
-														wp_terms_checklist(
-															$post->ID,
-															array(
-																'taxonomy'     => $tax_name,
-																'popular_cats' => $popular_ids,
-															)
-														);
+														/* translators: 1: Path to setting 2: Setting to set email address 3: Setting for number of coupons to generate */
+														echo sprintf( esc_html__( 'Enter the email addresses of the recipients separated by comma under %1$1s. Make sure to match the count of email addresses in %2$2s to %3$3s', 'woocommerce-smart-coupons' ), '<strong>' . esc_html__( 'Send to', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Send to', 'woocommerce-smart-coupons' ) . '</strong>', '<strong>' . esc_html__( 'Number of coupons to generate', 'woocommerce-smart-coupons' ) . '</strong>' );
 														?>
-													</ul>
-												</div>
+														</span>
+													</span>
+												</p>
 											</div>
 										</div>
 									</div>
 								</div>
+								<div id="wc_sc_bulk_email_metabox" class="postbox" style="display:none;">
+									<h3>
+										<?php
+											echo esc_html__( 'Email to ', 'woocommerce-smart-coupons' );
+										?>
+									</h3>
+									<table class="form-table">
+										<tr>
+											<th>
+												<label for="smart_coupon_email"><?php echo esc_html__( 'Send to', 'woocommerce-smart-coupons' ); ?><span class="sc-required-mark">*</span></label>
+											</th>
+											<td>
+												<input type="text" name="smart_coupon_email" id="email" class="input-text" cols="50" rows="5" placeholder="johnsmith@example.com">
+											</td>
+											<td>
+												<span class="description"><?php echo esc_html__( 'Use comma "," to separate multiple email addresses', 'woocommerce-smart-coupons' ); ?></span>
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="smart_coupon_message"><?php echo esc_html__( 'Message', 'woocommerce-smart-coupons' ); ?> <small><?php echo esc_html__( '(optional)', 'woocommerce-smart-coupons' ); ?></small></label>
+											</th>
+											<td colspan="2">
+												<?php
+													wp_editor( $message, $editor_id, $editor_args );
+												?>
+											</td>
+										</tr>
+										<tr>
+											<th></th>
+											<td>
+												<?php
+													$sample_coupon_code = $this->get_sample_coupon_code();
+												if ( ! empty( $sample_coupon_code ) ) {
+													?>
+															<input type="button" id="sc-preview-email" class="button button-secondary" value="<?php echo esc_attr__( 'Preview Email', 'woocommerce-smart-coupons' ); ?>">
+														<?php
+												}
+												?>
+											</td>
+										</tr>
+									</table>
+									<div class="form-field wc-sc-email-preview-html">
+										<?php
+										if ( ! empty( $sample_coupon_code ) ) {
+											$this->get_preview_email_html( $sample_coupon_code );
+										}
+										?>
+									</div>
 								</div>
+								<?php
+									$this->get_preview_email_js( $editor_id );
+								?>
+								<div id="woocommerce-coupon-data" class="postbox" >
+									<h3>
+										<span class="coupon_actions">
+											<?php
+												echo esc_html__( 'Coupon Description ', 'woocommerce-smart-coupons' );
+												/* translators: 1: HTML small tag start 2: HTML small tag end */
+												echo sprintf( esc_html__( '%1$s(This will add the same coupon description in all the bulk generated coupons)%2$s', 'woocommerce-smart-coupons' ), '<small>', '</small>' );
+											?>
+										</span>
+									</h3>
+									<div class="sc_bulk_description">
+										<?php
+										if ( ! empty( $post->ID ) && $this->is_hpos_order( $post->ID ) ) {
+											$post_or_order = wc_get_order( $post->ID );
+										} else {
+											$post_or_order = $post;
+										}
+											$admin_post_types->edit_form_after_title( $post_or_order );
+										?>
+									</div>
+								</div>
+								<div class="sc-bulk-generate-coupon-data-main">
+									<div class="sc-bulk-generate-coupon-data">
+										<div id="woocommerce-coupon-data" class="postbox">
+											<h3>
+										<span class="coupon_actions">
+											<?php echo esc_html__( 'Coupon Data', 'woocommerce-smart-coupons' ); ?>
+										</span>
+											</h3>
+											<div class="inside">
+												<?php WC_Meta_Box_Coupon_Data::output( $post ); ?>
+											</div>
+										</div>
+									</div>
+									<div class="sc-bulk-generate-coupon-category">
+										<div id="sc_coupon_categorydiv" class="postbox ">
+										<div class="postbox-header"><h2 class="hndle ui-sortable-handle"><?php echo esc_html__( 'Coupon categories', 'woocommerce-smart-coupons' ); ?></h2>
+											</div><div class="inside">
+											<div id="taxonomy-sc_coupon_category" class="categorydiv">
+												<div class="sc-manage-category">
+													<a target="_blank" title="" href="<?php echo esc_url( admin_url( 'edit-tags.php?taxonomy=sc_coupon_category&post_type=shop_coupon' ) ); ?>"><?php echo esc_html__( 'Manage coupon categories', 'woocommerce-smart-coupons' ); ?></a>
+												</div>
+
+												<?php
+												$args     = array( 'taxonomy' => 'sc_coupon_category' );
+												$tax_name = esc_attr( $args['taxonomy'] );
+												$taxonomy = get_taxonomy( $args['taxonomy'] );
+												?>
+												<div id="taxonomy-<?php echo esc_attr( $tax_name ); ?>" class="categorydiv">
+													<ul id="<?php echo esc_attr( $tax_name ); ?>-tabs" class="category-tabs">
+														<li class="tabs"><a href="#<?php echo esc_attr( $tax_name ); ?>-all"><?php echo esc_html( $taxonomy->labels->all_items ); ?></a></li>
+														<li class="hide-if-no-js"><a href="#<?php echo esc_attr( $tax_name ); ?>-pop"><?php echo esc_html( $taxonomy->labels->most_used ); ?></a></li>
+													</ul>
+
+													<div id="<?php echo esc_attr( $tax_name ); ?>-pop" class="tabs-panel" style="display: none;">
+														<ul id="<?php echo esc_attr( $tax_name ); ?>checklist-pop" class="categorychecklist form-no-clear" >
+															<?php $popular_ids = wp_popular_terms_checklist( $tax_name ); ?>
+														</ul>
+													</div>
+
+													<div id="<?php echo esc_attr( $tax_name ); ?>-all" class="tabs-panel">
+														<ul id="<?php echo esc_attr( $tax_name ); ?>checklist" data-wp-lists="list:<?php echo esc_attr( $tax_name ); ?>" class="categorychecklist form-no-clear">
+															<?php
+															wp_terms_checklist(
+																$post->ID,
+																array(
+																	'taxonomy'     => $tax_name,
+																	'popular_cats' => $popular_ids,
+																)
+															);
+															?>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+								</div>
+
 							</div>
 
-						</div>
+							<p class="submit"><input id="generate_and_import" name="generate_and_import" type="submit" class="button button-primary button-hero" value="<?php echo esc_attr__( 'Apply', 'woocommerce-smart-coupons' ); ?>" /></p>
 
-						<p class="submit"><input id="generate_and_import" name="generate_and_import" type="submit" class="button button-primary button-hero" value="<?php echo esc_attr__( 'Apply', 'woocommerce-smart-coupons' ); ?>" /></p>
-
-					</form>
+						</form>
+					</div>
 				</div>
-			</div>
-			<?php
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 
 		}
 
@@ -1407,6 +1490,9 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 							jQuery('.sc-email-content').css('opacity', 1);
 							let email_css = jQuery('#wc-sc-preview-email-template-css').data('css');
 								email_css = email_css.replace( 'body', '#sc-body-ignore' );
+								email_css = email_css.replace(/(^|\})\s*([^{]+)/g, function(match, separator, selector) {
+									return separator + ' .sc-preview-email-container ' + selector;
+								});
 							if( '' !== email_css ) {
 								let email_style = '<style type="text/css" id="wc-sc-email-style">' + email_css + '</style>';
 								jQuery('body').append(email_style);
@@ -1436,6 +1522,22 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 						if( price_content.length > 0 ) {
 							price_content[price_content.length-1].nodeValue = parseFloat(jQuery(this).val()).toFixed(2);
 						}
+
+						var el = jQuery(this);
+						var amount = parseFloat( el.val() );
+						if (isNaN(amount)) {
+							amount = 0;
+						}
+						amount = amount.toFixed(2);
+						let originalString = jQuery('#template_header h1').html();
+
+						// This regex finds a number (with optional currency before or after) and replaces only the number
+						let newString = originalString.replace(/(\D)?(\d+(?:[.,]\d+)?)(\D)?/, function(match, p1, p2, p3) {
+							return `${p1 ?? ''}${amount}${p3 ?? ''}`;
+						});
+
+						jQuery('#template_header h1').html( newString );
+
 						var html = jQuery('.sc-email-content span.woocommerce-Price-amount.amount').html();
 						jQuery('.sc-email-content span.woocommerce-Price-amount.amount').html(html);
 						var price_html = '<span class="woocommerce-Price-amount amount">' + html + '</span>';
@@ -1484,55 +1586,59 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 		 * @param  object $wp WP object.
 		 */
 		public function filter_coupons_using_meta( $wp ) {
-			global $pagenow, $wpdb;
+			try {
+				global $pagenow, $wpdb;
 
-			if ( 'edit.php' !== $pagenow ) {
-				return;
-			}
-			if ( ! isset( $wp->query_vars['s'] ) ) {
-				return;
-			}
-			if ( 'shop_coupon' !== $wp->query_vars['post_type'] ) {
-				return;
-			}
-
-			$e = substr( $wp->query_vars['s'], 0, 5 );
-
-			if ( 'email:' === strtolower( substr( $wp->query_vars['s'], 0, 6 ) ) ) {
-
-				$email = trim( substr( $wp->query_vars['s'], 6 ) );
-
-				if ( ! $email ) {
+				if ( 'edit.php' !== $pagenow ) {
+					return;
+				}
+				if ( ! isset( $wp->query_vars['s'] ) ) {
+					return;
+				}
+				if ( 'shop_coupon' !== $wp->query_vars['post_type'] ) {
 					return;
 				}
 
-				$post_ids = wp_cache_get( 'wc_sc_get_coupon_ids_by_email_' . sanitize_key( $email ), 'woocommerce_smart_coupons' );
+				$e = substr( $wp->query_vars['s'], 0, 5 );
 
-				if ( false === $post_ids ) {
-					$post_ids = $wpdb->get_col(
-						$wpdb->prepare(
-							"SELECT pm.post_id
-								FROM {$wpdb->postmeta} AS pm
-									LEFT JOIN {$wpdb->posts} AS p
-									ON (p.ID = pm.post_id AND p.post_type = 'shop_coupon')
-								WHERE pm.meta_key = 'customer_email'
-									AND pm.meta_value LIKE %s",
-							'%' . $wpdb->esc_like( $email ) . '%'
-						)
-					); // WPCS: db call ok.
-					wp_cache_set( 'wc_sc_get_coupon_ids_by_email_' . sanitize_key( $email ), $post_ids, 'woocommerce_smart_coupons' );
-					$this->maybe_add_cache_key( 'wc_sc_get_coupon_ids_by_email_' . sanitize_key( $email ) );
+				if ( 'email:' === strtolower( substr( $wp->query_vars['s'], 0, 6 ) ) ) {
+
+					$email = trim( substr( $wp->query_vars['s'], 6 ) );
+
+					if ( ! $email ) {
+						return;
+					}
+
+					$post_ids = wp_cache_get( 'wc_sc_get_coupon_ids_by_email_' . sanitize_key( $email ), 'woocommerce_smart_coupons' );
+
+					if ( false === $post_ids ) {
+						$post_ids = $wpdb->get_col(
+							$wpdb->prepare(
+								"SELECT pm.post_id
+									FROM {$wpdb->postmeta} AS pm
+										LEFT JOIN {$wpdb->posts} AS p
+										ON (p.ID = pm.post_id AND p.post_type = 'shop_coupon')
+									WHERE pm.meta_key = 'customer_email'
+										AND pm.meta_value LIKE %s",
+								'%' . $wpdb->esc_like( $email ) . '%'
+							)
+						); // WPCS: db call ok.
+						wp_cache_set( 'wc_sc_get_coupon_ids_by_email_' . sanitize_key( $email ), $post_ids, 'woocommerce_smart_coupons' );
+						$this->maybe_add_cache_key( 'wc_sc_get_coupon_ids_by_email_' . sanitize_key( $email ) );
+					}
+
+					if ( empty( $post_ids ) ) {
+						return;
+					}
+
+					unset( $wp->query_vars['s'] );
+
+					$wp->query_vars['post__in'] = $post_ids;
+
+					$wp->query_vars['email'] = $email;
 				}
-
-				if ( empty( $post_ids ) ) {
-					return;
-				}
-
-				unset( $wp->query_vars['s'] );
-
-				$wp->query_vars['post__in'] = $post_ids;
-
-				$wp->query_vars['email'] = $email;
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}
@@ -1582,6 +1688,7 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 			if ( empty( $is_connected_page ) && 'wc-smart-coupons' === $get_page ) {
 				return true;
 			}
+
 			return $is_connected_page;
 		}
 
@@ -1611,6 +1718,7 @@ if ( ! class_exists( 'WC_SC_Admin_Pages' ) ) {
 						break;
 				}
 			}
+
 			return $breadcrumbs;
 		}
 

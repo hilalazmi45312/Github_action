@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 use SkyVerge\WooCommerce\Local_Pickup_Plus\Pickup_Locations\Pickup_Location as Pickup_Location;
 
 /**
@@ -134,11 +134,13 @@ class WC_Local_Pickup_Plus_Pickup_Location {
 
 			wc_local_pickup_plus()->check_tables();
 
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$table  = "{$wpdb->prefix}woocommerce_pickup_locations_geodata";
 			$exists = $wpdb->get_row( $wpdb->prepare( "
 				SELECT * from {$table}
  				WHERE post_id = %d
  			", (int) $this->id ) );
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		}
 
 		return ! empty( $exists );
@@ -343,11 +345,17 @@ class WC_Local_Pickup_Plus_Pickup_Location {
 			$pickup_locations_table = "{$wpdb->prefix}woocommerce_pickup_locations_geodata";
 			$pickup_location_id     = (int) $this->id;
 
-			$results = $wpdb->get_results( "
-				SELECT lat, lon
-				FROM {$pickup_locations_table}
-				WHERE post_id = {$pickup_location_id}
-			", ARRAY_A );
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$results = $wpdb->get_results(
+				$wpdb->prepare("
+					SELECT lat, lon
+					FROM {$pickup_locations_table}
+					WHERE post_id = %d",
+					$pickup_location_id
+				),
+				ARRAY_A
+			);
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 			$coordinates = isset( $results[0] ) ? $results[0] : $default_coordinates;
 
@@ -513,11 +521,13 @@ class WC_Local_Pickup_Plus_Pickup_Location {
 			if ( $this->id > 0 ) {
 
 				$table   = "{$wpdb->prefix}woocommerce_pickup_locations_geodata";
-				$address = $wpdb->get_row( "
+				// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				$address = $wpdb->get_row( $wpdb->prepare("
 					SELECT *
 					FROM {$table}
-					WHERE post_id = {$this->id}
-				" );
+					WHERE post_id = %d
+				", $this->id ) );
+				// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 				if ( ! empty( $address ) ) {
 					$address_array = array(

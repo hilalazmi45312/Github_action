@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.8.2" created="2021-11-11 12:56" -->
+	<!-- generator="WordPress/6.7.2" created="2025-06-03 14:20" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -27,16 +27,15 @@
 
 <channel>
 	<title>admin</title>
-	<link>http://dummy.xtemos.com/woodmart2</link>
+	<link>https://dummy.xtemos.com/woodmart2</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Thu, 11 Nov 2021 12:56:35 +0000</pubDate>
+	<pubDate>Tue, 03 Jun 2025 14:20:39 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
-	<wp:base_site_url>http://dummy.xtemos.com/woodmart2/</wp:base_site_url>
-	<wp:base_blog_url>http://dummy.xtemos.com/woodmart2</wp:base_blog_url>
+	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
+	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2</wp:base_blog_url>
 
-		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-
+	
 					<wp:term>
 			<wp:term_id>74</wp:term_id>
 			<wp:term_taxonomy><![CDATA[woodmart_slider]]></wp:term_taxonomy>
@@ -75,13 +74,52 @@
 			<wp:meta_key><![CDATA[autoplay_speed]]></wp:meta_key>
 			<wp:meta_value><![CDATA[20000]]></wp:meta_value>
 		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-74-css-data]]></wp:meta_key>
+			<wp:meta_value><![CDATA[#slider-74 .wd-slide {
+	min-height: 560px;
+}
+
+@media (max-width: 1024px) {
+	#slider-74 .wd-slide {
+		min-height: 760px;
+	}
+}
+
+@media (max-width: 767px) {
+	#slider-74 .wd-slide {
+		min-height: 720px;
+	}
+}
+]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-74-version]]></wp:meta_key>
+			<wp:meta_value><![CDATA[8.2.0]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-74-site-url]]></wp:meta_key>
+			<wp:meta_value><![CDATA[65c5e7a3e87c59ae65d18b8d3b912a1e]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-74-credentials]]></wp:meta_key>
+			<wp:meta_value><![CDATA[requested]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-74-file-data]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:3:{s:4:"path";s:35:"/2025/06/xts-term-74-1748959920.css";s:13:"theme_version";s:5:"8.2.0";s:8:"site_url";s:32:"65c5e7a3e87c59ae65d18b8d3b912a1e";}]]></wp:meta_value>
+		</wp:termmeta>
+		<wp:termmeta>
+			<wp:meta_key><![CDATA[xts-term-74-status]]></wp:meta_key>
+			<wp:meta_value><![CDATA[valid]]></wp:meta_value>
+		</wp:termmeta>
 		</wp:term>
 		
-	<generator>https://wordpress.org/?v=5.8.2</generator>
+	<generator>https://wordpress.org/?v=6.7.2</generator>
 
 					<item>
 					<title><![CDATA[fashion-slide-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-1/</link>
 					<pubDate>Wed, 28 Jul 2021 09:38:55 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-slide-1.jpg</guid>
@@ -104,7 +142,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-slide-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-2/</link>
 					<pubDate>Wed, 28 Jul 2021 09:38:56 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-slide-2.jpg</guid>
@@ -127,7 +165,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-slide-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-3/</link>
 					<pubDate>Wed, 28 Jul 2021 09:38:57 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-slide-3.jpg</guid>
@@ -150,7 +188,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-bg-testimon]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-bg-testimon/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-bg-testimon/</link>
 					<pubDate>Wed, 28 Jul 2021 11:05:21 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-bg-testimon.jpg</guid>
@@ -173,7 +211,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-cat-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-cat-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-cat-1/</link>
 					<pubDate>Tue, 14 Sep 2021 15:13:18 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-cat-1.jpg</guid>
@@ -196,7 +234,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-cat-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-cat-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-cat-2/</link>
 					<pubDate>Tue, 14 Sep 2021 15:13:26 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-cat-2.jpg</guid>
@@ -219,7 +257,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-cat-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-cat-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-cat-3/</link>
 					<pubDate>Tue, 14 Sep 2021 15:13:37 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-cat-3.jpg</guid>
@@ -242,7 +280,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-cat-4]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-cat-4/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-cat-4/</link>
 					<pubDate>Tue, 14 Sep 2021 15:13:49 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-cat-4.jpg</guid>
@@ -265,7 +303,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-1/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:26 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-1.jpg</guid>
@@ -288,7 +326,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-2/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:27 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-2.jpg</guid>
@@ -311,7 +349,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-3/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:28 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-3.jpg</guid>
@@ -334,7 +372,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-4]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-4/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-4/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:29 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-4.jpg</guid>
@@ -357,7 +395,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-5]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-5/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-5/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:30 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-5.jpg</guid>
@@ -380,7 +418,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-6]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-6/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-6/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:31 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-6.jpg</guid>
@@ -403,7 +441,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-6-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-6-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-6-2/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:32 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-6-2.jpg</guid>
@@ -426,7 +464,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-7]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-7/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-7/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:34 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-7.jpg</guid>
@@ -449,7 +487,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-7-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-7-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-7-2/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:36 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-7-2.jpg</guid>
@@ -472,7 +510,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-10]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-10/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-10/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:41 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-10.jpg</guid>
@@ -495,7 +533,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-cat-6]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-cat-6/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-cat-6/</link>
 					<pubDate>Thu, 16 Sep 2021 13:15:51 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-cat-6.jpg</guid>
@@ -518,7 +556,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-cat-5]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-cat-5/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-cat-5/</link>
 					<pubDate>Thu, 16 Sep 2021 13:15:52 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-cat-5.jpg</guid>
@@ -541,7 +579,7 @@
 										</item>
 								<item>
 					<title><![CDATA[Home Fashion]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/</link>
 					<pubDate>Wed, 28 Jul 2021 09:33:50 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/?page_id=1316</guid>
@@ -591,16 +629,16 @@
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1496911206212{margin-top: -40px !important;margin-bottom: 30px !important;}.vc_custom_1627470715852{margin-bottom: 80px !important;}.vc_custom_1627471258840{margin-bottom: 60px !important;}.vc_custom_1627471308692{margin-bottom: 50px !important;}.vc_custom_1627471335551{margin-bottom: 50px !important;}.vc_custom_1628596173535{margin-bottom: 80px !important;padding-top: 90px !important;padding-bottom: 80px !important;background-image: url(http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-bg-testimon.jpg?id=1337) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1497444810075{margin-bottom: -30px !important;}.vc_custom_1628776691303{margin-bottom: 25px !important;}.vc_custom_1628776783474{margin-bottom: 25px !important;}.vc_custom_1628776768072{margin-bottom: 25px !important;}.vc_custom_1627633308024{padding-top: 0px !important;}.vc_custom_1636635151478{margin-bottom: 10px !important;}.vc_custom_1636635158396{margin-bottom: 10px !important;}.vc_custom_1628596054457{margin-bottom: 0px !important;}.vc_custom_1492003706259{padding-top: 0px !important;}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[.vc_custom_1496911206212{margin-top: -40px !important;margin-bottom: 30px !important;}.vc_custom_1627470715852{margin-bottom: 80px !important;}.vc_custom_1627471258840{margin-bottom: 60px !important;}.vc_custom_1627471308692{margin-bottom: 50px !important;}.vc_custom_1627471335551{margin-bottom: 50px !important;}.vc_custom_1628596173535{margin-bottom: 80px !important;padding-top: 90px !important;padding-bottom: 80px !important;background-image: url(https://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-bg-testimon.jpg?id=1337) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1497444810075{margin-bottom: -30px !important;}.vc_custom_1628776691303{margin-bottom: 25px !important;}.vc_custom_1628776783474{margin-bottom: 25px !important;}.vc_custom_1628776768072{margin-bottom: 25px !important;}.vc_custom_1627633308024{padding-top: 0px !important;}.vc_custom_1636635151478{margin-bottom: 10px !important;}.vc_custom_1636635158396{margin-bottom: 10px !important;}.vc_custom_1628596054457{margin-bottom: 0px !important;}.vc_custom_1492003706259{padding-top: 0px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:4:{i:0;s:5:"wpcf7";i:1;s:16:"mc4wp-deprecated";i:2;s:5:"mc4wp";i:3;s:17:"revolution-slider";}]]></wp:meta_value>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
+							<wp:meta_value><![CDATA[1]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[fashion-banner-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-banner-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-banner-1/</link>
 					<pubDate>Wed, 28 Jul 2021 11:02:55 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-banner-1.jpg</guid>
@@ -623,7 +661,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-banner-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-banner-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-banner-2/</link>
 					<pubDate>Wed, 28 Jul 2021 11:03:06 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-banner-2.jpg</guid>
@@ -646,7 +684,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-banner-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-banner-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-banner-3/</link>
 					<pubDate>Wed, 28 Jul 2021 11:03:17 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-banner-3.jpg</guid>
@@ -669,7 +707,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-testimon-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-testimon-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-testimon-1/</link>
 					<pubDate>Wed, 28 Jul 2021 11:05:41 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-testimon-1.jpg</guid>
@@ -692,7 +730,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-testimon-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-testimon-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-testimon-2/</link>
 					<pubDate>Wed, 28 Jul 2021 11:05:51 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-testimon-2.jpg</guid>
@@ -715,7 +753,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-testimon-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/home-fashion/fashion-testimon-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/home-fashion/fashion-testimon-3/</link>
 					<pubDate>Wed, 28 Jul 2021 11:06:01 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-testimon-3.jpg</guid>
@@ -738,7 +776,7 @@
 										</item>
 								<item>
 					<title><![CDATA[Prefooter Fashion]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/?cms_block=prefooter-fashion</link>
+					<link>https://dummy.xtemos.com/woodmart2/?cms_block=prefooter-fashion</link>
 					<pubDate>Wed, 28 Jul 2021 11:08:12 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/?post_type=cms_block&#038;p=1344</guid>
@@ -769,7 +807,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-8]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-8/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-8/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:38 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-8.jpg</guid>
@@ -792,7 +830,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-product-9]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-product-9/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-product-9/</link>
 					<pubDate>Tue, 14 Sep 2021 15:14:39 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-product-9.jpg</guid>
@@ -815,7 +853,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-1/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:29 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-1.jpg</guid>
@@ -838,7 +876,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-2/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:31 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-2.jpg</guid>
@@ -861,7 +899,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-3/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:34 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-3.jpg</guid>
@@ -884,7 +922,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-4]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-4/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-4/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:37 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-4.jpg</guid>
@@ -907,7 +945,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-5]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-5/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-5/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:39 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-5.jpg</guid>
@@ -930,7 +968,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-6]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-6/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-6/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:40 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-6.jpg</guid>
@@ -953,7 +991,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-7]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-7/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-7/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:42 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-7.jpg</guid>
@@ -976,7 +1014,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-8]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-8/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-8/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:44 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-8.jpg</guid>
@@ -999,7 +1037,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-blog-img-9]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-blog-img-9/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-blog-img-9/</link>
 					<pubDate>Thu, 16 Sep 2021 14:58:45 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/09/fashion-blog-img-9.jpg</guid>
@@ -1022,7 +1060,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-quote 1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/fashion-quote-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/fashion-quote-1/</link>
 					<pubDate>Thu, 11 Nov 2021 12:50:01 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/11/fashion-quote-1.svg</guid>
@@ -1045,15 +1083,15 @@
 										</item>
 								<item>
 					<title><![CDATA[wood-logo-white-reserve]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/wood-logo-white-reserve/</link>
+					<link>https://dummy.xtemos.com/woodmart2/wood-logo-white-reserve/</link>
 					<pubDate>Wed, 21 Jun 2017 08:17:11 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2017/06/wood-logo-white-reserve.svg</guid>
 															<wp:post_id>302</wp:post_id>
 					<wp:post_date><![CDATA[2017-06-21 08:17:11]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2017-06-21 08:17:11]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2017-06-21 08:17:11]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2017-06-21 08:17:11]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2024-02-07 14:15:45]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2024-02-07 14:15:45]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[wood-logo-white-reserve]]></wp:post_name>
 					<wp:status><![CDATA[inherit]]></wp:status>
@@ -1068,16 +1106,16 @@
 										</item>
 								<item>
 					<title><![CDATA[Footer 1 column Light]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/?cms_block=footer-1-column-light</link>
+					<link>https://dummy.xtemos.com/woodmart2/?cms_block=footer-1-column-light</link>
 					<pubDate>Wed, 28 Jul 2021 07:37:13 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/?post_type=cms_block&#038;p=1295</guid>
-											<content:encoded><![CDATA[[vc_row][vc_column][woodmart_image click_action="custom_link" img_id="302" img_size="220x30" img_link="#" img_link_blank="no" css=".vc_custom_1627457831620{margin-bottom: 20px !important;}" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60fb05765464f" css=".vc_custom_1627063675337{margin-bottom: 20px !important;}" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Condimentum adipiscing vel neque dis nam parturient orci at scelerisque neque dis nam parturient.[/woodmart_text_block][woodmart_list list_type="image" woodmart_css_id="6165a97d07b17" list="%5B%7B%22list-content%22%3A%22451%20Wall%20Street%2C%20UK%2C%20London%22%2C%22item_type%22%3A%22image%22%2C%22image_id%22%3A%223906%22%7D%2C%7B%22link%22%3A%22url%3Atel%253A%2520(064)%2520332-1233%22%2C%22list-content%22%3A%22Phone%3A%20(064)%20332-1233%22%2C%22item_type%22%3A%22image%22%2C%22image_id%22%3A%223904%22%7D%2C%7B%22list-content%22%3A%22Fax%3A%20(099)%20453-1357%22%2C%22item_type%22%3A%22image%22%2C%22image_id%22%3A%223905%22%7D%5D" css=".vc_custom_1634052488395{margin-bottom: 0px !important;}" list_items_gap="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS1saS1tYiI6WyIiXX0sImNzc19wYXJhbXMiOnsiZGV2aWNlIjoiZGVza3RvcCJ9LCJzZWxlY3Rvcl9pZCI6IjYxNjVhOTdkMDdiMTciLCJkYXRhIjp7ImRlc2t0b3AiOjd9fQ==" img_size="14x14"][/vc_column][/vc_row]]]></content:encoded>
+											<content:encoded><![CDATA[[vc_row][vc_column][woodmart_image click_action="custom_link" img_id="302" img_size="220x30" img_link="#" img_link_blank="no" css=".vc_custom_1627457831620{margin-bottom: 20px !important;}" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"][woodmart_text_block woodmart_css_id="60fb05765464f" css=".vc_custom_1627063675337{margin-bottom: 20px !important;}" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no"]Condimentum adipiscing vel neque dis nam parturient orci at scelerisque neque dis nam parturient.[/woodmart_text_block][woodmart_list list_type="image" woodmart_css_id="6165a97d07b17" list="%5B%7B%22list-content%22%3A%22451%20Wall%20Street%2C%20UK%2C%20London%22%2C%22item_type%22%3A%22image%22%2C%22image_id%22%3A3906%7D%2C%7B%22link%22%3A%22url%3Atel%253A%2520%28064%29%2520332-1233%22%2C%22list-content%22%3A%22Phone%3A%20%28064%29%20332-1233%22%2C%22item_type%22%3A%22image%22%2C%22image_id%22%3A3904%7D%2C%7B%22list-content%22%3A%22Fax%3A%20%28099%29%20453-1357%22%2C%22item_type%22%3A%22image%22%2C%22image_id%22%3A3905%7D%5D" css=".vc_custom_1634052488395{margin-bottom: 0px !important;}" list_items_gap="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS1saS1tYiI6WyIiXX0sImNzc19wYXJhbXMiOnsiZGV2aWNlIjoiZGVza3RvcCJ9LCJzZWxlY3Rvcl9pZCI6IjYxNjVhOTdkMDdiMTciLCJkYXRhIjp7ImRlc2t0b3AiOjd9fQ==" img_size="14x14"][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>1295</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-28 07:37:13]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-28 07:37:13]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-10-12 15:28:10]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-10-12 15:28:10]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2024-02-07 14:14:38]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2024-02-07 14:14:38]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[footer-1-column-light]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1089,22 +1127,26 @@
 							<wp:meta_value><![CDATA[.vc_custom_1627457831620{margin-bottom: 20px !important;}.vc_custom_1627063675337{margin-bottom: 20px !important;}.vc_custom_1634052488395{margin-bottom: 0px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[woodmart_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[#wd-6165a97d07b17{--li-mb:7px;}]]></wp:meta_value>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
+							<wp:meta_value><![CDATA[.vc_custom_1627457831620{margin-bottom: 20px !important;}.vc_custom_1627063675337{margin-bottom: 20px !important;}.vc_custom_1634052488395{margin-bottom: 0px !important;}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
+							<wp:meta_value><![CDATA[1]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Fashion slide 1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/</link>
 					<pubDate>Wed, 28 Jul 2021 09:39:27 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/?post_type=woodmart_slide&#038;p=1319</guid>
-											<content:encoded><![CDATA[[vc_row][vc_column offset="vc_col-lg-8" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_parallax="0" woodmart_sticky_column="false" parallax_scroll="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block text_color_scheme="" text_font_size="m" text_font_weight="700" text_color="primary" text_align="center" wd_animation="slide-from-top" woodmart_css_id="61892d221054c" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1636379943422{margin-bottom: 20px !important;}" wd_animation_delay="400" woodmart_empty_space="" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQyMjEwNTRjIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]YOUR FAVOURITE EMOJI[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="610138c98708a" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjYxMDEzOGM5ODcwOGEiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjRweCJ9fQ==" css=".vc_custom_1627470034458{margin-bottom: 15px !important;}" wd_animation_delay="300"]Blondes with minimalistic[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-bottom" woodmart_css_id="610138ed36be5" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjYxMDEzOGVkMzZiZTUiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjRweCJ9fQ==" css=".vc_custom_1627470064844{margin-bottom: 15px !important;}" wd_animation_delay="500" text_line_height_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsibGluZS1oZWlnaHQiOlsiLndkLXRleHQtYmxvY2siXX0sInNlbGVjdG9yX2lkIjoiNjEwMTM4ZWQzNmJlNSIsImRhdGEiOnsiZGVza3RvcCI6IjM4cHgiLCJtb2JpbGUiOiIyNHB4In19"]tendencies to vintage[/woodmart_text_block][woodmart_text_block text_font_size="s" text_align="center" content_width="custom" wd_animation="slide-from-bottom" woodmart_css_id="61892d1594aa1" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" wd_animation_delay="600" woodmart_empty_space="" content_desktop_width="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS13ZC1tYXgtd2lkdGgiOlsiIl19LCJjc3NfcGFyYW1zIjp7ImRldmljZSI6ImRlc2t0b3AifSwic2VsZWN0b3JfaWQiOiI2MTg5MmQxNTk0YWExIiwiZGF0YSI6eyJkZXNrdG9wIjozODB9fQ==" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQxNTk0YWExIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Accumsan mus felis neque a penatibus imperdiet magna amet inceptnetus ad in dui cum nec.[/woodmart_text_block][woodmart_button color="primary" shape="round" wd_animation="slide-from-bottom" woodmart_css_id="61012766df40a" title="SHOP NOW" full_width="no" button_inline="no" button_smooth_scroll="no" wd_animation_delay="700"][/vc_column][/vc_row]]]></content:encoded>
+											<content:encoded><![CDATA[[vc_row][vc_column offset="vc_col-lg-8" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_parallax="0" woodmart_sticky_column="false" parallax_scroll="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block text_color_scheme="" text_font_size="m" text_font_weight="700" text_color="primary" text_align="center" wd_animation="slide-from-top" woodmart_css_id="61892d221054c" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1636379943422{margin-bottom: 20px !important;}" wd_animation_delay="400" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQyMjEwNTRjIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]YOUR FAVOURITE EMOJI[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="683f031f4e20e" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjY4M2YwMzFmNGUyMGUiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjNweCJ9fQ==" css=".vc_custom_1748960036088{margin-bottom: 15px !important;}" wd_animation_delay="300" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDMxZjRlMjBlIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Blondes with minimalistic[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-bottom" woodmart_css_id="683f03274ebdf" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjY4M2YwMzI3NGViZGYiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjNweCJ9fQ==" css=".vc_custom_1748960042408{margin-bottom: 15px !important;}" wd_animation_delay="500" text_line_height_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsibGluZS1oZWlnaHQiOlsiLndkLXRleHQtYmxvY2siXX0sInNlbGVjdG9yX2lkIjoiNjgzZjAzMjc0ZWJkZiIsImRhdGEiOnsiZGVza3RvcCI6IjM4cHgiLCJtb2JpbGUiOiIyNHB4In19" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDMyNzRlYmRmIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]tendencies to vintage[/woodmart_text_block][woodmart_text_block text_font_size="s" text_align="center" content_width="custom" wd_animation="slide-from-bottom" woodmart_css_id="61892d1594aa1" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" wd_animation_delay="600" content_desktop_width="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS13ZC1tYXgtd2lkdGgiOlsiIl19LCJjc3NfcGFyYW1zIjp7ImRldmljZSI6ImRlc2t0b3AifSwic2VsZWN0b3JfaWQiOiI2MTg5MmQxNTk0YWExIiwiZGF0YSI6eyJkZXNrdG9wIjozODB9fQ==" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQxNTk0YWExIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Accumsan mus felis neque a penatibus imperdiet magna amet inceptnetus ad in dui cum nec.[/woodmart_text_block][woodmart_button wd_animation="slide-from-bottom" shape="round" color="primary" woodmart_css_id="61012766df40a" title="SHOP NOW" full_width="no" button_inline="no" button_smooth_scroll="no" wd_animation_delay="700"][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>1319</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-28 09:39:27]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-28 09:39:27]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-11-08 14:16:43]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-11-08 14:16:43]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-03 14:18:30]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-03 14:18:30]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[fashion-slide-1]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1117,12 +1159,24 @@
 							<wp:meta_value><![CDATA[1320]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_desktop]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_image_size_desktop]]></wp:meta_key>
 							<wp:meta_value><![CDATA[cover]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_image_position_desktop]]></wp:meta_key>
 							<wp:meta_value><![CDATA[center center]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_tablet]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_mobile]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_color]]></wp:meta_key>
@@ -1154,11 +1208,11 @@
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[#wd-610138c98708a.wd-text-block{line-height:48px;font-size:38px;}#wd-610138ed36be5.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d1594aa1{--wd-max-width:380px;}@media (max-width: 767px) {#wd-610138c98708a.wd-text-block{line-height:34px;font-size:24px;}#wd-610138ed36be5.wd-text-block{font-size:24px;line-height:24px;}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[#wd-683f031f4e20e.wd-text-block{line-height:48px;font-size:38px;}#wd-683f03274ebdf.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d1594aa1{--wd-max-width:380px;}@media (max-width: 767px) {#wd-683f031f4e20e.wd-text-block{line-height:33px;font-size:23px;}#wd-683f03274ebdf.wd-text-block{font-size:23px;line-height:24px;}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1636379943422{margin-bottom: 20px !important;}.vc_custom_1627470034458{margin-bottom: 15px !important;}.vc_custom_1627470064844{margin-bottom: 15px !important;}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[.vc_custom_1636379943422{margin-bottom: 20px !important;}.vc_custom_1748960036088{margin-bottom: 15px !important;}.vc_custom_1748960042408{margin-bottom: 15px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_oembed_ed3c58df64584dfef189354ea56f6043]]></wp:meta_key>
@@ -1168,10 +1222,18 @@
 							<wp:meta_key><![CDATA[_oembed_c8001e05be984104f3f08bd7d2e45daa]]></wp:meta_key>
 							<wp:meta_value><![CDATA[{{unknown}}]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
+							<wp:meta_value><![CDATA[1]]></wp:meta_value>
+						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[fashion-slide-1]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-1/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-1/</link>
 					<pubDate>Wed, 28 Jul 2021 09:38:55 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-slide-1.jpg</guid>
@@ -1194,7 +1256,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-slide-2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-2/</link>
 					<pubDate>Wed, 28 Jul 2021 09:38:56 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-slide-2.jpg</guid>
@@ -1217,7 +1279,7 @@
 										</item>
 								<item>
 					<title><![CDATA[fashion-slide-3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1/fashion-slide-3/</link>
 					<pubDate>Wed, 28 Jul 2021 09:38:57 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">http://dummy.xtemos.com/woodmart2/wp-content/uploads/2021/07/fashion-slide-3.jpg</guid>
@@ -1240,16 +1302,16 @@
 										</item>
 								<item>
 					<title><![CDATA[Fashion slide 2]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1-2/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1-2/</link>
 					<pubDate>Wed, 28 Jul 2021 09:47:44 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/?post_type=woodmart_slide&#038;p=1324</guid>
-											<content:encoded><![CDATA[[vc_row][vc_column offset="vc_col-lg-offset-3 vc_col-lg-9" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_parallax="0" woodmart_sticky_column="false" parallax_scroll="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block text_color_scheme="" text_font_size="m" text_font_weight="700" text_color="primary" text_align="center" wd_animation="slide-from-top" woodmart_css_id="61892d2b1fcab" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1636379950510{margin-bottom: 20px !important;}" wd_animation_delay="400" woodmart_empty_space="" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQyYjFmY2FiIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]YOUR FAVOURITE EMOJI[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="610138ff85f46" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjYxMDEzOGZmODVmNDYiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjRweCJ9fQ==" css=".vc_custom_1627470082826{margin-bottom: 15px !important;}" wd_animation_delay="300"]Fashionable fit trend style[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-bottom" woodmart_css_id="610138df7cadf" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjYxMDEzOGRmN2NhZGYiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjRweCJ9fQ==" css=".vc_custom_1627470052028{margin-bottom: 15px !important;}" wd_animation_delay="500" text_line_height_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsibGluZS1oZWlnaHQiOlsiLndkLXRleHQtYmxvY2siXX0sInNlbGVjdG9yX2lkIjoiNjEwMTM4ZGY3Y2FkZiIsImRhdGEiOnsiZGVza3RvcCI6IjM4cHgiLCJtb2JpbGUiOiIyNHB4In19"]best sport man wear[/woodmart_text_block][woodmart_text_block text_font_size="s" text_align="center" content_width="custom" wd_animation="slide-from-bottom" woodmart_css_id="61892d301de66" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" wd_animation_delay="600" woodmart_empty_space="" content_desktop_width="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS13ZC1tYXgtd2lkdGgiOlsiIl19LCJjc3NfcGFyYW1zIjp7ImRldmljZSI6ImRlc2t0b3AifSwic2VsZWN0b3JfaWQiOiI2MTg5MmQzMDFkZTY2IiwiZGF0YSI6eyJkZXNrdG9wIjozODB9fQ==" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQzMDFkZTY2Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Accumsan mus felis neque a penatibus imperdiet magna amet inceptnetus ad in dui cum nec.[/woodmart_text_block][woodmart_button color="primary" shape="round" wd_animation="slide-from-bottom" woodmart_css_id="6101285906275" title="SHOP NOW" full_width="no" button_inline="no" button_smooth_scroll="no" wd_animation_delay="700"][/vc_column][/vc_row]]]></content:encoded>
+											<content:encoded><![CDATA[[vc_row][vc_column offset="vc_col-lg-offset-3 vc_col-lg-9" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_parallax="0" woodmart_sticky_column="false" parallax_scroll="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block text_color_scheme="" text_font_size="m" text_font_weight="700" text_color="primary" text_align="center" wd_animation="slide-from-top" woodmart_css_id="61892d2b1fcab" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1636379950510{margin-bottom: 20px !important;}" wd_animation_delay="400" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQyYjFmY2FiIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]YOUR FAVOURITE EMOJI[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="683f04434a4f6" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjY4M2YwNDQzNGE0ZjYiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjNweCJ9fQ==" css=".vc_custom_1748960327278{margin-bottom: 15px !important;}" wd_animation_delay="300" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDQ0MzRhNGY2Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Fashionable fit trend style[/woodmart_text_block][woodmart_text_block text_color_scheme="dark" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-bottom" woodmart_css_id="683f0449c4c3d" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjY4M2YwNDQ5YzRjM2QiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjNweCJ9fQ==" css=".vc_custom_1748960334161{margin-bottom: 15px !important;}" wd_animation_delay="500" text_line_height_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsibGluZS1oZWlnaHQiOlsiLndkLXRleHQtYmxvY2siXX0sInNlbGVjdG9yX2lkIjoiNjgzZjA0NDljNGMzZCIsImRhdGEiOnsiZGVza3RvcCI6IjM4cHgiLCJtb2JpbGUiOiIyNHB4In19" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDQ0OWM0YzNkIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]best sport man wear[/woodmart_text_block][woodmart_text_block text_font_size="s" text_align="center" content_width="custom" wd_animation="slide-from-bottom" woodmart_css_id="61892d301de66" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" wd_animation_delay="600" content_desktop_width="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS13ZC1tYXgtd2lkdGgiOlsiIl19LCJjc3NfcGFyYW1zIjp7ImRldmljZSI6ImRlc2t0b3AifSwic2VsZWN0b3JfaWQiOiI2MTg5MmQzMDFkZTY2IiwiZGF0YSI6eyJkZXNrdG9wIjozODB9fQ==" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQzMDFkZTY2Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Accumsan mus felis neque a penatibus imperdiet magna amet inceptnetus ad in dui cum nec.[/woodmart_text_block][woodmart_button wd_animation="slide-from-bottom" shape="round" color="primary" woodmart_css_id="6101285906275" title="SHOP NOW" full_width="no" button_inline="no" button_smooth_scroll="no" wd_animation_delay="700"][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>1324</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-28 09:47:44]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-28 09:47:44]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-11-08 14:16:42]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-11-08 14:16:42]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-03 14:18:56]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-03 14:18:56]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[fashion-slide-1-2]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1259,15 +1321,19 @@
 												<category domain="woodmart_slider" nicename="fashion-slider"><![CDATA[Fashion slider]]></category>
 											<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[#wd-610138ff85f46.wd-text-block{line-height:48px;font-size:38px;}#wd-610138df7cadf.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d301de66{--wd-max-width:380px;}@media (max-width: 767px) {#wd-610138ff85f46.wd-text-block{line-height:34px;font-size:24px;}#wd-610138df7cadf.wd-text-block{font-size:24px;line-height:24px;}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[#wd-683f04434a4f6.wd-text-block{line-height:48px;font-size:38px;}#wd-683f0449c4c3d.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d301de66{--wd-max-width:380px;}@media (max-width: 767px) {#wd-683f04434a4f6.wd-text-block{line-height:33px;font-size:23px;}#wd-683f0449c4c3d.wd-text-block{font-size:23px;line-height:24px;}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1636379950510{margin-bottom: 20px !important;}.vc_custom_1627470082826{margin-bottom: 15px !important;}.vc_custom_1627470052028{margin-bottom: 15px !important;}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[.vc_custom_1636379950510{margin-bottom: 20px !important;}.vc_custom_1748960327278{margin-bottom: 15px !important;}.vc_custom_1748960334161{margin-bottom: 15px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
 							<wp:meta_value><![CDATA[1321]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_desktop]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_image_size_desktop]]></wp:meta_key>
@@ -1276,6 +1342,14 @@
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_image_position_desktop]]></wp:meta_key>
 							<wp:meta_value><![CDATA[center center]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_tablet]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_mobile]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_color]]></wp:meta_key>
@@ -1307,11 +1381,11 @@
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[#wd-610138ff85f46.wd-text-block{line-height:48px;font-size:38px;}#wd-610138df7cadf.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d301de66{--wd-max-width:380px;}@media (max-width: 767px) {#wd-610138ff85f46.wd-text-block{line-height:34px;font-size:24px;}#wd-610138df7cadf.wd-text-block{font-size:24px;line-height:24px;}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[#wd-683f04434a4f6.wd-text-block{line-height:48px;font-size:38px;}#wd-683f0449c4c3d.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d301de66{--wd-max-width:380px;}@media (max-width: 767px) {#wd-683f04434a4f6.wd-text-block{line-height:33px;font-size:23px;}#wd-683f0449c4c3d.wd-text-block{font-size:23px;line-height:24px;}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1636379950510{margin-bottom: 20px !important;}.vc_custom_1627470082826{margin-bottom: 15px !important;}.vc_custom_1627470052028{margin-bottom: 15px !important;}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[.vc_custom_1636379950510{margin-bottom: 20px !important;}.vc_custom_1748960327278{margin-bottom: 15px !important;}.vc_custom_1748960334161{margin-bottom: 15px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_oembed_ed3c58df64584dfef189354ea56f6043]]></wp:meta_key>
@@ -1325,19 +1399,27 @@
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
 							<wp:meta_value><![CDATA[fashion-slide-1]]></wp:meta_value>
 						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
+							<wp:meta_value><![CDATA[1]]></wp:meta_value>
+						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Fashion slide 3]]></title>
-					<link>http://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1-3/</link>
+					<link>https://dummy.xtemos.com/woodmart2/blog/woodmart_slide/fashion-slide-1-3/</link>
 					<pubDate>Wed, 28 Jul 2021 09:52:41 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/?post_type=woodmart_slide&#038;p=1327</guid>
-											<content:encoded><![CDATA[[vc_row][vc_column woodmart_color_scheme="light" offset="vc_col-lg-offset-2 vc_col-lg-8" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_parallax="0" woodmart_sticky_column="false" parallax_scroll="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block text_color_scheme="light" text_font_size="m" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="61892d3c57afa" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1636379973647{margin-bottom: 20px !important;}" wd_animation_delay="400" woodmart_empty_space="" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQzYzU3YWZhIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]YOUR FAVOURITE EMOJI[/woodmart_text_block][woodmart_text_block text_color_scheme="light" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="6101290a2929a" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjYxMDEyOTBhMjkyOWEiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjRweCJ9fQ==" css=".vc_custom_1627466000089{margin-bottom: 15px !important;}" wd_animation_delay="300"]Blondes with minimalistic[/woodmart_text_block][woodmart_text_block text_color_scheme="light" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-bottom" woodmart_css_id="610129122c9dd" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjYxMDEyOTEyMmM5ZGQiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjRweCJ9fQ==" css=".vc_custom_1627466006193{margin-bottom: 15px !important;}" wd_animation_delay="500" text_line_height_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsibGluZS1oZWlnaHQiOlsiLndkLXRleHQtYmxvY2siXX0sInNlbGVjdG9yX2lkIjoiNjEwMTI5MTIyYzlkZCIsImRhdGEiOnsiZGVza3RvcCI6IjM4cHgiLCJtb2JpbGUiOiIyNHB4In19"]tendencies to vintage[/woodmart_text_block][woodmart_text_block text_color_scheme="light" text_font_size="s" text_align="center" content_width="custom" wd_animation="slide-from-bottom" woodmart_css_id="61892d4772946" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" wd_animation_delay="600" woodmart_empty_space="" content_desktop_width="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS13ZC1tYXgtd2lkdGgiOlsiIl19LCJjc3NfcGFyYW1zIjp7ImRldmljZSI6ImRlc2t0b3AifSwic2VsZWN0b3JfaWQiOiI2MTg5MmQ0NzcyOTQ2IiwiZGF0YSI6eyJkZXNrdG9wIjozODB9fQ==" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQ0NzcyOTQ2Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Accumsan mus felis neque a penatibus imperdiet magna amet inceptnetus ad in dui cum nec.[/woodmart_text_block][woodmart_button color="primary" shape="round" wd_animation="slide-from-bottom" woodmart_css_id="61012766df40a" title="SHOP NOW" full_width="no" button_inline="no" button_smooth_scroll="no" wd_animation_delay="700"][/vc_column][/vc_row]]]></content:encoded>
+											<content:encoded><![CDATA[[vc_row][vc_column woodmart_color_scheme="light" offset="vc_col-lg-offset-2 vc_col-lg-8" mobile_bg_img_hidden="no" tablet_bg_img_hidden="no" woodmart_parallax="0" woodmart_sticky_column="false" parallax_scroll="no" mobile_reset_margin="no" tablet_reset_margin="no"][woodmart_text_block text_color_scheme="light" text_font_size="m" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="61892d3c57afa" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" css=".vc_custom_1636379973647{margin-bottom: 20px !important;}" wd_animation_delay="400" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQzYzU3YWZhIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]YOUR FAVOURITE EMOJI[/woodmart_text_block][woodmart_text_block text_color_scheme="light" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-top" woodmart_css_id="683f045427733" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjY4M2YwNDU0Mjc3MzMiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjNweCJ9fQ==" css=".vc_custom_1748960343420{margin-bottom: 15px !important;}" wd_animation_delay="300" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDQ1NDI3NzMzIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Blondes with minimalistic[/woodmart_text_block][woodmart_text_block text_color_scheme="light" text_font_family="primary" text_font_size="custom" text_font_weight="700" text_color="title" text_align="center" wd_animation="slide-from-bottom" woodmart_css_id="683f04596ffba" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" text_font_size_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsiZm9udC1zaXplIjpbIi53ZC10ZXh0LWJsb2NrIl19LCJzZWxlY3Rvcl9pZCI6IjY4M2YwNDU5NmZmYmEiLCJkYXRhIjp7ImRlc2t0b3AiOiIzOHB4IiwibW9iaWxlIjoiMjNweCJ9fQ==" css=".vc_custom_1748960348575{margin-bottom: 15px !important;}" wd_animation_delay="500" text_line_height_custom="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zaXplIiwiY3NzX2FyZ3MiOnsibGluZS1oZWlnaHQiOlsiLndkLXRleHQtYmxvY2siXX0sInNlbGVjdG9yX2lkIjoiNjgzZjA0NTk2ZmZiYSIsImRhdGEiOnsiZGVza3RvcCI6IjM4cHgiLCJtb2JpbGUiOiIyNHB4In19" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2ODNmMDQ1OTZmZmJhIiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]tendencies to vintage[/woodmart_text_block][woodmart_text_block text_color_scheme="light" text_font_size="s" text_align="center" content_width="custom" wd_animation="slide-from-bottom" woodmart_css_id="61892d4772946" parallax_scroll="no" woodmart_inline="no" wd_hide_on_desktop="no" wd_hide_on_tablet_landscape="no" wd_hide_on_tablet="no" wd_hide_on_mobile="no" wd_animation_delay="600" content_desktop_width="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfc2xpZGVyIiwiY3NzX2FyZ3MiOnsiLS13ZC1tYXgtd2lkdGgiOlsiIl19LCJjc3NfcGFyYW1zIjp7ImRldmljZSI6ImRlc2t0b3AifSwic2VsZWN0b3JfaWQiOiI2MTg5MmQ0NzcyOTQ2IiwiZGF0YSI6eyJkZXNrdG9wIjozODB9fQ==" responsive_spacing="eyJwYXJhbV90eXBlIjoid29vZG1hcnRfcmVzcG9uc2l2ZV9zcGFjaW5nIiwic2VsZWN0b3JfaWQiOiI2MTg5MmQ0NzcyOTQ2Iiwic2hvcnRjb2RlIjoid29vZG1hcnRfdGV4dF9ibG9jayIsImRhdGEiOnsidGFibGV0Ijp7fSwibW9iaWxlIjp7fX19"]Accumsan mus felis neque a penatibus imperdiet magna amet inceptnetus ad in dui cum nec.[/woodmart_text_block][woodmart_button wd_animation="slide-from-bottom" shape="round" color="primary" woodmart_css_id="61012766df40a" title="SHOP NOW" full_width="no" button_inline="no" button_smooth_scroll="no" wd_animation_delay="700"][/vc_column][/vc_row]]]></content:encoded>
 															<wp:post_id>1327</wp:post_id>
 					<wp:post_date><![CDATA[2021-07-28 09:52:41]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2021-07-28 09:52:41]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2021-11-08 14:16:39]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2021-11-08 14:16:39]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-06-03 14:19:10]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-06-03 14:19:10]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[fashion-slide-1-3]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -1347,15 +1429,19 @@
 												<category domain="woodmart_slider" nicename="fashion-slider"><![CDATA[Fashion slider]]></category>
 											<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[#wd-6101290a2929a.wd-text-block{line-height:48px;font-size:38px;}#wd-610129122c9dd.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d4772946{--wd-max-width:380px;}@media (max-width: 767px) {#wd-6101290a2929a.wd-text-block{line-height:34px;font-size:24px;}#wd-610129122c9dd.wd-text-block{font-size:24px;line-height:24px;}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[#wd-683f045427733.wd-text-block{line-height:48px;font-size:38px;}#wd-683f04596ffba.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d4772946{--wd-max-width:380px;}@media (max-width: 767px) {#wd-683f045427733.wd-text-block{line-height:33px;font-size:23px;}#wd-683f04596ffba.wd-text-block{font-size:23px;line-height:24px;}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1636379973647{margin-bottom: 20px !important;}.vc_custom_1627466000089{margin-bottom: 15px !important;}.vc_custom_1627466006193{margin-bottom: 15px !important;}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[.vc_custom_1636379973647{margin-bottom: 20px !important;}.vc_custom_1748960343420{margin-bottom: 15px !important;}.vc_custom_1748960348575{margin-bottom: 15px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
 							<wp:meta_value><![CDATA[1322]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_desktop]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_image_size_desktop]]></wp:meta_key>
@@ -1364,6 +1450,14 @@
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_image_position_desktop]]></wp:meta_key>
 							<wp:meta_value><![CDATA[center center]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_tablet]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[bg_image_mobile]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:2:{s:3:"url";s:0:"";s:2:"id";s:0:"";}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[bg_color]]></wp:meta_key>
@@ -1395,11 +1489,11 @@
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[woodmart_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[#wd-6101290a2929a.wd-text-block{line-height:48px;font-size:38px;}#wd-610129122c9dd.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d4772946{--wd-max-width:380px;}@media (max-width: 767px) {#wd-6101290a2929a.wd-text-block{line-height:34px;font-size:24px;}#wd-610129122c9dd.wd-text-block{font-size:24px;line-height:24px;}}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[#wd-683f045427733.wd-text-block{line-height:48px;font-size:38px;}#wd-683f04596ffba.wd-text-block{font-size:38px;line-height:38px;}#wd-61892d4772946{--wd-max-width:380px;}@media (max-width: 767px) {#wd-683f045427733.wd-text-block{line-height:33px;font-size:23px;}#wd-683f04596ffba.wd-text-block{font-size:23px;line-height:24px;}}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
-							<wp:meta_value><![CDATA[.vc_custom_1636379973647{margin-bottom: 20px !important;}.vc_custom_1627466000089{margin-bottom: 15px !important;}.vc_custom_1627466006193{margin-bottom: 15px !important;}]]></wp:meta_value>
+							<wp:meta_value><![CDATA[.vc_custom_1636379973647{margin-bottom: 20px !important;}.vc_custom_1748960343420{margin-bottom: 15px !important;}.vc_custom_1748960348575{margin-bottom: 15px !important;}]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_oembed_ed3c58df64584dfef189354ea56f6043]]></wp:meta_key>
@@ -1412,6 +1506,14 @@
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
 							<wp:meta_value><![CDATA[fashion-slide-1]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_post_custom_layout]]></wp:meta_key>
+							<wp:meta_value><![CDATA[default]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css_updated]]></wp:meta_key>
+							<wp:meta_value><![CDATA[1]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 				</channel>

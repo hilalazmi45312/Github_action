@@ -14,11 +14,29 @@ if ( ! function_exists( 'wd_get_block_bg_css' ) ) {
 	 * @param string $selector CSS selector.
 	 * @param array  $attributes Block attributes.
 	 * @param string $attr_prefix Attribute prefix.
+	 * @param string $image_type Image type: background or image.
 	 * @return array
 	 */
-	function wd_get_block_bg_css( $selector, $attributes, $attr_prefix ) {
+	function wd_get_block_bg_css( $selector, $attributes, $attr_prefix, $image_type = 'background' ) {
 		$type      = isset( $attributes[ $attr_prefix . 'Type' ] ) ? $attributes[ $attr_prefix . 'Type' ] : 'classic';
 		$block_css = new Block_CSS( $attributes );
+
+		$bg_image_position = function( $device ) use ( $attributes, $attr_prefix, $block_css ) {
+			$device_prefix = 'desktop' !== $device ? ucfirst( $device ) : '';
+
+			if ( 'custom' !== $attributes[ $attr_prefix . 'Position' . $device_prefix ] ) {
+				return $attributes[ $attr_prefix . 'Position' . $device_prefix ];
+			}
+
+			$rule  = ( isset( $attributes[ $attr_prefix . 'CustomPositionX' . $device_prefix ] ) && '' !== $attributes[ $attr_prefix . 'CustomPositionX' . $device_prefix ] ) ? $attributes[ $attr_prefix . 'CustomPositionX' . $device_prefix ] : '0';
+			$rule .= $block_css->get_units_for_attribute( 'CustomPositionX', $device );
+
+			$rule .= ' ';
+			$rule .= ( isset( $attributes[ $attr_prefix . 'CustomPositionY' . $device_prefix ] ) && '' !== $attributes[ $attr_prefix . 'CustomPositionY' . $device_prefix ] ) ? $attributes[ $attr_prefix . 'CustomPositionY' . $device_prefix ] : '0';
+			$rule .= $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionY', $device );
+
+			return $rule;
+		};
 
 		$block_css->add_css_rules(
 			$selector,
@@ -35,13 +53,21 @@ if ( ! function_exists( 'wd_get_block_bg_css' ) ) {
 		);
 
 		if ( 'classic' === $type ) {
+			if ( 'background' === $image_type ) {
+				$block_css->add_css_rules(
+					$selector,
+					array(
+						array(
+							'attr_name' => $attr_prefix . 'Image,url',
+							'template'  => 'background-image: url({{value}});',
+						),
+					)
+				);
+			}
+
 			$block_css->add_css_rules(
 				$selector,
 				array(
-					array(
-						'attr_name' => $attr_prefix . 'Image,url',
-						'template'  => 'background-image: url({{value}});',
-					),
 					array(
 						'attr_name' => $attr_prefix . 'Attachment',
 						'template'  => 'background-attachment: {{value}};',
@@ -53,30 +79,26 @@ if ( ! function_exists( 'wd_get_block_bg_css' ) ) {
 				)
 			);
 
-			if ( isset( $attributes[ $attr_prefix . 'Position' ] ) ) {
-				if ( 'custom' !== $attributes[ $attr_prefix . 'Position' ] ) {
-					$block_css->add_css_rules(
-						$selector,
-						array(
-							array(
-								'attr_name' => $attr_prefix . 'Position',
-								'template'  => 'background-position: {{value}};',
-							),
-						)
+			$block_css->add_css_rules(
+				$selector . ' img',
+				array(
+					array(
+						'attr_name' => $attr_prefix . 'ObjectFit',
+						'template'  => 'object-fit: {{value}};',
+					),
+				)
+			);
+
+			if ( ! empty( $attributes[ $attr_prefix . 'Position' ] ) ) {
+				if ( 'image' === $image_type ) {
+					$block_css->add_to_selector(
+						$selector . ' img',
+						'object-position:' . $bg_image_position( 'desktop' ) . ';',
 					);
 				} else {
-					$block_css->add_css_rules(
+					$block_css->add_to_selector(
 						$selector,
-						array(
-							array(
-								'attr_name' => $attr_prefix . 'CustomPositionX',
-								'template'  => 'background-position-x: {{value}}' . $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionX' ) . ';',
-							),
-							array(
-								'attr_name' => $attr_prefix . 'CustomPositionY',
-								'template'  => 'background-position-y: {{value}}' . $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionY' ) . ';',
-							),
-						)
+						'background-position:' . $bg_image_position( 'desktop' ) . ';',
 					);
 				}
 			}
@@ -105,42 +127,30 @@ if ( ! function_exists( 'wd_get_block_bg_css' ) ) {
 				}
 			}
 
-			$block_css->add_css_rules(
-				$selector,
-				array(
+			if ( 'background' === $image_type ) {
+				$block_css->add_css_rules(
+					$selector,
 					array(
-						'attr_name' => $attr_prefix . 'ImageTablet,url',
-						'template'  => 'background-image: url({{value}});',
-					),
-				),
-				'tablet'
-			);
-
-			if ( isset( $attributes[ $attr_prefix . 'PositionTablet' ] ) ) {
-				if ( 'custom' !== $attributes[ $attr_prefix . 'PositionTablet' ] ) {
-					$block_css->add_css_rules(
-						$selector,
 						array(
-							array(
-								'attr_name' => $attr_prefix . 'PositionTablet',
-								'template'  => 'background-position: {{value}};',
-							),
+							'attr_name' => $attr_prefix . 'ImageTablet,url',
+							'template'  => 'background-image: url({{value}});',
 						),
+					),
+					'tablet'
+				);
+			}
+
+			if ( ! empty( $attributes[ $attr_prefix . 'PositionTablet' ] ) ) {
+				if ( 'image' === $image_type ) {
+					$block_css->add_to_selector(
+						$selector . ' img',
+						'object-position:' . $bg_image_position( 'tablet' ) . ';',
 						'tablet'
 					);
 				} else {
-					$block_css->add_css_rules(
+					$block_css->add_to_selector(
 						$selector,
-						array(
-							array(
-								'attr_name' => $attr_prefix . 'CustomPositionXTablet',
-								'template'  => 'background-position-x: {{value}}' . $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionX', 'tablet' ) . ';',
-							),
-							array(
-								'attr_name' => $attr_prefix . 'CustomPositionYTablet',
-								'template'  => 'background-position-y: {{value}}' . $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionY', 'tablet' ) . ';',
-							),
-						),
+						'background-position:' . $bg_image_position( 'tablet' ) . ';',
 						'tablet'
 					);
 				}
@@ -173,41 +183,40 @@ if ( ! function_exists( 'wd_get_block_bg_css' ) ) {
 			}
 
 			$block_css->add_css_rules(
-				$selector,
+				$selector . ' img',
 				array(
 					array(
-						'attr_name' => $attr_prefix . 'ImageMobile,url',
-						'template'  => 'background-image: url({{value}});',
+						'attr_name' => $attr_prefix . 'ObjectFitTablet',
+						'template'  => 'object-fit: {{value}};',
 					),
 				),
-				'mobile'
+				'tablet'
 			);
 
-			if ( isset( $attributes[ $attr_prefix . 'PositionMobile' ] ) ) {
-				if ( 'custom' !== $attributes[ $attr_prefix . 'PositionMobile' ] ) {
-					$block_css->add_css_rules(
-						$selector,
+			if ( 'background' === $image_type ) {
+				$block_css->add_css_rules(
+					$selector,
+					array(
 						array(
-							array(
-								'attr_name' => $attr_prefix . 'PositionMobile',
-								'template'  => 'background-position: {{value}};',
-							),
+							'attr_name' => $attr_prefix . 'ImageMobile,url',
+							'template'  => 'background-image: url({{value}});',
 						),
+					),
+					'mobile'
+				);
+			}
+
+			if ( ! empty( $attributes[ $attr_prefix . 'PositionMobile' ] ) ) {
+				if ( 'image' === $image_type ) {
+					$block_css->add_to_selector(
+						$selector . ' img',
+						'object-position:' . $bg_image_position( 'mobile' ) . ';',
 						'mobile'
 					);
 				} else {
-					$block_css->add_css_rules(
+					$block_css->add_to_selector(
 						$selector,
-						array(
-							array(
-								'attr_name' => $attr_prefix . 'CustomPositionXMobile',
-								'template'  => 'background-position-x: {{value}}' . $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionX', 'mobile' ) . ';',
-							),
-							array(
-								'attr_name' => $attr_prefix . 'CustomPositionYMobile',
-								'template'  => 'background-position-y: {{value}}' . $block_css->get_units_for_attribute( $attr_prefix . 'CustomPositionY', 'mobile' ) . ';',
-							),
-						),
+						'background-position:' . $bg_image_position( 'mobile' ) . ';',
 						'mobile'
 					);
 				}
@@ -238,6 +247,17 @@ if ( ! function_exists( 'wd_get_block_bg_css' ) ) {
 					);
 				}
 			}
+
+			$block_css->add_css_rules(
+				$selector . ' img',
+				array(
+					array(
+						'attr_name' => $attr_prefix . 'ObjectFitMobile',
+						'template'  => 'object-fit: {{value}};',
+					),
+				),
+				'mobile'
+			);
 		}
 
 		if ( 'gradient' === $type ) {

@@ -249,6 +249,10 @@ class BrandDisplayWidget extends \Elementor\Widget_Base
 
     protected function render()
     {
+        // Enqueue widget assets only when widget is rendered
+        wp_enqueue_style('sh-brand-display-widget-css');
+        wp_enqueue_script('sh-brand-display-widget-js');
+
         $settings = $this->get_settings_for_display();
         $brands = $this->get_brands_to_display($settings);
 

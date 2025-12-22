@@ -73,6 +73,19 @@ class Upload extends Field {
 	}
 
 	/**
+	 * Get default value for the field.
+	 *
+	 * @param string $value Value to check.
+	 * @return string[]
+	 */
+	public function get_default_value( $value = '' ) {
+		return array(
+			'url' => '',
+			'id'  => '',
+		);
+	}
+
+	/**
 	 * Enqueue media lib.
 	 *
 	 * @since 1.0.0

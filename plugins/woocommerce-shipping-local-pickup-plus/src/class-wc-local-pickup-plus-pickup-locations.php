@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Local Pickup Locations handler class.
@@ -107,10 +107,9 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 			$this->pickup_locations_country_state_codes['all'] = array();
 
 			$codes = array();
-			$table = $wpdb->prefix . 'woocommerce_pickup_locations_geodata';
 			$query = $wpdb->get_results( "
 				SELECT country, state
-				FROM {$table}
+				FROM {$wpdb->prefix}woocommerce_pickup_locations_geodata
 				ORDER BY country
 			", ARRAY_A );
 
@@ -260,7 +259,6 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 		global $wpdb;
 
 		$location_ids = array();
-		$table        = $wpdb->prefix . 'woocommerce_pickup_locations_geodata';
 		$latitude     = isset( $coordinates['lat'] ) && is_numeric( $coordinates['lat'] ) ? $coordinates['lat'] : 0;
 		$longitude    = isset( $coordinates['lon'] ) && is_numeric( $coordinates['lon'] ) ? $coordinates['lon'] : 0;
 		$radius       = is_string( $radius ) ? $radius : null;
@@ -299,20 +297,27 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 
 			// MySQL adaptation of Haversine formula to calculate great-circle distance between two points.
 			// Note: this version uses kilometers!
-			$query = "
-				SELECT post_id, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians(lat) ) ) ) AS distance
-				FROM {$table}
-				{$distanceSql}
+			// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$query = $wpdb->prepare('
+				SELECT post_id, ( 6371 * acos( cos( radians(%f) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(%f) ) + sin( radians(%f) ) * sin( radians(lat) ) ) ) AS distance
+				FROM '.$wpdb->prefix.'woocommerce_pickup_locations_geodata
+				'.$distanceSql.'
 				ORDER BY distance ASC
-			";
+				',
+				$latitude,
+				$longitude,
+				$latitude
+			);
 
 			if (isset($args['posts_per_page']) && $args['posts_per_page'] > -1) {
-				$query .= "
-					LIMIT {$args['posts_per_page']}
-				";
+				$query .= $wpdb->prepare("
+					LIMIT %d",
+					$args['posts_per_page']
+				);
 			}
 
 			$results = $wpdb->get_results("{$query}", ARRAY_A);
+			// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 			if (! empty($results)) {
 				foreach ($results as $pickup_location) {
@@ -361,12 +366,11 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 		$city         = $wpdb->esc_like( $address->get_city() );
 		$address_1    = $wpdb->esc_like( $address->get_address_line_1() );
 		$postcode     = $wpdb->esc_like( $address->get_postcode() );
-		$table        = $wpdb->prefix . 'woocommerce_pickup_locations_geodata';
 
 		if ( '' === $country ) {
 			$query = "
 				SELECT post_id
-				FROM {$table}
+				FROM {$wpdb->prefix}woocommerce_pickup_locations_geodata
 				WHERE title LIKE %s
 				OR city LIKE %s
 				OR address_1 LIKE %s
@@ -376,7 +380,7 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 		} else {
 			$query = "
 				SELECT post_id
-				FROM {$table}
+				FROM {$wpdb->prefix}woocommerce_pickup_locations_geodata
 				WHERE country = %s
 				AND state = %s
 				AND ( title LIKE %s OR city LIKE %s OR address_1 LIKE %s OR postcode LIKE %s )
@@ -386,16 +390,41 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 
 		if ( isset( $args['posts_per_page'] ) && is_numeric( $args['posts_per_page'] )  && $args['posts_per_page'] > -1 ) {
 			$limit  = (int) $args['posts_per_page'];
-			$query .= "
-				LIMIT {$limit}
-			";
+			$query .= $wpdb->prepare(
+				'LIMIT %d',
+				$limit
+			);
 		}
 
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+
 		if ( '' === $country ) {
-			$results = $wpdb->get_results( $wpdb->prepare( $query, "%{$title}%", "%{$city}%", "%{$address_1}%", "%{$postcode}%" ), ARRAY_A );
+			$results = $wpdb->get_results(
+				$wpdb->prepare(
+					$query,
+					'%'.$wpdb->esc_like($title).'%',
+					'%'.$wpdb->esc_like($city).'%',
+					'%'.$wpdb->esc_like($address_1).'%',
+					'%'.$wpdb->esc_like($postcode).'%'
+				),
+				ARRAY_A
+			);
 		} else {
-			$results = $wpdb->get_results( $wpdb->prepare( $query, $country, $state, "%{$title}%", "%{$city}%", "%{$address_1}%", "%{$postcode}%" ), ARRAY_A );
+			$results = $wpdb->get_results(
+				$wpdb->prepare(
+					$query,
+					$country,
+					$state,
+					'%'.$wpdb->esc_like($title).'%',
+					'%'.$wpdb->esc_like($city).'%',
+					'%'.$wpdb->esc_like($address_1).'%',
+					'%'.$wpdb->esc_like($postcode).'%'
+				),
+				ARRAY_A
+			);
 		}
+
+		// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
 
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $pickup_location ) {
@@ -434,12 +463,10 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 
 		if ( ( is_string( $search_term ) || is_numeric( $search_term ) ) && ( 'any' === $which_part || in_array( $which_part, $accepted_parts, true ) ) ) {
 
-			$table = $wpdb->prefix . 'woocommerce_pickup_locations_geodata';
-
 			if ( 'any' === $which_part ) {
 				$query = "
 					SELECT post_id
-					FROM {$table}
+					FROM {$wpdb->prefix}woocommerce_pickup_locations_geodata
 					WHERE country LIKE %s
 					OR state LIKE %s
 					OR postcode LIKE %s
@@ -448,10 +475,10 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 					OR address_2 LIKE %s
 				";
 			} else {
-				// no need escaping which part, see array check above (or it will be wrapped in quotes)
+				// no need escaping WHERE {$which_part}, see array check above (or it will be wrapped in quotes)
 				$query = "
 					SELECT post_id
-					FROM {$table}
+					FROM {$wpdb->prefix}woocommerce_pickup_locations_geodata
 					WHERE {$which_part} LIKE %s
 					ORDER BY {$which_part}
 				";
@@ -459,18 +486,40 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 
 			if ( isset( $args['posts_per_page'] ) && is_numeric( $args['posts_per_page'] ) && $args['posts_per_page'] > -1 ) {
 				$limit  = (int) $args['posts_per_page'];
-				$query .= "
-					LIMIT {$limit}
-				";
+				$query .= $wpdb->prepare(
+					'LIMIT %d',
+					$limit
+				);
 			}
 
 			$search_term = $wpdb->esc_like( $search_term );
 
+			// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+
 			if ( 'any' === $which_part ) {
-				$results = $wpdb->get_results( $wpdb->prepare( $query, "{$search_term}%", "{$search_term}%", "{$search_term}%", "{$search_term}%", "{$search_term}%", "{$search_term}%" ), ARRAY_A );
+				$results = $wpdb->get_results(
+					$wpdb->prepare(
+						$query,
+						$wpdb->esc_like( $search_term ).'%',
+						$wpdb->esc_like( $search_term ).'%',
+						$wpdb->esc_like( $search_term ).'%',
+						$wpdb->esc_like( $search_term ).'%',
+						$wpdb->esc_like( $search_term ).'%',
+						$wpdb->esc_like( $search_term ).'%'
+					),
+					ARRAY_A
+				);
 			} else {
-				$results = $wpdb->get_results( $wpdb->prepare( $query, "{$search_term}%" ), ARRAY_A );
+				$results = $wpdb->get_results(
+					$wpdb->prepare(
+						$query,
+						$wpdb->esc_like($search_term).'%'
+					),
+					ARRAY_A
+				);
 			}
+
+			// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( ! empty( $results ) ) {
 				foreach ( $results as $pickup_location ) {
@@ -770,13 +819,17 @@ class WC_Local_Pickup_Plus_Pickup_Locations {
 
 			wc_local_pickup_plus()->check_tables();
 
-			$geodata_table = $wpdb->prefix . 'woocommerce_pickup_locations_geodata';
-			$record_exists = $wpdb->get_row( " SELECT * from {$geodata_table} WHERE post_id = {$post_id} " );
+			$record_exists = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * from {$wpdb->prefix}woocommerce_pickup_locations_geodata WHERE post_id = %d",
+					$post_id
+				)
+			);
 
 			if ( empty( $record_exists ) ) {
 
 				$wpdb->insert(
-					$geodata_table,
+					$wpdb->prefix.'woocommerce_pickup_locations_geodata',
 					array(
 						'post_id'      => (int) $post_id,
 						'title'        => $post->post_title,

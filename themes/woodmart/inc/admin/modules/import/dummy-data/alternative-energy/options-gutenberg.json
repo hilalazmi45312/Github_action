@@ -212,5 +212,11 @@
     "secondary-color": {
         "idle": "rgb(222,240,246)"
     },
-    "single_product_header": "header_342125"
+    "single_product_header": "header_342125",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

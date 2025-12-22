@@ -40,7 +40,7 @@ class MagentoAPI
                     'Accept'       => 'application/x-www-form-urlencoded',
                 ],
                 'body'      => http_build_query($body),
-                'timeout'   => 15,
+                'timeout'   => 30,
             ]
         );
 
@@ -48,6 +48,7 @@ class MagentoAPI
             return [
                 'flag' => 0,
                 'message' => $response->get_error_message(),
+                'wp_error' => true,
             ];
         }
 
@@ -121,7 +122,9 @@ class MagentoAPI
             return [
                 'flag' => 0,
                 'message' => $response->get_error_message(),
+                'wp_error' => true,
             ];
+            log_api_request($url, 'Request OTP', $response->get_error_message());
         }
 
         $body = json_decode(wp_remote_retrieve_body($response), true);
@@ -213,7 +216,7 @@ class MagentoAPI
                     'icno' => $data['ic_number'],
                     'type' => '',
                 ]),
-                'timeout'   => 15,
+                'timeout'   => 30,
             ]
         );
 
@@ -547,10 +550,10 @@ class MagentoAPI
         $response = wp_remote_get(
             $this->miniOrangeConfig['api_url'] . '/rest/oauth/getuserinfo',
             [
-            'headers'   => [
-                'Authorization' => 'Bearer ' . $token,
-            ],
-            'timeout'   => 30,
+                'headers'   => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+                'timeout'   => 30,
             ]
         );
 
@@ -588,5 +591,46 @@ class MagentoAPI
                 'message' => json_encode($body)
             ];
         }
+    }
+
+    public function verify_turnstile_token($token)
+    {
+        $secret = '0x4AAAAAACGMt2EU0_9fHo2sx6ywje9X0aM';
+
+        $response = wp_remote_post(
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+            [
+                'body' => [
+                    'secret'   => $secret,
+                    'response' => $token,
+                    'remoteip' => $_SERVER['REMOTE_ADDR'], // optional but recommended
+                ],
+                'timeout' => 60,
+            ]
+        );
+
+        if (is_wp_error($response)) {
+            return [
+                'flag' => 0,
+                'message' => $response->get_error_message(),
+            ];
+            log_api_request('https://challenges.cloudflare.com/turnstile/v0/siteverify', 'Turnstile Verification', $response->get_error_message());
+        }
+
+        $body = json_decode(wp_remote_retrieve_body($response), true);
+
+        if (isset($body['success']) && $body['success'] === true) {
+            return [
+                'flag' => 1,
+                'message' => 'Turnstile validation passed',
+                'details' => $body,
+            ];
+        }
+
+        return [
+            'flag' => 0,
+            'message' => 'Turnstile verification failed',
+            'details' => $body,
+        ];
     }
 }

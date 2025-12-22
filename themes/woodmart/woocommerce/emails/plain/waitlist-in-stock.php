@@ -11,7 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 echo esc_html( wp_strip_all_tags( $email_heading ) ) . "\n\n";
 
-echo esc_html__( "Hi {user_name}\n", 'woodmart' );
+echo esc_html(
+	sprintf(
+		// translators: %s User name.
+		__(
+			'Hi, %s!',
+			'woodmart'
+		),
+		$email->user_name
+	)
+) . "\n";
 
 echo wp_kses(
 	sprintf(

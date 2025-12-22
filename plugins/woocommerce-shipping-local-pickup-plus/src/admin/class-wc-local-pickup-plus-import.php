@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Pickup Locations Export class.
@@ -48,9 +48,13 @@ class WC_Local_Pickup_Plus_Import extends \WC_Local_Pickup_Plus_Import_Export  {
 	public function __construct() {
 
 		$this->action_id        = 'import';
-		$this->action_label     = __( 'Import', 'woocommerce-shipping-local-pickup-plus' );
-		$this->admin_page_title = __( 'Import Pickup Locations', 'woocommerce-shipping-local-pickup-plus' );
 		$this->delimiter_option = 'wc_local_pickup_plus_pickup_locations_csv_import_fields_delimiter';
+
+		// defer setting labels until after `init` due to translation loading
+		add_action('init', function() {
+			$this->action_label     = __( 'Import', 'woocommerce-shipping-local-pickup-plus' );
+			$this->admin_page_title = __( 'Import Pickup Locations', 'woocommerce-shipping-local-pickup-plus' );
+		});
 
 		// add CSV file input field handler
 		add_action( 'woocommerce_admin_field_wc-local-pickup-plus-file', array( $this, 'render_file_upload_field' ) );
@@ -167,7 +171,7 @@ class WC_Local_Pickup_Plus_Import extends \WC_Local_Pickup_Plus_Import_Export  {
 				<input
 					type="hidden"
 					name="MAX_FILE_SIZE"
-					value="<?php echo wp_max_upload_size(); ?>"
+					value="<?php echo esc_attr( wp_max_upload_size() ); ?>"
 				/>
 				<input
 					name="<?php echo esc_attr( $field['id'] ); ?>"
@@ -176,7 +180,7 @@ class WC_Local_Pickup_Plus_Import extends \WC_Local_Pickup_Plus_Import_Export  {
 					style="<?php echo esc_attr( $field['css'] ); ?>"
 					value="<?php echo esc_attr( $field['value'] ); ?>"
 					class="<?php echo esc_attr( $field['class'] ); ?>"
-				/><br><span class="description"><?php echo $field['desc_tip']; ?></span>
+				/><br><span class="description"><?php echo wp_kses_post( $field['desc_tip'] ); ?></span>
 			</td>
 		</tr>
 		<?php
@@ -226,7 +230,7 @@ class WC_Local_Pickup_Plus_Import extends \WC_Local_Pickup_Plus_Import_Export  {
 			wc_local_pickup_plus()->get_message_handler()->add_error(
 				/* translators: Placeholder: %s - error message */
 				sprintf( __( 'There was a problem uploading the file: %s', 'woocommerce-shipping-local-pickup-plus' ),
-					'<em>' . $this->get_file_upload_error( $_FILES['wc_local_pickup_plus_csv_import_pickup_locations_source_file']['error'] ) . '</em>'
+					'<em>' . esc_html( $this->get_file_upload_error( absint( $_FILES['wc_local_pickup_plus_csv_import_pickup_locations_source_file']['error'] ) ) ) . '</em>'
 				)
 			);
 
@@ -235,14 +239,14 @@ class WC_Local_Pickup_Plus_Import extends \WC_Local_Pickup_Plus_Import_Export  {
 
 			// get CSV data from file
 			if ( isset( $_FILES['wc_local_pickup_plus_csv_import_pickup_locations_source_file']['tmp_name'] ) ) {
-				$csv_data = $this->parse_file_csv( $_FILES['wc_local_pickup_plus_csv_import_pickup_locations_source_file']['tmp_name'] );
+				$csv_data = $this->parse_file_csv( sanitize_text_field( $_FILES['wc_local_pickup_plus_csv_import_pickup_locations_source_file']['tmp_name'] ) );
 			}
 
 			// bail out if the file can't be parsed or there are only headers
 			if ( empty( $csv_data ) || count( $csv_data ) <= 1 ) {
 
 				wc_local_pickup_plus()->get_message_handler()->add_error(
-					__( 'Could not find Pickup Locations to import from uploaded file.', 'woocommerce-shipping-local-pickup-plus' )
+					esc_html__( 'Could not find Pickup Locations to import from uploaded file.', 'woocommerce-shipping-local-pickup-plus' )
 				);
 
 			// proceed

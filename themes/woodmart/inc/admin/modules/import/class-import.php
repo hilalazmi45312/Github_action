@@ -248,53 +248,59 @@ class Import extends Singleton {
 			<div class="xts-box-content">
 				<div class="xts-row xts-sp-20">
 					<div class="xts-col-12 xts-col-lg-3 xts-col-xl-2 xts-col-dummy-nav">
-						<?php if ( ! isset( $_GET['tab'] ) || ( isset( $_GET['tab'] ) && 'wizard' !== $_GET['tab'] ) ) : // phpcs:ignore ?>
-
-							<div class="xts-import-cats-list-wrap">
-								<div class="xts-buttons-control">
-									<div class="xts-import-cats-set xts-btns-set">
-										<div class="xts-set-item xts-set-btn xts-active" data-type="version">
-											<span>
-												<?php esc_html_e( 'Websites', 'woodmart' ); ?>
-											</span>
-										</div>
-										<div class="xts-set-item xts-set-btn" data-type="page">
-											<span>
-												<?php esc_html_e( 'Additional pages', 'woodmart' ); ?>
-											</span>
-										</div>
+						<div class="xts-import-cats-list-wrap">
+							<div class="xts-buttons-control">
+								<div class="xts-import-cats-set xts-btns-set">
+									<div class="xts-set-item xts-set-btn xts-active" data-type="version">
+										<span>
+											<?php esc_html_e( 'Websites', 'woodmart' ); ?>
+										</span>
+									</div>
+									<div class="xts-set-item xts-set-btn" data-type="page">
+										<span>
+											<?php esc_html_e( 'Additional pages', 'woodmart' ); ?>
+										</span>
 									</div>
 								</div>
+							</div>
 
-								<div class="xts-import-cats-list">
-									<?php foreach ( $this->get_categories() as $type => $categories ) : ?>
-										<?php
-										$classes = '';
+							<div class="xts-import-cats-list">
+								<?php foreach ( $this->get_categories() as $type => $categories ) : ?>
+									<?php
+									$classes = '';
 
-										if ( 'version' === $type ) {
-											$classes = wd_add_cssclass( 'xts-active', $classes );
-										}
-										?>
-										<ul class="xts-filter <?php echo esc_attr( $classes ); ?>" data-type="<?php echo esc_attr( $type ); ?>">
-											<li data-cat="*" class="xts-active">
+									if ( 'version' === $type ) {
+										$classes = wd_add_cssclass( 'xts-active', $classes );
+									}
+									?>
+									<ul class="xts-filter <?php echo esc_attr( $classes ); ?>" data-type="<?php echo esc_attr( $type ); ?>">
+										<li data-cat="*" class="xts-active">
+											<a>
+												<span><?php esc_html_e( 'All', 'woodmart' ); ?></span>
+												<span class="xts-filter-count"><?php echo esc_html( $this->get_all_category_count( $type ) ); ?></span>
+											</a>
+										</li>
+										<?php foreach ( $categories as $category ) : ?>
+											<li data-cat="<?php echo esc_attr( $category['data']['slug'] ); ?>">
 												<a>
-													<span><?php esc_html_e( 'All', 'woodmart' ); ?></span>
-													<span class="xts-filter-count"><?php echo esc_html( $this->get_all_category_count( $type ) ); ?></span>
+													<span><?php echo esc_html( $category['data']['name'] ); ?></span>
+													<span class="xts-filter-count"><?php echo esc_html( $category['count'] ); ?></span>
 												</a>
 											</li>
-											<?php foreach ( $categories as $category ) : ?>
-												<li data-cat="<?php echo esc_attr( $category['data']['slug'] ); ?>">
-													<a>
-														<span><?php echo esc_html( $category['data']['name'] ); ?></span>
-														<span class="xts-filter-count"><?php echo esc_html( $category['count'] ); ?></span>
-													</a>
-												</li>
-											<?php endforeach; ?>
-										</ul>
-									<?php endforeach; ?>
-								</div>
+										<?php endforeach; ?>
+									</ul>
+								<?php endforeach; ?>
 							</div>
-						<?php endif; ?>
+
+							<div class="xts-note">
+								<?php
+									echo wp_kses(
+										'<span>Note:</span> you can import any of the prebuilt websites that will include a home page, a few products, posts, projects, images and menus. You will be able to switch to any website at any time or just skip this step for now.',
+										woodmart_get_allowed_html()
+									);
+								?>
+							</div>
+						</div>
 					</div>
 
 					<div class="xts-col">
@@ -327,7 +333,7 @@ class Import extends Singleton {
 								}
 
 								?>
-								<div class="xts-import-item-wrap xts-cat-show xts-col-6 xts-col-xl-4 <?php echo esc_attr( $item_wrap_classes ); ?>">
+								<div class="xts-import-item-wrap xts-cat-show xts-col-12 xts-col-lg-6 xts-col-xl-4 <?php echo esc_attr( $item_wrap_classes ); ?>">
 									<div class="xts-import-item <?php echo esc_attr( $item_classes ); ?>" data-version="<?php echo esc_attr( $slug ); ?>" data-base="<?php echo esc_attr( $base ); ?>" data-type="<?php echo esc_attr( $type ); ?>" data-tags="<?php echo esc_attr( $tags ); ?>" data-cats="<?php echo esc_attr( implode( ',', $categories_array ) ); ?>">
 										<div class="xts-import-item-image">
 											<img data-src="<?php echo esc_url( WOODMART_DUMMY_URL . $slug . '/preview.jpg' ); ?>" src="<?php echo esc_url( woodmart_lazy_get_default_preview() ); ?>" class="wd-lazy-load wd-lazy-fade" alt="<?php echo esc_attr__( 'Import preview', 'woodmart' ); ?>">
@@ -459,7 +465,11 @@ class Import extends Singleton {
 		}
 
 		if ( ! function_exists( 'is_shop' ) ) {
-			$plugins[] = 'Woocommerce';
+			$plugins[] = 'WooCommerce';
+		}
+
+		if ( 'native' !== woodmart_get_opt( 'current_builder' ) && ! defined( 'ELEMENTOR_VERSION' ) && ! defined( 'WPB_PLUGIN_DIR' ) ) {
+			$plugins[] = 'Elementor';
 		}
 
 		return $plugins;

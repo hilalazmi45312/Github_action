@@ -10,7 +10,7 @@ if ( ! function_exists( 'woodmart_white_label' ) ) {
 		?>
 
 		<style>
-			<?php if ( $screenshot_data['id'] ) : ?>
+			<?php if ( is_array( $screenshot_data ) && $screenshot_data['id'] ) : ?>
             .theme[aria-describedby="woodmart-action woodmart-name"] img, .theme[aria-describedby="woodmart-child-action woodmart-child-name"] img, .wd-woodmart-theme img, .wd-woodmart-theme .theme-info, .theme[data-slug="woodmart"] img, .theme[data-slug="woodmart-child"] img, .wd-woodmart-theme img{
 				display: none;
 			}

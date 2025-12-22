@@ -297,17 +297,6 @@ if( ! function_exists( 'woodmart_get_social_shortcode_params' ) ) {
 			),
 			array(
 				'type'             => 'textfield',
-				'heading'          => esc_html__( 'Skype link', 'woodmart' ),
-				'param_name'       => 'skype_link',
-				'save_always'      => true,
-				'dependency'       => array(
-					'element' => 'social_links_source',
-					'value'   => 'custom',
-				),
-				'edit_field_class' => 'vc_col-sm-6 vc_column',
-			),
-			array(
-				'type'             => 'textfield',
 				'heading'          => esc_html__( 'WhatsApp link', 'woodmart' ),
 				'param_name'       => 'whatsapp_link',
 				'save_always'      => true,

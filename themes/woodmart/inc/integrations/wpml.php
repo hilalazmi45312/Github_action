@@ -305,7 +305,7 @@ if ( ! function_exists( 'woodmart_get_wpml_languages_in_mobile_menu' ) ) {
 								<li class="menu-item">
 									<a href="<?php echo esc_url( $language['url'] ); ?>" hreflang="<?php echo esc_attr( $language['language_code'] ); ?>" class="woodmart-nav-link">
 										<?php if ( $language['country_flag_url'] && $settings['burger']['show_language_flag'] ) : ?>
-											<img src="<?php echo esc_url( $language['country_flag_url'] ); ?>" alt="<?php echo esc_attr( $language['native_name'] ); ?>" class="wd-nav-img">
+											<img src="<?php echo esc_url( $language['country_flag_url'] ); ?>" alt="<?php echo esc_attr( sprintf( __( 'Flag for %s', 'woodmart' ), $current_lang ) ); ?>" class="wd-nav-img">
 										<?php endif; ?>
 										<span class="nav-link-text">
 											<?php echo esc_html( $language['native_name'] ); ?>
@@ -346,7 +346,7 @@ if ( class_exists( 'woocommerce_wpml' ) && ! function_exists( 'woodmart_wpml_shi
 	function woodmart_wpml_shipping_progress_bar_amount( $limit ) {
 		global $woocommerce_wpml;
 
-		if ( 'wc' === woodmart_get_opt( 'shipping_progress_bar_calculation', 'custom' ) ) {
+		if ( 'wc' === woodmart_get_opt( 'shipping_progress_bar_calculation', 'custom' ) || ! $woocommerce_wpml || ! method_exists( $woocommerce_wpml, 'get_multi_currency' ) ) {
 			return $limit;
 		}
 

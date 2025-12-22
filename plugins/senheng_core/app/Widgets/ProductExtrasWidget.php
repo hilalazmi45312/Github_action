@@ -57,38 +57,20 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
         if (!$post) {
             return false;
         }
+
+        $widget_name = $this->get_name();
         
-        // Check if Elementor is active and get document
+        // Check if Elementor is active
         if (class_exists('\Elementor\Plugin')) {
-            $document = \Elementor\Plugin::$instance->documents->get($post->ID);
-            if ($document) {
-                $elements_data = $document->get_elements_data();
-                return $this->search_for_widget_in_elements($elements_data);
+            // optimized check: search in post meta directly to avoid heavy parsing
+            $elementor_data = get_post_meta($post->ID, '_elementor_data', true);
+            if (is_string($elementor_data) && strpos($elementor_data, $widget_name) !== false) {
+                return true;
             }
         }
         
         // Fallback: Check if the post content contains our widget
-        return strpos($post->post_content, 'sh-product-extras') !== false;
-    }
-    
-    /**
-     * Recursively search for our widget in Elementor elements
-     */
-    private function search_for_widget_in_elements($elements) {
-        foreach ($elements as $element) {
-            if (isset($element['widgetType']) && $element['widgetType'] === 'sh-product-extras') {
-                return true;
-            }
-            
-            // Check nested elements (sections, columns, etc.)
-            if (isset($element['elements']) && is_array($element['elements'])) {
-                if ($this->search_for_widget_in_elements($element['elements'])) {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
+        return strpos($post->post_content, $widget_name) !== false;
     }
 
     public function get_name()
@@ -552,6 +534,10 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
 
     protected function render()
     {
+        // Enqueue widget assets only when widget is rendered (registered in ElementorWidgetsController)
+        wp_enqueue_style('sh-product-extras-widget-css');
+        wp_enqueue_script('sh-product-extras-widget-js');
+
         // Check if plugin is active
         if (!$this->is_product_extras_plugin_active()) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
@@ -584,9 +570,6 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             remove_action('woocommerce_before_add_to_cart_button', 'pewc_product_extra_fields');
         }
         
-        // Enqueue widget assets only if there are extra fields
-        $this->enqueue_widget_assets(!empty($extra_fields));
-        
         // Cache expensive pewc_get_extra_fields operation
         $product_id = $product->get_id();
         $cache_key = 'pewc_extra_fields_' . $product_id;
@@ -597,14 +580,17 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             wp_cache_set($cache_key, $extra_fields, 'product_extras_widget', 300); // Cache for 5 minutes
         }
         
-        // If no extra fields and hide_when_no_extras is enabled, don't render
-        if (empty($extra_fields) && $settings['hide_when_no_extras'] === 'yes') {
-            return;
-        }
+        // Enqueue widget assets only if there are extra fields
+      $this->enqueue_widget_assets(!empty($extra_fields));
+      
+      // If no extra fields and hide_when_no_extras is enabled, don't render
+      if (empty($extra_fields) && $settings['hide_when_no_extras'] === 'yes') {
+          return;
+      }
 
-        echo '<div class="sh-product-extras-container">';
+      echo '<div class="sh-product-extras-container" data-widget-id="' . esc_attr($this->get_id()) . '">';
 
-        // Display title if enabled
+      // Display title if enabled
         if ($settings['show_title'] === 'yes' && !empty($settings['section_title'])) {
             echo '<h3 class="sh-product-extras-title">' . esc_html($settings['section_title']) . '</h3>';
         }
@@ -668,7 +654,7 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
     /**
      * Output variation data as JSON for client-side processing
      */
-    private function output_variation_data($product)
+    private function output_variation_data($product, $discount_data = [])
     {
         if (!$product || !$product->is_type('variable')) {
             return;
@@ -683,10 +669,19 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
                 continue;
             }
 
+            $price_html = $variation_product->get_price_html();
+
+            // Apply discount if available
+            if (!empty($discount_data['amount']) && !empty($discount_data['type'])) {
+                $original_price = pewc_maybe_include_tax($variation_product, $variation_product->get_price());
+                $discounted_price = pewc_get_discounted_child_price($original_price, $discount_data['amount'], $discount_data['type']);
+                $price_html = wc_format_sale_price($original_price, $discounted_price);
+            }
+
             $variation_data[] = [
                 'variation_id' => $variation['variation_id'],
                 'attributes' => $variation['attributes'],
-                'price_html' => $variation_product->get_price_html(),
+                'price_html' => $price_html,
                 'is_in_stock' => $variation_product->is_in_stock(),
                 'stock_quantity' => $variation_product->get_stock_quantity(),
                 'image_url' => wp_get_attachment_image_url($variation_product->get_image_id(), 'woocommerce_thumbnail')
@@ -698,7 +693,7 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             echo wp_json_encode($variation_data);
             echo '</script>';
         }
-        }
+    }
 
     /**
      * Render product extras as cards with checkbox + image layout
@@ -935,11 +930,14 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             $checkbox_id = $field_id . '_' . $child_product_id;
             $field_name = $field_id . '_child_product';
             
+            $child_discount = isset($item['child_discount']) ? $item['child_discount'] : 0;
+            $discount_type = isset($item['discount_type']) ? $item['discount_type'] : '';
+            
             echo '<div class="sh-product-extra-card ' . $disabled_class . '" data-product-id="' . esc_attr($child_product_id) . '" data-field-id="' . esc_attr($field_id) . '" data-original-price="' . esc_attr($price_html) . '">';
             
             // Checkbox
             echo '<div class="sh-product-checkbox">';
-            echo '<input type="checkbox" class="sh-checkbox-input sh-product-checkbox-input" name="' . esc_attr($field_name) . '[]" id="' . esc_attr($checkbox_id) . '" value="' . esc_attr($child_product_id) . '" data-option-cost="' . esc_attr($option_cost) . '" data-product-id="' . esc_attr($child_product_id) . '" data-product-type="' . esc_attr($child_product->get_type()) . '" data-product-field-label="' . esc_attr($field_label) . '" ' . $disabled . '>';
+            echo '<input type="checkbox" class="sh-checkbox-input sh-product-checkbox-input" name="' . esc_attr($field_name) . '[]" id="' . esc_attr($checkbox_id) . '" value="' . esc_attr($child_product_id) . '" data-option-cost="' . esc_attr($option_cost) . '" data-product-id="' . esc_attr($child_product_id) . '" data-product-type="' . esc_attr($child_product->get_type()) . '" data-product-field-label="' . esc_attr($field_label) . '" data-child-discount="' . esc_attr($child_discount) . '" data-discount-type="' . esc_attr($discount_type) . '" ' . $disabled . '>';
             echo '<label for="' . esc_attr($checkbox_id) . '" class="sh-checkbox-label"></label>';
             echo '</div>';
             
@@ -1042,7 +1040,11 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             
             // Output variation data for this child product if it's variable
             if ($child_product->is_type('variable')) {
-                $this->output_variation_data($child_product);
+                $discount_data = [
+                    'amount' => isset($item['child_discount']) ? $item['child_discount'] : 0,
+                    'type' => isset($item['discount_type']) ? $item['discount_type'] : ''
+                ];
+                $this->output_variation_data($child_product, $discount_data);
             }
             
             if (!empty($product_description)) {

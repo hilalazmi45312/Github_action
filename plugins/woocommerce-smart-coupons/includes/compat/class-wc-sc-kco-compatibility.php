@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       7.1.0
- * @version     1.0.0
+ * @version     1.2.0
  *
  * @package     woocommerce-smart-coupons/includes/compat/
  */
@@ -44,7 +44,7 @@ if ( ! class_exists( 'WC_SC_KCO_Compatibility' ) ) {
 
 			if ( is_plugin_active( 'klarna-checkout-for-woocommerce/klarna-checkout-for-woocommerce.php' ) ) {
 				if ( ! class_exists( 'WC_SC_Purchase_Credit' ) ) {
-					include_once '../class-wc-sc-purchase-credit.php';
+					include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-purchase-credit.php';
 				}
 				if ( class_exists( 'WC_SC_Purchase_Credit' ) ) {
 					$wc_sc_purchase_credit = WC_SC_Purchase_Credit::get_instance();
@@ -120,7 +120,7 @@ if ( ! class_exists( 'WC_SC_KCO_Compatibility' ) ) {
 								},
 								success: function( response ) {
 									if ( 'yes' !== response.success ) {
-										console.log('<?php echo esc_html__( 'Failed to update coupon receiver details in session.', 'woocommerce-smart-coupons' ); ?>');
+										console.log('<?php echo esc_js( __( 'Failed to update coupon receiver details in session.', 'woocommerce-smart-coupons' ) ); ?>');
 									}
 								}
 							});

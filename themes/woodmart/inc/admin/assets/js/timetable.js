@@ -115,6 +115,10 @@ document.addEventListener('click', function(event) {
 });
 
 jQuery(document).on('xts_select_with_table_control_row_removed', function( e, $control ) {
+	if ( ! $control.hasClass('xts-timetable-control') ) {
+		return;
+	}
+
 	let $row = $control.find('.xts-controls-wrapper > .xts-table-controls:not(.xts-table-heading)');
 
 	if (1 === $row.length ) {

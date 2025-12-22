@@ -62,4 +62,5 @@ if ( ! function_exists( 'woodmart_add_webp_to_product_thumbnails_srcset' ) ) {
 	}
 
 	add_filter( 'woodmart_product_thumbnails_urls_image_srcset', 'woodmart_add_webp_to_product_thumbnails_srcset', 10, 2 );
+	add_filter( 'woodmart_get_webp_image_srcset', 'woodmart_add_webp_to_product_thumbnails_srcset', 10, 2 );
 }

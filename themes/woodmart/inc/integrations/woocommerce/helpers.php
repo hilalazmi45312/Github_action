@@ -246,6 +246,62 @@ if ( ! function_exists( 'woodmart_is_email_preview_request' ) ) {
 			$is_email_preview_request = wp_verify_nonce( $nonce, 'email-preview-nonce' );
 		}
 
-		return Automattic\WooCommerce\Utilities\FeaturesUtil::feature_is_enabled( 'email_improvements' ) && ( isset( $_GET['preview_woocommerce_mail'] ) || $is_email_preview_request );
+		return isset( $_GET['preview_woocommerce_mail'] ) || $is_email_preview_request;
+	}
+}
+
+if ( ! function_exists( 'woodmart_sort_data' ) ) {
+	/**
+	 * Sort the array by the specified key.
+	 * This function is just wrapper for usort function.
+	 *
+	 * @param array  &$data The input array.
+	 * @param string $order_by The name of the key by which the sorting will be performed.
+	 * @param string $order Sorting order.
+	 *
+	 * @return void
+	 */
+	function woodmart_sort_data( &$data, $order_by, $order ) {
+		usort(
+			$data,
+			function ( $a, $b ) use ( $order_by, $order ) {
+				$a_value = isset( $a[ $order_by ] ) ? $a[ $order_by ] : '';
+				$b_value = isset( $b[ $order_by ] ) ? $b[ $order_by ] : '';
+
+				if ( is_numeric( $a_value ) && is_numeric( $b_value ) ) {
+					$result = $a_value - $b_value;
+				} else {
+					$result = strcmp( $a_value, $b_value );
+				}
+
+				return ( 'asc' === $order ) ? $result : -$result;
+			}
+		);
+	}
+}
+
+if ( ! function_exists( 'woodmart_include_files' ) ) {
+	/**
+	 * Include module files.
+	 *
+	 * @param string $module_dir The module directory.
+	 * @param array  $files List of files to include.
+	 */
+	function woodmart_include_files( $module_dir, $files ) {
+		if ( empty( $files ) || ! is_array( $files ) ) {
+			return;
+		}
+
+		foreach ( $files as $file ) {
+			$path = $file;
+
+			if ( 0 === strpos( $file, './' ) ) {
+				$path = $module_dir . '/' . ltrim( substr( $file, 2 ), '/' ) . '.php';
+			}
+
+			if ( file_exists( $path ) ) {
+				require_once $path;
+			}
+		}
 	}
 }

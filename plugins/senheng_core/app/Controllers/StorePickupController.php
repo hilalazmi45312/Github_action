@@ -1,5 +1,10 @@
 <?php
 
+add_filter( 'use_block_editor_for_post_type', function( $enabled, $post_type ) {
+    return 'store' === $post_type ? false : $enabled;
+}, 10, 2 );
+
+
 /** ================================
  *  CUSTOM POST TYPE: STORES (OUTLETS)
  *  ============================================== */

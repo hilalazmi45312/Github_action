@@ -602,24 +602,7 @@ class Presets extends Singleton {
 			)
 		);
 
-		$custom_conditions = apply_filters(
-			'xts_get_custom_conditions_for_preset',
-			array(
-				'search'         => 'Search results',
-				'blog'           => 'Default "Your Latest Posts" screen',
-				'front'          => 'Front page',
-				'archives'       => 'All archives',
-				'author'         => 'Author archives',
-				'error404'       => '404 error screens',
-				'shop'           => 'Shop page',
-				'single_product' => 'Single product',
-				'cart'           => 'Cart page',
-				'checkout'       => 'Checkout page',
-				'account'        => 'Account pages',
-				'is_mobile'      => 'Is mobile device',
-				'is_rtl'         => 'Is RTL',
-			)
-		);
+		$custom_conditions = apply_filters( 'xts_get_custom_conditions_for_preset', woodmart_get_custom_conditions_list() );
 
 		if ( ! woodmart_woocommerce_installed() ) {
 			unset( $custom_conditions['shop'] );
@@ -932,6 +915,9 @@ class Presets extends Singleton {
 								break;
 							case 'error404':
 								$is_active = 'equals' === $rule['comparison'] ? is_404() : ! is_404();
+								break;
+							case 'logged_in':
+								$is_active = 'equals' === $rule['comparison'] ? is_user_logged_in() : ! is_user_logged_in();
 								break;
 							case 'shop':
 								if ( woodmart_woocommerce_installed() ) {

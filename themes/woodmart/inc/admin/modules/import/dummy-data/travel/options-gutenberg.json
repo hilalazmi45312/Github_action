@@ -216,5 +216,11 @@
     "shop_hide_sidebar_desktop": "0",
     "sticky_filter_button": "0",
     "popup_padding": "eyJkZXZpY2VzIjp7ImRlc2t0b3AiOnsidW5pdCI6InB4IiwidmFsdWUiOiIxNSJ9fX0=",
-    "popup_color_scheme": "light"
+    "popup_color_scheme": "light",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

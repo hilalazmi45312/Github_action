@@ -20,13 +20,6 @@ use XTS\Singleton;
  */
 class Sends_Promotional extends Singleton {
 	/**
-	 * Name unsubscribed users option.
-	 *
-	 * @var string
-	 */
-	private $unsubscribed_users = 'woodmart_wishlist_unsubscribed_users';
-
-	/**
 	 * Init.
 	 */
 	public function init() {
@@ -34,6 +27,15 @@ class Sends_Promotional extends Singleton {
 
 		add_action( 'woodmart_wishlist_send_promotional_email', array( $this, 'send_promotional_email' ) );
 
+		add_action( 'init', array( $this, 'schedule_cron_event' ) );
+	}
+
+	/**
+	 * Schedule cron event on init hook.
+	 *
+	 * @return void
+	 */
+	public function schedule_cron_event() {
 		if ( ! wp_next_scheduled( 'woodmart_wishlist_send_promotional_email' ) ) {
 			wp_schedule_event( time(), apply_filters( 'woodmart_schedule_send_promotional_email', 'hourly' ), 'woodmart_wishlist_send_promotional_email' );
 		}
@@ -58,13 +60,13 @@ class Sends_Promotional extends Singleton {
 
 		$emails_limited = apply_filters( 'woodmart_wishlist_send_emails_limited', 20 );
 		$counter        = 0;
-		$unsubscribed_users = get_option( $this->unsubscribed_users, array() );
 
 		foreach ( $promotion_data as $id => $data ) {
 			foreach ( $data['users_products'] as $user_id => $product_list ) {
-				$is_unsubscribed_users = in_array( get_userdata( $user_id )->user_email, $unsubscribed_users, true );
+				$user_email            = get_userdata( $user_id )->user_email;
+				$is_unsubscribed_users = woodmart_is_user_unsubscribed_from_mailing( $user_email, 'XTS_Email_Wishlist_Promotional' );
 
-				if ( ! $user_id || ! $product_list || $is_unsubscribed_users ) {
+				if ( ! $user_id || ! $product_list || $is_unsubscribed_users || woodmart_should_skip_subscription_email( $user_email, $user_id ) ) {
 					if ( $is_unsubscribed_users ) {
 						unset( $promotion_data[$id]['users_products'][ $user_id ] );
 					}

@@ -2,6 +2,12 @@ const facebookSignInButtons = document.querySelectorAll('.social-btn.fb');
 
 facebookSignInButtons.forEach(facebookSignInButton => {
     facebookSignInButton.addEventListener('click', () => {
+        if (!loginCfToken) {
+            return showSwalError(
+                'Verification required',
+                'Please complete the human verification.'
+            );
+        }
         manageButtonState(facebookSignInButton, false);
 
         FB.login((response) => {
@@ -53,7 +59,8 @@ function sendTokenToPhpApi(email, uid, accessToken, displayName, provider, photo
         access_token: accessToken,
         name: displayName,
         provider,
-        photo_url: photoURL
+        photo_url: photoURL,
+        cf_token: loginCfToken,
     }, (response) => {
         // Swal.close(); // Close the loading popup when response is received
         hideLoading();

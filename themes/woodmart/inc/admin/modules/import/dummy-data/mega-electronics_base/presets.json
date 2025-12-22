@@ -6,21 +6,21 @@
             "relation": "OR",
             "rules": [
                 {
-                    "type": "post_id",
+                    "type": "custom",
                     "comparison": "equals",
                     "post_type": "post",
                     "taxonomy": "category",
-                    "custom": "search",
+                    "custom": "cart",
                     "value_id": "7",
                     "user_role": "administrator"
                 },
                 {
-                    "type": "post_id",
+                   "type": "custom",
                     "comparison": "equals",
                     "post_type": "post",
                     "taxonomy": "category",
-                    "custom": "search",
-                    "value_id": "9",
+                    "custom": "checkout",
+                    "value_id": "8",
                     "user_role": "administrator"
                 }
             ]

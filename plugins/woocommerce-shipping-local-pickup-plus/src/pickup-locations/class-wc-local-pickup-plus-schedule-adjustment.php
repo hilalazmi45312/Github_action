@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Local Pickup time adjustment.
@@ -334,7 +334,7 @@ class WC_Local_Pickup_Plus_Schedule_Adjustment {
 				type="number"
 				id="<?php echo esc_attr( $args['name'] . '_amount' ); ?>"
 				name="<?php echo esc_attr( $args['name'] . '_amount' ); ?>"
-				value="<?php echo max( 0, (int) $this->get_amount() ); ?>"
+				value="<?php echo esc_attr( max( 0, (int) $this->get_amount() ) ); ?>"
 				style="max-width: 48px; text-align: right;"
 				placeholder="0"
 				step="1"
@@ -348,7 +348,7 @@ class WC_Local_Pickup_Plus_Schedule_Adjustment {
 				<?php disabled( $args['disabled'], true, true ); ?>>
 				<?php $selected_interval = $this->get_interval(); ?>
 				<?php foreach ( $this->get_intervals( true ) as $interval => $data ) : ?>
-					<option value="<?php echo esc_attr( $interval ); ?>" <?php selected( $interval, $selected_interval, true ); ?>><?php echo strtolower( esc_html( $data['label'] ) ); ?></option>
+					<option value="<?php echo esc_attr( $interval ); ?>" <?php selected( $interval, $selected_interval, true ); ?>><?php echo esc_html( strtolower( $data['label'] ) ); ?></option>
 				<?php endforeach; ?>
 			</select>
 			<?php echo ! empty( $args['desc_tip'] ) ? wc_help_tip( $args['desc_tip'] ) : ''; ?>
@@ -368,7 +368,7 @@ class WC_Local_Pickup_Plus_Schedule_Adjustment {
 	 */
 	public function output_field_html( array $args ) {
 
-		echo $this->get_field_html( $args );
+		echo $this->get_field_html( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 

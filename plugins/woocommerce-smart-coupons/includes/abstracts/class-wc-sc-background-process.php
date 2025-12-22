@@ -5,7 +5,7 @@
  *
  * @package     woocommerce-smart-coupons/includes/abstracts
  * @since       9.8.0
- * @version     1.2.0
+ * @version     1.4.0
  */
 
 // Exit if accessed directly.
@@ -113,7 +113,7 @@ if ( ! class_exists( 'WC_SC_Background_Process' ) ) {
 		private function start_process() {
 
 			if ( ! class_exists( 'WC_SC_Background_Upgrade' ) ) {
-				include_once '../class-wc-sc-background-upgrade.php';
+				include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-background-upgrade.php';
 			}
 
 			$wcsc_db = WC_SC_Background_Upgrade::get_instance();
@@ -288,29 +288,33 @@ if ( ! class_exists( 'WC_SC_Background_Process' ) ) {
 		 * @return void.
 		 */
 		public function restart_failed_action( $action_id = 0 ) {
-			if ( empty( $action_id ) || ! is_callable( array( 'ActionScheduler', 'store' ) ) ) {
-				return;
-			}
+			try {
+				if ( empty( $action_id ) || ! is_callable( array( 'ActionScheduler', 'store' ) ) ) {
+					return;
+				}
 
-			$scheduler = ActionScheduler::store();
+				$scheduler = ActionScheduler::store();
 
-			if ( ! is_callable( array( $scheduler, 'fetch_action' ) ) ) {
-				return;
-			}
+				if ( ! is_callable( array( $scheduler, 'fetch_action' ) ) ) {
+					return;
+				}
 
-			$action = $scheduler->fetch_action( $action_id );
+				$action = $scheduler->fetch_action( $action_id );
 
-			if ( empty( $action ) || ! is_object( $action ) || ! is_callable( array( $action, 'get_hook' ) ) ) {
-				return;
-			}
-			$action_hook = $action->get_hook();
+				if ( empty( $action ) || ! is_object( $action ) || ! is_callable( array( $action, 'get_hook' ) ) ) {
+					return;
+				}
+				$action_hook = $action->get_hook();
 
-			if ( empty( $action_hook ) ) {
-				return;
-			}
-			// Restart the task if the failed action ID matches with current action.
-			if ( $action_hook === $this->action ) {
-				$this->start_process();
+				if ( empty( $action_hook ) ) {
+					return;
+				}
+				// Restart the task if the failed action ID matches with current action.
+				if ( $action_hook === $this->action ) {
+					$this->start_process();
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 

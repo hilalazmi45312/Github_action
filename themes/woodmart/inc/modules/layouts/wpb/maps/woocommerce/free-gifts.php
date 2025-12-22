@@ -26,7 +26,7 @@ if ( ! function_exists( 'woodmart_get_vc_map_free_gifts' ) ) {
 		return array(
 			'base'        => 'woodmart_cart_free_gifts',
 			'name'        => esc_html__( 'Free gifts', 'woodmart' ),
-			'category'    => woodmart_get_tab_title_category_for_wpb( esc_html__( 'WooCommerce', 'woodmart' ) ),
+			'category'    => woodmart_get_tab_title_category_for_wpb( esc_html__( 'Site', 'woodmart' ) ),
 			'description' => esc_html__( 'Manual free gifts table', 'woodmart' ),
 			'icon'        => WOODMART_ASSETS . '/images/vc-icon/ct-icons/ct-free-gifts.svg',
 			'params'      => array(
@@ -36,6 +36,16 @@ if ( ! function_exists( 'woodmart_get_vc_map_free_gifts' ) ) {
 					'holder'     => 'div',
 					'title'      => esc_html__( 'Title', 'woodmart' ),
 					'param_name' => 'title_divider',
+				),
+
+				array(
+					'heading'     => esc_html__( 'Enable title', 'woodmart' ),
+					'group'       => esc_html__( 'Style', 'woodmart' ),
+					'type'        => 'woodmart_switch',
+					'param_name'  => 'show_title',
+					'true_state'  => 'yes',
+					'false_state' => 'no',
+					'default'     => 'yes',
 				),
 
 				$typography['font_family'],
@@ -54,6 +64,10 @@ if ( ! function_exists( 'woodmart_get_vc_map_free_gifts' ) ) {
 						'{{WRAPPER}} .wd-el-title' => array(
 							'color: {{VALUE}};',
 						),
+					),
+					'dependency'       => array(
+						'element' => 'show_title',
+						'value'   => 'yes',
 					),
 					'edit_field_class' => 'vc_col-sm-6 vc_column',
 				),

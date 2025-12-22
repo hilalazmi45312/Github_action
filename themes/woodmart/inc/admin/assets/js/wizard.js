@@ -4,6 +4,8 @@
 	'use strict';
 
 	function wizardInstallPlugins() {
+		var $page = $('.xts-plugins');
+
 		var checkPlugin = function($link, callback) {
 			setTimeout(function() {
 				$.ajax({
@@ -17,8 +19,16 @@
 					},
 					success: function(response) {
 						if ('success' === response.status) {
-							changeNextButtonStatus(response.data.required_plugins);
-							changePageStatus(response.data.is_all_activated);
+							changeButtonsStatus(response.data.required_plugins);
+
+							if ($page.hasClass('xts-all-loading')) {
+								if ( 'yes' === response.data.is_all_activated ) {
+									$page.removeClass('xts-all-loading');
+									$page.removeClass('xts-loading');
+								}
+							} else if ($page.hasClass('xts-loading')) {
+								$page.removeClass('xts-loading');
+							}
 						} else {
 							woodmartAdminModule.woodmartAdmin.addNotice($('.xts-plugin-response').first(), 'warning', response.message);
 							removeLinkClasses($link);
@@ -120,33 +130,23 @@
 
 		function addLinkClasses($link) {
 			$link.parents('.xts-plugin-wrapper').addClass('xts-loading');
-			$link.parents('.xts-plugin-wrapper').siblings().addClass('xts-disabled');
-			$('.xts-wizard-footer').addClass('xts-disabled');
 
 			$link.text(woodmartConfig[$link.data('action') + '_process_plugin_btn_text']);
 		}
 
 		function removeLinkClasses($link) {
 			$link.parents('.xts-plugin-wrapper').removeClass('xts-loading');
-			$link.parents('.xts-plugin-wrapper').siblings().removeClass('xts-disabled');
-			$('.xts-wizard-footer').removeClass('xts-disabled');
 		}
 
-		function changeNextButtonStatus(status) {
+		function changeButtonsStatus(status) {
 			var $nextBtn = $('.xts-next');
+
 			if ('has_required' === status) {
 				$nextBtn.addClass('xts-disabled');
+				$page.removeClass('xts-required-active');
 			} else {
 				$nextBtn.removeClass('xts-disabled');
-			}
-		}
-
-		function changePageStatus(status) {
-			var $page = $('.xts-plugins');
-			if ('yes' === status) {
-				$page.addClass('xts-all-active');
-			} else {
-				$page.removeClass('xts-all-active');
+				$page.addClass('xts-required-active');
 			}
 		}
 
@@ -158,7 +158,12 @@
 			$link.removeClass('xts-' + actionBefore).addClass('xts-' + actionAfter);
 			$link.attr('href', xtsPluginsData[$link.data('plugin')][actionAfter + '_url'].replaceAll('&amp;', '&'));
 			$link.data('action', actionAfter);
-			$link.text(woodmartConfig[actionAfter + '_plugin_btn_text']);
+
+			if ('deactivate' === actionAfter && $page.parents('.xts-setup-wizard').length) {
+				$link.parent().html('<span class="xts-plugin-btn-text">' + woodmartConfig['activated_plugin_btn_text'] + '</span>');
+			} else {
+				$link.text(woodmartConfig[actionAfter + '_plugin_btn_text']);
+			}
 		}
 
 		$(document).on('click', '.xts-ajax-plugin:not(.xts-deactivate)', function(e) {
@@ -167,6 +172,8 @@
 			var $link = $(this);
 			addLinkClasses($link);
 			parsePlugins($link, function() {});
+
+			$page.addClass('xts-loading');
 		});
 
 		$(document).on('click', '.xts-ajax-plugin.xts-deactivate', function(e) {
@@ -201,6 +208,9 @@
 			$('.xts-plugin-wrapper .xts-ajax-plugin:not(.xts-deactivate)').each(function() {
 				itemQueue.push($(this));
 			});
+
+			$page.addClass('xts-loading');
+			$page.addClass('xts-all-loading');
 
 			activationAction();
 		});
@@ -253,9 +263,59 @@
 		});
 	}
 
+	function wizardInstallDemo() {
+		var timeout = 400;
+		var $wrapper = $('.xts-setup-wizard');
+		var $title = $wrapper.find('.xts-wizard-import-template .xts-import-title');
+		var $imgWrapper = $wrapper.find('.xts-wizard-import-template .xts-import-item');
+
+		let interval = null;
+
+		$wrapper.find('.xts-import-item-btn').on('click', function(e) {
+			var $btn = $(this);
+
+			$wrapper.addClass('xts-loading');
+			$wrapper.find('.xts-wizard-dummy').removeClass('xts-active');
+			$wrapper.find('.xts-wizard-import-template').addClass('xts-active');
+
+			$title.text( $title.text() + ' "' + $btn.siblings('.xts-import-item-title').text().trim() + '"' );
+			$imgWrapper.html( $btn.parents('.xts-import-item').find('.xts-import-item-image').clone() );
+
+			setTimeout(function() {
+				$(document).trigger('wd-import-progress', {progress: 15});
+			})
+		})
+
+		$(document).on('wd-import-progress', function(e, data) {
+			var $progressBar = $imgWrapper.find('.xts-import-progress-bar');
+			var $progressBarPercent = $imgWrapper.find('.xts-import-progress-bar-percent');
+
+			if (data.progress === 100) {
+				timeout = 20;
+			}
+
+			var from = $progressBar.attr('data-progress');
+
+			clearInterval(interval);
+
+			interval = setInterval(function() {
+				from++;
+
+				$progressBar.attr('data-progress', from);
+				$progressBar.css('width', from + '%');
+				$progressBarPercent.text(from + '%');
+
+				if (from >= data.progress) {
+					clearInterval(interval);
+				}
+			}, timeout);
+		})
+	}
+
 	jQuery(document).ready(function() {
 		wizardInstallPlugins();
 		wizardBuilderSelect();
 		wizardInstallChildTheme();
+		wizardInstallDemo();
 	});
 })(jQuery);

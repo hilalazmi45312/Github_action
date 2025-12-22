@@ -685,7 +685,7 @@ class Accordion extends Widget_Base {
 				?>
 
 				<div class="wd-accordion-item">
-					<div class="wd-accordion-title<?php echo esc_attr( $loop_title_classes_wrapper ); ?>" data-accordion-index="<?php echo esc_attr( $index ); ?>">
+					<div class="wd-accordion-title wd-role-btn<?php echo esc_attr( $loop_title_classes_wrapper ); ?>" data-accordion-index="<?php echo esc_attr( $index ); ?>" tabindex="0">
 						<div class="wd-accordion-title-text<?php echo esc_attr( $title_classes ); ?>">
 							<?php if ( ! empty( $icon_output ) ) : ?>
 								<span class="img-wrapper">

@@ -137,7 +137,7 @@ if ( ! function_exists( 'woodmart_shortcode_title' ) ) {
 			<?php endif; ?>
 
 			<?php
-			if ( $size == 'custom' && ! $title_font_size  ) {
+			if ( function_exists( 'woodmart_responsive_text_size_css' ) && $size == 'custom' && ! $title_font_size  ) {
 				$css = '';
 
 				if ( $desktop_text_size ) {

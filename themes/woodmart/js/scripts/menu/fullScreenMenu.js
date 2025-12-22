@@ -4,17 +4,23 @@
 		$('.wd-header-fs-nav > a').on('click', function(e) {
 			e.preventDefault();
 
-			$('.wd-fs-menu').addClass('wd-opened');
+			var $menu = $('.wd-fs-menu');
+
+			$menu.addClass('wd-opened');
+			$menu.trigger('wdOpenSide');
 		});
 
 		woodmartThemeModule.$document.on('keyup', function(e) {
 			if (e.keyCode === 27) {
-				$('.wd-fs-close').click();
+				$('.wd-fs-close').trigger('click');
 			}
 		});
 
 		$('.wd-fs-close').on('click', function() {
-			$('.wd-fs-menu').removeClass('wd-opened');
+			var $menu = $('.wd-fs-menu');
+
+			$menu.removeClass('wd-opened');
+			$menu.trigger('wdCloseSide');
 
 			setTimeout(function() {
 				$('.wd-nav-fs .menu-item-has-children').removeClass('sub-menu-open');

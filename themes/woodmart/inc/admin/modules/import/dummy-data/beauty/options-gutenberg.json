@@ -126,5 +126,11 @@
     "prefooter_html_block": "18735",
     "disable_copyrights": "0",
     "btns_shop_style": "flat",
-    "btns_default_style": "flat"
+    "btns_default_style": "flat",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

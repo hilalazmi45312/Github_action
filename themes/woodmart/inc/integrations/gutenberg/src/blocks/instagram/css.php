@@ -13,6 +13,16 @@ $block_css->add_css_rules(
 	)
 );
 
+$block_css->add_css_rules(
+	$block_selector,
+	array(
+		array(
+			'attr_name' => 'aspectRatio',
+			'template'  => '--wd-aspect-ratio: {{value}};',
+		),
+	)
+);
+
 $block_css->merge_with(
 	wd_get_block_carousel_css(
 		$block_selector,

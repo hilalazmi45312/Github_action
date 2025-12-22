@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.7.2" created="2025-02-25 12:51" -->
+	<!-- generator="WordPress/6.7.2" created="2025-06-09 11:30" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>Games elementor</title>
 	<link>https://dummy.xtemos.com/woodmart2/games-elementor</link>
 	<description></description>
-	<pubDate>Tue, 25 Feb 2025 12:51:20 +0000</pubDate>
+	<pubDate>Mon, 09 Jun 2025 11:30:30 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
@@ -45,10 +45,6 @@
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:46:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:26:"widget-slider-price-filter";i:7;s:9:"blog-base";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:11:"header-base";i:19;s:9:"mod-tools";i:20;s:20:"header-elements-base";i:21;s:12:"social-icons";i:22;s:26:"header-my-account-dropdown";i:23;s:18:"woo-mod-login-form";i:24;s:17:"header-my-account";i:25;s:13:"header-search";i:26;s:16:"header-cart-side";i:27;s:11:"header-cart";i:28;s:20:"widget-shopping-cart";i:29;s:19:"widget-product-list";i:30;s:26:"header-mobile-nav-dropdown";i:31;s:8:"info-box";i:32;s:18:"mod-nav-menu-label";i:33;s:6:"banner";i:34;s:17:"banner-hover-zoom";i:35;s:10:"page-title";i:36;s:18:"blog-loop-base-old";i:37;s:24:"blog-loop-design-masonry";i:38;s:15:"widget-collapse";i:39;s:11:"footer-base";i:40;s:10:"scroll-top";i:41;s:17:"wd-search-results";i:42;s:14:"wd-search-form";i:43;s:24:"header-search-fullscreen";i:44;s:26:"header-search-fullscreen-1";i:45;s:14:"bottom-toolbar";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:category>
 			<wp:category>
 			<wp:term_id>89</wp:term_id>
@@ -58,10 +54,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:46:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:26:"widget-slider-price-filter";i:7;s:9:"blog-base";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:11:"header-base";i:19;s:9:"mod-tools";i:20;s:20:"header-elements-base";i:21;s:12:"social-icons";i:22;s:26:"header-my-account-dropdown";i:23;s:18:"woo-mod-login-form";i:24;s:17:"header-my-account";i:25;s:13:"header-search";i:26;s:16:"header-cart-side";i:27;s:11:"header-cart";i:28;s:20:"widget-shopping-cart";i:29;s:19:"widget-product-list";i:30;s:26:"header-mobile-nav-dropdown";i:31;s:8:"info-box";i:32;s:18:"mod-nav-menu-label";i:33;s:6:"banner";i:34;s:17:"banner-hover-zoom";i:35;s:10:"page-title";i:36;s:18:"blog-loop-base-old";i:37;s:24:"blog-loop-design-masonry";i:38;s:15:"widget-collapse";i:39;s:11:"footer-base";i:40;s:10:"scroll-top";i:41;s:17:"wd-search-results";i:42;s:14:"wd-search-form";i:43;s:24:"header-search-fullscreen";i:44;s:26:"header-search-fullscreen-1";i:45;s:14:"bottom-toolbar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:category>
 			<wp:category>
@@ -73,10 +65,6 @@
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:46:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:26:"widget-slider-price-filter";i:7;s:9:"blog-base";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:11:"header-base";i:19;s:9:"mod-tools";i:20;s:20:"header-elements-base";i:21;s:12:"social-icons";i:22;s:26:"header-my-account-dropdown";i:23;s:18:"woo-mod-login-form";i:24;s:17:"header-my-account";i:25;s:13:"header-search";i:26;s:16:"header-cart-side";i:27;s:11:"header-cart";i:28;s:20:"widget-shopping-cart";i:29;s:19:"widget-product-list";i:30;s:26:"header-mobile-nav-dropdown";i:31;s:8:"info-box";i:32;s:18:"mod-nav-menu-label";i:33;s:6:"banner";i:34;s:17:"banner-hover-zoom";i:35;s:10:"page-title";i:36;s:18:"blog-loop-base-old";i:37;s:24:"blog-loop-design-masonry";i:38;s:15:"widget-collapse";i:39;s:11:"footer-base";i:40;s:10:"scroll-top";i:41;s:17:"wd-search-results";i:42;s:14:"wd-search-form";i:43;s:24:"header-search-fullscreen";i:44;s:26:"header-search-fullscreen-1";i:45;s:14:"bottom-toolbar";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:category>
 			<wp:category>
 			<wp:term_id>91</wp:term_id>
@@ -86,10 +74,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[_woodmart_blog_design]]></wp:meta_key>
 			<wp:meta_value><![CDATA[inherit]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:46:{i:0;s:27:"widget-recent-post-comments";i:1;s:22:"widget-wd-recent-posts";i:2;s:10:"widget-nav";i:3;s:21:"widget-wd-layered-nav";i:4;s:21:"woo-mod-swatches-base";i:5;s:23:"woo-mod-swatches-filter";i:6;s:26:"widget-slider-price-filter";i:7;s:9:"blog-base";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:11:"header-base";i:19;s:9:"mod-tools";i:20;s:20:"header-elements-base";i:21;s:12:"social-icons";i:22;s:26:"header-my-account-dropdown";i:23;s:18:"woo-mod-login-form";i:24;s:17:"header-my-account";i:25;s:13:"header-search";i:26;s:16:"header-cart-side";i:27;s:11:"header-cart";i:28;s:20:"widget-shopping-cart";i:29;s:19:"widget-product-list";i:30;s:26:"header-mobile-nav-dropdown";i:31;s:8:"info-box";i:32;s:18:"mod-nav-menu-label";i:33;s:6:"banner";i:34;s:17:"banner-hover-zoom";i:35;s:10:"page-title";i:36;s:18:"blog-loop-base-old";i:37;s:24:"blog-loop-design-masonry";i:38;s:15:"widget-collapse";i:39;s:11:"footer-base";i:40;s:10:"scroll-top";i:41;s:17:"wd-search-results";i:42;s:14:"wd-search-form";i:43;s:24:"header-search-fullscreen";i:44;s:26:"header-search-fullscreen-1";i:45;s:14:"bottom-toolbar";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:category>
 					<wp:term>
@@ -117,10 +101,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[432]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:65:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:15:"widget-collapse";i:54;s:11:"footer-base";i:55;s:10:"text-block";i:56;s:20:"widget-nav-mega-menu";i:57;s:4:"list";i:58;s:10:"scroll-top";i:59;s:25:"header-my-account-sidebar";i:60;s:24:"header-search-fullscreen";i:61;s:26:"header-search-fullscreen-2";i:62;s:16:"popular-requests";i:63;s:14:"bottom-toolbar";i:64;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -153,10 +133,6 @@
 			<wp:meta_key><![CDATA[product_count_product_cat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[12]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:72:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:19:"woo-opt-title-limit";i:54;s:12:"product-loop";i:55;s:16:"product-loop-alt";i:56;s:20:"woo-opt-stretch-cont";i:57;s:22:"woo-mod-product-labels";i:58;s:9:"mfp-popup";i:59;s:28:"mod-star-rating-style-simple";i:60;s:15:"widget-collapse";i:61;s:11:"footer-base";i:62;s:10:"text-block";i:63;s:20:"widget-nav-mega-menu";i:64;s:4:"list";i:65;s:10:"scroll-top";i:66;s:25:"header-my-account-sidebar";i:67;s:24:"header-search-fullscreen";i:68;s:26:"header-search-fullscreen-2";i:69;s:16:"popular-requests";i:70;s:14:"bottom-toolbar";i:71;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>17</wp:term_id>
@@ -187,10 +163,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[product_count_product_cat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[12]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:72:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:19:"woo-opt-title-limit";i:54;s:12:"product-loop";i:55;s:16:"product-loop-alt";i:56;s:20:"woo-opt-stretch-cont";i:57;s:22:"woo-mod-product-labels";i:58;s:9:"mfp-popup";i:59;s:28:"mod-star-rating-style-simple";i:60;s:15:"widget-collapse";i:61;s:11:"footer-base";i:62;s:10:"text-block";i:63;s:20:"widget-nav-mega-menu";i:64;s:4:"list";i:65;s:10:"scroll-top";i:66;s:25:"header-my-account-sidebar";i:67;s:24:"header-search-fullscreen";i:68;s:26:"header-search-fullscreen-2";i:69;s:16:"popular-requests";i:70;s:14:"bottom-toolbar";i:71;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -223,10 +195,6 @@
 			<wp:meta_key><![CDATA[product_count_product_cat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[12]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:73:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:26:"woo-shop-el-active-filters";i:53;s:13:"sticky-loader";i:54;s:19:"woo-opt-title-limit";i:55;s:12:"product-loop";i:56;s:16:"product-loop-alt";i:57;s:20:"woo-opt-stretch-cont";i:58;s:9:"mfp-popup";i:59;s:22:"woo-mod-product-labels";i:60;s:28:"mod-star-rating-style-simple";i:61;s:15:"widget-collapse";i:62;s:11:"footer-base";i:63;s:10:"text-block";i:64;s:20:"widget-nav-mega-menu";i:65;s:4:"list";i:66;s:10:"scroll-top";i:67;s:25:"header-my-account-sidebar";i:68;s:24:"header-search-fullscreen";i:69;s:26:"header-search-fullscreen-2";i:70;s:16:"popular-requests";i:71;s:14:"bottom-toolbar";i:72;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>19</wp:term_id>
@@ -258,10 +226,6 @@
 			<wp:meta_key><![CDATA[product_count_product_cat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[12]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:72:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:19:"woo-opt-title-limit";i:54;s:12:"product-loop";i:55;s:16:"product-loop-alt";i:56;s:20:"woo-opt-stretch-cont";i:57;s:9:"mfp-popup";i:58;s:28:"mod-star-rating-style-simple";i:59;s:22:"woo-mod-product-labels";i:60;s:15:"widget-collapse";i:61;s:11:"footer-base";i:62;s:10:"text-block";i:63;s:20:"widget-nav-mega-menu";i:64;s:4:"list";i:65;s:10:"scroll-top";i:66;s:25:"header-my-account-sidebar";i:67;s:24:"header-search-fullscreen";i:68;s:26:"header-search-fullscreen-2";i:69;s:16:"popular-requests";i:70;s:14:"bottom-toolbar";i:71;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>20</wp:term_id>
@@ -288,10 +252,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[428]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:65:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:15:"widget-collapse";i:54;s:11:"footer-base";i:55;s:10:"text-block";i:56;s:20:"widget-nav-mega-menu";i:57;s:4:"list";i:58;s:10:"scroll-top";i:59;s:25:"header-my-account-sidebar";i:60;s:24:"header-search-fullscreen";i:61;s:26:"header-search-fullscreen-2";i:62;s:16:"popular-requests";i:63;s:14:"bottom-toolbar";i:64;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -320,10 +280,6 @@
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[429]]></wp:meta_value>
 		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:65:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:15:"widget-collapse";i:54;s:11:"footer-base";i:55;s:10:"text-block";i:56;s:20:"widget-nav-mega-menu";i:57;s:4:"list";i:58;s:10:"scroll-top";i:59;s:25:"header-my-account-sidebar";i:60;s:24:"header-search-fullscreen";i:61;s:26:"header-search-fullscreen-2";i:62;s:16:"popular-requests";i:63;s:14:"bottom-toolbar";i:64;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
-		</wp:termmeta>
 		</wp:term>
 			<wp:term>
 			<wp:term_id>22</wp:term_id>
@@ -350,10 +306,6 @@
 		<wp:termmeta>
 			<wp:meta_key><![CDATA[thumbnail_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[430]]></wp:meta_value>
-		</wp:termmeta>
-		<wp:termmeta>
-			<wp:meta_key><![CDATA[wd_page_css_files]]></wp:meta_key>
-			<wp:meta_value><![CDATA[a:65:{i:0;s:19:"widget-price-filter";i:1;s:27:"widget-recent-post-comments";i:2;s:22:"widget-wd-recent-posts";i:3;s:10:"widget-nav";i:4;s:21:"widget-wd-layered-nav";i:5;s:21:"woo-mod-swatches-base";i:6;s:23:"woo-mod-swatches-filter";i:7;s:26:"widget-slider-price-filter";i:8;s:12:"wp-gutenberg";i:9;s:5:"wpcf7";i:10;s:5:"mc4wp";i:11;s:17:"revolution-slider";i:12;s:14:"elementor-base";i:13;s:16:"woocommerce-base";i:14;s:15:"mod-star-rating";i:15;s:18:"woo-el-track-order";i:16;s:25:"woocommerce-block-notices";i:17;s:13:"woo-gutenberg";i:18;s:21:"widget-active-filters";i:19;s:16:"woo-shop-builder";i:20;s:11:"header-base";i:21;s:9:"mod-tools";i:22;s:8:"info-box";i:23;s:18:"mod-nav-menu-label";i:24;s:6:"banner";i:25;s:17:"banner-hover-zoom";i:26;s:20:"header-elements-base";i:27;s:12:"social-icons";i:28;s:13:"header-search";i:29;s:18:"header-search-form";i:30;s:14:"wd-search-form";i:31;s:18:"woo-mod-login-form";i:32;s:17:"header-my-account";i:33;s:16:"header-cart-side";i:34;s:11:"header-cart";i:35;s:20:"widget-shopping-cart";i:36;s:19:"widget-product-list";i:37;s:26:"header-mobile-nav-dropdown";i:38;s:17:"wd-search-results";i:39;s:23:"categories-loop-default";i:40;s:34:"woo-categories-loop-layout-masonry";i:41;s:19:"woo-categories-loop";i:42;s:15:"categories-loop";i:43;s:6:"swiper";i:44;s:13:"swiper-arrows";i:45;s:30:"int-elem-opt-off-canvas-column";i:46;s:24:"woo-mod-swatches-style-1";i:47;s:24:"el-off-canvas-column-btn";i:48;s:18:"off-canvas-sidebar";i:49;s:29:"woo-shop-el-products-per-page";i:50;s:25:"woo-shop-el-products-view";i:51;s:20:"woo-shop-el-order-by";i:52;s:13:"sticky-loader";i:53;s:15:"widget-collapse";i:54;s:11:"footer-base";i:55;s:10:"text-block";i:56;s:20:"widget-nav-mega-menu";i:57;s:4:"list";i:58;s:10:"scroll-top";i:59;s:25:"header-my-account-sidebar";i:60;s:24:"header-search-fullscreen";i:61;s:26:"header-search-fullscreen-2";i:62;s:16:"popular-requests";i:63;s:14:"bottom-toolbar";i:64;s:25:"mod-sticky-sidebar-opener";}]]></wp:meta_value>
 		</wp:termmeta>
 		</wp:term>
 			<wp:term>
@@ -888,8 +840,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-5"><![CDATA[rated-5]]></category>
 		<category domain="product_cat" nicename="rpg"><![CDATA[RPG]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -3614,8 +3566,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
 		<category domain="product_cat" nicename="rpg"><![CDATA[RPG]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -5001,8 +4953,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 										<wp:post_id>550</wp:post_id>
 					<wp:post_date><![CDATA[2023-07-17 13:41:34]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2023-07-17 13:41:34]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-02-03 15:00:52]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-02-03 15:00:52]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-04-10 01:50:03]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-04-10 01:50:03]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[tyrants-blessing]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -5015,8 +4967,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
 		<category domain="product_cat" nicename="rpg"><![CDATA[RPG]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -5041,7 +4993,7 @@ The cinematic combat system returns with additional Force abilities and new ligh
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.7.1]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
@@ -6388,8 +6340,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-5"><![CDATA[rated-5]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -7876,8 +7828,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -12087,8 +12039,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -17560,8 +17512,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -17986,8 +17938,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 												<category domain="product_cat" nicename="action"><![CDATA[Action]]></category>
 		<category domain="pa_color" nicename="deluxe"><![CDATA[Deluxe]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 											<wp:postmeta>
 							<wp:meta_key><![CDATA[_sku]]></wp:meta_key>
@@ -19113,8 +19065,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 												<category domain="product_cat" nicename="action"><![CDATA[Action]]></category>
 		<category domain="pa_color" nicename="deluxe"><![CDATA[Deluxe]]></category>
 		<category domain="product_visibility" nicename="rated-5"><![CDATA[rated-5]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 											<wp:postmeta>
 							<wp:meta_key><![CDATA[_sku]]></wp:meta_key>
@@ -20581,8 +20533,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -24958,8 +24910,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 										<wp:post_id>491</wp:post_id>
 					<wp:post_date><![CDATA[2023-07-17 13:41:19]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2023-07-17 13:41:19]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2025-02-03 15:04:01]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2025-02-03 15:04:01]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-04-29 05:58:59]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-04-29 05:58:59]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[open]]></wp:comment_status>
 					<wp:post_name><![CDATA[the-last-of-us-part-ii]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -24989,7 +24941,7 @@ The cinematic combat system returns with additional Force abilities and new ligh
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.6.0]]></wp:meta_value>
+							<wp:meta_value><![CDATA[9.7.1]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
@@ -26284,8 +26236,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 											<wp:postmeta>
 							<wp:meta_key><![CDATA[_sku]]></wp:meta_key>
@@ -27900,8 +27852,8 @@ The cinematic combat system returns with additional Force abilities and new ligh
 		<category domain="product_brand" nicename="pc"><![CDATA[PC]]></category>
 		<category domain="product_brand" nicename="playstation-5"><![CDATA[PlayStation 5]]></category>
 		<category domain="product_visibility" nicename="rated-4"><![CDATA[rated-4]]></category>
-		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="pa_color" nicename="standart"><![CDATA[Standart]]></category>
+		<category domain="pa_size" nicename="standart"><![CDATA[Standart]]></category>
 		<category domain="product_type" nicename="variable"><![CDATA[variable]]></category>
 		<category domain="product_brand" nicename="xbox-series-xs"><![CDATA[Xbox Series X|S]]></category>
 											<wp:postmeta>
@@ -30450,87 +30402,142 @@ This e-mail was sent from a contact form on [_site_title] ([_site_url])";s:18:"a
 					<pubDate>Mon, 17 Jul 2023 13:50:35 +0000</pubDate>
 					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/games-elementor/?post_type=cms_block&#038;p=916</guid>
-											<content:encoded><![CDATA[<link rel="stylesheet" id="wd-text-block-css" href="https://dummy.xtemos.com/woodmart2/games-elementor/wp-content/themes/woodmart/css/parts/el-text-block.min.css?ver=7.3.4" type="text/css" media="all" /> 					
+											<content:encoded><![CDATA[ 					
 			<p>Payment Methods:</p>
-								<img width="300" height="20" src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/guaranteed-safe-checkout-filled-300x20.png" alt="" decoding="async" loading="lazy" srcset="https://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/guaranteed-safe-checkout-filled-300x20.png 300w, https://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/guaranteed-safe-checkout-filled-150x11.png 150w" sizes="(max-width: 300px) 100vw, 300px" />					
-						<link rel="stylesheet" id="wd-widget-nav-mega-menu-css" href="https://dummy.xtemos.com/woodmart2/games-elementor/wp-content/themes/woodmart/css/parts/widget-nav-mega-menu.min.css?ver=7.3.4" type="text/css" media="all" /> 					
-						<ul id="menu-footer-menu-currency-games"><li id="menu-item-446" ><a href="#"><img  src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-usa.svg" title="wd-furniture-flag-usa" width="18" height="18">United States (English) / USD</a>
+								<img width="300" height="20" src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/guaranteed-safe-checkout-filled-300x20.png" alt="" />					
+								 						 					
+						<ul id="menu-footer-menu-currency-games"><li id="menu-item-446"><a href="#"><img src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-usa.svg" title="wd-furniture-flag-usa" loading="lazy" width="18" height="18">United States (English) / USD</a>
 <ul>
-	<li id="menu-item-447" ><a href="#"><img  src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-eu.svg" title="wd-furniture-flag-eu" width="18" height="18">Europian Union / EUR</a></li>
-	<li id="menu-item-448" ><a href="#"><img  src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-canada.svg" title="wd-furniture-flag-canada" width="18" height="18">Canada / CAD</a></li>
-	<li id="menu-item-449" ><a href="#"><img  src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-japan.svg" title="wd-furniture-flag-japan" width="18" height="18">Japan / YEN</a></li>
+	<li id="menu-item-447"><a href="#"><img src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-eu.svg" title="wd-furniture-flag-eu" loading="lazy" width="18" height="18">Europian Union / EUR</a></li>
+	<li id="menu-item-448"><a href="#"><img src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-canada.svg" title="wd-furniture-flag-canada" loading="lazy" width="18" height="18">Canada / CAD</a></li>
+	<li id="menu-item-449"><a href="#"><img src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-furniture-flag-japan.svg" title="wd-furniture-flag-japan" loading="lazy" width="18" height="18">Japan / YEN</a></li>
 </ul>
 </li>
 </ul>		
-								<img  src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-vgs-logo-white.svg" title="wd-vgs-logo-white" width="252" height="58">					
+								<img src="http://dummy.xtemos.com/woodmart2/games-elementor/wp-content/uploads/sites/16/2023/07/wd-vgs-logo-white.svg" title="wd-vgs-logo-white" loading="lazy" width="252" height="58">					
 			<p>The online store of equipment and electronics is one of the leading online stores. The band was released in 25 volumes.</p>
-			<p>Useful Links</p>
-						<link rel="stylesheet" id="wd-list-css" href="https://dummy.xtemos.com/woodmart2/games-elementor/wp-content/themes/woodmart/css/parts/el-list.min.css?ver=7.3.4" type="text/css" media="all" /> 					<ul>
+								 					
+					Useful Links				
+								 						 					<ul>
 											<li>
 						About Us
-						<a  href="https://dummy.xtemos.com/woodmart2/games-elementor/about-us-dark/" aria-label="List item link"></a>
+						<a href="https://dummy.xtemos.com/woodmart2/games-elementor/about-us-dark/" aria-label="List item link"></a>
 									</li>
 											<li>
 						Contact Us
-						<a  href="https://dummy.xtemos.com/woodmart2/games-elementor/contact-us-dark/" aria-label="List item link"></a>
+						<a href="https://dummy.xtemos.com/woodmart2/games-elementor/contact-us-dark/" aria-label="List item link"></a>
 									</li>
 											<li>
 						Sale
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 											<li>
 						Blog
-						<a  href="https://dummy.xtemos.com/woodmart2/games-elementor/blog/" aria-label="List item link"></a>
+						<a href="https://dummy.xtemos.com/woodmart2/games-elementor/blog/" aria-label="List item link"></a>
 									</li>
 											<li>
 						FAQs
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 					</ul>
-			<p>Useful Links</p>
-					<ul>
+							<ul>
+											<li>
+						About Us
+						<a href="https://dummy.xtemos.com/woodmart2/games-elementor/about-us-dark/" aria-label="List item link"></a>
+									</li>
+											<li>
+						Contact Us
+						<a href="https://dummy.xtemos.com/woodmart2/games-elementor/contact-us-dark/" aria-label="List item link"></a>
+									</li>
+											<li>
+						Sale
+						<a href="#" aria-label="List item link"></a>
+									</li>
+											<li>
+						Blog
+						<a href="https://dummy.xtemos.com/woodmart2/games-elementor/blog/" aria-label="List item link"></a>
+									</li>
+											<li>
+						FAQs
+						<a href="#" aria-label="List item link"></a>
+									</li>
+					</ul>
+					Games				
+							<ul>
 											<li>
 						PC
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 											<li>
 						PlayStation 5
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 											<li>
 						Xbox Series X|S
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 											<li>
 						Nintendo Switch
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 					</ul>
-			<p>Social Links</p>
-					<ul>
+							<ul>
+											<li>
+						PC
+						<a href="#" aria-label="List item link"></a>
+									</li>
+											<li>
+						PlayStation 5
+						<a href="#" aria-label="List item link"></a>
+									</li>
+											<li>
+						Xbox Series X|S
+						<a href="#" aria-label="List item link"></a>
+									</li>
+											<li>
+						Nintendo Switch
+						<a href="#" aria-label="List item link"></a>
+									</li>
+					</ul>
+					Social Links				
+							<ul>
 											<li>
 						Instagram
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 											<li>
 						Twiter
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
 									</li>
 											<li>
 						YouTube
-						<a  href="#" aria-label="List item link"></a>
+						<a href="#" aria-label="List item link"></a>
+									</li>
+					</ul>
+							<ul>
+											<li>
+						Instagram
+						<a href="#" aria-label="List item link"></a>
+									</li>
+											<li>
+						Twiter
+						<a href="#" aria-label="List item link"></a>
+									</li>
+											<li>
+						YouTube
+						<a href="#" aria-label="List item link"></a>
 									</li>
 					</ul>
 			Based on <a href="http://woodmart.xtemos.com"><strong>WoodMart</strong></a> theme  2023 <a href="https://themeforest.net/item/woodmart-woocommerce-wordpress-theme/20264492"><strong>WooCommerce Themes</strong></a>
-						<ul id="menu-footer-menu-copyrights-light"><li id="menu-item-441" ><a href="https://dummy.xtemos.com/woodmart2/games-elementor/terms-of-service/">Terms Of Service</a></li>
-<li id="menu-item-445" ><a href="https://dummy.xtemos.com/woodmart2/games-elementor/privacy-policy/">Privacy policy</a></li>
-<li id="menu-item-442" ><a href="https://dummy.xtemos.com/woodmart2/games-elementor/contact-us/">Store Refund Policy</a></li>
+						<ul id="menu-footer-menu-copyrights-light"><li id="menu-item-441"><a href="https://dummy.xtemos.com/woodmart2/games-elementor/terms-of-service/">Terms Of Service</a></li>
+<li id="menu-item-445"><a href="https://dummy.xtemos.com/woodmart2/games-elementor/privacy-policy/">Privacy policy</a></li>
+<li id="menu-item-442"><a href="https://dummy.xtemos.com/woodmart2/games-elementor/contact-us/">Store Refund Policy</a></li>
 </ul>]]></content:encoded>
 															<wp:post_id>916</wp:post_id>
 					<wp:post_date><![CDATA[2023-07-17 13:50:35]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2023-07-17 13:50:35]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2023-12-18 13:14:06]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2023-12-18 13:14:06]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-04-28 14:27:48]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-04-28 14:27:48]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[footer-games-dark]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -30547,7 +30554,7 @@ This e-mail was sent from a contact form on [_site_title] ([_site_url])";s:18:"a
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[3.16.6]]></wp:meta_value>
+							<wp:meta_value><![CDATA[3.28.0]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
@@ -30555,7 +30562,7 @@ This e-mail was sent from a contact form on [_site_title] ([_site_url])";s:18:"a
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-							<wp:meta_value><![CDATA[[{"id":"9a1a97d","elType":"container","settings":{"content_position":"middle","structure":"20","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#FFFFFF1C","margin":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":false},"padding":{"unit":"px","top":"20","right":"0","bottom":"20","left":"0","isLinked":false},"flex_direction":"row","flex_align_items":"center","flex_gap":{"size":null,"column":"","row":"","unit":"px","isLinked":true},"container_sticky_offset":50,"scroll_y":-80},"elements":[{"id":"6b0bbcf","elType":"container","settings":{"_column_size":50,"width":{"size":50,"unit":"%"},"column_sticky_offset":50,"scroll_y":-80,"content_width":"full","flex_direction":"row","flex_direction_tablet":"column","flex_align_items":"center","flex_align_items_tablet":"flex-start","flex_gap":{"column":"20","row":"10","isLinked":false,"unit":"px","size":20},"container_sticky_offset":50},"elements":[{"id":"b154848","elType":"widget","settings":{"text":"<p>Payment Methods:<\/p>","typography_typography":"custom","typography_font_family":"Readex Pro","typography_font_size":{"unit":"px","size":16,"sizes":[]},"typography_font_weight":"500","text_color":"title","scroll_y":-80},"elements":[],"widgetType":"wd_text_block"},{"id":"3bf871c","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/wp-content\/uploads\/sites\/16\/2023\/07\/guaranteed-safe-checkout-filled.png","id":1139,"size":"","alt":"","source":"library"},"image_size":"custom","rounding_size":"0","scroll_y":-80,"image_custom_dimension":{"width":"300","height":"20"}},"elements":[],"widgetType":"wd_image_or_svg"}],"isInner":true},{"id":"31308b7","elType":"container","settings":{"_column_size":50,"width":{"size":50,"unit":"%"},"align":"flex-end","column_sticky_offset":50,"scroll_y":-80,"align_mobile":"flex-start","content_width":"full","flex_align_items":"flex-end","flex_align_items_mobile":"flex-start","container_sticky_offset":50},"elements":[{"id":"330b867","elType":"widget","settings":{"title":"","nav_menu":"26","design":"horizontal","alignment":"right","item_typography_typography":"custom","item_typography_text_transform":"none","_element_width":"auto","scroll_y":-80},"elements":[],"widgetType":"wd_mega_menu"}],"isInner":true}],"isInner":false},{"id":"323fcd6","elType":"container","settings":{"flex_gap":{"size":30,"column":"30","row":"30","unit":"px","isLinked":true},"structure":"40","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#FFFFFF1C","padding":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":false},"flex_direction":"row","margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":false},"container_sticky_offset":50,"scroll_y":-80},"elements":[{"id":"dd0c22b","elType":"container","settings":{"_column_size":25,"width":{"size":25,"unit":"%"},"column_sticky_offset":50,"scroll_y":-80,"content_width":"full","flex_gap":{"column":"30","row":"30","isLinked":true,"unit":"px","size":30},"container_sticky_offset":50},"elements":[{"id":"621a37d","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/wp-content\/uploads\/sites\/16\/2023\/07\/wd-vgs-logo-white.svg","id":1713,"size":"","alt":"","source":"library"},"image_size":"custom","_margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":false},"scroll_y":-80,"image_custom_dimension":{"width":"252","height":"58"}},"elements":[],"widgetType":"wd_image_or_svg"},{"id":"937ec5b","elType":"widget","settings":{"text":"<p>The online store of equipment and electronics is one of the leading online stores. The band was released in 25 volumes.<\/p>","typography_typography":"custom","typography_font_size":{"unit":"px","size":16,"sizes":[]},"scroll_y":-80},"elements":[],"widgetType":"wd_text_block"}],"isInner":true},{"id":"f5c7bfe","elType":"container","settings":{"_column_size":25,"width":{"size":25,"unit":"%"},"column_sticky_offset":50,"scroll_y":-80,"content_width":"full","container_sticky_offset":50},"elements":[{"id":"3b6508b","elType":"widget","settings":{"text":"<p>Useful Links<\/p>","typography_typography":"custom","typography_font_family":"Readex Pro","typography_font_size":{"unit":"px","size":18,"sizes":[]},"typography_font_weight":"500","text_color":"title","scroll_y":-80},"elements":[],"widgetType":"wd_text_block"},{"id":"88c1062","elType":"widget","settings":{"list_items":[{"list_content":"About Us\n","_id":"38e2cca","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/about-us-dark\/","is_external":false,"nofollow":false,"custom_attributes":""}},{"list_content":"Contact Us\n\n","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/contact-us-dark\/","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"e4ba559"},{"list_content":"Sale\n\n\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"98b812b"},{"list_content":"Blog\n\n","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/blog\/","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"24830d4"},{"list_content":"FAQs\n\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"5e0e03c"}],"list_type":"without","color_scheme":"custom","text_color":"#FFFFFFE6","text_color_hover":"#6D4EEC","typography_typography":"custom","typography_font_family":"Readex Pro","list_items_gap":{"unit":"px","size":10,"sizes":[]},"scroll_y":-80},"elements":[],"widgetType":"wd_list"}],"isInner":true},{"id":"085bfc0","elType":"container","settings":{"_column_size":25,"width":{"size":25,"unit":"%"},"column_sticky_offset":50,"scroll_y":-80,"content_width":"full","container_sticky_offset":50},"elements":[{"id":"950dc55","elType":"widget","settings":{"text":"<p>Useful Links<\/p>","typography_typography":"custom","typography_font_family":"Readex Pro","typography_font_size":{"unit":"px","size":18,"sizes":[]},"typography_font_weight":"500","text_color":"title","scroll_y":-80},"elements":[],"widgetType":"wd_text_block"},{"id":"77a9250","elType":"widget","settings":{"list_items":[{"list_content":"PC\n","_id":"38e2cca","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""}},{"list_content":"PlayStation 5\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"35b311e"},{"list_content":"Xbox Series X|S\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"ce703fe"},{"list_content":"Nintendo Switch\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"0a06b1e"}],"list_type":"without","color_scheme":"custom","text_color":"#FFFFFFE6","text_color_hover":"#6D4EEC","typography_typography":"custom","typography_font_family":"Readex Pro","list_items_gap":{"unit":"px","size":10,"sizes":[]},"scroll_y":-80},"elements":[],"widgetType":"wd_list"}],"isInner":true},{"id":"06490db","elType":"container","settings":{"_column_size":25,"width":{"size":25,"unit":"%"},"column_sticky_offset":50,"scroll_y":-80,"content_width":"full","container_sticky_offset":50},"elements":[{"id":"23078ed","elType":"widget","settings":{"text":"<p>Social Links<\/p>","typography_typography":"custom","typography_font_family":"Readex Pro","typography_font_size":{"unit":"px","size":18,"sizes":[]},"typography_font_weight":"500","text_color":"title","scroll_y":-80},"elements":[],"widgetType":"wd_text_block"},{"id":"25756b7","elType":"widget","settings":{"list_items":[{"list_content":"Instagram\n","_id":"38e2cca","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""}},{"list_content":"Twiter\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"35b311e"},{"list_content":"YouTube\n","link":{"url":"#","is_external":false,"nofollow":false,"custom_attributes":""},"_id":"ce703fe"}],"list_type":"without","color_scheme":"custom","text_color":"#FFFFFFE6","text_color_hover":"#6D4EEC","typography_typography":"custom","typography_font_family":"Readex Pro","list_items_gap":{"unit":"px","size":10,"sizes":[]},"scroll_y":-80},"elements":[],"widgetType":"wd_list"}],"isInner":true}],"isInner":false},{"id":"3c69120","elType":"container","settings":{"content_position":"middle","flex_direction":"row","flex_align_items":"center","flex_gap":{"size":20,"column":"20","row":"15","unit":"px","isLinked":false},"flex_direction_mobile":"column","flex_justify_content":"space-between","flex_justify_content_tablet":"space-between","flex_justify_content_mobile":"flex-start","flex_align_items_tablet":"center","flex_align_items_mobile":"flex-start","padding":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":false},"container_sticky_offset":50,"scroll_y":-80},"elements":[{"id":"3debc6f","elType":"widget","settings":{"text":"Based on <a href=\"http:\/\/woodmart.xtemos.com\"><strong>WoodMart<\/strong><\/a> theme <i class=\"fa fa-copyright\"><\/i> 2023 <a href=\"https:\/\/themeforest.net\/item\/woodmart-woocommerce-wordpress-theme\/20264492\"><strong>WooCommerce Themes<\/strong><\/a>","scroll_y":-80},"elements":[],"widgetType":"wd_text_block"},{"id":"c3ed0b8","elType":"widget","settings":{"title":"","design":"horizontal","items_gap":"m","item_typography_typography":"custom","item_typography_text_transform":"capitalize","scroll_y":-80,"nav_menu":"25","_element_width":"auto","alignment":"right"},"elements":[],"widgetType":"wd_mega_menu"}],"isInner":false}]]]></wp:meta_value>
+							<wp:meta_value><![CDATA[[{"id":"9a1a97d","elType":"container","settings":{"content_position":"middle","structure":"20","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":""},"border_color":"#FFFFFF1C","margin":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""},"padding":{"unit":"px","top":"20","right":"0","bottom":"20","left":"0","isLinked":""},"flex_direction":"row","flex_align_items":"center","flex_gap":{"size":"","column":"","row":"","unit":"px","isLinked":"1"},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"6b0bbcf","elType":"container","settings":{"_column_size":"50","width":{"size":"50","unit":"%"},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","flex_direction":"row","flex_direction_tablet":"column","flex_align_items":"center","flex_align_items_tablet":"flex-start","flex_gap":{"column":"20","row":"10","isLinked":"","unit":"px","size":"20"},"container_sticky_offset":"50"},"elements":[{"id":"b154848","elType":"widget","settings":{"text":"<p>Payment Methods:<\/p>","typography_typography":"custom","typography_font_family":"Readex Pro","typography_font_size":{"unit":"px","size":"16","sizes":[]},"typography_font_weight":"500","text_color":"title","scroll_y":"-80"},"elements":[],"widgetType":"wd_text_block"},{"id":"3bf871c","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/wp-content\/uploads\/sites\/16\/2023\/07\/guaranteed-safe-checkout-filled.png","id":"1139","size":"","alt":"","source":"library"},"image_size":"custom","rounding_size":"0","scroll_y":"-80","image_custom_dimension":{"width":"300","height":"20"}},"elements":[],"widgetType":"wd_image_or_svg"}],"isInner":"1"},{"id":"31308b7","elType":"container","settings":{"_column_size":"50","width":{"size":"50","unit":"%"},"align":"flex-end","column_sticky_offset":"50","scroll_y":"-80","align_mobile":"flex-start","content_width":"full","flex_align_items":"flex-end","flex_align_items_mobile":"flex-start","container_sticky_offset":"50"},"elements":[{"id":"330b867","elType":"widget","settings":{"title":"","nav_menu":"26","design":"horizontal","alignment":"right","item_typography_typography":"custom","item_typography_text_transform":"none","_element_width":"auto","scroll_y":"-80"},"elements":[],"widgetType":"wd_mega_menu"}],"isInner":"1"}],"isInner":""},{"id":"323fcd6","elType":"container","settings":{"flex_gap":{"size":"30","column":"30","row":"30","unit":"px","isLinked":"1"},"structure":"40","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":""},"border_color":"#FFFFFF1C","padding":{"unit":"px","top":"0","right":"0","bottom":"40","left":"0","isLinked":""},"flex_direction":"row","margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":""},"container_sticky_offset":"50","scroll_y":"-80"},"elements":[{"id":"dd0c22b","elType":"container","settings":{"_column_size":"25","width":{"size":"25","unit":"%"},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","flex_gap":{"column":"30","row":"30","isLinked":"1","unit":"px","size":"30"},"container_sticky_offset":"50"},"elements":[{"id":"621a37d","elType":"widget","settings":{"image":{"url":"http:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/wp-content\/uploads\/sites\/16\/2023\/07\/wd-vgs-logo-white.svg","id":"1713","size":"","alt":"","source":"library"},"image_size":"custom","_margin":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":""},"scroll_y":"-80","image_custom_dimension":{"width":"252","height":"58"}},"elements":[],"widgetType":"wd_image_or_svg"},{"id":"937ec5b","elType":"widget","settings":{"text":"<p>The online store of equipment and electronics is one of the leading online stores. The band was released in 25 volumes.<\/p>","typography_typography":"custom","typography_font_size":{"unit":"px","size":"16","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_text_block"}],"isInner":"1"},{"id":"f5c7bfe","elType":"container","settings":{"_column_size":"25","width":{"size":"25","unit":"%"},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","container_sticky_offset":"50"},"elements":[{"id":"722069f","elType":"widget","widgetType":"wd_toggle","settings":{"element_title":"Useful Links","state":"static","state_tablet":"static","title_typography_typography":"custom","title_typography_font_family":"Readex Pro","title_typography_font_size":{"unit":"px","size":"18","sizes":[]},"title_typography_font_weight":"500","scroll_y":"-80"},"elements":[{"id":"3050bc1","elType":"container","settings":{"_title":"Toggle content","content_width":"full","scroll_y":"-80"},"elements":[{"id":"b5c80ae","elType":"container","settings":{"flex_direction":"column","scroll_y":"-80"},"elements":[{"id":"88c1062","elType":"widget","settings":{"list_items":[{"list_content":"About Us\n","_id":"38e2cca","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/about-us-dark\/","is_external":"","nofollow":"","custom_attributes":""}},{"list_content":"Contact Us\n\n","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/contact-us-dark\/","is_external":"","nofollow":"","custom_attributes":""},"_id":"e4ba559"},{"list_content":"Sale\n\n\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"98b812b"},{"list_content":"Blog\n\n","link":{"url":"https:\/\/dummy.xtemos.com\/woodmart2\/games-elementor\/blog\/","is_external":"","nofollow":"","custom_attributes":""},"_id":"24830d4"},{"list_content":"FAQs\n\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"5e0e03c"}],"list_type":"without","color_scheme":"custom","text_color":"#FFFFFFE6","text_color_hover":"#6D4EEC","typography_typography":"custom","typography_font_family":"Readex Pro","list_items_gap":{"unit":"px","size":"10","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_list"}],"isInner":"1"}],"isInner":"1","isLocked":"1"}]}],"isInner":"1"},{"id":"085bfc0","elType":"container","settings":{"_column_size":"25","width":{"size":"25","unit":"%"},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","container_sticky_offset":"50"},"elements":[{"id":"eaf0aeb","elType":"widget","widgetType":"wd_toggle","settings":{"element_title":"Games","state":"static","state_tablet":"static","title_typography_typography":"custom","title_typography_font_family":"Readex Pro","title_typography_font_size":{"unit":"px","size":"18","sizes":[]},"title_typography_font_weight":"500","scroll_y":"-80"},"elements":[{"id":"e6eb2b6","elType":"container","settings":{"_title":"Toggle content","content_width":"full","scroll_y":"-80"},"elements":[{"id":"00b7fc1","elType":"container","settings":{"flex_direction":"column","scroll_y":"-80"},"elements":[{"id":"77a9250","elType":"widget","settings":{"list_items":[{"list_content":"PC\n","_id":"38e2cca","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""}},{"list_content":"PlayStation 5\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"35b311e"},{"list_content":"Xbox Series X|S\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"ce703fe"},{"list_content":"Nintendo Switch\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"0a06b1e"}],"list_type":"without","color_scheme":"custom","text_color":"#FFFFFFE6","text_color_hover":"#6D4EEC","typography_typography":"custom","typography_font_family":"Readex Pro","list_items_gap":{"unit":"px","size":"10","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_list"}],"isInner":"1"}],"isInner":"1","isLocked":"1"}]}],"isInner":"1"},{"id":"06490db","elType":"container","settings":{"_column_size":"25","width":{"size":"25","unit":"%"},"column_sticky_offset":"50","scroll_y":"-80","content_width":"full","container_sticky_offset":"50"},"elements":[{"id":"1130629","elType":"widget","widgetType":"wd_toggle","settings":{"element_title":"Social Links","state":"static","state_tablet":"static","title_typography_typography":"custom","title_typography_font_family":"Readex Pro","title_typography_font_size":{"unit":"px","size":"18","sizes":[]},"title_typography_font_weight":"500","scroll_y":"-80"},"elements":[{"id":"656ef93","elType":"container","settings":{"_title":"Toggle content","content_width":"full","scroll_y":"-80"},"elements":[{"id":"08f63af","elType":"container","settings":{"flex_direction":"column","scroll_y":"-80"},"elements":[{"id":"25756b7","elType":"widget","settings":{"list_items":[{"list_content":"Instagram\n","_id":"38e2cca","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""}},{"list_content":"Twiter\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"35b311e"},{"list_content":"YouTube\n","link":{"url":"#","is_external":"","nofollow":"","custom_attributes":""},"_id":"ce703fe"}],"list_type":"without","color_scheme":"custom","text_color":"#FFFFFFE6","text_color_hover":"#6D4EEC","typography_typography":"custom","typography_font_family":"Readex Pro","list_items_gap":{"unit":"px","size":"10","sizes":[]},"scroll_y":"-80"},"elements":[],"widgetType":"wd_list"}],"isInner":"1"}],"isInner":"1","isLocked":"1"}]}],"isInner":"1"}],"isInner":""},{"id":"3c69120","elType":"container","settings":{"content_position":"middle","flex_direction":"row","flex_align_items":"center","flex_gap":{"size":"20","column":"20","row":"15","unit":"px","isLinked":""},"flex_direction_mobile":"column","flex_justify_content":"space-between","flex_justify_content_tablet":"space-between","flex_justify_content_mobile":"flex-start","flex_align_items_tablet":"center","flex_align_items_mobile":"flex-start","padding":{"unit":"px","top":"0","right":"0","bottom":"10","left":"0","isLinked":""},"container_sticky_offset":"50","scroll_y":"-80","flex_direction_tablet":"column"},"elements":[{"id":"3debc6f","elType":"widget","settings":{"text":"Based on <a href=\"http:\/\/woodmart.xtemos.com\"><strong>WoodMart<\/strong><\/a> theme <i class=\"fa fa-copyright\"><\/i> 2023 <a href=\"https:\/\/themeforest.net\/item\/woodmart-woocommerce-wordpress-theme\/20264492\"><strong>WooCommerce Themes<\/strong><\/a>","scroll_y":"-80","text_alignment":"center"},"elements":[],"widgetType":"wd_text_block"},{"id":"c3ed0b8","elType":"widget","settings":{"title":"","design":"horizontal","items_gap":"m","item_typography_typography":"custom","item_typography_text_transform":"capitalize","scroll_y":"-80","nav_menu":"25","_element_width":"auto","alignment":"center"},"elements":[],"widgetType":"wd_mega_menu"}],"isInner":""}]]]></wp:meta_value>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_elementor_page_assets]]></wp:meta_key>

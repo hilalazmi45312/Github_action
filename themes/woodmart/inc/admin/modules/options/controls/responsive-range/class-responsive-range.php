@@ -100,7 +100,13 @@ class Responsive_Range extends Field {
 	 * @return array $output Generated CSS code.
 	 */
 	public function css_output() {
-		if ( empty( $this->args['selectors'] ) || empty( $this->get_field_value() ) || ! function_exists( 'woodmart_decompress' ) ) {
+		$output_css = array();
+
+		if ( empty( $this->args['selectors'] ) || ! function_exists( 'woodmart_decompress' ) ) {
+			return array();
+		}
+
+		if ( empty( $this->get_field_value() ) && empty( $this->args['devices']['desktop']['value'] ) ) {
 			return array();
 		}
 
@@ -116,8 +122,17 @@ class Responsive_Range extends Field {
 			}
 		}
 
-		$value      = json_decode( woodmart_decompress( $this->get_field_value() ), true );
-		$output_css = array();
+		$value = wp_parse_args(
+			json_decode(
+				woodmart_decompress(
+					$this->get_field_value()
+				),
+				true
+			),
+			array(
+				'devices' => $this->args['devices'],
+			)
+		);
 
 		if ( empty( $value['devices'] ) ) {
 			return array();

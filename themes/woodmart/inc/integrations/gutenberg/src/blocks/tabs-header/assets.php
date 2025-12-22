@@ -1,7 +1,7 @@
 <?php
 $assets = array(
-	'styles' => array('block-title'),
-	'scripts' => array(),
+	'styles'    => array( 'block-title' ),
+	'scripts'   => array(),
 	'libraries' => array(),
 );
 

@@ -158,7 +158,7 @@ if ( ! function_exists( 'woodmart_shortcode_video' ) ) {
 			$video_attr .= $video_params['autoplay'] && 'without' === $settings['video_action_button'] ? ' autoplay' : '';
 
 			if ( 'yes' === $settings['video_overlay_lightbox'] || 'action_button' === $settings['video_action_button'] || 'play' === $settings['video_action_button'] ) {
-				$video_html .= '<div class="wd-popup wd-with-video wd-video-popup mfp-hide" id="' . $video_tag_id . '">';
+				$video_html .= '<div class="mfp-hide wd-popup wd-video-popup wd-with-video wd-scroll-content" id="' . $video_tag_id . '">';
 			}
 
 			if ( ! $video_params['autoplay'] && 'without' === $settings['video_action_button'] ) {
@@ -221,6 +221,7 @@ if ( ! function_exists( 'woodmart_shortcode_video' ) ) {
 			$frame_attributes[] = 'width="100%"';
 			$frame_attributes[] = 'height="100%"';
 			$frame_attributes[] = 'loading="lazy"';
+			$frame_attributes[] = 'aria-label="' . esc_attr__( 'Video player', 'woodmart' ) . '"';
 
 			$video_html = '<iframe ' . implode( ' ', $frame_attributes ) . '></iframe>';
 
@@ -241,7 +242,10 @@ if ( ! function_exists( 'woodmart_shortcode_video' ) ) {
 		if ( 'action_button' === $settings['video_action_button'] || 'yes' === $settings['video_overlay_lightbox'] || 'play' === $settings['video_action_button'] ) {
 			woodmart_enqueue_js_library( 'magnific' );
 			woodmart_enqueue_js_script( 'video-element-popup' );
+			
 			woodmart_enqueue_inline_style( 'mfp-popup' );
+			woodmart_enqueue_inline_style( 'mod-animations-transform' );
+			woodmart_enqueue_inline_style( 'mod-transform' );
 		}
 
 		woodmart_enqueue_js_script( 'video-element' );
@@ -250,7 +254,7 @@ if ( ! function_exists( 'woodmart_shortcode_video' ) ) {
 		?>
 		<div class="wd-el-video wd-wpb<?php echo esc_attr( $wrapper_classes ); ?>">
 			<?php if ( 'hosted' === $settings['video_type'] || 'without' === $settings['video_action_button'] || 'overlay' === $settings['video_action_button'] && 'yes' !== $settings['video_overlay_lightbox'] ) : ?>
-				<?php echo $video_html; ?>
+				<?php echo apply_filters( 'woodmart_video_html', $video_html, $settings ); ?>
 			<?php endif; ?>
 
 			<?php if ( 'action_button' === $settings['video_action_button'] && $settings['button_text'] ) : ?>
@@ -263,7 +267,7 @@ if ( ! function_exists( 'woodmart_shortcode_video' ) ) {
 			<?php endif; ?>
 
 			<?php if ( 'play' === $settings['video_action_button'] ) : ?>
-				<a href="<?php echo esc_url( $settings['link'] ); ?>" class="wd-el-video-btn<?php echo esc_attr( $play_classes ); ?>">
+				<a href="<?php echo esc_url( $settings['link'] ); ?>" class="wd-el-video-btn<?php echo esc_attr( $play_classes ); ?>" aria-label="<?php esc_attr_e( 'Play video', 'woodmart' ); ?>">
 					<span class="wd-el-video-play-btn"></span>
 					<?php if ( $settings['play_button_label'] ) : ?>
 						<span class="wd-el-video-play-label">
@@ -286,7 +290,7 @@ if ( ! function_exists( 'woodmart_shortcode_video' ) ) {
 					<?php endif; ?>
 				</div>
 
-				<a class="wd-el-video-link wd-el-video-btn-overlay wd-fill<?php echo esc_attr( $play_classes ); ?>" href="<?php echo esc_url( $settings['link'] ); ?>"></a>
+				<a class="wd-el-video-link wd-el-video-btn-overlay wd-fill<?php echo esc_attr( $play_classes ); ?>" href="<?php echo esc_url( $settings['link'] ); ?>" aria-label="<?php esc_attr_e( 'Play video', 'woodmart' ); ?>"></a>
 			<?php endif; ?>
 		</div>
 		<?php

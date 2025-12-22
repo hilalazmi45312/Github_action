@@ -1,4 +1,4 @@
-/* global woodmart_settings */
+/* global woodmart_settings, woodmartThemeModule, Cookies, jQuery */
 (function($) {
 	woodmartThemeModule.ageVerify = function() {
 		if ( typeof Cookies === 'undefined' ) {
@@ -19,13 +19,13 @@
 			showCloseBtn   : false,
 			enableEscapeKey: false,
 			removalDelay   : 600,
-			tClose         : woodmart_settings.close,
+			closeMarkup    : woodmart_settings.close_markup,
 			tLoading       : woodmart_settings.loading,
 			fixedContentPos: true,
 			callbacks      : {
 				beforeOpen: function() {
-					this.wrap.addClass('wd-popup-slide-from-left');
-				}
+					this.wrap.addClass('wd-age-verify-wrap');
+				},
 			}
 		});
 

@@ -252,7 +252,6 @@ class Nested_Carousel extends Widget_Nested_Base {
 		}
 
 		if ( 'yes' === $settings['scroll_carousel_init'] ) {
-			woodmart_enqueue_js_library( 'waypoints' );
 			$carousel_classes .= ' scroll-init';
 		}
 

@@ -139,5 +139,7 @@
     "blog_excerpt_length": "90",
     "update_cart_quantity_change": "1",
     "products_hover": "icons",
-    "blog_excerpt": "excerpt"
+    "blog_excerpt": "excerpt",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

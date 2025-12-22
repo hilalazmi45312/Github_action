@@ -26,6 +26,7 @@ Options::add_field(
 		'description' => esc_html__( 'This option will delete outdated images from the Media library automatically and keep only the latest from your account. Works with images added to the Media library starting from WoodMart 7.2 version.', 'woodmart' ),
 		'type'        => 'switcher',
 		'section'     => 'instagram_api_section',
+		'default'     => true,
 		'priority'    => 20,
 	)
 );

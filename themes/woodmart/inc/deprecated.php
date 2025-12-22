@@ -467,3 +467,79 @@ if ( ! function_exists( 'woodmart_lazy_avatar_image' ) ) {
 		return woodmart_lazy_image_standard( $html );
 	}
 }
+
+if ( ! function_exists( 'woodmart_post_meta' ) ) {
+	/**
+	 * Post meta template.
+	 *
+	 * @param array $atts Attributes.
+	 */
+	function woodmart_post_meta( $atts = array() ) {
+		_deprecated_function( 'woodmart_post_meta', '8.2', '' );
+
+		extract(
+			shortcode_atts(
+				array(
+					'author'        => 1,
+					'author_avatar' => 0,
+					'date'          => 1,
+					'author_label'  => 'short',
+					'comments'      => 1,
+					'social_icons'  => 0,
+				),
+				$atts
+			)
+		);
+		?>
+			<ul class="entry-meta-list">
+				<?php if ( get_post_type() === 'post' ) : ?>
+					<li class="modified-date">
+						<?php woodmart_post_modified_date(); ?>
+					</li>
+
+					<?php if ( is_sticky() ) : ?>
+						<li class="meta-featured-post">
+							<?php esc_html_e( 'Featured', 'woodmart' ); ?>
+						</li>
+					<?php endif; ?>
+
+					<?php if ( $author ) : ?>
+						<li class="meta-author">
+							<?php woodmart_post_meta_author( $author_avatar, $author_label ); ?>
+						</li>
+					<?php endif ?>
+
+					<?php if ( $date ) : ?>
+						<li class="meta-date">
+							<?php echo esc_html( _x( 'On', 'meta-date', 'woodmart' ) ) . ' ' . get_the_date(); ?>
+						</li>
+					<?php endif ?>
+
+					<?php if ( $comments && comments_open() ) : ?>
+						<li class="meta-reply">
+							<?php woodmart_post_meta_reply(); ?>
+						</li>
+					<?php endif; ?>
+
+					<?php if ( $social_icons && woodmart_is_social_link_enable( 'share' ) && function_exists( 'woodmart_shortcode_social' ) ) : ?>
+						<li class="hovered-social-icons wd-tltp">
+							<div class="tooltip top">
+								<div class="tooltip-arrow"></div>
+								<div class="tooltip-inner">
+									<?php
+										echo woodmart_shortcode_social( // phpcs:ignore.
+											array(
+												'size'  => 'small',
+												'color' => 'light',
+											)
+										);
+									?>
+								</div>
+							</div>
+						</li>
+					<?php endif ?>
+				<?php endif; ?>
+			</ul>
+		<?php
+	}
+}

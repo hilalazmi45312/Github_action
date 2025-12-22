@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -39,17 +39,17 @@ $packages_count = count( $pickup_data );
 $package_number = 1;
 
 echo "\n\n";
-echo $packages_count === 1 ? wp_strip_all_tags( $shipping_method->get_method_title() ) . "\n\n" : '';
+echo $packages_count === 1 ? esc_html( wp_strip_all_tags( $shipping_method->get_method_title() ) ) . "\n\n" : '';
 
 foreach ( $pickup_data as $pickup_meta ) {
 
 	if ( $packages_count > 1 ) {
-		echo sprintf( is_rtl() ? '#%2$s %1$s' . "\n\n" : '%1$s #%2$s' . "\n\n", wp_strip_all_tags( $shipping_method->get_method_title() ), $package_number );
+		echo sprintf( is_rtl() ? '#%2$s %1$s' . "\n\n" : '%1$s #%2$s' . "\n\n", esc_html( wp_strip_all_tags( $shipping_method->get_method_title() ) ), esc_html( $package_number ) );
 	}
 
 	foreach ( $pickup_meta as $label => $value ) {
 		$value = str_replace( '&times;', 'x', $value );
-		echo wp_strip_all_tags( is_rtl() ? $value . ' :' . $label . ' -' : '- ' . $label . ': ' .  $value ) . "\n";
+		echo esc_html( wp_strip_all_tags( is_rtl() ? $value . ' :' . $label . ' -' : '- ' . $label . ': ' .  $value ) ) . "\n";
 	}
 
 	$package_number++;

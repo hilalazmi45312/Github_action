@@ -96,16 +96,18 @@ if ( ! function_exists( 'woodmart_shortcode_responsive_text_block' ) ) {
 						$css .= '}';
 					}
 
-					if ( $tablet_text_size ) {
-						$css .= '@media (max-width: 1199px) {';
-						$css .= woodmart_responsive_text_size_css( $text_id, 'woodmart-text-block', $tablet_text_size, 'return' );
-						$css .= '}';
-					}
+					if ( function_exists( 'woodmart_responsive_text_size_css' ) ) {
+						if ( $tablet_text_size ) {
+							$css .= '@media (max-width: 1199px) {';
+							$css .= woodmart_responsive_text_size_css( $text_id, 'woodmart-text-block', $tablet_text_size, 'return' );
+							$css .= '}';
+						}
 
-					if ( $mobile_text_size ) {
-						$css .= '@media (max-width: 767px) {';
-						$css .= woodmart_responsive_text_size_css( $text_id, 'woodmart-text-block', $mobile_text_size, 'return' );
-						$css .= '}';
+						if ( $mobile_text_size ) {
+							$css .= '@media (max-width: 767px) {';
+							$css .= woodmart_responsive_text_size_css( $text_id, 'woodmart-text-block', $mobile_text_size, 'return' );
+							$css .= '}';
+						}
 					}
 
 					wp_add_inline_style( 'woodmart-inline-css', $css );

@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       3.3.0
- * @version     1.4.0
+ * @version     1.5.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -81,86 +81,26 @@ if ( ! class_exists( 'WC_SC_Product_Fields' ) ) {
 		 * Function to provide area for entering coupon code
 		 */
 		public function woocommerce_product_options_coupons() {
-			global $post;
+			try {
+				global $post;
 
-			$product_type = WC_Product_Factory::get_product_type( $post->ID );
+				$product_type = WC_Product_Factory::get_product_type( $post->ID );
 
-			$product                      = ( ! empty( $post->ID ) && function_exists( 'wc_get_product' ) ) ? wc_get_product( $post->ID ) : null;
-			$is_callable_product_get_meta = $this->is_callable( $product, 'get_meta' );
+				$product                      = ( ! empty( $post->ID ) && function_exists( 'wc_get_product' ) ) ? wc_get_product( $post->ID ) : null;
+				$is_callable_product_get_meta = $this->is_callable( $product, 'get_meta' );
 
-			$is_send_coupons_on_renewals = ( true === $is_callable_product_get_meta ) ? $product->get_meta( 'send_coupons_on_renewals' ) : get_post_meta( $post->ID, 'send_coupons_on_renewals', true );
+				$is_send_coupons_on_renewals = ( true === $is_callable_product_get_meta ) ? $product->get_meta( 'send_coupons_on_renewals' ) : get_post_meta( $post->ID, 'send_coupons_on_renewals', true );
 
-			echo '<div class="options_group smart-coupons-field">';
+				echo '<div class="options_group smart-coupons-field">';
 
-			$all_discount_types = wc_get_coupon_types();
+				$all_discount_types = wc_get_coupon_types();
 
-			?>
-			<p class="form-field smart-coupon-search post_<?php echo esc_attr( $post->ID ); ?>">
-				<label for="_coupon_title"><?php echo esc_html__( 'Coupons', 'woocommerce-smart-coupons' ); ?></label>
-				<select class="wc-coupon-search" style="width: 50%;" multiple="multiple" id="_coupon_title_<?php echo esc_attr( $post->ID ); ?>" name="_coupon_title[<?php echo esc_attr( $post->ID ); ?>][]" data-placeholder="<?php echo esc_attr__( 'Search for a coupon&hellip;', 'woocommerce-smart-coupons' ); ?>" data-action="sc_json_search_coupons" data-security="<?php echo esc_attr( wp_create_nonce( 'search-coupons' ) ); ?>" >
-					<?php
-					$coupon_titles = ( true === $is_callable_product_get_meta ) ? $product->get_meta( '_coupon_title' ) : get_post_meta( $post->ID, '_coupon_title', true );
-
-					if ( ! empty( $coupon_titles ) ) {
-
-						foreach ( $coupon_titles as $coupon_title ) {
-
-							$coupon = new WC_Coupon( $coupon_title );
-
-							$discount_type = $coupon->get_discount_type();
-
-							if ( ! empty( $discount_type ) ) {
-								/* translators: 1. Discount type 2. Discount Type Label */
-								$discount_type = sprintf( __( ' ( %1$s: %2$s )', 'woocommerce-smart-coupons' ), __( 'Type', 'woocommerce-smart-coupons' ), $all_discount_types[ $discount_type ] );
-							}
-
-							echo '<option value="' . esc_attr( $coupon_title ) . '"' . selected( true, true, false ) . '>' . esc_html( $coupon_title . $discount_type ) . '</option>';
-						}
-					}
-					?>
-				</select>
-				<?php
-				echo wc_help_tip( esc_html__( 'These coupon/s will be given to customers who buy this product. The coupon code will be automatically sent to their email address on purchase.', 'woocommerce-smart-coupons' ) ); // phpcs:ignore
 				?>
-			</p>
-			<p class="form-field send_coupons_on_renewals_field post_<?php echo esc_attr( $post->ID ); ?>" style="display: none;">
-				<label for="send_coupons_on_renewals"><?php echo esc_html__( 'Send coupons on renewals?', 'woocommerce-smart-coupons' ); ?></label>
-				<input type="checkbox" class="checkbox" style="" name="send_coupons_on_renewals[<?php echo esc_attr( $post->ID ); ?>]" id="send_coupons_on_renewals_<?php echo esc_attr( $post->ID ); ?>" value="yes" <?php checked( $is_send_coupons_on_renewals, 'yes' ); ?>/>
-				<?php echo wc_help_tip( esc_html__( 'Check this box to send above coupons on each renewal order.', 'woocommerce-smart-coupons' ) ); // phpcs:ignore ?>
-			</p>
-			<?php $this->product_options_admin_js(); ?>
-			<?php
-
-			echo '</div>';
-
-		}
-
-		/**
-		 * Coupon fields for variation
-		 *
-		 * @param int     $loop           Position in the loop.
-		 * @param array   $variation_data Variation data.
-		 * @param WP_Post $variation Post data.
-		 */
-		public function woocommerce_product_options_coupons_variable( $loop = 0, $variation_data = array(), $variation = null ) {
-
-			$variation_id = $variation->ID;
-
-			$all_discount_types = wc_get_coupon_types();
-
-			$product                      = ( ! empty( $variation_id ) && function_exists( 'wc_get_product' ) ) ? wc_get_product( $variation_id ) : null;
-			$is_callable_product_get_meta = $this->is_callable( $product, 'get_meta' );
-
-			$is_send_coupons_on_renewals = ( true === $is_callable_product_get_meta ) ? $product->get_meta( 'send_coupons_on_renewals' ) : get_post_meta( $variation_id, 'send_coupons_on_renewals', true );
-
-			?>
-			<div class="smart_coupons_product_options_variable smart-coupons-field">
-				<p class="form-field smart-coupon-search _coupon_title_field post_<?php echo esc_attr( $variation_id ); ?> form-row form-row-full">
-					<label for="_coupon_title_<?php echo esc_attr( $loop ); ?>"><?php echo esc_html__( 'Coupons', 'woocommerce-smart-coupons' ); ?></label>
-					<?php echo wc_help_tip( esc_html__( 'These coupon/s will be given to customers who buy this product. The coupon code will be automatically sent to their email address on purchase.', 'woocommerce-smart-coupons' ) ); // phpcs:ignore ?>
-					<select class="wc-coupon-search" style="width: 100% !important;" multiple="multiple" id="_coupon_title_<?php echo esc_attr( $variation_id ); ?>" name="_coupon_title[<?php echo esc_attr( $variation_id ); ?>][<?php echo esc_attr( $loop ); ?>][]" data-placeholder="<?php echo esc_attr__( 'Search for a coupon&hellip;', 'woocommerce-smart-coupons' ); ?>" data-action="sc_json_search_coupons" data-security="<?php echo esc_attr( wp_create_nonce( 'search-coupons' ) ); ?>" >
+				<p class="form-field smart-coupon-search post_<?php echo esc_attr( $post->ID ); ?>">
+					<label for="_coupon_title"><?php echo esc_html__( 'Coupons', 'woocommerce-smart-coupons' ); ?></label>
+					<select class="wc-coupon-search" style="width: 50%;" multiple="multiple" id="_coupon_title_<?php echo esc_attr( $post->ID ); ?>" name="_coupon_title[<?php echo esc_attr( $post->ID ); ?>][]" data-placeholder="<?php echo esc_attr__( 'Search for a coupon&hellip;', 'woocommerce-smart-coupons' ); ?>" data-action="sc_json_search_coupons" data-security="<?php echo esc_attr( wp_create_nonce( 'search-coupons' ) ); ?>" >
 						<?php
-						$coupon_titles = ( true === $is_callable_product_get_meta ) ? $product->get_meta( '_coupon_title' ) : get_post_meta( $variation_id, '_coupon_title', true );
+						$coupon_titles = ( true === $is_callable_product_get_meta ) ? $product->get_meta( '_coupon_title' ) : get_post_meta( $post->ID, '_coupon_title', true );
 
 						if ( ! empty( $coupon_titles ) ) {
 
@@ -180,16 +120,84 @@ if ( ! class_exists( 'WC_SC_Product_Fields' ) ) {
 						}
 						?>
 					</select>
+					<?php
+					echo wc_help_tip( esc_html__( 'These coupon/s will be given to customers who buy this product. The coupon code will be automatically sent to their email address on purchase.', 'woocommerce-smart-coupons' ) ); // phpcs:ignore
+					?>
 				</p>
-				<p class="form-field send_coupons_on_renewals_field post_<?php echo esc_attr( $variation_id ); ?> form-row form-row-full">
-					<label class="tips" data-tip="<?php echo esc_attr__( 'Check this box to send above coupons on each renewal order.', 'woocommerce-smart-coupons' ); ?>">
-						<?php echo esc_html__( 'Send coupons on renewals?', 'woocommerce-smart-coupons' ); ?>
-						<input type="checkbox" class="checkbox" id="send_coupons_on_renewals_<?php echo esc_attr( $variation_id ); ?>" name="send_coupons_on_renewals[<?php echo esc_attr( $variation_id ); ?>][<?php echo esc_attr( $loop ); ?>]" style="margin: 0.1em 0.5em 0.1em 0 !important;" value="yes" <?php checked( $is_send_coupons_on_renewals, 'yes' ); ?>/>
-					</label>
+				<p class="form-field send_coupons_on_renewals_field post_<?php echo esc_attr( $post->ID ); ?>" style="display: none;">
+					<label for="send_coupons_on_renewals"><?php echo esc_html__( 'Send coupons on renewals?', 'woocommerce-smart-coupons' ); ?></label>
+					<input type="checkbox" class="checkbox" style="" name="send_coupons_on_renewals[<?php echo esc_attr( $post->ID ); ?>]" id="send_coupons_on_renewals_<?php echo esc_attr( $post->ID ); ?>" value="yes" <?php checked( $is_send_coupons_on_renewals, 'yes' ); ?>/>
+					<?php echo wc_help_tip( esc_html__( 'Check this box to send above coupons on each renewal order.', 'woocommerce-smart-coupons' ) ); // phpcs:ignore ?>
 				</p>
 				<?php $this->product_options_admin_js(); ?>
-			</div>
-			<?php
+				<?php
+
+				echo '</div>';
+
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
+
+		}
+
+		/**
+		 * Coupon fields for variation
+		 *
+		 * @param int     $loop           Position in the loop.
+		 * @param array   $variation_data Variation data.
+		 * @param WP_Post $variation Post data.
+		 */
+		public function woocommerce_product_options_coupons_variable( $loop = 0, $variation_data = array(), $variation = null ) {
+			try {
+				$variation_id = $variation->ID;
+
+				$all_discount_types = wc_get_coupon_types();
+
+				$product                      = ( ! empty( $variation_id ) && function_exists( 'wc_get_product' ) ) ? wc_get_product( $variation_id ) : null;
+				$is_callable_product_get_meta = $this->is_callable( $product, 'get_meta' );
+
+				$is_send_coupons_on_renewals = ( true === $is_callable_product_get_meta ) ? $product->get_meta( 'send_coupons_on_renewals' ) : get_post_meta( $variation_id, 'send_coupons_on_renewals', true );
+
+				?>
+				<div class="smart_coupons_product_options_variable smart-coupons-field">
+					<p class="form-field smart-coupon-search _coupon_title_field post_<?php echo esc_attr( $variation_id ); ?> form-row form-row-full">
+						<label for="_coupon_title_<?php echo esc_attr( $loop ); ?>"><?php echo esc_html__( 'Coupons', 'woocommerce-smart-coupons' ); ?></label>
+						<?php echo wc_help_tip( esc_html__( 'These coupon/s will be given to customers who buy this product. The coupon code will be automatically sent to their email address on purchase.', 'woocommerce-smart-coupons' ) ); // phpcs:ignore ?>
+						<select class="wc-coupon-search" style="width: 100% !important;" multiple="multiple" id="_coupon_title_<?php echo esc_attr( $variation_id ); ?>" name="_coupon_title[<?php echo esc_attr( $variation_id ); ?>][<?php echo esc_attr( $loop ); ?>][]" data-placeholder="<?php echo esc_attr__( 'Search for a coupon&hellip;', 'woocommerce-smart-coupons' ); ?>" data-action="sc_json_search_coupons" data-security="<?php echo esc_attr( wp_create_nonce( 'search-coupons' ) ); ?>" >
+							<?php
+							$coupon_titles = ( true === $is_callable_product_get_meta ) ? $product->get_meta( '_coupon_title' ) : get_post_meta( $variation_id, '_coupon_title', true );
+
+							if ( ! empty( $coupon_titles ) ) {
+
+								foreach ( $coupon_titles as $coupon_title ) {
+
+									$coupon = new WC_Coupon( $coupon_title );
+
+									$discount_type = $coupon->get_discount_type();
+
+									if ( ! empty( $discount_type ) ) {
+										/* translators: 1. Discount type 2. Discount Type Label */
+										$discount_type = sprintf( __( ' ( %1$s: %2$s )', 'woocommerce-smart-coupons' ), __( 'Type', 'woocommerce-smart-coupons' ), $all_discount_types[ $discount_type ] );
+									}
+
+									echo '<option value="' . esc_attr( $coupon_title ) . '"' . selected( true, true, false ) . '>' . esc_html( $coupon_title . $discount_type ) . '</option>';
+								}
+							}
+							?>
+						</select>
+					</p>
+					<p class="form-field send_coupons_on_renewals_field post_<?php echo esc_attr( $variation_id ); ?> form-row form-row-full">
+						<label class="tips" data-tip="<?php echo esc_attr__( 'Check this box to send above coupons on each renewal order.', 'woocommerce-smart-coupons' ); ?>">
+							<?php echo esc_html__( 'Send coupons on renewals?', 'woocommerce-smart-coupons' ); ?>
+							<input type="checkbox" class="checkbox" id="send_coupons_on_renewals_<?php echo esc_attr( $variation_id ); ?>" name="send_coupons_on_renewals[<?php echo esc_attr( $variation_id ); ?>][<?php echo esc_attr( $loop ); ?>]" style="margin: 0.1em 0.5em 0.1em 0 !important;" value="yes" <?php checked( $is_send_coupons_on_renewals, 'yes' ); ?>/>
+						</label>
+					</p>
+					<?php $this->product_options_admin_js(); ?>
+				</div>
+				<?php
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
+			}
 		}
 
 		/**
@@ -416,47 +424,51 @@ if ( ! class_exists( 'WC_SC_Product_Fields' ) ) {
 		 * @param object $post The post object.
 		 */
 		public function woocommerce_process_product_meta_coupons( $post_id = 0, $post = null ) {
-			$post_id           = absint( $post_id );
-			$post_coupon_title = ( ! empty( $_POST['_coupon_title'][ $post_id ] ) ) ? wc_clean( wp_unslash( $_POST['_coupon_title'][ $post_id ] ) ) : ''; // phpcs:ignore
+			try {
+				$post_id           = absint( $post_id );
+				$post_coupon_title = ( ! empty( $_POST['_coupon_title'][ $post_id ] ) ) ? wc_clean( wp_unslash( $_POST['_coupon_title'][ $post_id ] ) ) : ''; // phpcs:ignore
 
-			$product                         = ( ! empty( $post_id ) ) ? wc_get_product( $post_id ) : null;
-			$is_callable_product_update_meta = $this->is_callable( $product, 'update_meta_data' );
+				$product                         = ( ! empty( $post_id ) ) ? wc_get_product( $post_id ) : null;
+				$is_callable_product_update_meta = $this->is_callable( $product, 'update_meta_data' );
 
-			if ( ! empty( $post_coupon_title ) ) {
-				if ( $this->is_wc_gte_30() ) {
-					$coupon_titles = $post_coupon_title;
+				if ( ! empty( $post_coupon_title ) ) {
+					if ( $this->is_wc_gte_30() ) {
+						$coupon_titles = $post_coupon_title;
+					} else {
+						$coupon_titles = array_filter( array_map( 'trim', explode( ',', $post_coupon_title ) ) );
+					}
+					if ( true === $is_callable_product_update_meta ) {
+						$product->update_meta_data( '_coupon_title', $coupon_titles );
+					} else {
+						update_post_meta( $post_id, '_coupon_title', $coupon_titles );
+					}
 				} else {
-					$coupon_titles = array_filter( array_map( 'trim', explode( ',', $post_coupon_title ) ) );
+					if ( true === $is_callable_product_update_meta ) {
+						$product->update_meta_data( '_coupon_title', array() );
+					} else {
+						update_post_meta( $post_id, '_coupon_title', array() );
+					}
 				}
-				if ( true === $is_callable_product_update_meta ) {
-					$product->update_meta_data( '_coupon_title', $coupon_titles );
-				} else {
-					update_post_meta( $post_id, '_coupon_title', $coupon_titles );
-				}
-			} else {
-				if ( true === $is_callable_product_update_meta ) {
-					$product->update_meta_data( '_coupon_title', array() );
-				} else {
-					update_post_meta( $post_id, '_coupon_title', array() );
-				}
-			}
 
-			if ( isset( $_POST['send_coupons_on_renewals'][ $post_id ] ) ) { // phpcs:ignore
-				if ( true === $is_callable_product_update_meta ) {
-					$product->update_meta_data( 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $post_id ] ) ) ); // phpcs:ignore
+				if ( isset( $_POST['send_coupons_on_renewals'][ $post_id ] ) ) { // phpcs:ignore
+					if ( true === $is_callable_product_update_meta ) {
+						$product->update_meta_data( 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $post_id ] ) ) ); // phpcs:ignore
+					} else {
+						update_post_meta( $post_id, 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $post_id ] ) ) ); // phpcs:ignore
+					}
 				} else {
-					update_post_meta( $post_id, 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $post_id ] ) ) ); // phpcs:ignore
+					if ( true === $is_callable_product_update_meta ) {
+						$product->update_meta_data( 'send_coupons_on_renewals', 'no' );
+					} else {
+						update_post_meta( $post_id, 'send_coupons_on_renewals', 'no' );
+					}
 				}
-			} else {
-				if ( true === $is_callable_product_update_meta ) {
-					$product->update_meta_data( 'send_coupons_on_renewals', 'no' );
-				} else {
-					update_post_meta( $post_id, 'send_coupons_on_renewals', 'no' );
-				}
-			}
 
-			if ( $this->is_callable( $product, 'save' ) ) {
-				$product->save();
+				if ( $this->is_callable( $product, 'save' ) ) {
+					$product->save();
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -467,54 +479,56 @@ if ( ! class_exists( 'WC_SC_Product_Fields' ) ) {
 		 * @param  integer $i Loop ID.
 		 */
 		public function woocommerce_process_product_meta_coupons_variable( $variation_id = 0, $i = 0 ) {
+			try {
+				if ( empty( $variation_id ) ) {
+					return;
+				}
 
-			if ( empty( $variation_id ) ) {
-				return;
+				$variation_id                      = absint( $variation_id );
+				$variation                         = ( ! empty( $variation_id ) ) ? wc_get_product( $variation_id ) : null;
+				$is_callable_variation_update_meta = $this->is_callable( $variation, 'update_meta_data' );
+
+				$post_coupon_title = ( ! empty( $_POST['_coupon_title'][ $variation_id ][ $i ] ) ) ? wc_clean( wp_unslash( $_POST['_coupon_title'][ $variation_id ][ $i ] ) ) : ''; // phpcs:ignore
+
+				if ( ! empty( $post_coupon_title ) ) {
+					if ( $this->is_wc_gte_30() ) {
+						$coupon_titles = $post_coupon_title;
+					} else {
+						$coupon_titles = array_filter( array_map( 'trim', explode( ',', $post_coupon_title ) ) );
+					}
+					if ( true === $is_callable_variation_update_meta ) {
+						$variation->update_meta_data( '_coupon_title', $coupon_titles );
+					} else {
+						update_post_meta( $variation_id, '_coupon_title', $coupon_titles );
+					}
+				} else {
+					if ( true === $is_callable_variation_update_meta ) {
+						$variation->update_meta_data( '_coupon_title', array() );
+					} else {
+						update_post_meta( $variation_id, '_coupon_title', array() );
+					}
+				}
+
+				if ( isset( $_POST['send_coupons_on_renewals'][ $variation_id ][ $i ] ) ) { // phpcs:ignore
+					if ( true === $is_callable_variation_update_meta ) {
+						$variation->update_meta_data( 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $variation_id ][ $i ] ) ) ); // phpcs:ignore
+					} else {
+						update_post_meta( $variation_id, 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $variation_id ][ $i ] ) ) ); // phpcs:ignore
+					}
+				} else {
+					if ( true === $is_callable_variation_update_meta ) {
+						$variation->update_meta_data( 'send_coupons_on_renewals', 'no' );
+					} else {
+						update_post_meta( $variation_id, 'send_coupons_on_renewals', 'no' );
+					}
+				}
+
+				if ( $this->is_callable( $variation, 'save' ) ) {
+					$variation->save();
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			$variation_id                      = absint( $variation_id );
-			$variation                         = ( ! empty( $variation_id ) ) ? wc_get_product( $variation_id ) : null;
-			$is_callable_variation_update_meta = $this->is_callable( $variation, 'update_meta_data' );
-
-			$post_coupon_title = ( ! empty( $_POST['_coupon_title'][ $variation_id ][ $i ] ) ) ? wc_clean( wp_unslash( $_POST['_coupon_title'][ $variation_id ][ $i ] ) ) : ''; // phpcs:ignore
-
-			if ( ! empty( $post_coupon_title ) ) {
-				if ( $this->is_wc_gte_30() ) {
-					$coupon_titles = $post_coupon_title;
-				} else {
-					$coupon_titles = array_filter( array_map( 'trim', explode( ',', $post_coupon_title ) ) );
-				}
-				if ( true === $is_callable_variation_update_meta ) {
-					$variation->update_meta_data( '_coupon_title', $coupon_titles );
-				} else {
-					update_post_meta( $variation_id, '_coupon_title', $coupon_titles );
-				}
-			} else {
-				if ( true === $is_callable_variation_update_meta ) {
-					$variation->update_meta_data( '_coupon_title', array() );
-				} else {
-					update_post_meta( $variation_id, '_coupon_title', array() );
-				}
-			}
-
-			if ( isset( $_POST['send_coupons_on_renewals'][ $variation_id ][ $i ] ) ) { // phpcs:ignore
-				if ( true === $is_callable_variation_update_meta ) {
-					$variation->update_meta_data( 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $variation_id ][ $i ] ) ) ); // phpcs:ignore
-				} else {
-					update_post_meta( $variation_id, 'send_coupons_on_renewals', wc_clean( wp_unslash( $_POST['send_coupons_on_renewals'][ $variation_id ][ $i ] ) ) ); // phpcs:ignore
-				}
-			} else {
-				if ( true === $is_callable_variation_update_meta ) {
-					$variation->update_meta_data( 'send_coupons_on_renewals', 'no' );
-				} else {
-					update_post_meta( $variation_id, 'send_coupons_on_renewals', 'no' );
-				}
-			}
-
-			if ( $this->is_callable( $variation, 'save' ) ) {
-				$variation->save();
-			}
-
 		}
 
 	}

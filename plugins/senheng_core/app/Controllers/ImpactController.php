@@ -328,10 +328,16 @@ class ImpactController
 
     public static function get_ambassador_id($current_user_id, $config, $idsso)
     {
-        return false; #testing
+        // Already have ambassador ID? Done.
+        $cached = get_user_meta($current_user_id, 'ambassodor_id', true);
+        if (!empty($cached)) {
+            return $cached;
+        }
+
         if (!$current_user_id || !$config || !$idsso) {
             return false;
         }
+
         $response = wp_remote_post(
             $config['api_url'] . '/ambassodor_retrieve',
             [
@@ -352,15 +358,11 @@ class ImpactController
 
         $body = json_decode(wp_remote_retrieve_body($response), true);
 
-        if (isset($body['code']) && $body['code'] === 201) {
-            if (isset($body['body']['ambassodor_id']) && $body['body']['is_ambassador']) {
-                update_user_meta($current_user_id, 'ambassodor_id', $body['body']['ambassodor_id']);
-            } else {
-                // If no ambassador ID is found, return false
-                return false;
-            }
+        if (!empty($body['body']['ambassodor_id']) && !empty($body['body']['is_ambassador'])) {
 
-            return true;
+            update_user_meta($current_user_id, 'ambassodor_id', $body['body']['ambassodor_id']);
+
+            return $body['body']['ambassodor_id'];
         }
 
         return false;

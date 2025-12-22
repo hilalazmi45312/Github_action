@@ -131,6 +131,164 @@ if ( ! function_exists( 'woodmart_checkout_steps' ) ) {
 
 /**
  * ------------------------------------------------------------------------------------------------
+ * Checkout thank you page order overview
+ * ------------------------------------------------------------------------------------------------
+ */
+
+if ( ! function_exists( 'woodmart_order_overview' ) ) {
+	function woodmart_order_overview( $order ) {
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return;
+		}
+		?>
+		<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+			<li class="woocommerce-order-overview__order order">
+				<span><?php esc_html_e( 'Order number:', 'woocommerce' ); ?></span>
+				<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+			</li>
+	
+			<li class="woocommerce-order-overview__date date">
+				<span><?php esc_html_e( 'Date:', 'woocommerce' ); ?></span>
+				<strong><?php echo wc_format_datetime( $order->get_date_created() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+			</li>
+	
+			<?php if ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email() ) : ?>
+				<li class="woocommerce-order-overview__email email">
+					<span><?php esc_html_e( 'Email:', 'woocommerce' ); ?></span>
+					<strong><?php echo $order->get_billing_email(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+				</li>
+			<?php endif; ?>
+	
+			<li class="woocommerce-order-overview__total total">
+				<span><?php esc_html_e( 'Total:', 'woocommerce' ); ?></span>
+				<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+			</li>
+	
+			<?php if ( $order->get_payment_method_title() ) : ?>
+				<li class="woocommerce-order-overview__payment-method method">
+					<span><?php esc_html_e( 'Payment method:', 'woocommerce' ); ?></span>
+					<strong><?php echo wp_kses_post( $order->get_payment_method_title() ); ?></strong>
+				</li>
+			<?php endif; ?>
+		</ul>
+		<?php
+	}
+}
+
+/**
+ * ------------------------------------------------------------------------------------------------
+ * Checkout thank you page order details
+ * ------------------------------------------------------------------------------------------------
+ */
+
+if ( ! function_exists( 'woodmart_order_details' ) ) {
+	function woodmart_order_details( $order ) {
+		if ( ! $order ) {
+			return;
+		}
+
+		$order_items        = $order->get_items( apply_filters( 'woocommerce_purchase_order_item_types', 'line_item' ) );
+		$show_purchase_note = $order->has_status( apply_filters( 'woocommerce_purchase_note_order_statuses', array( 'completed', 'processing' ) ) );
+		$actions            = array_filter(
+			wc_get_account_orders_actions( $order ),
+			function ( $action ) {
+				return 'View' !== $action['name'];
+			}
+		);
+
+		?>
+		<section class="woocommerce-order-details">
+			<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
+
+			<h2 class="woocommerce-order-details__title"><?php esc_html_e( 'Order details', 'woocommerce' ); ?></h2>
+
+			<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+
+				<thead>
+					<tr>
+						<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
+						<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<?php
+					do_action( 'woocommerce_order_details_before_order_table_items', $order );
+
+					foreach ( $order_items as $item_id => $item ) {
+						$product = $item->get_product();
+
+						wc_get_template(
+							'order/order-details-item.php',
+							array(
+								'order'              => $order,
+								'item_id'            => $item_id,
+								'item'               => $item,
+								'show_purchase_note' => $show_purchase_note,
+								'purchase_note'      => $product ? $product->get_purchase_note() : '',
+								'product'            => $product,
+							)
+						);
+					}
+
+					do_action( 'woocommerce_order_details_after_order_table_items', $order );
+					?>
+				</tbody>
+
+				<?php
+				if ( ! empty( $actions ) ) :
+					?>
+				<tfoot>
+					<tr>
+						<th class="order-actions--heading"><?php esc_html_e( 'Actions', 'woocommerce' ); ?>:</th>
+						<td>
+								<?php
+								$wp_button_class = wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '';
+								foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+									if ( empty( $action['aria-label'] ) ) {
+										// Generate the aria-label based on the action name.
+										/* translators: %1$s Action name, %2$s Order number. */
+										$action_aria_label = sprintf( __( '%1$s order number %2$s', 'woocommerce' ), $action['name'], $order->get_order_number() );
+									} else {
+										$action_aria_label = $action['aria-label'];
+									}
+										echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . ' order-actions-button " aria-label="' . esc_attr( $action_aria_label ) . '">' . esc_html( $action['name'] ) . '</a>';
+										unset( $action_aria_label );
+								}
+								?>
+							</td>
+						</tr>
+					</tfoot>
+					<?php endif ?>
+				<tfoot>
+					<?php
+					foreach ( $order->get_order_item_totals() as $key => $total ) {
+						?>
+							<tr>
+								<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
+								<td><?php echo wp_kses_post( $total['value'] ); ?></td>
+							</tr>
+							<?php
+					}
+					?>
+					<?php if ( $order->get_customer_note() ) : ?>
+						<tr>
+							<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
+							<td><?php echo wp_kses( nl2br( wptexturize( $order->get_customer_note() ) ), array( 'br' => array() ) ); ?></td>
+						</tr>
+					<?php endif; ?>
+				</tfoot>
+			</table>
+
+			<?php do_action( 'woocommerce_order_details_after_order_table', $order ); ?>
+		</section>
+
+		<?php
+	}
+}
+
+/**
+ * ------------------------------------------------------------------------------------------------
  * Custom thumbnail for category (wide items)
  * ------------------------------------------------------------------------------------------------
  */
@@ -215,7 +373,8 @@ if ( ! function_exists( 'woodmart_product_sale_countdown' ) ) {
 			return;
 		}
 
-		$timezone = 'GMT';
+		$timezone  = 'GMT';
+		$separator = ! empty( $settings['separator'] ) && 'no' !== $settings['separator'] && ! empty( $settings['separator_text'] );
 
 		if ( apply_filters( 'woodmart_wp_timezone', false ) ) {
 			$timezone = wc_timezone_string();
@@ -231,8 +390,16 @@ if ( ! function_exists( 'woodmart_product_sale_countdown' ) ) {
 			$wrapper_classes .= ' wd-style-standard';
 		}
 
-		if ( ! empty( $settings['timer_style'] ) ) {
-			$wrapper_classes .= ' wd-style-' . $settings['timer_style'];
+		if ( ! empty( $settings['timer_style'] ) && 'active' === $settings['timer_style'] ) {
+			$wrapper_classes .= ' wd-bg-active';
+		}
+
+		if ( ! empty( $settings['size'] ) ) {
+			$wrapper_classes .= ' wd-size-' . $settings['size'];
+		}
+
+		if ( ! empty( $settings['layout'] ) && 'inline' === $settings['layout'] ) {
+			$wrapper_classes .= ' wd-layout-inline';
 		}
 
 		if ( ! empty( $settings['woodmart_color_scheme'] ) ) {
@@ -241,6 +408,10 @@ if ( ! function_exists( 'woodmart_product_sale_countdown' ) ) {
 
 		if ( ! empty( $settings['extra_class'] ) ) {
 			$wrapper_classes .= ' ' . $settings['extra_class'];
+		}
+
+		if ( isset( $settings['labels'] ) && ( ! $settings['labels'] || 'no' === $settings['labels'] ) ) {
+			$wrapper_classes .= ' wd-labels-hide';
 		}
 
 		if ( $content ) {
@@ -252,40 +423,59 @@ if ( ! function_exists( 'woodmart_product_sale_countdown' ) ) {
 			<h4 class="wd-el-title title element-title">
 				<?php echo esc_html( $settings['title'] ); ?>
 			</h4>
-		<?php endif; ?>
-		<div class="wd-product-countdown wd-timer<?php echo esc_attr( $wrapper_classes ); ?>" data-end-date="<?php echo esc_attr( date( 'Y-m-d H:i:s', $sale_date_end ) ); ?>" data-timezone="<?php echo esc_attr( $timezone ); ?>">
-			<span class="wd-timer-days">
-				<span class="wd-timer-value">
-					0
+		<?php endif; 
+
+		?>
+		<div class="wd-countdown-timer wd-product-countdown">
+			<div class="wd-timer<?php echo esc_attr( $wrapper_classes ); ?>" data-end-date="<?php echo esc_attr( date( 'Y-m-d H:i:s', $sale_date_end ) ); ?>" data-timezone="<?php echo esc_attr( $timezone ); ?>" data-hide-on-finish="yes">
+				<span class="wd-item wd-timer-days">
+					<span class="wd-timer-value">
+						0
+					</span>
+					<span class="wd-timer-text">
+						<?php esc_html_e( 'days', 'woodmart' ); ?>
+					</span>
 				</span>
-				<span class="wd-timer-text">
-					<?php esc_html_e( 'days', 'woodmart' ); ?>
+				<?php if ( $separator ) : ?>
+					<div class="wd-sep">
+						<?php echo esc_html( $settings['separator_text'] ); ?>
+					</div>
+				<?php endif; ?>
+				<span class="wd-item wd-timer-hours">
+					<span class="wd-timer-value">
+						00
+					</span>
+					<span class="wd-timer-text">
+						<?php esc_html_e( 'hr', 'woodmart' ); ?>
+					</span>
 				</span>
-			</span>
-			<span class="wd-timer-hours">
-				<span class="wd-timer-value">
-					00
+				<?php if ( $separator ) : ?>
+					<div class="wd-sep">
+						<?php echo esc_html( $settings['separator_text'] ); ?>
+					</div>
+				<?php endif; ?>
+				<span class="wd-item wd-timer-min">
+					<span class="wd-timer-value">
+						00
+					</span>
+					<span class="wd-timer-text">
+						<?php esc_html_e( 'min', 'woodmart' ); ?>
+					</span>
 				</span>
-				<span class="wd-timer-text">
-					<?php esc_html_e( 'hr', 'woodmart' ); ?>
+				<?php if ( $separator ) : ?>
+					<div class="wd-sep">
+						<?php echo esc_html( $settings['separator_text'] ); ?>
+					</div>
+				<?php endif; ?>
+				<span class="wd-item wd-timer-sec">
+					<span class="wd-timer-value">
+						00
+					</span>
+					<span class="wd-timer-text">
+						<?php esc_html_e( 'sc', 'woodmart' ); ?>
+					</span>
 				</span>
-			</span>
-			<span class="wd-timer-min">
-				<span class="wd-timer-value">
-					00
-				</span>
-				<span class="wd-timer-text">
-					<?php esc_html_e( 'min', 'woodmart' ); ?>
-				</span>
-			</span>
-			<span class="wd-timer-sec">
-				<span class="wd-timer-value">
-					00
-				</span>
-				<span class="wd-timer-text">
-					<?php esc_html_e( 'sc', 'woodmart' ); ?>
-				</span>
-			</span>
+			</div>
 		</div>
 		<?php
 		// phpcs:enable
@@ -327,9 +517,7 @@ if ( ! function_exists( 'woodmart_hover_image' ) ) {
 		if ( $hover_image != '' && woodmart_get_opt( 'hover_image' ) ) :
 			?>
 			<div class="hover-img">
-				<a href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php esc_html_e( 'Product image', 'woodmart' ); ?>">
-					<?php echo woodmart_get_product_thumbnail( 'woocommerce_thumbnail', $attachment_ids[0] ); ?>
-				</a>
+				<?php echo woodmart_get_product_thumbnail( 'woocommerce_thumbnail', $attachment_ids[0] ); ?>
 			</div>
 			<?php
 		endif;
@@ -337,8 +525,10 @@ if ( ! function_exists( 'woodmart_hover_image' ) ) {
 	}
 }
 
-add_action( 'woocommerce_before_main_content', 'woodmart_woo_wrapper_start', 10 );
-add_action( 'woocommerce_after_main_content', 'woodmart_woo_wrapper_end', 10 );
+if ( woodmart_woocommerce_installed() ) {
+	add_action( 'woocommerce_before_main_content', 'woodmart_woo_wrapper_start', 10 );
+	add_action( 'woocommerce_after_main_content', 'woodmart_woo_wrapper_end', 10 );
+}
 
 if ( ! function_exists( 'woodmart_woo_wrapper_start' ) ) {
 	function woodmart_woo_wrapper_start() {
@@ -352,6 +542,10 @@ if ( ! function_exists( 'woodmart_woo_wrapper_start' ) ) {
 			if ( ( is_shop() || is_product_taxonomy() ) && Builder::get_instance()->has_custom_layout( 'shop_archive' ) ) {
 				$classes = ' entry-content';
 			}
+		}
+
+		if ( woodmart_is_thank_you_page() && Builder::get_instance()->has_custom_layout( 'thank_you_page' ) || is_account_page() && ( Builder::get_instance()->has_custom_layout( 'my_account_page' ) || Builder::get_instance()->has_custom_layout( 'my_account_auth' ) || Builder::get_instance()->has_custom_layout( 'my_account_lost_password' ) ) ) {
+			$classes = ' entry-content';
 		}
 
 		echo '<div class="wd-content-area site-content' . esc_attr( $classes ) . '"' . wp_kses( $content_inline_style, true ) . '>';
@@ -374,7 +568,12 @@ if ( ! function_exists( 'woodmart_woo_wrapper_end' ) ) {
 
 if ( ! function_exists( 'woodmart_before_my_account_navigation' ) ) {
 	function woodmart_before_my_account_navigation() {
-		echo '<div class="wd-my-account-sidebar' . woodmart_get_old_classes( ' woodmart-my-account-sidebar' ) . '">';
+		if ( Builder::get_instance()->has_custom_layout( 'my_account_page' ) ) {
+			return;
+		}
+
+		echo '<div class="wd-my-account-sidebar wd-grid-col' . woodmart_get_old_classes( ' woodmart-my-account-sidebar' ) . '" style="--wd-col-lg:3;--wd-col-md:4;--wd-col-sm:12;">';
+
 		if ( ! function_exists( 'woodmart_my_account_title' ) ) {
 			?>
 				<h3 class="woocommerce-MyAccount-title entry-title">
@@ -438,7 +637,11 @@ if ( ! function_exists( 'woodmart_product_video_button' ) ) {
 
 		woodmart_enqueue_js_library( 'magnific' );
 		woodmart_enqueue_js_script( 'product-video' );
+		
 		woodmart_enqueue_inline_style( 'mfp-popup' );
+		woodmart_enqueue_inline_style( 'el-video' );
+		woodmart_enqueue_inline_style( 'mod-animations-transform' );
+		woodmart_enqueue_inline_style( 'mod-transform' );
 		?>
 			<div class="product-video-button wd-gallery-btn wd-action-btn wd-style-icon-bg-text wd-play-icon">
 				<a href="<?php echo esc_url( $video_url ); ?>"><span><?php esc_html_e( 'Watch video', 'woodmart' ); ?></span></a>
@@ -933,10 +1136,12 @@ if ( ! function_exists( 'woodmart_product_categories_nav' ) ) {
 			$list_args['hierarchical'] = 1;
 
 			if ( woodmart_get_opt( 'shop_page_title_categories_exclude' ) ) {
-				$list_args['exclude'] = woodmart_get_opt( 'shop_page_title_categories_exclude' );
+				$list_args['exclude'] = array_filter( woodmart_get_opt( 'shop_page_title_categories_exclude' ) );
 			}
 
-			include_once WC()->plugin_path() . '/includes/walkers/class-product-cat-list-walker.php';
+			if ( ! class_exists( 'WC_Product_Cat_List_Walker' ) ) {
+				include_once WC()->plugin_path() . '/includes/walkers/class-product-cat-list-walker.php';
+			}
 
 			if ( is_object( $current_cat ) && ! get_term_children( $current_cat->term_id, 'product_cat' ) && $show_subcategories && ! $show_categories_neighbors ) {
 				if ( 'side-hidden' === $mobile_categories_layout ) {
@@ -963,6 +1168,10 @@ if ( ! function_exists( 'woodmart_product_categories_nav' ) ) {
 
 		if ( 'accordion' === $mobile_categories_layout ) {
 			$class .= ' wd-mobile-' . $mobile_categories_layout;
+		}
+
+		if ( ! empty( $settings['icon_alignment'] ) && 'inherit' !== $settings['icon_alignment'] ) {
+			$class .= ' wd-icon-' . $settings['icon_alignment'];
 		}
 
 		if ( woodmart_is_shop_on_front() ) {
@@ -1277,11 +1486,11 @@ if ( ! class_exists( 'WOODMART_Walker_Category' ) ) {
 						if ( $category->term_id == $_current_term->term_id ) {
 							$css_classes[] = 'wd-active';
 						} elseif ( $category->term_id == $_current_term->parent ) {
-							$css_classes[] = 'current-cat-parent';
+							$css_classes[] = 'current-cat-parent wd-current-active-parent';
 						}
 						while ( $_current_term->parent ) {
 							if ( $category->term_id == $_current_term->parent ) {
-								$css_classes[] = 'current-cat-ancestor';
+								$css_classes[] = 'current-cat-ancestor wd-current-active-ancestor';
 								break;
 							}
 							$_current_term = get_term( $_current_term->parent, $category->taxonomy );
@@ -1323,7 +1532,9 @@ if ( ! class_exists( 'WOODMART_Walker_Category' ) ) {
 
 if ( ! class_exists( 'WOODMART_WC_Product_Cat_List_Walker' ) && function_exists( 'WC' ) ) :
 
-	include_once WC()->plugin_path() . '/includes/walkers/class-product-cat-list-walker.php';
+	if ( ! class_exists( 'WC_Product_Cat_List_Walker' ) ) {
+		include_once WC()->plugin_path() . '/includes/walkers/class-product-cat-list-walker.php';
+	}
 
 	class WOODMART_WC_Product_Cat_List_Walker extends WC_Product_Cat_List_Walker {
 
@@ -1341,15 +1552,15 @@ if ( ! class_exists( 'WOODMART_WC_Product_Cat_List_Walker' ) && function_exists(
 			$output .= '<li class="cat-item cat-item-' . $cat->term_id;
 
 			if ( $args['current_category'] == $cat->term_id ) {
-				$output .= ' current-cat';
+				$output .= ' current-cat wd-active';
 			}
 
 			if ( $args['has_children'] && $args['hierarchical'] ) {
-				$output .= ' cat-parent';
+				$output .= ' cat-parent wd-active-parent';
 			}
 
 			if ( $args['current_category_ancestors'] && $args['current_category'] && in_array( $cat->term_id, $args['current_category_ancestors'] ) ) {
-				$output .= ' current-cat-parent';
+				$output .= ' current-cat-parent wd-current-active-parent';
 			}
 
 			$output .= '"><a href="' . get_term_link( (int) $cat->term_id, $this->tree_type ) . '">' . $cat->name . '</a>';
@@ -1377,6 +1588,11 @@ if ( ! function_exists( 'woodmart_product_categories' ) ) {
 		}
 
 		$terms = get_the_terms( $product->get_id(), 'product_cat' );
+
+		if ( 'variation' === $product->get_type() && ! $terms && $product->get_parent_id() ) {
+			// For variable products, get the parent product's category.
+			$terms = get_the_terms( $product->get_parent_id(), 'product_cat' );
+		}
 
 		if ( ! $terms ) {
 			return;
@@ -1576,17 +1792,75 @@ if ( ! function_exists( 'woodmart_my_account_links' ) ) {
 			return;
 		}
 		?>
-		<div class="wd-my-account-links wd-grid-g<?php echo woodmart_get_old_classes( ' woodmart-my-account-links' ); ?>">
+		<ul class="wd-my-account-links wd-nav-my-acc wd-nav wd-icon-top wd-grid-g<?php echo woodmart_get_old_classes( ' woodmart-my-account-links' ); ?>">
 			<?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
-				<div class="<?php echo esc_attr( $endpoint ); ?>-link">
-					<a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>"><?php echo esc_html( $label ); ?></a>
-				</div>
+				<li class="wd-my-acc-<?php echo esc_attr( $endpoint ); ?>">
+					<a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>">
+						<span class="wd-nav-icon"></span>
+						<span class="nav-link-text">
+							<?php echo esc_html( $label ); ?>
+						</span>
+					</a>
+				</li>
 			<?php endforeach; ?>
-		</div>
+			</ul>
 		<?php
 	}
 	add_action( 'woocommerce_account_dashboard', 'woodmart_my_account_links', 10 );
 }
+
+if ( ! function_exists( 'woodmart_account_navigation' ) ) {
+
+	/**
+	 * My Account navigation template.
+	 *
+	 * @param string $menu_classes Additional CSS classes for the navigation wrapper.
+	 * @param bool   $show_icons Whether to display icons next to menu items (optional).
+	 * @param bool   $attributes Element attributes like <style> (optional).
+	 */
+	function woodmart_account_navigation( $menu_classes = '', $show_icons = false, $attributes = '') {
+		do_action( 'woocommerce_before_account_navigation' );
+		$wishlist_page    = function_exists( 'wpml_object_id_filter' ) ? wpml_object_id_filter( woodmart_get_opt( 'wishlist_page' ), 'page', true ) : woodmart_get_opt( 'wishlist_page' );
+		$is_wishlist_page = $wishlist_page && (int) woodmart_get_the_ID() === (int) $wishlist_page;
+		?>
+
+		<nav class="woocommerce-MyAccount-navigation" aria-label="<?php esc_html_e( 'Account pages', 'woocommerce' ); ?>">
+			<ul class="wd-nav-my-acc wd-nav<?php echo esc_html( $menu_classes ); ?>"<?php echo wp_kses( $attributes, true ); ?>>
+				<?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
+					<?php
+					$item_classes = wc_get_account_menu_item_classes( $endpoint );
+
+					if ( $show_icons ) {
+						$item_classes .= ' wd-my-acc-' . $endpoint;
+					}
+
+					$current_endpoint = WC()->query->get_current_endpoint();
+
+					if (
+						( ! $is_wishlist_page && ( wc_is_current_account_menu_item( $endpoint ) || $current_endpoint === $endpoint ) ) ||
+						( $is_wishlist_page && 'wishlist' === $endpoint )
+					) {
+						$item_classes .= ' wd-active';
+					}
+					?>
+					<li class="<?php echo esc_html( $item_classes ); ?>">
+						<a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>" <?php echo wc_is_current_account_menu_item( $endpoint ) ? 'aria-current="page"' : ''; ?>>
+							<?php if ( $show_icons ) : ?>
+								<span class="wd-nav-icon"></span>
+							<?php endif; ?>
+							<span class="nav-link-text">
+								<?php echo esc_html( $label ); ?>
+							</span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</nav>
+
+		<?php do_action( 'woocommerce_after_account_navigation' );
+	}
+}
+
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -1595,13 +1869,21 @@ if ( ! function_exists( 'woodmart_my_account_links' ) ) {
  */
 if ( ! function_exists( 'woodmart_my_account_wrapp_start' ) ) {
 	function woodmart_my_account_wrapp_start() {
-		echo '<div class="woocommerce-my-account-wrapper">';
+		if ( Builder::get_instance()->has_custom_layout( 'my_account_page' ) ) {
+			return;
+		}
+
+		echo '<div class="wd-my-account-wrapper wd-grid-g" style="--wd-col-lg:12;--wd-gap-lg:30px;--wd-gap-sm:20px;">';
 	}
 	add_action( 'woocommerce_account_navigation', 'woodmart_my_account_wrapp_start', 1 );
 }
 
 if ( ! function_exists( 'woodmart_my_account_wrapp_end' ) ) {
 	function woodmart_my_account_wrapp_end() {
+		if ( Builder::get_instance()->has_custom_layout( 'my_account_page' ) ) {
+			return;
+		}
+
 		echo '</div>';
 	}
 	add_action( 'woocommerce_account_content', 'woodmart_my_account_wrapp_end', 10000 );
@@ -1708,45 +1990,6 @@ if ( ! function_exists( 'woodmart_after_add_to_cart_area' ) ) {
 	add_action( 'woocommerce_single_product_summary', 'woodmart_after_add_to_cart_area', 31 );
 }
 
-
-/**
- * ------------------------------------------------------------------------------------------------
- * Clear all filters button
- * ------------------------------------------------------------------------------------------------
- */
-
-if ( ! function_exists( 'woodmart_clear_filters_btn' ) ) {
-	function woodmart_clear_filters_btn() {
-		if ( ! woodmart_woocommerce_installed() ) {
-			return;
-		}
-
-		$url                = woodmart_shop_page_link();
-		$_chosen_attributes = WC_Query::get_layered_nav_chosen_attributes();
-
-		if ( ! empty( $_GET['filter_product_brand'] ) ) {
-			$filter_product_brand = woodmart_clean( wp_unslash( $_GET['filter_product_brand'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-			$_chosen_attributes['product_brand']['terms'] = array_map( 'sanitize_title', explode( ',', $filter_product_brand ) );
-		}
-
-		$min_price = isset( $_GET['min_price'] ) ? esc_attr( $_GET['min_price'] ) : '';
-		$max_price = isset( $_GET['max_price'] ) ? esc_attr( $_GET['max_price'] ) : '';
-
-		if ( 0 < count( $_chosen_attributes ) || $min_price || $max_price ) {
-			$reset_url = strtok( $url, '?' );
-			if ( isset( $_GET['post_type'] ) ) {
-				$reset_url = add_query_arg( 'post_type', wc_clean( wp_unslash( $_GET['post_type'] ) ), $reset_url );
-			}
-			?>
-				<div class="wd-clear-filters wd-action-btn wd-style-text wd-cross-icon">
-					<a href="<?php echo esc_url( $reset_url ); ?>"><?php echo esc_html__( 'Clear filters', 'woodmart' ); ?></a>
-				</div>
-			<?php
-		}
-	}
-}
-
 /**
  * ------------------------------------------------------------------------------------------------
  * Print shop page css from vc elements
@@ -1769,7 +2012,7 @@ if ( ! function_exists( 'woodmart_sticky_single_add_to_cart' ) ) {
 		}
 
 		?>
-			<div class="wd-sticky-btn<?php echo woodmart_get_old_classes( ' woodmart-sticky-btn' ); ?>">
+			<div class="wd-sticky-btn<?php echo woodmart_get_old_classes( ' woodmart-sticky-btn' ); ?>" role="complementary" aria-label="<?php esc_html_e( 'Sticky add to cart', 'woodmart' ); ?>">
 				<div class="wd-sticky-btn-container container<?php echo woodmart_get_old_classes( ' woodmart-sticky-btn-container' ); ?>">
 					<div class="wd-sticky-btn-content<?php echo woodmart_get_old_classes( ' woodmart-sticky-btn-content' ); ?>">
 						<div class="wd-sticky-btn-thumbnail<?php echo woodmart_get_old_classes( ' woodmart-sticky-btn-thumbnail' ); ?>">
@@ -1790,7 +2033,11 @@ if ( ! function_exists( 'woodmart_sticky_single_add_to_cart' ) ) {
 							<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" class="wd-sticky-add-to-cart button alt<?php echo woodmart_get_old_classes( ' woodmart-sticky-add-to-cart' ); ?>">
 								<?php echo true == $product->is_type( 'variable' ) ? esc_html__( 'Select options', 'woodmart' ) : $product->single_add_to_cart_text(); ?>
 							</a>
-							<?php Quick_Buy::get_instance()->output_quick_buy_button(); ?>
+							<?php
+							if ( woodmart_get_opt( 'buy_now_enabled' ) ) {
+								Quick_Buy::get_instance()->output_quick_buy_button();
+							}
+							?>
 						<?php endif; ?>
 
 						<?php do_action( 'woodmart_sticky_atc_actions' ); ?>
@@ -1840,7 +2087,7 @@ if ( ! function_exists( 'woodmart_sticky_sidebar_button' ) ) {
 		$classes       = $toolbar ? 'wd-toolbar-sidebar wd-tools-element' . woodmart_get_old_classes( ' sticky-toolbar' ) : 'wd-sidebar-opener wd-action-btn wd-style-icon wd-burger-icon';
 		$label_classes = $toolbar ? 'wd-toolbar-label' : '';
 
-		if ( ( 0 === $sidebar_col && ! $is_builder ) || woodmart_maintenance_page() || is_singular( 'woodmart_slide' ) || is_singular( 'cms_block' ) || ( $sticky_toolbar && in_array( 'sidebar', $sticky_toolbar_fields, true ) && ! $toolbar && ! strpos( $off_canvas_sidebar, 'wd-sidebar-hidden-lg' ) ) || ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width( true ) ) ) {
+		if ( ( 0 === $sidebar_col && ! $is_builder ) || woodmart_maintenance_page() || is_singular( 'woodmart_slide' ) || is_singular( 'cms_block' ) || is_singular( 'wd_floating_block' ) || is_singular( 'wd_popup' ) || ( $sticky_toolbar && in_array( 'sidebar', $sticky_toolbar_fields, true ) && ! $toolbar && ! strpos( $off_canvas_sidebar, 'wd-sidebar-hidden-lg' ) ) || ( woodmart_is_elementor_installed() && woodmart_is_elementor_full_width( true ) ) ) {
 			return;
 		}
 
@@ -2006,6 +2253,8 @@ if ( ! function_exists( 'woodmart_get_header_links' ) ) {
 
 		if ( 'light' === whb_get_dropdowns_color() ) {
 			$dropdowns_classes .= ' color-scheme-light';
+		} else {
+			$dropdowns_classes .= ' color-scheme-dark';
 		}
 
 		$dropdowns_classes .= woodmart_get_old_classes( ' menu-item-register sub-menu-dropdown' );
@@ -2217,18 +2466,14 @@ if ( ! function_exists( 'woodmart_login_form' ) ) {
 		$goo_app_id     = woodmart_get_opt( 'goo_app_id' );
 		$goo_app_secret = woodmart_get_opt( 'goo_app_secret' );
 
+		$form_attrs  = ! empty( $action ) ? 'action="' . esc_url( $action ) . '"' : '';
+		$form_attrs .= $hidden ? ' style="display:none;"' : '';
+
 		ob_start();
+
+		woodmart_enqueue_inline_style( 'woo-mod-login-form' );
 		?>
-			<form id="customer_login" method="post" class="login woocommerce-form woocommerce-form-login
-			<?php
-			if ( $hidden ) {
-				echo 'hidden-form';}
-			?>
-			" <?php echo ( ! empty( $action ) ) ? 'action="' . esc_url( $action ) . '"' : ''; ?> <?php
-			if ( $hidden ) {
-				echo 'style="display:none;"';}
-			?>
-			>
+			<form id="customer_login" method="post" class="login woocommerce-form woocommerce-form-login hidden-form" <?php echo $form_attrs; //phpcs:ignore. ?>>
 
 				<?php do_action( 'woocommerce_login_form_start' ); ?>
 
@@ -2245,7 +2490,7 @@ if ( ! function_exists( 'woodmart_login_form' ) ) {
 
 				<?php do_action( 'woocommerce_login_form' ); ?>
 
-				<p class="form-row">
+				<p class="form-row form-row-btn">
 					<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
 					<?php if ( $redirect ) : ?>
 						<input type="hidden" name="redirect" value="<?php echo esc_url( $redirect ); ?>" />
@@ -2303,6 +2548,64 @@ if ( ! function_exists( 'woodmart_login_form' ) ) {
 	}
 }
 
+// **********************************************************************//
+// ! Register form HTML for my account auth page
+// **********************************************************************//
+
+if ( ! function_exists( 'woodmart_register_form' ) ) {
+	function woodmart_register_form() {
+		if ( get_option( 'woocommerce_enable_myaccount_registration' ) !== 'yes' ) {
+			return;
+		}
+		$account_link = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
+		?>
+		<form method="post" action="<?php echo esc_url( add_query_arg( 'action', 'register', $account_link ) ); ?>" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+		
+			<?php do_action( 'woocommerce_register_form_start' ); ?>
+		
+			<?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+		
+				<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+					<label for="reg_username"><?php esc_html_e( 'Username', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+					<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+				</p>
+		
+			<?php endif; ?>
+		
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="reg_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+				<input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+			</p>
+		
+			<?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+		
+				<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+					<label for="reg_password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+					<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" />
+				</p>
+		
+			<?php else : ?>
+		
+				<p><?php esc_html_e( 'A link to set a new password will be sent to your email address.', 'woocommerce' ); ?></p>
+		
+			<?php endif; ?>
+		
+			<div style="<?php echo ( ( is_rtl() ) ? 'right' : 'left' ); ?>: -999em; position: absolute;"><label for="trap"><?php esc_html_e( 'Anti-spam', 'woocommerce' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>
+		
+			<?php do_action( 'woocommerce_register_form' ); ?>
+		
+			<p class="woocommerce-form-row form-row form-row-btn">
+				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
+				<button type="submit" class="woocommerce-Button woocommerce-button button<?php echo esc_attr( function_exists( 'wc_wp_theme_get_element_class_name' ) && wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
+			</p>
+		
+			<?php do_action( 'woocommerce_register_form_end' ); ?>
+		
+		</form>
+		<?php
+	}
+}
+
 // *****************************************************************************//
 // ! OFF Wrappers elements: cart widget, search (full screen), header banner
 // *****************************************************************************//
@@ -2334,7 +2637,7 @@ if ( ! function_exists( 'woodmart_cart_side_widget' ) ) {
 		woodmart_enqueue_inline_style( 'widget-shopping-cart' );
 		woodmart_enqueue_inline_style( 'widget-product-list' );
 		?>
-			<div class="cart-widget-side wd-side-hidden<?php echo esc_attr( $wrapper_classes ); ?>">
+			<div class="cart-widget-side wd-side-hidden<?php echo esc_attr( $wrapper_classes ); ?>" role="complementary" aria-label="<?php esc_attr_e( 'Shopping cart sidebar', 'woodmart' ); ?>">
 				<div class="wd-heading">
 					<span class="title"><?php esc_html_e( 'Shopping cart', 'woodmart' ); ?></span>
 					<div class="close-side-widget wd-action-btn wd-style-text wd-cross-icon">
@@ -2363,7 +2666,7 @@ if ( ! function_exists( 'woodmart_sidebar_login_form' ) ) {
 		$account_link = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
 		$page_id      = woodmart_get_the_ID() ? woodmart_get_the_ID() : get_option( 'woocommerce_myaccount_page_id' );
 		$redirect_url = apply_filters( 'woodmart_my_account_side_login_form_redirect', get_permalink( $page_id ) );
-		$action_url   = apply_filters( 'woodmart_my_account_side_login_form_action', '' );
+		$action_url   = apply_filters( 'woodmart_my_account_side_login_form_action', wc_get_page_permalink( 'myaccount' ) );
 
 		$wrapper_classes = '';
 
@@ -2382,7 +2685,7 @@ if ( ! function_exists( 'woodmart_sidebar_login_form' ) ) {
 		woodmart_enqueue_inline_style( 'header-my-account-sidebar' );
 		woodmart_enqueue_inline_style( 'woo-mod-login-form' );
 		?>
-			<div class="login-form-side wd-side-hidden woocommerce<?php echo esc_attr( $wrapper_classes ); ?>">
+			<div class="login-form-side wd-side-hidden woocommerce<?php echo esc_attr( $wrapper_classes ); ?>" role="complementary" aria-label="<?php esc_attr_e( 'Login sidebar', 'woodmart' ); ?>">
 				<div class="wd-heading">
 					<span class="title"><?php esc_html_e( 'Sign in', 'woodmart' ); ?></span>
 					<div class="close-side-widget wd-action-btn wd-style-text wd-cross-icon">
@@ -2677,5 +2980,137 @@ if ( ! function_exists( 'woodmart_show_reviews_count' ) ) {
 			(<?php echo esc_html( $review_count ); ?>)
 		</a>
 		<?php
+	}
+}
+
+if ( ! function_exists( 'woodmart_json_search_users' ) ) {
+	/**
+	 * Add ajax action for search user filter.
+	 *
+	 * @param string $term Search term.
+	 */
+	function woodmart_json_search_users( $term = '' ) {
+		check_ajax_referer( 'search-users', 'security' );
+
+		if ( empty( $term ) && isset( $_GET['term'] ) ) {
+			$term = (string) wc_clean( wp_unslash( $_GET['term'] ) ); // phpcs:ignore.
+		}
+
+		if ( empty( $term ) ) {
+			wp_die();
+		}
+
+		$users_found = array();
+
+		$users = new WP_User_Query(
+			array(
+				'search'         => '*' . esc_attr( $term ) . '*',
+				'search_columns' => array(
+					'user_login',
+					'user_nicename',
+					'user_email',
+					'user_url',
+				),
+			)
+		);
+
+		$users_objects = $users->get_results();
+
+		foreach ( $users_objects as $user ) {
+			$users_found[ $user->get( 'ID' ) ] = $user->get( 'user_login' );
+		}
+
+		wp_send_json( apply_filters( 'woodmart_json_search_found_users', $users_found ) );
+	}
+
+	add_action( 'wp_ajax_woodmart_json_search_users', 'woodmart_json_search_users' );
+}
+
+if ( ! function_exists( 'woodmart_add_list_table_filters' ) ) {
+	/**
+	 * Render filters for list tables in admin panel.
+	 *
+	 * @param string $reset_link The link to which the user will go when he presses the reset button.
+	 */
+	function woodmart_add_list_table_filters( $reset_link ) {
+		$need_reset = false;
+		$product_id = isset( $_REQUEST['_product_id'] ) ? intval( $_REQUEST['_product_id'] ) : false; // phpcs:ignore.
+		$user_id    = isset( $_REQUEST['_user_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_user_id'] ) ) : false; // phpcs:ignore.
+
+		if ( ! empty( $product_id ) ) {
+			$product = wc_get_product( $product_id );
+
+			if ( $product ) {
+				$selected_product = '#' . $product_id . ' &ndash; ' . $product->get_title();
+			}
+		}
+
+		if ( ! empty( $user_id ) ) {
+			$user = get_user_by( 'id', $user_id );
+
+			if ( $user ) {
+				$selected_user = $user->get( 'user_login' );
+			}
+		}
+
+		if ( $product_id || $user_id ) {
+			$need_reset = true;
+		}
+
+		wp_enqueue_style(
+			'xts-jquery-ui',
+			WOODMART_ASSETS . '/css/jquery-ui.css',
+			array(),
+			WOODMART_VERSION
+		);
+
+		wp_enqueue_script(
+			'xts-admin-filters',
+			WOODMART_ASSETS . '/js/adminFilters.js',
+			array(
+				'jquery',
+				'jquery-ui-datepicker',
+				'select2',
+			),
+			WOODMART_VERSION,
+			true
+		);
+		?>
+		<select
+			id="_product_id"
+			name="_product_id"
+			class="wc-product-search"
+			data-security="<?php echo esc_attr( wp_create_nonce( 'search-products' ) ); ?>"
+			style="width: 300px;"
+		>
+			<?php if ( $product_id && isset( $selected_product ) ) : ?>
+				<option value="<?php echo esc_attr( $product_id ); ?>" <?php selected( true, true, true ); ?> >
+					<?php echo esc_html( $selected_product ); ?>
+				</option>
+			<?php endif; ?>
+		</select>
+		<select
+			id="_user_id"
+			name="_user_id"
+			class="xts-users-search"
+			data-security="<?php echo esc_attr( wp_create_nonce( 'search-users' ) ); ?>"
+			style="width: 300px;"
+		>
+			<?php if ( $user_id && isset( $selected_user ) ) : ?>
+				<option value="<?php echo esc_attr( $user_id ); ?>" <?php selected( true, true, true ); ?> >
+					<?php echo esc_html( $selected_user ); ?>
+				</option>
+			<?php endif; ?>
+		</select>
+		<?php
+		submit_button( esc_html__( 'Filter', 'woodmart' ), 'button', 'filter_action', false, array( 'id' => 'post-query-submit' ) );
+
+		if ( $need_reset ) {
+			printf(
+				'<a href="%s" class="button button-secondary reset-button">%s</a>',
+				esc_url( $reset_link ),
+				esc_html__( 'Reset', 'woodmart' )
+			);
+		}
 	}
 }

@@ -436,6 +436,10 @@ class ProductVariationWidget extends \Elementor\Widget_Base
 
     protected function render()
     {
+        // Enqueue widget assets only when widget is rendered
+        wp_enqueue_style('sh-product-variation-widget-css');
+        wp_enqueue_script('sh-product-variation-widget-js');
+
         $settings = $this->get_settings_for_display();
 
         // Check if we're in Elementor editor mode
@@ -607,8 +611,9 @@ class ProductVariationWidget extends \Elementor\Widget_Base
                             }
                             
                             if (taxonomy_exists($attribute_name)) {
-                                $swatch_style = function_exists('woodmart_wc_get_attribute_term') ? woodmart_wc_get_attribute_term($attribute_name, 'swatch_style') : '1';
-                                $swatch_dis_style = function_exists('woodmart_wc_get_attribute_term') ? woodmart_wc_get_attribute_term($attribute_name, 'swatch_dis_style') : '1';
+                                // Force style 1 as default
+                                $swatch_style = '1';
+                                $swatch_dis_style = '1';
                                 $swatch_size = function_exists('woodmart_wc_get_attribute_term') ? woodmart_wc_get_attribute_term($attribute_name, 'swatch_size') : 'default';
                                 $swatch_shape = function_exists('woodmart_wc_get_attribute_term') ? woodmart_wc_get_attribute_term($attribute_name, 'swatch_shape') : 'round';
                                 

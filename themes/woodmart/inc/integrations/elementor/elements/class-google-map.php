@@ -782,7 +782,7 @@ class Google_Map extends Widget_Base {
 		woodmart_enqueue_inline_style( 'el-google-map' );
 
 		?>
-		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?> data-map-args='<?php echo wp_json_encode( $map_args ); ?>'>
+		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?> data-map-args='<?php echo esc_attr( wp_json_encode( $map_args ) ); ?>'>
 
 			<?php if ( 'page_load' !== $settings['init_type'] && $placeholder ) : ?>
 				<div class="wd-map-placeholder wd-fill">

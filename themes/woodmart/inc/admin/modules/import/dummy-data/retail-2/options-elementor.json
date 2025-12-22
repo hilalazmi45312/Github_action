@@ -174,7 +174,11 @@
     "blog_excerpt": "excerpt",
     "footer_html_block": "6307",
     "promo_popup_content_type": "html_block",
-    "additional_tab_content_type": "html_block",
-    "additional_tab_html_block": "726",
-    "portfolio_page": "51"
+    "portfolio_page": "51",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

@@ -12,11 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 	// Admin.
-	'admin-bar-slider-menu'           => array(
+	'admin-bar-menu'                  => array(
 		array(
-			'title'     => esc_html__( 'Admin bar slider menu', 'woodmart' ),
-			'name'      => 'admin-bar-slider-menu',
-			'file'      => '/js/scripts/admin/adminBarSliderMenu',
+			'title'     => esc_html__( 'Admin bar menu', 'woodmart' ),
+			'name'      => 'admin-bar-menu',
+			'file'      => '/js/scripts/admin/adminBarMenu',
 			'in_footer' => true,
 		),
 	),
@@ -61,11 +61,27 @@ return array(
 			'in_footer' => true,
 		),
 	),
+	'before-search-content'           => array(
+		array(
+			'title'     => esc_html__( 'Before search content', 'woodmart' ),
+			'name'      => 'before-search-content',
+			'file'      => '/js/scripts/global/beforeSearchContent',
+			'in_footer' => true,
+		),
+	),
 	'ajax-search'                     => array(
 		array(
 			'title'     => esc_html__( 'AJAX search', 'woodmart' ),
 			'name'      => 'ajax-search',
 			'file'      => '/js/scripts/global/ajaxSearch',
+			'in_footer' => true,
+		),
+	),
+	'search-history'                  => array(
+		array(
+			'title'     => esc_html__( 'Search history', 'woodmart' ),
+			'name'      => 'search-history',
+			'file'      => '/js/scripts/global/searchHistory',
 			'in_footer' => true,
 		),
 	),
@@ -163,11 +179,11 @@ return array(
 			'in_footer' => true,
 		),
 	),
-	'promo-popup'                     => array(
+	'floating-blocks'                  => array(
 		array(
-			'title'     => esc_html__( 'Promo popup', 'woodmart' ),
-			'name'      => 'promo-popup',
-			'file'      => '/js/scripts/global/promoPopup',
+			'title'     => esc_html__( 'Floating blocks', 'woodmart' ),
+			'name'      => 'floating-blocks',
+			'file'      => '/js/scripts/global/floatingBlocks',
 			'in_footer' => true,
 		),
 	),
@@ -235,11 +251,11 @@ return array(
 			'in_footer' => true,
 		),
 	),
-	'mailchimp'                       => array(
+	'lcp-tracker'                     => array(
 		array(
-			'title'     => esc_html__( 'Mailchimp', 'woodmart' ),
-			'name'      => 'mailchimp',
-			'file'      => '/js/scripts/global/mailchimp',
+			'title'     => esc_html__( 'LCP image tracker', 'woodmart' ),
+			'name'      => 'lcp-tracker',
+			'file'      => '/js/scripts/global/lcpTracker',
 			'in_footer' => true,
 		),
 	),
@@ -555,9 +571,9 @@ return array(
 	),
 	'simple-dropdown'                 => array(
 		array(
-			'title'     => esc_html__( 'Simple dropdown', 'woodmart' ),
+			'title'     => esc_html__( 'Search category dropdown', 'woodmart' ),
 			'name'      => 'simple-dropdown',
-			'file'      => '/js/scripts/menu/simpleDropdown',
+			'file'      => '/js/scripts/menu/searchCatDropdown',
 			'in_footer' => true,
 		),
 	),
@@ -1175,6 +1191,22 @@ return array(
 			'in_footer' => true,
 		),
 	),
+	'pt-subscribe-form'              => array(
+		array(
+			'title'     => esc_html__( 'Price tracker subscribe form', 'woodmart' ),
+			'name'      => 'pt-subscribe-form',
+			'file'      => '/js/scripts/wc/ptSubscribeForm',
+			'in_footer' => true,
+		),
+	),
+	'pt-table'                       => array(
+		array(
+			'title'     => esc_html__( 'Price tracker table in my account page', 'woodmart' ),
+			'name'      => 'pt-table',
+			'file'      => '/js/scripts/wc/ptTable',
+			'in_footer' => true,
+		),
+	),
 	'update-delivery-dates'           => array(
 		array(
 			'title'     => esc_html__( 'Update estimate delivery dates using ajax.', 'woodmart' ),
@@ -1196,6 +1228,14 @@ return array(
 			'title'     => esc_html__( 'Abandoned cart', 'woodmart' ),
 			'name'      => 'abandoned-cart',
 			'file'      => '/js/scripts/wc/abandonedCart',
+			'in_footer' => true,
+		),
+	),
+	'email-subscription-checkboxes'   => array(
+		array(
+			'title'     => esc_html__( 'Email subscription checkboxes', 'woodmart' ),
+			'name'      => 'email-subscription-checkboxes',
+			'file'      => '/js/scripts/wc/emailSubscriptionCheckboxes',
 			'in_footer' => true,
 		),
 	),

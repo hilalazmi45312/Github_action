@@ -13,7 +13,7 @@ use Elementor\Widget_Base;
 use XTS\WC_Wishlist\Ui as Wishlist;
 use XTS\Modules\Compare\Ui as Compare;
 use XTS\Modules\Linked_Variations\Frontend as Linked_Variations;
-use XTS\Modules\Shipping_Progress_Bar\Main as Shipping_Progress_Bar;
+use XTS\Modules\Shipping_Progress_Bar\Frontend as Shipping_Progress_Bar;
 use XTS\Modules\Visitor_Counter\Main as Visitor_Counter;
 use XTS\Modules\Sold_Counter\Main as Sold_Counter;
 use XTS\Modules\Estimate_Delivery\Frontend as Estimate_Delivery_Frontend;
@@ -60,7 +60,7 @@ class Hook extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'wd-woocommerce-elements' );
+		return array( 'wd-site-elements' );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Hook extends Widget_Base {
 	 * @return bool Whether to show the widget in the panel or not.
 	 */
 	public function show_in_panel() {
-		return woodmart_woocommerce_installed();
+		return Main::is_layout_type( 'single_product' ) || Main::is_layout_type( 'shop_archive' ) || Main::is_layout_type( 'checkout_form' ) || Main::is_layout_type( 'cart' ) || Main::is_layout_type( 'checkout_content' ) || Main::is_layout_type( 'thank_you_page' ) || Main::is_layout_type( 'my_account_page' ) || Main::is_layout_type( 'my_account_auth' ) || Main::is_layout_type( 'my_account_lost_password' );
 	}
 
 	/**
@@ -134,6 +134,28 @@ class Hook extends Widget_Base {
 					'woocommerce_checkout_order_review'    => 'woocommerce_checkout_order_review',
 					'woocommerce_checkout_after_order_review' => 'woocommerce_checkout_after_order_review',
 					'woocommerce_after_checkout_form'      => 'woocommerce_after_checkout_form',
+
+					'woocommerce_thankyou'                 => 'woocommerce_thankyou',
+					'woocommerce_before_thankyou'          => 'woocommerce_before_thankyou',
+					'woocommerce_order_details_after_order_table' => 'woocommerce_order_details_after_order_table',
+
+					'woocommerce_before_account_navigation' => 'woocommerce_before_account_navigation',
+					'woocommerce_after_account_navigation' => 'woocommerce_after_account_navigation',
+					'woocommerce_before_my_account'        => 'woocommerce_before_my_account',
+					'woocommerce_after_my_account'         => 'woocommerce_after_my_account',
+
+					'woocommerce_before_customer_login_form' => 'woocommerce_before_customer_login_form',
+					'woocommerce_after_customer_login_form' => 'woocommerce_after_customer_login_form',
+					'woocommerce_login_form_start'         => 'woocommerce_login_form_start',
+					'woocommerce_login_form_end'           => 'woocommerce_login_form_end',
+					'woocommerce_login_form'               => 'woocommerce_login_form',
+					'woocommerce_register_form_start'      => 'woocommerce_register_form_start',
+					'woocommerce_register_form_end'        => 'woocommerce_register_form_end',
+					'woocommerce_register_form'            => 'woocommerce_register_form',
+
+					'woocommerce_before_lost_password_form' => 'woocommerce_before_lost_password_form',
+					'woocommerce_lostpassword_form'        => 'woocommerce_lostpassword_form',
+					'woocommerce_after_lost_password_form' => 'woocommerce_after_lost_password_form',
 				),
 				'default'     => '0',
 			)
@@ -170,7 +192,10 @@ class Hook extends Widget_Base {
 		if ( 'yes' === $settings['clean_actions'] ) {
 			if ( 'woocommerce_checkout_billing' === $settings['hook'] ) {
 				remove_action( 'woocommerce_checkout_billing', array( WC()->checkout(), 'checkout_form_billing' ) );
-				remove_action( 'woocommerce_checkout_billing', array( Shipping_Progress_Bar::get_instance(), 'render_shipping_progress_bar_with_wrapper' ) );
+
+				if ( woodmart_get_opt( 'shipping_progress_bar_enabled' ) ) {
+					remove_action( 'woocommerce_checkout_billing', array( Shipping_Progress_Bar::get_instance(), 'render_shipping_progress_bar_with_wrapper' ) );
+				}
 			} elseif ( 'woocommerce_checkout_shipping' === $settings['hook'] ) {
 				remove_action( 'woocommerce_checkout_shipping', array( WC()->checkout(), 'checkout_form_shipping' ) );
 			} elseif ( 'woocommerce_checkout_before_customer_details' === $settings['hook'] ) {
@@ -196,6 +221,7 @@ class Hook extends Widget_Base {
 				remove_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20 );
 			} elseif ( 'woocommerce_single_product_summary' === $settings['hook'] ) {
 				remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+				remove_action( 'woocommerce_single_product_summary', 'woodmart_single_product_countdown', 15 );
 				remove_action( 'woocommerce_single_product_summary', 'woodmart_stock_progress_bar', 16 );
 				remove_action( 'woocommerce_single_product_summary', 'woocommerce_output_product_data_tabs', 60 );
 				remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating' );
@@ -224,7 +250,7 @@ class Hook extends Widget_Base {
 					remove_action( 'woocommerce_single_product_summary', array( Compare::get_instance(), 'add_to_compare_single_btn' ), 33 );
 				}
 				if ( woodmart_get_opt( 'counter_visitor_enabled' ) ) {
-					remove_action( 'woocommerce_single_product_summary', array( Visitor_Counter::get_instance(), 'output_count_visitors' ), 38 );
+					remove_action( 'woocommerce_single_product_summary', array( Visitor_Counter::get_instance(), 'output_count_visitors' ), 39 );
 				}
 				if ( woodmart_get_opt( 'sold_counter_enabled' ) ) {
 					remove_action( 'woocommerce_single_product_summary', array( Sold_Counter::get_instance(), 'render' ), 25 );
@@ -255,11 +281,31 @@ class Hook extends Widget_Base {
 				remove_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 20 );
 				remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
 				remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 10 );
+			} elseif ( 'woocommerce_order_details_after_order_table' === $settings['hook'] ) {
+				remove_action( 'woocommerce_order_details_after_order_table', 'woocommerce_order_again_button' );
+			} elseif ( 'woocommerce_thankyou' === $settings['hook'] ) {
+				remove_action( 'woocommerce_thankyou', 'woocommerce_order_details_table' );
+			} elseif ( 'woocommerce_before_customer_login_form' === $settings['hook'] ) {
+				remove_action( 'woocommerce_before_customer_login_form', 'woocommerce_output_all_notices' );
+			} elseif ( 'woocommerce_register_form' === $settings['hook'] ) {
+				remove_action( 'woocommerce_register_form', 'wc_registration_privacy_policy_text', 20 );
+			} elseif ( 'woocommerce_before_lost_password_form' === $settings['hook'] ) {
+				remove_action( 'woocommerce_before_lost_password_form', 'woocommerce_output_all_notices' );
 			}
 		}
 
 		if ( 'woocommerce_before_checkout_form' === $settings['hook'] || 'woocommerce_after_checkout_form' === $settings['hook'] ) {
 			do_action( $settings['hook'], WC()->checkout() );
+		} elseif ( in_array( $settings['hook'], array( 'woocommerce_thankyou', 'woocommerce_before_thankyou', 'woocommerce_order_details_after_order_table' ), true ) ) {
+			$order_id = (int) get_query_var( 'order-received' );
+			$order    = $order_id ? wc_get_order( $order_id ) : '';
+			if ( $order ) {
+				if ( 'woocommerce_order_details_after_order_table' === $settings['hook'] ) {
+					do_action( $settings['hook'], $order );
+				} else {
+					do_action( $settings['hook'], $order_id );
+				}
+			}
 		} else {
 			do_action( $settings['hook'] );
 		}

@@ -279,7 +279,14 @@ class Frequently_Bought_Together extends Widget_Base {
 	 * Render the widget output on the frontend.
 	 */
 	protected function render() {
-		$settings = wp_parse_args( $this->get_settings_for_display(), array( 'is_builder' => true ) );
+		$settings = wp_parse_args(
+			$this->get_settings_for_display(),
+			array(
+				'is_builder'                     => true,
+				'hide_pagination_control_tablet' => 'yes',
+				'hide_pagination_control_mobile' => 'yes',
+			)
+		);
 
 		if ( ! woodmart_get_opt( 'bought_together_enabled', 1 ) ) {
 			return;

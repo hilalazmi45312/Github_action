@@ -7,7 +7,8 @@ if ( ! function_exists( 'wd_gutenberg_product_categories' ) ) {
 
 		wd_replace_boolean_to_yes_no( array( 'images', 'product_count', 'mobile_accordion', 'hide_empty', 'shop_categories_ancestors', 'shop_categories_ancestors', 'hide_pagination_control', 'hide_prev_next_buttons', 'scroll_per_page', 'center_mode', 'wrap', 'autoplay', 'hide_scrollbar', 'autoheight', 'disable_overflow_carousel', 'dynamic_pagination_control', 'scroll_carousel_init' ), $block_attributes );
 
-		$block_attributes['categories_design']      = ! empty( $block_attributes['categories_design'] ) ? $block_attributes['categories_design'] : woodmart_get_opt( 'categories_design' );
+		$block_attributes['is_wpb']            = false;
+		$block_attributes['categories_design'] = ! empty( $block_attributes['categories_design'] ) ? $block_attributes['categories_design'] : woodmart_get_opt( 'categories_design' );
 
 		$block_attributes['el_class'] = wd_get_gutenberg_element_classes( $block_attributes );
 		$block_attributes['el_id']    = wd_get_gutenberg_element_id( $block_attributes );

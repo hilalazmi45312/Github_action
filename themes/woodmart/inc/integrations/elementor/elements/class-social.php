@@ -351,18 +351,6 @@ class Social extends Widget_Base {
 		);
 
 		$this->add_control(
-			'skype_link',
-			array(
-				'label'   => esc_html__( 'Skype link', 'woodmart' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '',
-				'ai'      => array(
-					'active' => false,
-				),
-			)
-		);
-
-		$this->add_control(
 			'whatsapp_link',
 			array(
 				'label'   => esc_html__( 'WhatsApp link', 'woodmart' ),

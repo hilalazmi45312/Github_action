@@ -36,7 +36,7 @@ class Select_With_Table extends Field {
 				<div class="xts-bundle-discount">
 					<div class="xts-input-append">
 						<input type="number" min="0" max="100" name="<?php echo esc_attr( $this->get_input_name() . '[{{index}}][discount]' ); ?>">
-						<span class="add-on">%</span>
+						<span class="xts-add-on">%</span>
 					</div>
 				</div>
 				<div class="xts-close">
@@ -63,7 +63,7 @@ class Select_With_Table extends Field {
 						<div class="xts-bundle-discount">
 							<div class="xts-input-append">
 								<input type="number" min="0" max="100" step="0.01" name="<?php echo esc_attr( $this->get_input_name() . '[' . $id . '][discount]' ); ?>" value="<?php echo esc_attr( $product['discount'] ); ?>">
-								<span class="add-on">%</span>
+								<span class="xts-add-on">%</span>
 							</div>
 						</div>
 						<div class="xts-close">

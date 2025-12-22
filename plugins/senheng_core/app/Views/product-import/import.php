@@ -67,6 +67,12 @@ $stats = ProductImportController::getStats();
                             <span><strong>Partial Update for Existing Products</strong> - Only update basic fields for existing products.</span>
                         </label>
                         <p style="font-size: 12px; color: #666; margin: 2px 0 15px 26px;">When checked, existing products will only have their Title, Price, Stock, and Sales Quantity updated. Descriptions, Images, Categories, and other meta data will be preserved.</p>
+
+                        <label style="display: flex; align-items: center; margin-bottom: 2px;">
+                            <input type="checkbox" id="update_yoast_from_sku" name="update_yoast_from_sku" value="1" style="margin-right: 8px;">
+                            <span><strong>Update YOAST SEO Meta from SKU</strong> - Update YOAST Meta Title and Description based on SKU.</span>
+                        </label>
+                        <p style="font-size: 12px; color: #666; margin: 2px 0 15px 26px;">When checked, YOAST SEO Meta Title and Description will be updated for the product (or parent product for variations) based on the SKU. Other data will not be affected.</p>
                     </div>
                     
                     <input type="hidden" name="nonce" value="<?php echo esc_attr($nonce); ?>">

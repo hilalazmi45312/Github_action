@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.6.0
- * @version     3.14.0
+ * @version     3.23.2
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -145,20 +145,23 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * @return mixed $meta_value
 		 */
 		public function process_coupon_meta_value_for_import( $meta_value = null, $args = array() ) {
-
-			$discount_type = isset( $args['discount_type'] ) ? $args['discount_type'] : '';
-			if ( 'smart_coupon' !== $discount_type && ! empty( $args['meta_key'] ) && 'wc_sc_auto_apply_coupon' === $args['meta_key'] ) {
-				$auto_apply_coupon = $meta_value;
-				if ( 'yes' === $auto_apply_coupon ) {
-					$auto_apply_coupon_ids = get_option( 'wc_sc_auto_apply_coupon_ids', array() );
-					$auto_apply_coupon_ids = ( empty( $auto_apply_coupon_ids ) || ! is_array( $auto_apply_coupon_ids ) ) ? array() : $auto_apply_coupon_ids;
-					$auto_apply_coupon_ids = array_map( 'absint', $auto_apply_coupon_ids );
-					$coupon_id             = ( isset( $args['post']['post_id'] ) ) ? absint( $args['post']['post_id'] ) : 0;
-					if ( ! empty( $coupon_id ) && ! in_array( $coupon_id, $auto_apply_coupon_ids, true ) ) {
-						$auto_apply_coupon_ids[] = $coupon_id;
-						update_option( 'wc_sc_auto_apply_coupon_ids', $auto_apply_coupon_ids, 'no' );
+			try {
+				$discount_type = isset( $args['discount_type'] ) ? $args['discount_type'] : '';
+				if ( 'smart_coupon' !== $discount_type && ! empty( $args['meta_key'] ) && 'wc_sc_auto_apply_coupon' === $args['meta_key'] ) {
+					$auto_apply_coupon = $meta_value;
+					if ( 'yes' === $auto_apply_coupon ) {
+						$auto_apply_coupon_ids = get_option( 'wc_sc_auto_apply_coupon_ids', array() );
+						$auto_apply_coupon_ids = ( empty( $auto_apply_coupon_ids ) || ! is_array( $auto_apply_coupon_ids ) ) ? array() : $auto_apply_coupon_ids;
+						$auto_apply_coupon_ids = array_map( 'absint', $auto_apply_coupon_ids );
+						$coupon_id             = ( isset( $args['post']['post_id'] ) ) ? absint( $args['post']['post_id'] ) : 0;
+						if ( ! empty( $coupon_id ) && ! $this->sc_coupon_code_exists( $coupon_id, $auto_apply_coupon_ids ) ) {
+							$auto_apply_coupon_ids[] = $coupon_id;
+							update_option( 'wc_sc_auto_apply_coupon_ids', $auto_apply_coupon_ids, 'no' );
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 			return $meta_value;
@@ -225,7 +228,7 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 				$update  = false;
 				$coupons = $this->get_auto_applied_coupons();
 				// Check if auto applied coupons are not empty.
-				if ( ! empty( $coupons ) && in_array( $coupon_code, $coupons, true ) ) {
+				if ( ! empty( $coupons ) && $this->sc_coupon_code_exists( $coupon_code, $coupons ) ) {
 					$coupons = array_diff( $coupons, array( $coupon_code ) );
 					$update  = true;
 				}
@@ -255,28 +258,32 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * @return void
 		 */
 		public function wc_sc_removed_coupon( $coupon_code = '' ) {
-			$backtrace    = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore
-			$is_automatic = true;
-			if ( ! empty( $backtrace ) ) {
-				foreach ( $backtrace as $trace ) {
-					if (
-						isset( $trace['file'] ) &&
-						(
-							false !== strpos( $trace['file'], 'StoreApi/Routes/V1/CartRemoveCoupon.php' ) ||
-							( ! empty( $trace['function'] ) && 'remove_coupon' === $trace['function'] && ! empty( $trace['class'] ) && in_array( $trace['class'], array( 'WC_AJAX', 'WC_Cart' ), true ) )
-						)
-					) {
-						$is_automatic = false;
+			try {
+				$backtrace    = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore
+				$is_automatic = true;
+				if ( ! empty( $backtrace ) ) {
+					foreach ( $backtrace as $trace ) {
+						if (
+							isset( $trace['file'] ) &&
+							(
+								false !== strpos( $trace['file'], 'StoreApi/Routes/V1/CartRemoveCoupon.php' ) ||
+								( ! empty( $trace['function'] ) && 'remove_coupon' === $trace['function'] && ! empty( $trace['class'] ) && in_array( $trace['class'], array( 'WC_AJAX', 'WC_Cart' ), true ) )
+							)
+						) {
+							$is_automatic = false;
 
-						// Call auto_apply_coupons() if removal is from StoreApi/Routes/V1/CartRemoveCoupon.php.
-						$this->auto_apply_coupons();
-						return; // Exit function after calling auto_apply_coupons().
+							// Call auto_apply_coupons() if removal is from StoreApi/Routes/V1/CartRemoveCoupon.php.
+							$this->auto_apply_coupons();
+							return; // Exit function after calling auto_apply_coupons().
+						}
 					}
 				}
-			}
 
-			if ( $is_automatic ) {
-				$this->unset_auto_applied_coupon( $coupon_code );
+				if ( $is_automatic ) {
+					$this->unset_auto_applied_coupon( $coupon_code );
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -330,7 +337,7 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		public function is_coupon_applied_by_auto_apply( $coupon_code = '' ) {
 			if ( ! empty( $coupon_code ) ) {
 				$applied_coupons = $this->get_auto_applied_coupons();
-				if ( ! empty( $applied_coupons ) && is_array( $applied_coupons ) && in_array( $coupon_code, $applied_coupons, true ) ) {
+				if ( ! empty( $applied_coupons ) && is_array( $applied_coupons ) && $this->sc_coupon_code_exists( $coupon_code, $applied_coupons ) ) {
 					return true;
 				}
 			}
@@ -401,319 +408,336 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * Reference: issues/234#note_27085
 		 */
 		public function auto_apply_coupons() {
+
 			( ! in_array( $this->get_db_status_for( '9.8.0' ), array( 'completed', 'done' ), true ) ) ? $this->auto_apply_coupons_old() : $this->auto_apply_coupons_new();
+
 		}
 
 		/**
 		 * Function to auto apply coupons new mechanism.
 		 */
 		public function auto_apply_coupons_new() {
-
-			if ( is_admin() ) {
-				return;
-			}
-			if ( ! class_exists( 'WC_SC_Coupon_Data_Store' ) ) {
-				if ( file_exists( trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/class-wc-sc-coupon-data-store.php' ) ) {
-					include_once trailingslashit( WP_PLUGIN_DIR . '/' . WC_SC_PLUGIN_DIRNAME ) . 'includes/class-wc-sc-coupon-data-store.php';
+			try {
+				if ( is_admin() ) {
+					return;
 				}
-			}
-
-			$cart = ( is_object( WC() ) && isset( WC()->cart ) ) ? WC()->cart : null;
-
-			if ( is_object( $cart ) && is_callable( array( $cart, 'is_empty' ) ) && ! $cart->is_empty() && $this->is_allow_auto_apply_coupons() ) {
-
-				$exclude_applied_coupon_ids = array();
-				$cart_product_ids           = array();
-				$cart_category_ids          = array();
-				$cart_attribute_ids         = array();
-
-				$wc_session            = ! empty( WC()->session ) ? WC()->session : null;
-				$max_auto_apply_coupon = absint( get_option( 'wc_sc_max_auto_apply_coupons_limit', 5 ) );
-				// Fetch already applied coupon.
-				$applied_coupons = $cart->get_applied_coupons();
-
-				if ( ! empty( $applied_coupons ) ) {
-					foreach ( $applied_coupons as $code ) {
-						$coupon = new WC_Coupon( $code );
-						if ( ! $this->is_callable( $coupon, 'get_id' ) ) {
-							continue;
-						}
-						$exclude_applied_coupon_ids[] = $coupon->get_id();
+				if ( ! class_exists( 'WC_SC_Coupon_Data_Store' ) ) {
+					if ( file_exists( WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-data-store.php' ) ) {
+						include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupon-data-store.php';
 					}
 				}
 
-				$subtotal                  = ( wc_prices_include_tax() && $cart->display_prices_including_tax() ) ? $cart->get_subtotal() + $cart->get_subtotal_tax() : $cart->get_subtotal();
-				$selected_payment_method   = WC()->session->get( 'chosen_payment_method' );
-				$selected_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
-				$cart_items                = $cart->get_cart();
-				// Prepare product IDs for matching.
+				$cart = ( is_object( WC() ) && isset( WC()->cart ) ) ? WC()->cart : null;
 
-				if ( ! empty( $cart_items ) ) {
-					if ( ! class_exists( 'WC_SC_Coupons_By_Product_Attribute' ) ) {
-						include_once 'class-wc-sc-coupons-by-product-attribute.php';
-					}
-					$wc_sc_product_attribute = WC_SC_Coupons_By_Product_Attribute::get_instance();
-					foreach ( $cart_items as $item ) {
-						if ( ! isset( $item['data'] ) || empty( $item['data'] ) ) {
-							continue;
+				if ( is_object( $cart ) && is_callable( array( $cart, 'is_empty' ) ) && ! $cart->is_empty() && $this->is_allow_auto_apply_coupons() ) {
+
+					$exclude_applied_coupon_ids = array();
+					$cart_product_ids           = array();
+					$cart_category_ids          = array();
+					$cart_attribute_ids         = array();
+
+					$wc_session            = ! empty( WC()->session ) ? WC()->session : null;
+					$max_auto_apply_coupon = absint( get_option( 'wc_sc_max_auto_apply_coupons_limit', 5 ) );
+					// Fetch already applied coupon.
+					$applied_coupons = $cart->get_applied_coupons();
+
+					if ( ! empty( $applied_coupons ) ) {
+						foreach ( $applied_coupons as $code ) {
+							$coupon = new WC_Coupon( $code );
+							if ( ! $this->is_callable( $coupon, 'get_id' ) ) {
+								continue;
+							}
+							if ( $coupon->get_individual_use() ) {
+								return false;
+							}
+							$exclude_applied_coupon_ids[] = $coupon->get_id();
 						}
-						$product = $item['data'];
-						if ( ! $product instanceof WC_Product || ! $this->is_callable( $product, 'get_id' ) ) {
-							continue;
+					}
+
+					$subtotal                  = ( wc_prices_include_tax() && $cart->display_prices_including_tax() ) ? $cart->get_subtotal() + $cart->get_subtotal_tax() : $cart->get_subtotal();
+					$selected_payment_method   = WC()->session->get( 'chosen_payment_method' );
+					$selected_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
+					$cart_items                = $cart->get_cart();
+					// Prepare product IDs for matching.
+
+					if ( ! empty( $cart_items ) ) {
+						if ( ! class_exists( 'WC_SC_Coupons_By_Product_Attribute' ) ) {
+							include_once WC_SC_PLUGIN_DIRPATH . 'includes/class-wc-sc-coupons-by-product-attribute.php';
 						}
-						$cart_product_ids[] = $product->get_id();
-						if ( ! empty( $product->get_parent_id() ) ) {
-							$cart_product_ids[] = $product->get_parent_id();
+						$wc_sc_product_attribute = WC_SC_Coupons_By_Product_Attribute::get_instance();
+						foreach ( $cart_items as $item ) {
+							if ( ! isset( $item['data'] ) || empty( $item['data'] ) ) {
+								continue;
+							}
+							$product = $item['data'];
+							if ( ! $product instanceof WC_Product || ! $this->is_callable( $product, 'get_id' ) ) {
+								continue;
+							}
+							$cart_product_ids[] = $product->get_id();
+							if ( ! empty( $product->get_parent_id() ) ) {
+								$cart_product_ids[] = $product->get_parent_id();
+							}
+							$cart_category_ids = array_merge( $cart_category_ids, wc_get_product_cat_ids( $product->get_id() ) );
+
+							$cart_category_ids = apply_filters( 'wc_sc_auto_apply_coupons_cart_category_ids', $cart_category_ids, $product );
+
+							$cart_attribute_ids = array_merge( $cart_attribute_ids, $wc_sc_product_attribute->get_product_attributes( $product ) );
 						}
-						$cart_category_ids = array_merge( $cart_category_ids, wc_get_product_cat_ids( $product->get_id() ) );
-
-						$cart_category_ids = apply_filters( 'wc_sc_auto_apply_coupons_cart_category_ids', $cart_category_ids, $product );
-
-						$cart_attribute_ids = array_merge( $cart_attribute_ids, $wc_sc_product_attribute->get_product_attributes( $product ) );
-					}
-				}
-
-				// Fetch auto apply coupons.
-				$auto_apply_coupon_ids = ( ! empty( $wc_session ) && is_a( $wc_session, 'WC_Session' ) && is_callable( array( $wc_session, 'get' ) ) ) ? $wc_session->get( $this->session_key_auto_apply_coupons ) : array();
-				$set_in_session        = apply_filters( $this->session_key_auto_apply_coupons . '_session', true, array( 'source' => $this ) );
-				$cart_hash             = md5( wp_json_encode( $cart->get_cart_for_session() ) );
-				$stored_cart_hash      = WC()->session->get( 'wc_sc_auto_apply_cart_hash' );
-				if ( empty( $auto_apply_coupon_ids ) || ! $set_in_session || $cart_hash !== $stored_cart_hash ) {
-					global $wpdb;
-					$user_role                    = '';
-					$query_exclude_user_role      = '';
-					$email                        = '';
-					$query_exclude_customer_email = '';
-					$limit                        = $max_auto_apply_coupon * apply_filters( 'wc_sc_max_auto_apply_coupons_multiplier', get_option( 'wc_sc_max_auto_apply_coupons_multiplier', 50 ) );
-					$query_autoapply_coupons      = $wpdb->prepare(
-						"SELECT id
-							FROM {$wpdb->prefix}wc_smart_coupons
-								WHERE wc_sc_auto_apply_coupon = %d
-								AND discount_type != %s
-								AND (date_expires IS NULL OR date_expires >= DATE_ADD(NOW(), INTERVAL %d MINUTE))
-								",
-						1,
-						'smart_coupon',
-						absint( apply_filters( 'auto_apply_coupons_expires_limit', 5 ) )
-					);
-
-					if ( ! empty( $exclude_applied_coupon_ids ) && is_array( $exclude_applied_coupon_ids ) ) {
-						$exclude_applied_coupon_ids = implode( ',', $exclude_applied_coupon_ids );
-						$query_autoapply_coupons   .= " AND id NOT IN ( $exclude_applied_coupon_ids )";
 					}
 
-					// Condition for minimum & maximum spend.
-					$query_autoapply_coupons .= " AND (minimum_amount = '' OR minimum_amount IS NULL OR minimum_amount <= " . $subtotal . ') ';
-					$query_autoapply_coupons .= " AND (maximum_amount = '' OR maximum_amount IS NULL OR maximum_amount >= " . $subtotal . ') ';
-
-					// Condition for selected payment method.
-					if ( ! empty( $selected_payment_method ) && is_string( $selected_payment_method ) ) {
-						$query_autoapply_coupons .= $wpdb->prepare( ' AND ( wc_sc_payment_method_ids = %s OR wc_sc_payment_method_ids IS NULL OR wc_sc_payment_method_ids LIKE %s )', 'a:0:{}', '%' . $wpdb->esc_like( '"' . $selected_payment_method . '"' ) . '%' );
-					}
-
-					// Condition for selected shipping method.
-					if ( ! empty( $selected_shipping_methods ) && is_array( $selected_shipping_methods ) ) {
-						$sub_query = '';
-						foreach ( $selected_shipping_methods as $shipping_method ) {
-							$shipping_method = explode( ':', $shipping_method )[0];
-							$sub_query      .= $wpdb->prepare( ' OR wc_sc_shipping_method_ids LIKE %s', '%' . $wpdb->esc_like( '"' . $shipping_method . '"' ) . '%' );
-
-						}
-						$query_autoapply_coupons .= $wpdb->prepare( " AND ( wc_sc_shipping_method_ids = %s OR wc_sc_shipping_method_ids IS NULL $sub_query ) ", 'a:0:{}' ); // phpcs:ignore
-					}
-
-					// Filter by product ids.
-					if ( ! empty( $cart_product_ids ) && is_array( $cart_product_ids ) ) {
-						$cart_product_ids  = array_unique( $cart_product_ids );
-						$sub_query         = '';
-						$exclude_sub_query = '';
-						foreach ( $cart_product_ids as $id ) {
-							$sub_query         .= $wpdb->prepare( ' OR product_ids LIKE %s', '%' . $wpdb->esc_like( $id ) . '%' );
-							$exclude_sub_query .= $wpdb->prepare( ' OR exclude_product_ids NOT LIKE %s', '%' . $wpdb->esc_like( $id ) . '%' );
-						}
-						$query_autoapply_coupons .= " AND (product_ids = '' OR product_ids IS NULL $sub_query )";
-
-						// Filter by exclude product ids.
-						$query_autoapply_coupons .= " AND (exclude_product_ids = '' OR exclude_product_ids IS NULL $exclude_sub_query )";
-					}
-
-					// Filter by cart_attribute_ids.
-					if ( ! empty( $cart_attribute_ids ) && is_array( $cart_attribute_ids ) ) {
-						$cart_attribute_ids = array_unique( $cart_attribute_ids );
-						$sub_query          = '';
-						$exclude_sub_query  = '';
-						foreach ( $cart_attribute_ids as $id ) {
-							$sub_query         .= $wpdb->prepare( ' OR wc_sc_product_attribute_ids LIKE %s', '%' . $wpdb->esc_like( $id ) . '%' );
-							$exclude_sub_query .= $wpdb->prepare( ' OR wc_sc_exclude_product_attribute_ids NOT LIKE %s', '%' . $wpdb->esc_like( $id ) . '%' );
-						}
-						$query_autoapply_coupons .= " AND (wc_sc_product_attribute_ids IN ('', 'a:0:{}') OR wc_sc_product_attribute_ids IS NULL $sub_query )";
-
-						// Filter by exclude category ids.
-						$query_autoapply_coupons .= " AND (wc_sc_exclude_product_attribute_ids IN ('', 'a:0:{}') OR wc_sc_exclude_product_attribute_ids IS NULL $exclude_sub_query )";
-					}
-
-					// Filter by category ids.
-					if ( ! empty( $cart_category_ids ) && is_array( $cart_category_ids ) ) {
-						$cart_category_ids = array_unique( $cart_category_ids );
-						$sub_query         = '';
-						$exclude_sub_query = '';
-						foreach ( $cart_category_ids as $cat_id ) {
-							$sub_query         .= $wpdb->prepare( ' OR product_categories LIKE %s', '%' . $wpdb->esc_like( 'i:' . $cat_id ) . '%' );
-							$exclude_sub_query .= $wpdb->prepare( ' OR exclude_product_categories NOT LIKE %s', '%' . $wpdb->esc_like( 'i:' . $cat_id ) . '%' );
-						}
-						$query_autoapply_coupons .= " AND (product_categories IN ('', 'a:0:{}') OR product_categories IS NULL $sub_query )";
-
-						// Filter by exclude category ids.
-						$query_autoapply_coupons .= " AND (exclude_product_categories IN ('', 'a:0:{}') OR exclude_product_categories IS NULL $exclude_sub_query )";
-					}
-
-					$query_customer_email = $wpdb->prepare( ' customer_email = %s OR customer_email IS NULL', 'a:0:{}' );
-					$query_user_role      = $wpdb->prepare( ' wc_sc_user_role_ids = %s OR wc_sc_user_role_ids IS NULL', 'a:0:{}' );
-
-					$current_user = wp_get_current_user();
-					if ( ! is_user_logged_in() ) {
-						$email                 = function_exists( 'WC' ) && isset( WC()->customer ) && WC()->customer instanceof WC_Customer && is_callable( array( WC()->customer, 'get_billing_email' ) ) ? WC()->customer->get_billing_email() : '';
-						$current_user          = ( ! empty( $email ) ) ? get_user_by( 'email', $email ) : $current_user;
-						$email_domain          = '*' . strstr( $email, '@' );
-						$query_customer_email .= $wpdb->prepare(
-							' OR customer_email LIKE %s OR customer_email LIKE %s',
-							'%' . $wpdb->esc_like( '"' . $email_domain . '"' ) . '%',
-							'%' . $wpdb->esc_like( '"' . $email . '"' ) . '%'
+					// Fetch auto apply coupons.
+					$auto_apply_coupon_ids = ( ! empty( $wc_session ) && is_a( $wc_session, 'WC_Session' ) && is_callable( array( $wc_session, 'get' ) ) ) ? $wc_session->get( $this->session_key_auto_apply_coupons ) : array();
+					$set_in_session        = apply_filters( $this->session_key_auto_apply_coupons . '_session', true, array( 'source' => $this ) );
+					$cart_hash             = md5( wp_json_encode( $cart->get_cart_for_session() ) );
+					$stored_cart_hash      = WC()->session->get( 'wc_sc_auto_apply_cart_hash' );
+					if ( empty( $auto_apply_coupon_ids ) || ! $set_in_session || $cart_hash !== $stored_cart_hash ) {
+						global $wpdb;
+						$user_role                    = '';
+						$query_exclude_user_role      = '';
+						$email                        = '';
+						$query_exclude_customer_email = '';
+						$limit                        = $max_auto_apply_coupon * apply_filters( 'wc_sc_max_auto_apply_coupons_multiplier', get_option( 'wc_sc_max_auto_apply_coupons_multiplier', 50 ) );
+						$query_autoapply_coupons      = $wpdb->prepare(
+							"SELECT id
+								FROM {$wpdb->prefix}wc_smart_coupons
+									WHERE wc_sc_auto_apply_coupon = %d
+									AND discount_type != %s
+									AND (date_expires IS NULL OR date_expires >= DATE_ADD(NOW(), INTERVAL %d MINUTE))
+									",
+							1,
+							'smart_coupon',
+							absint( apply_filters( 'auto_apply_coupons_expires_limit', 5 ) )
 						);
-					}
 
-					if ( isset( $current_user->ID ) && ! empty( $current_user->ID ) ) {
-						$max_user_roles_limit = apply_filters( 'wc_sc_max_user_roles_limit', 5 );
-						$user_roles           = ( ! empty( $current_user->roles ) ) ? $current_user->roles : array();
-						if ( count( $user_roles ) > $max_user_roles_limit ) {
-							$user_roles = array_slice( $user_roles, 0, $max_user_roles_limit );
+						if ( ! empty( $exclude_applied_coupon_ids ) && is_array( $exclude_applied_coupon_ids ) ) {
+							$exclude_applied_coupon_ids = implode( ',', $exclude_applied_coupon_ids );
+							$query_autoapply_coupons   .= " AND id NOT IN ( $exclude_applied_coupon_ids )";
 						}
-						$email        = function_exists( 'WC' ) && isset( WC()->customer ) && WC()->customer instanceof WC_Customer && is_callable( array( WC()->customer, 'get_billing_email' ) ) ? WC()->customer->get_billing_email() : get_user_meta( $current_user->ID, 'billing_email', true );
-						$email        = ( ! empty( $email ) ) ? $email : $current_user->user_email;
-						$email_domain = '*' . strstr( $email, '@' );
 
-						if ( $email !== $current_user->user_email ) {
-							$current_user_email_domain = '*' . strstr( $current_user->user_email, '@' );
-							$query_customer_email     .= $wpdb->prepare(
-								' OR customer_email LIKE %s OR customer_email LIKE %s OR customer_email LIKE %s OR customer_email LIKE %s',
-								'%' . $wpdb->esc_like( '"' . $current_user_email_domain . '"' ) . '%',
-								'%' . $wpdb->esc_like( '"' . $email_domain . '"' ) . '%',
-								'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%',
-								'%' . $wpdb->esc_like( '"' . $email . '"' ) . '%'
-							);
+						// Condition for minimum & maximum spend.
+						$query_autoapply_coupons .= " AND (maximum_amount = '' OR maximum_amount IS NULL OR maximum_amount >= " . $subtotal . ') ';
 
-							// add exclude customer email.
-							$query_exclude_customer_email .= $wpdb->prepare(
-								"wc_sc_excluded_customer_email = '' OR wc_sc_excluded_customer_email IS NULL OR wc_sc_excluded_customer_email NOT LIKE %s AND  wc_sc_excluded_customer_email NOT LIKE %s",
-								'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%',
-								'%' . $wpdb->esc_like( '"' . $email . '"' ) . '%'
-							);
-						} else {
+						// Condition for selected payment method.
+						if ( ! empty( $selected_payment_method ) && is_string( $selected_payment_method ) ) {
+							$query_autoapply_coupons .= $wpdb->prepare( ' AND ( wc_sc_payment_method_ids = %s OR wc_sc_payment_method_ids IS NULL OR wc_sc_payment_method_ids LIKE %s )', 'a:0:{}', '%' . $wpdb->esc_like( '"' . $selected_payment_method . '"' ) . '%' );
+						}
+
+						// Condition for selected shipping method.
+						if ( ! empty( $selected_shipping_methods ) && is_array( $selected_shipping_methods ) ) {
+							$sub_query = '';
+							foreach ( $selected_shipping_methods as $shipping_method ) {
+								$shipping_method = explode( ':', $shipping_method )[0];
+								$sub_query      .= $wpdb->prepare( ' OR wc_sc_shipping_method_ids LIKE %s', '%' . $wpdb->esc_like( '"' . $shipping_method . '"' ) . '%' );
+
+							}
+							$query_autoapply_coupons .= $wpdb->prepare( " AND ( wc_sc_shipping_method_ids = %s OR wc_sc_shipping_method_ids IS NULL $sub_query ) ", 'a:0:{}' ); // phpcs:ignore
+						}
+
+						// Filter by product ids.
+						if ( ! empty( $cart_product_ids ) && is_array( $cart_product_ids ) ) {
+							$cart_product_ids  = array_unique( $cart_product_ids );
+							$sub_query         = '';
+							$exclude_sub_query = '';
+							foreach ( $cart_product_ids as $id ) {
+								$sub_query         .= $wpdb->prepare( ' OR CONCAT(",",product_ids,",") LIKE %s', '%,' . $wpdb->esc_like( $id ) . ',%' );
+								$exclude_sub_query .= $wpdb->prepare( ' OR CONCAT(",",exclude_product_ids,",") NOT LIKE %s', '%,' . $wpdb->esc_like( $id ) . ',%' );
+							}
+							$query_autoapply_coupons .= " AND (product_ids = '' OR product_ids IS NULL $sub_query )";
+
+							// Filter by exclude product ids.
+							$query_autoapply_coupons .= " AND (exclude_product_ids = '' OR exclude_product_ids IS NULL $exclude_sub_query )";
+						}
+
+						// Filter by cart_attribute_ids.
+						if ( ! empty( $cart_attribute_ids ) && is_array( $cart_attribute_ids ) ) {
+							$cart_attribute_ids = array_unique( $cart_attribute_ids );
+							$sub_query          = '';
+							$exclude_sub_query  = '';
+							foreach ( $cart_attribute_ids as $id ) {
+								$sub_query         .= $wpdb->prepare( ' OR wc_sc_product_attribute_ids LIKE %s', '%' . $wpdb->esc_like( $id ) . '%' );
+								$exclude_sub_query .= $wpdb->prepare( ' OR wc_sc_exclude_product_attribute_ids NOT LIKE %s', '%' . $wpdb->esc_like( $id ) . '%' );
+							}
+							$query_autoapply_coupons .= " AND (wc_sc_product_attribute_ids IN ('', 'a:0:{}') OR wc_sc_product_attribute_ids IS NULL $sub_query )";
+
+							// Filter by exclude category ids.
+							$query_autoapply_coupons .= " AND (wc_sc_exclude_product_attribute_ids IN ('', 'a:0:{}') OR wc_sc_exclude_product_attribute_ids IS NULL $exclude_sub_query )";
+						}
+
+						// Filter by category ids.
+						if ( ! empty( $cart_category_ids ) && is_array( $cart_category_ids ) ) {
+							$cart_category_ids = array_unique( $cart_category_ids );
+							$sub_query         = '';
+							$exclude_sub_query = '';
+							foreach ( $cart_category_ids as $cat_id ) {
+								$sub_query         .= $wpdb->prepare( ' OR product_categories LIKE %s', '%' . $wpdb->esc_like( 'i:' . $cat_id ) . '%' );
+								$exclude_sub_query .= $wpdb->prepare( ' OR exclude_product_categories NOT LIKE %s', '%' . $wpdb->esc_like( 'i:' . $cat_id ) . '%' );
+							}
+							$query_autoapply_coupons .= " AND (product_categories IN ('', 'a:0:{}') OR product_categories IS NULL $sub_query )";
+
+							// Filter by exclude category ids.
+							$query_autoapply_coupons .= " AND (exclude_product_categories IN ('', 'a:0:{}') OR exclude_product_categories IS NULL $exclude_sub_query )";
+						}
+
+						$query_customer_email = $wpdb->prepare( ' customer_email = %s OR customer_email IS NULL', 'a:0:{}' );
+						$query_user_role      = $wpdb->prepare( ' wc_sc_user_role_ids = %s OR wc_sc_user_role_ids IS NULL', 'a:0:{}' );
+
+						$current_user = wp_get_current_user();
+						if ( ! is_user_logged_in() ) {
+							$email                 = function_exists( 'WC' ) && isset( WC()->customer ) && WC()->customer instanceof WC_Customer && is_callable( array( WC()->customer, 'get_billing_email' ) ) ? WC()->customer->get_billing_email() : '';
+							$current_user          = ( ! empty( $email ) ) ? get_user_by( 'email', $email ) : $current_user;
+							$email_domain          = '*' . strstr( $email, '@' );
 							$query_customer_email .= $wpdb->prepare(
 								' OR customer_email LIKE %s OR customer_email LIKE %s',
 								'%' . $wpdb->esc_like( '"' . $email_domain . '"' ) . '%',
-								'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%'
-							);
-							// add exclude customer email.
-							$query_exclude_customer_email .= $wpdb->prepare(
-								"wc_sc_excluded_customer_email = '' OR wc_sc_excluded_customer_email IS NULL OR wc_sc_excluded_customer_email NOT LIKE %s",
-								'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%'
+								'%' . $wpdb->esc_like( '"' . $email . '"' ) . '%'
 							);
 						}
 
-						if ( ! is_scalar( $user_roles ) && ! empty( $user_roles ) ) {
-							$query_user_roles         = array();
-							$query_exclude_user_roles = array();
-							foreach ( $user_roles as $role ) {
-								$query_user_roles[]         = $wpdb->prepare( ' wc_sc_user_role_ids LIKE %s', '%' . $wpdb->esc_like( '"' . $role . '"' ) . '%' );
-								$query_exclude_user_roles[] = $wpdb->prepare( ' wc_sc_exclude_user_role_ids NOT LIKE %s', '%' . $wpdb->esc_like( '"' . $role . '"' ) . '%' );
+						if ( isset( $current_user->ID ) && ! empty( $current_user->ID ) ) {
+							$max_user_roles_limit = apply_filters( 'wc_sc_max_user_roles_limit', 5 );
+							$user_roles           = ( ! empty( $current_user->roles ) ) ? $current_user->roles : array();
+							if ( count( $user_roles ) > $max_user_roles_limit ) {
+								$user_roles = array_slice( $user_roles, 0, $max_user_roles_limit );
 							}
-							if ( ! empty( $query_user_roles ) ) {
-								$query_user_role .= ' OR (' . implode( ' OR ', $query_user_roles ) . ')';
-							}
+							$email        = function_exists( 'WC' ) && isset( WC()->customer ) && WC()->customer instanceof WC_Customer && is_callable( array( WC()->customer, 'get_billing_email' ) ) ? WC()->customer->get_billing_email() : get_user_meta( $current_user->ID, 'billing_email', true );
+							$email        = ( ! empty( $email ) ) ? $email : $current_user->user_email;
+							$email_domain = '*' . strstr( $email, '@' );
 
-							if ( ! empty( $query_exclude_user_roles ) ) {
-								$query_exclude_user_role .= implode( ' AND ', $query_exclude_user_roles );
-							}
-						}
-					}
-
-					$query_autoapply_coupons .= ! empty( trim( $query_customer_email ) ) ? ' AND (' . $query_customer_email . ')' : '';
-					$query_autoapply_coupons .= ! empty( trim( $query_exclude_customer_email ) ) ? ' AND (' . $query_exclude_customer_email . ')' : '';
-					$query_autoapply_coupons .= ! empty( trim( $query_user_role ) ) ? ' AND (' . $query_user_role . ')' : '';
-					$query_autoapply_coupons .= ! empty( trim( $query_exclude_user_role ) ) ? ' AND (' . $query_exclude_user_role . ')' : '';
-
-					$query_autoapply_coupons .= " ORDER BY id DESC LIMIT $limit";
-					$auto_apply_coupon_ids    = $wpdb->get_col( $query_autoapply_coupons ); // phpcs:ignore
-					$auto_apply_coupon_ids    = ( empty( $auto_apply_coupon_ids ) || ! is_array( $auto_apply_coupon_ids ) ) ? array() : array_unique( array_filter( array_map( 'absint', $auto_apply_coupon_ids ) ) );
-					if ( ! empty( $wc_session ) && is_a( $wc_session, 'WC_Session' ) && is_callable( array( $wc_session, 'set' ) ) ) {
-						$wc_session->set( $this->session_key_auto_apply_coupons, $auto_apply_coupon_ids );
-						$wc_session->set( 'wc_sc_auto_apply_cart_hash', $cart_hash );
-					}
-				}
-
-				$auto_apply_coupon_ids = apply_filters( $this->session_key_auto_apply_coupons, $auto_apply_coupon_ids, array( 'source' => $this ) );
-
-				if ( ! empty( $auto_apply_coupon_ids ) && is_array( $auto_apply_coupon_ids ) ) {
-					$valid_coupon_counter         = 0;
-					$max_auto_apply_coupons_limit = apply_filters( 'wc_sc_max_auto_apply_coupons_limit', $max_auto_apply_coupon, array( 'source' => $this ) );
-					$current_filter               = current_filter();
-					do_action(
-						'wc_sc_before_auto_apply_coupons',
-						array(
-							'source'         => $this,
-							'current_filter' => $current_filter,
-						)
-					);
-					foreach ( $auto_apply_coupon_ids as $apply_coupon_id ) {
-						// Process only five coupons.
-						if ( absint( $max_auto_apply_coupons_limit ) === $valid_coupon_counter ) {
-							break;
-						}
-						$coupon = new WC_Coupon( absint( $apply_coupon_id ) );
-						if ( $this->is_wc_gte_30() ) {
-							$coupon_id   = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) ? $coupon->get_id() : 0;
-							$coupon_code = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_code' ) ) ) ? $coupon->get_code() : '';
-						} else {
-							$coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-							$coupon_code = ( ! empty( $coupon->code ) ) ? $coupon->code : '';
-						}
-
-						// If coupon has payment method restriction and already store wc_sc_auto_applied_coupons.
-						$payment_method_ids = $this->get_post_meta( $coupon_id, 'wc_sc_payment_method_ids', true );
-						if ( ( is_array( $payment_method_ids ) && count( $payment_method_ids ) > 0 ) && $this->is_coupon_applied_by_auto_apply( $coupon_code ) ) {
-							$this->unset_auto_applied_coupon( $coupon_code );
-						}
-
-						// Guest usage limit validation.
-						if ( $this->has_coupon_reached_usage_limit( $coupon ) ) {
-							continue;
-						}
-
-						// Check if it is a valid coupon object.
-						if ( $apply_coupon_id === $coupon_id && ! empty( $coupon_code ) && $this->is_coupon_valid_for_auto_apply( $coupon ) ) {
-								$cart_total    = ( $this->is_wc_greater_than( '3.1.2' ) ) ? $cart->get_cart_contents_total() : $cart->cart_contents_total;
-								$is_auto_apply = apply_filters(
-									'wc_sc_is_auto_apply',
-									( $cart_total > 0 ),
-									array(
-										'source'     => $this,
-										'cart_obj'   => $cart,
-										'coupon_obj' => $coupon,
-										'cart_total' => $cart_total,
-									)
+							if ( $email !== $current_user->user_email ) {
+								$current_user_email_domain = '*' . strstr( $current_user->user_email, '@' );
+								$query_customer_email     .= $wpdb->prepare(
+									' OR customer_email LIKE %s OR customer_email LIKE %s OR customer_email LIKE %s OR customer_email LIKE %s',
+									'%' . $wpdb->esc_like( '"' . $current_user_email_domain . '"' ) . '%',
+									'%' . $wpdb->esc_like( '"' . $email_domain . '"' ) . '%',
+									'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%',
+									'%' . $wpdb->esc_like( '"' . $email . '"' ) . '%'
 								);
-								// Check if cart still requires a coupon discount and does not have coupon already applied.
-							if ( true === $is_auto_apply && ! $cart->has_discount( $coupon_code ) ) {
-								$cart->add_discount( $coupon_code );
-								$cart->calculate_shipping();
-								$cart->calculate_totals();
-								$this->set_auto_applied_coupon( $coupon_code );
+
+								// add exclude customer email.
+								$query_exclude_customer_email .= $wpdb->prepare(
+									"wc_sc_excluded_customer_email = '' OR wc_sc_excluded_customer_email IS NULL OR wc_sc_excluded_customer_email NOT LIKE %s AND  wc_sc_excluded_customer_email NOT LIKE %s",
+									'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%',
+									'%' . $wpdb->esc_like( '"' . $email . '"' ) . '%'
+								);
+							} else {
+								$query_customer_email .= $wpdb->prepare(
+									' OR customer_email LIKE %s OR customer_email LIKE %s',
+									'%' . $wpdb->esc_like( '"' . $email_domain . '"' ) . '%',
+									'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%'
+								);
+								// add exclude customer email.
+								$query_exclude_customer_email .= $wpdb->prepare(
+									"wc_sc_excluded_customer_email = '' OR wc_sc_excluded_customer_email IS NULL OR wc_sc_excluded_customer_email NOT LIKE %s",
+									'%' . $wpdb->esc_like( '"' . $current_user->user_email . '"' ) . '%'
+								);
 							}
-							$valid_coupon_counter++;
-						} // End if to check valid coupon.
+
+							if ( ! is_scalar( $user_roles ) && ! empty( $user_roles ) ) {
+								$query_user_roles         = array();
+								$query_exclude_user_roles = array();
+								foreach ( $user_roles as $role ) {
+									$query_user_roles[]         = $wpdb->prepare( ' wc_sc_user_role_ids LIKE %s', '%' . $wpdb->esc_like( '"' . $role . '"' ) . '%' );
+									$query_exclude_user_roles[] = $wpdb->prepare( ' wc_sc_exclude_user_role_ids NOT LIKE %s', '%' . $wpdb->esc_like( '"' . $role . '"' ) . '%' );
+								}
+								if ( ! empty( $query_user_roles ) ) {
+									$query_user_role .= ' OR (' . implode( ' OR ', $query_user_roles ) . ')';
+								}
+
+								if ( ! empty( $query_exclude_user_roles ) ) {
+									$query_exclude_user_role .= implode( ' AND ', $query_exclude_user_roles );
+								}
+							}
+						}
+
+						$query_autoapply_coupons .= ! empty( trim( $query_customer_email ) ) ? ' AND (' . $query_customer_email . ')' : '';
+						$query_autoapply_coupons .= ! empty( trim( $query_exclude_customer_email ) ) ? ' AND (' . $query_exclude_customer_email . ')' : '';
+						$query_autoapply_coupons .= ! empty( trim( $query_user_role ) ) ? ' AND (' . $query_user_role . ')' : '';
+						$query_autoapply_coupons .= ! empty( trim( $query_exclude_user_role ) ) ? ' AND (' . $query_exclude_user_role . ')' : '';
+
+						$query_autoapply_coupons .= " ORDER BY id DESC LIMIT $limit";
+						$auto_apply_coupon_ids    = $wpdb->get_col( $query_autoapply_coupons ); // phpcs:ignore
+						$auto_apply_coupon_ids    = ( empty( $auto_apply_coupon_ids ) || ! is_array( $auto_apply_coupon_ids ) ) ? array() : array_unique( array_filter( array_map( 'absint', $auto_apply_coupon_ids ) ) );
+						if ( ! empty( $wc_session ) && is_a( $wc_session, 'WC_Session' ) && is_callable( array( $wc_session, 'set' ) ) ) {
+							$wc_session->set( $this->session_key_auto_apply_coupons, $auto_apply_coupon_ids );
+							$wc_session->set( 'wc_sc_auto_apply_cart_hash', $cart_hash );
+						}
+					}
+
+					$auto_apply_coupon_ids = apply_filters( $this->session_key_auto_apply_coupons, $auto_apply_coupon_ids, array( 'source' => $this ) );
+
+					if ( ! empty( $auto_apply_coupon_ids ) && is_array( $auto_apply_coupon_ids ) ) {
+						$valid_coupon_counter         = 0;
+						$max_auto_apply_coupons_limit = apply_filters( 'wc_sc_max_auto_apply_coupons_limit', $max_auto_apply_coupon, array( 'source' => $this ) );
+						$current_filter               = current_filter();
+						do_action(
+							'wc_sc_before_auto_apply_coupons',
+							array(
+								'source'         => $this,
+								'current_filter' => $current_filter,
+							)
+						);
+						foreach ( $auto_apply_coupon_ids as $apply_coupon_id ) {
+							// Process only five coupons.
+							if ( absint( $max_auto_apply_coupons_limit ) === $valid_coupon_counter ) {
+								break;
+							}
+							$coupon = new WC_Coupon( absint( $apply_coupon_id ) );
+							if ( $this->is_wc_gte_30() ) {
+								$coupon_id   = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) ? $coupon->get_id() : 0;
+								$coupon_code = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_code' ) ) ) ? $coupon->get_code() : '';
+							} else {
+								$coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+								$coupon_code = ( ! empty( $coupon->code ) ) ? $coupon->code : '';
+							}
+
+							// If coupon has payment method restriction and already store wc_sc_auto_applied_coupons.
+							$payment_method_ids = $this->get_post_meta( $coupon_id, 'wc_sc_payment_method_ids', true );
+							if ( ( is_array( $payment_method_ids ) && count( $payment_method_ids ) > 0 ) && $this->is_coupon_applied_by_auto_apply( $coupon_code ) ) {
+								$this->unset_auto_applied_coupon( $coupon_code );
+							}
+
+							// Guest usage limit validation.
+							if ( $this->has_coupon_reached_usage_limit( $coupon ) ) {
+								continue;
+							}
+
+							// Check if it is a valid coupon object.
+							if ( $apply_coupon_id === $coupon_id && ! empty( $coupon_code ) && $this->is_coupon_valid_for_auto_apply( $coupon ) ) {
+									$cart_total    = ( $this->is_wc_greater_than( '3.1.2' ) ) ? $cart->get_cart_contents_total() : $cart->cart_contents_total;
+									$is_auto_apply = apply_filters(
+										'wc_sc_is_auto_apply',
+										( $cart_total > 0 ),
+										array(
+											'source'     => $this,
+											'cart_obj'   => $cart,
+											'coupon_obj' => $coupon,
+											'cart_total' => $cart_total,
+										)
+									);
+									// Check if cart still requires a coupon discount and does not have coupon already applied.
+								if ( true === $is_auto_apply && ! $cart->has_discount( $coupon_code ) ) {
+									/*
+									* Before apply a discount if any individual valid coupon found
+									* then unset all others non-individual coupons to avoid infinite loop
+									* This is an important code to causing auto infinite loop
+									*/
+									if ( $coupon->get_individual_use() ) {
+										$cart->applied_coupons = array();
+										$this->reset_auto_applied_coupons_session();
+									}
+
+									$cart->add_discount( $coupon_code );
+									$cart->calculate_shipping();
+									$cart->calculate_totals();
+									$this->set_auto_applied_coupon( $coupon_code );
+								}
+								$valid_coupon_counter++;
+							} // End if to check valid coupon.
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -721,115 +745,119 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * Function to auto apply coupons older mechanism.
 		 */
 		public function auto_apply_coupons_old() {
-			$cart = ( is_object( WC() ) && isset( WC()->cart ) ) ? WC()->cart : null;
-			if ( is_object( $cart ) && is_callable( array( $cart, 'is_empty' ) ) && ! $cart->is_empty() && $this->is_allow_auto_apply_coupons() ) {
-				global $wpdb;
-				$user_role = '';
-				$email     = '';
-				if ( ! is_admin() ) {
-					$current_user = wp_get_current_user();
-					if ( ! empty( $current_user->ID ) ) {
-						$max_user_roles_limit = apply_filters( 'wc_sc_max_user_roles_limit', 5 );
-						$user_roles           = ( ! empty( $current_user->roles ) ) ? $current_user->roles : array();
-						if ( count( $user_roles ) > $max_user_roles_limit ) {
-							$user_roles = array_slice( $user_roles, 0, $max_user_roles_limit );
+			try {
+				$cart = ( is_object( WC() ) && isset( WC()->cart ) ) ? WC()->cart : null;
+				if ( is_object( $cart ) && is_callable( array( $cart, 'is_empty' ) ) && ! $cart->is_empty() && $this->is_allow_auto_apply_coupons() ) {
+					global $wpdb;
+					$user_role = '';
+					$email     = '';
+					if ( ! is_admin() ) {
+						$current_user = wp_get_current_user();
+						if ( ! empty( $current_user->ID ) ) {
+							$max_user_roles_limit = apply_filters( 'wc_sc_max_user_roles_limit', 5 );
+							$user_roles           = ( ! empty( $current_user->roles ) ) ? $current_user->roles : array();
+							if ( count( $user_roles ) > $max_user_roles_limit ) {
+								$user_roles = array_slice( $user_roles, 0, $max_user_roles_limit );
+							}
+							$email = get_user_meta( $current_user->ID, 'billing_email', true );
+							$email = ( ! empty( $email ) ) ? $email : $current_user->user_email;
 						}
-						$email = get_user_meta( $current_user->ID, 'billing_email', true );
-						$email = ( ! empty( $email ) ) ? $email : $current_user->user_email;
 					}
-				}
-				$query = $wpdb->prepare(
-					"SELECT DISTINCT p.ID
-						FROM {$wpdb->posts} AS p
-							JOIN {$wpdb->postmeta} AS pm1
-								ON (p.ID = pm1.post_id
-									AND p.post_type = %s
-									AND p.post_status = %s
-									AND pm1.meta_key = %s
-									AND pm1.meta_value = %s)
-							JOIN {$wpdb->postmeta} AS pm2
-								ON (p.ID = pm2.post_id
-									AND pm2.meta_key IN ('wc_sc_user_role_ids', 'customer_email')
-									AND (pm2.meta_value = ''
-											OR pm2.meta_value = 'a:0:{}'",
-					'shop_coupon',
-					'publish',
-					'wc_sc_auto_apply_coupon',
-					'yes'
-				);
-				if ( ! empty( $user_roles ) ) {
-					foreach ( $user_roles as $user_role ) {
+					$query = $wpdb->prepare(
+						"SELECT DISTINCT p.ID
+							FROM {$wpdb->posts} AS p
+								JOIN {$wpdb->postmeta} AS pm1
+									ON (p.ID = pm1.post_id
+										AND p.post_type = %s
+										AND p.post_status = %s
+										AND pm1.meta_key = %s
+										AND pm1.meta_value = %s)
+								JOIN {$wpdb->postmeta} AS pm2
+									ON (p.ID = pm2.post_id
+										AND pm2.meta_key IN ('wc_sc_user_role_ids', 'customer_email')
+										AND (pm2.meta_value = ''
+												OR pm2.meta_value = 'a:0:{}'",
+						'shop_coupon',
+						'publish',
+						'wc_sc_auto_apply_coupon',
+						'yes'
+					);
+					if ( ! empty( $user_roles ) ) {
+						foreach ( $user_roles as $user_role ) {
+							$query .= $wpdb->prepare(
+								' OR pm2.meta_value LIKE %s',
+								'%' . $wpdb->esc_like( $user_role ) . '%'
+							);
+						}
+					}
+					if ( ! empty( $email ) ) {
 						$query .= $wpdb->prepare(
 							' OR pm2.meta_value LIKE %s',
-							'%' . $wpdb->esc_like( $user_role ) . '%'
+							'%' . $wpdb->esc_like( $email ) . '%'
 						);
 					}
-				}
-				if ( ! empty( $email ) ) {
-					$query .= $wpdb->prepare(
-						' OR pm2.meta_value LIKE %s',
-						'%' . $wpdb->esc_like( $email ) . '%'
-					);
-				}
-				$query                .= '))';
-				$auto_apply_coupon_ids = $wpdb->get_col( $query ); // phpcs:ignore
-				$auto_apply_coupon_ids = ( empty( $auto_apply_coupon_ids ) || ! is_array( $auto_apply_coupon_ids ) ) ? array() : $auto_apply_coupon_ids;
-				$auto_apply_coupon_ids = array_filter( array_map( 'absint', $auto_apply_coupon_ids ) );
-				if ( ! empty( $auto_apply_coupon_ids ) && is_array( $auto_apply_coupon_ids ) ) {
-					$valid_coupon_counter         = 0;
-					$max_auto_apply_coupons_limit = apply_filters( 'wc_sc_max_auto_apply_coupons_limit', get_option( 'wc_sc_max_auto_apply_coupons_limit', 5 ), array( 'source' => $this ) );
-					$current_filter               = current_filter();
-					do_action(
-						'wc_sc_before_auto_apply_coupons',
-						array(
-							'source'         => $this,
-							'current_filter' => $current_filter,
-						)
-					);
-					foreach ( $auto_apply_coupon_ids as $apply_coupon_id ) {
-						// Process only five coupons.
-						if ( absint( $max_auto_apply_coupons_limit ) === $valid_coupon_counter ) {
-							break;
-						}
-						$coupon = new WC_Coupon( absint( $apply_coupon_id ) );
-						if ( $this->is_wc_gte_30() ) {
-							$coupon_id   = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) ? $coupon->get_id() : 0;
-							$coupon_code = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_code' ) ) ) ? $coupon->get_code() : '';
-						} else {
-							$coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
-							$coupon_code = ( ! empty( $coupon->code ) ) ? $coupon->code : '';
-						}
-
-						// If coupon has payment method restriction and already store wc_sc_auto_applied_coupons.
-						$payment_method_ids = $this->get_post_meta( $coupon_id, 'wc_sc_payment_method_ids', true );
-						if ( ( is_array( $payment_method_ids ) && count( $payment_method_ids ) > 0 ) && $this->is_coupon_applied_by_auto_apply( $coupon_code ) ) {
-							$this->unset_auto_applied_coupon( $coupon_code );
-						}
-
-						// Check if it is a valid coupon object.
-						if ( $apply_coupon_id === $coupon_id && ! empty( $coupon_code ) && $this->is_coupon_valid_for_auto_apply( $coupon ) ) {
-								$cart_total    = ( $this->is_wc_greater_than( '3.1.2' ) ) ? $cart->get_cart_contents_total() : $cart->cart_contents_total;
-								$is_auto_apply = apply_filters(
-									'wc_sc_is_auto_apply',
-									( $cart_total > 0 ),
-									array(
-										'source'     => $this,
-										'cart_obj'   => $cart,
-										'coupon_obj' => $coupon,
-										'cart_total' => $cart_total,
-									)
-								);
-								// Check if cart still requires a coupon discount and does not have coupon already applied.
-							if ( true === $is_auto_apply && ! $cart->has_discount( $coupon_code ) ) {
-								$cart->add_discount( $coupon_code );
-								$cart->calculate_shipping();
-								$cart->calculate_totals();
-								$this->set_auto_applied_coupon( $coupon_code );
+					$query                .= '))';
+					$auto_apply_coupon_ids = $wpdb->get_col( $query ); // phpcs:ignore
+					$auto_apply_coupon_ids = ( empty( $auto_apply_coupon_ids ) || ! is_array( $auto_apply_coupon_ids ) ) ? array() : $auto_apply_coupon_ids;
+					$auto_apply_coupon_ids = array_filter( array_map( 'absint', $auto_apply_coupon_ids ) );
+					if ( ! empty( $auto_apply_coupon_ids ) && is_array( $auto_apply_coupon_ids ) ) {
+						$valid_coupon_counter         = 0;
+						$max_auto_apply_coupons_limit = apply_filters( 'wc_sc_max_auto_apply_coupons_limit', get_option( 'wc_sc_max_auto_apply_coupons_limit', 5 ), array( 'source' => $this ) );
+						$current_filter               = current_filter();
+						do_action(
+							'wc_sc_before_auto_apply_coupons',
+							array(
+								'source'         => $this,
+								'current_filter' => $current_filter,
+							)
+						);
+						foreach ( $auto_apply_coupon_ids as $apply_coupon_id ) {
+							// Process only five coupons.
+							if ( absint( $max_auto_apply_coupons_limit ) === $valid_coupon_counter ) {
+								break;
 							}
-							$valid_coupon_counter++;
-						} // End if to check valid coupon.
+							$coupon = new WC_Coupon( absint( $apply_coupon_id ) );
+							if ( $this->is_wc_gte_30() ) {
+								$coupon_id   = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_id' ) ) ) ? $coupon->get_id() : 0;
+								$coupon_code = ( ! empty( $coupon ) && is_callable( array( $coupon, 'get_code' ) ) ) ? $coupon->get_code() : '';
+							} else {
+								$coupon_id   = ( ! empty( $coupon->id ) ) ? $coupon->id : 0;
+								$coupon_code = ( ! empty( $coupon->code ) ) ? $coupon->code : '';
+							}
+
+							// If coupon has payment method restriction and already store wc_sc_auto_applied_coupons.
+							$payment_method_ids = $this->get_post_meta( $coupon_id, 'wc_sc_payment_method_ids', true );
+							if ( ( is_array( $payment_method_ids ) && count( $payment_method_ids ) > 0 ) && $this->is_coupon_applied_by_auto_apply( $coupon_code ) ) {
+								$this->unset_auto_applied_coupon( $coupon_code );
+							}
+
+							// Check if it is a valid coupon object.
+							if ( $apply_coupon_id === $coupon_id && ! empty( $coupon_code ) && $this->is_coupon_valid_for_auto_apply( $coupon ) ) {
+									$cart_total    = ( $this->is_wc_greater_than( '3.1.2' ) ) ? $cart->get_cart_contents_total() : $cart->cart_contents_total;
+									$is_auto_apply = apply_filters(
+										'wc_sc_is_auto_apply',
+										( $cart_total > 0 ),
+										array(
+											'source'     => $this,
+											'cart_obj'   => $cart,
+											'coupon_obj' => $coupon,
+											'cart_total' => $cart_total,
+										)
+									);
+									// Check if cart still requires a coupon discount and does not have coupon already applied.
+								if ( true === $is_auto_apply && ! $cart->has_discount( $coupon_code ) ) {
+									$cart->add_discount( $coupon_code );
+									$cart->calculate_shipping();
+									$cart->calculate_totals();
+									$this->set_auto_applied_coupon( $coupon_code );
+								}
+								$valid_coupon_counter++;
+							} // End if to check valid coupon.
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -892,6 +920,25 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * @return bool
 		 */
 		public function auto_apply_coupons_to_cart_checkout_block( $pre_render = null, $parsed_block = array(), $parent_block = null ) {
+			global $pagenow;
+			// Skip non-front-end requests.
+			if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_rest_endpoint() || defined( 'REST_REQUEST' ) ) {
+				if ( function_exists( 'get_current_screen' ) ) {
+					$screen = get_current_screen();
+					if ( ! empty( $screen->post_type ) && 'product' === $screen->post_type ) {
+						return $pre_render; // No need to run the following code when working with products.
+					}
+				}
+				$get_post      = ( ! empty( $_GET['post'] ) ) ? wc_clean( wp_unslash( $_GET['post'] ) ) : '';            // phpcs:ignore
+				$get_post_type = ( ! empty( $_GET['post_type'] ) ) ? wc_clean( wp_unslash( $_GET['post_type'] ) ) : '';  // phpcs:ignore
+				if ( 'post.php' === $pagenow && ! empty( $get_post ) && 'product' === get_post_type( $get_post ) ) {
+					return $pre_render;  // No need to run the following code when working with products.
+				}
+				if ( 'post-new.php' === $pagenow && ! empty( $get_post_type ) && 'product' === $get_post_type ) {
+					return $pre_render;  // No need to run the following code when working with products.
+				}
+				return $pre_render; // No need to run the following code when working with products. Giving preference to detect product, if unable to detect then return.
+			}
 			if ( isset( $parsed_block['blockName'] ) && in_array( $parsed_block['blockName'], array( 'woocommerce/cart', 'woocommerce/checkout' ), true ) ) {
 				$this->auto_apply_coupons();
 			}
@@ -912,7 +959,9 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 
 			// Only apply limit check for guest users.
 			if ( $this->has_coupon_reached_usage_limit( $coupon ) ) {
-				wc_add_notice( sprintf( __( 'Coupon usage limit has been reached.', 'woocommerce-smart-coupons' ) ), 'error' );
+				if ( did_action( 'wp_ajax_nopriv_sc_get_available_coupons' ) <= 0 ) { // Add notice only when it's not validated for displaying available coupons.
+					wc_add_notice( sprintf( __( 'Coupon usage limit has been reached.', 'woocommerce-smart-coupons' ) ), 'error' );
+				}
 				return false;
 			}
 
@@ -935,45 +984,49 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * Then, it automatically applies any eligible coupons.
 		 */
 		public function wc_checkout_update_order_review_auto_apply_coupons() {
-			check_ajax_referer( 'update-order-review', 'security' );
+			try {
+				check_ajax_referer( 'update-order-review', 'security' );
 
-			// Get the posted shipping methods from the form data, if available.
-			$posted_shipping_methods = isset( $_POST['shipping_method'] ) ? wc_clean( wp_unslash( $_POST['shipping_method'] ) ) : array(); // phpcs:ignore
+				// Get the posted shipping methods from the form data, if available.
+				$posted_shipping_methods = isset( $_POST['shipping_method'] ) ? wc_clean( wp_unslash( $_POST['shipping_method'] ) ) : array(); // phpcs:ignore
 
-			if ( ! empty( $posted_shipping_methods ) ) {
-				// Retrieve the current chosen shipping methods from the session.
-				$chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
+				if ( ! empty( $posted_shipping_methods ) ) {
+					// Retrieve the current chosen shipping methods from the session.
+					$chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
 
-				if ( is_array( $posted_shipping_methods ) ) {
-					// Update the chosen shipping methods with the posted values.
-					foreach ( $posted_shipping_methods as $i => $value ) {
-						if ( ! is_string( $value ) ) {
-							continue;
+					if ( is_array( $posted_shipping_methods ) ) {
+						// Update the chosen shipping methods with the posted values.
+						foreach ( $posted_shipping_methods as $i => $value ) {
+							if ( ! is_string( $value ) ) {
+								continue;
+							}
+							$chosen_shipping_methods[ $i ] = $value;
 						}
-						$chosen_shipping_methods[ $i ] = $value;
+					}
+
+					// Save the updated chosen shipping methods back to the session.
+					WC()->session->set( 'chosen_shipping_methods', $chosen_shipping_methods );
+				}
+
+				// Get the posted payment methods from the form data, if available.
+				$posted_payment_method = isset( $_POST['payment_method'] ) ? wc_clean( wp_unslash( $_POST['payment_method'] ) ) : array(); // phpcs:ignore
+
+				if ( ! empty( $posted_payment_method ) ) {
+
+					// Retrieve the current chosen payment method from the session.
+					$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
+
+					// Update the session only if the new method is different.
+					if ( ! empty( $posted_payment_method ) && $posted_payment_method !== $chosen_payment_method ) {
+						WC()->session->set( 'chosen_payment_method', $posted_payment_method );
 					}
 				}
 
-				// Save the updated chosen shipping methods back to the session.
-				WC()->session->set( 'chosen_shipping_methods', $chosen_shipping_methods );
+				// Automatically apply any eligible coupons.
+				$this->auto_apply_coupons();
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
-
-			// Get the posted payment methods from the form data, if available.
-			$posted_payment_method = isset( $_POST['payment_method'] ) ? wc_clean( wp_unslash( $_POST['payment_method'] ) ) : array(); // phpcs:ignore
-
-			if ( ! empty( $posted_payment_method ) ) {
-
-				// Retrieve the current chosen payment method from the session.
-				$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
-
-				// Update the session only if the new method is different.
-				if ( ! empty( $posted_payment_method ) && $posted_payment_method !== $chosen_payment_method ) {
-					WC()->session->set( 'chosen_payment_method', $posted_payment_method );
-				}
-			}
-
-			// Automatically apply any eligible coupons.
-			$this->auto_apply_coupons();
 		}
 
 		/**
@@ -987,34 +1040,45 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 * @param WC_Cart $cart The WooCommerce cart object.
 		 */
 		public function remove_coupon_if_zero( $cart ) {
-			// Get all applied coupons.
-			$applied_coupons      = $cart->get_applied_coupons();
-			$auto_applied_coupons = $this->get_auto_applied_coupons();
-			$auto_applied_coupons = array_map( 'strtolower', $auto_applied_coupons );
+			try {
+				// Get all applied coupons.
+				$applied_coupons      = $cart->get_applied_coupons();
+				$auto_applied_coupons = $this->get_auto_applied_coupons();
 
-			if ( ! empty( $applied_coupons ) ) {
-				foreach ( $applied_coupons as $coupon_code ) {
-					// Check if the coupon is not in the coupon discount totals (indicating a zero discount).
-					if ( in_array( strtolower( $coupon_code ), $auto_applied_coupons, true ) && ! array_key_exists( strtolower( $coupon_code ), $cart->get_coupon_discount_totals() ) ) {
-						// Remove the coupon from the applied coupons array.
-						$updated_coupons = array_diff( $applied_coupons, array( $coupon_code ) );
-						$cart->set_applied_coupons( $updated_coupons );
+				if ( ! empty( $applied_coupons ) ) {
+					foreach ( $applied_coupons as $coupon_code ) {
+						// Check if the coupon is not in the coupon discount totals (indicating a zero discount).
+						if ( $this->sc_coupon_code_exists( $coupon_code, $auto_applied_coupons ) && ! array_key_exists( $coupon_code, $cart->get_coupon_discount_totals() ) ) {
+							// Remove the coupon from the applied coupons array.
+							$updated_coupons = array_diff( $applied_coupons, array( $coupon_code ) );
+							$cart->set_applied_coupons( $updated_coupons );
 
-						// Unset the auto-applied coupon from session.
-						$this->unset_auto_applied_coupon( $coupon_code );
-					}
+							// Unset the auto-applied coupon from session.
+							$this->unset_auto_applied_coupon( $coupon_code );
+						}
 
-					// Guest usage limit validation.
-					$coupon = new WC_Coupon( $coupon_code );
-					if ( $this->has_coupon_reached_usage_limit( $coupon ) ) {
-						// Remove the coupon if usage limit is reached.
-						$updated_coupons = array_diff( $applied_coupons, array( $coupon_code ) );
-						$cart->set_applied_coupons( $updated_coupons );
+						// Guest usage limit validation.
+						$coupon = new WC_Coupon( $coupon_code );
+						if ( $this->has_coupon_reached_usage_limit( $coupon ) ) {
+							// Remove the coupon if usage limit is reached.
+							$updated_coupons = array_diff( $applied_coupons, array( $coupon_code ) );
+							$cart->set_applied_coupons( $updated_coupons );
 
-						// Unset the auto-applied coupon from session.
-						$this->unset_auto_applied_coupon( $coupon_code ); // Usage limit reached.
+							// Unset the auto-applied coupon from session.
+							$this->unset_auto_applied_coupon( $coupon_code ); // Usage limit reached.
+
+							foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+								if ( isset( $cart_item['wc_sc_product_source'] ) && $this->sc_is_same_coupon_code( $cart_item['wc_sc_product_source'], $coupon_code ) ) {
+									if ( ! doing_action( 'woocommerce_before_calculate_totals' ) ) {
+										WC()->cart->set_quantity( $cart_item_key, 0 );
+									}
+								}
+							}
+						}
 					}
 				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 		}
 
@@ -1071,6 +1135,10 @@ if ( ! class_exists( 'WC_SC_Auto_Apply_Coupon' ) ) {
 		 */
 		public function blocks_removed_coupon( $code = '' ) {
 			if ( empty( $code ) ) {
+				return;
+			}
+			$applied_coupons = WC()->cart->get_applied_coupons();
+			if ( in_array( $code, $applied_coupons, true ) ) {
 				return;
 			}
 

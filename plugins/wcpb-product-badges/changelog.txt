@@ -1,0 +1,252 @@
+*** Product Badges Changelog ***
+
+2025-08-19 - version 3.4.0
+* Add: Badge animation effects and duration options
+* Add: Custom rules display option, allowing badges to be assigned to products using custom rules
+* Add: Dynamic placeholders in text badge: product price, stock quantity or status, sale price if on sale, regular price, discount percentage if on sale
+* Add: Low stock display option for badges, allowing badges to be displayed when products have low stock levels, uses the product level, or the global setting
+* Add: wcpb_product_badges_custom_rules_display filter hook
+* Update: Information under badge select on edit product page with link to badge management
+* Update: Image library filters now positioned directly below the image library badge type for easier filtering
+
+2025-05-27 - version 3.3.0
+* Add: Allow badges to be selected from the add/edit product screen
+* Update: Info text content and styling on badge fields amended, now conditionally displayed based on settings applied
+* Update: Move display meta box above badge metabox
+* Update: Make Display > Products > Specific the default option
+* Update: Change order of Display > Products > Specific fields
+* Fix: Product category field on badge edit displays incorrect hierarchy for categories 3+ categories deep
+
+2025-02-06 - version 3.2.1
+* Update: Badge display category select field names to include the full hierarchy for easier selection, useful when there multiple child categories exist
+* Update: Refactor libraries
+* Update: WooCommerce tested up to 9.6.1
+
+2025-01-17 - version 3.2.0
+* Add: Set badge by specific shipping classes functionality
+* Add: Composer WooCommerce Quality Insights Toolkit (QIT) dependency
+* Update: WooCommerce tested up to 9.5.2
+* Update: WordPress tested up to 6.7.1
+
+2024-08-27 - version 3.1.0
+* Add: .pot to languages folder
+* Add: Requires WooCommerce dependency header
+* Add: wp_set_script_translations to JS assets
+* Update: composer.json and composer.lock to woocommerce/woocommerce-sniffs 1.0.0
+* Update: JS assets to include sprintf const
+* Update: phpcs.xml codesniffs
+* Update: PHP requires at least 7.4.0
+* Update: WooCommerce requires at least 8.5.0
+* Update: WooCommerce tested up to 9.2.3
+* Update: WordPress requires at least 6.3.0
+* Update: WordPress tested up to 6.6.1
+
+2024-04-11 - version 3.0.1
+* Update: Woo.com links reverted to WooCommerce.com, due to WooCommerce backtrack
+* Update: WooCommerce tested up to 8.7.0
+* Update: WordPress tested up to 6.5.2
+
+2024-01-15 - version 3.0.0
+* Note: This is a milestone release, please ensure you read the contents of this changelog and we recommend performing this update on a staging/development environment and testing before updating the extension on a production website, clear all caches after updating
+* Add: Compatibility mode product loops position setting, the equivalent of the old compatibility mode setting
+* Add: Compatibility mode product pages setting
+* Add: Set badge width to 0 to fit to content, equivalent of CSS width: auto, use of 0 is only recommended for countdown/text based badges
+* Add: WooCommerce Cart/Checkout blocks compatibility
+* Update: Changelog consistency
+* Update: Code based badge descripiton link does not open in new window
+* Update: Dashboard notice changes including adding target blank links so do not lose progress if adding/editing a badge
+* Update: Some text strings not translation ready
+* Fix: If badge offset pixels/badge size width set to 0, reverts to default on next page load when adding/editing a badge
+* Remove: Compatibility mode setting as now split into multiple settings, this setting is now the compatibility mode product loops position setting
+
+2023-12-19 - version 2.4.1
+* Update: Activation notice
+* Update: Changelog keys
+* Update: Code consistency
+* Update: Development assets
+* Update: Dashboard categories, tags and product select fields now AJAX based
+* Update: Dashboard categories, tags and product select fields now include ID reference incase there are duplicate names
+* Update: WooCommerce.com links to Woo.com
+* Update: PHP requires at least 7.3.0
+* Update: WooCommerce requires at least 7.9.0
+* Update: WooCommerce tested up to 8.4.0
+* Update: WordPress requires at least 6.1.0
+* Update: WordPress tested up to 6.4.2
+* Fix: The parameter at position #2 of get_terms() has been deprecated
+
+2023-08-03 - version 2.4.0
+* Add: High Performance Order Storage (HPOS) compatibility if WooCommerce version is 8.0.0 or higher, note that this version includes several changes for HPOS compatibility, it is recommended you perform this update on a staging/development environment before updating the extension on a production website regardless of whether HPOS enabled, HPOS and the compatibility in this extension are very new, use with caution
+* Update: Development assets
+* Update: PHP requires at least 7.2.0
+* Update: WooCommerce requires at least 7.3.0
+* Update: WooCommerce tested up to 7.9.0
+* Update: WordPress requires at least 5.9.0
+* Fix: Typo in responsive breakpoints information
+
+2023-05-31 - version 2.3.2
+* Add: Badge management responsive width breakpoints information
+* Update: WooCommerce tested up to 7.7.1
+* Update: WordPress tested up to 6.2.2
+
+2023-01-09 - version 2.3.1
+* Update: phpcs.xml development asset configuration
+* Update: WooCommerce tested up to 7.2.2
+* Fix: Invalid argument supplied for foreach() warning displayed if WordPress debugging mode enable
+
+2022-12-22 - version 2.3.0
+* Add: Set badge by specific tag(s) functionality
+* Add: Development assets
+* Update: Loading of JS assets moved to footer
+* Update: WooCommerce requires at least 5.0.0
+* Update: WooCommerce tested up to 7.2.1
+* Update: WordPress tested up to 6.1.1
+* Fix: jQuery $ uncaught conflicts may occur depending on website/theme/plugin/extension configuration
+
+2022-03-25 - version 2.2.0
+* Note: This version includes several changes to asset enqueues, update conditions and more, please ensure you read the contents of this changelog, it is recommended you perform this update on a staging/development environment before updating the extension on a production website, clear all caches after updating to ensure all assets are reloaded
+* Add: WCPB_Product_Badges_Translation class
+* Add: Minified CSS/JS assets created and enqueued
+* Add: WooCommerce not installed/activated notice
+* Update: CSS assets now SCSS
+* Update: Enqueues plugins_url function calls so folder name not included that could effect installations where folder renamed
+* Update: Upgrade conditions now use version_compare
+* Update: WordPress tested up to 5.9.2
+* Update: WooCommerce tested up to 6.3.1
+* Fix: Translations may not load due to load_plugin_textdomain not hooked on init
+
+2021-12-17 - version 2.1.5
+* Add: footer_styles() function in WCPB_Product_Badges_Public class
+* Update: Refactoring of public-badge-position-loop.js and public-magnifiy-position.js assets
+* Update: WordPress up to declaration
+* Update: WooCommerce up to declaration
+* Fix: Badges may not appear until page refreshed on Safari browsers
+* Fix: Badges are hidden by default until page loaded and then shown via JS which causes delay in display, potential inconsistencies/non display in some browsers
+* Remove: public-badge-show.js and public-magnify-hide.js assets as replaced by HTML/CSS equivalents
+
+2021-09-26 - version 2.1.4
+* Add: Image library badge alt text
+* Add: Image custom badge alt text if alt text has been set
+* Add: Image custom badge src now uses esc_url
+* Add: Bfcache specific conditions for showing badges after bfcache load
+* Update: WordPress up to declaration
+* Update: WooCommerce up to declaration
+* Fix: Undefined $text variable notice appears when using countdown badge if WordPress debug mode enabled
+* Fix: Flatsome theme shows badges in gallery thumbnails on single product page
+
+2021-03-30 - version 2.1.3
+* Fix: Countdown badges do not display on some iOS devices in Safari browser due to date/time format
+* Fix: Badges may not display if a website uses AJAX request based display of products after initial page load
+
+2021-03-20 - version 2.1.2
+* Add: Configure settings button to activation notice
+* Update: Dashboard colors so consistent with admin color changes in WordPress 5.7
+* Update: WordPress tested up to version 5.7.0
+* Update: WooCommerce tested up to version 5.1.0
+* Fix: Various issues causing PHP 7 based deprecation notices when debug mode enabled
+* Fix: Various PHP 8 based notices/errors, note that the recommended PHP version for this extension remains 7.x
+* Remove: Option population function on activation as already done during install/upgrade functions
+
+2021-02-27 - version 2.1.1
+* Fix: Incomplete admin CSS line causing text type badge fields to be shown on load, fix applied in maintenance release as could cause other badge add/edit issues depending on browser
+
+2021-02-27 - version 2.1.0
+* Note: It is recommended to clear site caches after updating
+* Add: Countdown badge type
+* Add: Father's day badges
+* Add: Mother's day badges
+* Add: Activation class
+* Add: Activation notice
+* Update: Upgrade class
+* Update: JS assets so split across multiple files so functionality no longer duplicated across files due to compatibility modes, now JS functionality required is conditionally loaded
+* Update: Default badge offset and width field values
+* Update: WordPress minimum version inline with WooCommerce requirement
+* Update: WooCommerce tested upto declaration
+* Update: Filter assignment of some general badges to availability
+* Fix: Order by on some backend fields not correct
+* Fix: Badge can appear in incorrect position for a few milliseconds before page fully loaded
+* Fix: Changelog typos
+* Fix: Magnify may not be hidden as expected if multiple badges per product is enabled
+* Fix: Incorrect text domains
+* Fix: Backend filter names are not translation ready
+
+2021-01-16 - version 2.0.0
+* Add: Compatibility mode setting
+* Add: Multiple badges per product setting
+* Add: Settings page and button
+* Add: On backorder assignment condition
+* Add: Notices to dashboard in relation to new settings added
+* Add: wp_kses_post() information under code textarea when adding/editing a badge
+* Add: WooCommerce 4.8.0 compatibility
+* Add: WordPress 5.6 compatibility
+* Update: WordPress up to declaration
+* Update: WooCommerce up to declaration
+* Fix: Some text badge options (such as border radius based) do not work on loop pages due to wp_kses_post()
+
+2020-12-03 - version 1.3.0
+* Add: Availability badges
+* Add: General badges
+* Add: Badge order functionality to allow management of badge display priorities when multiple badges used
+* Add: Order, type, position, visibility and products columns to badge list with sorting function
+* Add: Non-sale display option so products not on sale can be targeted for badge display
+* Add: Out of stock display option so out of stock products can be targeted for badge display
+* Add: Featured display option so featured products can be targeted for badge display
+* Add: load_plugin_textdomain
+* Add: Various performance improvements including less JavaScript and removal of image based size/positioning calculations
+* Update: Badge display funcctionality to reduce non-display issues caused by themes removing WooCommerce image based filters, now only uses the woocommerce_before_shop_loop_item action (loops), woocommerce_blocks_product_grid_item_html filter (blocks) and woocommerce_single_product_image_thumbnail_html filter (product) which are less likely to be removed by a theme
+* Update: Badge display functionality so no longer calculates badge position based on image sizes which could potentially give an incorrect position, position is now CSS based after image containers added via JS
+* Update: Text badge markup so it does not include the CSS rules if values are empty which can occur if styles have not have been set before (e.g. a new badge)
+* Update: Some badge color filter assignments
+* Fix: Badge will display as a broken image if it is a image library type and the library image is not selected
+* Fix: Badge will display as a broken image if it is a custom image type and the custom image is not uploaded
+* Fix: Badges displayed in block editor are not positioned correctly
+* Fix: Product block sales flash is not hidden
+* Fix: z-index on badge needs increasing due to some themes setting a high z-index on product images, while keeping low enough to account for sticky headers with higher z-indexes
+* Fix: Flatsome theme uses woocommerce_single_product_image_thumbnail_html on all gallery thumbnails not just the main image, so badges are hidden on the gallery thumbnails in this theme
+* Fix: Some themes do not have a relative position on .product so add one but not !important as some themes override this to be absolute
+* Fix: Some themes may override width and height of a custom badge image
+* Remove: Initial badge display hidden and the show of badge via CSS rules, no longer needed due to changes to badge display
+
+2020-11-26 - version 1.2.2
+* Update: Upgrade function call to before WooCommerce conditional check
+* Fix: Product page magnify icon may position incorrectly when more than 1 image
+* Fix: jQuery may not be defined due to lack of dependency in enqueue on some themes
+* Fix: Clear button too wide when selecting text badge colors
+
+2020-11-20 - version 1.2.1
+* Fix: Button not clickable in alert which appears when no matching images when filtering image library, replaced alert with text
+* Fix: Cyber monday badge incorrectly filters to black friday not cyber monday
+
+2020-11-18 - version 1.2.0
+* Add: Black Friday badges
+* Add: Cyber Monday badges
+* Add: General badges
+* Add: Christmas badges
+* Add: Valentine's badges
+
+2020-11-14 - version 1.1.0
+* Add: Black Friday badges
+* Update: Product loops description text to include details on display within WooCommerce product blocks
+
+2020-11-13 - version 1.0.6
+* Add: Compatibility with all WooCommerce product blocks which use the woocommerce_product_get_image() filter and wc-block-grid container
+* Fix: Uncaught error call to a member function get_id() on cart page on some themes
+
+2020-11-10 - version 1.0.5
+* Add: WordPress multisite network compatibility
+* Fix: Some themes may position badge images incorrectly due to theme absolute positioning
+
+2020-11-01 - version 1.0.4
+* Fix: Product badge may not display on product page
+
+2020-10-29 - version 1.0.3
+* Fix: Product badges may still apply to sticky add to cart on product pages, added further CSS rule to target product gallery only, loop rule (e.g. for related products) uneffected
+
+2020-10-28 - version 1.0.2
+* Fix: Product badges are mistakenly being added to products in widgets, sticky add to cart, etc
+
+2020-10-28 - version 1.0.1
+* Update: With free gift badge color filter assignment
+* Fix: Dashboard input fields (e.g. offset field) too wide on lower resolution screens
+
+2020-10-19 - version 1.0.0
+* New: Initial release

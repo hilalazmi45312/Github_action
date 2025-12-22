@@ -151,10 +151,15 @@ if ( ! function_exists( 'woodmart_list_shortcode' ) ) {
 				<li>
 					<?php echo $item_icon_output; // phpcs:ignore ?>
 
-					<span class="wd-list-content list-content"><?php echo do_shortcode( $item['list-content'] ); ?></span>
-					<?php if ( isset( $item['link'] ) ) : ?>
-						<a class="wd-fill" <?php echo $link_attrs; ?> aria-label="<?php esc_attr_e( 'List link', 'woodmart' ); ?>"></a>
-					<?php endif; ?>
+					<span class="wd-list-content list-content">
+						<?php if ( isset( $item['link'] ) ) : ?>
+							<a <?php echo $link_attrs; ?>>
+								<?php echo do_shortcode( $item['list-content'] ); ?>
+							</a>
+						<?php else : ?>
+							<?php echo do_shortcode( $item['list-content'] ); ?>
+						<?php endif; ?>
+					</span>
 				</li>
 			<?php endforeach ?>
 		</ul>

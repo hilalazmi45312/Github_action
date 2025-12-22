@@ -6,8 +6,18 @@
 (function ($) {
 	"use strict";
 
+	// Debounce utility for performance
+	function debounce(func, wait) {
+		let timeout;
+		return function (...args) {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => func.apply(this, args), wait);
+		};
+	}
+
 	class SenhengProductDisplay {
 		constructor() {
+			this.observer = null;
 			this.init();
 		}
 
@@ -16,6 +26,7 @@
 			this.disableWoodMartVariationHover();
 			this.initializeSwatches();
 			this.initializeSCoinCentering();
+			this.setupMutationObserver();
 		}
 
 		bindEvents() {
@@ -242,19 +253,64 @@
 			const $product = $(e.currentTarget);
 			const $overlay = $product.find(".swatches-overlay");
 
-			// Remove hover state
-			setTimeout(() => {
+			// Remove hover state with requestAnimationFrame for smoother performance
+			requestAnimationFrame(() => {
 				if (!$product.is(":hover")) {
 					$overlay.removeClass("hover-active");
 				}
-			}, 100);
+			});
 		}
-	}
 
-	// AJAX handler for getting variation images
-	function addVariationImageAjaxHandler() {
-		// This would be handled by the ProductLoopController in PHP
-		// The AJAX endpoint is registered in the controller
+		// Setup MutationObserver for dynamic content (replaces deprecated DOMNodeInserted)
+		setupMutationObserver() {
+			// Disconnect existing observer if any
+			if (this.observer) {
+				this.observer.disconnect();
+			}
+
+			// Debounced callback for better performance
+			const debouncedCallback = debounce(() => {
+				this.initializeSCoinCentering();
+			}, 100);
+
+			// Create MutationObserver
+			this.observer = new MutationObserver((mutations) => {
+				let hasNewScoinBadge = false;
+
+				for (const mutation of mutations) {
+					if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+						for (const node of mutation.addedNodes) {
+							if (node.nodeType === Node.ELEMENT_NODE) {
+								if (node.classList?.contains('scoin-badge') ||
+									(node.querySelector && node.querySelector('.scoin-badge'))) {
+									hasNewScoinBadge = true;
+									break;
+								}
+							}
+						}
+					}
+					if (hasNewScoinBadge) break;
+				}
+
+				if (hasNewScoinBadge) {
+					debouncedCallback();
+				}
+			});
+
+			// Observe document body for changes
+			this.observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+		}
+
+		// Cleanup method for proper teardown
+		destroy() {
+			if (this.observer) {
+				this.observer.disconnect();
+				this.observer = null;
+			}
+		}
 	}
 
 	// Initialize when document is ready
@@ -278,13 +334,6 @@
 		}
 	});
 
-	// Re-initialize S-Coin centering when new content is loaded
-	$(document).on("DOMNodeInserted", function (e) {
-		if (
-			$(e.target).find(".scoin-badge").length > 0 &&
-			window.senhengProductDisplay
-		) {
-			window.senhengProductDisplay.initializeSCoinCentering();
-		}
-	});
+	// Note: DOMNodeInserted is replaced by MutationObserver in setupMutationObserver()
+	// This provides better performance and is the modern standard
 })(jQuery);

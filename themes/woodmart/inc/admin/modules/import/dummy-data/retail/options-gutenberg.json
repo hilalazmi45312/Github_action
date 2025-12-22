@@ -138,5 +138,11 @@
     "categories_with_shadow": "disable",
     "blog_excerpt": "excerpt",
     "attr_after_short_desc": "1",
-    "categories_design": "alt"
+    "categories_design": "alt",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width",
+    "custom_product_tabs_enabled": "1",
+    "legacy_product_tabs_enabled": "0"
 }

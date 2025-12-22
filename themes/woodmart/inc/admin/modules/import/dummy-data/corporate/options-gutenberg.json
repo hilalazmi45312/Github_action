@@ -127,5 +127,9 @@
         "attachment": "",
         "position": ""
     },
-    "footer-style": "light"
+    "footer-style": "light",
+    "blog_design": "masonry",
+    "blog_columns": "3",
+    "blog_masonry": "0",
+    "blog_archive_layout": "full-width"
 }

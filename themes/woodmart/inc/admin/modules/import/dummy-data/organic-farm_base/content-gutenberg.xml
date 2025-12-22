@@ -16,7 +16,7 @@
 	<!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 	<!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.5.5" created="2024-11-18 12:27" -->
+	<!-- generator="WordPress/6.7.4" created="2025-10-06 09:05" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,16 +29,13 @@
 	<title>Farm gutenberg</title>
 	<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg</link>
 	<description></description>
-	<pubDate>Mon, 18 Nov 2024 12:27:13 +0000</pubDate>
+	<pubDate>Mon, 06 Oct 2025 09:05:22 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://dummy.xtemos.com/woodmart2/</wp:base_site_url>
 	<wp:base_blog_url>https://dummy.xtemos.com/woodmart2/farm-gutenberg</wp:base_blog_url>
 
-		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[adad@adad.ad]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>491</wp:author_id><wp:author_login><![CDATA[Ethan Smith]]></wp:author_login><wp:author_email><![CDATA[ethan_smith@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Ethan Smith]]></wp:author_display_name><wp:author_first_name><![CDATA[Ethan]]></wp:author_first_name><wp:author_last_name><![CDATA[Smith]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[Mr. Mackay]]></wp:author_login><wp:author_email><![CDATA[zak@asda.as]]></wp:author_email><wp:author_display_name><![CDATA[Mr. Mackay]]></wp:author_display_name><wp:author_first_name><![CDATA[sds]]></wp:author_first_name><wp:author_last_name><![CDATA[scssc]]></wp:author_last_name></wp:author>
-
+	
 			<wp:category>
 			<wp:term_id>1</wp:term_id>
 			<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
@@ -344,13 +341,13 @@
 	<wp:term><wp:term_id>36</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[mobile-navigation]]></wp:term_slug><wp:term_name><![CDATA[Mobile navigation]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=6.5.5</generator>
+	<generator>https://wordpress.org/?v=6.7.4</generator>
 
 					<item>
 					<title><![CDATA[Organic fresh milk]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/organic-fresh-milk/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=13</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"2c94fdd4-f432-4fc8-b3f9-f9bc3261b69f"} -->
 <p id="wd-2c94fdd4" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -582,10 +579,61 @@
 						</wp:postmeta>
 										</item>
 								<item>
+					<title><![CDATA[Organic fresh milk - 0.5 gal]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/organic-fresh-milk/?attribute_pa_size=0-5-gal</link>
+					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=16</guid>
+																<excerpt:encoded><![CDATA[Size: 0.5 gal]]></excerpt:encoded>
+										<wp:post_id>16</wp:post_id>
+					<wp:post_date><![CDATA[2024-07-24 11:05:47]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2024-07-24 11:05:47]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2024-07-24 11:05:48]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2024-07-24 11:05:48]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+					<wp:post_name><![CDATA[organic-fresh-milk-0-5-gal]]></wp:post_name>
+					<wp:status><![CDATA[publish]]></wp:status>
+					<wp:post_parent>13</wp:post_parent>
+					<wp:menu_order>3</wp:menu_order>
+					<wp:post_type><![CDATA[product_variation]]></wp:post_type>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[_tax_class]]></wp:meta_key>
+							<wp:meta_value><![CDATA[parent]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_manage_stock]]></wp:meta_key>
+							<wp:meta_value><![CDATA[no]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_stock_status]]></wp:meta_key>
+							<wp:meta_value><![CDATA[instock]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
+							<wp:meta_value><![CDATA[9.1.2]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
+							<wp:meta_value><![CDATA[import-placeholder-for-17]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_regular_price]]></wp:meta_key>
+							<wp:meta_value><![CDATA[7.56]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[attribute_pa_size]]></wp:meta_key>
+							<wp:meta_value><![CDATA[0-5-gal]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
+							<wp:meta_value><![CDATA[7.56]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
 					<title><![CDATA[Investing in feed efficiency can reduce cattle emissions]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/investing-in-feed-efficiency-can-reduce-cattle-emissions/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:05 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=76</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -681,7 +729,7 @@
 					<title><![CDATA[What’s going on incattle breeding organic farm]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/whats-going-on-incattle-breeding-organic-farm/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:13 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=78</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -773,7 +821,7 @@
 					<title><![CDATA[Why is Saved Feed important in organic farming?]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/why-is-saved-feed-important-in-organic-farming/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:20 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=80</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -865,7 +913,7 @@
 					<title><![CDATA[Breeding solutions for organic dairy farmers]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/breeding-solutions-for-organic-dairy-farmers/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:29 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=82</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -957,7 +1005,7 @@
 					<title><![CDATA[What breeds can I choose for organic dairy farming?]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/what-breeds-can-i-choose-for-organic-dairy-farming/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:37 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=84</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -1049,7 +1097,7 @@
 					<title><![CDATA[Healthy, resilient cows for organic dairy farming]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/healthy-resilient-cows-for-organic-dairy-farming/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:46 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=86</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -1141,7 +1189,7 @@
 					<title><![CDATA[Organic dairy farming calls for even healthier cows]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/organic-dairy-farming-calls-for-even-healthier-cows/</link>
 					<pubDate>Wed, 24 Jul 2024 11:16:54 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=88</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -1233,7 +1281,7 @@
 					<title><![CDATA[Pre-calving supplement offers nutrition boost]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/pre-calving-supplement-offers-nutrition-boost/</link>
 					<pubDate>Wed, 24 Jul 2024 11:17:01 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=90</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"f2ad44c4-f60a-414c-b38f-e0818499d4ed","marginBottom":"30"} -->
 <div id="wd-f2ad44c4" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"86b90f9a-1637-4982-a7c0-09bad9bf841a","adjacentCount":2,"justifyContent":"center","flexOrderMobile":"1"} -->
@@ -1322,89 +1370,10 @@
 						</wp:postmeta>
 										</item>
 								<item>
-					<title><![CDATA[Delivery Details]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/?cms_block=delivery-details</link>
-					<pubDate>Wed, 24 Jul 2024 11:21:54 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
-					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=cms_block&#038;p=101</guid>
-											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"35a5a5e5-8ae2-425e-a2a4-5eb167a5999c"} -->
-<p id="wd-35a5a5e5" class="wp-block-wd-paragraph">48 hours from the time of purchase to all locations</p>
-<!-- /wp:wd/paragraph -->
-
-<!-- wp:wd/image {"blockId":"318a92c9-7033-4d25-b668-ea4c03066242","image":{"id":153,"url":"http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-product-delivery-details-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-product-delivery-details-opt.jpg","width":660,"height":280}} -->
-<div id="wd-318a92c9" class="wp-block-wd-image wd-block-image"><img class="wp-image-153" src="http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-product-delivery-details-opt.jpg" /></div>
-<!-- /wp:wd/image -->
-
-<!-- wp:wd/paragraph {"blockId":"7f9f7fe2-043e-4918-88db-20454e5a994e"} -->
-<p id="wd-7f9f7fe2" class="wp-block-wd-paragraph">There’s lot of hate out there for a text that amounts to little more than garbled words in an old language. The villagers are out there with a vengeance to get that Frankenstein, wielding torches and pitchforks, wanting.</p>
-<!-- /wp:wd/paragraph -->
-
-<!-- wp:wd/row {"blockId":"47dadcfc-a9e4-4ff3-88b5-fb4d38b50f83","columnsGap":60} -->
-<div id="wd-47dadcfc" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"9ed8ae8c-3381-4dea-a2cd-9407c197cfd7","adjacentCount":2,"blocksGap":10} -->
-<div id="wd-9ed8ae8c" class="wp-block-wd-column"><!-- wp:wd/title {"blockId":"8c2ba635-20b4-439e-80d8-d0c26bc9e12a","content":"When will my order ship?","tpFontSize":"18"} -->
-<h2 id="wd-8c2ba635" class="wp-block-wd-title title">When will my order ship?</h2>
-<!-- /wp:wd/title -->
-
-<!-- wp:wd/list {"blockId":"62e3d838-00fd-48f4-a262-678ec8ee9230"} -->
-<ul id="wd-62e3d838" class="wp-block-wd-list wd-list wd-type-unordered wd-style-default"><!-- wp:wd/list-item {"blockId":"d5cd1382-22a1-421f-9493-fdc82a0eafc7","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-d5cd1382" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">We grow chickens​</span></li>
-<!-- /wp:wd/list-item -->
-
-<!-- wp:wd/list-item {"blockId":"ed4cfab7-5f0b-4518-960e-21186cc856c8","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-ed4cfab7" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Checking birds​</span></li>
-<!-- /wp:wd/list-item -->
-
-<!-- wp:wd/list-item {"blockId":"344c7c4a-3732-4332-95b7-e55e6e249feb","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-344c7c4a" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Manufacture of products​</span></li>
-<!-- /wp:wd/list-item -->
-
-<!-- wp:wd/list-item {"blockId":"1ef53e33-09cf-438e-b305-cbe75460c184","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-1ef53e33" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Points of sale​</span></li>
-<!-- /wp:wd/list-item --></ul>
-<!-- /wp:wd/list --></div>
-<!-- /wp:wd/column -->
-
-<!-- wp:wd/column {"blockId":"20274bbc-0798-40c6-a479-cb57d65f34a7","adjacentCount":2,"blocksGap":10} -->
-<div id="wd-20274bbc" class="wp-block-wd-column"><!-- wp:wd/title {"blockId":"66c9d0c1-e21e-458c-8702-522ae7c22f61","content":"Delivery time","tpFontSize":"18"} -->
-<h2 id="wd-66c9d0c1" class="wp-block-wd-title title">Delivery time</h2>
-<!-- /wp:wd/title -->
-
-<!-- wp:wd/list {"blockId":"87541d31-e238-48d4-95d8-b4c50e0103be"} -->
-<ul id="wd-87541d31" class="wp-block-wd-list wd-list wd-type-unordered wd-style-default"><!-- wp:wd/list-item {"blockId":"70e96b3a-0bee-4aac-9c9e-73439e6900b5","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-70e96b3a" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Agriculture products</span></li>
-<!-- /wp:wd/list-item -->
-
-<!-- wp:wd/list-item {"blockId":"766fd24a-b441-46ee-b1c7-2c1938a84206","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-766fd24a" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Excellent service</span></li>
-<!-- /wp:wd/list-item -->
-
-<!-- wp:wd/list-item {"blockId":"eda2d168-94f3-455c-8dd1-fe35110b5db6","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-eda2d168" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Eco product</span></li>
-<!-- /wp:wd/list-item -->
-
-<!-- wp:wd/list-item {"blockId":"a427ee0f-1298-4333-8c8e-1779d20410b8","iconType":"unordered","svg":"","image":""} -->
-<li id="wd-a427ee0f" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Modern technique</span></li>
-<!-- /wp:wd/list-item --></ul>
-<!-- /wp:wd/list --></div>
-<!-- /wp:wd/column --></div>
-<!-- /wp:wd/row -->]]></content:encoded>
-															<wp:post_id>101</wp:post_id>
-					<wp:post_date><![CDATA[2024-07-24 11:21:54]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2024-07-24 11:21:54]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-03 08:16:55]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-03 08:16:55]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-					<wp:post_name><![CDATA[delivery-details]]></wp:post_name>
-					<wp:status><![CDATA[publish]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[cms_block]]></wp:post_type>
-																			</item>
-								<item>
 					<title><![CDATA[Header banner Farm]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/?cms_block=header-banner-farm</link>
 					<pubDate>Wed, 24 Jul 2024 11:22:15 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=cms_block&#038;p=104</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/section {"blockId":"537aee79-7f01-48af-ada7-491c61408fe5"} -->
 <div id="wd-537aee79" class="wp-block-wd-section"><!-- wp:wd/marquee {"blockId":"94e4064a-ef35-4d0d-82bf-781b777cda4f","speed":"40","displayWidth":"full-width"} -->
@@ -1461,7 +1430,7 @@
 					<title><![CDATA[About Us]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/about-us/</link>
 					<pubDate>Wed, 24 Jul 2024 11:23:42 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?page_id=106</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"00804dc2-afb9-4a9c-93d2-0e8e8603c7b1","marginBottom":"80","marginBottomTablet":"60","marginBottomMobile":"40"} -->
 <div id="wd-00804dc2" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"d1530ec6-6d9e-431c-ae52-d933e06a0aa5","adjacentCount":2,"colWidth":42,"adjacentCountTablet":1,"colWidthTablet":100} -->
@@ -1658,7 +1627,7 @@
 					<title><![CDATA[Blog]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/blog/</link>
 					<pubDate>Wed, 24 Jul 2024 11:23:54 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?page_id=108</guid>
 															<wp:post_id>108</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-24 11:23:54]]></wp:post_date>
@@ -1692,7 +1661,7 @@
 					<title><![CDATA[Compare]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/compare/</link>
 					<pubDate>Wed, 24 Jul 2024 11:24:30 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?page_id=110</guid>
 											<content:encoded><![CDATA[<!-- wp:shortcode -->
 [woodmart_compare]
@@ -1729,7 +1698,7 @@
 					<title><![CDATA[Contact Us]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/contact-us/</link>
 					<pubDate>Wed, 24 Jul 2024 11:24:43 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?page_id=112</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"9ca04ec0-c307-4cb0-8abc-aaa924357b44","columnsGap":40,"marginBottom":"30","marginBottomMobile":"0"} -->
 <div id="wd-9ca04ec0" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"95a09025-5c1a-42ba-923c-7f667b0610dc","adjacentCount":2,"colWidth":60,"adjacentCountTablet":1,"colWidthTablet":100,"flexOrderTablet":"1"} -->
@@ -1808,7 +1777,7 @@
 					<title><![CDATA[Home Organic-farm]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/</link>
 					<pubDate>Wed, 24 Jul 2024 11:25:01 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?page_id=114</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/container {"blockId":"84482076-18ae-4360-8e26-c3173c4662c7","textAlign":"center","rowGap":"30","marginTop":"40","marginBottom":"80","rowGapTablet":"20","marginTopTablet":"20","marginTopMobile":"0","marginBottomTablet":"60","marginBottomMobile":"40"} -->
 <div id="wd-84482076" class="wp-block-wd-container wd-dir-col wd-align"><!-- wp:wd/title {"blockId":"005f8447-f118-40e6-88ad-eb1543484795","content":"The Highest Quality Products From a Organic Dairy Farm","tpFontSize":"74","tpLineHeight":"1.2","tpFontVariant":"600","tpFontWeight":"600","displayWidth":"custom","customWidth":"1130","tpFontSizeTablet":"48","tpFontSizeMobile":"24","tpLineHeightUnits":"em"} -->
@@ -2057,7 +2026,7 @@
 					<title><![CDATA[Wishlist]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/wishlist/</link>
 					<pubDate>Wed, 24 Jul 2024 11:25:49 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?page_id=118</guid>
 											<content:encoded><![CDATA[<!-- wp:shortcode -->
 [woodmart_wishlist]
@@ -2094,7 +2063,7 @@
 					<title><![CDATA[Contact form Organic Farm]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=wpcf7_contact_form&#038;p=120</link>
 					<pubDate>Wed, 24 Jul 2024 11:30:20 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=wpcf7_contact_form&#038;p=120</guid>
 											<content:encoded><![CDATA[<div class="wd-grid-g">
 <div class="wd-grid-f-stretch" style="--wd-gap-lg: 30px;--wd-gap-sm: 20px">
@@ -2106,7 +2075,7 @@
 </div>
 1
 [_site_title] "[your-subject]"
-[_site_title] 
+[_site_title]
 [_site_admin_email]
 From: [your-name] [your-email]
 Subject: [your-subject]
@@ -2122,7 +2091,7 @@ Reply-To: [your-email]
 
 
 [_site_title] "[your-subject]"
-[_site_title] 
+[_site_title]
 [your-email]
 Message Body:
 [your-message]
@@ -2158,8 +2127,8 @@ Please enter a telephone number.]]></content:encoded>
 															<wp:post_id>120</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-24 11:30:20]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-07-24 11:30:20]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-08-19 14:51:54]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-08-19 14:51:54]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-01-24 13:47:22]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-01-24 13:47:22]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[contact-form-organic-farm]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -2179,7 +2148,7 @@ Please enter a telephone number.]]></content:encoded>
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_mail]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:9:{s:6:"active";b:1;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:42:"[_site_title]  ";s:9:"recipient";s:19:"[_site_admin_email]";s:4:"body";s:191:"From: [your-name] [your-email]
+							<wp:meta_value><![CDATA[a:9:{s:6:"active";b:1;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:13:"[_site_title]";s:9:"recipient";s:19:"[_site_admin_email]";s:4:"body";s:191:"From: [your-name] [your-email]
 Subject: [your-subject]
 
 Message Body:
@@ -2190,7 +2159,7 @@ This is a notification that a contact form was submitted on your website ([_site
 						</wp:postmeta>
 												<wp:postmeta>
 							<wp:meta_key><![CDATA[_mail_2]]></wp:meta_key>
-							<wp:meta_value><![CDATA[a:9:{s:6:"active";b:0;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:42:"[_site_title]  ";s:9:"recipient";s:12:"[your-email]";s:4:"body";s:220:"Message Body:
+							<wp:meta_value><![CDATA[a:9:{s:6:"active";b:0;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:13:"[_site_title]";s:9:"recipient";s:12:"[your-email]";s:4:"body";s:220:"Message Body:
 [your-message]
 
 -- 
@@ -2208,63 +2177,16 @@ This email is a receipt for your contact form submission on our website ([_site_
 							<wp:meta_key><![CDATA[_hash]]></wp:meta_key>
 							<wp:meta_value><![CDATA[8f028010c457cdfafa8c24ac7d51b532fd68e010]]></wp:meta_value>
 						</wp:postmeta>
-										</item>
-								<item>
-					<title><![CDATA[Organic fresh milk - 0.5 gal]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/organic-fresh-milk/?attribute_pa_size=0-5-gal</link>
-					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
-					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=16</guid>
-																<excerpt:encoded><![CDATA[Size: 0.5 gal]]></excerpt:encoded>
-										<wp:post_id>16</wp:post_id>
-					<wp:post_date><![CDATA[2024-07-24 11:05:47]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2024-07-24 11:05:47]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-07-24 11:05:48]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-07-24 11:05:48]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-					<wp:post_name><![CDATA[organic-fresh-milk-0-5-gal]]></wp:post_name>
-					<wp:status><![CDATA[publish]]></wp:status>
-					<wp:post_parent>13</wp:post_parent>
-					<wp:menu_order>3</wp:menu_order>
-					<wp:post_type><![CDATA[product_variation]]></wp:post_type>
-																					<wp:postmeta>
-							<wp:meta_key><![CDATA[_tax_class]]></wp:meta_key>
-							<wp:meta_value><![CDATA[parent]]></wp:meta_value>
-						</wp:postmeta>
 												<wp:postmeta>
-							<wp:meta_key><![CDATA[_manage_stock]]></wp:meta_key>
-							<wp:meta_value><![CDATA[no]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_stock_status]]></wp:meta_key>
-							<wp:meta_value><![CDATA[instock]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_product_version]]></wp:meta_key>
-							<wp:meta_value><![CDATA[9.1.2]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
-							<wp:meta_value><![CDATA[import-placeholder-for-17]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_regular_price]]></wp:meta_key>
-							<wp:meta_value><![CDATA[7.56]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[attribute_pa_size]]></wp:meta_key>
-							<wp:meta_value><![CDATA[0-5-gal]]></wp:meta_value>
-						</wp:postmeta>
-												<wp:postmeta>
-							<wp:meta_key><![CDATA[_price]]></wp:meta_key>
-							<wp:meta_value><![CDATA[7.56]]></wp:meta_value>
+							<wp:meta_key><![CDATA[_config_validation]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{s:11:"mail.sender";a:1:{i:0;a:2:{s:4:"code";s:22:"invalid_mailbox_syntax";s:4:"args";a:3:{s:7:"message";s:31:"Invalid mailbox syntax is used.";s:6:"params";a:0:{}s:4:"link";s:68:"https://contactform7.com/configuration-errors/invalid-mailbox-syntax";}}}}]]></wp:meta_value>
 						</wp:postmeta>
 										</item>
 								<item>
 					<title><![CDATA[Unsalted Butter]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/unsalted-butter/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=17</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"25532c80-c7ac-4a51-baf9-609b6d90a772"} -->
 <p id="wd-25532c80" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -2550,7 +2472,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Salted Butter]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/salted-butter/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=21</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"1fd24a10-dc41-417a-921d-d1413483edc9"} -->
 <p id="wd-1fd24a10" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -2835,7 +2757,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Yogurt Blueberry]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/yogurt-blueberry/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=25</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"ee122c0e-1391-4227-81ed-ba009050d0b5"} -->
 <p id="wd-ee122c0e" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -2957,7 +2879,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Yogurt Apple]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/yogurt-apple/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=26</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"59a8107b-099b-427c-b3e0-dd426b95c796"} -->
 <p id="wd-59a8107b" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3079,7 +3001,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Yogurt Banana]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/yogurt-banana/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=27</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"c8528259-be07-40d9-b269-2dbd1ae82aab"} -->
 <p id="wd-c8528259" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3200,7 +3122,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Sour Cream]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/sour-cream/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=28</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"379a25b3-d80b-4e25-84d2-dc1f114c9da0"} -->
 <p id="wd-379a25b3" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3321,7 +3243,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Cheese]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/cheese/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=29</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"0f292833-6035-4893-b833-704bdae9ded0"} -->
 <p id="wd-0f292833" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3443,7 +3365,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Cheese With Nuts Inside]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/cheese-with-nuts-inside/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=30</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"e885e660-289d-49ff-9c43-d36903e930d1"} -->
 <p id="wd-e885e660" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3565,7 +3487,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Cheese With Cumin]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/cheese-with-cumin/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=31</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"e6a7e6a6-18b9-4d33-9368-e46a6e750b2b"} -->
 <p id="wd-e6a7e6a6" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3687,7 +3609,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Organic Milk Pasteurized]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/organic-milk-pasteurized/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=32</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"f960d62a-1f91-413a-b0f2-54fbbb0ed3ef"} -->
 <p id="wd-f960d62a" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -3970,28 +3892,10 @@ This email is a receipt for your contact form submission on our website ([_site_
 						</wp:postmeta>
 										</item>
 								<item>
-					<title><![CDATA[Shop]]></title>
-					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/shop/</link>
-					<pubDate>Wed, 24 Jul 2024 11:04:45 +0000</pubDate>
-					<dc:creator><![CDATA[admin]]></dc:creator>
-					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/shop/</guid>
-															<wp:post_id>6</wp:post_id>
-					<wp:post_date><![CDATA[2024-07-24 11:04:45]]></wp:post_date>
-					<wp:post_date_gmt><![CDATA[2024-07-24 11:04:45]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-08-16 11:08:37]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-08-16 11:08:37]]></wp:post_modified_gmt>
-					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-					<wp:post_name><![CDATA[shop]]></wp:post_name>
-					<wp:status><![CDATA[publish]]></wp:status>
-					<wp:post_parent>0</wp:post_parent>
-					<wp:menu_order>0</wp:menu_order>
-					<wp:post_type><![CDATA[page]]></wp:post_type>
-																			</item>
-								<item>
 					<title><![CDATA[Sour Organic Cream]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/product/sour-organic-cream/</link>
 					<pubDate>Wed, 24 Jul 2024 11:05:47 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=product&#038;p=36</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"c51f052d-15e8-4036-879b-88092ede42da"} -->
 <p id="wd-c51f052d" class="wp-block-wd-paragraph">Lorem ipsum dolor sit amet, nulla probatus oportere pro ut, at iisque ocurreret qui, qui everti nusquam eu. Mundi appetere et sit, iracundia interesset consequuntur nec an. Sumo nibh repudiare at has, no pri eruditi percipit.</p>
@@ -4110,10 +4014,28 @@ This email is a receipt for your contact form submission on our website ([_site_
 						</wp:postmeta>
 										</item>
 								<item>
+					<title><![CDATA[Shop]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/shop/</link>
+					<pubDate>Wed, 24 Jul 2024 11:04:45 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/shop/</guid>
+															<wp:post_id>6</wp:post_id>
+					<wp:post_date><![CDATA[2024-07-24 11:04:45]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2024-07-24 11:04:45]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2024-08-16 11:08:37]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2024-08-16 11:08:37]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+					<wp:post_name><![CDATA[shop]]></wp:post_name>
+					<wp:status><![CDATA[publish]]></wp:status>
+					<wp:post_parent>0</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[page]]></wp:post_type>
+																			</item>
+								<item>
 					<title><![CDATA[Footer Farm]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/?cms_block=footer-farm</link>
 					<pubDate>Wed, 24 Jul 2024 11:22:03 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=cms_block&#038;p=103</guid>
 											<content:encoded><![CDATA[<!-- wp:wd/row {"blockId":"400525e5-eb31-45c3-a8eb-c56b7f8040fa","columnsGap":20,"paddingTop":"80","paddingBottom":"80","paddingTopTablet":"60","paddingTopMobile":"40","paddingBottomTablet":"60","paddingBottomMobile":"40"} -->
 <div id="wd-400525e5" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"81e59261-ba86-4a40-bd31-6c7022384a85","adjacentCount":2,"colWidth":33.33,"adjacentCountTablet":1,"colWidthTablet":100} -->
@@ -4125,7 +4047,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/column -->
 
 <!-- wp:wd/column {"blockId":"1de3bc64-b1c2-4582-80e6-3c20252298ad","adjacentCount":2,"colWidth":66.67,"justifyContent":"flex-end","adjacentCountTablet":1,"colWidthTablet":100} -->
-<div id="wd-1de3bc64" class="wp-block-wd-column"><!-- wp:wd/menu {"blockId":"859dd244-48b9-40f1-a0fb-b27d34229d71","nav_menu":"32","items_gap":"l","align":"end","icon_alignment":"right","itemTpFontSize":"18","itemTpFontVariant":"500","itemTpFontWeight":"500","alignTablet":"start"} /-->
+<div id="wd-1de3bc64" class="wp-block-wd-column"><!-- wp:wd/menu {"blockId":"859dd244-48b9-40f1-a0fb-b27d34229d71","nav_menu":"32","items_gap":"l","align":"end","icon_alignment":"right","itemTpFontSize":"18","itemTpFontVariant":"500","itemTpFontWeight":"500","itemsHoverColorCode":"rgba(255,255,255,0.8)","alignTablet":"start"} /-->
 
 <!-- wp:wd/divider {"blockId":"e1d3c684-ffbb-4be6-a069-2a78a9283226","weight":2,"colorCode":"#ffffff"} -->
 <div id="wd-e1d3c684" class="wp-block-wd-divider wd-style-line"></div>
@@ -4134,13 +4056,13 @@ This email is a receipt for your contact form submission on our website ([_site_
 <!-- /wp:wd/row -->
 
 <!-- wp:wd/image {"blockId":"a59c46d3-825d-43b5-b1c1-631879348c45","image":{"id":149,"url":"http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-footer-logo.svg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-footer-logo.svg","width":1532,"height":185},"marginBottom":"0"} -->
-<div id="wd-a59c46d3" class="wp-block-wd-image wd-block-image"><img class="wp-image-149" src="http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-footer-logo.svg" /></div>
+<div id="wd-a59c46d3" class="wp-block-wd-image wd-block-image"><img class="wp-image-149" src="http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-footer-logo.svg" alt=""/></div>
 <!-- /wp:wd/image -->]]></content:encoded>
 															<wp:post_id>103</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-24 11:22:03]]></wp:post_date>
 					<wp:post_date_gmt><![CDATA[2024-07-24 11:22:03]]></wp:post_date_gmt>
-					<wp:post_modified><![CDATA[2024-10-04 11:24:35]]></wp:post_modified>
-					<wp:post_modified_gmt><![CDATA[2024-10-04 11:24:35]]></wp:post_modified_gmt>
+					<wp:post_modified><![CDATA[2025-10-06 09:04:46]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-10-06 09:04:46]]></wp:post_modified_gmt>
 					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 					<wp:post_name><![CDATA[footer-farm]]></wp:post_name>
 					<wp:status><![CDATA[publish]]></wp:status>
@@ -4152,7 +4074,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Milk]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/milk/</link>
 					<pubDate>Wed, 24 Jul 2024 12:17:26 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=123</guid>
 															<wp:post_id>123</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:15:46]]></wp:post_date>
@@ -4223,7 +4145,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Butter]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/butter/</link>
 					<pubDate>Wed, 24 Jul 2024 12:17:26 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=124</guid>
 															<wp:post_id>124</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:15:46]]></wp:post_date>
@@ -4294,7 +4216,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Yogurt]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/yogurt/</link>
 					<pubDate>Wed, 24 Jul 2024 12:17:26 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=125</guid>
 															<wp:post_id>125</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:15:46]]></wp:post_date>
@@ -4365,7 +4287,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Sour Cream]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/sour-cream/</link>
 					<pubDate>Wed, 24 Jul 2024 12:17:26 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=126</guid>
 															<wp:post_id>126</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:15:46]]></wp:post_date>
@@ -4436,7 +4358,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Cheese]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/cheese/</link>
 					<pubDate>Wed, 24 Jul 2024 12:17:26 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=127</guid>
 															<wp:post_id>127</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:15:46]]></wp:post_date>
@@ -4507,7 +4429,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Milk]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/milk-2/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:12 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=128</guid>
 															<wp:post_id>128</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:26:53]]></wp:post_date>
@@ -4582,7 +4504,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Butter]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/butter-2/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:12 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=129</guid>
 															<wp:post_id>129</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:26:53]]></wp:post_date>
@@ -4657,7 +4579,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Yogurt]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/yogurt-2/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:12 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=130</guid>
 															<wp:post_id>130</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:26:53]]></wp:post_date>
@@ -4732,7 +4654,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Sour Cream]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/sour-cream-2/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:12 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=131</guid>
 															<wp:post_id>131</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:26:53]]></wp:post_date>
@@ -4807,7 +4729,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Cheese]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/11/18/cheese-2/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:12 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=132</guid>
 															<wp:post_id>132</wp:post_id>
 					<wp:post_date><![CDATA[2024-11-18 12:26:53]]></wp:post_date>
@@ -4882,7 +4804,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Home]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/home/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:55 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=133</guid>
 															<wp:post_id>133</wp:post_id>
 					<wp:post_date><![CDATA[2024-07-24 12:23:15]]></wp:post_date>
@@ -4933,7 +4855,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/134/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:55 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=134</guid>
 											<content:encoded><![CDATA[ ]]></content:encoded>
 															<wp:post_id>134</wp:post_id>
@@ -4985,7 +4907,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/135/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:55 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=135</guid>
 											<content:encoded><![CDATA[ ]]></content:encoded>
 															<wp:post_id>135</wp:post_id>
@@ -5037,7 +4959,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/07/24/136/</link>
 					<pubDate>Wed, 24 Jul 2024 12:22:55 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=136</guid>
 											<content:encoded><![CDATA[ ]]></content:encoded>
 															<wp:post_id>136</wp:post_id>
@@ -5089,7 +5011,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Milk]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/08/12/milk-3/</link>
 					<pubDate>Wed, 24 Jul 2024 12:26:30 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=137</guid>
 															<wp:post_id>137</wp:post_id>
 					<wp:post_date><![CDATA[2024-08-12 07:36:53]]></wp:post_date>
@@ -5152,7 +5074,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Butter]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/08/12/butter-3/</link>
 					<pubDate>Wed, 24 Jul 2024 12:26:30 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=138</guid>
 															<wp:post_id>138</wp:post_id>
 					<wp:post_date><![CDATA[2024-08-12 07:36:53]]></wp:post_date>
@@ -5215,7 +5137,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Yogurt]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/08/12/yogurt-3/</link>
 					<pubDate>Wed, 24 Jul 2024 12:26:30 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=139</guid>
 															<wp:post_id>139</wp:post_id>
 					<wp:post_date><![CDATA[2024-08-12 07:36:53]]></wp:post_date>
@@ -5271,10 +5193,97 @@ This email is a receipt for your contact form submission on our website ([_site_
 						</wp:postmeta>
 										</item>
 								<item>
+					<title><![CDATA[Delivery Details]]></title>
+					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/?wd_product_tabs=delivery-details</link>
+					<pubDate>Wed, 21 May 2025 11:40:26 +0000</pubDate>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
+					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?post_type=wd_product_tabs&#038;p=724</guid>
+											<content:encoded><![CDATA[<!-- wp:wd/paragraph {"blockId":"35a5a5e5-8ae2-425e-a2a4-5eb167a5999c"} -->
+<p id="wd-35a5a5e5" class="wp-block-wd-paragraph">48 hours from the time of purchase to all locations</p>
+<!-- /wp:wd/paragraph -->
+
+<!-- wp:wd/image {"blockId":"318a92c9-7033-4d25-b668-ea4c03066242","image":{"id":153,"url":"http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-product-delivery-details-opt.jpg"},"imageData":{"url":"https://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-product-delivery-details-opt.jpg","width":660,"height":280}} -->
+<div id="wd-318a92c9" class="wp-block-wd-image wd-block-image"><img class="wp-image-153" src="http://dummy.xtemos.com/woodmart2/farm-gutenberg/wp-content/uploads/sites/32/2024/07/farm-product-delivery-details-opt.jpg" alt="" /></div>
+<!-- /wp:wd/image -->
+
+<!-- wp:wd/paragraph {"blockId":"7f9f7fe2-043e-4918-88db-20454e5a994e"} -->
+<p id="wd-7f9f7fe2" class="wp-block-wd-paragraph">There’s lot of hate out there for a text that amounts to little more than garbled words in an old language. The villagers are out there with a vengeance to get that Frankenstein, wielding torches and pitchforks, wanting.</p>
+<!-- /wp:wd/paragraph -->
+
+<!-- wp:wd/row {"blockId":"47dadcfc-a9e4-4ff3-88b5-fb4d38b50f83","columnsGap":60} -->
+<div id="wd-47dadcfc" class="wp-block-wd-row"><!-- wp:wd/column {"blockId":"9ed8ae8c-3381-4dea-a2cd-9407c197cfd7","adjacentCount":2,"blocksGap":10} -->
+<div id="wd-9ed8ae8c" class="wp-block-wd-column"><!-- wp:wd/title {"blockId":"8c2ba635-20b4-439e-80d8-d0c26bc9e12a","content":"When will my order ship?","tpFontSize":"18"} -->
+<h2 id="wd-8c2ba635" class="wp-block-wd-title title">When will my order ship?</h2>
+<!-- /wp:wd/title -->
+
+<!-- wp:wd/list {"blockId":"62e3d838-00fd-48f4-a262-678ec8ee9230"} -->
+<ul id="wd-62e3d838" class="wp-block-wd-list wd-list wd-type-unordered wd-style-default"><!-- wp:wd/list-item {"blockId":"d5cd1382-22a1-421f-9493-fdc82a0eafc7","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-d5cd1382" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">We grow chickens​</span></li>
+<!-- /wp:wd/list-item -->
+
+<!-- wp:wd/list-item {"blockId":"ed4cfab7-5f0b-4518-960e-21186cc856c8","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-ed4cfab7" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Checking birds​</span></li>
+<!-- /wp:wd/list-item -->
+
+<!-- wp:wd/list-item {"blockId":"344c7c4a-3732-4332-95b7-e55e6e249feb","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-344c7c4a" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Manufacture of products​</span></li>
+<!-- /wp:wd/list-item -->
+
+<!-- wp:wd/list-item {"blockId":"1ef53e33-09cf-438e-b305-cbe75460c184","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-1ef53e33" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Points of sale​</span></li>
+<!-- /wp:wd/list-item --></ul>
+<!-- /wp:wd/list --></div>
+<!-- /wp:wd/column -->
+
+<!-- wp:wd/column {"blockId":"20274bbc-0798-40c6-a479-cb57d65f34a7","adjacentCount":2,"blocksGap":10} -->
+<div id="wd-20274bbc" class="wp-block-wd-column"><!-- wp:wd/title {"blockId":"66c9d0c1-e21e-458c-8702-522ae7c22f61","content":"Delivery time","tpFontSize":"18"} -->
+<h2 id="wd-66c9d0c1" class="wp-block-wd-title title">Delivery time</h2>
+<!-- /wp:wd/title -->
+
+<!-- wp:wd/list {"blockId":"87541d31-e238-48d4-95d8-b4c50e0103be"} -->
+<ul id="wd-87541d31" class="wp-block-wd-list wd-list wd-type-unordered wd-style-default"><!-- wp:wd/list-item {"blockId":"70e96b3a-0bee-4aac-9c9e-73439e6900b5","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-70e96b3a" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Agriculture products</span></li>
+<!-- /wp:wd/list-item -->
+
+<!-- wp:wd/list-item {"blockId":"766fd24a-b441-46ee-b1c7-2c1938a84206","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-766fd24a" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Excellent service</span></li>
+<!-- /wp:wd/list-item -->
+
+<!-- wp:wd/list-item {"blockId":"eda2d168-94f3-455c-8dd1-fe35110b5db6","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-eda2d168" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Eco product</span></li>
+<!-- /wp:wd/list-item -->
+
+<!-- wp:wd/list-item {"blockId":"a427ee0f-1298-4333-8c8e-1779d20410b8","iconType":"unordered","svg":"","image":""} -->
+<li id="wd-a427ee0f" class="wp-block-wd-list-item"><div class="wd-icon"></div><span class="wd-list-content">Modern technique</span></li>
+<!-- /wp:wd/list-item --></ul>
+<!-- /wp:wd/list --></div>
+<!-- /wp:wd/column --></div>
+<!-- /wp:wd/row -->]]></content:encoded>
+															<wp:post_id>724</wp:post_id>
+					<wp:post_date><![CDATA[2025-05-21 11:40:26]]></wp:post_date>
+					<wp:post_date_gmt><![CDATA[2025-05-21 11:40:26]]></wp:post_date_gmt>
+					<wp:post_modified><![CDATA[2025-05-21 11:40:27]]></wp:post_modified>
+					<wp:post_modified_gmt><![CDATA[2025-05-21 11:40:27]]></wp:post_modified_gmt>
+					<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+					<wp:post_name><![CDATA[delivery-details]]></wp:post_name>
+					<wp:status><![CDATA[publish]]></wp:status>
+					<wp:post_parent>0</wp:post_parent>
+					<wp:menu_order>0</wp:menu_order>
+					<wp:post_type><![CDATA[wd_product_tabs]]></wp:post_type>
+																					<wp:postmeta>
+							<wp:meta_key><![CDATA[product_tab_title]]></wp:meta_key>
+							<wp:meta_value><![CDATA[Delivery Details]]></wp:meta_value>
+						</wp:postmeta>
+												<wp:postmeta>
+							<wp:meta_key><![CDATA[product_tab_condition]]></wp:meta_key>
+							<wp:meta_value><![CDATA[a:1:{i:0;a:3:{s:10:"comparison";s:7:"include";s:4:"type";s:3:"all";s:18:"product-type-query";s:6:"simple";}}]]></wp:meta_value>
+						</wp:postmeta>
+										</item>
+								<item>
 					<title><![CDATA[Sour Cream]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/08/12/sour-cream-3/</link>
 					<pubDate>Wed, 24 Jul 2024 12:26:30 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=140</guid>
 															<wp:post_id>140</wp:post_id>
 					<wp:post_date><![CDATA[2024-08-12 07:36:53]]></wp:post_date>
@@ -5337,7 +5346,7 @@ This email is a receipt for your contact form submission on our website ([_site_
 					<title><![CDATA[Cheese]]></title>
 					<link>https://dummy.xtemos.com/woodmart2/farm-gutenberg/2024/08/12/cheese-3/</link>
 					<pubDate>Wed, 24 Jul 2024 12:26:30 +0000</pubDate>
-					<dc:creator><![CDATA[Ethan Smith]]></dc:creator>
+					<dc:creator><![CDATA[Mr. Mackay]]></dc:creator>
 					<guid isPermaLink="false">https://dummy.xtemos.com/woodmart2/farm-gutenberg/?p=141</guid>
 															<wp:post_id>141</wp:post_id>
 					<wp:post_date><![CDATA[2024-08-12 07:36:53]]></wp:post_date>

@@ -55,11 +55,7 @@ abstract class Element {
 	}
 
 	public function render( $el, $children = '' ) {
-		if ( $this->vc_element ) {
-			$args = $this->_parse_vc_args( $el );
-		} else {
-			$args = $this->_parse_args( $el );
-		}
+		$args = $this->parse_args( $el );
 
 		extract( $args );
 
@@ -76,6 +72,16 @@ abstract class Element {
 		if ( file_exists( $located ) ) {
 			require $located;
 		}
+	}
+
+	protected function parse_args( $el ) {
+		if ( $this->vc_element ) {
+			$args = $this->_parse_vc_args( $el );
+		} else {
+			$args = $this->_parse_args( $el );
+		}
+
+		return $args;
 	}
 
 	private function _parse_args( $el ) {

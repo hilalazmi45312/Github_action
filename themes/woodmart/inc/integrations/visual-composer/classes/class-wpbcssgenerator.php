@@ -362,6 +362,7 @@ class Wpbcssgenerator {
 			}
 
 			update_option( 'woodmart-generated-wpbcss-file', $upload );
+			update_option( 'woodmart-generated-wpbcss-css', wp_slash( addslashes( trim( $css ) ) ), false );
 			update_option( 'woodmart-wpbcss-data', $css_data );
 
 			$this->_notices->add_success( 'New CSS file is generated and saved.' );

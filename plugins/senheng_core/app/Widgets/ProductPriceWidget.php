@@ -540,6 +540,10 @@ class ProductPriceWidget extends \Elementor\Widget_Base
 
     protected function render()
     {
+        // Enqueue widget assets only when widget is rendered
+        wp_enqueue_style('sh-product-price-widget-css');
+        wp_enqueue_script('sh-product-price-widget-js');
+
         $settings = $this->get_settings_for_display();
 
         // Check if we're in Elementor editor mode
@@ -617,7 +621,8 @@ class ProductPriceWidget extends \Elementor\Widget_Base
             }
         } else {
             // For simple products
-            if ($sale_price > 0 && $sale_price < $regular_price) {
+            // Check if product is on sale using standard WooCommerce behavior
+            if ($sale_price > 0 && $sale_price < $regular_price && $product->is_on_sale()) {
                 // Product is on sale
                 $display_regular_price = wc_price($regular_price);
                 $display_sale_price = wc_price($sale_price);
@@ -625,7 +630,7 @@ class ProductPriceWidget extends \Elementor\Widget_Base
                 $price_html = $display_sale_price;
             } else {
                 // Product is not on sale
-                $display_sale_price = wc_price($current_price);
+                $display_sale_price = wc_price($regular_price);
                 $price_html = $display_sale_price;
             }
         }

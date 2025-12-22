@@ -55,6 +55,8 @@ if ( ! function_exists( 'wd_get_shop_archive_block_archive_products_attrs' ) ) {
 		);
 
 		$attr->add_attr( wd_get_color_control_attrs( 'productsBackground' ) );
+		$attr->add_attr( wd_get_color_control_attrs( 'productsBorderColor' ) );
+
 		wd_get_advanced_tab_attrs( $attr );
 
 		return $attr->get_attr();

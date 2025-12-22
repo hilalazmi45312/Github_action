@@ -17,13 +17,13 @@
  * needs please refer to http://docs.woocommerce.com/document/local-pickup-plus/
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2012-2024, SkyVerge, Inc.
+ * @copyright   Copyright (c) 2012-2025, SkyVerge, Inc.
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
 
-use SkyVerge\WooCommerce\PluginFramework\v5_11_12 as Framework;
+use SkyVerge\WooCommerce\PluginFramework\v5_15_12 as Framework;
 
 /**
  * Session data handler.
@@ -37,10 +37,10 @@ class WC_Local_Pickup_Plus_Session {
 
 
 	/** @var array default cart item pickup data (associative array) */
-	private $default_cart_item_pickup_data;
+	private $default_cart_item_pickup_data = [];
 
 	/** @var array default package pickup data (associative array) */
-	private $default_package_pickup_data;
+	private $default_package_pickup_data = [];
 
 
 	/**
@@ -48,22 +48,36 @@ class WC_Local_Pickup_Plus_Session {
 	 *
 	 * @since 2.0.0
 	 */
-	public function __construct() {
-
-		$this->default_cart_item_pickup_data = array(
-			'handling'           => wc_local_pickup_plus_shipping_method()->get_default_handling(),
-			'lookup_area'        => '',
-			'pickup_location_id' => 0,
-		);
-
-		$this->default_package_pickup_data = array(
-			'pickup_date'        => '',
-			'appointment_offset' => '',
-			'pickup_location_id' => 0,
-		);
-
+	public function __construct()
+	{
 		// clear session data upon emptying the cart
 		add_action( 'woocommerce_cart_emptied', array( $this, 'clear_session_data' ) );
+	}
+
+	private function getDefaultCartItemPickupData() : array
+	{
+		if (! isset($this->default_cart_item_pickup_data)) {
+			$this->default_cart_item_pickup_data = array(
+				'handling'           => wc_local_pickup_plus_shipping_method()->get_default_handling(),
+				'lookup_area'        => '',
+				'pickup_location_id' => 0,
+			);
+		}
+
+		return $this->default_cart_item_pickup_data;
+	}
+
+	private function getDefaultPackagePickupData() : array
+	{
+		if (! isset($this->default_package_pickup_data)) {
+			$this->default_package_pickup_data = array(
+				'pickup_date'        => '',
+				'appointment_offset' => '',
+				'pickup_location_id' => 0,
+			);
+		}
+
+		return $this->default_package_pickup_data;
 	}
 
 
@@ -80,9 +94,9 @@ class WC_Local_Pickup_Plus_Session {
 		$data = array();
 
 		if ( 'cart_item' === $item ) {
-			$data = $this->default_cart_item_pickup_data;
+			$data = $this->getDefaultCartItemPickupData();
 		} elseif( 'package' === $item ) {
-			$data = $this->default_package_pickup_data;
+			$data = $this->getDefaultPackagePickupData();
 		}
 
 		return $data;

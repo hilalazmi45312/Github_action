@@ -4,7 +4,7 @@
  *
  * @author      StoreApps
  * @since       4.5.2
- * @version     1.3.1
+ * @version     1.4.0
  *
  * @package     woocommerce-smart-coupons/includes/
  */
@@ -120,7 +120,6 @@ if ( ! class_exists( 'WC_SC_Coupon_Columns' ) ) {
 		 * @return array
 		 */
 		public function define_columns( $columns = array() ) {
-
 			if ( ! is_array( $columns ) || empty( $columns ) ) {
 				$columns = array();
 			}
@@ -137,19 +136,22 @@ if ( ! class_exists( 'WC_SC_Coupon_Columns' ) ) {
 		 * @param int    $post_id Post ID being shown.
 		 */
 		public function render_columns( $column = '', $post_id = 0 ) {
+			try {
+				$this->prepare_row_data( $post_id );
 
-			$this->prepare_row_data( $post_id );
-
-			if ( ! $this->object ) {
-				return;
-			}
-
-			if ( ! empty( $column ) ) {
-				switch ( $column ) {
-					case 'wc_sc_view_orders':
-						$this->render_view_orders_column( $post_id, $this->object );
-						break;
+				if ( ! $this->object ) {
+					return;
 				}
+
+				if ( ! empty( $column ) ) {
+					switch ( $column ) {
+						case 'wc_sc_view_orders':
+							$this->render_view_orders_column( $post_id, $this->object );
+							break;
+					}
+				}
+			} catch ( \Throwable $e ) {
+				$this->sc_block_catch_error( $e );
 			}
 
 		}

@@ -116,9 +116,6 @@ if ( ! function_exists( 'wd_get_block_social_buttons_attrs' ) ) {
 				'tiktok_link'         => array(
 					'type' => 'string',
 				),
-				'skype_link'          => array(
-					'type' => 'string',
-				),
 				'yelp_link'           => array(
 					'type' => 'string',
 				),

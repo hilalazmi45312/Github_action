@@ -1,9 +1,10 @@
-/* global woodmart_settings */
+/* global woodmart_settings, woodmartThemeModule */
 (function($) {
 	woodmartThemeModule.onePageMenu = function() {
 		var scrollToRow = function(hash) {
 			var $htmlBody = $('html, body');
 			var row = $('#' + hash + ', .wd-menu-anchor[data-id="' + hash + '"]');
+			var offset = row.data('offset') ? parseInt(row.data('offset'), 10) : woodmart_settings.one_page_menu_offset;
 
 			$htmlBody.stop(true);
 
@@ -14,7 +15,7 @@
 			var position = row.offset().top;
 
 			$htmlBody.animate({
-				scrollTop: position - woodmart_settings.one_page_menu_offset
+				scrollTop: position - offset
 			}, 800);
 
 			setTimeout(function() {
@@ -39,7 +40,7 @@
 
 		woodmartThemeModule.$body.on('click', '.onepage-link > a', function(e) {
 			var $this = $(this),
-			    hash  = $this.attr('href').split('#')[1];
+				hash  = $this.attr('href').split('#')[1];
 
 			if ($('#' + hash).length < 1 && $('.wd-menu-anchor[data-id="' + hash + '"]').length < 1) {
 				return;
@@ -78,12 +79,14 @@
 				}
 			});
 
-			var locationHash = window.location.hash.split('#')[1];
+			if ($('body').is('[class*="elementor-"]')) {
+				var locationHash = window.location.hash.split('#')[1];
 
-			if (window.location.hash.length > 1) {
-				setTimeout(function() {
-					scrollToRow(locationHash);
-				}, 500);
+				if (window.location.hash.length > 1) {
+					setTimeout(function() {
+						scrollToRow(locationHash);
+					}, 500);
+				}
 			}
 		}
 	};
