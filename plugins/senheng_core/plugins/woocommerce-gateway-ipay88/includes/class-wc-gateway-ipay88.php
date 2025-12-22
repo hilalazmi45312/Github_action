@@ -1211,7 +1211,9 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		}
 		WC_iPay88::add_debug_log( 'Payment response received. Response is: ' . print_r( $posted, true ) );
 
-		$refno = WC_iPay88::get_field( 'RefNo', $posted );
+		$refno = $this->normalize_refno(
+			WC_iPay88::get_field( 'RefNo', $posted )
+		);
 		if ( $refno ) {
 			$order_id = $this->get_order_id( $refno );
 			$order = wc_get_order( (int) $order_id );
@@ -1270,7 +1272,9 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		
 		if ( $this->validate_response() ) {
 			
-			$refno   = WC_iPay88::get_field( 'RefNo', $posted );
+			$refno = $this->normalize_refno(
+				WC_iPay88::get_field( 'RefNo', $posted )
+			);
 			$transid = WC_iPay88::get_field( 'TransId', $posted );
 			$estatus = WC_iPay88::get_field( 'Status', $posted );
 			$errdesc = WC_iPay88::get_field( 'ErrDesc', $posted );
@@ -1600,4 +1604,9 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway {
 		
 		return $order_id;
 	}
+
+	private function normalize_refno( $refno ) {
+		return (int) preg_replace('/[^0-9]/', '', $refno);
+	}
+
 } //end vanbodevelops ipay88 class
