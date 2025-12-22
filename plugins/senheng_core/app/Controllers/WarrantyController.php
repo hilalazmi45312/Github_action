@@ -67,6 +67,7 @@ class WarrantyController
 
         if (is_user_logged_in() && $membershipType !== 'eBSC') {
             // Logged in but NOT eBSC → stop
+            self::forceRemoveAllWarranties();
             return;
         }
 
@@ -168,5 +169,29 @@ class WarrantyController
 
         // save to order item
         $item->add_meta_data('_warranty_selected', $has_warranty ? 'yes' : 'no', true);
+    }
+
+    public static function forceRemoveAllWarranties()
+    {
+        if (!WC()->session) return;
+
+        // Clear session selections
+        WC()->session->set('warranty_selected_keys', []);
+
+        // Mark all cart items as OFF
+        $offKeys = [];
+
+        if (WC()->cart) {
+            foreach (WC()->cart->get_cart() as $key => $item) {
+                $offKeys[] = (string) $key;
+            }
+        }
+
+        // Update cookie
+        wc_setcookie(
+            'wty_off_keys',
+            wp_json_encode(array_unique($offKeys)),
+            time() + DAY_IN_SECONDS
+        );
     }
 }
