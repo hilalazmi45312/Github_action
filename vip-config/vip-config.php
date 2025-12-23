@@ -95,8 +95,3 @@ if ( ( ! defined( 'VIP_GO_APP_ENVIRONMENT' ) || ( defined( 'VIP_GO_APP_ENVIRONME
 	define( 'WP_DEBUG', false );
 	define( 'WC_LOG_HANDLER', 'WC_Log_Handler_DB' );
 }
-
-
-define('MEDIA_SYNC_TARGET_ENDPOINT', 'https://senq.com.my/wp-json/wp/v2/media');
-define('MEDIA_SYNC_AUTH_USER', 'ilias');
-define('MEDIA_SYNC_AUTH_PASS', 'ScrD D5wT mRsV odxg 2SnZ ikVs');
