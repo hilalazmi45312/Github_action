@@ -169,6 +169,14 @@ class CartController
             array(),
             '1.0.0'
         );
+
+        // Initialize wpmDataLayer early to prevent TypeError from woocommerce-google-adwords-conversion-tracking-tag plugin
+        // The plugin's woocommerce_after_cart_item_name hook expects wpmDataLayer to exist before cart items render
+        wp_add_inline_script(
+            'jquery',
+            'window.wpmDataLayer = window.wpmDataLayer || {}; window.wpmDataLayer.cart_item_keys = window.wpmDataLayer.cart_item_keys || {};',
+            'before'
+        );
     }
 
     /**
