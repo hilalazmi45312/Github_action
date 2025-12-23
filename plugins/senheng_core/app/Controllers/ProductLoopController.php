@@ -49,6 +49,9 @@ class ProductLoopController
         
         // WoodMart specific hooks
         add_action('after_setup_theme', [self::class, 'setup_woodmart_compatibility'], 15);
+        
+        // Filter WoodMart product labels to hide when WCPB badge is present
+        add_filter('woodmart_product_label_output', [self::class, 'filter_woodmart_product_labels'], 20);
                 
         // Posts slider override for WoodMart compatibility
         add_action('init', [self::class, 'setup_posts_slider_override'], 20);
@@ -767,6 +770,11 @@ public static function enqueue_styles()
             return;
         }
 
+        // Skip S-coin badge if product has WCPB badge
+        if (self::product_has_wcpb_badge()) {
+            return;
+        }
+
         $product_id = $product->get_id();
         $price = (float) $product->get_price();
         
@@ -846,5 +854,165 @@ public static function enqueue_styles()
         // For products without color attributes, hide all dropdown variations
         // This ensures no dropdown variations appear in the product loop
         return '';
+    }
+
+    /**
+     * Check if a product has a WCPB Product Badge
+     * Uses the same logic as the WCPB plugin to determine if a badge would display
+     * 
+     * @param int|null $product_id The product ID. If null, uses global $product
+     * @return bool True if product has at least one WCPB badge
+     */
+    public static function product_has_wcpb_badge($product_id = null)
+    {
+        // Check if WCPB plugin is active
+        if (!class_exists('WCPB_Product_Badges')) {
+            return false;
+        }
+
+        global $product;
+        
+        if ($product_id) {
+            $check_product = wc_get_product($product_id);
+        } else {
+            $check_product = $product;
+        }
+        
+        if (!$check_product) {
+            return false;
+        }
+
+        $product_id = $check_product->get_id();
+        $product_category_ids = $check_product->get_category_ids();
+        $product_tag_ids = $check_product->get_tag_ids();
+        $product_shipping_class_id = $check_product->get_shipping_class_id();
+        $product_is_on_sale = $check_product->is_on_sale();
+        $product_is_on_backorder = $check_product->is_on_backorder();
+        $product_stock_status = $check_product->get_stock_status();
+        $product_featured = $check_product->is_featured();
+        
+        // Low stock calculation
+        $low_stock_amount = get_option('woocommerce_notify_low_stock_amount');
+        $product_low_stock_amount = $check_product->get_low_stock_amount();
+        $product_low_stock_threshold = !empty($product_low_stock_amount) ? $product_low_stock_amount : $low_stock_amount;
+        $product_has_low_stock = $check_product->managing_stock() && $check_product->get_stock_quantity() !== null && $check_product->get_stock_quantity() <= $product_low_stock_threshold && $check_product->get_stock_quantity() > 0;
+
+        // Get all WCPB badges
+        $badges = get_posts([
+            'numberposts' => -1,
+            'post_type' => 'wcpb_product_badge',
+            'post_status' => 'publish',
+            'fields' => 'ids',
+        ]);
+
+        if (empty($badges)) {
+            return false;
+        }
+
+        foreach ($badges as $badge_id) {
+            $visibility = get_post_meta($badge_id, '_wcpb_product_badges_display_visibility', true);
+            $products_setting = get_post_meta($badge_id, '_wcpb_product_badges_display_products', true);
+            
+            // Check visibility - for product loop we check 'all' or 'product_loops'
+            if ($visibility !== 'all' && $visibility !== 'product_loops') {
+                continue;
+            }
+
+            $display = false;
+
+            if ($products_setting === 'specific') {
+                $products_specific_categories = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_categories', true);
+                $products_specific_tags = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_tags', true);
+                $products_specific_products = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_products', true);
+                $products_specific_shipping_classes = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_shipping_classes', true);
+
+                // Check categories
+                if (!empty($products_specific_categories)) {
+                    foreach ($products_specific_categories as $cat_id) {
+                        if (in_array($cat_id, $product_category_ids)) {
+                            $display = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Check tags
+                if (!$display && !empty($products_specific_tags)) {
+                    foreach ($products_specific_tags as $tag_id) {
+                        if (in_array($tag_id, $product_tag_ids)) {
+                            $display = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Check specific products
+                if (!$display && !empty($products_specific_products)) {
+                    if (in_array($product_id, $products_specific_products)) {
+                        $display = true;
+                    }
+                }
+
+                // Check shipping classes
+                if (!$display && !empty($products_specific_shipping_classes)) {
+                    if (in_array($product_shipping_class_id, $products_specific_shipping_classes)) {
+                        $display = true;
+                    }
+                }
+            } elseif ($products_setting === 'sale') {
+                if ($product_is_on_sale) {
+                    $display = true;
+                }
+            } elseif ($products_setting === 'non_sale') {
+                if (!$product_is_on_sale) {
+                    $display = true;
+                }
+            } elseif ($products_setting === 'out_of_stock') {
+                if ($product_stock_status === 'outofstock') {
+                    $display = true;
+                }
+            } elseif ($products_setting === 'low_stock') {
+                if ($product_has_low_stock) {
+                    $display = true;
+                }
+            } elseif ($products_setting === 'on_backorder') {
+                if ($product_is_on_backorder) {
+                    $display = true;
+                }
+            } elseif ($products_setting === 'featured') {
+                if ($product_featured) {
+                    $display = true;
+                }
+            } elseif ($products_setting === 'custom_rules') {
+                // Check custom rules filter
+                if (apply_filters('wcpb_product_badges_custom_rules_display', false, $check_product, $badge_id)) {
+                    $display = true;
+                }
+            } else {
+                // Default case - show for all products
+                $display = true;
+            }
+
+            if ($display) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Filter WoodMart product labels to hide when WCPB badge is present
+     * This prevents duplicate badges from appearing on products
+     * 
+     * @param array $output The array of product labels
+     * @return array Empty array if WCPB badge present, otherwise unmodified
+     */
+    public static function filter_woodmart_product_labels($output)
+    {
+        if (self::product_has_wcpb_badge()) {
+            return []; // Return empty array to hide all WoodMart product labels
+        }
+        return $output;
     }
 }
