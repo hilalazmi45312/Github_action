@@ -1489,84 +1489,84 @@ add_filter( 'wp_headers', function( $headers ) {
 }, 999 );
 
 
-/**
- * Export WooCommerce Attributes with Each Value on Separate Row
- * Access via: yoursite.com/?export_attributes=1
- */
-function export_woocommerce_attributes_csv() {
-    // Check if WooCommerce is active
-    if (!function_exists('wc_get_attribute_taxonomies')) {
-        return;
-    }
+// /**
+//  * Export WooCommerce Attributes with Each Value on Separate Row
+//  * Access via: yoursite.com/?export_attributes=1
+//  */
+// function export_woocommerce_attributes_csv() {
+//     // Check if WooCommerce is active
+//     if (!function_exists('wc_get_attribute_taxonomies')) {
+//         return;
+//     }
     
-    // Get all attribute taxonomies
-    $attribute_taxonomies = wc_get_attribute_taxonomies();
+//     // Get all attribute taxonomies
+//     $attribute_taxonomies = wc_get_attribute_taxonomies();
     
-    // Set headers for CSV download
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="woocommerce-attributes-' . date('Y-m-d') . '.csv"');
-    header('Pragma: no-cache');
-    header('Expires: 0');
+//     // Set headers for CSV download
+//     header('Content-Type: text/csv; charset=utf-8');
+//     header('Content-Disposition: attachment; filename="woocommerce-attributes-' . date('Y-m-d') . '.csv"');
+//     header('Pragma: no-cache');
+//     header('Expires: 0');
     
-    // Open output stream
-    $output = fopen('php://output', 'w');
+//     // Open output stream
+//     $output = fopen('php://output', 'w');
     
-    // Add UTF-8 BOM for Excel compatibility
-    fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
+//     // Add UTF-8 BOM for Excel compatibility
+//     fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
     
-    // Write header row
-    fputcsv($output, array('Attribute Name', 'Attribute Slug', 'All Values'));
+//     // Write header row
+//     fputcsv($output, array('Attribute Name', 'Attribute Slug', 'All Values'));
     
-    // Loop through each attribute
-    foreach ($attribute_taxonomies as $tax) {
-        $taxonomy = 'pa_' . $tax->attribute_name;
+//     // Loop through each attribute
+//     foreach ($attribute_taxonomies as $tax) {
+//         $taxonomy = 'pa_' . $tax->attribute_name;
         
-        // Get all terms for this attribute
-        $terms = get_terms(array(
-            'taxonomy'   => $taxonomy,
-            'hide_empty' => false,
-            'orderby'    => 'name',
-            'order'      => 'ASC'
-        ));
+//         // Get all terms for this attribute
+//         $terms = get_terms(array(
+//             'taxonomy'   => $taxonomy,
+//             'hide_empty' => false,
+//             'orderby'    => 'name',
+//             'order'      => 'ASC'
+//         ));
         
-        // Check if terms exist
-        if (!is_wp_error($terms) && !empty($terms)) {
-            // First row: show attribute name and slug with first value
-            $first_term = array_shift($terms);
-            fputcsv($output, array(
-                $tax->attribute_label,      // Attribute Name
-                $tax->attribute_name,       // Attribute Slug
-                $first_term->name           // First Value
-            ));
+//         // Check if terms exist
+//         if (!is_wp_error($terms) && !empty($terms)) {
+//             // First row: show attribute name and slug with first value
+//             $first_term = array_shift($terms);
+//             fputcsv($output, array(
+//                 $tax->attribute_label,      // Attribute Name
+//                 $tax->attribute_name,       // Attribute Slug
+//                 $first_term->name           // First Value
+//             ));
             
-            // Remaining rows: empty name and slug, just values
-            foreach ($terms as $term) {
-                fputcsv($output, array(
-                    '',                     // Empty Attribute Name
-                    '',                     // Empty Attribute Slug
-                    $term->name             // Value
-                ));
-            }
-        } else {
-            // No values for this attribute
-            fputcsv($output, array(
-                $tax->attribute_label,
-                $tax->attribute_name,
-                '(No values)'
-            ));
-        }
-    }
+//             // Remaining rows: empty name and slug, just values
+//             foreach ($terms as $term) {
+//                 fputcsv($output, array(
+//                     '',                     // Empty Attribute Name
+//                     '',                     // Empty Attribute Slug
+//                     $term->name             // Value
+//                 ));
+//             }
+//         } else {
+//             // No values for this attribute
+//             fputcsv($output, array(
+//                 $tax->attribute_label,
+//                 $tax->attribute_name,
+//                 '(No values)'
+//             ));
+//         }
+//     }
     
-    fclose($output);
-    exit;
-}
-// Hook to WordPress init to check for export trigger
-add_action('init', function() {
-    // Check if export parameter is set and user has permission
-    if (isset($_GET['export_attributes']) && current_user_can('manage_woocommerce')) {
-        export_woocommerce_attributes_csv();
-    }
-});
+//     fclose($output);
+//     exit;
+// }
+// // Hook to WordPress init to check for export trigger
+// add_action('init', function() {
+//     // Check if export parameter is set and user has permission
+//     if (isset($_GET['export_attributes']) && current_user_can('manage_woocommerce')) {
+//         export_woocommerce_attributes_csv();
+//     }
+// });
 
 
 // // Force Elementor image widget to use FULL size when "Full" is selected.
