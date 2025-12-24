@@ -649,7 +649,7 @@ window.InsiderObject = {
     /**
      * Handle Remove from Cart event
      */
-    handleRemoveFromCartEvent(productData, quantity=0) {
+    handleRemoveFromCartEvent(productData, quantity = 0) {
         const productRemovedCart = {
             type: 'remove_from_cart',
             value: {
@@ -1054,7 +1054,7 @@ window.InsiderObject = {
             // --- Helper: find variation by SKU ---
             function findVariationBySKU() {
                 const variations = $form.data('product_variations') || [];
-                return variations.find(v => v.sku && v.sku.length > 0);
+                return variations.find(v => v.sku && v.sku.length > 0 && v.is_in_stock);
             }
 
             // --- Auto-select default variation ---
@@ -1414,4 +1414,21 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('test');
         window.history.back();
     });
+});
+
+window.addEventListener('load', function () {
+    // Check if InsiderQueue is defined and it's an array
+    if (Array.isArray(window.InsiderQueue)) {
+        // If the item with type 'init' doesn't exist, push it to the array
+        if (!window.InsiderQueue.some(item => item.type === 'init')) {
+            window.InsiderQueue.push({
+                type: 'init'
+            });
+        }
+    } else {
+        // If InsiderQueue doesn't exist as an array, initialize it and push the item
+        window.InsiderQueue = [{
+            type: 'init'
+        }];
+    }
 });
