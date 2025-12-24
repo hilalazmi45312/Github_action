@@ -1094,7 +1094,7 @@ add_action('wp_ajax_nopriv_check_coupon_validity', 'my_coupon_check_validity');
 add_action('rest_api_init', function () {
     register_rest_route('custom-api/v1', '/insider-bulk-feed', [
         'methods' => 'GET',
-        'callback' => 'custom_insider_bulk_feed_handler',
+        'callback' => 'custom_insider_bulk_feed_handler_url',
         'args' => [
             'mode' => [
                 'required' => false,
@@ -1105,6 +1105,15 @@ add_action('rest_api_init', function () {
         ],
     ]);
 });
+
+function custom_insider_bulk_feed_handler_url(WP_REST_Request $request)
+{
+    $mode = $request->get_param('mode') ?: 'all';
+    $limit = (int) ($request->get_param('limit') ?: 500);
+    $limit = max(1, min($limit, 1000));
+
+    return custom_insider_bulk_feed_handler($mode, $limit);
+}
 
 function custom_insider_bulk_feed_handler($mode, $limit = 500)
 {
