@@ -1164,7 +1164,7 @@ function custom_insider_bulk_feed_handler($mode, $limit = 500)
             ON m.post_id = p.ID
            AND m.meta_key = %s
         WHERE p.post_type = 'product'
-          AND p.post_modified_gmt > m.meta_value
+          AND p.post_modified > m.meta_value
           {$where_ids}
         LIMIT %d
     ", 'last_synced_insider', $limit);
