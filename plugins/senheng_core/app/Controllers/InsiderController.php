@@ -1093,23 +1093,38 @@ add_action('wp_ajax_nopriv_check_coupon_validity', 'my_coupon_check_validity');
 /**************************************/
 add_action('rest_api_init', function () {
     register_rest_route('custom-api/v1', '/insider-bulk-feed', [
-        'methods'  => 'GET',
-        'callback' => 'custom_insider_bulk_feed_handler',
-        'permission_callback' => '__return_true',
+        'methods' => 'GET',
+        'callback' => 'custom_insider_bulk_feed_handler_url',
+        'args' => [
+            'mode' => [
+                'required' => false,
+                'validate_callback' => function ($param, $request, $key) {
+                    return true;
+                },
+            ],
+        ],
     ]);
 });
 
-function custom_insider_bulk_feed_handler(WP_REST_Request $request)
+function custom_insider_bulk_feed_handler_url(WP_REST_Request $request)
+{
+    $mode = $request->get_param('mode') ?: 'all';
+    $limit = (int) ($request->get_param('limit') ?: 500);
+
+    return custom_insider_bulk_feed_handler($mode, $limit);
+}
+
+function custom_insider_bulk_feed_handler($mode, $limit = 500)
 {
     $config = insider_config();
-    if ($request->get_param('token') !== INSIDER_BULK_FEED_TOKEN) {
-        return new WP_REST_Response(['error' => 'Invalid token'], 403);
-    }
+    // if ($request->get_param('token') !== INSIDER_BULK_FEED_TOKEN) {
+    //     return new WP_REST_Response(['error' => 'Invalid token'], 403);
+    // }
 
-    $product_ids = $request->get_param('product_ids');
-    $mode  = $request->get_param('mode') ?: 'all';
-    $limit = (int) ($request->get_param('limit') ?: 200);
-    $limit = max(1, min($limit, 1000));
+    // $product_ids = $request->get_param('product_ids');
+    // $mode  = $request->get_param('mode') ?: 'all';
+    // $limit = (int) ($request->get_param('limit') ?: 200);
+    // $limit = max(1, min($limit, 1000));
     $locale = insiderLocale();
 
     global $wpdb;
