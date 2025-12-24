@@ -197,6 +197,9 @@ class CheckoutController
      */
     public static function init_checkout_page_hooks()
     {
+        // Unhook tracking plugins during checkout AJAX to improve update_order_review performance
+        add_action('woocommerce_checkout_update_order_review', [self::class, 'unhook_tracking_plugins_during_ajax'], 1);
+
         // Modify checkout item name to include variation attributes
         add_filter('woocommerce_cart_item_name', [self::class, 'modify_checkout_item_name'], 10, 3);
 
@@ -252,6 +255,53 @@ class CheckoutController
         add_action('woocommerce_review_order_before_order_total', [self::class, 'render_remaining_balance_row']);
         add_filter('woocommerce_order_item_name', [self::class, 'checkout_order_item_name'], 10, 3);
 
+    }
+
+    /**
+     * Unhook tracking plugins during checkout AJAX to improve performance
+     * 
+     * The Pixel Manager for WooCommerce plugin injects inline <script> tags for each cart item
+     * via the woocommerce_after_cart_item_name hook. This causes significant performance overhead
+     * during update_order_review AJAX calls. This method removes those hooks during AJAX.
+     * 
+     * @param string $post_data The posted data from checkout form
+     */
+    public static function unhook_tracking_plugins_during_ajax($post_data = '')
+    {
+        // Only apply during AJAX requests
+        if (!wp_doing_ajax()) {
+            return;
+        }
+
+        global $wp_filter;
+        
+        $hooks_to_clean = [
+            'woocommerce_after_cart_item_name',
+            'woocommerce_after_mini_cart_item_name',
+        ];
+        
+        foreach ($hooks_to_clean as $hook) {
+            if (!isset($wp_filter[$hook]) || !is_object($wp_filter[$hook])) {
+                continue;
+            }
+            
+            foreach ($wp_filter[$hook]->callbacks as $priority => $callbacks) {
+                foreach ($callbacks as $id => $callback) {
+                    // Check if this is the Pixel Manager callback
+                    if (is_array($callback['function']) && 
+                        isset($callback['function'][0]) && 
+                        is_object($callback['function'][0])) {
+                        $class_name = get_class($callback['function'][0]);
+                        // Match Pixel Manager class names
+                        if (strpos($class_name, 'Pixel_Manager') !== false || 
+                            strpos($class_name, 'PMW') !== false ||
+                            strpos($class_name, 'wpm') !== false) {
+                            remove_action($hook, $callback['function'], $priority);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
