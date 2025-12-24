@@ -66,6 +66,7 @@ class OrderMetaController
             '_product_extra_', // partial match logic needed if we want to hide these too, but loop below handles exact keys
             '_trade_in_option', // Hide raw key, keep 'Trade In'
             '_deposit_option',  // Hide raw key, keep 'Payment Option'
+            '_actual_price',    // Hide raw key, we display it formatted in display_product_extras_in_admin
         ];
 
         $filtered_meta = [];
@@ -96,14 +97,21 @@ class OrderMetaController
         // Display Actual Price for Deposit Orders
         $deposit_option = $item->get_meta('_deposit_option');
         if ($deposit_option === 'deposit') {
-            $product_obj = $item->get_product();
-            if ($product_obj) {
-                $regular_price = $product_obj->get_regular_price();
-                if ($regular_price) {
-                    echo '<div class="sh-actual-price" style="margin-top:5px; font-size:0.9em;">';
-                    echo '<strong>' . __('Actual Price:', 'senheng-core') . '</strong> ' . wc_price($regular_price);
-                    echo '</div>';
+            // First, try to get the actual price saved at order time
+            $actual_price = $item->get_meta('_actual_price');
+            
+            // Fallback to product's regular price if _actual_price not saved
+            if (empty($actual_price)) {
+                $product_obj = $item->get_product();
+                if ($product_obj) {
+                    $actual_price = $product_obj->get_regular_price();
                 }
+            }
+            
+            if (!empty($actual_price)) {
+                echo '<div class="sh-actual-price" style="margin-top:5px; font-size:0.9em;">';
+                echo '<strong>' . __('Actual Price:', 'senheng-core') . '</strong> ' . wc_price($actual_price);
+                echo '</div>';
             }
         }
 

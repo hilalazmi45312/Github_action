@@ -456,6 +456,14 @@ class WooCommerceAddtoCartController
             WC()->cart->cart_contents[$cart_item_key]['trade_in'] = $options['trade_in'];
         }
         WC()->cart->cart_contents[$cart_item_key]['awcdp_deposit_option'] = $options['awcdp_deposit_option'];
+        
+        // Ensure awcdp_deposit array is set for AWCDP plugin to process
+        if ($options['awcdp_deposit_option'] === 'yes') {
+            if (!isset(WC()->cart->cart_contents[$cart_item_key]['awcdp_deposit'])) {
+                WC()->cart->cart_contents[$cart_item_key]['awcdp_deposit'] = array();
+            }
+            WC()->cart->cart_contents[$cart_item_key]['awcdp_deposit']['enable'] = 1;
+        }
     }
 
     /**
@@ -510,6 +518,14 @@ class WooCommerceAddtoCartController
         }
         if ($options['awcdp_deposit_option'] !== '') {
             $cart_item_data['awcdp_deposit_option'] = $options['awcdp_deposit_option'];
+            
+            // IMPORTANT: Set the awcdp_deposit array structure that the deposits-partial-payments-for-woocommerce 
+            // plugin expects. This ensures the plugin creates partial payment order meta regardless of trade-in status.
+            if ($options['awcdp_deposit_option'] === 'yes') {
+                $cart_item_data['awcdp_deposit'] = array(
+                    'enable' => 1,  // Required for AWCDP plugin to process deposit
+                );
+            }
         }
 
         return $cart_item_data;
@@ -1376,7 +1392,9 @@ class WooCommerceAddtoCartController
                 }
             }
 
-            // STEP 3: Handle trade-in pricing (should override product extras pricing)
+            // STEP 3: Handle trade-in pricing - BUT DO NOT modify cart price for deposit orders
+            // The line item should show the actual product price, not the deposit amount
+            // Deposit amount is stored as meta and used for checkout total calculation
             if (isset($cart_item['trade_in']) && $cart_item['trade_in'] === 'yes' && isset($cart_item['awcdp_deposit_option'])) {
                 $payment_option = $cart_item['awcdp_deposit_option'];
 
@@ -1397,34 +1415,30 @@ class WooCommerceAddtoCartController
                     }
 
                     if ($original_product) {
-                        $base_price = 0;
-
                         $base_price = floatval($original_product->get_price());
-
+                        
+                        // IMPORTANT: Always use base product price for the line item
+                        // This ensures the order shows actual product price, not deposit amount
                         $final_price = $base_price;
 
-                        // Apply deposit pricing if deposit option is selected
+                        // Store deposit amount as meta for checkout calculations (but don't change line price)
                         if ($payment_option === 'yes') {
-                            // Get deposit settings
                             $deposit_amount = get_post_meta($product_id, '_awcdp_deposits_deposit_amount', true);
                             $deposit_type = get_post_meta($product_id, '_awcdp_deposit_type', true);
 
                             if (!empty($deposit_amount)) {
+                                $calculated_deposit = 0;
                                 if ($deposit_type === 'percent') {
-                                    // Percentage deposit
-                                    $final_price = $base_price * (floatval($deposit_amount) / 100);
-                                } elseif ($deposit_type === 'fixed') {
-                                    // Fixed deposit amount
-                                    $final_price = floatval($deposit_amount);
+                                    $calculated_deposit = $base_price * (floatval($deposit_amount) / 100);
                                 } else {
-                                    // Default to fixed amount if type is not specified
-                                    $final_price = floatval($deposit_amount);
+                                    $calculated_deposit = floatval($deposit_amount);
                                 }
+                                // Store the deposit amount for checkout total calculation
+                                $cart->cart_contents[$cart_item_key]['deposit_amount'] = $calculated_deposit;
                             }
                         }
-                        // If payment_option is 'no', use full price (already set as $base_price)
 
-                        // Set the calculated price (this will override any previous pricing)
+                        // Set the calculated price (actual product price, NOT deposit)
                         $cart_item['data']->set_price($final_price);
 
                         // Mark that trade-in price has been calculated
