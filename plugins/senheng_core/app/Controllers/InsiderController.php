@@ -1099,17 +1099,17 @@ add_action('rest_api_init', function () {
     ]);
 });
 
-function custom_insider_bulk_feed_handler(WP_REST_Request $request)
+function custom_insider_bulk_feed_handler($mode, $limit = 500)
 {
     $config = insider_config();
-    if ($request->get_param('token') !== INSIDER_BULK_FEED_TOKEN) {
-        return new WP_REST_Response(['error' => 'Invalid token'], 403);
-    }
+    // if ($request->get_param('token') !== INSIDER_BULK_FEED_TOKEN) {
+    //     return new WP_REST_Response(['error' => 'Invalid token'], 403);
+    // }
 
-    $product_ids = $request->get_param('product_ids');
-    $mode  = $request->get_param('mode') ?: 'all';
-    $limit = (int) ($request->get_param('limit') ?: 200);
-    $limit = max(1, min($limit, 1000));
+    // $product_ids = $request->get_param('product_ids');
+    // $mode  = $request->get_param('mode') ?: 'all';
+    // $limit = (int) ($request->get_param('limit') ?: 200);
+    // $limit = max(1, min($limit, 1000));
     $locale = insiderLocale();
 
     global $wpdb;
