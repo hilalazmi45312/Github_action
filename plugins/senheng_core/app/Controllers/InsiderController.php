@@ -1110,7 +1110,6 @@ function custom_insider_bulk_feed_handler_url(WP_REST_Request $request)
 {
     $mode = $request->get_param('mode') ?: 'all';
     $limit = (int) ($request->get_param('limit') ?: 500);
-    $limit = max(1, min($limit, 1000));
 
     return custom_insider_bulk_feed_handler($mode, $limit);
 }
