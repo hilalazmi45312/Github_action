@@ -1781,13 +1781,30 @@ class CheckoutController
 
                 if ($deposit_indicator === 'deposit') {
                     $item->add_meta_data('Payment Option', 'Deposit Payment');
-                    // Prefer calculated final trade-in price; fallback to any existing deposit amount
-                    if (isset($values['_final_tradein_price'])) {
-                        $item->add_meta_data('_deposit_amount', $values['_final_tradein_price']);
-                    } elseif (isset($values['deposit_amount'])) {
+                    
+                    // Get deposit amount - prioritize actual deposit_amount over _final_tradein_price
+                    // Note: _final_tradein_price is the full product price, NOT the deposit amount
+                    if (isset($values['deposit_amount']) && is_numeric($values['deposit_amount'])) {
                         $item->add_meta_data('_deposit_amount', $values['deposit_amount']);
                     } elseif (isset($values['product_extras']['deposit_amount'])) {
                         $item->add_meta_data('_deposit_amount', $values['product_extras']['deposit_amount']);
+                    }
+                    
+                    // Save the actual price at order time for consistent display in admin
+                    // This ensures the Actual Price reflects the price at time of order
+                    $product = $item->get_product();
+                    if ($product) {
+                        // For trade-in orders, _final_tradein_price contains the full product price
+                        // Otherwise, get the current price from product
+                        if (isset($values['_final_tradein_price']) && is_numeric($values['_final_tradein_price'])) {
+                            $actual_price = $values['_final_tradein_price'];
+                        } else {
+                            $actual_price = $product->get_price();
+                        }
+                        
+                        if ($actual_price) {
+                            $item->add_meta_data('_actual_price', $actual_price);
+                        }
                     }
                 } else {
                     $item->add_meta_data('Payment Option', 'Full Payment');
@@ -2358,17 +2375,30 @@ class CheckoutController
                     // Add deposit metadata to order item (legacy-consistent)
                     $item->add_meta_data('_deposit_option', 'deposit');
 
-                    // Prefer AWCDP calculated final price; fall back to legacy fields
+                    // Get deposit amount from cart item meta (set by WooCommerceAddtoCartController)
                     $deposit_amount = 0;
-                    if (isset($cart_item['_final_tradein_price'])) {
-                        $deposit_amount = floatval($cart_item['_final_tradein_price']);
-                        $item->add_meta_data('_deposit_amount', $deposit_amount);
-                    } elseif (isset($cart_item['deposit_amount'])) {
+                    if (isset($cart_item['deposit_amount']) && is_numeric($cart_item['deposit_amount'])) {
+                        // Primary: use calculated deposit amount from cart item
                         $deposit_amount = floatval($cart_item['deposit_amount']);
                         $item->add_meta_data('_deposit_amount', $deposit_amount);
                     } elseif (isset($cart_item['product_extras']['deposit_amount'])) {
                         $deposit_amount = floatval($cart_item['product_extras']['deposit_amount']);
                         $item->add_meta_data('_deposit_amount', $deposit_amount);
+                    } else {
+                        // Fallback: calculate deposit from product meta
+                        $product_id = $cart_item['product_id'] ?? 0;
+                        $meta_amount = get_post_meta($product_id, '_awcdp_deposits_deposit_amount', true);
+                        $meta_type = get_post_meta($product_id, '_awcdp_deposit_type', true);
+                        $product = $item->get_product();
+                        if ($product && !empty($meta_amount)) {
+                            $base_price = floatval($product->get_price());
+                            if ($meta_type === 'percent') {
+                                $deposit_amount = $base_price * (floatval($meta_amount) / 100);
+                            } else {
+                                $deposit_amount = floatval($meta_amount);
+                            }
+                            $item->add_meta_data('_deposit_amount', $deposit_amount);
+                        }
                     }
 
                     // Calculate and store remaining balance per item
