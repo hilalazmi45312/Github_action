@@ -130,7 +130,7 @@ function mas_sync_media_to_remote_site($attachment_id)
 
     // Send the media to the target site via the REST API
     $response = wp_remote_post(
-        $target_endpoint, // Use the target endpoint from settings
+        $target_endpoint.'/wp-json/wp/v2/media',
         [
             'timeout' => 20,
             'headers' => [
