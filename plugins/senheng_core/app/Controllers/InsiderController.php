@@ -1093,9 +1093,16 @@ add_action('wp_ajax_nopriv_check_coupon_validity', 'my_coupon_check_validity');
 /**************************************/
 add_action('rest_api_init', function () {
     register_rest_route('custom-api/v1', '/insider-bulk-feed', [
-        'methods'  => 'GET',
+        'methods' => 'GET',
         'callback' => 'custom_insider_bulk_feed_handler',
-        // 'permission_callback' => '__return_true',
+        'args' => [
+            'mode' => [
+                'required' => false,
+                'validate_callback' => function ($param, $request, $key) {
+                    return true;
+                },
+            ],
+        ],
     ]);
 });
 
