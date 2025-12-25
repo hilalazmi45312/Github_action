@@ -585,7 +585,7 @@ class Ivole_Email {
 			);
 		} else {
 			//WPML and Polylang integration
-			if ( has_filter( 'wpml_translate_single_string' ) && defined( 'ICL_LANGUAGE_CODE' ) && ICL_LANGUAGE_CODE && ! function_exists( 'pll_current_language' ) ) {
+			if ( has_filter( 'wpml_translate_single_string' ) && ! function_exists( 'pll_current_language' ) ) {
 				$content = wpautop(
 					wp_kses_post(
 						apply_filters(

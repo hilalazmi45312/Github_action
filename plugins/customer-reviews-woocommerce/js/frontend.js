@@ -614,12 +614,18 @@
 		jQuery( '.cr-reviews-grid' ).on( 'click', '.cr-grid-read-more a', function (e) {
 			e.preventDefault();
 			let parent = jQuery(this).parents(".review-content");
+			if ( 0 === parent.length ) {
+				parent = jQuery(this).parents(".cr-grid-reply-content");
+			}
 			parent.find(".cr-grid-read-more").hide();
 			parent.find(".cr-grid-details").css("display", "inline");
 		} );
 		jQuery( '.cr-reviews-grid' ).on( 'click', '.cr-grid-read-less a', function (e) {
 			e.preventDefault();
 			let parent = jQuery(this).parents(".review-content");
+			if ( 0 === parent.length ) {
+				parent = jQuery(this).parents(".cr-grid-reply-content");
+			}
 			parent.find(".cr-grid-details").hide();
 			parent.find(".cr-grid-read-more").css("display", "inline");
 		} );

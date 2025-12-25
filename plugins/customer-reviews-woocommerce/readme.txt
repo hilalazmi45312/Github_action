@@ -2,9 +2,9 @@
 Contributors: ivole
 Tags: woocommerce, review plugin, review reminder, customer reviews, review for discount
 Requires at least: 4.5
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 5.90.0
+Stable tag: 5.94.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -105,6 +105,7 @@ Plus, benefit from:
 
 * Getting unique, user-generated SEO content for your shop - customer reviews often contain long tail keywords
 * Building user-generated content (UGC) such as photos and videos uploaded by your customers
+* Embedding JSON-LD structured data for product reviews to help search engines better understand and display your review content
 * Enhancing rich snippets and structured data markup for reviews with pictures
 * Enhancing the standard WooCommerce structured data markup with product identifiers (GTIN, MPN, Brand)
 
@@ -233,6 +234,21 @@ If you would like to change how reviews are sorted on product pages, it is possi
 
 == Changelog ==
 
+= 5.94.0 =
+* Bug fix: vulnerability in Ajax requests for local aggregated review forms
+= 5.93.1 =
+* Bug fix: incorrect version in the schema URL for Google Product Reviews
+= 5.93.0 =
+* Improvement: update of XML feed format to version 2.4 for Google Product Reviews
+= 5.92.0 =
+* New feature: 'schema_markup' parameter in [cusrev_reviews_grid] shortcode to create AggregateRating rich snippet
+* Improvement: display replies to reviews in [cusrev_reviews_grid] shortcode
+* Improvement: reduce database queries on WooCommerce Orders page when Review Reminder column is hidden
+* Bug fix: JSON-LD structured data markup not properly detected due to a missing schema property
+* Bug fix: product identifiers displayed on product pages despite being deactivated in the settings
+= 5.91.0 =
+* New feature: 'Review Schema Markup' option on the 'Review Extensions' tab of the plugin's settings to add schema markup when a theme or plugin prevents output of the standard WooCommerce schema markup
+* Improvement: increased buffer size for exporting reviews
 = 5.90.0 =
 * Improvement: support of <is_incentivized_review> attribute in XML product reviews feed for Google
 * Improvement: display coupon codes created for reviews on the Reviews page in WordPress admin panel

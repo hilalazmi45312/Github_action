@@ -103,7 +103,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="<?php echo esc_attr( $card_class ); ?>" style="<?php echo esc_attr( $card_style ); ?>" data-reviewid="<?php echo esc_attr( $review->comment_ID ); ?>">
 					<div class="cr-review-card-content">
 						<?php echo $customer_images_html; ?>
-						<div class="top-row">
+						<div class="top-row" style="<?php echo esc_attr( $cr_grid_hr_style ); ?>">
 							<?php
 							$avtr = get_avatar( $review, 56, '', esc_attr( $author ) );
 							if( $avatars && $avtr ): ?>
@@ -200,8 +200,90 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php
 							endif;
 						endif;
+						// replies to reviews
+						if (
+							$cr_replies &&
+							isset( $cr_replies[$review->comment_ID] ) &&
+							is_array( $cr_replies[$review->comment_ID] ) &&
+							0 < count( $cr_replies[$review->comment_ID] )
+						) :
+							$cr_reply_count = count( $cr_replies[$review->comment_ID] );
+							$cr_replies_label = sprintf(
+								_n( 'Reply', 'Replies', $cr_reply_count, 'customer-reviews-woocommerce' ),
+								$cr_reply_count
+							);
 						?>
-						<?php if ( $show_products && $product ):
+							<div class="cr-grid-replies-container">
+								<div class="cr-grid-replies">
+									<div class="cr-grid-replies-line cr-grid-replies-line-left" style="<?php echo esc_attr( $cr_grid_hr_replies_style ); ?>"></div>
+									<div class="cr-grid-replies-pill" style="<?php echo esc_attr( $cr_grid_replies_pill_style ); ?>">
+										<span class="cr-grid-replies-pill-label"><?php echo esc_html( $cr_replies_label ); ?></span>
+										<span class="cr-grid-replies-pill-count"><?php echo intval( $cr_reply_count ); ?></span>
+									</div>
+									<div class="cr-grid-replies-line cr-grid-replies-line-right" style="<?php echo esc_attr( $cr_grid_hr_replies_style ); ?>"></div>
+								</div>
+								<div class="cr-grid-first-reply">
+									<div class="cr-grid-reply-top-row">
+										<?php
+										$cr_reply_author = get_comment_author( $cr_replies[$review->comment_ID][0] );
+										$cr_reply_avtr = get_avatar( $cr_replies[$review->comment_ID][0], 40, '', esc_attr( $cr_reply_author ) );
+										if ( $avatars && $cr_reply_avtr ): ?>
+											<div class="cr-grid-reply-thumbnail">
+												<?php echo $cr_reply_avtr; ?>
+											</div>
+										<?php endif; ?>
+										<div class="cr-grid-reply-author">
+											<div class="cr-grid-reply-author-name">
+												<?php echo esc_html( $cr_reply_author ); ?>
+											</div>
+											<div class="cr-grid-reply-author-type">
+												<?php
+												if (
+													isset( $cr_replies[$review->comment_ID][0]->user_id ) &&
+													0 < $cr_replies[$review->comment_ID][0]->user_id &&
+													user_can( $cr_replies[$review->comment_ID][0]->user_id, 'manage_woocommerce' )
+												) {
+													echo esc_html(
+														apply_filters(
+															'cr_reviews_store_manager',
+															__( 'Store manager', 'customer-reviews-woocommerce' )
+														)
+													);
+												} else {
+													echo esc_html__( 'Reviewer', 'customer-reviews-woocommerce' );
+												}
+												?>
+											</div>
+										</div>
+									</div>
+									<div class="cr-grid-reply-middle-row">
+										<div class="cr-grid-reply-content">
+											<?php
+												// compatibility with WPML / WCML plugins to translate replies
+												if ( class_exists( 'WCML\Reviews\Translations\FrontEndHooks' ) ) {
+													if ( method_exists( 'WCML\Reviews\Translations\FrontEndHooks', 'translateReview' ) ) {
+														( new WCML\Reviews\Translations\FrontEndHooks() )->translateReview( $cr_replies[$review->comment_ID][0] );
+													}
+												}
+												$cr_reply_clear_content = wp_strip_all_tags( $cr_replies[$review->comment_ID][0]->comment_content );
+												if ( $max_chars && strlen( $cr_reply_clear_content ) > $max_chars ) {
+													$cr_reply_less_content = wp_kses_post( mb_substr( $cr_reply_clear_content, 0, $max_chars ) );
+													$cr_reply_more_content = wp_kses_post( mb_substr( $cr_reply_clear_content, $max_chars ) );
+													$cr_reply_read_more = '<span class="cr-grid-read-more">...<br><a href="#">' . esc_html__( 'Show More', 'customer-reviews-woocommerce' ) . '</a></span>';
+													$cr_reply_more_content = '<div class="cr-grid-details" style="display:none;">' . $cr_reply_more_content . '<br><span class="cr-grid-read-less"><a href="#">' . esc_html__( 'Show Less', 'customer-reviews-woocommerce' ) . '</a></span></div>';
+													$cr_reply_comment_content = $cr_reply_less_content . $cr_reply_read_more . $cr_reply_more_content;
+													echo $cr_reply_comment_content;
+												} else {
+													echo wpautop( wp_kses_post( $cr_replies[$review->comment_ID][0]->comment_content ) );
+												}
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php
+						endif;
+						if ( $show_products && $product ):
 							if( 'publish' === $product->get_status() ):
 								?>
 								<div class="review-product" style="<?php echo esc_attr( $product_style ); ?>">
