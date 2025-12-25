@@ -137,7 +137,7 @@ $stats = ProductImportController::getStats();
                     ['col' => 'high_price',     'desc' => 'High Price (Regular Price)'],
                     ['col' => 'total_s_coin',   'desc' => 'S-Coin Value'],
                     ['col' => 'real_quantity',  'desc' => 'Stock Quantity'],
-                    ['col' => 'sale_quantity',  'desc' => 'Sales Quantity'],
+
                     ['col' => 'L1Name',         'desc' => 'Category Level 1'],
                     ['col' => 'L1ID',           'desc' => 'Category Level 1 ID'],
                     ['col' => 'L2Name',         'desc' => 'Category Level 2'],
