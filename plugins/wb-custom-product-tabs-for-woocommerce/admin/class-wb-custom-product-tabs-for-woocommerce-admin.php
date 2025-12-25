@@ -682,7 +682,6 @@ class Wb_Custom_Product_Tabs_For_Woocommerce_Admin {
 			jQuery(document).ready( function() {
 				jQuery('.wp-list-table').after('<a href="https://wordpress.org/support/plugin/wb-custom-product-tabs-for-woocommerce/reviews/?rate=5#new-post" target="_blank" style="display:inline-block; box-shadow:2px 1px 2px 0px #e2d5d5; margin:0px; padding:10px; box-sizing:border-box; margin-bottom:15px; border-left: solid 4px blueviolet; background:#333; color:#fff; text-decoration:none; position:fixed; bottom:0px; z-index:10000; left:50%; transform:translate(-50%, 0%);"><?php echo wp_kses_post( $msg ); ?></a>');
 
-				// jQuery('.page-title-action').after('<a style="margin-left:10px; font-weight:bold; background-image: linear-gradient(75deg, #db3ef6, #400cb4); color: #fff; padding:5px 10px; border:solid 1px #d73df4; border-radius:5px; top:-3px; display: inline-block; position: relative; text-decoration:none;" href="https://webbuilder143.com/support-our-work/?utm_source=plugin&utm_medium=global-tabs&utm_campaign=add-new&utm_id=tabs-plugin&utm_content=donate" target="_blank"><?php esc_html_e( 'Donate to support the Custom Product Tabs plugin.', 'wb-custom-product-tabs-for-woocommerce' ); ?></a>');
 
 				jQuery('.page-title-action').after('<a style="margin-left:10px; margin-top: 10px; display:inline-block; position: relative; text-decoration:none;" class="button button-primary" href="<?php echo esc_url( admin_url( 'options-general.php?page=wb-product-tab-settings' ) ); ?>"><?php esc_html_e( 'Tab settings', 'wb-custom-product-tabs-for-woocommerce' ); ?></a>');
 			});
@@ -1090,7 +1089,7 @@ class Wb_Custom_Product_Tabs_For_Woocommerce_Admin {
 			}
 		} elseif ( 1 === (int) $banner_state ) {
 			// Show now.
-				$is_show_banner = true;
+			$is_show_banner = true;
 		} elseif ( 3 === (int) $banner_state ) { // Remind.
 
 			$banner_remind_start = (int) get_option( 'wb_cptb_review_banner_remind_start', 0 );
@@ -1105,7 +1104,7 @@ class Wb_Custom_Product_Tabs_For_Woocommerce_Admin {
 			<div class="notice notice-success wb-tabs-review-notice">
 				<p><strong>🎉 Amazing! You've created more than 10 product tabs using Custom Product Tabs for WooCommerce.</strong></p>
 				<p>
-					We're excited to see you're getting great value from the plugin. If it's improved your workflow, we'd really appreciate it if you could leave us a quick 5-star review. It only takes a moment, and your support helps us continue improving the plugin and offering excellent support.
+					We're excited to see that you're getting great value from the plugin. We've spent countless hours refining every feature to make it as smooth and useful as it is today. If it has improved your workflow, we'd really appreciate it if you could leave us a quick 5-star review. It only takes a moment, and your support helps us continue improving the plugin and providing excellent support.
 				</p>
 				<p>Your feedback matters — and it helps others discover the plugin too!</p>
 				<p>
