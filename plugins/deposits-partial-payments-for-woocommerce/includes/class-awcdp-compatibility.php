@@ -63,6 +63,8 @@ class AWCDP_Compatibility
 
         require_once realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR .  'compatibility/merchant-pro.php';
 
+        require_once realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'compatibility/pymntpl-paypal-woocommerce.php';
+        
         // pixelyoursite
         if( function_exists('PYS') || class_exists('PixelYourSite\PYS') || class_exists('PixelYourSite\Events') || function_exists('pys_get_option') ){
             require_once realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'compatibility/pixelyoursite.php';
@@ -73,9 +75,11 @@ class AWCDP_Compatibility
              || class_exists('\Mollie\WooCommerce\Payment\MollieOrderService') ) {
             require_once realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'compatibility/mollie-payments.php';
         }
-       
-        
-        // require_once realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR .  'compatibility/pymntpl-paypal-woocommerce.php';
+		
+		if ( class_exists( 'WC_Klarna_Payments' ) || class_exists( 'KP_WC' ) || in_array('klarna-payments-for-woocommerce/klarna-payments-for-woocommerce.php', apply_filters('active_plugins', get_option('active_plugins'))) ) {
+            require_once realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'compatibility/klarna-payments.php';
+        }
+
 	}
 		
     public function awcdp_wc_register_custom_post_status() {
