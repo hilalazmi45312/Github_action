@@ -3,7 +3,7 @@ Contributors: edmon.parker
 Tags: read more, accordion, content toggle, expand content  
 Requires at least: 3.8  
 Tested up to: 6.8.1
-Stable tag: 3.4.6 
+Stable tag: 3.5.5.1
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -41,8 +41,14 @@ Need help? Contact us at **edmon.parker@gmail.com** for support or custom develo
 
 
 == Changelog ==
+= 3.5.5 =
+* Fixed deprecated functionality to ensure full compatibility with PHP 8.4 version
+
+= 3.5.4.1 =
+* Admin side improvmenetss
+
 = 3.5.4 =
-* Admin side improvmenets
+* Admin side improvmenetss
 
 = 3.5.3 =
 * Admin panel ui improvmenets
