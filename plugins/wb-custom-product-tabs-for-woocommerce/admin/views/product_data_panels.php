@@ -16,6 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<span class="dashicons dashicons-sos" style="margin-top:7px; font-size:14px;"></span>  
 					<?php esc_html_e( 'Help & FAQ', 'wb-custom-product-tabs-for-woocommerce' ); ?>
 				</a>
+				<a class="button button-secondary" target="_blank" href="<?php echo esc_url( admin_url( 'post-new.php?post_type='. WB_TAB_POST_TYPE ) ); ?>">
+					<span class="dashicons dashicons-admin-site-alt2" style="margin-top:7px; font-size:14px;"></span>  
+					<?php esc_html_e( 'Add new global tab', 'wb-custom-product-tabs-for-woocommerce' ); ?>
+				</a>
 				<button class="button button-primary wb_tab_addnew_btn" type="button"><span class="dashicons dashicons-plus-alt" style="margin-top:7px; font-size:14px;"></span> <?php esc_html_e( 'Add new tab', 'wb-custom-product-tabs-for-woocommerce' ); ?></button></p>
 		</div>
 		<div class="wb_tab_main_inner">

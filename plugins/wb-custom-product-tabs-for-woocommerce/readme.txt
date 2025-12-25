@@ -3,9 +3,9 @@ Contributors: webbuilder143
 Donate link: https://webbuilder143.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=donate-link&utm_id=tabs-plugin&utm_content=donate
 Tags: product tabs, tabs plugin, woocommerce custom tabs, woocommerce product tabs, tabs
 Requires at least: 3.5.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.6
-Stable tag: 1.6.0
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,18 @@ Before importing Global Tabs, make sure to import Products, Categories, Tags, an
 6. Help & FAQs
 
 == Changelog ==
+
+= 1.6.4 =
+* Tested with: WooCommerce 10.4.3
+
+= 1.6.3 =
+* [Fix] Description tab was automatically focusing on product page load. Thanks to @elkevandrunen for reporting the issue.
+
+= 1.6.2 =
+* [Fix] Custom tab not activating when changing URL hash.
+
+= 1.6.1 =
+* Tested with WP 6.9
 
 = 1.6.0 =
 * [Add] New option to disable WooCommerce default tabs.
@@ -362,6 +374,5 @@ Before importing Global Tabs, make sure to import Products, Categories, Tags, an
 
 == Upgrade Notice ==
 
-= 1.6.0 =
-* [Add] New option to disable WooCommerce default tabs.
-* Tested with: WooCommerce 10.3.5
+= 1.6.4 =
+* Tested with: WooCommerce 10.4.3

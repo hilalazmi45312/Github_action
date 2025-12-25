@@ -48,18 +48,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 
 
-	<div style="background-color: #6d4cb7; color: white; padding: 20px; text-align: center; border-radius: 8px; font-family: Arial, sans-serif; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:50px;">
-		<h2 style="font-size: 24px; margin: 0; font-weight: bold; color: white;">Support Our Plugin</h2>
-		<!--
-		<p style="font-size: 16px; margin: 10px 0;">If you find this plugin helpful, please consider making a donation. Your support helps us improve and add new features.</p>
-		<a href="https://webbuilder143.com/support-our-work/?utm_source=plugin&utm_medium=settings&utm_campaign=bottom-banner&utm_id=tabs-plugin&utm_content=donate" style="background-color: #9c27b0; color: white; padding: 10px 20px; font-size: 18px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;" target="_blank">Donate Now</a> -->
+	<div style="background-color: #6d4cb7; color: white; padding: 20px; text-align: center; border-radius: 8px; font-family: Arial, sans-serif; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:50px; font-size: 14px;">
+		<h2 style="font-size: 24px; margin: 0; font-weight: bold; color: white;">Enjoying the plugin?</h2>
+		
+		<p style="font-size: 14px;">We've spent countless hours refining every feature to make it as smooth and useful as it is today.</p>
+		<p style="font-size: 14px;">If our work has helped you, a <a href="https://wordpress.org/support/plugin/wb-custom-product-tabs-for-woocommerce/reviews/?rate=5#new-post" target="_blank" style="text-decoration:none; font-weight:bold; color:#09f309;">★★★★★</a> rating would mean a lot to us and inspire us to keep improving and adding more features.</p>
 	  
-		<p style="font-size: 16px; margin-top: 20px;">
-		<strong>Click <a href="https://wordpress.org/support/plugin/wb-custom-product-tabs-for-woocommerce/reviews/?rate=5#new-post" target="_blank" style="text-decoration:none; font-weight:bold; color:#09f309;">here</a> to rate us ⭐️⭐️⭐️⭐️⭐️,</strong> if you like the Custom Product Tabs plugin!
-		</p>
-
-		<p style="font-size: 14px; margin-top: 15px;">Thank you for your support!</p>
+		<p style="margin-top: 15px; font-size: 14px;">Thank you for your support!</p>
 	</div>
-
 
 </div>
