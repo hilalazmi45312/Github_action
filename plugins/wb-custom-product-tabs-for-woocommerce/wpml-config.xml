@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1">wb-custom-tabs</custom-type>
+    </custom-types>
+
+    <taxonomies>
+        <taxonomy translate="1">product_cat</taxonomy>
+        <taxonomy translate="1">product_tag</taxonomy>
+        <taxonomy translate="1">product_brand</taxonomy>
+    </taxonomies>
+
+    <custom-fields>
+        <custom-field action="copy">_wb_tab_products</custom-field>
+        <custom-field action="copy">_wb_tab_position</custom-field>
+        <custom-field action="translate">_wb_tab_nickname</custom-field>
+        <custom-field action="translate">_wb_tab_slug</custom-field>
+    </custom-fields>
+
+    <custom-fields-texts>
+        <key name="wb_custom_tabs">
+            <key name="*">
+                <key name="title" action="translate" style="line" label="Title" />
+                <key name="content" action="translate" style="visual" label="Description" />
+                <key name="tab_type" action="copy" />
+                <key name="position" action="copy" />
+                <key name="nickname" action="translate" style="line" label="Nickname" />
+                <key name="slug" action="translate" style="line" label="Nickname" />
+            </key>
+        </key>
+    </custom-fields-texts>
+</wpml-config>
