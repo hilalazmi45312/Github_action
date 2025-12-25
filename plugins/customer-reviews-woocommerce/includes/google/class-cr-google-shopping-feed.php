@@ -204,11 +204,11 @@ class CR_Google_Shopping_Feed {
 			$xml_writer->text('http://www.w3.org/2001/XMLSchema-instance');
 			$xml_writer->endAttribute();
 			$xml_writer->startAttribute('xsi:noNamespaceSchemaLocation');
-			$xml_writer->text('http://www.google.com/shopping/reviews/schema/product/2.3/product_reviews.xsd');
+			$xml_writer->text('http://www.google.com/shopping/reviews/schema/product/2.4/product_reviews.xsd');
 			$xml_writer->endAttribute();
 			// <version>
 			$xml_writer->startElement('version');
-			$xml_writer->text('2.3');
+			$xml_writer->text('2.4');
 			$xml_writer->endElement();
 			// <aggregator>
 			$xml_writer->startElement('aggregator');

@@ -15,7 +15,7 @@ class CR_Export_Reviews {
 	protected $admin_menu;
 	protected $tab;
 	protected $settings;
-	public static $file_write_buffer = 10;
+	public static $file_write_buffer = 25;
 
 	public function __construct( $admin_menu ) {
 		$this->menu_slug = 'cr-import-export';

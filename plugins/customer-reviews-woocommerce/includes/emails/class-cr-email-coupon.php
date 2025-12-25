@@ -15,7 +15,6 @@ class CR_Email_Coupon {
 	public $to;
 	public $heading;
 	public $subject;
-	public $template_html;
 	public $from;
 	public $from_name;
 	public $bcc;
@@ -31,7 +30,6 @@ class CR_Email_Coupon {
 		$this->id               = 'ivole_review_coupon';
 		$this->heading          = strval( get_option( 'ivole_email_heading_coupon', __( 'Thank You for Leaving a Review', 'customer-reviews-woocommerce' ) ) );
 		$this->subject          = strval( get_option( 'ivole_email_subject_coupon', '[{site_title}] ' . __( 'Discount Coupon for You', 'customer-reviews-woocommerce' ) ) );
-		$this->template_html    = Ivole_Email::plugin_path() . '/templates/email_coupon.php';
 		$this->from							= get_option( 'ivole_email_from', '' );
 		$this->from_name				= get_option( 'ivole_email_from_name', Ivole_Email::get_blogname() );
 		$this->replyto					= get_option( 'ivole_coupon_email_replyto', get_option( 'admin_email' ) );
@@ -302,12 +300,66 @@ class CR_Email_Coupon {
 	}
 
 	public function get_content() {
-		ob_start();
-		//$email_heading = $this->heading;
-		$def_body = Ivole_Email::$default_body_coupon;
-		$lang = $this->language;
-		include( $this->template_html );
-		return ob_get_clean();
+		$content = '';
+		if (
+			function_exists( 'qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage' )
+		) {
+			// qTranslate integration
+			$content = qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage(
+				wpautop(
+					wp_kses_post(
+						get_option(
+							'ivole_email_body_coupon',
+							Ivole_Email::$default_body_coupon
+						)
+					)
+				)
+			);
+		} else {
+			// WPML integration
+			if (
+				has_filter( 'wpml_translate_single_string' ) &&
+				! function_exists( 'pll_current_language' )
+			) {
+				$wpml_current_language = strtolower( $this->language );
+				$content = wpautop(
+					wp_kses_post(
+						apply_filters(
+							'wpml_translate_single_string',
+							get_option(
+								'ivole_email_body_coupon',
+								Ivole_Email::$default_body_coupon
+							),
+							'ivole',
+							'ivole_email_body_coupon',
+							$wpml_current_language
+						)
+					)
+				);
+			} elseif (
+				function_exists( 'pll_current_language' )
+			) {
+				$polylang_current_language = strtolower( $this->language );
+				$content = wpautop(
+					wp_kses_post(
+						pll_translate_string(
+							get_option( 'ivole_email_body_coupon', Ivole_Email::$default_body_coupon ),
+							$polylang_current_language
+						)
+					)
+				);
+			} else {
+				$content = wpautop(
+					wp_kses_post(
+						get_option(
+							'ivole_email_body_coupon',
+							Ivole_Email::$default_body_coupon
+						)
+					)
+				);
+			}
+		}
+		return $content;
 	}
 
 	public function replace_variables( $input ) {

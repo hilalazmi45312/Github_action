@@ -384,6 +384,9 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 
 			$remaining_reviews = $count_all_reviews - count( $reviews );
 
+			// get replies to reviews
+			$cr_replies = $this->get_review_replies( $reviews );
+
 			$cr_verified_label = get_option( 'ivole_verified_owner', '' );
 			if( $cr_verified_label ) {
 				if ( function_exists( 'pll__' ) ) {
@@ -418,6 +421,10 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 			$product_style = "background-color:" . $attributes['color_pr_bcrd'] . ";";
 			$stars_style = $attributes['color_stars'];
 			$max_chars = $attributes['max_chars'];
+			$cr_grid_hr_style = "border-color:" . $attributes['color_brdr'] . ";";
+			$cr_grid_hr_replies_style = "background-color:" . $attributes['color_brdr'] . ";";
+			$cr_grid_replies_pill_style = "border-color:" . $attributes['color_brdr'] . ";";
+			$cr_grid_replies_pill_style .= "background-color:" . $attributes['color_bcrd'] . ";";
 
 			$id = uniqid( 'cr-reviews-grid-' );
 
@@ -437,7 +444,7 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 
 			// display a summary bar
 			$summary_bar = '';
-			if ( $attributes['show_summary_bar'] || $attributes['add_review'] ) {
+			if ( $attributes['show_summary_bar'] || $attributes['add_review'] || $attributes['schema_markup'] ) {
 				$summary_bar = $this->show_summary_table( $args, $args_s );
 			}
 
@@ -508,6 +515,7 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 				'min_chars' => 0,
 				'show_summary_bar' => 'false',
 				'add_review' => 'false',
+				'schema_markup' => 'false',
 				'comment__not_in' => []
 			), $attributes, 'cusrev_reviews_grid' );
 
@@ -582,6 +590,7 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 			} else {
 				$attributes['add_review'] = false;
 			}
+			$attributes['schema_markup'] = $attributes['schema_markup'] === 'true' ? true : false;
 
 			return $this->render_reviews_grid( $attributes );
 		}
@@ -906,7 +915,7 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 			return $clauses;
 		}
 
-		private function show_summary_table( $args, $args_shop ){
+		private function show_summary_table( $args, $args_shop ) {
 			$all = $this->count_ratings( 0, $args, $args_shop );
 			$output = '';
 			if ($all > 0) {
@@ -1079,6 +1088,35 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 			} else {
 				$output .= '<div class="cr-count-filtered-reviews"></div>';
 			}
+
+			// add structured data
+			if (
+				$this->attributes['schema_markup'] &&
+				! $this->attributes['shop_reviews'] &&
+				$this->attributes['products'] &&
+				is_array( $this->attributes['products'] ) &&
+				1 === count( $this->attributes['products'] )
+			) {
+				$prod_temp = wc_get_product( $this->attributes['products'][0] );
+				if ( $prod_temp ) {
+					$prod_name = esc_html( strip_tags( $prod_temp->get_title() ) );
+					$schema = array(
+						'@context' => 'https://schema.org/',
+						'@type' => 'Product',
+						'name' => $prod_name,
+						'aggregateRating' => array(
+							'@type' => 'aggregateRating',
+							'ratingValue' => round( $average, 1 ),
+							'bestRating' => 5,
+							'ratingCount' => $all
+						)
+					);
+					$output .= '<script type="application/ld+json">';
+					$output .= wp_json_encode( $schema );
+					$output .= '</script>';
+				}
+			}
+
 			$output .= '</div>';
 
 			return $output;
@@ -1189,6 +1227,38 @@ if ( ! class_exists( 'CR_Reviews_Grid' ) ) {
 				}
 			}
 			return $avatar;
+		}
+
+		private function get_review_replies( array $reviews ) {
+			$replies_map = [];
+
+			// Collect parent IDs from input array
+			$parent_ids = wp_list_pluck( $reviews, 'comment_ID' );
+
+			if ( empty( $parent_ids ) ) {
+				return $replies_map;
+			}
+
+			// Fetch all replies in one query
+			$all_replies = get_comments( [
+				'parent__in' => $parent_ids,
+				'orderby'    => 'comment_date_gmt',
+				'order'      => 'ASC',
+				'number'     => 0,  // no limit
+			] );
+
+			// Build map: parent_id => array of replies
+			foreach ( $all_replies as $reply ) {
+				$pid = $reply->comment_parent;
+
+				if ( ! isset( $replies_map[ $pid ] ) ) {
+					$replies_map[ $pid ] = [];
+				}
+
+				$replies_map[ $pid ][] = $reply;
+			}
+
+			return $replies_map;
 		}
 
 	}

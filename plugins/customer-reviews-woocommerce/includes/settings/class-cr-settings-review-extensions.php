@@ -47,15 +47,44 @@ if ( ! class_exists( 'CR_Review_Extensions_Settings' ) ):
 		public function save() {
 			$this->init_settings();
 
-			//removing spaces
-			if( !empty( $_POST ) && isset( $_POST['ivole_verified_owner'] ) ) {
+			// removing spaces
+			if ( !empty( $_POST ) && isset( $_POST['ivole_verified_owner'] ) ) {
 				$_POST['ivole_verified_owner'] = trim($_POST['ivole_verified_owner']);
 			}
+
+			$review_extensions_option = array(
+				'schema_markup' => false
+			);
+
+			// review schema markup
+			if ( ! empty( $_POST ) && isset( $_POST['ivole_review_schema_markup'] ) ) {
+				if ( 1 == $_POST['ivole_review_schema_markup'] || 'yes' === $_POST['ivole_review_schema_markup'] ) {
+					$review_extensions_option['schema_markup'] = true;
+				}
+			}
+
+			update_option( 'ivole_review_extensions', $review_extensions_option, null );
 
 			WC_Admin_Settings::save_fields( $this->settings );
 		}
 
 		protected function init_settings() {
+			// default options
+			$review_schema_markup = 'no';
+			// read the options
+			$review_extensions_option = self::get_review_extension_options();
+			if (
+				$review_extensions_option &&
+				is_array( $review_extensions_option )
+			) {
+				if (
+					isset( $review_extensions_option['schema_markup'] ) &&
+					$review_extensions_option['schema_markup']
+				) {
+					$review_schema_markup = 'yes';
+				}
+			}
+			//
 			$display_setting_description = '<p>' .
 				__( 'The plugin uses the standard WooCommerce functionality to display reviews on products pages. By default, visual appearance of reviews is controlled by WooCommerce and your active WordPress theme. There is also an option to enable an enhanced visual style for display of reviews on product pages.', 'customer-reviews-woocommerce' ) .
 				'</p><p>' .
@@ -145,6 +174,15 @@ if ( ! class_exists( 'CR_Review_Extensions_Settings' ) ):
 				'type'     => 'checkbox'
 			);
 			$this->settings[] = array(
+				'title' => __( 'Review Schema Markup', 'customer-reviews-woocommerce' ),
+				'desc' => __( 'Add JSON-LD structured data for product reviews on WooCommerce product pages to help search engines better understand and display your review content. Enable this only if your theme, WooCommerce, or SEO plugins are not already generating review schema, to avoid duplicate markup.', 'customer-reviews-woocommerce' ),
+				'id' => 'ivole_review_schema_markup',
+				'default' => 'no',
+				'type' => 'checkbox',
+				'is_option' => false,
+				'value' => $review_schema_markup
+			);
+			$this->settings[] = array(
 				'title'   => __( 'Remove Plugin\'s Branding', 'customer-reviews-woocommerce' ),
 				'desc'    => __( 'Enable this option to remove plugin\'s branding ("Powered by Customer Reviews plugin") from the reviews summary bar. If you like our plugin and would like to support us, please disable this checkbox.', 'customer-reviews-woocommerce' ),
 				'id'      => 'ivole_reviews_nobranding',
@@ -184,6 +222,13 @@ if ( ! class_exists( 'CR_Review_Extensions_Settings' ) ):
 
 		public function is_this_tab() {
 			return $this->settings_menu->is_this_page() && ( $this->settings_menu->get_current_tab() === $this->tab );
+		}
+
+		public static function get_review_extension_options() {
+			$defaults = array(
+				'schema_markup' => false
+			);
+			return get_option( 'ivole_review_extensions', $defaults );
 		}
 
 	}
