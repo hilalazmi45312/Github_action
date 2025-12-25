@@ -163,9 +163,9 @@ if(!class_exists('YrmConfig')) {
 				define('YRM_LANG', 'yrm_lang');
 			}
 
-			$this->addDefine('EXPM_VERSION', 3.53);
-			$this->addDefine('YRM_VERSION_TEXT', '3.5.3');
-			$this->addDefine('EXPM_VERSION_PRO', 2.48);
+			$this->addDefine('EXPM_VERSION', 3.55);
+			$this->addDefine('YRM_VERSION_TEXT', '3.5.5');
+			$this->addDefine('EXPM_VERSION_PRO', 2.49);
 			$this->addDefine('YRM_ADMIN_POST_NONCE', 'YRM_ADMIN_POST_NONCE');
 
 			$this->addDefine('YRM_FREE_PKG', 1);

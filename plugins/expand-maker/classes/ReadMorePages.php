@@ -4,6 +4,12 @@ Class ReadMorePages {
 	public $functionsObj;
 	public $readMoreDataObj;
 
+	public $mainSavedObj;
+
+	public function setMainSavedObj($obj) {
+		$this->mainSavedObj = $obj;
+	}
+
 	public function __construct() {
 		
 	}
@@ -90,7 +96,7 @@ Class ReadMorePages {
 		$dataObj->setId($id);
 
 		$savedObj = $dataObj;
-        $typeObj->mainSavedObj = $savedObj;
+		$this->setMainSavedObj($savedObj);
 		$dataParams = $dataObj->getOptionsData();
 		$functions = $this->functionsObj;
 		require_once(YRM_VIEWS."readMoreAddNewButton.php");
