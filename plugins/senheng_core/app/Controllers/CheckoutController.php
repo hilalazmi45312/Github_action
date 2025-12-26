@@ -2056,13 +2056,17 @@ class CheckoutController
         $fee_total = floatval($cart->get_fee_total());
         $shipping_total = floatval($cart->get_shipping_total());
         $tax_total = floatval($cart->get_total_tax());
-        $discount_total = floatval($cart->get_discount_total());
+        // $discount_total = floatval($cart->get_discount_total());
 
         // If cart has deposits, use the deposit total + extras as the base
         if ($cart_data['has_deposits']) {
+            // Custom calculation → coupon NOT included
             $contents_total = $cart_data['deposit_total'] + $cart_data['extras_total'];
+            $discount_total = floatval($cart->get_discount_total());
         } else {
+            // WooCommerce calculation → coupon ALREADY included
             $contents_total = floatval($cart->get_cart_contents_total());
+            $discount_total = 0;
         }
 
         // Calculate expected total
