@@ -108,12 +108,20 @@ add_action('wp_footer', [WarrantyController::class, 'injectCartCheckboxScript'])
 
 //Store in Order Item Meta
 add_action('woocommerce_checkout_create_order_line_item', [WarrantyController::class, 'store_warranty_in_order_item'], 10, 4);
-add_filter('woocommerce_coupon_is_valid_for_fee', function ($valid, $fee, $coupon) {
-    if (strpos($fee->name, 'Product Warranty') !== false) {
-        return false; // Do NOT apply coupon to warranty fees
-    }
-    return $valid;
-}, 10, 3);
+
+add_action('woocommerce_after_calculate_totals', function ($cart) {
+    sh_logs('AFTER totals coupons: ' . print_r($cart->get_applied_coupons(), true));
+    sh_logs('AFTER discount total: ' . $cart->get_discount_total());
+}, 99);
+
+add_action('woocommerce_checkout_update_order_review', function () {
+    $cart = WC()->cart;
+    if (!$cart) return;
+
+    sh_logs('CHECKOUT coupons: ' . print_r($cart->get_applied_coupons(), true));
+    sh_logs('CHECKOUT discount total: ' . $cart->get_discount_total());
+});
+
 
 // Installment Controller
 // Ensure payment methods table has all required columns
