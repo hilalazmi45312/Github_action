@@ -1,0 +1,120 @@
+# Indonesian translation for WooCommerce Minimum Order Value
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Minimum Order Value\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-minimum-order\n"
+"POT-Creation-Date: 2025-10-03T19:00:26+00:00\n"
+"PO-Revision-Date: 2025-10-04 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Indonesian\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: wc-minimum-order\n"
+
+#. Plugin Name of the plugin
+#: wc-minimum-order.php
+msgid "WooCommerce Minimum Order Value"
+msgstr "WooCommerce Nilai Pesanan Minimum"
+
+#. Plugin URI of the plugin
+#: wc-minimum-order.php
+msgid "https://github.com/yourname/wc-minimum-order"
+msgstr "https://github.com/yourname/wc-minimum-order"
+
+#. Description of the plugin
+#: wc-minimum-order.php
+msgid "Set a minimum order value for WooCommerce checkout."
+msgstr "Tetapkan nilai pesanan minimum untuk checkout WooCommerce."
+
+#. Author of the plugin
+#: wc-minimum-order.php
+msgid "Your Name"
+msgstr "Nama Anda"
+
+#. Author URI of the plugin
+#: wc-minimum-order.php
+msgid "https://yourwebsite.com"
+msgstr "https://yourwebsite.com"
+
+#: wc-minimum-order.php:56
+msgid "Minimum Order Settings"
+msgstr "Pengaturan Pesanan Minimum"
+
+#: wc-minimum-order.php:58
+msgid "Configure minimum order requirements for your store."
+msgstr "Konfigurasi persyaratan pesanan minimum untuk toko Anda."
+
+#: wc-minimum-order.php:64
+msgid "Minimum Order Value"
+msgstr "Nilai Pesanan Minimum"
+
+#: wc-minimum-order.php:65
+msgid "Set a minimum order total required for checkout. Leave empty to disable."
+msgstr "Tetapkan total pesanan minimum yang diperlukan untuk checkout. Biarkan kosong untuk menonaktifkan."
+
+#: wc-minimum-order.php:85
+msgid "Customer Messages"
+msgstr "Pesan pelanggan"
+
+#: wc-minimum-order.php:87
+msgid "Customize the messages shown to customers. Use {minimum_amount} and {remaining_amount} as placeholders."
+msgstr "Sesuaikan pesan yang ditampilkan kepada pelanggan. Gunakan {minimum_amount} dan {remaining_amount} sebagai placeholder."
+
+#: wc-minimum-order.php:93
+msgid "Cart Page Message"
+msgstr "Pesan halaman keranjang"
+
+#: wc-minimum-order.php:94
+msgid "Message displayed on the cart page when the minimum order value is not met."
+msgstr "Pesan yang ditampilkan di halaman keranjang ketika nilai pesanan minimum tidak terpenuhi."
+
+#: wc-minimum-order.php:96 wc-minimum-order.php:324 wc-minimum-order.php:375
+msgid "You need {remaining_amount} more to reach the minimum order value of {minimum_amount}."
+msgstr "Anda membutuhkan {remaining_amount} lagi untuk mencapai nilai pesanan minimum sebesar {minimum_amount}."
+
+#: wc-minimum-order.php:105
+msgid "Checkout Error Message"
+msgstr "Pesan kesalahan checkout"
+
+#: wc-minimum-order.php:106 wc-minimum-order.php:264 wc-minimum-order.php:382
+msgid "Error message displayed during checkout when the minimum order value is not met."
+msgstr "Pesan kesalahan yang ditampilkan saat checkout ketika nilai pesanan minimum tidak terpenuhi."
+
+#: wc-minimum-order.php:123
+msgid "Product & Category Exclusions"
+msgstr "Pengecualian produk & kategori"
+
+#: wc-minimum-order.php:125
+msgid "Exclude specific products or categories from the minimum order calculation. Excluded items will not count toward the minimum."
+msgstr "Kecualikan produk atau kategori tertentu dari perhitungan pesanan minimum. Item yang dikecualikan tidak akan dihitung untuk minimum."
+
+#: wc-minimum-order.php:131
+msgid "Exclude Products"
+msgstr "Kecualikan produk"
+
+#: wc-minimum-order.php:132
+msgid "Select products to exclude from minimum order calculation."
+msgstr "Pilih produk yang akan dikecualikan dari perhitungan pesanan minimum."
+
+#: wc-minimum-order.php:141
+msgid "Search and select products..."
+msgstr "Cari dan pilih produk..."
+
+#: wc-minimum-order.php:147
+msgid "Exclude Categories"
+msgstr "Kecualikan kategori"
+
+#: wc-minimum-order.php:148
+msgid "Select categories to exclude from minimum order calculation. All products in these categories will be excluded."
+msgstr "Pilih kategori yang akan dikecualikan dari perhitungan pesanan minimum. Semua produk dalam kategori ini akan dikecualikan."
+
+#: wc-minimum-order.php:157
+msgid "Search and select categories..."
+msgstr "Cari dan pilih kategori..."
+
+#: wc-minimum-order.php:339
+msgid "Notice:"
+msgstr "Pemberitahuan:"
