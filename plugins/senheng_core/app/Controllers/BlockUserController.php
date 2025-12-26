@@ -1,49 +1,87 @@
 <?php
 
-/**
- * Add block checkbox to user profile
- */
-function culb_add_block_field($user) {
-    if (!current_user_can('edit_users')) {
-        return;
-    }
-    ?>
-    <h3>Login Restrictions</h3>
-    <table class="form-table">
-        <tr>
-            <th><label for="culb_block_login">Block Login</label></th>
-            <td>
-                <input type="checkbox" name="culb_block_login" id="culb_block_login" value="1"
-                    <?php checked(get_user_meta($user->ID, 'culb_block_login', true), '1'); ?> />
-                <span class="description">Prevent this user from logging in (custom login flows).</span>
-            </td>
-        </tr>
-    </table>
-    <?php
+if (!defined('ABSPATH')) {
+    exit;
 }
-add_action('show_user_profile', 'culb_add_block_field');
-add_action('edit_user_profile', 'culb_add_block_field');
 
 /**
- * Save block flag
+ * Helper: Check if user is blocked
  */
-function culb_save_block_field($user_id) {
-    if (!current_user_can('edit_users')) {
-        return;
-    }
-
-    if (isset($_POST['culb_block_login'])) {
-        update_user_meta($user_id, 'culb_block_login', '1');
-    } else {
-        delete_user_meta($user_id, 'culb_block_login');
-    }
-}
-add_action('personal_options_update', 'culb_save_block_field');
-add_action('edit_user_profile_update', 'culb_save_block_field');
-
-/**
- * Helper function to check if user login is blocked
- */
-function culb_is_user_blocked($user_id) {
+function culb_is_user_blocked($user_id)
+{
     return (bool) get_user_meta($user_id, 'culb_block_login', true);
+}
+
+/**
+ * Admin menu page
+ */
+add_action('admin_menu', function () {
+    add_users_page(
+        'Login Blocker',
+        'Login Blocker',
+        'manage_users',
+        'culb-login-blocker',
+        'culb_render_admin_page'
+    );
+});
+
+/**
+ * Render admin page
+ */
+function culb_render_admin_page()
+{
+    if (!current_user_can('manage_users')) {
+        return;
+    }
+
+    // Handle form submission
+    if (isset($_POST['culb_nonce']) && wp_verify_nonce($_POST['culb_nonce'], 'culb_save')) {
+        $blocked_users = isset($_POST['blocked_users']) ? array_map('intval', $_POST['blocked_users']) : [];
+
+        // Clear existing blocks
+        $users = get_users(['fields' => ['ID']]);
+        foreach ($users as $user) {
+            delete_user_meta($user->ID, 'culb_block_login');
+        }
+
+        // Apply new blocks
+        foreach ($blocked_users as $user_id) {
+            update_user_meta($user_id, 'culb_block_login', '1');
+        }
+
+        echo '<div class="updated notice"><p>Login block list updated.</p></div>';
+    }
+
+    $users = get_users();
+?>
+    <div class="wrap">
+        <h1>Login Blocker</h1>
+        <p>Select users who should be <strong>blocked from logging in</strong>.</p>
+
+        <form method="post">
+            <?php wp_nonce_field('culb_save', 'culb_nonce'); ?>
+
+            <table class="form-table">
+                <tr>
+                    <th>Select Users</th>
+                    <td>
+                        <select name="blocked_users[]" multiple size="12" style="width: 350px;">
+                            <?php foreach ($users as $user): ?>
+                                <option value="<?php echo esc_attr($user->ID); ?>"
+                                    <?php selected(culb_is_user_blocked($user->ID)); ?>>
+                                    <?php echo esc_html($user->display_name . ' (' . $user->user_email . ')'); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <p class="description">
+                            Hold <strong>Ctrl / Cmd</strong> to select multiple users.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <?php submit_button('Save Blocked Users'); ?>
+        </form>
+    </div>
+<?php
 }
