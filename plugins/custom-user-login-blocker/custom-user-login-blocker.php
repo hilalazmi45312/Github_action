@@ -261,13 +261,16 @@ add_action('wp_ajax_culb_update_block', function () {
     foreach ($users as $user_id) {
         if ($mode === 'block') {
             update_user_meta($user_id, 'culb_block_login', '1');
+
             if ($until) {
                 update_user_meta($user_id, 'culb_block_until', strtotime($until));
             }
-            wp_destroy_user_sessions($user_id);
-        } else {
-            delete_user_meta($user_id, 'culb_block_login');
-            delete_user_meta($user_id, 'culb_block_until');
+
+            // Force logout safely (VIP compatible)
+            if (class_exists('WP_Session_Tokens')) {
+                $manager = WP_Session_Tokens::get_instance($user_id);
+                $manager->destroy_all();
+            }
         }
 
         culb_log_action($user_id, $mode);
