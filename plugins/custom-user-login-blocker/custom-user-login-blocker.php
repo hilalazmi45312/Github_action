@@ -2,8 +2,8 @@
 
 /**
  * Plugin Name: Custom User Login Blocker (AJAX)
- * Description: AJAX-based user login blocker with role blocking, audit log, and temp block.
- * Version: 2.0.0
+ * Description: AJAX-based user login blocker with role blocking, audit log, temp block, and force logout.
+ * Version: 2.1.0
  */
 
 if (!defined('ABSPATH')) exit;
@@ -31,14 +31,14 @@ function culb_is_user_blocked($user_id)
 
 /**
  * =========================
- * Admin Menu
+ * Admin Menu (VIP safe)
  * =========================
  */
 add_action('admin_menu', function () {
     add_users_page(
         'Login Blocker',
         'Login Blocker',
-        'manage_options',
+        'list_users',
         'culb-login-blocker',
         'culb_render_page'
     );
@@ -53,8 +53,21 @@ add_action('admin_enqueue_scripts', function ($hook) {
     if ($hook !== 'users_page_culb-login-blocker') return;
 
     wp_enqueue_script('jquery');
-    wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js', ['jquery']);
-    wp_enqueue_style('select2-css', 'https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css');
+
+    wp_enqueue_script(
+        'select2',
+        'https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js',
+        ['jquery'],
+        '4.1.0',
+        true
+    );
+
+    wp_enqueue_style(
+        'select2-css',
+        'https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css',
+        [],
+        '4.1.0'
+    );
 
     wp_enqueue_script(
         'culb-admin',
@@ -77,6 +90,9 @@ add_action('admin_enqueue_scripts', function ($hook) {
  */
 function culb_render_page()
 {
+    if (!current_user_can('list_users')) {
+        wp_die(__('You do not have permission.'));
+    }
 ?>
     <div class="wrap">
         <h1>Login Blocker</h1>
@@ -88,7 +104,9 @@ function culb_render_page()
         <select id="culb-role">
             <option value="">-- Select role --</option>
             <?php foreach (wp_roles()->roles as $role => $data): ?>
-                <option value="<?= esc_attr($role) ?>"><?= esc_html($data['name']) ?></option>
+                <option value="<?php echo esc_attr($role); ?>">
+                    <?php echo esc_html($data['name']); ?>
+                </option>
             <?php endforeach; ?>
         </select>
 
@@ -101,19 +119,36 @@ function culb_render_page()
         </p>
 
         <div id="culb-result"></div>
+
+        <hr>
+
+        <h2>Blocked Users</h2>
+        <table class="widefat striped" id="culb-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Blocked Until</th>
+                    <th>Blocked By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 <?php
 }
 
 /**
  * =========================
- * AJAX: Get users (Select2)
+ * AJAX: Search users (Select2)
  * =========================
  */
 add_action('wp_ajax_culb_search_users', function () {
     check_ajax_referer('culb_ajax');
 
-    $term = sanitize_text_field($_GET['q']);
+    $term = sanitize_text_field($_GET['q'] ?? '');
+
     $users = get_users([
         'search' => "*{$term}*",
         'number' => 20,
@@ -123,12 +158,48 @@ add_action('wp_ajax_culb_search_users', function () {
     $results = [];
     foreach ($users as $user) {
         $results[] = [
-            'id' => $user->ID,
+            'id'   => $user->ID,
             'text' => "{$user->display_name} ({$user->user_email})"
         ];
     }
 
     wp_send_json($results);
+});
+
+/**
+ * =========================
+ * AJAX: Get blocked users
+ * =========================
+ */
+add_action('wp_ajax_culb_get_blocked_users', function () {
+    check_ajax_referer('culb_ajax');
+
+    $users = get_users([
+        'meta_key'   => 'culb_block_login',
+        'meta_value' => '1'
+    ]);
+
+    $data = [];
+
+    foreach ($users as $user) {
+        $until = get_user_meta($user->ID, 'culb_block_until', true);
+        $log   = get_user_meta($user->ID, 'culb_audit_log', true);
+        $last  = is_array($log) ? end($log) : null;
+
+        $blocked_by = $last && isset($last['by'])
+            ? get_userdata($last['by'])->display_name
+            : '-';
+
+        $data[] = [
+            'id'    => $user->ID,
+            'name'  => $user->display_name,
+            'email' => $user->user_email,
+            'until' => $until ? date('Y-m-d H:i', $until) : 'Permanent',
+            'by'    => $blocked_by
+        ];
+    }
+
+    wp_send_json_success($data);
 });
 
 /**
@@ -139,10 +210,10 @@ add_action('wp_ajax_culb_search_users', function () {
 add_action('wp_ajax_culb_update_block', function () {
     check_ajax_referer('culb_ajax');
 
-    $action_type = sanitize_text_field($_POST['mode']);
-    $users       = array_map('intval', $_POST['users'] ?? []);
-    $role        = sanitize_text_field($_POST['role'] ?? '');
-    $until       = sanitize_text_field($_POST['until'] ?? '');
+    $mode  = sanitize_text_field($_POST['mode']);
+    $users = array_map('intval', $_POST['users'] ?? []);
+    $role  = sanitize_text_field($_POST['role'] ?? '');
+    $until = sanitize_text_field($_POST['until'] ?? '');
 
     if ($role) {
         $users = get_users(['role' => $role, 'fields' => ['ID']]);
@@ -150,8 +221,7 @@ add_action('wp_ajax_culb_update_block', function () {
     }
 
     foreach ($users as $user_id) {
-
-        if ($action_type === 'block') {
+        if ($mode === 'block') {
             update_user_meta($user_id, 'culb_block_login', '1');
             if ($until) {
                 update_user_meta($user_id, 'culb_block_until', strtotime($until));
@@ -162,7 +232,7 @@ add_action('wp_ajax_culb_update_block', function () {
             delete_user_meta($user_id, 'culb_block_until');
         }
 
-        culb_log_action($user_id, $action_type);
+        culb_log_action($user_id, $mode);
     }
 
     wp_send_json_success('Updated successfully');
@@ -175,7 +245,8 @@ add_action('wp_ajax_culb_update_block', function () {
  */
 function culb_log_action($user_id, $action)
 {
-    $log = get_user_meta($user_id, 'culb_audit_log', true) ?: [];
+    $log = get_user_meta($user_id, 'culb_audit_log', true);
+    if (!is_array($log)) $log = [];
 
     $log[] = [
         'action' => $action,
