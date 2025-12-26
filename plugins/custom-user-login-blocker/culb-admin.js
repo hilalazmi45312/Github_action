@@ -16,8 +16,11 @@ jQuery(function ($) {
                 };
             },
             processResults: function (data) {
-                return { results: data };
-            }
+                return {
+                    results: data.data
+                };
+            },
+            cache: true
         }
     });
 

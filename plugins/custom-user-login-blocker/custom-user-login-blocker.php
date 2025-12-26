@@ -163,7 +163,7 @@ add_action('wp_ajax_culb_search_users', function () {
         ];
     }
 
-    wp_send_json($results);
+    wp_send_json_success($results);
 });
 
 /**
