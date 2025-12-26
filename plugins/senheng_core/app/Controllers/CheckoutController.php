@@ -225,10 +225,10 @@ class CheckoutController
         self::init_deposit_hooks();
 
         // Filter cart total on checkout to ensure fees are included
-        add_filter('woocommerce_cart_get_total', [self::class, 'filter_checkout_cart_total'], PHP_INT_MAX, 1);
+        // add_filter('woocommerce_cart_get_total', [self::class, 'filter_checkout_cart_total'], PHP_INT_MAX, 1);
 
         // self::ensure_checkout_totals_include_extras();
-        add_action('woocommerce_after_calculate_totals', [self::class, 'ensure_checkout_totals_include_extras'], PHP_INT_MAX);
+        // add_action('woocommerce_after_calculate_totals', [self::class, 'ensure_checkout_totals_include_extras'], PHP_INT_MAX);
         
         // Render a custom shop table row after cart contents on checkout
         add_action('woocommerce_review_order_after_cart_contents', [self::class, 'render_custom_checkout_cart_table'], 10);
