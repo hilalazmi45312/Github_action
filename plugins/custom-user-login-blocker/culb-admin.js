@@ -1,35 +1,10 @@
 jQuery(function ($) {
 
-    // Select2 user search
-    $('#culb-users').select2({
-        placeholder: 'Search users...',
-        minimumInputLength: 1,
-        ajax: {
-            url: culbAjax.ajaxurl,
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    action: 'culb_search_users',
-                    _ajax_nonce: culbAjax.nonce,
-                    q: params.term
-                };
-            },
-            processResults: function (data) {
-                return {
-                    results: data.data
-                };
-            },
-            cache: true
-        }
-    });
-
     function loadBlockedUsers() {
         $.post(culbAjax.ajaxurl, {
             action: 'culb_get_blocked_users',
             _ajax_nonce: culbAjax.nonce
         }, function (res) {
-
             if (!res.success) return;
 
             let rows = '';
@@ -40,11 +15,6 @@ jQuery(function ($) {
                         <td>${u.email}</td>
                         <td>${u.until}</td>
                         <td>${u.by}</td>
-                        <td>
-                            <button class="button culb-unblock" data-id="${u.id}">
-                                Unblock
-                            </button>
-                        </td>
                     </tr>
                 `;
             });
@@ -53,25 +23,17 @@ jQuery(function ($) {
         });
     }
 
-    function update(mode, users = null) {
+    $(document).on('click', '.culb-toggle', function () {
+        const btn = $(this);
+
         $.post(culbAjax.ajaxurl, {
             action: 'culb_update_block',
             _ajax_nonce: culbAjax.nonce,
-            mode: mode,
-            users: users ?? $('#culb-users').val(),
-            role: $('#culb-role').val(),
-            until: $('#culb-until').val()
-        }, function (res) {
-            $('#culb-result').html('<div class="updated notice"><p>' + res.data + '</p></div>');
-            loadBlockedUsers();
+            mode: btn.data('mode'),
+            users: [btn.data('id')]
+        }, function () {
+            location.reload();
         });
-    }
-
-    $('#culb-block').on('click', () => update('block'));
-    $('#culb-unblock').on('click', () => update('unblock'));
-
-    $(document).on('click', '.culb-unblock', function () {
-        update('unblock', [$(this).data('id')]);
     });
 
     loadBlockedUsers();

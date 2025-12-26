@@ -93,32 +93,71 @@ function culb_render_page()
     if (!current_user_can('list_users')) {
         wp_die(__('You do not have permission.'));
     }
+
+    $search = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : '';
+
+    $users = [];
+    if ($search) {
+        $users = get_users([
+            'search' => "*{$search}*",
+            'search_columns' => ['user_login', 'user_email', 'display_name'],
+            'number' => 50
+        ]);
+    }
 ?>
     <div class="wrap">
         <h1>Login Blocker</h1>
 
-        <h3>Block Individual Users</h3>
-        <select id="culb-users" multiple style="width:400px"></select>
+        <form method="get">
+            <input type="hidden" name="page" value="culb-login-blocker">
 
-        <h3>Block by Role</h3>
-        <select id="culb-role">
-            <option value="">-- Select role --</option>
-            <?php foreach (wp_roles()->roles as $role => $data): ?>
-                <option value="<?php echo esc_attr($role); ?>">
-                    <?php echo esc_html($data['name']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <p>
+                <input type="text"
+                    name="s"
+                    value="<?php echo esc_attr($search); ?>"
+                    placeholder="Search user by name or email"
+                    style="width:300px">
+                <button class="button">Search</button>
+            </p>
+        </form>
 
-        <h3>Temporary Block</h3>
-        <input type="datetime-local" id="culb-until">
-
-        <p>
-            <button class="button button-primary" id="culb-block">Block</button>
-            <button class="button" id="culb-unblock">Unblock</button>
-        </p>
-
-        <div id="culb-result"></div>
+        <?php if ($search): ?>
+            <table class="widefat striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($users): foreach ($users as $user): ?>
+                            <tr>
+                                <td><?php echo esc_html($user->display_name); ?></td>
+                                <td><?php echo esc_html($user->user_email); ?></td>
+                                <td>
+                                    <?php echo culb_is_user_blocked($user->ID)
+                                        ? '<strong style="color:red">Blocked</strong>'
+                                        : '<span style="color:green">Active</span>'; ?>
+                                </td>
+                                <td>
+                                    <button class="button culb-toggle"
+                                        data-id="<?php echo $user->ID; ?>"
+                                        data-mode="<?php echo culb_is_user_blocked($user->ID) ? 'unblock' : 'block'; ?>">
+                                        <?php echo culb_is_user_blocked($user->ID) ? 'Unblock' : 'Block'; ?>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach;
+                    else: ?>
+                        <tr>
+                            <td colspan="4">No users found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
 
         <hr>
 
@@ -130,7 +169,6 @@ function culb_render_page()
                     <th>Email</th>
                     <th>Blocked Until</th>
                     <th>Blocked By</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
