@@ -122,6 +122,26 @@ add_action('woocommerce_checkout_update_order_review', function () {
     sh_logs('CHECKOUT discount total: ' . $cart->get_discount_total());
 });
 
+add_action('woocommerce_before_checkout_process', function () {
+    $cart = WC()->cart;
+    sh_logs('BEFORE PROCESS coupons: ' . print_r($cart->get_applied_coupons(), true));
+    sh_logs('BEFORE PROCESS discount total: ' . $cart->get_discount_total());
+});
+
+add_action('woocommerce_after_calculate_totals', function ($cart) {
+    if (is_admin() && !defined('DOING_AJAX')) return;
+
+    $seen = [];
+
+    foreach ($cart->get_applied_coupons() as $code) {
+        if (isset($seen[$code])) {
+            $cart->remove_coupon($code);
+        } else {
+            $seen[$code] = true;
+        }
+    }
+}, 99);
+
 
 // Installment Controller
 // Ensure payment methods table has all required columns
