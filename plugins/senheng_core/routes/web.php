@@ -108,6 +108,12 @@ add_action('wp_footer', [WarrantyController::class, 'injectCartCheckboxScript'])
 
 //Store in Order Item Meta
 add_action('woocommerce_checkout_create_order_line_item', [WarrantyController::class, 'store_warranty_in_order_item'], 10, 4);
+add_filter('woocommerce_coupon_is_valid_for_fee', function ($valid, $fee, $coupon) {
+    if (strpos($fee->name, 'Product Warranty') !== false) {
+        return false; // Do NOT apply coupon to warranty fees
+    }
+    return $valid;
+}, 10, 3);
 
 // Installment Controller
 // Ensure payment methods table has all required columns
