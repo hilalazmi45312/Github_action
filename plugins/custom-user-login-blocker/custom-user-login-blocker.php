@@ -38,7 +38,7 @@ add_action('admin_menu', function () {
     add_users_page(
         'Login Blocker',
         'Login Blocker',
-        'manage_users',
+        'manage_options',
         'culb-login-blocker',
         'culb_render_page'
     );
