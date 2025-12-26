@@ -93,6 +93,10 @@ class WarrantyController
                 $cart->add_fee($label, $fee_total, $taxable);
             }
         }
+
+        WC_iPay88::add_debug_log('applied coupons: ' . print_r($cart->get_applied_coupons(), true));
+        WC_iPay88::add_debug_log('discount total: ' . $cart->get_discount_total());
+        WC_iPay88::add_debug_log('discount tax: ' . $cart->get_discount_tax());
     }
 
 
