@@ -55,6 +55,10 @@ jQuery(document).ready(function ($) {
             ? 'viber://forward?text=' + encodeURIComponent(shareMessage + ' ' + shareUrl)
             : 'viber://forward?text=' + encodeURIComponent(shareUrl);
 
+        var whatsappUrl = hasAmbassador
+            ? 'https://wa.me/?text=' + encodeURIComponent(shareMessage + ' ' + shareUrl)
+            : 'https://wa.me/?text=' + encodeURIComponent(shareUrl);
+
         var $modal = $('#sh-share-modal');
         var $overlay = $('#sh-share-overlay');
 
@@ -63,6 +67,7 @@ jQuery(document).ready(function ($) {
         $modal.find('.sh-share-facebook').attr('href', facebookUrl);
         $modal.find('.sh-share-twitter').attr('href', twitterUrl);
         $modal.find('.sh-share-viber').attr('href', viberUrl);
+        $modal.find('.sh-share-whatsapp').attr('href', whatsappUrl);
 
         // Copy action with clipboard fallback and prevent default navigation
         $modal.find('.sh-copy-link').off('click').on('click', function (e) {
