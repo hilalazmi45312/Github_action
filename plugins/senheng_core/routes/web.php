@@ -34,19 +34,16 @@ add_action('wp_ajax_social_login', [LoginController::class, 'socialLogin']);
 add_action('wp_ajax_nopriv_social_login', [LoginController::class, 'socialLogin']);
 add_action('wp_footer', [LoginController::class, 'enqueueAssetsPopup']);
 
-
-//Impact Controller routes and actions
+//Impact Controller routes and actions (Can be Edit by Elementor)
 add_action('wp_enqueue_scripts', [ImpactController::class, 'enqueueAssets']);
+add_action('init', [ImpactController::class, 'registerAffiliatePostType']);
+add_filter('elementor/cpt_support', [ImpactController::class, 'enableElementorSupport']);
+add_filter('show_admin_bar', [ImpactController::class, 'hideAdminBarForElementor']);
+add_action('wp_head', [ImpactController::class, 'hideAdminBarStyles']);
 add_action('init', [ImpactController::class, 'addEndpoint']);
 add_filter('woocommerce_account_menu_items', [ImpactController::class, 'addMenuItem']);
-add_action('woocommerce_account_affiliate-signup_endpoint', [ImpactController::class, 'renderSignUpAffiliatePage']);
-add_action('woocommerce_account_affiliate-overview_endpoint', [ImpactController::class, 'renderOverview']);
-add_action('woocommerce_account_affiliate-commission-structure_endpoint', [ImpactController::class, 'renderCommissionStructure']);
-add_action('woocommerce_account_affiliate-learning-support_endpoint', [ImpactController::class, 'renderLearningSupport']);
-add_action('woocommerce_account_affiliate-manage-earning_endpoint', [ImpactController::class, 'renderManageEarnings']);
-add_action('woocommerce_account_affiliate-faq_endpoint', [ImpactController::class, 'renderFAQ']);
-add_action('woocommerce_account_affiliate-terms-conditions_endpoint', [ImpactController::class, 'renderTermsConditions']);
-add_action('woocommerce_account_affiliate-return-refund_endpoint', [ImpactController::class, 'renderReturnRefund']);
+add_action('wp', [ImpactController::class, 'registerDynamicEndpointActions']);
+add_action('wp_insert_post', [ImpactController::class, 'setElementorCanvasTemplate'], 10, 3);
 
 add_action('wp_ajax_impact_affiliate_signup', [ImpactController::class, 'impact_affiliate_signup']);
 add_action('wp_ajax_nopriv_impact_affiliate_signup', [ImpactController::class, 'impact_affiliate_signup']);
@@ -192,6 +189,8 @@ add_action('init', [WoodmartRatingController::class, 'init']);
 // Elementor Widgets Registration
 add_action('init', [ElementorWidgetsController::class, 'init']);
 
+
+
 // WooCommerce Variations Mobile Fixes Controller (removed Insider Product ID field)
 
 // Payment Gateway Controller
@@ -268,3 +267,9 @@ add_action('wp_footer', [FlixmediaController::class, 'flixmedia_dynamic_script']
 add_action('wp_footer', [OneSyncController::class, 'one_sync_dynamic_script']);
 
 add_action('init', [LimitedTimeOfferController::class, 'init']);
+
+// Product Sync Controller (bidirectional sync with remote WooCommerce site)
+add_action('init', [ProductSyncController::class, 'init']);
+
+// Coupon Controller (deposit/full payment restrictions)
+add_action('init', [CouponController::class, 'init']);
