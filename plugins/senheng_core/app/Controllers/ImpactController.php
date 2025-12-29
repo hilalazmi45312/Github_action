@@ -4,6 +4,310 @@
 
 class ImpactController
 {
+    /**
+     * Default affiliate templates that will be seeded on activation
+     */
+    const DEFAULT_TEMPLATES = [
+        'affiliate-overview' => [
+            'title' => 'Overview',
+            'fallback' => 'overview.php',
+            'order' => 1,
+        ],
+        'affiliate-signup' => [
+            'title' => 'Sign Up',
+            'fallback' => 'index.php',
+            'order' => 2,
+            'conditional' => 'signup', // Special handling for signup visibility
+        ],
+        'affiliate-commission-structure' => [
+            'title' => 'Commission Structure',
+            'fallback' => 'commission.php',
+            'order' => 3,
+        ],
+        'affiliate-learning-support' => [
+            'title' => 'Learning & Support',
+            'fallback' => 'learning-support.php',
+            'order' => 4,
+        ],
+        'affiliate-manage-earning' => [
+            'title' => 'Manage Earnings',
+            'fallback' => null,
+            'order' => 5,
+        ],
+        'affiliate-faq' => [
+            'title' => 'FAQ',
+            'fallback' => 'faq.php',
+            'order' => 6,
+        ],
+        'affiliate-terms-conditions' => [
+            'title' => 'Terms & Conditions',
+            'fallback' => 'terms-conditions.php',
+            'order' => 7,
+        ],
+        'affiliate-return-refund' => [
+            'title' => 'Return & Refund',
+            'fallback' => 'return-refund.php',
+            'order' => 8,
+        ],
+    ];
+
+    /**
+     * Register the affiliate_template custom post type
+     */
+    public static function registerAffiliatePostType()
+    {
+        register_post_type('affiliate_template', [
+            'labels' => [
+                'name' => __('Affiliate Pages', 'mytext'),
+                'singular_name' => __('Affiliate Page', 'mytext'),
+                'add_new' => __('Add New', 'mytext'),
+                'add_new_item' => __('Add New Affiliate Page', 'mytext'),
+                'edit_item' => __('Edit Affiliate Page', 'mytext'),
+                'new_item' => __('New Affiliate Page', 'mytext'),
+                'view_item' => __('View Affiliate Page', 'mytext'),
+                'search_items' => __('Search Affiliate Pages', 'mytext'),
+                'not_found' => __('No affiliate pages found', 'mytext'),
+                'not_found_in_trash' => __('No affiliate pages found in trash', 'mytext'),
+                'menu_name' => __('Affiliate Pages', 'mytext'),
+            ],
+            'public' => true, // Required for Elementor to work
+            'publicly_queryable' => true, // Required for Elementor preview
+            'exclude_from_search' => true, // Hide from search results
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_rest' => true, // Gutenberg/REST API support
+            'menu_position' => 30,
+            'menu_icon' => 'dashicons-groups',
+            'supports' => ['title', 'editor', 'elementor'], // Add elementor support
+            'capability_type' => 'post',
+            'has_archive' => false,
+            'rewrite' => false,
+        ]);
+
+        // Explicitly add Elementor support for this post type
+        self::addElementorSupport();
+
+        // Seed default templates if not already created
+        self::seedDefaultTemplates();
+    }
+
+    /**
+     * Explicitly add Elementor support for affiliate_template
+     */
+    public static function addElementorSupport()
+    {
+        // Get Elementor's supported post types from options
+        $cpt_support = get_option('elementor_cpt_support', ['page', 'post']);
+        
+        // Add our post type if not already included
+        if (!in_array('affiliate_template', $cpt_support)) {
+            $cpt_support[] = 'affiliate_template';
+            update_option('elementor_cpt_support', $cpt_support);
+        }
+    }
+
+    /**
+     * Enable Elementor support for affiliate_template post type via filter
+     */
+    public static function enableElementorSupport($post_types)
+    {
+        if (!in_array('affiliate_template', $post_types)) {
+            $post_types[] = 'affiliate_template';
+        }
+        return $post_types;
+    }
+
+    /**
+     * Seed default affiliate templates if they don't exist
+     */
+    public static function seedDefaultTemplates()
+    {
+        // Only run once per request
+        static $seeded = false;
+        if ($seeded) {
+            return;
+        }
+        $seeded = true;
+
+        // Check if we already have templates
+        $existing = get_posts([
+            'post_type' => 'affiliate_template',
+            'posts_per_page' => 1,
+            'post_status' => 'any',
+        ]);
+
+        if (!empty($existing)) {
+            return; // Templates already exist
+        }
+
+        foreach (self::DEFAULT_TEMPLATES as $slug => $config) {
+            $post_id = wp_insert_post([
+                'post_title' => $config['title'],
+                'post_name' => $slug,
+                'post_type' => 'affiliate_template',
+                'post_status' => 'publish',
+                'menu_order' => $config['order'],
+                'meta_input' => [
+                    '_affiliate_fallback_view' => $config['fallback'] ?? '',
+                    '_affiliate_conditional' => $config['conditional'] ?? '',
+                    '_wp_page_template' => 'elementor_canvas', // Use Elementor Canvas template
+                ],
+            ]);
+
+            // Set Elementor canvas template
+            if ($post_id && !is_wp_error($post_id)) {
+                update_post_meta($post_id, '_elementor_template_type', 'wp-page');
+                update_post_meta($post_id, '_elementor_edit_mode', 'builder');
+            }
+        }
+
+        // Flush rewrite rules after seeding
+        flush_rewrite_rules();
+    }
+
+    /**
+     * Set Elementor Canvas template for newly created affiliate templates
+     */
+    public static function setElementorCanvasTemplate($post_id, $post, $update)
+    {
+        // Only for affiliate_template post type
+        if ($post->post_type !== 'affiliate_template') {
+            return;
+        }
+
+        // Only for new posts (not updates)
+        if ($update) {
+            return;
+        }
+
+        // Set Elementor Canvas template
+        update_post_meta($post_id, '_wp_page_template', 'elementor_canvas');
+        update_post_meta($post_id, '_elementor_template_type', 'wp-page');
+        update_post_meta($post_id, '_elementor_edit_mode', 'builder');
+    }
+
+    /**
+     * Get all affiliate templates
+     */
+    public static function getAffiliateTemplates()
+    {
+        static $templates = null;
+        
+        if ($templates !== null) {
+            return $templates;
+        }
+
+        $templates = get_posts([
+            'post_type' => 'affiliate_template',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+        ]);
+
+        return $templates;
+    }
+
+    /**
+     * Render Elementor content for a template, with fallback to PHP view
+     * Wraps content with my-account compatible structure
+     */
+    public static function renderTemplate($slug)
+    {
+        $template = get_page_by_path($slug, OBJECT, 'affiliate_template');
+        
+        if ($template && class_exists('\Elementor\Plugin')) {
+            $elementor = \Elementor\Plugin::instance();
+            $content = $elementor->frontend->get_builder_content_for_display($template->ID);
+            
+            if (!empty($content)) {
+                // Wrap Elementor content with my-account compatible structure
+                echo '<div class="profile-right-content affiliate-elementor-content">';
+                echo '<div class="setting-user-profile">';
+                echo $content;
+                echo '</div>';
+                echo '</div>';
+                return;
+            }
+        }
+
+        // Fallback to PHP template
+        $fallback = $template ? get_post_meta($template->ID, '_affiliate_fallback_view', true) : null;
+        
+        // Check default templates for fallback
+        if (!$fallback && isset(self::DEFAULT_TEMPLATES[$slug])) {
+            $fallback = self::DEFAULT_TEMPLATES[$slug]['fallback'];
+        }
+
+        if ($fallback && file_exists(SENHENG_CORE_VIEW_PATH . 'impact/' . $fallback)) {
+            include SENHENG_CORE_VIEW_PATH . 'impact/' . $fallback;
+        } else {
+            // Default message if no content - also wrapped
+            echo '<div class="profile-right-content affiliate-no-content">';
+            echo '<div class="setting-user-profile">';
+            echo '<p>' . __('Content coming soon.', 'mytext') . '</p>';
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+
+    /**
+     * Hide admin bar when editing affiliate_template in Elementor
+     */
+    public static function hideAdminBarForElementor($show)
+    {
+        // Check if we're in Elementor preview/edit mode for affiliate_template
+        if (isset($_GET['elementor-preview']) || isset($_GET['action']) && $_GET['action'] === 'elementor') {
+            $post_id = isset($_GET['elementor-preview']) ? intval($_GET['elementor-preview']) : get_the_ID();
+            if ($post_id && get_post_type($post_id) === 'affiliate_template') {
+                return false;
+            }
+        }
+        return $show;
+    }
+
+    /**
+     * Add CSS to hide admin bar in Elementor editor for affiliate templates
+     */
+    public static function hideAdminBarStyles()
+    {
+        if (!is_admin() && (isset($_GET['elementor-preview']) || isset($_GET['action']) && $_GET['action'] === 'elementor')) {
+            $post_id = isset($_GET['elementor-preview']) ? intval($_GET['elementor-preview']) : get_the_ID();
+            if ($post_id && get_post_type($post_id) === 'affiliate_template') {
+                echo '<style>
+                    #wpadminbar { display: none !important; }
+                    html { margin-top: 0 !important; }
+                    body.admin-bar { margin-top: 0 !important; }
+                </style>';
+            }
+        }
+    }
+
+    /**
+     * Dynamic endpoint callback for any affiliate template
+     */
+    public static function renderDynamicTemplate()
+    {
+        global $wp_query;
+        
+        // Find which endpoint was requested
+        foreach (self::getAffiliateTemplates() as $template) {
+            $slug = $template->post_name;
+            if (isset($wp_query->query_vars[$slug])) {
+                self::renderTemplate($slug);
+                return;
+            }
+        }
+        
+        // Also check default templates
+        foreach (array_keys(self::DEFAULT_TEMPLATES) as $slug) {
+            if (isset($wp_query->query_vars[$slug])) {
+                self::renderTemplate($slug);
+                return;
+            }
+        }
+    }
+
     public static function enqueueAssets()
     {
         // // Only load assets for logged-in users with ambassador IDs
@@ -88,17 +392,38 @@ class ImpactController
                 // Parent
                 $new['affiliate-program'] = __('Senheng Affiliate Program', 'mytext');
 
-                // Child items (they will be hidden/show with JS)
-                $new['affiliate-overview'] = __('Overview', 'mytext');
-                if (!$is_ambassador && $idsso) {
-                    $new['affiliate-signup'] = __('Sign Up', 'mytext');
+                // Get dynamic menu items from affiliate_template post type
+                $templates = self::getAffiliateTemplates();
+                
+                if (!empty($templates)) {
+                    foreach ($templates as $template) {
+                        $slug = $template->post_name;
+                        $title = $template->post_title;
+                        $conditional = get_post_meta($template->ID, '_affiliate_conditional', true);
+                        
+                        // Handle conditional visibility (e.g., signup only for non-ambassadors)
+                        if ($conditional === 'signup') {
+                            if (!$is_ambassador && $idsso) {
+                                $new[$slug] = __($title, 'mytext');
+                            }
+                        } else {
+                            $new[$slug] = __($title, 'mytext');
+                        }
+                    }
+                } else {
+                    // Fallback to default templates if no templates exist yet
+                    foreach (self::DEFAULT_TEMPLATES as $slug => $config) {
+                        $conditional = $config['conditional'] ?? '';
+                        
+                        if ($conditional === 'signup') {
+                            if (!$is_ambassador && $idsso) {
+                                $new[$slug] = __($config['title'], 'mytext');
+                            }
+                        } else {
+                            $new[$slug] = __($config['title'], 'mytext');
+                        }
+                    }
                 }
-                $new['affiliate-commission-structure'] = __('Commission Structure', 'mytext');
-                $new['affiliate-learning-support'] = __('Learning & Support', 'mytext');
-                $new['affiliate-manage-earning'] = __('Manage Earnings', 'mytext');
-                $new['affiliate-faq'] = __('FAQ', 'mytext');
-                $new['affiliate-terms-conditions'] = __('Terms & Conditions', 'mytext');
-                $new['affiliate-return-refund'] = __('Return & Refund', 'mytext');
             }
 
             $new[$key] = $value;
@@ -109,55 +434,88 @@ class ImpactController
 
     public static function addEndpoint()
     {
+        // Always register parent endpoint
         add_rewrite_endpoint('affiliate-program', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-overview', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-signup', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-commission-structure', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-learning-support', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-manage-earning', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-faq', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-terms-conditions', EP_ROOT | EP_PAGES);
-        add_rewrite_endpoint('affiliate-return-refund', EP_ROOT | EP_PAGES);
+        
+        // Get templates and register their endpoints
+        $templates = self::getAffiliateTemplates();
+        
+        if (!empty($templates)) {
+            foreach ($templates as $template) {
+                add_rewrite_endpoint($template->post_name, EP_ROOT | EP_PAGES);
+            }
+        } else {
+            // Fallback: register default endpoints if no templates exist yet
+            foreach (array_keys(self::DEFAULT_TEMPLATES) as $slug) {
+                add_rewrite_endpoint($slug, EP_ROOT | EP_PAGES);
+            }
+        }
     }
 
+    /**
+     * Register dynamic WooCommerce endpoint actions
+     * Called after post type is registered
+     */
+    public static function registerDynamicEndpointActions()
+    {
+        $templates = self::getAffiliateTemplates();
+        
+        if (!empty($templates)) {
+            foreach ($templates as $template) {
+                $slug = $template->post_name;
+                add_action('woocommerce_account_' . $slug . '_endpoint', function() use ($slug) {
+                    ImpactController::renderTemplate($slug);
+                });
+            }
+        } else {
+            // Fallback: register actions for default templates
+            foreach (array_keys(self::DEFAULT_TEMPLATES) as $slug) {
+                add_action('woocommerce_account_' . $slug . '_endpoint', function() use ($slug) {
+                    ImpactController::renderTemplate($slug);
+                });
+            }
+        }
+    }
+
+    // Legacy render functions - now call renderTemplate() for backward compatibility
     public static function renderSignUpAffiliatePage()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/index.php';
+        self::renderTemplate('affiliate-signup');
     }
 
     public static function renderOverview()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/overview.php';
+        self::renderTemplate('affiliate-overview');
     }
 
     public static function renderCommissionStructure()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/commission.php';
+        self::renderTemplate('affiliate-commission-structure');
     }
 
     public static function renderLearningSupport()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/learning-support.php';
+        self::renderTemplate('affiliate-learning-support');
     }
 
     public static function renderManageEarnings()
     {
-        echo '<h2>Manage Earnings</h2>';
+        self::renderTemplate('affiliate-manage-earning');
     }
 
     public static function renderFAQ()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/faq.php';
+        self::renderTemplate('affiliate-faq');
     }
 
     public static function renderTermsConditions()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/terms-conditions.php';
+        self::renderTemplate('affiliate-terms-conditions');
     }
 
     public static function renderReturnRefund()
     {
-        include SENHENG_CORE_VIEW_PATH . 'impact/return-refund.php';
+        self::renderTemplate('affiliate-return-refund');
     }
 
     public static function restrictUrlSignUp()
