@@ -1,0 +1,120 @@
+# Portuguese (Brazil) translation for WooCommerce Minimum Order Value
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Minimum Order Value\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-minimum-order\n"
+"POT-Creation-Date: 2025-10-03T19:00:26+00:00\n"
+"PO-Revision-Date: 2025-10-04 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: wc-minimum-order\n"
+
+#. Plugin Name of the plugin
+#: wc-minimum-order.php
+msgid "WooCommerce Minimum Order Value"
+msgstr "WooCommerce Valor Mínimo de Pedido"
+
+#. Plugin URI of the plugin
+#: wc-minimum-order.php
+msgid "https://github.com/yourname/wc-minimum-order"
+msgstr "https://github.com/yourname/wc-minimum-order"
+
+#. Description of the plugin
+#: wc-minimum-order.php
+msgid "Set a minimum order value for WooCommerce checkout."
+msgstr "Defina um valor mínimo de pedido para o checkout do WooCommerce."
+
+#. Author of the plugin
+#: wc-minimum-order.php
+msgid "Your Name"
+msgstr "Seu nome"
+
+#. Author URI of the plugin
+#: wc-minimum-order.php
+msgid "https://yourwebsite.com"
+msgstr "https://yourwebsite.com"
+
+#: wc-minimum-order.php:56
+msgid "Minimum Order Settings"
+msgstr "Configurações de Pedido Mínimo"
+
+#: wc-minimum-order.php:58
+msgid "Configure minimum order requirements for your store."
+msgstr "Configure os requisitos de pedido mínimo para sua loja."
+
+#: wc-minimum-order.php:64
+msgid "Minimum Order Value"
+msgstr "Valor Mínimo do Pedido"
+
+#: wc-minimum-order.php:65
+msgid "Set a minimum order total required for checkout. Leave empty to disable."
+msgstr "Defina um total mínimo de pedido necessário para finalizar a compra. Deixe vazio para desabilitar."
+
+#: wc-minimum-order.php:85
+msgid "Customer Messages"
+msgstr "Mensagens ao cliente"
+
+#: wc-minimum-order.php:87
+msgid "Customize the messages shown to customers. Use {minimum_amount} and {remaining_amount} as placeholders."
+msgstr "Personalize as mensagens exibidas aos clientes. Use {minimum_amount} e {remaining_amount} como marcadores de posição."
+
+#: wc-minimum-order.php:93
+msgid "Cart Page Message"
+msgstr "Mensagem da página do carrinho"
+
+#: wc-minimum-order.php:94
+msgid "Message displayed on the cart page when the minimum order value is not met."
+msgstr "Mensagem exibida na página do carrinho quando o valor mínimo do pedido não é atingido."
+
+#: wc-minimum-order.php:96 wc-minimum-order.php:324 wc-minimum-order.php:375
+msgid "You need {remaining_amount} more to reach the minimum order value of {minimum_amount}."
+msgstr "Você precisa de mais {remaining_amount} para atingir o valor mínimo do pedido de {minimum_amount}."
+
+#: wc-minimum-order.php:105
+msgid "Checkout Error Message"
+msgstr "Mensagem de erro no checkout"
+
+#: wc-minimum-order.php:106 wc-minimum-order.php:264 wc-minimum-order.php:382
+msgid "Error message displayed during checkout when the minimum order value is not met."
+msgstr "Mensagem de erro exibida durante o checkout quando o valor mínimo do pedido não é atingido."
+
+#: wc-minimum-order.php:123
+msgid "Product & Category Exclusions"
+msgstr "Exclusões de produtos e categorias"
+
+#: wc-minimum-order.php:125
+msgid "Exclude specific products or categories from the minimum order calculation. Excluded items will not count toward the minimum."
+msgstr "Exclua produtos ou categorias específicos do cálculo do pedido mínimo. Os itens excluídos não contarão para o mínimo."
+
+#: wc-minimum-order.php:131
+msgid "Exclude Products"
+msgstr "Excluir produtos"
+
+#: wc-minimum-order.php:132
+msgid "Select products to exclude from minimum order calculation."
+msgstr "Selecione os produtos para excluir do cálculo do pedido mínimo."
+
+#: wc-minimum-order.php:141
+msgid "Search and select products..."
+msgstr "Pesquisar e selecionar produtos..."
+
+#: wc-minimum-order.php:147
+msgid "Exclude Categories"
+msgstr "Excluir categorias"
+
+#: wc-minimum-order.php:148
+msgid "Select categories to exclude from minimum order calculation. All products in these categories will be excluded."
+msgstr "Selecione as categorias para excluir do cálculo do pedido mínimo. Todos os produtos nessas categorias serão excluídos."
+
+#: wc-minimum-order.php:157
+msgid "Search and select categories..."
+msgstr "Pesquisar e selecionar categorias..."
+
+#: wc-minimum-order.php:339
+msgid "Notice:"
+msgstr "Aviso:"
