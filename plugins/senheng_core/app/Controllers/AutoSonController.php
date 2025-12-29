@@ -86,7 +86,8 @@ class AutoSonController
         $end_date   = $request->get_param('end_date');
 
         $args = [
-            'status' => ['processing', 'completed', 'wc-partially-paid'],
+            'status' => ['processing', 'completed','wc-partially-paid'],
+            'posts_per_page' => -1,
         ];
 
         if (!empty($start_date) && !empty($end_date)) {
