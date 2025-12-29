@@ -59,9 +59,10 @@ class CouponController
                 <select id="<?php echo esc_attr(self::META_PAYMENT_TYPE); ?>" 
                         name="<?php echo esc_attr(self::META_PAYMENT_TYPE); ?>" 
                         style="width: 50%;" 
-                        class="wc-enhanced-select"
-                        data-placeholder="<?php esc_attr_e('No payment type restriction', 'senheng-core'); ?>">
-                    <option value=""></option>
+                        class="wc-enhanced-select">
+                    <option value="" <?php selected($payment_type, ''); ?>>
+                        <?php esc_html_e('No Restriction', 'senheng-core'); ?>
+                    </option>
                     <option value="full" <?php selected($payment_type, 'full'); ?>>
                         <?php esc_html_e('Full Payment Only', 'senheng-core'); ?>
                     </option>
