@@ -55,6 +55,10 @@ jQuery(document).ready(function ($) {
             ? 'viber://forward?text=' + encodeURIComponent(shareMessage + ' ' + shareUrl)
             : 'viber://forward?text=' + encodeURIComponent(shareUrl);
 
+        var whatsappUrl = hasAmbassador
+            ? 'https://wa.me/?text=' + encodeURIComponent(shareMessage + ' ' + shareUrl)
+            : 'https://wa.me/?text=' + encodeURIComponent(shareUrl);
+
         var $modal = $('#sh-share-modal');
         var $overlay = $('#sh-share-overlay');
 
@@ -63,6 +67,7 @@ jQuery(document).ready(function ($) {
         $modal.find('.sh-share-facebook').attr('href', facebookUrl);
         $modal.find('.sh-share-twitter').attr('href', twitterUrl);
         $modal.find('.sh-share-viber').attr('href', viberUrl);
+        $modal.find('.sh-share-whatsapp').attr('href', whatsappUrl);
 
         // Copy action with clipboard fallback and prevent default navigation
         $modal.find('.sh-copy-link').off('click').on('click', function (e) {
@@ -134,8 +139,21 @@ jQuery(document).ready(function ($) {
         });
 
         // Clicking any external share should also ping (copy link already handled)
-        $modal.find('a.sh-share-icon').not('.sh-copy-link').off('click').on('click', function () {
-            pingShare();
+        // $modal.find('a.sh-share-icon').not('.sh-copy-link').off('click').on('click', function () {
+        //     pingShare();
+        // });
+
+        $modal.find('a.sh-share-icon').not('.sh-copy-link')
+        .off('click')
+        .on('click', function (e) {
+            e.preventDefault();
+
+            const url = $(this).attr('href');
+
+            if (url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+                pingShare();
+            }
         });
 
         // Close handlers
