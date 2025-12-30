@@ -27,7 +27,7 @@ jobs:
       - name: Add and fetch from target repo (Senheng-3)
         run: |
           echo "Adding target remote (Senheng-3)..."
-          git remote add target https://{username}:${GH_TOKEN}@github.com/hilalazmi45312/Github_action.git
+          git remote add target "https://x-access-token:${GH_TOKEN}@github.com/hilalazmi45312/Github_action.git"
           git fetch target
 
       # 4. Checkout the branch you want to merge from source repo (Senheng-1)

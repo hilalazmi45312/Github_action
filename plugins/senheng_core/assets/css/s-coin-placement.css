@@ -35,56 +35,93 @@
 	margin-right: 5px !important;
 }
 
-.scoin-cont-total {
-	font-size: 14px !important;
-	color: #939691 !important;
-	background-color: #f9f2d5 !important;
-	border: none !important;
-	border-radius: 6px !important;
-	margin-top: 10px !important;
-}
-
 .scoin-cont-total img {
 	width: 18px !important;
 	height: 18px !important;
 	vertical-align: middle !important;
-	margin-right: 5px !important;
+	margin-right: 2px !important;
+}
+
+/* Checkout page S-Coin row styles */
+.scoin-total-row .scoin-cont-total {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	font-size: 14px !important;
+	background-color: #f9f2d5 !important;
+	border: none !important;
+	border-radius: 6px !important;
+	padding: 8px 12px !important;
+}
+
+.scoin-total-row .scoin-icon {
+	display: inline-flex;
+	align-items: center;
+	align-self: center;
+	margin-right: 2px;
+	flex-shrink: 0;
+}
+
+.scoin-total-row .scoin-icon img {
+	width: 18px !important;
+	height: 18px !important;
+}
+
+.scoin-total-row .scoin-text-wrapper {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.scoin-total-row .scoin-earn-text {
+	margin-left: 8px;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	font-family: var(--wd-text-font);
+	color: #939691 !important;
+}
+
+.scoin-total-row .scoin-worth-text {
+	margin-left: 8px;
+	font-size: 13px !important;
+	font-family: var(--wd-text-font);
+	color: #939691 !important;
+	font-weight: 600 !important;
 }
 
 /* Fallback for general product loops (non-Elementor widgets) */
 .rebate-container-small:not(.s-coin-label-dynamic) {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .rebate-container-small:not(.s-coin-label-dynamic) img {
-    height: 50px;
-    width: auto;
+	height: 50px;
+	width: auto;
 }
 
 .rebate-container-small:not(.s-coin-label-dynamic) .rebate-info {
-    position: absolute;
-    top: 45%;
-    right: 18%;
-    transform: translateY(-50%);
-    font-weight: 700;
-    color: #ff0000;
-    font-size: 12px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	position: absolute;
+	top: 45%;
+	right: 18%;
+	transform: translateY(-50%);
+	font-weight: 700;
+	color: #ff0000;
+	font-size: 12px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* Ensure S-Coin Label Widget styles take precedence */
 .rebate-container-small.s-coin-label-dynamic {
-    /* Widget styles are handled in s-coin-label-widget.css */
-    /* This ensures no conflicts with product loop styles */
+	/* Widget styles are handled in s-coin-label-widget.css */
+	/* This ensures no conflicts with product loop styles */
 }
 
 /* mobile setting */
-@media (max-width: 768px) {
-}
+@media (max-width: 768px) {}
 
 /* .table th,
  .table td {
