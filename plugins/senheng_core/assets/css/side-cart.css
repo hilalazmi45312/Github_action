@@ -9,6 +9,7 @@
 
 .shopping-cart-widget-footer>* {
     margin-bottom: 0;
+    font-family: var(--wd-title-font);
 }
 
 .product_list_widget>li .wd-entities-title {

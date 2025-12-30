@@ -189,13 +189,13 @@ class FlixmediaController
 
                     // Check if it contains a fallback script (indicates no match / no real content)
                     const hasFallbackScript = inpage.querySelector('script[src*="media.flix"][src*="service.js"]') !== null ||
-                                            inpage.querySelector('script[type="text/javascript"][src*="modular/js/minify"]') !== null;
+                        inpage.querySelector('script[type="text/javascript"][src*="modular/js/minify"]') !== null;
 
                     // Alternative broader check: any <script type="text/javascript"> inside inpage
                     // const hasFallbackScript = inpage.querySelector('script[type="text/javascript"]') !== null;
 
-                    const hasContent = !hasFallbackScript && 
-                                    (inpage.children.length > 0 || inpage.innerHTML.trim() !== '');
+                    const hasContent = !hasFallbackScript &&
+                        (inpage.children.length > 0 || inpage.innerHTML.trim() !== '');
 
                     const descTab = document.getElementById('tab-description');
                     if (descTab) {
@@ -247,6 +247,9 @@ class FlixmediaController
 
             /* ========= VARIATION HANDLER ========= */
             jQuery(function($) {
+                const parentHasData = <?php echo wp_json_encode(
+                                            ! empty($base_ean) || ! empty($base_mpn) || ! empty($base_sku)
+                                        ); ?>;
                 const $form = $('form.variations_form');
                 if (!$form.length) return;
 
@@ -258,20 +261,41 @@ class FlixmediaController
                     brand: <?php echo wp_json_encode($brand_name); ?>
                 };
 
+                // $form.on('found_variation', function(e, variation) {
+                //     const data = {
+                //         ean: variation._global_unique_id || variation.ean || '',
+                //         mpn: variation.mpn || '',
+                //         sku: variation.sku || '',
+                //         brand: base.brand
+                //     };
+                //     if (!data.ean && !data.mpn && !data.sku) {
+                //         if (window.__clearFlix) window.__clearFlix();
+                //         lastSku = null;
+                //         return;
+                //     }
+                //     if (lastSku === data.sku) return;
+                //     lastSku = data.sku;
+                //     window.__loadFlixFor(data);
+                // });
+
                 $form.on('found_variation', function(e, variation) {
+                    if (parentHasData) {
+                        console.log('Parent has data, skipping variation load.');
+                        return;
+                    }
+
                     const data = {
                         ean: variation._global_unique_id || variation.ean || '',
                         mpn: variation.mpn || '',
                         sku: variation.sku || '',
                         brand: base.brand
                     };
+
                     if (!data.ean && !data.mpn && !data.sku) {
                         if (window.__clearFlix) window.__clearFlix();
-                        lastSku = null;
                         return;
                     }
-                    if (lastSku === data.sku) return;
-                    lastSku = data.sku;
+
                     window.__loadFlixFor(data);
                 });
 

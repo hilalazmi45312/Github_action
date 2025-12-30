@@ -316,16 +316,26 @@ class ScoinController
         $s_coin_formatted = number_format($total_scoins, 0);
         $rm_formatted     = number_format($total_scoins / 100, 2);
 
-        if ($is_checkout) {
-            $s_coin_formatted = 'Earn total ' . $s_coin_formatted . ' S-Coin (worth RM' . $rm_formatted . ')';
-        }
-
         $icon_url = esc_url(SENHENG_CORE_ASSETS_URL . 'uploads/s-coin-nobg.png');
 
         echo '<tr class="scoin-total-row">';
         echo '  <th>' . esc_html__('S-Coin Earn', 'senheng') . '</th>';
         echo '  <td data-title="' . esc_attr__('S-Coin earn', 'senheng') . '">';
-        echo '      <button type="button" style="pointer-events:none;cursor:default;" class="scoin-cont-total"><img src="' . $icon_url . '" alt="S-Coin"> ' . esc_html($s_coin_formatted) . '</button>';
+        
+        if ($is_checkout) {
+            // Checkout display: icon on middle left + text stacked on right
+            echo '<div class="scoin-cont-total">';
+            echo '    <span class="scoin-icon"><img src="' . $icon_url . '" alt="S-Coin"></span>';
+            echo '    <span class="scoin-text-wrapper">';
+            echo '        <span class="scoin-earn-text">Earn total ' . esc_html($s_coin_formatted) . ' S-Coin</span>';
+            echo '        <span class="scoin-worth-text">(Worth RM' . esc_html($rm_formatted) . ')</span>';
+            echo '    </span>';
+            echo '</div>';
+        } else {
+            // Cart display: original button format
+            echo '<button type="button" style="pointer-events:none;cursor:default;" class="scoin-cont-total"><img src="' . $icon_url . '" alt="S-Coin"> ' . esc_html($s_coin_formatted) . '</button>';
+        }
+        
         echo '  </td>';
         echo '</tr>';
     }
