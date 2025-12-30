@@ -143,6 +143,17 @@ class AutoSonController
             }
             $line = self::map_order_line($item, $order, $isProductWarranty, $shop_id);
             $lines[] = $line;
+
+            // Add product extras (selected_products) immediately after their parent product
+            $product_extras = $item->get_meta('_product_extras_products', true);
+            if (!empty($product_extras) && is_array($product_extras)) {
+                foreach ($product_extras as $extra_product) {
+                    $extra_line = self::map_product_extra_line($extra_product, $item, $order, $shop_id);
+                    if ($extra_line) {
+                        $lines[] = $extra_line;
+                    }
+                }
+            }
         }
         $transaction_id = get_post_meta($order->get_id(), '_ipay88_transaction_id', true);
         $authentication_code = get_post_meta($order->get_id(), '_ipay88_auth_code', true);
@@ -346,6 +357,131 @@ class AutoSonController
             // 'extras' => self::map_extras($order),
             'discounts' => self::map_vouchers($order),
             's_coin_value' => $s_coin_value
+        ];
+    }
+
+    /**
+     * Map product extra (selected_product from product-extras-for-woocommerce) to order line format
+     * 
+     * @param array $extra_product The extra product data from _product_extras_products meta
+     * @param WC_Order_Item_Product $parent_item The parent order item
+     * @param WC_Order $order The order object
+     * @param string $shop_id The shop ID
+     * @return array|null The mapped order line or null if invalid
+     */
+    private static function map_product_extra_line($extra_product, $parent_item, $order, $shop_id)
+    {
+        if (empty($extra_product) || !is_array($extra_product)) {
+            return null;
+        }
+
+        // Get product ID (use variation ID if available, otherwise product ID)
+        $product_id = isset($extra_product['variationId']) && !empty($extra_product['variationId']) 
+            ? intval($extra_product['variationId']) 
+            : (isset($extra_product['productId']) ? intval($extra_product['productId']) : 0);
+
+        if (!$product_id) {
+            return null;
+        }
+
+        // Get the actual product object (will be variation if variationId exists)
+        $product = wc_get_product($product_id);
+        
+        if (!$product) {
+            return null;
+        }
+
+        // Get extra product details from stored data
+        $quantity = isset($extra_product['quantity']) ? intval($extra_product['quantity']) : 1;
+        $product_name = isset($extra_product['title']) ? $extra_product['title'] : $product->get_name();
+        
+        // Get s_coin_value if available (usually 0 for extras, but check stored data)
+        $s_coin_value = isset($extra_product['s_coin_value']) ? (float) $extra_product['s_coin_value'] : 0;
+
+        // Calculate selling price using wc_get_price_excluding_tax like map_order_line
+        $selling_price = (string) round((float) wc_get_price_excluding_tax($product) * $quantity * 100);
+
+        // Calculate discount amount if child discount exists
+        $child_discount = isset($extra_product['childDiscount']) ? floatval($extra_product['childDiscount']) : 0;
+        $discount_type = isset($extra_product['discountType']) ? $extra_product['discountType'] : '';
+        
+        $unit_price = (float) wc_get_price_excluding_tax($product);
+        $original_price = $unit_price;
+        
+        if ($unit_price > 0 && $child_discount > 0) {
+            if ($discount_type === 'percent') {
+                $unit_price = $unit_price - ($unit_price * ($child_discount / 100));
+            } elseif ($discount_type === 'fixed') {
+                $unit_price = max(0, $unit_price - $child_discount);
+            }
+        }
+        
+        $discount_amount = ($original_price - $unit_price) * $quantity;
+        $discount_total_cents = (int) round($discount_amount * 100);
+
+        // Generate a unique order line ID for the extra product
+        $extra_line_id = $parent_item->get_id() . '_extra_' . md5(json_encode($extra_product));
+
+        return [
+            'orderLineId' => $product_id, // Product ID for simple, Variation ID for variation
+            // 'bizCode'     => '',
+            'sku'         => [
+                // 'skuId'   => $product ? $product->get_id() : 0,
+                'skuCode' => $product ? $product->get_sku() : '',
+                // 'item'    => [
+                //     'id'     => $product ? $product->get_id() : 0,
+                //     'shopId' => $product ? $product->get_sku() : '',
+                //     'name'   => $product_name,
+                //     'supportVAT' => false
+                // ],
+                'skuName' => $product_name,
+                // 'shopId'  => $shop_id,
+                // 'image'   => $product ? wp_get_attachment_url($product->get_image_id()) : '',
+                // 'attributes' => $product ? self::map_product_attributes($product) : [],
+                // 'extraPrice' => [],
+                'skuExtra'  =>
+                [
+                    'extraMap' =>
+                    [
+                        'selling_price' => $selling_price,
+                        // 'categoryIds' => $categories['categoryIds'],
+                        // 'unitQuantity' => (string) $quantity,
+                        // 'categoryIdListName' => $categories['categoryIdListName'],
+                        // 'itemMd5' => md5($product ? $product->get_id() : 0),
+                        // 'isVirtual' => $product ? $product->is_virtual() : false,
+                        // 'businessType' => $product ? $product->get_type() : '',
+                        // 'tax_rate' => $product ? $product->get_tax_class() : '',
+                    ]
+                ],
+                // 'deliveryFeeName' => 'SENHENG OFFICIAL- OWN FLEET (HD)',
+            ],
+            'quantity' => $quantity,
+            // 'orderLineStatus' => self::map_order_status(),
+            // 'warehouseCodePlan' => '',
+            // 'warehouseCodeActual' => '',
+            // 'enableStatus' => '',
+            // 'deviceSource' => '',
+            // 'masterId' => '',
+            'price'    => [
+                'skuOriginTotalAmount'  => (string) round((float) wc_get_price_excluding_tax($product) * $quantity * 100),
+                // 'skuAdjustAmount' => 0,
+                'shipFeeOriginAmount'   => 0, // Product extras don't have separate shipping
+                // 'shipFeeAdjustAmount' => 0,
+                // 'taxFeeOriginAmount' => 0,
+                // 'taxFeeAdjustAmount' => 0,
+                // 'paidAmount'            => (int) round($unit_price * $quantity * 100),
+                'skuDiscountTotalAmount' => $discount_total_cents,
+                // 'skuLevelDiscountAmount' => 0,
+                // 'shopLevelDiscountAmount' => 0,
+                // 'platformLevelDiscountAmount' => 0,
+                // 'shipFeeDiscountTotalAmount' => 0,
+                // 'taxFeeDiscountTotalAmount' => 0,
+                // 'skuOriginalAmount'     => (int) round($original_price * $quantity * 100),
+            ],
+            // 'operateTime' => self::map_operate_time($order),
+            // 'extras' => self::map_extras($order),
+            'discounts' => []
+            // 's_coin_value' => $s_coin_value
         ];
     }
 
