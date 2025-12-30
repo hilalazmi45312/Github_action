@@ -106,6 +106,7 @@ add_action('wp_footer', [WarrantyController::class, 'injectCartCheckboxScript'])
 //Store in Order Item Meta
 add_action('woocommerce_checkout_create_order_line_item', [WarrantyController::class, 'store_warranty_in_order_item'], 10, 4);
 
+
 // Installment Controller
 // Ensure payment methods table has all required columns
 add_action('admin_init', [PaymentMethod::class, 'ensureTableColumns']);

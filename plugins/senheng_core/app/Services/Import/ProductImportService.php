@@ -1162,6 +1162,11 @@ class ProductImportService
         // 'draft' from resolvePostStatus means 'inactive' in CSV
         // For variations, 'private' status = Disabled (unticked Enabled)
         // 'publish' status = Enabled (ticked Enabled)
+        
+        // 1. Handle Variation Status ("Enabled" checkbox)
+        // 'draft' from resolvePostStatus means 'inactive' in CSV
+        // For variations, 'private' status = Disabled (unticked Enabled)
+        // 'publish' status = Enabled (ticked Enabled)
         $mappedStatus = $this->resolvePostStatus($r);
         if ($mappedStatus) {
             $varStatus = ($mappedStatus === 'draft') ? 'private' : 'publish';
@@ -1534,31 +1539,6 @@ class ProductImportService
                 Logger::info($this->logFile, "Parent Product (ID: $parentId) status updated to 'draft' (all variations inactive)");
             }
         }
-    }
-
-    /**
-     * Update YOAST SEO Meta Title and Description
-     * 
-     * @param int    $productId Product ID (or Parent ID)
-     * @param string $title     Meta Title
-     * @param string $desc      Meta Description (will be stripped of tags)
-     */
-    private function updateYoastSeo(int $productId, string $title, string $desc): void
-    {
-        if (!$productId || !$title) {
-            return;
-        }
-        
-        // Clean description for meta tag
-        $cleanDesc = trim(preg_replace('/\s+/', ' ', strip_tags($desc)));
-        
-        // Update YOAST meta
-        update_post_meta($productId, '_yoast_wpseo_title', $title);
-        if ($cleanDesc) {
-            update_post_meta($productId, '_yoast_wpseo_metadesc', $cleanDesc);
-        }
-        
-        Logger::info($this->logFile, "Updated YOAST SEO for ID $productId (Title: $title)");
     }
 }
 
