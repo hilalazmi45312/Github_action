@@ -1,0 +1,120 @@
+# Japanese translation for WooCommerce Minimum Order Value
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Minimum Order Value\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-minimum-order\n"
+"POT-Creation-Date: 2025-10-03T19:00:26+00:00\n"
+"PO-Revision-Date: 2025-10-04 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: wc-minimum-order\n"
+
+#. Plugin Name of the plugin
+#: wc-minimum-order.php
+msgid "WooCommerce Minimum Order Value"
+msgstr "WooCommerce 最低注文金額"
+
+#. Plugin URI of the plugin
+#: wc-minimum-order.php
+msgid "https://github.com/yourname/wc-minimum-order"
+msgstr "https://github.com/yourname/wc-minimum-order"
+
+#. Description of the plugin
+#: wc-minimum-order.php
+msgid "Set a minimum order value for WooCommerce checkout."
+msgstr "WooCommerce のチェックアウトに最低注文金額を設定します。"
+
+#. Author of the plugin
+#: wc-minimum-order.php
+msgid "Your Name"
+msgstr "あなたの名前"
+
+#. Author URI of the plugin
+#: wc-minimum-order.php
+msgid "https://yourwebsite.com"
+msgstr "https://yourwebsite.com"
+
+#: wc-minimum-order.php:56
+msgid "Minimum Order Settings"
+msgstr "最低注文金額設定"
+
+#: wc-minimum-order.php:58
+msgid "Configure minimum order requirements for your store."
+msgstr "ストアの最低注文要件を設定します。"
+
+#: wc-minimum-order.php:64
+msgid "Minimum Order Value"
+msgstr "最低注文金額"
+
+#: wc-minimum-order.php:65
+msgid "Set a minimum order total required for checkout. Leave empty to disable."
+msgstr "チェックアウトに必要な最低注文合計を設定します。無効にするには空のままにしてください。"
+
+#: wc-minimum-order.php:85
+msgid "Customer Messages"
+msgstr "顧客メッセージ"
+
+#: wc-minimum-order.php:87
+msgid "Customize the messages shown to customers. Use {minimum_amount} and {remaining_amount} as placeholders."
+msgstr "顧客に表示されるメッセージをカスタマイズします。プレースホルダーとして {minimum_amount} と {remaining_amount} を使用します。"
+
+#: wc-minimum-order.php:93
+msgid "Cart Page Message"
+msgstr "カートページメッセージ"
+
+#: wc-minimum-order.php:94
+msgid "Message displayed on the cart page when the minimum order value is not met."
+msgstr "最低注文金額に達していない場合にカートページに表示されるメッセージ。"
+
+#: wc-minimum-order.php:96 wc-minimum-order.php:324 wc-minimum-order.php:375
+msgid "You need {remaining_amount} more to reach the minimum order value of {minimum_amount}."
+msgstr "最低注文金額 {minimum_amount} に達するには、あと {remaining_amount} 必要です。"
+
+#: wc-minimum-order.php:105
+msgid "Checkout Error Message"
+msgstr "チェックアウトエラーメッセージ"
+
+#: wc-minimum-order.php:106 wc-minimum-order.php:264 wc-minimum-order.php:382
+msgid "Error message displayed during checkout when the minimum order value is not met."
+msgstr "最低注文金額に達していない場合にチェックアウト時に表示されるエラーメッセージ。"
+
+#: wc-minimum-order.php:123
+msgid "Product & Category Exclusions"
+msgstr "商品とカテゴリーの除外"
+
+#: wc-minimum-order.php:125
+msgid "Exclude specific products or categories from the minimum order calculation. Excluded items will not count toward the minimum."
+msgstr "特定の商品やカテゴリーを最低注文金額の計算から除外します。除外されたアイテムは最低金額にカウントされません。"
+
+#: wc-minimum-order.php:131
+msgid "Exclude Products"
+msgstr "商品を除外"
+
+#: wc-minimum-order.php:132
+msgid "Select products to exclude from minimum order calculation."
+msgstr "最低注文金額の計算から除外する商品を選択してください。"
+
+#: wc-minimum-order.php:141
+msgid "Search and select products..."
+msgstr "商品を検索して選択..."
+
+#: wc-minimum-order.php:147
+msgid "Exclude Categories"
+msgstr "カテゴリーを除外"
+
+#: wc-minimum-order.php:148
+msgid "Select categories to exclude from minimum order calculation. All products in these categories will be excluded."
+msgstr "最低注文金額の計算から除外するカテゴリーを選択してください。これらのカテゴリーのすべての商品が除外されます。"
+
+#: wc-minimum-order.php:157
+msgid "Search and select categories..."
+msgstr "カテゴリーを検索して選択..."
+
+#: wc-minimum-order.php:339
+msgid "Notice:"
+msgstr "注意:"

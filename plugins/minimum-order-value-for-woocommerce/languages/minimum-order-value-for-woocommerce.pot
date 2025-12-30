@@ -1,0 +1,136 @@
+# Copyright (C) 2025 Your Name
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Minimum Order Value for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/minimum-order-value-for-woocommerce\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-10-03T19:00:26+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: minimum-order-value-for-woocommerce\n"
+
+#. Plugin Name of the plugin
+#: minimum-order-value-for-woocommerce.php
+msgid "Minimum Order Value for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: minimum-order-value-for-woocommerce.php
+msgid "https://github.com/yourname/wc-minimum-order"
+msgstr ""
+
+#. Description of the plugin
+#: minimum-order-value-for-woocommerce.php
+msgid "Set a minimum order value for WooCommerce checkout."
+msgstr ""
+
+#. Author of the plugin
+#: minimum-order-value-for-woocommerce.php
+msgid "Your Name"
+msgstr ""
+
+#. Author URI of the plugin
+#: minimum-order-value-for-woocommerce.php
+msgid "https://yourwebsite.com"
+msgstr ""
+
+#: test-translation.php:22
+#: minimum-order-value-for-woocommerce.php:56
+msgid "Minimum Order Settings"
+msgstr ""
+
+#: translation-test.php:21
+#: minimum-order-value-for-woocommerce.php:105
+msgid "Checkout Error Message"
+msgstr ""
+
+#: translation-test.php:22
+#: minimum-order-value-for-woocommerce.php:106
+msgid "Error message displayed during checkout when the minimum order value is not met."
+msgstr ""
+
+#: translation-test.php:23
+#: minimum-order-value-for-woocommerce.php:125
+msgid "Exclude specific products or categories from the minimum order calculation. Excluded items will not count toward the minimum."
+msgstr ""
+
+#: translation-test.php:24
+#: minimum-order-value-for-woocommerce.php:132
+msgid "Select products to exclude from minimum order calculation."
+msgstr ""
+
+#: translation-test.php:25
+#: minimum-order-value-for-woocommerce.php:123
+msgid "Product & Category Exclusions"
+msgstr ""
+
+#: translation-test.php:26
+#: minimum-order-value-for-woocommerce.php:131
+msgid "Exclude Products"
+msgstr ""
+
+#: translation-test.php:27
+#: minimum-order-value-for-woocommerce.php:147
+msgid "Exclude Categories"
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:58
+msgid "Configure minimum order requirements for your store."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:64
+msgid "Minimum Order Value"
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:65
+msgid "Set a minimum order total required for checkout. Leave empty to disable."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:85
+msgid "Customer Messages"
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:87
+msgid "Customize the messages shown to customers. Use {minimum_amount} and {remaining_amount} as placeholders."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:93
+msgid "Cart Page Message"
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:94
+msgid "Message displayed on the cart page when the minimum order value is not met."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:96
+#: minimum-order-value-for-woocommerce.php:324
+#: minimum-order-value-for-woocommerce.php:375
+msgid "You need {remaining_amount} more to reach the minimum order value of {minimum_amount}."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:108
+#: minimum-order-value-for-woocommerce.php:264
+#: minimum-order-value-for-woocommerce.php:382
+msgid "Your order total must be at least {minimum_amount}."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:141
+msgid "Search and select products..."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:148
+msgid "Select categories to exclude from minimum order calculation. All products in these categories will be excluded."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:157
+msgid "Search and select categories..."
+msgstr ""
+
+#: minimum-order-value-for-woocommerce.php:339
+msgid "Notice:"
+msgstr ""

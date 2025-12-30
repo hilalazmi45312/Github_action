@@ -309,8 +309,8 @@ class ReadMoreIncludeManager {
 				$scripts .= 'obj.init();';
 			$scripts .= '});';
 		}
-		$customScript = @$savedData['yrm-editor-js'];
-		$scripts .=  stripslashes($customScript);
+		$customScript = wp_unslash($savedData['yrm-editor-js'] ?? '');
+		$scripts .= $customScript;
 
 		$scripts .= '</script>';
 		$scripts .= $this->includeCustomStyle();

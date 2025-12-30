@@ -2,7 +2,18 @@
 
 class AutoSonController
 {
-    protected static $channelName = 'SRCSQV2';
+    protected static $channelName = 'SRCSHV2';
+
+    public function __construct()
+    {
+        $WebChannel = getChannelWeb();
+
+        if ($WebChannel === 'SenQ') {
+            self::$channelName = 'SRCSQV2';
+        } else {
+            self::$channelName = 'SRCSHV2';
+        }
+    }
 
     public static function includeUserMeta($response, $object, $request)
     {

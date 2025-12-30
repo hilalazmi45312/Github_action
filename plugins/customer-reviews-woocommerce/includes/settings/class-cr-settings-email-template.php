@@ -719,53 +719,6 @@ if ( ! class_exists( 'CR_Email_Template' ) ):
 						</div>
 				</div>
 				<?php
-				wc_enqueue_js(
-					"jQuery( 'select.email_type' ).on( 'change', function() {
-
-						var val = jQuery( this ).val();
-
-						jQuery( '.template_plain, .template_html' ).show();
-
-						if ( val != 'multipart' && val != 'html' ) {
-							jQuery('.template_html').hide();
-						}
-
-						if ( val != 'multipart' && val != 'plain' ) {
-							jQuery('.template_plain').hide();
-						}
-
-					}).trigger( 'change' );
-
-					var view = '" . esc_js( __( 'View template', 'customer-reviews-woocommerce' ) ) . "';
-					var hide = '" . esc_js( __( 'Hide template', 'customer-reviews-woocommerce' ) ) . "';
-
-					jQuery( 'a.toggle_editor' ).text( view ).on( 'click', function() {
-						var label = hide;
-
-						if ( jQuery( this ).closest(' .template' ).find( '.editor' ).is(':visible') ) {
-							var label = view;
-						}
-
-						jQuery( this ).text( label ).closest(' .template' ).find( '.editor' ).slideToggle();
-						return false;
-					} );
-
-					jQuery( 'a.delete_template' ).on( 'click', function() {
-						if ( window.confirm('" . esc_js( __( 'Are you sure you want to delete this template file?', 'customer-reviews-woocommerce' ) ) . "') ) {
-							return true;
-						}
-
-						return false;
-					});
-
-					jQuery( '.editor textarea' ).on( 'change', function() {
-						var name = jQuery( this ).attr( 'data-name' );
-
-						if ( name ) {
-							jQuery( this ).attr( 'name', name );
-						}
-					});"
-				);
 			}
 		}
 

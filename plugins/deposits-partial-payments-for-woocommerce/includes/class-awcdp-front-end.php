@@ -155,6 +155,7 @@ class AWCDP_Front_End
 
             add_action('woocommerce_store_api_checkout_order_processed', array($this, 'awcdp_block_checkout_create_order'), 10, 1);
         
+            add_filter( 'woocommerce_gzd_instant_order_confirmation', '__return_false' );
 
         }
 

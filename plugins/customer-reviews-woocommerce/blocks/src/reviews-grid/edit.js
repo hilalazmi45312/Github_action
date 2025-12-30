@@ -60,8 +60,8 @@ export default function Edit( { attributes, setAttributes } ) {
 					<RangeControl
 						label={ __( 'Number of Reviews', 'customer-reviews-woocommerce' ) }
 						value={ attributes.count }
-						min={ 1 }
-						max={ 6 }
+						min={ 0 }
+						max={ 100 }
 						onChange={ ( newCount ) =>
 							setAttributes( { count: newCount } )
 						}
@@ -72,7 +72,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Number of Shop Reviews', 'customer-reviews-woocommerce' ) }
 						value={ attributes.count_shop_reviews }
 						min={ 0 }
-						max={ 3 }
+						max={ 100 }
 						onChange={ ( newCount_shop_reviews ) =>
 							setAttributes( { count_shop_reviews: newCount_shop_reviews } )
 						}
@@ -146,6 +146,12 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Add Review', 'customer-reviews-woocommerce' ) }
 						checked={ attributes.add_review }
 						onChange={ () => setAttributes( { add_review: ! attributes.add_review } ) }
+						__nextHasNoMarginBottom
+					/>
+					<ToggleControl
+						label={ __( 'Schema Markup', 'customer-reviews-woocommerce' ) }
+						checked={ attributes.schema_markup }
+						onChange={ () => setAttributes( { schema_markup: ! attributes.schema_markup } ) }
 						__nextHasNoMarginBottom
 					/>
 					<SelectControl

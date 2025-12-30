@@ -53,7 +53,7 @@ if ( ! class_exists( 'CR_Local_Forms_Ajax' ) ) :
 						$req = new stdClass();
 						$req->order = new stdClass();
 						$req->order->id = $record->orderId;
-						$req->order->display_name = $_POST['displayName'];
+						$req->order->display_name = sanitize_text_field( $_POST['displayName'] );
 						$req->order->items = array();
 						foreach( $db_items as $item ) {
 							if( -1 === intval( $item['id'] ) ) {
@@ -73,7 +73,7 @@ if ( ! class_exists( 'CR_Local_Forms_Ajax' ) ) :
 
 						$db_items = json_encode( $db_items );
 						$update_result = $wpdb->update( $table_name, array(
-							'displayName' => $_POST['displayName'],
+							'displayName' => $req->order->display_name,
 							'items' => $db_items
 						), array( 'formId' => $_POST['formId'] ) );
 						if( false !== $update_result ) {

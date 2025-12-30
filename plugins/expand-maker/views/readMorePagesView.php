@@ -41,77 +41,61 @@
 <div class="ycf-bootstrap-wrapper">
 	
 	<div class="expm-wrapper">
-	<!-- <div class="read-more-promo" style="background: linear-gradient(135deg, #6a5acd, #3b5998); padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); color: white; text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">
-  <div style="max-width: 600px;">
-    <h3 style="font-size: 26px; font-weight: bold; margin-bottom: 10px;">🔥 Share Your Feature Requests!</h3>
-    <p style="font-size: 18px; line-height: 1.5; margin-bottom: 10px;">
-		Do you want to get new features related to <strong>Read More</strong>?
-    </p>
-    <p style="font-size: 16px; margin-bottom: 20px;">We’re working hard and could add them as soon as possible in our next updates.</p>
-    <p style="font-size: 16px; margin-bottom: 20px;">💡 Be free and share your new feature suggestions with us — your feedback makes the plugin better!</p>
-    <a href="https://wordpress.org/support/plugin/expand-maker/" target="_blank" class="btn btn-primary" style="background-color: #ff6347; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-size: 18px; transition: all 0.3s ease-in-out;">Send a Feature Request</a>
-  </div>
-</div> -->
+		<?php if (!isset($_COOKIE['yrmBannerClosed'])) : ?>
+		<div class="read-more-promo" style="background: linear-gradient(135deg, #6a5acd, #3b5998); padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); color: white; text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap;position:relative;">
+			<button class="yrm-close-banner">×</button>
+			<div style="max-width: 600px;">
+				<h3 style="font-size: 26px; font-weight: bold; margin-bottom: 10px;">🔥 Share Your Feature Requests!</h3>
+				<p style="font-size: 18px; line-height: 1.5; margin-bottom: 10px;">
+					Do you want to get new features related to <strong>Read More</strong>?
+				</p>
+				<p style="font-size: 16px; margin-bottom: 20px;">We’re working hard and could add them as soon as possible in our next updates.</p>
+				<p style="font-size: 16px; margin-bottom: 20px;">💡 Be free and share your new feature suggestions with us — your feedback makes the plugin better!</p>
+				<a href="https://wordpress.org/support/plugin/expand-maker/" target="_blank" class="btn btn-primary" style="background-color: #ff6347; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-size: 18px; transition: all 0.3s ease-in-out;">Send a Feature Request</a>
+			</div>
+		</div>
+		<?php endif; ?>
+		<style>
+		.read-more-promo a:hover {
+			background-color: #ff4500;
+			transform: scale(1.05);
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+		}
+		.yrm-close-banner {
+			position:absolute;
+			top:18px;
+			right:22px;
+			background:rgba(255,255,255,0.15);
+			backdrop-filter: blur(4px);
+			width:32px;
+			height:32px;
+			border-radius:50%;
+			color:white;
+			border:none;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:20px;
+			cursor:pointer;
+			transition:0.2s;
+			font-size: 18px;
+		}
 
-<div class="read-more-promo" 
-     style="
-        background: linear-gradient(135deg, #ff0066, #ff8c00);
-        padding: 35px;
-        border-radius: 12px;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-        color: white;
-        text-align: center;
-        margin-bottom: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-     "
->
-  <div style="max-width: 650px;">
-    
-    <h3 style="font-size: 30px; font-weight: 800; margin-bottom: 10px;">
-      🎉 Black Friday Mega Sale — 50% OFF!
-    </h3>
+		.yrm-close-banner:hover {
+			background:rgba(255,255,255,0.28);
+			transform:scale(1.1);
+		}
+		</style>
+		<script>
+		jQuery(document).ready(function($){
 
-    <p style="font-size: 18px; margin-bottom: 10px; line-height: 1.5;">
-      Upgrade your <strong>Read More</strong> plugin and unlock all PRO features for half the price!
-    </p>
+			jQuery('.yrm-close-banner').on('click', function(){
+				jQuery('.read-more-promo').fadeOut();
+				document.cookie = "yrmBannerClosed=1; path=/";
+			});
 
-    <p style="font-size: 16px; margin-bottom: 20px;">
-      💰 Offer ends <strong>December 3</strong> — Don’t miss out!
-    </p>
-
-    <a href="https://edmonsoft.com/" 
-       target="_blank"
-       style="
-          background-color: #000;
-          color: #fff;
-          padding: 14px 30px;
-          border-radius: 6px;
-          text-decoration: none;
-          font-size: 18px;
-          font-weight: bold;
-          transition: 0.3s ease;
-          display: inline-block;
-       "
-       onmouseover="this.style.opacity='0.85'" 
-       onmouseout="this.style.opacity='1'"
-    >
-      Get 50% OFF Now
-    </a>
-
-  </div>
-</div>
-
-
-<style>
-  .read-more-promo a:hover {
-    background-color: #ff4500;
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  }
-</style>
+		});
+		</script>
 		<div class="wrap">
 			<h2 class="add-new-buttons"><?php _e('Read More', YRM_LANG); ?><a href="<?php echo YRM_TYPES_PAGE_URL;?>" class="add-new-h2"><?php echo _e('Add New', YRM_LANG); ?></a></h2>
 		</div>

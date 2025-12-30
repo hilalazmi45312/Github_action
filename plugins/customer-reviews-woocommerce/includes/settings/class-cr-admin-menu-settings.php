@@ -158,7 +158,10 @@ if ( ! class_exists( 'CR_Settings_Admin_Menu' ) ):
 						'dns_copied' => __( 'DNS record copied', 'customer-reviews-woocommerce' ),
 						'dns_enabled' => __( 'Enabled', 'customer-reviews-woocommerce' ),
 						'dns_disabled' => __( 'Disabled', 'customer-reviews-woocommerce' ),
-						'dns_pending' => __( 'Pending', 'customer-reviews-woocommerce' )
+						'dns_pending' => __( 'Pending', 'customer-reviews-woocommerce' ),
+						'view_email_template' => __( 'View template', 'customer-reviews-woocommerce' ),
+						'hide_email_template' => __( 'Hide template', 'customer-reviews-woocommerce' ),
+						'email_template_delete' => __( 'Are you sure you want to delete this template file?', 'customer-reviews-woocommerce' )
 					)
 				);
 				wp_enqueue_script( 'cr-admin-settings' );

@@ -793,5 +793,47 @@
 			} );
 		}
 
+		// email templates show / hide
+		jQuery( 'select.email_type' ).on( 'change', function() {
+
+			var val = jQuery( this ).val();
+
+			jQuery( '.template_plain, .template_html' ).show();
+
+			if ( val != 'multipart' && val != 'html' ) {
+				jQuery('.template_html').hide();
+			}
+
+			if ( val != 'multipart' && val != 'plain' ) {
+				jQuery('.template_plain').hide();
+			}
+
+		}).trigger( 'change' );
+
+		jQuery( 'a.toggle_editor' ).text( cr_settings_object.view_email_template ).on( 'click', function() {
+			var label = cr_settings_object.hide_email_template;
+
+			if ( jQuery( this ).closest(' .template' ).find( '.editor' ).is(':visible') ) {
+				label = cr_settings_object.view_email_template;
+			}
+
+			jQuery( this ).text( label ).closest(' .template' ).find( '.editor' ).slideToggle();
+			return false;
+		} );
+
+		jQuery( 'a.delete_template' ).on( 'click', function() {
+			if ( window.confirm( cr_settings_object.email_template_delete ) ) {
+				return true;
+			}
+			return false;
+		});
+
+		jQuery( '.editor textarea' ).on( 'change', function() {
+			var name = jQuery( this ).attr( 'data-name' );
+			if ( name ) {
+				jQuery( this ).attr( 'name', name );
+			}
+		});
+
 	} );
 } () );

@@ -268,7 +268,10 @@ if ( ! class_exists( 'CR_Manual' ) ) :
 		}
 
 		public function custom_orders_list_column_content( $column, $post_id ) {
-			if( 'ivole-review-reminder' === $column ) {
+			if (
+				'ivole-review-reminder' === $column &&
+				! $this->is_reminder_column_hidden()
+			) {
 				$order = wc_get_order( $post_id );
 				if ( $order ) {
 					// Check customer consent
@@ -849,6 +852,18 @@ if ( ! class_exists( 'CR_Manual' ) ) :
 				$schedule = true;
 			}
 			return $schedule;
+		}
+
+		function is_reminder_column_hidden() {
+			$column_name = 'ivole-review-reminder';
+			$user_id = get_current_user_id();
+
+			// user meta key used by WordPress to store hidden columns for WooCommerce Orders
+			$hidden = get_user_meta( $user_id, 'managewoocommerce_page_wc-orderscolumnshidden', true );
+			if ( ! is_array( $hidden ) ) {
+				return false; // no hidden columns configured
+			}
+			return in_array( $column_name, $hidden, true );
 		}
 
 	}
