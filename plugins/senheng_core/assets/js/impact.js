@@ -139,8 +139,21 @@ jQuery(document).ready(function ($) {
         });
 
         // Clicking any external share should also ping (copy link already handled)
-        $modal.find('a.sh-share-icon').not('.sh-copy-link').off('click').on('click', function () {
-            pingShare();
+        // $modal.find('a.sh-share-icon').not('.sh-copy-link').off('click').on('click', function () {
+        //     pingShare();
+        // });
+
+        $modal.find('a.sh-share-icon').not('.sh-copy-link')
+        .off('click')
+        .on('click', function (e) {
+            e.preventDefault();
+
+            const url = $(this).attr('href');
+
+            if (url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+                pingShare();
+            }
         });
 
         // Close handlers
