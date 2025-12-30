@@ -831,145 +831,191 @@ add_filter( 'doing_it_wrong_trigger_error', function ( $trigger, $function, $mes
 
 
 /**
- * Full clone that keeps Elementor data intact and saves as Draft.
- * Put in functions.php or a small plugin.
+ * Elementor-safe full clone (keeps containers & widgets intact)
+ * Clones post/page/CPT as Draft
  */
 
-/** 1) Add "Clone (Full)" link on row actions (posts, pages, and common CPTs) */
+/**
+ * 1) Add "Clone (Full)" link in admin row actions
+ */
 add_filter( 'post_row_actions', 'sh_add_full_clone_link', 20, 2 );
 add_filter( 'page_row_actions', 'sh_add_full_clone_link', 20, 2 );
+
 function sh_add_full_clone_link( $actions, $post ) {
-    // Limit to types you care about; add more if needed.
-    $allowed_types = array( 'post', 'page', 'product', 'woodmart_layout', 'elementor_library' );
+
+    $allowed_types = array(
+        'post',
+        'page',
+        'product',
+        'woodmart_layout',
+        'elementor_library',
+    );
+
     if ( ! in_array( $post->post_type, $allowed_types, true ) ) {
         return $actions;
     }
 
-    if ( current_user_can( 'edit_post', $post->ID ) ) {
-        $url = wp_nonce_url(
-            add_query_arg(
-                array(
-                    'action' => 'sh_clone_full',
-                    'post'   => $post->ID,
-                ),
-                admin_url( 'admin.php' )
-            ),
-            'sh_clone_full_' . $post->ID
-        );
-
-        $actions['sh_clone_full'] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Clone (Full)', 'default' ) . '</a>';
+    if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+        return $actions;
     }
+
+    $url = wp_nonce_url(
+        add_query_arg(
+            array(
+                'action' => 'sh_clone_full',
+                'post'   => $post->ID,
+            ),
+            admin_url( 'admin.php' )
+        ),
+        'sh_clone_full_' . $post->ID
+    );
+
+    $actions['sh_clone_full'] = '<a href="' . esc_url( $url ) . '">' .
+        esc_html__( 'Clone (Full)', 'default' ) .
+        '</a>';
 
     return $actions;
 }
 
-/** 2) Handle the cloning (keeps Elementor meta safe) */
+/**
+ * 2) Handle cloning (Elementor SAFE)
+ */
 add_action( 'admin_action_sh_clone_full', 'sh_handle_full_clone' );
+
 function sh_handle_full_clone() {
+
     if ( empty( $_GET['post'] ) ) {
-        wp_die( esc_html__( 'No post to clone has been supplied!', 'default' ) );
+        wp_die( 'No post supplied.' );
     }
 
     $post_id = absint( $_GET['post'] );
+
     if ( ! wp_verify_nonce( $_GET['_wpnonce'] ?? '', 'sh_clone_full_' . $post_id ) ) {
-        wp_die( esc_html__( 'Security check failed.', 'default' ) );
+        wp_die( 'Security check failed.' );
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        wp_die( 'Permission denied.' );
     }
 
     $post = get_post( $post_id );
-    if ( ! $post || ! current_user_can( 'edit_post', $post_id ) ) {
-        wp_die( esc_html__( 'You are not allowed to clone this item.', 'default' ) );
+
+    if ( ! $post ) {
+        wp_die( 'Post not found.' );
     }
 
-    // Insert the new draft
-    $new_post_id = wp_insert_post( array(
-        'post_author'  => get_current_user_id(),
-        'post_content' => $post->post_content, // not used by Elementor but fine to keep
-        'post_excerpt' => $post->post_excerpt,
-        'post_title'   => $post->post_title . ' (copy)',
-        'post_status'  => 'draft',
-        'post_type'    => $post->post_type,
-        'post_parent'  => 0,
-        'menu_order'   => $post->menu_order,
-        'comment_status' => $post->comment_status,
-        'ping_status'    => $post->ping_status,
-    ), true );
+    /**
+     * Create new draft
+     */
+    $new_post_id = wp_insert_post(
+        array(
+            'post_title'     => $post->post_title . ' (copy)',
+            'post_content'   => $post->post_content,
+            'post_excerpt'   => $post->post_excerpt,
+            'post_status'    => 'draft',
+            'post_type'      => $post->post_type,
+            'post_author'    => get_current_user_id(),
+            'comment_status' => $post->comment_status,
+            'ping_status'    => $post->ping_status,
+            'menu_order'     => $post->menu_order,
+        ),
+        true
+    );
 
     if ( is_wp_error( $new_post_id ) ) {
         wp_die( $new_post_id );
     }
 
-    // Copy terms (all taxonomies registered to this post type)
+    /**
+     * Copy taxonomies
+     */
     $taxonomies = get_object_taxonomies( $post->post_type );
+
     foreach ( $taxonomies as $taxonomy ) {
         $terms = wp_get_object_terms( $post_id, $taxonomy, array( 'fields' => 'ids' ) );
         if ( ! is_wp_error( $terms ) ) {
-            wp_set_object_terms( $new_post_id, $terms, $taxonomy, false );
+            wp_set_object_terms( $new_post_id, $terms, $taxonomy );
         }
     }
 
-    // Copy all post meta; keep a small blacklist of system/meta that shouldn't be copied
+    /**
+     * Copy post meta (CRITICAL: Elementor-safe)
+     */
     $blacklist = array(
         '_edit_lock',
         '_edit_last',
         '_wp_old_slug',
-        '_elementor_css',              // regenerated by Elementor
-        '_elementor_source_image_hash' // transient-ish
+        '_elementor_css', // regenerate
     );
 
     $all_meta = get_post_meta( $post_id );
+
     foreach ( $all_meta as $meta_key => $values ) {
+
         if ( in_array( $meta_key, $blacklist, true ) ) {
             continue;
         }
 
         foreach ( $values as $value ) {
-            // Handle Elementor meta specially - need wp_slash to preserve JSON escaping
-            if ( str_starts_with( $meta_key, '_elementor_' ) ) {
-                // WordPress from stripping escape characters which corrupts widgets
-                if ( $meta_key === '_elementor_data' ) {
-                    // Use wp_slash to preserve all escape sequences in the JSON
-                    update_post_meta( $new_post_id, $meta_key, wp_slash( $value ) );
-                } else {
-                    // Other Elementor meta (like _elementor_template_type, _elementor_version, etc.)
-                    // This handles cases where the source meta is corrupted/double-serialized
-                    $clean_value = maybe_unserialize( $value );
-                    update_post_meta( $new_post_id, $meta_key, $clean_value );
-                }
-            } else {
-                // Preserve serialized data & strings safely for non-Elementor meta
-                $value = maybe_unserialize( $value );
-                $value = is_string( $value ) ? wp_slash( $value ) : $value;
-                add_post_meta( $new_post_id, $meta_key, $value );
+
+            // Elementor layout JSON — COPY RAW
+            if ( $meta_key === '_elementor_data' ) {
+                update_post_meta( $new_post_id, '_elementor_data', $value );
+                continue;
             }
+
+            // Other Elementor meta
+            if ( str_starts_with( $meta_key, '_elementor_' ) ) {
+                update_post_meta(
+                    $new_post_id,
+                    $meta_key,
+                    maybe_unserialize( $value )
+                );
+                continue;
+            }
+
+            // Normal meta
+            update_post_meta(
+                $new_post_id,
+                $meta_key,
+                maybe_unserialize( $value )
+            );
         }
     }
 
-    // Optional: fix common theme meta so layout/type is preserved (Woodmart examples)
-    foreach ( array( 'wd_layout_type', 'woodmart_layout_type', 'conditions' ) as $maybe_key ) {
-        $v = get_post_meta( $post_id, $maybe_key, true );
-        if ( $v !== '' && $v !== null ) {
-            update_post_meta( $new_post_id, $maybe_key, is_string( $v ) ? wp_slash( $v ) : $v );
-        }
+    /**
+     * Force Elementor mode (extra safety)
+     */
+    update_post_meta( $new_post_id, '_elementor_edit_mode', 'builder' );
+
+    if ( $post->post_type === 'page' ) {
+        update_post_meta( $new_post_id, '_elementor_template_type', 'wp-page' );
     }
 
-    // Redirect back to the list table with a notice; do NOT open Elementor.
-    $redirect = add_query_arg(
-        array(
-            'post_type' => $post->post_type,
-            'sh_cloned' => 1,
-        ),
-        admin_url( 'edit.php' )
+    /**
+     * Redirect back
+     */
+    wp_safe_redirect(
+        add_query_arg(
+            array(
+                'post_type' => $post->post_type,
+                'sh_cloned' => 1,
+            ),
+            admin_url( 'edit.php' )
+        )
     );
-    wp_safe_redirect( $redirect );
+
     exit;
 }
 
-/** 3) Small notice after cloning */
+/**
+ * 3) Admin notice
+ */
 add_action( 'admin_notices', function () {
     if ( isset( $_GET['sh_cloned'] ) ) {
-        echo '<div class="notice notice-success is-dismissible"><p>' .
-             esc_html__( 'Clone created as Draft. You can now edit it with Elementor.', 'default' ) .
-             '</p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p>';
+        echo esc_html__( 'Clone created successfully. Open with Elementor.', 'default' );
+        echo '</p></div>';
     }
 } );
 
