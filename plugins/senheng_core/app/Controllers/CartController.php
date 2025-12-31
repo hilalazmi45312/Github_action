@@ -1556,7 +1556,7 @@ class CartController
     public static function display_maintenance_fees_disclaimer()
     {
         echo '<tr class="sh-maintenance-fees-disclaimer">
-            <td colspan="2" style="text-align: right; font-size: 13px; color: #666; font-family: var(--wd-text-font);">
+            <td colspan="2" style="text-align: right; font-size: 14px; color: #666; font-family: var(--wd-text-font);">
                 <p style="margin-bottom: 0 !important;">* Subject to 5% maintenance and security fees</p>
             </td>
         </tr>';
