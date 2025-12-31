@@ -835,7 +835,7 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
         
         foreach ($item['child_products'] as $child_product_id) {
             $child_product = wc_get_product($child_product_id);
-            if (!is_object($child_product) || get_post_status($child_product_id) != 'publish') {
+            if (!is_object($child_product) || !in_array(get_post_status($child_product_id), ['publish', 'private'])) {
                 continue;
             }
             
@@ -2078,6 +2078,4 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
         // Default to showing the group if no attribute conditions are found
         return $match_all;
     }
-
-
 }
