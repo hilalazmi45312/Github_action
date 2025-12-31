@@ -46,8 +46,8 @@
 .scoin-total-row .scoin-cont-total {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: flex-start;
 	font-size: 14px !important;
+	color: #939691 !important;
 	background-color: #f9f2d5 !important;
 	border: none !important;
 	border-radius: 6px !important;
