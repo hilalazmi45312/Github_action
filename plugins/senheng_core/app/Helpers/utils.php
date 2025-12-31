@@ -912,3 +912,12 @@ if (! function_exists('ipay88_types_mapping')) {
         ];
     }
 }
+
+if (! function_exists('sh_logs')) {
+
+    function sh_logs($message)
+    {
+        $logger = wc_get_logger();
+        $logger->add('senheng_core_logs', $message);
+    }
+}

@@ -192,6 +192,14 @@ class RegisterController
             update_user_meta($user->ID, $key, $value);
         }
 
+        // Block login if user is suspended
+        if (function_exists('culb_is_user_blocked') && culb_is_user_blocked($user->ID)) {
+            wp_send_json_error([
+                'message' => 'Your account has been suspended. Please contact support.'
+            ]);
+            return;
+        }
+
         // Force login
         wp_set_current_user($user->ID);
         wp_set_auth_cookie($user->ID, true); // true = remember me
