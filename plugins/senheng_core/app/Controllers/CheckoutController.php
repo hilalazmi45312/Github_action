@@ -240,6 +240,9 @@ class CheckoutController
                 'error'
             );
         }
+
+        // Display maintenance and security fees disclaimer
+        add_action('woocommerce_review_order_before_order_total', [self::class, 'display_maintenance_fees_disclaimer'], 25);
     }
 
     /**
@@ -2826,6 +2829,18 @@ class CheckoutController
             echo "console.log('PHP DEBUG: " . esc_js($label) . "', " . $json . ");";
         }
         echo '</script>';
+    }
+
+    /**
+     * Display maintenance and security fees disclaimer before order total
+     */
+    public static function display_maintenance_fees_disclaimer()
+    {
+        echo '<tr class="sh-maintenance-fees-disclaimer">
+            <td colspan="2" style="text-align: right; font-size: 13px; color: #666; padding-top: 5px; font-family: var(--wd-text-font);">
+                <p style="margin-bottom: 10px !important;">* Subject to 5% maintenance and security fees</p>
+            </td>
+        </tr>';
     }
 }
 
