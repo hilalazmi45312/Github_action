@@ -319,7 +319,7 @@ class ScoinController
         $icon_url = esc_url(SENHENG_CORE_ASSETS_URL . 'uploads/s-coin-nobg.png');
 
         echo '<tr class="scoin-total-row">';
-        echo '  <th>' . esc_html__('S-Coin Earn', 'senheng') . '<p style="font-size: 11px; color: #666; font-family: var(--wd-text-font); text-align: left; font-weight: normal; margin: 5px 0 0 0;">* Subject to 5% maintenance and security fees</p></th>';
+        echo '  <th>' . esc_html__('S-Coin Earn', 'senheng') . '<p style="font-size: 9px; color: #666; font-family: var(--wd-text-font); text-align: left; font-weight: normal; margin: 5px 0 0 0;">* Subject to 5% maintenance and security fees</p></th>';
         echo '  <td data-title="' . esc_attr__('S-Coin earn', 'senheng') . '">';
         
         if ($is_checkout) {
