@@ -1,0 +1,22 @@
+*** All in one product feed for WooCommerce Changelog ***
+
+2025-11-20 - version 1.0.4
+*Compatibility - Tested OK with WordPress 6.8.3
+*Compatibility - Tested OK with WooCommerce 10.3.5
+
+2025-07-29 - version 1.0.3
+ * Add: Support for Pinterest RSS and  X Shopping Manager(Twitter) channels.
+ * Compatibility: Tested OK with WordPress 6.8.2
+ * Compatibility: Tested OK with WooCommerce 10.0.4
+ 
+2025-03-20 - version 1.0.2
+ * Add: Support for Idealo Feed.
+ * Fix: Automatic feed refresh.
+
+2025-03-14 - version 1.0.1
+ * Add: Support for Custom Product Feeds.
+ * Add: Google Pickup methods and Pickup SLA.
+ * Update: Documentation and support links updated.
+
+2025-03-13 - version 1.0.0
+ * Add: First release
