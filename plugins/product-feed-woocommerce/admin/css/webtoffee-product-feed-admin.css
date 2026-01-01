@@ -1,0 +1,648 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+.wt-fbfeed-tab-container{
+    padding: 30px;
+    /*padding-bottom: 0px;*/
+    background: #fff;
+    box-shadow: 0px 2px 2px #ccc;
+    float: left;
+    box-sizing: border-box;
+    width: 99%;
+    height: auto;
+}
+
+.wt_fbfeed_view_log{  }
+.wt_fbfeed_log_loader{ width:100%; height:200px; text-align:center; line-height:150px; font-size:14px; font-style:italic; }
+.wt_fbfeed_log_container{ padding:25px; }
+.wt_fbfeed_raw_log{ text-align:left; font-size:14px; }
+.log_view_tb th, .log_view_tb td{ text-align:center; }
+.log_list_tb .log_file_name_col{ text-align:left; }
+/* popup */
+.wt_fbfeed_overlay{ position:fixed; z-index:100000000; width:100%; height:100%; background-color:rgba(0,0,0,.5); left:0px; top:0px; display:none;}
+.wt_fbfeed_popup{position:fixed; z-index:100000001; background:#fff; border:solid 1px #eee; text-align:left; box-shadow:0px 2px 5px #333; left:50%; display:none;}
+.wt_fbfeed_popup_hd{display:inline-block; width:100%; box-sizing:border-box; font-weight:bold; background-color:#f3f3f3; height:40px; text-align:left; line-height:40px; padding:0px 20px;}
+.wt_fbfeed_popup_close{float:right; width:40px; height:40px; text-align:right; line-height:40px; cursor:pointer;}
+.wt_fbfeed_popup_footer{width:100%; text-align:right; margin-top:10px;}
+
+
+/*
+    Common 
+*/
+
+.wizard,
+.tabcontrol
+{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.wizard a,
+.tabcontrol a
+{
+    outline: 0;
+}
+
+.wizard ul,
+.tabcontrol ul
+{
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.wizard ul > li,
+.tabcontrol ul > li
+{
+    display: block;
+    padding: 0;
+}
+
+/* Accessibility */
+.wizard > .steps .current-info,
+.tabcontrol > .steps .current-info
+{
+    position: absolute;
+    left: -999em;
+}
+
+.wizard > .content > .title,
+.tabcontrol > .content > .title
+{
+    position: absolute;
+    left: -999em;
+}
+
+
+
+/*
+    Wizard
+*/
+
+.wizard > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wizard.vertical > .steps
+{
+    display: inline;
+    float: left;
+    width: 30%;
+}
+
+.wizard > .steps .number
+{
+    font-size: 1.429em;
+}
+
+.wizard > .steps > ul > li
+{
+    width: 25%;
+}
+
+.wizard > .steps > ul > li,
+.wizard > .actions > ul > li
+{
+    float: left;
+}
+
+.wizard.vertical > .steps > ul > li
+{
+    float: none;
+    width: 100%;
+}
+
+.wizard > .steps a
+/*.wizard > .steps a:hover,*/
+/*.wizard > .steps a:active*/
+{
+    display: block;
+    width: auto;
+    margin: 0 0.5em 0.5em;
+    padding: 1em 1em;
+    text-decoration: none;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard > .steps .disabled a
+/*.wizard > .steps .disabled a:hover,*/
+/*.wizard > .steps .disabled a:active*/
+{
+    background: #eee;
+    color: #aaa;
+    cursor: default;
+}
+
+.wizard > .steps .current a,
+/*.wizard > .steps .current a:hover,*/
+/*.wizard > .steps .current a:active*/
+.wizard > .steps .current a:focus
+{
+    /*background: #2184be;*/
+    color: #fff;
+    cursor: default;
+    box-shadow:none;
+}
+
+.wizard > .steps .done .number{
+        /*background-image: url(../../assets/images/wt-feed-tick.svg);*/
+}
+
+.wizard > .steps .done a,
+/*.wizard > .steps .done a:hover,*/
+.wizard > .steps .done a:active
+{
+    background: #9dc8e2;
+    color: #fff;
+}
+
+.wizard > .steps .error a,
+/*.wizard > .steps .error a:hover,*/
+.wizard > .steps .error a:active
+{
+    background: #ff3111;
+    color: #fff;
+}
+
+.wizard > .content
+{
+    display: block;
+    margin: 0.5em;
+    min-height: 35em;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard.vertical > .content
+{
+    display: inline;
+    float: left;
+    margin: 0 2.5% 0.5em 2.5%;
+    width: 65%;
+}
+
+.wizard > .content > .body
+{
+    float: left;
+    position: absolute;
+    width: 95%;
+    /*height: 95%;*/
+    padding: 2.5%;
+    padding-top: 0px;
+    /*margin-top: 15px;*/
+}
+.wizard > .content > .body{ position: relative !important;}
+.wizard > .actions > ul > li.disabled {
+  display: none;
+}
+
+.wizard > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.wizard > .content > .body ul > li
+{
+    display: list-item;
+}
+
+.wizard > .content > .body > iframe
+{
+    border: 0 none;
+    width: 100%;
+    height: 100%;
+}
+/*
+.wizard > .content > .body input
+{
+    display: block;
+    border: 1px solid #ccc;
+}
+
+.wizard > .content > .body input[type="checkbox"]
+{
+    display: inline-block;
+}
+
+.wizard > .content > .body input.error
+{
+    background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
+    color: #8a1f11;
+}
+*/
+.wizard > .content > .body label
+{
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.wizard > .content > .body label.error
+{
+    color: #8a1f11;
+    display: inline-block;
+    margin-left: 1.5em;
+}
+
+.wizard > .actions
+{
+    position: relative;
+    display: block;
+    text-align: right;
+    width: 100%;
+}
+
+.wizard.vertical > .actions
+{
+    display: inline;
+    float: right;
+    margin: 0 2.5%;
+    width: 95%;
+}
+
+.wizard > .actions > ul
+{
+    display: inline-block;
+    text-align: right;
+    margin-right: 30px;
+}
+
+.wizard > .actions > ul > li
+{
+    margin: 0 0.5em;
+}
+
+.wizard.vertical > .actions > ul > li
+{
+    margin: 0 0 0 1em;
+}
+
+.wizard > .actions a,
+.wizard > .actions a:hover,
+.wizard > .actions a:active
+{
+    background: #2271b1;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    padding: 1px 20px;
+        line-height: 3;
+    
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 4px;
+}
+
+/* button-secondary */
+.wizard > .actions a[href="#previous"], .wizard > .actions a[href="#finish"]{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 3;
+    min-height: 30px;
+    margin: 0;
+    padding: 0 20px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    color: #2271b1;
+    border-color: #2271b1;
+    background: #f6f7f7;
+    vertical-align: top;
+}
+
+.wizard > .actions .disabled a,
+.wizard > .actions .disabled a:hover,
+.wizard > .actions .disabled a:active
+{
+    background: #1877f2;
+    color: #aaa;
+}
+
+.wizard > .loading
+{
+}
+
+.wizard > .loading .spinner
+{
+}
+
+
+
+/*
+    Tabcontrol
+*/
+
+.tabcontrol > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.tabcontrol > .steps > ul
+{
+    position: relative;
+    margin: 6px 0 0 0;
+    top: 1px;
+    z-index: 1;
+}
+
+.tabcontrol > .steps > ul > li
+{
+    float: left;
+    margin: 5px 2px 0 0;
+    padding: 1px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tabcontrol > .steps > ul > li:hover
+{
+    background: #edecec;
+    border: 1px solid #bbb;
+    padding: 0;
+}
+
+.tabcontrol > .steps > ul > li.current
+{
+    background: #fff;
+    border: 1px solid #bbb;
+    border-bottom: 0 none;
+    padding: 0 0 1px 0;
+    margin-top: 0;
+}
+
+.tabcontrol > .steps > ul > li > a
+{
+    color: #5f5f5f;
+    display: inline-block;
+    border: 0 none;
+    margin: 0;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li > a:hover
+{
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li.current > a
+{
+    padding: 15px 30px 10px 30px;
+}
+
+.tabcontrol > .content
+{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 35em;
+    overflow: hidden;
+    border-top: 1px solid #bbb;
+    padding-top: 20px;
+}
+
+.tabcontrol > .content > .body
+{
+    float: left;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+}
+
+.tabcontrol > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.tabcontrol > .content > .body ul > li
+{
+    display: list-item;
+}
+
+
+.wt-nav-tab, .wt-nav-tab:hover, .wt-nav-tab:focus{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    background: none;
+    box-shadow: none;
+    font-weight: normal;
+}
+
+.wt-nav-tab-act, .wt-nav-tab-act:hover{
+    color: #3157A6;
+    border-bottom: 5px solid #3157A6;
+    font-weight: 600;
+}
+
+
+.wt-pf_form_help{ color:#666;font-weight:400; font-size:12px; display:inline-block; width:100%; margin-top:10px; }
+
+
+.wizard ul[role="tablist"] {
+    position: relative;
+    margin-bottom: 0;
+    border-bottom-color: transparent;
+    margin-left: 300px;
+}
+
+.wizard > div.wizard-inner {
+    position: relative;
+}
+
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 75%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.wizard ul[role="tablist"] > li.current > a, .wizard ul[role="tablist"] > li.current > a:hover, .wizard ul[role="tablist"] > li.current > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.number {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #fff;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 16px;
+    color: #0e214b;
+    font-weight: 500;
+    border: 1px solid #ddd;
+}
+span.number i{
+    color:#555555;
+}
+.wizard li.current span.number {
+    background: #3157A6;
+    color: #fff;
+    /*border-color: #3157A6;*/
+}
+.wizard li.current span.number i{
+    color: #5bc0de;
+}
+.wizard ul[role="tablist"] > li.current > a i{
+    color: #0db02b;
+}
+
+.wizard ul[role="tablist"] > li {
+    width: 15%;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: red;
+    transition: 0.1s ease-in-out;
+}
+
+
+
+.wizard ul[role="tablist"] > li a {
+    width: 30px;
+    height: 30px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    top: 0;
+}
+.wizard ul[role="tablist"] > li a i{
+    position: absolute;
+    top: -15px;
+    font-style: normal;
+    font-weight: 400;
+    white-space: nowrap;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+}
+
+.wizard ul[role="tablist"] > li a:hover {
+    background: transparent;
+}
+
+.wizard .tab-pane {
+    position: relative;
+    padding-top: 20px;
+}
+
+
+.wizard h3 {
+    margin-top: 0;
+}
+.prev-step,
+.next-step{
+    font-size: 13px;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 30px;
+}
+.next-step{
+    background-color: #0db02b;
+}
+.wt-connecting-line{
+    height: 2px;
+    width:24%;
+    background: #e0e0e0;
+    position: relative;
+    margin-top:50px;
+    margin-bottom: -36px;
+    z-index: 1;
+    margin-left: 360px;
+}
+
+@media only screen and (max-width: 1200px){
+    .wt-connecting-line{
+        width:20%;
+        margin-left: 330px;
+    }
+}
+@media only screen and (max-width: 992px){
+    .wt-connecting-line{
+        width:20%;
+        margin-left: 320px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .wt-connecting-line{
+        width:16%;
+        margin-left: 330px;
+    }
+}
+@media only screen and (max-width: 600px){
+    .wt-connecting-line{
+        width:18%;
+        margin-left: 330px;
+    }
+}
+.wt_pf_schedule_sync_block{padding: 2px 30px}
+.wt_notify_msg{ position:fixed; width:300px; padding:15px; color:#fff; right:60px; top:0px; opacity:0; box-shadow:0px 2px 2px #333; border-radius:5px; z-index:1000000000;}
+
+#example-basic-p-0{
+    margin-top: 0px;
+}
+#example-basic-p-2 h2{
+    width:80%;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.clearfix:after,.clearfix:before{
+    content: " ";
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
