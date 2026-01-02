@@ -196,7 +196,7 @@
         </div>
 
         <p class="terms">
-            By continuing, you agree to our <a href="/privacy-sh">Terms of Service</a> and acknowledge that you’ve read our <a href="/terms-of-use">Privacy Policy</a>.
+            By continuing, you agree to our <a href="/terms-of-use">Terms of Service</a> and acknowledge that you’ve read our <a href="/privacy-sh">Privacy Policy</a>.
         </p>
     </div>
 </div>
