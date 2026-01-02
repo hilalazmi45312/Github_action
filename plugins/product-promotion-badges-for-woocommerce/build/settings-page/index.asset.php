@@ -1,1 +1,0 @@
-<?php return array('dependencies' => array('react', 'wp-api-fetch', 'wp-block-editor', 'wp-components', 'wp-compose', 'wp-core-data', 'wp-data', 'wp-date', 'wp-element', 'wp-html-entities', 'wp-i18n', 'wp-media-utils', 'wp-notices', 'wp-primitives'), 'version' => 'f17ee8060ba73dd1d802');
