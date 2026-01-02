@@ -97,7 +97,7 @@
         <p class="reset-password" onclick="resetPassword()"><a href="#">Forgot Password?</a></p>
 
         <p class="terms">
-            By continuing, you agree to Senheng’s <a href="/privacy-sh">Terms of Service</a> and acknowledge that you’ve read our <a href="/terms-of-use">Privacy Policy</a>.
+            By continuing, you agree to our <a href="/terms-of-use">Terms of Service</a> and acknowledge that you’ve read our <a href="/privacy-sh">Privacy Policy</a>.
         </p>
     </div>
 
