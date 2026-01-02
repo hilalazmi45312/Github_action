@@ -119,10 +119,10 @@ class BenefitBoxController
         // Get benefit box settings from database
         $benefit_settings = BenefitBox::getActiveSettings();
         foreach ($benefit_settings as $setting) {
-            // Check if this is a warranty type - display only if product has warranty
+            // Check if this is a warranty type - display only if product_warranty is not 0
             if ($setting['type'] === 'warranty') {
                 // Try ACF get_field first, then fallback to get_post_meta
-                $warranty_value = '';
+                $warranty_value = null;
                 
                 // Method 1: ACF get_field
                 if (function_exists('get_field')) {
@@ -130,17 +130,19 @@ class BenefitBoxController
                 }
                 
                 // Method 2: Fallback to get_post_meta (ACF stores with underscore prefix sometimes)
-                if (empty($warranty_value)) {
+                if ($warranty_value === null || $warranty_value === '' || $warranty_value === false) {
                     $warranty_value = get_post_meta($product_id, 'product_warranty', true);
                 }
                 
                 // Method 3: Try with underscore prefix (ACF reference field storage)
-                if (empty($warranty_value)) {
+                if ($warranty_value === null || $warranty_value === '' || $warranty_value === false) {
                     $warranty_value = get_post_meta($product_id, '_product_warranty', true);
                 }
                 
-                if (empty($warranty_value)) {
-                    continue; // Skip warranty card if product has no warranty
+                // Only skip warranty card if product_warranty is explicitly set to 0
+                // Display for all other values (including empty/not set)
+                if ($warranty_value === 0 || $warranty_value === '0') {
+                    continue; // Skip warranty card only when explicitly set to 0
                 }
                 
                 // Process shortcodes in title and subtitle
@@ -247,10 +249,6 @@ class BenefitBoxController
 
         try {
             $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-
-            // Debug logging
-            error_log('Save request - Raw ID: ' . ($_POST['id'] ?? 'not set') . ', Parsed ID: ' . $id . ', Is new: ' . ($id === 0 ? 'true' : 'false'));
-            error_log('Save request - POST data: ' . print_r($_POST, true));
 
             // Validate required fields
             if (empty($_POST['type']) || empty($_POST['title'])) {
