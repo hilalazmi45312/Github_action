@@ -162,7 +162,9 @@ class AutoSonController
         $admin_fee = get_post_meta($order->get_id(), '_ipay88_admin_fee', true);
         $shipping_method = $order->get_shipping_method();
         $isPickup = stripos($shipping_method, 'Store Pickup') !== false;
-        $storePickUpName = $isPickup ? self::get_store_pickup_name($order) : '';
+        $storePickUp = $isPickup
+        ? self::get_store_pickup_name($order)
+        : ['storePickUpName' => '', 'storePickUpCode' => ''];
         $isAdminFeeWaive = self::isBrandWaived($admin_fee, $cart_brands);
 
         return [
@@ -198,28 +200,43 @@ class AutoSonController
             // 'scoinRedemption'    => 0,
             'isAdminFeeWaive'    => $isAdminFeeWaive,
             'isStorePickUp' => $isPickup ? 'true' : 'false',
-            'storePickUpName' => $storePickUpName,
+            'storePickUpName' => $storePickUp['storePickUpName'],
+            'storePickUpCode' => $storePickUp['storePickUpCode'],
         ];
     }
 
     private static function get_store_pickup_name($order)
     {
         foreach ($order->get_shipping_methods() as $item) {
-            
-            // // Only Local Pickup Plus
+
+            // Optional safety check
             // if ($item->get_method_id() !== 'local_pickup_plus') {
             //     continue;
             // }
 
-            // This meta is already saved by the plugin
-            $location_id = $item->get_meta('_pickup_location_id');
-            $branch_code = get_post_meta($location_id, '_pickup_location_branch_code', true);
+            $location_name = $item->get_meta('_pickup_location_name');
+            $location_id   = $item->get_meta('_pickup_location_id');
 
-            if (!empty($branch_code)) {
-                return $branch_code; // e.g. "senQ IOI Mall Puchong"
+            if (!$location_name || !$location_id) {
+                continue;
             }
+
+            $branch_code = get_post_meta(
+                $location_id,
+                '_pickup_location_branch_code',
+                true
+            );
+
+            return [
+                'storePickUpName' => $location_name,
+                'storePickUpCode' => $branch_code ?: '',
+            ];
         }
-        return '';
+
+        return [
+            'storePickUpName' => '',
+            'storePickUpCode' => '',
+        ];
     }
 
     private static function isBrandWaived($admin_fee, $cart_brands)
