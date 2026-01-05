@@ -11,7 +11,7 @@ add_action('init', function () {
 
 
 // add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
-// add_action('template_redirect', [PwaSessionController::class, 'shweb_auto_login_from_token']); #close for temp WH want to see if this make slow
+add_action('template_redirect', [PwaSessionController::class, 'shweb_auto_login_from_token']);
 // add_filter('password_protected_is_active', [PwaSessionController::class, 'isPasswordProtectedActive']);
 
 // RegisterController routes

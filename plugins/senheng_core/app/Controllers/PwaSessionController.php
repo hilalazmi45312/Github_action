@@ -79,9 +79,9 @@ class PwaSessionController
         //     $isApp = true;
         // }
 
-        if ($userAgent === 'SRC') {
-            $isApp = true;
-        }
+        // if ($userAgent === 'SRC') {
+        //     $isApp = true;
+        // }
 
         if ($isApp) {
             echo '
