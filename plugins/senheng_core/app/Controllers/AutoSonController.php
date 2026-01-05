@@ -205,20 +205,20 @@ class AutoSonController
     private static function get_store_pickup_name($order)
     {
         foreach ($order->get_shipping_methods() as $item) {
-
+            
             // // Only Local Pickup Plus
             // if ($item->get_method_id() !== 'local_pickup_plus') {
             //     continue;
             // }
 
             // This meta is already saved by the plugin
-            $location_name = $item->get_meta('_pickup_location_name');
+            $location_id = $item->get_meta('_pickup_location_id');
+            $branch_code = get_post_meta($location_id, '_pickup_location_branch_code', true);
 
-            if (!empty($location_name)) {
-                return $location_name; // e.g. "senQ IOI Mall Puchong"
+            if (!empty($branch_code)) {
+                return $branch_code; // e.g. "senQ IOI Mall Puchong"
             }
         }
-
         return '';
     }
 
