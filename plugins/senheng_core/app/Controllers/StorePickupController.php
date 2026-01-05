@@ -864,6 +864,13 @@ add_action('admin_head', function () {
                   update_post_meta($post_id, '_pickup_location_address_address_1', $payload['acf']['store_address']);
                   update_post_meta($post_id, '_pickup_location_phone', $payload['acf']['store_contact']);
                   update_post_meta($post_id, '_pickup_location_email_recipients', 'gary@cloone.com.my');
+                  if (!empty($payload['acf']['branch_code'])) {
+                      update_post_meta(
+                          $post_id,
+                          '_pickup_location_branch_code',
+                          sanitize_text_field($payload['acf']['branch_code'])
+                      );
+                  }
 
                   update_post_meta($post_id, '_pickup_location_products', 'a:2:{s:8:"products";a:0:{}}'); // No products assigned (empty array)
                   update_post_meta($post_id, '_pickup_location_price_adjustment_enabled', 'no'); // Price adjustment disabled
