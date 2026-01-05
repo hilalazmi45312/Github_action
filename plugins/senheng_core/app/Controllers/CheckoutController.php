@@ -1126,7 +1126,7 @@ class CheckoutController
     {
         // If only virtual products, unset all default checkout fields
         if (self::is_cart_only_virtual()) {
-            $fields = array();
+            // $fields = array();
 
             // Add custom fields
             $fields['billing']['id_type'] = array(
