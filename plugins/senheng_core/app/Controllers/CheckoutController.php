@@ -394,7 +394,7 @@ class CheckoutController
             'need_einvoice' => [
                 'type'     => 'checkbox',
                 'label'    => __('Do you need an E-invoice? (for government tax submission)', 'textdomain'),
-                'required' => $need_einvoice_required,
+                'required' => false,
                 'priority' => 120,
                 'class'    => ['need-einvoice-inline'],
                 'default'  => $need_einvoice_required ? 1 : 0,
@@ -511,6 +511,31 @@ class CheckoutController
     // Custom Validation for E-Invoice Fields
     public static function validate_einvoice_fields($data, $errors)
     {
+
+        // Safety: cart must exist
+        if ( ! WC()->cart ) {
+            return;
+        }
+
+        // Get payable total (AFTER discounts, vouchers, etc)
+        $order_total = (float) WC()->cart->get_total('edit');
+
+        // Threshold
+        $threshold = 10000;
+
+        /**
+         * 1️⃣ Enforce checkbox when order > RM10,000
+         */
+        if ( $order_total > $threshold && empty( $data['need_einvoice'] ) ) {
+            $errors->add(
+                'need_einvoice',
+                __( '<strong>E-Invoice submission is compulsory for order more than RM10,000</strong>', 'textdomain' )
+            );
+
+            // Stop here — no point validating other fields yet
+            return;
+        }
+
         if (!empty($data['need_einvoice'])) {
             $required_fields = [
                 'einvoiceName' => __('Full Name (as per IC)', 'textdomain'),
