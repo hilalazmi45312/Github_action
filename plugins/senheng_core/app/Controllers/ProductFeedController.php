@@ -25,6 +25,35 @@ class ProductFeedController
     public static function init()
     {
         add_action('plugins_loaded', [self::class, 'senhengsenq_override_export_dir'], 20);
+        add_filter('wt_feed_filter_product_brand', [self::class, 'fix_variation_brand_export'], 10, 2);
+    }
+
+    /**
+     * Fix brand export for variations
+     * The plugin defaults to store name if it can't find the brand on the variation ID.
+     * We need to check the parent product for the brand term.
+     */
+    public static function fix_variation_brand_export($brand, $product)
+    {
+        if (!is_a($product, 'WC_Product')) {
+            return $brand;
+        }
+
+        $product_id = $product->get_id();
+
+        // For variations, use parent product ID to find brand
+        if ($product->is_type('variation')) {
+            $product_id = $product->get_parent_id();
+        }
+
+        $brand_terms = get_the_terms($product_id, 'product_brand');
+
+        if (!is_wp_error($brand_terms) && !empty($brand_terms)) {
+            // Return the first brand found
+            return $brand_terms[0]->name;
+        }
+
+        return $brand;
     }
 
     /**

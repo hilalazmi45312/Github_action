@@ -66,9 +66,6 @@ class CartController
 
         add_filter('woocommerce_cart_ready_to_calc_shipping', [self::class, 'disable_shipping_calc_on_cart'], 99);
         add_filter('woocommerce_cart_needs_shipping', [self::class, 'disable_needs_shipping_on_cart'], 99);
-
-        // Display maintenance and security fees disclaimer
-        add_action('woocommerce_cart_totals_before_order_total', [self::class, 'display_maintenance_fees_disclaimer'], 25);
     }
 
     /**
@@ -1548,17 +1545,5 @@ class CartController
             return $needs;
         }
         return false;
-    }
-
-    /**
-     * Display maintenance and security fees disclaimer before order total
-     */
-    public static function display_maintenance_fees_disclaimer()
-    {
-        echo '<tr class="sh-maintenance-fees-disclaimer">
-            <td colspan="2" style="text-align: right; font-size: 13px; color: #666; font-family: var(--wd-text-font);">
-                <p style="margin-bottom: 0 !important;">* Subject to 5% maintenance and security fees</p>
-            </td>
-        </tr>';
     }
 }

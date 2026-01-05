@@ -1,9 +1,0 @@
-<?php
-namespace {{namespace}};
-
-use TypeRocketPro\Controllers\TemplateController;
-
-class {{controller}} extends TemplateController
-{
-
-}

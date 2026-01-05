@@ -1,9 +1,0 @@
-<?php
-namespace {{namespace}};
-
-use TypeRocket\Controllers\Controller;
-
-class {{controller}} extends Controller
-{
-
-}

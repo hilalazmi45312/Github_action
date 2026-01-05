@@ -1155,8 +1155,9 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway
 
 			// Order total formatted the same way
 			// $order_total = (string) intval($order->get_total() * 100);
-			$sent_amount     = get_post_meta($order_id, '_ipay88_amount', true);
-			$order_total = preg_replace('/[^0-9]/', '', $sent_amount);
+			// $sent_amount     = get_post_meta($order_id, '_ipay88_amount', true);
+			// $order_total = preg_replace('/[^0-9]/', '', $sent_amount);
+            $order_total = number_format($order->get_total(), 2, '', '');
 
 			WC_iPay88::add_debug_log('Order total is: ' . $order_total);
 			WC_iPay88::add_debug_log('Received amount is: ' . $clean_received);

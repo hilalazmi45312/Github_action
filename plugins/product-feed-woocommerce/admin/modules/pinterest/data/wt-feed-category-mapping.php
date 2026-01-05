@@ -1,0 +1,161 @@
+<?php
+/**
+ * Tiktok category mapping view
+ *
+ * @link
+ *
+ * @package Webtoffee_Product_Feed_Sync_Pro
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Category mapping.
+if ( ! function_exists( 'wt_pinterest_feed_render_categories' ) ) {
+	/**
+	 * Get Product Categories
+	 *
+	 * @param int    $parent Parent ID.
+	 * @param string $par separator.
+	 * @param string $value mapped values.
+	 */
+	function wt_pinterest_feed_render_categories( $parent = 0, $par = '', $value = '' ) {
+		$category_args = array(
+			'taxonomy'       => 'product_cat',
+			'parent'         => $parent,
+			'orderby'        => 'term_group',
+			'show_count'     => 1,
+			'pad_counts'     => 1,
+			'hierarchical'   => 1,
+			'title_li'       => '',
+			'hide_empty'     => 0,
+			'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				array(
+					'key'        => 'wt_google_category',
+					'compare'    => 'NOT EXISTS',
+				),
+			),
+		);
+		$categories   = get_categories( $category_args );
+		if ( ! empty( $categories ) ) {
+			if ( ! empty( $par ) ) {
+				$par = $par . ' > ';
+			}
+
+			foreach ( $categories as $cat ) {
+				$class = $parent ? "treegrid-parent-{$parent} category-mapping" : 'treegrid-parent category-mapping';
+				?>
+				<tr class="treegrid-1 ">
+					<th>
+						<label for="cat_mapping_<?php echo esc_attr( $cat->term_id ); ?>"><?php echo esc_html( $par . $cat->name ); ?></label>
+					</th>
+					<td><!--suppress HtmlUnknownAttribute -->
+						
+
+						<select id= "cat_mapping_<?php echo esc_attr( $cat->term_id ); ?>" name="map_to[<?php echo esc_attr( $cat->term_id ); ?>]">
+								<?php
+								$allowed_tags = array(
+									'select' => array(
+										'id' => array(),
+										'class' => array(),
+										'name' => array(),
+									),
+									'option' => array(
+										'value' => array(),
+										'selected' => array(),
+									),
+								);
+								echo wp_kses( wt_pinterest_feed_category_dropdown(), $allowed_tags );
+								?>
+							</select>
+					</td>
+				</tr>
+				<?php
+				// call for child category if any.
+				if ( ! empty( $par ) ) {
+					wt_pinterest_feed_render_categories( $cat->term_id, $par . $cat->name, $value );
+				}
+			}
+		}
+	}
+}
+
+// FB Category dropdown caching.
+if ( ! function_exists( 'wt_fb_feed_category_dropdown' ) ) {
+	/**
+	 * Category dropdown
+	 *
+	 * @param string $selected Selected category.
+	 * @return string
+	 */
+	function wt_pinterest_feed_category_dropdown( $selected = '' ) {
+
+		$category_dropdown = wp_cache_get( 'wt_pinterestfeed_dropdown_product_categories' );
+
+		if ( false === $category_dropdown ) {
+			$categories = Webtoffee_Product_Feed_Sync_Pro_Pinterest::get_category_array();
+
+			// Primary Attributes.
+			$category_dropdown = '';
+
+			foreach ( $categories as $key => $value ) {
+				$category_dropdown .= sprintf( '<option value="%s">%s</option>', $key, $value );
+			}
+
+			wp_cache_set( 'wt_pinterestfeed_dropdown_product_categories', $category_dropdown, '', WEEK_IN_SECONDS );
+		}
+
+		if ( $selected && strpos( $category_dropdown, 'value="' . $selected . '"' ) !== false ) {
+			$category_dropdown = str_replace( 'value="' . $selected . '"', 'value="' . $selected . '"  selected', $category_dropdown );
+		}
+
+		return $category_dropdown;
+	}
+}
+
+$value = array();
+
+?>
+<div class="wt-wrap">
+	<h4>
+	<?php
+	esc_html_e(
+		'Map WooCommerce categories with Pinterest categories.',
+		'product-feed-woocommerce'
+	);
+	?>
+	</h4>
+	<span>Pinterest has a pre-defined set of <a target="_blank" href="https://www.pinterest.com/basepages/producttype/taxonomy.en-US.txt">categories</a>. It is important that you map the categories defined within your store with the Pinterest categories respectively so that the products will be mapped accordingly. Everytime we come across a new category that has not been mapped prior we will produce it in the below section for you to verify.You can always edit the prior mapping under the respective <a target="_blank" href="<?php echo esc_url( admin_url( 'edit-tags.php?taxonomy=product_cat&post_type=product' ) ); ?>">categories</a></span>
+	
+	<form action="" name="feed" id="category-mapping-form" class="category-mapping-form" method="post" autocomplete="off">
+		<?php wp_nonce_field( 'wt-category-mapping' ); ?>
+
+		<br/>
+		<table class="table tree widefat fixed wt-pf-category-default-mapping-tb">
+			<thead>
+			<tr>
+				<th>
+				<?php
+				esc_html_e(
+					'Store Categories',
+					'product-feed-woocommerce'
+				);
+				?>
+				</th>
+				<th>
+				<?php
+				esc_html_e(
+					'Pinterest Category',
+					'product-feed-woocommerce'
+				);
+				?>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php wt_pinterest_feed_render_categories( 0, '', $value ); ?>
+			</tbody>
+		</table>
+	</form>
+</div>
