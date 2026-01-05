@@ -6,11 +6,9 @@ add_action('init', function () {
     [RegisterController::class, 'registerRegisterRewrite']();
     force_login_page();
 });
-// add_action('wp_head', [PwaSessionController::class, 'deferJSNew'], 1);
-// add_filter('script_loader_tag', [PwaSessionController::class, 'deferJS'], 10, 3);
 
 
-// add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
+add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
 add_action('template_redirect', [PwaSessionController::class, 'shweb_auto_login_from_token']);
 // add_filter('password_protected_is_active', [PwaSessionController::class, 'isPasswordProtectedActive']);
 
