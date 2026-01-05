@@ -8,9 +8,9 @@ add_action('init', function () {
 });
 
 
-add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
 add_action('template_redirect', [PwaSessionController::class, 'shweb_auto_login_from_token']);
-// add_filter('password_protected_is_active', [PwaSessionController::class, 'isPasswordProtectedActive']);
+add_action('wp_head', [HeaderController::class, 'renderPWAHeader']);
+add_action('wp_head', [PwaSessionController::class, 'hideHeaderFooter']);
 
 // RegisterController routes
 add_action('template_redirect', [RegisterController::class, 'handleTemplateRedirect']);
@@ -249,9 +249,6 @@ add_filter('woocommerce_locate_template', [MyAccountController::class, 'overide_
 // SplashController
 // add_action('wp_head', [SplashController::class, 'header']);
 // add_action('wp_footer', [SplashController::class, 'footer']);
-
-// Header Controller
-// add_action('wp_head', [HeaderController::class, 'renderPWAHeader']);
 
 // HTTP Logger for debugging API calls
 add_action('http_api_debug', [HttpLogger::class, 'listen'], 10, 5);
