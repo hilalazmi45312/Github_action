@@ -1036,7 +1036,7 @@ add_action('admin_head', function () {
 
 
                 add_action('admin_footer-edit.php', function () {
-                  if (get_current_user_id() === 1) return;
+                  if (get_current_user_id() === 1 || get_current_user_id() === 3) return;
                   $screen = get_current_screen();
                   if ($screen && $screen->post_type === 'wc_pickup_location') : ?>
     <script type="text/javascript">
@@ -1062,3 +1062,42 @@ add_action('admin_head', function () {
     </script>
 <?php endif;
                 });
+
+/**
+ * Add Branch Code column to Pickup Locations admin list
+ */
+add_filter('manage_edit-wc_pickup_location_columns', function ($columns) {
+
+    $new = [];
+
+    foreach ($columns as $key => $label) {
+        $new[$key] = $label;
+
+        // Insert after Title (or change position if you want)
+        if ($key === 'title') {
+            $new['branch_code'] = __('Branch Code', 'senheng');
+        }
+    }
+
+    return $new;
+});
+
+add_action(
+    'manage_wc_pickup_location_posts_custom_column',
+    function ($column, $post_id) {
+
+        if ($column === 'branch_code') {
+            $branch_code = get_post_meta(
+                $post_id,
+                '_pickup_location_branch_code',
+                true
+            );
+
+            echo $branch_code
+                ? esc_html($branch_code)
+                : '<span style="color:#999;">—</span>';
+        }
+    },
+    10,
+    2
+);
