@@ -986,31 +986,26 @@ add_action('wp_ajax_nopriv_woodmart_remove_from_wishlist', 'track_multiple_wishl
 function track_search_term()
 {
     if (is_search()) {
-        $search_term = get_search_query();
-        $search_url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-        echo "
+        $search_data = [
+            'type'  => 'custom_event',
+            'value' => [[
+                'event_name'       => 'searched',
+                'event_parameters' => [
+                    'keyword'      => get_search_query(),
+                    'searched_url' => home_url(add_query_arg(null, null)),
+                ],
+            ]],
+        ];
+        ?>
         <script>
             window.InsiderQueue = window.InsiderQueue || [];
-            let searchData = {
-                type: 'custom_event',
-                value: [{
-                    event_name: 'searched',
-                    event_parameters: {
-                        search_term: '" . esc_js($search_term) . "',
-                        searched_url: '" . esc_js($search_url) . "'
-                    }
-                }]
-            };
-
+            const searchData = <?php echo wp_json_encode($search_data); ?>;
             window.InsiderQueue.push(searchData);
-            window.InsiderQueue.push({
-                type: 'init'
-            });
+            window.InsiderQueue.push({ type: 'init' });
 
             console.log('📡 Search Event Fired:', searchData);
         </script>
-        ";
+        <?php
     }
 }
 add_action('wp_footer', 'track_search_term');
