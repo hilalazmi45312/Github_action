@@ -242,7 +242,28 @@ class CheckoutController
         }
 
         //change order total for deposit products at checkout
-        add_action('woocommerce_before_calculate_totals', [self::class, 'adjust_order_total_for_deposit_products'], 20);
+        // add_action('woocommerce_before_calculate_totals', [self::class, 'adjust_order_total_for_deposit_products'], 20);
+
+        add_action(
+            'woocommerce_checkout_create_order_line_item',
+            function ($item, $cart_item_key, $values, $order) {
+
+                if (empty($values['is_deposit'])) {
+                    return;
+                }
+
+                $discount = (float) WC()->cart->get_discount_total();
+                $base_price = (float) $values['data']->get_regular_price();
+                $final_price = max(0, $base_price - $discount);
+
+                // Force order line totals
+                $item->set_subtotal($final_price);
+                $item->set_total($final_price);
+
+            },
+            20,
+            4
+        );
     }
 
     /**
