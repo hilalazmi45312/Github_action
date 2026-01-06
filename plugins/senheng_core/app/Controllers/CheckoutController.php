@@ -241,32 +241,7 @@ class CheckoutController
             );
         }
 
-        //change order total for deposit products at checkout
-        // add_action('woocommerce_before_calculate_totals', [self::class, 'adjust_order_total_for_deposit_products'], 20);
-
-        add_action(
-            'woocommerce_checkout_create_order',
-            function ($order) {
-
-                $has_deposit = false;
-                foreach ($order->get_items() as $item) {
-                    if ($item->get_meta('is_deposit')) {
-                        $has_deposit = true;
-                        break;
-                    }
-                }
-
-                if (!$has_deposit) {
-                    return;
-                }
-
-                // Force final payable total
-                $final_total = 200.00; // or calculate dynamically
-
-                $order->set_total($final_total);
-            },
-            999
-        );
+        add_filter('woocommerce_calculated_total', [self::class, 'adjust_calculated_total_for_deposits'], 10, 2);
     }
 
     /**
@@ -2855,26 +2830,23 @@ class CheckoutController
         echo '</script>';
     }
 
-    public static function adjust_order_total_for_deposit_products($cart) 
-    {
-        if (is_admin() && !defined('DOING_AJAX')) return;
-        if (!$cart || $cart->is_empty()) return;
-
+    public static function adjust_calculated_total_for_deposits($total, $cart) {
+        if (is_admin() && !defined('DOING_AJAX')) return $total;
+        if (!$cart || $cart->is_empty()) return $total;
+        
         $cart_data = self::calculate_cart_data();
-        if (!$cart_data['has_deposits']) return;
-
+        if (!$cart_data['has_deposits']) return $total;
+        
+        // Get the coupon discount amount
         $discount = (float) $cart->get_discount_total();
-
-        foreach ($cart->get_cart() as $cart_item) {
-            if (!empty($cart_item['is_deposit'])) {
-
-                $base_price = (float) $cart_item['data']->get_regular_price();
-                $final_price = max(0, $base_price - $discount);
-
-                // Set FINAL payable deposit price
-                $cart_item['data']->set_price($final_price);
-            }
+        
+        if ($discount > 0) {
+            // Subtract discount from total
+            $adjusted_total = max(0, $total - $discount);
+            return $adjusted_total;
         }
+        
+        return $total;
     }
 }
 
