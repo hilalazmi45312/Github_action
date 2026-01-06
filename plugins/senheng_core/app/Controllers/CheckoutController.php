@@ -2831,31 +2831,25 @@ class CheckoutController
         echo '</script>';
     }
 
-    public static function adjust_order_total_for_deposit_products($cart) {
+    public static function adjust_order_total_for_deposit_products($cart) 
+    {
         if (is_admin() && !defined('DOING_AJAX')) return;
         if (!$cart || $cart->is_empty()) return;
 
         $cart_data = self::calculate_cart_data();
+        if (!$cart_data['has_deposits']) return;
 
-        if (!$cart_data['has_deposits']) {
-            return;
-        }
+        $discount = (float) $cart->get_discount_total();
 
-        // Deposit total after coupon
-        $new_total = max(0, $cart_data['deposit_total'] - $cart->get_discount_total());
+        foreach ($cart->get_cart() as $cart_item) {
+            if (!empty($cart_item['is_deposit'])) {
 
-        // Remove existing fees (important)
-        $cart->fees_api()->remove_all_fees();
+                $base_price = (float) $cart_item['data']->get_regular_price();
+                $final_price = max(0, $base_price - $discount);
 
-        // Add adjustment fee
-        $difference = $new_total - $cart->get_cart_contents_total();
-
-        if (abs($difference) > 0.01) {
-            $cart->add_fee(
-                __('Deposit Adjustment', 'woocommerce'),
-                $difference,
-                false
-            );
+                // Set FINAL payable deposit price
+                $cart_item['data']->set_price($final_price);
+            }
         }
     }
 }
