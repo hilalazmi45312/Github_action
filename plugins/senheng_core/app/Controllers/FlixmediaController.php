@@ -66,7 +66,7 @@ class FlixmediaController
                 display: none !important;
             }
 
-            .woocommerce-product-gallery--with-images #flix_hotspots {
+            /* .woocommerce-product-gallery--with-images #flix_hotspots {
                 position: absolute;
                 top: 50%;
                 left: 0;
@@ -78,7 +78,7 @@ class FlixmediaController
                 padding-inline: clamp(12px, 6%, 40px);
                 pointer-events: none;
                 visibility: visible !important;
-            }
+            } */
 
             #flix_hotspots .flix_hs {
                 position: static !important;
