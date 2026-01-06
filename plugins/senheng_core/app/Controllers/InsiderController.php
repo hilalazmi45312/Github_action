@@ -130,7 +130,7 @@ function get_page_type()
     //     return ['type' => 'tag'];
     // } 
     elseif (is_search()) {
-        return ['type' => 'search'];
+        // return ['type' => 'search'];
     } elseif (is_404()) {
         return ['type' => '404'];
     } elseif (is_page()) {
@@ -997,7 +997,7 @@ function track_search_term()
                 value: [{
                     event_name: 'searched',
                     event_parameters: {
-                        search_term: '" . esc_js($search_term) . "',
+                        keyword: '" . esc_js($search_term) . "',
                         searched_url: '" . esc_js($search_url) . "'
                     }
                 }]
