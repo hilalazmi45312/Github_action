@@ -252,26 +252,24 @@ window.InsiderObject = {
     /**
      * Handle search event
      */
-    handleSearch(event) {
-        const searchInput = event.target.querySelector("input[name='s']");
-        const keyword = searchInput ? searchInput.value.trim() : "";
-        // const searched_url = event.target.action + '?' + new URLSearchParams(new FormData(event.target)).toString();
-        const params = new URLSearchParams();
-        if (keyword) params.set("s", keyword);
-        params.set("post_type", "product");
-        const searched_url = `${event.target.action}?${params.toString()}`;
+    // handleSearch(event) {
+    //     const searchInput = event.target.querySelector("input[name='s']");
+    //     const keyword = searchInput ? searchInput.value.trim() : "";
+    //     // const searched_url = event.target.action + '?' + new URLSearchParams(new FormData(event.target)).toString();
+    //     const baseUrl = window.location.origin; // current domain
+    //     const searched_url = `${baseUrl}/?s=${encodeURIComponent(keyword)}&post_type=product`;
 
-        this.pushEvent('searched', {
-            channel: insiderData.channel,
-            keyword: keyword,
-            search_url: searched_url,
-        });
-        console.log('📡 Search pushed:', {
-            channel: insiderData.channel,
-            keyword: keyword,
-            search_url: searched_url,
-        });
-    },
+    //     this.pushEvent('searched', {
+    //         channel: insiderData.channel,
+    //         keyword: keyword,
+    //         search_url: searched_url,
+    //     });
+    //     console.log('📡 Search pushed:', {
+    //         channel: insiderData.channel,
+    //         keyword: keyword,
+    //         search_url: searched_url,
+    //     });
+    // },
 
     /**
      * Handle banner click events
@@ -532,29 +530,29 @@ window.InsiderObject = {
             // }
 
             // Search woodmart ajax search
-            // if (settings.url.indexOf("action=woodmart_ajax_search") !== -1) {
-            //     try {
-            //         let formDataArray = settings.data ? settings.data.split('&') : [];
-            //         let keyword = '';
-            //         const urlParams = new URLSearchParams(settings.url.split('?')[1]);
-            //         keyword = urlParams.get('query') || '';
-            //         let searched_url = settings.url + (keyword ? '&s=' + keyword : '');
-            //         this.pushEvent('searched', {
-            //             channel: insiderData.channel,
-            //             keyword: keyword,
-            //             search_url: searched_url,
-            //             src: ''
-            //         });
-            //         console.log('📡 Search pushed:', {
-            //             channel: insiderData.channel,
-            //             keyword: keyword,
-            //             search_url: searched_url,
-            //             src: ''
-            //         });
-            //     } catch (error) {
-            //         console.error("Error processing Search event:", error);
-            //     }
-            // }
+            if (settings.url.indexOf("action=woodmart_ajax_search") !== -1) {
+                try {
+                    let formDataArray = settings.data ? settings.data.split('&') : [];
+                    let keyword = '';
+                    const urlParams = new URLSearchParams(settings.url.split('?')[1]);
+                    keyword = urlParams.get('query') || '';
+                    // let searched_url = settings.url + (keyword ? '&s=' + keyword : '');
+                    const baseUrl = window.location.origin; // current domain
+                    const searched_url = `${baseUrl}/?s=${encodeURIComponent(keyword)}&post_type=product`;
+                    this.pushEvent('searched', {
+                        channel: insiderData.channel,
+                        keyword: keyword,
+                        search_url: searched_url,
+                    });
+                    console.log('📡 Search pushed:', {
+                        channel: insiderData.channel,
+                        keyword: keyword,
+                        search_url: searched_url,
+                    });
+                } catch (error) {
+                    console.error("Error processing Search event:", error);
+                }
+            }
 
             //Coupon
             if (settings.url.indexOf("wc-ajax=apply_coupon") !== -1) {
