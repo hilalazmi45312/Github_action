@@ -987,7 +987,7 @@ function track_search_term()
 {
     if (is_search()) {
         $search_term = get_search_query();
-        $search_url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $search_url  = home_url(add_query_arg(null, null));
 
         echo "
         <script>
