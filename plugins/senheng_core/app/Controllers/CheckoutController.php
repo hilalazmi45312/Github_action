@@ -187,7 +187,9 @@ class CheckoutController
         }
 
         // Calculate remaining amount for deposits
-        $data['remaining_amount'] = max($data['full_total'] - $data['deposit_total'], 0.0);
+        // Coupon discount is applied to the remaining balance instead of the deposit
+        $discount_total = WC()->cart->get_discount_total();
+        $data['remaining_amount'] = max($data['full_total'] - $data['deposit_total'] - $discount_total, 0.0);
 
         return $data;
     }
@@ -2085,9 +2087,9 @@ class CheckoutController
 
         // If cart has deposits, use the deposit total + extras as the base
         if ($cart_data['has_deposits']) {
-            // Custom calculation → coupon NOT included
+            // Custom calculation → coupon NOT included (applied to remaining balance)
             $contents_total = $cart_data['deposit_total'] + $cart_data['extras_total'];
-            $discount_total = floatval($cart->get_discount_total());
+            $discount_total = 0; // Do NOT subtract discount from "Today's Total"
         } else {
             // WooCommerce calculation → coupon ALREADY included
             $contents_total = floatval($cart->get_cart_contents_total());
@@ -2196,7 +2198,8 @@ class CheckoutController
         
         $shipping_total = $cart_object->get_shipping_total();
         $tax_total = $cart_object->get_total_tax();
-        $discount_total = $cart_object->get_discount_total();
+        // For deposit orders, discount is applied to remaining balance, so exclude it here
+        $discount_total = (isset($cart_data['has_deposits']) && $cart_data['has_deposits']) ? 0 : $cart_object->get_discount_total();
         $fee_total = method_exists($cart_object, 'get_fee_total') ? $cart_object->get_fee_total() : 0;
 
         $calc_contents_total = $current_contents_total;
@@ -2439,6 +2442,14 @@ class CheckoutController
                         // Remaining balance = (full unit price - deposit per unit) * quantity
                         $remaining_per_unit = max(0, $unit_price - $deposit_amount);
                         $total_remaining = $remaining_per_unit * $quantity;
+
+                        // Apply applied coupon discount to the remaining balance
+                        // We use the item's total discount (subtotal - total) to find how much discount was applied to this line
+                        $item_discount = floatval($item->get_subtotal()) - floatval($item->get_total());
+                        if ($item_discount > 0) {
+                            $total_remaining = max(0, $total_remaining - $item_discount);
+                        }
+
                         $item->add_meta_data('_remaining_balance', $total_remaining);
                     }
 
