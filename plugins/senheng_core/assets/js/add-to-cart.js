@@ -21,6 +21,7 @@
 		".shopping-cart-widget", // Generic shopping cart widget
 	];
 
+
 	jQuery(document.body).on("wc_fragment_refresh", function () {
 		// Try multiple cart selectors to find the active cart (prioritize Woodmart)
 		window._cartScroll = {};

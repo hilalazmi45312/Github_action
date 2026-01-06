@@ -98,6 +98,28 @@ class WooCommerceAddtoCartController
         // add_filter('woocommerce_add_to_cart_validation', [self::class, 'validate_variation_stock'], 10, 5);
 
         add_filter( 'woocommerce_product_variation_title_include_attributes', '__return_false' );
+
+        // Bypass PEWC validation for custom widget add-to-cart to prevent "Required field" errors
+        // checks on server side when we are already handling it via our custom controller
+        add_filter( 'woocommerce_add_to_cart_validation', [self::class, 'bypass_pewc_validation'], 5, 5 );
+    }
+
+    /**
+     * Bypass PEWC validation when using our custom add to cart flow
+     */
+    public static function bypass_pewc_validation($passed, $product_id, $quantity, $variation_id = '', $variations = '')
+    {
+        // Only bypass if we are doing our custom AJAX add to cart
+        if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'woodmart_ajax_add_to_cart') {
+            // Check if we have our custom product extras data
+            // This ensures we only bypass when we are sure we are handling the extras
+            if (isset($_REQUEST['product_extras_products']) || isset($_REQUEST['product_extras_info']) || isset($_REQUEST['has_product_extras'])) {
+                // Remove the PEWC validation hook
+                remove_filter('woocommerce_add_to_cart_validation', 'pewc_validate_cart_item_data', 10);
+            }
+        }
+        
+        return $passed;
     }
 
     /**
