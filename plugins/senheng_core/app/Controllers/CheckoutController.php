@@ -240,6 +240,9 @@ class CheckoutController
                 'error'
             );
         }
+
+        //change order total for deposit products at checkout
+        add_action('woocommerce_before_calculate_totals', [self::class, 'adjust_order_total_for_deposit_products'], 20);
     }
 
     /**
@@ -2826,6 +2829,34 @@ class CheckoutController
             echo "console.log('PHP DEBUG: " . esc_js($label) . "', " . $json . ");";
         }
         echo '</script>';
+    }
+
+    public static function adjust_order_total_for_deposit_products($cart) {
+        if (is_admin() && !defined('DOING_AJAX')) return;
+        if (!$cart || $cart->is_empty()) return;
+
+        $cart_data = self::calculate_cart_data();
+
+        if (!$cart_data['has_deposits']) {
+            return;
+        }
+
+        // Deposit total after coupon
+        $new_total = max(0, $cart_data['deposit_total'] - $cart->get_discount_total());
+
+        // Remove existing fees (important)
+        $cart->fees_api()->remove_all_fees();
+
+        // Add adjustment fee
+        $difference = $new_total - $cart->get_cart_contents_total();
+
+        if (abs($difference) > 0.01) {
+            $cart->add_fee(
+                __('Deposit Adjustment', 'woocommerce'),
+                $difference,
+                false
+            );
+        }
     }
 }
 
