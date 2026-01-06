@@ -890,7 +890,13 @@ class CartController
         $tax_total = $cart->get_total_tax();
         $discount_total = $cart->get_discount_total();
 
-        $correct_total = $deposit_contents_total + $extras_total + $fee_total + $shipping_total + $tax_total - $discount_total;
+        // For deposit/trade-in orders, we want the coupon to apply to the REMAINING balance, not the order total.
+        // So we do NOT subtract discount_total here.
+        if ($has_deposits || $has_trade_in) {
+             $correct_total = $deposit_contents_total + $extras_total + $fee_total + $shipping_total + $tax_total;
+        } else {
+             $correct_total = $deposit_contents_total + $extras_total + $fee_total + $shipping_total + $tax_total - $discount_total;
+        }
         return $correct_total;
     }
 

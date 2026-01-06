@@ -86,7 +86,7 @@ class AutoSonController
         $end_date   = $request->get_param('end_date');
 
         $args = [
-            'status' => ['processing', 'completed','wc-partially-paid'],
+            'status' => ['processing', 'completed', 'wc-partially-paid'],
             'posts_per_page' => -1,
         ];
 
@@ -162,7 +162,9 @@ class AutoSonController
         $admin_fee = get_post_meta($order->get_id(), '_ipay88_admin_fee', true);
         $shipping_method = $order->get_shipping_method();
         $isPickup = stripos($shipping_method, 'Store Pickup') !== false;
-        $storePickUpName = $isPickup ? self::get_store_pickup_name($order) : '';
+        $storePickUp = $isPickup
+        ? self::get_store_pickup_name($order)
+        : ['storePickUpName' => '', 'storePickUpCode' => ''];
         $isAdminFeeWaive = self::isBrandWaived($admin_fee, $cart_brands);
 
         return [
@@ -180,7 +182,7 @@ class AutoSonController
             'remark'             => ['buyerRemark' => $order->get_customer_note(), 'sellerRemark' => ''],
             // 'extras'             => self::map_extras($order),
             'orderLines'         => $lines,
-            'paymentOrderInfos'  => [self::map_payment_info($order)],
+            'paymentOrderInfos'  => [self::map_payment_info($order, $installment_term)],
             // 'packageOrderInfos'  => [],
             'einvoiceInfo'       => self::map_einvoice($order, $customer_id, $full_name),
             'creditCardNo'       => $credit_card_no ?: '',
@@ -198,7 +200,8 @@ class AutoSonController
             // 'scoinRedemption'    => 0,
             'isAdminFeeWaive'    => $isAdminFeeWaive,
             'isStorePickUp' => $isPickup ? 'true' : 'false',
-            'storePickUpName' => $storePickUpName,
+            'storePickUpName' => $storePickUp['storePickUpName'],
+            'storePickUpCode' => $storePickUp['storePickUpCode'],
         ];
     }
 
@@ -206,20 +209,34 @@ class AutoSonController
     {
         foreach ($order->get_shipping_methods() as $item) {
 
-            // // Only Local Pickup Plus
+            // Optional safety check
             // if ($item->get_method_id() !== 'local_pickup_plus') {
             //     continue;
             // }
 
-            // This meta is already saved by the plugin
             $location_name = $item->get_meta('_pickup_location_name');
+            $location_id   = $item->get_meta('_pickup_location_id');
 
-            if (!empty($location_name)) {
-                return $location_name; // e.g. "senQ IOI Mall Puchong"
+            if (!$location_name || !$location_id) {
+                continue;
             }
+
+            $branch_code = get_post_meta(
+                $location_id,
+                '_pickup_location_branch_code',
+                true
+            );
+
+            return [
+                'storePickUpName' => $location_name,
+                'storePickUpCode' => $branch_code ?: '',
+            ];
         }
 
-        return '';
+        return [
+            'storePickUpName' => '',
+            'storePickUpCode' => '',
+        ];
     }
 
     private static function isBrandWaived($admin_fee, $cart_brands)
@@ -376,8 +393,8 @@ class AutoSonController
         }
 
         // Get product ID (use variation ID if available, otherwise product ID)
-        $product_id = isset($extra_product['variationId']) && !empty($extra_product['variationId']) 
-            ? intval($extra_product['variationId']) 
+        $product_id = isset($extra_product['variationId']) && !empty($extra_product['variationId'])
+            ? intval($extra_product['variationId'])
             : (isset($extra_product['productId']) ? intval($extra_product['productId']) : 0);
 
         if (!$product_id) {
@@ -386,7 +403,7 @@ class AutoSonController
 
         // Get the actual product object (will be variation if variationId exists)
         $product = wc_get_product($product_id);
-        
+
         if (!$product) {
             return null;
         }
@@ -394,7 +411,7 @@ class AutoSonController
         // Get extra product details from stored data
         $quantity = isset($extra_product['quantity']) ? intval($extra_product['quantity']) : 1;
         $product_name = isset($extra_product['title']) ? $extra_product['title'] : $product->get_name();
-        
+
         // Get s_coin_value if available (usually 0 for extras, but check stored data)
         $s_coin_value = isset($extra_product['s_coin_value']) ? (float) $extra_product['s_coin_value'] : 0;
 
@@ -404,10 +421,10 @@ class AutoSonController
         // Calculate discount amount if child discount exists
         $child_discount = isset($extra_product['childDiscount']) ? floatval($extra_product['childDiscount']) : 0;
         $discount_type = isset($extra_product['discountType']) ? $extra_product['discountType'] : '';
-        
+
         $unit_price = (float) wc_get_price_excluding_tax($product);
         $original_price = $unit_price;
-        
+
         if ($unit_price > 0 && $child_discount > 0) {
             if ($discount_type === 'percent') {
                 $unit_price = $unit_price - ($unit_price * ($child_discount / 100));
@@ -415,7 +432,7 @@ class AutoSonController
                 $unit_price = max(0, $unit_price - $child_discount);
             }
         }
-        
+
         $discount_amount = ($original_price - $unit_price) * $quantity;
         $discount_total_cents = (int) round($discount_amount * 100);
 
@@ -642,9 +659,10 @@ class AutoSonController
         ];
     }
 
-    private static function map_payment_info($order)
+    private static function map_payment_info($order, $installment_term = null)
     {
         $payment_method = get_post_meta($order->get_id(), '_ipay88_payment_type_name', true);
+        $payment_method = self::mapIpay88PaymentMethod($payment_method, $installment_term);
         return [
             'paidAmount'      => (int) round($order->get_total() * 100),
             'originAmount'    => (int) round($order->get_total() * 100),
@@ -657,6 +675,59 @@ class AutoSonController
             'status'          => 'PAY_SUCCESS',
             // 'externalTradeNo' => $order->get_transaction_id()
         ];
+    }
+
+    private static function mapIpay88PaymentMethod(string $payment_method, $installment_term = null): ?string
+    {
+        $map = [
+
+            // Credit Card
+            'Credit/DebitCard' => 'Credit/DebitCard',
+
+            // Internet Banking
+            'Maybank2U'        => 'Maybank2U',
+            'AllianceOnline'   => 'Alliance',
+            'Ambank'           => 'AmBank',
+            'RHB'              => 'RHB',
+            'HongLeongConnect' => 'HongLeong',
+            'CIMB'             => 'CIMB',
+            'PublicBank'       => 'PublicBank',
+            'BankRakyat'       => 'BankRakyat',
+            'AffinBank'        => 'AffinBank',
+            'BSN'              => 'BSN',
+            'BankIslam'        => 'BankIslam',
+            'UOBBank'          => 'UOBBank',
+            'BankMuamalat'     => 'BankMuamalat',
+            'OCBC'             => 'OCBC',
+            'StandardChartered' => 'StandardChartered',
+            'HSBC'             => 'HSBC',
+
+            // E-Wallet
+            'BoostWallet'      => 'BoostWallet',
+            'GrabPay'          => 'GrabPay',
+            'TNG'              => 'TNG',
+            'MaybankPayQR'     => 'MaybankPayQR',
+            'ShopeePay'        => 'ShopeePay',
+
+            // BNPL / Instalment
+            'PublicBankEPP'               => 'PublicBankEPP',
+            'MaybankEzyPayVisaMastercard' => 'MaybankEzyPayVisaMastercard',
+            'MaybankEzyPayAMEX'           => 'MaybankEzyPayAMEX',
+            'HSBCInstalment'              => 'HSBCInstalment',
+            'CIMBEasyPay'                 => 'CIMBEasyPay',
+            'HongLeongEPP'                => 'HongLeongMIGS',
+            'RHBInstalment'               => 'RHBInstalment',
+            'AmBankEPP'                   => 'AmbankEPP',
+            'StandardCharteredInstalment' => 'StandardCharteredInstalment',
+            'Atome'                       => 'Atome',
+        ];
+
+
+        if ($payment_method === 'GrabPay' && $installment_term && is_numeric($installment_term) && intval($installment_term) > 1) {
+            return 'GrabPayLater';
+        }
+
+        return $map[$payment_method] ?? null;
     }
 
     private static function map_extras($order)
