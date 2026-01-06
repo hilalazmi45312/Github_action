@@ -16,27 +16,60 @@ if ( ! function_exists( 'bwfan_is_woocommerce_active' ) || ! bwfan_is_woocommerc
     .bwfan-email-product-rows .bwfan-product-rows {
         width: 100%;
         border-collapse: collapse;
-        max-width:700px;
-        border-bottom: 2px solid #000;
+        max-width: 700px;
     }
     #body_content .bwfan-email-product-rows .bwfan-product-rows td {
-        padding: 20px 10px;
-        border-bottom: 1px solid #000;
-        vertical-align: top;
+        padding: 24px 12px;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
     }
-    #body_content .bwfan-email-product-rows .bwfan-product-rows tr:last-child td {
-        border-bottom: none;
+    #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-product-row td {
+        border-bottom: 1px solid #ccc;
+    }
+    #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-product-row:last-of-type td {
+        border-bottom: 1px solid #ccc;
+    }
+    .bwfan-email-product-rows .sh-product-image img {
+        width: 100px;
+        height: auto;
+        display: block;
+    }
+    .bwfan-email-product-rows .sh-product-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+    }
+    .bwfan-email-product-rows .sh-product-attr {
+        font-size: 14px;
+        color: #666;
+        margin: 2px 0;
+        line-height: 1.4;
+    }
+    .bwfan-email-product-rows .sh-product-qty {
+        font-size: 15px;
+        color: #555;
+        text-align: center;
+    }
+    .bwfan-email-product-rows .sh-product-price {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        text-align: right;
+        white-space: nowrap;
     }
     .sh-extras-row td {
         padding-top: 0 !important;
         padding-bottom: 20px !important;
-        border-top: 0;
+        border-top: 0 !important;
+        border-bottom: 1px solid #ccc !important;
         background-color: #fff;
     }
     .sh-extras-container {
         font-size: 13px;
         color: #666;
-        padding-left: 72px; /* Align with product title (approx 60px image + padding) */
+        padding-left: 112px; /* Align with product title (100px image + padding) */
     }
     .sh-extra-item {
         display: block;
@@ -62,7 +95,7 @@ if ( ! function_exists( 'bwfan_is_woocommerce_active' ) || ! bwfan_is_woocommerc
 <?php
 
 if ( is_array( $products ) ) : ?>
-    <div class='bwfan-email-product-rows bwfan-email-table-wrap'>
+    <table class='bwfan-email-product-rows bwfan-email-table-wrap' cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td>
         <!--[if mso]>
         <table>
             <tr>
@@ -128,22 +161,22 @@ if ( is_array( $products ) ) : ?>
                     }
 
                     ?>
-                    <tr>
+                    <tr class="sh-product-row">
 						<?php if ( false === $disable_product_thumbnail ) : ?>
-                            <td class="image" width="60" style="vertical-align: top;">
+                            <td class="sh-product-image" width="100" style="vertical-align: middle;">
 								<?php if ( true === $cartItemLinkEnabled ) :
 									$cartItemLink = BWFAN_Common::decode_merge_tags( apply_filters( 'bwfan_block_editor_alter_cart_item_link', '{{cart_recovery_link}}' ) );
 									?>
                                     <a href="<?php echo esc_url( $cartItemLink ); ?>" target="_blank">
-										<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 60 ) ); ?>
+										<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 100 ) ); ?>
                                     </a>
 								<?php else : ?>
-									<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 60 ) ); ?>
+									<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 100 ) ); ?>
 								<?php endif; ?>
                             </td>
 						<?php endif; ?>
-                        <td width="" style="vertical-align: top;">
-                            <h4 style="vertical-align:middle; margin: 0 0 5px;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></h4>
+                        <td width="" style="vertical-align: middle;">
+                            <span class="sh-product-name" style="display:block;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></span>
                             <!-- Standard Variation Attributes -->
                             <?php 
                             if ( is_array( $item ) && ! empty( $item['variation'] ) ) {
@@ -161,7 +194,7 @@ if ( is_array( $products ) ) : ?>
                                         $att_label = wc_attribute_label( str_replace( 'attribute_', '', $att_name ), $item['data'] );
                                     }
                                     
-                                    echo '<div style="font-size:13px; color:#666;">' . esc_html( $att_label ) . ' : ' . esc_html( $att_value ) . '</div>';
+                                    echo '<span class="sh-product-attr" style="display:block;">' . esc_html( $att_label ) . ' : ' . esc_html( $att_value ) . '</span>';
                                 }
                             } elseif ( is_object( $item ) ) {
                                 // Order item meta (variations)
@@ -175,7 +208,7 @@ if ( is_array( $products ) ) : ?>
                                     if ( in_array( $meta->display_key, ['Trade In', 'Payment Option'] ) || in_array( $meta->key, ['_trade_in_option', 'trade_in', '_deposit_option', 'payment_option'] ) ) {
                                         continue;
                                     }
-                                    echo '<div style="font-size:13px; color:#666;">' . wp_kses_post( $meta->display_key ) . ': ' . wp_kses_post( strip_tags( $meta->display_value ) ) . '</div>';
+                                    echo '<span class="sh-product-attr" style="display:block;">' . wp_kses_post( $meta->display_key ) . ': ' . wp_kses_post( strip_tags( $meta->display_value ) ) . '</span>';
                                 }
                             }
 
@@ -188,7 +221,7 @@ if ( is_array( $products ) ) : ?>
                                 // Cart Context
                                 if ( isset( $item['trade_in'] ) && '' !== $item['trade_in'] ) {
                                     $val = ( 'yes' === $item['trade_in'] ) ? __( 'Yes', 'senheng-core' ) : __( 'No', 'senheng-core' );
-                                    $trade_in_display = '<div style="font-size:13px; color:#666; margin-top: 4px;">' . esc_html__('Trade In', 'senheng-core') . ': ' . esc_html($val) . '</div>';
+                                    $trade_in_display = '<span class="sh-product-attr" style="display:block;">' . esc_html__('Trade In', 'senheng-core') . ': ' . esc_html($val) . '</span>';
                                 }
 
                                 if ( ( isset( $item['awcdp_deposit_option'] ) && 'yes' === $item['awcdp_deposit_option'] ) || 
@@ -216,7 +249,7 @@ if ( is_array( $products ) ) : ?>
                                     } else {
                                         $val_display = $trade_in_meta;
                                     }
-                                    $trade_in_display = '<div style="font-size:13px; color:#666; margin-top: 4px;">' . esc_html__('Trade In', 'senheng-core') . ': ' . esc_html($val_display) . '</div>';
+                                    $trade_in_display = '<span class="sh-product-attr" style="display:block;">' . esc_html__('Trade In', 'senheng-core') . ': ' . esc_html($val_display) . '</span>';
                                 }
 
                                 // Check for Payment Option meta
@@ -242,21 +275,25 @@ if ( is_array( $products ) ) : ?>
 
                             // Output Payment Option & Actual Price
                             if ( $is_deposit_display ) {
-                                echo '<div style="font-size:13px; color:#666; margin-top: 4px;">' . esc_html__('Payment Option', 'senheng-core') . ': ' . esc_html__('Deposit Payment', 'senheng-core') . '</div>';
+                                echo '<span class="sh-product-attr" style="display:block;">' . esc_html__('Payment Option', 'senheng-core') . ': ' . esc_html__('Deposit Payment', 'senheng-core') . '</span>';
                                 if ( $actual_price_display > 0 ) {
-                                    echo '<div style="font-size:13px; color:#666; margin-top: 2px;">' . esc_html__('Actual Price', 'senheng-core') . ': ' . wc_price( $actual_price_display ) . '</div>';
+                                    echo '<span class="sh-product-attr" style="display:block;">' . esc_html__('Actual Price', 'senheng-core') . ': ' . wc_price( $actual_price_display ) . '</span>';
                                 }
                             }
                             ?>
                         </td>
-                        <td align="right" class="last" width="100" style="vertical-align: top;">
+                        <td class="sh-product-qty" width="50" style="vertical-align: middle;">
 	                        <?php if( false === BWFAN_Merge_Tag_Loader::get_data( 'is_preview' ) ): ?>
-		                        <div style="white-space: nowrap;">
-                                    <span style="margin-right: 10px;">x<?php echo esc_html( $quantity ); ?></span>
-                                    <?php echo wp_kses_post( $line_total ); ?>
-                                </div>
+                                x<?php echo esc_html( $quantity ); ?>
+	                        <?php else: ?>
+                                x1
+	                        <?php endif; ?>
+                        </td>
+                        <td class="sh-product-price" width="120" style="vertical-align: middle;">
+	                        <?php if( false === BWFAN_Merge_Tag_Loader::get_data( 'is_preview' ) ): ?>
+                                <?php echo wp_kses_post( $line_total ); ?>
 		                        <?php if ( $suffix && wc_tax_enabled() ): ?>
-									<small><?php echo $suffix; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
+									<br><small><?php echo $suffix; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
 		                        <?php endif; ?>
 	                        <?php else: ?>
 								<?php echo $price; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -269,8 +306,8 @@ if ( is_array( $products ) ) : ?>
                     if ( ! empty( $product_extras ) && ( ! empty( $product_extras['selected_products'] ) || ! empty( $product_extras['selected_info'] ) ) ) : 
                     ?>
                     <tr class="sh-extras-row">
-                        <td colspan="3">
-                            <div class="sh-extras-container">
+                        <td colspan="4" style="padding-left: 112px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" class="sh-extras-container">
                                 <?php
                                 // Selected Products (Bundles/Addons)
                                 if ( ! empty( $product_extras['selected_products'] ) ) {
@@ -280,7 +317,7 @@ if ( is_array( $products ) ) : ?>
                                         // Calculate price if available (optional display)
                                         $extra_price = isset($extra_product['price']) ? $extra_product['price'] : 0;
                                         
-                                        echo '<div class="sh-extra-item">';
+                                        echo '<tr class="sh-extra-item"><td style="padding: 3px 0; padding-left: 10px; border-left: 2px solid #eee;">';
                                         echo '<span class="sh-extra-name">+ ' . esc_html( $extra_title ) . '</span>';
                                         if ( $extra_qty > 1 ) {
                                             echo ' <span class="sh-extra-meta">(x' . esc_html( $extra_qty ) . ')</span>';
@@ -289,7 +326,7 @@ if ( is_array( $products ) ) : ?>
                                         /* if ( $extra_price > 0 ) {
                                             echo '<span class="sh-extra-price">' . wc_price( $extra_price ) . '</span>';
                                         } */
-                                        echo '</div>';
+                                        echo '</td></tr>';
                                     }
                                 }
 
@@ -299,17 +336,17 @@ if ( is_array( $products ) ) : ?>
                                         $info_label = isset($info_data['infoLabel']) ? $info_data['infoLabel'] : '';
                                         $info_price = isset($info_data['infoPrice']) ? $info_data['infoPrice'] : '';
                                         
-                                        echo '<div class="sh-extra-item">';
+                                        echo '<tr class="sh-extra-item"><td style="padding: 3px 0; padding-left: 10px; border-left: 2px solid #eee;">';
                                         echo '<span class="sh-extra-name">+ ' . esc_html( $info_label ) . '</span>';
                                         // Info usually has formatted price string like "+RM 100"
                                         // if ( ! empty( $info_price ) ) {
                                         //     echo '<span class="sh-extra-price">' . esc_html( $info_price ) . '</span>';
                                         // }
-                                        echo '</div>';
+                                        echo '</td></tr>';
                                      }
                                 }
                                 ?>
-                            </div>
+                            </table>
                         </td>
                     </tr>
                     <?php endif; ?>
@@ -324,47 +361,55 @@ if ( is_array( $products ) ) : ?>
 					}
 					$price      = isset( $products_price[ $product->get_id() ] ) ? $products_price[ $product->get_id() ] : null;
 					$line_total = is_null( $price ) ? BWFAN_Common::get_prices_with_tax( $product ) : $price;
+					$quantity   = 1; // Default quantity for fallback
 					?>
-                    <tr>
+                    <tr class="sh-product-row">
 						<?php
 						if ( true === $disable_product_link ) {
 							if ( false === $disable_product_thumbnail ) {
 								?>
-                                <td class="image" width="60">
-									<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 60 ) ); //phpcs:ignore WordPress.Security.EscapeOutput ?>
+                                <td class="sh-product-image" width="100" style="vertical-align: middle;">
+									<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 100 ) ); //phpcs:ignore WordPress.Security.EscapeOutput ?>
                                 </td>
 								<?php
 							} ?>
-                            <td width="">
-                                <h4 style="margin:0;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></h4>
+                            <td width="" style="vertical-align: middle;">
+                                <span class="sh-product-name" style="display:block;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></span>
                             </td>
 							<?php
 						} else {
 							?>
 							<?php if ( false === $disable_product_thumbnail ) : ?>
-                                <td class="image" width="60">
+                                <td class="sh-product-image" width="100" style="vertical-align: middle;">
                                     <a href="<?php echo esc_url( $product->get_permalink() ); ?>" target="_blank">
-										<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 60 ) ); //phpcs:ignore WordPress.Security.EscapeOutput ?>
+										<?php echo wp_kses_post( BWFAN_Common::get_product_image( $product, 'thumbnail', false, 100 ) ); //phpcs:ignore WordPress.Security.EscapeOutput ?>
                                     </a>
                                 </td>
 							<?php endif; ?>
-                            <td width="">
+                            <td width="" style="vertical-align: middle;">
                                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" target="_blank" style="text-decoration:none; color:#000;">
-                                    <h4 style="margin:0;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></h4>
+                                    <span class="sh-product-name" style="display:block;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></span>
                                 </a>
                             </td>
 							<?php
 						}
 						?>
 
-                        <td align="right" class="last" width="100">
+                        <td class="sh-product-qty" width="50" style="vertical-align: middle;">
+	                        <?php if( false === BWFAN_Merge_Tag_Loader::get_data( 'is_preview' ) ): ?>
+                                x<?php echo esc_html( $quantity ); ?>
+	                        <?php else: ?>
+                                x1
+	                        <?php endif; ?>
+                        </td>
+                        <td class="sh-product-price" width="120" style="vertical-align: middle;">
 	                        <?php if( false === BWFAN_Merge_Tag_Loader::get_data( 'is_preview' ) ): ?>
 		                        <?php echo wp_kses_post( BWFAN_Common::price( $line_total, $currency ) ); //phpcs:ignore WordPress.Security.EscapeOutput ?>
 		                        <?php if ( $suffix && wc_tax_enabled() ): ?>
-                                    <small><?php echo $suffix; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
+                                    <br><small><?php echo $suffix; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
 		                        <?php endif; ?>
 	                        <?php else: ?>
-								<?php echo $price; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>think 
+								<?php echo $price; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> 
 	                        <?php endif; ?>
                         </td>
                     </tr>
@@ -377,5 +422,5 @@ if ( is_array( $products ) ) : ?>
         </tr>
         </table>
         <![endif]-->
-    </div>
+    </td></tr></table>
 <?php endif;
