@@ -353,23 +353,26 @@
 
 			if (form.length > 0 && checkbox.length > 0) {
 				var checkboxName = checkbox.attr("name");
+				var checkboxValue = checkbox.val();
+				var productId = checkbox.data("product-id") || checkboxValue;
 				var quantity =
 					quantityInput.length && quantityInput.val() !== undefined
 						? parseInt(quantityInput.val()) || 1
 						: 1;
 
 				// Update checkbox value in form
-				if (checkboxName && checkbox.val() !== undefined) {
-					var hiddenCheckbox = form.find(
-						'input[type="hidden"][name="' + checkboxName + '"]'
-					);
+				if (checkboxName && checkboxValue !== undefined) {
+					// For PEWC validation: use the base field name without []
+					var hiddenCheckboxSelector = 'input[type="hidden"][name="' + checkboxName + '"][value="' + checkboxValue + '"]';
+					var hiddenCheckbox = form.find(hiddenCheckboxSelector);
+
 					if (checkbox.is(":checked")) {
 						if (hiddenCheckbox.length === 0) {
 							form.append(
-								'<input type="hidden" name="' +
+								'<input type="hidden" class="sh-widget-pewc-field" name="' +
 								checkboxName +
 								'" value="' +
-								checkbox.val() +
+								checkboxValue +
 								'">'
 							);
 						}
@@ -465,11 +468,19 @@
 				this.handleCartSelection($checkbox, false);
 			}
 
-			// Batch DOM updates
-			this.batchDOMUpdates($card, function () {
-				// Update form fields
-				ProductExtrasWidget.updateFormFields($card);
+			// Update pewc-item data-field-value for required field validation
+			var $pewcItem = $card.closest(".pewc-item");
+			if ($pewcItem.length) {
+				this.updatePewcFieldValue($pewcItem);
+			}
 
+			// CRITICAL: Update form fields SYNCHRONOUSLY so hidden inputs are injected 
+			// BEFORE any form submit event. Previously this was in batchDOMUpdates (async)
+			// which caused the inputs to be injected AFTER form validation started
+			ProductExtrasWidget.updateFormFields($card);
+
+			// Batch DOM updates for non-critical UI changes
+			this.batchDOMUpdates($card, function () {
 				// Update quantity controls state
 				ProductExtrasWidget.updateQuantityControlsState($card);
 
@@ -640,6 +651,29 @@
 			// Update form fields and trigger price update
 			this.updateSelectFormFields($card);
 			this.debouncedPriceUpdate();
+		},
+
+		/**
+		 * Update the data-field-value attribute on a pewc-item wrapper
+		 * This is used by the product-extras-for-woocommerce plugin's validation
+		 * to determine if a required products field has been filled
+		 */
+		updatePewcFieldValue: function ($pewcItem) {
+			if (!$pewcItem || !$pewcItem.length) {
+				return;
+			}
+
+			// Count all checked checkboxes within this pewc-item
+			var checkedCount = $pewcItem.find('.sh-checkbox-input:checked, .sh-product-checkbox-input:checked').length;
+
+			// Update the data-field-value attribute
+			$pewcItem.attr('data-field-value', checkedCount);
+
+			// If field is required and now has a value, clear any validation error
+			if (checkedCount > 0 && $pewcItem.hasClass('required-field')) {
+				$pewcItem.removeClass('pewc-failed-validation');
+				$pewcItem.find('.pewc-js-validation-notice').html('').hide();
+			}
 		},
 
 		// Debounced price update for better performance

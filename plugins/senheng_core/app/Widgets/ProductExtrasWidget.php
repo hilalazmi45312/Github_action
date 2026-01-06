@@ -833,6 +833,25 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             return;
         }
         
+        // Build pewc-item wrapper for validation compatibility
+        $field_id = $group_id . '_' . $item_id;
+        $is_required = !empty($item['field_required']);
+        $pewc_classes = ['pewc-item', 'pewc-group-products', 'sh-pewc-product-field', $field_id];
+        if ($is_required) {
+            $pewc_classes[] = 'required-field';
+        }
+        
+        echo '<div class="' . esc_attr(implode(' ', $pewc_classes)) . '" ';
+        echo 'data-id="' . esc_attr($field_id) . '" ';
+        echo 'data-field-type="products" ';
+        echo 'data-field-value="0" ';
+        if ($is_required) {
+            $validation_notice = !empty($field_label) ? $field_label : __('This field', 'senheng_core');
+            echo 'data-validation-notice="' . esc_attr($validation_notice . ' is a required field.') . '" ';
+        }
+        echo '>';
+        echo '<span class="pewc-js-validation-notice"></span>';
+        
         foreach ($item['child_products'] as $child_product_id) {
             $child_product = wc_get_product($child_product_id);
             if (!is_object($child_product) || !in_array(get_post_status($child_product_id), ['publish', 'private'])) {
@@ -1055,6 +1074,8 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
             
             echo '</div>'; // .sh-product-extra-card
         }
+        
+        echo '</div>'; // Close pewc-item validation wrapper
     }
 
     /**
@@ -2078,4 +2099,6 @@ class ProductExtrasWidget extends \Elementor\Widget_Base
         // Default to showing the group if no attribute conditions are found
         return $match_all;
     }
+
+
 }
