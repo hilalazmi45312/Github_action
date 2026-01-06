@@ -542,12 +542,12 @@ window.InsiderObject = {
                     this.pushEvent('searched', {
                         channel: insiderData.channel,
                         keyword: keyword,
-                        search_url: searched_url,
+                        searched_url: searched_url,
                     });
                     console.log('📡 Search pushed:', {
                         channel: insiderData.channel,
                         keyword: keyword,
-                        search_url: searched_url,
+                        searched_url: searched_url,
                     });
                 } catch (error) {
                     console.error("Error processing Search event:", error);
