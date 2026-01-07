@@ -62,7 +62,6 @@ function yoast_meta_ie_init() {
         new Yoast_Meta_IE\Admin\Admin();
     }
     new Yoast_Meta_IE\Ajax\Ajax_Handlers();
-    new Yoast_Meta_IE\Ajax\CSV_Converter();
 }
 add_action( 'plugins_loaded', 'yoast_meta_ie_init' );
 
