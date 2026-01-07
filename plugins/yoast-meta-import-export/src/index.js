@@ -38,7 +38,6 @@ const YoastMetaApp = () => {
 
     const showNotice = (type, message) => {
         setNotice({ type, message });
-        setTimeout(() => setNotice(null), 5000);
     };
 
     const handleFileSelect = (fileContent, fileName) => {
