@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isActive = button.getAttribute('data-is-active');
         const whatsappNumber = button.getAttribute('data-whatsapp-number');
         const predefinedText = button.getAttribute('data-predefined-text');
+        const whatsappRedirectEnabled = button.getAttribute('data-whatsapp-redirect-enabled');
         const alwaysOnline = button.getAttribute('data-always-online');
         const workingDaysMessage = button.getAttribute('data-working-days-message');
         const nonWorkingDaysMessage = button.getAttribute('data-non-working-days-message');
@@ -219,6 +220,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (type === 'whatsapp') {
             document.getElementById('modal-whatsapp-number').value = whatsappNumber || '';
             document.getElementById('modal-predefined-text').value = predefinedText || '';
+            // Default to true (checked) if attribute format is missing (backward compatibility) or if explicitly '1'
+            document.getElementById('modal-whatsapp-redirect-enabled').checked = (whatsappRedirectEnabled === '1' || whatsappRedirectEnabled === null || whatsappRedirectEnabled === '');
             document.getElementById('modal-always-online').checked = alwaysOnline == 1;
             document.getElementById('modal-working-days-message').value = workingDaysMessage || '';
             document.getElementById('modal-non-working-days-message').value = nonWorkingDaysMessage || '';
@@ -330,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (type === 'whatsapp') {
             editButton.setAttribute('data-whatsapp-number', formData.get('whatsapp_number') || '');
             editButton.setAttribute('data-predefined-text', formData.get('predefined_text') || '');
+            editButton.setAttribute('data-whatsapp-redirect-enabled', formData.get('whatsapp_redirect_enabled') ? '1' : '0');
             editButton.setAttribute('data-always-online', formData.get('always_online') ? '1' : '0');
             editButton.setAttribute('data-working-days-message', formData.get('working_days_message') || '');
             editButton.setAttribute('data-non-working-days-message', formData.get('non_working_days_message') || '');
@@ -349,6 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Remove WhatsApp-specific attributes for non-WhatsApp types
             editButton.removeAttribute('data-whatsapp-number');
             editButton.removeAttribute('data-predefined-text');
+            editButton.removeAttribute('data-whatsapp-redirect-enabled');
             editButton.removeAttribute('data-always-online');
             editButton.removeAttribute('data-working-days-message');
             editButton.removeAttribute('data-non-working-days-message');
@@ -394,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let editButtonData = `data-id="${id}" data-type="${data.type}" data-title="${data.title}" data-subtitle="${data.subtitle}" data-icon="${data.icon || ''}" data-sort-order="${data.sort_order}" data-is-active="${data.is_active}"`;
 
         if (data.type === 'whatsapp') {
-            editButtonData += ` data-whatsapp-number="${data.whatsapp_number || ''}" data-predefined-text="${data.predefined_text || ''}" data-always-online="${data.always_online || '0'}" data-working-days-message="${data.working_days_message || ''}" data-non-working-days-message="${data.non_working_days_message || ''}" data-availability-schedule="${data.availability_schedule || ''}"`;
+            editButtonData += ` data-whatsapp-number="${data.whatsapp_number || ''}" data-predefined-text="${data.predefined_text || ''}" data-whatsapp-redirect-enabled="${data.whatsapp_redirect_enabled !== undefined ? data.whatsapp_redirect_enabled : '1'}" data-always-online="${data.always_online || '0'}" data-working-days-message="${data.working_days_message || ''}" data-non-working-days-message="${data.non_working_days_message || ''}" data-availability-schedule="${data.availability_schedule || ''}"`;
         }
 
         newRow.innerHTML = `
@@ -725,6 +730,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 if (formData.get('type') === 'whatsapp') {
                                     editButton.setAttribute('data-whatsapp-number', formData.get('whatsapp_number') || '');
                                     editButton.setAttribute('data-predefined-text', formData.get('predefined_text') || '');
+                                    editButton.setAttribute('data-whatsapp-redirect-enabled', formData.get('whatsapp_redirect_enabled') ? '1' : '0');
                                     editButton.setAttribute('data-always-online', formData.get('always_online') ? '1' : '0');
                                     editButton.setAttribute('data-working-days-message', formData.get('working_days_message') || '');
                                     editButton.setAttribute('data-non-working-days-message', formData.get('non_working_days_message') || '');
@@ -744,6 +750,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     // Remove WhatsApp-specific attributes for non-WhatsApp types
                                     editButton.removeAttribute('data-whatsapp-number');
                                     editButton.removeAttribute('data-predefined-text');
+                                    editButton.removeAttribute('data-whatsapp-redirect-enabled');
                                     editButton.removeAttribute('data-always-online');
                                     editButton.removeAttribute('data-working-days-message');
                                     editButton.removeAttribute('data-non-working-days-message');
