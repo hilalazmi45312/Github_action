@@ -18,7 +18,15 @@ $cards = isset($data['cards']) && is_array($data['cards']) ? $data['cards'] : []
             ?>
             <div class="<?php echo esc_attr(implode(' ', $cardClasses)); ?>" 
                  <?php echo !empty($card['is_installment']) ? 'id="installment-details"' : ''; ?>
-                 <?php echo !empty($card['is_whatsapp']) ? 'data-whatsapp-number="' . esc_attr($card['whatsapp_number']) . '" data-predefined-text="' . esc_attr($card['predefined_text']) . '"' : ''; ?>>
+                 <?php 
+                 if (!empty($card['is_whatsapp'])) {
+                     if (!empty($card['whatsapp_redirect_enabled'])) {
+                        echo 'data-whatsapp-number="' . esc_attr($card['whatsapp_number']) . '" data-predefined-text="' . esc_attr($card['predefined_text']) . '"';
+                     } else {
+                        echo 'style="cursor: default;"';
+                     }
+                 }
+                 ?>>
                 <div class="benefit-card-icon">
                     <img src="<?php echo esc_url($card['icon']); ?>" alt="">
                 </div>

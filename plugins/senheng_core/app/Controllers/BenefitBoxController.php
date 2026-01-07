@@ -168,6 +168,8 @@ class BenefitBoxController
             if ($setting['type'] === 'whatsapp') {
                 $card['whatsapp_number'] = $setting['whatsapp_number'];
                 $card['predefined_text'] = $setting['predefined_text'];
+                // Default to true if not set
+                $card['whatsapp_redirect_enabled'] = isset($setting['whatsapp_redirect_enabled']) ? (bool)$setting['whatsapp_redirect_enabled'] : true;
                 $card['is_whatsapp'] = true;
             } elseif ($setting['type'] === 'installment') {
                 $card['is_installment'] = true;

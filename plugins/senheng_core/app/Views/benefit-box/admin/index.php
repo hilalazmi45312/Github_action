@@ -150,6 +150,7 @@ $is_creating = isset($_GET['action']) && $_GET['action'] === 'new';
                                         data-is-active="<?php echo esc_attr($setting['is_active']); ?>"
                                         data-whatsapp-number="<?php echo esc_attr($setting['whatsapp_number'] ?? ''); ?>"
                                         data-predefined-text="<?php echo esc_attr($setting['predefined_text'] ?? ''); ?>"
+                                        data-whatsapp-redirect-enabled="<?php echo esc_attr($setting['whatsapp_redirect_enabled'] ?? '1'); ?>"
                                         data-always-online="<?php echo esc_attr($setting['always_online'] ?? '0'); ?>"
                                         data-working-days-message="<?php echo esc_attr($setting['working_days_message'] ?? ''); ?>"
                                         data-non-working-days-message="<?php echo esc_attr($setting['non_working_days_message'] ?? ''); ?>"
@@ -247,6 +248,17 @@ $is_creating = isset($_GET['action']) && $_GET['action'] === 'new';
                             <td>
                                 <input type="text" name="whatsapp_number" id="modal-whatsapp-number" class="regular-text">
                                 <p class="description">Refer to <a href="https://faq.whatsapp.com/en/general/21016748" target="_blank">WhatsApp FAQ</a> for detailed explanation.</p>
+                            </td>
+                        </tr>
+
+                        <tr class="modal-whatsapp-field" style="display: none;">
+                            <th scope="row">Enable Redirect</th>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="whatsapp_redirect_enabled" id="modal-whatsapp-redirect-enabled" value="1" checked>
+                                    Redirect to WhatsApp on click
+                                </label>
+                                <p class="description">Uncheck to display the box without redirecting to WhatsApp when clicked.</p>
                             </td>
                         </tr>
                         

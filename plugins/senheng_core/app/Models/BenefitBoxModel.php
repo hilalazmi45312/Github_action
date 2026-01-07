@@ -281,7 +281,8 @@ class BenefitBox
             'always_online' => 0,
             'working_days_message' => '',
             'non_working_days_message' => '',
-            'availability_schedule' => ''
+            'availability_schedule' => '',
+            'whatsapp_redirect_enabled' => 1
         ];
 
         // Handle type-specific fields
@@ -289,6 +290,7 @@ class BenefitBox
             $data['whatsapp_number'] = sanitize_text_field($request_data['whatsapp_number'] ?? '');
             $data['predefined_text'] = sanitize_textarea_field($request_data['predefined_text'] ?? '');
             $data['always_online'] = isset($request_data['always_online']) ? 1 : 0;
+            $data['whatsapp_redirect_enabled'] = isset($request_data['whatsapp_redirect_enabled']) ? 1 : 0;
             $data['working_days_message'] = sanitize_textarea_field($request_data['working_days_message'] ?? '');
             $data['non_working_days_message'] = sanitize_textarea_field($request_data['non_working_days_message'] ?? '');
             
