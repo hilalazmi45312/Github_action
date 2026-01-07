@@ -20,40 +20,44 @@ if ( ! function_exists( 'bwfan_is_woocommerce_active' ) || ! bwfan_is_woocommerc
     }
     #body_content .bwfan-email-product-rows .bwfan-product-rows td {
         padding: 24px 12px;
-        border-bottom: 1px solid #ddd;
         vertical-align: middle;
     }
     #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-product-row td {
         border-bottom: 1px solid #ccc;
     }
-    #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-product-row:last-of-type td {
+    /* Remove border from product row when it has extras (extras row will have the border) */
+    #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-product-row.has-extras td {
+        border-bottom: none;
+    }
+    /* Extras row gets the border */
+    #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-extras-row td {
         border-bottom: 1px solid #ccc;
     }
     .bwfan-email-product-rows .sh-product-image img {
-        width: 100px;
+        width: 65px;
         height: auto;
         display: block;
     }
     .bwfan-email-product-rows .sh-product-name {
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 11px;
+        font-weight: 500;
         color: #333;
         margin: 0 0 6px 0;
         line-height: 1.3;
     }
     .bwfan-email-product-rows .sh-product-attr {
-        font-size: 14px;
+        font-size: 12px;
         color: #666;
         margin: 2px 0;
         line-height: 1.4;
     }
     .bwfan-email-product-rows .sh-product-qty {
-        font-size: 15px;
+        font-size: 12px;
         color: #555;
         text-align: center;
     }
     .bwfan-email-product-rows .sh-product-price {
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 500;
         color: #333;
         text-align: right;
@@ -106,10 +110,10 @@ if ( is_array( $products ) ) : ?>
 			<?php
 			$disable_product_link      = BWFAN_Common::disable_product_link();
 			$disable_product_thumbnail = BWFAN_Common::disable_product_thumbnail();
+			$suffix                    = BWFAN_Common::get_wc_tax_label_if_displayed();
 
 			if ( false !== $cart ) {
 				$cartItemLinkEnabled = apply_filters( 'bwfan_block_editor_enable_cart_item_link', true );
-				$suffix              = BWFAN_Common::get_wc_tax_label_if_displayed();
 				foreach ( $cart as $item ) :
 					// Handle both Cart Item (array) and Order Item (object)
                     $product = null;
@@ -160,8 +164,11 @@ if ( is_array( $products ) ) : ?>
                         $product_extras = $item['product_extras'];
                     }
 
+                    // Check if this product has extras (for border styling)
+                    $has_extras = ! empty( $product_extras ) && ( ! empty( $product_extras['selected_products'] ) || ! empty( $product_extras['selected_info'] ) );
+
                     ?>
-                    <tr class="sh-product-row">
+                    <tr class="sh-product-row<?php echo $has_extras ? ' has-extras' : ''; ?>">
 						<?php if ( false === $disable_product_thumbnail ) : ?>
                             <td class="sh-product-image" width="100" style="vertical-align: middle;">
 								<?php if ( true === $cartItemLinkEnabled ) :
@@ -322,10 +329,8 @@ if ( is_array( $products ) ) : ?>
                                         if ( $extra_qty > 1 ) {
                                             echo ' <span class="sh-extra-meta">(x' . esc_html( $extra_qty ) . ')</span>';
                                         }
-                                        // Optional: Display price if > 0
-                                        /* if ( $extra_price > 0 ) {
-                                            echo '<span class="sh-extra-price">' . wc_price( $extra_price ) . '</span>';
-                                        } */
+                                        // Display price (RM 0 for free gifts)
+                                        echo ' <span class="sh-extra-price" style="color: #777;">' . wc_price( $extra_price ) . '</span>';
                                         echo '</td></tr>';
                                     }
                                 }
@@ -362,8 +367,41 @@ if ( is_array( $products ) ) : ?>
 					$price      = isset( $products_price[ $product->get_id() ] ) ? $products_price[ $product->get_id() ] : null;
 					$line_total = is_null( $price ) ? BWFAN_Common::get_prices_with_tax( $product ) : $price;
 					$quantity   = 1; // Default quantity for fallback
+
+                    // Check if in preview mode
+                    $is_preview = BWFAN_Merge_Tag_Loader::get_data( 'is_preview' );
+                    
+                    // Sample preview data for demonstration
+                    $sample_variation = '';
+                    $sample_trade_in = '';
+                    $sample_payment = '';
+                    $sample_extras = [];
+                    $has_extras = false;
+
+                    if ( $is_preview ) {
+                        // Sample variation
+                        $sample_variation = '<span class="sh-product-attr" style="display:block;">Color: Black</span>';
+                        
+                        // Sample trade-in
+                        $sample_trade_in = '<span class="sh-product-attr" style="display:block;">' . esc_html__('Trade In', 'senheng-core') . ': ' . esc_html__('Yes', 'senheng-core') . '</span>';
+                        
+                        // Sample deposit payment  
+                        $sample_payment = '<span class="sh-product-attr" style="display:block;">' . esc_html__('Payment Option', 'senheng-core') . ': ' . esc_html__('Deposit Payment', 'senheng-core') . '</span>';
+                        $sample_payment .= '<span class="sh-product-attr" style="display:block;">' . esc_html__('Actual Price', 'senheng-core') . ': ' . wc_price( $product->get_price() ) . '</span>';
+                        
+                        // Sample extras (free gift + warranty)
+                        $sample_extras = [
+                            'selected_products' => [
+                                [ 'title' => __('Free Gift: Carrying Case', 'senheng-core'), 'quantity' => 1, 'price' => 0 ],
+                            ],
+                            'selected_info' => [
+                                [ 'infoLabel' => __('Extended Warranty (3 Years)', 'senheng-core'), 'infoPrice' => '+RM 199' ],
+                            ],
+                        ];
+                        $has_extras = true;
+                    }
 					?>
-                    <tr class="sh-product-row">
+                    <tr class="sh-product-row<?php echo $has_extras ? ' has-extras' : ''; ?>">
 						<?php
 						if ( true === $disable_product_link ) {
 							if ( false === $disable_product_thumbnail ) {
@@ -375,6 +413,14 @@ if ( is_array( $products ) ) : ?>
 							} ?>
                             <td width="" style="vertical-align: middle;">
                                 <span class="sh-product-name" style="display:block;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></span>
+                                <?php 
+                                // Preview: Show sample variation, trade-in, payment
+                                if ( $is_preview ) {
+                                    echo $sample_variation;
+                                    echo $sample_trade_in;
+                                    echo $sample_payment;
+                                }
+                                ?>
                             </td>
 							<?php
 						} else {
@@ -390,6 +436,14 @@ if ( is_array( $products ) ) : ?>
                                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" target="_blank" style="text-decoration:none; color:#000;">
                                     <span class="sh-product-name" style="display:block;"><?php echo wp_kses_post( BWFAN_Common::get_name( $product ) ); ?></span>
                                 </a>
+                                <?php 
+                                // Preview: Show sample variation, trade-in, payment
+                                if ( $is_preview ) {
+                                    echo $sample_variation;
+                                    echo $sample_trade_in;
+                                    echo $sample_payment;
+                                }
+                                ?>
                             </td>
 							<?php
 						}
@@ -409,10 +463,53 @@ if ( is_array( $products ) ) : ?>
                                     <br><small><?php echo $suffix; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></small>
 		                        <?php endif; ?>
 	                        <?php else: ?>
-								<?php echo $price; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> 
+								<?php echo wp_kses_post( BWFAN_Common::price( $line_total, $currency ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> 
 	                        <?php endif; ?>
                         </td>
                     </tr>
+
+                    <?php 
+                    // Product Extras Row (Preview sample extras)
+                    if ( $has_extras && ! empty( $sample_extras ) ) : 
+                    ?>
+                    <tr class="sh-extras-row">
+                        <td colspan="4" style="padding-left: 112px; padding-top: 0; padding-bottom: 20px; border-top: 0; border-bottom: 1px solid #ccc;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" class="sh-extras-container">
+                                <?php
+                                // Selected Products (Free Gifts/Bundles/Addons)
+                                if ( ! empty( $sample_extras['selected_products'] ) ) {
+                                    foreach ( $sample_extras['selected_products'] as $extra_product ) {
+                                        $extra_title = isset($extra_product['title']) ? $extra_product['title'] : '';
+                                        $extra_qty = isset($extra_product['quantity']) ? $extra_product['quantity'] : 1;
+                                        $extra_price = isset($extra_product['price']) ? $extra_product['price'] : 0;
+                                        
+                                        echo '<tr class="sh-extra-item"><td style="padding: 3px 0; padding-left: 10px; border-left: 2px solid #eee;">';
+                                        echo '<span class="sh-extra-name">+ ' . esc_html( $extra_title ) . '</span>';
+                                        if ( $extra_qty > 1 ) {
+                                            echo ' <span class="sh-extra-meta">(x' . esc_html( $extra_qty ) . ')</span>';
+                                        }
+                                        // Display price (RM 0 for free gifts)
+                                        echo ' <span class="sh-extra-price" style="color: #777;">' . wc_price( $extra_price ) . '</span>';
+                                        echo '</td></tr>';
+                                    }
+                                }
+
+                                // Selected Info (Warranty/Services)
+                                if ( ! empty( $sample_extras['selected_info'] ) ) {
+                                     foreach ( $sample_extras['selected_info'] as $info_data ) {
+                                        $info_label = isset($info_data['infoLabel']) ? $info_data['infoLabel'] : '';
+                                        
+                                        echo '<tr class="sh-extra-item"><td style="padding: 3px 0; padding-left: 10px; border-left: 2px solid #eee;">';
+                                        echo '<span class="sh-extra-name">+ ' . esc_html( $info_label ) . '</span>';
+                                        echo '</td></tr>';
+                                     }
+                                }
+                                ?>
+                            </table>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+
 				<?php }
 			} ?>
             </tbody>

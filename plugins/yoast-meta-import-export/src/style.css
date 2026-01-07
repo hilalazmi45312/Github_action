@@ -1,0 +1,111 @@
+/* Yoast Meta Import/Export Styles */
+
+.yoast-meta-ie-app {
+    max-width: 1200px;
+}
+
+.yoast-meta-ie-tabs .components-tab-panel__tabs {
+    margin-bottom: 20px;
+}
+
+.yoast-meta-ie-file-upload {
+    margin-top: 20px;
+}
+
+.yoast-meta-ie-file-upload-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.yoast-meta-ie-file-drop-zone {
+    border: 2px dashed #c3c4c7;
+    border-radius: 4px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f6f7f7;
+}
+
+.yoast-meta-ie-file-drop-zone:hover,
+.yoast-meta-ie-file-drop-zone.drag-active {
+    border-color: #007cba;
+    background: #f0f8ff;
+}
+
+.yoast-meta-ie-file-drop-zone.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.yoast-meta-ie-file-drop-zone.has-file {
+    border-color: #46b450;
+    background: #f0f9f0;
+}
+
+.yoast-meta-ie-upload-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.yoast-meta-ie-upload-text {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #1e1e1e;
+}
+
+.yoast-meta-ie-upload-hint {
+    font-size: 14px;
+    color: #646970;
+}
+
+.yoast-meta-ie-file-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.yoast-meta-ie-file-name {
+    flex: 1;
+    text-align: left;
+}
+
+.yoast-meta-ie-clear-file {
+    color: #d63638;
+    text-decoration: none;
+}
+
+.yoast-meta-ie-clear-file:hover {
+    color: #b32d2e;
+}
+
+/* Responsive adjustments */
+@media (max-width: 782px) {
+    .yoast-meta-ie-file-selected {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .yoast-meta-ie-file-name {
+        margin-bottom: 8px;
+    }
+}
+
+/* WordPress Components Overrides */
+.components-panel__row {
+    margin-top: 0;
+    min-height: 30px;
+}
+
+.components-checkbox-control {
+    width: 100%;
+}
+
+.yoast-meta-ie-post-type-selection,
+.yoast-meta-ie-taxonomy-selection {
+    margin-bottom: 8px;
+}
