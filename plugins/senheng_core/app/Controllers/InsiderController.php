@@ -993,6 +993,7 @@ function track_search_term()
                 'event_parameters' => [
                     'keyword'      => get_search_query(),
                     'searched_url' => home_url(add_query_arg(null, null)),
+                    'channel'      => get_userAgent(),
                 ],
             ]],
         ];
