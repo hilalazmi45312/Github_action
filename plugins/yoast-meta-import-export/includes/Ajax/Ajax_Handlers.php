@@ -53,11 +53,12 @@ class Ajax_Handlers {
     public function __construct() {
         add_action( 'wp_ajax_yoast_meta_ie_export', array( $this, 'export_csv' ) );
         add_action( 'wp_ajax_yoast_meta_ie_import_batch', array( $this, 'import_batch' ) );
+        add_action( 'wp_ajax_yoast_meta_ie_convert_csv', array( $this, 'convert_csv' ) );
     }
 
     /**
      * Handles the CSV export AJAX request.
-     * Generates and downloads a CSV with all categories and brands from the website.
+     * Generates and downloads a CSV with all Yoast meta for posts and terms.
      */
     public function export_csv() {
         // Verify nonce and permissions
@@ -67,73 +68,57 @@ class Ajax_Handlers {
             wp_die( 'Insufficient permissions' );
         }
 
+        $export_options = isset( $_POST['export_options'] ) ? json_decode( stripslashes( $_POST['export_options'] ), true ) : array();
+        $selected_post_types = isset( $export_options['postTypes'] ) ? $export_options['postTypes'] : array('post', 'page');
+        $selected_taxonomies = isset( $export_options['taxonomies'] ) ? $export_options['taxonomies'] : array('category', 'post_tag');
+
         $csv_data = array();
-        
-        // Build headers for categories and brands export
-        $headers = array( 
-            'ID', 
-            'Name', 
-            'Slug', 
-            'Description', 
-            'Parent_ID', 
-            'Parent_Name', 
-            'Count', 
-            'Taxonomy',
-            'Taxonomy_Label'
-        );
+        // Build headers: ID, Type, Type_Value, Title/Name, URL, then all Yoast fields
+        $headers = array( 'ID', 'Type', 'Type_Value', 'Title/Name', 'URL' );
+        $headers = array_merge( $headers, $this->yoast_fields );
         $csv_data[] = $headers;
 
-        // Define taxonomies to export: product categories and product brands
-        $taxonomies_to_export = array(
-            'product_cat' => 'Product Category',
-            'product_brand' => 'Product Brand'
-        );
+        // Export posts (selected post types except attachments)
+        if ( ! empty( $selected_post_types ) ) {
+            $args = array(
+                'post_type' => $selected_post_types,
+                'posts_per_page' => -1,
+                'post_status' => 'any',
+                'post_type__not_in' => array('attachment'), // Exclude media attachments
+            );
 
-        foreach ( $taxonomies_to_export as $taxonomy => $taxonomy_label ) {
-            // Check if taxonomy exists
-            if ( ! taxonomy_exists( $taxonomy ) ) {
-                continue;
-            }
+            $posts = get_posts( $args );
 
-            $terms = get_terms( array(
-                'taxonomy' => $taxonomy,
-                'hide_empty' => false,
-                'orderby' => 'name',
-                'order' => 'ASC',
-            ) );
-
-            if ( is_wp_error( $terms ) || empty( $terms ) ) {
-                continue;
-            }
-
-            foreach ( $terms as $term ) {
-                // Get parent name if exists
-                $parent_name = '';
-                if ( $term->parent > 0 ) {
-                    $parent_term = get_term( $term->parent, $taxonomy );
-                    if ( $parent_term && ! is_wp_error( $parent_term ) ) {
-                        $parent_name = $parent_term->name;
-                    }
+            foreach ( $posts as $post ) {
+                $row = array( $post->ID, 'post', $post->post_type, $post->post_title, get_permalink( $post->ID ) );
+                foreach ( $this->yoast_fields as $field ) {
+                    $row[] = get_post_meta( $post->ID, $field, true );
                 }
-
-                $row = array(
-                    $term->term_id,
-                    $term->name,
-                    $term->slug,
-                    $term->description,
-                    $term->parent,
-                    $parent_name,
-                    $term->count,
-                    $taxonomy,
-                    $taxonomy_label
-                );
-                
                 $csv_data[] = $row;
             }
         }
 
+        // Export taxonomies (selected taxonomies)
+        if ( ! empty( $selected_taxonomies ) ) {
+            foreach ( $selected_taxonomies as $taxonomy ) {
+                $terms = get_terms( array(
+                    'taxonomy' => $taxonomy,
+                    'hide_empty' => false,
+                ) );
+
+                foreach ( $terms as $term ) {
+                    $term_link = get_term_link( $term );
+                    $row = array( $term->term_id, 'term', $taxonomy, $term->name, is_wp_error( $term_link ) ? '' : $term_link );
+                    foreach ( $this->yoast_fields as $field ) {
+                        $row[] = get_term_meta( $term->term_id, $field, true );
+                    }
+                    $csv_data[] = $row;
+                }
+            }
+        }
+
         // Output CSV with UTF-8 encoding
-        $filename = 'categories-brands-export-' . date( 'Y-m-d' ) . '.csv';
+        $filename = 'yoast-meta-export-' . date( 'Y-m-d' ) . '.csv';
 
         header( 'Content-Type: text/csv; charset=utf-8' );
         header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
@@ -247,6 +232,159 @@ class Ajax_Handlers {
             'errors' => $errors,
             'dry_run' => $dry_run,
             'options' => $options,
+        ) );
+    }
+
+    /**
+     * Handles the CSV conversion AJAX request.
+     * Converts URL-based CSV to ID-based format for import.
+     */
+    public function convert_csv() {
+        // Verify nonce and permissions
+        check_ajax_referer( 'yoast_meta_ie_nonce', 'nonce' );
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( 'Insufficient permissions' );
+        }
+
+        $batch = isset( $_POST['batch'] ) ? json_decode( stripslashes( $_POST['batch'] ), true ) : array();
+
+        if ( empty( $batch ) ) {
+            wp_send_json_error( 'No data to convert' );
+        }
+
+        $converted = array();
+        $errors = array();
+        $skipped = array();
+
+        foreach ( $batch as $item ) {
+            $group = isset( $item['groups'] ) ? trim( $item['groups'] ) : '';
+            $url = isset( $item['url'] ) ? trim( $item['url'] ) : '';
+            $title = isset( $item['meta_status'] ) ? trim( $item['meta_status'] ) : '';
+            $description = isset( $item['meta_description'] ) ? trim( $item['meta_description'] ) : '';
+
+            if ( empty( $url ) ) {
+                $errors[] = "Row missing URL";
+                continue;
+            }
+
+            // Extract slug from URL
+            $parsed_url = parse_url( $url );
+            $path = isset( $parsed_url['path'] ) ? trim( $parsed_url['path'], '/' ) : '';
+            $path_parts = explode( '/', $path );
+            $slug = end( $path_parts );
+
+            if ( empty( $slug ) ) {
+                $errors[] = "Could not extract slug from URL: {$url}";
+                continue;
+            }
+
+            $id = 0;
+            $type = '';
+            $type_value = '';
+            $name = '';
+
+            // Determine type based on Groups column or URL structure
+            $group_lower = strtolower( $group );
+
+            if ( strpos( $group_lower, 'brand' ) !== false || strpos( $path, 'brands-corner' ) !== false ) {
+                // Brand page - lookup in product_brand taxonomy
+                $term = get_term_by( 'slug', $slug, 'product_brand' );
+                if ( $term && ! is_wp_error( $term ) ) {
+                    $id = $term->term_id;
+                    $type = 'term';
+                    $type_value = 'product_brand';
+                    $name = $term->name;
+                }
+            } elseif ( strpos( $group_lower, 'category' ) !== false ) {
+                // Category page - lookup in product_cat taxonomy
+                $term = get_term_by( 'slug', $slug, 'product_cat' );
+                if ( $term && ! is_wp_error( $term ) ) {
+                    $id = $term->term_id;
+                    $type = 'term';
+                    $type_value = 'product_cat';
+                    $name = $term->name;
+                }
+            } elseif ( strpos( $group_lower, 'product' ) !== false ) {
+                // Product page - lookup in product post type
+                $post = get_page_by_path( $slug, OBJECT, 'product' );
+                if ( $post ) {
+                    $id = $post->ID;
+                    $type = 'post';
+                    $type_value = 'product';
+                    $name = $post->post_title;
+                }
+            } else {
+                // Try to auto-detect: first try product, then page, then post
+                $post = get_page_by_path( $slug, OBJECT, 'product' );
+                if ( $post ) {
+                    $id = $post->ID;
+                    $type = 'post';
+                    $type_value = 'product';
+                    $name = $post->post_title;
+                } else {
+                    $post = get_page_by_path( $slug, OBJECT, 'page' );
+                    if ( $post ) {
+                        $id = $post->ID;
+                        $type = 'post';
+                        $type_value = 'page';
+                        $name = $post->post_title;
+                    } else {
+                        $post = get_page_by_path( $slug, OBJECT, 'post' );
+                        if ( $post ) {
+                            $id = $post->ID;
+                            $type = 'post';
+                            $type_value = 'post';
+                            $name = $post->post_title;
+                        }
+                    }
+                }
+            }
+
+            if ( $id === 0 ) {
+                $skipped[] = array(
+                    'url' => $url,
+                    'slug' => $slug,
+                    'group' => $group,
+                    'reason' => 'No matching post or term found'
+                );
+                continue;
+            }
+
+            // Get the converted URL (permalink)
+            $converted_url = '';
+            if ( $type === 'post' ) {
+                $converted_url = get_permalink( $id );
+            } elseif ( $type === 'term' ) {
+                $converted_url = get_term_link( (int) $id, $type_value );
+                if ( is_wp_error( $converted_url ) ) {
+                    $converted_url = '';
+                }
+            }
+
+            // Build converted row
+            $converted[] = array(
+                'id' => $id,
+                'type' => $type,
+                'type_value' => $type_value,
+                'title_name' => $name,
+                '_yoast_wpseo_title' => $title,
+                '_yoast_wpseo_metadesc' => $description,
+                'original_url' => $url,
+                'converted_url' => $converted_url,
+            );
+        }
+
+        wp_send_json_success( array(
+            'converted' => $converted,
+            'skipped' => $skipped,
+            'errors' => $errors,
+            'stats' => array(
+                'total' => count( $batch ),
+                'converted' => count( $converted ),
+                'skipped' => count( $skipped ),
+                'errors' => count( $errors ),
+            ),
         ) );
     }
 }

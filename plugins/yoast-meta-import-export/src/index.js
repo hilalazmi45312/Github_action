@@ -32,11 +32,9 @@ const YoastMetaApp = () => {
         force: false,
         clearExisting: false
     });
-
-    // Converter states
-    const [converterResetKey, setConverterResetKey] = useState(0);
-    const [rawCsvContent, setRawCsvContent] = useState(null);
-    const [conversionResult, setConversionResult] = useState(null);
+    const [convertCsvData, setConvertCsvData] = useState(null);
+    const [convertedData, setConvertedData] = useState(null);
+    const [convertResetKey, setConvertResetKey] = useState(0);
 
     const showNotice = (type, message) => {
         setNotice({ type, message });
@@ -171,6 +169,105 @@ const YoastMetaApp = () => {
         }
     };
 
+    const handleConvertFileSelect = (fileContent, fileName) => {
+        const data = parseCSV(fileContent);
+        setConvertCsvData(data);
+        setConvertedData(null);
+        setNotice({ type: 'info', message: `CSV "${fileName}" loaded: ${data.length} entries ready for conversion.` });
+    };
+
+    const handleConvert = async () => {
+        if (!convertCsvData) return;
+
+        setLoading(true);
+        setNotice(null);
+
+        const batchSize = 50;
+        let allConverted = [];
+        let allSkipped = [];
+        let allErrors = [];
+        let processedCount = 0;
+
+        setProgress({ current: 0, total: convertCsvData.length });
+
+        for (let i = 0; i < convertCsvData.length; i += batchSize) {
+            const batch = convertCsvData.slice(i, i + batchSize);
+
+            try {
+                const response = await fetch(window.yoastMetaIe.ajaxUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        action: 'yoast_meta_ie_convert_csv',
+                        nonce: yoastMetaIe.nonce,
+                        batch: JSON.stringify(batch),
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    allConverted = allConverted.concat(result.data.converted);
+                    allSkipped = allSkipped.concat(result.data.skipped);
+                    allErrors = allErrors.concat(result.data.errors);
+                } else {
+                    allErrors.push(result.data);
+                }
+            } catch (error) {
+                allErrors.push(error.message);
+            }
+
+            processedCount += batch.length;
+            setProgress({ current: processedCount, total: convertCsvData.length });
+
+            if (i + batchSize < convertCsvData.length) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+        }
+
+        setLoading(false);
+        setConvertedData({
+            converted: allConverted,
+            skipped: allSkipped,
+            errors: allErrors,
+        });
+
+        if (allErrors.length > 0) {
+            showNotice('warning', `Conversion complete with errors. Converted: ${allConverted.length}, Skipped: ${allSkipped.length}, Errors: ${allErrors.length}`);
+        } else {
+            showNotice('success', `Conversion complete! Converted: ${allConverted.length}, Skipped: ${allSkipped.length}`);
+        }
+    };
+
+    const downloadConvertedCsv = () => {
+        if (!convertedData || !convertedData.converted.length) return;
+
+        const headers = ['ID', 'Type', 'Type_Value', 'Title/Name', 'Original URL', 'Converted URL', '_yoast_wpseo_title', '_yoast_wpseo_metadesc'];
+        const rows = convertedData.converted.map(item => [
+            item.id,
+            item.type,
+            item.type_value,
+            `"${(item.title_name || '').replace(/"/g, '""')}"`,
+            `"${(item.original_url || '').replace(/"/g, '""')}"`,
+            `"${(item.converted_url || '').replace(/"/g, '""')}"`,
+            `"${(item['_yoast_wpseo_title'] || '').replace(/"/g, '""')}"`,
+            `"${(item['_yoast_wpseo_metadesc'] || '').replace(/"/g, '""')}"`
+        ]);
+
+        const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'yoast-meta-converted-' + new Date().toISOString().split('T')[0] + '.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    };
+
     const parseCSV = (csvText) => {
         const lines = csvText.trim().split('\n');
         const result = [];
@@ -212,69 +309,6 @@ const YoastMetaApp = () => {
         return data;
     };
 
-    // Converter functions
-    const handleConverterFileSelect = (fileContent, fileName) => {
-        setRawCsvContent(fileContent);
-        setConversionResult(null);
-        setNotice({ type: 'info', message: `CSV "${fileName}" loaded. Click "Convert CSV" to process.` });
-    };
-
-    const handleConvertCsv = async () => {
-        if (!rawCsvContent) return;
-
-        setLoading(true);
-        setNotice(null);
-
-        try {
-            const response = await fetch(window.yoastMetaIe.ajaxUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    action: 'yoast_meta_ie_convert_csv',
-                    nonce: yoastMetaIe.nonce,
-                    csv_content: rawCsvContent,
-                }),
-            });
-
-            const result = await response.json();
-
-            if (result.success && result.data.success) {
-                setConversionResult(result.data);
-                const stats = result.data.stats;
-                showNotice('success', `Conversion complete! ${stats.converted} entries converted, ${stats.errors} errors, ${stats.skipped} skipped.`);
-            } else {
-                const errorMsg = result.data?.error || result.data || 'Unknown error';
-                showNotice('error', 'Conversion failed: ' + errorMsg);
-            }
-        } catch (error) {
-            showNotice('error', 'Conversion error: ' + error.message);
-        }
-
-        setLoading(false);
-    };
-
-    const handleDownloadConverted = () => {
-        if (!conversionResult?.csv_output) return;
-
-        const blob = new Blob([conversionResult.csv_output], { type: 'text/csv;charset=utf-8;' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'converted-yoast-import-' + new Date().toISOString().split('T')[0] + '.csv';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-    };
-
-    const handleResetConverter = () => {
-        setRawCsvContent(null);
-        setConversionResult(null);
-        setConverterResetKey(prev => prev + 1);
-        setNotice(null);
-    };
     const tabs = [
         {
             name: 'export',
@@ -411,79 +445,83 @@ const YoastMetaApp = () => {
         },
         {
             name: 'convert',
-            title: 'Convert CSV',
+            title: 'Convert',
             content: (
                 <Panel>
                     <PanelBody>
                         <PanelRow>
                             <h4>
-                                Convert URL-based SEO CSV to Import Format
+                                Convert URL-based CSV to ID-based format for import
                             </h4>
                         </PanelRow>
                         <PanelRow>
                             <Text>
-                                Upload a CSV with columns: <strong>Groups, URL, Meta Status, Meta Description</strong>.
-                                This tool will convert URLs to WordPress IDs for import.
+                                Upload a CSV with columns: Groups, URL, Meta Status (title), Meta Description.
+                                The converter will lookup each URL and output a CSV compatible with the Import tab.
                             </Text>
                         </PanelRow>
                         <PanelRow>
-                            <FileUpload key={converterResetKey} onFileSelect={handleConverterFileSelect} disabled={loading} />
+                            <FileUpload key={convertResetKey} onFileSelect={handleConvertFileSelect} disabled={loading} />
                         </PanelRow>
-                        {rawCsvContent && !conversionResult && (
+                        {convertCsvData && (
+                            <PanelRow>
+                                <Text>
+                                    <strong>{convertCsvData.length} entries ready for conversion</strong>
+                                </Text>
+                            </PanelRow>
+                        )}
+                        {convertCsvData && !convertedData && (
                             <PanelRow>
                                 <Button
                                     isPrimary
-                                    onClick={handleConvertCsv}
+                                    onClick={handleConvert}
                                     disabled={loading}
                                 >
                                     {loading ? 'Converting...' : 'Convert CSV'}
                                 </Button>
                             </PanelRow>
                         )}
-                        {conversionResult && (
+                        {convertedData && (
                             <>
                                 <PanelRow>
-                                    <div style={{ background: '#f0f0f0', padding: '15px', borderRadius: '4px', width: '100%' }}>
-                                        <Text><strong>Conversion Results:</strong></Text>
-                                        <ul style={{ margin: '10px 0', paddingLeft: '20px' }}>
-                                            <li>Total Rows: {conversionResult.stats.total_rows}</li>
-                                            <li>Successfully Converted: {conversionResult.stats.converted}</li>
-                                            <li>Errors: {conversionResult.stats.errors}</li>
-                                            <li>Skipped: {conversionResult.stats.skipped}</li>
-                                        </ul>
-                                    </div>
+                                    <Text>
+                                        <strong>Results:</strong> {convertedData.converted.length} converted, {convertedData.skipped.length} skipped
+                                    </Text>
                                 </PanelRow>
+                                {convertedData.skipped.length > 0 && (
+                                    <PanelRow>
+                                        <details style={{ width: '100%' }}>
+                                            <summary style={{ cursor: 'pointer', color: '#d94f4f' }}>
+                                                View {convertedData.skipped.length} skipped items
+                                            </summary>
+                                            <ul style={{ maxHeight: '200px', overflow: 'auto', fontSize: '12px' }}>
+                                                {convertedData.skipped.map((item, idx) => (
+                                                    <li key={idx}>{item.slug} - {item.reason}</li>
+                                                ))}
+                                            </ul>
+                                        </details>
+                                    </PanelRow>
+                                )}
                                 <PanelRow>
                                     <Button
                                         isPrimary
-                                        onClick={handleDownloadConverted}
-                                        disabled={loading}
-                                        style={{ marginRight: '10px' }}
+                                        onClick={downloadConvertedCsv}
+                                        disabled={!convertedData.converted.length}
                                     >
                                         Download Converted CSV
                                     </Button>
                                     <Button
                                         isSecondary
-                                        onClick={handleResetConverter}
+                                        onClick={() => {
+                                            setConvertCsvData(null);
+                                            setConvertedData(null);
+                                            setConvertResetKey(prev => prev + 1);
+                                        }}
+                                        style={{ marginLeft: '10px' }}
                                     >
                                         Reset
                                     </Button>
                                 </PanelRow>
-                                {conversionResult.errors.length > 0 && (
-                                    <PanelRow>
-                                        <div style={{ background: '#fef7f1', padding: '15px', borderRadius: '4px', width: '100%', maxHeight: '200px', overflow: 'auto' }}>
-                                            <Text><strong>Errors ({conversionResult.errors.length}):</strong></Text>
-                                            <ul style={{ margin: '10px 0', paddingLeft: '20px', fontSize: '12px' }}>
-                                                {conversionResult.errors.slice(0, 50).map((error, idx) => (
-                                                    <li key={idx}>{error}</li>
-                                                ))}
-                                                {conversionResult.errors.length > 50 && (
-                                                    <li>... and {conversionResult.errors.length - 50} more errors</li>
-                                                )}
-                                            </ul>
-                                        </div>
-                                    </PanelRow>
-                                )}
                             </>
                         )}
                     </PanelBody>
