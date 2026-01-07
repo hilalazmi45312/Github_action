@@ -244,12 +244,14 @@ const YoastMetaApp = () => {
     const downloadConvertedCsv = () => {
         if (!convertedData || !convertedData.converted.length) return;
 
-        const headers = ['ID', 'Type', 'Type_Value', 'Title/Name', '_yoast_wpseo_title', '_yoast_wpseo_metadesc'];
+        const headers = ['ID', 'Type', 'Type_Value', 'Title/Name', 'Original URL', 'Converted URL', '_yoast_wpseo_title', '_yoast_wpseo_metadesc'];
         const rows = convertedData.converted.map(item => [
             item.id,
             item.type,
             item.type_value,
             `"${(item.title_name || '').replace(/"/g, '""')}"`,
+            `"${(item.original_url || '').replace(/"/g, '""')}"`,
+            `"${(item.converted_url || '').replace(/"/g, '""')}"`,
             `"${(item['_yoast_wpseo_title'] || '').replace(/"/g, '""')}"`,
             `"${(item['_yoast_wpseo_metadesc'] || '').replace(/"/g, '""')}"`
         ]);

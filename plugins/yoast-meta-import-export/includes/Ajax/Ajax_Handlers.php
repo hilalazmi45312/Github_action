@@ -73,8 +73,8 @@ class Ajax_Handlers {
         $selected_taxonomies = isset( $export_options['taxonomies'] ) ? $export_options['taxonomies'] : array('category', 'post_tag');
 
         $csv_data = array();
-        // Build headers: ID, Type, Type_Value, Title/Name, then all Yoast fields
-        $headers = array( 'ID', 'Type', 'Type_Value', 'Title/Name' );
+        // Build headers: ID, Type, Type_Value, Title/Name, URL, then all Yoast fields
+        $headers = array( 'ID', 'Type', 'Type_Value', 'Title/Name', 'URL' );
         $headers = array_merge( $headers, $this->yoast_fields );
         $csv_data[] = $headers;
 
@@ -90,7 +90,7 @@ class Ajax_Handlers {
             $posts = get_posts( $args );
 
             foreach ( $posts as $post ) {
-                $row = array( $post->ID, 'post', $post->post_type, $post->post_title );
+                $row = array( $post->ID, 'post', $post->post_type, $post->post_title, get_permalink( $post->ID ) );
                 foreach ( $this->yoast_fields as $field ) {
                     $row[] = get_post_meta( $post->ID, $field, true );
                 }
@@ -107,7 +107,8 @@ class Ajax_Handlers {
                 ) );
 
                 foreach ( $terms as $term ) {
-                    $row = array( $term->term_id, 'term', $taxonomy, $term->name );
+                    $term_link = get_term_link( $term );
+                    $row = array( $term->term_id, 'term', $taxonomy, $term->name, is_wp_error( $term_link ) ? '' : $term_link );
                     foreach ( $this->yoast_fields as $field ) {
                         $row[] = get_term_meta( $term->term_id, $field, true );
                     }
@@ -350,6 +351,17 @@ class Ajax_Handlers {
                 continue;
             }
 
+            // Get the converted URL (permalink)
+            $converted_url = '';
+            if ( $type === 'post' ) {
+                $converted_url = get_permalink( $id );
+            } elseif ( $type === 'term' ) {
+                $converted_url = get_term_link( (int) $id, $type_value );
+                if ( is_wp_error( $converted_url ) ) {
+                    $converted_url = '';
+                }
+            }
+
             // Build converted row
             $converted[] = array(
                 'id' => $id,
@@ -359,6 +371,7 @@ class Ajax_Handlers {
                 '_yoast_wpseo_title' => $title,
                 '_yoast_wpseo_metadesc' => $description,
                 'original_url' => $url,
+                'converted_url' => $converted_url,
             );
         }
 
