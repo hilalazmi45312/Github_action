@@ -9,6 +9,8 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
 
     steps:
       # 1. Checkout source repo (Senheng-1)
@@ -46,12 +48,10 @@ jobs:
       - name: Merge changes from Senheng-1 into Senheng-3
         run: |
           echo "Merging changes from ${GITHUB_REF_NAME}..."
-          git merge --no-ff --commit --allow-unrelated-histories ${GITHUB_REF_NAME}
+          git merge --no-ff --commit --allow-unrelated-histories origin/${GITHUB_REF_NAME}
 
       # 7. Push merged changes to Senheng-3
       - name: Push merged changes to Senheng-3
-        env:
-          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
           echo "Pushing changes to Senheng-3..."
           git push target ${GITHUB_REF_NAME}
