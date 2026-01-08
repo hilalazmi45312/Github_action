@@ -65,6 +65,7 @@ function auth_current_user($data)
     wp_send_json([
         "data" => [
             "id" => $shData['idmapping'],
+            'wp_user_id' => get_current_user_id(),
             "tenantId" => null,
             "username" => null,
             "nickname" => $shData['cust_name'],
