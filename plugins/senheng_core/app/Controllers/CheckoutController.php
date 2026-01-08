@@ -242,6 +242,9 @@ class CheckoutController
                 'error'
             );
         }
+
+        // add_filter('woocommerce_calculated_total', [self::class, 'adjust_calculated_total_for_deposits'], 10, 2);
+        add_action('woocommerce_checkout_order_processed', [self::class, 'adjust_order_total_before_payment'], 10, 3);
     }
 
     /**
@@ -2862,6 +2865,32 @@ class CheckoutController
             echo "console.log('PHP DEBUG: " . esc_js($label) . "', " . $json . ");";
         }
         echo '</script>';
+    }
+
+    public static function adjust_order_total_before_payment($order_id, $posted_data, $order) {
+        // Check if order has deposit products
+        $has_deposit = false;
+        foreach ($order->get_items() as $item) {
+            if (!empty($item->get_meta('is_deposit'))) {
+                $has_deposit = true;
+                break;
+            }
+        }
+        
+        if (!$has_deposit) return;
+        
+        // Get discount applied
+        $discount = $order->get_total_discount();
+        
+        if ($discount > 0) {
+            // Calculate new total (deposit amount minus discount)
+            $current_total = $order->get_total();
+            $new_total = max(0, $current_total - $discount);
+            
+            // Update order total
+            $order->set_total($new_total);
+            $order->save();
+        }
     }
 }
 

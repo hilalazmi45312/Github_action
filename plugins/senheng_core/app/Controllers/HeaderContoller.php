@@ -12,9 +12,10 @@ class HeaderController
         }
 
         $isApp = (
-            (isset($_GET['app']) && in_array(strtolower($_GET['app']), ['1', 'true', 'yes'], true)) ||
+            (isset($_GET['app']) && in_array(strtolower($_GET['app']), ['1', 'true', 'yes'], true)) 
+            // ||
             // (isset($_COOKIE['is_app']) && $_COOKIE['is_app'] === '1') ||
-            ($userAgent === 'SRC')
+            // ($userAgent === 'SRC')
         );
 
         if ($isApp) {
