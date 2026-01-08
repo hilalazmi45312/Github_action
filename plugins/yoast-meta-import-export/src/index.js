@@ -121,9 +121,9 @@ const YoastMetaApp = () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    if (!result.data.dry_run) {
-                        updatedTotal += result.data.updated;
-                    }
+                    // Update total count for both actual import and dry run
+                    updatedTotal += result.data.updated;
+
                     if (result.data.errors.length > 0) {
                         errors = errors.concat(result.data.errors);
                     }
