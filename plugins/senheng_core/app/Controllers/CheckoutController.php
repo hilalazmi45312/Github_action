@@ -1322,7 +1322,6 @@ class CheckoutController
         $types_mapping = ipay88_types_mapping();
         $payment_plan = $_POST['ipay88_payment_plan' . $payment_type] ?? '';
         $admin_fee    = $_POST['ipay88_admin_fee' . $payment_type] ?? '';
-        // $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($payment_type, $payment_plan);
 
         // Persist immediately
         if ($payment_type) {
