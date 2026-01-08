@@ -1322,7 +1322,7 @@ class CheckoutController
         $types_mapping = ipay88_types_mapping();
         $payment_plan = $_POST['ipay88_payment_plan' . $payment_type] ?? '';
         $admin_fee    = $_POST['ipay88_admin_fee' . $payment_type] ?? '';
-        $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($payment_type, $payment_plan);
+        // $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($payment_type, $payment_plan);
 
         // Persist immediately
         if ($payment_type) {
@@ -2862,6 +2862,49 @@ class CheckoutController
             echo "console.log('PHP DEBUG: " . esc_js($label) . "', " . $json . ");";
         }
         echo '</script>';
+    }
+
+    public static function validate_admin_fee_backend() 
+    {
+        $paymentID = sanitize_text_field( $_POST['ipay88_payment_type'] ?? '' );
+        if ( ! $paymentID ) {
+            return;
+        }
+        $bnpl_options = apply_filters( 'wc_ipay88_bnpl_payment_types', [
+            '111','112','115','157','174','179','534','606','727','891','523',
+        ] );
+        if ( ! in_array( $paymentID, $bnpl_options, true ) ) {
+            return;
+        }
+        $months = sanitize_text_field(
+            $_POST[ 'ipay88_payment_plan' . $paymentID ] ?? '0'
+        );
+        if ( $months === '0' ) {
+            wc_add_notice(
+                __( 'Payment plan is required for the selected payment type.', 'wc_ipay88' ),
+                'error'
+            );
+            return;
+        }
+        $total = (float) WC()->cart->get_total( 'edit' );
+        $expected_fee = (float) PaymentMethod::getAdminFeePaymentMethods(
+            $paymentID,
+            $months,
+            $total
+        );
+        $cart_fee = 0.0;
+        foreach ( WC()->cart->get_fees() as $fee ) {
+            if ( $fee->id === 'admin-fee' ) {
+                $cart_fee = (float) $fee->amount;
+                break;
+            }
+        }
+        if ( abs( $expected_fee - $cart_fee ) > 0.01 ) {
+            wc_add_notice(
+                __( 'Please reselect your payment plan before continuing.', 'wc_ipay88' ),
+                'error'
+            );
+        }
     }
 }
 

@@ -226,6 +226,7 @@ add_filter('woocommerce_form_field', [CheckoutController::class, 'remove_optiona
 add_action('woocommerce_checkout_create_order_line_item', [CheckoutController::class, 'add_scoin_to_order_item'], 10, 4);
 add_action('woocommerce_checkout_update_order_meta', [CheckoutController::class, 'update_order_meta_with_scoin'], 10, 2);
 add_action('woocommerce_checkout_update_order_meta', [CheckoutController::class, 'capture_raw_checkout_post'], 5, 2);
+add_action('woocommerce_after_checkout_validation', [CheckoutController::class, 'validate_admin_fee_backend'], 10, 2);
 
 add_action('wp_enqueue_scripts', [CheckoutController::class, 'enqueue_checkout_assets']);
 add_action('woocommerce_checkout_cart_item_quantity', [CheckoutController::class, 'display_product_extras_in_checkout_after_quantity'], 10, 3);
