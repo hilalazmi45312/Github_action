@@ -252,22 +252,24 @@ window.InsiderObject = {
     /**
      * Handle search event
      */
-    handleSearch(event) {
-        const searchInput = event.target.querySelector("input[name='s']");
-        const keyword = searchInput ? searchInput.value.trim() : "";
-        const searched_url = event.target.action + '?' + new URLSearchParams(new FormData(event.target)).toString();
+    // handleSearch(event) {
+    //     const searchInput = event.target.querySelector("input[name='s']");
+    //     const keyword = searchInput ? searchInput.value.trim() : "";
+    //     // const searched_url = event.target.action + '?' + new URLSearchParams(new FormData(event.target)).toString();
+    //     const baseUrl = window.location.origin; // current domain
+    //     const searched_url = `${baseUrl}/?s=${encodeURIComponent(keyword)}&post_type=product`;
 
-        this.pushEvent('searched', {
-            channel: insiderData.channel,
-            keyword: keyword,
-            search_url: searched_url,
-        });
-        console.log('📡 Search pushed:', {
-            channel: insiderData.channel,
-            keyword: keyword,
-            search_url: searched_url,
-        });
-    },
+    //     this.pushEvent('searched', {
+    //         channel: insiderData.channel,
+    //         keyword: keyword,
+    //         search_url: searched_url,
+    //     });
+    //     console.log('📡 Search pushed:', {
+    //         channel: insiderData.channel,
+    //         keyword: keyword,
+    //         search_url: searched_url,
+    //     });
+    // },
 
     /**
      * Handle banner click events
@@ -534,18 +536,18 @@ window.InsiderObject = {
                     let keyword = '';
                     const urlParams = new URLSearchParams(settings.url.split('?')[1]);
                     keyword = urlParams.get('query') || '';
-                    let searched_url = settings.url + (keyword ? '&s=' + keyword : '');
+                    // let searched_url = settings.url + (keyword ? '&s=' + keyword : '');
+                    const baseUrl = window.location.origin; // current domain
+                    const searched_url = `${baseUrl}/?s=${encodeURIComponent(keyword)}&post_type=product`;
                     this.pushEvent('searched', {
                         channel: insiderData.channel,
                         keyword: keyword,
-                        search_url: searched_url,
-                        src: ''
+                        searched_url: searched_url,
                     });
                     console.log('📡 Search pushed:', {
                         channel: insiderData.channel,
                         keyword: keyword,
-                        search_url: searched_url,
-                        src: ''
+                        searched_url: searched_url,
                     });
                 } catch (error) {
                     console.error("Error processing Search event:", error);

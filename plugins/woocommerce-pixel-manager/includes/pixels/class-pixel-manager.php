@@ -1,0 +1,2508 @@
+<?php
+
+namespace SweetCode\Pixel_Manager\Pixels;
+
+use SweetCode\Pixel_Manager\Admin\Environment;
+use SweetCode\Pixel_Manager\Admin\LTV;
+use SweetCode\Pixel_Manager\Admin\Validations;
+use SweetCode\Pixel_Manager\Data\GA4_Data_API;
+use SweetCode\Pixel_Manager\Pixels\ABTasty\AB_Tasty;
+use SweetCode\Pixel_Manager\Pixels\Core\Pixel_Registry;
+use SweetCode\Pixel_Manager\Pixels\Facebook\Facebook_CAPI;
+use SweetCode\Pixel_Manager\Pixels\Google\Google_MP_GA4;
+use SweetCode\Pixel_Manager\Pixels\Google\Google_Helpers;
+use SweetCode\Pixel_Manager\Pixels\Google\GTG_Proxy;
+use SweetCode\Pixel_Manager\Pixels\Google\GTG_Config;
+use SweetCode\Pixel_Manager\Pixels\Optimizely\Optimizely;
+use SweetCode\Pixel_Manager\Pixels\TikTok\TikTok_EAPI;
+use SweetCode\Pixel_Manager\Pixels\Pinterest\Pinterest_APIC;
+use SweetCode\Pixel_Manager\Pixels\Snapchat\Snapchat_CAPI;
+use SweetCode\Pixel_Manager\Pixels\Reddit\Reddit_CAPI;
+use SweetCode\Pixel_Manager\Pixels\VWO\VWO;
+use SweetCode\Pixel_Manager\Geolocation;
+use SweetCode\Pixel_Manager\Helpers;
+use SweetCode\Pixel_Manager\Logger;
+use SweetCode\Pixel_Manager\Options;
+use SweetCode\Pixel_Manager\Product;
+use SweetCode\Pixel_Manager\Server_Event_Processor;
+use SweetCode\Pixel_Manager\Shop;
+use WP_Error;
+
+defined('ABSPATH') || exit; // Exit if accessed directly
+
+class Pixel_Manager {
+
+	private $rest_namespace                    = 'pmw/v1';
+	private $gads_conversion_adjustments_route = '/google-ads/conversion-adjustments.csv';
+
+	private static $instance;
+
+	public static function get_instance() {
+		if (is_null(self::$instance)) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
+	 * Initializes the class and sets up options, states, additional classes, and pixel managers. Also registers actions and filters.
+	 */
+	private function __construct() {
+
+		/**
+		 * Inject optimization scripts
+		 */
+
+		add_action('wp_head', function () {
+
+			if (Options::is_ab_tasty_active()) {
+				AB_Tasty::inject_script();
+			}
+		}, 1);
+
+		add_action('wp_enqueue_scripts', function () {
+			if (Options::is_optimizely_active()) {
+				Optimizely::enqueue_scripts();
+			}
+		}, 10);
+
+		/**
+		 * Initialize Google Tag Gateway Proxy
+		 *
+		 * This enables proxying Google Tag requests through WordPress
+		 * to Google's First-Party Servers (FPS).
+		 * Only active when a measurement path is configured.
+		 *
+		 * @since 1.53.0
+		 */
+		if (Options::get_google_tag_gateway_measurement_path()) {
+			GTG_Proxy::init();
+		}
+
+		/**
+		 * Inject PMW snippets in head
+		 */
+
+		// Prepare Litespeed ESI injection
+		if (Environment::is_litespeed_esi_active()) {
+			add_action(
+					'litespeed_esi_load-pmw_data_layer',
+					array( $this, 'inject_data_layer_through_litespeed_esi' )
+			);
+		}
+
+		add_action('wp_head', function () {
+
+			self::inject_pmw_opening();
+
+			// Inject Meta domain verification ID
+			if (
+					true &&
+					Options::get_facebook_domain_verification_id()
+			) {
+				?>
+				<meta name="facebook-domain-verification"
+						content="<?php echo esc_attr(Options::get_facebook_domain_verification_id()); ?>"/>
+				<?php
+			}
+
+			// Add products to data layer from page transient
+			if (get_transient('pmw_products_for_datalayer_' . get_the_ID())) {
+				$products = get_transient('pmw_products_for_datalayer_' . get_the_ID());
+				$this->inject_products_from_transient_into_datalayer($products);
+			}
+
+			// If user is logged in then run the following code
+			// https://docs.litespeedtech.com/lscache/lscwp/api/#esi
+			if (
+					is_user_logged_in()
+					&& Environment::is_litespeed_esi_active()
+			) {
+				$this->inject_data_layer_litespeed_esi();
+			} else {
+				$this->inject_data_layer();
+			}
+		});
+
+		/**
+		 * Initialize all pixels
+		 */
+
+		/**
+		 * Load pixel descriptor infrastructure
+		 * 
+		 * This enables the unified pixel registry system that supports both
+		 * server-side adapters and browser-side descriptors.
+		 */
+		require_once __DIR__ . '/core/interface-pixel-descriptor.php';
+		require_once __DIR__ . '/core/abstract-pixel-descriptor.php';
+		require_once __DIR__ . '/core/class-pixel-registry.php';
+
+		if (true) {
+
+			// Ensure the adapter infrastructure is loaded before initializing adapters
+			// The autoloader can't properly resolve the Pixel_Adapter interface, so we load it manually
+			require_once __DIR__ . '/core/interface-pixel-adapter.php';
+			require_once __DIR__ . '/core/abstract-pixel-adapter.php';
+
+			// Load all S2S adapter classes unconditionally so they can auto-register
+			// Each adapter's is_available() method determines if it's actually usable
+			// This allows Options::server_2_server_enabled() to dynamically detect all S2S integrations
+			class_exists('SweetCode\Pixel_Manager\Pixels\Facebook\Facebook_Adapter');
+			class_exists('SweetCode\Pixel_Manager\Pixels\TikTok\TikTok_Adapter');
+			class_exists('SweetCode\Pixel_Manager\Pixels\Pinterest\Pinterest_Adapter');
+			class_exists('SweetCode\Pixel_Manager\Pixels\Snapchat\Snapchat_Adapter');
+			class_exists('SweetCode\Pixel_Manager\Pixels\Reddit\Reddit_Adapter');
+
+			// Initialize the actual S2S pixel implementations based on configuration
+			if (Options::is_ga4_mp_active()) {
+				Google_MP_GA4::get_instance();
+			}
+
+			if (Options::is_facebook_capi_active()) {
+				Facebook_CAPI::get_instance();
+			}
+
+			if (Options::is_tiktok_eapi_active()) {
+				TikTok_EAPI::get_instance();
+			}
+
+			if (Options::is_pinterest_apic_active()) {
+				Pinterest_APIC::get_instance();
+			}
+
+			if (Options::is_snapchat_capi_active()) {
+				Snapchat_CAPI::get_instance();
+			}
+
+			if (Options::is_reddit_capi_active()) {
+				Reddit_CAPI::get_instance();
+			}
+		}
+
+		/**
+		 * Load all pixel descriptors
+		 * 
+		 * Each descriptor auto-registers with the Pixel_Registry on instantiation.
+		 * The autoloader handles file loading - we just trigger it via class_exists().
+		 * 
+		 * When adding a new pixel descriptor, add its class name to the array below.
+		 */
+		$descriptors = array(
+			// Google pixels
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Google\Google_Ads_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Google\GA4_Descriptor',
+			
+			// Marketing pixels
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Bing_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Twitter_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\LinkedIn_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\AdRoll_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Outbrain_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Taboola_Descriptor',
+			
+			// Statistics pixels
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Hotjar_Descriptor',
+			
+			// Optimization pixels
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\VWO_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\Optimizely_Descriptor',
+			'SweetCode\Pixel_Manager\Pixels\Descriptors\AB_Tasty_Descriptor',
+		);
+
+		foreach ( $descriptors as $descriptor_class ) {
+			class_exists( $descriptor_class );
+		}
+
+		/**
+		 * Allow third-party plugins to register custom pixel descriptors
+		 */
+		Pixel_Registry::init_third_party_pixels();
+
+		add_action('wp_head', function () {
+			$this->inject_pmw_closing();
+		});
+
+		/**
+		 * Front-end script section
+		 */
+		if (Shop::track_user()) {
+			add_action('wp_enqueue_scripts', array( $this, 'front_end_scripts' ));
+		}
+
+		/**
+		 * Enqueue CSS for Elementor Pro
+		 *
+		 * This fixes an issue where Elementor widgets would show the PMW scripts as visible outputs.
+		 */
+		if (Environment::is_elementor_pro_active()) {
+			add_action('wp_enqueue_scripts', array( $this, 'front_end_styles_elementor_fix' ));
+		}
+
+		add_action('wp_ajax_pmw_get_cart_items', array( $this, 'ajax_pmw_get_cart_items' ));
+		add_action('wp_ajax_nopriv_pmw_get_cart_items', array( $this, 'ajax_pmw_get_cart_items' ));
+
+		add_action('wp_ajax_pmw_get_product_ids', array( $this, 'ajax_pmw_get_product_ids' ));
+		add_action('wp_ajax_nopriv_pmw_get_product_ids', array( $this, 'ajax_pmw_get_product_ids' ));
+
+		add_action('wp_ajax_pmw_purchase_pixels_fired', array( $this, 'ajax_purchase_pixels_fired_handler' ));
+		add_action('wp_ajax_nopriv_pmw_purchase_pixels_fired', array( $this, 'ajax_purchase_pixels_fired_handler' ));
+
+		// Experimental filter ! Can be removed without further notification
+		if ($this->experimental_defer_scripts_activation()) {
+			add_filter('script_loader_tag', array( $this, 'experimental_defer_scripts' ), 10, 2);
+		}
+
+		/**
+		 * Inject pixel snippets after <body> tag
+		 */
+		if (did_action('wp_body_open')) {
+			add_action('wp_body_open', function () {
+				self::inject_body_pixels();
+			});
+		}
+
+		/**
+		 * Inject pixel snippets into wp_footer
+		 */
+		add_action('wp_footer', array( $this, 'pmw_wp_footer' ));
+
+		/**
+		 * Process short codes
+		 */
+
+		Shortcodes::init();
+
+		if (Environment::is_woocommerce_active()) {
+
+			add_action('woocommerce_after_shop_loop_item', array( $this, 'action_woocommerce_after_shop_loop_item' ), 10, 1);
+			add_filter('woocommerce_blocks_product_grid_item_html', array( $this, 'wc_add_data_to_gutenberg_block' ), 10, 3);
+			add_action('wp_head', array( $this, 'woocommerce_inject_product_data_on_product_page' ));
+			// do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
+			add_action('woocommerce_after_cart_item_name', array( $this, 'woocommerce_after_cart_item_name' ), 10, 2);
+			add_action('woocommerce_after_mini_cart_item_name', array( $this, 'woocommerce_after_cart_item_name' ), 10, 2);
+			add_action('woocommerce_mini_cart_contents', array( $this, 'woocommerce_mini_cart_contents' ));
+
+			add_action('woocommerce_new_order', array( $this, 'pmw_woocommerce_new_order' ));
+		}
+
+		/**
+		 * Run background processes
+		 */
+
+		add_action('template_redirect', array( $this, 'run_background_processes' ));
+
+		/**
+		 * Register REST API endpoints
+		 */
+
+		if (true) {
+			add_filter('rest_pre_serve_request', array( $this, 'prepare_custom_rest_handlers' ), 10, 4);
+		}
+
+		add_action('rest_api_init', array( $this, 'register_rest_routes' ));
+
+		/**
+		 * Register wp-ajax fallback for REST API endpoints
+		 */
+
+		if (true) {
+			add_action('wp_ajax_pmw_server_to_server_event', array( $this, 'capture_ajax_server_to_server_event__premium_only' ));
+			add_action('wp_ajax_nopriv_pmw_server_to_server_event', array( $this, 'capture_ajax_server_to_server_event__premium_only' ));
+
+			add_action('wp_ajax_pmw_process_transient_session_identifiers', array( $this, 'pmw_process_transient_session_identifiers__premium_only' ));
+			add_action('wp_ajax_nopriv_pmw_process_transient_session_identifiers', array( $this, 'pmw_process_transient_session_identifiers__premium_only' ));
+		}
+
+		/**
+		 * Conditionally hooks into WordPress 'wp_ajax_..' actions to handle session storage of IPv6 addresses.
+		 * Only adds these hooks if the freemius/sdk package can use premium code.
+		 * It needs to be handled through Ajax because the REST API can't handle WooCommerce sessions.
+		 *
+		 * @see true
+		 * @see add_action()
+		 */
+		if (true) {
+			add_action('wp_ajax_pmw_store_client_ip_in_server_session', array( __CLASS__, 'pmw_store_client_ip_in_server_session' ));
+			add_action('wp_ajax_nopriv_pmw_store_client_ip_in_server_session', array( __CLASS__, 'pmw_store_client_ip_in_server_session' ));
+		}
+
+		if (true) {
+
+			/**
+			 * Automatic Conversion Recovery
+			 */
+			add_action('woocommerce_checkout_order_created', array( $this, 'acr_set_cookie__premium_only' ));
+			add_action('wp_ajax_get_acr_order_data_ajax', array( $this, 'get_acr_order_data_ajax__premium_only' ));
+			add_action('wp_ajax_nopriv_get_acr_order_data_ajax', array( $this, 'get_acr_order_data_ajax__premium_only' ));
+		}
+
+		// When updating a page, delete any transient data set by the Pixel Manager
+		add_action('save_post', array( $this, 'delete_pmw_products_transient' ), 10, 3);
+	}
+
+	private function experimental_defer_scripts_activation() {
+
+		$defer_scripts = apply_filters_deprecated('wpm_experimental_defer_scripts', array( false ), '1.31.2', 'pmw_experimental_defer_scripts');
+
+		return apply_filters('pmw_experimental_defer_scripts', $defer_scripts);
+	}
+
+	public function delete_pmw_products_transient( $post_id, $post, $update ) {
+
+		if ($update) {
+			delete_transient('pmw_products_for_datalayer_' . $post_id);
+		}
+	}
+
+	public function inject_products_from_transient_into_datalayer( $products ) {
+
+		?>
+		<script<?php echo wp_kses(Helpers::get_opening_script_string(), Helpers::get_script_string_allowed_html()); ?>>
+			(window.wpmDataLayer = window.wpmDataLayer || {}).products = window.wpmDataLayer.products || {};
+			window.wpmDataLayer.products                               = Object.assign(window.wpmDataLayer.products, <?php echo wp_json_encode((object) $products); ?>);
+		</script>
+		<?php
+	}
+
+	public function acr_set_cookie__premium_only( $order ) {
+		$data = array(
+				'order_id'  => $order->get_id(),
+				'order_key' => $order->get_order_key(),
+		);
+
+		$cookie_options = array(
+				'expires'  => time() + ( 90 * 24 * 60 * 60 ), // 90 days
+				'path'     => '/',
+				'secure'   => true,
+				'samesite' => 'Strict',
+		);
+
+		setcookie('_pmw_automatic_conversion_recovery', wp_json_encode($data), $cookie_options);
+	}
+
+	public function get_google_ads_conversion_adjustments_endpoint() {
+		/**
+		 * The regular /wp-json/ endpoint doesn't work if pretty permalinks are disabled.
+		 * https://developer.wordpress.org/rest-api/key-concepts/#routes-endpoints
+		 */
+		return '/?rest_route=/' . $this->rest_namespace . $this->gads_conversion_adjustments_route;
+	}
+
+	/**
+	 * Prepares custom REST API handlers for specific routes.
+	 *
+	 * This function is used to short-circuit the default REST API behavior for specific routes.
+	 * In this case, it is used to output a CSV file for the Google Ads conversion adjustments.
+	 *
+	 * Input: https://wordpress.stackexchange.com/a/377954/68337
+	 *
+	 * @param bool|array       $served  The served result, used to short-circuit the default REST API behavior.
+	 * @param WP_REST_Response $result  The original result to be served by the REST endpoint.
+	 * @param WP_REST_Request  $request The current request instance containing request data.
+	 * @param WP_REST_Server   $server  The REST server instance for serving responses and managing headers.
+	 * @return bool|array  Returns the original $served result if the route doesn't match. Otherwise, processes the request and exits.
+	 */
+	public function prepare_custom_rest_handlers( $served, $result, $request, $server ) {
+
+		// If $request->get_route() is not /pmw/v1/google-ads/conversion-adjustments then return $served
+		if (strpos($request->get_route(), $this->rest_namespace . $this->gads_conversion_adjustments_route) === false) {
+			return $served;
+		}
+
+		// If $result->get_data() is an array, return $served
+		// This is to prevent buggy behavior created by some third-party plugins
+		// https://secure.helpscout.net/conversation/2827410362/4097/
+		if (is_array($result->get_data())) {
+			return $served;
+		}
+
+		// For production
+		$server->send_header('Content-Type', 'text/csv');
+
+		// For testing
+//      $server->send_header('Content-Type', 'text/html');
+//      $server->send_header('Content-Type', 'text/xml');
+//      $server->send_header('Content-Type', 'application/xml');
+
+		// Echo the XML that's returned by smg_feed().
+		echo esc_html($result->get_data());
+
+		exit;
+	}
+
+	// Extracted the code because the QIT semgrep rule was triggered
+	public function can_current_user_edit_options() {
+		return Environment::can_current_user_edit_options();
+	}
+
+	public function register_rest_routes() {
+
+		/**
+		 * Testing endpoint which helps to verify if the REST API is working
+		 */
+		// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+		register_rest_route($this->rest_namespace, '/test/', array(
+				'methods'             => 'POST',
+				'callback'            => function () {
+					wp_send_json_success();
+				},
+				'permission_callback' => function () {
+					return true;
+				},
+		));
+
+		/**
+		 * Testing endpoint which helps to verify if the REST API is working
+		 */
+		// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+		register_rest_route($this->rest_namespace, '/test/', array(
+				'methods'             => 'GET',
+				'callback'            => function () {
+					wp_send_json_success();
+				},
+				'permission_callback' => function () {
+					return true;
+				},
+		));
+
+		register_rest_route($this->rest_namespace, '/settings/', array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'pmw_save_imported_settings' ),
+				'permission_callback' => array( $this, 'can_current_user_edit_options' ),
+		));
+
+		/**
+		 * No nonce verification required as we only request public data
+		 * from the server.
+		 */
+		// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+		register_rest_route($this->rest_namespace, '/products/', array(
+				'methods'             => 'POST',
+				'callback'            => function ( $request ) {
+
+					$request_decoded = $request->get_json_params();
+
+					$this->get_products_for_datalayer($request_decoded);
+				},
+				'permission_callback' => function () {
+					return true;
+				},
+		));
+
+		// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+		register_rest_route($this->rest_namespace, '/pixels-fired/', array(
+				'methods'             => 'POST',
+				'callback'            => function ( $request ) {
+
+					$data = $request->get_json_params();
+
+					// TODO: Maybe remove the nonce verification. 1) Some merchants even cache parts of the purchase confirmation page, which lets the nonce fail. 2) Nonce checks in this endpoint are not really necessary as we CAN check for a valid order_key which is only known to the customer who purchased a specific order.
+//              if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+//                  wp_send_json_error('Invalid nonce');
+//              }
+
+					$data = Helpers::generic_sanitization($data);
+
+					self::process_conversion_pixel_status($data['order_id'], $data['order_key'], $data['source']);
+				},
+				'permission_callback' => function () {
+					return true;
+				},
+		));
+
+		if (true) {
+
+			/**
+			 * Public route for sever-to-server events.
+			 * No nonce verification required, as this route is only passing through data
+			 * to third party server-to-server endpoints
+			 */
+			// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+			register_rest_route($this->rest_namespace, '/sse/', array(
+					'methods'             => 'POST',
+					'callback'            => function ( $request ) {
+
+						$data = $request->get_json_params();
+						$data = Helpers::generic_sanitization($data);
+
+						if (!is_array($data)) {
+							wp_send_json_error('No valid data array provided.');
+						}
+
+						$this->process_server_to_server_event__premium_only($data);
+
+						wp_send_json_success();
+					},
+					'permission_callback' => function () {
+						return true;
+					},
+			));
+
+			/**
+			 * Public route to request order details of a past order that a specific user has made
+			 * and who is identified by a cookie.
+			 * We don't use nonce verification as we only request data from the server specific to that user.
+			 */
+			// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+			register_rest_route($this->rest_namespace, '/acr/order/', array(
+					'methods'             => 'POST',
+					'callback'            => function ( $request ) {
+
+						$data = $request->get_json_params();
+
+						if (!is_array($data)) {
+							wp_send_json_error('No valid data array provided.');
+						}
+
+						$this->get_order_details_for_acr($data);
+					},
+					'permission_callback' => function () {
+						return true;
+					},
+			));
+
+			// Public route for Google Ads conversion adjustment CSV
+			// nosemgrep: audit.php.wp.security.rest-route.permission-callback.return-true
+			register_rest_route($this->rest_namespace, $this->gads_conversion_adjustments_route, array(
+					'methods'             => 'GET',
+					'callback'            => function ( $request ) {
+						if (!Options::is_google_ads_conversion_adjustments_conversion_name_set()) {
+							return 'The Google Ads Conversion Adjustments Conversion Name has not been set';
+						}
+
+						return $this->get_google_ads_conversion_adjustments__premium_only();
+					},
+					'permission_callback' => function () {
+						return true;
+					},
+			));
+
+			register_rest_route($this->rest_namespace, '/ga4/data-api/credentials/', array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'pwm_save_ga4_data_api_credentials__premium_only' ),
+					'permission_callback' => array( __CLASS__, 'protected_rest_route_permission_callback' ),
+			));
+
+			register_rest_route($this->rest_namespace, '/ga4/data-api/get-order-attribution-data/', array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'pwm_save_ga4_data_api_get_order_attribution_data__premium_only' ),
+					'permission_callback' => array( __CLASS__, 'protected_rest_route_permission_callback' ),
+			));
+		}
+	}
+
+	/**
+	 * Callback function for the protected REST route permission check.
+	 *
+	 * This function checks if the current user has permission to access the protected route.
+	 * If the user does not have permission, it returns a WP_Error with a 401 status code.
+	 * If the user has permission, it returns true.
+	 *
+	 * @return /WP_Error|bool Returns a WP_Error if the user does not have permission, or true if they do.
+	 *
+	 * @since  1.49.0
+	 */
+	public static function protected_rest_route_permission_callback() {
+
+		if (Environment::can_current_user_edit_options()) {
+			return true;
+		}
+
+		return new WP_Error('rest_forbidden', esc_html__('You can not view private data.', 'woocommerce-google-adwords-conversion-tracking-tag'), array( 'status' => 401 ));
+	}
+
+	private function get_products_for_datalayer( $data ) {
+
+		$product_ids = Helpers::generic_sanitization($data['product_ids']);
+
+		if (!$product_ids) {
+			wp_send_json_error('No product IDs provided.');
+		}
+
+		if (!is_array($product_ids)) {
+			wp_send_json_error('Product IDs must be an array.');
+		}
+
+		// if $data['page_id'] is not set, return error
+		if (!isset($data['page_id'])) {
+			wp_send_json_error('No page ID provided');
+		}
+
+		// if $data['page_type'] is not set, return error
+		if (!isset($data['page_type'])) {
+			wp_send_json_error('No page type provided');
+		}
+
+		// Prevent server overload if too many products are requested
+		$product_ids = count($product_ids) > 50 ? array_slice($product_ids, 0, 50) : $product_ids;
+
+		$products = $this->get_products_for_datalayer_by_product_ids($product_ids);
+
+		// Check if a data layer products transient for this page exists
+		// If it does, add the products from the transient to $products
+		if (get_transient('pmw_products_for_datalayer_' . $data['page_id'])) {
+			$products_in_transient = get_transient('pmw_products_for_datalayer_' . $data['page_id']);
+
+			// Filter out products that no longer exist or are not published
+			$products_in_transient = array_filter($products_in_transient, function ( $product_data ) {
+				// Skip if no product ID
+				if (!isset($product_data['id'])) {
+					return false;
+				}
+
+				$product = wc_get_product($product_data['id']);
+
+				// Remove if product doesn't exist or is not published
+				if (Product::is_not_wc_product($product) || 'publish' !== $product->get_status()) {
+					return false;
+				}
+
+				return true;
+			});
+
+			// Merge the associative arrays with nested arrays $products and $products_in_transient preserving the keys
+			$products = array_replace_recursive($products, $products_in_transient);
+		}
+
+		// Set transient with products for $data['page_id']
+		if (
+				'cart' !== $data['page_type']
+				&& 'checkout' !== $data['page_type']
+				&& 'order_received_page' !== $data['page_type']
+		) {
+			set_transient('pmw_products_for_datalayer_' . $data['page_id'], $products, MONTH_IN_SECONDS);
+		}
+
+		wp_send_json_success($products);
+	}
+
+	/**
+	 * Retrieves order attribution data from the GA4 Data API and returns it in an HTML table format.
+	 *
+	 * @param WP_REST_Request $request The request object containing necessary data such as order ID.
+	 * @return void Responds with JSON success or error messages.
+	 */
+	public function pwm_save_ga4_data_api_get_order_attribution_data__premium_only( $request ) {
+
+		// Verify nonce
+		if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+			wp_send_json_error('Invalid nonce');
+		}
+
+		$data = $request->get_json_params();
+
+		if (!isset($data['order_id'])) {
+			wp_send_json_error('No order ID provided');
+		}
+
+		$order_id = Helpers::generic_sanitization($data['order_id']);
+		$order    = wc_get_order($order_id);
+
+		if (is_bool($order)) {
+			wp_send_json_error('Order not found');
+		}
+
+		$data = GA4_Data_API::get_instance()->get_order_attribution_data($order);
+
+		if (is_wp_error($data)) {
+			wp_send_json_error($data->get_error_message() . ' ' . esc_html__('Try going through the setup process again.', 'woocommerce-google-adwords-conversion-tracking-tag'));
+		}
+
+		if (isset($data['error'])) {
+			wp_send_json_error($data['error']['message']);
+		}
+
+		if (!isset($data['rows'])) {
+
+			$error_message = 'No rows returned from GA4 Data API.';
+
+			// If order creation date is not older than 1 day, append the message "GA4 can take up to 24 hours to process order attribution."
+			if (strtotime($order->get_date_created()) > strtotime('-48 hours')) {
+				$error_message .= '</br>GA4 can take up to 24 hours to process order attribution.';
+			}
+
+			wp_send_json_error($error_message);
+		}
+
+		$total_value = 0;
+
+		foreach ($data['rows'] as $row) {
+			$total_value += $row['metricValues'][0]['value'];
+		}
+
+		// create html table using output buffer
+		ob_start();
+		?>
+		<table>
+			<tr>
+				<th style="text-align: left">Channel</th>
+				<th class="pmw-ga4-attr-values">Attr. Value</th>
+				<th class="pmw-ga4-attr-values">Attr. %</th>
+			</tr>
+			<?php foreach ($data['rows'] as $row) : ?>
+				<tr>
+					<td><?php echo esc_html($row['dimensionValues'][0]['value']); ?></td>
+					<td class="pmw-ga4-attr-values"><?php echo esc_html(Helpers::format_decimal(floatval($row['metricValues'][0]['value']), 2)); ?></td>
+					<td class="pmw-ga4-attr-values"><?php echo esc_html(round($row['metricValues'][0]['value'] / $total_value * 100, 2)); ?>
+						%
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			<tr>
+				<td>
+					<b>Total</b>
+				</td>
+				<td class="pmw-ga4-attr-values">
+					<b><?php echo esc_html(Helpers::format_decimal($total_value, 2)); ?></b>
+				</td>
+				<td class="pmw-ga4-attr-values">
+					<b>100%</b>
+				</td>
+			</tr>
+		</table>
+
+		<?php
+		$html = ob_get_clean();
+
+		wp_send_json_success($html);
+	}
+
+	/**
+	 * Generates a CSV containing Google Ads conversion adjustments based on cancelled orders and refunds
+	 * within a specific time range. The adjustments include order ID, conversion name, adjustment time,
+	 * adjustment type, adjusted value, and currency.
+	 *
+	 * Source: https://support.google.com/google-ads/answer/7686280
+	 * Source: Timezone http://goo.gl/T1C5Ov
+	 * CSV template https://www.gstatic.com/conversiontracking/conversion-adjustment-template-oid.csv
+	 *
+	 * @return string A CSV string representing the Google Ads conversion adjustments data.
+	 */
+	private function get_google_ads_conversion_adjustments__premium_only() {
+
+		$conversion_name = Options::get_google_ads_conversion_adjustments_conversion_name();
+
+		$title_row = array(
+				'Order ID',
+				'Conversion Name',
+				'Adjustment Time',
+				'Adjustment Type',
+				'Adjusted Value',
+				'Adjusted Value Currency',
+		);
+
+		$csv = implode(',', $title_row) . PHP_EOL;
+
+		// For production
+		$date_before = wp_date('Y-m-d H:i:s', strtotime('-2 days'));
+		// For testing
+//      $date_before = wp_date('Y-m-d H:i:s');
+
+		// get php date format eg. 2012-08-14T13:00:00-0100
+		$date_format = 'Y-m-d\TH:i:sP';
+
+		$date_after = wp_date('Y-m-d H:i:s', strtotime('-3 days'));
+
+		/**
+		 * Get all cancelled orders that were cancelled within a time range
+		 * and retract them
+		 */
+		$orders = wc_get_orders(array(
+				'limit'         => -1,
+				'status'        => 'cancelled',
+				'date_modified' => $date_after . '...' . $date_before,
+				//                                  'date_modified' => '>' . $date_after,
+		));
+
+		foreach ($orders as $order) {
+
+			// Get the order ID
+//          $order_id = $order->get_id();
+			$order_id = $order->get_order_number();
+
+			// Get the modified date
+			$adjustment_time = $order->get_date_modified();
+			$adjustment_time = $adjustment_time->format($date_format);
+
+			// Set adjustment type
+			$adjustment_type         = 'RETRACT';
+			$adjusted_value          = null;
+			$adjusted_value_currency = null;
+
+			// Compile new row
+			$row = array(
+					$order_id,
+					$conversion_name,
+					$adjustment_time,
+					$adjustment_type,
+					$adjusted_value,
+					$adjusted_value_currency,
+			);
+
+			$csv .= implode(',', $row) . PHP_EOL;
+		}
+
+		/**
+		 * Get all refunds from within a time range
+		 */
+		$refunds = wc_get_orders(array(
+				'type'        => 'shop_order_refund',
+				'status'      => 'completed',
+				'date_after'  => $date_after,
+				//                                   'date_after' => gmdate('Y-m-d H:i:s', strtotime('-3 days')),
+				'date_before' => $date_before,
+		));
+
+		foreach ($refunds as $refund) {
+
+			$parent_order = wc_get_order($refund->get_parent_id());
+
+			// Get the order ID
+			$order_id = $parent_order->get_order_number();
+
+			// Get the refund date
+			$adjustment_time = $refund->get_date_created();
+			$adjustment_time = $adjustment_time->format($date_format);
+
+			// Get adjustment type
+
+			// Get parent order status
+			$parent_order_status = $parent_order->get_status();
+
+			if ('refunded' === $parent_order_status || 'cancelled' === $parent_order_status) {
+				$adjustment_type         = 'RETRACT';
+				$adjusted_value          = null;
+				$adjusted_value_currency = null;
+			} else {
+				$adjustment_type = 'RESTATE';
+
+				// Get the total value of the parent order
+				$adjusted_value          = $this->get_order_value_after_refunds($parent_order);
+				$adjusted_value_currency = $refund->get_currency();
+			}
+
+			// If $adjusted_value is negative, set it to 0
+			if ($adjusted_value < 0) {
+				$adjusted_value = 0;
+			}
+
+			// Compile new row
+			$row = array(
+					$order_id,
+					$conversion_name,
+					$adjustment_time,
+					$adjustment_type,
+					$adjusted_value,
+					$adjusted_value_currency,
+			);
+
+			$csv .= implode(',', $row) . PHP_EOL;
+		}
+
+		return $csv;
+	}
+
+	private function get_order_value_after_refunds( $order ) {
+
+		$refunds         = $order->get_refunds();
+		$refunded_amount = 0;
+
+		foreach ($refunds as $refund) {
+			$refunded_amount -= $refund->get_total();
+		}
+
+		$order_total    = $order->get_total();
+		$adjusted_value = $order_total - $refunded_amount;
+
+		// Calculate the new order value considering the order total logic that has been applied by the user
+		$adjusted_value_percentage = $adjusted_value / $order_total;
+		$adjusted_value            = Shop::get_order_value_total_marketing($order, true) * $adjusted_value_percentage;
+
+		return Helpers::format_decimal($adjusted_value, 2);
+	}
+
+	private function get_order_details_for_acr( $data ) {
+
+		// If order ID or order key is not provided, return error
+		if (!isset($data['order_id']) || !isset($data['order_key'])) {
+			wp_send_json_error('No order ID or order key provided');
+		}
+
+		$data = Helpers::generic_sanitization($data);
+
+		$order_id  = $data['order_id'];
+		$order_key = $data['order_key'];
+
+		$order = wc_get_order($order_id);
+
+		// if order is not found, return error
+		if (!$order) {
+			wp_send_json_error('Order not found');
+		}
+
+		// If order key doesn't match, return error
+		if ($order->get_order_key() !== $order_key) {
+			wp_send_json_error('Order key does not match');
+		}
+
+		if (!$this->is_order_eligible_for_acr($order)) {
+			wp_send_json_error('Order is not eligible for ACR');
+		}
+
+		// Return the order details for the wpmDataLayer with the provided ID
+		wp_send_json_success($this->get_order_data($order));
+	}
+
+	private function is_order_eligible_for_acr( $order ) {
+
+		/**
+		 * If the order is not in a paid state, return false.
+		 *
+		 * It seems to be better to check for paid statuses instead of not-paid statuses,
+		 * as there are shops that may add unpaid statuses to the status list. Those statuses
+		 * then can trigger the ACR, which they shouldn't. Using wc_get_is_paid_statuses()
+		 * will make sure that only paid statuses are checked, even additional paid statuses
+		 * added through the filter in wc_get_is_paid_statuses().
+		 *
+		 * https://stackoverflow.com/a/59869889
+		 */
+		if (!in_array($order->get_status(), wc_get_is_paid_statuses())) {
+			return false;
+		}
+
+		// If order has already fired the conversion pixel, return false
+		if (Shop::has_conversion_pixel_already_fired($order)) {
+			return false;
+		}
+
+		if (!Shop::can_order_confirmation_be_processed($order)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public function capture_ajax_server_to_server_event__premium_only() {
+
+		$_post = Helpers::get_input_vars(INPUT_POST);
+		$this->process_server_to_server_event__premium_only($_post['data']);
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Process transient session identifiers and store them in the WooCommerce session.
+	 *
+	 * @return void
+	 */
+	public function pmw_process_transient_session_identifiers__premium_only() {
+
+		// If WooCommerce is not active, return error
+		if (!Environment::is_woocommerce_active()) {
+			wp_send_json_error('WooCommerce not active');
+		}
+
+		if (!Shop::is_woocommerce_session_active()) {
+			wp_send_json_error('WooCommerce session not active');
+		}
+
+		$_post = Helpers::get_input_vars(INPUT_POST);
+
+		// If the session identifiers are not set, return error
+		if (!isset($_post['data'])) {
+			wp_send_json_error('No session identifiers provided');
+		}
+
+		$data = self::sanitize_new_transient_session_identifiers__premium_only($_post['data']);
+
+		Logger::debug('Processing transient session identifiers: ' . wp_json_encode($data));
+
+		$transient_session_identifiers = Shop::get_transient_identifiers_from_session();
+		$transient_session_identifiers = array_merge($transient_session_identifiers, $data);
+
+		// Set the session identifiers in the WooCommerce session
+		WC()->session->set(Shop::get_transient_identifiers_key(), $transient_session_identifiers);
+
+		wp_send_json_success(array(
+				'session_identifiers' => $data,
+				'message'             => 'Session identifiers stored in server session',
+		));
+	}
+
+	/**
+	 * Sanitize new transient session identifiers
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	private static function sanitize_new_transient_session_identifiers__premium_only( $data ) {
+
+		$allowed_keys = array(
+				'referrer',
+				'gclid',
+				'gbraid',
+				'wbraid',
+				'fbclid',
+				'ttclid',
+				'scid',
+				'epik',
+		);
+
+		// Remove all keys that are not allowed
+		$data = array_intersect_key($data, array_flip($allowed_keys));
+
+		if (isset($data['referrer'])) {
+			// if is not valid URL, unset
+			if (!filter_var($data['referrer'], FILTER_VALIDATE_URL)) {
+				unset($data['referrer']);
+			}
+		}
+
+		if (isset($data['gclid'])) {
+			if (!Google_Helpers::is_valid_gclid($data['gclid'])) {
+				unset($data['gclid']);
+			}
+		}
+
+		if (isset($data['gbraid'])) {
+			if (!Google_Helpers::is_valid_braid($data['gbraid'])) {
+				unset($data['gbraid']);
+			}
+		}
+
+		if (isset($data['wbraid'])) {
+			if (!Google_Helpers::is_valid_braid($data['wbraid'])) {
+				unset($data['wbraid']);
+			}
+		}
+
+		if (isset($data['fbclid'])) {
+			if (!Facebook_CAPI::is_valid_fbc($data['fbclid'])) {
+				unset($data['fbclid']);
+			}
+		}
+
+		if (isset($data['ttclid'])) {
+			if (!TikTok_EAPI::is_valid_ttclid($data['ttclid'])) {
+				unset($data['ttclid']);
+			}
+		}
+
+		if (isset($data['scid'])) {
+			if (!Snapchat_CAPI::is_valid_scid($data['scid'])) {
+				unset($data['scid']);
+			}
+		}
+
+		if (isset($data['epik'])) {
+			if (!Pinterest_APIC::is_valid_epik($data['epik'])) {
+				unset($data['epik']);
+			}
+		}
+
+		return $data;
+	}
+
+	public static function pmw_store_client_ip_in_server_session() {
+
+		$_post = Helpers::get_input_vars(INPUT_POST);
+
+		// return error if the ip field is not set
+		if (!isset($_post['data']['ip'])) {
+			wp_send_json_error('No IP address provided');
+		}
+
+		$ip = sanitize_text_field($_post['data']['ip']);
+
+		// return error if the ip field is not a valid IP address (IPv4 or IPv6)
+		if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+			wp_send_json_error('Invalid IP address');
+		}
+
+		// If WooCommerce is not active, return error
+		if (!Environment::is_woocommerce_active()) {
+			wp_send_json_error('WooCommerce not active');
+		}
+
+		// If WC() is not available, return error
+		if (!function_exists('WC')) {
+			wp_send_json_error('WC() not available');
+		}
+
+		// If a WooCommerce session is not available, return error
+		if (!WC()->session) {
+			wp_send_json_error('WooCommerce session not available');
+		}
+
+		// Set the client IP address in the WooCommerce session
+		WC()->session->set('client_ip', $ip);
+
+		wp_send_json_success(array(
+				'ip'      => $ip,
+				'message' => 'Client IP address stored in server session',
+		));
+	}
+
+	public function get_acr_order_data_ajax__premium_only() {
+
+		$_post = Helpers::get_input_vars(INPUT_POST);
+		$this->get_order_details_for_acr($_post['data']);
+	}
+
+	public function process_server_to_server_event__premium_only( $data ) {
+
+		// Process event through the server-side filter pipeline
+		Server_Event_Processor::process_event($data);
+	}
+
+	/**
+	 * Save imported settings from the REST API request.
+	 *
+	 * @param WP_REST_Request $request The request object containing the settings to be saved.
+	 * @return void Responds with JSON success or error messages.
+	 */
+	public function pmw_save_imported_settings( $request ) {
+
+		// Verify nonce
+		if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+			wp_send_json_error('Invalid nonce');
+		}
+
+		$options = $request->get_params();
+
+		// Sanitize nested array $options
+		$options = Helpers::generic_sanitization($options);
+
+		if (!is_array($options)) {
+			wp_send_json_error('Invalid options. Not an array.');
+		}
+
+		// Validate imported options
+		if (!Validations::validate_imported_options($options)) {
+			wp_send_json_error(array( 'message' => 'Invalid options. Didn\'t pass validation.' ));
+		}
+
+		// All good, save options with timestamp and automatic backup
+		Options::save_options_with_timestamp($options, true);
+		wp_send_json_success(array( 'message' => 'Options saved' ));
+	}
+
+	public function pwm_save_ga4_data_api_credentials__premium_only( $request ) {
+
+		// Verify nonce
+		if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+			wp_send_json_error('Invalid nonce');
+		}
+
+		$credentials = $request->get_params();
+
+		// Sanitize nested array $options
+		$credentials = Helpers::generic_sanitization($credentials);
+
+		// Validate imported options
+		if (!Validations::validate_ga4_data_api_credentials($credentials)) {
+			wp_send_json_error(array( 'message' => 'Invalid options' ));
+		}
+
+		// All good, save options with timestamp and automatic backup
+		$options = Options::get_options();
+		$options['google']['analytics']['ga4']['data_api']['credentials'] = $credentials;
+		Options::save_options_with_timestamp($options, true);
+		wp_send_json_success(array( 'message' => 'Options saved' ));
+	}
+
+	public function run_background_processes() {
+
+		if (true && Environment::is_woocommerce_active()) {
+
+			if (is_cart() || is_checkout()) {
+
+				if (Options::is_ga4_mp_active()) {
+					Google_MP_GA4::set_identifiers_on_session();
+				}
+
+				if (Options::is_facebook_capi_active()) {
+					Facebook_CAPI::set_identifiers_on_session();
+				}
+
+				if (Options::is_tiktok_eapi_active()) {
+					TikTok_EAPI::set_identifiers_on_session();
+				}
+
+				if (Options::is_pinterest_apic_active()) {
+					Pinterest_APIC::set_identifiers_on_session();
+				}
+
+				if (Options::is_snapchat_capi_active()) {
+					Snapchat_CAPI::set_identifiers_on_session();
+				}
+			}
+
+			// TODO: That function should probably not go into the Google_MP_GA4 class
+			if (Shop::pmw_is_order_received_page()) {
+				if (Shop::pmw_get_current_order()) {
+					Google_Helpers::save_gclid_in_order__premium_only(Shop::pmw_get_current_order());
+				}
+			}
+		}
+	}
+
+	public function pmw_woocommerce_new_order( $order_id ) {
+
+		$order = wc_get_order($order_id);
+
+		/**
+		 * All new orders should be marked as long PMW is active,
+		 * so that we know we can process them later through PMW,
+		 * and so that we know we should not touch orders that were
+		 * placed before PMW was active.
+		 */
+		$order->add_meta_data('_wpm_process_through_wpm', true, true);
+
+		/**
+		 * Set a custom user ID on the order
+		 * because WC sets 0 on all order created
+		 * manually through the back-end.
+		 */
+
+		$user_id = 0;
+
+		if (is_user_logged_in()) {
+			$user_id = get_current_user_id();
+		}
+
+		$order->add_meta_data('_wpm_customer_user', $user_id, true);
+
+		/**
+		 * Mark all orders which have been created while the premium version was active
+		 */
+		if (true) {
+			$order->add_meta_data('_wpm_premium_active', true, true);
+		}
+
+		$order->save();
+	}
+
+	// Thanks to: https://gist.github.com/mishterk/6b7a4d6e5a91086a5a9b05ace304b5ce#file-mark-wordpress-scripts-as-async-or-defer-php
+	public function experimental_defer_scripts( $tag, $handle ) {
+
+		if ('wpm' !== $handle) {
+			return $tag;
+		}
+
+		return str_replace(' src', ' defer src', $tag); // defer the script
+	}
+
+	public function woocommerce_mini_cart_contents() {
+
+		foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+			$this->woocommerce_after_cart_item_name($cart_item, $cart_item_key);
+		}
+	}
+
+	public function woocommerce_after_cart_item_name( $cart_item, $cart_item_key ) {
+
+		$data = array(
+				'product_id'   => $cart_item['product_id'],
+				'variation_id' => $cart_item['variation_id'],
+		);
+
+		$json_encode_options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
+		// add JSON_PRETTY_PRINT
+//      $json_encode_options = $json_encode_options | JSON_PRETTY_PRINT;
+
+		?>
+		<script>
+			window.wpmDataLayer.cart_item_keys                                          = window.wpmDataLayer.cart_item_keys || {};
+			window.wpmDataLayer.cart_item_keys['<?php echo esc_js($cart_item_key); ?>'] = <?php echo wp_json_encode($data, $json_encode_options); ?>;
+		</script>
+
+		<?php
+	}
+
+	// on the product page
+	public function woocommerce_inject_product_data_on_product_page() {
+
+		if (!is_product()) {
+			return;
+		}
+
+		$product = wc_get_product(get_the_id());
+
+		if (Product::is_not_wc_product($product)) {
+			Logger::debug('woocommerce_inject_product_data_on_product_page provided no product on a product page: .' . get_the_id());
+			return;
+		}
+
+		Product::print_product_data_layer_script($product, false, true);
+
+		if ($product->is_type('grouped')) {
+
+			foreach ($product->get_children() as $product_id) {
+
+				$product = wc_get_product($product_id);
+
+				if (Product::is_not_wc_product($product)) {
+					Product::log_problematic_product_id($product_id);
+					continue;
+				}
+
+				Product::print_product_data_layer_script($product, false, true);
+			}
+
+		} elseif ($product->is_type('variable')) {
+			/**
+			 * Stop inspection
+			 *
+			 * @noinspection PhpPossiblePolymorphicInvocationInspection
+			 */
+
+			// Prevent processing of large amounts of variations
+			// because get_available_variations() is very slow
+			if (64 <= count($product->get_children())) {
+				return;
+			}
+
+			foreach ($product->get_available_variations() as $key => $variation) {
+
+				$variable_product = wc_get_product($variation['variation_id']);
+
+				if (!is_object($variable_product)) {
+					Product::log_problematic_product_id($variation['variation_id']);
+					continue;
+				}
+
+				Product::print_product_data_layer_script($variable_product, false, true);
+			}
+		}
+	}
+
+	// every product that's generated by the shop loop like shop page or a shortcode
+	public function action_woocommerce_after_shop_loop_item() {
+
+		global $product;
+
+		Product::print_product_data_layer_script($product);
+	}
+
+	/**
+	 * Product views generated by a Gutenberg block (instead of a shortcode)
+	 *
+	 * @param $html
+	 * @param $data
+	 * @param $product
+	 * @return mixed|string
+	 */
+	public function wc_add_data_to_gutenberg_block( $html, $data, $product ) {
+
+		// If the cart is empty, early return the html and don't add the additional product data layer.
+		// This is to avoid a render blocking issue reported here: https://wordpress.org/support/topic/wc-8-4-empty-cart-error/
+		// Also we need safeguards to avoid a bug reported here: https://wordpress.org/support/topic/fatal-error-4590/
+		// IMO WooCommerce should not process the woocommerce_blocks_product_grid_item_html hook during a REST API request.
+		if (!is_object(WC()->cart)) {
+			return $html;
+		}
+
+		if (method_exists(WC()->cart, 'is_empty') && WC()->cart->is_empty()) {
+			return $html;
+		}
+
+		// The new cart block in WC 9.x errors out when emptying the cart
+		if (has_block('woocommerce/cart')) {
+			return $html;
+		}
+
+		return $html . Product::ob_print_get_product_data_layer_script($product);
+	}
+
+	public function pmw_wp_footer() {
+		// WP footer scripts
+	}
+
+	public function inject_data_layer_through_litespeed_esi() {
+		do_action('litespeed_control_set_nocache', 'nocache for Pixel the Pixel Manager');
+		$this->inject_data_layer();
+	}
+
+	/**
+	 * Output the uncached data layer through ESI.
+	 *
+	 * TODO: Once the wp_kses filter is updated, refactor the below code.
+	 * TODO: Remove the wcm part and replace echo with echo wp_kses(...).
+	 * TODO: The wp_kses output will have to go through a WP version check to
+	 * TODO: make sure it's only used on WP installs with the updated wp_kses filter.
+	 * TODO: https://core.trac.wordpress.org/ticket/58921
+	 * TODO: Update the sweetcode.com docs after the refactor.
+	 *
+	 * @return void
+	 * @since 1.32.6
+	 **/
+	private function inject_data_layer_litespeed_esi() {
+
+		if ('wcm' === PMW_DISTRO) {
+			do_action('litespeed_control_set_nocache', 'logged in user: disable cache');
+			$this->inject_data_layer();
+
+			return;
+		}
+	}
+
+	/**
+	 * Injects the data layer into the page.
+	 *
+	 * Source: https://support.cloudflare.com/hc/en-us/articles/200169436-How-can-I-have-Rocket-Loader-ignore-specific-JavaScripts-
+	 *
+	 * @return void
+	 */
+	private function inject_data_layer() {
+
+		$json_encode_options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
+		// add JSON_PRETTY_PRINT
+//      $json_encode_options = $json_encode_options | JSON_PRETTY_PRINT;
+
+		// We add a script string with additional attributes to the script tag.
+		// Those attributes are primarily to exclude the script from being processed
+		// by various script loaders and script blockers.
+		// Some exclusion techniques use HTML comments, but those comments may be stripped by HTML minifiers.
+		?>
+
+		<script<?php echo wp_kses(Helpers::get_opening_script_string(), Helpers::get_script_string_allowed_html()); ?>>
+
+			window.wpmDataLayer = window.wpmDataLayer || {};
+			window.wpmDataLayer = Object.assign(window.wpmDataLayer, <?php echo wp_json_encode($this->get_data_for_data_layer(), $json_encode_options); ?>);
+
+		</script>
+
+		<?php
+	}
+
+	/**
+	 * Set up the wpmDataLayer
+	 *
+	 * @return mixed|void
+	 */
+	private function get_data_for_data_layer() {
+
+		/**
+		 * Load and set some defaults.
+		 */
+
+		$data = array(
+				'cart'           => (object) array(), // Empty arrays get cast into an array, but we need an object
+				'cart_item_keys' => (object) array(), // Empty arrays get cast into an array, but we need an object
+				'version'        => Helpers::get_version_info(),
+		);
+
+		/**
+		 * Load the pixels
+		 */
+
+		$data['pixels'] = $this->get_pixel_data();
+
+		/**
+		 * Load remaining settings
+		 */
+
+		if (Environment::is_woocommerce_active()) {
+			$data = $this->add_order_data($data);
+//          $data         = array_merge($data, $this->get_order_data());
+			$data['shop'] = $this->get_shop_data();
+		}
+
+		$data['page'] = self::get_page_data();
+
+		$data['general'] = $this->get_general_data();
+
+		// If the free version is active, don't output user data.
+		// User data can only be processed with the premium version.
+		if (true) {
+			$user_data = Helpers::get_user_data();
+
+			if (!empty($user_data)) {
+				$data['user'] = $user_data;
+			}
+		}
+
+		/**
+		 * Load the experiment settings
+		 */
+
+//      $data['experiments'] = [
+//              'ga4_server_and_browser_tracking' => apply_filters('experimental_pmw_ga4_server_and_browser_tracking', false),
+//      ];
+
+		$data = apply_filters_deprecated('wpm_experimental_data_layer', array( $data ), '1.31.2', 'pmw_experimental_data_layer');
+
+		// Return and optionally modify the pmw data layer
+		return apply_filters('pmw_experimental_data_layer', $data);
+	}
+
+	private function get_pixel_data() {
+
+		$data = array();
+
+		if (Options::is_google_active()) {
+			$data['google'] = $this->get_google_pixel_data();
+		}
+
+		if (Options::is_facebook_active()) {
+			$data['facebook'] = $this->get_facebook_pixel_data();
+		}
+
+		if (Options::is_hotjar_enabled()) {
+			$data['hotjar'] = $this->get_hotjar_pixel_data();
+		}
+
+		// If the premium version is active, load the additional pixels
+		if (true) {
+
+			if (Options::is_contentsquare_active()) {
+				$data['contentsquare'] = self::get_contentsquare_pixel_data();
+			}
+
+			if (Options::is_adroll_active()) {
+				$data['adroll'] = $this->get_adroll_pixel_data();
+			}
+
+			if (Options::is_linkedin_active()) {
+				$data['linkedin'] = $this->get_linkedin_pixel_data();
+			}
+
+			if (Options::is_bing_active()) {
+				$data['bing'] = self::get_bing_pixel_data();
+			}
+			if (Options::is_reddit_active()) {
+				$data['reddit'] = $this->get_reddit_pixel_data();
+			}
+
+			if (Options::is_outbrain_active()) {
+				$data['outbrain'] = self::get_outbrain_pixel_data();
+			}
+
+			if (Options::is_pinterest_active()) {
+				$data['pinterest'] = $this->get_pinterest_pixel_data();
+			}
+
+			if (Options::is_snapchat_active()) {
+				$data['snapchat'] = $this->get_snapchat_pixel_data();
+			}
+
+			if (Options::is_taboola_active()) {
+				$data['taboola'] = self::get_taboola_pixel_data();
+			}
+
+			if (Options::is_tiktok_active()) {
+				$data['tiktok'] = $this->get_tiktok_pixel_data();
+			}
+
+			if (Options::is_twitter_active()) {
+				$data['twitter'] = $this->get_twitter_pixel_data();
+			}
+
+			if (Options::is_vwo_active()) {
+				$data['vwo'] = self::get_vwo_pixel_data();
+			}
+		}
+
+		return $data;
+	}
+
+	private function get_google_pixel_data() {
+
+		$data = array(
+				'linker'  => array(
+						'settings' => Google_Helpers::get_google_linker_settings(),
+				),
+				'user_id' => Options::is_google_user_id_active(),
+		);
+
+		if (Options::is_google_ads_active()) {
+			$data['ads'] = array(
+					'conversion_ids'           => (object) Google_Helpers::get_google_ads_conversion_ids(),
+					'dynamic_remarketing'      => array(
+							'status'                      => true, // Has been set be true by default
+							'id_type'                     => Product::get_dyn_r_id_type('google_ads'),
+							'send_events_with_parent_ids' => $this->send_events_with_parent_ids(),
+					),
+					'google_business_vertical' => Google_Helpers::get_google_business_vertical_name_by_id(Options::get_google_ads_business_vertical_id()),
+					'phone_conversion_number'  => Options::get_google_ads_phone_conversion_number(),
+					'phone_conversion_label'   => Options::get_google_ads_phone_conversion_label(),
+			);
+		}
+
+		if (Options::is_google_analytics_active()) {
+			$data['analytics'] = array(
+					'ga4'     => array(
+							'measurement_id'          => Options::get_ga4_measurement_id(),
+							'parameters'              => (object) Google_Helpers::get_ga4_parameters(Options::get_ga4_measurement_id()),
+							'mp_active'               => ( Options::is_ga4_mp_active() && true ),
+							'debug_mode'              => Google_Helpers::is_ga4_debug_mode_active(),
+							'page_load_time_tracking' => Options::is_ga4_page_load_time_tracking_active(),
+					),
+					'id_type' => Google_Helpers::get_ga_id_type(),
+			);
+		}
+
+		$data['tag_id']            = Google_Helpers::get_google_tag_id_information()['active'];
+		$data['tag_id_suppressed'] = Google_Helpers::get_google_tag_id_information()['suppressed'];
+
+		$data['tag_gateway']['measurement_path'] = Options::get_google_tag_gateway_measurement_path();
+
+		// Always include proxy_url for automatic fallback detection
+		// JavaScript will detect if WordPress fallback is being used and switch to direct proxy URL
+		$isolated_url = GTG_Proxy::get_isolated_proxy_url();
+		if ( $isolated_url ) {
+			$data['tag_gateway']['proxy_url'] = $isolated_url;
+		}
+
+		// Include server-detected GTG handler for frontend to use without extra requests
+		if ( Options::get_google_tag_gateway_measurement_path() ) {
+			$data['tag_gateway']['handler'] = GTG_Config::get_handler();
+		}
+
+		$data['tcf_support'] = Options::is_google_tcf_support_active();
+
+		$data['consent_mode'] = array(
+				'is_active'          => Options::is_google_consent_mode_active(),
+				'wait_for_update'    => 500,
+				'ads_data_redaction' => Google_Helpers::get_google_consent_mode_ads_data_redaction_setting(),
+				'url_passthrough'    => Google_Helpers::get_google_consent_mode_url_passthrough_setting(),
+		);
+
+		if (Options::is_google_enhanced_conversions_active()) {
+			$data['enhanced_conversions']['is_active'] = Options::is_google_enhanced_conversions_active();
+		}
+
+		return $data;
+	}
+
+	private function send_events_with_parent_ids() {
+
+		$events_with_parent_ids = apply_filters_deprecated('wooptpm_send_events_with_parent_ids', array( true ), '1.13.0', 'pmw_send_events_with_parent_ids');
+		$events_with_parent_ids = apply_filters_deprecated('wpm_send_events_with_parent_ids', array( $events_with_parent_ids ), '1.31.2', 'pmw_send_events_with_parent_ids');
+
+		return apply_filters('pmw_send_events_with_parent_ids', $events_with_parent_ids);
+	}
+
+	private function get_adroll_pixel_data() {
+		return array(
+				'advertiser_id'       => Options::get_adroll_advertiser_id(),
+				'pixel_id'            => Options::get_adroll_pixel_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('adroll'),
+				),
+		);
+	}
+
+	private function get_linkedin_pixel_data() {
+		return array(
+				'partner_id'          => Options::get_linkedin_partner_id(),
+				'conversion_ids'      => Options::get_linkedin_conversion_ids(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('linkedin'),
+				),
+		);
+	}
+
+	private static function get_bing_pixel_data() {
+		return array(
+				'uet_tag_id'           => Options::get_bing_uet_tag_id(),
+				'enhanced_conversions' => Options::is_bing_enhanced_conversions_enabled(),
+				'dynamic_remarketing'  => array(
+						'id_type' => Product::get_dyn_r_id_type('bing'),
+				),
+				'consent_mode'         => array(
+						'is_active' => Options::is_bing_consent_mode_active(),
+				),
+		);
+	}
+
+	private function get_facebook_pixel_data() {
+
+		$data = array(
+				'pixel_id'            => Options::get_facebook_pixel_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('facebook'),
+				),
+				'capi'                => Options::is_facebook_capi_active(),
+				'advanced_matching'   => Options::is_facebook_capi_advanced_matching_enabled(),
+				// Allow user to add URL patterns that should not be tracked by the Facebook pixel
+				'exclusion_patterns'  => apply_filters('pmw_facebook_tracking_exclusion_patterns', array()),
+				'fbevents_js_url'     => Helpers::get_facebook_fbevents_js_url(),
+		);
+
+		if (apply_filters('pmw_facebook_mobile_bridge_app_id', null)) {
+			$data['mobile_bridge_app_id'] = apply_filters('pmw_facebook_mobile_bridge_app_id', null);
+		}
+
+		return $data;
+	}
+
+	private function get_hotjar_pixel_data() {
+		return array(
+				'site_id' => Options::get_hotjar_site_id(),
+		);
+	}
+
+	private static function get_contentsquare_pixel_data() {
+		return array(
+				'tag_id' => Options::get_contentsquare_tag_id(),
+		);
+	}
+
+	private static function get_outbrain_pixel_data() {
+		return array(
+				'advertiser_id'       => Options::get_outbrain_advertiser_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('outbrain'),
+				),
+				'event_names'         => self::get_outbrain_event_name_mapping(),
+		);
+	}
+
+	private static function get_outbrain_event_name_mapping() {
+
+		$mapping = array(
+				'search'         => 'search',
+				'view_content'   => 'content_view',
+				'add_to_cart'    => 'add_to_cart',
+				'start_checkout' => 'checkout',
+				'purchase'       => 'purchase',
+		);
+
+		return (array) apply_filters('pmw_outbrain_event_name_mapping', $mapping);
+	}
+
+	private function get_pinterest_pixel_data() {
+
+		$data = array(
+				'pixel_id'            => Options::get_pinterest_pixel_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('pinterest'),
+				),
+				'advanced_matching'   => Options::is_pinterest_advanced_matching_active(),
+		);
+
+		$enhanced_match         = Options::is_pinterest_enhanced_match_enabled();
+		$enhanced_match         = apply_filters_deprecated('wooptpm_pinterest_enhanced_match', array( $enhanced_match ), '1.13.0', 'wpm_pinterest_enhanced_match');
+		$data['enhanced_match'] = apply_filters_deprecated('wpm_pinterest_enhanced_match', array( $enhanced_match ), '1.22.0', null, 'There is now an option in the Pinterest settings to enable/disable enhanced match.');
+
+		return $data;
+	}
+
+	private function get_reddit_pixel_data() {
+		return array(
+				'advertiser_id'       => Options::get_reddit_advertiser_id(),
+				'advanced_matching'   => Options::is_reddit_advanced_matching_enabled(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('reddit'),
+				),
+		);
+	}
+
+	private function get_snapchat_pixel_data() {
+		return array(
+				'pixel_id'            => Options::get_snapchat_pixel_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('snapchat'),
+				),
+				'advanced_matching'   => Options::is_snapchat_advanced_matching_enabled(),
+		);
+	}
+
+	private static function get_taboola_pixel_data() {
+		return array(
+				'account_id'          => (int) Options::get_taboola_account_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('taboola'),
+				),
+				'event_names'         => self::get_taboola_event_name_mapping(),
+		);
+	}
+
+	private static function get_taboola_event_name_mapping() {
+
+		$mapping = array(
+				'search'          => 'search',
+				'view_content'    => 'view_content',
+				'add_to_wishlist' => 'add_to_wishlist',
+				'add_to_cart'     => 'add_to_cart',
+				'start_checkout'  => 'start_checkout',
+				'purchase'        => 'make_purchase',
+		);
+
+		return (array) apply_filters('pmw_taboola_event_name_mapping', $mapping);
+	}
+
+	private function get_tiktok_pixel_data() {
+		return array(
+				'pixel_id'            => Options::get_tiktok_pixel_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('tiktok'),
+				),
+				'eapi'                => Options::is_tiktok_eapi_active(),
+				'advanced_matching'   => Options::is_tiktok_advanced_matching_enabled(),
+		);
+	}
+
+	private function get_twitter_pixel_data() {
+		return array(
+				'pixel_id'            => Options::get_twitter_pixel_id(),
+				'dynamic_remarketing' => array(
+						'id_type' => Product::get_dyn_r_id_type('twitter'),
+				),
+				'event_ids'           => Options::get_twitter_event_ids(),
+		);
+	}
+
+	private static function get_vwo_pixel_data() {
+		return array(
+				'account_id' => Options::get_vwo_account_id(),
+		);
+	}
+
+	private function add_order_data( $data ) {
+
+		if (!Shop::pmw_is_order_received_page()) {
+			return array_merge($data, array());
+		}
+
+		if (!Shop::pmw_get_current_order()) {
+			return array_merge($data, array());
+		}
+
+		if (!Shop::can_order_confirmation_be_processed(Shop::pmw_get_current_order())) {
+			return array_merge($data, array());
+		}
+
+		return array_merge($data, $this->get_order_data(Shop::pmw_get_current_order()));
+	}
+
+	/**
+	 * Get the shop order data.
+	 *
+	 * @param $order
+	 * @return array
+	 */
+	private function get_order_data( $order ) {
+
+		$data = array();
+
+		if ($order) {
+			$data['order'] = array(
+					'id'                 => (int) $order->get_id(),
+					'number'             => (string) $order->get_order_number(),
+					'key'                => (string) $order->get_order_key(),
+					'affiliation'        => (string) get_bloginfo('name'),
+					'currency'           => (string) Shop::get_order_currency($order),
+					'value'              => array(
+							'marketing' => Shop::get_order_value_total_marketing($order, true),
+							'total'     => Shop::get_order_value_total_statistics($order),
+							'subtotal'  => Shop::get_order_value_subtotal_statistics($order),
+					),
+					'discount'           => (float) $order->get_total_discount(),
+					'tax'                => (float) $order->get_total_tax(),
+					'shipping'           => (float) $order->get_shipping_total(),
+					'coupon'             => implode(',', $order->get_coupon_codes()),
+					'aw_merchant_id'     => Options::get_google_ads_merchant_id() ? Options::get_google_ads_merchant_id() : '',
+					'aw_feed_country'    => (string) Geolocation::get_visitor_country(),
+					'aw_feed_language'   => Google_Helpers::get_gmc_language(),
+					'new_customer'       => Shop::is_new_customer($order),
+					'quantity'           => (int) count(Product::pmw_get_order_items($order)),
+					'items'              => Product::get_front_end_order_items($order),
+					'customer_id'        => $order->get_customer_id(),
+					'user_id'            => $order->get_user_id(),
+					'payment_type'       => (string) $order->get_payment_method(),
+					'payment_type_title' => (string) $order->get_payment_method_title(),
+			);
+
+			// Filter to add custom order parameters
+			$custom_parameters = Shop::get_custom_order_parameters($order);
+			if (!empty($custom_parameters)) {
+				$data['order']['custom_parameters'] = $custom_parameters;
+			}
+
+			// Process customer lifetime value
+			if (Shop::can_ltv_be_processed_on_order($order)) {
+
+				if (!LTV::are_all_pmw_order_values_set($order)) {
+					LTV::calculate_pmw_order_values($order);
+				}
+
+				$data['order']['value']['ltv']['marketing'] = (float) LTV::get_marketing_ltv_from_order($order);
+				$data['order']['value']['ltv']['total']     = (float) LTV::get_total_ltv_from_order($order);
+			}
+
+			// set em (email)
+			$data['order']['billing_email']        = trim(strtolower($order->get_billing_email()));
+			$data['order']['billing_email_hashed'] = hash('sha256', trim(strtolower($order->get_billing_email())));
+
+			if ($order->get_billing_phone()) {
+
+				$phone = $order->get_billing_phone();
+				$phone = Helpers::get_e164_formatted_phone_number($phone, $order->get_billing_country());
+
+				$data['order']['billing_phone'] = $phone;
+			}
+
+			if ($order->get_billing_first_name()) {
+				$data['order']['billing_first_name'] = trim(strtolower($order->get_billing_first_name()));
+			}
+
+			if ($order->get_billing_last_name()) {
+				$data['order']['billing_last_name'] = trim(strtolower($order->get_billing_last_name()));
+			}
+
+			if ($order->get_billing_city()) {
+				$data['order']['billing_city'] = str_replace(' ', '', trim(strtolower($order->get_billing_city())));
+			}
+
+			if ($order->get_billing_state()) {
+				$data['order']['billing_state'] = trim(strtolower($order->get_billing_state()));
+			}
+
+			if ($order->get_billing_postcode()) {
+				$data['order']['billing_postcode'] = $order->get_billing_postcode();
+			}
+
+			if ($order->get_billing_country()) {
+				$data['order']['billing_country'] = trim(strtolower($order->get_billing_country()));
+			}
+
+			// Add enhanced conversion data for Google Ads
+			if (true) {
+				if (Options::is_google_enhanced_conversions_active()) {
+					$data['order']['google']['enhanced_conversion_data'] = Google_Helpers::get_google_enhanced_conversion_data($order);
+				}
+			}
+
+			// Add custom variables for Google Ads
+			if (true) {
+				$google_ads_custom_variables = $this->get_google_ads_custom_variables($order);
+
+				if (!empty($google_ads_custom_variables)) {
+					$data['order']['google']['ads']['custom_variables'] = $google_ads_custom_variables;
+				}
+			}
+
+			$data['products'] = $this->get_order_products($order);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Return an array with custom variables for Google Ads.
+	 *
+	 * @param $order
+	 * @return array
+	 *
+	 * @since 1.43.5
+	 */
+	private function get_google_ads_custom_variables( $order ) {
+		return (array) apply_filters('pmw_google_ads_order_custom_variables', array(), $order);
+	}
+
+	private function get_order_products( $order ) {
+
+		$order_products = array();
+
+		foreach ((array) Product::pmw_get_order_items($order) as $order_item) {
+
+			$order_item_data = $order_item->get_data();
+
+			if (0 !== $order_item_data['variation_id']) {
+				// add variation
+
+				$order_products[$order_item_data['variation_id']] = $this->get_product_data($order_item_data['variation_id']);
+			}
+
+			$order_products[$order_item_data['product_id']] = $this->get_product_data($order_item_data['product_id']);
+		}
+
+		return $order_products;
+	}
+
+	private function get_product_data( $product_id ) {
+
+		$product = wc_get_product($product_id);
+
+		if (Product::is_not_wc_product($product)) {
+
+			Product::log_problematic_product_id($product_id);
+			return array();
+		}
+
+		$data = array(
+				'product_id'          => $product->get_id(),
+				'name'                => $product->get_name(),
+				'type'                => $product->get_type(),
+				'dyn_r_ids'           => Product::get_dyn_r_ids($product),
+				'brand'               => (string) Product::get_brand_name($product_id),
+				'category'            => (array) Product::get_product_category($product_id),
+				'variant_description' => (string) ( $product->get_type() === 'variation' ) ? Product::get_formatted_variant_text($product) : '',
+		);
+
+		if ($product->get_type() === 'variation') {
+			$parent_product       = wc_get_product($product->get_parent_id());
+			$data['brand']        = Product::get_brand_name($parent_product->get_id());
+			$data['name_variant'] = $data['name'];
+			$data['name']         = $parent_product->get_name();
+		}
+
+		return $data;
+	}
+
+	private static function inject_pmw_opening() {
+		echo PHP_EOL . '<!-- START Pixel Manager Pro for WooCommerce -->' . PHP_EOL;
+	}
+
+	public function inject_pmw_closing() {
+
+		echo PHP_EOL . '<!-- END Pixel Manager Pro for WooCommerce -->' . PHP_EOL;
+	}
+
+	public function ajax_pmw_get_cart_items() {
+
+		Logger::debug('ajax_pmw_get_cart_items()');
+
+		global $woocommerce;
+
+		$cart_items = $woocommerce->cart->get_cart();
+
+		$data = array();
+
+		foreach ($cart_items as $cart_item => $value) {
+
+			$product = wc_get_product($value['data']->get_id());
+
+			if (Product::is_not_wc_product($product)) {
+
+				Product::log_problematic_product_id($value['data']->get_id());
+				continue;
+			}
+
+			$data['cart_item_keys'][$cart_item] = array(
+					'id'           => (string) $product->get_id(),
+					'is_variation' => false,
+			);
+
+			$data['cart'][$product->get_id()] = array(
+					'id'           => (string) $product->get_id(),
+					'dyn_r_ids'    => Product::get_dyn_r_ids($product),
+					'name'         => $product->get_name(),
+					//                'list_name'     => '',
+					'brand'        => Product::get_brand_name($product->get_id()),
+					//                'variant'       => '',
+					//                'list_position' => '',
+					'quantity'     => (int) $value['quantity'],
+					'price'        => (float) $product->get_price(),
+					'is_variation' => false,
+			);
+
+			if ('variation' === $product->get_type()) {
+
+				$parent_product = wc_get_product($product->get_parent_id());
+
+				if ($parent_product) {
+					$data['cart'][$product->get_id()]['name']                = $parent_product->get_name();
+					$data['cart'][$product->get_id()]['parent_id']           = (string) $parent_product->get_id();
+					$data['cart'][$product->get_id()]['parent_id_dyn_r_ids'] = Product::get_dyn_r_ids($parent_product);
+					$data['cart'][$product->get_id()]['brand']               = Product::get_brand_name($parent_product->get_id());
+				} else {
+					Logger::debug('Variation ' . $product->get_id() . ' doesn\'t link to a valid parent product.');
+				}
+
+				$data['cart'][$product->get_id()]['is_variation'] = true;
+				$data['cart'][$product->get_id()]['category']     = Product::get_product_category($product->get_parent_id());
+
+				$variant_text_array = array();
+
+				$attributes = $product->get_attributes();
+				if ($attributes) {
+					foreach ($attributes as $key => $value) {
+
+						$key_name             = str_replace('pa_', '', $key);
+						$variant_text_array[] = ucfirst($key_name) . ': ' . strtolower($value);
+					}
+				}
+
+				$data['cart'][$product->get_id()]['variant'] = (string) implode(' | ', $variant_text_array);
+
+				$data['cart_item_keys'][$cart_item]['parent_id']    = (string) $product->get_parent_id();
+				$data['cart_item_keys'][$cart_item]['is_variation'] = true;
+
+			} else {
+				$data['cart'][$product->get_id()]['category'] = Product::get_product_category($product->get_id());
+			}
+		}
+
+		wp_send_json_success($data);
+	}
+
+	public function ajax_pmw_get_product_ids() {
+
+		$data = Helpers::get_input_vars(INPUT_POST);
+
+		// Change product_ids back into an array
+		$data['product_ids'] = explode(',', $data['product_ids']);
+
+		$this->get_products_for_datalayer($data);
+	}
+
+	public function get_products_for_datalayer_by_product_ids( $product_ids ) {
+
+		$products = array();
+
+		foreach ($product_ids as $key => $product_id) {
+
+			// validate if a valid product ID has been passed in the array
+			if (!ctype_digit((string) $product_id)) {
+				continue;
+			}
+
+			$product = wc_get_product($product_id);
+
+			if (Product::is_not_wc_product($product)) {
+				continue;
+			}
+
+			// Only expose published products
+			if ('publish' !== $product->get_status()) {
+				continue;
+			}
+
+			$products[$product_id] = Product::get_product_details_for_datalayer($product);
+		}
+
+		return $products;
+	}
+
+	public function ajax_purchase_pixels_fired_handler() {
+
+		$_post = Helpers::get_input_vars(INPUT_POST);
+
+		// Don't use the nonce check from the admin class, because some plugin users have even partial purchase confirmation pages cached,
+		// which means the nonce will be invalid.
+//      if (!wp_verify_nonce($_post['nonce_ajax'], 'nonce-pmw-ajax')) {
+//          wp_send_json_error('Invalid nonce');
+//      }
+
+		self::process_conversion_pixel_status($_post['order_id'], $_post['order_key'], $_post['source']);
+	}
+
+	private static function process_conversion_pixel_status( $order_id, $order_key, $order_source ) {
+
+		if (
+				!$order_id
+				|| !$order_key
+				|| !$order_source
+		) {
+			wp_send_json_error('Invalid data. Missing one or several of order_id, order_key or source.');
+		}
+
+		$order = wc_get_order($order_id);
+
+		if (!$order) {
+			wp_send_json_error('Invalid order ID');
+		}
+
+		if ($order->get_order_key() !== $order_key) {
+			wp_send_json_error('Invalid order key or wrong order ID');
+		}
+
+		self::save_conversion_pixels_fired_status($order, $order_source);
+
+		wp_send_json_success('Successfully saved the order status.');
+	}
+
+	public static function save_conversion_pixels_fired_status( $order, $source = 'thankyou_page' ) {
+
+		$order->update_meta_data('_wpm_conversion_pixel_trigger', $source);
+		$order->update_meta_data('_wpm_conversion_pixel_fired', true);
+
+		// Get the time between when the order was created and now and save it in _wpm_conversion_pixel_fired_delay
+		$time_diff = time() - strtotime($order->get_date_created());
+		$order->update_meta_data('_wpm_conversion_pixel_fired_delay', $time_diff);
+
+		$order->save();
+	}
+
+	public function front_end_scripts() {
+
+		$pmw_dependencies = array(
+				'jquery',
+				'wp-hooks',
+		);
+
+		if (true) {
+
+			wp_enqueue_script(
+					'wpm',
+					PMW_PLUGIN_DIR_PATH . 'js/public/pro/wpm-public__premium_only' . $this->get_preset_version() . '.min.js',
+					$pmw_dependencies,
+					PMW_CURRENT_VERSION,
+					$this->move_pmw_script_to_footer()
+			);
+
+			if (Helpers::lazy_load_pmw__premium_only()) {
+				wp_enqueue_script(
+						'pmw-lazy',
+						PMW_PLUGIN_DIR_PATH . 'js/public/pro/pmw-lazy__premium_only.js',
+						array( 'wpm' ),
+						PMW_CURRENT_VERSION,
+						$this->move_pmw_script_to_footer()
+				);
+			}
+
+		} else {
+
+			wp_enqueue_script(
+					'wpm',
+					PMW_PLUGIN_DIR_PATH . 'js/public/free/wpm-public.p1.min.js',
+					$pmw_dependencies,
+					PMW_CURRENT_VERSION,
+					$this->move_pmw_script_to_footer()
+			);
+		}
+
+		wp_localize_script(
+				'wpm',
+//            'ajax_object',
+				'wpm',
+				array(
+						'ajax_url'      => admin_url('admin-ajax.php'),
+						'root'          => esc_url_raw(rest_url()),
+						//              'nonce'    => wp_create_nonce(),
+						'nonce_wp_rest' => wp_create_nonce('wp_rest'),
+						'nonce_ajax'    => wp_create_nonce('nonce-pmw-ajax'),
+				)
+		);
+	}
+
+	public function front_end_styles_elementor_fix() {
+
+		wp_enqueue_style(
+				'pmw-public-elementor-fix',
+				PMW_PLUGIN_DIR_PATH . 'css/public/elementor-fix.css',
+				array(),
+				PMW_CURRENT_VERSION
+		);
+	}
+
+	private function move_pmw_script_to_footer() {
+
+		$move_pmw_script_to_footer_active = apply_filters_deprecated('wpm_experimental_move_wpm_script_to_footer', array( false ), '1.31.2', 'pmw_experimental_move_pmw_script_to_footer');
+
+		// this filter moves the PMW script to the footer
+		return apply_filters('pmw_experimental_move_pmw_script_to_footer', $move_pmw_script_to_footer_active);
+	}
+
+	private function get_preset_version() {
+
+		$version = apply_filters_deprecated('wpm_script_optimization_preset_version', array( 1 ), '1.31.2', 'pmw_script_optimization_preset_version');
+
+		return '.p' . apply_filters('pmw_script_optimization_preset_version', $version);
+	}
+
+	public function inject_order_received_page_dedupe( $order, $order_total, $is_new_customer ) {
+		// nothing to do
+	}
+
+	private static function inject_body_pixels() {
+//        do something
+	}
+
+	private function get_shop_data() {
+
+		$data = array();
+
+		if (is_product_category()) {
+			$data['list_name'] = 'Product Category' . Shop::get_list_name_suffix();
+			$data['list_id']   = 'product_category' . Shop::get_list_id_suffix();
+			$data['page_type'] = 'product_category';
+		} elseif (is_product_tag()) {
+			$data['list_name'] = 'Product Tag' . Shop::get_list_name_suffix();
+			$data['list_id']   = 'product_tag' . Shop::get_list_id_suffix();
+			$data['page_type'] = 'product_tag';
+		} elseif (is_search()) {
+			$data['list_name'] = 'Product Search';
+			$data['list_id']   = 'search';
+			$data['page_type'] = 'search';
+		} elseif (is_shop()) {
+			$data['list_name'] = 'Shop | page number: ' . $this->get_page_number();
+			$data['list_id']   = 'product_shop_page_number_' . $this->get_page_number();
+			$data['page_type'] = 'product_shop';
+		} elseif (is_product()) {
+			$data['list_name']    = 'Product | ' . Shop::pmw_get_the_title();
+			$data['list_id']      = 'product_' . sanitize_title(get_the_title());
+			$data['page_type']    = 'product';
+			$product              = wc_get_product();
+			$data['product_type'] = $product->get_type();
+		} elseif (is_front_page()) {
+			$data['list_name'] = 'Front Page';
+			$data['list_id']   = 'front_page';
+			$data['page_type'] = 'front_page';
+		} elseif (Shop::pmw_is_order_received_page()) {
+			$data['list_name'] = 'Order Received Page';
+			$data['list_id']   = 'order_received_page';
+			$data['page_type'] = 'order_received_page';
+		} elseif (is_cart()) {
+			$data['list_name'] = 'Cart';
+			$data['list_id']   = 'cart';
+			$data['page_type'] = 'cart';
+		} elseif (is_checkout()) {
+			$data['list_name'] = 'Checkout Page';
+			$data['list_id']   = 'checkout';
+			$data['page_type'] = 'checkout';
+		} elseif (is_page()) {
+			$data['list_name'] = 'Page | ' . Shop::pmw_get_the_title();
+			$data['list_id']   = 'page_' . sanitize_title(get_the_title());
+			$data['page_type'] = 'page';
+		} elseif (is_home()) {
+			$data['list_name'] = 'Blog Home';
+			$data['list_id']   = 'blog_home';
+			$data['page_type'] = 'blog_post';
+		} elseif ('post' === get_post_type()) {
+			$data['list_name'] = 'Blog Post | ' . Shop::pmw_get_the_title();
+			$data['list_id']   = 'blog_post_' . sanitize_title(get_the_title());
+			$data['page_type'] = 'blog_post';
+		} else {
+			$data['list_name'] = '';
+			$data['list_id']   = '';
+			$data['page_type'] = '';
+		}
+
+		$data['currency'] = get_woocommerce_currency();
+
+		$data['selectors'] = array(
+				'addToCart'     => (array) apply_filters('pmw_add_selectors_add_to_cart', array()),
+				'beginCheckout' => (array) apply_filters('pmw_add_selectors_begin_checkout', array()),
+		);
+
+		$data['order_duplication_prevention'] = Shop::is_order_duplication_prevention_active();
+		$data['view_item_list_trigger']       = Shop::view_item_list_trigger_settings();
+		$data['variations_output']            = Options::is_shop_variations_output_active();
+
+		$data['session_active'] = Shop::is_woocommerce_session_active();
+
+		return $data;
+	}
+
+	private static function get_page_data() {
+		$data = array();
+
+		$data['id']         = get_the_ID();
+		$data['title']      = get_the_title();
+		$data['type']       = get_post_type();
+		$data['categories'] = get_the_category();
+//      $data['template']   = get_page_template_slug();
+
+		$parent_id = wp_get_post_parent_id($data['id']);
+		// Parent
+		$data['parent'] = array(
+				'id'         => $parent_id,
+				'title'      => get_the_title($parent_id),
+				'type'       => get_post_type($parent_id),
+				'categories' => get_the_category($parent_id),
+		);
+
+		return $data;
+	}
+
+	private function get_page_number() {
+		return ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+	}
+
+	private function get_general_data() {
+
+		$data = array(
+				'user_logged_in'             => is_user_logged_in(),
+				'scroll_tracking_thresholds' => Options::get_scroll_tracking_thresholds(),
+				'page_id'                    => get_the_ID(),
+				// Exclude domains, such as gtm-msr.appspot.com from being tracked and reported
+				'exclude_domains'            => apply_filters('pmw_exclude_domains_from_tracking', array()),
+				'server_2_server'            => array(
+						'active'                      => Options::server_2_server_enabled(),
+						// Exclude user agents from being accepted for server-to-server events
+						'user_agent_exclude_patterns' => apply_filters('pmw_exclude_user_agents_from_server_2_server_events', array()),
+						// Exclude specific IPs from being accepted for server-to-server events
+						'ip_exclude_list'             => apply_filters('pmw_exclude_ips_from_server_2_server_events', array()),
+						'pageview_event_s2s'          => array(
+								'is_active' => Options::is_pageview_events_s2s_active() && Options::server_2_server_enabled(),
+								'pixels'    => Options::pixels_that_require_s2s_pageview_events(),
+						),
+				),
+				'consent_management'         => array(
+						'explicit_consent' => Options::is_consent_management_explicit_consent_active(),
+				),
+				'lazy_load_pmw'              => Options::is_lazy_load_pmw_active(),
+				'chunk_base_path'            => self::get_chunk_base_path(),
+				'modules'                    => self::get_modules_config(),
+
+				//          'logger'                   => [
+				//              'is_active' => Options::is_logging_enabled(),
+				//              'log_level' => Options::get_log_level(),
+				//          ],
+		);
+
+		if (Options::are_restricted_consent_regions_set()) {
+			$data['consent_management']['restricted_regions'] = Options::get_restricted_consent_regions();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Retrieves the configuration for optional JavaScript modules.
+	 *
+	 * This method centralizes the configuration for dynamically loaded JavaScript chunks
+	 * that can be toggled on/off by the user. Each module corresponds to a webpack chunk
+	 * that will only be loaded if its flag is true.
+	 *
+	 * When adding a new toggleable module:
+	 * 1. Add a default option in Options::get_default_options() under general->modules
+	 * 2. Add a helper method in Options class (e.g., should_load_module_name())
+	 * 3. Add the flag here in get_modules_config()
+	 * 4. Add conditional loading in main.js based on wpmDataLayer.general.modules.module_name
+	 * 5. Add admin UI toggle in Admin::add_section_advanced_subsection_general()
+	 *
+	 * @return array Associative array of module names and their enabled/disabled status.
+	 * @since 1.51.0
+	 */
+	private static function get_modules_config() {
+		return array(
+			'load_deprecated_functions' => Options::should_load_deprecated_functions(),
+		);
+	}
+
+	/**
+	 * Retrieves the base path for the chunk files based on the plugin distribution type.
+	 * Determines whether the plugin is a free or pro distribution and returns the
+	 * corresponding directory path.
+	 *
+	 * For local development, you can override this by defining PMW_HANDLE_AS_FREE_VERSION
+	 * or PMW_HANDLE_AS_PRO_VERSION in wp-config.php
+	 *
+	 * @return string The base path for chunk files, either in the 'free' or 'pro' folder.
+	 *
+	 * @since 1.51.1
+	 */
+	private static function get_chunk_base_path() {
+
+		// Allow handling as free version via constant (useful for local testing)
+		if (defined('PMW_HANDLE_AS_FREE_VERSION') && PMW_HANDLE_AS_FREE_VERSION) {
+			$version = 'free';
+		} elseif (defined('PMW_HANDLE_AS_PRO_VERSION') && PMW_HANDLE_AS_PRO_VERSION) {
+			$version = 'pro';
+		} else {
+			$version = Helpers::is_free_plugin_distribution() ? 'free' : 'pro';
+		}
+
+		return PMW_PLUGIN_DIR_PATH . 'js/public/' . $version . '/';
+	}
+}
+

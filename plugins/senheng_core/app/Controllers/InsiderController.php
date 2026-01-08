@@ -130,7 +130,7 @@ function get_page_type()
     //     return ['type' => 'tag'];
     // } 
     elseif (is_search()) {
-        return ['type' => 'search'];
+        // return ['type' => 'search'];
     } elseif (is_404()) {
         return ['type' => '404'];
     } elseif (is_page()) {
@@ -993,6 +993,7 @@ function track_search_term()
                 'event_parameters' => [
                     'keyword'      => get_search_query(),
                     'searched_url' => home_url(add_query_arg(null, null)),
+                    'channel'      => get_userAgent(),
                 ],
             ]],
         ];
