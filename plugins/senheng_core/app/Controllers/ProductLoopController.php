@@ -13,6 +13,12 @@ class ProductLoopController
     public static $defer_custom_price = true;
     public static $defer_custom_rating = true;
     public static $lightweight_variable = true;
+    
+    /**
+     * Per-request cache for WCPB badges to avoid N+1 queries
+     */
+    private static $wcpb_badges_cache = null;
+    private static $wcpb_badges_meta_cache = [];
     /**
      * Initialize the controller
      */
@@ -321,31 +327,27 @@ public static function enqueue_styles()
             if (!empty($variation_ids)) {
                 $lowest_rating = null;
                 $lowest_count = 0;
+                $lowest_variation_id = null;
 
-                global $wpdb;
+                // Prime the meta cache for all variations in a single query
+                // This uses WordPress API and leverages object cache
+                update_meta_cache('post', $variation_ids);
                 
-                // Get all variation ratings in a single query.
-                $placeholders = implode(',', array_fill(0, count($variation_ids), '%d'));
-                $query = $wpdb->prepare(
-                    "SELECT post_id, 
-                            meta_value as rating 
-                     FROM {$wpdb->postmeta} 
-                     WHERE post_id IN ($placeholders) 
-                     AND meta_key = '_wc_average_rating'
-                     AND meta_value > 0
-                     ORDER BY CAST(meta_value AS DECIMAL(10,2)) ASC
-                     LIMIT 1",
-                    ...$variation_ids
-                );
-                
-                $lowest_rating_row = $wpdb->get_row($query);
-                
-                if ($lowest_rating_row) {
-                    $variation_id = $lowest_rating_row->post_id;
-                    $lowest_rating = (float) $lowest_rating_row->rating;
+                // Now get ratings using cached meta data
+                foreach ($variation_ids as $variation_id) {
+                    $variation_rating = (float) get_post_meta($variation_id, '_wc_average_rating', true);
                     
-                    // Get the count for this specific variation
-                    $lowest_count = (int) get_post_meta($variation_id, '_wc_review_count', true);
+                    if ($variation_rating > 0) {
+                        if ($lowest_rating === null || $variation_rating < $lowest_rating) {
+                            $lowest_rating = $variation_rating;
+                            $lowest_variation_id = $variation_id;
+                        }
+                    }
+                }
+                
+                if ($lowest_variation_id !== null) {
+                    // Get the count for this specific variation (already cached)
+                    $lowest_count = (int) get_post_meta($lowest_variation_id, '_wc_review_count', true);
                 }
 
                 // If no variation ratings found, use parent product rating
@@ -897,21 +899,16 @@ public static function enqueue_styles()
         $product_low_stock_threshold = !empty($product_low_stock_amount) ? $product_low_stock_amount : $low_stock_amount;
         $product_has_low_stock = $check_product->managing_stock() && $check_product->get_stock_quantity() !== null && $check_product->get_stock_quantity() <= $product_low_stock_threshold && $check_product->get_stock_quantity() > 0;
 
-        // Get all WCPB badges
-        $badges = get_posts([
-            'numberposts' => -1,
-            'post_type' => 'wcpb_product_badge',
-            'post_status' => 'publish',
-            'fields' => 'ids',
-        ]);
+        // Get all WCPB badges using per-request cache to avoid N+1 queries
+        $badges = self::get_cached_wcpb_badges();
 
         if (empty($badges)) {
             return false;
         }
 
         foreach ($badges as $badge_id) {
-            $visibility = get_post_meta($badge_id, '_wcpb_product_badges_display_visibility', true);
-            $products_setting = get_post_meta($badge_id, '_wcpb_product_badges_display_products', true);
+            $visibility = self::get_cached_badge_meta($badge_id, '_wcpb_product_badges_display_visibility');
+            $products_setting = self::get_cached_badge_meta($badge_id, '_wcpb_product_badges_display_products');
             
             // Check visibility - for product loop we check 'all' or 'product_loops'
             if ($visibility !== 'all' && $visibility !== 'product_loops') {
@@ -921,10 +918,10 @@ public static function enqueue_styles()
             $display = false;
 
             if ($products_setting === 'specific') {
-                $products_specific_categories = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_categories', true);
-                $products_specific_tags = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_tags', true);
-                $products_specific_products = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_products', true);
-                $products_specific_shipping_classes = get_post_meta($badge_id, '_wcpb_product_badges_display_products_specific_shipping_classes', true);
+                $products_specific_categories = self::get_cached_badge_meta($badge_id, '_wcpb_product_badges_display_products_specific_categories');
+                $products_specific_tags = self::get_cached_badge_meta($badge_id, '_wcpb_product_badges_display_products_specific_tags');
+                $products_specific_products = self::get_cached_badge_meta($badge_id, '_wcpb_product_badges_display_products_specific_products');
+                $products_specific_shipping_classes = self::get_cached_badge_meta($badge_id, '_wcpb_product_badges_display_products_specific_shipping_classes');
 
                 // Check categories
                 if (!empty($products_specific_categories)) {
@@ -999,6 +996,45 @@ public static function enqueue_styles()
         }
 
         return false;
+    }
+
+    /**
+     * Get cached WCPB badges (per-request cache)
+     * Loads all badges once per request to avoid N+1 queries in product loops
+     * 
+     * @return array Array of badge IDs
+     */
+    private static function get_cached_wcpb_badges()
+    {
+        if (self::$wcpb_badges_cache === null) {
+            self::$wcpb_badges_cache = get_posts([
+                'numberposts' => -1,
+                'post_type' => 'wcpb_product_badge',
+                'post_status' => 'publish',
+                'fields' => 'ids',
+            ]);
+            
+            // Pre-load all badge meta data in a single query
+            if (!empty(self::$wcpb_badges_cache)) {
+                update_meta_cache('post', self::$wcpb_badges_cache);
+            }
+        }
+        
+        return self::$wcpb_badges_cache;
+    }
+
+    /**
+     * Get cached badge meta (uses WordPress object cache via update_meta_cache)
+     * 
+     * @param int $badge_id The badge post ID
+     * @param string $meta_key The meta key to retrieve
+     * @return mixed The meta value
+     */
+    private static function get_cached_badge_meta($badge_id, $meta_key)
+    {
+        // Since we called update_meta_cache() in get_cached_wcpb_badges(),
+        // get_post_meta() will now hit the object cache instead of the database
+        return get_post_meta($badge_id, $meta_key, true);
     }
 
     /**
