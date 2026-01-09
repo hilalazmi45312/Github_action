@@ -3,20 +3,35 @@ window.ipay88RestoringSelections = false;
 window.ipay88CollapsedSections = window.ipay88CollapsedSections || [];
 window.ipay88LastPlanKey = window.ipay88LastPlanKey || null;
 window.ipay88PendingInstallmentSelection = null;
-window.ipay88AjaxInProgress = false; // NEW: Prevent overlapping AJAX calls
+window.ipay88AjaxInProgress = false; // Prevent overlapping AJAX calls
 
 // AJAX: Update admin fee (global)
 function updateAdminFee(adminFee, paymentValue, months) {
 	var $ = jQuery;
 
-	// Prevent overlapping AJAX calls
-	if (window.ipay88AjaxInProgress) {
-		return;
-	}
-
 	// Always update the hidden admin fee input
 	const adminFeeInput = $('#ipay88_admin_fee' + paymentValue);
 	adminFeeInput.val(adminFee);
+
+	// Also update the global hidden fields for the checkout form
+	// These are the ones that will be submitted with "Place Order"
+	let $globalFeeInput = $('input[name="ipay88_admin_fee"]');
+	if ($globalFeeInput.length === 0) {
+		$globalFeeInput = $('<input type="hidden" name="ipay88_admin_fee" />').appendTo('form.checkout');
+	}
+	$globalFeeInput.val(adminFee);
+
+	let $globalPlanInput = $('input[name="ipay88_payment_plan"]');
+	if ($globalPlanInput.length === 0) {
+		$globalPlanInput = $('<input type="hidden" name="ipay88_payment_plan" />').appendTo('form.checkout');
+	}
+	$globalPlanInput.val(paymentValue);
+
+	let $globalMonthsInput = $('input[name="ipay88_months"]');
+	if ($globalMonthsInput.length === 0) {
+		$globalMonthsInput = $('<input type="hidden" name="ipay88_months" />').appendTo('form.checkout');
+	}
+	$globalMonthsInput.val(months || 0);
 
 	// Determine if this is a clearing action (non-BNPL switch)
 	const isClearing = Number(adminFee) === 0;
@@ -45,7 +60,8 @@ function updateAdminFee(adminFee, paymentValue, months) {
 	}
 
 	window.ipay88LastPlanKey = key;
-	window.ipay88AjaxInProgress = true;
+	// We NO LONGER set AjaxInProgress=true, allowing immediate consecutive clicks
+	// window.ipay88AjaxInProgress = true; 
 	window.ipay88RestoringSelections = true;
 
 	// Store the NEW selection (used for restoring after checkout update)
@@ -59,30 +75,10 @@ function updateAdminFee(adminFee, paymentValue, months) {
 		window.ipay88PendingInstallmentSelection = null;
 	}
 
-	$.ajax({
-		url: wc_checkout_params.ajax_url,
-		type: 'POST',
-		data: {
-			action: 'update_ipay88_admin_fee',
-			admin_fee: adminFee,
-			payment_plan: paymentValue,
-			months: normalizedMonths
-		},
-		success: function (response) {
-			if (response.success) {
-				$(document.body).trigger('update_checkout');
-			} else {
-				window.ipay88RestoringSelections = false;
-				window.ipay88PendingInstallmentSelection = null;
-				window.ipay88AjaxInProgress = false;
-			}
-		},
-		error: function (xhr, status, error) {
-			window.ipay88RestoringSelections = false;
-			window.ipay88PendingInstallmentSelection = null;
-			window.ipay88AjaxInProgress = false;
-		}
-	});
+	// DIRECT UPDATE: No separate AJAX call.
+	// The form inputs are already updated above, so standard update_checkout 
+	// will send the data in 'post_data', and standard Place Order will send it in $_POST.
+	$(document.body).trigger('update_checkout');
 }
 
 function initIPay88PaymentOptions() {
@@ -588,127 +584,127 @@ jQuery(function ($) {
 	});
 });
 
-jQuery(function($) {
-    'use strict';
-    
-    // Check if checkout form exists
-    if (!$('form.checkout').length) {
-        return;
-    }
-    
-    console.log('iPay88: Script loaded');
-    
-    // Handle the checkout process
-    $('form.checkout').on('checkout_place_order_ipay88', function() {
-        console.log('iPay88: Place order triggered');
-        return true; // Allow the order to be placed
-    });
-    
-    // Listen for AJAX complete
-    $(document).ajaxComplete(function(event, xhr, settings) {
-        // Check if this is the checkout AJAX request
-        if (settings.url && settings.url.indexOf('wc-ajax=checkout') > -1) {
-            console.log('iPay88: Checkout AJAX complete');
-            
-            try {
-                var response = JSON.parse(xhr.responseText);
-                console.log('iPay88: Response:', response);
-                
-                if (response.result === 'success' && response.ipay88_form_data && response.ipay88_form_url) {
-                    console.log('iPay88: Submitting form to iPay88');
-                    
-                    // Block the UI
-                    $.blockUI({
-                        message: 'Thank you for your order. We are now redirecting you to iPay88 to make payment.',
-                        overlayCSS: {
-                            background: '#fff',
-                            opacity: 0.6
-                        },
-                        css: {
-                            padding: 20,
-                            textAlign: 'center',
-                            color: '#555',
-                            border: '3px solid #aaa',
-                            backgroundColor: '#fff',
-                            cursor: 'wait',
-                            lineHeight: '32px',
-                            zIndex: 9999
-                        }
-                    });
-                    
-                    // Create and submit the form
-                    var $form = $('<form>', {
-                        method: 'POST',
-                        action: response.ipay88_form_url,
-                        target: '_top'
-                    });
-                    
-                    // Add all hidden fields
-                    $.each(response.ipay88_form_data, function(name, value) {
-                        $form.append($('<input>', {
-                            type: 'hidden',
-                            name: name,
-                            value: value
-                        }));
-                    });
-                    
-                    console.log('iPay88: Form created, submitting...');
-                    
-                    // Append to body and submit
-                    $('body').append($form);
-                    
-                    // Small delay to ensure form is in DOM
-                    setTimeout(function() {
-                        $form.submit();
-                    }, 100);
-                }
-            } catch (e) {
-                console.error('iPay88: Error parsing response', e);
-            }
-        }
-    });
+jQuery(function ($) {
+	'use strict';
+
+	// Check if checkout form exists
+	if (!$('form.checkout').length) {
+		return;
+	}
+
+	console.log('iPay88: Script loaded');
+
+	// Handle the checkout process
+	$('form.checkout').on('checkout_place_order_ipay88', function () {
+		console.log('iPay88: Place order triggered');
+		return true; // Allow the order to be placed
+	});
+
+	// Listen for AJAX complete
+	$(document).ajaxComplete(function (event, xhr, settings) {
+		// Check if this is the checkout AJAX request
+		if (settings.url && settings.url.indexOf('wc-ajax=checkout') > -1) {
+			console.log('iPay88: Checkout AJAX complete');
+
+			try {
+				var response = JSON.parse(xhr.responseText);
+				console.log('iPay88: Response:', response);
+
+				if (response.result === 'success' && response.ipay88_form_data && response.ipay88_form_url) {
+					console.log('iPay88: Submitting form to iPay88');
+
+					// Block the UI
+					$.blockUI({
+						message: 'Thank you for your order. We are now redirecting you to iPay88 to make payment.',
+						overlayCSS: {
+							background: '#fff',
+							opacity: 0.6
+						},
+						css: {
+							padding: 20,
+							textAlign: 'center',
+							color: '#555',
+							border: '3px solid #aaa',
+							backgroundColor: '#fff',
+							cursor: 'wait',
+							lineHeight: '32px',
+							zIndex: 9999
+						}
+					});
+
+					// Create and submit the form
+					var $form = $('<form>', {
+						method: 'POST',
+						action: response.ipay88_form_url,
+						target: '_top'
+					});
+
+					// Add all hidden fields
+					$.each(response.ipay88_form_data, function (name, value) {
+						$form.append($('<input>', {
+							type: 'hidden',
+							name: name,
+							value: value
+						}));
+					});
+
+					console.log('iPay88: Form created, submitting...');
+
+					// Append to body and submit
+					$('body').append($form);
+
+					// Small delay to ensure form is in DOM
+					setTimeout(function () {
+						$form.submit();
+					}, 100);
+				}
+			} catch (e) {
+				console.error('iPay88: Error parsing response', e);
+			}
+		}
+	});
 });
 
-jQuery(function($) {
-    // Define a function to hide payment plans based on eligibility
-    function updatePaymentPlansVisibility() {
-        const paymentPlans = shBnplData.paymentPlans || [];
-        const total = shBnplData.total || 0;
-        let anyEligiblePlans = false; // Flag to track if there are any eligible plans
+jQuery(function ($) {
+	// Define a function to hide payment plans based on eligibility
+	function updatePaymentPlansVisibility() {
+		const paymentPlans = shBnplData.paymentPlans || [];
+		const total = shBnplData.total || 0;
+		let anyEligiblePlans = false; // Flag to track if there are any eligible plans
 
-        // loop through each BNPL payment option wrapper
-        $('.ipay88-payment-option-wrapper').each(function() {
-            const $wrapper = $(this);
-            const paymentValue = $wrapper.find('input[name="ipay88_payment_type"]').val();
+		// loop through each BNPL payment option wrapper
+		$('.ipay88-payment-option-wrapper').each(function () {
+			const $wrapper = $(this);
+			const paymentValue = $wrapper.find('input[name="ipay88_payment_type"]').val();
 
-            // find plans for this payment type
-            const eligiblePlans = paymentPlans
-                .filter(p => String(p.ipay88_id) === String(paymentValue))
-                .filter(p => total >= (p.min_amount));
+			// find plans for this payment type
+			const eligiblePlans = paymentPlans
+				.filter(p => String(p.ipay88_id) === String(paymentValue))
+				.filter(p => total >= (p.min_amount));
 
-            if (eligiblePlans.length === 0) {
-                // hide the entire wrapper if no eligible plans
-                $wrapper.hide();
-            } else {
-                // Show the wrapper if there are eligible plans
-                $wrapper.show();
-                anyEligiblePlans = true; // At least one plan is available
-            }
-        });
+			if (eligiblePlans.length === 0) {
+				// hide the entire wrapper if no eligible plans
+				$wrapper.hide();
+			} else {
+				// Show the wrapper if there are eligible plans
+				$wrapper.show();
+				anyEligiblePlans = true; // At least one plan is available
+			}
+		});
 
-        // If no eligible plans are available, hide the .bnpl-section
-        if (anyEligiblePlans === false) {
-            $('.bnpl-section').hide();
-        } else {
-            $('.bnpl-section').show();
-        }
-    }
+		// If no eligible plans are available, hide the .bnpl-section
+		if (anyEligiblePlans === false) {
+			$('.bnpl-section').hide();
+		} else {
+			$('.bnpl-section').show();
+		}
+	}
 
-    // Run the function on page load
-    updatePaymentPlansVisibility();
+	// Run the function on page load
+	updatePaymentPlansVisibility();
 
-    // Reapply the visibility check after WooCommerce AJAX updates (i.e., after checkout updates)
-    $(document.body).on('updated_checkout', function() {
-        updatePaymentPlansVisibility();
-    });
+	// Reapply the visibility check after WooCommerce AJAX updates (i.e., after checkout updates)
+	$(document.body).on('updated_checkout', function () {
+		updatePaymentPlansVisibility();
+	});
 });
