@@ -193,6 +193,11 @@ add_action('template_redirect', function () {
             'handler' => 'apply_cart_coupon',
             'methods' => ['DELETE'],
         ],
+        'payment/list'        =>
+        [
+            'handler' => 'get_payment_method_list',
+            'methods' => ['GET'],
+        ],
         'gateway' =>
         [
             'handler' => 'pampas_router',
