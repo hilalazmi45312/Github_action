@@ -389,6 +389,83 @@ class Ajax_Handlers {
                     }
                 } // end else (slug not empty)
 
+                // ---------------------------------------------------------
+                // REDIRECT FALLBACK LOGIC
+                // ---------------------------------------------------------
+                if ( $id === 0 && ! empty( $url ) ) {
+                    // If we haven't found a match yet, check if the URL redirects (e.g. Yoast Premium redirects)
+                    // We use wp_remote_head with redirection disabled to catch the 3xx response
+                    $response = wp_remote_head( $url, array(
+                        'redirection' => 0,
+                        'timeout'     => 5,
+                        'sslverify'   => false, // Skip SSL verification for internal tests to avoid issues
+                    ) );
+
+                    if ( ! is_wp_error( $response ) ) {
+                        $response_code = wp_remote_retrieve_response_code( $response );
+                        // Check for 301, 302, 307etc.
+                        if ( in_array( $response_code, array( 301, 302, 303, 307, 308 ) ) ) {
+                            $location = wp_remote_retrieve_header( $response, 'location' );
+                            
+                            if ( ! empty( $location ) ) {
+                                // We found a redirect! Parse the new Location URL and try lookup again.
+                                $redirect_parsed = @parse_url( $location );
+                                if ( $redirect_parsed && isset( $redirect_parsed['path'] ) ) {
+                                    $redirect_path = trim( $redirect_parsed['path'], '/' );
+                                    $redirect_parts = explode( '/', $redirect_path );
+                                    $redirect_slug = end( $redirect_parts );
+                                    $redirect_slug = urldecode( $redirect_slug );
+
+                                    if ( ! empty( $redirect_slug ) ) {
+                                        // RE-TRY MATCHING with new slug
+                                        // NOTE: This duplicates the lookup logic above. Ideally refactor into a helper function, 
+                                        // but for now keeping it inline to minimize diff risk.
+                                        
+                                        // We can assume same group logic or try to detect again. 
+                                        // Let's reuse the auto-detect logic as it's safer for redirects.
+                                        
+                                        // Try Brand
+                                        $term = get_term_by( 'slug', $redirect_slug, 'product_brand' );
+                                        if ( $term && ! is_wp_error( $term ) ) {
+                                            $id = $term->term_id;
+                                            $type = 'term';
+                                            $type_value = 'product_brand';
+                                            $name = $term->name;
+                                        } 
+                                        // Try Category
+                                        elseif ( ($term = get_term_by( 'slug', $redirect_slug, 'product_cat' )) && ! is_wp_error( $term ) ) {
+                                            $id = $term->term_id;
+                                            $type = 'term';
+                                            $type_value = 'product_cat';
+                                            $name = $term->name;
+                                        }
+                                        // Try Product/Page/Post
+                                        else {
+                                            // Priority: Product -> Page -> Post
+                                            $post = get_page_by_path( $redirect_slug, OBJECT, 'product' );
+                                            if ( ! $post ) {
+                                                $post = get_page_by_path( $redirect_slug, OBJECT, 'page' );
+                                            }
+                                            if ( ! $post ) {
+                                                $post = get_page_by_path( $redirect_slug, OBJECT, 'post' );
+                                            }
+
+                                            if ( $post ) {
+                                                $id = $post->ID;
+                                                $type = 'post';
+                                                $type_value = $post->post_type; // Capture actual post type
+                                                $name = $post->post_title;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // ---------------------------------------------------------
+                // END REDIRECT FALLBACK
+                // ---------------------------------------------------------
 
                 // Get the converted URL (permalink) if we found a match
                 $converted_url = '';
