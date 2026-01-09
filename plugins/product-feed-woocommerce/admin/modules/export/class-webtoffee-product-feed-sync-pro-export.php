@@ -1106,14 +1106,17 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Export' ) ) {
 		 * @return string File path.
 		 */
 		public static function get_file_path( $file_name ) {
-			if ( ! is_dir( self::$export_dir ) ) {
-				if ( ! mkdir( self::$export_dir, 0775 ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
+			
+			$export_dir = self::get_export_dir();
+
+			if ( ! is_dir( $export_dir ) ) {
+				if ( ! mkdir( $export_dir, 0775 ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 					return false;
 				} else {
 					$files_to_create = array( 'index.php' => '<?php // Silence is golden' );
 					foreach ( $files_to_create as $file => $file_content ) {
-						if ( ! file_exists( self::$export_dir . '/' . $file ) ) {
-							$fh = @fopen( self::$export_dir . '/' . $file, 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+						if ( ! file_exists( $export_dir . '/' . $file ) ) {
+							$fh = @fopen( $export_dir . '/' . $file, 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 							if ( is_resource( $fh ) ) {
 								fwrite( $fh, $file_content ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
 								fclose( $fh ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
@@ -1122,7 +1125,7 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Export' ) ) {
 					}
 				}
 			}
-			return self::$export_dir . '/' . $file_name;
+			return $export_dir . '/' . $file_name;
 		}
 
 		/**
@@ -1136,8 +1139,8 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Export' ) ) {
 					if ( '' != $file_name ) {
 						$file_arr = explode( '.', $file_name );
 						$file_ext = end( $file_arr );
-						if ( isset( $this->allowed_export_file_type[ $file_ext ] ) || 'zip' == $file_ext ) {
-							$file_path = self::$export_dir . '/' . $file_name;
+						if ( isset( $this->allowed_export_file_type[ $file_ext ] ) ) {
+							$file_path = self::get_file_path( $file_name );
 							if ( file_exists( $file_path ) && is_file( $file_path ) ) {
 								header( 'Pragma: public' );
 								header( 'Expires: 0' );
@@ -1415,6 +1418,28 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Export' ) ) {
 						content: "\f312";
 					}';
 			wp_add_inline_style( 'woocommerce_admin_styles', $custom_css );
+		}
+
+
+		/**
+		 * 	Get directory path for saving export files.
+		 * 
+		 * 	@since 1.0.5
+		 * 	@return string Export directory path.
+		 */
+		public static function get_export_dir() {
+			
+			if ( Webtoffee_Product_Feed_Sync_Pro_Common_Helper::is_vip_env() ) {
+				self::$export_dir = wp_get_upload_dir()['basedir'] . self::$export_dir_name;
+			}
+
+			/**
+			 *  Alter export file saving directory.
+			 * 
+			 * 	@since 	1.0.5
+			 * 	@param 	string  Export directory path.
+			 */
+			return apply_filters( 'wt_pf_alter_export_dir', self::$export_dir );
 		}
 	}
 }

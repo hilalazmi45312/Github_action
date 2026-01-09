@@ -878,6 +878,16 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Common_Helper' ) ) {
 			}
 			return $strtotime;
 		}
+
+		/**
+		 * 	Check if running on VIP File System.
+		 * 
+		 * 	@since 1.0.5
+		 * 	@return bool
+		 */
+		public static function is_vip_env() {
+			return defined( 'WPCOM_IS_VIP_ENV' ) && WPCOM_IS_VIP_ENV;
+		}
 	}
 }
 
