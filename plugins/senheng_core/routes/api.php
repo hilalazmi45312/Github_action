@@ -173,6 +173,11 @@ add_action('template_redirect', function () {
             'handler' => 'add_cart_item',
             'methods' => ['POST'],
         ],
+        'trade/cart/query/update'        =>
+        [
+            'handler' => 'update_cart_item',
+            'methods' => ['POST'],
+        ],
         'trade/cart/query/remove'        =>
         [
             'handler' => 'delete_cart_items',

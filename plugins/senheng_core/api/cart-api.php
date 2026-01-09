@@ -2,12 +2,12 @@
 
 function get_cart($data = [])
 {
-    if (!is_user_logged_in()) {
-        wp_send_json_error(['message' => 'Not logged in'], 401);
-    }
+    // if (!is_user_logged_in()) {
+    //     wp_send_json_error(['message' => 'Not logged in'], 401);
+    // }
 
-    $shData  = senhengallInfo();
-    $user_id = $shData['user_id'];
+    // $shData  = senhengallInfo();
+    // $user_id = $shData['user_id'];
 
     $cartType  = isset($data['cartType']) ? max(1, (int) $data['cartType']) : null;
     $clientType    = isset($data['clientType'])   ? max(1, (int) $data['clientType'])   : null;
@@ -281,9 +281,9 @@ function get_cart($data = [])
 
 function get_cart_count($data = [])
 {
-    if (!is_user_logged_in()) {
-        wp_send_json_error(['message' => 'Not logged in'], 401);
-    }
+    // if (!is_user_logged_in()) {
+    //     wp_send_json_error(['message' => 'Not logged in'], 401);
+    // }
 
     $shData  = senhengallInfo();
     $user_id = $shData['user_id'];
@@ -307,23 +307,15 @@ function get_cart_count($data = [])
 
 function add_cart_item($data = [])
 {
-    if (!is_user_logged_in()) {
-        wp_send_json_error(['message' => 'Not logged in'], 401);
-    }
-
-    $shData  = senhengallInfo();
-    $user_id = $shData['user_id'];
-
     $product_id = isset($data['product_id']) ? (int)$data['product_id'] : 0;
     $variation_id = isset($data['variation_id']) ? (int)$data['variation_id'] : 0;
     $qty = isset($data['quantity']) ? (int)$data['quantity'] : 1;
     $variation = (isset($data['variation']) && is_array($data['variation'])) ? $data['variation'] : [];
-
-    if ($user_id <= 0 || $product_id <= 0 || $qty <= 0) {
-        wp_send_json_error(['message' => 'Invalid user_id, product_id, or quantity']);
+    $is_warranty99 = isset($data['is_warranty99']) ? (bool) $data['is_warranty99'] : true;
+    if (is_user_logged_in()) {
+        $is_warranty99 = false;
     }
 
-    // Validate product exists
     $wc_product_id = $variation_id > 0 ? $variation_id : $product_id;
     $product = wc_get_product($wc_product_id);
 
@@ -342,70 +334,78 @@ function add_cart_item($data = [])
         wp_send_json_error(['message' => 'Failed to add to cart']);
     }
 
+    $cart_item = $cart->get_cart_item($item_key);
+
+    if (!$cart_item) {
+        wp_send_json_error('Invalid cart item');
+    }
+
+    $cart_item['is_warranty99'] = $is_warranty99;
+    $cart->cart_contents[$item_key] = $cart_item;
+
     $cart->calculate_totals();
 
     wp_send_json_success([
-        'user_id'         => $user_id,
-        'item_key'        => $item_key,
-        'cart_count'      => $cart->get_cart_contents_count(),
-        'cart_total'      => html_entity_decode( wp_strip_all_tags( $cart->get_cart_total() ) ),
+        'item_key'       => $item_key,
+        'cart_count'     => $cart->get_cart_contents_count(),
+        // 'subtotal'       => (float) $cart->get_subtotal(),
+        // 'fees_total'     => (float) $cart->get_fee_total(),
+        // 'shipping_total' => (float) $cart->get_shipping_total(),
+        // 'tax_total'      => (float) $cart->get_total_tax(),
+        // 'total'          => (float) $cart->get_total('edit'),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total()),
     ]);
 }
 
 
 function update_cart_item($data = [])
 {
-    $user_id  = isset($data['user_id']) ? (int)$data['user_id'] : 0;
-    $item_key = isset($data['item_key']) ? sanitize_text_field($data['item_key']) : '';
-    $qty      = isset($data['quantity']) ? (int)$data['quantity'] : null;
-
-    if ($user_id <= 0 || $item_key === '' || $qty === null) {
-        echo wp_json_encode([
-            'success' => false,
-            'message' => 'Invalid user_id, item_key or quantity',
-        ]);
-        return;
+    $item_key = isset($data['cartLineId']) ? sanitize_text_field($data['cartLineId']) : '';
+    $qty      = isset($data['quantity']) ? (int) $data['quantity'] : null;
+    $is_warranty99 = isset($data['is_warranty99']) ? (bool) $data['is_warranty99'] : true;
+    if (is_user_logged_in()) {
+        $is_warranty99 = false;
     }
 
     if ($item_key === '') {
         wp_send_json_error(['message' => 'Missing cart item key']);
     }
 
-    $cart = sh_init_wc_cart_for_user($user_id);
-    if (is_wp_error($cart)) {
-        wp_send_json_error(['message' => $cart->get_error_message()]);
+    $cart = WC()->cart;
+    $cart_item = $cart->get_cart_item($item_key);
+
+    if (!$cart_item) {
+        wp_send_json_error('Invalid cart item');
     }
+
+    $cart_item['is_warranty99'] = $is_warranty99;
+    $cart->cart_contents[$item_key] = $cart_item;
 
     if ($qty <= 0) {
         $cart->remove_cart_item($item_key);
     } else {
-        $cart->set_quantity($item_key, $qty);
+        $cart->set_quantity($item_key, $qty, false);
     }
 
     $cart->calculate_totals();
 
     wp_send_json_success([
-        'user_id'         => $user_id,
-        'cart_count'      => $cart->get_cart_contents_count(),
-        'cart_total'      => strip_tags($cart->get_cart_total()),
+        'item_key'       => $item_key,
+        'cart_count'     => $cart->get_cart_contents_count(),
+        // 'subtotal'       => (float) $cart->get_subtotal(),
+        // 'fees_total'     => (float) $cart->get_fee_total(),
+        // 'shipping_total' => (float) $cart->get_shipping_total(),
+        // 'tax_total'      => (float) $cart->get_total_tax(),
+        // 'total'          => (float) $cart->get_total('edit'),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total()),
     ]);
 }
 
 function delete_cart_items($data = [])
 {
-    if (!is_user_logged_in()) {
-        wp_send_json_error(['message' => 'Not logged in'], 401);
-    }
-
-    $shData  = senhengallInfo();
-    $user_id = $shData['user_id'];
     $item_keys = isset($data['cartLineId']) && is_array($data['cartLineId'])
         ? array_map('sanitize_text_field', $data['cartLineId'])
         : [];
-
-    if ($user_id <= 0 || empty($item_keys)) {
-        wp_send_json_error(['message' => 'Invalid user_id or item_keys']);
-    }
 
     if (empty($item_keys)) {
         wp_send_json_error(['message' => 'No cart item keys provided']);
@@ -430,54 +430,13 @@ function delete_cart_items($data = [])
     $cart->calculate_totals();
 
     wp_send_json_success([
-        'removed'         => $deleted,
-        'cart_count'      => $cart->get_cart_contents_count(),
-        'cart_total'      => html_entity_decode( wp_strip_all_tags( $cart->get_cart_total() ) ),
+        'item_key'       => $item_key,
+        'cart_count'     => $cart->get_cart_contents_count(),
+        // 'subtotal'       => (float) $cart->get_subtotal(),
+        // 'fees_total'     => (float) $cart->get_fee_total(),
+        // 'shipping_total' => (float) $cart->get_shipping_total(),
+        // 'tax_total'      => (float) $cart->get_total_tax(),
+        // 'total'          => (float) $cart->get_total('edit'),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total()),
     ]);
-}
-
-/**
- * Bootstraps WooCommerce session, customer, and cart for a given user.
- * Returns WC_Cart instance ready to use OR WP_Error.
- */
-function sh_init_wc_cart_for_user($user_id)
-{
-    if ($user_id <= 0 || ! get_user_by('id', $user_id)) {
-        return new WP_Error('invalid_user', 'Invalid user ID');
-    }
-
-    // Set user + login (for this request)
-    wp_set_current_user($user_id);
-    // wp_set_auth_cookie($user_id, true);
-
-    if (! did_action('init')) {
-        do_action('init');
-    }
-
-    if (function_exists('WC')) {
-        WC()->frontend_includes();
-
-        // Session
-        if (null === WC()->session || ! WC()->session instanceof WC_Session_Handler) {
-            WC()->session = new WC_Session_Handler();
-            WC()->session->init();
-        }
-
-        // Customer
-        if (null === WC()->customer) {
-            WC()->customer = new WC_Customer($user_id, true);
-        }
-
-        // Cart
-        if (null === WC()->cart) {
-            WC()->cart = new WC_Cart();
-        }
-
-        // Load from session
-        WC()->cart->get_cart_from_session();
-
-        return WC()->cart;
-    }
-
-    return new WP_Error('no_wc', 'WooCommerce not loaded');
 }
