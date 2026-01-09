@@ -240,16 +240,21 @@ class Ajax_Handlers {
      * Converts URL-based CSV to ID-based format for import.
      */
     public function convert_csv() {
+        // Output buffering to catch and discard any PHP warnings/notices that might corrupt the JSON response
+        ob_start();
+
         // Verify nonce and permissions
         check_ajax_referer( 'yoast_meta_ie_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
+            ob_end_clean();
             wp_send_json_error( 'Insufficient permissions' );
         }
 
         $batch = isset( $_POST['batch'] ) ? json_decode( stripslashes( $_POST['batch'] ), true ) : array();
 
         if ( empty( $batch ) ) {
+            ob_end_clean();
             wp_send_json_error( 'No data to convert' );
         }
 
@@ -258,123 +263,168 @@ class Ajax_Handlers {
         $skipped = array();
 
         foreach ( $batch as $item ) {
-            $group = isset( $item['groups'] ) ? trim( $item['groups'] ) : '';
-            $url = isset( $item['url'] ) ? trim( $item['url'] ) : '';
-            $title = isset( $item['meta_status'] ) ? trim( $item['meta_status'] ) : '';
-            $description = isset( $item['meta_description'] ) ? trim( $item['meta_description'] ) : '';
+            try {
+                $group = isset( $item['groups'] ) ? trim( $item['groups'] ) : '';
+                $url = isset( $item['url'] ) ? trim( $item['url'] ) : '';
+                $title = isset( $item['meta_status'] ) ? trim( $item['meta_status'] ) : '';
+                $description = isset( $item['meta_description'] ) ? trim( $item['meta_description'] ) : '';
 
-            if ( empty( $url ) ) {
-                $errors[] = "Row missing URL";
-                continue;
-            }
-
-            // Extract slug from URL
-            $parsed_url = parse_url( $url );
-            $path = isset( $parsed_url['path'] ) ? trim( $parsed_url['path'], '/' ) : '';
-            $path_parts = explode( '/', $path );
-            $slug = end( $path_parts );
-
-            if ( empty( $slug ) ) {
-                $errors[] = "Could not extract slug from URL: {$url}";
-                continue;
-            }
-
-            $id = 0;
-            $type = '';
-            $type_value = '';
-            $name = '';
-
-            // Determine type based on Groups column or URL structure
-            $group_lower = strtolower( $group );
-
-            if ( strpos( $group_lower, 'brand' ) !== false || strpos( $path, 'brands-corner' ) !== false ) {
-                // Brand page - lookup in product_brand taxonomy
-                $term = get_term_by( 'slug', $slug, 'product_brand' );
-                if ( $term && ! is_wp_error( $term ) ) {
-                    $id = $term->term_id;
-                    $type = 'term';
-                    $type_value = 'product_brand';
-                    $name = $term->name;
+                if ( empty( $url ) ) {
+                    $errors[] = "Row missing URL";
+                    continue;
                 }
-            } elseif ( strpos( $group_lower, 'category' ) !== false ) {
-                // Category page - lookup in product_cat taxonomy
-                $term = get_term_by( 'slug', $slug, 'product_cat' );
-                if ( $term && ! is_wp_error( $term ) ) {
-                    $id = $term->term_id;
-                    $type = 'term';
-                    $type_value = 'product_cat';
-                    $name = $term->name;
-                }
-            } elseif ( strpos( $group_lower, 'product' ) !== false ) {
-                // Product page - lookup in product post type
-                $post = get_page_by_path( $slug, OBJECT, 'product' );
-                if ( $post ) {
-                    $id = $post->ID;
-                    $type = 'post';
-                    $type_value = 'product';
-                    $name = $post->post_title;
-                }
-            } else {
-                // Try to auto-detect: first try product, then page, then post
-                $post = get_page_by_path( $slug, OBJECT, 'product' );
-                if ( $post ) {
-                    $id = $post->ID;
-                    $type = 'post';
-                    $type_value = 'product';
-                    $name = $post->post_title;
+
+                // Extract slug from URL safely
+                // Use @ to suppress potential malformed URL warnings found in some CSVs
+                $parsed_url = @parse_url( $url );
+                
+                if ( $parsed_url === false || ! isset( $parsed_url['path'] ) ) {
+                    // Fallback for root domains or weird URLs
+                    $path = '';
                 } else {
-                    $post = get_page_by_path( $slug, OBJECT, 'page' );
-                    if ( $post ) {
-                        $id = $post->ID;
-                        $type = 'post';
-                        $type_value = 'page';
-                        $name = $post->post_title;
-                    } else {
-                        $post = get_page_by_path( $slug, OBJECT, 'post' );
+                    $path = trim( $parsed_url['path'], '/' );
+                }
+                
+                $path_parts = explode( '/', $path );
+                $slug = end( $path_parts );
+
+                // Decode slug (URLs might be encoded)
+                $slug = urldecode( $slug );
+
+                $id = 0;
+                $type = '';
+                $type_value = '';
+                $name = '';
+                
+                // Special handling for homepage/root URL (empty slug)
+                if ( empty( $slug ) ) {
+                    $front_page_id = get_option( 'page_on_front' );
+                    if ( $front_page_id ) {
+                        $post = get_post( $front_page_id );
                         if ( $post ) {
                             $id = $post->ID;
                             $type = 'post';
-                            $type_value = 'post';
+                            $type_value = 'page';
                             $name = $post->post_title;
                         }
                     }
-                }
-            }
+                    
+                    if ( $id === 0 ) {
+                        // If still 0, it really couldn't be found or it's not the homepage
+                         $skipped[] = array(
+                            'url' => $url,
+                            'slug' => '',
+                            'group' => $group,
+                            'reason' => 'Root URL but no static homepage set'
+                        );
+                        // Continue to adding formatted row even if skipped
+                    }
+                } else {
+                    // Normal slug lookup
 
-            // Get the converted URL (permalink) if we found a match
-            $converted_url = '';
-            if ( $id > 0 ) {
-                if ( $type === 'post' ) {
-                    $converted_url = get_permalink( $id );
-                } elseif ( $type === 'term' ) {
-                    $converted_url = get_term_link( (int) $id, $type_value );
-                    if ( is_wp_error( $converted_url ) ) {
-                        $converted_url = '';
+                    // Determine type based on Groups column or URL structure
+                    $group_lower = strtolower( $group );
+
+                    if ( strpos( $group_lower, 'brand' ) !== false || strpos( $path, 'brands-corner' ) !== false ) {
+                        // Brand page - lookup in product_brand taxonomy
+                        $term = get_term_by( 'slug', $slug, 'product_brand' );
+                        if ( $term && ! is_wp_error( $term ) ) {
+                            $id = $term->term_id;
+                            $type = 'term';
+                            $type_value = 'product_brand';
+                            $name = $term->name;
+                        }
+                    } elseif ( strpos( $group_lower, 'category' ) !== false ) {
+                        // Category page - lookup in product_cat taxonomy
+                        $term = get_term_by( 'slug', $slug, 'product_cat' );
+                        if ( $term && ! is_wp_error( $term ) ) {
+                            $id = $term->term_id;
+                            $type = 'term';
+                            $type_value = 'product_cat';
+                            $name = $term->name;
+                        }
+                    } elseif ( strpos( $group_lower, 'product' ) !== false ) {
+                        // Product page - lookup in product post type
+                        $post = get_page_by_path( $slug, OBJECT, 'product' );
+                        if ( $post ) {
+                            $id = $post->ID;
+                            $type = 'post';
+                            $type_value = 'product';
+                            $name = $post->post_title;
+                        }
+                    } else {
+                        // Try to auto-detect: first try product, then page, then post
+                        $post = get_page_by_path( $slug, OBJECT, 'product' );
+                        if ( $post ) {
+                            $id = $post->ID;
+                            $type = 'post';
+                            $type_value = 'product';
+                            $name = $post->post_title;
+                        } else {
+                            $post = get_page_by_path( $slug, OBJECT, 'page' );
+                            if ( $post ) {
+                                $id = $post->ID;
+                                $type = 'post';
+                                $type_value = 'page';
+                                $name = $post->post_title;
+                            } else {
+                                $post = get_page_by_path( $slug, OBJECT, 'post' );
+                                if ( $post ) {
+                                    $id = $post->ID;
+                                    $type = 'post';
+                                    $type_value = 'post';
+                                    $name = $post->post_title;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if ( $id === 0 ) {
+                        $skipped[] = array(
+                            'url' => $url,
+                            'slug' => $slug,
+                            'group' => $group,
+                            'reason' => 'No matching post or term found'
+                        );
+                    }
+                } // end else (slug not empty)
+
+
+                // Get the converted URL (permalink) if we found a match
+                $converted_url = '';
+                if ( $id > 0 ) {
+                    if ( $type === 'post' ) {
+                        $converted_url = get_permalink( $id );
+                    } elseif ( $type === 'term' ) {
+                        $converted_url = get_term_link( (int) $id, $type_value );
+                        if ( is_wp_error( $converted_url ) ) {
+                            $converted_url = '';
+                        }
                     }
                 }
-            }
 
-            // Track skipped items for statistics, but still include them in converted output
-            if ( $id === 0 ) {
-                $skipped[] = array(
-                    'url' => $url,
-                    'slug' => $slug,
-                    'group' => $group,
-                    'reason' => 'No matching post or term found'
+                // Build converted row - include ALL items, even unmatched ones (with empty values)
+                $converted[] = array(
+                    'id' => $id > 0 ? $id : '',
+                    'type' => $type,
+                    'type_value' => $type_value,
+                    'title_name' => $name,
+                    '_yoast_wpseo_title' => $title,
+                    '_yoast_wpseo_metadesc' => $description,
+                    'original_url' => $url,
+                    'converted_url' => $converted_url,
                 );
+            } catch ( \Exception $e ) {
+                $errors[] = "Exception processing URL {$url}: " . $e->getMessage();
+                // Continue to next item
             }
+        }
 
-            // Build converted row - include ALL items, even unmatched ones (with empty values)
-            $converted[] = array(
-                'id' => $id > 0 ? $id : '',
-                'type' => $type,
-                'type_value' => $type_value,
-                'title_name' => $name,
-                '_yoast_wpseo_title' => $title,
-                '_yoast_wpseo_metadesc' => $description,
-                'original_url' => $url,
-                'converted_url' => $converted_url,
-            );
+        // Clean output buffer
+        $ob_output = ob_get_clean();
+        if ( ! empty( $ob_output ) ) {
+             // Return warnings/notices to frontend
+             $errors[] = "PHP Warnings/Notices: " . strip_tags($ob_output);
         }
 
         wp_send_json_success( array(
