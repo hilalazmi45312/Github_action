@@ -393,6 +393,16 @@ class Ajax_Handlers {
                 // REDIRECT FALLBACK LOGIC
                 // ---------------------------------------------------------
                 if ( $id === 0 && ! empty( $url ) ) {
+                    // Determine EXPECTED context from Groups or URL structure before redirect
+                    $expected_type = 'unknown';
+                    if ( strpos( $group_lower, 'brand' ) !== false || strpos( $path, 'brands-corner' ) !== false ) {
+                        $expected_type = 'brand';
+                    } elseif ( strpos( $group_lower, 'category' ) !== false ) {
+                        $expected_type = 'category';
+                    } elseif ( strpos( $group_lower, 'product' ) !== false ) {
+                        $expected_type = 'product';
+                    }
+
                     // If we haven't found a match yet, check if the URL redirects (e.g. Yoast Premium redirects)
                     // We use wp_remote_head with redirection disabled to catch the 3xx response
                     $response = wp_remote_head( $url, array(
@@ -416,21 +426,26 @@ class Ajax_Handlers {
                                     $redirect_slug = end( $redirect_parts );
                                     $redirect_slug = urldecode( $redirect_slug );
 
+                                    // RULE 2: Check for generic roots if it was a Brand or Category
+                                    // If we expected a specific brand but got redirected to "/brands-corner" (root), ignore it.
+                                    $generic_roots = array( 'brands-corner', 'brands', 'brand', 'category', 'categories', 'shop', 'product', 'products' );
+                                    if ( ($expected_type === 'brand' || $expected_type === 'category') && in_array( $redirect_slug, $generic_roots ) ) {
+                                        // Skip looking up generic roots
+                                        $redirect_slug = ''; 
+                                    }
+
                                     if ( ! empty( $redirect_slug ) ) {
                                         // RE-TRY MATCHING with new slug
-                                        // NOTE: This duplicates the lookup logic above. Ideally refactor into a helper function, 
-                                        // but for now keeping it inline to minimize diff risk.
-                                        
-                                        // We can assume same group logic or try to detect again. 
-                                        // Let's reuse the auto-detect logic as it's safer for redirects.
                                         
                                         // Try Brand
+                                        $match_type = '';
                                         $term = get_term_by( 'slug', $redirect_slug, 'product_brand' );
                                         if ( $term && ! is_wp_error( $term ) ) {
                                             $id = $term->term_id;
                                             $type = 'term';
                                             $type_value = 'product_brand';
                                             $name = $term->name;
+                                            $match_type = 'brand';
                                         } 
                                         // Try Category
                                         elseif ( ($term = get_term_by( 'slug', $redirect_slug, 'product_cat' )) && ! is_wp_error( $term ) ) {
@@ -438,6 +453,7 @@ class Ajax_Handlers {
                                             $type = 'term';
                                             $type_value = 'product_cat';
                                             $name = $term->name;
+                                            $match_type = 'category';
                                         }
                                         // Try Product/Page/Post
                                         else {
@@ -455,7 +471,17 @@ class Ajax_Handlers {
                                                 $type = 'post';
                                                 $type_value = $post->post_type; // Capture actual post type
                                                 $name = $post->post_title;
+                                                $match_type = 'product';
                                             }
+                                        }
+
+                                        // RULE 1: Check match against expected type
+                                        // If expected Product but got Brand/Category, INVALIDATE.
+                                        if ( $id > 0 && $expected_type === 'product' && ($match_type === 'brand' || $match_type === 'category') ) {
+                                            $id = 0; // Reset
+                                            $type = '';
+                                            $type_value = '';
+                                            $name = '';
                                         }
                                     }
                                 }
