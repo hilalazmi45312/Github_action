@@ -54,26 +54,39 @@ class CheckoutController
 
     /**
      * Get waived brands from database
+     * Uses per-request static caching to avoid redundant DB queries.
      * 
      * @return array List of brand slugs that have admin fee waived
      */
     private static function get_waived_brands()
     {
+        // Per-request static cache
+        static $cached = null;
+        if ($cached !== null) {
+            return $cached;
+        }
+
         global $wpdb;
         $table_name = $wpdb->prefix . 'c_admin_fee_waivers';
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table name from $wpdb->prefix (safe)
         $rows = $wpdb->get_col("SELECT brand_slug FROM {$table_name}");
-        return array_map('strtolower', array_map('trim', (array)$rows));
+        $cached = array_map('strtolower', array_map('trim', (array)$rows));
+        return $cached;
     }
 
     /**
      * Calculate all cart-related data in a single loop
      * This consolidates what was previously 5-6 separate cart iterations.
+     * Uses per-request static caching to avoid redundant calculations within the same AJAX call.
      * 
      * @return array{base_cart_total: float, extras_total: float, has_deposits: bool, deposit_total: float, full_total: float, remaining_amount: float, cart_brands: array}
      */
     private static function calculate_cart_data()
     {
+        // Per-request static cache - resets on each new HTTP request
+        static $cached_data = null;
+        static $cached_cart_hash = null;
+
         $cart = WC()->cart;
         $data = [
             'base_cart_total' => 0.0,
@@ -87,6 +100,15 @@ class CheckoutController
 
         if (!$cart || $cart->is_empty()) {
             return $data;
+        }
+
+        // Generate hash of current cart state including session data that affects totals
+        $ipay88_fee = WC()->session ? WC()->session->get('ipay88_admin_fee', 0) : 0;
+        $cart_hash = md5(serialize($cart->get_cart()) . '_' . $cart->get_cart_discount_total() . '_' . $ipay88_fee);
+        
+        // Return cached data if cart hasn't changed within this request
+        if ($cached_data !== null && $cached_cart_hash === $cart_hash) {
+            return $cached_data;
         }
 
         foreach ($cart->get_cart() as $cart_item) {
@@ -190,6 +212,10 @@ class CheckoutController
         // Coupon discount is applied to the remaining balance instead of the deposit
         $discount_total = WC()->cart->get_discount_total();
         $data['remaining_amount'] = max($data['full_total'] - $data['deposit_total'] - $discount_total, 0.0);
+
+        // Store in per-request cache
+        $cached_data = $data;
+        $cached_cart_hash = $cart_hash;
 
         return $data;
     }
@@ -640,7 +666,17 @@ class CheckoutController
                         });
                     }
 
+                    // Track previous einvoice state to skip unnecessary DOM updates
+                    var lastEinvoiceState = null;
+
                     function toggleEinvoiceFields() {
+                        // Skip if state hasn't changed (performance optimization)
+                        var currentState = $('#need_einvoice').is(':checked');
+                        if (lastEinvoiceState === currentState) {
+                            return;
+                        }
+                        lastEinvoiceState = currentState;
+
                         // List of fields that should have an asterisk when required
                         const requiredFields = [
                             'einvoiceName',
@@ -655,7 +691,7 @@ class CheckoutController
                             'einvoice_confirm'
                         ];
 
-                        if ($('#need_einvoice').is(':checked')) {
+                        if (currentState) {
                             $('.einvoice-field').closest('.form-row').show();
                             // Add required attribute and asterisk to required fields
                             requiredFields.forEach(function(fieldId) {
@@ -2193,6 +2229,12 @@ class CheckoutController
         $base_cart_total = $cart_data['base_cart_total'];
         $total_extras_price = $cart_data['extras_total'];
         
+        // Early exit: if no extras and no deposits, skip heavy processing
+        // The static cache ensures calculate_cart_data() is fast on subsequent calls
+        if ($total_extras_price == 0 && !$cart_data['has_deposits']) {
+            return $fragments;
+        }
+        
         $current_contents_total = $base_cart_total + $total_extras_price;
         
         $shipping_total = $cart_object->get_shipping_total();
@@ -2324,7 +2366,39 @@ class CheckoutController
             return;
         }
 
-        $admin_fee = WC()->session->get('ipay88_admin_fee', 0);
+        $admin_fee = 0;
+
+        // 1. Try to get reading from POST data (Instant Place Order support)
+        if (isset($_POST['ipay88_admin_fee'])) {
+            $admin_fee = floatval($_POST['ipay88_admin_fee']);
+            if ($admin_fee > 0) {
+                // Update session to keep it in sync for future requests
+                WC()->session->set('ipay88_admin_fee', $admin_fee);
+                
+                // Also capture plan details if available
+                if (isset($_POST['ipay88_payment_plan'])) WC()->session->set('ipay88_payment_plan', sanitize_text_field($_POST['ipay88_payment_plan']));
+                if (isset($_POST['ipay88_months'])) WC()->session->set('ipay88_months', sanitize_text_field($_POST['ipay88_months']));
+            }
+        } 
+        // 2. Try to get from serialized AJAX data (e.g. update_order_review)
+        elseif (isset($_POST['post_data'])) {
+            parse_str($_POST['post_data'], $post_data_array);
+            if (isset($post_data_array['ipay88_admin_fee'])) {
+                $admin_fee = floatval($post_data_array['ipay88_admin_fee']);
+                if ($admin_fee > 0) {
+                     // Update session to keep it in sync
+                    WC()->session->set('ipay88_admin_fee', $admin_fee);
+                    
+                    if (isset($post_data_array['ipay88_payment_plan'])) WC()->session->set('ipay88_payment_plan', sanitize_text_field($post_data_array['ipay88_payment_plan']));
+                    if (isset($post_data_array['ipay88_months'])) WC()->session->set('ipay88_months', sanitize_text_field($post_data_array['ipay88_months']));
+                }
+            }
+        }
+
+        // 3. Fallback to session if no POST data found (Standard flow)
+        if ($admin_fee <= 0) {
+            $admin_fee = WC()->session->get('ipay88_admin_fee', 0);
+        }
 
         // Only proceed if admin fee exists
         if ($admin_fee > 0) {

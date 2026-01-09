@@ -359,13 +359,13 @@ if (!function_exists('get_userAgent')) {
         //    - Flutter: add a custom token from your app if you can (e.g., "MyFlutterApp/1.0")
         //    - Android WebView typically has "; wv"
         //    - Many in-app browsers include "FBAN", "FBAV", "Instagram", "Line", etc.
-        if (
-            stripos($ua, 'Flutter') !== false ||
-            preg_match('/;\s*wv\)/i', $ua) ||
-            preg_match('/FBAN|FBAV|Instagram|Line\/|OKHttp|Electron|Cordova|Ionic|ReactNative/i', $ua)
-        ) {
-            return 'SRC';
-        }
+        // if (
+        //     stripos($ua, 'Flutter') !== false ||
+        //     preg_match('/;\s*wv\)/i', $ua) ||
+        //     preg_match('/FBAN|FBAV|Instagram|Line\/|OKHttp|Electron|Cordova|Ionic|ReactNative/i', $ua)
+        // ) {
+        //     return 'SRC';
+        // }
 
         // 3) iPadOS desktop-like UA quirk:
         //    iPad can report "Macintosh; Intel Mac OS X" but still include "Mobile/"

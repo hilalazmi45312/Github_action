@@ -47,9 +47,16 @@ class PwaSessionController
             wp_safe_redirect($redirect_url);
             exit;
         } else {
-            wp_logout();
-            wp_safe_redirect(home_url('/?app=true'));
-            exit;
+            $magento_api = new MagentoAPI();
+
+            $user_infos = $magento_api->getAllCardInfo($user_data['user_info']['username'], $user_data['user_info']['email']);
+            $card = $user_infos['card_info'][0] ?? [];
+            $loginData = self::buildLoginData($user_data, $user_infos, $card);
+            self::createUserSession($loginData, $redirect_url);
+
+            // wp_logout();
+            // wp_safe_redirect(home_url('/?app=true'));
+            // exit;
         }
     }
 
@@ -79,9 +86,9 @@ class PwaSessionController
         //     $isApp = true;
         // }
 
-        if ($userAgent === 'SRC') {
-            $isApp = true;
-        }
+        // if ($userAgent === 'SRC') {
+        //     $isApp = true;
+        // }
 
         if ($isApp) {
             echo '
@@ -147,109 +154,91 @@ class PwaSessionController
         }
     }
 
-    public static function deferJS()
+    public static function createUserSession($loginData, $redirect_url)
     {
-        ob_start(function ($buffer) {
-            // Defer all JS scripts except those with 'no-defer' in their src
-            $buffer = preg_replace_callback(
-                '/<script\b(?![^>]*\bno-defer\b)[^>]*\bsrc=["\']([^"\']+)["\'][^>]*><\/script>/i',
-                function ($matches) {
-                    return str_replace('<script', '<script defer', $matches[0]);
-                },
-                $buffer
-            );
-            return $buffer;
-        });
-    }
+        $user = get_user_by('email', $loginData['cust_email']);
+        if (!$user) {
+            // Create new user since not found
+            $username = sanitize_user(strtolower(str_replace(' ', '', $loginData['cust_name'])) . $loginData['idmapping']);
+            $user_id = wp_create_user($username, $otp, $loginData['cust_email']);
 
-    public static function deferJSNew()
-    {
-        ob_start(function ($buffer) {
-            // List of script handles or keywords to never defer
-            $never = [
-                'jquery',
-                'jquery-core',
-                'jquery-migrate',
-                'wp-hooks',
-                'wp-i18n',
-                'wp-util',
-                'wp-embed',
-                'elementor-frontend',
-                'elementor-webpack-runtime',
-                'elementor-waypoints',
-                'imagesloaded',
-                'swiper',
-                'woodmart-theme',
-                'woocommerce',
-                'wc-add-to-cart',
-                'wc-cart-fragments',
-                'selectWoo',
+            if (is_wp_error($user_id)) {
+                wp_send_json_error(['message' => $user_id->get_error_message()]);
+                return;
+            }
+
+            $user = new WP_User($user_id);
+            $user->set_role('customer');
+
+            wp_update_user([
+                'ID' => $user_id,
+                'display_name' => $loginData['cust_name']
+            ]);
+
+            // Retrieve ambassador ID once at login
+            $config = woo_authorization_salt();
+            $idsso  = $loginData['idsso'];
+
+            $ambassador_id = ImpactController::get_ambassador_id($user->ID, $config, $idsso);
+
+            // If ambassador found, mark user as signed up automatically
+            if ($ambassador_id) {
+                update_user_meta($user->ID, 'impact_ambassador_sign_up', true);
+            }
+
+            // User meta fields to update
+            $meta_fields = [
+                'idmapping'         => $loginData['idmapping'],
+                'idsso'             => $loginData['idsso'],
+                'cust_allp1no'      => $loginData['cust_allp1no'],
+                'cust_all_cardtype' => $loginData['cust_all_cardtype'],
+                'cust_cardtype'     => $loginData['cust_cardtype'],
+                'cust_contact'      => $loginData['cust_contact'],
+                'cust_email'        => $loginData['cust_email'],
+                'cust_icno'         => $loginData['cust_icno'],
+                'cust_id'           => $loginData['cust_id'],
+                'cust_idmapping'    => $loginData['cust_idmapping'],
+                'cust_name'         => $loginData['cust_name'],
+                'cust_p1no'         => $loginData['cust_p1no']
             ];
 
-            // Build a regex pattern to match scripts that should NOT be deferred
-            $never_pattern = implode('|', array_map('preg_quote', $never));
+            foreach ($meta_fields as $key => $value) {
+                update_user_meta($user->ID, $key, $value);
+            }
 
-            // Defer all JS scripts except those in the $never list
-            $buffer = preg_replace_callback(
-                '/<script\b([^>]*\bsrc=["\']([^"\']+)["\'][^>]*)><\/script>/i',
-                function ($matches) use ($never_pattern) {
-                    $src = $matches[2];
-                    if (preg_match('/(' . $never_pattern . ')/i', $src)) {
-                        // Do not defer if src matches any in the never list
-                        return $matches[0];
-                    }
-                    return str_replace('<script', '<script defer', $matches[0]);
-                },
-                $buffer
-            );
-            return $buffer;
-        });
+            // Clean (to ensure no cache plugins interfere)
+            wp_cache_delete($user->ID, 'users');
+            wp_cache_delete($user->user_login, 'userlogins');
+
+            // User exists, log them in
+            wp_set_current_user($user->ID);
+            wp_set_auth_cookie($user->ID);
+
+            // ✅ Fire wp_login with both params
+            do_action('wp_login', $user->user_login, $user);
+
+            wp_safe_redirect($redirect_url);
+            exit;
+        }
     }
 
-    public static function deferJSCustom($tag, $handle, $src)
+    private static function buildLoginData($user_data, $user_infos, $card)
     {
-        $never = [
-            'jquery',
-            'jquery-core',
-            'jquery-migrate',
-            'wp-hooks',
-            'wp-i18n',
-            'wp-util',
-            'wp-embed',
-            'elementor-frontend',
-            'elementor-webpack-runtime',
-            'elementor-waypoints',
-            'imagesloaded',
-            'swiper',
-            'woodmart-theme',
-            'woocommerce',
-            'wc-add-to-cart',
-            'wc-cart-fragments',
-            'selectWoo',
+        $cust_allp1no = implode(',', array_column($user_infos['card_info'], 'CARD_NO'));
+        $cust_all_cardtype = implode(',', array_column($user_infos['card_info'], 'CARD_TYPE'));
+        return [
+            'idmapping'         => $card['ID'] ?? null,
+            'idsso'             => $user_data['user_info']['username'],
+            'cust_allp1no'      => $cust_allp1no,
+            'cust_all_cardtype' => $cust_all_cardtype,
+            'cust_cardtype'     => $card['CARD_TYPE'] ?? null,
+            'cust_contact'      => $card['CONTACT']   ?? null,
+            'cust_email'        => $user_data['user_info']['email'],
+            'cust_icno'         => $card['ICNO']      ?? null,
+            'cust_id'           => $card['MEMBER_ID']        ?? null,
+            'cust_idmapping'    => $card['ID'] ?? null,
+            'cust_name'         => $user_data['user_info']['firstname'],
+            'cust_p1no'         => $card['CARD_NO']   ?? null,
         ];
-        if (in_array($handle, $never, true)) {
-            return $tag;
-        }
-
-        // Defer only obvious third-party/marketing scripts
-        $allow_if_url_contains = [
-            'connect.facebook.net',
-            'useinsider.com',
-            'cdn.branch.io',
-            'whatsapp',
-            'popup-builder',
-            'sweetalert',
-            'pixel-manager',
-            'googletagmanager.com',
-            'google-analytics.com',
-            'clarity.ms',
-            'hotjar',
-        ];
-        foreach ($allow_if_url_contains as $needle) {
-            if (strpos($src, $needle) !== false) {
-                return str_replace('<script ', '<script defer ', $tag);
-            }
-        }
-        return $tag;
     }
 }

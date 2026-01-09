@@ -112,6 +112,8 @@ class Admin {
             'importCompletedWithErrors' => __('Import completed with errors: ', 'yoast-meta-ie'),
             'exportDescription' => __('Export all Yoast SEO meta fields for post types and taxonomies to a CSV file.', 'yoast-meta-ie'),
             'importDescription' => __('Import Yoast SEO meta fields from a CSV file. The file will be processed client-side.', 'yoast-meta-ie'),
+            'dryRunCompleted' => __('Dry run completed. ', 'yoast-meta-ie'),
+            'postsTermsWouldBeUpdated' => __(' posts/terms would be updated.', 'yoast-meta-ie'),
         );
     }
     private function get_available_post_types() {
