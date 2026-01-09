@@ -307,39 +307,38 @@ function get_cart_count($data = [])
 
 function add_cart_item($data = [])
 {
-    $user_id = isset($data['user_id']) ? (int)$data['user_id'] : 0;
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => 'Not logged in'], 401);
+    }
+
+    $shData  = senhengallInfo();
+    $user_id = $shData['user_id'];
+
     $product_id = isset($data['product_id']) ? (int)$data['product_id'] : 0;
     $variation_id = isset($data['variation_id']) ? (int)$data['variation_id'] : 0;
     $qty = isset($data['quantity']) ? (int)$data['quantity'] : 1;
     $variation = (isset($data['variation']) && is_array($data['variation'])) ? $data['variation'] : [];
 
     if ($user_id <= 0 || $product_id <= 0 || $qty <= 0) {
-        echo wp_json_encode([
-            'success' => false,
-            'message' => 'Invalid user_id, product_id, or quantity',
-        ]);
-        return;
+        wp_send_json_error(['message' => 'Invalid user_id, product_id, or quantity']);
     }
-
-    wp_set_current_user($user_id);
 
     // Validate product exists
     $wc_product_id = $variation_id > 0 ? $variation_id : $product_id;
     $product = wc_get_product($wc_product_id);
 
     if (!$product) {
-        echo wp_json_encode([
-            'success' => false,
-            'message' => 'Product not found',
-        ]);
-        return;
+        wp_send_json_error(['message' => 'Product not found'], 404);
     }
 
-    $cart = sh_init_wc_cart_for_user($user_id);
+    $cart = WC()->cart;
 
     $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation);
-
     if (! $item_key) {
+        $notices = wc_get_notices('error');
+        if (! empty($notices)) {
+            wp_send_json_error(['message' => wp_strip_all_tags($notices[0]['notice'])]);
+        }
         wp_send_json_error(['message' => 'Failed to add to cart']);
     }
 
@@ -349,7 +348,7 @@ function add_cart_item($data = [])
         'user_id'         => $user_id,
         'item_key'        => $item_key,
         'cart_count'      => $cart->get_cart_contents_count(),
-        'cart_total'      => strip_tags($cart->get_cart_total()),
+        'cart_total'      => html_entity_decode( wp_strip_all_tags( $cart->get_cart_total() ) ),
     ]);
 }
 
@@ -394,24 +393,25 @@ function update_cart_item($data = [])
 
 function delete_cart_items($data = [])
 {
-    $user_id   = isset($data['user_id']) ? (int)$data['user_id'] : 0;
-    $item_keys = isset($data['item_keys']) && is_array($data['item_keys'])
-        ? array_map('sanitize_text_field', $data['item_keys'])
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => 'Not logged in'], 401);
+    }
+
+    $shData  = senhengallInfo();
+    $user_id = $shData['user_id'];
+    $item_keys = isset($data['cartLineId']) && is_array($data['cartLineId'])
+        ? array_map('sanitize_text_field', $data['cartLineId'])
         : [];
 
     if ($user_id <= 0 || empty($item_keys)) {
-        echo wp_json_encode([
-            'success' => false,
-            'message' => 'Invalid user_id or item_keys',
-        ]);
-        return;
+        wp_send_json_error(['message' => 'Invalid user_id or item_keys']);
     }
 
     if (empty($item_keys)) {
         wp_send_json_error(['message' => 'No cart item keys provided']);
     }
 
-    $cart = sh_init_wc_cart_for_user($user_id);
+    $cart = WC()->cart;
     if (is_wp_error($cart)) {
         wp_send_json_error(['message' => $cart->get_error_message()]);
     }
@@ -423,13 +423,16 @@ function delete_cart_items($data = [])
         }
     }
 
+    if ($deleted === 0) {
+        wp_send_json_error(['message' => 'No cart items were deleted'], 400);
+    }
+
     $cart->calculate_totals();
 
     wp_send_json_success([
-        'user_id'         => $user_id,
-        'deleted'         => $deleted,
+        'removed'         => $deleted,
         'cart_count'      => $cart->get_cart_contents_count(),
-        'cart_total'      => strip_tags($cart->get_cart_total()),
+        'cart_total'      => html_entity_decode( wp_strip_all_tags( $cart->get_cart_total() ) ),
     ]);
 }
 

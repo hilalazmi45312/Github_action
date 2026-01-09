@@ -168,6 +168,16 @@ add_action('template_redirect', function () {
             'methods' => ['GET'],
             'params'  => ['cartType', 'clientType', 'divisionIds'],
         ],
+        'trade/cart/query/add'        =>
+        [
+            'handler' => 'add_cart_item',
+            'methods' => ['POST'],
+        ],
+        'trade/cart/query/remove'        =>
+        [
+            'handler' => 'delete_cart_items',
+            'methods' => ['POST'],
+        ],
         'gateway' =>
         [
             'handler' => 'pampas_router',
@@ -224,7 +234,7 @@ add_action('template_redirect', function () {
     // if ($method === 'GET') {
     $input = array_merge($_GET, $input);
     // }
-
+    wc_clear_notices();
     // Call handler
     if (is_callable($handler)) {
         $handler($input);
