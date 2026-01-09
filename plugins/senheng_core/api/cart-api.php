@@ -329,7 +329,7 @@ function add_cart_item($data = [])
     if (! $item_key) {
         $notices = wc_get_notices('error');
         if (! empty($notices)) {
-            wp_send_json_error(['message' => wp_strip_all_tags($notices[0]['notice'])]);
+            wp_send_json_error(['message' => wc_notice_to_plain_text($notices[0]['notice'])]);
         }
         wp_send_json_error(['message' => 'Failed to add to cart']);
     }
@@ -353,7 +353,7 @@ function add_cart_item($data = [])
         // 'shipping_total' => (float) $cart->get_shipping_total(),
         // 'tax_total'      => (float) $cart->get_total_tax(),
         // 'total'          => (float) $cart->get_total('edit'),
-        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total()),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
     ]);
 }
 
@@ -397,7 +397,7 @@ function update_cart_item($data = [])
         // 'shipping_total' => (float) $cart->get_shipping_total(),
         // 'tax_total'      => (float) $cart->get_total_tax(),
         // 'total'          => (float) $cart->get_total('edit'),
-        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total()),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
     ]);
 }
 
@@ -437,6 +437,55 @@ function delete_cart_items($data = [])
         // 'shipping_total' => (float) $cart->get_shipping_total(),
         // 'tax_total'      => (float) $cart->get_total_tax(),
         // 'total'          => (float) $cart->get_total('edit'),
-        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total()),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
+    ]);
+}
+
+function apply_cart_coupon($data = [])
+{
+    $coupon_code = isset($data['coupon_code']) ? sanitize_text_field($data['coupon_code']) : '';
+
+    if ($data['_method'] === 'DELETE') {
+        //remove coupon
+        $cart = WC()->cart;
+        $cart->remove_coupon($coupon_code);
+        $cart->calculate_totals();
+
+        wp_send_json_success([
+            'item_key'       => $item_key,
+            'cart_count'     => $cart->get_cart_contents_count(),
+            // 'subtotal'       => (float) $cart->get_subtotal(),
+            // 'fees_total'     => (float) $cart->get_fee_total(),
+            // 'shipping_total' => (float) $cart->get_shipping_total(),
+            // 'tax_total'      => (float) $cart->get_total_tax(),
+            // 'total'          => (float) $cart->get_total('edit'),
+            'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
+        ]);
+    }
+
+    if ($coupon_code === '') {
+        wp_send_json_error(['message' => 'No coupon code provided']);
+    }
+
+    $cart = WC()->cart;
+
+    if (! $cart->apply_coupon($coupon_code)) {
+        $notices = wc_get_notices('error');
+        if (! empty($notices)) {
+            wp_send_json_error(['message' => wc_notice_to_plain_text($notices[0]['notice'])]);
+        }
+    }
+
+    $cart->calculate_totals();
+
+    wp_send_json_success([
+        'item_key'       => $item_key,
+        'cart_count'     => $cart->get_cart_contents_count(),
+        // 'subtotal'       => (float) $cart->get_subtotal(),
+        // 'fees_total'     => (float) $cart->get_fee_total(),
+        // 'shipping_total' => (float) $cart->get_shipping_total(),
+        // 'tax_total'      => (float) $cart->get_total_tax(),
+        // 'total'          => (float) $cart->get_total('edit'),
+        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
     ]);
 }

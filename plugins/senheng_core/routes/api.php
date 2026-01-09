@@ -183,6 +183,16 @@ add_action('template_redirect', function () {
             'handler' => 'delete_cart_items',
             'methods' => ['POST'],
         ],
+        'trade/cart/query/apply-coupon'        =>
+        [
+            'handler' => 'apply_cart_coupon',
+            'methods' => ['POST'],
+        ],
+        'trade/cart/query/apply-coupon'        =>
+        [
+            'handler' => 'apply_cart_coupon',
+            'methods' => ['DELETE'],
+        ],
         'gateway' =>
         [
             'handler' => 'pampas_router',
