@@ -708,6 +708,191 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Admin' ) ) {
 			</div>
 			<?php
 		}
-	}
 
+		/**
+		 * Checks if any supported multi-currency plugin is active.
+		 *
+		 * This method determines if any of the commonly used WooCommerce multi-currency 
+		 * plugins are active by checking for their respective classes. The supported plugins are:
+		 * 
+		 * - WPML WooCommerce Multilingual (class: 'WCML_Multi_Currency')
+		 * - WOOCS – WooCommerce Currency Switcher (class: 'WOOCS')
+		 * - WooCommerce Multi Currency by VillaTheme (class: 'WOOMULTI_CURRENCY_F')
+		 * - Aelia Currency Switcher for WooCommerce (class: 'WC_Aelia_CurrencySwitcher')
+		 * - WooCommerce Multi Currency by PCode (class: 'WOOMULTI_CURRENCY_Data')
+		 *
+		 * @since 1.0.5
+		 *
+		 * @static
+		 * @access public
+		 *
+		 * @return bool True if any supported multi-currency plugin is active, false otherwise.
+		 */
+		public static function is_multi_currency_active() {
+			return (
+				class_exists( 'WCML_Multi_Currency' ) ||
+				class_exists( 'WOOCS' ) ||
+				class_exists( 'WOOMULTI_CURRENCY_F' ) ||
+				class_exists( 'WC_Aelia_CurrencySwitcher' ) ||
+				class_exists( 'WOOMULTI_CURRENCY_Data' )
+			);
+		}
+
+		/**
+		 * Get the converted product price for the specified currency.
+		 *
+		 * Retrieves and converts the product price to the target currency using the
+		 * active multi-currency plugin's exchange rates and configuration.
+		 * Supported plugins: WPML WooCommerce Multilingual, WOOCS, VillaTheme Multi Currency,
+		 * Aelia Currency Switcher, and PCode Multi Currency.
+		 *
+		 * @since 1.0.5
+		 *
+		 * @param float  $price             Product price in base currency.
+		 * @param string $selected_currency Selected target currency code (e.g. 'USD', 'EUR').
+		 * @param string $selected_country  Selected country code for tax calculation (e.g. 'US').
+		 * @param object $product           WooCommerce product object. Optional. Default null.
+		 *
+		 * @return float Converted product price in the selected currency, or the original price if conversion is not applicable.
+		 */
+		public static function get_converted_price( $price, $selected_currency, $selected_country, $product = null ) {
+			$price          = (float) $price;
+			$actual_price   = $price;
+			$decimal_places = wc_get_price_decimals();
+
+			if ( empty( $product ) || ! is_object( $product ) ) {
+				return round( $price, (int) $decimal_places );
+			}
+
+			$add_tax_in_final = false;
+
+			if ( self::is_multi_currency_active() ) {
+				if ( get_woocommerce_currency() !== $selected_currency && $price > 0 ) {
+
+					$price_excl_tax = wc_get_price_excluding_tax( $product, array( 'price' => $price ) );
+
+					// Handle potentially empty price string returned by wc_get_price_excluding_tax.
+					if ( is_string( $price_excl_tax ) && '' === $price_excl_tax ) {
+						return round( $actual_price, (int) $decimal_places );
+					}
+
+					if ( $price_excl_tax !== $actual_price && $price_excl_tax < $actual_price ) {
+						$add_tax_in_final = true;
+					}
+
+					$price = (float) $price_excl_tax;
+
+					// WPML WooCommerce Multilingual.
+					if ( class_exists( 'WCML_Multi_Currency' ) ) {
+						$wcml_mc        = new WCML_Multi_Currency();
+						$currencies     = $wcml_mc->get_currencies( true );
+						$woo_currencies = get_woocommerce_currencies();
+
+						if (
+							! empty( $woo_currencies[ $selected_currency ] )
+							&& ! empty( $currencies[ $selected_currency ] )
+						) {
+							$rate = isset( $currencies[ $selected_currency ]['rate'] ) ? $currencies[ $selected_currency ]['rate'] : 1;
+							$decimals = isset( $currencies[ $selected_currency ]['num_decimals'] )
+								? $currencies[ $selected_currency ]['num_decimals']
+								: $decimal_places;
+							$price = $price * (float) $rate;
+							$decimal_places = $decimals;
+						}
+					}
+					// WOOCS – WooCommerce Currency Switcher.
+					elseif ( class_exists( 'WOOCS' ) ) {
+						global $WOOCS;
+						$currencies = $WOOCS->get_currencies();
+						if ( ! empty( $currencies[ $selected_currency ] ) ) {
+							$rate = isset( $currencies[ $selected_currency ]['rate'] ) ? $currencies[ $selected_currency ]['rate'] : 1;
+							$decimals = isset( $currencies[ $selected_currency ]['decimals'] )
+								? $currencies[ $selected_currency ]['decimals']
+								: $decimal_places;
+							$price = $price * (float) $rate;
+							$decimal_places = $decimals;
+						}
+					}
+					// Aelia Currency Switcher for WooCommerce.
+					elseif ( class_exists( 'WC_Aelia_CurrencySwitcher' ) && method_exists( 'WC_Aelia_CurrencySwitcher', 'settings' ) ) {
+						$settings_controller = WC_Aelia_CurrencySwitcher::settings();
+						if ( is_object( $settings_controller ) && method_exists( $settings_controller, 'get_exchange_rates' ) ) {
+							$aelia_currencies = $settings_controller->get_exchange_rates();
+							if ( ! empty( $aelia_currencies[ $selected_currency ] ) ) {
+								$rate = isset( $aelia_currencies[ $selected_currency ]['rate'] ) ? $aelia_currencies[ $selected_currency ]['rate'] : 1;
+								$decimals = isset( $aelia_currencies[ $selected_currency ]['decimals'] )
+									? $aelia_currencies[ $selected_currency ]['decimals']
+									: $decimal_places;
+								$price = $price * (float) $rate;
+								$decimal_places = $decimals;
+							}
+						}
+					}
+					// WooCommerce Multi Currency by VillaTheme.
+					elseif ( class_exists( 'WOOMULTI_CURRENCY_F' ) && class_exists( 'WOOMULTI_CURRENCY_F_Data' ) ) {
+						$wcf_settings = call_user_func( array( 'WOOMULTI_CURRENCY_F_Data', 'get_ins' ) );
+						if ( is_object( $wcf_settings ) && method_exists( $wcf_settings, 'get_list_currencies' ) ) {
+							$currencies = $wcf_settings->get_list_currencies();
+							if ( ! empty( $currencies[ $selected_currency ] ) ) {
+								$rate = isset( $currencies[ $selected_currency ]['rate'] ) ? $currencies[ $selected_currency ]['rate'] : 1;
+								$decimals = isset( $currencies[ $selected_currency ]['decimals'] )
+									? $currencies[ $selected_currency ]['decimals']
+									: $decimal_places;
+								$price = $price * (float) $rate;
+								$decimal_places = $decimals;
+							}
+						}
+					}
+					// WooCommerce Multi Currency by PCode.
+					elseif ( class_exists( 'WOOMULTI_CURRENCY_Data' ) ) {
+						$wcf_settings = call_user_func( array( 'WOOMULTI_CURRENCY_Data', 'get_ins' ) );
+						if ( is_object( $wcf_settings ) && method_exists( $wcf_settings, 'get_list_currencies' ) ) {
+							$currencies = $wcf_settings->get_list_currencies();
+							if ( ! empty( $currencies[ $selected_currency ] ) ) {
+								$rate = isset( $currencies[ $selected_currency ]['rate'] ) ? $currencies[ $selected_currency ]['rate'] : 1;
+								$decimals = isset( $currencies[ $selected_currency ]['decimals'] )
+									? $currencies[ $selected_currency ]['decimals']
+									: $decimal_places;
+								$price = $price * (float) $rate;
+								$decimal_places = $decimals;
+							}
+						}
+					}
+				}
+			}
+
+			/**
+			 * Calculate the tax for the selected country using WooCommerce tax rules.
+			 */
+			if ( $product && is_callable( array( $product, 'is_taxable' ) ) && $product->is_taxable() && $add_tax_in_final ) {
+				$tax_class = $product->get_tax_class();
+
+				$tax_rates = WC_Tax::find_rates(
+					array(
+						'country'   => $selected_country,
+						'state'     => '',
+						'postcode'  => '',
+						'city'      => '',
+						'tax_class' => $tax_class,
+					)
+				);
+
+				if ( ! empty( $tax_rates ) ) {
+					$taxes = WC_Tax::calc_tax( $price, $tax_rates, false );
+
+					$tax_total = array_sum( $taxes );
+
+					if ( 'yes' === get_option( 'woocommerce_tax_round_at_subtotal' ) ) {
+						$tax_total = round( $tax_total, wc_get_price_decimals() );
+					} else {
+						$tax_total = array_sum( array_map( 'wc_round_tax_total', $taxes ) );
+					}
+
+					$price += $tax_total;
+				}
+			}
+
+			return round( (float) $price, (int) $decimal_places );
+		}
+	}
 }

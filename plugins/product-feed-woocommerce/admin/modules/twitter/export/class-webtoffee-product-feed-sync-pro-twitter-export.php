@@ -717,17 +717,19 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
             $shipping_obj = new Webtoffee_Product_Feed_Shipping($this->product, 'google', $this->form_data);
             $shipping_info = $shipping_obj->get_shipping_by_location($shpping_country);
 
-            if (( class_exists('WCML_Multi_Currency') || class_exists('WOOCS') || class_exists('WOOMULTI_CURRENCY_F') || class_exists('WC_Aelia_CurrencySwitcher') ) && !empty($this->form_data['post_type_form_data']['wt_pf_export_post_currency'])) {
-               
-                $selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-                foreach ($shipping_info as $key => $value ){
-                    $shipping_price = isset($value['price']) ? $value['price'] : 0;
-                    if($shipping_price>0){
-                     $shipping_price_convrtd = $this->get_converted_price($shipping_price, $selected_currency);
-                     $shipping_info[$key]['price'] = $shipping_price_convrtd;
+            if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+                    $selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+                    foreach ($shipping_info as $key => $value ){
+                        $shipping_price = isset($value['price']) ? $value['price'] : 0;
+                        if($shipping_price>0){
+                            $shipping_price_convrtd = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($shipping_price, $selected_currency, $selected_country, $this->product);
+                            $shipping_info[$key]['price'] = $shipping_price_convrtd;
+                        }
                     }
-                }
-            }
+				}
+			}
 
             /**
              * Filter the product shipping.
@@ -2208,10 +2210,11 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
         public function currency($catalog_attr, $product_attr, $export_columns) {
 
             $currency = get_option('woocommerce_currency');
-
-            if (( class_exists('WCML_Multi_Currency') || class_exists('WOOCS') || class_exists('WOOMULTI_CURRENCY_F') || class_exists('WC_Aelia_CurrencySwitcher')  ) && !empty($this->form_data['post_type_form_data']['wt_pf_export_post_currency'])) {
-                $currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-            }
+            if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+				}
+			}
 
             /**
              * Filter the product currency.
@@ -2341,9 +2344,12 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
 			}
 
 			$selected_currency = get_woocommerce_currency();
-			if ( class_exists( 'WCML_Multi_Currency' ) && ! empty( $this->form_data['post_type_form_data']['item_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['item_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($price, $selected_currency, $selected_country, $this->product);
+				}
 			}
 
 			if ( $price > 0 ) {
@@ -2371,10 +2377,13 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
             $price = $this->product->get_price();
 
             $selected_currency = get_woocommerce_currency();
-            if (( class_exists('WCML_Multi_Currency') || class_exists('WOOCS') || class_exists('WOOMULTI_CURRENCY_F') || class_exists('WC_Aelia_CurrencySwitcher') ) && !empty($this->form_data['post_type_form_data']['wt_pf_export_post_currency'])) {
-                $selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-                $price = $this->get_converted_price($price, $selected_currency);
-            }
+            $selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+            if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($price, $selected_currency, $selected_country, $this->product);
+				}
+			}
 
             if ($price > 0) {
                                 
@@ -2402,9 +2411,12 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
 			$price = $this->product->get_sale_price();
 
 			$selected_currency = get_woocommerce_currency();
-			if ( class_exists( 'WCML_Multi_Currency' ) && ! empty( $this->form_data['post_type_form_data']['item_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['item_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($price, $selected_currency, $selected_country, $this->product);
+				}
 			}
 
 			if ( $price > 0 ) {
@@ -2435,10 +2447,13 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
             $price = wc_get_price_including_tax($this->product, array('price' => $tprice));
             
             $selected_currency = get_woocommerce_currency();
-            if (( class_exists('WCML_Multi_Currency') || class_exists('WOOCS') || class_exists('WOOMULTI_CURRENCY_F') || class_exists('WC_Aelia_CurrencySwitcher') ) && !empty($this->form_data['post_type_form_data']['wt_pf_export_post_currency'])) {
-                $selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-                $price = $this->get_converted_price($price, $selected_currency);
-            }            
+            $selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+            if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($price, $selected_currency, $selected_country, $this->product);
+				}
+			}
             
             if ($price > 0) {
                                 
@@ -2475,10 +2490,13 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
             $price = wc_get_price_including_tax($this->product, array('price' => $cprice));
             
             $selected_currency = get_woocommerce_currency();
-            if (( class_exists('WCML_Multi_Currency') || class_exists('WOOCS') || class_exists('WOOMULTI_CURRENCY_F') || class_exists('WC_Aelia_CurrencySwitcher') ) && !empty($this->form_data['post_type_form_data']['wt_pf_export_post_currency'])) {
-                $selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-                $price = $this->get_converted_price($price, $selected_currency);
-            }            
+            $selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+            if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($price, $selected_currency, $selected_country, $this->product);
+				}
+			}         
             
             if ($price > 0) {
                                 
@@ -2515,10 +2533,13 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pro_Twitter_Export')) {
             $price = wc_get_price_including_tax($this->product, array('price' => $sprice));
             
             $selected_currency = get_woocommerce_currency();
-            if (( class_exists('WCML_Multi_Currency') || class_exists('WOOCS') || class_exists('WOOMULTI_CURRENCY_F') || class_exists('WC_Aelia_CurrencySwitcher') ) && !empty($this->form_data['post_type_form_data']['wt_pf_export_post_currency'])) {
-                $selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-                $price = $this->get_converted_price($price, $selected_currency);
-            }            
+            $selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+            if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price($price, $selected_currency, $selected_country, $this->product);
+				}
+			}         
             
             if ($price > 0) {
                                 

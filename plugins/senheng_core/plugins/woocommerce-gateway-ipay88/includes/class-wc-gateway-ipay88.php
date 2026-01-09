@@ -979,7 +979,6 @@ class WC_Gateway_iPay88 extends WC_Payment_Gateway
 			$ptype = WC_iPay88::get_field('ipay88_payment_type', $_POST);
 			$pPlan = WC_iPay88::get_field('ipay88_payment_plan' . $ptype, $_POST);
 			$adminFee = WC_iPay88::get_field('ipay88_admin_fee' . $ptype, $_POST);
-			// $adminFeeDB = PaymentMethod::getAdminFeePaymentMethods($ptype, $pPlan);
 
 			$this->posted_payment_type = null !== $ptype ? $ptype : '0';
 			$this->posted_payment_plan = null !== $pPlan ? $pPlan : '0';

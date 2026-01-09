@@ -41,8 +41,8 @@ if (empty($hero_alt) && function_exists('get_the_title')) {
 }
 
 // Icon assets
-$google_icon = 'https://demo.seco.com.my/shweb/wp-content/uploads/2025/10/store-googlemaps.png';
-$waze_icon   = 'https://demo.seco.com.my/shweb/wp-content/uploads/2025/10/store-waze.png';
+$google_icon = 'https://www.senheng.com.my/wp-content/uploads/2025/10/store-googlemaps.png';
+$waze_icon   = 'https://www.senheng.com.my/wp-content/uploads/2025/10/store-waze.png';
 ?>
 
 <style>

@@ -176,26 +176,31 @@ class PaymentMethod
         ", ARRAY_A);
     }
 
-    public static function getAdminFeePaymentMethods($ipay88_id, $payment_plan)
+    public static function getAdminFeePaymentMethods($ipay88_id, $payment_plan, $total=0)
     {
         global $wpdb;
 
         $sql = $wpdb->prepare(
             "
-        SELECT COALESCE(pp.apply_admin_fee, 0)
-        FROM {$wpdb->prefix}c_payment_methods pm
-        LEFT JOIN {$wpdb->prefix}c_payment_plans pp
-            ON pp.method_id = pm.id
-           AND pp.months = %d
-           AND pp.status = 'active'
-        WHERE pm.ipay88_id = %d
-          AND pm.status = 'active'
-        LIMIT 1
-        ",
+            SELECT pp.apply_admin_fee
+            FROM {$wpdb->prefix}c_payment_methods pm
+            INNER JOIN {$wpdb->prefix}c_payment_plans pp
+                ON pp.method_id = pm.id
+            AND pp.months = %d
+            AND pp.status = 'active'
+            WHERE pm.ipay88_id = %d
+            AND pm.status = 'active'
+            AND pp.min_amount <= %f
+            ORDER BY pp.min_amount DESC
+            LIMIT 1
+            ",
             $payment_plan,
-            $ipay88_id
+            $ipay88_id,
+            $total
         );
 
-        return (int) $wpdb->get_var($sql);
+        $fee = $wpdb->get_var($sql);
+        // NULL = no eligible plan
+        return $fee !== null ? (float) $fee : null;
     }
 }

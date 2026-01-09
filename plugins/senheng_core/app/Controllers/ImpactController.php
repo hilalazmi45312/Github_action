@@ -316,7 +316,11 @@ class ImpactController
         // }
 
         $current_user_id = get_current_user_id();
-        $ambassadorID = get_user_meta($current_user_id, 'ambassodor_id', true);
+        $config = woo_authorization_salt();
+        $idsso = get_user_meta($current_user_id, 'idsso', true);
+        
+        // Use the centralized method with caching + API fallback
+        $ambassadorID = self::get_ambassador_id($current_user_id, $config, $idsso);
         $userAgent = get_userAgent();
         $appShareLink = null;
         if ($userAgent === 'SRC') {
@@ -686,13 +690,22 @@ class ImpactController
 
     public static function get_ambassador_id($current_user_id, $config, $idsso)
     {
+        static $request_cache = [];
+
+        // Check request cache first
+        if (isset($request_cache[$current_user_id])) {
+            return $request_cache[$current_user_id];
+        }
+
         // Already have ambassador ID? Done.
         $cached = get_user_meta($current_user_id, 'ambassodor_id', true);
         if (!empty($cached)) {
+            $request_cache[$current_user_id] = $cached;
             return $cached;
         }
 
         if (!$current_user_id || !$config || !$idsso) {
+            $request_cache[$current_user_id] = false;
             return false;
         }
 
@@ -719,9 +732,12 @@ class ImpactController
         if (!empty($body['body']['ambassodor_id']) && !empty($body['body']['is_ambassador'])) {
 
             update_user_meta($current_user_id, 'ambassodor_id', $body['body']['ambassodor_id']);
+            $request_cache[$current_user_id] = $body['body']['ambassodor_id'];
 
             return $body['body']['ambassodor_id'];
         }
+
+        $request_cache[$current_user_id] = false;
 
         return false;
     }

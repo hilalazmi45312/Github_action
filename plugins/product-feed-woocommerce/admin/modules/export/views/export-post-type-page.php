@@ -143,6 +143,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$multi_currency = true;
 		}
 
+		if ( class_exists( 'WOOMULTI_CURRENCY_Data' ) ) {
+			$currency_list = array();
+			$wcf_settings = WOOMULTI_CURRENCY_Data::get_ins();
+			$wcf_currencies = $wcf_settings->get_list_currencies();
+			foreach ( $wcf_currencies as $currency_key => $currency_name ) {
+				$currency_list[ $currency_key ] = $currency_key;
+			}
+			$multi_currency = true;
+		}
+
 		if ( class_exists( 'WCML_Multi_Currency' ) && class_exists( 'woocommerce' ) ) {
 			$wcml_mc = new WCML_Multi_Currency();
 			$currency_list = $wcml_mc->get_currencies( true );
