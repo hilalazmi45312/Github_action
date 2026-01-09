@@ -501,6 +501,22 @@ const YoastMetaApp = () => {
                                         </details>
                                     </PanelRow>
                                 )}
+                                {convertedData.errors.length > 0 && (
+                                    <PanelRow>
+                                        <details style={{ width: '100%' }}>
+                                            <summary style={{ cursor: 'pointer', color: '#d94f4f' }}>
+                                                View {convertedData.errors.length} errors
+                                            </summary>
+                                            <ul style={{ maxHeight: '200px', overflow: 'auto', fontSize: '12px', listStyleType: 'disc', paddingLeft: '20px' }}>
+                                                {convertedData.errors.map((error, idx) => (
+                                                    <li key={idx}>
+                                                        {typeof error === 'string' ? error : JSON.stringify(error)}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </details>
+                                    </PanelRow>
+                                )}
                                 <PanelRow>
                                     <Button
                                         isPrimary
