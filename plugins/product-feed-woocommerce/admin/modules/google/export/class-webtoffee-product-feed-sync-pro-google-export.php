@@ -123,7 +123,7 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Google_Export' ) ) {
 			 * WPML
 			 *
 			 */
-			$item_post_lang = ! empty( $form_data['post_type_form_data']['item_post_lang'] ) ? $form_data['post_type_form_data']['item_post_lang'] : '';
+			$item_post_lang = ! empty( $form_data['post_type_form_data']['wt_pf_export_post_language'] ) ? $form_data['post_type_form_data']['wt_pf_export_post_language'] : '';
 
 			$prod_tags = ! empty( $form_data['filter_form_data']['wt_pf_product_tags'] ) ? $form_data['filter_form_data']['wt_pf_product_tags'] : array();
 
@@ -2265,9 +2265,12 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Google_Export' ) ) {
 
 			$currency = get_option( 'woocommerce_currency' );
 
-			if ( class_exists( 'WCML_Multi_Currency' ) && ! empty( $this->form_data['post_type_form_data']['item_post_currency'] ) ) {
-				$currency = $this->form_data['post_type_form_data']['item_post_currency'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+				}
 			}
+
 			/**
 			 * Filter the product currency.
 			 *
@@ -2392,9 +2395,12 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Google_Export' ) ) {
 			}
 
 			$selected_currency = get_woocommerce_currency();
-			if ( class_exists( 'WCML_Multi_Currency' ) && ! empty( $this->form_data['post_type_form_data']['item_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['item_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price( $price, $selected_currency, $selected_country, $this->product );
+				}
 			}
 
 			if ( $price > 0 ) {
@@ -2422,9 +2428,12 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Google_Export' ) ) {
 			$price = $this->product->get_price();
 
 			$selected_currency = get_woocommerce_currency();
-			if ( class_exists( 'WCML_Multi_Currency' ) && ! empty( $this->form_data['post_type_form_data']['item_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['item_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price( $price, $selected_currency, $selected_country, $this->product );
+				}
 			}
 
 			if ( $price > 0 ) {
@@ -2440,6 +2449,7 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Google_Export' ) ) {
 			 */
 			return apply_filters( 'wt_feed_filter_product_current_price', $price, $this->product );
 		}
+
 		/**
 		 * Get product sale price.
 		 *
@@ -2451,15 +2461,20 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Google_Export' ) ) {
 		public function sale_price( $catalog_attr, $product_attr, $export_columns ) {
 			$price = $this->product->get_sale_price();
 
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+
 			$selected_currency = get_woocommerce_currency();
-			if ( class_exists( 'WCML_Multi_Currency' ) && ! empty( $this->form_data['post_type_form_data']['item_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['item_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price( $price, $selected_currency, $selected_country, $this->product );
+				}
 			}
 
 			if ( $price > 0 ) {
 				$price = $price . ' ' . $selected_currency;
 			}
+			
 			/**
 			 * Filter the product sale price.
 			 *

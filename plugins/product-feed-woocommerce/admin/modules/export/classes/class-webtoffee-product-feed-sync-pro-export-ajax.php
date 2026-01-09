@@ -551,7 +551,7 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Sync_Pro_Export_Ajax' ) ) {
 					$item_filename = isset( $this->export_obj->form_data['post_type_form_data']['wt_pf_export_catalog_name'] ) ? $this->export_obj->form_data['post_type_form_data']['wt_pf_export_catalog_name'] : '';
 				}
 				$item_country = isset( $this->export_obj->form_data['post_type_form_data']['wt_pf_export_catalog_country'] ) ? $this->export_obj->form_data['post_type_form_data']['wt_pf_export_catalog_country'] : 'US';
-				$item_lang = isset( $this->export_obj->form_data['post_type_form_data']['item_post_lang'] ) ? $this->export_obj->form_data['post_type_form_data']['item_post_lang'] : '';
+				$item_lang = isset( $this->export_obj->form_data['post_type_form_data']['wt_pf_export_post_language'] ) ? $this->export_obj->form_data['post_type_form_data']['wt_pf_export_post_language'] : '';
 				$item_currency = isset( $this->export_obj->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ? $this->export_obj->form_data['post_type_form_data']['wt_pf_export_post_currency'] : '';
 				$item_cat_filter_type = isset( $this->export_obj->form_data['post_type_form_data']['item_cat_filter_type'] ) ? $this->export_obj->form_data['post_type_form_data']['item_cat_filter_type'] : 'include_cat';
 				$item_exc_cat = isset( $this->export_obj->form_data['post_type_form_data']['item_exc_cat'] ) ? $this->export_obj->form_data['post_type_form_data']['item_exc_cat'] : array();

@@ -30,9 +30,17 @@ if ( ! class_exists( 'Product_Feed_For_Woocommerce_Product' ) ) {
 		/**
 		 * Current product
 		 *
-		 * @var string
+		 * @var object|WC_Product
 		 */
 		public $product;
+
+		/**
+		 * Form data
+		 *
+		 * @var array
+		 */
+		public $form_data;
+		
 		/**
 		 * Constructor.
 		 *
@@ -412,9 +420,12 @@ if ( ! class_exists( 'Product_Feed_For_Woocommerce_Product' ) ) {
 			}
 
 			$selected_currency = get_woocommerce_currency();
-			if ( ( class_exists( 'WCML_Multi_Currency' ) || class_exists( 'WOOCS' ) || class_exists( 'WOOMULTI_CURRENCY_F' ) || class_exists( 'WC_Aelia_CurrencySwitcher' ) ) && ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price( $price, $selected_currency, $selected_country, $this->product );
+				}
 			}
 
 			if ( $price > 0 ) {
@@ -466,7 +477,7 @@ if ( ! class_exists( 'Product_Feed_For_Woocommerce_Product' ) ) {
 		 */
 		public function sale_price( $catalog_attr, $product_attr, $export_columns ) {
 			$price = $this->product->get_sale_price();
-
+			
 			if ( ! $price && ( is_plugin_active( 'woo-discount-rules/woo-discount-rules.php' ) || is_plugin_active( 'woo-discount-rules-pro/woo-discount-rules-pro.php' ) ) ) {
 				$price = $this->product->get_regular_price();
 			}
@@ -485,9 +496,12 @@ if ( ! class_exists( 'Product_Feed_For_Woocommerce_Product' ) ) {
 			}
 
 			$selected_currency = get_woocommerce_currency();
-			if ( ( class_exists( 'WCML_Multi_Currency' ) || class_exists( 'WOOCS' ) || class_exists( 'WOOMULTI_CURRENCY_F' ) || class_exists( 'WC_Aelia_CurrencySwitcher' ) ) && ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
-				$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
-				$price = $this->get_converted_price( $price, $selected_currency );
+			$selected_country = $this->form_data['post_type_form_data']['wt_pf_export_catalog_country'];
+			if ( Webtoffee_Product_Feed_Sync_Pro_Admin::is_multi_currency_active() ) {
+				if ( ! empty( $this->form_data['post_type_form_data']['wt_pf_export_post_currency'] ) ) {
+					$selected_currency = $this->form_data['post_type_form_data']['wt_pf_export_post_currency'];
+					$price = Webtoffee_Product_Feed_Sync_Pro_Admin::get_converted_price( $price, $selected_currency, $selected_country, $this->product );
+				}
 			}
 
 			if ( class_exists( 'YITH_WC_Dynamic_Pricing_Discounts' ) ) {
@@ -548,6 +562,7 @@ if ( ! class_exists( 'Product_Feed_For_Woocommerce_Product' ) ) {
 			 * @param array $form_data Form data.
 			 */
 			$price = apply_filters( 'wt_feed_filter_product_sale_price', $price, $this->product, $this->form_data );
+			
 			/**
 			 * Filter the product sale price.
 			 *

@@ -152,7 +152,7 @@ if ( ! class_exists( 'Webtoffee_Product_Feed_Google_ProductReviewsExport' ) ) {
 			 WPML
 			 *
 			 */
-			$item_post_lang = ! empty( $form_data['post_type_form_data']['item_post_lang'] ) ? $form_data['post_type_form_data']['item_post_lang'] : '';
+			$item_post_lang = ! empty( $form_data['post_type_form_data']['wt_pf_export_post_language'] ) ? $form_data['post_type_form_data']['wt_pf_export_post_language'] : '';
 
 			if ( '' === $item_post_lang ) {
 				$item_post_lang = ! empty( $form_data['post_type_form_data']['wt_pf_export_post_language'] ) ? $form_data['post_type_form_data']['wt_pf_export_post_language'] : '';

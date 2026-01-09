@@ -341,6 +341,20 @@ class Ajax_Handlers {
                 }
             }
 
+            // Get the converted URL (permalink) if we found a match
+            $converted_url = '';
+            if ( $id > 0 ) {
+                if ( $type === 'post' ) {
+                    $converted_url = get_permalink( $id );
+                } elseif ( $type === 'term' ) {
+                    $converted_url = get_term_link( (int) $id, $type_value );
+                    if ( is_wp_error( $converted_url ) ) {
+                        $converted_url = '';
+                    }
+                }
+            }
+
+            // Track skipped items for statistics, but still include them in converted output
             if ( $id === 0 ) {
                 $skipped[] = array(
                     'url' => $url,
@@ -348,23 +362,11 @@ class Ajax_Handlers {
                     'group' => $group,
                     'reason' => 'No matching post or term found'
                 );
-                continue;
             }
 
-            // Get the converted URL (permalink)
-            $converted_url = '';
-            if ( $type === 'post' ) {
-                $converted_url = get_permalink( $id );
-            } elseif ( $type === 'term' ) {
-                $converted_url = get_term_link( (int) $id, $type_value );
-                if ( is_wp_error( $converted_url ) ) {
-                    $converted_url = '';
-                }
-            }
-
-            // Build converted row
+            // Build converted row - include ALL items, even unmatched ones (with empty values)
             $converted[] = array(
-                'id' => $id,
+                'id' => $id > 0 ? $id : '',
                 'type' => $type,
                 'type_value' => $type_value,
                 'title_name' => $name,

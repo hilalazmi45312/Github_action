@@ -271,5 +271,4 @@ add_action('init', [ProductSyncController::class, 'init']);
 // Coupon Controller (deposit/full payment restrictions)
 add_action('init', [CouponController::class, 'init']);
 
-// Product Feed Controller (WPVIP compatibility - redirect feed files to /tmp)
-ProductFeedController::init();
+
