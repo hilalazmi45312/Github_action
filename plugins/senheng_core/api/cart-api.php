@@ -331,6 +331,10 @@ function add_cart_item($data = [])
     $is_trade_in = isset($data['is_trade_in']) && $data['is_trade_in'] === true ? 'yes' : 'no';
     $awcdp_deposit_option = isset($data['awcdp_deposit_option']) && $data['awcdp_deposit_option'] === true ? 'yes' : 'no';
 
+    $cart_item_data = [];
+    $cart_item_data['trade_in'] = $is_trade_in;
+    $cart_item_data['awcdp_deposit_option'] = $awcdp_deposit_option;
+
     // 🔥 Make AWCDP see it
     if ($awcdp_deposit_option === 'yes') {
         $_REQUEST['awcdp_deposit_option'] = 'yes';
@@ -349,13 +353,27 @@ function add_cart_item($data = [])
     $wc_product_id = $variation_id > 0 ? $variation_id : $product_id;
     $product = wc_get_product($wc_product_id);
 
+    $is_deposit = ($awcdp_deposit_option === 'yes');
+    $validation_error = validate_mixed_cart_rules(
+        WC()->cart->get_cart(),
+        [
+            'product' => $product,
+            'is_deposit' => $is_deposit
+        ]
+    );
+
+    if ($validation_error) {
+        wp_send_json_error(['message' => $validation_error], 400);
+    }
+
+
     if (!$product) {
         wp_send_json_error(['message' => 'Product not found'], 404);
     }
 
     $cart = WC()->cart;
 
-    $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation);
+    $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation, $cart_item_data);
     if (! $item_key) {
         $notices = wc_get_notices('error');
         if (! empty($notices)) {
@@ -377,10 +395,9 @@ function add_cart_item($data = [])
 
     $cart_item = $cart->get_cart_item($item_key);
 
+    $cart_totals = (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total());
     if (!empty($cart_item['awcdp_deposit']) && is_array($cart_item['awcdp_deposit'])) {
         $cart_totals = $cart_item['awcdp_deposit']['deposit'] + $cart->get_fee_total();
-    } else {
-        $cart_totals = (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total());
     }
 
     wp_send_json_success([
@@ -394,7 +411,6 @@ function add_cart_item($data = [])
         'cart_total'     => $cart_totals,
     ]);
 }
-
 
 function update_cart_item($data = [])
 {
@@ -506,7 +522,6 @@ function apply_cart_coupon($data = [])
         $cart->calculate_totals();
 
         wp_send_json_success([
-            'item_key'       => $item_key,
             'cart_count'     => $cart->get_cart_contents_count(),
             // 'subtotal'       => (float) $cart->get_subtotal(),
             // 'fees_total'     => (float) $cart->get_fee_total(),
@@ -533,7 +548,6 @@ function apply_cart_coupon($data = [])
     $cart->calculate_totals();
 
     wp_send_json_success([
-        'item_key'       => $item_key,
         'cart_count'     => $cart->get_cart_contents_count(),
         // 'subtotal'       => (float) $cart->get_subtotal(),
         // 'fees_total'     => (float) $cart->get_fee_total(),
@@ -542,4 +556,48 @@ function apply_cart_coupon($data = [])
         // 'total'          => (float) $cart->get_total('edit'),
         'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
     ]);
+}
+
+function validate_mixed_cart_rules($existing_cart, $new_item)
+{
+    $has_virtual = $has_physical = false;
+    $has_deposit = $has_full = false;
+
+    foreach ($existing_cart as $item) {
+        $product = $item['data'];
+
+        if ($product->is_virtual()) $has_virtual = true;
+        else $has_physical = true;
+
+        $is_deposit = (
+            (!empty($item['awcdp_deposit_option']) && $item['awcdp_deposit_option'] === 'yes') ||
+            (!empty($item['deposit_option']) && $item['deposit_option'] === 'deposit') ||
+            (!empty($item['awcdp_deposit']))
+        );
+
+        if ($is_deposit) $has_deposit = true;
+        else $has_full = true;
+    }
+
+    // Add incoming product
+    if ($new_item['product']->is_virtual()) $has_virtual = true;
+    else $has_physical = true;
+
+    if ($new_item['is_deposit']) $has_deposit = true;
+    else $has_full = true;
+
+    // Final rules
+    if ($has_virtual && $has_deposit) {
+        return __("You cannot combine partial payment items with ESD products. Please adjust your cart to proceed.", "woocommerce");
+    }
+
+    if ($has_virtual && $has_physical) {
+        return __("You cannot combine normal and ESD products together. Please adjust your cart to proceed.", "woocommerce");
+    }
+
+    if ($has_deposit && $has_full) {
+        return __("You cannot combine partial payment items with normal products. Please adjust your cart to proceed.", "woocommerce");
+    }
+
+    return false;
 }

@@ -186,12 +186,7 @@ add_action('template_redirect', function () {
         'trade/cart/query/apply-coupon'        =>
         [
             'handler' => 'apply_cart_coupon',
-            'methods' => ['POST'],
-        ],
-        'trade/cart/query/apply-coupon'        =>
-        [
-            'handler' => 'apply_cart_coupon',
-            'methods' => ['DELETE'],
+            'methods' => ['POST', 'DELETE'],
         ],
         'payment/list'        =>
         [
