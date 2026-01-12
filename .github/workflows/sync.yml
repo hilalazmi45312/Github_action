@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false   # IMPORTANT: allow PAT to be used
+          persist-credentials: false
 
       # 2. Configure Git identity
       - name: Configure Git
@@ -25,17 +25,19 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       # 3. Add target remote (Senheng-3)
-      - name: Add target remote (Senheng-3)
+      - name: Add target remote
         env:
           GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
-          echo "Adding target remote (Senheng-3)..."
           git remote add target "https://x-access-token:${GH_TOKEN}@github.com/hilalazmi45312/Github_action.git"
 
-      # 4. Mirror push branch to target repo
+      # 4. Fetch target branch (CRITICAL for --force-with-lease)
+      - name: Fetch target branch
+        run: |
+          git fetch target ${GITHUB_REF_NAME}
+
+      # 5. Mirror push (SAFE)
       - name: Mirror branch to Senheng-3
-        env:
-          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
           echo "Mirroring branch ${GITHUB_REF_NAME} to Senheng-3..."
           git push target \
