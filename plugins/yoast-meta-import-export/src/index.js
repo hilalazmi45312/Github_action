@@ -1,6 +1,6 @@
 "use client"
 
-import { render, useState } from "@wordpress/element"
+import { render, useState, useEffect } from "@wordpress/element"
 import { __ } from "@wordpress/i18n"
 import {
     Panel,
