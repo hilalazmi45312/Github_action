@@ -168,6 +168,36 @@ add_action('template_redirect', function () {
             'methods' => ['GET'],
             'params'  => ['cartType', 'clientType', 'divisionIds'],
         ],
+        'trade/cart/query/add'        =>
+        [
+            'handler' => 'add_cart_item',
+            'methods' => ['POST'],
+        ],
+        'trade/cart/query/update'        =>
+        [
+            'handler' => 'update_cart_item',
+            'methods' => ['POST'],
+        ],
+        'trade/cart/query/remove'        =>
+        [
+            'handler' => 'delete_cart_items',
+            'methods' => ['POST'],
+        ],
+        'trade/cart/query/apply-coupon'        =>
+        [
+            'handler' => 'apply_cart_coupon',
+            'methods' => ['POST'],
+        ],
+        'trade/cart/query/apply-coupon'        =>
+        [
+            'handler' => 'apply_cart_coupon',
+            'methods' => ['DELETE'],
+        ],
+        'payment/list'        =>
+        [
+            'handler' => 'get_payment_method_list',
+            'methods' => ['GET'],
+        ],
         'gateway' =>
         [
             'handler' => 'pampas_router',
@@ -224,7 +254,7 @@ add_action('template_redirect', function () {
     // if ($method === 'GET') {
     $input = array_merge($_GET, $input);
     // }
-
+    wc_clear_notices();
     // Call handler
     if (is_callable($handler)) {
         $handler($input);
