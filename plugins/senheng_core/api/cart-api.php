@@ -13,8 +13,9 @@ function get_cart($data = [])
     $clientType    = isset($data['clientType'])   ? max(1, (int) $data['clientType'])   : null;
     $divisionIds = isset($data['divisionIds']) ? (int) $data['divisionIds'] : null;
 
-    $cart_items = WC()->cart->get_cart();
-
+    $cart = WC()->cart;
+    $cart->calculate_totals();
+    $cart_items = $cart->get_cart();
     // Group by shop (vendor) – for now WordPress does not support vendor, so shopId is null
     $shops = [];
 
@@ -153,7 +154,7 @@ function get_cart($data = [])
                 "shopId" => null,
                 "itemId" => $product_id,
                 "itemName" => $product->get_name(),
-                "esdItem" => null,
+                "esdItem" => $product->is_virtual(),
                 "skuId" => $variation_id ? $variation_id : $product_id,
                 "skuCode" => $product->get_sku(),
                 "quantity" => $qty,
@@ -196,9 +197,9 @@ function get_cart($data = [])
                 "extra" => null,
                 "itemPromotion" => null,
                 "candidateShopPromotions" => [],
-                "isTradeIn" => null,
-                "isPartialPayment" => null,
-                "isProductWarranty" => null,
+                "isTradeIn" => $product->get_meta('_trade_in_option') === 'yes' ? true : false,
+                "isPartialPayment" => $product->get_meta('_deposit_amount') ? true : false,
+                "isProductWarranty" => product_has_warranty($product->get_name()),
                 "isStorePickUp" => null
             ]
         ];
@@ -277,6 +278,20 @@ function get_cart($data = [])
     ];
 
     wp_send_json($response);
+}
+
+function product_has_warranty($product_name)
+{
+    $cart = WC()->cart;
+    foreach ($cart->get_fees() as $fee) {
+        if (
+            str_contains($fee->name, 'Product Warranty') &&
+            str_contains($fee->name, $product_name)
+        ) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function get_cart_count($data = [])
