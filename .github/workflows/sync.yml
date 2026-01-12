@@ -1,4 +1,4 @@
-name: Auto-sync Senheng-1 -> Senheng-3
+name: Auto-sync Senheng-1 -> Senheng-3 (Mirror Mode)
 
 on:
   push:
@@ -11,45 +11,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout source repo (IMPORTANT FIX)
+      # 1. Checkout source repo (Senheng-1)
       - name: Checkout source repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false   # 🔥 REQUIRED
+          persist-credentials: false   # IMPORTANT: allow PAT to be used
 
-      # 2. Configure Git
+      # 2. Configure Git identity
       - name: Configure Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      # 3. Add target remote with PAT
-      - name: Add and fetch from target repo (Senheng-3)
+      # 3. Add target remote (Senheng-3)
+      - name: Add target remote (Senheng-3)
         env:
           GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
+          echo "Adding target remote (Senheng-3)..."
           git remote add target "https://x-access-token:${GH_TOKEN}@github.com/hilalazmi45312/Github_action.git"
-          git fetch target
 
-      # 4. Checkout source branch
-      - name: Checkout branch from source repo
-        run: |
-          git checkout ${GITHUB_REF_NAME}
-
-      # 5. Checkout or create target branch
-      - name: Checkout target branch in Senheng-3
-        run: |
-          git checkout -B ${GITHUB_REF_NAME} target/${GITHUB_REF_NAME} || git checkout -b ${GITHUB_REF_NAME}
-
-      # 6. Merge
-      - name: Merge changes
-        run: |
-          git merge --no-ff --commit --allow-unrelated-histories ${GITHUB_REF_NAME}
-
-      # 7. Push using PAT
-      - name: Push merged changes to Senheng-3
+      # 4. Mirror push branch to target repo
+      - name: Mirror branch to Senheng-3
         env:
           GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
-          git push target ${GITHUB_REF_NAME}
+          echo "Mirroring branch ${GITHUB_REF_NAME} to Senheng-3..."
+          git push target \
+            ${GITHUB_REF_NAME}:${GITHUB_REF_NAME} \
+            --force-with-lease
