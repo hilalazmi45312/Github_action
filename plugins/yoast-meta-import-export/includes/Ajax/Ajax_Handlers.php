@@ -166,8 +166,16 @@ class Ajax_Handlers {
         $errors = array();
 
         foreach ( $batch as $item ) {
-            $type = $item['type'];
-            $id = intval( $item['id'] );
+            $type = isset( $item['type'] ) ? trim( $item['type'] ) : '';
+            $id_val = isset( $item['id'] ) ? trim( $item['id'] ) : '';
+
+            // Validate strict requirements: ID and Type must be present
+            if ( empty( $id_val ) || empty( $type ) ) {
+                $errors[] = "Row skipped: Missing required ID or Type";
+                continue;
+            }
+
+            $id = intval( $id_val );
 
             if ( $type === 'post' ) {
                 // Check if post exists
@@ -389,6 +397,109 @@ class Ajax_Handlers {
                     }
                 } // end else (slug not empty)
 
+                // ---------------------------------------------------------
+                // REDIRECT FALLBACK LOGIC
+                // ---------------------------------------------------------
+                if ( $id === 0 && ! empty( $url ) ) {
+                    // Determine EXPECTED context from Groups or URL structure before redirect
+                    $expected_type = 'unknown';
+                    if ( strpos( $group_lower, 'brand' ) !== false || strpos( $path, 'brands-corner' ) !== false ) {
+                        $expected_type = 'brand';
+                    } elseif ( strpos( $group_lower, 'category' ) !== false ) {
+                        $expected_type = 'category';
+                    } elseif ( strpos( $group_lower, 'product' ) !== false ) {
+                        $expected_type = 'product';
+                    }
+
+                    // If we haven't found a match yet, check if the URL redirects (e.g. Yoast Premium redirects)
+                    // We use wp_remote_head with redirection disabled to catch the 3xx response
+                    $response = wp_remote_head( $url, array(
+                        'redirection' => 0,
+                        'timeout'     => 5,
+                        'sslverify'   => false, // Skip SSL verification for internal tests to avoid issues
+                    ) );
+
+                    if ( ! is_wp_error( $response ) ) {
+                        $response_code = wp_remote_retrieve_response_code( $response );
+                        // Check for 301, 302, 307etc.
+                        if ( in_array( $response_code, array( 301, 302, 303, 307, 308 ) ) ) {
+                            $location = wp_remote_retrieve_header( $response, 'location' );
+                            
+                            if ( ! empty( $location ) ) {
+                                // We found a redirect! Parse the new Location URL and try lookup again.
+                                $redirect_parsed = @parse_url( $location );
+                                if ( $redirect_parsed && isset( $redirect_parsed['path'] ) ) {
+                                    $redirect_path = trim( $redirect_parsed['path'], '/' );
+                                    $redirect_parts = explode( '/', $redirect_path );
+                                    $redirect_slug = end( $redirect_parts );
+                                    $redirect_slug = urldecode( $redirect_slug );
+
+                                    // RULE 2: Check for generic roots if it was a Brand or Category
+                                    // If we expected a specific brand but got redirected to "/brands-corner" (root), ignore it.
+                                    $generic_roots = array( 'brands-corner', 'brands', 'brand', 'category', 'categories', 'shop', 'product', 'products' );
+                                    if ( ($expected_type === 'brand' || $expected_type === 'category') && in_array( $redirect_slug, $generic_roots ) ) {
+                                        // Skip looking up generic roots
+                                        $redirect_slug = ''; 
+                                    }
+
+                                    if ( ! empty( $redirect_slug ) ) {
+                                        // RE-TRY MATCHING with new slug
+                                        
+                                        // Try Brand
+                                        $match_type = '';
+                                        $term = get_term_by( 'slug', $redirect_slug, 'product_brand' );
+                                        if ( $term && ! is_wp_error( $term ) ) {
+                                            $id = $term->term_id;
+                                            $type = 'term';
+                                            $type_value = 'product_brand';
+                                            $name = $term->name;
+                                            $match_type = 'brand';
+                                        } 
+                                        // Try Category
+                                        elseif ( ($term = get_term_by( 'slug', $redirect_slug, 'product_cat' )) && ! is_wp_error( $term ) ) {
+                                            $id = $term->term_id;
+                                            $type = 'term';
+                                            $type_value = 'product_cat';
+                                            $name = $term->name;
+                                            $match_type = 'category';
+                                        }
+                                        // Try Product/Page/Post
+                                        else {
+                                            // Priority: Product -> Page -> Post
+                                            $post = get_page_by_path( $redirect_slug, OBJECT, 'product' );
+                                            if ( ! $post ) {
+                                                $post = get_page_by_path( $redirect_slug, OBJECT, 'page' );
+                                            }
+                                            if ( ! $post ) {
+                                                $post = get_page_by_path( $redirect_slug, OBJECT, 'post' );
+                                            }
+
+                                            if ( $post ) {
+                                                $id = $post->ID;
+                                                $type = 'post';
+                                                $type_value = $post->post_type; // Capture actual post type
+                                                $name = $post->post_title;
+                                                $match_type = 'product';
+                                            }
+                                        }
+
+                                        // RULE 1: Check match against expected type
+                                        // If expected Product but got Brand/Category, INVALIDATE.
+                                        if ( $id > 0 && $expected_type === 'product' && ($match_type === 'brand' || $match_type === 'category') ) {
+                                            $id = 0; // Reset
+                                            $type = '';
+                                            $type_value = '';
+                                            $name = '';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // ---------------------------------------------------------
+                // END REDIRECT FALLBACK
+                // ---------------------------------------------------------
 
                 // Get the converted URL (permalink) if we found a match
                 $converted_url = '';

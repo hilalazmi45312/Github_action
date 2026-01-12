@@ -84,10 +84,14 @@ class WarrantyController
             $pid = (int)($item['product_id'] ?? 0);
             if (!$pid || !self::isEligibleProduct($pid)) continue;
 
+            if (isset($item['is_warranty99']) && $item['is_warranty99'] === false) {
+                continue;
+            }
+
             $qty = !empty($item['quantity']) ? (int)$item['quantity'] : 1;
 
             // If this key NOT in off list → add fee
-            if (!in_array((string)$key, $off, true)) {
+            if (!in_array((string)$key, $off, true) || (isset($item['is_warranty99']) && $item['is_warranty99'] === true)) {
                 $fee_total = $amount * $qty;
                 $label = __('9.9 Product Warranty', 'woocommerce') . ' — ' . wp_html_excerpt($item['data']->get_name(), 70);
                 $cart->add_fee($label, $fee_total, $taxable);

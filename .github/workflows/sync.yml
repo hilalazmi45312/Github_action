@@ -1,4 +1,4 @@
-name: Auto-sync Senheng-1 -> Senheng-3
+name: Auto-sync Senheng-1 -> Senheng-3 (Mirror Mode)
 
 on:
   push:
@@ -15,45 +15,31 @@ jobs:
       - name: Checkout source repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensures the full history is fetched for the merge
+          fetch-depth: 0
+          persist-credentials: false
 
-      # 2. Configure Git
+      # 2. Configure Git identity
       - name: Configure Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      # 3. Add target remote (Senheng-3) and fetch the remote branches
-      - name: Add and fetch from target repo (Senheng-3)
+      # 3. Add target remote (Senheng-3)
+      - name: Add target remote
         env:
           GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
-          echo "Adding target remote (Senheng-3)..."
           git remote add target "https://x-access-token:${GH_TOKEN}@github.com/hilalazmi45312/Github_action.git"
-          git fetch target
 
-      # 4. Checkout the branch you want to merge from source repo (Senheng-1)
-      - name: Checkout branch from source repo
+      # 4. Fetch target branch (CRITICAL for --force-with-lease)
+      - name: Fetch target branch
         run: |
-          echo "Checking out branch ${GITHUB_REF_NAME} from Senheng-1..."
-          git checkout ${GITHUB_REF_NAME}
+          git fetch target ${GITHUB_REF_NAME}
 
-      # 5. Create or checkout the corresponding branch in Senheng-3
-      - name: Checkout target branch in Senheng-3
+      # 5. Mirror push (SAFE)
+      - name: Mirror branch to Senheng-3
         run: |
-          echo "Checking out target branch ${GITHUB_REF_NAME} in Senheng-3..."
-          git checkout -B ${GITHUB_REF_NAME} target/${GITHUB_REF_NAME} || git checkout -b ${GITHUB_REF_NAME}
-
-      # 6. Merge changes from Senheng-1 into Senheng-3
-      - name: Merge changes from Senheng-1 into Senheng-3
-        run: |
-          echo "Merging changes from ${GITHUB_REF_NAME}..."
-          git merge --no-ff --commit --allow-unrelated-histories ${GITHUB_REF_NAME}
-
-      # 7. Push merged changes to Senheng-3
-      - name: Push merged changes to Senheng-3
-        env:
-          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
-        run: |
-          echo "Pushing changes to Senheng-3..."
-          git push target ${GITHUB_REF_NAME}
+          echo "Mirroring branch ${GITHUB_REF_NAME} to Senheng-3..."
+          git push target \
+            ${GITHUB_REF_NAME}:${GITHUB_REF_NAME} \
+            --force-with-lease

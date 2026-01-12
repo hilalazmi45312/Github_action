@@ -921,3 +921,20 @@ if (! function_exists('sh_logs')) {
         $logger->add('senheng_core_logs', $message);
     }
 }
+
+if (! function_exists('wc_notice_to_plain_text')) {
+    /**
+     * Convert a WooCommerce notice (HTML) to plain text.
+     *
+     * @param string $notice The WooCommerce notice in HTML format.
+     * @return string The plain text version of the notice.
+     */
+    function wc_notice_to_plain_text($notice)
+    {
+        return html_entity_decode(
+            wp_strip_all_tags($notice),
+            ENT_QUOTES,
+            'UTF-8'
+        );
+    }
+}
