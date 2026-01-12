@@ -329,8 +329,23 @@ function add_cart_item($data = [])
     $is_warranty99 = isset($data['is_warranty99']) ? (bool) $data['is_warranty99'] : true;
     $is_trade_in = isset($data['is_trade_in']) && $data['is_trade_in'] === true ? 'yes' : 'no';
     $awcdp_deposit_option = isset($data['awcdp_deposit_option']) && $data['awcdp_deposit_option'] === true ? 'yes' : 'no';
+
+    $cart_item_data = [];
+
     $cart_item_data['trade_in'] = $is_trade_in;
     $cart_item_data['awcdp_deposit_option'] = $awcdp_deposit_option;
+
+    // 🔥 Make AWCDP see it
+    if ($awcdp_deposit_option === 'yes') {
+        $_REQUEST['awcdp_deposit_option'] = 'yes';
+        $_REQUEST['data']['awcdp_deposit_option'] = 'yes';
+        $cart_item_data['deposit_option'] = 'deposit';
+    }
+
+    $_REQUEST['trade_in'] = $is_trade_in;
+    $_REQUEST['data']['trade_in'] = $is_trade_in;
+
+
     if (is_user_logged_in()) {
         $is_warranty99 = false;
     }
@@ -392,6 +407,7 @@ function update_cart_item($data = [])
 
     $cart = WC()->cart;
     $cart_item = $cart->get_cart_item($item_key);
+    wp_send_json($cart_item);
 
     if (!$cart_item) {
         wp_send_json_error('Invalid cart item');
