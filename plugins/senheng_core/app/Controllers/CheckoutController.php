@@ -2585,7 +2585,7 @@ class CheckoutController
      *
      * @return array{has_deposits:bool, deposit_total:float, full_total:float, remaining_amount:float}
      */
-    private static function calculate_deposit_totals()
+    public static function calculate_deposit_totals()
     {
         // Use consolidated cart data calculation (already has deposit data)
         $cart_data = self::calculate_cart_data();

@@ -6,7 +6,7 @@ function get_cart($data = [])
     //     wp_send_json_error(['message' => 'Not logged in'], 401);
     // }
 
-    // $shData  = senhengallInfo();
+    $shData  = senhengallInfo();
     // $user_id = $shData['user_id'];
 
     $cartType  = isset($data['cartType']) ? max(1, (int) $data['cartType']) : null;
@@ -199,6 +199,7 @@ function get_cart($data = [])
                 "candidateShopPromotions" => [],
                 "isTradeIn" => isset($cart_item['trade_in']) && $cart_item['trade_in'] === 'yes',
                 "isPartialPayment" => isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit',
+                "depositInfo" => $cart_item['awcdp_deposit'] ?? null,
                 "isProductWarranty" => product_has_warranty($product->get_name()),
                 "isStorePickUp" => null
             ]
@@ -330,11 +331,6 @@ function add_cart_item($data = [])
     $is_trade_in = isset($data['is_trade_in']) && $data['is_trade_in'] === true ? 'yes' : 'no';
     $awcdp_deposit_option = isset($data['awcdp_deposit_option']) && $data['awcdp_deposit_option'] === true ? 'yes' : 'no';
 
-    $cart_item_data = [];
-
-    $cart_item_data['trade_in'] = $is_trade_in;
-    $cart_item_data['awcdp_deposit_option'] = $awcdp_deposit_option;
-
     // 🔥 Make AWCDP see it
     if ($awcdp_deposit_option === 'yes') {
         $_REQUEST['awcdp_deposit_option'] = 'yes';
@@ -359,7 +355,7 @@ function add_cart_item($data = [])
 
     $cart = WC()->cart;
 
-    $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation, $cart_item_data);
+    $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation);
     if (! $item_key) {
         $notices = wc_get_notices('error');
         if (! empty($notices)) {
@@ -379,6 +375,14 @@ function add_cart_item($data = [])
 
     $cart->calculate_totals();
 
+    $cart_item = $cart->get_cart_item($item_key);
+
+    if (!empty($cart_item['awcdp_deposit']) && is_array($cart_item['awcdp_deposit'])) {
+        $cart_totals = $cart_item['awcdp_deposit']['deposit'] + $cart->get_fee_total();
+    } else {
+        $cart_totals = (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total());
+    }
+
     wp_send_json_success([
         'item_key'       => $item_key,
         'cart_count'     => $cart->get_cart_contents_count(),
@@ -387,7 +391,7 @@ function add_cart_item($data = [])
         // 'shipping_total' => (float) $cart->get_shipping_total(),
         // 'tax_total'      => (float) $cart->get_total_tax(),
         // 'total'          => (float) $cart->get_total('edit'),
-        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
+        'cart_total'     => $cart_totals,
     ]);
 }
 
@@ -407,10 +411,19 @@ function update_cart_item($data = [])
 
     $cart = WC()->cart;
     $cart_item = $cart->get_cart_item($item_key);
-    wp_send_json($cart_item);
 
     if (!$cart_item) {
         wp_send_json_error('Invalid cart item');
+    }
+
+    if (!empty($cart_item['awcdp_deposit']) && is_array($cart_item['awcdp_deposit'])) {
+        $_REQUEST['awcdp_deposit'] = $cart_item['awcdp_deposit'];
+        $_REQUEST['data']['awcdp_deposit'] = $cart_item['awcdp_deposit'];
+    }
+
+    if (!empty($cart_item['trade_in'])) {
+        $_REQUEST['trade_in'] = $cart_item['trade_in'];
+        $_REQUEST['data']['trade_in'] = $cart_item['trade_in'];
     }
 
     $cart_item['is_warranty99'] = $is_warranty99;
@@ -424,6 +437,13 @@ function update_cart_item($data = [])
 
     $cart->calculate_totals();
 
+    if (!empty($cart_item['awcdp_deposit']) && is_array($cart_item['awcdp_deposit'])) {
+        $cart_totals = $cart_item['awcdp_deposit']['deposit'] + $cart->get_fee_total();
+    } else {
+        $cart_totals = (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total());
+    }
+
+
     wp_send_json_success([
         'item_key'       => $item_key,
         'cart_count'     => $cart->get_cart_contents_count(),
@@ -432,7 +452,7 @@ function update_cart_item($data = [])
         // 'shipping_total' => (float) $cart->get_shipping_total(),
         // 'tax_total'      => (float) $cart->get_total_tax(),
         // 'total'          => (float) $cart->get_total('edit'),
-        'cart_total'     => (float) ($cart->get_subtotal() + $cart->get_fee_total() + $cart->get_discount_total()),
+        'cart_total'     => $cart_totals,
     ]);
 }
 
@@ -465,7 +485,6 @@ function delete_cart_items($data = [])
     $cart->calculate_totals();
 
     wp_send_json_success([
-        'item_key'       => $item_key,
         'cart_count'     => $cart->get_cart_contents_count(),
         // 'subtotal'       => (float) $cart->get_subtotal(),
         // 'fees_total'     => (float) $cart->get_fee_total(),
