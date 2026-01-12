@@ -117,7 +117,7 @@ if ( ! function_exists( 'bwfan_is_woocommerce_active' ) || ! bwfan_is_woocommerc
             line-height: 1.2 !important;
         }
         .bwfan-email-product-rows .sh-product-attr {
-            font-size: 10px !important;
+            font-size: 9px !important;
         }
         .bwfan-email-product-rows .sh-product-qty {
             font-size: 11px !important;
@@ -134,6 +134,9 @@ if ( ! function_exists( 'bwfan_is_woocommerce_active' ) || ! bwfan_is_woocommerc
             min-width: 80px !important;
             max-width: 90px !important;
         }
+        .bwfan-email-product-rows .sh-product-name-col {
+            width: 120px !important;
+        }
         /* Extra product rows mobile */
         #body_content .bwfan-email-product-rows .bwfan-product-rows tr.sh-extra-product-row td {
             padding: 8px 8px !important;
@@ -146,9 +149,16 @@ if ( ! function_exists( 'bwfan_is_woocommerce_active' ) || ! bwfan_is_woocommerc
             width: 40px !important;
         }
         .bwfan-email-product-rows .sh-extra-price-col {
-            width: 55px !important;
-            min-width: 55px !important;
+            width: 75px !important;
+            min-width: 75px !important;
             white-space: normal !important;
+        }
+        .bwfan-email-product-rows .sh-extra-product-name {
+            font-size: 9px !important;
+        }
+        .bwfan-email-product-rows .sh-extra-price-text, 
+        .bwfan-email-product-rows .sh-extra-qty-text {
+            font-size: 10px !important;
         }
     }
 </style>
@@ -461,7 +471,7 @@ if ( is_array( $products ) ) : ?>
                                                 </td>
                                                 <!-- Product Name & Variation -->
                                                 <td style="vertical-align: middle;">
-                                                    <span style="display:block; font-size: 12px; font-weight: 500; color: #333; line-height: 1.4;"><?php echo esc_html( $extra['title'] ); ?></span>
+                                                    <span class="sh-extra-product-name" style="display:block; font-size: 12px; font-weight: 500; color: #333; line-height: 1.4;"><?php echo esc_html( $extra['title'] ); ?></span>
                                                     <?php 
                                                     // Show variation attributes if it's a variation
                                                     if ( $extra_wc_product instanceof WC_Product_Variation ) {
@@ -480,12 +490,12 @@ if ( is_array( $products ) ) : ?>
                                     <td class="sh-extra-price-col" style="vertical-align: middle; text-align: center; width: 100px; white-space: nowrap;">
                                         <?php 
                                         if ( $extra['type'] === 'product' ) {
-                                            echo '<span style="font-size: 12px; font-weight: 500; color: #333;">' . wp_kses_post( wc_price( $extra['price'] ) ) . '</span>';
+                                            echo '<span class="sh-extra-price-text" style="font-size: 12px; font-weight: 500; color: #333;">' . wp_kses_post( wc_price( $extra['price'] ) ) . '</span>';
                                         } else {
-                                            echo '<span style="font-size: 12px; font-weight: 500; color: #333;">' . esc_html( $extra['price'] ) . '</span>';
+                                            echo '<span class="sh-extra-price-text" style="font-size: 12px; font-weight: 500; color: #333;">' . esc_html( $extra['price'] ) . '</span>';
                                         }
                                         ?>
-                                        <br><span style="font-size: 11px; color: #666;">Qty: <?php echo esc_html( $extra['quantity'] ); ?></span>
+                                        <br><span class="sh-extra-qty-text" style="font-size: 11px; color: #666;">Qty: <?php echo esc_html( $extra['quantity'] ); ?></span>
                                     </td>
                                 </tr>
                             </table>
@@ -679,7 +689,7 @@ if ( is_array( $products ) ) : ?>
                                                 </td>
                                                 <!-- Product Name -->
                                                 <td style="vertical-align: middle;">
-                                                    <span style="display:block; font-size: 12px; font-weight: 500; color: #333; line-height: 1.4;"><?php echo esc_html( $sample_extra['title'] ); ?></span>
+                                                    <span class="sh-extra-product-name" style="display:block; font-size: 12px; font-weight: 500; color: #333; line-height: 1.4;"><?php echo esc_html( $sample_extra['title'] ); ?></span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -688,12 +698,12 @@ if ( is_array( $products ) ) : ?>
                                     <td class="sh-extra-price-col" style="vertical-align: middle; text-align: center; width: 100px; white-space: nowrap;">
                                         <?php 
                                         if ( $sample_extra['type'] === 'product' ) {
-                                            echo '<span style="font-size: 12px; font-weight: 500; color: #333;">' . wp_kses_post( wc_price( $sample_extra['price'] ) ) . '</span>';
+                                            echo '<span class="sh-extra-price-text" style="font-size: 12px; font-weight: 500; color: #333;">' . wp_kses_post( wc_price( $sample_extra['price'] ) ) . '</span>';
                                         } else {
-                                            echo '<span style="font-size: 12px; font-weight: 500; color: #333;">' . esc_html( $sample_extra['price'] ) . '</span>';
+                                            echo '<span class="sh-extra-price-text" style="font-size: 12px; font-weight: 500; color: #333;">' . esc_html( $sample_extra['price'] ) . '</span>';
                                         }
                                         ?>
-                                        <br><span style="font-size: 11px; color: #666;">Qty: <?php echo esc_html( $sample_extra['quantity'] ); ?></span>
+                                        <br><span class="sh-extra-qty-text" style="font-size: 11px; color: #666;">Qty: <?php echo esc_html( $sample_extra['quantity'] ); ?></span>
                                     </td>
                                 </tr>
                             </table>
