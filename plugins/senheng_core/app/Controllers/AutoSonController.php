@@ -335,7 +335,7 @@ class AutoSonController
                 [
                     'extraMap' =>
                     [
-                        'selling_price' => (string) round((float) wc_get_price_excluding_tax($product) * $item->get_quantity() * 100),
+                        'selling_price' => (string) round((float) wc_get_price_excluding_tax($product) * 100),
                         // 'categoryIds' => $categories['categoryIds'],
                         // 'unitQuantity' => (string) $item->get_quantity(),
                         // 'categoryIdListName' => $categories['categoryIdListName'],
@@ -416,7 +416,7 @@ class AutoSonController
         $s_coin_value = isset($extra_product['s_coin_value']) ? (float) $extra_product['s_coin_value'] : 0;
 
         // Calculate selling price using wc_get_price_excluding_tax like map_order_line
-        $selling_price = (string) round((float) wc_get_price_excluding_tax($product) * $quantity * 100);
+        $selling_price = (string) round((float) wc_get_price_excluding_tax($product) * 100);
 
         // Calculate discount amount if child discount exists
         $child_discount = isset($extra_product['childDiscount']) ? floatval($extra_product['childDiscount']) : 0;
@@ -480,7 +480,7 @@ class AutoSonController
             // 'deviceSource' => '',
             // 'masterId' => '',
             'price'    => [
-                'skuOriginTotalAmount'  => (string) round((float) wc_get_price_excluding_tax($product) * 100),
+                'skuOriginTotalAmount'  => (string) round((float) wc_get_price_excluding_tax($product) * $quantity * 100),
                 // 'skuAdjustAmount' => 0,
                 'shipFeeOriginAmount'   => 0, // Product extras don't have separate shipping
                 // 'shipFeeAdjustAmount' => 0,
