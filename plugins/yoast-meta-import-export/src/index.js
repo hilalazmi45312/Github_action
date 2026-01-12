@@ -93,16 +93,31 @@ const YoastMetaApp = () => {
         setLoading(true);
         setNotice(null); // Clear the CSV loaded notice when import starts
 
+        // Strict duplicate filtering: If ID/Type appears more than once, skip ALL instances
+        const counts = {};
+        csvData.forEach(item => {
+            if (!item.id || !item.type) return;
+            const key = `${item.type}-${item.id}`;
+            counts[key] = (counts[key] || 0) + 1;
+        });
+
+        const filteredCsvData = csvData.filter(item => {
+            if (!item.id || !item.type) return true; // Keep items with missing keys for backend validation
+            const key = `${item.type}-${item.id}`;
+            // Only keep if it appears exactly once
+            return counts[key] === 1;
+        });
+
         const batchSize = 10;
         let updatedTotal = 0;
         let errors = [];
         let processedCount = 0;
 
         // Set initial progress
-        setProgress({ current: 0, total: csvData.length });
+        setProgress({ current: 0, total: filteredCsvData.length });
 
-        for (let i = 0; i < csvData.length; i += batchSize) {
-            const batch = csvData.slice(i, i + batchSize);
+        for (let i = 0; i < filteredCsvData.length; i += batchSize) {
+            const batch = filteredCsvData.slice(i, i + batchSize);
 
             try {
                 const response = await fetch(window.yoastMetaIe.ajaxUrl, {
@@ -136,10 +151,10 @@ const YoastMetaApp = () => {
 
             // Update progress
             processedCount += batch.length;
-            setProgress({ current: processedCount, total: csvData.length });
+            setProgress({ current: processedCount, total: filteredCsvData.length });
 
             // Add delay between batches to avoid rate limits (1000ms)
-            if (i + batchSize < csvData.length) {
+            if (i + batchSize < filteredCsvData.length) {
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
         }
@@ -175,6 +190,16 @@ const YoastMetaApp = () => {
         setNotice({ type: 'info', message: `CSV "${fileName}" loaded: ${data.length} entries ready for conversion.` });
     };
 
+    // State for duplicate tracking
+    const [processedIds, setProcessedIds] = useState(new Set());
+
+    // Reset processed IDs when starting new conversion
+    useEffect(() => {
+        if (!convertCsvData) {
+            setProcessedIds(new Set());
+        }
+    }, [convertCsvData]);
+
     const handleConvert = async () => {
         if (!convertCsvData) return;
 
@@ -186,6 +211,9 @@ const YoastMetaApp = () => {
         let allSkipped = [];
         let allErrors = [];
         let processedCount = 0;
+
+        // Local set for this run (to handle multiple clicks if state doesn't reset fast enough, though useEffect handles it)
+        const currentRunIds = new Set();
 
         setProgress({ current: 0, total: convertCsvData.length });
 
@@ -208,9 +236,16 @@ const YoastMetaApp = () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    allConverted = allConverted.concat(result.data.converted);
-                    allSkipped = allSkipped.concat(result.data.skipped);
-                    allErrors = allErrors.concat(result.data.errors);
+                    const batchConverted = result.data.converted;
+                    const batchSkipped = result.data.skipped;
+                    const batchErrors = result.data.errors;
+
+                    // Add all converted items (duplicates allowed in Convert step)
+                    allConverted = allConverted.concat(batchConverted);
+
+                    // Add Skipped and Errors
+                    allSkipped = allSkipped.concat(batchSkipped);
+                    allErrors = allErrors.concat(batchErrors);
                 } else {
                     allErrors.push(result.data);
                 }
@@ -232,6 +267,7 @@ const YoastMetaApp = () => {
             skipped: allSkipped,
             errors: allErrors,
         });
+        setProcessedIds(currentRunIds);
 
         if (allErrors.length > 0) {
             showNotice('warning', `Conversion complete with errors. Converted: ${allConverted.length}, Skipped: ${allSkipped.length}, Errors: ${allErrors.length}`);
@@ -240,31 +276,86 @@ const YoastMetaApp = () => {
         }
     };
 
-    const downloadConvertedCsv = () => {
-        if (!convertedData || !convertedData.converted.length) return;
+    const downloadConvertedCsv = (type = 'ready') => {
+        if (!convertedData) return;
 
-        const headers = ['ID', 'Type', 'Type_Value', 'Title/Name', 'Original URL', 'Converted URL', '_yoast_wpseo_title', '_yoast_wpseo_metadesc'];
-        const rows = convertedData.converted.map(item => [
-            item.id,
-            item.type,
-            item.type_value,
-            `"${(item.title_name || '').replace(/"/g, '""')}"`,
-            `"${(item.original_url || '').replace(/"/g, '""')}"`,
-            `"${(item.converted_url || '').replace(/"/g, '""')}"`,
-            `"${(item['_yoast_wpseo_title'] || '').replace(/"/g, '""')}"`,
-            `"${(item['_yoast_wpseo_metadesc'] || '').replace(/"/g, '""')}"`
-        ]);
+        let data = [];
+        let filename = '';
 
-        const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-        const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'yoast-meta-converted-' + new Date().toISOString().split('T')[0] + '.csv';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
+        if (type === 'ready') {
+            // "ready": Only successfully converted items (clean)
+            data = convertedData.converted.map(item => {
+                // Filter out internal keys like original_url, converted_url if not needed for import? 
+                // BUT user might want them for reference. 
+                // The import BACKEND ignores unknown columns, so it's safe to keep them.
+                // However, "Ready for Import" implies minimal/clean. 
+                // Let's keep them as they are useful for verification.
+                return item;
+            });
+            filename = 'yoast-meta-import-ready.csv';
+        } else {
+            // "full": All items (Converted + Skipped + Errors)
+            // We need to normalize structure so all have same columns
+
+            // 1. Converted
+            const convertedRows = convertedData.converted.map(item => ({
+                ...item,
+                'Status': 'Converted',
+                'Message': 'Success'
+            }));
+
+            // 2. Skipped
+            const skippedRows = convertedData.skipped.map(item => ({
+                'id': '',
+                'type': '',
+                'type_value': '',
+                'title_name': '',
+                'original_url': item.url,
+                'Status': 'Skipped',
+                'Message': item.reason
+            }));
+
+            // 3. Errors (Errors are just strings mainly)
+            const errorRows = convertedData.errors.map(err => ({
+                'Status': 'Error',
+                'Message': typeof err === 'string' ? err : JSON.stringify(err)
+            }));
+
+            data = [...convertedRows, ...skippedRows, ...errorRows];
+            filename = 'yoast-meta-conversion-report.csv';
+        }
+
+        if (data.length === 0) {
+            alert('No data to download');
+            return;
+        }
+
+        // Generate CSV keys from first item (or union of all keys?)
+        // Ideally union, but let's take keys from first converted item + Status/Message
+        // Safe bet: manually define headers based on known structure + extras
+        const allKeys = new Set();
+        data.forEach(item => Object.keys(item).forEach(k => allKeys.add(k)));
+        const headers = Array.from(allKeys);
+
+        const csvContent = [
+            headers.join(','),
+            ...data.map(row => headers.map(header => {
+                const val = row[header] !== undefined ? row[header] : '';
+                return `"${String(val).replace(/"/g, '""')}"`;
+            }).join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     };
 
     const parseCSV = (csvText) => {
@@ -518,13 +609,14 @@ const YoastMetaApp = () => {
                                     </PanelRow>
                                 )}
                                 <PanelRow>
-                                    <Button
-                                        isPrimary
-                                        onClick={downloadConvertedCsv}
-                                        disabled={!convertedData.converted.length}
-                                    >
-                                        Download Converted CSV
-                                    </Button>
+                                    <div style={{ display: 'flex', gap: '10px', marginTop: '10px', marginBottom: '10px' }}>
+                                        <Button isSecondary onClick={() => downloadConvertedCsv('ready')}>
+                                            Download Import-Ready CSV
+                                        </Button>
+                                        <Button isSecondary onClick={() => downloadConvertedCsv('full')}>
+                                            Download Full Report
+                                        </Button>
+                                    </div>
                                     <Button
                                         isSecondary
                                         onClick={() => {
