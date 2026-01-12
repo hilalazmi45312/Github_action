@@ -197,8 +197,8 @@ function get_cart($data = [])
                 "extra" => null,
                 "itemPromotion" => null,
                 "candidateShopPromotions" => [],
-                "isTradeIn" => $product->get_meta('_trade_in_option') === 'yes' ? true : false,
-                "isPartialPayment" => $product->get_meta('_deposit_amount') ? true : false,
+                "isTradeIn" => isset($cart_item['trade_in']) && $cart_item['trade_in'] === 'yes',
+                "isPartialPayment" => isset($cart_item['deposit_option']) && $cart_item['deposit_option'] === 'deposit',
                 "isProductWarranty" => product_has_warranty($product->get_name()),
                 "isStorePickUp" => null
             ]
@@ -327,6 +327,10 @@ function add_cart_item($data = [])
     $qty = isset($data['quantity']) ? (int)$data['quantity'] : 1;
     $variation = (isset($data['variation']) && is_array($data['variation'])) ? $data['variation'] : [];
     $is_warranty99 = isset($data['is_warranty99']) ? (bool) $data['is_warranty99'] : true;
+    $is_trade_in = isset($data['is_trade_in']) && $data['is_trade_in'] === true ? 'yes' : 'no';
+    $awcdp_deposit_option = isset($data['awcdp_deposit_option']) && $data['awcdp_deposit_option'] === true ? 'yes' : 'no';
+    $cart_item_data['trade_in'] = $is_trade_in;
+    $cart_item_data['awcdp_deposit_option'] = $awcdp_deposit_option;
     if (is_user_logged_in()) {
         $is_warranty99 = false;
     }
@@ -340,7 +344,7 @@ function add_cart_item($data = [])
 
     $cart = WC()->cart;
 
-    $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation);
+    $item_key = $cart->add_to_cart($product_id, $qty, $variation_id, $variation, $cart_item_data);
     if (! $item_key) {
         $notices = wc_get_notices('error');
         if (! empty($notices)) {
