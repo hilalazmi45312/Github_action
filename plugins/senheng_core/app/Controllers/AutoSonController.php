@@ -355,7 +355,7 @@ class AutoSonController
             // 'deviceSource' => '',
             // 'masterId' => '',
             'price'    => [
-                'skuOriginTotalAmount'  => (string) round((float) wc_get_price_excluding_tax($product) * 100),
+                'skuOriginTotalAmount'  => (string) round((float) wc_get_price_excluding_tax($product) * $item->get_quantity() * 100),
                 // 'skuAdjustAmount' => 0,
                 'shipFeeOriginAmount'   => (int) round($order->get_shipping_total() * 100),
                 // 'shipFeeAdjustAmount' => 0,
