@@ -166,8 +166,16 @@ class Ajax_Handlers {
         $errors = array();
 
         foreach ( $batch as $item ) {
-            $type = $item['type'];
-            $id = intval( $item['id'] );
+            $type = isset( $item['type'] ) ? trim( $item['type'] ) : '';
+            $id_val = isset( $item['id'] ) ? trim( $item['id'] ) : '';
+
+            // Validate strict requirements: ID and Type must be present
+            if ( empty( $id_val ) || empty( $type ) ) {
+                $errors[] = "Row skipped: Missing required ID or Type";
+                continue;
+            }
+
+            $id = intval( $id_val );
 
             if ( $type === 'post' ) {
                 // Check if post exists
