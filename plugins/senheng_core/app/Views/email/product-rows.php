@@ -452,7 +452,7 @@ if ( is_array( $products ) ) : ?>
                     ?>
                     <!-- Extra Product Row - Using nested table for better layout -->
                     <tr class="sh-extra-product-row<?php echo $is_last_extra ? ' last-extra' : ''; ?>">
-                        <td colspan="4" style="padding: 16px 12px 0 30px;<?php echo $is_last_extra ? ' padding-bottom: 30px; border-bottom: 1px solid #333;' : ''; ?>">
+                        <td colspan="4" style="padding: 8px 12px 0 30px;<?php echo $is_last_extra ? ' padding-bottom: 15px; border-bottom: 1px solid #333;' : ''; ?>">
                             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse: collapse; margin: 0 !important;">
                                 <tr>
                                     <!-- Image + Name & Variation (combined wider cell) -->
@@ -676,7 +676,7 @@ if ( is_array( $products ) ) : ?>
                     ?>
                     <!-- Extra Product Row - Using nested table for better layout -->
                     <tr class="sh-extra-product-row<?php echo $is_last_sample_extra ? ' last-extra' : ''; ?>">
-                        <td colspan="4" style="padding: 16px 12px 0 30px;<?php echo $is_last_sample_extra ? ' padding-bottom: 30px; border-bottom: 1px solid #333;' : ''; ?>">
+                        <td colspan="4" style="padding: 8px 12px 0 30px;<?php echo $is_last_sample_extra ? ' padding-bottom: 15px; border-bottom: 1px solid #333;' : ''; ?>">
                             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse: collapse; margin: 0 !important;">
                                 <tr>
                                     <!-- Image + Name (combined wider cell) -->
