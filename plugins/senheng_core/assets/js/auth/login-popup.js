@@ -119,13 +119,14 @@ function makeAjaxRequest(url, data, onSuccess) {
     });
 }
 
-function phoneNumberValidation(e) {
-    const value = e.value.trim();
-    const onlyDigits = value.replace(/\D/g, '');
-    if (onlyDigits.length < 8 || onlyDigits.length > 10) {
-        e.classList.add('invalid-input-popup');
+function phoneNumberValidation(input) {
+    // Remove anything that is not a digit
+    input.value = input.value.replace(/\D/g, '');
+
+    if (input.value.length < 8 || input.value.length > 10) {
+        input.classList.add('invalid-input-popup');
     } else {
-        e.classList.remove('invalid-input-popup');
+        input.classList.remove('invalid-input-popup');
     }
 }
 
