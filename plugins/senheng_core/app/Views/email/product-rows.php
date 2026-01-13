@@ -439,7 +439,7 @@ if ( is_array( $products ) ) : ?>
                     ?>
                     <!-- Category Header Row -->
                     <tr class="sh-extra-header-row">
-                        <td colspan="4" style="padding: 12px 12px 0 45px; font-size: 12px; font-weight: 600; color: #444; border-bottom: none;">
+                        <td colspan="4" style="padding: 12px 12px 0 50px; font-size: 12px; font-weight: 600; color: #444; border-bottom: none;">
                             <?php echo esc_html( $category_name ); ?>
                         </td>
                     </tr>
@@ -665,7 +665,7 @@ if ( is_array( $products ) ) : ?>
                     ?>
                     <!-- Category Header Row -->
                     <tr class="sh-extra-header-row">
-                        <td colspan="4" style="padding: 12px 12px 0 45px; font-size: 12px; font-weight: 600; color: #444; border-bottom: none;">
+                        <td colspan="4" style="padding: 12px 12px 0 50px; font-size: 12px; font-weight: 600; color: #444; border-bottom: none;">
                             <?php echo esc_html( $category_name ); ?>
                         </td>
                     </tr>

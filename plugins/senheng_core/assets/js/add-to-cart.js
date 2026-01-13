@@ -934,7 +934,7 @@
 			return false;
 		}
 		e.preventDefault();
-		e.stopImmediatePropagation();
+		// Note: stopImmediatePropagation removed to allow GTM tracking
 		clearErrorNotices();
 		ensureTradeDepositInputs($form);
 		$button.addClass("loading");
