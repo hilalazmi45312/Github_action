@@ -1,0 +1,49 @@
+{
+    "packages": [
+        {
+            "name": "tagconcierge/tc-woocommerce-plugin-free",
+            "version": "1.13.0",
+            "version_normalized": "1.13.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tagconcierge/tc-woocommerce-plugin-free.git",
+                "reference": "ed7ada3b9c157f38bfd1f86a5147759410aeed64"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1",
+                "johnpbloch/wordpress-core": "*",
+                "roave/security-advisories": "dev-latest",
+                "woocommerce/woocommerce-sniffs": "1.0.0",
+                "wp-coding-standards/wpcs": "^3",
+                "wpackagist-plugin/woocommerce": "*"
+            },
+            "time": "2025-10-18T00:10:54+00:00",
+            "type": "wordpress-plugin",
+            "extra": {
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:wordpress-plugin"
+                    ]
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "GtmEcommerceWoo\\Lib\\": "src"
+                }
+            },
+            "scripts": {
+                "fix": [
+                    "phpcbf --warning-severity=0 -s --ignore-annotations --extensions=php,html --ignore=*/vendor/* src/ gtm-ecommerce-woo.php"
+                ],
+                "check": [
+                    "phpcs --warning-severity=0 -s --ignore-annotations --extensions=php,html --ignore=*/vendor/* src/ gtm-ecommerce-woo.php"
+                ]
+            },
+            "description": "Google Tag Manager for WooCommerce",
+            "install-path": "../tagconcierge/tc-woocommerce-plugin-free"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}
