@@ -1666,3 +1666,10 @@ add_action('admin_footer', function() {
     </script>
     <?php
 });
+
+// Dynamic current year at the footer
+function year_shortcode() {
+    $year = date('Y');
+    return $year;
+}
+add_shortcode('year', 'year_shortcode');
