@@ -1009,7 +1009,7 @@ function track_search_term()
         <?php
     }
 }
-add_action('wp_footer', 'track_search_term');
+// add_action('wp_footer', 'track_search_term');
 
 /******************************/
 /*****  BRAND STORE VIEW  ****/
